@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import HubSpotModal from './HubSpotModal'
 
@@ -45,38 +46,23 @@ export default function Nav({ variant = 'light' }: NavProps) {
         backdropFilter: 'blur(24px) saturate(1.4)',
         borderBottom: '1px solid rgba(42,42,68,.5)'
       }}>
-        <Link href="/" style={{ textDecoration: 'none' }}>
-          <div style={{
-            fontWeight: 900,
-            fontSize: 20,
-            color: '#eeeef6',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10
-          }}>
-            <div style={{
-              width: 32,
-              height: 32,
-              borderRadius: 10,
-              background: 'linear-gradient(135deg,#12a37d,#3b6ff5)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 16,
-              fontWeight: 900,
-              color: '#fff'
-            }}>D</div>
-            DynaMeet
-            <span style={{
-              fontSize: 11,
-              fontWeight: 700,
-              padding: '4px 10px',
-              borderRadius: 6,
-              background: '#1a1a2e',
-              border: '1px solid #2a2a44',
-              color: '#7878a0'
-            }}>Careers</span>
-          </div>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <Image
+            src="/logo.svg"
+            alt="DynaMeet"
+            width={140}
+            height={30}
+            style={{ height: 28, width: 'auto' }}
+          />
+          <span style={{
+            fontSize: 11,
+            fontWeight: 700,
+            padding: '4px 10px',
+            borderRadius: 6,
+            background: '#1a1a2e',
+            border: '1px solid #2a2a44',
+            color: '#7878a0'
+          }}>Careers</span>
         </Link>
         <div style={{ display: 'flex', gap: 28 }}>
           {navLinks.map((link) => (
@@ -143,9 +129,13 @@ export default function Nav({ variant = 'light' }: NavProps) {
       borderBottom: '1px solid rgba(223,227,240,.6)'
     }}>
       <Link href="/" style={{ textDecoration: 'none' }}>
-        <div style={{ fontWeight: 900, fontSize: 22, color: '#0f1128' }}>
-          Meeton<span style={{ color: '#12a37d' }}> AI</span>
-        </div>
+        <Image
+          src="/logo-dark.svg"
+          alt="DynaMeet"
+          width={140}
+          height={30}
+          style={{ height: 28, width: 'auto' }}
+        />
       </Link>
       <div style={{ display: 'flex', gap: 28 }}>
         {navLinks.map((link) => (

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 type FooterProps = {
@@ -24,33 +25,18 @@ export default function Footer({ variant = 'light' }: FooterProps) {
         justifyContent: 'space-between',
         background: '#12121e'
       }}>
-        <div style={{
-          fontWeight: 900,
-          fontSize: 16,
-          color: '#7878a0',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8
-        }}>
-          <div style={{
-            width: 24,
-            height: 24,
-            borderRadius: 7,
-            background: 'linear-gradient(135deg,#12a37d,#3b6ff5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 11,
-            fontWeight: 900,
-            color: '#fff'
-          }}>D</div>
-          DynaMeet K.K.
-        </div>
+        <Image
+          src="/logo.svg"
+          alt="DynaMeet"
+          width={120}
+          height={26}
+          style={{ height: 24, width: 'auto', opacity: 0.7 }}
+        />
         <div style={{ display: 'flex', gap: 20 }}>
           <Link href="/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>Meeton ai</Link>
           <Link href="/talent/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>Meeton Talent</Link>
-          <a href="#" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>会社概要</a>
-          <a href="#" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>お問い合わせ</a>
+          <a href="https://dynameet.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</a>
+          <a href="https://dynameet.ai/service-agreement-2/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>利用規約</a>
         </div>
         <div style={{ fontSize: 12, color: '#7878a0' }}>© 2025 DynaMeet K.K.</div>
       </footer>
@@ -66,13 +52,19 @@ export default function Footer({ variant = 'light' }: FooterProps) {
       justifyContent: 'space-between',
       background: isTalent ? '#f8f9fc' : '#f4f6fb'
     }}>
-      <div style={{ fontWeight: 900, fontSize: 17, color: '#6e7494' }}>
-        Meeton<span style={{ color: ctaColor }}> {isTalent ? 'Talent' : 'ai'}</span>
-      </div>
+      <Image
+        src="/logo-dark.svg"
+        alt="DynaMeet"
+        width={120}
+        height={26}
+        style={{ height: 24, width: 'auto', opacity: 0.7 }}
+      />
       <div style={{ display: 'flex', gap: 24 }}>
-        <Link href="/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>プロダクト</Link>
-        <a href="#" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>ブログ</a>
-        <a href="#" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>お問い合わせ</a>
+        <Link href="/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>Meeton ai</Link>
+        <Link href="/talent/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>Meeton Talent</Link>
+        <Link href="/blog/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>ブログ</Link>
+        <a href="https://dynameet.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</a>
+        <a href="https://dynameet.ai/service-agreement-2/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>利用規約</a>
       </div>
       <div style={{ fontSize: 12, color: '#9498b2' }}>© 2025 DynaMeet K.K.</div>
     </footer>
