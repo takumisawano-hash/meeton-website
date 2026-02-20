@@ -38,7 +38,7 @@ export default function Footer({ variant = 'light' }: FooterProps) {
           <a href="https://dynameet.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</a>
           <a href="https://dynameet.ai/service-agreement-2/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>利用規約</a>
         </div>
-        <div style={{ fontSize: 12, color: '#7878a0' }}>© 2025 DynaMeet K.K.</div>
+        <div style={{ fontSize: 12, color: '#7878a0' }}>© 2026 DynaMeet K.K. All rights reserved.</div>
       </footer>
     )
   }
@@ -66,7 +66,7 @@ export default function Footer({ variant = 'light' }: FooterProps) {
         <a href="https://dynameet.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</a>
         <a href="https://dynameet.ai/service-agreement-2/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>利用規約</a>
       </div>
-      <div style={{ fontSize: 12, color: '#9498b2' }}>© 2025 DynaMeet K.K.</div>
+      <div style={{ fontSize: 12, color: '#9498b2' }}>© 2026 DynaMeet K.K. All rights reserved.</div>
     </footer>
   )
 }
