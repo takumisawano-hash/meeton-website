@@ -64,6 +64,51 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 .grad{background:linear-gradient(135deg,#12a37d,#2b8ce0,#3b6ff5)}
 .grad-text{background:linear-gradient(135deg,#12a37d,#2b8ce0,#3b6ff5);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* RESPONSIVE */
+.products-row{display:flex;gap:20px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.jobs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.process-row{display:flex;gap:0;align-items:stretch}
+.hero-stats-row{display:flex;justify-content:center;gap:64px}
+.hero-ctas-row{display:flex;gap:14px;justify-content:center}
+
+@media(max-width:1024px){
+  .section{padding:80px 32px}
+  .values-grid{grid-template-columns:repeat(2,1fr)}
+  .process-row{flex-wrap:wrap;gap:16px}
+  .process-row>div{flex:1 1 45%}
+  .process-row .arrow{display:none}
+}
+@media(max-width:768px){
+  .section{padding:60px 24px}
+  .stitle{font-size:32px}
+  .ssub{font-size:16px}
+  .products-row{flex-direction:column}
+  .values-grid{grid-template-columns:1fr}
+  .jobs-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .process-row{flex-direction:column}
+  .process-row>div{flex:1 1 100%}
+  .hero-stats-row{flex-direction:column;gap:32px}
+  .hero-ctas-row{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  .section{padding:48px 16px}
+}
+
+/* Hero responsive */
+.hero-title{font-size:80px;font-weight:900;line-height:1.1;letter-spacing:-3px;margin-bottom:28px;color:#eeeef6}
+@media(max-width:1024px){
+  .hero-title{font-size:60px;letter-spacing:-2px}
+}
+@media(max-width:768px){
+  .hero-title{font-size:44px;letter-spacing:-1.5px}
+}
+@media(max-width:480px){
+  .hero-title{font-size:36px;letter-spacing:-1px}
+}
 `;
 
 function JobCard({ job }: { job: typeof jobs[0] }) {
@@ -145,14 +190,14 @@ export default function Page() {
             <span style={{width:6,height:6,borderRadius:"50%",background:"#12a37d",display:"inline-block"}} />
             We are Hiring  -  6 positions open
           </div>
-          <h1 className="anim d2" style={{fontSize:80,fontWeight:900,lineHeight:1.1,letterSpacing:-3,marginBottom:28,color:"#eeeef6"}}>
+          <h1 className="anim d2 hero-title">
             AIで営業の<br />
             <span className="grad-text">あたりまえ</span>を変える
           </h1>
           <p className="anim d3" style={{fontSize:20,lineHeight:1.9,color:"#7878a0",maxWidth:620,margin:"0 auto 48px"}}>
             DynaMeet は Meeton ai と Meeton Talent の2つのプロダクトで、BtoB営業のあり方を根本から変えるAIスタートアップです。
           </p>
-          <div className="anim d4" style={{display:"flex",gap:14,justifyContent:"center"}}>
+          <div className="anim d4 hero-ctas-row">
             <button onClick={() => document.getElementById("s2")?.scrollIntoView({behavior:"smooth"})} style={{border:"none",cursor:"pointer",fontWeight:700,fontSize:18,padding:"18px 44px",borderRadius:14,background:grad,color:"#fff",boxShadow:"0 6px 32px rgba(18,163,125,.3)"}}>
               募集職種を見る
             </button>
@@ -160,7 +205,7 @@ export default function Page() {
               応募する
             </button>
           </div>
-          <div className="anim d5" style={{display:"flex",justifyContent:"center",gap:64,marginTop:80,paddingTop:48,borderTop:"1px solid #2a2a44"}}>
+          <div className="anim d5 hero-stats-row" style={{marginTop:80,paddingTop:48,borderTop:"1px solid #2a2a44"}}>
             {[{v:"10x",l:"導入社数（数ヶ月で）"},{v:"2",l:"プロダクト運営"},{v:"Series A",l:"準備中"}].map((n,i) => (
               <div key={i} style={{textAlign:"center"}}>
                 <div className="grad-text" style={{fontFamily:"var(--fm)",fontSize:44,fontWeight:700,letterSpacing:-1}}>{n.v}</div>
@@ -177,7 +222,7 @@ export default function Page() {
           <div className="slabel" style={{textAlign:"center"}}>OUR PRODUCTS</div>
           <div className="stitle" style={{textAlign:"center"}}>2つのプロダクトで営業を革新</div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>それぞれが独立した事業として成長しながら、データとAI基盤を共有。両方のプロダクトに関われるのが DynaMeet の魅力です。</p>
-          <div style={{display:"flex",gap:20,marginTop:48}}>
+          <div className="products-row" style={{marginTop:48}}>
             {[
               {color:"#12a37d",badge:"Revenue Engine",name:"Meeton ai",desc:"Webサイト訪問者をAIチャットで接客し、リード獲得から商談予約まで自動化するAI SDRプラットフォーム。",s1v:"10x",s1l:"導入社数の増加",s2v:"急成長中",s2l:"ローンチ数ヶ月",href:"/"},
               {color:"#3b6ff5",badge:"Talent Intelligence",name:"Meeton Talent",desc:"採用市場にAIの力を。企業と人材のマッチングを根本から変えるプロダクト。（詳細は面談でお話しします）",s1v:"New",s1l:"開発フェーズ",s2v:"巨大",s2l:"市場機会",href:"/talent/"},
@@ -216,7 +261,7 @@ export default function Page() {
           <div className="slabel" style={{textAlign:"center"}}>CULTURE AND VALUES</div>
           <div className="stitle" style={{textAlign:"center"}}>DynaMeet の行動原則</div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>少数精鋭だからこそ、一人ひとりの行動がカルチャーを作る。</p>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:16,marginTop:48}}>
+          <div className="values-grid" style={{marginTop:48}}>
             {values.map((v,i) => (
               <div key={i} style={{
                 background:"#0a0a12",border:"1px solid #2a2a44",borderRadius:18,padding:32,
@@ -238,7 +283,7 @@ export default function Page() {
           <div className="slabel" style={{textAlign:"center"}}>OPEN POSITIONS</div>
           <div className="stitle" style={{textAlign:"center"}}>募集職種</div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>すべてのポジションでフルリモート勤務可能。少数精鋭のチームで、大きなインパクトを。</p>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:16,marginTop:48}}>
+          <div className="jobs-grid" style={{marginTop:48}}>
             {jobs.map((j,i) => <JobCard job={j} key={i} />)}
           </div>
         </div>
@@ -250,7 +295,7 @@ export default function Page() {
           <div className="slabel" style={{textAlign:"center"}}>WHY DYNAMEET</div>
           <div className="stitle" style={{textAlign:"center"}}>DynaMeet で働く理由</div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>Series A前の最もエキサイティングなフェーズ。初期メンバーとしての特権。</p>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:16,marginTop:48}}>
+          <div className="why-grid" style={{marginTop:48}}>
             {whyJoin.map((w,i) => (
               <div key={i} style={{
                 background:"#0a0a12",border:"1px solid #2a2a44",borderRadius:16,padding:28,
@@ -274,7 +319,7 @@ export default function Page() {
           <div className="slabel" style={{textAlign:"center"}}>HIRING PROCESS</div>
           <div className="stitle" style={{textAlign:"center"}}>選考プロセス</div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>スピード重視。応募から最短1週間でオファーまで。</p>
-          <div style={{display:"flex",gap:0,alignItems:"stretch",marginTop:48}}>
+          <div className="process-row" style={{marginTop:48}}>
             {processSteps.map((s,i) => (
               <div key={i} style={{display:"flex",alignItems:"stretch",flex:1}}>
                 <div style={{
@@ -286,7 +331,7 @@ export default function Page() {
                   <div style={{fontSize:13,lineHeight:1.7,color:"#7878a0"}}>{s.desc}</div>
                 </div>
                 {i < 3 && (
-                  <div style={{display:"flex",alignItems:"center",justifyContent:"center",width:36,fontFamily:"var(--fm)",fontSize:18,color:"#3a3a58",flexShrink:0}}>→</div>
+                  <div className="arrow" style={{display:"flex",alignItems:"center",justifyContent:"center",width:36,fontFamily:"var(--fm)",fontSize:18,color:"#3a3a58",flexShrink:0}}>→</div>
                 )}
               </div>
             ))}
