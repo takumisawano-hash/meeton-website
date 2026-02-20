@@ -128,6 +128,56 @@
       "source": "/hiring",
       "destination": "/careers/",
       "permanent": true
+    },
+    {
+      "source": "/en",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/news",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/news/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dynameet-aisdr",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dynameet-aisdr/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/service",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/service/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/price",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [
