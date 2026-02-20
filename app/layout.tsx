@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Plus_Jakarta_Sans, Noto_Sans_JP, JetBrains_Mono } from 'next/font/google'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
@@ -75,6 +76,13 @@ export default function RootLayout({
         <JsonLd type="organization" />
         <JsonLd type="website" />
         {children}
+        <Script id="dynameet-config" strategy="lazyOnload">
+          {`window.DynaMeetConfig = { teamId: "3b1c8eb3-45b2-4181-a055-7a5862219595" };`}
+        </Script>
+        <Script
+          src="https://app.dynameet.ai/meeton.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   )
