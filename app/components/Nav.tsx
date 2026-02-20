@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import HubSpotModal from './HubSpotModal'
 
 type NavProps = {
   variant?: 'light' | 'dark'
@@ -9,6 +11,7 @@ type NavProps = {
 
 export default function Nav({ variant = 'light' }: NavProps) {
   const pathname = usePathname()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const isDark = variant === 'dark'
 
@@ -158,17 +161,22 @@ export default function Nav({ variant = 'light' }: NavProps) {
         ))}
       </div>
       <div style={{ display: 'flex', gap: 10 }}>
-        <button style={{
-          background: 'transparent',
-          border: '2px solid #c8cedf',
-          color: '#6e7494',
-          padding: '12px 26px',
-          borderRadius: 10,
-          fontSize: 15,
-          cursor: 'pointer',
-          fontWeight: 700,
-          transition: 'all .25s'
-        }}>資料請求</button>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          style={{
+            background: 'transparent',
+            border: '2px solid #c8cedf',
+            color: '#6e7494',
+            padding: '12px 26px',
+            borderRadius: 10,
+            fontSize: 15,
+            cursor: 'pointer',
+            fontWeight: 700,
+            transition: 'all .25s'
+          }}
+        >
+          資料請求
+        </button>
         <button style={{
           border: 'none',
           cursor: 'pointer',
@@ -182,6 +190,7 @@ export default function Nav({ variant = 'light' }: NavProps) {
           transition: 'all .25s'
         }}>デモを予約</button>
       </div>
+      <HubSpotModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </nav>
   )
 }

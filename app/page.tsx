@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import HubSpotModal from "./components/HubSpotModal";
 
 const css = `
 :root {
@@ -327,6 +328,7 @@ function CaseCarousel(){
 
 export default function Page(){
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isDocModalOpen, setIsDocModalOpen] = useState(false);
   return(
     <div>
       <style dangerouslySetInnerHTML={{__html:css}}/>
@@ -344,7 +346,7 @@ export default function Page(){
           <h1 className="anim d2">Webサイト訪問者を<br/><em>商談に変える</em> AI</h1>
           <p className="anim d3 hero-sub">Meeton ai がすべてのWebサイト訪問者に対応し、スムーズにリードを獲得。見込み度を自動で評価し、メールとチャットで育成しながら、商談予約まで自動化します。</p>
           <div className="anim d4 hero-ctas">
-            <button className="btn btn-cta btn-cta-lg">資料請求</button>
+            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost">デモを予約 →</button>
           </div>
           <div className="anim d5 hero-stats">
@@ -670,13 +672,15 @@ export default function Page(){
           <div className="stitle" style={{textAlign:"center"}}>訪問者の99%を<br/>失い続けますか？</div>
           <p className="ssub" style={{textAlign:"center",margin:"16px auto 36px"}}>Meeton ai を数分で導入。コード不要。匿名の訪問者を商談に変えましょう。</p>
           <div style={{display:"flex",gap:14,justifyContent:"center"}}>
-            <button className="btn btn-cta btn-cta-lg">資料請求</button>
+            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost">デモを予約 →</button>
           </div>
         </div>
       </section>
 
       <Footer variant="light" />
+
+      <HubSpotModal isOpen={isDocModalOpen} onClose={() => setIsDocModalOpen(false)} />
     </div>
   );
 }
