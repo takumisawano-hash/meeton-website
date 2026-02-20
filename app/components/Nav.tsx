@@ -15,6 +15,7 @@ export default function Nav({ variant = 'light' }: NavProps) {
   const navLinks = [
     { href: '/', label: 'Meeton AI' },
     { href: '/talent/', label: 'Meeton Talent' },
+    { href: '/blog/', label: 'ブログ' },
     { href: '/careers/', label: '採用情報' },
   ]
 

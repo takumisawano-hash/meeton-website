@@ -50,11 +50,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/:path*",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/category/:path*",
       "destination": "/",
       "permanent": true
