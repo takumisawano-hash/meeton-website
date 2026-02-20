@@ -1,5 +1,17 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "redirects": [
+    {
+      "source": "/demo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/downloadable-materials",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }

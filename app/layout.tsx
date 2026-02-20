@@ -23,8 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Meeton AI - Webサイト訪問者を商談に変えるAI',
-  description: 'Meeton ai がすべてのWebサイト訪問者に対応し、スムーズにリードを獲得。見込み度を自動で評価し、メールとチャットで育成しながら、商談予約まで自動化します。',
+  title: 'Meeton AI｜ウェブサイトから商談を自動創出するAIセールスプラットフォーム',
+  description: 'Meeton AIは、ウェブサイト訪問者をAIチャット・インテントスコアリング・自動スケジューリングで商談に変えるB2B SaaSプラットフォームです。',
 }
 
 export default function RootLayout({

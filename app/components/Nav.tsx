@@ -135,7 +135,7 @@ export default function Nav({ variant = 'light' }: NavProps) {
     }}>
       <Link href="/" style={{ textDecoration: 'none' }}>
         <div style={{ fontWeight: 900, fontSize: 22, color: '#0f1128' }}>
-          Meeton<span style={{ color: ctaColor }}> {isTalent ? 'Talent' : 'ai'}</span>
+          Meeton<span style={{ color: '#12a37d' }}> AI</span>
         </div>
       </Link>
       <div style={{ display: 'flex', gap: 28 }}>
