@@ -238,7 +238,7 @@ export default function Page(){
         <div className="anim d1 hero-badge"><div className="hero-badge-dot"/>採用サイト特化 AI リクルーター</div>
         <h1 className="anim d2">採用サイト訪問者を<em>面談に変える</em> AI</h1>
         <p className="anim d3 hero-sub">すべての訪問者にAIが対応。候補者を自然に獲得し、志望度を自動で評価。メールとチャットで育成しながら面談予約まで完全自動化。</p>
-        <div className="anim d4 hero-ctas"><button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button><button className="btn-ghost">デモを予約 →</button></div>
+        <div className="anim d4 hero-ctas"><button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button><a href="https://meetings-na2.hubspot.com/takumi-sawano?utm_source=website&utm_medium=cta&utm_campaign=meeton-talent" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{textDecoration:'none',display:'inline-flex',alignItems:'center'}}>デモを予約 →</a></div>
         <div className="anim d5 hero-stats">
           {[{v:"3x",l:"エントリー数",c:"var(--cta)"},{v:"65%",l:"面談化率",c:"var(--accent)"},{v:"24/7",l:"AI常時対応",c:"var(--teal)"}].map((s,i)=>(
             <div key={i}><div className="stat-v" style={{color:s.c}}>{s.v}</div><div className="stat-l">{s.l}</div></div>
@@ -554,13 +554,13 @@ export default function Page(){
       <div className="slabel">今すぐ始める</div>
       <div className="stitle" style={{textAlign:"center"}}>採用サイト訪問者の99%を<br/>失い続けますか？</div>
       <p className="ssub" style={{textAlign:"center",margin:"16px auto 36px"}}>Meeton Talent を数分で導入。コード不要。興味を持った候補者を面談に変えましょう。</p>
-      <div style={{display:"flex",gap:14,justifyContent:"center"}}><button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button><button className="btn-ghost">デモを予約 →</button></div>
+      <div style={{display:"flex",gap:14,justifyContent:"center"}}><button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button><a href="https://meetings-na2.hubspot.com/takumi-sawano?utm_source=website&utm_medium=cta&utm_campaign=meeton-talent" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{textDecoration:'none',display:'inline-flex',alignItems:'center'}}>デモを予約 →</a></div>
     </div>
   </section>
 
   <Footer variant="light" />
 
-  <HubSpotModal isOpen={isDocModalOpen} onClose={() => setIsDocModalOpen(false)} />
+  <HubSpotModal isOpen={isDocModalOpen} onClose={() => setIsDocModalOpen(false)} utmCampaign="meeton-talent" />
 
   </div>);
 }

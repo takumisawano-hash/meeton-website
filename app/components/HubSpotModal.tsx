@@ -11,6 +11,7 @@ declare global {
           formId: string
           region: string
           target: string
+          onFormReady?: ($form: HTMLFormElement) => void
         }) => void
       }
     }
@@ -20,9 +21,10 @@ declare global {
 type HubSpotModalProps = {
   isOpen: boolean
   onClose: () => void
+  utmCampaign?: string
 }
 
-export default function HubSpotModal({ isOpen, onClose }: HubSpotModalProps) {
+export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotModalProps) {
   const formContainerRef = useRef<HTMLDivElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
 
@@ -43,14 +45,34 @@ export default function HubSpotModal({ isOpen, onClose }: HubSpotModalProps) {
   useEffect(() => {
     if (isOpen && scriptLoaded && formContainerRef.current && window.hbspt) {
       formContainerRef.current.innerHTML = ''
+
+      const baseUrl = typeof window !== 'undefined' ? window.location.origin + window.location.pathname : ''
+      const utmParams = utmCampaign
+        ? `?utm_source=website&utm_medium=cta&utm_campaign=${utmCampaign}`
+        : ''
+
       window.hbspt.forms.create({
         portalId: '45872857',
         formId: 'dd42d8b3-e426-4079-9479-fa28287c0544',
         region: 'na2',
         target: '#hubspot-form-container',
+        onFormReady: ($form: HTMLFormElement) => {
+          if (utmCampaign && $form) {
+            const pageUrlInput = $form.querySelector('input[name="hs_context"]')
+            if (pageUrlInput) {
+              try {
+                const context = JSON.parse((pageUrlInput as HTMLInputElement).value || '{}')
+                context.pageUrl = baseUrl + utmParams
+                ;(pageUrlInput as HTMLInputElement).value = JSON.stringify(context)
+              } catch {
+                // ignore parsing errors
+              }
+            }
+          }
+        },
       })
     }
-  }, [isOpen, scriptLoaded])
+  }, [isOpen, scriptLoaded, utmCampaign])
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {

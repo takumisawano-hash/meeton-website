@@ -347,7 +347,7 @@ export default function Page(){
           <p className="anim d3 hero-sub">Meeton ai がすべてのWebサイト訪問者に対応し、スムーズにリードを獲得。見込み度を自動で評価し、メールとチャットで育成しながら、商談予約まで自動化します。</p>
           <div className="anim d4 hero-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost">デモを予約 →</button>
+            <a href="https://meetings-na2.hubspot.com/takumi-sawano?utm_source=website&utm_medium=cta&utm_campaign=meeton-ai" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{textDecoration:'none',display:'inline-flex',alignItems:'center'}}>デモを予約 →</a>
           </div>
           <div className="anim d5 hero-stats">
             {[{v:"2x",l:"商談化率の向上"},{v:"3x",l:"リード獲得数の向上"},{v:"24/7",l:"AIが常時対応"}].map((s,i)=>(
@@ -673,14 +673,14 @@ export default function Page(){
           <p className="ssub" style={{textAlign:"center",margin:"16px auto 36px"}}>Meeton ai を数分で導入。コード不要。匿名の訪問者を商談に変えましょう。</p>
           <div style={{display:"flex",gap:14,justifyContent:"center"}}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost">デモを予約 →</button>
+            <a href="https://meetings-na2.hubspot.com/takumi-sawano?utm_source=website&utm_medium=cta&utm_campaign=meeton-ai" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{textDecoration:'none',display:'inline-flex',alignItems:'center'}}>デモを予約 →</a>
           </div>
         </div>
       </section>
 
       <Footer variant="light" />
 
-      <HubSpotModal isOpen={isDocModalOpen} onClose={() => setIsDocModalOpen(false)} />
+      <HubSpotModal isOpen={isDocModalOpen} onClose={() => setIsDocModalOpen(false)} utmCampaign="meeton-ai" />
     </div>
   );
 }

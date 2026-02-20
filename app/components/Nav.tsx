@@ -122,6 +122,11 @@ export default function Nav({ variant = 'light' }: NavProps) {
     ? 'rgba(37,99,235,.22)'
     : 'rgba(18,163,125,.25)'
 
+  const utmCampaign = isTalent ? 'meeton-talent' : 'meeton-ai'
+  const demoUrl = isTalent
+    ? 'https://meetings-na2.hubspot.com/takumi-sawano?utm_source=website&utm_medium=cta&utm_campaign=meeton-talent'
+    : 'https://meetings-na2.hubspot.com/takumi-sawano?utm_source=website&utm_medium=cta&utm_campaign=meeton-ai'
+
   return (
     <nav style={{
       position: 'fixed',
@@ -177,20 +182,30 @@ export default function Nav({ variant = 'light' }: NavProps) {
         >
           資料請求
         </button>
-        <button style={{
-          border: 'none',
-          cursor: 'pointer',
-          fontWeight: 700,
-          borderRadius: 10,
-          background: ctaGradient,
-          color: '#fff',
-          padding: '12px 26px',
-          fontSize: 15,
-          boxShadow: `0 4px 16px ${ctaGlow}`,
-          transition: 'all .25s'
-        }}>デモを予約</button>
+        <a
+          href={demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 700,
+            borderRadius: 10,
+            background: ctaGradient,
+            color: '#fff',
+            padding: '12px 26px',
+            fontSize: 15,
+            boxShadow: `0 4px 16px ${ctaGlow}`,
+            transition: 'all .25s',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+          }}
+        >
+          デモを予約
+        </a>
       </div>
-      <HubSpotModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <HubSpotModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} utmCampaign={utmCampaign} />
     </nav>
   )
 }
