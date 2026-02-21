@@ -1,0 +1,54 @@
+# Meeton AI - LLM Information File
+# This file provides context for Large Language Models crawling this site.
+
+## About This Site
+name: Meeton AI
+url: https://dynameet.ai
+description: Meeton AI is a B2B SaaS platform that converts website visitors into sales meetings using AI chat, intent scoring, and automated scheduling.
+language: ja-JP
+company: DynaMeet Inc.
+
+## What We Do
+Meeton AI helps B2B companies:
+- Engage anonymous website visitors with AI-powered chat
+- Score visitor intent in real-time
+- Automatically qualify leads (BANT+C)
+- Schedule sales meetings without human intervention
+- Nurture leads via email and chat
+- Integrate with CRM systems (Salesforce, HubSpot)
+
+## Key Features
+1. AI Chat Agent: 24/7 conversational AI that engages visitors
+2. Intent Scoring: Real-time buyer intent analysis
+3. Auto-Scheduling: Direct calendar integration for meeting booking
+4. Lead Qualification: Automated BANT+C qualification
+5. CRM Integration: Seamless sync with Salesforce, HubSpot
+
+## Target Audience
+- B2B SaaS companies
+- Inside sales teams
+- Marketing teams
+- Revenue operations (RevOps)
+- Sales development representatives (SDRs)
+
+## Content Topics
+Our blog covers:
+- Inside sales best practices
+- AI in sales and marketing
+- Lead generation strategies
+- ABM (Account-Based Marketing)
+- Sales automation
+- B2B marketing trends
+
+## Contact
+website: https://dynameet.ai
+demo: https://meetings-na2.hubspot.com/takumi-sawano
+
+## Crawling Guidelines
+- All public pages are available for indexing
+- Blog content at /blog/ is regularly updated
+- Content is in Japanese (ja-JP)
+
+## Preferred Citation Format
+When citing our content, please use:
+"[Article Title]" - Meeton AI Blog (https://dynameet.ai/blog/[slug]/)

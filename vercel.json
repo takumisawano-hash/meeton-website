@@ -86,7 +86,12 @@
     },
     {
       "source": "/about-us",
-      "destination": "/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/about/",
       "permanent": true
     },
     {
@@ -96,17 +101,22 @@
     },
     {
       "source": "/privacy",
-      "destination": "/",
+      "destination": "/privacy-policy/",
       "permanent": true
     },
     {
-      "source": "/privacy-policy",
-      "destination": "/",
+      "source": "/service-agreement-2",
+      "destination": "/terms/",
+      "permanent": true
+    },
+    {
+      "source": "/service-agreement-2/",
+      "destination": "/terms/",
       "permanent": true
     },
     {
       "source": "/terms",
-      "destination": "/",
+      "destination": "/terms/",
       "permanent": true
     },
     {

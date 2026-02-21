@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import HubSpotModal from './HubSpotModal'
+import HubSpotMeetingModal from './HubSpotMeetingModal'
 
 type NavProps = {
   variant?: 'light' | 'dark'
@@ -13,6 +14,7 @@ type NavProps = {
 export default function Nav({ variant = 'light' }: NavProps) {
   const pathname = usePathname()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
 
   const isDark = variant === 'dark'
 
@@ -172,10 +174,8 @@ export default function Nav({ variant = 'light' }: NavProps) {
         >
           資料請求
         </button>
-        <a
-          href={demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => setIsMeetingModalOpen(true)}
           style={{
             border: 'none',
             cursor: 'pointer',
@@ -187,15 +187,13 @@ export default function Nav({ variant = 'light' }: NavProps) {
             fontSize: 15,
             boxShadow: `0 4px 16px ${ctaGlow}`,
             transition: 'all .25s',
-            textDecoration: 'none',
-            display: 'inline-flex',
-            alignItems: 'center',
           }}
         >
           デモを予約
-        </a>
+        </button>
       </div>
       <HubSpotModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} utmCampaign={utmCampaign} />
+      <HubSpotMeetingModal isOpen={isMeetingModalOpen} onClose={() => setIsMeetingModalOpen(false)} utmCampaign={utmCampaign} />
     </nav>
   )
 }

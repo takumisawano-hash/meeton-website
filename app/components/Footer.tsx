@@ -35,8 +35,9 @@ export default function Footer({ variant = 'light' }: FooterProps) {
         <div style={{ display: 'flex', gap: 20 }}>
           <Link href="/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>Meeton ai</Link>
           <Link href="/talent/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>Meeton Talent</Link>
-          <a href="https://dynameet.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</a>
-          <a href="https://dynameet.ai/service-agreement-2/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>利用規約</a>
+          <Link href="/about/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>会社概要</Link>
+          <Link href="/privacy-policy/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</Link>
+          <Link href="/terms/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>利用規約</Link>
         </div>
         <div style={{ fontSize: 12, color: '#7878a0' }}>© 2026 DynaMeet K.K. All rights reserved.</div>
       </footer>
@@ -63,8 +64,9 @@ export default function Footer({ variant = 'light' }: FooterProps) {
         <Link href="/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>Meeton ai</Link>
         <Link href="/talent/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>Meeton Talent</Link>
         <Link href="/blog/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>ブログ</Link>
-        <a href="https://dynameet.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</a>
-        <a href="https://dynameet.ai/service-agreement-2/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>利用規約</a>
+        <Link href="/about/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>会社概要</Link>
+        <Link href="/privacy-policy/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</Link>
+        <Link href="/terms/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>利用規約</Link>
       </div>
       <div style={{ fontSize: 12, color: '#9498b2' }}>© 2026 DynaMeet K.K. All rights reserved.</div>
     </footer>

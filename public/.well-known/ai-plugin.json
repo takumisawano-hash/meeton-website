@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Meeton AI",
+  "name_for_model": "meeton_ai",
+  "description_for_human": "AIを活用したB2Bセールス自動化プラットフォーム。ウェブサイト訪問者を商談に変換。",
+  "description_for_model": "Meeton AI is a B2B SaaS platform that converts website visitors into sales meetings using AI chat, intent scoring, and automated scheduling. The platform helps inside sales teams, SDRs, and marketing teams generate and qualify leads automatically. Key features include: AI chat agent for 24/7 visitor engagement, real-time intent scoring, automated BANT+C qualification, direct calendar integration for meeting booking, and CRM integration with Salesforce and HubSpot.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://dynameet.ai/openapi.json"
+  },
+  "logo_url": "https://dynameet.ai/icon.png",
+  "contact_email": "info@dynameet.ai",
+  "legal_info_url": "https://dynameet.ai/privacy-policy/"
+}

@@ -6,10 +6,29 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/', '/admin/'],
+        disallow: [
+          '/api/',
+          '/_next/',
+          '/admin/',
+          '/wp-admin/',
+          '/wp-content/',
+          '/wp-includes/',
+          '/wp-login.php',
+          '/xmlrpc.php',
+          '/*.json$',
+          '/feed/',
+        ],
       },
       {
         userAgent: 'Googlebot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Googlebot-Image',
+        allow: '/',
+      },
+      {
+        userAgent: 'Bingbot',
         allow: '/',
       },
     ],

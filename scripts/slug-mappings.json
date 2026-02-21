@@ -1,0 +1,710 @@
+[
+  {
+    "title": "営業をマスターする：返信率・商談化率を増やすためにできる4つのこと",
+    "oldSlug": "mastering-sales-4-ways-to-improve-meeting-rate",
+    "newSlug": "mastering-sales-4-ways-to-improve-meeting-rate",
+    "publishedDate": "2024-08-01"
+  },
+  {
+    "title": "インサイドセールスに向いている人：人材の募集と採用戦略",
+    "oldSlug": "inside-sales-recruitment-strategy",
+    "newSlug": "inside-sales-recruitment-strategy",
+    "publishedDate": "2024-08-13"
+  },
+  {
+    "title": "リード戦略を考える（前編）：市場環境から考える営業戦略",
+    "oldSlug": "lead-strategy-pt1-high-low-volume-leads",
+    "newSlug": "lead-strategy-pt1-high-low-volume-leads",
+    "publishedDate": "2024-08-13"
+  },
+  {
+    "title": "リード戦略を考える（後編）：多量リード・少量リード環境で成功する方法",
+    "oldSlug": "lead-strategy-pt2-high-low-volume-leads",
+    "newSlug": "lead-strategy-pt2-high-low-volume-leads",
+    "publishedDate": "2024-08-13"
+  },
+  {
+    "title": "今日からできる、より多くの商談を獲得するための5つのステップ",
+    "oldSlug": "5-steps-to-booking-more-meetings",
+    "newSlug": "5-steps-to-booking-more-meetings",
+    "publishedDate": "2024-08-14"
+  },
+  {
+    "title": "商談に繋げるためのコールドコール（営業電話）台本戦略",
+    "oldSlug": "cold-calling-phone-script-strategy",
+    "newSlug": "cold-calling-phone-script-strategy",
+    "publishedDate": "2024-08-14"
+  },
+  {
+    "title": "アウトバウンド・セールス：時間を無駄にせず、商談に繋げる方法",
+    "oldSlug": "outbound-sales-how-to-not-waste-time-and-book-meetings",
+    "newSlug": "outbound-sales-how-to-not-waste-time-and-book-meetings",
+    "publishedDate": "2024-08-14"
+  },
+  {
+    "title": "成功するインサイドセールスプロセスの作り方",
+    "oldSlug": "developing-a-winning-inside-sales-process",
+    "newSlug": "developing-a-winning-inside-sales-process",
+    "publishedDate": "2024-08-15"
+  },
+  {
+    "title": "「リードクオリフィケーション」とは：リード選定の手順",
+    "oldSlug": "lead-qualification",
+    "newSlug": "lead-qualification",
+    "publishedDate": "2024-08-20"
+  },
+  {
+    "title": "インサイドセールスの主要な評価指標（KPI）",
+    "oldSlug": "kpi-for-inside-sales",
+    "newSlug": "kpi-for-inside-sales",
+    "publishedDate": "2024-08-22"
+  },
+  {
+    "title": "データで見る：BtoB営業におけるメールのアウトリーチ戦略",
+    "oldSlug": "email-outreach-strategy-using-data",
+    "newSlug": "email-outreach-strategy-using-data",
+    "publishedDate": "2024-09-09"
+  },
+  {
+    "title": "ABMとは：戦略と活用できるツール",
+    "oldSlug": "what-is-abm-strategy-and-tools",
+    "newSlug": "what-is-abm-strategy-and-tools",
+    "publishedDate": "2024-09-19"
+  },
+  {
+    "title": "どう答える？今日から使えるオブジェクションハンドリング",
+    "oldSlug": "how-to-respond-objection-handling-tips",
+    "newSlug": "how-to-respond-objection-handling-tips",
+    "publishedDate": "2024-09-24"
+  },
+  {
+    "title": "インサイドセールス組織の作り方：検討するポイントと管理方法",
+    "oldSlug": "building-an-inside-sales-org",
+    "newSlug": "building-an-inside-sales-org",
+    "publishedDate": "2024-10-03"
+  },
+  {
+    "title": "インサイドセールスとは？BtoB営業の現代版",
+    "oldSlug": "what-is-inside-sales",
+    "newSlug": "what-is-inside-sales",
+    "publishedDate": "2024-08-08"
+  },
+  {
+    "title": "イベントレポート：インサイドセールス意見交換会（10月3日）",
+    "oldSlug": "community-roundtable-20241003",
+    "newSlug": "community-roundtable-20241003",
+    "publishedDate": "2024-10-07"
+  },
+  {
+    "title": "ウェビナー「反応を引き出すアウトバウンドメールの基本」開催のお知らせ",
+    "oldSlug": "%e3%82%a6%e3%82%a7%e3%83%93%e3%83%8a%e3%83%bc%e3%80%8c%e5%8f%8d%e5%bf%9c%e3%82%92%e5%bc%95%e3%81%8d%e5%87%ba%e3%81%99%e3%82%a2%e3%82%a6%e3%83%88%e3%83%90%e3%82%a6%e3%83%b3%e3%83%89%e3%83%a1%e3%83%bc",
+    "newSlug": "jp-mlutf21b-0phs",
+    "publishedDate": "2024-12-11"
+  },
+  {
+    "title": "イベントレポート：インサイドセールス大忘年会(12月12日）",
+    "oldSlug": "%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%ef%bc%9a%e3%82%a4%e3%83%b3%e3%82%b5%e3%82%a4%e3%83%89%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e5%a4%a7%e5%bf%98%e5%b9%b4%e4%bc%9a1",
+    "newSlug": "event-report-1",
+    "publishedDate": "2024-12-13"
+  },
+  {
+    "title": "初ウェビナー開催報告：「相手の反応を引き出すアウトバウンドメール」",
+    "oldSlug": "%e5%88%9d%e3%82%a6%e3%82%a7%e3%83%93%e3%83%8a%e3%83%bc%e9%96%8b%e5%82%ac%e5%a0%b1%e5%91%8a%ef%bc%9a%e3%80%8c%e7%9b%b8%e6%89%8b%e3%81%ae%e5%8f%8d%e5%bf%9c%e3%82%92%e5%bc%95%e3%81%8d%e5%87%ba%e3%81%99",
+    "newSlug": "jp-mlutf3gu-iwv4",
+    "publishedDate": "2024-12-24"
+  },
+  {
+    "title": "営業効率化のカギ：成功するチームが実践する戦略とツール",
+    "oldSlug": "%e5%96%b6%e6%a5%ad%e5%8a%b9%e7%8e%87%e5%8c%96%e3%81%ae%e3%82%ab%e3%82%ae%e6%88%90%e5%8a%9f%e3%81%99%e3%82%8b%e3%83%81%e3%83%bc%e3%83%a0%e3%81%8c%e5%ae%9f%e8%b7%b5%e3%81%99%e3%82%8b%e6%88%a6%e7%95%a5",
+    "newSlug": "sales-efficiency-success-team-strategy",
+    "publishedDate": "2025-01-14"
+  },
+  {
+    "title": "メールマーケティング成功の鍵：ドメインの信頼性向上ガイド",
+    "oldSlug": "%e3%83%a1%e3%83%bc%e3%83%ab%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e6%88%90%e5%8a%9f%e3%81%ae%e9%8d%b5%ef%bc%9a%e3%83%89%e3%83%a1%e3%82%a4%e3%83%b3%e3%81%ae%e4%bf%a1%e9%a0%bc",
+    "newSlug": "email-marketingsuccess",
+    "publishedDate": "2025-01-15"
+  },
+  {
+    "title": "営業の成功を引き寄せる「セールスチャンピオン」とは？",
+    "oldSlug": "%e5%96%b6%e6%a5%ad%e3%81%ae%e6%88%90%e5%8a%9f%e3%82%92%e5%bc%95%e3%81%8d%e5%af%84%e3%81%9b%e3%82%8b%e3%80%8c%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e3%83%81%e3%83%a3%e3%83%b3%e3%83%94%e3%82%aa%e3%83%b3",
+    "newSlug": "sales-success-sales-champion",
+    "publishedDate": "2025-01-16"
+  },
+  {
+    "title": "セールスリーダーシップを極める：チームパフォーマンスを高め、売上成長を促進する戦略",
+    "oldSlug": "%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e3%83%aa%e3%83%bc%e3%83%80%e3%83%bc%e3%82%b7%e3%83%83%e3%83%97%e3%82%92%e6%a5%b5%e3%82%81%e3%82%8b%ef%bc%9a%e3%83%81%e3%83%bc%e3%83%a0%e3%83%91%e3%83%95%e3%82%a9",
+    "newSlug": "sales-leadership-team",
+    "publishedDate": "2025-01-17"
+  },
+  {
+    "title": "営業チームを成功に導く！目標を達成するための重要指標とその活用方法",
+    "oldSlug": "leading-your-sales-team-to-success",
+    "newSlug": "leading-your-sales-team-to-success",
+    "publishedDate": "2025-01-20"
+  },
+  {
+    "title": "収益を最大化する新しいB2Bマーケティングの形",
+    "oldSlug": "%e5%8f%8e%e7%9b%8a%e3%82%92%e6%9c%80%e5%a4%a7%e5%8c%96%e3%81%99%e3%82%8b%e6%96%b0%e3%81%97%e3%81%84b2b%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%ae%e5%bd%a2",
+    "newSlug": "maximize-revenue-b2bmarketing",
+    "publishedDate": "2025-01-21"
+  },
+  {
+    "title": "売上を加速するためのセールスパイプライン管理",
+    "oldSlug": "%e5%a3%b2%e4%b8%8a%e3%82%92%e5%8a%a0%e9%80%9f%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e3%83%91%e3%82%a4%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e7%ae%a1%e7%90%86",
+    "newSlug": "sales-pipeline",
+    "publishedDate": "2025-01-23"
+  },
+  {
+    "title": "営業チームがアポ取りモチベーションを維持する方法",
+    "oldSlug": "%e5%96%b6%e6%a5%ad%e3%83%81%e3%83%bc%e3%83%a0%e3%81%8c%e3%82%a2%e3%83%9d%e5%8f%96%e3%82%8a%e3%83%a2%e3%83%81%e3%83%99%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92%e7%b6%ad%e6%8c%81%e3%81%99%e3%82%8b",
+    "newSlug": "salesteam-booking-meetings",
+    "publishedDate": "2025-01-30"
+  },
+  {
+    "title": "停滞した商談を打破するには？",
+    "oldSlug": "%e5%81%9c%e6%bb%9e%e3%81%97%e3%81%9f%e5%95%86%e8%ab%87%e3%82%92%e6%89%93%e7%a0%b4%e3%81%99%e3%82%8b%e3%81%ab%e3%81%af%ef%bc%9f",
+    "newSlug": "stalled-deals",
+    "publishedDate": "2025-02-25"
+  },
+  {
+    "title": "営業成功の鍵：見込み客の見つけ方と関係構築のポイント",
+    "oldSlug": "keys-to-success",
+    "newSlug": "keys-to-success",
+    "publishedDate": "2025-03-12"
+  },
+  {
+    "title": "戦略的な営業計画の本質とは？",
+    "oldSlug": "strategic-salesplan",
+    "newSlug": "strategic-salesplan",
+    "publishedDate": "2025-03-04"
+  },
+  {
+    "title": "【インターン生インタビュー #3 】「スキルが向上している実感が得られる」 - 細川さん",
+    "oldSlug": "interview-with-interns-at-dynameet-3",
+    "newSlug": "interview-with-interns-at-dynameet-3",
+    "publishedDate": "2025-05-07"
+  },
+  {
+    "title": "クローズドロスト（商談失注）分析による営業成績向上法",
+    "oldSlug": "sales-performance-improvement-through-closed-lost-analysis",
+    "newSlug": "sales-performance-improvement-through-closed-lost-analysis",
+    "publishedDate": "2025-03-25"
+  },
+  {
+    "title": "【インターン生インタビュー #1】「自分で何でもできるから面白い」 - 島田さん",
+    "oldSlug": "dynameet-intern-interview-1",
+    "newSlug": "dynameet-intern-interview-1",
+    "publishedDate": "2025-04-01"
+  },
+  {
+    "title": "新規顧客獲得支援ツール「DynaMeet（ダイナミート）」提供開始",
+    "oldSlug": "launched-dynameet-a-new-customer-acquisition-support-tool",
+    "newSlug": "launched-dynameet-a-new-customer-acquisition-support-tool",
+    "publishedDate": "2025-04-02"
+  },
+  {
+    "title": "【インターン生インタビュー #2 】「裁量を持って仕事ができる」 – 今井さん",
+    "oldSlug": "dynameet-intern-interview-2",
+    "newSlug": "dynameet-intern-interview-2",
+    "publishedDate": "2025-04-08"
+  },
+  {
+    "title": "ABMツール完全ガイド2025：選び方から導入まで徹底解説",
+    "oldSlug": "abm-tools-complete-guide-2025-how-to-choose-and-implement",
+    "newSlug": "abm-tools-complete-guide-2025-how-to-choose-and-implement",
+    "publishedDate": "2025-04-15"
+  },
+  {
+    "title": "インサイドセールスに向いている人の「10の特徴」",
+    "oldSlug": "how-to-identify-the-10-characteristics-of-successful-inside-sales",
+    "newSlug": "how-to-identify-the-10-characteristics-of-successful-inside-sales",
+    "publishedDate": "2025-04-22"
+  },
+  {
+    "title": "主要ABMツール5選：機能比較と費用対効果を徹底分析",
+    "oldSlug": "analysis-of-5-major-abm-tools",
+    "newSlug": "analysis-of-5-major-abm-tools",
+    "publishedDate": "2025-05-01"
+  },
+  {
+    "title": "営業プロセスの盲点：「停滞案件」が示す重要な課題と対策",
+    "oldSlug": "%e5%96%b6%e6%a5%ad%e3%83%97%e3%83%ad%e3%82%bb%e3%82%b9%e3%81%ae%e7%9b%b2%e7%82%b9%ef%bc%9a%e3%80%8c%e5%81%9c%e6%bb%9e%e6%a1%88%e4%bb%b6%e3%80%8d%e3%81%8c%e7%a4%ba%e3%81%99%e9%87%8d%e8%a6%81%e3%81%aa",
+    "newSlug": "jp-mlutfj0o-38b4",
+    "publishedDate": "2025-04-10"
+  },
+  {
+    "title": "商談化率を高めるインサイドセールスのスキルと思考法",
+    "oldSlug": "interview-with-successful-person-in-inside-sales-common-skills-and-mindset",
+    "newSlug": "interview-with-successful-person-in-inside-sales-common-skills-and-mindset",
+    "publishedDate": "2025-05-13"
+  },
+  {
+    "title": "インサイドセールス採用ガイド：適性を見極める面接質問と評価基準",
+    "oldSlug": "inside-sales-hiring-guide-interview-questions-and-evaluation-criteria",
+    "newSlug": "inside-sales-hiring-guide-interview-questions-and-evaluation-criteria",
+    "publishedDate": "2025-05-20"
+  },
+  {
+    "title": "ABMツールを活用したターゲットアカウント分析の手法",
+    "oldSlug": "targeted-account-analysis-techniques-using-abm-tools",
+    "newSlug": "targeted-account-analysis-techniques-using-abm-tools",
+    "publishedDate": "2025-05-27"
+  },
+  {
+    "title": "90日で成果を出す！インサイドセールス研修ガイド",
+    "oldSlug": "inside-sales-training-guide",
+    "newSlug": "inside-sales-training-guide",
+    "publishedDate": "2025-06-02"
+  },
+  {
+    "title": "オブジェクション対応ガイド：状況別スクリプト例付き",
+    "oldSlug": "objection-handling-complete-manual-situational-handling-scripts",
+    "newSlug": "objection-handling-complete-manual-situational-handling-scripts",
+    "publishedDate": "2025-06-10"
+  },
+  {
+    "title": "営業成果に直結するアウトバウンドセールスの基礎と応用",
+    "oldSlug": "outbound-sales-strategy",
+    "newSlug": "outbound-sales-strategy",
+    "publishedDate": "2025-06-17"
+  },
+  {
+    "title": "商談でよくあるオブジェクションへの切り返し15選",
+    "oldSlug": "15-common-turn-offs-to-objecitons-in-business-meetings",
+    "newSlug": "15-common-turn-offs-to-objecitons-in-business-meetings",
+    "publishedDate": "2025-06-24"
+  },
+  {
+    "title": "アウトバウンドセールスとインバウンドマーケティングの連携戦略",
+    "oldSlug": "sales-marketing-alliance",
+    "newSlug": "sales-marketing-alliance",
+    "publishedDate": "2025-07-03"
+  },
+  {
+    "title": "オブジェクション分析：顧客心理を理解して受注率を高める方法",
+    "oldSlug": "objection-analysis-sales",
+    "newSlug": "objection-analysis-sales",
+    "publishedDate": "2025-07-08"
+  },
+  {
+    "title": "新規顧客獲得を加速！アウトバウンドセールスにおけるメール・電話・SNS使い分け戦略",
+    "oldSlug": "outbound-sales-strategy-email-phone-sns",
+    "newSlug": "outbound-sales-strategy-email-phone-sns",
+    "publishedDate": "2025-07-15"
+  },
+  {
+    "title": "業種別オブジェクション対応ガイド：IT・製造・小売業界編",
+    "oldSlug": "objection-handling-by-industry",
+    "newSlug": "objection-handling-by-industry",
+    "publishedDate": "2025-07-22"
+  },
+  {
+    "title": "データ駆動型のアウトバウンドセールス：分析から実行までの完全ロードマップ",
+    "oldSlug": "data-driven-outbound-sales",
+    "newSlug": "data-driven-outbound-sales",
+    "publishedDate": "2025-07-29"
+  },
+  {
+    "title": "ABM戦略の立て方：ターゲット選定から実行までのステップバイステップ",
+    "oldSlug": "abm-targeting-to-execution",
+    "newSlug": "abm-targeting-to-execution",
+    "publishedDate": "2025-08-12"
+  },
+  {
+    "title": "インサイドセールスとフィールドセールスの連携モデル3パターン",
+    "oldSlug": "inside-field-collab-models",
+    "newSlug": "inside-field-collab-models",
+    "publishedDate": "2025-08-19"
+  },
+  {
+    "title": "ABM戦略におけるKPI設定と測定方法",
+    "oldSlug": "abm-kpi-framework",
+    "newSlug": "abm-kpi-framework",
+    "publishedDate": "2025-08-26"
+  },
+  {
+    "title": "オブジェクションを営業力強化に活かす",
+    "oldSlug": "turn-objections-into-sales",
+    "newSlug": "turn-objections-into-sales",
+    "publishedDate": "2025-09-02"
+  },
+  {
+    "title": "リソース不足を解消する中小企業のABM戦略",
+    "oldSlug": "smbs-abm-focus-growth",
+    "newSlug": "smbs-abm-focus-growth",
+    "publishedDate": "2025-09-15"
+  },
+  {
+    "title": "AI SDRは営業の未来か？ウェブサイトからの商談機会を最大化する次世代戦略",
+    "oldSlug": "ai-sdr-%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e3%81%8b%e3%82%89%e3%81%ae%e5%95%86%e8%ab%87%e6%a9%9f%e4%bc%9a%e3%82%92%e6%9c%80%e5%a4%a7%e5%8c%96",
+    "newSlug": "ai-sdr-%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e3%81%8b%e3%82%89%e3%81%ae%e5%95%86%e8%ab%87%e6%a9%9f%e4%bc%9a%e3%82%92%e6%9c%80%e5%a4%a7%e5%8c%96",
+    "publishedDate": "2025-10-08"
+  },
+  {
+    "title": "営業とマーケティングの分断を解消：AIが実現するRevOps統合で売上を最大化する方法",
+    "oldSlug": "%e5%96%b6%e6%a5%ad%e3%81%a8%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%ae%e5%88%86%e6%96%ad%e3%82%92%e8%a7%a3%e6%b6%88%ef%bc%9aai%e3%81%8c%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b",
+    "newSlug": "sales-marketing-ai",
+    "publishedDate": "2025-07-21"
+  },
+  {
+    "title": "AIによるパイプライン予測：フォアキャスト精度を高め、売上予測の「当たらない」を解消する方法",
+    "oldSlug": "ai%e3%81%ab%e3%82%88%e3%82%8b%e3%83%91%e3%82%a4%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e4%ba%88%e6%b8%ac%ef%bc%9a%e3%83%95%e3%82%a9%e3%82%a2%e3%82%ad%e3%83%a3%e3%82%b9%e3%83%88%e7%b2%be%e5%ba%a6%e3%82%92",
+    "newSlug": "ai%e3%81%ab%e3%82%88%e3%82%8b%e3%83%91%e3%82%a4%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e4%ba%88%e6%b8%ac%ef%bc%9a%e3%83%95%e3%82%a9%e3%82%a2%e3%82%ad%e3%83%a3%e3%82%b9%e3%83%88%e7%b2%be%e5%ba%a6%e3%82%92",
+    "publishedDate": "2025-07-22"
+  },
+  {
+    "title": "シナリオ型チャットボットの限界を超える：AIエージェントが変える次世代の顧客エンゲージメント",
+    "oldSlug": "%e3%82%b7%e3%83%8a%e3%83%aa%e3%82%aa%e5%9e%8b%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88%e3%81%ae%e9%99%90%e7%95%8c%e3%82%92%e8%b6%85%e3%81%88%e3%82%8b%ef%bc%9aai%e3%82%a8%e3%83%bc",
+    "newSlug": "scenario-chatbot-ai",
+    "publishedDate": "2025-07-23"
+  },
+  {
+    "title": "ABMの成否を分けるインテントデータ活用術とは？見込み客の98%を逃さない新たな手法",
+    "oldSlug": "abm%e3%81%ae%e6%88%90%e5%90%a6%e3%82%92%e5%88%86%e3%81%91%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%83%87%e3%83%bc%e3%82%bf%e6%b4%bb%e7%94%a8%e8%a1%93%e3%81%a8%e3%81%af%ef%bc%9f",
+    "newSlug": "abm%e3%81%ae%e6%88%90%e5%90%a6%e3%82%92%e5%88%86%e3%81%91%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%83%87%e3%83%bc%e3%82%bf%e6%b4%bb%e7%94%a8%e8%a1%93%e3%81%a8%e3%81%af%ef%bc%9f",
+    "publishedDate": "2025-10-09"
+  },
+  {
+    "title": "【SDRの生産性が大幅向上】AIとの協業で実現する、次世代インサイドセールス部門の作り方",
+    "oldSlug": "%e3%80%90sdr%e3%81%ae%e7%94%9f%e7%94%a3%e6%80%a7%e3%81%8c%e5%a4%a7%e5%b9%85%e5%90%91%e4%b8%8a%e3%80%91ai%e3%81%a8%e3%81%ae%e5%8d%94%e6%a5%ad%e3%81%a7%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e3%80%81",
+    "newSlug": "jp-mlutg1dm-rgkb",
+    "publishedDate": "2025-10-12"
+  },
+  {
+    "title": "貴社の営業AIはどのレベル？BtoBセールスAI成熟度モデルで診断する、売上最大化へのロードマップ",
+    "oldSlug": "%e8%b2%b4%e7%a4%be%e3%81%ae%e5%96%b6%e6%a5%adai%e3%81%af%e3%81%a9%e3%81%ae%e3%83%ac%e3%83%99%e3%83%ab%ef%bc%9fbtob%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9ai%e6%88%90%e7%86%9f%e5%ba%a6%e3%83%a2%e3%83%87",
+    "newSlug": "salesai-btob-ai",
+    "publishedDate": "2025-10-14"
+  },
+  {
+    "title": "見込み客の98%は”見えない”まま消えている：BtoBマーケティングの「ダークファネル」を収益に変えるAI戦略",
+    "oldSlug": "%e8%a6%8b%e8%be%bc%e3%81%bf%e5%ae%a2%e3%81%ae98%e3%81%af%e8%a6%8b%e3%81%88%e3%81%aa%e3%81%84%e3%81%be%e3%81%be%e6%b6%88%e3%81%88%e3%81%a6%e3%81%84%e3%82%8b%ef%bc%9abtob%e3%83%9e",
+    "newSlug": "prospect-98-btob",
+    "publishedDate": "2025-10-16"
+  },
+  {
+    "title": "ウェブサイト訪問者の99%を逃すな！匿名訪問者をAIで商談に変える方法",
+    "oldSlug": "%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e8%a8%aa%e5%95%8f%e8%80%85%e3%81%ae99%e3%82%92%e9%80%83%e3%81%99%e3%81%aa%ef%bc%81%e5%8c%bf%e5%90%8d%e8%a8%aa%e5%95%8f%e8%80%85%e3%82%92ai",
+    "newSlug": "websitevisitor-99-anonymousvisitor-ai",
+    "publishedDate": "2025-11-04"
+  },
+  {
+    "title": "5分以内の対応で商談化率8倍！Speed to Leadが変えるB2B営業戦略",
+    "oldSlug": "5%e5%88%86%e4%bb%a5%e5%86%85%e3%81%ae%e5%af%be%e5%bf%9c%e3%81%a7%e5%95%86%e8%ab%87%e5%8c%96%e7%8e%878%e5%80%8d%ef%bc%81speed-to-lead%e3%81%8c%e5%a4%89%e3%81%88%e3%82%8bb2b%e5%96%b6%e6%a5%ad%e6%88%a6",
+    "newSlug": "5%e5%88%86%e4%bb%a5%e5%86%85%e3%81%ae%e5%af%be%e5%bf%9c%e3%81%a7%e5%95%86%e8%ab%87%e5%8c%96%e7%8e%878%e5%80%8d%ef%bc%81speed-to-lead%e3%81%8c%e5%a4%89%e3%81%88%e3%82%8bb2b%e5%96%b6%e6%a5%ad%e6%88%a6",
+    "publishedDate": "2025-11-05"
+  },
+  {
+    "title": "営業チームに「AIエージェント」を迎え撃て：分断を防ぐ統合AI戦略で商談創出を加速",
+    "oldSlug": "%e5%96%b6%e6%a5%ad%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ab%e3%80%8cai%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7%e3%83%b3%e3%83%88%e3%80%8d%e3%82%92%e8%bf%8e%e3%81%88%e6%92%83%e3%81%a6%ef%bc%9a%e5%88%86%e6%96%ad",
+    "newSlug": "salesteam-ai",
+    "publishedDate": "2025-11-06"
+  },
+  {
+    "title": "80%のリードをムダにしない！AIリードクオリフィケーション最前線",
+    "oldSlug": "80%e3%81%ae%e3%83%aa%e3%83%bc%e3%83%89%e3%82%92%e3%83%a0%e3%83%80%e3%81%ab%e3%81%97%e3%81%aa%e3%81%84%ef%bc%81ai%e3%83%aa%e3%83%bc%e3%83%89%e3%82%af%e3%82%aa%e3%83%aa%e3%83%95%e3%82%a3%e3%82%b1",
+    "newSlug": "80%e3%81%ae%e3%83%aa%e3%83%bc%e3%83%89%e3%82%92%e3%83%a0%e3%83%80%e3%81%ab%e3%81%97%e3%81%aa%e3%81%84%ef%bc%81ai%e3%83%aa%e3%83%bc%e3%83%89%e3%82%af%e3%82%aa%e3%83%aa%e3%83%95%e3%82%a3%e3%82%b1",
+    "publishedDate": "2025-11-07"
+  },
+  {
+    "title": "オーガニックリード47%減の危機！AIで変革する次世代B2Bリードジェネレーション戦略",
+    "oldSlug": "%e3%82%aa%e3%83%bc%e3%82%ac%e3%83%8b%e3%83%83%e3%82%af%e3%83%aa%e3%83%bc%e3%83%8947%e6%b8%9b%e3%81%ae%e5%8d%b1%e6%a9%9f%ef%bc%81ai%e3%81%a7%e5%a4%89%e9%9d%a9%e3%81%99%e3%82%8b%e6%ac%a1%e4%b8%96",
+    "newSlug": "jp-mlutg7bj-fj0o",
+    "publishedDate": "2025-11-10"
+  },
+  {
+    "title": "AIが営業の未来を変える：データドリブンで商談化率を劇的に向上させる5つの戦略",
+    "oldSlug": "ai%e3%81%8c%e5%96%b6%e6%a5%ad%e3%81%ae%e6%9c%aa%e6%9d%a5%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%ef%bc%9a%e3%83%87%e3%83%bc%e3%82%bf%e3%83%89%e3%83%aa%e3%83%96%e3%83%b3%e3%81%a7%e5%95%86%e8%ab%87%e5%8c%96",
+    "newSlug": "ai%e3%81%8c%e5%96%b6%e6%a5%ad%e3%81%ae%e6%9c%aa%e6%9d%a5%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%ef%bc%9a%e3%83%87%e3%83%bc%e3%82%bf%e3%83%89%e3%83%aa%e3%83%96%e3%83%b3%e3%81%a7%e5%95%86%e8%ab%87%e5%8c%96",
+    "publishedDate": "2025-11-11"
+  },
+  {
+    "title": "80%のリードを死蔵しない！AIナーチャリングで商談化率を劇的に向上させる方法",
+    "oldSlug": "80%e3%81%ae%e3%83%aa%e3%83%bc%e3%83%89%e3%82%92%e6%ad%bb%e8%94%b5%e3%81%97%e3%81%aa%e3%81%84%ef%bc%81ai%e3%83%8a%e3%83%bc%e3%83%81%e3%83%a3%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%a7%e5%95%86%e8%ab%87",
+    "newSlug": "80%e3%81%ae%e3%83%aa%e3%83%bc%e3%83%89%e3%82%92%e6%ad%bb%e8%94%b5%e3%81%97%e3%81%aa%e3%81%84%ef%bc%81ai%e3%83%8a%e3%83%bc%e3%83%81%e3%83%a3%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%a7%e5%95%86%e8%ab%87",
+    "publishedDate": "2025-11-12"
+  },
+  {
+    "title": "クッキーレス時代のBtoBマーケティング：AIチャットボットで実現する第一者データ活用と商談化戦略",
+    "oldSlug": "%e3%82%af%e3%83%83%e3%82%ad%e3%83%bc%e3%83%ac%e3%82%b9%e6%99%82%e4%bb%a3%e3%81%aebtob%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%ef%bc%9aai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88",
+    "newSlug": "cookieless-btobmarketing-ai",
+    "publishedDate": "2025-11-13"
+  },
+  {
+    "title": "24時間365日対応のAIインサイドセールスで見込み客を逃さない新戦略",
+    "oldSlug": "24%e6%99%82%e9%96%93365%e6%97%a5%e5%af%be%e5%bf%9c%e3%81%aeai%e3%82%a4%e3%83%b3%e3%82%b5%e3%82%a4%e3%83%89%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e3%81%a7%e8%a6%8b%e8%be%bc%e3%81%bf%e5%ae%a2%e3%82%92",
+    "newSlug": "24%e6%99%82%e9%96%93365%e6%97%a5%e5%af%be%e5%bf%9c%e3%81%aeai%e3%82%a4%e3%83%b3%e3%82%b5%e3%82%a4%e3%83%89%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e3%81%a7%e8%a6%8b%e8%be%bc%e3%81%bf%e5%ae%a2%e3%82%92",
+    "publishedDate": "2025-11-14"
+  },
+  {
+    "title": "24時間365日稼働する“営業担当”！AIチャットボットでWeb訪問者を逃さず商談化",
+    "oldSlug": "24%e6%99%82%e9%96%93365%e6%97%a5%e7%a8%bc%e5%83%8d%e3%81%99%e3%82%8b%e5%96%b6%e6%a5%ad%e6%8b%85%e5%bd%93%ef%bc%81ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88",
+    "newSlug": "24%e6%99%82%e9%96%93365%e6%97%a5%e7%a8%bc%e5%83%8d%e3%81%99%e3%82%8b%e5%96%b6%e6%a5%ad%e6%8b%85%e5%bd%93%ef%bc%81ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88",
+    "publishedDate": "2025-11-17"
+  },
+  {
+    "title": "AIチャット×コンテンツ推薦で匿名BtoB来訪者を逃さない！最速でリード化する営業自動化戦略",
+    "oldSlug": "ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88x%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84%e6%8e%a8%e8%96%a6%e3%81%a7%e5%8c%bf%e5%90%8dbtob%e6%9d%a5%e8%a8%aa%e8%80%85%e3%82%92%e9%80%83%e3%81%95",
+    "newSlug": "ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88x%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84%e6%8e%a8%e8%96%a6%e3%81%a7%e5%8c%bf%e5%90%8dbtob%e6%9d%a5%e8%a8%aa%e8%80%85%e3%82%92%e9%80%83%e3%81%95",
+    "publishedDate": "2025-11-18"
+  },
+  {
+    "title": "BtoBサイトの離脱ゼロを実現！AIチャットボット×自動スケジューリングで見込み客を逃さず商談化",
+    "oldSlug": "btob%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e9%9b%a2%e8%84%b1%e3%82%bc%e3%83%ad%e3%82%92%e5%ae%9f%e7%8f%be%ef%bc%81ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88x%e8%87%aa",
+    "newSlug": "btob%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e9%9b%a2%e8%84%b1%e3%82%bc%e3%83%ad%e3%82%92%e5%ae%9f%e7%8f%be%ef%bc%81ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88x%e8%87%aa",
+    "publishedDate": "2025-11-19"
+  },
+  {
+    "title": "AIチャットボット×BtoB営業：匿名ウェブ訪問者を逃さずリード獲得する最新戦略",
+    "oldSlug": "ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88xbtob%e5%96%b6%e6%a5%ad%ef%bc%9a%e5%8c%bf%e5%90%8d%e3%82%a6%e3%82%a7%e3%83%96%e8%a8%aa%e5%95%8f%e8%80%85%e3%82%92%e9%80%83",
+    "newSlug": "ai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%83%9c%e3%83%83%e3%83%88xbtob%e5%96%b6%e6%a5%ad%ef%bc%9a%e5%8c%bf%e5%90%8d%e3%82%a6%e3%82%a7%e3%83%96%e8%a8%aa%e5%95%8f%e8%80%85%e3%82%92%e9%80%83",
+    "publishedDate": "2025-11-20"
+  },
+  {
+    "title": "AIで商談日程調整を自動化：即時予約で失注を防ぐ最新アプローチ",
+    "oldSlug": "ai%e3%81%a7%e5%95%86%e8%ab%87%e6%97%a5%e7%a8%8b%e8%aa%bf%e6%95%b4%e3%82%92%e8%87%aa%e5%8b%95%e5%8c%96%ef%bc%9a%e5%8d%b3%e6%99%82%e4%ba%88%e7%b4%84%e3%81%a7%e5%a4%b1%e6%b3%a8%e3%82%92%e9%98%b2%e3%81%90",
+    "newSlug": "ai%e3%81%a7%e5%95%86%e8%ab%87%e6%97%a5%e7%a8%8b%e8%aa%bf%e6%95%b4%e3%82%92%e8%87%aa%e5%8b%95%e5%8c%96%ef%bc%9a%e5%8d%b3%e6%99%82%e4%ba%88%e7%b4%84%e3%81%a7%e5%a4%b1%e6%b3%a8%e3%82%92%e9%98%b2%e3%81%90",
+    "publishedDate": "2025-11-21"
+  },
+  {
+    "title": "AI×コンテンツマーケティング：営業連携で商談創出を最大化する実践ガイド",
+    "oldSlug": "aix%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%ef%bc%9a%e5%96%b6%e6%a5%ad%e9%80%a3%e6%90%ba%e3%81%a7%e5%95%86%e8%ab%87%e5%89%b5",
+    "newSlug": "aix%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%ef%bc%9a%e5%96%b6%e6%a5%ad%e9%80%a3%e6%90%ba%e3%81%a7%e5%95%86%e8%ab%87%e5%89%b5",
+    "publishedDate": "2025-11-24"
+  },
+  {
+    "title": "2025年版：AIで強化するRevOpsによる営業・マーケ統合ガイド",
+    "oldSlug": "2025%e5%b9%b4%e7%89%88%ef%bc%9aai%e3%81%a7%e5%bc%b7%e5%8c%96%e3%81%99%e3%82%8brevops%e3%81%ab%e3%82%88%e3%82%8b%e5%96%b6%e6%a5%ad%e3%83%bb%e3%83%9e%e3%83%bc%e3%82%b1%e7%b5%b1%e5%90%88%e3%82%ac",
+    "newSlug": "2025%e5%b9%b4%e7%89%88%ef%bc%9aai%e3%81%a7%e5%bc%b7%e5%8c%96%e3%81%99%e3%82%8brevops%e3%81%ab%e3%82%88%e3%82%8b%e5%96%b6%e6%a5%ad%e3%83%bb%e3%83%9e%e3%83%bc%e3%82%b1%e7%b5%b1%e5%90%88%e3%82%ac",
+    "publishedDate": "2025-11-25"
+  },
+  {
+    "title": "CROのためのKPI革命：リアルタイム・インテント・アクティベーションでパイプライン・ベロシティを30%加速する方法",
+    "oldSlug": "cro%e3%81%ae%e3%81%9f%e3%82%81%e3%81%aekpi%e9%9d%a9%e5%91%bd%ef%bc%9a%e3%83%aa%e3%82%a2%e3%83%ab%e3%82%bf%e3%82%a4%e3%83%a0%e3%83%bb%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%83%bb%e3%82%a2",
+    "newSlug": "cro%e3%81%ae%e3%81%9f%e3%82%81%e3%81%aekpi%e9%9d%a9%e5%91%bd%ef%bc%9a%e3%83%aa%e3%82%a2%e3%83%ab%e3%82%bf%e3%82%a4%e3%83%a0%e3%83%bb%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%83%bb%e3%82%a2",
+    "publishedDate": "2025-11-26"
+  },
+  {
+    "title": "CRO必見：AIインテントとコンバーセーショナルAIの統合で「セールスベロシティ」を最大化する戦略的KPI",
+    "oldSlug": "cro%e5%bf%85%e8%a6%8b%ef%bc%9aai%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%81%a8%e3%82%b3%e3%83%b3%e3%83%90%e3%83%bc%e3%82%bb%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%8a%e3%83%abai%e3%81%ae%e7%b5%b1",
+    "newSlug": "cro%e5%bf%85%e8%a6%8b%ef%bc%9aai%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%81%a8%e3%82%b3%e3%83%b3%e3%83%90%e3%83%bc%e3%82%bb%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%8a%e3%83%abai%e3%81%ae%e7%b5%b1",
+    "publishedDate": "2025-11-27"
+  },
+  {
+    "title": "B2B SaaS成長を加速させるAI戦略：MQL-SQL間の摩擦を解消するリードハンドオフの未来",
+    "oldSlug": "b2b-saas%e6%88%90%e9%95%b7%e3%82%92%e5%8a%a0%e9%80%9f%e3%81%95%e3%81%9b%e3%82%8bai%e6%88%a6%e7%95%a5%ef%bc%9amql-sql%e9%96%93%e3%81%ae%e6%91%a9%e6%93%a6%e3%82%92%e8%a7%a3%e6%b6%88%e3%81%99%e3%82%8b",
+    "newSlug": "b2b-saas%e6%88%90%e9%95%b7%e3%82%92%e5%8a%a0%e9%80%9f%e3%81%95%e3%81%9b%e3%82%8bai%e6%88%a6%e7%95%a5%ef%bc%9amql-sql%e9%96%93%e3%81%ae%e6%91%a9%e6%93%a6%e3%82%92%e8%a7%a3%e6%b6%88%e3%81%99%e3%82%8b",
+    "publishedDate": "2025-11-28"
+  },
+  {
+    "title": "ウェブサイト離脱率を利益に変える：匿名訪問者を瞬時に商談化するAI GTMアーキテクチャ",
+    "oldSlug": "%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e9%9b%a2%e8%84%b1%e7%8e%87%e3%82%92%e5%88%a9%e7%9b%8a%e3%81%ab%e5%a4%89%e3%81%88%e3%82%8b%ef%bc%9a%e5%8c%bf%e5%90%8d%e8%a8%aa%e5%95%8f%e8%80%85",
+    "newSlug": "websitebounce-anonymousvisitor",
+    "publishedDate": "2025-12-01"
+  },
+  {
+    "title": "【RevOps責任者必見】パイプライン・ベロシティを2倍速にする「匿名インテントキャプチャ×AIエージェント」戦略",
+    "oldSlug": "%e3%80%90revops%e8%b2%ac%e4%bb%bb%e8%80%85%e5%bf%85%e8%a6%8b%e3%80%91%e3%83%91%e3%82%a4%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e3%83%bb%e3%83%99%e3%83%ad%e3%82%b7%e3%83%86%e3%82%a3%e3%82%922%e5%80%8d",
+    "newSlug": "revops-velocity-2",
+    "publishedDate": "2025-12-02"
+  },
+  {
+    "title": "【競合に勝つ】ウェブサイト離脱を防ぐ「インテント・トゥ・エンゲージメント速度（ITEV）」フレームワーク",
+    "oldSlug": "%e3%80%90%e7%ab%b6%e5%90%88%e3%81%ab%e5%8b%9d%e3%81%a4%e3%80%91%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e9%9b%a2%e8%84%b1%e3%82%92%e9%98%b2%e3%81%90%e3%80%8c%e3%82%a4%e3%83%b3%e3%83%86",
+    "newSlug": "websitebounce",
+    "publishedDate": "2025-12-03"
+  },
+  {
+    "title": "ウェブサイト収益の「ブラックホール」を埋める：BtoBセールステック断片化が引き起こすROI崩壊とAIネイティブ統合戦略",
+    "oldSlug": "%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e5%8f%8e%e7%9b%8a%e3%81%ae%e3%80%8c%e3%83%96%e3%83%a9%e3%83%83%e3%82%af%e3%83%9b%e3%83%bc%e3%83%ab%e3%80%8d%e3%82%92%e5%9f%8b%e3%82%81%e3%82%8b",
+    "newSlug": "jp-mlutgmfu-wd0v",
+    "publishedDate": "2025-12-04"
+  },
+  {
+    "title": "AIインテントデータとエージェントAIで実現する「ファネル凝縮」戦略：B2B営業の新常識",
+    "oldSlug": "ai%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%83%87%e3%83%bc%e3%82%bf%e3%81%a8%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7%e3%83%b3%e3%83%88ai%e3%81%a7%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e3%80%8c",
+    "newSlug": "ai%e3%82%a4%e3%83%b3%e3%83%86%e3%83%b3%e3%83%88%e3%83%87%e3%83%bc%e3%82%bf%e3%81%a8%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7%e3%83%b3%e3%83%88ai%e3%81%a7%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e3%80%8c",
+    "publishedDate": "2025-12-05"
+  },
+  {
+    "title": "CROのためのAgentic RevOpsフレームワーク：リアルタイムインテントがパイプラインROIを4倍にする仕組み",
+    "oldSlug": "cro%e3%81%ae%e3%81%9f%e3%82%81%e3%81%aeagentic-revops%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%83%af%e3%83%bc%e3%82%af%ef%bc%9a%e3%83%aa%e3%82%a2%e3%83%ab%e3%82%bf%e3%82%a4%e3%83%a0%e3%82%a4%e3%83%b3",
+    "newSlug": "cro%e3%81%ae%e3%81%9f%e3%82%81%e3%81%aeagentic-revops%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%83%af%e3%83%bc%e3%82%af%ef%bc%9a%e3%83%aa%e3%82%a2%e3%83%ab%e3%82%bf%e3%82%a4%e3%83%a0%e3%82%a4%e3%83%b3",
+    "publishedDate": "2025-12-08"
+  },
+  {
+    "title": "【新機能】チームでの日程調整を自動化。「グループカレンダー」機能をリリース",
+    "oldSlug": "%e3%80%90%e6%96%b0%e6%a9%9f%e8%83%bd%e3%80%91%e3%83%81%e3%83%bc%e3%83%a0%e3%81%a7%e3%81%ae%e6%97%a5%e7%a8%8b%e8%aa%bf%e6%95%b4%e3%82%92%e8%87%aa%e5%8b%95%e5%8c%96%e3%80%82%e3%80%8c%e3%82%b0%e3%83%ab",
+    "newSlug": "new-feature-team-scheduling-automation",
+    "publishedDate": "2025-12-08"
+  },
+  {
+    "title": "2026年、BtoB営業は「フォーム」を捨てる —— シグナルベースセリングと即時商談化が変える収益モデル",
+    "oldSlug": "2026%e5%b9%b4%e3%81%ae%e5%96%b6%e6%a5%ad%e8%a6%87%e6%a8%a9%e3%82%92%e6%8f%a1%e3%82%8b%e6%96%b0%e5%b8%b8%e8%ad%98%ef%bc%9a%e3%81%aa%e3%81%9c%e3%80%8c%e3%82%b7%e3%82%b0%e3%83%8a%e3%83%ab%e3%83%99",
+    "newSlug": "2026%e5%b9%b4%e3%81%ae%e5%96%b6%e6%a5%ad%e8%a6%87%e6%a8%a9%e3%82%92%e6%8f%a1%e3%82%8b%e6%96%b0%e5%b8%b8%e8%ad%98%ef%bc%9a%e3%81%aa%e3%81%9c%e3%80%8c%e3%82%b7%e3%82%b0%e3%83%8a%e3%83%ab%e3%83%99",
+    "publishedDate": "2025-12-11"
+  },
+  {
+    "title": "「SDRは採用するな」—— 2026年の労働力不足を勝ち抜く『AIエージェント』起点の新・営業組織論",
+    "oldSlug": "%e3%80%8csdr%e3%81%af%e6%8e%a1%e7%94%a8%e3%81%99%e3%82%8b%e3%81%aa%e3%80%8d-2026%e5%b9%b4%e3%81%ae%e5%8a%b4%e5%83%8d%e5%8a%9b%e4%b8%8d%e8%b6%b3%e3%82%92%e5%8b%9d%e3%81%a1%e6%8a%9c",
+    "newSlug": "jp-mlutgq9p-3f9v",
+    "publishedDate": "2025-12-12"
+  },
+  {
+    "title": "ウェブサイトからの商談を391%増やすAI戦略：「プラチナム・ミニット」の法則とは？",
+    "oldSlug": "%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e3%81%8b%e3%82%89%e3%81%ae%e5%95%86%e8%ab%87%e3%82%92391%e5%a2%97%e3%82%84%e3%81%99ai%e6%88%a6%e7%95%a5%ef%bc%9a%e3%80%8c%e3%83%97%e3%83%a9",
+    "newSlug": "website-meeting-391-aistrategy",
+    "publishedDate": "2025-12-15"
+  },
+  {
+    "title": "【AI時代のSDR組織再編】セールス生産性を最大化する「ヒューマンSDR」の新しい役割と配置戦略",
+    "oldSlug": "%e3%80%90ai%e6%99%82%e4%bb%a3%e3%81%aesdr%e7%b5%84%e7%b9%94%e5%86%8d%e7%b7%a8%e3%80%91%e3%82%bb%e3%83%bc%e3%83%ab%e3%82%b9%e7%94%9f%e7%94%a3%e6%80%a7%e3%82%92%e6%9c%80%e5%a4%a7%e5%8c%96%e3%81%99",
+    "newSlug": "jp-mlutgtmq-7hss",
+    "publishedDate": "2025-12-16"
+  },
+  {
+    "title": "【AI時代のマーケティングROI証明】非線形なB2B購買プロセスで収益貢献度を可視化するアトリビューション設計図",
+    "oldSlug": "%e3%80%90ai%e6%99%82%e4%bb%a3%e3%81%ae%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0roi%e8%a8%bc%e6%98%8e%e3%80%91%e9%9d%9e%e7%b7%9a%e5%bd%a2%e3%81%aab2b%e8%b3%bc%e8%b2%b7%e3%83%97",
+    "newSlug": "ai-marketingroi-b2b",
+    "publishedDate": "2025-12-17"
+  },
+  {
+    "title": "【Tech Stackの分断を解消】Salesforce/HubSpot連携の失敗を防ぐAI駆動型GTMオーケストレーション戦略",
+    "oldSlug": "%e3%80%90tech-stack%e3%81%ae%e5%88%86%e6%96%ad%e3%82%92%e8%a7%a3%e6%b6%88%e3%80%91salesforce-hubspot%e9%80%a3%e6%90%ba%e3%81%ae%e5%a4%b1%e6%95%97%e3%82%92%e9%98%b2%e3%81%90ai%e9%a7%86%e5%8b%95",
+    "newSlug": "tech-stack-salesforce-hubspotcollaboration-ai",
+    "publishedDate": "2025-12-18"
+  },
+  {
+    "title": "AIによるリアルタイムABMオペレーション戦略：ウェブサイトの匿名インテントを収益に直結させる方法",
+    "oldSlug": "ai%e3%81%ab%e3%82%88%e3%82%8b%e3%83%aa%e3%82%a2%e3%83%ab%e3%82%bf%e3%82%a4%e3%83%a0abm%e3%82%aa%e3%83%9a%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e6%88%a6%e7%95%a5%ef%bc%9a%e3%82%a6%e3%82%a7",
+    "newSlug": "ai%e3%81%ab%e3%82%88%e3%82%8b%e3%83%aa%e3%82%a2%e3%83%ab%e3%82%bf%e3%82%a4%e3%83%a0abm%e3%82%aa%e3%83%9a%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e6%88%a6%e7%95%a5%ef%bc%9a%e3%82%a6%e3%82%a7",
+    "publishedDate": "2025-12-19"
+  },
+  {
+    "title": "【B2Bパーソナライゼーション スケーリングの壁】AIが「コンテキストの途切れ」を解消し、エンゲージメントを劇的に深める方法",
+    "oldSlug": "%e3%80%90b2b%e3%83%91%e3%83%bc%e3%82%bd%e3%83%8a%e3%83%a9%e3%82%a4%e3%82%bc%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3-%e3%82%b9%e3%82%b1%e3%83%bc%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ae%e5%a3%81%e3%80%91ai",
+    "newSlug": "b2bpersonalization-ai",
+    "publishedDate": "2025-12-22"
+  },
+  {
+    "title": "「AI生成コンテンツへの不信」を商談に変える：2026年B2Bバイヤーが求める「人間による検証」への即時接続戦略",
+    "oldSlug": "%e3%80%8cai%e7%94%9f%e6%88%90%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84%e3%81%b8%e3%81%ae%e4%b8%8d%e4%bf%a1%e3%80%8d%e3%82%92%e5%95%86%e8%ab%87%e3%81%ab%e5%a4%89%e3%81%88%e3%82%8b%ef%bc%9a2026",
+    "newSlug": "ai-content-meeting-2026",
+    "publishedDate": "2025-12-24"
+  },
+  {
+    "title": "B2Bバイヤーの43%が陥る「購入後悔」の罠：2026年の商談創出を左右する「センスメイキング」の正体",
+    "oldSlug": "b2b%e3%83%90%e3%82%a4%e3%83%a4%e3%83%bc%e3%81%ae43%e3%81%8c%e9%99%a5%e3%82%8b%e3%80%8c%e8%b3%bc%e5%85%a5%e5%be%8c%e6%82%94%e3%80%8d%e3%81%ae%e7%bd%a0%ef%bc%9a2026%e5%b9%b4%e3%81%ae%e5%95%86%e8%ab%87",
+    "newSlug": "b2b%e3%83%90%e3%82%a4%e3%83%a4%e3%83%bc%e3%81%ae43%e3%81%8c%e9%99%a5%e3%82%8b%e3%80%8c%e8%b3%bc%e5%85%a5%e5%be%8c%e6%82%94%e3%80%8d%e3%81%ae%e7%bd%a0%ef%bc%9a2026%e5%b9%b4%e3%81%ae%e5%95%86%e8%ab%87",
+    "publishedDate": "2025-12-29"
+  },
+  {
+    "title": "【2026年B2B予測】御社のサイトは「バイヤーAI」を接客できるか？AI同士が交渉する「A2A営業」の衝撃",
+    "oldSlug": "%e3%80%902026%e5%b9%b4b2b%e4%ba%88%e6%b8%ac%e3%80%91%e5%be%a1%e7%a4%be%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%af%e3%80%8c%e3%83%90%e3%82%a4%e3%83%a4%e3%83%bcai%e3%80%8d%e3%82%92%e6%8e%a5%e5%ae%a2",
+    "newSlug": "2026b2b-ai",
+    "publishedDate": "2025-12-30"
+  },
+  {
+    "title": "【2026年予測】デジタル完結型が成約率を下げる？バイヤーの43%が陥る「購入後悔」をゼロにするAI戦略",
+    "oldSlug": "%e3%80%902026%e5%b9%b4%e4%ba%88%e6%b8%ac%e3%80%91%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e5%ae%8c%e7%b5%90%e5%9e%8b%e3%81%8c%e6%88%90%e7%b4%84%e7%8e%87%e3%82%92%e4%b8%8b%e3%81%92%e3%82%8b%ef%bc%9f",
+    "newSlug": "jp-mlutgykn-n8r4",
+    "publishedDate": "2026-01-08"
+  },
+  {
+    "title": "【2026年版】クッキーレス時代の「自律型商談創出」：AIエージェントによるゼロパーティデータ活用術",
+    "oldSlug": "%e3%80%902026%e5%b9%b4%e7%89%88%e3%80%91%e3%82%af%e3%83%83%e3%82%ad%e3%83%bc%e3%83%ac%e3%82%b9%e6%99%82%e4%bb%a3%e3%81%ae%e3%80%8c%e8%87%aa%e5%be%8b%e5%9e%8b%e5%95%86%e8%ab%87%e5%89%b5%e5%87%ba",
+    "newSlug": "2026-cookieless-meeting",
+    "publishedDate": "2026-01-09"
+  },
+  {
+    "title": "SEOからSXO（検索体験最適化）へ。2026年、検索の「回答化」で消失するトラフィックを商談に変える技術",
+    "oldSlug": "seo%e3%81%8b%e3%82%89sxo%ef%bc%88%e6%a4%9c%e7%b4%a2%e4%bd%93%e9%a8%93%e6%9c%80%e9%81%a9%e5%8c%96%ef%bc%89%e3%81%b8%e3%80%822026%e5%b9%b4%e3%80%81%e6%a4%9c%e7%b4%a2%e3%81%ae%e3%80%8c%e5%9b%9e%e7%ad%94",
+    "newSlug": "seo%e3%81%8b%e3%82%89sxo%ef%bc%88%e6%a4%9c%e7%b4%a2%e4%bd%93%e9%a8%93%e6%9c%80%e9%81%a9%e5%8c%96%ef%bc%89%e3%81%b8%e3%80%822026%e5%b9%b4%e3%80%81%e6%a4%9c%e7%b4%a2%e3%81%ae%e3%80%8c%e5%9b%9e%e7%ad%94",
+    "publishedDate": "2026-01-13"
+  },
+  {
+    "title": "【CAC高騰を突破】既存顧客から31%の収益増を狙う、AIエージェントによる「ABX-E（自動エクスパンション）」戦略",
+    "oldSlug": "%e3%80%90cac%e9%ab%98%e9%a8%b0%e3%82%92%e7%aa%81%e7%a0%b4%e3%80%91%e6%97%a2%e5%ad%98%e9%a1%a7%e5%ae%a2%e3%81%8b%e3%82%8931%e3%81%ae%e5%8f%8e%e7%9b%8a%e5%a2%97%e3%82%92%e7%8b%99%e3%81%86%e3%80%81ai",
+    "newSlug": "jp-mluth2ah-mk1a",
+    "publishedDate": "2026-01-14"
+  },
+  {
+    "title": "【2026年版】リードフォームの完全廃止：AIエージェントが「15人の決裁者」を並行接客するDSR新戦略",
+    "oldSlug": "%e3%80%902026%e5%b9%b4%e7%89%88%e3%80%91%e3%83%aa%e3%83%bc%e3%83%89%e3%83%95%e3%82%a9%e3%83%bc%e3%83%a0%e3%81%ae%e5%ae%8c%e5%85%a8%e5%bb%83%e6%ad%a2%ef%bc%9aai%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7",
+    "newSlug": "2026-leadform-ai",
+    "publishedDate": "2026-01-15"
+  },
+  {
+    "title": "【2026年GTM新基準】AIを「ツール」で終わらせない「GTMエンジニアリング」への転換：自律型レベニューシステムの構築術",
+    "oldSlug": "%e3%80%902026%e5%b9%b4gtm%e6%96%b0%e5%9f%ba%e6%ba%96%e3%80%91ai%e3%82%92%e3%80%8c%e3%83%84%e3%83%bc%e3%83%ab%e3%80%8d%e3%81%a7%e7%b5%82%e3%82%8f%e3%82%89%e3%81%9b%e3%81%aa%e3%81%84%e3%80%8cgtm",
+    "newSlug": "2026gtm-ai-gtm",
+    "publishedDate": "2026-01-16"
+  },
+  {
+    "title": "なぜAIを導入しても商談が増えないのか？：自律型GTMを成功させる「データ基盤」の再定義とMeeton aiの実装モデル",
+    "oldSlug": "%e3%81%aa%e3%81%9cai%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%a6%e3%82%82%e5%95%86%e8%ab%87%e3%81%8c%e5%a2%97%e3%81%88%e3%81%aa%e3%81%84%e3%81%ae%e3%81%8b%ef%bc%9f%ef%bc%9a%e8%87%aa%e5%be%8b%e5%9e%8b",
+    "newSlug": "ai-meeting",
+    "publishedDate": "2026-01-21"
+  },
+  {
+    "title": "【商談準備をゼロにする】AIエージェントが「BANT+C」を自動診断。AEの商談勝率を劇的に変える「自律型ディスカバリー」戦略",
+    "oldSlug": "%e3%80%90%e5%95%86%e8%ab%87%e6%ba%96%e5%82%99%e3%82%92%e3%82%bc%e3%83%ad%e3%81%ab%e3%81%99%e3%82%8b%e3%80%91ai%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7%e3%83%b3%e3%83%88%e3%81%8c%e3%80%8cbantc%e3%80%8d",
+    "newSlug": "meeting-ai-bantc",
+    "publishedDate": "2026-01-22"
+  },
+  {
+    "title": "AI時代のパイプライン「変換率30%」を実現する企業が知る、Chat→Call→Deal一気通貫の実装ロードマップ",
+    "oldSlug": "ai%e6%99%82%e4%bb%a3%e3%81%ae%e3%83%91%e3%82%a4%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e3%80%8c%e5%a4%89%e6%8f%9b%e7%8e%8730%e3%80%8d%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e4%bc%81%e6%a5%ad",
+    "newSlug": "ai%e6%99%82%e4%bb%a3%e3%81%ae%e3%83%91%e3%82%a4%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e3%80%8c%e5%a4%89%e6%8f%9b%e7%8e%8730%e3%80%8d%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e4%bc%81%e6%a5%ad",
+    "publishedDate": "2026-01-26"
+  },
+  {
+    "title": "【ダークソーシャルの壁を突破】84%の「見えない共有」を商談に変える、AIステルス・オーケストレーション戦略",
+    "oldSlug": "%e3%80%90%e3%83%80%e3%83%bc%e3%82%af%e3%82%bd%e3%83%bc%e3%82%b7%e3%83%a3%e3%83%ab%e3%81%ae%e5%a3%81%e3%82%92%e7%aa%81%e7%a0%b4%e3%80%9184%e3%81%ae%e3%80%8c%e8%a6%8b%e3%81%88%e3%81%aa%e3%81%84%e5%85%b1",
+    "newSlug": "dark-social-84",
+    "publishedDate": "2026-01-27"
+  },
+  {
+    "title": "なぜ成約後、30%のSaaS企業が顧客を失うのか—セールス→CS連携の『コンテキスト喪失』を防ぐ実装ガイド",
+    "oldSlug": "%e3%81%aa%e3%81%9c%e6%88%90%e7%b4%84%e5%be%8c%e3%80%8130%e3%81%aesaas%e4%bc%81%e6%a5%ad%e3%81%8c%e9%a1%a7%e5%ae%a2%e3%82%92%e5%a4%b1%e3%81%86%e3%81%ae%e3%81%8b-%e3%82%bb%e3%83%bc%e3%83%ab",
+    "newSlug": "jp-mluth6vj-m14m",
+    "publishedDate": "2026-01-28"
+  },
+  {
+    "title": "Pipelineが積み上がるのにCloseできない—Engagement Velocity × Deal Stalling Detectionで実現する売上予測精度87%への道筋",
+    "oldSlug": "pipeline%e3%81%8c%e7%a9%8d%e3%81%bf%e4%b8%8a%e3%81%8c%e3%82%8b%e3%81%ae%e3%81%abclose%e3%81%a7%e3%81%8d%e3%81%aa%e3%81%84-engagement-velocity-x-deal-stalling-detection%e3%81%a7%e5%ae%9f",
+    "newSlug": "pipeline%e3%81%8c%e7%a9%8d%e3%81%bf%e4%b8%8a%e3%81%8c%e3%82%8b%e3%81%ae%e3%81%abclose%e3%81%a7%e3%81%8d%e3%81%aa%e3%81%84-engagement-velocity-x-deal-stalling-detection%e3%81%a7%e5%ae%9f",
+    "publishedDate": "2026-01-29"
+  },
+  {
+    "title": "「孤独なAI」が商談を殺す：2026年にDrift/Intercomを捨て、自律型オーケストレーションへ移行すべき科学的根拠",
+    "oldSlug": "%e3%80%8c%e5%ad%a4%e7%8b%ac%e3%81%aaai%e3%80%8d%e3%81%8c%e5%95%86%e8%ab%87%e3%82%92%e6%ae%ba%e3%81%99%ef%bc%9a2026%e5%b9%b4%e3%81%abdrift-intercom%e3%82%92%e6%8d%a8%e3%81%a6%e3%80%81%e8%87%aa%e5%be%8b",
+    "newSlug": "ai-meeting-2026-drift-intercom",
+    "publishedDate": "2026-02-02"
+  },
+  {
+    "title": "見えない28日間のロス：リード獲得後の「モメンタムキラー」を3つの自律化で解決する",
+    "oldSlug": "%e8%a6%8b%e3%81%88%e3%81%aa%e3%81%8428%e6%97%a5%e9%96%93%e3%81%ae%e3%83%ad%e3%82%b9%ef%bc%9a%e3%83%aa%e3%83%bc%e3%83%89%e7%8d%b2%e5%be%97%e5%be%8c%e3%81%ae%e3%80%8c%e3%83%a2%e3%83%a1%e3%83%b3%e3%82%bf",
+    "newSlug": "jp-mluth9b8-r7i1",
+    "publishedDate": "2026-02-03"
+  },
+  {
+    "title": "「Intent-to-Booking速度」が、次のRevOps競争を決める：40%のAgentic AI導入が失敗する理由と、勝つ企業の3つの条件",
+    "oldSlug": "%e3%80%8cintent-to-booking%e9%80%9f%e5%ba%a6%e3%80%8d%e3%81%8c%e3%80%81%e6%ac%a1%e3%81%aerevops%e7%ab%b6%e4%ba%89%e3%82%92%e6%b1%ba%e3%82%81%e3%82%8b%ef%bc%9a40%e3%81%aeagentic-ai%e5%b0%8e%e5%85%a5",
+    "newSlug": "intent-to-booking-revops-40-agentic-ai",
+    "publishedDate": "2026-02-04"
+  },
+  {
+    "title": "複数部門の購買委員会の意図は、72時間で消える：Drift/Intercomが見逃す『Intent Decay Problem』と、営業が負ける理由",
+    "oldSlug": "%e8%a4%87%e6%95%b0%e9%83%a8%e9%96%80%e3%81%ae%e8%b3%bc%e8%b2%b7%e5%a7%94%e5%93%a1%e4%bc%9a%e3%81%ae%e6%84%8f%e5%9b%b3%e3%81%af%e3%80%8172%e6%99%82%e9%96%93%e3%81%a7%e6%b6%88%e3%81%88%e3%82%8b%ef%bc%9a",
+    "newSlug": "buying-committee-72",
+    "publishedDate": "2026-02-05"
+  },
+  {
+    "title": "ウェブサイト離脱を商談に変える：AIチャットが実現する「ゼロフリクション」コンバージョン戦略",
+    "oldSlug": "%e3%82%a6%e3%82%a7%e3%83%96%e3%82%b5%e3%82%a4%e3%83%88%e9%9b%a2%e8%84%b1%e3%82%92%e5%95%86%e8%ab%87%e3%81%ab%e5%a4%89%e3%81%88%e3%82%8b%ef%bc%9aai%e3%83%81%e3%83%a3%e3%83%83%e3%83%88%e3%81%8c%e5%ae%9f",
+    "newSlug": "websitebounce-meeting-ai",
+    "publishedDate": "2026-02-17"
+  }
+]
