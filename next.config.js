@@ -1,3 +1,5 @@
+const blogRedirects = require('./scripts/blog-redirects.js')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
@@ -15,7 +17,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'dynameet.ai',
+      },
     ],
+  },
+  async redirects() {
+    return blogRedirects
   },
 }
 
