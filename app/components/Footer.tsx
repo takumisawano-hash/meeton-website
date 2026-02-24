@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -8,21 +9,51 @@ type FooterProps = {
   variant?: 'light' | 'dark'
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < breakpoint)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [breakpoint])
+
+  return isMobile
+}
+
 export default function Footer({ variant = 'light' }: FooterProps) {
   const pathname = usePathname()
   const isDark = variant === 'dark'
   const isTalent = pathname.startsWith('/talent')
+  const isMobile = useIsMobile()
 
-  const ctaColor = isTalent ? '#2563eb' : '#12a37d'
+  const linkStyle = {
+    fontSize: isMobile ? 12 : 13,
+    color: isDark ? '#7878a0' : '#6e7494',
+    textDecoration: 'none' as const,
+    fontWeight: 600
+  }
+
+  const links = [
+    { href: '/', label: 'Meeton ai' },
+    { href: '/talent/', label: 'Meeton Talent' },
+    ...(isDark ? [] : [{ href: '/blog/', label: 'ブログ' }]),
+    { href: '/about/', label: '会社概要' },
+    { href: '/privacy-policy/', label: 'プライバシーポリシー' },
+    { href: '/terms/', label: '利用規約' },
+  ]
 
   if (isDark) {
     return (
       <footer style={{
         borderTop: '1px solid #2a2a44',
-        padding: '32px 48px',
+        padding: isMobile ? '32px 20px' : '32px 48px',
         display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        gap: isMobile ? 24 : 0,
         background: '#12121e'
       }}>
         <Image
@@ -32,14 +63,25 @@ export default function Footer({ variant = 'light' }: FooterProps) {
           height={26}
           style={{ height: 24, width: 'auto', opacity: 0.7 }}
         />
-        <div style={{ display: 'flex', gap: 20 }}>
-          <Link href="/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>Meeton ai</Link>
-          <Link href="/talent/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>Meeton Talent</Link>
-          <Link href="/about/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>会社概要</Link>
-          <Link href="/privacy-policy/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</Link>
-          <Link href="/terms/" style={{ fontSize: 13, color: '#7878a0', textDecoration: 'none', fontWeight: 600 }}>利用規約</Link>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: isMobile ? '10px 16px' : 20,
+          justifyContent: 'center'
+        }}>
+          {links.map(link => (
+            <Link key={link.href} href={link.href} style={linkStyle}>
+              {link.label}
+            </Link>
+          ))}
         </div>
-        <div style={{ fontSize: 12, color: '#7878a0' }}>© 2026 DynaMeet K.K. All rights reserved.</div>
+        <div style={{
+          fontSize: isMobile ? 11 : 12,
+          color: '#7878a0',
+          textAlign: 'center' as const
+        }}>
+          © 2026 DynaMeet K.K. All rights reserved.
+        </div>
       </footer>
     )
   }
@@ -47,10 +89,12 @@ export default function Footer({ variant = 'light' }: FooterProps) {
   return (
     <footer style={{
       borderTop: '1px solid #dfe3f0',
-      padding: '36px 48px',
+      padding: isMobile ? '32px 20px' : '36px 48px',
       display: 'flex',
+      flexDirection: isMobile ? 'column' : 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      gap: isMobile ? 24 : 0,
       background: isTalent ? '#f8f9fc' : '#f4f6fb'
     }}>
       <Image
@@ -60,15 +104,25 @@ export default function Footer({ variant = 'light' }: FooterProps) {
         height={26}
         style={{ height: 24, width: 'auto', opacity: 0.7 }}
       />
-      <div style={{ display: 'flex', gap: 24 }}>
-        <Link href="/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>Meeton ai</Link>
-        <Link href="/talent/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>Meeton Talent</Link>
-        <Link href="/blog/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>ブログ</Link>
-        <Link href="/about/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>会社概要</Link>
-        <Link href="/privacy-policy/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>プライバシーポリシー</Link>
-        <Link href="/terms/" style={{ fontSize: 13, color: '#6e7494', textDecoration: 'none', fontWeight: 600 }}>利用規約</Link>
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: isMobile ? '10px 16px' : 24,
+        justifyContent: 'center'
+      }}>
+        {links.map(link => (
+          <Link key={link.href} href={link.href} style={linkStyle}>
+            {link.label}
+          </Link>
+        ))}
       </div>
-      <div style={{ fontSize: 12, color: '#9498b2' }}>© 2026 DynaMeet K.K. All rights reserved.</div>
+      <div style={{
+        fontSize: isMobile ? 11 : 12,
+        color: '#9498b2',
+        textAlign: 'center' as const
+      }}>
+        © 2026 DynaMeet K.K. All rights reserved.
+      </div>
     </footer>
   )
 }

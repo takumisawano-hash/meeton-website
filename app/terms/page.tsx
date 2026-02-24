@@ -5,13 +5,13 @@ import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: '利用規約',
-  description: 'Meeton AIサービスの利用規約。ご利用前に必ずお読みください。',
+  description: 'Meeton aiサービスの利用規約。ご利用前に必ずお読みください。',
   alternates: {
     canonical: '/terms/',
   },
   openGraph: {
-    title: '利用規約｜Meeton AI',
-    description: 'Meeton AIサービスの利用規約。ご利用前に必ずお読みください。',
+    title: '利用規約｜Meeton ai',
+    description: 'Meeton aiサービスの利用規約。ご利用前に必ずお読みください。',
     url: 'https://dynameet.ai/terms/',
   },
 }
@@ -23,7 +23,7 @@ export default function TermsPage() {
       <main
         style={{
           minHeight: '100vh',
-          paddingTop: 100,
+          paddingTop: 'clamp(70px, 12vw, 100px)',
           background: '#fff',
         }}
       >
@@ -31,15 +31,15 @@ export default function TermsPage() {
           style={{
             maxWidth: 800,
             margin: '0 auto',
-            padding: '48px 24px 80px',
+            padding: 'clamp(24px, 6vw, 48px) clamp(16px, 4vw, 24px) clamp(50px, 10vw, 80px)',
           }}
         >
           {/* Breadcrumb */}
           <nav
             aria-label="パンくずリスト"
             style={{
-              marginBottom: 32,
-              fontSize: 14,
+              marginBottom: 'clamp(20px, 4vw, 32px)',
+              fontSize: 'clamp(12px, 2vw, 14px)',
               color: '#6e7494',
             }}
           >
@@ -57,10 +57,10 @@ export default function TermsPage() {
           </nav>
 
           {/* Header */}
-          <header style={{ marginBottom: 48 }}>
+          <header style={{ marginBottom: 'clamp(32px, 6vw, 48px)' }}>
             <h1
               style={{
-                fontSize: 36,
+                fontSize: 'clamp(28px, 5vw, 36px)',
                 fontWeight: 800,
                 color: '#0f1128',
                 margin: 0,
@@ -73,7 +73,7 @@ export default function TermsPage() {
           {/* Content */}
           <div
             style={{
-              fontSize: 15,
+              fontSize: 'clamp(14px, 2vw, 15px)',
               lineHeight: 1.8,
               color: '#374151',
             }}
@@ -235,13 +235,13 @@ function Section({
   children: React.ReactNode
 }) {
   return (
-    <section style={{ marginBottom: 40 }}>
+    <section style={{ marginBottom: 'clamp(28px, 5vw, 40px)' }}>
       <h2
         style={{
-          fontSize: 18,
+          fontSize: 'clamp(16px, 2.5vw, 18px)',
           fontWeight: 700,
           color: '#0f1128',
-          marginBottom: 16,
+          marginBottom: 'clamp(12px, 2vw, 16px)',
           paddingBottom: 8,
           borderBottom: '2px solid #12a37d',
         }}

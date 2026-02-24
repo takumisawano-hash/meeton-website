@@ -5,13 +5,13 @@ import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: '会社概要',
-  description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton AI」を開発・運用しています。',
+  description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton ai」を開発・運用しています。',
   alternates: {
     canonical: '/about/',
   },
   openGraph: {
-    title: '会社概要｜Meeton AI',
-    description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton AI」を開発・運用しています。',
+    title: '会社概要｜Meeton ai',
+    description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton ai」を開発・運用しています。',
     url: 'https://dynameet.ai/about/',
   },
 }
@@ -44,7 +44,7 @@ export default function AboutPage() {
       <main
         style={{
           minHeight: '100vh',
-          paddingTop: 100,
+          paddingTop: 'clamp(70px, 12vw, 100px)',
           background: '#fff',
         }}
       >
@@ -52,15 +52,15 @@ export default function AboutPage() {
           style={{
             maxWidth: 800,
             margin: '0 auto',
-            padding: '48px 24px 80px',
+            padding: 'clamp(24px, 6vw, 48px) clamp(16px, 4vw, 24px) clamp(50px, 10vw, 80px)',
           }}
         >
           {/* Breadcrumb */}
           <nav
             aria-label="パンくずリスト"
             style={{
-              marginBottom: 32,
-              fontSize: 14,
+              marginBottom: 'clamp(20px, 4vw, 32px)',
+              fontSize: 'clamp(12px, 2vw, 14px)',
               color: '#6e7494',
             }}
           >
@@ -78,10 +78,10 @@ export default function AboutPage() {
           </nav>
 
           {/* Header */}
-          <header style={{ marginBottom: 48 }}>
+          <header style={{ marginBottom: 'clamp(32px, 6vw, 48px)' }}>
             <h1
               style={{
-                fontSize: 36,
+                fontSize: 'clamp(28px, 5vw, 36px)',
                 fontWeight: 800,
                 color: '#0f1128',
                 margin: 0,
@@ -95,7 +95,7 @@ export default function AboutPage() {
           <div
             style={{
               background: '#f8fafc',
-              borderRadius: 16,
+              borderRadius: 'clamp(12px, 2vw, 16px)',
               overflow: 'hidden',
               border: '1px solid #e5e7eb',
             }}
@@ -105,18 +105,18 @@ export default function AboutPage() {
                 key={item.label}
                 style={{
                   display: 'flex',
+                  flexDirection: 'column',
                   borderBottom:
                     index < companyInfo.length - 1 ? '1px solid #e5e7eb' : 'none',
                 }}
+                className="company-info-row"
               >
                 <div
                   style={{
-                    width: 200,
-                    flexShrink: 0,
-                    padding: '20px 24px',
+                    padding: 'clamp(12px, 2vw, 20px) clamp(16px, 3vw, 24px)',
                     background: '#f1f5f9',
                     fontWeight: 600,
-                    fontSize: 14,
+                    fontSize: 'clamp(12px, 2vw, 14px)',
                     color: '#374151',
                   }}
                 >
@@ -124,9 +124,8 @@ export default function AboutPage() {
                 </div>
                 <div
                   style={{
-                    flex: 1,
-                    padding: '20px 24px',
-                    fontSize: 15,
+                    padding: 'clamp(12px, 2vw, 20px) clamp(16px, 3vw, 24px)',
+                    fontSize: 'clamp(13px, 2vw, 15px)',
                     color: '#0f1128',
                     lineHeight: 1.7,
                   }}
@@ -136,6 +135,20 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+          <style>{`
+            @media (min-width: 640px) {
+              .company-info-row {
+                flex-direction: row !important;
+              }
+              .company-info-row > div:first-child {
+                width: 200px;
+                flex-shrink: 0;
+              }
+              .company-info-row > div:last-child {
+                flex: 1;
+              }
+            }
+          `}</style>
         </div>
       </main>
       <Footer />

@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   // description がない場合のフォールバック
-  const description = post.description || `${post.title}についての詳細記事。Meeton AIブログでAI営業の最新情報をお届けします。`
+  const description = post.description || `${post.title}についての詳細記事。Meeton aiブログでAI営業の最新情報をお届けします。`
 
   return {
     title: post.title,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       section: post.category || 'セールス',
       tags: post.tags,
       url: `https://dynameet.ai/blog/${post.slug}/`,
-      siteName: 'Meeton AI',
+      siteName: 'Meeton ai',
       locale: 'ja_JP',
       ...(post.featuredImage && {
         images: [{
@@ -185,16 +185,18 @@ export default async function BlogPostPage({ params }: Props) {
         style={{
           maxWidth: 800,
           margin: '0 auto',
-          padding: '48px 24px 80px',
+          padding: 'clamp(24px, 6vw, 48px) clamp(16px, 4vw, 24px) clamp(50px, 10vw, 80px)',
         }}
       >
         {/* Breadcrumb */}
         <nav
           aria-label="パンくずリスト"
           style={{
-            marginBottom: 32,
-            fontSize: 14,
+            marginBottom: 'clamp(20px, 4vw, 32px)',
+            fontSize: 'clamp(12px, 2vw, 14px)',
             color: '#6e7494',
+            overflowX: 'auto',
+            whiteSpace: 'nowrap',
           }}
         >
           <Link
@@ -217,22 +219,22 @@ export default async function BlogPostPage({ params }: Props) {
             ブログ
           </Link>
           <span style={{ margin: '0 8px' }}>/</span>
-          <span style={{ color: '#0f1128' }}>{post.title}</span>
+          <span style={{ color: '#0f1128', whiteSpace: 'normal' }}>{post.title}</span>
         </nav>
 
         {/* Header */}
-        <header style={{ marginBottom: 40 }}>
+        <header style={{ marginBottom: 'clamp(24px, 5vw, 40px)' }}>
           {post.category && (
             <span
               style={{
                 display: 'inline-block',
-                fontSize: 13,
+                fontSize: 'clamp(11px, 1.8vw, 13px)',
                 fontWeight: 600,
                 color: '#12a37d',
                 background: 'rgba(18,163,125,0.1)',
-                padding: '6px 14px',
+                padding: 'clamp(4px, 1vw, 6px) clamp(10px, 2vw, 14px)',
                 borderRadius: 8,
-                marginBottom: 20,
+                marginBottom: 'clamp(14px, 3vw, 20px)',
               }}
             >
               {post.category}
@@ -240,12 +242,12 @@ export default async function BlogPostPage({ params }: Props) {
           )}
           <h1
             style={{
-              fontSize: 32,
+              fontSize: 'clamp(24px, 5vw, 32px)',
               fontWeight: 800,
               lineHeight: 1.4,
               color: '#0f1128',
               margin: 0,
-              marginBottom: 20,
+              marginBottom: 'clamp(14px, 3vw, 20px)',
             }}
           >
             {post.title}
@@ -254,14 +256,14 @@ export default async function BlogPostPage({ params }: Props) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 16,
+              gap: 'clamp(10px, 2vw, 16px)',
               flexWrap: 'wrap',
             }}
           >
             <time
               dateTime={post.publishedDate}
               style={{
-                fontSize: 14,
+                fontSize: 'clamp(12px, 2vw, 14px)',
                 color: '#6e7494',
               }}
             >
@@ -269,7 +271,7 @@ export default async function BlogPostPage({ params }: Props) {
             </time>
             <span
               style={{
-                fontSize: 14,
+                fontSize: 'clamp(12px, 2vw, 14px)',
                 color: '#6e7494',
                 display: 'flex',
                 alignItems: 'center',
@@ -283,12 +285,12 @@ export default async function BlogPostPage({ params }: Props) {
               {readingTime}分で読了
             </span>
             {post.tags.length > 0 && (
-              <div style={{ display: 'flex', gap: 8 }}>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
                     style={{
-                      fontSize: 12,
+                      fontSize: 'clamp(10px, 1.5vw, 12px)',
                       color: '#6e7494',
                       background: '#f0f2f5',
                       padding: '4px 10px',
@@ -309,9 +311,9 @@ export default async function BlogPostPage({ params }: Props) {
             style={{
               position: 'relative',
               width: '100%',
-              borderRadius: 16,
+              borderRadius: 'clamp(10px, 2vw, 16px)',
               overflow: 'hidden',
-              marginBottom: 40,
+              marginBottom: 'clamp(24px, 5vw, 40px)',
             }}
           >
             <Image
@@ -341,8 +343,8 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Footer */}
         <footer
           style={{
-            marginTop: 64,
-            paddingTop: 32,
+            marginTop: 'clamp(40px, 8vw, 64px)',
+            paddingTop: 'clamp(20px, 4vw, 32px)',
             borderTop: '1px solid #e5e7eb',
           }}
         >
@@ -352,7 +354,7 @@ export default async function BlogPostPage({ params }: Props) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              fontSize: 15,
+              fontSize: 'clamp(14px, 2vw, 15px)',
               fontWeight: 600,
               color: '#12a37d',
               textDecoration: 'none',

@@ -27,6 +27,7 @@ export type BlogPost = {
   featuredImage: string | null
   focusKeyword: string | null  // 主要キーワード（SEO用）
   noIndex: boolean             // 検索除外フラグ
+  views: number                // ビュー数（注目記事の選定用）
 }
 
 export type NotionBlock = BlockObjectResponse
@@ -38,7 +39,7 @@ function getRichTextContent(richText: RichTextItemResponse[]): string {
 function getPropertyValue(
   properties: PageObjectResponse['properties'],
   name: string
-): string | string[] | boolean | null {
+): string | string[] | boolean | number | null {
   const prop = properties[name]
   if (!prop) return null
 
@@ -55,6 +56,8 @@ function getPropertyValue(
       return prop.select?.name || null
     case 'multi_select':
       return prop.multi_select.map((item) => item.name)
+    case 'number':
+      return prop.number ?? 0
     case 'files':
       if (prop.files.length === 0) return null
       const file = prop.files[0]
@@ -85,6 +88,7 @@ function pageToPost(page: PageObjectResponse): BlogPost {
     featuredImage: getPropertyValue(props, 'FeaturedImage') as string | null,
     focusKeyword: (getPropertyValue(props, 'FocusKeyword') as string) || null,
     noIndex: (getPropertyValue(props, 'NoIndex') as boolean) || false,
+    views: (getPropertyValue(props, 'Views') as number) || 0,
   }
 }
 

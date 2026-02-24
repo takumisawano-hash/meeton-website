@@ -27,8 +27,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Meeton AI｜ウェブサイトから商談を自動創出するAIセールスプラットフォーム',
-    template: '%s｜Meeton AI',
+    default: 'Meeton ai｜ウェブサイトから商談を自動創出するAIセールスプラットフォーム',
+    template: '%s｜Meeton ai',
   },
   description: 'Meeton AIは、ウェブサイト訪問者をAIチャット・インテントスコアリング・自動スケジューリングで商談に変えるB2B SaaSプラットフォームです。',
   metadataBase: new URL('https://dynameet.ai'),
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    siteName: 'Meeton AI',
+    siteName: 'Meeton ai',
     url: 'https://dynameet.ai',
   },
   twitter: {
@@ -77,7 +77,7 @@ export default function RootLayout({
         <JsonLd type="website" />
         {children}
         <Script id="dynameet-config" strategy="lazyOnload">
-          {`window.DynaMeetConfig = { teamId: "3b1c8eb3-45b2-4181-a055-7a5862219595" };`}
+          {`window.DynaMeetConfig = { teamId: "70801bb6-9b39-4989-8be9-7d93076424c1" };`}
         </Script>
         <Script
           src="https://app.dynameet.ai/meeton.js"

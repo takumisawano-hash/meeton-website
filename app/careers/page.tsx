@@ -154,14 +154,19 @@ function JobCard({ job }: { job: typeof jobs[0] }) {
           }}>{t}</span>
         ))}
       </div>
-      <div style={{display:"flex",alignItems:"center",gap:8,fontSize:14,fontWeight:700,color:"#eeeef6",paddingTop:10,borderTop:"1px solid #2a2a44"}}>
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSe57dBjNsS3pG0QYZAVRFJk4wPKOv6GX7WBF-1tisAslnq5OQ/viewform?usp=dialog"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{display:"flex",alignItems:"center",gap:8,fontSize:14,fontWeight:700,color:"#eeeef6",paddingTop:10,borderTop:"1px solid #2a2a44",textDecoration:"none",transition:"opacity .2s"}}
+      >
         <span style={{
           width:28,height:28,borderRadius:8,
           background:"linear-gradient(135deg,#12a37d,#3b6ff5)",
           display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14
         }}>→</span>
         応募する
-      </div>
+      </a>
     </div>
   );
 }
@@ -176,7 +181,7 @@ export default function Page() {
       <Nav variant="dark" />
 
       {/* HERO */}
-      <section style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",padding:"140px 48px 100px"}}>
+      <section style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",padding:"clamp(100px,18vw,140px) clamp(16px,5vw,48px) clamp(60px,10vw,100px)"}}>
         <div style={{position:"absolute",inset:0,overflow:"hidden"}}>
           <div style={{position:"absolute",inset:0,backgroundImage:"radial-gradient(circle,rgba(120,120,160,.06) 1px,transparent 1px)",backgroundSize:"32px 32px",pointerEvents:"none"}} />
           <div style={{position:"absolute",width:800,height:800,top:"50%",left:"50%",transform:"translate(-50%,-50%)",borderRadius:"50%",background:"conic-gradient(from 0deg,rgba(18,163,125,.12),rgba(59,111,245,.12),rgba(124,92,252,.08),rgba(18,163,125,.12))",filter:"blur(80px)"}} />
@@ -198,12 +203,14 @@ export default function Page() {
             DynaMeet は Meeton ai と Meeton Talent の2つのプロダクトで、BtoB営業のあり方を根本から変えるAIスタートアップです。
           </p>
           <div className="anim d4 hero-ctas-row">
-            <button onClick={() => document.getElementById("s2")?.scrollIntoView({behavior:"smooth"})} style={{border:"none",cursor:"pointer",fontWeight:700,fontSize:18,padding:"18px 44px",borderRadius:14,background:grad,color:"#fff",boxShadow:"0 6px 32px rgba(18,163,125,.3)"}}>
-              募集職種を見る
-            </button>
-            <button style={{background:"transparent",border:"2px solid #3a3a58",color:"#eeeef6",padding:"16px 40px",borderRadius:14,fontSize:18,fontWeight:700,cursor:"pointer"}}>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSe57dBjNsS3pG0QYZAVRFJk4wPKOv6GX7WBF-1tisAslnq5OQ/viewform?usp=dialog"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{border:"none",cursor:"pointer",fontWeight:700,fontSize:18,padding:"18px 44px",borderRadius:14,background:grad,color:"#fff",boxShadow:"0 6px 32px rgba(18,163,125,.3)",textDecoration:"none",display:"inline-block"}}
+            >
               応募する
-            </button>
+            </a>
           </div>
           <div className="anim d5 hero-stats-row" style={{marginTop:80,paddingTop:48,borderTop:"1px solid #2a2a44"}}>
             {[{v:"10x",l:"導入社数（数ヶ月で）"},{v:"2",l:"プロダクト運営"},{v:"Series A",l:"準備中"}].map((n,i) => (
@@ -340,17 +347,19 @@ export default function Page() {
       </section>
 
       {/* FINAL CTA */}
-      <section style={{padding:"120px 48px",textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{padding:"clamp(60px,12vw,120px) clamp(16px,5vw,48px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,backgroundImage:"radial-gradient(circle,rgba(120,120,160,.06) 1px,transparent 1px)",backgroundSize:"32px 32px",pointerEvents:"none",opacity:.3}} />
         <div style={{position:"absolute",width:700,height:700,top:"50%",left:"50%",transform:"translate(-50%,-50%)",borderRadius:"50%",background:"conic-gradient(from 180deg,rgba(18,163,125,.1),rgba(59,111,245,.1),rgba(124,92,252,.06),rgba(18,163,125,.1))",filter:"blur(100px)"}} />
         <div style={{position:"relative",zIndex:2,maxWidth:620,margin:"0 auto"}}>
           <div className="slabel" style={{textAlign:"center"}}>JOIN US</div>
           <div className="stitle" style={{textAlign:"center"}}>一緒に、営業の未来を<br />つくりませんか？</div>
           <p className="ssub" style={{textAlign:"center",margin:"16px auto 40px"}}>少数精鋭のチームで、AIの力で営業のあたりまえを変える。あなたの力が必要です。</p>
-          <div style={{display:"flex",gap:14,justifyContent:"center"}}>
-            <button style={{border:"none",cursor:"pointer",fontWeight:700,fontSize:18,padding:"18px 44px",borderRadius:14,background:grad,color:"#fff",boxShadow:"0 6px 32px rgba(18,163,125,.3)"}}>応募する</button>
-            <button style={{background:"transparent",border:"2px solid #3a3a58",color:"#eeeef6",padding:"16px 40px",borderRadius:14,fontSize:18,fontWeight:700,cursor:"pointer"}}>カジュアル面談を申し込む</button>
-          </div>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSe57dBjNsS3pG0QYZAVRFJk4wPKOv6GX7WBF-1tisAslnq5OQ/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{border:"none",cursor:"pointer",fontWeight:700,fontSize:18,padding:"18px 44px",borderRadius:14,background:grad,color:"#fff",boxShadow:"0 6px 32px rgba(18,163,125,.3)",textDecoration:"none"}}
+          >応募する</a>
         </div>
       </section>
 

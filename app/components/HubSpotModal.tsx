@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 declare global {
   interface Window {
@@ -88,9 +89,15 @@ export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotMo
     }
   }, [isOpen, onClose])
 
-  if (!isOpen) return null
+  const [mounted, setMounted] = useState(false)
 
-  return (
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!isOpen || !mounted) return null
+
+  return createPortal(
     <div
       style={{
         position: 'fixed',
@@ -165,6 +172,7 @@ export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotMo
         </div>
         <div id="hubspot-form-container" ref={formContainerRef} />
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

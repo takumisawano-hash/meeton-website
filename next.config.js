@@ -24,7 +24,19 @@ const nextConfig = {
     ],
   },
   async redirects() {
-    return blogRedirects
+    return [
+      {
+        source: '/demo',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/demo/',
+        destination: '/',
+        permanent: true,
+      },
+      ...blogRedirects,
+    ]
   },
 }
 

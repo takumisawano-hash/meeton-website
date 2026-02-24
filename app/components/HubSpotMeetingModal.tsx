@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 type HubSpotMeetingModalProps = {
   isOpen: boolean
@@ -29,9 +30,15 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
     }
   }, [isOpen, onClose])
 
-  if (!isOpen) return null
+  const [mounted, setMounted] = useState(false)
 
-  return (
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!isOpen || !mounted) return null
+
+  return createPortal(
     <div
       style={{
         position: 'fixed',
@@ -119,6 +126,7 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
           />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
