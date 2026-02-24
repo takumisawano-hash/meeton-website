@@ -25,22 +25,49 @@ type HubSpotModalProps = {
   utmCampaign?: string
 }
 
+// Preload HubSpot script on page load
+let scriptLoadPromise: Promise<void> | null = null
+function preloadHubSpotScript(): Promise<void> {
+  if (scriptLoadPromise) return scriptLoadPromise
+  if (typeof window !== 'undefined' && window.hbspt) {
+    return Promise.resolve()
+  }
+
+  scriptLoadPromise = new Promise((resolve) => {
+    if (typeof window === 'undefined') {
+      resolve()
+      return
+    }
+    if (document.getElementById('hubspot-script')) {
+      if (window.hbspt) resolve()
+      else {
+        const existing = document.getElementById('hubspot-script')
+        existing?.addEventListener('load', () => resolve())
+      }
+      return
+    }
+    const script = document.createElement('script')
+    script.id = 'hubspot-script'
+    script.src = '//js-na2.hsforms.net/forms/embed/v2.js'
+    script.charset = 'utf-8'
+    script.async = true
+    script.onload = () => resolve()
+    document.head.appendChild(script)
+  })
+  return scriptLoadPromise
+}
+
+// Start preloading immediately when module loads
+if (typeof window !== 'undefined') {
+  preloadHubSpotScript()
+}
+
 export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotModalProps) {
   const formContainerRef = useRef<HTMLDivElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !document.getElementById('hubspot-script')) {
-      const script = document.createElement('script')
-      script.id = 'hubspot-script'
-      script.src = '//js-na2.hsforms.net/forms/embed/v2.js'
-      script.charset = 'utf-8'
-      script.async = true
-      script.onload = () => setScriptLoaded(true)
-      document.head.appendChild(script)
-    } else if (window.hbspt) {
-      setScriptLoaded(true)
-    }
+    preloadHubSpotScript().then(() => setScriptLoaded(true))
   }, [])
 
   useEffect(() => {
