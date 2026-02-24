@@ -1,4 +1,4 @@
-import { Client } from '@notionhq/client'
+import { Client, APIErrorCode, isNotionClientError } from '@notionhq/client'
 import type {
   PageObjectResponse,
   BlockObjectResponse,
@@ -8,6 +8,30 @@ import type {
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
+
+// Retry helper for rate-limited requests
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 5,
+  baseDelay: number = 1000
+): Promise<T> {
+  let lastError: unknown
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await fn()
+    } catch (error) {
+      lastError = error
+      if (isNotionClientError(error) && error.code === APIErrorCode.RateLimited) {
+        const delay = baseDelay * Math.pow(2, attempt) // Exponential backoff
+        console.log(`Rate limited, retrying in ${delay}ms (attempt ${attempt + 1}/${maxRetries})`)
+        await new Promise(resolve => setTimeout(resolve, delay))
+      } else {
+        throw error
+      }
+    }
+  }
+  throw lastError
+}
 
 const databaseId = process.env.NOTION_DATABASE_ID || ''
 
@@ -96,21 +120,23 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   if (!isConfigured()) return []
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      filter: {
-        property: 'Published',
-        checkbox: {
-          equals: true,
+    const response = await withRetry(() =>
+      notion.databases.query({
+        database_id: databaseId,
+        filter: {
+          property: 'Published',
+          checkbox: {
+            equals: true,
+          },
         },
-      },
-      sorts: [
-        {
-          property: 'PublishedDate',
-          direction: 'descending',
-        },
-      ],
-    })
+        sorts: [
+          {
+            property: 'PublishedDate',
+            direction: 'descending',
+          },
+        ],
+      })
+    )
 
     return response.results
       .filter((page): page is PageObjectResponse => 'properties' in page)
@@ -124,25 +150,27 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!isConfigured()) return null
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      filter: {
-        and: [
-          {
-            property: 'Slug',
-            rich_text: {
-              equals: slug,
+    const response = await withRetry(() =>
+      notion.databases.query({
+        database_id: databaseId,
+        filter: {
+          and: [
+            {
+              property: 'Slug',
+              rich_text: {
+                equals: slug,
+              },
             },
-          },
-          {
-            property: 'Published',
-            checkbox: {
-              equals: true,
+            {
+              property: 'Published',
+              checkbox: {
+                equals: true,
+              },
             },
-          },
-        ],
-      },
-    })
+          ],
+        },
+      })
+    )
 
     const page = response.results[0]
     if (!page || !('properties' in page) || page.object !== 'page') return null
@@ -160,11 +188,13 @@ export async function getPostBlocks(pageId: string): Promise<NotionBlock[]> {
     let cursor: string | undefined
 
     do {
-      const response = await notion.blocks.children.list({
-        block_id: pageId,
-        start_cursor: cursor,
-        page_size: 100,
-      })
+      const response = await withRetry(() =>
+        notion.blocks.children.list({
+          block_id: pageId,
+          start_cursor: cursor,
+          page_size: 100,
+        })
+      )
 
       blocks.push(
         ...response.results.filter(
@@ -189,38 +219,40 @@ export async function getRelatedPosts(category: string, currentSlug: string, lim
   if (!isConfigured() || !category) return []
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      filter: {
-        and: [
-          {
-            property: 'Published',
-            checkbox: {
-              equals: true,
+    const response = await withRetry(() =>
+      notion.databases.query({
+        database_id: databaseId,
+        filter: {
+          and: [
+            {
+              property: 'Published',
+              checkbox: {
+                equals: true,
+              },
             },
-          },
-          {
-            property: 'Category',
-            select: {
-              equals: category,
+            {
+              property: 'Category',
+              select: {
+                equals: category,
+              },
             },
-          },
-          {
-            property: 'Slug',
-            rich_text: {
-              does_not_equal: currentSlug,
+            {
+              property: 'Slug',
+              rich_text: {
+                does_not_equal: currentSlug,
+              },
             },
+          ],
+        },
+        sorts: [
+          {
+            property: 'PublishedDate',
+            direction: 'descending',
           },
         ],
-      },
-      sorts: [
-        {
-          property: 'PublishedDate',
-          direction: 'descending',
-        },
-      ],
-      page_size: limit,
-    })
+        page_size: limit,
+      })
+    )
 
     return response.results
       .filter((page): page is PageObjectResponse => 'properties' in page)
