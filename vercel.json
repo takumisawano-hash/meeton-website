@@ -30,7 +30,7 @@
       "permanent": true
     },
     {
-      "source": "/wp-content/:path*",
+      "source": "/wp-content/:path((?!uploads/).*)",
       "destination": "/",
       "permanent": true
     },
