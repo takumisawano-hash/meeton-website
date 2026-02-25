@@ -366,11 +366,13 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
                   }}>
                     {post.featuredImage && (
                       <Image
-                        src={`/api/notion-image?pageId=${post.id}&type=page-property`}
+                        src={post.featuredImage.includes('s3.us-west-2.amazonaws.com')
+                          ? `/api/notion-image?pageId=${post.id}&type=page-property`
+                          : post.featuredImage}
                         alt={post.title}
                         fill
                         style={{ objectFit: 'cover' }}
-                        unoptimized
+                        unoptimized={post.featuredImage.includes('s3.us-west-2.amazonaws.com')}
                       />
                     )}
                     {post.category && (

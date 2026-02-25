@@ -317,7 +317,9 @@ export default async function BlogPostPage({ params }: Props) {
             }}
           >
             <Image
-              src={`/api/notion-image?pageId=${post.id}&type=page-property`}
+              src={post.featuredImage.includes('s3.us-west-2.amazonaws.com')
+                ? `/api/notion-image?pageId=${post.id}&type=page-property`
+                : post.featuredImage}
               alt={post.title}
               width={800}
               height={450}
@@ -327,7 +329,7 @@ export default async function BlogPostPage({ params }: Props) {
                 objectFit: 'cover',
               }}
               priority
-              unoptimized
+              unoptimized={post.featuredImage.includes('s3.us-west-2.amazonaws.com')}
             />
           </div>
         )}
