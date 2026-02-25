@@ -21,6 +21,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'dynameet.ai',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
   async redirects() {
