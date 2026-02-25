@@ -317,7 +317,7 @@ export default async function BlogPostPage({ params }: Props) {
             }}
           >
             <Image
-              src={post.featuredImage}
+              src={`/api/notion-image?pageId=${post.id}&type=page-property`}
               alt={post.title}
               width={800}
               height={450}
@@ -327,6 +327,7 @@ export default async function BlogPostPage({ params }: Props) {
                 objectFit: 'cover',
               }}
               priority
+              unoptimized
             />
           </div>
         )}

@@ -196,10 +196,10 @@ function renderBlock(block: NotionBlock): React.ReactNode {
       )
 
     case 'image': {
-      const imageUrl =
-        block.image.type === 'external'
-          ? block.image.external.url
-          : block.image.file.url
+      const isNotionFile = block.image.type === 'file'
+      const imageUrl = isNotionFile
+        ? `/api/notion-image?blockId=${block.id}&type=block`
+        : block.image.external.url
       const caption = block.image.caption.map((t) => t.plain_text).join('')
       return (
         <figure key={block.id} style={{ margin: '32px 0' }}>
@@ -221,6 +221,7 @@ function renderBlock(block: NotionBlock): React.ReactNode {
                 height: 'auto',
                 objectFit: 'contain',
               }}
+              unoptimized={isNotionFile}
             />
           </div>
           {caption && (

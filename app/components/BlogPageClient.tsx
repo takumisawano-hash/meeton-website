@@ -366,10 +366,11 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
                   }}>
                     {post.featuredImage && (
                       <Image
-                        src={post.featuredImage}
+                        src={`/api/notion-image?pageId=${post.id}&type=page-property`}
                         alt={post.title}
                         fill
                         style={{ objectFit: 'cover' }}
+                        unoptimized
                       />
                     )}
                     {post.category && (
