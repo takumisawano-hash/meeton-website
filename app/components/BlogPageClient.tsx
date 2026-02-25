@@ -365,14 +365,10 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
                     background: 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%)'
                   }}>
                     {post.featuredImage && (
-                      <Image
-                        src={post.featuredImage.includes('s3.us-west-2.amazonaws.com')
-                          ? `/api/notion-image?pageId=${post.id}&type=page-property`
-                          : post.featuredImage}
+                      <img
+                        src={post.featuredImage}
                         alt={post.title}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        unoptimized={post.featuredImage.includes('s3.us-west-2.amazonaws.com')}
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                     )}
                     {post.category && (

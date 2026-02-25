@@ -316,20 +316,14 @@ export default async function BlogPostPage({ params }: Props) {
               marginBottom: 'clamp(24px, 5vw, 40px)',
             }}
           >
-            <Image
-              src={post.featuredImage.includes('s3.us-west-2.amazonaws.com')
-                ? `/api/notion-image?pageId=${post.id}&type=page-property`
-                : post.featuredImage}
+            <img
+              src={post.featuredImage}
               alt={post.title}
-              width={800}
-              height={450}
               style={{
                 width: '100%',
                 height: 'auto',
                 objectFit: 'cover',
               }}
-              priority
-              unoptimized={post.featuredImage.includes('s3.us-west-2.amazonaws.com')}
             />
           </div>
         )}
