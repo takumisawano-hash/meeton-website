@@ -323,6 +323,7 @@ const clients = [
   {name:"Univis",logo:"/clients/univis.png"},
   {name:"銀座桜屋",logo:"/clients/ginza-sakuraya.png"},
   {name:"BizteX",logo:"/clients/biztex.jpeg"},
+  {name:"Domo",logo:"/clients/domo.svg"},
 ];
 
 function CaseCarousel(){
