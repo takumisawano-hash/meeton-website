@@ -318,11 +318,11 @@ const faqData = [
 ];
 
 const clients = [
-  {name:"G-gen",logo:"/clients/ggen.jpg"},
+  {name:"G-gen",logo:"/clients/ggen.png"},
   {name:"EdulinX",logo:"/clients/edulinx.png"},
   {name:"Univis",logo:"/clients/univis.png"},
   {name:"銀座桜屋",logo:"/clients/ginza-sakuraya.png"},
-  {name:"BizteX",logo:"/clients/biztex.jpeg"},
+  {name:"BizteX",logo:"/clients/biztex.png"},
   {name:"Domo",logo:"/clients/domo.svg"},
 ];
 
