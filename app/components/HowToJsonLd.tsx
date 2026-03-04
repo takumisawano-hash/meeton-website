@@ -38,7 +38,7 @@ export default function HowToJsonLd({ name, description, steps, totalTime, image
     ...(image && {
       image: {
         '@type': 'ImageObject',
-        url: image,
+        url: image.startsWith('/') ? `https://dynameet.ai${image}` : image,
       },
     }),
   }

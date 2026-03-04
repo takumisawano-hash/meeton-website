@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import type { BlogPost } from '@/app/lib/notion'
 
 type BlogCardProps = {
@@ -43,12 +42,12 @@ export default function BlogCard({ post }: BlogCardProps) {
               background: '#f5f7fa',
             }}
           >
-            <Image
+            <img
               src={post.featuredImage}
               alt={post.title}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              loading="lazy"
+              onError={(e) => { e.currentTarget.style.display = 'none' }}
             />
           </div>
         )}

@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: 'ja_JP',
       ...(post.featuredImage && {
         images: [{
-          url: post.featuredImage,
+          url: post.featuredImage.startsWith('/') ? `https://dynameet.ai${post.featuredImage}` : post.featuredImage,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       creator: '@meetonai',
       site: '@meetonai',
       ...(post.featuredImage && {
-        images: [post.featuredImage],
+        images: [post.featuredImage.startsWith('/') ? `https://dynameet.ai${post.featuredImage}` : post.featuredImage],
       }),
     },
     robots: {

@@ -64,11 +64,11 @@ export default function BlogJsonLd({ post, wordCount, readingTime, headings }: B
     ...(post.featuredImage && {
       image: {
         '@type': 'ImageObject',
-        url: post.featuredImage,
+        url: post.featuredImage.startsWith('/') ? `https://dynameet.ai${post.featuredImage}` : post.featuredImage,
         width: 1200,
         height: 630,
       },
-      thumbnailUrl: post.featuredImage,
+      thumbnailUrl: post.featuredImage.startsWith('/') ? `https://dynameet.ai${post.featuredImage}` : post.featuredImage,
     }),
     ...((post.focusKeyword || post.tags.length > 0) && {
       keywords: [post.focusKeyword, ...post.tags].filter(Boolean).join(', '),

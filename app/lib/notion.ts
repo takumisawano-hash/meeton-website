@@ -108,6 +108,15 @@ function getPropertyValue(
   }
 }
 
+// 全てのサムネイル画像をプロキシ経由で配信する
+// - Notion S3署名URLの失効問題を回避
+// - Google Driveの外部埋め込みブロックを回避
+function getFeaturedImageUrl(page: PageObjectResponse): string | null {
+  const prop = page.properties['FeaturedImage']
+  if (!prop || prop.type !== 'files' || prop.files.length === 0) return null
+  return `/api/notion-image?pageId=${page.id}&type=page-property&property=FeaturedImage`
+}
+
 function pageToPost(page: PageObjectResponse): BlogPost {
   const props = page.properties
   const publishedDate = (getPropertyValue(props, 'PublishedDate') as string) || ''
@@ -124,7 +133,7 @@ function pageToPost(page: PageObjectResponse): BlogPost {
     modifiedDate,
     category: (getPropertyValue(props, 'Category') as string) || '',
     tags: (getPropertyValue(props, 'Tags') as string[]) || [],
-    featuredImage: getPropertyValue(props, 'FeaturedImage') as string | null,
+    featuredImage: getFeaturedImageUrl(page),
     focusKeyword: (getPropertyValue(props, 'FocusKeyword') as string) || null,
     noIndex: (getPropertyValue(props, 'NoIndex') as boolean) || false,
     views: (getPropertyValue(props, 'Views') as number) || 0,
