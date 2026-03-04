@@ -1,17 +1,13 @@
 import { ImageResponse } from 'next/og'
-import { getPostBySlug } from '@/app/lib/notion'
+import { NextRequest } from 'next/server'
 
 export const runtime = 'edge'
-export const alt = 'ブログ記事'
-export const size = { width: 1200, height: 630 }
-export const contentType = 'image/png'
 
-export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const post = await getPostBySlug(slug)
+export async function GET(request: NextRequest) {
+  const title = request.nextUrl.searchParams.get('title') || ''
+  const category = request.nextUrl.searchParams.get('category') || ''
 
-  const title = post?.title || 'ブログ記事'
-  const category = post?.category || ''
+  // タイトルの長さに応じてフォントサイズを調整
   const fontSize = title.length > 50 ? 40 : title.length > 30 ? 46 : 52
 
   return new ImageResponse(
@@ -29,7 +25,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           fontFamily: 'sans-serif',
         }}
       >
-        {/* グロー効果 */}
+        {/* 装飾: グロー効果 */}
         <div
           style={{
             position: 'absolute',
@@ -55,7 +51,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
 
-        {/* アクセントライン (上部) */}
+        {/* 装飾: アクセントライン (上部) */}
         <div
           style={{
             position: 'absolute',
@@ -68,7 +64,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
 
-        {/* 右側の縦ライン */}
+        {/* 装飾: 右側の縦ライン */}
         <div
           style={{
             position: 'absolute',
@@ -82,7 +78,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
 
-        {/* ドット装飾 */}
+        {/* 装飾: ドット */}
         <div
           style={{
             position: 'absolute',
@@ -118,6 +114,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             maxWidth: '90%',
           }}
         >
+          {/* カテゴリバッジ */}
           {category && (
             <div style={{ display: 'flex' }}>
               <span
@@ -137,6 +134,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             </div>
           )}
 
+          {/* タイトル */}
           <h1
             style={{
               fontSize,
@@ -155,6 +153,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             {title}
           </h1>
 
+          {/* 下部アクセント */}
           <div
             style={{
               display: 'flex',
@@ -195,7 +194,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
       </div>
     ),
     {
-      ...size,
+      width: 1200,
+      height: 630,
+      headers: {
+        'Cache-Control': 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=2592000',
+      },
     }
   )
 }

@@ -126,10 +126,12 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   const url = file.type === 'external' ? file.external.url : ''
   if (!url) return null
 
-  // Google Driveは外部埋め込み不可 → OG画像ルートで代替
+  // Google Driveは外部埋め込み不可 → サムネイル生成APIで代替
   if (url.includes('drive.google.com')) {
-    const slug = (getPropertyValue(page.properties, 'Slug') as string) || ''
-    return slug ? `/blog/${slug}/opengraph-image` : null
+    const title = (getPropertyValue(page.properties, 'Title') as string) || ''
+    const category = (getPropertyValue(page.properties, 'Category') as string) || ''
+    if (!title) return null
+    return `/api/thumbnail?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
   }
 
   // 自サイトURL（旧WordPress画像等）はそのまま
