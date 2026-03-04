@@ -108,12 +108,36 @@ function getPropertyValue(
   }
 }
 
-// 全てのサムネイル画像をプロキシ経由で配信する
-// - Notion S3署名URLの失効問題を回避
-// - Google Driveの外部埋め込みブロックを回避
+// サムネイル画像URLを取得する
+// - Notion S3画像: プロキシ経由（署名URL失効を回避）
+// - Google Drive: アクセス不可のため、OG画像ルートにフォールバック
+// - 自サイトURL: そのまま使用（旧WordPress画像等）
+// - その他外部URL: プロキシ経由（ホットリンク問題回避）
 function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   const prop = page.properties['FeaturedImage']
   if (!prop || prop.type !== 'files' || prop.files.length === 0) return null
+
+  const file = prop.files[0]
+  if (file.type === 'file') {
+    // Notion S3ファイル → プロキシ経由
+    return `/api/notion-image?pageId=${page.id}&type=page-property&property=FeaturedImage`
+  }
+
+  const url = file.type === 'external' ? file.external.url : ''
+  if (!url) return null
+
+  // Google Driveは外部埋め込み不可 → OG画像ルートで代替
+  if (url.includes('drive.google.com')) {
+    const slug = (getPropertyValue(page.properties, 'Slug') as string) || ''
+    return slug ? `/blog/${slug}/opengraph-image` : null
+  }
+
+  // 自サイトURL（旧WordPress画像等）はそのまま
+  if (url.includes('dynameet.ai')) {
+    return url
+  }
+
+  // その他外部URL → プロキシ経由
   return `/api/notion-image?pageId=${page.id}&type=page-property&property=FeaturedImage`
 }
 
