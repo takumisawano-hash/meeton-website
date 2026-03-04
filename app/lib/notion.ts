@@ -110,8 +110,7 @@ function getPropertyValue(
 
 // サムネイル画像URLを取得する
 // - Notion S3画像: プロキシ経由（署名URL失効を回避）
-// - Google Drive: アクセス不可のため、OG画像ルートにフォールバック
-// - 自サイトURL: そのまま使用（旧WordPress画像等）
+// - Google Drive / 旧WordPress: アクセス不可のため、サムネイル生成APIで代替
 // - その他外部URL: プロキシ経由（ホットリンク問題回避）
 function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   const prop = page.properties['FeaturedImage']
@@ -126,17 +125,12 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   const url = file.type === 'external' ? file.external.url : ''
   if (!url) return null
 
-  // Google Driveは外部埋め込み不可 → サムネイル生成APIで代替
-  if (url.includes('drive.google.com')) {
+  // Google Drive・旧WordPress画像 → サムネイル生成APIで代替
+  if (url.includes('drive.google.com') || url.includes('/wp-content/uploads/')) {
     const title = (getPropertyValue(page.properties, 'Title') as string) || ''
     const category = (getPropertyValue(page.properties, 'Category') as string) || ''
     if (!title) return null
     return `/api/thumbnail?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
-  }
-
-  // 自サイトURL（旧WordPress画像等）はそのまま
-  if (url.includes('dynameet.ai')) {
-    return url
   }
 
   // その他外部URL → プロキシ経由
