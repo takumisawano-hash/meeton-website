@@ -39,6 +39,21 @@ function isConfigured(): boolean {
   return Boolean(process.env.NOTION_TOKEN && process.env.NOTION_DATABASE_ID)
 }
 
+// Resolve data_source_id from database_id (required for Notion API 2025-09-03+)
+let resolvedDataSourceId: string | null = null
+
+async function getDataSourceId(): Promise<string> {
+  if (resolvedDataSourceId) return resolvedDataSourceId
+  const db = await withRetry(() => notion.databases.retrieve({ database_id: databaseId }))
+  const dataSources = (db as Record<string, unknown>).data_sources as { id: string; name: string }[] | undefined
+  if (dataSources && dataSources.length > 0) {
+    resolvedDataSourceId = dataSources[0].id
+  } else {
+    resolvedDataSourceId = databaseId
+  }
+  return resolvedDataSourceId
+}
+
 export type BlogPost = {
   id: string
   slug: string
@@ -120,27 +135,37 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   if (!isConfigured()) return []
 
   try {
-    const response = await withRetry(() =>
-      notion.databases.query({
-        database_id: databaseId,
-        filter: {
-          property: 'Published',
-          checkbox: {
-            equals: true,
-          },
-        },
-        sorts: [
-          {
-            property: 'PublishedDate',
-            direction: 'descending',
-          },
-        ],
-      })
-    )
+    const dataSourceId = await getDataSourceId()
+    const results: PageObjectResponse[] = []
+    let cursor: string | undefined
 
-    return response.results
-      .filter((page): page is PageObjectResponse => 'properties' in page)
-      .map(pageToPost)
+    do {
+      const response = await withRetry(() =>
+        notion.dataSources.query({
+          data_source_id: dataSourceId,
+          filter: {
+            property: 'Published',
+            checkbox: {
+              equals: true,
+            },
+          },
+          sorts: [
+            {
+              property: 'PublishedDate',
+              direction: 'descending',
+            },
+          ],
+          start_cursor: cursor,
+        })
+      )
+
+      results.push(
+        ...response.results.filter((page): page is PageObjectResponse => 'properties' in page)
+      )
+      cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined
+    } while (cursor)
+
+    return results.map(pageToPost)
   } catch {
     return []
   }
@@ -150,9 +175,10 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!isConfigured()) return null
 
   try {
+    const dataSourceId = await getDataSourceId()
     const response = await withRetry(() =>
-      notion.databases.query({
-        database_id: databaseId,
+      notion.dataSources.query({
+        data_source_id: dataSourceId,
         filter: {
           and: [
             {
@@ -219,9 +245,10 @@ export async function getRelatedPosts(category: string, currentSlug: string, lim
   if (!isConfigured() || !category) return []
 
   try {
+    const dataSourceId = await getDataSourceId()
     const response = await withRetry(() =>
-      notion.databases.query({
-        database_id: databaseId,
+      notion.dataSources.query({
+        data_source_id: dataSourceId,
         filter: {
           and: [
             {

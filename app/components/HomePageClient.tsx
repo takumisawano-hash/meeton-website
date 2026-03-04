@@ -324,6 +324,7 @@ const clients = [
   {name:"銀座桜屋",logo:"/clients/ginza-sakuraya.png"},
   {name:"BizteX",logo:"/clients/biztex.png"},
   {name:"Domo",logo:"/clients/domo.svg"},
+  {name:"インプレックスアンドカンパニー",logo:"/clients/imprexc.png"},
 ];
 
 function CaseCarousel(){
