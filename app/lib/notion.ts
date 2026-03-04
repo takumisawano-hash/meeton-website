@@ -112,9 +112,19 @@ function getPropertyValue(
 // - Notion S3画像: プロキシ経由（署名URL失効を回避）
 // - Google Drive / 旧WordPress: アクセス不可のため、サムネイル生成APIで代替
 // - その他外部URL: プロキシ経由（ホットリンク問題回避）
+function getThumbnailUrl(page: PageObjectResponse): string | null {
+  const title = (getPropertyValue(page.properties, 'Title') as string) || ''
+  if (!title) return null
+  const category = (getPropertyValue(page.properties, 'Category') as string) || ''
+  return `/api/thumbnail?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
+}
+
 function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   const prop = page.properties['FeaturedImage']
-  if (!prop || prop.type !== 'files' || prop.files.length === 0) return null
+  if (!prop || prop.type !== 'files' || prop.files.length === 0) {
+    // 画像未設定 → サムネイル自動生成
+    return getThumbnailUrl(page)
+  }
 
   const file = prop.files[0]
   if (file.type === 'file') {
@@ -127,10 +137,7 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
 
   // Google Drive・旧WordPress画像 → サムネイル生成APIで代替
   if (url.includes('drive.google.com') || url.includes('/wp-content/uploads/')) {
-    const title = (getPropertyValue(page.properties, 'Title') as string) || ''
-    const category = (getPropertyValue(page.properties, 'Category') as string) || ''
-    if (!title) return null
-    return `/api/thumbnail?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
+    return getThumbnailUrl(page)
   }
 
   // その他外部URL → プロキシ経由
