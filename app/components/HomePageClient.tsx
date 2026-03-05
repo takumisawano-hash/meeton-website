@@ -115,7 +115,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.1)}
 .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
 .why-card:hover::before{opacity:1}
-.why-icon{font-size:32px;margin-bottom:16px}
+.why-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,rgba(18,163,125,.1),rgba(59,130,246,.1));color:var(--cta)}
 .why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
 .why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
 
@@ -267,13 +267,18 @@ const phases = [
     ]},
 ];
 
-const whyData = [
-  {icon:"💬",title:"チャットだから分かる本音",desc:"フォームでは取れない「何に興味があるか」「何に困っているか」をAIチャットがリアルタイムで把握。最も精度の高い見込み判定を実現。"},
-  {icon:"🧠",title:"シナリオ設計不要、AIが自律稼働",desc:"初期設定だけ済ませれば、あとはAIが訪問者の行動・文脈に応じて最適な対応を自律的に判断。従来のチャットボットのようなシナリオ分岐の設計・運用は一切不要。"},
-  {icon:"🔄",title:"AI ナーチャリングエンジン",desc:"Soft Lead → Hard Lead → 商談予約。リードの状態に応じてメール配信・チャット再接触・行動シグナルを自動で組み合わせ、人手なしでリードを次のステージへ進めます。"},
-  {icon:"⚡",title:"自然な流れでリード獲得",desc:"従来のフォームに加え、チャット内での自然なやりとりでもリード情報を取得。訪問者の体験を損なわず、取りこぼしを減らします。"},
-  {icon:"🎯",title:"待ちじゃない、AIから能動的に",desc:"従来のチャットボットは訪問者が話しかけるのを待つだけ。Meeton aiはページ内容・閲覧行動・再訪パターンを読み取り、AIから最適なタイミングで声をかけます。"},
-  {icon:"🚀",title:"5分で導入、コード不要",desc:"WebサイトにJSタグを1行追加するだけ。既存のCRM、カレンダー、チャットツールと連携。開発リソース不要。"},
+const WhyIcon = ({d,children}:{d?:string,children?:React.ReactNode}) => children ? (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{children}</svg>
+) : (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>
+);
+const whyData:{icon:React.ReactNode,title:string,desc:string}[] = [
+  {icon:<WhyIcon d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>,title:"チャットだから分かる本音",desc:"フォームでは取れない「何に興味があるか」「何に困っているか」をAIチャットがリアルタイムで把握。最も精度の高い見込み判定を実現。"},
+  {icon:<WhyIcon><path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0-4 4c0 1.5.8 2.8 2 3.4V18a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-3.6c1.2-.7 2-2 2-3.4a4 4 0 0 0-4-4V6a4 4 0 0 0-4-4z"/><path d="M8 14h8"/><path d="M9 10h1"/><path d="M14 10h1"/></WhyIcon>,title:"シナリオ設計不要、AIが自律稼働",desc:"初期設定だけ済ませれば、あとはAIが訪問者の行動・文脈に応じて最適な対応を自律的に判断。従来のチャットボットのようなシナリオ分岐の設計・運用は一切不要。"},
+  {icon:<WhyIcon><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></WhyIcon>,title:"AI ナーチャリングエンジン",desc:"Soft Lead → Hard Lead → 商談予約。リードの状態に応じてメール配信・チャット再接触・行動シグナルを自動で組み合わせ、人手なしでリードを次のステージへ進めます。"},
+  {icon:<WhyIcon><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></WhyIcon>,title:"自然な流れでリード獲得",desc:"従来のフォームに加え、チャット内での自然なやりとりでもリード情報を取得。訪問者の体験を損なわず、取りこぼしを減らします。"},
+  {icon:<WhyIcon><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></WhyIcon>,title:"待ちじゃない、AIから能動的に",desc:"従来のチャットボットは訪問者が話しかけるのを待つだけ。Meeton aiはページ内容・閲覧行動・再訪パターンを読み取り、AIから最適なタイミングで声をかけます。"},
+  {icon:<WhyIcon d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>,title:"5分で導入、コード不要",desc:"WebサイトにJSタグを1行追加するだけ。既存のCRM、カレンダー、チャットツールと連携。開発リソース不要。"},
 ];
 
 const stepsData = [
