@@ -192,7 +192,7 @@ export default function TermsPage() {
 
             <Section title="第12条（個人情報の取扱い）">
               <p>
-                当社は、本サービスの利用によって取得する個人情報については、当社「プライバシーポリシー」に従い適切に取り扱うものとします。
+                当社は、本サービスの利用によって取得する個人情報については、当社「<a href="https://dynameet.ai/privacy-policy/" className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>」に従い適切に取り扱うものとします。
               </p>
             </Section>
 

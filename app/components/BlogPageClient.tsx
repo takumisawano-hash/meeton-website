@@ -3,8 +3,6 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Nav from './Nav'
-import Footer from './Footer'
 import type { BlogPost } from '@/app/lib/notion'
 
 type BlogPageClientProps = {
@@ -67,12 +65,6 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
 
   return (
     <>
-      <Nav />
-      <main style={{
-        paddingTop: 'clamp(70px, 12vw, 100px)',
-        minHeight: '100vh',
-        background: 'linear-gradient(180deg, #f8fafc 0%, #fff 50%)'
-      }}>
         {/* Hero Section */}
         <section style={{
           padding: 'clamp(30px, 6vw, 60px) clamp(16px, 4vw, 24px) clamp(24px, 5vw, 40px)',
@@ -430,8 +422,6 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
             </div>
           )}
         </section>
-      </main>
-      <Footer />
     </>
   )
 }

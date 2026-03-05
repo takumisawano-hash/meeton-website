@@ -26,8 +26,8 @@ export default function BlogLayout({
       <main
         style={{
           minHeight: '100vh',
-          paddingTop: 80,
-          background: '#fafbfc',
+          paddingTop: 'clamp(70px, 12vw, 100px)',
+          background: 'linear-gradient(180deg, #f8fafc 0%, #fff 50%)',
         }}
       >
         {children}
