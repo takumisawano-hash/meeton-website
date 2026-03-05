@@ -76,9 +76,13 @@ export default function RootLayout({
         <JsonLd type="organization" />
         <JsonLd type="website" />
         {children}
-        <Script id="dynameet-config" strategy="lazyOnload">
-          {`window.DynaMeetConfig = { teamId: "70801bb6-9b39-4989-8be9-7d93076424c1" };`}
-        </Script>
+        <Script
+          id="dynameet-config"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: 'window.DynaMeetConfig = { teamId: "70801bb6-9b39-4989-8be9-7d93076424c1" };',
+          }}
+        />
         <Script
           src="https://app.dynameet.ai/meeton.js"
           strategy="lazyOnload"
