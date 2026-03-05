@@ -13,6 +13,7 @@ declare global {
           region: string
           target: string
           onFormReady?: ($form: HTMLFormElement) => void
+          onFormSubmitted?: () => void
         }) => void
       }
     }
@@ -65,6 +66,7 @@ if (typeof window !== 'undefined') {
 export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotModalProps) {
   const formContainerRef = useRef<HTMLDivElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     preloadHubSpotScript().then(() => setScriptLoaded(true))
@@ -79,11 +81,13 @@ export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotMo
         ? `?utm_source=website&utm_medium=cta&utm_campaign=${utmCampaign}`
         : ''
 
+      setSubmitted(false)
       window.hbspt.forms.create({
         portalId: '45872857',
         formId: 'dd42d8b3-e426-4079-9479-fa28287c0544',
         region: 'na2',
         target: '#hubspot-form-container',
+        onFormSubmitted: () => setSubmitted(true),
         onFormReady: ($form: HTMLFormElement) => {
           if (utmCampaign && $form) {
             const pageUrlInput = $form.querySelector('input[name="hs_context"]')
@@ -182,22 +186,56 @@ export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotMo
         >
           ×
         </button>
-        <div style={{ marginBottom: 24, textAlign: 'center' }}>
-          <h2
-            style={{
-              fontSize: 24,
-              fontWeight: 800,
-              color: '#0f1128',
-              marginBottom: 8,
-            }}
-          >
-            資料請求
-          </h2>
-          <p style={{ fontSize: 14, color: '#6e7494' }}>
-            以下のフォームにご記入ください
-          </p>
-        </div>
-        <div id="hubspot-form-container" ref={formContainerRef} />
+        {submitted ? (
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <div style={{
+              width: 56, height: 56, borderRadius: '50%',
+              background: 'linear-gradient(135deg, #12a37d, #3b82f6)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 20px',
+            }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f1128', marginBottom: 8 }}>
+              資料請求ありがとうございます
+            </h2>
+            <p style={{ fontSize: 14, color: '#6e7494', lineHeight: 1.7, marginBottom: 24 }}>
+              ご入力いただいたメールアドレスに<br />資料をお送りしました。
+            </p>
+            <button
+              onClick={onClose}
+              style={{
+                padding: '12px 28px',
+                background: 'linear-gradient(135deg, #12a37d, #0d8a6a)',
+                color: '#fff', borderRadius: 10, fontWeight: 700,
+                fontSize: 14, border: 'none', cursor: 'pointer',
+              }}
+            >
+              閉じる
+            </button>
+          </div>
+        ) : (
+          <>
+            <div style={{ marginBottom: 24, textAlign: 'center' }}>
+              <h2
+                style={{
+                  fontSize: 24,
+                  fontWeight: 800,
+                  color: '#0f1128',
+                  marginBottom: 8,
+                }}
+              >
+                資料請求
+              </h2>
+              <p style={{ fontSize: 14, color: '#6e7494' }}>
+                以下のフォームにご記入ください
+              </p>
+            </div>
+            <div id="hubspot-form-container" ref={formContainerRef} />
+          </>
+        )}
       </div>
     </div>,
     document.body

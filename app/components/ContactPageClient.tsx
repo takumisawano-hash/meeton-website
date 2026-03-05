@@ -7,6 +7,7 @@ import Footer from './Footer'
 export default function ContactPageClient() {
   const formRef = useRef<HTMLDivElement>(null)
   const [formLoaded, setFormLoaded] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     // Load HubSpot script
@@ -35,6 +36,7 @@ export default function ContactPageClient() {
       formId: '08dc0777-eba7-419f-befe-70ae7bc44f02',
       region: 'na2',
       target: '#contact-hubspot-form',
+      onFormSubmitted: () => setSubmitted(true),
     })
     setFormLoaded(true)
   }
@@ -72,25 +74,81 @@ export default function ContactPageClient() {
             </p>
           </div>
 
-          <div style={{
-            background: '#fff',
-            borderRadius: 16,
-            padding: 'clamp(24px, 4vw, 40px)',
-            border: '1px solid #e5e7eb',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.04)',
-          }}>
-            {!formLoaded && (
+          {submitted ? (
+            <div style={{
+              background: '#fff',
+              borderRadius: 16,
+              padding: 'clamp(40px, 6vw, 64px) clamp(24px, 4vw, 40px)',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.04)',
+              textAlign: 'center',
+            }}>
               <div style={{
-                textAlign: 'center',
-                padding: '40px 0',
-                color: '#9ca3af',
-                fontSize: 14,
+                width: 64, height: 64, borderRadius: '50%',
+                background: 'linear-gradient(135deg, #12a37d, #3b82f6)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 24px',
               }}>
-                フォームを読み込み中...
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </div>
-            )}
-            <div id="contact-hubspot-form" ref={formRef} />
-          </div>
+              <h2 style={{
+                fontSize: 'clamp(22px, 4vw, 28px)',
+                fontWeight: 800,
+                color: '#1a1a2e',
+                marginBottom: 12,
+              }}>
+                お問い合わせありがとうございます
+              </h2>
+              <p style={{
+                fontSize: 'clamp(14px, 2vw, 16px)',
+                color: '#6e7494',
+                lineHeight: 1.7,
+                marginBottom: 32,
+              }}>
+                内容を確認のうえ、担当者より2営業日以内にご連絡いたします。
+              </p>
+              <a
+                href="/"
+                style={{
+                  display: 'inline-block',
+                  padding: '14px 32px',
+                  background: 'linear-gradient(135deg, #12a37d, #0d8a6a)',
+                  color: '#fff',
+                  borderRadius: 10,
+                  fontWeight: 700,
+                  fontSize: 15,
+                  textDecoration: 'none',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(18,163,125,0.3)' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none' }}
+              >
+                トップページに戻る
+              </a>
+            </div>
+          ) : (
+            <div style={{
+              background: '#fff',
+              borderRadius: 16,
+              padding: 'clamp(24px, 4vw, 40px)',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.04)',
+            }}>
+              {!formLoaded && (
+                <div style={{
+                  textAlign: 'center',
+                  padding: '40px 0',
+                  color: '#9ca3af',
+                  fontSize: 14,
+                }}>
+                  フォームを読み込み中...
+                </div>
+              )}
+              <div id="contact-hubspot-form" ref={formRef} />
+            </div>
+          )}
         </section>
       </main>
       <Footer />

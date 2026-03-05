@@ -31,18 +31,27 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
     : ''
   const embedUrl = `${baseUrl}?embed=true${utmParams ? `&${utmParams}` : ''}`
   const [iframeLoaded, setIframeLoaded] = useState(false)
+  const [booked, setBooked] = useState(false)
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
+    const handleMessage = (e: MessageEvent) => {
+      if (e.origin.includes('hubspot.com') && e.data?.meetingBookSucceeded) {
+        setBooked(true)
+      }
+    }
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
+      window.addEventListener('message', handleMessage)
       document.body.style.overflow = 'hidden'
       setIframeLoaded(false)
+      setBooked(false)
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
+      window.removeEventListener('message', handleMessage)
       document.body.style.overflow = ''
     }
   }, [isOpen, onClose])
@@ -131,40 +140,76 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
             ご都合の良い日時をお選びください
           </p>
         </div>
-        <div style={{ flex: 1, borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative' }}>
-          {!iframeLoaded && (
+        {booked ? (
+          <div style={{
+            flex: 1, display: 'flex', flexDirection: 'column',
+            alignItems: 'center', justifyContent: 'center', textAlign: 'center',
+            borderRadius: 12, border: '1px solid #e5e7eb', background: '#f8fafc',
+          }}>
             <div style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: '#f8fafc',
+              width: 64, height: 64, borderRadius: '50%',
+              background: 'linear-gradient(135deg, #12a37d, #3b82f6)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              marginBottom: 24,
             }}>
-              <div style={{
-                width: 40,
-                height: 40,
-                border: '3px solid #e5e7eb',
-                borderTopColor: '#12a37d',
-                borderRadius: '50%',
-                animation: 'spin 1s linear infinite',
-              }} />
-              <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
             </div>
-          )}
-          <iframe
-            src={embedUrl}
-            style={{
-              width: '100%',
-              height: '100%',
-              border: 'none',
-              opacity: iframeLoaded ? 1 : 0,
-              transition: 'opacity 0.2s',
-            }}
-            title="デモ予約カレンダー"
-            onLoad={() => setIframeLoaded(true)}
-          />
-        </div>
+            <h3 style={{ fontSize: 22, fontWeight: 800, color: '#0f1128', marginBottom: 8 }}>
+              ご予約ありがとうございます
+            </h3>
+            <p style={{ fontSize: 14, color: '#6e7494', lineHeight: 1.7, marginBottom: 28 }}>
+              確認メールをお送りしました。<br />当日お会いできることを楽しみにしています。
+            </p>
+            <button
+              onClick={onClose}
+              style={{
+                padding: '12px 28px',
+                background: 'linear-gradient(135deg, #12a37d, #0d8a6a)',
+                color: '#fff', borderRadius: 10, fontWeight: 700,
+                fontSize: 14, border: 'none', cursor: 'pointer',
+              }}
+            >
+              閉じる
+            </button>
+          </div>
+        ) : (
+          <div style={{ flex: 1, borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative' }}>
+            {!iframeLoaded && (
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#f8fafc',
+              }}>
+                <div style={{
+                  width: 40,
+                  height: 40,
+                  border: '3px solid #e5e7eb',
+                  borderTopColor: '#12a37d',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite',
+                }} />
+                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+              </div>
+            )}
+            <iframe
+              src={embedUrl}
+              style={{
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                opacity: iframeLoaded ? 1 : 0,
+                transition: 'opacity 0.2s',
+              }}
+              title="デモ予約カレンダー"
+              onLoad={() => setIframeLoaded(true)}
+            />
+          </div>
+        )}
       </div>
     </div>,
     document.body
