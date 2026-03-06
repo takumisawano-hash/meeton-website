@@ -925,22 +925,21 @@ export default function HomePageClient(){
 
           {/* Vertical Funnel: 7 channels inside Meeton ai → AI pipeline → Sales */}
           <div style={{marginTop:48,overflowX:"auto",padding:"8px 0"}}>
-            <svg width="100%" viewBox="0 0 800 600" fill="none" style={{maxWidth:800,margin:"0 auto",display:"block"}}>
+            <svg width="100%" viewBox="0 0 800 700" fill="none" style={{maxWidth:800,margin:"0 auto",display:"block"}}>
               <defs>
                 <filter id="hubGlow"><feDropShadow dx="0" dy="4" stdDeviation="12" floodColor="#12a37d" floodOpacity=".18"/></filter>
                 <filter id="nodeGlow"><feDropShadow dx="0" dy="2" stdDeviation="6" floodOpacity=".08"/></filter>
                 <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#12a37d" stopOpacity=".07"/><stop offset="100%" stopColor="#0fc19a" stopOpacity=".02"/></linearGradient>
                 <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#3b6ff5"/><stop offset="100%" stopColor="#6690fa"/></linearGradient>
                 <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
-                <clipPath id="funnelClip"><path d="M60,20 L740,20 Q760,20 760,40 L620,430 Q615,445 600,445 L200,445 Q185,445 180,430 L40,40 Q40,20 60,20 Z"/></clipPath>
               </defs>
 
               {/* ── Trapezoid funnel boundary (Meeton ai ecosystem) ── */}
               <g filter="url(#hubGlow)">
-                <path d="M60,20 L740,20 Q760,20 760,40 L620,430 Q615,445 600,445 L200,445 Q185,445 180,430 L40,40 Q40,20 60,20 Z" fill="url(#hubGrad)" stroke="#12a37d" strokeWidth="2.5"/>
+                <path d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z" fill="url(#hubGrad)" stroke="#12a37d" strokeWidth="2.5"/>
               </g>
               {/* Animated border */}
-              <path d="M60,20 L740,20 Q760,20 760,40 L620,430 Q615,445 600,445 L200,445 Q185,445 180,430 L40,40 Q40,20 60,20 Z" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="6 6" opacity=".3">
+              <path d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="6 6" opacity=".3">
                 <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="6s" repeatCount="indefinite"/>
               </path>
 
@@ -997,74 +996,67 @@ export default function HomePageClient(){
               </circle>
 
               {/* Arrow down to pipeline */}
-              <line x1="400" y1="246" x2="400" y2="280" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+              <line x1="400" y1="246" x2="400" y2="275" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
                 <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="394,278 400,290 406,278" fill="#12a37d"/>
+              <polygon points="394,273 400,285 406,273" fill="#12a37d"/>
 
-              {/* ── AI Processing Pipeline (3 horizontal steps) ── */}
+              {/* ── AI Processing Pipeline (3 vertical steps) ── */}
               {/* Step 1: 精査 */}
               <g filter="url(#nodeGlow)">
-                <rect x="220" y="300" width="120" height="50" rx="14" fill="url(#stepGrad)"/>
-                <text x="280" y="330" textAnchor="middle" fontSize="15" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+                <rect x="330" y="290" width="140" height="50" rx="14" fill="url(#stepGrad)"/>
+                <text x="400" y="320" textAnchor="middle" fontSize="16" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
               </g>
-              <line x1="340" y1="325" x2="370" y2="325" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+              <line x1="400" y1="340" x2="400" y2="365" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
                 <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="370,320 380,325 370,330" fill="#12a37d"/>
+              <polygon points="394,363 400,375 406,363" fill="#12a37d"/>
 
               {/* Step 2: 商談予約 */}
               <g filter="url(#nodeGlow)">
-                <rect x="382" y="300" width="120" height="50" rx="14" fill="url(#stepGrad)"/>
-                <text x="442" y="330" textAnchor="middle" fontSize="15" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u5546\u8ac7\u4e88\u7d04"}</text>
+                <rect x="330" y="380" width="140" height="50" rx="14" fill="url(#stepGrad)"/>
+                <text x="400" y="410" textAnchor="middle" fontSize="16" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u5546\u8ac7\u4e88\u7d04"}</text>
               </g>
-              <line x1="502" y1="325" x2="530" y2="325" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+              <line x1="400" y1="430" x2="400" y2="455" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
                 <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="530,320 540,325 530,330" fill="#12a37d"/>
+              <polygon points="394,453 400,465 406,453" fill="#12a37d"/>
 
               {/* Step 3: ヒアリング */}
               <g filter="url(#nodeGlow)">
-                <rect x="542" y="300" width="120" height="50" rx="14" fill="url(#stepGrad)"/>
-                <text x="602" y="330" textAnchor="middle" fontSize="15" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+                <rect x="330" y="470" width="140" height="50" rx="14" fill="url(#stepGrad)"/>
+                <text x="400" y="500" textAnchor="middle" fontSize="16" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
               </g>
 
-              {/* Animated dot along pipeline */}
+              {/* Animated dot along vertical pipeline */}
               <circle r="4" fill="white" opacity=".8">
-                <animateMotion dur="3.5s" repeatCount="indefinite" path="M280,325 L442,325 L602,325"/>
+                <animateMotion dur="3.5s" repeatCount="indefinite" path="M400,315 L400,405 L400,495"/>
               </circle>
 
-              {/* Pipeline label */}
-              <text x="400" y="375" textAnchor="middle" fontSize="10" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{"\u2191 AI\u304c\u81ea\u52d5\u3067\u7cbe\u67fb\u30fb\u4e88\u7d04\u30fb\u30d2\u30a2\u30ea\u30f3\u30b0\u3092\u5b8c\u7d50"}</text>
-
               {/* ── Exit: arrow breaking through funnel bottom ── */}
-              {/* Gap in funnel border */}
-              <rect x="382" y="438" width="36" height="14" fill="var(--surface)"/>
-              <line x1="400" y1="390" x2="400" y2="470" stroke="#3b6ff5" strokeWidth="3" strokeDasharray="8 4">
+              <rect x="382" y="548" width="36" height="14" fill="var(--surface)"/>
+              <line x1="400" y1="520" x2="400" y2="585" stroke="#3b6ff5" strokeWidth="3" strokeDasharray="8 4">
                 <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="392,468 400,484 408,468" fill="#3b6ff5"/>
+              <polygon points="392,583 400,597 408,583" fill="#3b6ff5"/>
 
               {/* Animated exit dot */}
               <circle r="4" fill="#3b6ff5" opacity=".6">
-                <animateMotion dur="1.5s" repeatCount="indefinite" path="M400,390 L400,480"/>
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M400,520 L400,593"/>
               </circle>
 
               {/* Pulse at exit */}
-              <circle cx="400" cy="484" r="6" fill="none" stroke="#3b6ff5" strokeWidth="2" opacity="0">
+              <circle cx="400" cy="597" r="6" fill="none" stroke="#3b6ff5" strokeWidth="2" opacity="0">
                 <animate attributeName="r" from="6" to="20" dur="2s" repeatCount="indefinite"/>
                 <animate attributeName="opacity" from=".5" to="0" dur="2s" repeatCount="indefinite"/>
               </circle>
 
               {/* ── 営業チーム (OUTSIDE the funnel) ── */}
               <g filter="url(#nodeGlow)">
-                <rect x="310" y="500" width="180" height="80" rx="18" fill="url(#salesGrad)"/>
-                <text x="400" y="532" textAnchor="middle" fontSize="18" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
-                <text x="400" y="554" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
+                <rect x="310" y="610" width="180" height="76" rx="18" fill="url(#salesGrad)"/>
+                <text x="400" y="640" textAnchor="middle" fontSize="18" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
+                <text x="400" y="662" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
               </g>
-
-              {/* Label */}
-              <text x="400" y="598" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b6ff5" fontFamily="var(--fb)">{"\u2191 \u30a8\u30b3\u30b7\u30b9\u30c6\u30e0\u3092\u629c\u3051\u3066\u521d\u3081\u3066\u55b6\u696d\u306b\u5c4a\u304f"}</text>
             </svg>
           </div>
         </div>
