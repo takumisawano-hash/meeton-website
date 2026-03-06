@@ -397,35 +397,35 @@ const ICON = {
 function DiagramChatbot() {
   return (
     <div className="diagram" style={{flexDirection:"column",gap:8}}>
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 460 220" fill="none" style={{maxWidth:600}}>
         {/* Website */}
-        <rect x="10" y="60" width="100" height="80" rx="12" fill="#f0fdfa" stroke="#0891b2" strokeWidth="2"/>
-        <SvgIcon d={ICON.globe} x={60} y={86} size={18} color="#0891b2"/>
-        <text x="60" y="110" textAnchor="middle" fontSize="9" fontWeight="700" fill="#0891b2">{"Web / LP / \u5e83\u544a"}</text>
+        <rect x="15" y="60" width="110" height="90" rx="14" fill="#f0fdfa" stroke="#0891b2" strokeWidth="2"/>
+        <SvgIcon d={ICON.globe} x={70} y={88} size={20} color="#0891b2"/>
+        <text x="70" y="116" textAnchor="middle" fontSize="10" fontWeight="700" fill="#0891b2">{"Web / LP / \u5e83\u544a"}</text>
         {/* Arrow */}
-        <line x1="115" y1="100" x2="155" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3">
+        <line x1="130" y1="105" x2="170" y2="105" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3">
           <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/>
         </line>
-        <polygon points="155,95 165,100 155,105" fill="#c8cedf"/>
+        <polygon points="170,100 180,105 170,110" fill="#c8cedf"/>
         {/* AI Chatbot */}
-        <rect x="170" y="40" width="120" height="120" rx="16" fill="white" stroke="#0891b2" strokeWidth="2"/>
-        <SvgIcon d={ICON.cpu} x={230} y={64} size={22} color="#0891b2"/>
-        <text x="230" y="88" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f1128">{"AI\u30c1\u30e3\u30c3\u30c8"}</text>
-        <rect x="186" y="98" width="88" height="16" rx="4" fill="#e5f8f2"/>
-        <text x="230" y="110" textAnchor="middle" fontSize="8" fontWeight="600" fill="#12a37d">{"\u30cb\u30fc\u30ba\u628a\u63e1"}</text>
-        <rect x="186" y="120" width="88" height="16" rx="4" fill="#eaf0fe"/>
-        <text x="230" y="132" textAnchor="middle" fontSize="8" fontWeight="600" fill="#3b6ff5">{"\u8cc7\u6599\u63d0\u6848"}</text>
-        <rect x="186" y="142" width="88" height="12" rx="4" fill="#f0ecfe"/>
-        <text x="230" y="151" textAnchor="middle" fontSize="7" fontWeight="600" fill="#7c5cfc">{"\u4e88\u7d04\u8a98\u5c0e"}</text>
+        <rect x="185" y="30" width="130" height="150" rx="16" fill="white" stroke="#0891b2" strokeWidth="2"/>
+        <SvgIcon d={ICON.cpu} x={250} y={58} size={24} color="#0891b2"/>
+        <text x="250" y="86" textAnchor="middle" fontSize="12" fontWeight="800" fill="#0f1128">{"AI\u30c1\u30e3\u30c3\u30c8"}</text>
+        <rect x="200" y="98" width="100" height="18" rx="5" fill="#e5f8f2"/>
+        <text x="250" y="112" textAnchor="middle" fontSize="9" fontWeight="600" fill="#12a37d">{"\u30cb\u30fc\u30ba\u628a\u63e1"}</text>
+        <rect x="200" y="122" width="100" height="18" rx="5" fill="#eaf0fe"/>
+        <text x="250" y="136" textAnchor="middle" fontSize="9" fontWeight="600" fill="#3b6ff5">{"\u8cc7\u6599\u63d0\u6848"}</text>
+        <rect x="200" y="146" width="100" height="18" rx="5" fill="#f0ecfe"/>
+        <text x="250" y="160" textAnchor="middle" fontSize="9" fontWeight="600" fill="#7c5cfc">{"\u4e88\u7d04\u8a98\u5c0e"}</text>
         {/* Arrow */}
-        <line x1="295" y1="100" x2="330" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3">
+        <line x1="320" y1="105" x2="355" y2="105" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3">
           <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/>
         </line>
-        <polygon points="330,95 340,100 330,105" fill="#c8cedf"/>
+        <polygon points="355,100 365,105 355,110" fill="#c8cedf"/>
         {/* Meeting */}
-        <rect x="345" y="60" width="100" height="80" rx="12" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
-        <SvgIcon d={ICON.cal} x={395} y={88} size={20} color="#12a37d"/>
-        <text x="395" y="112" textAnchor="middle" fontSize="11" fontWeight="800" fill="#12a37d">{"\u5546\u8ac7\u78ba\u5b9a"}</text>
+        <rect x="370" y="55" width="80" height="100" rx="14" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
+        <SvgIcon d={ICON.cal} x={410} y={88} size={22} color="#12a37d"/>
+        <text x="410" y="118" textAnchor="middle" fontSize="11" fontWeight="800" fill="#12a37d">{"\u5546\u8ac7\u78ba\u5b9a"}</text>
       </svg>
     </div>
   );
@@ -434,35 +434,35 @@ function DiagramChatbot() {
 function DiagramEmail() {
   return (
     <div className="diagram" style={{flexDirection:"column"}}>
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 420 210" fill="none" style={{maxWidth:600}}>
         {/* Sources */}
-        <rect x="5" y="15" width="80" height="40" rx="8" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1.5"/>
-        <text x="45" y="40" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b6ff5">{"\u30a4\u30f3\u30d0\u30a6\u30f3\u30c9"}</text>
-        <rect x="5" y="65" width="80" height="40" rx="8" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1.5"/>
-        <text x="45" y="90" textAnchor="middle" fontSize="9" fontWeight="700" fill="#7c5cfc">{"\u30a6\u30a7\u30d3\u30ca\u30fc"}</text>
-        <rect x="5" y="115" width="80" height="40" rx="8" fill="#e5f8f2" stroke="#12a37d" strokeWidth="1.5"/>
-        <text x="45" y="140" textAnchor="middle" fontSize="9" fontWeight="700" fill="#12a37d">CRM / API</text>
+        <rect x="10" y="15" width="85" height="42" rx="8" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1.5"/>
+        <text x="52" y="41" textAnchor="middle" fontSize="10" fontWeight="700" fill="#3b6ff5">{"\u30a4\u30f3\u30d0\u30a6\u30f3\u30c9"}</text>
+        <rect x="10" y="67" width="85" height="42" rx="8" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1.5"/>
+        <text x="52" y="93" textAnchor="middle" fontSize="10" fontWeight="700" fill="#7c5cfc">{"\u30a6\u30a7\u30d3\u30ca\u30fc"}</text>
+        <rect x="10" y="119" width="85" height="42" rx="8" fill="#e5f8f2" stroke="#12a37d" strokeWidth="1.5"/>
+        <text x="52" y="145" textAnchor="middle" fontSize="10" fontWeight="700" fill="#12a37d">CRM / API</text>
         {/* Arrows to AI */}
-        <line x1="90" y1="35" x2="140" y2="95" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <line x1="90" y1="85" x2="140" y2="95" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <line x1="90" y1="135" x2="140" y2="95" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <line x1="100" y1="36" x2="150" y2="97" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <line x1="100" y1="88" x2="150" y2="97" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <line x1="100" y1="140" x2="150" y2="97" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></line>
         {/* AI Engine */}
-        <rect x="145" y="55" width="110" height="85" rx="14" fill="white" stroke="#12a37d" strokeWidth="2"/>
-        <SvgIcon d={ICON.mail} x={200} y={78} size={20} color="#12a37d"/>
-        <text x="200" y="100" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"AI\u30e1\u30fc\u30eb"}</text>
-        <text x="200" y="115" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u81ea\u52d5\u30ca\u30fc\u30c1\u30e3\u30ea\u30f3\u30b0"}</text>
-        <text x="200" y="128" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7"}</text>
+        <rect x="155" y="50" width="120" height="96" rx="14" fill="white" stroke="#12a37d" strokeWidth="2"/>
+        <SvgIcon d={ICON.mail} x={215} y={76} size={22} color="#12a37d"/>
+        <text x="215" y="100" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f1128">{"AI\u30e1\u30fc\u30eb"}</text>
+        <text x="215" y="116" textAnchor="middle" fontSize="9" fill="#6e7494">{"\u81ea\u52d5\u30ca\u30fc\u30c1\u30e3\u30ea\u30f3\u30b0"}</text>
+        <text x="215" y="131" textAnchor="middle" fontSize="9" fill="#6e7494">{"\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7"}</text>
         {/* Arrow */}
-        <line x1="260" y1="97" x2="300" y2="97" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="300,92 310,97 300,102" fill="#c8cedf"/>
+        <line x1="280" y1="98" x2="318" y2="98" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points="318,93 328,98 318,103" fill="#c8cedf"/>
         {/* Result */}
-        <rect x="315" y="60" width="80" height="75" rx="12" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
-        <SvgIcon d={ICON.cal} x={355} y={84} size={20} color="#12a37d"/>
-        <text x="355" y="107" textAnchor="middle" fontSize="10" fontWeight="800" fill="#12a37d">{"\u5546\u8ac7\u78ba\u5b9a"}</text>
-        <text x="355" y="122" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u81ea\u52d5\u4e88\u7d04"}</text>
+        <rect x="333" y="55" width="80" height="86" rx="14" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
+        <SvgIcon d={ICON.cal} x={373} y={82} size={22} color="#12a37d"/>
+        <text x="373" y="108" textAnchor="middle" fontSize="11" fontWeight="800" fill="#12a37d">{"\u5546\u8ac7\u78ba\u5b9a"}</text>
+        <text x="373" y="125" textAnchor="middle" fontSize="9" fill="#6e7494">{"\u81ea\u52d5\u4e88\u7d04"}</text>
         {/* Timeline label */}
-        <rect x="130" y="165" width="150" height="24" rx="6" fill="#fff7ed" stroke="#f59e0b" strokeWidth="1"/>
-        <text x="205" y="181" textAnchor="middle" fontSize="9" fontWeight="700" fill="#d97706">{"\u30a4\u30d9\u30f3\u30c8\u76f4\u5f8c\u306e\u71b1\u91cf\u304c\u9ad8\u3044\u30bf\u30a4\u30df\u30f3\u30b0\u3067\u5373\u30a2\u30af\u30b7\u30e7\u30f3"}</text>
+        <rect x="140" y="172" width="170" height="28" rx="8" fill="#fff7ed" stroke="#f59e0b" strokeWidth="1"/>
+        <text x="225" y="190" textAnchor="middle" fontSize="9" fontWeight="700" fill="#d97706">{"\u71b1\u91cf\u304c\u9ad8\u3044\u30bf\u30a4\u30df\u30f3\u30b0\u3067\u5373\u30a2\u30af\u30b7\u30e7\u30f3"}</text>
       </svg>
     </div>
   );
@@ -471,31 +471,31 @@ function DiagramEmail() {
 function DiagramDownloadCenter() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 420 210" fill="none" style={{maxWidth:600}}>
         {/* Download page */}
-        <rect x="20" y="20" width="160" height="160" rx="14" fill="white" stroke="#3b6ff5" strokeWidth="2"/>
-        <text x="100" y="48" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8"}</text>
+        <rect x="15" y="10" width="170" height="190" rx="14" fill="white" stroke="#3b6ff5" strokeWidth="2"/>
+        <text x="100" y="38" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9"}</text>
         {/* Doc cards */}
-        {[{y:60,name:"\u5c0e\u5165\u30ac\u30a4\u30c9",c:"#e0475b"},{y:90,name:"\u6599\u91d1\u6bd4\u8f03\u8868",c:"#3b6ff5"},{y:120,name:"\u4e8b\u4f8b\u96c6",c:"#12a37d"}].map((d,i)=>(
+        {[{y:52,name:"\u5c0e\u5165\u30ac\u30a4\u30c9",c:"#e0475b"},{y:84,name:"\u6599\u91d1\u6bd4\u8f03\u8868",c:"#3b6ff5"},{y:116,name:"\u4e8b\u4f8b\u96c6",c:"#12a37d"}].map((d,i)=>(
           <g key={i}>
-            <rect x="36" y={d.y} width="128" height="24" rx="6" fill={`${d.c}10`} stroke={d.c} strokeWidth="1"/>
-            <SvgIcon d={ICON.doc} x={48} y={d.y+12} size={12} color={d.c}/>
-            <text x="60" y={d.y+16} fontSize="10" fontWeight="700" fill={d.c}>{d.name}</text>
+            <rect x="30" y={d.y} width="140" height="26" rx="6" fill={`${d.c}10`} stroke={d.c} strokeWidth="1"/>
+            <SvgIcon d={ICON.doc} x={44} y={d.y+13} size={13} color={d.c}/>
+            <text x="58" y={d.y+17} fontSize="10" fontWeight="700" fill={d.c}>{d.name}</text>
           </g>
         ))}
-        <rect x="36" y="152" width="128" height="18" rx="4" fill="#e5f8f2"/>
-        <text x="100" y="164" textAnchor="middle" fontSize="8" fontWeight="700" fill="#12a37d">{"+\u4ed6\u306e\u8cc7\u6599\u3082\u8868\u793a..."}</text>
+        <rect x="30" y="150" width="140" height="22" rx="5" fill="#e5f8f2"/>
+        <text x="100" y="165" textAnchor="middle" fontSize="9" fontWeight="700" fill="#12a37d">{"+\u4ed6\u306e\u8cc7\u6599\u3082..."}</text>
         {/* Arrow */}
-        <line x1="185" y1="100" x2="215" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="215,95 225,100 215,105" fill="#c8cedf"/>
+        <line x1="190" y1="105" x2="225" y2="105" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points="225,100 235,105 225,110" fill="#c8cedf"/>
         {/* AI */}
-        <rect x="230" y="40" width="120" height="120" rx="16" fill="white" stroke="#3b6ff5" strokeWidth="2"/>
-        <SvgIcon d={ICON.cpu} x={290} y={68} size={22} color="#3b6ff5"/>
-        <text x="290" y="92" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"AI\u304c\u6848\u5185"}</text>
-        <rect x="248" y="102" width="84" height="14" rx="4" fill="#eaf0fe"/>
-        <text x="290" y="113" textAnchor="middle" fontSize="8" fontWeight="600" fill="#3b6ff5">{"\u300c\u3053\u306e\u8cc7\u6599\u304c\u304a\u3059\u3059\u3081\u300d"}</text>
-        <rect x="248" y="122" width="84" height="14" rx="4" fill="#e5f8f2"/>
-        <text x="290" y="133" textAnchor="middle" fontSize="8" fontWeight="600" fill="#12a37d">{"\u2192 \u5546\u8ac7\u7372\u5f97"}</text>
+        <rect x="240" y="30" width="130" height="150" rx="16" fill="white" stroke="#3b6ff5" strokeWidth="2"/>
+        <SvgIcon d={ICON.cpu} x={305} y={60} size={24} color="#3b6ff5"/>
+        <text x="305" y="88" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f1128">{"AI\u304c\u6848\u5185"}</text>
+        <rect x="256" y="100" width="98" height="18" rx="5" fill="#eaf0fe"/>
+        <text x="305" y="114" textAnchor="middle" fontSize="9" fontWeight="600" fill="#3b6ff5">{"\u3053\u306e\u8cc7\u6599\u304c\u304a\u3059\u3059\u3081"}</text>
+        <rect x="256" y="124" width="98" height="18" rx="5" fill="#e5f8f2"/>
+        <text x="305" y="138" textAnchor="middle" fontSize="9" fontWeight="600" fill="#12a37d">{"\u2192 \u5546\u8ac7\u7372\u5f97"}</text>
       </svg>
     </div>
   );
@@ -504,37 +504,37 @@ function DiagramDownloadCenter() {
 function DiagramThanksPage() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 430 210" fill="none" style={{maxWidth:600}}>
         {/* Form completion */}
-        <rect x="10" y="50" width="90" height="100" rx="12" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1.5"/>
-        <SvgIcon d={ICON.form} x={55} y={74} size={16} color="#7c5cfc"/>
-        <text x="55" y="96" textAnchor="middle" fontSize="9" fontWeight="800" fill="#7c5cfc">{"\u554f\u3044\u5408\u308f\u305b"}</text>
-        <text x="55" y="110" textAnchor="middle" fontSize="9" fontWeight="800" fill="#7c5cfc">{"\u8cc7\u6599\u8acb\u6c42"}</text>
-        <text x="55" y="130" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u5b8c\u4e86\uff01"}</text>
+        <rect x="10" y="40" width="95" height="120" rx="14" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1.5"/>
+        <SvgIcon d={ICON.form} x={57} y={72} size={18} color="#7c5cfc"/>
+        <text x="57" y="98" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c5cfc">{"\u554f\u3044\u5408\u308f\u305b"}</text>
+        <text x="57" y="114" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c5cfc">{"\u8cc7\u6599\u8acb\u6c42"}</text>
+        <text x="57" y="138" textAnchor="middle" fontSize="9" fill="#6e7494">{"\u5b8c\u4e86\uff01"}</text>
         {/* Arrow */}
-        <line x1="105" y1="100" x2="135" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="135,95 145,100 135,105" fill="#c8cedf"/>
+        <line x1="110" y1="100" x2="148" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points="148,95 158,100 148,105" fill="#c8cedf"/>
         {/* Thanks page */}
-        <rect x="150" y="25" width="240" height="155" rx="14" fill="white" stroke="#7c5cfc" strokeWidth="2"/>
-        <text x="270" y="50" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8"}</text>
+        <rect x="162" y="15" width="258" height="185" rx="16" fill="white" stroke="#7c5cfc" strokeWidth="2"/>
+        <text x="291" y="42" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f1128">{"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8"}</text>
         {/* Calendar */}
-        <rect x="166" y="60" width="110" height="105" rx="10" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1"/>
-        <SvgIcon d={ICON.cal} x={221} y={76} size={16} color="#7c5cfc"/>
-        <text x="221" y="96" textAnchor="middle" fontSize="9" fontWeight="800" fill="#7c5cfc">{"\u30ab\u30ec\u30f3\u30c0\u30fc\u8868\u793a"}</text>
+        <rect x="178" y="55" width="120" height="130" rx="10" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1"/>
+        <SvgIcon d={ICON.cal} x={238} y={73} size={16} color="#7c5cfc"/>
+        <text x="238" y="92" textAnchor="middle" fontSize="9" fontWeight="800" fill="#7c5cfc">{"\u30ab\u30ec\u30f3\u30c0\u30fc"}</text>
         {["\u6708 10:00","\u6c34 14:00","\u91d1 11:00"].map((t,i)=>(
           <g key={i}>
-            <rect x="178" y={104+i*18} width="86" height="14" rx="4" fill="white" stroke="#c9bef5" strokeWidth="1"/>
-            <text x="221" y={114+i*18} textAnchor="middle" fontSize="8" fontWeight="600" fill="#7c5cfc">{t}</text>
+            <rect x="190" y={102+i*24} width="96" height="18" rx="5" fill="white" stroke="#c9bef5" strokeWidth="1"/>
+            <text x="238" y={115+i*24} textAnchor="middle" fontSize="9" fontWeight="600" fill="#7c5cfc">{t}</text>
           </g>
         ))}
         {/* AI Chat */}
-        <rect x="286" y="60" width="94" height="105" rx="10" fill="#e5f8f2" stroke="#12a37d" strokeWidth="1"/>
-        <SvgIcon d={ICON.chat} x={333} y={76} size={16} color="#12a37d"/>
-        <text x="333" y="96" textAnchor="middle" fontSize="9" fontWeight="800" fill="#12a37d">{"AI\u30c1\u30e3\u30c3\u30c8"}</text>
-        <rect x="296" y="104" width="74" height="22" rx="4" fill="white"/>
-        <text x="333" y="118" textAnchor="middle" fontSize="7" fill="#6e7494">{"\u7591\u554f\u70b9\u3092\u89e3\u6d88"}</text>
-        <rect x="296" y="132" width="74" height="22" rx="4" fill="white"/>
-        <text x="333" y="146" textAnchor="middle" fontSize="7" fill="#12a37d">{"\u96e2\u8131\u7387\u3092\u8efd\u6e1b"}</text>
+        <rect x="308" y="55" width="100" height="130" rx="10" fill="#e5f8f2" stroke="#12a37d" strokeWidth="1"/>
+        <SvgIcon d={ICON.chat} x={358} y={73} size={16} color="#12a37d"/>
+        <text x="358" y="92" textAnchor="middle" fontSize="9" fontWeight="800" fill="#12a37d">{"AI\u30c1\u30e3\u30c3\u30c8"}</text>
+        <rect x="318" y="102" width="80" height="26" rx="5" fill="white"/>
+        <text x="358" y="119" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u7591\u554f\u70b9\u3092\u89e3\u6d88"}</text>
+        <rect x="318" y="136" width="80" height="26" rx="5" fill="white"/>
+        <text x="358" y="153" textAnchor="middle" fontSize="8" fill="#12a37d">{"\u96e2\u8131\u3092\u9632\u6b62"}</text>
       </svg>
     </div>
   );
@@ -543,40 +543,40 @@ function DiagramThanksPage() {
 function DiagramPopup() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 420 210" fill="none" style={{maxWidth:600}}>
+        <defs><filter id="popShadow"><feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.08"/></filter></defs>
         {/* Browser */}
-        <rect x="20" y="20" width="160" height="160" rx="12" fill="#fafafa" stroke="#dfe3f0" strokeWidth="2"/>
-        <rect x="20" y="20" width="160" height="24" rx="12" fill="#f4f6fb"/>
-        <circle cx="36" cy="32" r="4" fill="#e0475b"/>
-        <circle cx="48" cy="32" r="4" fill="#f59e0b"/>
-        <circle cx="60" cy="32" r="4" fill="#12a37d"/>
-        <text x="100" y="64" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6e7494">{"\u8a2a\u554f\u8005\u304c\u95b2\u89a7\u4e2d..."}</text>
-        <rect x="36" y="74" width="128" height="8" rx="3" fill="#eaedfa"/>
-        <rect x="36" y="88" width="100" height="8" rx="3" fill="#eaedfa"/>
-        <rect x="36" y="102" width="115" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="10" y="10" width="170" height="190" rx="14" fill="#fafafa" stroke="#dfe3f0" strokeWidth="2"/>
+        <rect x="10" y="10" width="170" height="26" rx="14" fill="#f4f6fb"/>
+        <circle cx="28" cy="23" r="4" fill="#e0475b"/>
+        <circle cx="40" cy="23" r="4" fill="#f59e0b"/>
+        <circle cx="52" cy="23" r="4" fill="#12a37d"/>
+        <text x="95" y="56" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6e7494">{"\u8a2a\u554f\u8005\u304c\u95b2\u89a7\u4e2d..."}</text>
+        <rect x="26" y="66" width="138" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="26" y="80" width="110" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="26" y="94" width="124" height="8" rx="3" fill="#eaedfa"/>
         {/* AI analyzing */}
-        <text x="100" y="140" textAnchor="middle" fontSize="10" fontWeight="800" fill="#d03ea1">{"AI\u304c\u30da\u30fc\u30b8\u3092\u5206\u6790"}</text>
-        <rect x="40" y="148" width="120" height="6" rx="3" fill="#d03ea110"/>
-        <rect x="40" y="148" width="80" height="6" rx="3" fill="#d03ea1">
-          <animate attributeName="width" from="20" to="120" dur="2s" repeatCount="indefinite"/>
+        <text x="95" y="130" textAnchor="middle" fontSize="10" fontWeight="800" fill="#d03ea1">{"AI\u304c\u30da\u30fc\u30b8\u3092\u5206\u6790"}</text>
+        <rect x="30" y="138" width="130" height="7" rx="3" fill="#d03ea110"/>
+        <rect x="30" y="138" width="80" height="7" rx="3" fill="#d03ea1">
+          <animate attributeName="width" from="20" to="130" dur="2s" repeatCount="indefinite"/>
         </rect>
         {/* Arrow */}
-        <line x1="185" y1="100" x2="215" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="215,95 225,100 215,105" fill="#c8cedf"/>
+        <line x1="185" y1="105" x2="220" y2="105" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points="220,100 230,105 220,110" fill="#c8cedf"/>
         {/* Popup */}
-        <rect x="230" y="30" width="150" height="140" rx="14" fill="white" stroke="#d03ea1" strokeWidth="2" filter="url(#popShadow)"/>
-        <defs><filter id="popShadow"><feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.1"/></filter></defs>
-        <text x="305" y="58" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u304a\u3059\u3059\u3081\u8cc7\u6599"}</text>
-        <rect x="246" y="68" width="118" height="28" rx="6" fill="#d03ea108" stroke="#d03ea140" strokeWidth="1"/>
-        <SvgIcon d={ICON.doc} x={258} y={82} size={14} color="#d03ea1"/>
-        <text x="282" y="82" fontSize="9" fontWeight="700" fill="#0f1128">{"\u5c0e\u5165\u4e8b\u4f8b\u96c6"}</text>
-        <text x="282" y="92" fontSize="7" fill="#6e7494">{"\u3053\u306e\u30da\u30fc\u30b8\u306b\u6700\u9069"}</text>
-        <rect x="246" y="102" width="118" height="28" rx="6" fill="#d03ea108" stroke="#d03ea140" strokeWidth="1"/>
-        <SvgIcon d="M18 20V10a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v10M12 4v12M4 14h16" x={258} y={116} size={14} color="#d03ea1"/>
-        <text x="282" y="116" fontSize="9" fontWeight="700" fill="#0f1128">{"\u6599\u91d1\u6bd4\u8f03\u8868"}</text>
-        <text x="282" y="126" fontSize="7" fill="#6e7494">{"\u691c\u8a0e\u4e2d\u306e\u65b9\u3078"}</text>
-        <rect x="256" y="140" width="98" height="20" rx="6" fill="#12a37d"/>
-        <text x="305" y="154" textAnchor="middle" fontSize="9" fontWeight="800" fill="white">{"\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9 \u2192"}</text>
+        <rect x="234" y="20" width="175" height="175" rx="16" fill="white" stroke="#d03ea1" strokeWidth="2" filter="url(#popShadow)"/>
+        <text x="321" y="48" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f1128">{"\u304a\u3059\u3059\u3081\u8cc7\u6599"}</text>
+        <rect x="250" y="58" width="143" height="34" rx="8" fill="#d03ea108" stroke="#d03ea140" strokeWidth="1"/>
+        <SvgIcon d={ICON.doc} x={264} y={75} size={14} color="#d03ea1"/>
+        <text x="286" y="74" fontSize="9" fontWeight="700" fill="#0f1128">{"\u5c0e\u5165\u4e8b\u4f8b\u96c6"}</text>
+        <text x="286" y="86" fontSize="8" fill="#6e7494">{"\u3053\u306e\u30da\u30fc\u30b8\u306b\u6700\u9069"}</text>
+        <rect x="250" y="98" width="143" height="34" rx="8" fill="#d03ea108" stroke="#d03ea140" strokeWidth="1"/>
+        <SvgIcon d="M18 20V10a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v10M12 4v12M4 14h16" x={264} y={115} size={14} color="#d03ea1"/>
+        <text x="286" y="114" fontSize="9" fontWeight="700" fill="#0f1128">{"\u6599\u91d1\u6bd4\u8f03\u8868"}</text>
+        <text x="286" y="126" fontSize="8" fill="#6e7494">{"\u691c\u8a0e\u4e2d\u306e\u65b9\u3078"}</text>
+        <rect x="262" y="142" width="135" height="28" rx="8" fill="#12a37d"/>
+        <text x="329" y="161" textAnchor="middle" fontSize="10" fontWeight="800" fill="white">{"\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9 \u2192"}</text>
       </svg>
     </div>
   );
@@ -585,43 +585,43 @@ function DiagramPopup() {
 function DiagramCalendarURL() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 430 210" fill="none" style={{maxWidth:600}}>
         {/* Email */}
-        <rect x="15" y="25" width="150" height="150" rx="12" fill="white" stroke="#e0475b" strokeWidth="2"/>
-        <text x="90" y="50" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u55b6\u696d\u30e1\u30fc\u30eb"}</text>
-        <rect x="30" y="60" width="120" height="8" rx="3" fill="#eaedfa"/>
-        <rect x="30" y="74" width="100" height="8" rx="3" fill="#eaedfa"/>
-        <rect x="30" y="88" width="110" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="10" y="10" width="160" height="190" rx="14" fill="white" stroke="#e0475b" strokeWidth="2"/>
+        <text x="90" y="38" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f1128">{"\u55b6\u696d\u30e1\u30fc\u30eb"}</text>
+        <rect x="26" y="50" width="128" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="26" y="64" width="105" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="26" y="78" width="118" height="8" rx="3" fill="#eaedfa"/>
         {/* Calendar link */}
-        <rect x="30" y="108" width="120" height="28" rx="8" fill="#e0475b10" stroke="#e0475b" strokeWidth="1.5"/>
-        <SvgIcon d={ICON.cal} x={52} y={122} size={12} color="#e0475b"/>
-        <text x="96" y="126" textAnchor="middle" fontSize="9" fontWeight="800" fill="#e0475b">{"\u65e5\u7a0b\u3092\u9078\u3076 \u2192"}</text>
-        <rect x="30" y="144" width="120" height="8" rx="3" fill="#eaedfa"/>
-        <rect x="30" y="158" width="80" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="26" y="98" width="128" height="32" rx="8" fill="#e0475b10" stroke="#e0475b" strokeWidth="1.5"/>
+        <SvgIcon d={ICON.cal} x={48} y={114} size={13} color="#e0475b"/>
+        <text x="100" y="118" textAnchor="middle" fontSize="10" fontWeight="800" fill="#e0475b">{"\u65e5\u7a0b\u3092\u9078\u3076 \u2192"}</text>
+        <rect x="26" y="140" width="128" height="8" rx="3" fill="#eaedfa"/>
+        <rect x="26" y="154" width="90" height="8" rx="3" fill="#eaedfa"/>
         {/* Arrow */}
-        <line x1="170" y1="100" x2="200" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="200,95 210,100 200,105" fill="#c8cedf"/>
+        <line x1="175" y1="105" x2="210" y2="105" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points="210,100 220,105 210,110" fill="#c8cedf"/>
         {/* Calendar + AI */}
-        <rect x="215" y="25" width="170" height="150" rx="14" fill="white" stroke="#e0475b" strokeWidth="2"/>
-        <text x="300" y="50" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u30ab\u30ec\u30f3\u30c0\u30fc + AI\u30c1\u30e3\u30c3\u30c8"}</text>
+        <rect x="224" y="10" width="196" height="190" rx="16" fill="white" stroke="#e0475b" strokeWidth="2"/>
+        <text x="322" y="38" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u30ab\u30ec\u30f3\u30c0\u30fc + AI"}</text>
         {/* Calendar side */}
-        <rect x="225" y="60" width="75" height="100" rx="8" fill="#fef2f2" stroke="#e0475b" strokeWidth="1"/>
-        <SvgIcon d={ICON.cal} x={262} y={74} size={14} color="#e0475b"/>
+        <rect x="234" y="50" width="86" height="134" rx="10" fill="#fef2f2" stroke="#e0475b" strokeWidth="1"/>
+        <SvgIcon d={ICON.cal} x={277} y={66} size={14} color="#e0475b"/>
         {["\u6708 10:00","\u6c34 15:00","\u91d1 13:00"].map((t,i)=>(
           <g key={i}>
-            <rect x="233" y={86+i*20} width="60" height="14" rx="4" fill="white" stroke="#fca5a5" strokeWidth="1"/>
-            <text x="263" y={96+i*20} textAnchor="middle" fontSize="7" fontWeight="600" fill="#e0475b">{t}</text>
+            <rect x="242" y={82+i*28} width="70" height="20" rx="5" fill="white" stroke="#fca5a5" strokeWidth="1"/>
+            <text x="277" y={96+i*28} textAnchor="middle" fontSize="9" fontWeight="600" fill="#e0475b">{t}</text>
           </g>
         ))}
         {/* AI chat side */}
-        <rect x="308" y="60" width="68" height="100" rx="8" fill="#e5f8f2" stroke="#12a37d" strokeWidth="1"/>
-        <SvgIcon d={ICON.chat} x={342} y={74} size={14} color="#12a37d"/>
-        <rect x="314" y="86" width="56" height="20" rx="4" fill="white"/>
-        <text x="342" y="100" textAnchor="middle" fontSize="6" fill="#6e7494">{"\u4e0d\u5b89\u3092\u89e3\u6d88"}</text>
-        <rect x="314" y="112" width="56" height="20" rx="4" fill="white"/>
-        <text x="342" y="126" textAnchor="middle" fontSize="6" fill="#12a37d">{"\u96e2\u8131\u9632\u6b62"}</text>
-        <rect x="314" y="138" width="56" height="16" rx="4" fill="#12a37d"/>
-        <text x="342" y="150" textAnchor="middle" fontSize="6" fontWeight="700" fill="white">{"\u5546\u8ac7\u78ba\u5b9a"}</text>
+        <rect x="328" y="50" width="82" height="134" rx="10" fill="#e5f8f2" stroke="#12a37d" strokeWidth="1"/>
+        <SvgIcon d={ICON.chat} x={369} y={66} size={14} color="#12a37d"/>
+        <rect x="336" y="82" width="66" height="24" rx="5" fill="white"/>
+        <text x="369" y="98" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u4e0d\u5b89\u3092\u89e3\u6d88"}</text>
+        <rect x="336" y="112" width="66" height="24" rx="5" fill="white"/>
+        <text x="369" y="128" textAnchor="middle" fontSize="8" fill="#12a37d">{"\u96e2\u8131\u9632\u6b62"}</text>
+        <rect x="336" y="144" width="66" height="24" rx="5" fill="#12a37d"/>
+        <text x="369" y="160" textAnchor="middle" fontSize="8" fontWeight="700" fill="white">{"\u5546\u8ac7\u78ba\u5b9a"}</text>
       </svg>
     </div>
   );
@@ -630,31 +630,31 @@ function DiagramCalendarURL() {
 function DiagramPDF() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
+      <svg width="100%" height="100%" viewBox="0 0 430 210" fill="none" style={{maxWidth:600}}>
         {/* PDF doc */}
-        <rect x="30" y="20" width="130" height="165" rx="10" fill="white" stroke="#c026d3" strokeWidth="2"/>
-        <rect x="30" y="20" width="130" height="32" rx="10" fill="#c026d310"/>
-        <text x="95" y="41" textAnchor="middle" fontSize="12" fontWeight="800" fill="#c026d3">{" PDF \u8cc7\u6599"}</text>
-        <rect x="44" y="62" width="102" height="6" rx="3" fill="#eaedfa"/>
-        <rect x="44" y="74" width="88" height="6" rx="3" fill="#eaedfa"/>
-        <rect x="44" y="86" width="96" height="6" rx="3" fill="#eaedfa"/>
-        <rect x="44" y="98" width="78" height="6" rx="3" fill="#eaedfa"/>
+        <rect x="20" y="10" width="140" height="180" rx="10" fill="white" stroke="#c026d3" strokeWidth="2"/>
+        <rect x="20" y="10" width="140" height="32" rx="10" fill="#c026d310"/>
+        <text x="90" y="31" textAnchor="middle" fontSize="12" fontWeight="800" fill="#c026d3">{" PDF \u8cc7\u6599"}</text>
+        <rect x="36" y="52" width="108" height="6" rx="3" fill="#eaedfa"/>
+        <rect x="36" y="64" width="92" height="6" rx="3" fill="#eaedfa"/>
+        <rect x="36" y="76" width="100" height="6" rx="3" fill="#eaedfa"/>
+        <rect x="36" y="88" width="80" height="6" rx="3" fill="#eaedfa"/>
         {/* QR / URL */}
-        <rect x="44" y="118" width="48" height="48" rx="6" fill="#c026d310" stroke="#c026d3" strokeWidth="1"/>
-        <text x="68" y="148" textAnchor="middle" fontSize="8" fontWeight="700" fill="#c026d3">QR</text>
-        <rect x="100" y="118" width="50" height="20" rx="4" fill="#c026d3"/>
-        <text x="125" y="132" textAnchor="middle" fontSize="7" fontWeight="700" fill="white">{"\u5546\u8ac7\u4e88\u7d04 \u2192"}</text>
-        <text x="125" y="152" textAnchor="middle" fontSize="7" fill="#6e7494">{"\u8aad\u8005 = \u71b1\u91cf\u9ad8"}</text>
+        <rect x="36" y="106" width="48" height="48" rx="6" fill="#c026d310" stroke="#c026d3" strokeWidth="1"/>
+        <text x="60" y="136" textAnchor="middle" fontSize="8" fontWeight="700" fill="#c026d3">QR</text>
+        <rect x="92" y="106" width="56" height="20" rx="4" fill="#c026d3"/>
+        <text x="120" y="120" textAnchor="middle" fontSize="7" fontWeight="700" fill="white">{"\u5546\u8ac7\u4e88\u7d04 \u2192"}</text>
+        <text x="120" y="142" textAnchor="middle" fontSize="7" fill="#6e7494">{"\u8aad\u8005 = \u71b1\u91cf\u9ad8"}</text>
         {/* Arrow */}
-        <line x1="168" y1="100" x2="205" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="205,95 215,100 205,105" fill="#c8cedf"/>
+        <line x1="168" y1="100" x2="210" y2="100" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points="210,95 220,100 210,105" fill="#c8cedf"/>
         {/* Booking page */}
-        <rect x="220" y="35" width="160" height="130" rx="14" fill="white" stroke="#c026d3" strokeWidth="2"/>
-        <text x="300" y="62" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u5546\u8ac7\u4e88\u7d04\u30da\u30fc\u30b8"}</text>
-        <SvgIcon d={ICON.cal} x={300} y={86} size={28} color="#c026d3"/>
-        <rect x="252" y="110" width="96" height="24" rx="8" fill="#c026d3"/>
-        <text x="300" y="126" textAnchor="middle" fontSize="10" fontWeight="800" fill="white">{"\u4e88\u7d04\u78ba\u5b9a"}</text>
-        <text x="300" y="152" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u76f4\u63a5\u8a98\u5c0e\u3067\u9ad8CV"}</text>
+        <rect x="230" y="20" width="180" height="160" rx="14" fill="white" stroke="#c026d3" strokeWidth="2"/>
+        <text x="320" y="50" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u5546\u8ac7\u4e88\u7d04\u30da\u30fc\u30b8"}</text>
+        <SvgIcon d={ICON.cal} x={320} y={80} size={28} color="#c026d3"/>
+        <rect x="272" y="106" width="96" height="24" rx="8" fill="#c026d3"/>
+        <text x="320" y="122" textAnchor="middle" fontSize="10" fontWeight="800" fill="white">{"\u4e88\u7d04\u78ba\u5b9a"}</text>
+        <text x="320" y="152" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u76f4\u63a5\u8a98\u5c0e\u3067\u9ad8CV"}</text>
       </svg>
     </div>
   );
@@ -669,100 +669,112 @@ function DiagramAIConcierge() {
     {label:"\u30e1\u30fc\u30eb\u30ab\u30ec\u30f3\u30c0\u30fc",color:"#e0475b",icon:ICON.cal},
     {label:"PDF\u30fb\u8cc7\u6599\u5185",color:"#c026d3",icon:ICON.doc},
   ];
-  const chatBubbles = [
-    {text:"\u6599\u91d1\u30d7\u30e9\u30f3\u306b\u3064\u3044\u3066\u805e\u304d\u305f\u3044\u306e\u3067\u3059\u304c...",isUser:true,delay:0.5},
-    {text:"\u5fa1\u793e\u306e\u898f\u6a21\u3067\u3059\u3068\u30b9\u30bf\u30f3\u30c0\u30fc\u30c9\u30d7\u30e9\u30f3\u304c\u6700\u9069\u3067\u3059",isUser:false,delay:1.8},
-    {text:"\u3053\u306e\u65e5\u7a0b\u3067\u5546\u8ac7\u3044\u304b\u304c\u3067\u3059\u304b\uff1f",isUser:false,delay:3.0},
-  ];
   return (
-    <svg width="100%" viewBox="0 0 900 420" fill="none" style={{maxWidth:900,margin:"0 auto",display:"block"}}>
+    <svg width="100%" viewBox="0 0 900 460" fill="none" style={{maxWidth:900,margin:"0 auto",display:"block"}}>
       <defs>
-        <filter id="concShadow"><feDropShadow dx="0" dy="3" stdDeviation="6" floodOpacity=".08"/></filter>
+        <filter id="concShadow"><feDropShadow dx="0" dy="3" stdDeviation="8" floodOpacity=".08"/></filter>
+        <linearGradient id="concGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
       </defs>
 
       {/* Left: 6 channel sources */}
       {channels.map((ch,i) => {
-        const y = 30 + i * 62;
+        const y = 40 + i * 58;
         return (
           <g key={i}>
             <g filter="url(#concShadow)">
-              <rect x="10" y={y} width="160" height="44" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
-              <g transform={`translate(22,${y+10})`}>
+              <rect x="10" y={y} width="150" height="42" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
+              <g transform={`translate(22,${y+9})`}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
               </g>
-              <text x="54" y={y+28} fontSize="11" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
+              <text x="52" y={y+27} fontSize="11" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
             </g>
-            {/* Animated arrow to calendar */}
-            <line x1="175" y1={y+22} x2="280" y2={210} stroke={ch.color} strokeWidth="1.2" strokeDasharray="5 3" opacity=".35">
-              <animate attributeName="stroke-dashoffset" from="16" to="0" dur={`${1.5+i*0.1}s`} repeatCount="indefinite"/>
+            <line x1="165" y1={y+21} x2="220" y2={y+21} stroke={ch.color} strokeWidth="1.2" strokeDasharray="4 3" opacity=".4">
+              <animate attributeName="stroke-dashoffset" from="14" to="0" dur={`${1.2+i*0.1}s`} repeatCount="indefinite"/>
             </line>
             <circle r="2.5" fill={ch.color} opacity=".6">
-              <animateMotion dur={`${2.2+i*0.15}s`} repeatCount="indefinite" path={`M175,${y+22} L280,210`}/>
+              <animateMotion dur={`${1.8+i*0.12}s`} repeatCount="indefinite" path={`M165,${y+21} L220,${y+21}`}/>
             </circle>
           </g>
         );
       })}
 
-      {/* Center: Calendar widget */}
+      {/* Main panel: AI Chat (left) + Calendar (right) merged */}
       <g filter="url(#concShadow)">
-        <rect x="290" y="80" width="200" height="260" rx="18" fill="white" stroke="#7c5cfc" strokeWidth="2"/>
-        <rect x="290" y="80" width="200" height="44" rx="18" fill="#f0ecfe"/>
-        <SvgIcon d={ICON.cal} x={390} y={100} size={20} color="#7c5cfc"/>
-        <text x="390" y="118" textAnchor="middle" fontSize="12" fontWeight="800" fill="#7c5cfc">{"\u65e5\u7a0b\u3092\u9078\u629e"}</text>
-        {[
-          {day:"\u6708\u66dc\u65e5",time:"10:00 - 10:30"},
-          {day:"\u6c34\u66dc\u65e5",time:"14:00 - 14:30"},
-          {day:"\u91d1\u66dc\u65e5",time:"11:00 - 11:30"},
-          {day:"\u6765\u9031\u706b",time:"15:00 - 15:30"},
-        ].map((slot,i) => (
-          <g key={i}>
-            <rect x="308" y={134+i*44} width="164" height="34" rx="8" fill={i===1?"#7c5cfc":"white"} stroke={i===1?"#7c5cfc":"#c9bef5"} strokeWidth="1.5"/>
-            <text x="328" y={155+i*44} fontSize="10" fontWeight="700" fill={i===1?"white":"#0f1128"} fontFamily="var(--fb)">{slot.day}</text>
-            <text x="452" y={155+i*44} textAnchor="end" fontSize="10" fontWeight="600" fill={i===1?"rgba(255,255,255,.8)":"#6e7494"} fontFamily="var(--fm)">{slot.time}</text>
-          </g>
-        ))}
+        {/* Outer container */}
+        <rect x="230" y="20" width="650" height="390" rx="22" fill="white" stroke="var(--border)" strokeWidth="1.5"/>
+
+        {/* AI Chat section (left half) */}
+        <rect x="230" y="20" width="340" height="390" rx="22" fill="white"/>
+        <rect x="230" y="20" width="340" height="48" rx="22" fill="#e5f8f2"/>
+        <rect x="570" y="20" width="0" height="48" fill="#e5f8f2"/>
+        <SvgIcon d={ICON.chat} x={380} y={42} size={18} color="#12a37d"/>
+        <text x="400" y="50" fontSize="13" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"AI \u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5"}</text>
+
+        {/* Divider line */}
+        <line x1="570" y1="36" x2="570" y2="394" stroke="#dfe3f0" strokeWidth="1"/>
+
+        {/* Calendar section (right half) */}
+        <rect x="571" y="20" width="309" height="48" rx="0" fill="#f0ecfe"/>
+        <rect x="858" y="20" width="22" height="48" rx="22" fill="#f0ecfe"/>
+        <SvgIcon d={ICON.cal} x={710} y={42} size={18} color="#7c5cfc"/>
+        <text x="730" y="50" fontSize="13" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u65e5\u7a0b\u9078\u629e"}</text>
       </g>
 
-      {/* Right: AI Chatbot panel */}
-      <g filter="url(#concShadow)">
-        <rect x="520" y="80" width="280" height="260" rx="18" fill="white" stroke="#12a37d" strokeWidth="2"/>
-        <rect x="520" y="80" width="280" height="44" rx="18" fill="#e5f8f2"/>
-        <SvgIcon d={ICON.chat} x={660} y={100} size={20} color="#12a37d"/>
-        <text x="660" y="118" textAnchor="middle" fontSize="12" fontWeight="800" fill="#12a37d">{"AI\u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5"}</text>
+      {/* Chat conversation */}
+      {/* AI greeting */}
+      <g style={{animation:"chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="254" y="84" width="290" height="38" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="268" y="108" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u65e5\u6642\u4e88\u7d04\u524d\u306b\u805e\u304d\u305f\u3044\u3053\u3068\u306f\u3054\u3056\u3044\u307e\u3059\u304b\uff1f"}</text>
+      </g>
+      {/* User question */}
+      <g style={{animation:"chatPop .5s 1.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="340" y="134" width="204" height="38" rx="12" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+        <text x="354" y="158" fontSize="10" fontWeight="600" fill="#7c5cfc" fontFamily="var(--fb)">{"\u6599\u91d1\u30d7\u30e9\u30f3\u306b\u3064\u3044\u3066\u77e5\u308a\u305f\u3044\u3067\u3059"}</text>
+      </g>
+      {/* AI answer */}
+      <g style={{animation:"chatPop .5s 2.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="254" y="184" width="300" height="52" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="268" y="206" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u5fa1\u793e\u306e\u898f\u6a21\u3067\u3059\u3068\u30b9\u30bf\u30f3\u30c0\u30fc\u30c9\u30d7\u30e9\u30f3\u304c"}</text>
+        <text x="268" y="222" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u6700\u9069\u3067\u3059\u3002\u8a73\u3057\u304f\u306f\u5546\u8ac7\u3067\u3054\u8aac\u660e\u3057\u307e\u3059\uff01"}</text>
+      </g>
+      {/* AI nudge */}
+      <g style={{animation:"chatPop .5s 3.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="254" y="248" width="280" height="38" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="268" y="272" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u53f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fc\u304b\u3089\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u3092\u3069\u3046\u305e\uff01"}</text>
       </g>
 
-      {/* Chat bubbles with staggered animation */}
-      {chatBubbles.map((b,i) => {
-        const bx = b.isUser ? 640 : 540;
-        const by = 140 + i * 55;
-        const bw = b.isUser ? 150 : 240;
-        return (
-          <g key={i} style={{animation:`chatPop .5s ${b.delay}s cubic-bezier(.16,1,.3,1) forwards`,opacity:0}}>
-            <rect x={bx} y={by} width={bw} height="38" rx="10"
-              fill={b.isUser?"#f0ecfe":"#e5f8f2"}
-              stroke={b.isUser?"#c9bef5":"rgba(18,163,125,.2)"} strokeWidth="1"/>
-            <text x={bx+12} y={by+24} fontSize="9" fontWeight="600"
-              fill={b.isUser?"#7c5cfc":"#12a37d"} fontFamily="var(--fb)">{b.text}</text>
-          </g>
-        );
-      })}
+      {/* Calendar time slots */}
+      {[
+        {day:"\u6708\u66dc\u65e5",time:"10:00",sel:false},
+        {day:"\u6c34\u66dc\u65e5",time:"14:00",sel:false},
+        {day:"\u91d1\u66dc\u65e5",time:"11:00",sel:true},
+        {day:"\u6765\u9031\u706b",time:"15:00",sel:false},
+      ].map((slot,i) => (
+        <g key={i}>
+          <rect x="590" y={84+i*50} width="270" height="40" rx="10"
+            fill={slot.sel?"#7c5cfc":"white"} stroke={slot.sel?"#7c5cfc":"#dfe3f0"} strokeWidth={slot.sel?2:1.5}/>
+          <text x="612" y={109+i*50} fontSize="11" fontWeight="700" fill={slot.sel?"white":"#0f1128"} fontFamily="var(--fb)">{slot.day}</text>
+          <text x="838" y={109+i*50} textAnchor="end" fontSize="11" fontWeight="600" fill={slot.sel?"rgba(255,255,255,.85)":"#6e7494"} fontFamily="var(--fm)">{slot.time}</text>
+          {slot.sel && <SvgIcon d="M20 6L9 17l-5-5" x={848} y={99+i*50} size={14} color="white"/>}
+        </g>
+      ))}
 
-      {/* Booking button with pulse */}
-      <g style={{animation:"chatPop .5s 4s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-        <rect x="580" y="310" width="180" height="40" rx="10" fill="#12a37d"/>
-        <text x="670" y="335" textAnchor="middle" fontSize="12" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u2713 \u4e88\u7d04\u78ba\u5b9a"}</text>
-        <rect x="580" y="310" width="180" height="40" rx="10" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
-          <animate attributeName="opacity" values="0;.4;0" dur="2s" begin="4.5s" repeatCount="indefinite"/>
-          <animate attributeName="rx" values="10;14;10" dur="2s" begin="4.5s" repeatCount="indefinite"/>
+      {/* Booking confirmed button */}
+      <g style={{animation:"chatPop .5s 4.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="254" y="300" width="300" height="44" rx="12" fill="url(#concGrad)"/>
+        <text x="404" y="327" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u2713 \u91d1\u66dc\u65e5 11:00 \u3067\u5546\u8ac7\u78ba\u5b9a\uff01"}</text>
+        <rect x="254" y="300" width="300" height="44" rx="12" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
+          <animate attributeName="opacity" values="0;.5;0" dur="2s" begin="5s" repeatCount="indefinite"/>
         </rect>
       </g>
 
-      {/* Bottom stats badges */}
+      {/* Bottom: label + stats */}
       <g>
-        <rect x="310" y="370" width="120" height="36" rx="10" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
-        <text x="370" y="393" textAnchor="middle" fontSize="11" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u96e2\u8131\u7387 -40%"}</text>
-        <rect x="450" y="370" width="120" height="36" rx="10" fill="#e5f8f2" stroke="#b8e6d8" strokeWidth="1"/>
-        <text x="510" y="393" textAnchor="middle" fontSize="11" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"\u4e88\u7d04\u7387 +35%"}</text>
+        <text x="400" y="378" textAnchor="middle" fontSize="10" fill="#6e7494" fontFamily="var(--fb)">{"\u2190 AI\u304c\u7591\u554f\u3092\u89e3\u6d88\u3057\u3066\u304b\u3089\u4e88\u7d04\u3078\u8a98\u5c0e"}</text>
+        <rect x="300" y="398" width="100" height="32" rx="8" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+        <text x="350" y="419" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u96e2\u8131\u7387 -40%"}</text>
+        <rect x="416" y="398" width="100" height="32" rx="8" fill="#e5f8f2" stroke="#b8e6d8" strokeWidth="1"/>
+        <text x="466" y="419" textAnchor="middle" fontSize="10" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"\u4e88\u7d04\u7387 +35%"}</text>
       </g>
     </svg>
   );
@@ -933,7 +945,7 @@ export default function HomePageClient(){
                 return (
                   <g key={i}>
                     {/* Animated connection line */}
-                    <line x1={nx + 190} y1={ny + 24} x2={cx - 70} y2={cy} stroke={src.color} strokeWidth="1.5" strokeDasharray="6 4" opacity=".4">
+                    <line x1={nx + 190} y1={ny + 24} x2={cx - 80} y2={cy} stroke={src.color} strokeWidth="1.5" strokeDasharray="6 4" opacity=".4">
                       <animate attributeName="stroke-dashoffset" from="20" to="0" dur={`${1.2 + i * 0.15}s`} repeatCount="indefinite"/>
                     </line>
                     {/* Animated dot traveling along line */}
@@ -957,50 +969,42 @@ export default function HomePageClient(){
 
               {/* Central Hub - Meeton ai */}
               <g filter="url(#hubGlow)">
-                <circle cx="480" cy="210" r="68" fill="url(#hubGrad)"/>
-                <circle cx="480" cy="210" r="68" fill="none" stroke="white" strokeWidth="2" opacity=".3"/>
-                <circle cx="480" cy="210" r="78" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="4 4" opacity=".3">
+                <circle cx="480" cy="210" r="80" fill="url(#hubGrad)"/>
+                <circle cx="480" cy="210" r="80" fill="none" stroke="white" strokeWidth="2" opacity=".3"/>
+                <circle cx="480" cy="210" r="92" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="4 4" opacity=".3">
                   <animateTransform attributeName="transform" type="rotate" from="0 480 210" to="360 480 210" dur="30s" repeatCount="indefinite"/>
                 </circle>
                 {/* CPU/AI icon */}
-                <g transform="translate(464, 185)">
+                <g transform="translate(464, 172)">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="4" y="4" width="16" height="16" rx="2"/>
                     <rect x="9" y="9" width="6" height="6"/>
                     <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>
                   </svg>
                 </g>
-                <text x="480" y="226" textAnchor="middle" fontSize="14" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
-                {/* Cycling 3-step subtitles */}
-                <g style={{animation:"hubStep1 7.5s infinite"}}>
-                  <SvgIcon d="M22 12h-4l-3 9L9 3l-3 9H2" x={462} y={240} size={12} color="rgba(255,255,255,.9)"/>
-                  <text x="492" y="244" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.85)" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
-                </g>
-                <g style={{animation:"hubStep2 7.5s infinite",opacity:0}}>
-                  <SvgIcon d={ICON.cal} x={462} y={240} size={12} color="rgba(255,255,255,.9)"/>
-                  <text x="492" y="244" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.85)" fontFamily="var(--fb)">{"\u5546\u8ac7\u7372\u5f97"}</text>
-                </g>
-                <g style={{animation:"hubStep3 7.5s infinite",opacity:0}}>
-                  <SvgIcon d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" x={462} y={240} size={12} color="rgba(255,255,255,.9)"/>
-                  <text x="492" y="244" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.85)" fontFamily="var(--fb)">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
-                </g>
+                <text x="480" y="216" textAnchor="middle" fontSize="14" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
+                {/* 3 capabilities always visible */}
+                <line x1="440" y1="226" x2="520" y2="226" stroke="rgba(255,255,255,.25)" strokeWidth="1"/>
+                <text x="480" y="242" textAnchor="middle" fontSize="9" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+                <text x="480" y="256" textAnchor="middle" fontSize="9" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u5546\u8ac7\u7372\u5f97"}</text>
+                <text x="480" y="270" textAnchor="middle" fontSize="9" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
               </g>
 
               {/* Pulse rings around hub */}
-              <circle cx="480" cy="210" r="68" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
-                <animate attributeName="r" from="68" to="100" dur="2s" repeatCount="indefinite"/>
+              <circle cx="480" cy="210" r="80" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
+                <animate attributeName="r" from="80" to="110" dur="2s" repeatCount="indefinite"/>
                 <animate attributeName="opacity" from=".4" to="0" dur="2s" repeatCount="indefinite"/>
               </circle>
 
               {/* Arrow from hub to sales */}
-              <line x1="558" y1="210" x2="680" y2="210" stroke="#3b6ff5" strokeWidth="2.5" strokeDasharray="8 4">
+              <line x1="570" y1="210" x2="680" y2="210" stroke="#3b6ff5" strokeWidth="2.5" strokeDasharray="8 4">
                 <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
               <polygon points="680,202 696,210 680,218" fill="#3b6ff5"/>
 
               {/* Animated dots on output line */}
               <circle r="4" fill="#3b6ff5" opacity=".6">
-                <animateMotion dur="1.5s" repeatCount="indefinite" path="M558,210 L680,210"/>
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M570,210 L680,210"/>
               </circle>
 
               {/* Sales team */}
