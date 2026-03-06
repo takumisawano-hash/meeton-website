@@ -903,7 +903,7 @@ export default function HomePageClient(){
         <div className="hero-content">
           <div className="anim d1 hero-badge"><div className="hero-badge-dot"/>AI インサイドセールス</div>
           <h1 className="anim d2">営業が動く前に、<br/><em>商談が届く</em></h1>
-          <p className="anim d3 hero-sub">Meeton ai が、Webサイト・メール・資料・広告LPのあらゆる接点で見込み客に自動アプローチ。ニーズを把握し、資料を届け、商談予約まで完結させます。</p>
+          <p className="anim d3 hero-sub">Webサイト・メール・資料——あらゆる接点にAIを配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。</p>
           <div className="anim d4 hero-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
