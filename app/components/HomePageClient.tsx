@@ -923,31 +923,31 @@ export default function HomePageClient(){
           <div className="stitle">接点すべてが、<span style={{color:"var(--cta)"}}>商談獲得マシン</span>に変わる</div>
           <p className="ssub" style={{margin:"0 auto"}}>7つのチャネルが同時に稼働。訪問者を逃さず捉え、温度が高いうちに商談へ変換します。</p>
 
-          {/* Ecosystem diagram: 7 channels live INSIDE Meeton ai → output to Sales */}
+          {/* Vertical Funnel: 7 channels inside Meeton ai → AI pipeline → Sales */}
           <div style={{marginTop:48,overflowX:"auto",padding:"8px 0"}}>
-            <svg width="100%" viewBox="0 0 960 480" fill="none" style={{maxWidth:960,margin:"0 auto",display:"block"}}>
+            <svg width="100%" viewBox="0 0 800 600" fill="none" style={{maxWidth:800,margin:"0 auto",display:"block"}}>
               <defs>
                 <filter id="hubGlow"><feDropShadow dx="0" dy="4" stdDeviation="12" floodColor="#12a37d" floodOpacity=".18"/></filter>
                 <filter id="nodeGlow"><feDropShadow dx="0" dy="2" stdDeviation="6" floodOpacity=".08"/></filter>
-                <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#12a37d" stopOpacity=".06"/><stop offset="100%" stopColor="#0fc19a" stopOpacity=".02"/></linearGradient>
+                <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#12a37d" stopOpacity=".07"/><stop offset="100%" stopColor="#0fc19a" stopOpacity=".02"/></linearGradient>
                 <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#3b6ff5"/><stop offset="100%" stopColor="#6690fa"/></linearGradient>
                 <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
+                <clipPath id="funnelClip"><path d="M60,20 L740,20 Q760,20 760,40 L620,430 Q615,445 600,445 L200,445 Q185,445 180,430 L40,40 Q40,20 60,20 Z"/></clipPath>
               </defs>
 
-              {/* ── Meeton ai Ecosystem boundary ── */}
+              {/* ── Trapezoid funnel boundary (Meeton ai ecosystem) ── */}
               <g filter="url(#hubGlow)">
-                <rect x="12" y="12" width="720" height="456" rx="24" fill="url(#hubGrad)" stroke="#12a37d" strokeWidth="2" strokeDasharray="8 4" opacity=".8"/>
+                <path d="M60,20 L740,20 Q760,20 760,40 L620,430 Q615,445 600,445 L200,445 Q185,445 180,430 L40,40 Q40,20 60,20 Z" fill="url(#hubGrad)" stroke="#12a37d" strokeWidth="2.5"/>
               </g>
-              {/* Ecosystem label */}
-              <text x="372" y="46" textAnchor="middle" fontSize="24" fontWeight="900" fill="#12a37d" fontFamily="var(--fb)">Meeton ai</text>
-              <text x="372" y="64" textAnchor="middle" fontSize="11" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{"\u30a8\u30b3\u30b7\u30b9\u30c6\u30e0"}</text>
+              {/* Animated border */}
+              <path d="M60,20 L740,20 Q760,20 760,40 L620,430 Q615,445 600,445 L200,445 Q185,445 180,430 L40,40 Q40,20 60,20 Z" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="6 6" opacity=".3">
+                <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="6s" repeatCount="indefinite"/>
+              </path>
 
-              {/* Rotating orbit around ecosystem */}
-              <rect x="12" y="12" width="720" height="456" rx="24" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="4 6" opacity=".25">
-                <animate attributeName="stroke-dashoffset" from="0" to="40" dur="8s" repeatCount="indefinite"/>
-              </rect>
+              {/* Ecosystem label at top */}
+              <text x="400" y="52" textAnchor="middle" fontSize="24" fontWeight="900" fill="#12a37d" fontFamily="var(--fb)">Meeton ai</text>
 
-              {/* ── 7 Channel cards (inside ecosystem, left zone) ── */}
+              {/* ── 7 Channel cards (top zone inside funnel) ── */}
               {[
                 {label:"AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",color:"#0891b2",icon:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"},
                 {label:"AI \u30e1\u30fc\u30eb",color:"#12a37d",icon:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"},
@@ -957,104 +957,114 @@ export default function HomePageClient(){
                 {label:"\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",color:"#e0475b",icon:"M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"},
                 {label:"\u30ab\u30ec\u30f3\u30c0\u30fcQR",color:"#c026d3",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"},
               ].map((ch, i) => {
-                const col = i < 4 ? 0 : 1;
-                const row = i < 4 ? i : i - 4;
-                const cx = 36 + col * 155;
-                const cy = 86 + row * 52;
-                const arrowEndX = 420;
-                const arrowEndY = 260;
+                /* Row 1: 4 cards, Row 2: 3 cards centered */
+                const isRow1 = i < 4;
+                const colIdx = isRow1 ? i : i - 4;
+                const rowCount = isRow1 ? 4 : 3;
+                const cardW = 148;
+                const gap = 12;
+                const totalW = rowCount * cardW + (rowCount - 1) * gap;
+                const startX = 400 - totalW / 2;
+                const cx = startX + colIdx * (cardW + gap);
+                const cy = isRow1 ? 74 : 124;
                 return (
                   <g key={i}>
-                    {/* Animated flow line to pipeline */}
-                    <line x1={cx + 140} y1={cy + 20} x2={arrowEndX} y2={arrowEndY} stroke={ch.color} strokeWidth="1" strokeDasharray="4 4" opacity=".3">
+                    {/* Animated flow line downward to convergence */}
+                    <line x1={cx + cardW / 2} y1={cy + 40} x2={400} y2={230} stroke={ch.color} strokeWidth="1" strokeDasharray="4 4" opacity=".25">
                       <animate attributeName="stroke-dashoffset" from="16" to="0" dur={`${1.5 + i * 0.12}s`} repeatCount="indefinite"/>
                     </line>
                     <circle r="2.5" fill={ch.color} opacity=".5">
-                      <animateMotion dur={`${2.2 + i * 0.15}s`} repeatCount="indefinite" path={`M${cx + 140},${cy + 20} L${arrowEndX},${arrowEndY}`}/>
+                      <animateMotion dur={`${2.5 + i * 0.18}s`} repeatCount="indefinite" path={`M${cx + cardW / 2},${cy + 40} L400,230`}/>
                     </circle>
                     {/* Channel card */}
                     <g filter="url(#nodeGlow)">
-                      <rect x={cx} y={cy} width="140" height="40" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
-                      <g transform={`translate(${cx + 10}, ${cy + 8})`}>
+                      <rect x={cx} y={cy} width={cardW} height="38" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
+                      <g transform={`translate(${cx + 10}, ${cy + 7})`}>
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
                       </g>
-                      <text x={cx + 40} y={cy + 25} fontSize="10" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
+                      <text x={cx + 40} y={cy + 24} fontSize="10.5" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
                     </g>
                   </g>
                 );
               })}
 
-              {/* ── AI Processing Pipeline (center-right inside ecosystem) ── */}
-              {/* Converge point */}
-              <circle cx="420" cy="260" r="14" fill="#12a37d" opacity=".15"/>
-              <circle cx="420" cy="260" r="6" fill="#12a37d"/>
+              {/* ── Convergence zone ── */}
+              <circle cx="400" cy="230" r="16" fill="#12a37d" opacity=".12"/>
+              <circle cx="400" cy="230" r="6" fill="#12a37d"/>
+              <circle cx="400" cy="230" r="16" fill="none" stroke="#12a37d" strokeWidth="1.5" opacity="0">
+                <animate attributeName="r" from="6" to="24" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from=".4" to="0" dur="2s" repeatCount="indefinite"/>
+              </circle>
 
-              {/* Pipeline arrow down to steps */}
-              <line x1="420" y1="274" x2="420" y2="300" stroke="#12a37d" strokeWidth="2"/>
-
-              {/* Step 1: 精査 */}
-              <g filter="url(#nodeGlow)">
-                <rect x="370" y="300" width="100" height="44" rx="12" fill="url(#stepGrad)"/>
-                <text x="420" y="327" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
-              </g>
-              <line x1="470" y1="322" x2="500" y2="322" stroke="#12a37d" strokeWidth="2" strokeDasharray="4 3">
+              {/* Arrow down to pipeline */}
+              <line x1="400" y1="246" x2="400" y2="280" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
                 <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="500,318 508,322 500,326" fill="#12a37d"/>
+              <polygon points="394,278 400,290 406,278" fill="#12a37d"/>
+
+              {/* ── AI Processing Pipeline (3 horizontal steps) ── */}
+              {/* Step 1: 精査 */}
+              <g filter="url(#nodeGlow)">
+                <rect x="220" y="300" width="120" height="50" rx="14" fill="url(#stepGrad)"/>
+                <text x="280" y="330" textAnchor="middle" fontSize="15" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+              </g>
+              <line x1="340" y1="325" x2="370" y2="325" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+                <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="370,320 380,325 370,330" fill="#12a37d"/>
 
               {/* Step 2: 商談予約 */}
               <g filter="url(#nodeGlow)">
-                <rect x="510" y="300" width="100" height="44" rx="12" fill="url(#stepGrad)"/>
-                <text x="560" y="327" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u5546\u8ac7\u4e88\u7d04"}</text>
+                <rect x="382" y="300" width="120" height="50" rx="14" fill="url(#stepGrad)"/>
+                <text x="442" y="330" textAnchor="middle" fontSize="15" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u5546\u8ac7\u4e88\u7d04"}</text>
               </g>
-              <line x1="610" y1="322" x2="640" y2="322" stroke="#12a37d" strokeWidth="2" strokeDasharray="4 3">
+              <line x1="502" y1="325" x2="530" y2="325" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
                 <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="640,318 648,322 640,326" fill="#12a37d"/>
+              <polygon points="530,320 540,325 530,330" fill="#12a37d"/>
 
               {/* Step 3: ヒアリング */}
               <g filter="url(#nodeGlow)">
-                <rect x="650" y="300" width="72" height="44" rx="12" fill="url(#stepGrad)"/>
-                <text x="686" y="318" textAnchor="middle" fontSize="10" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u8ffd\u52a0"}</text>
-                <text x="686" y="334" textAnchor="middle" fontSize="10" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+                <rect x="542" y="300" width="120" height="50" rx="14" fill="url(#stepGrad)"/>
+                <text x="602" y="330" textAnchor="middle" fontSize="15" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
               </g>
+
+              {/* Animated dot along pipeline */}
+              <circle r="4" fill="white" opacity=".8">
+                <animateMotion dur="3.5s" repeatCount="indefinite" path="M280,325 L442,325 L602,325"/>
+              </circle>
 
               {/* Pipeline label */}
-              <text x="555" y="368" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{"\u2191 AI\u304c\u81ea\u52d5\u3067\u7cbe\u67fb\u30fb\u4e88\u7d04\u30fb\u30d2\u30a2\u30ea\u30f3\u30b0\u3092\u5b8c\u7d50"}</text>
+              <text x="400" y="375" textAnchor="middle" fontSize="10" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{"\u2191 AI\u304c\u81ea\u52d5\u3067\u7cbe\u67fb\u30fb\u4e88\u7d04\u30fb\u30d2\u30a2\u30ea\u30f3\u30b0\u3092\u5b8c\u7d50"}</text>
 
-              {/* Animated dots along pipeline */}
-              <circle r="3" fill="white" opacity=".8">
-                <animateMotion dur="3s" repeatCount="indefinite" path="M420,322 L508,322 L648,322 L720,322"/>
-              </circle>
-
-              {/* ── Exit arrow: breaking out of ecosystem boundary ── */}
-              <line x1="722" y1="322" x2="770" y2="322" stroke="#3b6ff5" strokeWidth="3" strokeDasharray="8 4">
+              {/* ── Exit: arrow breaking through funnel bottom ── */}
+              {/* Gap in funnel border */}
+              <rect x="382" y="438" width="36" height="14" fill="var(--surface)"/>
+              <line x1="400" y1="390" x2="400" y2="470" stroke="#3b6ff5" strokeWidth="3" strokeDasharray="8 4">
                 <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="770,315 784,322 770,329" fill="#3b6ff5"/>
+              <polygon points="392,468 400,484 408,468" fill="#3b6ff5"/>
 
-              {/* Animated output dot */}
+              {/* Animated exit dot */}
               <circle r="4" fill="#3b6ff5" opacity=".6">
-                <animateMotion dur="1.5s" repeatCount="indefinite" path="M722,322 L780,322"/>
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M400,390 L400,480"/>
               </circle>
 
-              {/* "Ecosystem boundary break" visual marker */}
-              <rect x="728" y="308" width="8" height="28" fill="var(--surface)" opacity=".9"/>
+              {/* Pulse at exit */}
+              <circle cx="400" cy="484" r="6" fill="none" stroke="#3b6ff5" strokeWidth="2" opacity="0">
+                <animate attributeName="r" from="6" to="20" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from=".5" to="0" dur="2s" repeatCount="indefinite"/>
+              </circle>
 
-              {/* ── Sales team (OUTSIDE ecosystem) ── */}
+              {/* ── 営業チーム (OUTSIDE the funnel) ── */}
               <g filter="url(#nodeGlow)">
-                <rect x="796" y="274" width="150" height="96" rx="18" fill="url(#salesGrad)"/>
-                <text x="871" y="310" textAnchor="middle" fontSize="16" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
-                <text x="871" y="332" textAnchor="middle" fontSize="10" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
-                <g transform="translate(857, 342)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </svg>
-                </g>
+                <rect x="310" y="500" width="180" height="80" rx="18" fill="url(#salesGrad)"/>
+                <text x="400" y="532" textAnchor="middle" fontSize="18" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
+                <text x="400" y="554" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
               </g>
 
-              {/* Label outside */}
-              <text x="871" y="260" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b6ff5" fontFamily="var(--fb)">{"\u2190 \u521d\u3081\u3066\u5916\u306b\u51fa\u308b"}</text>
+              {/* Label */}
+              <text x="400" y="598" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b6ff5" fontFamily="var(--fb)">{"\u2191 \u30a8\u30b3\u30b7\u30b9\u30c6\u30e0\u3092\u629c\u3051\u3066\u521d\u3081\u3066\u55b6\u696d\u306b\u5c4a\u304f"}</text>
             </svg>
           </div>
         </div>
