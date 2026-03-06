@@ -34,6 +34,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @keyframes barGrow{0%{width:0}30%{width:99%}80%{width:99%}100%{width:0}}
 @keyframes barCv{0%,40%{width:0}50%{width:1%}80%{width:1%}100%{width:0}}
 @keyframes dashFlow{0%{stroke-dashoffset:12}100%{stroke-dashoffset:0}}
+@keyframes hubStep1{0%,5%{opacity:0}10%{opacity:1}28%{opacity:1}33%{opacity:0}34%,100%{opacity:0}}
+@keyframes hubStep2{0%,33%{opacity:0}38%{opacity:1}61%{opacity:1}66%{opacity:0}67%,100%{opacity:0}}
+@keyframes hubStep3{0%,66%{opacity:0}71%{opacity:1}95%{opacity:1}100%{opacity:0}}
 .anim{opacity:0;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
@@ -66,18 +69,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
 .stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
 
-/* FEATURE CARDS - 7 features grid */
-.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
-.feat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:0;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+/* FEATURE CARDS - 7 features zigzag */
+.feat-grid{display:flex;flex-direction:column;gap:56px;margin-top:56px}
+.feat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:0;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:420px;align-items:stretch}
+.feat-card:nth-child(even){direction:rtl}
+.feat-card:nth-child(even)>*{direction:ltr}
 .feat-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.12)}
 .feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
 .feat-card:hover::before{opacity:1}
-.feat-card-body{padding:32px 32px 28px}
-.feat-card-vis{flex:1;min-height:220px;position:relative;overflow:hidden;border-top:1px solid var(--border);background:var(--surface)}
+.feat-card-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+.feat-card-vis{min-height:400px;position:relative;overflow:hidden;border-left:1px solid var(--border);background:var(--surface)}
+.feat-card:nth-child(even) .feat-card-vis{border-left:none;border-right:1px solid var(--border)}
 .feat-num{font-family:var(--fm);font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:12px;display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:8px}
-.feat-title{font-size:clamp(20px,3vw,24px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:10px;line-height:1.3}
-.feat-desc{font-size:15px;line-height:1.85;color:var(--sub)}
-.feat-card-full{grid-column:1/-1}
+.feat-title{font-size:clamp(22px,3vw,28px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:14px;line-height:1.3}
+.feat-desc{font-size:16px;line-height:1.85;color:var(--sub)}
 
 /* QUALITY SECTION */
 .qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
@@ -161,8 +166,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* RESPONSIVE */
 @media(max-width:1024px){
-  .feat-grid{grid-template-columns:1fr}
-  .feat-card-full{grid-column:1}
+  .feat-card{grid-template-columns:1fr;min-height:auto}
+  .feat-card:nth-child(even){direction:ltr}
+  .feat-card-vis{border-left:none!important;border-right:none!important;border-top:1px solid var(--border);min-height:280px}
+  .feat-card-body{padding:32px 28px}
   .qual-grid{grid-template-columns:1fr}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
@@ -390,7 +397,7 @@ const ICON = {
 function DiagramChatbot() {
   return (
     <div className="diagram" style={{flexDirection:"column",gap:8}}>
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* Website */}
         <rect x="10" y="60" width="100" height="80" rx="12" fill="#f0fdfa" stroke="#0891b2" strokeWidth="2"/>
         <SvgIcon d={ICON.globe} x={60} y={86} size={18} color="#0891b2"/>
@@ -427,7 +434,7 @@ function DiagramChatbot() {
 function DiagramEmail() {
   return (
     <div className="diagram" style={{flexDirection:"column"}}>
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* Sources */}
         <rect x="5" y="15" width="80" height="40" rx="8" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1.5"/>
         <text x="45" y="40" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b6ff5">{"\u30a4\u30f3\u30d0\u30a6\u30f3\u30c9"}</text>
@@ -464,7 +471,7 @@ function DiagramEmail() {
 function DiagramDownloadCenter() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* Download page */}
         <rect x="20" y="20" width="160" height="160" rx="14" fill="white" stroke="#3b6ff5" strokeWidth="2"/>
         <text x="100" y="48" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8"}</text>
@@ -497,7 +504,7 @@ function DiagramDownloadCenter() {
 function DiagramThanksPage() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* Form completion */}
         <rect x="10" y="50" width="90" height="100" rx="12" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="1.5"/>
         <SvgIcon d={ICON.form} x={55} y={74} size={16} color="#7c5cfc"/>
@@ -536,7 +543,7 @@ function DiagramThanksPage() {
 function DiagramPopup() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* Browser */}
         <rect x="20" y="20" width="160" height="160" rx="12" fill="#fafafa" stroke="#dfe3f0" strokeWidth="2"/>
         <rect x="20" y="20" width="160" height="24" rx="12" fill="#f4f6fb"/>
@@ -578,7 +585,7 @@ function DiagramPopup() {
 function DiagramCalendarURL() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* Email */}
         <rect x="15" y="25" width="150" height="150" rx="12" fill="white" stroke="#e0475b" strokeWidth="2"/>
         <text x="90" y="50" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0f1128">{"\u55b6\u696d\u30e1\u30fc\u30eb"}</text>
@@ -623,7 +630,7 @@ function DiagramCalendarURL() {
 function DiagramPDF() {
   return (
     <div className="diagram">
-      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:400}}>
+      <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style={{maxWidth:600}}>
         {/* PDF doc */}
         <rect x="30" y="20" width="130" height="165" rx="10" fill="white" stroke="#c026d3" strokeWidth="2"/>
         <rect x="30" y="20" width="130" height="32" rx="10" fill="#c026d310"/>
@@ -650,6 +657,114 @@ function DiagramPDF() {
         <text x="300" y="152" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u76f4\u63a5\u8a98\u5c0e\u3067\u9ad8CV"}</text>
       </svg>
     </div>
+  );
+}
+
+function DiagramAIConcierge() {
+  const channels = [
+    {label:"AI \u30e1\u30fc\u30eb",color:"#12a37d",icon:ICON.mail},
+    {label:"\u8cc7\u6599DL\u30bb\u30f3\u30bf\u30fc",color:"#3b6ff5",icon:ICON.doc},
+    {label:"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",color:"#7c5cfc",icon:ICON.bookmark},
+    {label:"AI \u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",color:"#d03ea1",icon:ICON.bell},
+    {label:"\u30e1\u30fc\u30eb\u30ab\u30ec\u30f3\u30c0\u30fc",color:"#e0475b",icon:ICON.cal},
+    {label:"PDF\u30fb\u8cc7\u6599\u5185",color:"#c026d3",icon:ICON.doc},
+  ];
+  const chatBubbles = [
+    {text:"\u6599\u91d1\u30d7\u30e9\u30f3\u306b\u3064\u3044\u3066\u805e\u304d\u305f\u3044\u306e\u3067\u3059\u304c...",isUser:true,delay:0.5},
+    {text:"\u5fa1\u793e\u306e\u898f\u6a21\u3067\u3059\u3068\u30b9\u30bf\u30f3\u30c0\u30fc\u30c9\u30d7\u30e9\u30f3\u304c\u6700\u9069\u3067\u3059",isUser:false,delay:1.8},
+    {text:"\u3053\u306e\u65e5\u7a0b\u3067\u5546\u8ac7\u3044\u304b\u304c\u3067\u3059\u304b\uff1f",isUser:false,delay:3.0},
+  ];
+  return (
+    <svg width="100%" viewBox="0 0 900 420" fill="none" style={{maxWidth:900,margin:"0 auto",display:"block"}}>
+      <defs>
+        <filter id="concShadow"><feDropShadow dx="0" dy="3" stdDeviation="6" floodOpacity=".08"/></filter>
+      </defs>
+
+      {/* Left: 6 channel sources */}
+      {channels.map((ch,i) => {
+        const y = 30 + i * 62;
+        return (
+          <g key={i}>
+            <g filter="url(#concShadow)">
+              <rect x="10" y={y} width="160" height="44" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
+              <g transform={`translate(22,${y+10})`}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
+              </g>
+              <text x="54" y={y+28} fontSize="11" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
+            </g>
+            {/* Animated arrow to calendar */}
+            <line x1="175" y1={y+22} x2="280" y2={210} stroke={ch.color} strokeWidth="1.2" strokeDasharray="5 3" opacity=".35">
+              <animate attributeName="stroke-dashoffset" from="16" to="0" dur={`${1.5+i*0.1}s`} repeatCount="indefinite"/>
+            </line>
+            <circle r="2.5" fill={ch.color} opacity=".6">
+              <animateMotion dur={`${2.2+i*0.15}s`} repeatCount="indefinite" path={`M175,${y+22} L280,210`}/>
+            </circle>
+          </g>
+        );
+      })}
+
+      {/* Center: Calendar widget */}
+      <g filter="url(#concShadow)">
+        <rect x="290" y="80" width="200" height="260" rx="18" fill="white" stroke="#7c5cfc" strokeWidth="2"/>
+        <rect x="290" y="80" width="200" height="44" rx="18" fill="#f0ecfe"/>
+        <SvgIcon d={ICON.cal} x={390} y={100} size={20} color="#7c5cfc"/>
+        <text x="390" y="118" textAnchor="middle" fontSize="12" fontWeight="800" fill="#7c5cfc">{"\u65e5\u7a0b\u3092\u9078\u629e"}</text>
+        {[
+          {day:"\u6708\u66dc\u65e5",time:"10:00 - 10:30"},
+          {day:"\u6c34\u66dc\u65e5",time:"14:00 - 14:30"},
+          {day:"\u91d1\u66dc\u65e5",time:"11:00 - 11:30"},
+          {day:"\u6765\u9031\u706b",time:"15:00 - 15:30"},
+        ].map((slot,i) => (
+          <g key={i}>
+            <rect x="308" y={134+i*44} width="164" height="34" rx="8" fill={i===1?"#7c5cfc":"white"} stroke={i===1?"#7c5cfc":"#c9bef5"} strokeWidth="1.5"/>
+            <text x="328" y={155+i*44} fontSize="10" fontWeight="700" fill={i===1?"white":"#0f1128"} fontFamily="var(--fb)">{slot.day}</text>
+            <text x="452" y={155+i*44} textAnchor="end" fontSize="10" fontWeight="600" fill={i===1?"rgba(255,255,255,.8)":"#6e7494"} fontFamily="var(--fm)">{slot.time}</text>
+          </g>
+        ))}
+      </g>
+
+      {/* Right: AI Chatbot panel */}
+      <g filter="url(#concShadow)">
+        <rect x="520" y="80" width="280" height="260" rx="18" fill="white" stroke="#12a37d" strokeWidth="2"/>
+        <rect x="520" y="80" width="280" height="44" rx="18" fill="#e5f8f2"/>
+        <SvgIcon d={ICON.chat} x={660} y={100} size={20} color="#12a37d"/>
+        <text x="660" y="118" textAnchor="middle" fontSize="12" fontWeight="800" fill="#12a37d">{"AI\u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5"}</text>
+      </g>
+
+      {/* Chat bubbles with staggered animation */}
+      {chatBubbles.map((b,i) => {
+        const bx = b.isUser ? 640 : 540;
+        const by = 140 + i * 55;
+        const bw = b.isUser ? 150 : 240;
+        return (
+          <g key={i} style={{animation:`chatPop .5s ${b.delay}s cubic-bezier(.16,1,.3,1) forwards`,opacity:0}}>
+            <rect x={bx} y={by} width={bw} height="38" rx="10"
+              fill={b.isUser?"#f0ecfe":"#e5f8f2"}
+              stroke={b.isUser?"#c9bef5":"rgba(18,163,125,.2)"} strokeWidth="1"/>
+            <text x={bx+12} y={by+24} fontSize="9" fontWeight="600"
+              fill={b.isUser?"#7c5cfc":"#12a37d"} fontFamily="var(--fb)">{b.text}</text>
+          </g>
+        );
+      })}
+
+      {/* Booking button with pulse */}
+      <g style={{animation:"chatPop .5s 4s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="580" y="310" width="180" height="40" rx="10" fill="#12a37d"/>
+        <text x="670" y="335" textAnchor="middle" fontSize="12" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u2713 \u4e88\u7d04\u78ba\u5b9a"}</text>
+        <rect x="580" y="310" width="180" height="40" rx="10" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
+          <animate attributeName="opacity" values="0;.4;0" dur="2s" begin="4.5s" repeatCount="indefinite"/>
+          <animate attributeName="rx" values="10;14;10" dur="2s" begin="4.5s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+
+      {/* Bottom stats badges */}
+      <g>
+        <rect x="310" y="370" width="120" height="36" rx="10" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+        <text x="370" y="393" textAnchor="middle" fontSize="11" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u96e2\u8131\u7387 -40%"}</text>
+        <rect x="450" y="370" width="120" height="36" rx="10" fill="#e5f8f2" stroke="#b8e6d8" strokeWidth="1"/>
+        <text x="510" y="393" textAnchor="middle" fontSize="11" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"\u4e88\u7d04\u7387 +35%"}</text>
+      </g>
+    </svg>
   );
 }
 
@@ -855,8 +970,20 @@ export default function HomePageClient(){
                     <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>
                   </svg>
                 </g>
-                <text x="480" y="228" textAnchor="middle" fontSize="14" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
-                <text x="480" y="244" textAnchor="middle" fontSize="9" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u5546\u8ac7\u81ea\u52d5\u96c6\u7d04"}</text>
+                <text x="480" y="226" textAnchor="middle" fontSize="14" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
+                {/* Cycling 3-step subtitles */}
+                <g style={{animation:"hubStep1 7.5s infinite"}}>
+                  <SvgIcon d="M22 12h-4l-3 9L9 3l-3 9H2" x={462} y={240} size={12} color="rgba(255,255,255,.9)"/>
+                  <text x="492" y="244" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.85)" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+                </g>
+                <g style={{animation:"hubStep2 7.5s infinite",opacity:0}}>
+                  <SvgIcon d={ICON.cal} x={462} y={240} size={12} color="rgba(255,255,255,.9)"/>
+                  <text x="492" y="244" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.85)" fontFamily="var(--fb)">{"\u5546\u8ac7\u7372\u5f97"}</text>
+                </g>
+                <g style={{animation:"hubStep3 7.5s infinite",opacity:0}}>
+                  <SvgIcon d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" x={462} y={240} size={12} color="rgba(255,255,255,.9)"/>
+                  <text x="492" y="244" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.85)" fontFamily="var(--fb)">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+                </g>
               </g>
 
               {/* Pulse rings around hub */}
@@ -904,7 +1031,7 @@ export default function HomePageClient(){
             {features.map((f,i)=>{
               const Diagram = diagramComponents[i];
               return(
-                <div className={`feat-card${i===0?" feat-card-full":""}`} key={i} style={{"--card-color":f.color} as React.CSSProperties}>
+                <div className="feat-card" key={i} style={{"--card-color":f.color} as React.CSSProperties}>
                   <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:f.gradient,opacity:0,transition:"opacity .3s"}} className="feat-card-accent"/>
                   <style dangerouslySetInnerHTML={{__html:`.feat-card:hover .feat-card-accent{opacity:1 !important}`}}/>
                   <div className="feat-card-body">
@@ -918,6 +1045,20 @@ export default function HomePageClient(){
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* AI CONCIERGE */}
+      <section className="section" id="concierge" style={{background:"linear-gradient(165deg,#f3f0ff 0%,#fff 40%,#edfcf7 100%)",position:"relative",overflow:"hidden"}}>
+        <div className="dot-grid" style={{opacity:.2}}/>
+        <div className="glow" style={{background:"rgba(124,92,252,.12)",width:500,height:500,top:-100,right:-80}}/>
+        <div className="section-inner" style={{position:"relative",zIndex:2}}>
+          <div className="slabel" style={{textAlign:"center"}}>AI CONCIERGE</div>
+          <div className="stitle" style={{textAlign:"center"}}>{"すべてのチャネルに、予約を後押しするAIがいる"}</div>
+          <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>{"カレンダー表示だけでは予約されない。AIチャットが疑問を解消し、最後の一押しで離脱を防ぎます。"}</p>
+          <div style={{marginTop:48,overflowX:"auto"}}>
+            <DiagramAIConcierge/>
           </div>
         </div>
       </section>
