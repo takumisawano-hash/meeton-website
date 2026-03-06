@@ -222,7 +222,7 @@ const features = [
     color: "#0891b2",
     bg: "#0891b210",
     gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-    title: "AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
+    title: "Meeton ai \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
     desc: "\u8a2a\u554f\u8005\u3092\u5f85\u305f\u306a\u3044\u3002AI\u304c\u5148\u306b\u58f0\u3092\u304b\u3051\u3001\u30cb\u30fc\u30ba\u3092\u5f15\u304d\u51fa\u3057\u3001\u8cc7\u6599\u3092\u5c4a\u3051\u3001\u305d\u306e\u307e\u307e\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u5b8c\u7d50\u3002Google\u5e83\u544a\u30fbLinkedIn\u5e83\u544a\u7d4c\u7531\u306eLP\u306b\u3082\u8a2d\u7f6e\u3067\u304d\u308b\u306e\u3067\u3001\u5e83\u544a\u8cbb\u3092\u304b\u3051\u305f\u6d41\u5165\u3092\u53d6\u308a\u3053\u307c\u3055\u305a\u5546\u8ac7\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
@@ -230,7 +230,7 @@ const features = [
     color: "#12a37d",
     bg: "#12a37d10",
     gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-    title: "AI \u30e1\u30fc\u30eb",
+    title: "Meeton ai \u30e1\u30fc\u30eb",
     desc: "\u30a4\u30f3\u30d0\u30a6\u30f3\u30c9\u30ea\u30fc\u30c9\u306b\u5bfe\u3057\u3066AI\u304c\u81ea\u52d5\u3067\u30ca\u30fc\u30c1\u30e3\u30ea\u30f3\u30b0\u30fb\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u3001\u5546\u8ac7\u78ba\u5b9a\u307e\u3067\u8a98\u5c0e\u3002\u30a6\u30a7\u30d3\u30ca\u30fc\u30fb\u30bb\u30df\u30ca\u30fc\u306e\u53c2\u52a0\u8005\u30ea\u30b9\u30c8\u3082CRM\u9023\u643a\u3084Webhook\u7d4c\u7531\u3067\u81ea\u52d5\u53d6\u308a\u8fbc\u307f\u3001\u30a4\u30d9\u30f3\u30c8\u76f4\u5f8c\u306e\u71b1\u91cf\u304c\u9ad8\u3044\u30bf\u30a4\u30df\u30f3\u30b0\u3092\u9003\u3057\u307e\u305b\u3093\u3002",
   },
   {
@@ -238,7 +238,7 @@ const features = [
     color: "#3b6ff5",
     bg: "#3b6ff510",
     gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-    title: "AI \u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30bb\u30f3\u30bf\u30fc",
+    title: "Meeton ai \u8cc7\u6599\u30da\u30fc\u30b8",
     desc: "\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8\u3092\u30b5\u30a4\u30c8\u306b\u7c21\u5358\u8ffd\u52a0\u3002AI\u304c\u300c\u3069\u306e\u8cc7\u6599\u304c\u5408\u3046\u304b\u300d\u3092\u63d0\u6848\u3057\u306a\u304c\u3089\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u304b\u3089\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u4e00\u6c17\u306b\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
   {
@@ -246,7 +246,7 @@ const features = [
     color: "#7c5cfc",
     bg: "#7c5cfc10",
     gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-    title: "\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8\u3067\u5373\u5ea7\u306b\u30ab\u30ec\u30f3\u30c0\u30fc\u63d0\u793a",
+    title: "Meeton ai \u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
     desc: "\u554f\u3044\u5408\u308f\u305b\u3084\u8cc7\u6599\u8acb\u6c42\u306e\u76f4\u5f8c\u2014\u2014\u6700\u3082\u71b1\u91cf\u304c\u9ad8\u3044\u77ac\u9593\u306b\u3001\u30ab\u30ec\u30f3\u30c0\u30fc\u3092\u63d0\u793a\u3002AI\u30c1\u30e3\u30c3\u30c8\u304c\u6a2a\u3067\u7591\u554f\u306b\u7b54\u3048\u308b\u306e\u3067\u3001\u300c\u3061\u3087\u3063\u3068\u8074\u304d\u305f\u3044\u3053\u3068\u304c\u3042\u308b\u3051\u3069\u2026\u300d\u3067\u96e2\u8131\u3055\u305b\u307e\u305b\u3093\u3002",
   },
   {
@@ -254,7 +254,7 @@ const features = [
     color: "#d03ea1",
     bg: "#d03ea110",
     gradient: "linear-gradient(135deg,#d03ea1,#e879b9)",
-    title: "AI \u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
+    title: "Meeton ai \u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
     desc: "\u300c\u4eca\u898b\u3066\u3044\u308b\u30da\u30fc\u30b8\u300d\u306b\u5408\u3063\u305f\u8cc7\u6599\u3092\u3001AI\u304c\u81ea\u52d5\u3067\u9078\u3073\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7\u63d0\u6848\u3002\u8cc7\u6599DL\u3092\u5165\u308a\u53e3\u306b\u3001\u81ea\u7136\u306a\u6d41\u308c\u3067\u5546\u8ac7\u7372\u5f97\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
@@ -262,7 +262,7 @@ const features = [
     color: "#e0475b",
     bg: "#e0475b10",
     gradient: "linear-gradient(135deg,#e0475b,#f87171)",
-    title: "\u55b6\u696d\u30e1\u30fc\u30eb\u306b AI \u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
+    title: "Meeton ai \u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
     desc: "\u30a2\u30dd\u96fb\u5f8c\u306e\u8cc7\u6599\u9001\u4ed8\u3084\u65e5\u7a0b\u8abf\u6574\u30e1\u30fc\u30eb\u306b\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af\u3092\u633f\u5165\u3002\u300c\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u306f\uff1f\u300d\u306e\u3084\u308a\u3068\u308a\u304c\u6d88\u3048\u3001\u30ef\u30f3\u30af\u30ea\u30c3\u30af\u3067\u5546\u8ac7\u78ba\u5b9a\u3002AI\u30c1\u30e3\u30c3\u30c8\u304c\u4e88\u7d04\u524d\u306e\u4e0d\u5b89\u3082\u89e3\u6d88\u3057\u307e\u3059\u3002",
   },
   {
@@ -270,7 +270,7 @@ const features = [
     color: "#c026d3",
     bg: "#c026d310",
     gradient: "linear-gradient(135deg,#c026d3,#d946ef)",
-    title: "PDF\u30fb\u8cc7\u6599\u5185\u304b\u3089\u76f4\u63a5\u4e88\u7d04",
+    title: "Meeton ai \u30ab\u30ec\u30f3\u30c0\u30fcQR",
     desc: "\u8cc7\u6599\u3092\u8aad\u3093\u3067\u3044\u308b\u4eba\u306f\u3001\u6700\u3082\u71b1\u91cf\u304c\u9ad8\u3044\u898b\u8fbc\u5ba2\u3002PDF\u5185\u306eURL\u3084QR\u30b3\u30fc\u30c9\u304b\u3089\u3001\u8aad\u3093\u3067\u3044\u308b\u305d\u306e\u77ac\u9593\u306b\u5546\u8ac7\u4e88\u7d04\u3078\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
 ];
@@ -670,7 +670,7 @@ function DiagramAIConcierge() {
     {label:"PDF\u30fb\u8cc7\u6599\u5185",color:"#c026d3",icon:ICON.doc},
   ];
   return (
-    <svg width="100%" viewBox="0 0 900 460" fill="none" style={{maxWidth:900,margin:"0 auto",display:"block"}}>
+    <svg width="100%" viewBox="0 0 900 480" fill="none" style={{maxWidth:900,margin:"0 auto",display:"block"}}>
       <defs>
         <filter id="concShadow"><feDropShadow dx="0" dy="3" stdDeviation="8" floodOpacity=".08"/></filter>
         <linearGradient id="concGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
@@ -701,46 +701,51 @@ function DiagramAIConcierge() {
       {/* Main panel: AI Chat (left) + Calendar (right) merged */}
       <g filter="url(#concShadow)">
         {/* Outer container */}
-        <rect x="230" y="20" width="650" height="390" rx="22" fill="white" stroke="var(--border)" strokeWidth="1.5"/>
+        <rect x="230" y="20" width="650" height="420" rx="16" fill="white" stroke="var(--border)" strokeWidth="1.5"/>
 
-        {/* AI Chat section (left half) */}
-        <rect x="230" y="20" width="340" height="390" rx="22" fill="white"/>
-        <rect x="230" y="20" width="340" height="48" rx="22" fill="#e5f8f2"/>
-        <rect x="570" y="20" width="0" height="48" fill="#e5f8f2"/>
-        <SvgIcon d={ICON.chat} x={380} y={42} size={18} color="#12a37d"/>
-        <text x="400" y="50" fontSize="13" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"AI \u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5"}</text>
+        {/* AI Chat header (left half) — rectangular */}
+        <rect x="231" y="21" width="338" height="48" rx="0" fill="#e5f8f2"/>
+        {/* Top-left corner clip */}
+        <rect x="231" y="21" width="16" height="16" rx="16" fill="#e5f8f2"/>
+        <rect x="231" y="29" width="16" height="8" fill="#e5f8f2"/>
+        <rect x="239" y="21" width="8" height="16" fill="#e5f8f2"/>
+        <SvgIcon d={ICON.chat} x={380} y={44} size={18} color="#12a37d"/>
+        <text x="400" y="52" fontSize="13" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"AI \u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5"}</text>
 
         {/* Divider line */}
-        <line x1="570" y1="36" x2="570" y2="394" stroke="#dfe3f0" strokeWidth="1"/>
+        <line x1="570" y1="36" x2="570" y2="424" stroke="#dfe3f0" strokeWidth="1"/>
 
-        {/* Calendar section (right half) */}
-        <rect x="571" y="20" width="309" height="48" rx="0" fill="#f0ecfe"/>
-        <rect x="858" y="20" width="22" height="48" rx="22" fill="#f0ecfe"/>
-        <SvgIcon d={ICON.cal} x={710} y={42} size={18} color="#7c5cfc"/>
-        <text x="730" y="50" fontSize="13" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u65e5\u7a0b\u9078\u629e"}</text>
+        {/* Calendar header (right half) — rectangular */}
+        <rect x="571" y="21" width="308" height="48" rx="0" fill="#f0ecfe"/>
+        {/* Top-right corner clip */}
+        <rect x="863" y="21" width="16" height="16" rx="16" fill="#f0ecfe"/>
+        <rect x="863" y="29" width="16" height="8" fill="#f0ecfe"/>
+        <rect x="855" y="21" width="16" height="16" fill="#f0ecfe"/>
+        <SvgIcon d={ICON.cal} x={710} y={44} size={18} color="#7c5cfc"/>
+        <text x="730" y="52" fontSize="13" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u65e5\u7a0b\u9078\u629e"}</text>
       </g>
 
       {/* Chat conversation */}
       {/* AI greeting */}
       <g style={{animation:"chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-        <rect x="254" y="84" width="290" height="38" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
-        <text x="268" y="108" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u65e5\u6642\u4e88\u7d04\u524d\u306b\u805e\u304d\u305f\u3044\u3053\u3068\u306f\u3054\u3056\u3044\u307e\u3059\u304b\uff1f"}</text>
+        <rect x="254" y="86" width="290" height="38" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="268" y="110" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u65e5\u6642\u4e88\u7d04\u524d\u306b\u805e\u304d\u305f\u3044\u3053\u3068\u306f\u3054\u3056\u3044\u307e\u3059\u304b\uff1f"}</text>
       </g>
       {/* User question */}
       <g style={{animation:"chatPop .5s 1.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-        <rect x="340" y="134" width="204" height="38" rx="12" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
-        <text x="354" y="158" fontSize="10" fontWeight="600" fill="#7c5cfc" fontFamily="var(--fb)">{"\u6599\u91d1\u30d7\u30e9\u30f3\u306b\u3064\u3044\u3066\u77e5\u308a\u305f\u3044\u3067\u3059"}</text>
+        <rect x="340" y="140" width="204" height="38" rx="12" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+        <text x="354" y="164" fontSize="10" fontWeight="600" fill="#7c5cfc" fontFamily="var(--fb)">{"\u6599\u91d1\u30d7\u30e9\u30f3\u306b\u3064\u3044\u3066\u77e5\u308a\u305f\u3044\u3067\u3059"}</text>
       </g>
       {/* AI answer */}
       <g style={{animation:"chatPop .5s 2.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-        <rect x="254" y="184" width="300" height="52" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
-        <text x="268" y="206" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u5fa1\u793e\u306e\u898f\u6a21\u3067\u3059\u3068\u30b9\u30bf\u30f3\u30c0\u30fc\u30c9\u30d7\u30e9\u30f3\u304c"}</text>
-        <text x="268" y="222" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u6700\u9069\u3067\u3059\u3002\u8a73\u3057\u304f\u306f\u5546\u8ac7\u3067\u3054\u8aac\u660e\u3057\u307e\u3059\uff01"}</text>
+        <rect x="254" y="194" width="300" height="52" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="268" y="216" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u5fa1\u793e\u306e\u898f\u6a21\u3067\u3059\u3068\u30b9\u30bf\u30f3\u30c0\u30fc\u30c9\u30d7\u30e9\u30f3\u304c"}</text>
+        <text x="268" y="232" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u6700\u9069\u3067\u3059\u3002\u8a73\u3057\u304f\u306f\u5546\u8ac7\u3067\u3054\u8aac\u660e\u3057\u307e\u3059\uff01"}</text>
       </g>
       {/* AI nudge */}
       <g style={{animation:"chatPop .5s 3.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-        <rect x="254" y="248" width="280" height="38" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
-        <text x="268" y="272" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u53f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fc\u304b\u3089\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u3092\u3069\u3046\u305e\uff01"}</text>
+        <rect x="254" y="262" width="280" height="38" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="268" y="286" fontSize="10" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u53f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fc\u304b\u3089\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u3092\u3069\u3046\u305e\uff01"}</text>
       </g>
 
       {/* Calendar time slots */}
@@ -751,30 +756,30 @@ function DiagramAIConcierge() {
         {day:"\u6765\u9031\u706b",time:"15:00",sel:false},
       ].map((slot,i) => (
         <g key={i}>
-          <rect x="590" y={84+i*50} width="270" height="40" rx="10"
+          <rect x="590" y={90+i*56} width="270" height="42" rx="10"
             fill={slot.sel?"#7c5cfc":"white"} stroke={slot.sel?"#7c5cfc":"#dfe3f0"} strokeWidth={slot.sel?2:1.5}/>
-          <text x="612" y={109+i*50} fontSize="11" fontWeight="700" fill={slot.sel?"white":"#0f1128"} fontFamily="var(--fb)">{slot.day}</text>
-          <text x="838" y={109+i*50} textAnchor="end" fontSize="11" fontWeight="600" fill={slot.sel?"rgba(255,255,255,.85)":"#6e7494"} fontFamily="var(--fm)">{slot.time}</text>
-          {slot.sel && <SvgIcon d="M20 6L9 17l-5-5" x={848} y={99+i*50} size={14} color="white"/>}
+          <text x="612" y={116+i*56} fontSize="11" fontWeight="700" fill={slot.sel?"white":"#0f1128"} fontFamily="var(--fb)">{slot.day}</text>
+          <text x="838" y={116+i*56} textAnchor="end" fontSize="11" fontWeight="600" fill={slot.sel?"rgba(255,255,255,.85)":"#6e7494"} fontFamily="var(--fm)">{slot.time}</text>
+          {slot.sel && <SvgIcon d="M20 6L9 17l-5-5" x={848} y={106+i*56} size={14} color="white"/>}
         </g>
       ))}
 
       {/* Booking confirmed button */}
       <g style={{animation:"chatPop .5s 4.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-        <rect x="254" y="300" width="300" height="44" rx="12" fill="url(#concGrad)"/>
-        <text x="404" y="327" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u2713 \u91d1\u66dc\u65e5 11:00 \u3067\u5546\u8ac7\u78ba\u5b9a\uff01"}</text>
-        <rect x="254" y="300" width="300" height="44" rx="12" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
+        <rect x="254" y="316" width="300" height="44" rx="12" fill="url(#concGrad)"/>
+        <text x="404" y="343" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u2713 \u91d1\u66dc\u65e5 11:00 \u3067\u5546\u8ac7\u78ba\u5b9a\uff01"}</text>
+        <rect x="254" y="316" width="300" height="44" rx="12" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
           <animate attributeName="opacity" values="0;.5;0" dur="2s" begin="5s" repeatCount="indefinite"/>
         </rect>
       </g>
 
       {/* Bottom: label + stats */}
       <g>
-        <text x="400" y="378" textAnchor="middle" fontSize="10" fill="#6e7494" fontFamily="var(--fb)">{"\u2190 AI\u304c\u7591\u554f\u3092\u89e3\u6d88\u3057\u3066\u304b\u3089\u4e88\u7d04\u3078\u8a98\u5c0e"}</text>
-        <rect x="300" y="398" width="100" height="32" rx="8" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
-        <text x="350" y="419" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u96e2\u8131\u7387 -40%"}</text>
-        <rect x="416" y="398" width="100" height="32" rx="8" fill="#e5f8f2" stroke="#b8e6d8" strokeWidth="1"/>
-        <text x="466" y="419" textAnchor="middle" fontSize="10" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"\u4e88\u7d04\u7387 +35%"}</text>
+        <text x="400" y="400" textAnchor="middle" fontSize="10" fill="#6e7494" fontFamily="var(--fb)">{"\u2190 AI\u304c\u7591\u554f\u3092\u89e3\u6d88\u3057\u3066\u304b\u3089\u4e88\u7d04\u3078\u8a98\u5c0e"}</text>
+        <rect x="300" y="418" width="100" height="32" rx="8" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+        <text x="350" y="439" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u96e2\u8131\u7387 -40%"}</text>
+        <rect x="416" y="418" width="100" height="32" rx="8" fill="#e5f8f2" stroke="#b8e6d8" strokeWidth="1"/>
+        <text x="466" y="439" textAnchor="middle" fontSize="10" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"\u4e88\u7d04\u7387 +35%"}</text>
       </g>
     </svg>
   );
@@ -920,7 +925,7 @@ export default function HomePageClient(){
 
           {/* Hub & Spoke diagram: 7 sources → Meeton ai → Sales */}
           <div style={{marginTop:48,overflowX:"auto",padding:"8px 0"}}>
-            <svg width="100%" viewBox="0 0 960 420" fill="none" style={{maxWidth:960,margin:"0 auto",display:"block"}}>
+            <svg width="100%" viewBox="0 0 960 460" fill="none" style={{maxWidth:960,margin:"0 auto",display:"block"}}>
               <defs>
                 <filter id="hubGlow"><feDropShadow dx="0" dy="4" stdDeviation="12" floodColor="#12a37d" floodOpacity=".18"/></filter>
                 <filter id="nodeGlow"><feDropShadow dx="0" dy="2" stdDeviation="6" floodOpacity=".08"/></filter>
@@ -974,20 +979,12 @@ export default function HomePageClient(){
                 <circle cx="480" cy="210" r="92" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="4 4" opacity=".3">
                   <animateTransform attributeName="transform" type="rotate" from="0 480 210" to="360 480 210" dur="30s" repeatCount="indefinite"/>
                 </circle>
-                {/* CPU/AI icon */}
-                <g transform="translate(464, 172)">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="4" y="4" width="16" height="16" rx="2"/>
-                    <rect x="9" y="9" width="6" height="6"/>
-                    <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>
-                  </svg>
-                </g>
-                <text x="480" y="216" textAnchor="middle" fontSize="14" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
+                <text x="480" y="200" textAnchor="middle" fontSize="22" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
                 {/* 3 capabilities always visible */}
-                <line x1="440" y1="226" x2="520" y2="226" stroke="rgba(255,255,255,.25)" strokeWidth="1"/>
-                <text x="480" y="242" textAnchor="middle" fontSize="9" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
-                <text x="480" y="256" textAnchor="middle" fontSize="9" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u5546\u8ac7\u7372\u5f97"}</text>
-                <text x="480" y="270" textAnchor="middle" fontSize="9" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+                <line x1="436" y1="212" x2="524" y2="212" stroke="rgba(255,255,255,.25)" strokeWidth="1"/>
+                <text x="480" y="230" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+                <text x="480" y="246" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u5546\u8ac7\u7372\u5f97"}</text>
+                <text x="480" y="262" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
               </g>
 
               {/* Pulse rings around hub */}
@@ -1010,13 +1007,13 @@ export default function HomePageClient(){
               {/* Sales team */}
               <g filter="url(#nodeGlow)">
                 <rect x="710" y="160" width="210" height="100" rx="20" fill="url(#salesGrad)"/>
-                <g transform="translate(743, 190)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <text x="815" y="198" textAnchor="middle" fontSize="16" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
+                <text x="815" y="220" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
+                <g transform="translate(801, 230)">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                   </svg>
                 </g>
-                <text x="815" y="204" textAnchor="middle" fontSize="16" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
-                <text x="815" y="224" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
               </g>
             </svg>
           </div>
@@ -1203,7 +1200,7 @@ export default function HomePageClient(){
         <div className="glow" style={{background:"rgba(18,163,125,.15)",width:500,height:500,top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}/>
         <div className="final-cta-inner">
           <div className="slabel">Get Started</div>
-          <div className="stitle" style={{textAlign:"center"}}>営業チームに、<br/>毎朝商談が届く世界へ</div>
+          <div className="stitle" style={{textAlign:"center"}}>営業チームが、<br/>商談に集中できる世界へ</div>
           <p className="ssub" style={{textAlign:"center",margin:"16px auto 36px"}}>導入は5分。7つのAIチャネルが24時間稼働し、商談を自動で獲得し続けます。</p>
           <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap"}}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
