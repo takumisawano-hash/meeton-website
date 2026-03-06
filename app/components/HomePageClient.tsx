@@ -1,8 +1,20 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
+
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
 import HubSpotModal from "./HubSpotModal";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
 
@@ -223,7 +235,7 @@ const features = [
     bg: "#0891b210",
     gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
     title: "Meeton ai \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
-    desc: "\u8a2a\u554f\u8005\u3092\u5f85\u305f\u306a\u3044\u3002AI\u304c\u5148\u306b\u58f0\u3092\u304b\u3051\u3001\u30cb\u30fc\u30ba\u3092\u5f15\u304d\u51fa\u3057\u3001\u8cc7\u6599\u3092\u5c4a\u3051\u3001\u305d\u306e\u307e\u307e\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u5b8c\u7d50\u3002Google\u5e83\u544a\u30fbLinkedIn\u5e83\u544a\u7d4c\u7531\u306eLP\u306b\u3082\u8a2d\u7f6e\u3067\u304d\u308b\u306e\u3067\u3001\u5e83\u544a\u8cbb\u3092\u304b\u3051\u305f\u6d41\u5165\u3092\u53d6\u308a\u3053\u307c\u3055\u305a\u5546\u8ac7\u3078\u7e4b\u3052\u307e\u3059\u3002",
+    desc: "\u8a2a\u554f\u8005\u3092\u5f85\u305f\u306a\u3044\u3002AI\u304c\u5148\u306b\u58f0\u3092\u304b\u3051\u3001\u30cb\u30fc\u30ba\u3092\u5f15\u304d\u51fa\u3057\u3001\u8cc7\u6599\u3092\u5c4a\u3051\u3001\u305d\u306e\u307e\u307e\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u5b8c\u7d50\u3002\u901a\u5e38\u306e\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8\u306f\u3082\u3061\u308d\u3093\u3001Google\u5e83\u544a\u30fbLinkedIn\u5e83\u544a\u7d4c\u7531\u306eLP\u306b\u3082\u8a2d\u7f6e\u3067\u304d\u308b\u306e\u3067\u3001\u5e83\u544a\u8cbb\u3092\u304b\u3051\u305f\u6d41\u5165\u3092\u53d6\u308a\u3053\u307c\u3055\u305a\u5546\u8ac7\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
     num: "02",
@@ -239,7 +251,7 @@ const features = [
     bg: "#3b6ff510",
     gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
     title: "Meeton ai \u8cc7\u6599\u30da\u30fc\u30b8",
-    desc: "\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8\u3092\u30b5\u30a4\u30c8\u306b\u7c21\u5358\u8ffd\u52a0\u3002AI\u304c\u300c\u3069\u306e\u8cc7\u6599\u304c\u5408\u3046\u304b\u300d\u3092\u63d0\u6848\u3057\u306a\u304c\u3089\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u304b\u3089\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u4e00\u6c17\u306b\u8a98\u5c0e\u3057\u307e\u3059\u3002",
+    desc: "AI\u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5\u4ed8\u304d\u306e\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8\u3092\u30b5\u30a4\u30c8\u306b\u7c21\u5358\u8ffd\u52a0\u3002AI\u304c\u300c\u3069\u306e\u8cc7\u6599\u304c\u5408\u3046\u304b\u300d\u3092\u63d0\u6848\u3057\u306a\u304c\u3089\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u304b\u3089\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u4e00\u6c17\u306b\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
   {
     num: "04",
@@ -785,6 +797,146 @@ function DiagramAIConcierge() {
   );
 }
 
+function DiagramAIConciergeMobile() {
+  const channels = [
+    {label:"AI \u30e1\u30fc\u30eb",color:"#12a37d",icon:ICON.mail},
+    {label:"\u8cc7\u6599DL\u30bb\u30f3\u30bf\u30fc",color:"#3b6ff5",icon:ICON.doc},
+    {label:"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",color:"#7c5cfc",icon:ICON.bookmark},
+    {label:"AI \u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",color:"#d03ea1",icon:ICON.bell},
+    {label:"\u30e1\u30fc\u30eb\u30ab\u30ec\u30f3\u30c0\u30fc",color:"#e0475b",icon:ICON.cal},
+    {label:"PDF\u30fb\u8cc7\u6599\u5185",color:"#c026d3",icon:ICON.doc},
+  ];
+  return (
+    <svg width="100%" viewBox="0 0 380 820" fill="none" style={{maxWidth:400,margin:"0 auto",display:"block"}}>
+      <defs>
+        <filter id="concShadowM"><feDropShadow dx="0" dy="3" stdDeviation="8" floodOpacity=".08"/></filter>
+        <linearGradient id="concGradM" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
+      </defs>
+
+      {/* Channel sources - 2 columns */}
+      {channels.map((ch,i) => {
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = col === 0 ? 10 : 195;
+        const y = 10 + row * 50;
+        return (
+          <g key={i}>
+            <g filter="url(#concShadowM)">
+              <rect x={x} y={y} width="170" height="40" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
+              <g transform={`translate(${x+12},${y+8})`}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
+              </g>
+              <text x={x+42} y={y+26} fontSize="12" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
+            </g>
+          </g>
+        );
+      })}
+
+      {/* Converging arrows */}
+      {channels.map((ch,i) => {
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = col === 0 ? 95 : 280;
+        const y = 10 + row * 50 + 40;
+        return (
+          <line key={`arrow-${i}`} x1={x} y1={y} x2="190" y2="175" stroke={ch.color} strokeWidth="1" strokeDasharray="4 3" opacity=".3">
+            <animate attributeName="stroke-dashoffset" from="14" to="0" dur={`${1.2+i*0.1}s`} repeatCount="indefinite"/>
+          </line>
+        );
+      })}
+      <circle cx="190" cy="175" r="4" fill="#12a37d"/>
+
+      {/* Arrow down */}
+      <line x1="190" y1="182" x2="190" y2="205" stroke="#12a37d" strokeWidth="2" strokeDasharray="4 3">
+        <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <polygon points="185,203 190,213 195,203" fill="#12a37d"/>
+
+      {/* AI Chat panel */}
+      <g filter="url(#concShadowM)">
+        <rect x="20" y="220" width="340" height="300" rx="16" fill="white" stroke="var(--border)" strokeWidth="1.5"/>
+        {/* Header */}
+        <rect x="21" y="221" width="338" height="44" rx="0" fill="#e5f8f2"/>
+        <rect x="21" y="221" width="16" height="16" rx="16" fill="#e5f8f2"/>
+        <rect x="21" y="229" width="16" height="8" fill="#e5f8f2"/>
+        <rect x="29" y="221" width="8" height="16" fill="#e5f8f2"/>
+        <rect x="343" y="221" width="16" height="16" rx="16" fill="#e5f8f2"/>
+        <rect x="343" y="229" width="16" height="8" fill="#e5f8f2"/>
+        <rect x="335" y="221" width="16" height="16" fill="#e5f8f2"/>
+        <SvgIcon d={ICON.chat} x={160} y={242} size={18} color="#12a37d"/>
+        <text x="180" y="249" fontSize="14" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"AI \u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5"}</text>
+      </g>
+
+      {/* Chat bubbles */}
+      <g style={{animation:"chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="40" y="280" width="260" height="36" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="54" y="303" fontSize="12" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u65e5\u6642\u4e88\u7d04\u524d\u306b\u805e\u304d\u305f\u3044\u3053\u3068\u306f\u3054\u3056\u3044\u307e\u3059\u304b\uff1f"}</text>
+      </g>
+      <g style={{animation:"chatPop .5s 1.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="140" y="328" width="200" height="36" rx="12" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+        <text x="154" y="351" fontSize="12" fontWeight="600" fill="#7c5cfc" fontFamily="var(--fb)">{"\u6599\u91d1\u30d7\u30e9\u30f3\u306b\u3064\u3044\u3066\u77e5\u308a\u305f\u3044\u3067\u3059"}</text>
+      </g>
+      <g style={{animation:"chatPop .5s 2.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="40" y="376" width="280" height="50" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="54" y="398" fontSize="12" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u5fa1\u793e\u306e\u898f\u6a21\u3067\u3059\u3068\u30b9\u30bf\u30f3\u30c0\u30fc\u30c9\u30d7\u30e9\u30f3\u304c"}</text>
+        <text x="54" y="416" fontSize="12" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u6700\u9069\u3067\u3059\u3002\u8a73\u3057\u304f\u306f\u5546\u8ac7\u3067\u3054\u8aac\u660e\u3057\u307e\u3059\uff01"}</text>
+      </g>
+      <g style={{animation:"chatPop .5s 3.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="40" y="438" width="260" height="36" rx="12" fill="#e5f8f2" stroke="rgba(18,163,125,.15)" strokeWidth="1"/>
+        <text x="54" y="461" fontSize="12" fontWeight="600" fill="#12a37d" fontFamily="var(--fb)">{"\u4e0b\u306e\u30ab\u30ec\u30f3\u30c0\u30fc\u304b\u3089\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u3092\u3069\u3046\u305e\uff01"}</text>
+      </g>
+
+      {/* Booking confirmed */}
+      <g style={{animation:"chatPop .5s 4.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+        <rect x="40" y="486" width="300" height="40" rx="12" fill="url(#concGradM)"/>
+        <text x="190" y="511" textAnchor="middle" fontSize="14" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u2713 \u91d1\u66dc\u65e5 11:00 \u3067\u5546\u8ac7\u78ba\u5b9a\uff01"}</text>
+      </g>
+
+      {/* Arrow down to calendar */}
+      <line x1="190" y1="530" x2="190" y2="555" stroke="#7c5cfc" strokeWidth="2" strokeDasharray="4 3">
+        <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <polygon points="185,553 190,563 195,553" fill="#7c5cfc"/>
+
+      {/* Calendar panel */}
+      <g filter="url(#concShadowM)">
+        <rect x="20" y="570" width="340" height="200" rx="16" fill="white" stroke="var(--border)" strokeWidth="1.5"/>
+        <rect x="21" y="571" width="338" height="44" rx="0" fill="#f0ecfe"/>
+        <rect x="21" y="571" width="16" height="16" rx="16" fill="#f0ecfe"/>
+        <rect x="21" y="579" width="16" height="8" fill="#f0ecfe"/>
+        <rect x="29" y="571" width="8" height="16" fill="#f0ecfe"/>
+        <rect x="343" y="571" width="16" height="16" rx="16" fill="#f0ecfe"/>
+        <rect x="343" y="579" width="16" height="8" fill="#f0ecfe"/>
+        <rect x="335" y="571" width="16" height="16" fill="#f0ecfe"/>
+        <SvgIcon d={ICON.cal} x={160} y={592} size={18} color="#7c5cfc"/>
+        <text x="180" y="599" fontSize="14" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u65e5\u7a0b\u9078\u629e"}</text>
+      </g>
+
+      {/* Calendar slots */}
+      {[
+        {day:"\u6708\u66dc\u65e5",time:"10:00",sel:false},
+        {day:"\u6c34\u66dc\u65e5",time:"14:00",sel:false},
+        {day:"\u91d1\u66dc\u65e5",time:"11:00",sel:true},
+        {day:"\u6765\u9031\u706b",time:"15:00",sel:false},
+      ].map((slot,i) => (
+        <g key={i}>
+          <rect x="40" y={624+i*38} width="300" height="32" rx="10"
+            fill={slot.sel?"#7c5cfc":"white"} stroke={slot.sel?"#7c5cfc":"#dfe3f0"} strokeWidth={slot.sel?2:1.5}/>
+          <text x="58" y={644+i*38} fontSize="13" fontWeight="700" fill={slot.sel?"white":"#0f1128"} fontFamily="var(--fb)">{slot.day}</text>
+          <text x="320" y={644+i*38} textAnchor="end" fontSize="13" fontWeight="600" fill={slot.sel?"rgba(255,255,255,.85)":"#6e7494"} fontFamily="var(--fm)">{slot.time}</text>
+          {slot.sel && <SvgIcon d="M20 6L9 17l-5-5" x={330} y={634+i*38} size={14} color="white"/>}
+        </g>
+      ))}
+
+      {/* Bottom stats */}
+      <rect x="60" y="782" width="120" height="30" rx="8" fill="#f0ecfe" stroke="#c9bef5" strokeWidth="1"/>
+      <text x="120" y="802" textAnchor="middle" fontSize="12" fontWeight="800" fill="#7c5cfc" fontFamily="var(--fb)">{"\u96e2\u8131\u7387 -40%"}</text>
+      <rect x="200" y="782" width="120" height="30" rx="8" fill="#e5f8f2" stroke="#b8e6d8" strokeWidth="1"/>
+      <text x="260" y="802" textAnchor="middle" fontSize="12" fontWeight="800" fill="#12a37d" fontFamily="var(--fb)">{"\u4e88\u7d04\u7387 +35%"}</text>
+    </svg>
+  );
+}
+
 const diagramComponents = [
   DiagramChatbot,
   DiagramEmail,
@@ -797,55 +949,73 @@ const diagramComponents = [
 
 /* ── Quality Section Diagram ── */
 function QualityFlowDiagram() {
+  const cx = 220; // center x
   return (
     <div style={{marginTop:48,padding:"32px 0"}}>
-      <svg width="100%" height="140" viewBox="0 0 900 140" fill="none" style={{maxWidth:900,margin:"0 auto",display:"block"}}>
-        {/* Chat/Form input */}
-        <rect x="10" y="30" width="140" height="80" rx="14" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
-        <SvgIcon d={ICON.chat} x={80} y={54} size={18} color="#12a37d"/>
-        <text x="80" y="80" textAnchor="middle" fontSize="10" fontWeight="800" fill="#12a37d">{"\u30c1\u30e3\u30c3\u30c8 / \u30d5\u30a9\u30fc\u30e0"}</text>
-        <text x="80" y="96" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u4e8b\u524d\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+      <svg width="100%" viewBox="0 0 440 820" fill="none" style={{maxWidth:440,margin:"0 auto",display:"block"}}>
 
-        {/* Arrow */}
-        <line x1="155" y1="70" x2="195" y2="70" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="195,65 205,70 195,75" fill="#c8cedf"/>
+        {/* ── Step 1: 事前ヒアリング (Chatbot mockup) ── */}
+        <rect x={cx-160} y="0" width="320" height="200" rx="18" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
+        <text x={cx} y="28" textAnchor="middle" fontSize="13" fontWeight="800" fill="#12a37d">{"STEP 1 \u2014 \u4e8b\u524d\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+        {/* Chat bubbles */}
+        <rect x={cx-130} y="42" width="180" height="30" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
+        <text x={cx-120} y="62" fontSize="10" fill="#333">{"\ud83e\udd16 \u3054\u691c\u8a0e\u4e2d\u306e\u8ab2\u984c\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044"}</text>
+        <rect x={cx+10} y="80" width="140" height="28" rx="10" fill="#12a37d"/>
+        <text x={cx+20} y="98" fontSize="10" fill="white">{"\u30ea\u30fc\u30c9\u7372\u5f97\u3092\u81ea\u52d5\u5316\u3057\u305f\u3044"}</text>
+        <rect x={cx-130} y="116" width="200" height="28" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
+        <text x={cx-120} y="134" fontSize="10" fill="#333">{"\ud83e\udd16 \u73fe\u5728\u306e\u30c1\u30fc\u30e0\u898f\u6a21\u306f\uff1f"}</text>
+        <rect x={cx+40} y="152" width="110" height="28" rx="10" fill="#12a37d"/>
+        <text x={cx+50} y="170" fontSize="10" fill="white">{"5\u540d\u3067\u904b\u7528\u4e2d\u3067\u3059"}</text>
 
-        {/* Routing */}
-        <rect x="210" y="20" width="160" height="100" rx="14" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="2"/>
-        <SvgIcon d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3" x={290} y={42} size={18} color="#7c5cfc"/>
-        <text x="290" y="68" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c5cfc">{"\u81ea\u52d5\u632f\u308a\u5206\u3051"}</text>
-        <text x="290" y="84" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u8868\u793a/\u975e\u8868\u793a \u30fb \u62c5\u5f53\u8005\u5206\u5c90"}</text>
-        <text x="290" y="98" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u306e\u307f\u7372\u5f97"}</text>
+        {/* Down arrow */}
+        <line x1={cx} y1="208" x2={cx} y2="248" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points={`${cx-5},248 ${cx},258 ${cx+5},248`} fill="#c8cedf"/>
 
-        {/* Arrow */}
-        <line x1="375" y1="70" x2="415" y2="70" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="415,65 425,70 415,75" fill="#c8cedf"/>
+        {/* ── Step 2: 自動振り分け ── */}
+        <rect x={cx-140} y="264" width="280" height="110" rx="18" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="2"/>
+        <SvgIcon d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3" x={cx} y={290} size={20} color="#7c5cfc"/>
+        <text x={cx} y="320" textAnchor="middle" fontSize="13" fontWeight="800" fill="#7c5cfc">{"STEP 2 \u2014 \u81ea\u52d5\u632f\u308a\u5206\u3051"}</text>
+        <text x={cx} y="340" textAnchor="middle" fontSize="10" fill="#6e7494">{"\u8868\u793a / \u975e\u8868\u793a\u5224\u5b9a \u30fb \u62c5\u5f53\u8005\u5206\u5c90"}</text>
+        <text x={cx} y="356" textAnchor="middle" fontSize="10" fill="#6e7494">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u306e\u307f\u7372\u5f97"}</text>
 
-        {/* Meeting booked */}
-        <rect x="430" y="30" width="120" height="80" rx="14" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
-        <SvgIcon d={ICON.cal} x={490} y={54} size={18} color="#12a37d"/>
-        <text x="490" y="78" textAnchor="middle" fontSize="10" fontWeight="800" fill="#12a37d">{"\u5546\u8ac7\u4e88\u7d04"}</text>
-        <text x="490" y="94" textAnchor="middle" fontSize="8" fill="#6e7494">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+        {/* Down arrow */}
+        <line x1={cx} y1="382" x2={cx} y2="422" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points={`${cx-5},422 ${cx},432 ${cx+5},422`} fill="#c8cedf"/>
 
-        {/* Arrow */}
-        <line x1="555" y1="70" x2="595" y2="70" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points="595,65 605,70 595,75" fill="#c8cedf"/>
+        {/* ── Step 3: 商談予約 + 追加ヒアリング (Chatbot mockup) ── */}
+        <rect x={cx-160} y="438" width="320" height="190" rx="18" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
+        <text x={cx} y="466" textAnchor="middle" fontSize="13" fontWeight="800" fill="#12a37d">{"STEP 3 \u2014 \u5546\u8ac7\u4e88\u7d04 \uff06 \u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+        {/* Calendar icon + booking */}
+        <rect x={cx-130} y="480" width="200" height="28" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
+        <text x={cx-120} y="498" fontSize="10" fill="#333">{"\ud83e\udd16 \u4e0b\u8a18\u65e5\u7a0b\u3067\u3054\u90fd\u5408\u306f\u3044\u304b\u304c\u3067\u3059\u304b\uff1f"}</text>
+        <rect x={cx-130} y="514" width="180" height="24" rx="8" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1"/>
+        <text x={cx-120} y="530" fontSize="9" fill="#3b6ff5">{"\ud83d\udcc5 3/10 14:00 \u3000\ud83d\udcc5 3/11 10:00 \u3000\ud83d\udcc5 3/12 15:00"}</text>
+        <rect x={cx+30} y="546" width="120" height="28" rx="10" fill="#12a37d"/>
+        <text x={cx+40} y="564" fontSize="10" fill="white">{"3/10 14:00\u3067\uff01"}</text>
+        <rect x={cx-130} y="582" width="220" height="28" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
+        <text x={cx-120} y="600" fontSize="10" fill="#333">{"\ud83e\udd16 \u5f53\u65e5\u307e\u3067\u306b\u78ba\u8a8d\u3057\u305f\u3044\u3053\u3068\u306f\u3042\u308a\u307e\u3059\u304b\uff1f"}</text>
 
-        {/* CRM + Notification */}
-        <rect x="610" y="15" width="130" height="50" rx="10" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1.5"/>
-        <text x="675" y="45" textAnchor="middle" fontSize="10" fontWeight="800" fill="#3b6ff5">{"CRM\u81ea\u52d5\u767b\u9332"}</text>
+        {/* Down arrow */}
+        <line x1={cx} y1="636" x2={cx} y2="676" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
+        <polygon points={`${cx-5},676 ${cx},686 ${cx+5},676`} fill="#c8cedf"/>
 
-        <rect x="610" y="75" width="130" height="50" rx="10" fill="#fff7ed" stroke="#f59e0b" strokeWidth="1.5"/>
-        <text x="675" y="105" textAnchor="middle" fontSize="10" fontWeight="800" fill="#d97706">{"\u5373\u65e5\u901a\u77e5"}</text>
+        {/* ── Step 4: CRM登録 + 通知 → 営業チーム ── */}
+        <g>
+          <rect x={cx-140} y="692" width="130" height="54" rx="12" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1.5"/>
+          <text x={cx-75} y="724" textAnchor="middle" fontSize="11" fontWeight="800" fill="#3b6ff5">{"CRM\u81ea\u52d5\u767b\u9332"}</text>
 
-        {/* Final arrow */}
-        <line x1="745" y1="40" x2="775" y2="70" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"/>
-        <line x1="745" y1="100" x2="775" y2="70" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"/>
+          <rect x={cx+10} y="692" width="130" height="54" rx="12" fill="#fff7ed" stroke="#f59e0b" strokeWidth="1.5"/>
+          <text x={cx+75} y="724" textAnchor="middle" fontSize="11" fontWeight="800" fill="#d97706">{"\u5373\u65e5\u901a\u77e5"}</text>
+        </g>
+
+        {/* Converging arrows */}
+        <line x1={cx-75} y1="750" x2={cx} y2="774" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"/>
+        <line x1={cx+75} y1="750" x2={cx} y2="774" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"/>
 
         {/* Sales team */}
-        <rect x="780" y="40" width="110" height="60" rx="12" fill="#12a37d" stroke="#0d8c6a" strokeWidth="1"/>
-        <SvgIcon d={ICON.users} x={835} y={60} size={16} color="white"/>
-        <text x="835" y="82" textAnchor="middle" fontSize="10" fontWeight="800" fill="white">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
+        <rect x={cx-70} y="778" width="140" height="40" rx="12" fill="#12a37d" stroke="#0d8c6a" strokeWidth="1"/>
+        <SvgIcon d={ICON.users} x={cx} y={788} size={16} color="white"/>
+        <text x={cx} y="808" textAnchor="middle" fontSize="11" fontWeight="800" fill="white">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
       </svg>
     </div>
   );
@@ -888,6 +1058,7 @@ export default function HomePageClient(){
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isDocModalOpen, setIsDocModalOpen] = useState(false);
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
+  const isMobile = useIsMobile(768);
   return(
     <div>
       <style dangerouslySetInnerHTML={{__html:css}}/>
@@ -921,10 +1092,129 @@ export default function HomePageClient(){
         <div className="section-inner">
           <div className="slabel">How it works</div>
           <div className="stitle">接点すべてが、<span style={{color:"var(--cta)"}}>商談獲得マシン</span>に変わる</div>
-          <p className="ssub" style={{margin:"0 auto"}}>7つのチャネルが同時に稼働。訪問者を逃さず捉え、温度が高いうちに商談へ変換します。</p>
+          <p className="ssub" style={{margin:"0 auto"}}>7つのチャネルが同時に稼働。訪問者を逃さず捉え、温度感が高いうちに商談へ変換します。</p>
 
           {/* Vertical Funnel: 7 channels inside Meeton ai → AI pipeline → Sales */}
           <div style={{marginTop:48,overflowX:"auto",padding:"8px 0"}}>
+            {isMobile ? (
+            <svg width="100%" viewBox="0 0 380 780" fill="none" style={{maxWidth:400,margin:"0 auto",display:"block"}}>
+              <defs>
+                <filter id="hubGlow"><feDropShadow dx="0" dy="4" stdDeviation="12" floodColor="#12a37d" floodOpacity=".18"/></filter>
+                <filter id="nodeGlow"><feDropShadow dx="0" dy="2" stdDeviation="6" floodOpacity=".08"/></filter>
+                <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#12a37d" stopOpacity=".07"/><stop offset="100%" stopColor="#0fc19a" stopOpacity=".02"/></linearGradient>
+                <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#3b6ff5"/><stop offset="100%" stopColor="#6690fa"/></linearGradient>
+                <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
+              </defs>
+
+              {/* Trapezoid funnel */}
+              <g filter="url(#hubGlow)">
+                <path d="M20,20 L360,20 Q375,20 375,35 L310,600 Q307,615 295,615 L85,615 Q73,615 70,600 L5,35 Q5,20 20,20 Z" fill="url(#hubGrad)" stroke="#12a37d" strokeWidth="2.5"/>
+              </g>
+              <path d="M20,20 L360,20 Q375,20 375,35 L310,600 Q307,615 295,615 L85,615 Q73,615 70,600 L5,35 Q5,20 20,20 Z" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="6 6" opacity=".3">
+                <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="6s" repeatCount="indefinite"/>
+              </path>
+
+              <text x="190" y="50" textAnchor="middle" fontSize="22" fontWeight="900" fill="#12a37d" fontFamily="var(--fb)">Meeton ai</text>
+
+              {/* 7 Channel cards - 2 columns */}
+              {[
+                {label:"AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",color:"#0891b2",icon:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"},
+                {label:"AI \u30e1\u30fc\u30eb",color:"#12a37d",icon:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"},
+                {label:"\u8cc7\u6599\u30da\u30fc\u30b8",color:"#3b6ff5",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3"},
+                {label:"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",color:"#7c5cfc",icon:"M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z"},
+                {label:"\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",color:"#d03ea1",icon:"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0"},
+                {label:"\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",color:"#e0475b",icon:"M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"},
+                {label:"\u30ab\u30ec\u30f3\u30c0\u30fcQR",color:"#c026d3",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"},
+              ].map((ch, i) => {
+                const col = i % 2;
+                const row = Math.floor(i / 2);
+                const cardW = 155;
+                const gap = 10;
+                const cx = col === 0 ? 190 - cardW - gap/2 : 190 + gap/2;
+                const cy = 64 + row * 46;
+                return (
+                  <g key={i}>
+                    <line x1={cx + cardW / 2} y1={cy + 38} x2={190} y2={260} stroke={ch.color} strokeWidth="1" strokeDasharray="4 4" opacity=".25">
+                      <animate attributeName="stroke-dashoffset" from="16" to="0" dur={`${1.5 + i * 0.12}s`} repeatCount="indefinite"/>
+                    </line>
+                    <circle r="2" fill={ch.color} opacity=".5">
+                      <animateMotion dur={`${2.5 + i * 0.18}s`} repeatCount="indefinite" path={`M${cx + cardW / 2},${cy + 38} L190,260`}/>
+                    </circle>
+                    <g filter="url(#nodeGlow)">
+                      <rect x={cx} y={cy} width={cardW} height="36" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
+                      <g transform={`translate(${cx + 10}, ${cy + 6})`}>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
+                      </g>
+                      <text x={cx + 38} y={cy + 23} fontSize="12" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
+                    </g>
+                  </g>
+                );
+              })}
+
+              {/* Convergence */}
+              <circle cx="190" cy="260" r="14" fill="#12a37d" opacity=".12"/>
+              <circle cx="190" cy="260" r="5" fill="#12a37d"/>
+              <circle cx="190" cy="260" r="14" fill="none" stroke="#12a37d" strokeWidth="1.5" opacity="0">
+                <animate attributeName="r" from="5" to="22" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from=".4" to="0" dur="2s" repeatCount="indefinite"/>
+              </circle>
+
+              {/* Arrow down */}
+              <line x1="190" y1="276" x2="190" y2="305" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+                <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="184,303 190,315 196,303" fill="#12a37d"/>
+
+              {/* Pipeline steps */}
+              <g filter="url(#nodeGlow)">
+                <rect x="120" y="320" width="140" height="48" rx="14" fill="url(#stepGrad)"/>
+                <text x="190" y="350" textAnchor="middle" fontSize="16" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+              </g>
+              <line x1="190" y1="368" x2="190" y2="393" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+                <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="184,391 190,403 196,391" fill="#12a37d"/>
+
+              <g filter="url(#nodeGlow)">
+                <rect x="120" y="408" width="140" height="48" rx="14" fill="url(#stepGrad)"/>
+                <text x="190" y="438" textAnchor="middle" fontSize="16" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u5546\u8ac7\u4e88\u7d04"}</text>
+              </g>
+              <line x1="190" y1="456" x2="190" y2="481" stroke="#12a37d" strokeWidth="2.5" strokeDasharray="4 3">
+                <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="184,479 190,491 196,479" fill="#12a37d"/>
+
+              <g filter="url(#nodeGlow)">
+                <rect x="120" y="496" width="140" height="48" rx="14" fill="url(#stepGrad)"/>
+                <text x="190" y="526" textAnchor="middle" fontSize="16" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+              </g>
+
+              <circle r="4" fill="white" opacity=".8">
+                <animateMotion dur="3.5s" repeatCount="indefinite" path="M190,345 L190,433 L190,521"/>
+              </circle>
+
+              {/* Exit */}
+              <rect x="172" y="608" width="36" height="14" fill="var(--surface)"/>
+              <line x1="190" y1="544" x2="190" y2="645" stroke="#3b6ff5" strokeWidth="3" strokeDasharray="8 4">
+                <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="183,643 190,657 197,643" fill="#3b6ff5"/>
+              <circle r="4" fill="#3b6ff5" opacity=".6">
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M190,544 L190,653"/>
+              </circle>
+              <circle cx="190" cy="657" r="6" fill="none" stroke="#3b6ff5" strokeWidth="2" opacity="0">
+                <animate attributeName="r" from="6" to="20" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from=".5" to="0" dur="2s" repeatCount="indefinite"/>
+              </circle>
+
+              {/* Sales team */}
+              <g filter="url(#nodeGlow)">
+                <rect x="100" y="670" width="180" height="76" rx="18" fill="url(#salesGrad)"/>
+                <text x="190" y="700" textAnchor="middle" fontSize="18" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
+                <text x="190" y="722" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
+              </g>
+            </svg>
+            ) : (
             <svg width="100%" viewBox="0 0 800 700" fill="none" style={{maxWidth:800,margin:"0 auto",display:"block"}}>
               <defs>
                 <filter id="hubGlow"><feDropShadow dx="0" dy="4" stdDeviation="12" floodColor="#12a37d" floodOpacity=".18"/></filter>
@@ -1058,6 +1348,7 @@ export default function HomePageClient(){
                 <text x="400" y="662" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
               </g>
             </svg>
+            )}
           </div>
         </div>
       </section>
@@ -1101,7 +1392,7 @@ export default function HomePageClient(){
           <div className="stitle" style={{textAlign:"center"}}>{"すべてのチャネルに、予約を後押しするAIがいる"}</div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>{"カレンダー表示だけでは予約されない。AIチャットが疑問を解消し、最後の一押しで離脱を防ぎます。"}</p>
           <div style={{marginTop:48,overflowX:"auto"}}>
-            <DiagramAIConcierge/>
+            {isMobile ? <DiagramAIConciergeMobile/> : <DiagramAIConcierge/>}
           </div>
         </div>
       </section>
