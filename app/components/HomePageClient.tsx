@@ -923,98 +923,138 @@ export default function HomePageClient(){
           <div className="stitle">接点すべてが、<span style={{color:"var(--cta)"}}>商談獲得マシン</span>に変わる</div>
           <p className="ssub" style={{margin:"0 auto"}}>7つのチャネルが同時に稼働。訪問者を逃さず捉え、温度が高いうちに商談へ変換します。</p>
 
-          {/* Hub & Spoke diagram: 7 sources → Meeton ai → Sales */}
+          {/* Ecosystem diagram: 7 channels live INSIDE Meeton ai → output to Sales */}
           <div style={{marginTop:48,overflowX:"auto",padding:"8px 0"}}>
-            <svg width="100%" viewBox="0 0 960 460" fill="none" style={{maxWidth:960,margin:"0 auto",display:"block"}}>
+            <svg width="100%" viewBox="0 0 960 480" fill="none" style={{maxWidth:960,margin:"0 auto",display:"block"}}>
               <defs>
                 <filter id="hubGlow"><feDropShadow dx="0" dy="4" stdDeviation="12" floodColor="#12a37d" floodOpacity=".18"/></filter>
                 <filter id="nodeGlow"><feDropShadow dx="0" dy="2" stdDeviation="6" floodOpacity=".08"/></filter>
-                <linearGradient id="hubGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
+                <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#12a37d" stopOpacity=".06"/><stop offset="100%" stopColor="#0fc19a" stopOpacity=".02"/></linearGradient>
                 <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#3b6ff5"/><stop offset="100%" stopColor="#6690fa"/></linearGradient>
+                <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#12a37d"/><stop offset="100%" stopColor="#0fc19a"/></linearGradient>
               </defs>
 
-              {/* 7 Source nodes - left arc */}
+              {/* ── Meeton ai Ecosystem boundary ── */}
+              <g filter="url(#hubGlow)">
+                <rect x="12" y="12" width="720" height="456" rx="24" fill="url(#hubGrad)" stroke="#12a37d" strokeWidth="2" strokeDasharray="8 4" opacity=".8"/>
+              </g>
+              {/* Ecosystem label */}
+              <text x="372" y="46" textAnchor="middle" fontSize="24" fontWeight="900" fill="#12a37d" fontFamily="var(--fb)">Meeton ai</text>
+              <text x="372" y="64" textAnchor="middle" fontSize="11" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{"\u30a8\u30b3\u30b7\u30b9\u30c6\u30e0"}</text>
+
+              {/* Rotating orbit around ecosystem */}
+              <rect x="12" y="12" width="720" height="456" rx="24" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="4 6" opacity=".25">
+                <animate attributeName="stroke-dashoffset" from="0" to="40" dur="8s" repeatCount="indefinite"/>
+              </rect>
+
+              {/* ── 7 Channel cards (inside ecosystem, left zone) ── */}
               {[
-                {y:30,label:"AI \u30c1\u30e3\u30c3\u30c8",sub:"\u8a2a\u554f\u8005\u5bfe\u5fdc",color:"#0891b2",icon:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"},
-                {y:90,label:"AI \u30e1\u30fc\u30eb",sub:"\u81ea\u52d5\u80b2\u6210",color:"#12a37d",icon:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"},
-                {y:150,label:"\u8cc7\u6599DL\u30bb\u30f3\u30bf\u30fc",sub:"\u30ea\u30fc\u30c9\u7372\u5f97",color:"#3b6ff5",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3"},
-                {y:210,label:"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",sub:"\u5373\u5ea7\u4e88\u7d04",color:"#7c5cfc",icon:"M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z"},
-                {y:270,label:"AI \u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",sub:"\u30da\u30fc\u30b8\u9023\u52d5",color:"#d03ea1",icon:"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0"},
-                {y:330,label:"\u30e1\u30fc\u30eb\u30ab\u30ec\u30f3\u30c0\u30fc",sub:"\u30ef\u30f3\u30af\u30ea\u30c3\u30af\u4e88\u7d04",color:"#e0475b",icon:"M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"},
-                {y:390,label:"PDF\u30fb\u8cc7\u6599\u5185\u4e88\u7d04",sub:"QR / URL",color:"#c026d3",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"},
-              ].map((src, i) => {
-                const nx = 40;
-                const ny = src.y;
-                const cx = 480; // hub center x
-                const cy = 210; // hub center y
+                {label:"AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",color:"#0891b2",icon:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"},
+                {label:"AI \u30e1\u30fc\u30eb",color:"#12a37d",icon:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"},
+                {label:"\u8cc7\u6599\u30da\u30fc\u30b8",color:"#3b6ff5",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3"},
+                {label:"\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",color:"#7c5cfc",icon:"M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z"},
+                {label:"\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",color:"#d03ea1",icon:"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0"},
+                {label:"\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",color:"#e0475b",icon:"M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"},
+                {label:"\u30ab\u30ec\u30f3\u30c0\u30fcQR",color:"#c026d3",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"},
+              ].map((ch, i) => {
+                const col = i < 4 ? 0 : 1;
+                const row = i < 4 ? i : i - 4;
+                const cx = 36 + col * 155;
+                const cy = 86 + row * 52;
+                const arrowEndX = 420;
+                const arrowEndY = 260;
                 return (
                   <g key={i}>
-                    {/* Animated connection line */}
-                    <line x1={nx + 190} y1={ny + 24} x2={cx - 80} y2={cy} stroke={src.color} strokeWidth="1.5" strokeDasharray="6 4" opacity=".4">
-                      <animate attributeName="stroke-dashoffset" from="20" to="0" dur={`${1.2 + i * 0.15}s`} repeatCount="indefinite"/>
+                    {/* Animated flow line to pipeline */}
+                    <line x1={cx + 140} y1={cy + 20} x2={arrowEndX} y2={arrowEndY} stroke={ch.color} strokeWidth="1" strokeDasharray="4 4" opacity=".3">
+                      <animate attributeName="stroke-dashoffset" from="16" to="0" dur={`${1.5 + i * 0.12}s`} repeatCount="indefinite"/>
                     </line>
-                    {/* Animated dot traveling along line */}
-                    <circle r="3" fill={src.color} opacity=".7">
-                      <animateMotion dur={`${2 + i * 0.2}s`} repeatCount="indefinite" path={`M${nx + 190},${ny + 24} L${cx - 70},${cy}`}/>
+                    <circle r="2.5" fill={ch.color} opacity=".5">
+                      <animateMotion dur={`${2.2 + i * 0.15}s`} repeatCount="indefinite" path={`M${cx + 140},${cy + 20} L${arrowEndX},${arrowEndY}`}/>
                     </circle>
-                    {/* Source card */}
+                    {/* Channel card */}
                     <g filter="url(#nodeGlow)">
-                      <rect x={nx} y={ny} width="190" height="48" rx="12" fill="white" stroke={src.color} strokeWidth="1.5"/>
-                      <g transform={`translate(${nx + 16}, ${ny + 12})`}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={src.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d={src.icon}/>
-                        </svg>
+                      <rect x={cx} y={cy} width="140" height="40" rx="10" fill="white" stroke={ch.color} strokeWidth="1.5"/>
+                      <g transform={`translate(${cx + 10}, ${cy + 8})`}>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
                       </g>
-                      <text x={nx + 50} y={ny + 22} fontSize="12" fontWeight="800" fill="#0f1128" fontFamily="var(--fb)">{src.label}</text>
-                      <text x={nx + 50} y={ny + 38} fontSize="10" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{src.sub}</text>
+                      <text x={cx + 40} y={cy + 25} fontSize="10" fontWeight="700" fill="#0f1128" fontFamily="var(--fb)">{ch.label}</text>
                     </g>
                   </g>
                 );
               })}
 
-              {/* Central Hub - Meeton ai */}
-              <g filter="url(#hubGlow)">
-                <circle cx="480" cy="210" r="80" fill="url(#hubGrad)"/>
-                <circle cx="480" cy="210" r="80" fill="none" stroke="white" strokeWidth="2" opacity=".3"/>
-                <circle cx="480" cy="210" r="92" fill="none" stroke="#12a37d" strokeWidth="1" strokeDasharray="4 4" opacity=".3">
-                  <animateTransform attributeName="transform" type="rotate" from="0 480 210" to="360 480 210" dur="30s" repeatCount="indefinite"/>
-                </circle>
-                <text x="480" y="200" textAnchor="middle" fontSize="22" fontWeight="900" fill="white" fontFamily="var(--fb)">Meeton ai</text>
-                {/* 3 capabilities always visible */}
-                <line x1="436" y1="212" x2="524" y2="212" stroke="rgba(255,255,255,.25)" strokeWidth="1"/>
-                <text x="480" y="230" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
-                <text x="480" y="246" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u5546\u8ac7\u7372\u5f97"}</text>
-                <text x="480" y="262" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,.9)" fontFamily="var(--fb)">{"\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
+              {/* ── AI Processing Pipeline (center-right inside ecosystem) ── */}
+              {/* Converge point */}
+              <circle cx="420" cy="260" r="14" fill="#12a37d" opacity=".15"/>
+              <circle cx="420" cy="260" r="6" fill="#12a37d"/>
+
+              {/* Pipeline arrow down to steps */}
+              <line x1="420" y1="274" x2="420" y2="300" stroke="#12a37d" strokeWidth="2"/>
+
+              {/* Step 1: 精査 */}
+              <g filter="url(#nodeGlow)">
+                <rect x="370" y="300" width="100" height="44" rx="12" fill="url(#stepGrad)"/>
+                <text x="420" y="327" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u7cbe\u67fb"}</text>
+              </g>
+              <line x1="470" y1="322" x2="500" y2="322" stroke="#12a37d" strokeWidth="2" strokeDasharray="4 3">
+                <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="500,318 508,322 500,326" fill="#12a37d"/>
+
+              {/* Step 2: 商談予約 */}
+              <g filter="url(#nodeGlow)">
+                <rect x="510" y="300" width="100" height="44" rx="12" fill="url(#stepGrad)"/>
+                <text x="560" y="327" textAnchor="middle" fontSize="13" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u5546\u8ac7\u4e88\u7d04"}</text>
+              </g>
+              <line x1="610" y1="322" x2="640" y2="322" stroke="#12a37d" strokeWidth="2" strokeDasharray="4 3">
+                <animate attributeName="stroke-dashoffset" from="14" to="0" dur="1s" repeatCount="indefinite"/>
+              </line>
+              <polygon points="640,318 648,322 640,326" fill="#12a37d"/>
+
+              {/* Step 3: ヒアリング */}
+              <g filter="url(#nodeGlow)">
+                <rect x="650" y="300" width="72" height="44" rx="12" fill="url(#stepGrad)"/>
+                <text x="686" y="318" textAnchor="middle" fontSize="10" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u8ffd\u52a0"}</text>
+                <text x="686" y="334" textAnchor="middle" fontSize="10" fontWeight="800" fill="white" fontFamily="var(--fb)">{"\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
               </g>
 
-              {/* Pulse rings around hub */}
-              <circle cx="480" cy="210" r="80" fill="none" stroke="#12a37d" strokeWidth="2" opacity="0">
-                <animate attributeName="r" from="80" to="110" dur="2s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" from=".4" to="0" dur="2s" repeatCount="indefinite"/>
+              {/* Pipeline label */}
+              <text x="555" y="368" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6e7494" fontFamily="var(--fb)">{"\u2191 AI\u304c\u81ea\u52d5\u3067\u7cbe\u67fb\u30fb\u4e88\u7d04\u30fb\u30d2\u30a2\u30ea\u30f3\u30b0\u3092\u5b8c\u7d50"}</text>
+
+              {/* Animated dots along pipeline */}
+              <circle r="3" fill="white" opacity=".8">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M420,322 L508,322 L648,322 L720,322"/>
               </circle>
 
-              {/* Arrow from hub to sales */}
-              <line x1="570" y1="210" x2="680" y2="210" stroke="#3b6ff5" strokeWidth="2.5" strokeDasharray="8 4">
+              {/* ── Exit arrow: breaking out of ecosystem boundary ── */}
+              <line x1="722" y1="322" x2="770" y2="322" stroke="#3b6ff5" strokeWidth="3" strokeDasharray="8 4">
                 <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
               </line>
-              <polygon points="680,202 696,210 680,218" fill="#3b6ff5"/>
+              <polygon points="770,315 784,322 770,329" fill="#3b6ff5"/>
 
-              {/* Animated dots on output line */}
+              {/* Animated output dot */}
               <circle r="4" fill="#3b6ff5" opacity=".6">
-                <animateMotion dur="1.5s" repeatCount="indefinite" path="M570,210 L680,210"/>
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M722,322 L780,322"/>
               </circle>
 
-              {/* Sales team */}
+              {/* "Ecosystem boundary break" visual marker */}
+              <rect x="728" y="308" width="8" height="28" fill="var(--surface)" opacity=".9"/>
+
+              {/* ── Sales team (OUTSIDE ecosystem) ── */}
               <g filter="url(#nodeGlow)">
-                <rect x="710" y="160" width="210" height="100" rx="20" fill="url(#salesGrad)"/>
-                <text x="815" y="198" textAnchor="middle" fontSize="16" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
-                <text x="815" y="220" textAnchor="middle" fontSize="11" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
-                <g transform="translate(801, 230)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="796" y="274" width="150" height="96" rx="18" fill="url(#salesGrad)"/>
+                <text x="871" y="310" textAnchor="middle" fontSize="16" fontWeight="900" fill="white" fontFamily="var(--fb)">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
+                <text x="871" y="332" textAnchor="middle" fontSize="10" fontWeight="600" fill="rgba(255,255,255,.8)" fontFamily="var(--fb)">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}</text>
+                <g transform="translate(857, 342)">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                   </svg>
                 </g>
               </g>
+
+              {/* Label outside */}
+              <text x="871" y="260" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b6ff5" fontFamily="var(--fb)">{"\u2190 \u521d\u3081\u3066\u5916\u306b\u51fa\u308b"}</text>
             </svg>
           </div>
         </div>
