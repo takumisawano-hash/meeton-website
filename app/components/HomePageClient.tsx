@@ -96,6 +96,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .feat-title{font-size:clamp(22px,3vw,28px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:14px;line-height:1.3}
 .feat-desc{font-size:16px;line-height:1.85;color:var(--sub)}
 
+/* QUALITY FLOW DIAGRAM */
+.qflow-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch}
+.qflow-arrow-h{display:flex}
+.qflow-arrow-v{display:none}
+.qflow-arrow-row2{display:contents}
+.qflow-arrow-row2>div:first-child{grid-column:1;justify-self:center}
+.qflow-arrow-row2>div:last-child{grid-column:3;justify-self:center}
+
 /* QUALITY SECTION */
 .qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
 .qual-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px;transition:all .35s;box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden}
@@ -182,6 +190,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .feat-card:nth-child(even){direction:ltr}
   .feat-card-vis{border-left:none!important;border-right:none!important;border-top:1px solid var(--border);min-height:280px}
   .feat-card-body{padding:32px 28px}
+  .qflow-grid{grid-template-columns:1fr;gap:0}
+  .qflow-arrow-h{display:none!important}
+  .qflow-arrow-v{display:flex!important}
+  .qflow-arrow-row2{display:flex;flex-direction:column;align-items:center}
+  .qflow-arrow-row2>div:last-child{display:none}
   .qual-grid{grid-template-columns:1fr}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
@@ -949,74 +962,74 @@ const diagramComponents = [
 
 /* ── Quality Section Diagram ── */
 function QualityFlowDiagram() {
-  const cx = 220; // center x
+  const cardBase:React.CSSProperties = {borderRadius:18,padding:"28px 24px",position:"relative",flex:1,minWidth:0};
+  const stepLabel:React.CSSProperties = {fontSize:13,fontWeight:800,marginBottom:14};
+  const bubble:React.CSSProperties = {borderRadius:10,padding:"8px 14px",fontSize:11,lineHeight:1.5};
+  const bubbleBot:React.CSSProperties = {...bubble,background:"white",border:"1px solid #c8cedf",color:"#333"};
+  const bubbleUser:React.CSSProperties = {...bubble,background:"#12a37d",color:"white",alignSelf:"flex-end"};
+  const arrowH:React.CSSProperties = {display:"flex",alignItems:"center",justifyContent:"center",color:"#c8cedf",fontSize:28,fontWeight:300,padding:"0 4px",flexShrink:0};
+  const arrowV:React.CSSProperties = {display:"flex",alignItems:"center",justifyContent:"center",color:"#c8cedf",fontSize:28,fontWeight:300,padding:"4px 0"};
+
   return (
     <div style={{marginTop:48,padding:"32px 0"}}>
-      <svg width="100%" viewBox="0 0 440 820" fill="none" style={{maxWidth:440,margin:"0 auto",display:"block"}}>
+      <div className="qflow-grid">
+        {/* Row 1 */}
+        <div style={{...cardBase,background:"#e5f8f2",border:"2px solid #12a37d"}}>
+          <div style={{...stepLabel,color:"#12a37d"}}>STEP 1 — 事前ヒアリング</div>
+          <div style={{display:"flex",flexDirection:"column",gap:8}}>
+            <div style={bubbleBot}>🤖 ご検討中の課題を教えてください</div>
+            <div style={bubbleUser}>リード獲得を自動化したい</div>
+            <div style={bubbleBot}>🤖 現在のチーム規模は？</div>
+            <div style={bubbleUser}>5名で運用中です</div>
+          </div>
+        </div>
 
-        {/* ── Step 1: 事前ヒアリング (Chatbot mockup) ── */}
-        <rect x={cx-160} y="0" width="320" height="200" rx="18" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
-        <text x={cx} y="28" textAnchor="middle" fontSize="13" fontWeight="800" fill="#12a37d">{"STEP 1 \u2014 \u4e8b\u524d\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
-        {/* Chat bubbles */}
-        <rect x={cx-130} y="42" width="180" height="30" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
-        <text x={cx-120} y="62" fontSize="10" fill="#333">{"\ud83e\udd16 \u3054\u691c\u8a0e\u4e2d\u306e\u8ab2\u984c\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044"}</text>
-        <rect x={cx+10} y="80" width="140" height="28" rx="10" fill="#12a37d"/>
-        <text x={cx+20} y="98" fontSize="10" fill="white">{"\u30ea\u30fc\u30c9\u7372\u5f97\u3092\u81ea\u52d5\u5316\u3057\u305f\u3044"}</text>
-        <rect x={cx-130} y="116" width="200" height="28" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
-        <text x={cx-120} y="134" fontSize="10" fill="#333">{"\ud83e\udd16 \u73fe\u5728\u306e\u30c1\u30fc\u30e0\u898f\u6a21\u306f\uff1f"}</text>
-        <rect x={cx+40} y="152" width="110" height="28" rx="10" fill="#12a37d"/>
-        <text x={cx+50} y="170" fontSize="10" fill="white">{"5\u540d\u3067\u904b\u7528\u4e2d\u3067\u3059"}</text>
+        <div style={arrowH} className="qflow-arrow-h"><span>→</span></div>
+        <div style={arrowV} className="qflow-arrow-v"><span>↓</span></div>
 
-        {/* Down arrow */}
-        <line x1={cx} y1="208" x2={cx} y2="248" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points={`${cx-5},248 ${cx},258 ${cx+5},248`} fill="#c8cedf"/>
+        <div style={{...cardBase,background:"#f0ecfe",border:"2px solid #7c5cfc"}}>
+          <div style={{...stepLabel,color:"#7c5cfc"}}>STEP 2 — 自動振り分け</div>
+          <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10,padding:"12px 0"}}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3"/></svg>
+            <div style={{fontSize:13,color:"#6e7494",textAlign:"center",lineHeight:1.7}}>表示 / 非表示判定・担当者分岐<br/>質の高い商談のみ獲得</div>
+          </div>
+        </div>
 
-        {/* ── Step 2: 自動振り分け ── */}
-        <rect x={cx-140} y="264" width="280" height="110" rx="18" fill="#f0ecfe" stroke="#7c5cfc" strokeWidth="2"/>
-        <SvgIcon d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3" x={cx} y={290} size={20} color="#7c5cfc"/>
-        <text x={cx} y="320" textAnchor="middle" fontSize="13" fontWeight="800" fill="#7c5cfc">{"STEP 2 \u2014 \u81ea\u52d5\u632f\u308a\u5206\u3051"}</text>
-        <text x={cx} y="340" textAnchor="middle" fontSize="10" fill="#6e7494">{"\u8868\u793a / \u975e\u8868\u793a\u5224\u5b9a \u30fb \u62c5\u5f53\u8005\u5206\u5c90"}</text>
-        <text x={cx} y="356" textAnchor="middle" fontSize="10" fill="#6e7494">{"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u306e\u307f\u7372\u5f97"}</text>
+        {/* Row connector */}
+        <div className="qflow-arrow-row2">
+          <div style={arrowV}><span>↓</span></div>
+          <div style={arrowV}><span>↓</span></div>
+        </div>
 
-        {/* Down arrow */}
-        <line x1={cx} y1="382" x2={cx} y2="422" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points={`${cx-5},422 ${cx},432 ${cx+5},422`} fill="#c8cedf"/>
+        {/* Row 2 */}
+        <div style={{...cardBase,background:"#e5f8f2",border:"2px solid #12a37d"}}>
+          <div style={{...stepLabel,color:"#12a37d"}}>STEP 3 — 商談予約 ＆ 追加ヒアリング</div>
+          <div style={{display:"flex",flexDirection:"column",gap:8}}>
+            <div style={bubbleBot}>🤖 下記日程でご都合はいかがですか？</div>
+            <div style={{...bubble,background:"#eaf0fe",border:"1px solid #3b6ff5",color:"#3b6ff5",fontSize:10}}>📅 3/10 14:00　📅 3/11 10:00　📅 3/12 15:00</div>
+            <div style={bubbleUser}>3/10 14:00で！</div>
+            <div style={bubbleBot}>🤖 当日までに確認したいことはありますか？</div>
+          </div>
+        </div>
 
-        {/* ── Step 3: 商談予約 + 追加ヒアリング (Chatbot mockup) ── */}
-        <rect x={cx-160} y="438" width="320" height="190" rx="18" fill="#e5f8f2" stroke="#12a37d" strokeWidth="2"/>
-        <text x={cx} y="466" textAnchor="middle" fontSize="13" fontWeight="800" fill="#12a37d">{"STEP 3 \u2014 \u5546\u8ac7\u4e88\u7d04 \uff06 \u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0"}</text>
-        {/* Calendar icon + booking */}
-        <rect x={cx-130} y="480" width="200" height="28" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
-        <text x={cx-120} y="498" fontSize="10" fill="#333">{"\ud83e\udd16 \u4e0b\u8a18\u65e5\u7a0b\u3067\u3054\u90fd\u5408\u306f\u3044\u304b\u304c\u3067\u3059\u304b\uff1f"}</text>
-        <rect x={cx-130} y="514" width="180" height="24" rx="8" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1"/>
-        <text x={cx-120} y="530" fontSize="9" fill="#3b6ff5">{"\ud83d\udcc5 3/10 14:00 \u3000\ud83d\udcc5 3/11 10:00 \u3000\ud83d\udcc5 3/12 15:00"}</text>
-        <rect x={cx+30} y="546" width="120" height="28" rx="10" fill="#12a37d"/>
-        <text x={cx+40} y="564" fontSize="10" fill="white">{"3/10 14:00\u3067\uff01"}</text>
-        <rect x={cx-130} y="582" width="220" height="28" rx="10" fill="white" stroke="#c8cedf" strokeWidth="1"/>
-        <text x={cx-120} y="600" fontSize="10" fill="#333">{"\ud83e\udd16 \u5f53\u65e5\u307e\u3067\u306b\u78ba\u8a8d\u3057\u305f\u3044\u3053\u3068\u306f\u3042\u308a\u307e\u3059\u304b\uff1f"}</text>
+        <div style={arrowH} className="qflow-arrow-h"><span>→</span></div>
+        <div style={arrowV} className="qflow-arrow-v"><span>↓</span></div>
 
-        {/* Down arrow */}
-        <line x1={cx} y1="636" x2={cx} y2="676" stroke="#c8cedf" strokeWidth="2" strokeDasharray="6 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite"/></line>
-        <polygon points={`${cx-5},676 ${cx},686 ${cx+5},676`} fill="#c8cedf"/>
-
-        {/* ── Step 4: CRM登録 + 通知 → 営業チーム ── */}
-        <g>
-          <rect x={cx-140} y="692" width="130" height="54" rx="12" fill="#eaf0fe" stroke="#3b6ff5" strokeWidth="1.5"/>
-          <text x={cx-75} y="724" textAnchor="middle" fontSize="11" fontWeight="800" fill="#3b6ff5">{"CRM\u81ea\u52d5\u767b\u9332"}</text>
-
-          <rect x={cx+10} y="692" width="130" height="54" rx="12" fill="#fff7ed" stroke="#f59e0b" strokeWidth="1.5"/>
-          <text x={cx+75} y="724" textAnchor="middle" fontSize="11" fontWeight="800" fill="#d97706">{"\u5373\u65e5\u901a\u77e5"}</text>
-        </g>
-
-        {/* Converging arrows */}
-        <line x1={cx-75} y1="750" x2={cx} y2="774" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"/>
-        <line x1={cx+75} y1="750" x2={cx} y2="774" stroke="#c8cedf" strokeWidth="1.5" strokeDasharray="4 3"/>
-
-        {/* Sales team */}
-        <rect x={cx-70} y="778" width="140" height="40" rx="12" fill="#12a37d" stroke="#0d8c6a" strokeWidth="1"/>
-        <SvgIcon d={ICON.users} x={cx} y={788} size={16} color="white"/>
-        <text x={cx} y="808" textAnchor="middle" fontSize="11" fontWeight="800" fill="white">{"\u55b6\u696d\u30c1\u30fc\u30e0"}</text>
-      </svg>
+        <div style={{...cardBase,display:"flex",flexDirection:"column",gap:14}}>
+          <div style={{display:"flex",gap:12,flex:1}}>
+            <div style={{flex:1,background:"#eaf0fe",border:"1.5px solid #3b6ff5",borderRadius:12,padding:"18px 16px",textAlign:"center"}}>
+              <div style={{fontSize:13,fontWeight:800,color:"#3b6ff5"}}>CRM自動登録</div>
+            </div>
+            <div style={{flex:1,background:"#fff7ed",border:"1.5px solid #f59e0b",borderRadius:12,padding:"18px 16px",textAlign:"center"}}>
+              <div style={{fontSize:13,fontWeight:800,color:"#d97706"}}>即日通知</div>
+            </div>
+          </div>
+          <div style={{background:"#12a37d",borderRadius:12,padding:"14px 20px",textAlign:"center",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ICON.users}/></svg>
+            <span style={{fontSize:13,fontWeight:800,color:"white"}}>営業チーム</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
