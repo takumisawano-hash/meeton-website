@@ -97,7 +97,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .feat-desc{font-size:16px;line-height:1.85;color:var(--sub)}
 
 /* QUALITY FLOW DIAGRAM */
-.qflow-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch}
+.qflow-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:860px;margin:0 auto}
 .qflow-arrow-h{display:flex}
 .qflow-arrow-v{display:none}
 .qflow-arrow-row2{display:contents}
