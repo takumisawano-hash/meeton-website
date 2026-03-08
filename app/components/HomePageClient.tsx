@@ -97,7 +97,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .feat-desc{font-size:16px;line-height:1.85;color:var(--sub)}
 
 /* QUALITY FLOW DIAGRAM */
-.qflow-grid{display:flex;flex-direction:column;max-width:520px;margin:0 auto;width:100%}
+.qflow-row{display:flex;align-items:stretch;gap:0;max-width:900px;margin:0 auto;width:100%}
+.qflow-row .qflow-card{flex:1;min-width:0}
+.qflow-row .qflow-connector{display:flex;flex-direction:column;align-items:center;justify-content:center;width:60px;flex-shrink:0;position:relative}
+.qflow-row .qflow-connector::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:#e0e4ef}
+.qflow-row-reverse{flex-direction:row-reverse}
+.qflow-gate-row{display:flex;justify-content:center;padding:4px 0}
+.qflow-arrow-col{display:flex;justify-content:center;padding:4px 0;color:#c8cedf;font-size:28;font-weight:300}
 
 /* QUALITY SECTION */
 .qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
@@ -185,7 +191,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .feat-card:nth-child(even){direction:ltr}
   .feat-card-vis{border-left:none!important;border-right:none!important;border-top:1px solid var(--border);min-height:280px}
   .feat-card-body{padding:32px 28px}
-  .qflow-grid{max-width:100%}
+  .qflow-row{flex-direction:column!important;max-width:100%}
+  .qflow-row-reverse{flex-direction:column!important}
+  .qflow-row .qflow-connector{width:auto;height:auto;flex-direction:row;padding:4px 0}
+  .qflow-row .qflow-connector::before{display:none}
   .qual-grid{grid-template-columns:1fr}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
@@ -953,75 +962,87 @@ const diagramComponents = [
 
 /* ── Quality Section Diagram ── */
 function QualityFlowDiagram() {
-  const cardBase:React.CSSProperties = {borderRadius:18,padding:"28px 24px",position:"relative"};
-  const stepLabel:React.CSSProperties = {fontSize:13,fontWeight:800,marginBottom:14};
-  const bubble:React.CSSProperties = {borderRadius:10,padding:"8px 14px",fontSize:11,lineHeight:1.5};
+  const card:React.CSSProperties = {borderRadius:18,padding:"24px 20px"};
+  const stepLabel:React.CSSProperties = {fontSize:13,fontWeight:800,marginBottom:10};
+  const bubble:React.CSSProperties = {borderRadius:10,padding:"7px 13px",fontSize:11,lineHeight:1.5};
   const bubbleBot:React.CSSProperties = {...bubble,background:"white",border:"1px solid #c8cedf",color:"#333"};
   const bubbleUser:React.CSSProperties = {...bubble,background:"#12a37d",color:"white",alignSelf:"flex-end"};
-  const arrowDown:React.CSSProperties = {display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",color:"#c8cedf",fontSize:28,fontWeight:300,padding:"4px 0"};
-  const gateStyle:React.CSSProperties = {display:"flex",alignItems:"center",justifyContent:"center",gap:8,background:"#f0ecfe",border:"2px dashed #7c5cfc",borderRadius:12,padding:"10px 20px",margin:"0 auto",maxWidth:360};
+  const connectorDot:React.CSSProperties = {width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,fontWeight:800,color:"white",zIndex:2};
 
   return (
-    <div style={{marginTop:48,padding:"32px 0",maxWidth:520,margin:"48px auto 0"}}>
-      {/* STEP 1 — 事前ヒアリング */}
-      <div style={{...cardBase,background:"#e5f8f2",border:"2px solid #12a37d"}}>
-        <div style={{...stepLabel,color:"#12a37d"}}>STEP 1 — 事前ヒアリング</div>
-        <div style={{fontSize:12,color:"#555",marginBottom:12,lineHeight:1.6}}>商談前に必要項目の入力へ誘導。基準を満たしたリードのみ次のステップへ。</div>
-        <div style={{display:"flex",flexDirection:"column",gap:8}}>
-          <div style={bubbleBot}>ご検討中の課題を教えてください</div>
-          <div style={bubbleUser}>リード獲得を自動化したい</div>
-          <div style={bubbleBot}>現在のチーム規模は？</div>
-          <div style={bubbleUser}>5名で運用中です</div>
-          <div style={bubbleBot}>ご予算感を教えてください</div>
-          <div style={bubbleUser}>月30万円程度を想定</div>
-        </div>
-      </div>
-
-      {/* Gate: 基準判定 */}
-      <div style={arrowDown}><span>↓</span></div>
-      <div style={gateStyle}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3"/></svg>
-        <span style={{fontSize:12,fontWeight:700,color:"#7c5cfc"}}>基準を満たしたリードのみ通過</span>
-      </div>
-
-      {/* STEP 2 — 日時確定 */}
-      <div style={arrowDown}><span>↓</span></div>
-      <div style={{...cardBase,background:"#eaf0fe",border:"2px solid #3b6ff5"}}>
-        <div style={{...stepLabel,color:"#3b6ff5"}}>STEP 2 — 商談日時の確定</div>
-        <div style={{display:"flex",flexDirection:"column",gap:8}}>
-          <div style={bubbleBot}>下記日程でご都合はいかがですか？</div>
-          <div style={{...bubble,background:"white",border:"1px solid #3b6ff5",color:"#3b6ff5",fontSize:10,display:"flex",gap:12,flexWrap:"wrap"}}>
-            <span>📅 3/10 14:00</span><span>📅 3/11 10:00</span><span>📅 3/12 15:00</span>
+    <div style={{marginTop:48,padding:"32px 0"}}>
+      {/* Row 1: STEP1 left, connector, empty right */}
+      <div className="qflow-row">
+        <div className="qflow-card" style={{...card,background:"#e5f8f2",border:"2px solid #12a37d"}}>
+          <div style={{...stepLabel,color:"#12a37d"}}>STEP 1 — 事前ヒアリング</div>
+          <div style={{fontSize:11,color:"#555",marginBottom:10,lineHeight:1.5}}>必要項目の入力に誘導。基準を満たしたリードのみ次へ。</div>
+          <div style={{display:"flex",flexDirection:"column",gap:6}}>
+            <div style={bubbleBot}>ご検討中の課題を教えてください</div>
+            <div style={bubbleUser}>リード獲得を自動化したい</div>
+            <div style={bubbleBot}>現在のチーム規模は？</div>
+            <div style={bubbleUser}>5名で運用中です</div>
           </div>
-          <div style={bubbleUser}>3/10 14:00でお願いします</div>
+        </div>
+        <div className="qflow-connector"><div style={{...connectorDot,background:"#12a37d"}}>1</div></div>
+        <div className="qflow-card"/>
+      </div>
+
+      {/* Gate row */}
+      <div className="qflow-gate-row">
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,background:"#f0ecfe",border:"2px dashed #7c5cfc",borderRadius:12,padding:"8px 24px"}}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3"/></svg>
+          <span style={{fontSize:12,fontWeight:700,color:"#7c5cfc"}}>基準を満たしたリードのみ通過</span>
         </div>
       </div>
 
-      {/* STEP 3 — 追加アンケート */}
-      <div style={arrowDown}><span>↓</span></div>
-      <div style={{...cardBase,background:"#f0ecfe",border:"2px solid #7c5cfc"}}>
-        <div style={{...stepLabel,color:"#7c5cfc"}}>STEP 3 — 追加アンケート</div>
-        <div style={{fontSize:12,color:"#555",marginBottom:12,lineHeight:1.6}}>日時確定後、追加のフォーム入力に誘導。商談準備に必要な情報を事前取得。</div>
-        <div style={{display:"flex",flexDirection:"column",gap:8}}>
-          <div style={bubbleBot}>商談をより有意義にするため、いくつか追加で伺います</div>
-          <div style={bubbleBot}>現在ご利用中のツールはありますか？</div>
-          <div style={bubbleUser}>HubSpotを使っています</div>
-          <div style={bubbleBot}>導入の優先度を教えてください</div>
-          <div style={bubbleUser}>今四半期中に導入したい</div>
+      {/* Row 2: empty left, connector, STEP2 right */}
+      <div className="qflow-row qflow-row-reverse">
+        <div className="qflow-card" style={{...card,background:"#eaf0fe",border:"2px solid #3b6ff5"}}>
+          <div style={{...stepLabel,color:"#3b6ff5"}}>STEP 2 — 商談日時の確定</div>
+          <div style={{display:"flex",flexDirection:"column",gap:6}}>
+            <div style={bubbleBot}>下記日程でご都合はいかがですか？</div>
+            <div style={{...bubble,background:"white",border:"1px solid #3b6ff5",color:"#3b6ff5",fontSize:10,display:"flex",gap:10,flexWrap:"wrap"}}>
+              <span>📅 3/10 14:00</span><span>📅 3/11 10:00</span><span>📅 3/12 15:00</span>
+            </div>
+            <div style={bubbleUser}>3/10 14:00でお願いします</div>
+          </div>
         </div>
+        <div className="qflow-connector"><div style={{...connectorDot,background:"#3b6ff5"}}>2</div></div>
+        <div className="qflow-card"/>
       </div>
 
-      {/* Result: 営業チームへ */}
-      <div style={arrowDown}><span>↓</span></div>
-      <div style={{...cardBase,background:"#12a37d",border:"2px solid #12a37d",textAlign:"center",padding:"20px 24px"}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginBottom:8}}>
+      {/* Arrow */}
+      <div className="qflow-arrow-col"><span>↓</span></div>
+
+      {/* Row 3: STEP3 left, connector, empty right */}
+      <div className="qflow-row">
+        <div className="qflow-card" style={{...card,background:"#f0ecfe",border:"2px solid #7c5cfc"}}>
+          <div style={{...stepLabel,color:"#7c5cfc"}}>STEP 3 — 追加アンケート</div>
+          <div style={{fontSize:11,color:"#555",marginBottom:10,lineHeight:1.5}}>日時確定後、フォーム入力で商談準備に必要な情報を取得。</div>
+          <div style={{display:"flex",flexDirection:"column",gap:6}}>
+            <div style={bubbleBot}>現在ご利用中のツールはありますか？</div>
+            <div style={bubbleUser}>HubSpotを使っています</div>
+            <div style={bubbleBot}>導入の優先度を教えてください</div>
+            <div style={bubbleUser}>今四半期中に導入したい</div>
+          </div>
+        </div>
+        <div className="qflow-connector"><div style={{...connectorDot,background:"#7c5cfc"}}>3</div></div>
+        <div className="qflow-card"/>
+      </div>
+
+      {/* Arrow */}
+      <div className="qflow-arrow-col"><span>↓</span></div>
+
+      {/* Result: 営業チームへ (full width) */}
+      <div style={{...card,background:"#12a37d",border:"2px solid #12a37d",textAlign:"center",padding:"18px 24px",maxWidth:900,margin:"0 auto"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginBottom:6}}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ICON.users}/></svg>
           <span style={{fontSize:14,fontWeight:800,color:"white"}}>準備万端で営業チームへ</span>
         </div>
-        <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap",marginTop:8}}>
-          <span style={{background:"rgba(255,255,255,0.2)",borderRadius:8,padding:"6px 14px",fontSize:11,color:"white",fontWeight:600}}>CRM自動登録</span>
-          <span style={{background:"rgba(255,255,255,0.2)",borderRadius:8,padding:"6px 14px",fontSize:11,color:"white",fontWeight:600}}>即日通知</span>
-          <span style={{background:"rgba(255,255,255,0.2)",borderRadius:8,padding:"6px 14px",fontSize:11,color:"white",fontWeight:600}}>ヒアリング内容共有</span>
+        <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap",marginTop:6}}>
+          <span style={{background:"rgba(255,255,255,0.2)",borderRadius:8,padding:"5px 14px",fontSize:11,color:"white",fontWeight:600}}>CRM自動登録</span>
+          <span style={{background:"rgba(255,255,255,0.2)",borderRadius:8,padding:"5px 14px",fontSize:11,color:"white",fontWeight:600}}>即日通知</span>
+          <span style={{background:"rgba(255,255,255,0.2)",borderRadius:8,padding:"5px 14px",fontSize:11,color:"white",fontWeight:600}}>ヒアリング内容共有</span>
         </div>
       </div>
     </div>
