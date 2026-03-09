@@ -32,7 +32,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       availableLanguage: ['Japanese', 'English'],
       url: 'https://meetings-na2.hubspot.com/takumi-sawano',
     },
-    description: 'Meeton AIは、ウェブサイト訪問者をAIチャット・インテントスコアリング・自動スケジューリングで商談に変えるB2B SaaSプラットフォームです。',
+    description: 'DynaMeetが提供するAIプラットフォーム。Meeton aiでウェブサイト訪問者を商談に変換、Meeton Talentで採用マッチングを革新。B2B SaaS企業の成長を加速します。',
     // AEO/GEO: 組織の専門分野
     knowsAbout: [
       'AI営業',

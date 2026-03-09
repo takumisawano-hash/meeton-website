@@ -27,10 +27,10 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Meeton ai｜ウェブサイトから商談を自動創出するAIセールスプラットフォーム',
+    default: 'Meeton ai｜AIで営業と採用を革新するDynaMeetのプロダクト',
     template: '%s｜Meeton ai',
   },
-  description: 'Meeton AIは、ウェブサイト訪問者をAIチャット・インテントスコアリング・自動スケジューリングで商談に変えるB2B SaaSプラットフォームです。',
+  description: 'DynaMeetが提供するAIプラットフォーム。Meeton aiでウェブサイト訪問者を商談に変換、Meeton Talentで採用マッチングを革新。B2B SaaS企業の成長を加速します。',
   metadataBase: new URL('https://dynameet.ai'),
   alternates: {
     canonical: '/',
