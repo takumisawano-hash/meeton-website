@@ -60,8 +60,6 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       '@type': 'Country',
       name: 'Japan',
     },
-    // 業種
-    industry: 'B2B SaaS',
   }
 
   const websiteSchema = {

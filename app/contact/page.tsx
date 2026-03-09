@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     siteName: 'Meeton ai',
     locale: 'ja_JP',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'お問い合わせ｜Meeton ai',
+    description: '製品に関するご質問、デモのご依頼、導入のご相談など、お気軽にお問い合わせください。',
+  },
 }
 
 export default function ContactPage() {
