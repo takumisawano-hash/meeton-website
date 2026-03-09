@@ -353,18 +353,15 @@ const stepsData = [
 ];
 
 const caseData = [
-  {name:"G-gen",industry:"Google Cloud \u30d7\u30ec\u30df\u30a2\u30d1\u30fc\u30c8\u30ca\u30fc",
-    quote:"\u30c1\u30e3\u30c3\u30c8\u3067\u88fd\u54c1\u306b\u3064\u3044\u3066\u5341\u5206\u306b\u628a\u63e1\u3057\u3066\u304b\u3089\u306e\u30ea\u30fc\u30c9\u306e\u305f\u3081\u3001\u898b\u5f53\u9055\u3044\u306e\u554f\u3044\u5408\u308f\u305b\u304c\u6fc0\u6e1b\u3002\u7372\u5f97\u5546\u8ac7\u306e\u7d04\u534a\u5206\u306fMeeton ai\u306b\u3088\u308b\u81ea\u52d5\u7372\u5f97\u3067\u3059\u3002",
-    stats:[{v:"2x",l:"\u30ea\u30fc\u30c9\u7372\u5f97\u6570",c:"var(--cta)"},{v:"60%",l:"\u5546\u8ac7\u5316\u7387",c:"var(--blue)"},{v:"3x",l:"\u5546\u8ac7\u5316\u7387\u306e\u6539\u5584",c:"var(--accent)"}]},
-  {name:"Univis",industry:"M&A\u30a2\u30c9\u30d0\u30a4\u30b6\u30ea\u30fc\u30fb\u8ca1\u52d9\u4f1a\u8a08\u30b3\u30f3\u30b5\u30eb",
-    quote:"\u9ad8\u5358\u4fa1\u30b5\u30fc\u30d3\u30b9\u3067\u3082AI\u304c\u5c02\u9580\u6027\u306e\u9ad8\u3044\u8aac\u660e\u3092\u7684\u78ba\u306b\u5b9f\u65bd\u3002\u300c\u76f8\u8ac7\u3057\u305f\u3044\u300d\u3068\u3044\u3046\u660e\u78ba\u306a\u610f\u601d\u306e\u3042\u308b\u8a2a\u554f\u8005\u3092\u9003\u3055\u305a\u7372\u5f97\u3067\u304d\u3066\u3044\u307e\u3059\u3002",
-    stats:[{v:"4x",l:"\u6708\u9593\u30ea\u30fc\u30c9\u6570",c:"var(--cta)"},{v:"100%",l:"\u30ea\u30fc\u30c9\u2192\u5546\u8ac7\u5316\u7387",c:"var(--blue)"},{v:"12\u4ef6",l:"\u6708\u9593\u30ea\u30fc\u30c9",c:"var(--accent)"}]},
-  {name:"BizteX",industry:"\u30af\u30e9\u30a6\u30c9RPA\u30fb\u696d\u52d9\u81ea\u52d5\u5316\u30c4\u30fc\u30eb",
-    quote:"\u8907\u96d1\u306a\u8a2d\u5b9a\u3084\u30b7\u30ca\u30ea\u30aa\u8a2d\u8a08\u304c\u4e0d\u8981\u3002AI\u304c\u81ea\u52d5\u3067\u5b66\u7fd2\u3057\u3001\u5c0e\u5165\u76f4\u5f8c\u304b\u3089\u6210\u679c\u3092\u767a\u63ee\u3002\u6bd4\u8f03\u691c\u8a0e\u4e2d\u306e\u8a2a\u554f\u8005\u306b\u6700\u9069\u306a\u30bf\u30a4\u30df\u30f3\u30b0\u3067\u8a71\u3057\u304b\u3051\u3066\u304f\u308c\u307e\u3059\u3002",
-    stats:[{v:"25\u4ef6",l:"\u5c0e\u5165\u521d\u6708\u30ea\u30fc\u30c9",c:"var(--cta)"},{v:"\u5373\u65e5",l:"\u52b9\u679c\u767a\u63ee",c:"var(--blue)"},{v:"0",l:"\u5fc5\u8981\u306a\u958b\u767a\u5de5\u6570",c:"var(--accent)"}]},
-  {name:"EdulinX",industry:"\u82f1\u8a9ee\u30e9\u30fc\u30cb\u30f3\u30b0\u30fb\u6559\u80b2\u30b5\u30fc\u30d3\u30b9",
-    quote:"BtoB\u55b6\u696d\u306e\u30ea\u30fc\u30c9\u7372\u5f97\u3060\u3051\u3067\u306a\u304f\u3001\u53d7\u8b1b\u751f\u304b\u3089\u306e\u554f\u3044\u5408\u308f\u305b\u306b\u3082AI\u304c24\u6642\u9593\u5bfe\u5fdc\u3002\u55b6\u696d\u3068\u30ab\u30b9\u30bf\u30de\u30fc\u30b5\u30dd\u30fc\u30c8\u306e\u4e21\u9762\u3067\u52b9\u679c\u304c\u51fa\u3066\u3044\u307e\u3059\u3002",
-    stats:[{v:"14.3%",l:"\u8cc7\u6599DL CVR",c:"var(--cta)"},{v:"931\u793e",l:"\u6708\u9593\u4f01\u696d\u7279\u5b9a",c:"var(--blue)"},{v:"24/7",l:"\u30b5\u30dd\u30fc\u30c8\u81ea\u52d5\u5316",c:"var(--accent)"}]},
+  {name:"G-gen",industry:"Google Cloud プレミアパートナー",
+    quote:"Meeton ai 導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
+    stats:[{v:"10件+",l:"月間商談創出",c:"var(--cta)"},{v:"40%+",l:"リード→商談 転換率",c:"var(--blue)"},{v:"安定",l:"毎月の商談パイプライン",c:"var(--accent)"}]},
+  {name:"Univis",industry:"M&Aアドバイザリー・財務会計コンサル",
+    quote:"商談化率は80%超え。Meeton ai が精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
+    stats:[{v:"80%+",l:"商談化率",c:"var(--cta)"},{v:"高精度",l:"Meeting創出",c:"var(--blue)"},{v:"確度◎",l:"商談の質",c:"var(--accent)"}]},
+  {name:"BizteX",industry:"クラウドRPA・業務自動化ツール",
+    quote:"導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton ai の最大の魅力です。",
+    stats:[{v:"6件",l:"初週の商談創出",c:"var(--cta)"},{v:"1週目",l:"成果が出るまで",c:"var(--blue)"},{v:"即効性",l:"導入スピード",c:"var(--accent)"}]},
 ];
 
 const integrations = [
@@ -1496,9 +1493,9 @@ export default function HomePageClient(){
       {/* CASES */}
       <section className="section" style={{background:"var(--surface)"}}>
         <div className="section-inner">
-          <div className="slabel" style={{textAlign:"center"}}>導入事例</div>
-          <div className="stitle" style={{textAlign:"center"}}>お客様の成果</div>
-          <p className="ssub" style={{textAlign:"center",margin:"0 auto 44px"}}>Meeton ai を導入した企業の実績をご紹介します。</p>
+          <div className="slabel" style={{textAlign:"center"}}>導入実績</div>
+          <div className="stitle" style={{textAlign:"center"}}>商談創出の実績</div>
+          <p className="ssub" style={{textAlign:"center",margin:"0 auto 44px"}}>Meeton ai が生み出した商談成果をご紹介します。</p>
           <CaseCarousel/>
         </div>
       </section>
