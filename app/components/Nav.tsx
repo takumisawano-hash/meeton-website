@@ -29,8 +29,10 @@ export default function Nav({ variant = 'light' }: NavProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isFeaturesDropdownOpen, setIsFeaturesDropdownOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const featuresDropdownRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
 
   const isDark = variant === 'dark'
@@ -40,6 +42,9 @@ export default function Nav({ variant = 'light' }: NavProps) {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false)
+      }
+      if (featuresDropdownRef.current && !featuresDropdownRef.current.contains(event.target as Node)) {
+        setIsFeaturesDropdownOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -68,6 +73,12 @@ export default function Nav({ variant = 'light' }: NavProps) {
     { href: '/talent/', label: 'AI for 採用' },
   ]
 
+  const featuresDropdownItems = [
+    { href: '/features/chatbot/', label: 'AI Chat', sub: 'AIチャットボット' },
+    { href: '/features/onsite/', label: 'On-Site', sub: 'サイト内チャネル' },
+    { href: '/features/offsite/', label: 'Outreach', sub: 'サイト外チャネル' },
+  ]
+
   const navLinks = [
     { href: '/blog/', label: 'ブログ' },
     { href: '/contact/', label: 'お問い合わせ' },
@@ -75,6 +86,7 @@ export default function Nav({ variant = 'light' }: NavProps) {
   ]
 
   const isProductActive = pathname === '/' || pathname.startsWith('/talent')
+  const isFeaturesActive = pathname.startsWith('/features')
 
   // Light variant colors
   const isTalent = pathname.startsWith('/talent')
@@ -218,6 +230,51 @@ export default function Nav({ variant = 'light' }: NavProps) {
               }}
             >
               {item.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Features Links */}
+        <div style={{ marginBottom: 24 }}>
+          <p style={{
+            fontSize: 12,
+            fontWeight: 600,
+            color: isDark ? '#5a5a7a' : '#9ca3af',
+            marginBottom: 12,
+            textTransform: 'uppercase',
+            letterSpacing: 1
+          }}>
+            Features
+          </p>
+          {featuresDropdownItems.map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              style={{
+                display: 'block',
+                padding: '14px 0',
+                textDecoration: 'none',
+                borderBottom: `1px solid ${isDark ? '#1a1a2e' : '#f1f5f9'}`
+              }}
+            >
+              <span style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: pathname === item.href
+                  ? colors.textActive
+                  : colors.text,
+              }}>
+                {item.label}
+              </span>
+              <span style={{
+                fontSize: 12,
+                color: isDark ? '#5a5a7a' : '#9ca3af',
+                fontWeight: 500,
+                display: 'block',
+                marginTop: 2,
+              }}>
+                {item.sub}
+              </span>
             </Link>
           ))}
         </div>
@@ -439,6 +496,101 @@ export default function Nav({ variant = 'light' }: NavProps) {
                           }}
                         >
                           {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              {/* Features Dropdown */}
+              <div
+                ref={featuresDropdownRef}
+                style={{ position: 'relative' }}
+                onMouseEnter={() => setIsFeaturesDropdownOpen(true)}
+                onMouseLeave={() => setIsFeaturesDropdownOpen(false)}
+              >
+                <button
+                  onClick={() => setIsFeaturesDropdownOpen(!isFeaturesDropdownOpen)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    fontSize: 15,
+                    color: isFeaturesActive ? colors.textActive : colors.text,
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    padding: 0,
+                    transition: 'color .2s'
+                  }}
+                >
+                  機能
+                  <svg
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    style={{
+                      transform: isFeaturesDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform .2s'
+                    }}
+                  >
+                    <path
+                      d="M1 1L5 5L9 1"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                {isFeaturesDropdownOpen && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    paddingTop: 12,
+                    zIndex: 200
+                  }}>
+                    <div style={{
+                      background: colors.dropdownBg,
+                      border: `1px solid ${colors.dropdownBorder}`,
+                      borderRadius: 12,
+                      padding: '8px 0',
+                      minWidth: 220,
+                      boxShadow: isDark ? '0 8px 32px rgba(0,0,0,.4)' : '0 8px 32px rgba(0,0,0,.12)',
+                    }}>
+                      {featuresDropdownItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => setIsFeaturesDropdownOpen(false)}
+                          style={{
+                            display: 'block',
+                            padding: '10px 20px',
+                            textDecoration: 'none',
+                            transition: 'all .2s',
+                          }}
+                        >
+                          <div style={{
+                            fontSize: 14,
+                            color: pathname === item.href
+                              ? colors.textActive
+                              : (isDark ? '#a8a8c8' : '#0f1128'),
+                            fontWeight: 700,
+                            marginBottom: 2,
+                          }}>
+                            {item.label}
+                          </div>
+                          <div style={{
+                            fontSize: 11,
+                            color: isDark ? '#5a5a7a' : '#6e7494',
+                            fontWeight: 500,
+                          }}>
+                            {item.sub}
+                          </div>
                         </Link>
                       ))}
                     </div>
