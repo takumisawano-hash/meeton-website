@@ -44,18 +44,32 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.2;letter-spacing:-.5px;margin-bottom:18px}
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f3f0ff 60%,#fff 100%)}
-.hero-content{max-width:860px;text-align:center;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:36px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,7vw,76px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:28px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(16px,3vw,22px);line-height:1.8;color:var(--sub);max-width:640px;margin:0 auto 48px}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.hero-stats{display:flex;justify-content:center;gap:clamp(32px,8vw,72px);margin-top:clamp(40px,8vw,72px);padding-top:clamp(32px,6vw,48px);border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
-.stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
+/* HERO - Dark */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 80px;background:#0f1128}
+.hero .dot-grid{background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px) !important}
+.hero-content{max-width:900px;text-align:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,111,245,.12);border:1px solid rgba(59,111,245,.25);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:#6ea0ff;backdrop-filter:blur(8px)}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#3b6ff5;animation:pulse 2s infinite}
+.hero h1{font-size:clamp(32px,7vw,72px);font-weight:900;color:#fff;line-height:1.15;letter-spacing:-2.5px;margin-bottom:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#12a37d,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,2.5vw,20px);line-height:1.8;color:#8a8cb8;max-width:600px;margin:0 auto 36px}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.2)}
+.hero .btn-ghost:hover{border-color:#3b6ff5;color:#6ea0ff;background:rgba(59,111,245,.08)}
+.hero-stats{display:flex;justify-content:center;gap:clamp(32px,6vw,56px);margin-top:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.stat-v{font-family:var(--fm);font-size:clamp(32px,5vw,44px);font-weight:700;letter-spacing:-1px}
+.stat-l{font-size:clamp(12px,1.8vw,14px);color:#6e7494;margin-top:6px;font-weight:600}
+
+/* Network Diagram */
+@keyframes dashFlow{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+@keyframes coreGlow{0%,100%{box-shadow:0 0 20px rgba(18,163,125,.3),0 0 60px rgba(18,163,125,.1)}50%{box-shadow:0 0 30px rgba(18,163,125,.5),0 0 80px rgba(18,163,125,.2)}}
+@keyframes netNodeIn{0%{opacity:0;transform:scale(0) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+.net-diagram{max-width:700px;margin:0 auto;position:relative;padding:20px 0}
+.net-node{display:flex;flex-direction:column;align-items:center;gap:6px;animation:netNodeIn .5s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
+.net-node-circle{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.net-node-label{font-size:12px;font-weight:800;color:#fff}
+.net-node-sub{font-size:10px;color:#6e7494;font-weight:600}
+.net-core{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#12a37d,#0fc19a);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 30px rgba(18,163,125,.4);animation:coreGlow 3s ease-in-out infinite}
 
 /* PHASE ROWS */
 .phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,64px);padding:clamp(40px,8vw,80px) 0;position:relative}
@@ -127,9 +141,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:768px){
   .hero{padding:90px 20px 50px;min-height:auto}
-  .hero-badge{padding:7px 16px;margin-bottom:24px}
-  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
-  .hero-stats{flex-direction:column;gap:20px;align-items:center}
+  .hero-badge{padding:7px 16px;margin-bottom:20px}
+  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto 32px}
+  .hero-stats{flex-direction:row;gap:24px}
+  .net-diagram svg{display:none}
+  .net-diagram{display:flex;flex-direction:column;align-items:center;gap:16px}
   .why-grid{grid-template-columns:1fr}
   .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
   .final-cta{padding:60px 20px 80px}
@@ -145,6 +161,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
+  .net-node-circle{width:44px;height:44px;font-size:18px;border-radius:12px}
+  .net-core{width:56px;height:56px;font-size:22px;border-radius:16px}
   .pvis{aspect-ratio:1/1.4;min-height:400px}
   .pvis>div{transform:scale(0.78);transform-origin:top center}
 }
@@ -166,25 +184,80 @@ export default function OffsitePageClient(){
     <div>
       <style dangerouslySetInnerHTML={{__html:css}}/>
 
-      <Nav variant="light" />
+      <Nav variant="dark" />
 
-      {/* HERO */}
+      {/* HERO - Dark */}
       <section className="hero">
         <div className="dot-grid"/>
-        <div className="glow" style={{background:"rgba(18,163,125,.2)",width:600,height:600,top:-200,right:-100}}/>
-        <div className="glow" style={{background:"rgba(124,92,252,.15)",width:500,height:500,bottom:-150,left:-80}}/>
-        <div className="glow" style={{background:"rgba(59,111,245,.1)",width:400,height:400,top:"40%",left:"50%"}}/>
+        <div className="glow" style={{background:"rgba(59,111,245,.12)",width:700,height:700,top:-200,right:-150}}/>
+        <div className="glow" style={{background:"rgba(124,92,252,.08)",width:500,height:500,bottom:-200,left:-100}}/>
+        <div className="glow" style={{background:"rgba(18,163,125,.06)",width:400,height:400,top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}/>
         <div className="hero-content">
           <div className="anim d1 hero-badge"><div className="hero-badge-dot"/>OUTREACH CHANNELS</div>
           <h1 className="anim d2">サイトの外でも<br/><em>リードを逃さない</em></h1>
-          <p className="anim d3 hero-sub">AIメール、カレンダーリンク、カレンダーQRの3チャネルで、Webサイトの外でもリードを育成し、商談予約を獲得します。オンラインもオフラインも、すべてAIが自動でつなぎます。</p>
+          <p className="anim d3 hero-sub">AIメール、カレンダーリンク、カレンダーQRの3チャネルで、Webサイトの外でもリードを育成し、商談予約を獲得。オンラインもオフラインも、すべてAIが自動でつなぎます。</p>
           <div className="anim d4 hero-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
           </div>
-          <div className="anim d5 hero-stats">
-            {[{v:"2x",l:"メール開封率"},{v:"40%",l:"予約率向上"},{v:"3",l:"チャネル"}].map((s,i)=>(
-              <div key={i} style={{textAlign:"center"}}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
+          {/* Network Diagram */}
+          <div className="anim d5 net-diagram">
+            {/* SVG connection lines */}
+            <svg width="100%" height="120" viewBox="0 0 700 120" fill="none" style={{position:"absolute",top:0,left:0,pointerEvents:"none"}}>
+              {/* Lines from channels to core */}
+              <line x1="110" y1="60" x2="310" y2="60" stroke="#3b6ff5" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s linear infinite"}}/>
+              <line x1="110" y1="60" x2="310" y2="60" stroke="url(#blueGrad)" strokeWidth="1.5" strokeOpacity=".3"/>
+              <line x1="110" y1="60" x2="310" y2="60" stroke="#3b6ff5" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s linear infinite"}}/>
+              {/* Top line */}
+              <path d="M110 20 Q210 20 310 60" stroke="#7c5cfc" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s .3s linear infinite"}} fill="none"/>
+              {/* Bottom line */}
+              <path d="M110 100 Q210 100 310 60" stroke="#12a37d" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s .6s linear infinite"}} fill="none"/>
+              {/* Core to booking */}
+              <line x1="390" y1="60" x2="590" y2="60" stroke="url(#greenGrad)" strokeWidth="2" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s .9s linear infinite"}}/>
+              <defs>
+                <linearGradient id="blueGrad" x1="110" y1="0" x2="310" y2="0"><stop stopColor="#3b6ff5"/><stop offset="1" stopColor="#7c5cfc"/></linearGradient>
+                <linearGradient id="greenGrad" x1="390" y1="0" x2="590" y2="0"><stop stopColor="#12a37d"/><stop offset="1" stopColor="#3b82f6"/></linearGradient>
+              </defs>
+            </svg>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",position:"relative",zIndex:2,gap:16}}>
+              {/* Left: 3 channel nodes */}
+              <div style={{display:"flex",flexDirection:"column",gap:14,alignItems:"center"}}>
+                {[
+                  {icon:"✉️",label:"AIメール",color:"#3b6ff5",bg:"rgba(59,111,245,.12)",delay:".2s"},
+                  {icon:"🔗",label:"カレンダーリンク",color:"#7c5cfc",bg:"rgba(124,92,252,.12)",delay:".4s"},
+                  {icon:"📱",label:"カレンダーQR",color:"#12a37d",bg:"rgba(18,163,125,.12)",delay:".6s"},
+                ].map((n,i)=>(
+                  <div className="net-node" key={i} style={{animationDelay:n.delay}}>
+                    <div className="net-node-circle" style={{background:n.bg}}>
+                      <span>{n.icon}</span>
+                    </div>
+                    <div className="net-node-label">{n.label}</div>
+                  </div>
+                ))}
+              </div>
+              {/* Center: AI Core */}
+              <div className="net-node" style={{animationDelay:".8s"}}>
+                <div className="net-core">🤖</div>
+                <div className="net-node-label">AI CORE</div>
+                <div className="net-node-sub">統合スコア管理</div>
+              </div>
+              {/* Right: Booking */}
+              <div className="net-node" style={{animationDelay:"1.1s"}}>
+                <div className="net-node-circle" style={{background:"rgba(18,163,125,.15)",border:"1px solid rgba(18,163,125,.3)"}}>
+                  <span>📅</span>
+                </div>
+                <div className="net-node-label">商談予約</div>
+                <div className="net-node-sub">自動確定</div>
+              </div>
+            </div>
+          </div>
+          <div className="hero-stats">
+            {[
+              {v:"2x",l:"メール開封率",c:"#3b6ff5"},
+              {v:"40%",l:"予約率向上",c:"#7c5cfc"},
+              {v:"3",l:"チャネル",c:"#12a37d"},
+            ].map((s,i)=>(
+              <div key={i} style={{textAlign:"center"}}><div className="stat-v" style={{background:`linear-gradient(135deg,${s.c},#fff)`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{s.v}</div><div className="stat-l">{s.l}</div></div>
             ))}
           </div>
         </div>

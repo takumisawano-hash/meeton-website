@@ -58,17 +58,33 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#ecfdf5 0%,#fff 30%,#f0ecfe 60%,#fff 100%)}
-.hero-content{max-width:860px;text-align:center;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:36px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,7vw,72px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:28px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(16px,3vw,22px);line-height:1.8;color:var(--sub);max-width:640px;margin:0 auto 48px}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.hero-stats{display:flex;justify-content:center;gap:clamp(32px,8vw,72px);margin-top:clamp(40px,8vw,72px);padding-top:clamp(32px,6vw,48px);border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
-.stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 70px;background:linear-gradient(165deg,#ecfeff 0%,#fff 35%,#f0f9ff 65%,#fff 100%)}
+.hero-content{max-width:900px;text-align:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cyan-light),var(--accent-light));border:1px solid rgba(8,145,178,.15);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cyan);backdrop-filter:blur(8px)}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+.hero h1{font-size:clamp(32px,7vw,68px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,2.5vw,20px);line-height:1.8;color:var(--sub);max-width:600px;margin:0 auto 36px}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.hero-stats{display:flex;justify-content:center;gap:clamp(32px,6vw,56px);margin-bottom:48px;flex-wrap:wrap}
+.stat-v{font-family:var(--fm);font-size:clamp(32px,5vw,44px);font-weight:700;letter-spacing:-1px}
+.stat-l{font-size:clamp(12px,1.8vw,14px);color:var(--sub);margin-top:6px;font-weight:600}
+
+/* Browser Frame */
+@keyframes cardFloat1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes cardFloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes cardFloat3{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes browserFade{0%{opacity:0;transform:translateY(24px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.browser-frame{max-width:740px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden;animation:browserFade .8s .5s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
+.browser-bar{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:#fafbfd}
+.browser-dots{display:flex;gap:5px}
+.browser-dots span{width:9px;height:9px;border-radius:50%}
+.browser-url{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:11px;color:var(--sub);font-family:var(--fm);font-weight:600;display:flex;align-items:center;gap:6px}
+.channel-cards{display:flex;gap:16px;padding:32px 24px 36px;justify-content:center}
+.ch-card{flex:1;max-width:200px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 16px;text-align:center;transition:all .35s;box-shadow:0 4px 16px rgba(0,0,0,.03);cursor:default;position:relative}
+.ch-card:hover{border-color:transparent;transform:translateY(-6px) !important;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.ch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;opacity:0;transition:opacity .3s}
+.ch-card:hover::before{opacity:1}
 
 /* WHY GRID (3-channel overview) */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -133,9 +149,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:768px){
   .hero{padding:90px 20px 50px;min-height:auto}
-  .hero-badge{padding:7px 16px;margin-bottom:24px}
-  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
-  .hero-stats{flex-direction:column;gap:20px;align-items:center}
+  .hero-badge{padding:7px 16px;margin-bottom:20px}
+  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto 32px}
+  .hero-stats{flex-direction:row;gap:24px;margin-bottom:32px}
+  .channel-cards{flex-direction:column;align-items:center;gap:12px;padding:20px 16px 24px}
+  .ch-card{max-width:280px;width:100%;padding:18px 14px}
   .why-grid{grid-template-columns:1fr}
   .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
   .final-cta{padding:60px 20px 80px}
@@ -151,6 +169,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
+  .browser-bar{padding:8px 10px}
+  .channel-cards{padding:16px 12px 20px;gap:10px}
   .pvis{aspect-ratio:1/1.4;min-height:400px}
   .pvis>div{transform:scale(0.78);transform-origin:top center}
   .flow-node{min-width:90px}
@@ -185,25 +205,65 @@ export default function OnsitePageClient() {
       {/* ===== HERO ===== */}
       <section className="hero">
         <div className="dot-grid" />
-        <div className="glow" style={{ background: "rgba(18,163,125,.2)", width: 600, height: 600, top: -200, right: -100 }} />
-        <div className="glow" style={{ background: "rgba(124,92,252,.15)", width: 500, height: 500, bottom: -150, left: -80 }} />
-        <div className="glow" style={{ background: "rgba(8,145,178,.1)", width: 400, height: 400, top: "40%", left: "50%" }} />
+        <div className="glow" style={{ background: "rgba(8,145,178,.15)", width: 600, height: 600, top: -200, right: -100 }} />
+        <div className="glow" style={{ background: "rgba(124,92,252,.1)", width: 400, height: 400, bottom: -150, left: -80 }} />
         <div className="hero-content">
           <div className="anim d1 hero-badge"><div className="hero-badge-dot" />ON-SITE CHANNELS</div>
           <h1 className="anim d2">サイト内のあらゆる接点を<br /><em>商談に変える</em></h1>
           <p className="anim d3 hero-sub">資料ページ・サンクスページ・ポップアップ。3つのサイト内チャネルにAIを配置し、訪問者のあらゆる行動を商談につなげます。</p>
+          <div className="anim d3 hero-stats">
+            {[
+              { v: "3", l: "チャネル", c: "var(--cyan)" },
+              { v: "3x", l: "リード獲得", c: "var(--accent)" },
+              { v: "65%", l: "エンゲージメント向上", c: "var(--cta)" },
+            ].map((s, i) => (
+              <div key={i} style={{ textAlign: "center" }}><div className="stat-v" style={{ background: `linear-gradient(135deg,${s.c},var(--accent))`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{s.v}</div><div className="stat-l">{s.l}</div></div>
+            ))}
+          </div>
           <div className="anim d4 hero-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
           </div>
-          <div className="anim d5 hero-stats">
-            {[
-              { v: "3", l: "チャネル", c: "var(--cta)" },
-              { v: "3x", l: "リード獲得", c: "var(--accent)" },
-              { v: "65%", l: "エンゲージメント向上", c: "var(--cyan)" },
-            ].map((s, i) => (
-              <div key={i} style={{ textAlign: "center" }}><div className="stat-v" style={{ background: `linear-gradient(135deg,${s.c},var(--accent))`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{s.v}</div><div className="stat-l">{s.l}</div></div>
-            ))}
+          {/* Browser Frame Visual */}
+          <div className="browser-frame">
+            <div className="browser-bar">
+              <div className="browser-dots">
+                <span style={{ background: "#e0475b" }} />
+                <span style={{ background: "#f5a623" }} />
+                <span style={{ background: "#12a37d" }} />
+              </div>
+              <div className="browser-url">
+                <span style={{ fontSize: 10 }}>🔒</span>
+                your-company.com
+              </div>
+            </div>
+            <div className="channel-cards">
+              {[
+                { icon: "📄", title: "資料ページ", sub: "AI資料ブラウジング", color: "#0891b2", bg: "var(--cyan-light)", border: "rgba(8,145,178,.2)", delay: "0s" },
+                { icon: "✅", title: "サンクスページ", sub: "CV後の追加アクション", color: "#12a37d", bg: "var(--cta-light)", border: "rgba(18,163,125,.2)", delay: ".5s" },
+                { icon: "💬", title: "ポップアップ", sub: "行動トリガー型AI", color: "#7c5cfc", bg: "var(--accent-light)", border: "rgba(124,92,252,.2)", delay: "1s" },
+              ].map((ch, i) => (
+                <div className="ch-card" key={i} style={{ animation: `cardFloat${i + 1} 4s ${ch.delay} ease-in-out infinite` }}>
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, borderRadius: "14px 14px 0 0", background: `linear-gradient(90deg,${ch.color},var(--accent))` }} />
+                  <div style={{ fontSize: 32, marginBottom: 12 }}>{ch.icon}</div>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: "var(--heading)", marginBottom: 4 }}>{ch.title}</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: ch.color, fontFamily: "var(--fm)", letterSpacing: .5 }}>{ch.sub}</div>
+                  {/* AI indicator */}
+                  <div style={{ marginTop: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
+                    <div style={{ width: 18, height: 18, borderRadius: 5, background: `linear-gradient(135deg,${ch.color},var(--accent))`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: "#fff", fontWeight: 800 }}>AI</div>
+                    <span style={{ fontSize: 9, fontWeight: 700, color: "var(--sub)" }}>常時稼働中</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Connection to AI core */}
+            <div style={{ padding: "0 24px 20px", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+              <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg,transparent,var(--border2))" }} />
+              <div style={{ display: "flex", alignItems: "center", gap: 6, background: "linear-gradient(135deg,var(--cta),#0fc19a)", padding: "6px 14px", borderRadius: 8 }}>
+                <span style={{ fontSize: 11, color: "#fff", fontWeight: 800 }}>🤖 AI Chat コアに統合</span>
+              </div>
+              <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg,var(--border2),transparent)" }} />
+            </div>
           </div>
         </div>
       </section>

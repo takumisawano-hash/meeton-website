@@ -44,18 +44,34 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.2;letter-spacing:-.5px;margin-bottom:18px}
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
 
-/* HERO */
+/* HERO - Split Layout */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f3f0ff 60%,#fff 100%)}
-.hero-content{max-width:860px;text-align:center;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:36px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
+.hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,64px);position:relative;z-index:2}
+.hero-text{flex:1.2;min-width:0}
+.hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,7vw,76px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:28px}
+.hero h1{font-size:clamp(32px,5vw,62px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2px;margin-bottom:22px}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(16px,3vw,22px);line-height:1.8;color:var(--sub);max-width:640px;margin:0 auto 48px}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.hero-stats{display:flex;justify-content:center;gap:clamp(32px,8vw,72px);margin-top:clamp(40px,8vw,72px);padding-top:clamp(32px,6vw,48px);border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
-.stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
+.hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:520px;margin-bottom:36px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:clamp(24px,4vw,48px);margin-top:clamp(32px,5vw,48px);padding-top:clamp(24px,4vw,36px);border-top:1px solid var(--border);flex-wrap:wrap}
+.stat-v{font-family:var(--fm);font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.stat-l{font-size:clamp(12px,1.5vw,14px);color:var(--sub);margin-top:6px;font-weight:600}
+
+/* Chat Window */
+@keyframes typingDot{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes msgAppear{0%{opacity:0;transform:translateY(12px) scale(.95)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.chat-win{width:100%;max-width:400px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
+.chat-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f8fffe,#f8f6ff)}
+.chat-msg{display:flex;gap:8px;margin-bottom:12px;opacity:0;animation:msgAppear .5s cubic-bezier(.16,1,.3,1) forwards}
+.chat-avatar{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--cta),#0fc19a);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:800;flex-shrink:0}
+.chat-bubble{background:var(--surface);border:1px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--heading);line-height:1.55;max-width:280px}
+.chat-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.03);cursor:default}
+.typing-dots{display:flex;gap:4px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;border-top-left-radius:4px;width:fit-content}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--sub);animation:typingDot 1.2s infinite}
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
 
 /* PHASE ROWS */
 .phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,64px);padding:clamp(40px,8vw,80px) 0;position:relative}
@@ -135,6 +151,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* RESPONSIVE */
 @media(max-width:1024px){
+  .hero-inner{flex-direction:column;text-align:center}
+  .hero-text{text-align:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .hero-stats{justify-content:center}
+  .chat-win{max-width:360px}
   .phase-row{flex-direction:column;gap:40px}
   .phase-row.reverse{flex-direction:column}
   .why-grid{grid-template-columns:repeat(2,1fr)}
@@ -145,9 +167,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:768px){
   .hero{padding:90px 20px 50px;min-height:auto}
-  .hero-badge{padding:7px 16px;margin-bottom:24px}
+  .hero-badge{padding:7px 16px;margin-bottom:20px}
   .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
-  .hero-stats{flex-direction:column;gap:20px;align-items:center}
+  .hero-stats{flex-direction:row;gap:24px;justify-content:center}
+  .chat-win{max-width:320px}
+  .chat-bubble{font-size:12px;padding:8px 12px}
   .why-grid{grid-template-columns:1fr}
   .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
   .final-cta{padding:60px 20px 80px}
@@ -162,6 +186,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
+  .chat-win{max-width:100%}
   .pvis{aspect-ratio:1/1.4;min-height:400px}
   .pvis>div{transform:scale(0.78);transform-origin:top center}
   .vis0-bubble{font-size:10px !important;padding:8px 12px !important;max-width:140px !important}
@@ -206,24 +231,77 @@ export default function ChatbotPageClient() {
 
       <Nav variant="light" />
 
-      {/* HERO */}
+      {/* HERO - Split Layout */}
       <section className="hero">
         <div className="dot-grid" />
-        <div className="glow" style={{ background: 'rgba(18,163,125,.25)', width: 600, height: 600, top: -200, right: -100 }} />
-        <div className="glow" style={{ background: 'rgba(124,92,252,.12)', width: 500, height: 500, bottom: -150, left: -80 }} />
-        <div className="glow" style={{ background: 'rgba(59,111,245,.08)', width: 400, height: 400, top: '40%', left: '50%' }} />
-        <div className="hero-content">
-          <div className="anim d1 hero-badge"><div className="hero-badge-dot" />CORE ENGINE</div>
-          <h1 className="anim d2">AIチャットで<br /><em>訪問者を商談に変える</em></h1>
-          <p className="anim d3 hero-sub">Webサイトに訪れたすべての訪問者にAIが自ら話しかけ、会話の流れでニーズを把握し、リードを獲得。見込み度をリアルタイムでスコアリングし、商談予約まで完全自動化します。</p>
-          <div className="anim d4 hero-ctas">
-            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
+        <div className="glow" style={{ background: 'rgba(18,163,125,.2)', width: 600, height: 600, top: -200, right: -100 }} />
+        <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
+        <div className="hero-inner">
+          <div className="hero-text">
+            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />CORE ENGINE</div>
+            <h1 className="anim d2">AIチャットで<br /><em>訪問者を商談に変える</em></h1>
+            <p className="anim d3 hero-sub">Webサイトに訪れたすべての訪問者にAIが自ら話しかけ、会話の流れでニーズを把握し、リードを獲得。商談予約まで完全自動化します。</p>
+            <div className="anim d4 hero-ctas">
+              <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
+              <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
+            </div>
+            <div className="anim d5 hero-stats">
+              {[{ v: '24/7', l: 'AIが常時対応' }, { v: '2x', l: '商談化率の向上' }, { v: '5min', l: '導入時間' }].map((s, i) => (
+                <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
+              ))}
+            </div>
           </div>
-          <div className="anim d5 hero-stats">
-            {[{ v: '24/7', l: 'AIが常時対応' }, { v: '2x', l: '商談化率の向上' }, { v: '5min', l: '導入時間' }].map((s, i) => (
-              <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
-            ))}
+          <div className="hero-visual anim d4">
+            <div className="chat-win">
+              <div className="chat-hdr">
+                <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,var(--cta),#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 800 }}>M</div>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton AI</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)' }} />
+                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>オンライン</span>
+                  </div>
+                </div>
+              </div>
+              <div style={{ padding: '18px 16px 14px' }}>
+                {/* Context badge */}
+                <div style={{ textAlign: 'center', marginBottom: 14, opacity: 0, animation: 'msgAppear .4s .6s cubic-bezier(.16,1,.3,1) forwards' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>
+                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cta)' }} />料金ページを閲覧中
+                  </span>
+                </div>
+                {/* AI message 1 */}
+                <div className="chat-msg" style={{ animationDelay: '.9s' }}>
+                  <div className="chat-avatar">AI</div>
+                  <div className="chat-bubble">はじめまして！ 料金プランについてご質問はありますか？</div>
+                </div>
+                {/* AI message 2 + resource card */}
+                <div className="chat-msg" style={{ animationDelay: '1.6s' }}>
+                  <div className="chat-avatar">AI</div>
+                  <div>
+                    <div className="chat-bubble">こちらの資料もお役に立つかもしれません</div>
+                    <div className="chat-card">
+                      <div style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg,#e0475b,#ff6b81)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800, flexShrink: 0 }}>PDF</div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)' }}>導入ガイド.pdf</div>
+                        <div style={{ fontSize: 10, color: 'var(--sub)' }}>3.2 MB</div>
+                      </div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)', background: 'var(--cta-light)', padding: '4px 10px', borderRadius: 6 }}>DL</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Typing indicator */}
+                <div className="chat-msg" style={{ animationDelay: '2.3s' }}>
+                  <div className="chat-avatar">AI</div>
+                  <div className="typing-dots"><span /><span /><span /></div>
+                </div>
+              </div>
+              {/* Input bar */}
+              <div style={{ padding: '0 16px 14px', display: 'flex', gap: 8 }}>
+                <div style={{ flex: 1, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 14px', fontSize: 12, color: 'var(--border2)' }}>メッセージを入力...</div>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg,var(--cta),#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: '#fff', flexShrink: 0 }}>↑</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
