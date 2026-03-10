@@ -38,6 +38,9 @@ export default function Footer({ variant = 'light' }: FooterProps) {
   const links = [
     { href: '/', label: 'Meeton ai' },
     { href: '/talent/', label: 'Meeton Talent' },
+    { href: '/features/chatbot/', label: 'AI Chat' },
+    { href: '/features/onsite/', label: 'On-Site' },
+    { href: '/features/offsite/', label: 'Outreach' },
     ...(isDark ? [] : [{ href: '/blog/', label: 'ブログ' }]),
     { href: '/about/', label: '会社概要' },
     { href: '/privacy-policy/', label: 'プライバシーポリシー' },
