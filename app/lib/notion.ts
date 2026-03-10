@@ -9,6 +9,16 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
+// Notion API 2025-09-03+ の dataSources エンドポイント（SDK型定義未対応）
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const notionDataSources = (notion as any).dataSources as {
+  query: (params: Record<string, unknown>) => Promise<{
+    results: Record<string, unknown>[]
+    has_more: boolean
+    next_cursor: string | null
+  }>
+}
+
 // Retry helper for rate-limited requests
 async function withRetry<T>(
   fn: () => Promise<T>,
@@ -177,7 +187,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 
     do {
       const response = await withRetry(() =>
-        notion.dataSources.query({
+        notionDataSources.query({
           data_source_id: dataSourceId,
           filter: {
             property: 'Published',
@@ -213,7 +223,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const dataSourceId = await getDataSourceId()
     const response = await withRetry(() =>
-      notion.dataSources.query({
+      notionDataSources.query({
         data_source_id: dataSourceId,
         filter: {
           and: [
@@ -283,7 +293,7 @@ export async function getRelatedPosts(category: string, currentSlug: string, lim
   try {
     const dataSourceId = await getDataSourceId()
     const response = await withRetry(() =>
-      notion.dataSources.query({
+      notionDataSources.query({
         data_source_id: dataSourceId,
         filter: {
           and: [
