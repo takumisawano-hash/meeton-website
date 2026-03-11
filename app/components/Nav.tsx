@@ -81,6 +81,7 @@ export default function Nav({ variant = 'light' }: NavProps) {
 
   const navLinks = [
     { href: '/blog/', label: 'ブログ' },
+    { href: '#download-center', label: 'お役立ち資料', onClick: true },
     { href: '/contact/', label: 'お問い合わせ' },
     { href: '/careers/', label: '採用情報' },
   ]
@@ -282,23 +283,48 @@ export default function Nav({ variant = 'light' }: NavProps) {
         {/* Nav Links */}
         <div style={{ marginBottom: 32 }}>
           {navLinks.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                display: 'block',
-                padding: '14px 0',
-                fontSize: 16,
-                fontWeight: 600,
-                color: pathname.startsWith(item.href.replace(/\/$/, ''))
-                  ? colors.textActive
-                  : colors.text,
-                textDecoration: 'none',
-                borderBottom: `1px solid ${isDark ? '#1a1a2e' : '#f1f5f9'}`
-              }}
-            >
-              {item.label}
-            </Link>
+            item.onClick ? (
+              <button
+                key={item.href}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  (window as any).Meeton && (window as any).Meeton.openDownloadCenter()
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  textAlign: 'left',
+                  background: 'none',
+                  border: 'none',
+                  padding: '14px 0',
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: colors.text,
+                  cursor: 'pointer',
+                  borderBottom: `1px solid ${isDark ? '#1a1a2e' : '#f1f5f9'}`
+                }}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{
+                  display: 'block',
+                  padding: '14px 0',
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: pathname.startsWith(item.href.replace(/\/$/, ''))
+                    ? colors.textActive
+                    : colors.text,
+                  textDecoration: 'none',
+                  borderBottom: `1px solid ${isDark ? '#1a1a2e' : '#f1f5f9'}`
+                }}
+              >
+                {item.label}
+              </Link>
+            )
           ))}
         </div>
 
@@ -598,19 +624,39 @@ export default function Nav({ variant = 'light' }: NavProps) {
                 )}
               </div>
               {navLinks.map(item => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{
-                    fontSize: 15,
-                    color: pathname.startsWith(item.href.replace(/\/$/, '')) ? colors.textActive : colors.text,
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                    transition: 'color .2s'
-                  }}
-                >
-                  {item.label}
-                </Link>
+                item.onClick ? (
+                  <button
+                    key={item.href}
+                    onClick={() => { (window as any).Meeton && (window as any).Meeton.openDownloadCenter() }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      fontSize: 15,
+                      color: colors.text,
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'color .2s'
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    style={{
+                      fontSize: 15,
+                      color: pathname.startsWith(item.href.replace(/\/$/, '')) ? colors.textActive : colors.text,
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                      transition: 'color .2s'
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
