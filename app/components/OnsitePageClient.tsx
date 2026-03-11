@@ -180,8 +180,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 const channelCards = [
   { iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3", color: "#0891b2", title: "資料ページ", sub: "AI資料ブラウジング体験", desc: "お客様の資料を一覧表示する専用ページ。AIが訪問者の興味に合った資料を提案し、ダウンロード時に自然にリード情報を取得します。" },
-  { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", color: "#12a37d", title: "サンクスページ", sub: "コンバージョン後の追加アクション", desc: "フォーム送信後の高い関心を逃さず、追加資料の提案や商談予約への誘導をAIが自動で行います。" },
   { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", color: "#7c5cfc", title: "資料ポップアップ", sub: "関心に応じた資料表示", desc: "訪問者の閲覧ページやスクロール位置に応じて、関心にマッチした資料をポップアップで表示。興味を引いた訪問者を商談予約まで誘導します。" },
+  { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", color: "#12a37d", title: "サンクスページ", sub: "コンバージョン後の追加アクション", desc: "フォーム送信後の高い関心を逃さず、追加資料の提案や商談予約への誘導をAIが自動で行います。" },
 ];
 
 const faqData = [
@@ -240,8 +240,8 @@ export default function OnsitePageClient() {
             <div className="channel-cards">
               {[
                 { iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3", title: "資料ページ", sub: "AI資料ブラウジング", color: "#0891b2", bg: "var(--cyan-light)", border: "rgba(8,145,178,.2)", delay: "0s" },
-                { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", title: "サンクスページ", sub: "CV後の追加アクション", color: "#12a37d", bg: "var(--cta-light)", border: "rgba(18,163,125,.2)", delay: ".5s" },
-                { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", title: "資料ポップアップ", sub: "関心に応じた資料表示", color: "#7c5cfc", bg: "var(--accent-light)", border: "rgba(124,92,252,.2)", delay: "1s" },
+                { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", title: "資料ポップアップ", sub: "関心に応じた資料表示", color: "#7c5cfc", bg: "var(--accent-light)", border: "rgba(124,92,252,.2)", delay: ".5s" },
+                { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", title: "サンクスページ", sub: "CV後の追加アクション", color: "#12a37d", bg: "var(--cta-light)", border: "rgba(18,163,125,.2)", delay: "1s" },
               ].map((ch, i) => (
                 <div className="ch-card" key={i} style={{ animation: `cardFloat${i + 1} 4s ${ch.delay} ease-in-out infinite` }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, borderRadius: "14px 14px 0 0", background: `linear-gradient(90deg,${ch.color},var(--accent))` }} />
@@ -366,75 +366,10 @@ export default function OnsitePageClient() {
           </div>
           <div className="phase-divider" />
 
-          {/* CHANNEL 02 - サンクスページ (right) */}
+          {/* CHANNEL 02 - 資料ポップアップ (right) */}
           <div className="phase-row reverse">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: "#12a37d10", color: "#12a37d" }}>CHANNEL 02</div>
-              <div className="phase-h">フォーム送信後の「次の一手」を逃さない</div>
-              <div className="phase-desc">フォーム送信後のサンクスページは、訪問者の関心が最も高い瞬間です。AIチャットが「資料をお送りしました。他にご興味のある情報はありますか？」と声をかけ、追加の資料提案や商談予約への誘導を行います。</div>
-              <div className="phase-features">
-                {["関連資料の追加提案", "商談予約への自然な誘導", "追加情報の取得", "リードスコア加点"].map((f, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: "#12a37d" }} />{f}</div>
-                ))}
-              </div>
-            </div>
-            <div className="phase-vis">
-              <div className="pvis" style={{ background: "linear-gradient(160deg,#ecfdf5,#f0fdf4)", padding: 16 }}>
-                <div style={{ position: "absolute", top: 14, left: 14, right: 14 }}>
-                  {/* Thank you message */}
-                  <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, padding: "12px 14px", marginBottom: 10, textAlign: "center", animation: "chatPop .5s .2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-                    <div style={{ fontSize: 18, marginBottom: 4 }}>&#10003;</div>
-                    <div style={{ fontSize: 11, fontWeight: 800, color: "var(--heading)" }}>資料のダウンロードありがとうございます</div>
-                    <div style={{ fontSize: 9, color: "var(--sub)", marginTop: 2 }}>メールにもお送りしました</div>
-                  </div>
-                  {/* AI chat bubble */}
-                  <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, borderBottomLeftRadius: 4, padding: "8px 12px", marginBottom: 8, animation: "chatPop .5s .7s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4 }}>
-                      <div style={{ width: 16, height: 16, borderRadius: 4, background: "linear-gradient(135deg,#12a37d,#0fc19a)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: "#fff", fontWeight: 800 }}>AI</div>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: "var(--sub)" }}>Meeton ai</span>
-                    </div>
-                    <div style={{ fontSize: 10, fontWeight: 600, color: "var(--heading)", lineHeight: 1.5 }}>他にご興味のある資料はありますか？<br />御社に合った事例もご用意できます</div>
-                  </div>
-                  {/* Related resource cards */}
-                  <div style={{ display: "flex", gap: 6, marginBottom: 8, animation: "chatPop .5s 1.2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-                    {[
-                      { name: "SaaS業界事例集", icon: "📊" },
-                      { name: "ROI試算シート", icon: "📈" },
-                    ].map((r, k) => (
-                      <div key={k} style={{ flex: 1, background: "linear-gradient(135deg,var(--cta-light),#d1fae5)", border: "1px solid rgba(18,163,125,.15)", borderRadius: 8, padding: "7px 8px", display: "flex", alignItems: "center", gap: 5 }}>
-                        <span style={{ fontSize: 14 }}>{r.icon}</span>
-                        <div style={{ fontSize: 9, fontWeight: 700, color: "#12a37d" }}>{r.name}</div>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Meeting CTA */}
-                  <div style={{ background: "linear-gradient(135deg,#12a37d,#0fc19a)", borderRadius: 10, padding: "8px 12px", animation: "chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards", opacity: 0, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: "#fff" }}>詳しい話を聞いてみませんか？</div>
-                      <div style={{ fontSize: 8, color: "rgba(255,255,255,.8)", marginTop: 1 }}>15分のカジュアル面談</div>
-                    </div>
-                    <div style={{ background: "#fff", color: "#12a37d", borderRadius: 6, padding: "4px 10px", fontSize: 9, fontWeight: 800 }}>予約 →</div>
-                  </div>
-                  {/* Score indicator */}
-                  <div style={{ marginTop: 8, background: "#fff", border: "1px solid var(--border)", borderRadius: 8, padding: "6px 10px", display: "flex", alignItems: "center", justifyContent: "space-between", animation: "slideIn .6s 2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-                    <span style={{ fontSize: 9, fontWeight: 700, color: "var(--heading)" }}>リードスコア</span>
-                    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                      <div style={{ width: 60, height: 4, borderRadius: 2, background: "var(--surface2)", overflow: "hidden" }}>
-                        <div style={{ height: "100%", borderRadius: 2, background: "linear-gradient(90deg,#12a37d,#0fc19a)", "--sw": "72%", animation: "scoreUp 1.2s 2.2s cubic-bezier(.16,1,.3,1) forwards" } as React.CSSProperties} />
-                      </div>
-                      <span style={{ fontFamily: "var(--fm)", fontSize: 10, fontWeight: 700, color: "#12a37d" }}>+15</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="phase-divider" />
-
-          {/* CHANNEL 03 - ポップアップ (left) */}
-          <div className="phase-row">
-            <div className="phase-text">
-              <div className="phase-tag" style={{ background: "#7c5cfc10", color: "#7c5cfc" }}>CHANNEL 03</div>
+              <div className="phase-tag" style={{ background: "#7c5cfc10", color: "#7c5cfc" }}>CHANNEL 02</div>
               <div className="phase-h">関心に合わせた資料をポップアップで表示</div>
               <div className="phase-desc">訪問者の閲覧ページやスクロール位置に応じて、関心にマッチした資料をポップアップで表示。興味を引いた訪問者をそのまま商談予約まで誘導します。Exit Intentやスクロール到達などのトリガーで最適なタイミングを判断。</div>
               <div className="phase-features">
@@ -504,6 +439,71 @@ export default function OnsitePageClient() {
               </div>
             </div>
           </div>
+          <div className="phase-divider" />
+
+          {/* CHANNEL 03 - サンクスページ (left) */}
+          <div className="phase-row">
+            <div className="phase-text">
+              <div className="phase-tag" style={{ background: "#12a37d10", color: "#12a37d" }}>CHANNEL 03</div>
+              <div className="phase-h">フォーム送信後の「次の一手」を逃さない</div>
+              <div className="phase-desc">フォーム送信後のサンクスページは、訪問者の関心が最も高い瞬間です。AIチャットが「資料をお送りしました。他にご興味のある情報はありますか？」と声をかけ、追加の資料提案や商談予約への誘導を行います。</div>
+              <div className="phase-features">
+                {["関連資料の追加提案", "商談予約への自然な誘導", "追加情報の取得", "リードスコア加点"].map((f, i) => (
+                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: "#12a37d" }} />{f}</div>
+                ))}
+              </div>
+            </div>
+            <div className="phase-vis">
+              <div className="pvis" style={{ background: "linear-gradient(160deg,#ecfdf5,#f0fdf4)", padding: 16 }}>
+                <div style={{ position: "absolute", top: 14, left: 14, right: 14 }}>
+                  {/* Thank you message */}
+                  <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, padding: "12px 14px", marginBottom: 10, textAlign: "center", animation: "chatPop .5s .2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
+                    <div style={{ fontSize: 18, marginBottom: 4 }}>&#10003;</div>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: "var(--heading)" }}>資料のダウンロードありがとうございます</div>
+                    <div style={{ fontSize: 9, color: "var(--sub)", marginTop: 2 }}>メールにもお送りしました</div>
+                  </div>
+                  {/* AI chat bubble */}
+                  <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, borderBottomLeftRadius: 4, padding: "8px 12px", marginBottom: 8, animation: "chatPop .5s .7s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4 }}>
+                      <div style={{ width: 16, height: 16, borderRadius: 4, background: "linear-gradient(135deg,#12a37d,#0fc19a)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: "#fff", fontWeight: 800 }}>AI</div>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: "var(--sub)" }}>Meeton ai</span>
+                    </div>
+                    <div style={{ fontSize: 10, fontWeight: 600, color: "var(--heading)", lineHeight: 1.5 }}>他にご興味のある資料はありますか？<br />御社に合った事例もご用意できます</div>
+                  </div>
+                  {/* Related resource cards */}
+                  <div style={{ display: "flex", gap: 6, marginBottom: 8, animation: "chatPop .5s 1.2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
+                    {[
+                      { name: "SaaS業界事例集", icon: "📊" },
+                      { name: "ROI試算シート", icon: "📈" },
+                    ].map((r, k) => (
+                      <div key={k} style={{ flex: 1, background: "linear-gradient(135deg,var(--cta-light),#d1fae5)", border: "1px solid rgba(18,163,125,.15)", borderRadius: 8, padding: "7px 8px", display: "flex", alignItems: "center", gap: 5 }}>
+                        <span style={{ fontSize: 14 }}>{r.icon}</span>
+                        <div style={{ fontSize: 9, fontWeight: 700, color: "#12a37d" }}>{r.name}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Meeting CTA */}
+                  <div style={{ background: "linear-gradient(135deg,#12a37d,#0fc19a)", borderRadius: 10, padding: "8px 12px", animation: "chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards", opacity: 0, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: "#fff" }}>詳しい話を聞いてみませんか？</div>
+                      <div style={{ fontSize: 8, color: "rgba(255,255,255,.8)", marginTop: 1 }}>15分のカジュアル面談</div>
+                    </div>
+                    <div style={{ background: "#fff", color: "#12a37d", borderRadius: 6, padding: "4px 10px", fontSize: 9, fontWeight: 800 }}>予約 →</div>
+                  </div>
+                  {/* Score indicator */}
+                  <div style={{ marginTop: 8, background: "#fff", border: "1px solid var(--border)", borderRadius: 8, padding: "6px 10px", display: "flex", alignItems: "center", justifyContent: "space-between", animation: "slideIn .6s 2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
+                    <span style={{ fontSize: 9, fontWeight: 700, color: "var(--heading)" }}>リードスコア</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                      <div style={{ width: 60, height: 4, borderRadius: 2, background: "var(--surface2)", overflow: "hidden" }}>
+                        <div style={{ height: "100%", borderRadius: 2, background: "linear-gradient(90deg,#12a37d,#0fc19a)", "--sw": "72%", animation: "scoreUp 1.2s 2.2s cubic-bezier(.16,1,.3,1) forwards" } as React.CSSProperties} />
+                      </div>
+                      <span style={{ fontFamily: "var(--fm)", fontSize: 10, fontWeight: 700, color: "#12a37d" }}>+15</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -528,18 +528,18 @@ export default function OnsitePageClient() {
               <div className="flow-node-sub">AI資料提案</div>
             </div>
             <div className="flow-arrow" style={{ animationDelay: ".7s" }}>→</div>
-            {/* Thank you Page */}
-            <div className="flow-node" style={{ borderColor: "rgba(18,163,125,.2)", animation: "popIn .5s .8s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-              <div className="flow-node-icon" style={{ background: "var(--cta-light)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3"/></svg></div>
-              <div className="flow-node-label">サンクスページ</div>
-              <div className="flow-node-sub">追加アクション</div>
-            </div>
-            <div className="flow-arrow" style={{ animationDelay: "1s" }}>→</div>
             {/* Popup */}
-            <div className="flow-node" style={{ borderColor: "rgba(124,92,252,.2)", animation: "popIn .5s 1.1s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
+            <div className="flow-node" style={{ borderColor: "rgba(124,92,252,.2)", animation: "popIn .5s .8s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
               <div className="flow-node-icon" style={{ background: "var(--accent-light)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
               <div className="flow-node-label">資料ポップアップ</div>
               <div className="flow-node-sub">関心資料の表示</div>
+            </div>
+            <div className="flow-arrow" style={{ animationDelay: "1s" }}>→</div>
+            {/* Thank you Page */}
+            <div className="flow-node" style={{ borderColor: "rgba(18,163,125,.2)", animation: "popIn .5s 1.1s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
+              <div className="flow-node-icon" style={{ background: "var(--cta-light)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3"/></svg></div>
+              <div className="flow-node-label">サンクスページ</div>
+              <div className="flow-node-sub">追加アクション</div>
             </div>
             <div className="flow-arrow" style={{ animationDelay: "1.3s" }}>→</div>
             {/* AI Core */}
@@ -553,8 +553,8 @@ export default function OnsitePageClient() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, maxWidth: 800, margin: "20px auto 0" }}>
             {[
               { iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6", channel: "資料ページ", action: "興味・閲覧履歴", color: "#0891b2", bg: "var(--cyan-light)" },
-              { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", channel: "サンクスページ", action: "CV後の行動", color: "#12a37d", bg: "var(--cta-light)" },
               { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", channel: "資料ポップアップ", action: "関心資料の表示", color: "#7c5cfc", bg: "var(--accent-light)" },
+              { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", channel: "サンクスページ", action: "CV後の行動", color: "#12a37d", bg: "var(--cta-light)" },
             ].map((item, i) => (
               <div key={i} style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, padding: "14px 16px", textAlign: "center", transition: "all .3s" }}>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: `${item.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={item.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.iconPath}/></svg></div>

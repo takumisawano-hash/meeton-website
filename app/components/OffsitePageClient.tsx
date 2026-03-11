@@ -44,21 +44,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.2;letter-spacing:-.5px;margin-bottom:18px}
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
 
-/* HERO - Dark */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 80px;background:#0f1128}
-.hero .dot-grid{background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px) !important}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f3f0ff 60%,#fff 100%)}
 .hero-content{max-width:900px;text-align:center;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,111,245,.12);border:1px solid rgba(59,111,245,.25);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:#6ea0ff;backdrop-filter:blur(8px)}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#3b6ff5;animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,7vw,72px);font-weight:900;color:#fff;line-height:1.15;letter-spacing:-2.5px;margin-bottom:22px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,#12a37d,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(15px,2.5vw,20px);line-height:1.8;color:#8a8cb8;max-width:600px;margin:0 auto 36px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
+.hero h1{font-size:clamp(32px,7vw,72px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,2.5vw,20px);line-height:1.8;color:var(--sub);max-width:600px;margin:0 auto 36px}
 .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
-.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.2)}
-.hero .btn-ghost:hover{border-color:#3b6ff5;color:#6ea0ff;background:rgba(59,111,245,.08)}
-.hero-stats{display:flex;justify-content:center;gap:clamp(32px,6vw,56px);margin-top:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(32px,5vw,44px);font-weight:700;letter-spacing:-1px}
-.stat-l{font-size:clamp(12px,1.8vw,14px);color:#6e7494;margin-top:6px;font-weight:600}
+.hero-stats{display:flex;justify-content:center;gap:clamp(32px,6vw,56px);margin-top:44px;padding-top:36px;border-top:1px solid var(--border);flex-wrap:wrap}
+.stat-v{font-family:var(--fm);font-size:clamp(32px,5vw,44px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.stat-l{font-size:clamp(12px,1.8vw,14px);color:var(--sub);margin-top:6px;font-weight:600}
 
 /* Network Diagram */
 @keyframes dashFlow{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
@@ -66,9 +63,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @keyframes netNodeIn{0%{opacity:0;transform:scale(0) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
 .net-diagram{max-width:700px;margin:0 auto;position:relative;padding:20px 0}
 .net-node{display:flex;flex-direction:column;align-items:center;gap:6px;animation:netNodeIn .5s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
-.net-node-circle{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 20px rgba(0,0,0,.2)}
-.net-node-label{font-size:12px;font-weight:800;color:#fff}
-.net-node-sub{font-size:10px;color:#6e7494;font-weight:600}
+.net-node-circle{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.net-node-label{font-size:12px;font-weight:800;color:var(--heading)}
+.net-node-sub{font-size:10px;color:var(--sub);font-weight:600}
 .net-core{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#12a37d,#0fc19a);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 30px rgba(18,163,125,.4);animation:coreGlow 3s ease-in-out infinite}
 
 /* PHASE ROWS */
@@ -107,7 +104,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.1)}
 .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
 .why-card:hover::before{opacity:1}
-.why-icon{font-size:32px;margin-bottom:16px}
+.why-icon{margin-bottom:16px}
 .why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
 .why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
 
@@ -144,8 +141,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .hero-badge{padding:7px 16px;margin-bottom:20px}
   .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto 32px}
   .hero-stats{flex-direction:row;gap:24px}
-  .net-diagram svg{display:none}
-  .net-diagram{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .net-diagram{overflow-x:auto}
   .why-grid{grid-template-columns:1fr}
   .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
   .final-cta{padding:60px 20px 80px}
@@ -184,14 +180,14 @@ export default function OffsitePageClient(){
     <div>
       <style dangerouslySetInnerHTML={{__html:css}}/>
 
-      <Nav variant="dark" />
+      <Nav variant="light" />
 
-      {/* HERO - Dark */}
+      {/* HERO */}
       <section className="hero">
         <div className="dot-grid"/>
-        <div className="glow" style={{background:"rgba(59,111,245,.12)",width:700,height:700,top:-200,right:-150}}/>
-        <div className="glow" style={{background:"rgba(124,92,252,.08)",width:500,height:500,bottom:-200,left:-100}}/>
-        <div className="glow" style={{background:"rgba(18,163,125,.06)",width:400,height:400,top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}/>
+        <div className="glow" style={{background:"rgba(18,163,125,.08)",width:700,height:700,top:-200,right:-150}}/>
+        <div className="glow" style={{background:"rgba(124,92,252,.06)",width:500,height:500,bottom:-200,left:-100}}/>
+        <div className="glow" style={{background:"rgba(59,111,245,.04)",width:400,height:400,top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}/>
         <div className="hero-content">
           <div className="anim d1 hero-badge"><div className="hero-badge-dot"/>OUTREACH CHANNELS</div>
           <h1 className="anim d2">サイトの外でも<br/><em>リードを逃さない</em></h1>
@@ -253,7 +249,7 @@ export default function OffsitePageClient(){
               {v:"40%",l:"予約率向上",c:"#7c5cfc"},
               {v:"3",l:"チャネル",c:"#12a37d"},
             ].map((s,i)=>(
-              <div key={i} style={{textAlign:"center"}}><div className="stat-v" style={{background:`linear-gradient(135deg,${s.c},#fff)`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{s.v}</div><div className="stat-l">{s.l}</div></div>
+              <div key={i} style={{textAlign:"center"}}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
             ))}
           </div>
         </div>
@@ -268,12 +264,14 @@ export default function OffsitePageClient(){
           <p className="ssub" style={{textAlign:"center",margin:"0 auto 44px"}}>メール、リンク、QRコード。3つのチャネルがあらゆる接点から商談を創出します。</p>
           <div className="why-grid">
             {[
-              {icon:"✉️",title:"AIメール",sub:"パーソナライズ育成メール",desc:"AIチャットでの会話内容やリードスコアを基に、一人ひとりに最適なメールを自動生成・送信。行動シグナルで最適なタイミングを判断します。"},
-              {icon:"🔗",title:"カレンダーリンク",sub:"どこでも商談予約",desc:"メール、PDF、提案書などにカレンダーリンクを埋め込み。事前認定済みの情報を引き継いだまま、ワンクリックで商談予約へ。"},
-              {icon:"📱",title:"カレンダーQR",sub:"オフラインから商談へ",desc:"展示会、名刺、印刷資料にQRコードを配置。スマートフォンで読み取るだけで、オフラインの接点を商談予約に変換します。"},
+              {iconPath:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",color:"#3b6ff5",title:"AIメール",sub:"パーソナライズ育成メール",desc:"AIチャットでの会話内容やリードスコアを基に、一人ひとりに最適なメールを自動生成・送信。行動シグナルで最適なタイミングを判断します。"},
+              {iconPath:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",color:"#12a37d",title:"カレンダーリンク",sub:"どこでも商談予約",desc:"メール、PDF、提案書などにカレンダーリンクを埋め込み。事前認定済みの情報を引き継いだまま、ワンクリックで商談予約へ。"},
+              {iconPath:"M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z M12 18h.01",color:"#7c5cfc",title:"カレンダーQR",sub:"オフラインから商談へ",desc:"展示会、名刺、印刷資料にQRコードを配置。スマートフォンで読み取るだけで、オフラインの接点を商談予約に変換します。"},
             ].map((w,i)=>(
               <div className="why-card" key={i}>
-                <div className="why-icon">{w.icon}</div>
+                <div className="why-icon" style={{width:48,height:48,borderRadius:12,background:`${w.color}12`,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={w.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={w.iconPath}/></svg>
+                </div>
                 <div style={{fontSize:11,fontWeight:700,color:"var(--sub)",letterSpacing:1,textTransform:"uppercase",marginBottom:6,fontFamily:"var(--fm)"}}>{w.sub}</div>
                 <div className="why-title">{w.title}</div>
                 <div className="why-desc">{w.desc}</div>
@@ -450,73 +448,62 @@ export default function OffsitePageClient(){
             </div>
             <div className="phase-vis">
               {/* QR Code + Smartphone Visual */}
-              <div className="pvis" style={{background:"linear-gradient(160deg,#f3f0ff,#f8f0ff)"}}>
-                {/* QR Code */}
-                <div style={{position:"absolute",top:20,left:"50%",transform:"translateX(-50%)",animation:"nodeGrow .5s .3s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
-                  <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 20px rgba(124,92,252,.1)",border:"1px solid #d8d0f5",textAlign:"center"}}>
-                    {/* QR Pattern */}
-                    <div style={{width:100,height:100,position:"relative",margin:"0 auto"}}>
-                      {/* QR grid pattern */}
-                      {[...Array(10)].map((_,row)=>(
-                        <div key={row} style={{display:"flex",gap:0}}>
-                          {[...Array(10)].map((_,col)=>{
-                            const isCorner = (row<3&&col<3)||(row<3&&col>6)||(row>6&&col<3);
-                            const isRandom = !isCorner && Math.sin(row*7+col*13)>0;
-                            return <div key={col} style={{width:10,height:10,background:isCorner||isRandom?"#7c5cfc":"transparent",borderRadius:isCorner?0:1}}/>;
-                          })}
-                        </div>
-                      ))}
-                      {/* Corner markers */}
-                      <div style={{position:"absolute",top:0,left:0,width:30,height:30,border:"3px solid #7c5cfc",borderRadius:4}}/>
-                      <div style={{position:"absolute",top:0,right:0,width:30,height:30,border:"3px solid #7c5cfc",borderRadius:4}}/>
-                      <div style={{position:"absolute",bottom:0,left:0,width:30,height:30,border:"3px solid #7c5cfc",borderRadius:4}}/>
-                      {/* Center logo */}
-                      <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:22,height:22,borderRadius:5,background:"linear-gradient(135deg,#7c5cfc,#b49dff)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:"#fff",fontWeight:900}}>M</div>
-                    </div>
-                    <div style={{fontSize:9,fontWeight:700,color:"#7c5cfc",marginTop:8,fontFamily:"var(--fm)"}}>SCAN TO BOOK</div>
-                  </div>
-                </div>
-
-                {/* Scan line animation */}
-                <div style={{position:"absolute",top:"20%",left:"calc(50% - 68px)",width:136,height:2,background:"linear-gradient(90deg,transparent,#7c5cfc,transparent)",animation:"scanLine 3s ease-in-out infinite",opacity:.6,borderRadius:1}}/>
-
-                {/* Smartphone */}
-                <div style={{position:"absolute",bottom:14,right:24,animation:"nodeGrow .5s .9s cubic-bezier(.16,1,.3,1) forwards",opacity:0,transform:"scale(0)"}}>
-                  <div style={{width:120,height:180,background:"#1a1a2e",borderRadius:18,padding:"8px 6px",boxShadow:"0 8px 32px rgba(0,0,0,.15)",position:"relative"}}>
-                    {/* Notch */}
-                    <div style={{width:40,height:4,background:"#2a2a4e",borderRadius:2,margin:"0 auto 6px"}}/>
-                    {/* Screen */}
-                    <div style={{background:"#fff",borderRadius:12,height:"calc(100% - 18px)",padding:"10px 8px",overflow:"hidden"}}>
-                      <div style={{fontSize:8,fontWeight:800,color:"var(--heading)",marginBottom:4}}>商談予約</div>
-                      <div style={{fontSize:7,color:"var(--sub)",marginBottom:8,lineHeight:1.4}}>ご都合の良い日時を選択してください</div>
-                      {/* Mini calendar */}
-                      <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:1,marginBottom:8}}>
-                        {["月","火","水","木","金","土","日"].map(d=>(
-                          <div key={d} style={{fontSize:5,textAlign:"center",color:"var(--sub)",fontWeight:700}}>{d}</div>
+              <div className="pvis" style={{background:"linear-gradient(160deg,#f3f0ff,#f8f0ff)",padding:20}}>
+                <div style={{position:"absolute",top:14,left:14,right:14}}>
+                  {/* QR Code - centered, smaller */}
+                  <div style={{display:"flex",justifyContent:"center",marginBottom:12,animation:"chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+                    <div style={{background:"#fff",borderRadius:14,padding:14,boxShadow:"0 4px 16px rgba(124,92,252,.1)",border:"1px solid #d8d0f5",textAlign:"center"}}>
+                      <div style={{width:80,height:80,position:"relative",margin:"0 auto"}}>
+                        {[...Array(8)].map((_,row)=>(
+                          <div key={row} style={{display:"flex",gap:0}}>
+                            {[...Array(8)].map((_,col)=>{
+                              const isCorner = (row<2&&col<2)||(row<2&&col>5)||(row>5&&col<2);
+                              const isRandom = !isCorner && Math.sin(row*7+col*13)>0;
+                              return <div key={col} style={{width:10,height:10,background:isCorner||isRandom?"#7c5cfc":"transparent",borderRadius:isCorner?0:1}}/>;
+                            })}
+                          </div>
                         ))}
-                        {[...Array(14)].map((_,i)=>(
-                          <div key={i} style={{fontSize:6,textAlign:"center",padding:2,borderRadius:3,background:i===5?"#7c5cfc":i===8?"var(--surface)":"transparent",color:i===5?"#fff":"var(--heading)",fontWeight:i===5?800:500}}>{i+10}</div>
-                        ))}
+                        <div style={{position:"absolute",top:0,left:0,width:20,height:20,border:"3px solid #7c5cfc",borderRadius:3}}/>
+                        <div style={{position:"absolute",top:0,right:0,width:20,height:20,border:"3px solid #7c5cfc",borderRadius:3}}/>
+                        <div style={{position:"absolute",bottom:0,left:0,width:20,height:20,border:"3px solid #7c5cfc",borderRadius:3}}/>
+                        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:18,height:18,borderRadius:4,background:"linear-gradient(135deg,#7c5cfc,#b49dff)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:8,color:"#fff",fontWeight:900}}>M</div>
                       </div>
-                      {/* Confirm button */}
-                      <div style={{background:"linear-gradient(135deg,#7c5cfc,#b49dff)",color:"#fff",borderRadius:6,padding:"5px 8px",textAlign:"center",fontSize:7,fontWeight:800}}>予約を確定する</div>
+                      <div style={{fontSize:8,fontWeight:700,color:"#7c5cfc",marginTop:6,fontFamily:"var(--fm)"}}>SCAN TO BOOK</div>
                     </div>
-                    {/* Home bar */}
-                    <div style={{width:32,height:3,background:"#444",borderRadius:2,margin:"4px auto 0"}}/>
                   </div>
-                </div>
-
-                {/* Connection line */}
-                <div style={{position:"absolute",bottom:100,left:"50%",width:1,height:30,background:"linear-gradient(180deg,#7c5cfc,transparent)",animation:"slideIn .4s 1.2s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}/>
-
-                {/* Confirmation badge */}
-                <div style={{position:"absolute",bottom:16,left:20,animation:"nodeGrow .5s 1.5s cubic-bezier(.16,1,.3,1) forwards",opacity:0,transform:"scale(0)"}}>
-                  <div style={{background:"#fff",border:"1px solid #d8d0f5",borderRadius:10,padding:"8px 12px",boxShadow:"0 2px 8px rgba(124,92,252,.1)"}}>
-                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                  {/* Arrow down */}
+                  <div style={{display:"flex",justifyContent:"center",marginBottom:10,animation:"chatPop .5s .7s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+                    <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+                      <div style={{width:2,height:16,background:"#7c5cfc",borderRadius:1}}/>
+                      <div style={{width:0,height:0,borderLeft:"5px solid transparent",borderRight:"5px solid transparent",borderTop:"6px solid #7c5cfc"}}/>
+                    </div>
+                  </div>
+                  {/* Smartphone - centered */}
+                  <div style={{display:"flex",justifyContent:"center",animation:"chatPop .5s .9s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+                    <div style={{width:140,background:"#1a1a2e",borderRadius:18,padding:"8px 6px",boxShadow:"0 8px 24px rgba(0,0,0,.12)"}}>
+                      <div style={{width:40,height:4,background:"#2a2a4e",borderRadius:2,margin:"0 auto 6px"}}/>
+                      <div style={{background:"#fff",borderRadius:12,padding:"10px 8px",overflow:"hidden"}}>
+                        <div style={{fontSize:9,fontWeight:800,color:"var(--heading)",marginBottom:4}}>商談予約</div>
+                        <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:2,marginBottom:8}}>
+                          {["月","火","水","木","金"].map(d=>(
+                            <div key={d} style={{fontSize:6,textAlign:"center",color:"var(--sub)",fontWeight:700}}>{d}</div>
+                          ))}
+                          {[10,11,12,13,14,15,16,17,18,19].map((n,i)=>(
+                            <div key={i} style={{fontSize:7,textAlign:"center",padding:2,borderRadius:3,background:i===3?"#7c5cfc":i===7?"var(--surface)":"transparent",color:i===3?"#fff":"var(--heading)",fontWeight:i===3?800:500}}>{n}</div>
+                          ))}
+                        </div>
+                        <div style={{background:"linear-gradient(135deg,#7c5cfc,#b49dff)",color:"#fff",borderRadius:6,padding:"5px 8px",textAlign:"center",fontSize:8,fontWeight:800}}>予約を確定する</div>
+                      </div>
+                      <div style={{width:32,height:3,background:"#444",borderRadius:2,margin:"4px auto 0"}}/>
+                    </div>
+                  </div>
+                  {/* Confirmation */}
+                  <div style={{display:"flex",justifyContent:"center",marginTop:10,animation:"slideIn .6s 1.3s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+                    <div style={{background:"#fff",border:"1px solid #d8d0f5",borderRadius:10,padding:"8px 14px",display:"flex",alignItems:"center",gap:8}}>
                       <div style={{width:20,height:20,borderRadius:"50%",background:"#7c5cfc",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:"#fff"}}>✓</div>
                       <div>
                         <div style={{fontSize:9,fontWeight:800,color:"var(--heading)"}}>予約完了</div>
-                        <div style={{fontSize:8,color:"var(--sub)"}}>3タップで完了</div>
+                        <div style={{fontSize:8,color:"var(--sub)"}}>スマホから3タップで完了</div>
                       </div>
                     </div>
                   </div>
