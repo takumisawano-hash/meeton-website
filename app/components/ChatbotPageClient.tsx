@@ -199,7 +199,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
-  { q: 'AIチャットボットはどのように訪問者に話しかけますか？', a: 'Meeton AIのチャットボットは、訪問者が閲覧しているページの内容や行動パターンを分析し、最適なタイミングで自動的に声をかけます。料金ページなら「プランについてご質問ありますか？」、ブログなら「詳しい資料をお送りしましょうか？」のように、文脈に合わせた自然な挨拶を行います。' },
+  { q: 'AIチャットボットはどのように訪問者に話しかけますか？', a: 'Meeton aiのチャットボットは、訪問者が閲覧しているページの内容や行動パターンを分析し、最適なタイミングで自動的に声をかけます。料金ページなら「プランについてご質問ありますか？」、ブログなら「詳しい資料をお送りしましょうか？」のように、文脈に合わせた自然な挨拶を行います。' },
   { q: 'シナリオの設計は必要ですか？', a: 'いいえ、従来のチャットボットのようなシナリオ分岐の設計は一切不要です。AIが訪問者の質問や行動に応じて自律的に最適な対応を判断します。初期設定（声かけ内容、商談予約ルール、資料の登録）を行うだけで稼働を開始できます。' },
   { q: 'どのようにリード情報を取得しますか？', a: 'チャットの会話の流れの中で自然にメールアドレスを取得します。チャット画面下部に専用の入力フィールドがあり、リアルタイムバリデーションとオートコンプリートに対応。入力された瞬間にCRMへ自動登録されるため、ブラウザが閉じてもデータは安全です。' },
   { q: '商談予約はどのように行われますか？', a: '訪問者の行動（ページ閲覧、チャット内容、訪問回数）をリアルタイムでスコアリングし、設定した基準を満たした訪問者にのみカレンダーを表示して商談予約を促します。Google CalendarやTimeRexなど主要な日程調整ツールと連携しています。' },
@@ -264,7 +264,7 @@ export default function ChatbotPageClient() {
               <div className="chat-hdr">
                 <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,var(--cta),#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 800 }}>M</div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton AI</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton ai</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)' }} />
                     <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>オンライン</span>
@@ -528,7 +528,7 @@ export default function ChatbotPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton AI のチャットボットなのか</div>
+          <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton ai のチャットボットなのか</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>従来のチャットボットとは根本的に異なるアプローチ。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (

@@ -391,7 +391,7 @@ export default function OnsitePageClient() {
                   <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, borderBottomLeftRadius: 4, padding: "8px 12px", marginBottom: 8, animation: "chatPop .5s .7s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4 }}>
                       <div style={{ width: 16, height: 16, borderRadius: 4, background: "linear-gradient(135deg,#12a37d,#0fc19a)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: "#fff", fontWeight: 800 }}>AI</div>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: "var(--sub)" }}>Meeton AI</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: "var(--sub)" }}>Meeton ai</span>
                     </div>
                     <div style={{ fontSize: 10, fontWeight: 600, color: "var(--heading)", lineHeight: 1.5 }}>他にご興味のある資料はありますか？<br />御社に合った事例もご用意できます</div>
                   </div>

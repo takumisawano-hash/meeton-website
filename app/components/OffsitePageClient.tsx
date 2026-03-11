@@ -392,7 +392,7 @@ export default function OffsitePageClient(){
                     <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,paddingBottom:10,borderBottom:"1px solid var(--border)"}}>
                       <div style={{width:28,height:28,borderRadius:"50%",background:"linear-gradient(135deg,var(--cta),#0fc19a)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#fff",fontWeight:800}}>M</div>
                       <div>
-                        <div style={{fontSize:10,fontWeight:800,color:"var(--heading)"}}>Meeton AI</div>
+                        <div style={{fontSize:10,fontWeight:800,color:"var(--heading)"}}>Meeton ai</div>
                         <div style={{fontSize:9,color:"var(--sub)"}}>noreply@dynameet.ai</div>
                       </div>
                     </div>

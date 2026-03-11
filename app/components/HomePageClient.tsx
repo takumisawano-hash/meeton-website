@@ -1372,7 +1372,7 @@ export default function HomePageClient(){
         <div className="dot-grid" style={{opacity:.3}}/>
         <div className="section-inner" style={{position:"relative",zIndex:2}}>
           <div className="slabel" style={{textAlign:"center"}}>Products</div>
-          <div className="stitle" style={{textAlign:"center"}}>商談をつくる、<span style={{color:"var(--cta)"}}>3つのプロダクト</span></div>
+          <div className="stitle" style={{textAlign:"center"}}>商談をつくる、<span style={{color:"var(--cta)"}}>3つのアプローチ</span></div>
           <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>AIチャットボットを軸に、サイト内外のあらゆる接点から商談を自動獲得します。</p>
 
           <div className="cat-grid">
