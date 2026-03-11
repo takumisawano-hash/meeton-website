@@ -131,7 +131,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.1)}
 .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
 .why-card:hover::before{opacity:1}
-.why-icon{font-size:32px;margin-bottom:16px}
+.why-icon{margin-bottom:16px}
 .why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
 .why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
 
@@ -207,18 +207,26 @@ const faqData = [
 ];
 
 const whyData = [
-  { icon: '🧠', title: 'シナリオ設計不要', desc: 'AIが自律稼働し、訪問者の行動・文脈に応じて最適な対応を自動判断。従来のチャットボットのような分岐設計の手間はゼロ。' },
-  { icon: '🎯', title: '能動型、待ちじゃない', desc: '訪問者が話しかけるのを待つのではなく、AIがページ内容・行動パターンを読み取り、最適なタイミングで自ら声をかけます。' },
-  { icon: '💬', title: '自然な会話でリード獲得', desc: 'フォームではなくチャットの流れの中で自然にメールアドレスを取得。訪問者体験を損なわずにリード獲得率を最大化。' },
-  { icon: '🚀', title: '5分で導入', desc: 'WebサイトにJavaScriptタグを1行追加するだけ。コード不要、開発リソース不要。最短当日から稼働開始。' },
+  { title: 'シナリオ設計不要', desc: 'AIが自律稼働し、訪問者の行動・文脈に応じて最適な対応を自動判断。従来のチャットボットのような分岐設計の手間はゼロ。', color: '#7c5cfc', iconPath: 'M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2zM9 18h6M10 22h4' },
+  { title: '能動型、待ちじゃない', desc: '訪問者が話しかけるのを待つのではなく、AIがページ内容・行動パターンを読み取り、最適なタイミングで自ら声をかけます。', color: '#0891b2', iconPath: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' },
+  { title: '自然な会話でリード獲得', desc: 'フォームではなくチャットの流れの中で自然にメールアドレスを取得。訪問者体験を損なわずにリード獲得率を最大化。', color: '#12a37d', iconPath: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' },
+  { title: '5分で導入', desc: 'WebサイトにJavaScriptタグを1行追加するだけ。コード不要、開発リソース不要。最短当日から稼働開始。', color: '#3b6ff5', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
 ];
 
 const flowSteps = [
-  { num: '1', title: 'サイト訪問', sub: 'Visitor arrives', icon: '🌐', color: '#6e7494' },
-  { num: '2', title: 'AI声かけ', sub: 'Proactive greeting', icon: '💬', color: '#0891b2' },
-  { num: '3', title: 'ニーズ把握\n& 資料提案', sub: 'Need understanding', icon: '💡', color: '#12a37d' },
-  { num: '4', title: 'リード獲得\n& 予約誘導', sub: 'Lead capture', icon: '🎯', color: '#3b6ff5' },
-  { num: '5', title: '商談確定', sub: 'Meeting confirmed', icon: '📅', color: '#7c5cfc' },
+  { num: '1', title: 'サイト訪問', sub: 'Visitor arrives', color: '#6e7494' },
+  { num: '2', title: 'AI声かけ', sub: 'Proactive greeting', color: '#0891b2' },
+  { num: '3', title: 'ニーズ把握\n& 資料提案', sub: 'Need understanding', color: '#12a37d' },
+  { num: '4', title: 'リード獲得\n& 予約誘導', sub: 'Lead capture', color: '#3b6ff5' },
+  { num: '5', title: '商談確定', sub: 'Meeting confirmed', color: '#7c5cfc' },
+];
+
+const flowStepIcons = [
+  <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>,
+  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>,
+  <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>,
+  <><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></>,
+  <><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></>,
 ];
 
 export default function ChatbotPageClient() {
@@ -319,7 +327,11 @@ export default function ChatbotPageClient() {
                 <div className="flow-step">
                   <div className="flow-connector" style={{ background: `linear-gradient(90deg, ${step.color}40, ${flowSteps[Math.min(i + 1, 4)].color}40)` }} />
                   <div className="flow-num" style={{ background: `linear-gradient(135deg, ${step.color}, ${step.color}cc)` }}>{step.num}</div>
-                  <div className="flow-icon">{step.icon}</div>
+                  <div style={{width:28,height:28,margin:'0 auto 8px'}}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {flowStepIcons[i]}
+                    </svg>
+                  </div>
                   <div className="flow-title" style={{ whiteSpace: 'pre-line' }}>{step.title}</div>
                   <div className="flow-sub">{step.sub}</div>
                 </div>
@@ -364,11 +376,11 @@ export default function ChatbotPageClient() {
                     料金ページを閲覧中
                   </div>
                 </div>
-                <div className="vis0-bubble vis0-ai" style={{ top: 46, left: 20, animationDelay: '.4s' }}>こんにちは！<br />プランについてご質問ありますか？</div>
-                <div className="vis0-bubble vis0-ai" style={{ top: 118, left: 20, animationDelay: '1s', fontSize: 11, color: 'var(--sub)' }}>こちらの資料もおすすめです：</div>
-                <div className="vis0-bubble vis0-res" style={{ top: 160, left: 20, animationDelay: '1.4s' }}>📄 導入ガイド（PDF）</div>
-                <div className="vis0-bubble vis0-res" style={{ top: 160, left: 180, animationDelay: '1.7s' }}>📊 料金比較表</div>
-                <div className="vis0-bubble" style={{ top: 220, right: 20, animationDelay: '2.2s', background: 'var(--cta)', color: '#fff', borderBottomRightRadius: 4 }}>料金について詳しく知りたいです</div>
+                <div className="vis0-bubble vis0-ai" style={{ top: 42, left: 20, animationDelay: '.4s' }}>こんにちは！<br />プランについてご質問ありますか？</div>
+                <div className="vis0-bubble vis0-ai" style={{ top: 108, left: 20, animationDelay: '1s', fontSize: 11, color: 'var(--sub)' }}>こちらの資料もおすすめです：</div>
+                <div className="vis0-bubble vis0-res" style={{ top: 148, left: 20, animationDelay: '1.4s', maxWidth: 145 }}>📄 導入ガイド（PDF）</div>
+                <div className="vis0-bubble vis0-res" style={{ top: 148, left: 175, animationDelay: '1.7s', maxWidth: 145 }}>📊 料金比較表</div>
+                <div className="vis0-bubble" style={{ top: 200, right: 20, animationDelay: '2.2s', background: 'var(--cta)', color: '#fff', borderBottomRightRadius: 4 }}>料金について詳しく知りたいです</div>
               </div>
             </div>
           </div>
@@ -388,10 +400,10 @@ export default function ChatbotPageClient() {
             </div>
             <div className="phase-vis">
               <div className="pvis vis1">
-                <div className="vis0-bubble vis0-ai" style={{ top: 16, left: 16, animationDelay: '.2s' }}>どのような課題をお持ちですか？</div>
-                <div className="vis0-bubble" style={{ top: 70, right: 16, animationDelay: '.7s', background: 'var(--cta)', color: '#fff', borderBottomRightRadius: 4 }}>リード獲得を効率化したいです</div>
-                <div className="vis0-bubble vis0-ai" style={{ top: 130, left: 16, animationDelay: '1.2s', fontSize: 11 }}>それなら、こちらの資料がおすすめです：</div>
-                <div style={{ position: 'absolute', top: 172, left: 16, right: 16, animation: 'slideIn .6s 1.6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                <div className="vis0-bubble vis0-ai" style={{ top: 12, left: 16, animationDelay: '.2s' }}>どのような課題をお持ちですか？</div>
+                <div className="vis0-bubble" style={{ top: 62, right: 16, animationDelay: '.7s', background: 'var(--cta)', color: '#fff', borderBottomRightRadius: 4 }}>リード獲得を効率化したいです</div>
+                <div className="vis0-bubble vis0-ai" style={{ top: 116, left: 16, animationDelay: '1.2s', fontSize: 11 }}>それなら、こちらの資料がおすすめです：</div>
+                <div style={{ position: 'absolute', top: 152, left: 16, right: 16, animation: 'slideIn .6s 1.6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                   <div style={{ display: 'flex', gap: 8 }}>
                     {[{ name: 'リード獲得ガイド.pdf', size: '3.2 MB', match: '98%' }, { name: '導入事例集.pdf', size: '2.1 MB', match: '92%' }].map((f, j) => (
                       <div key={j} style={{ flex: 1, background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '10px', transition: 'all .2s' }}>
@@ -429,18 +441,18 @@ export default function ChatbotPageClient() {
             </div>
             <div className="phase-vis">
               <div className="pvis vis2-email">
-                <div className="vis0-bubble vis0-ai" style={{ top: 20, left: 20, animationDelay: '.3s' }}>資料をお送りしますね！<br />メールアドレスを教えてください 📧</div>
-                <div style={{ position: 'absolute', top: 90, left: 20, right: 20, padding: '10px 14px', borderRadius: 10, border: '2px solid var(--cta)', background: '#fff', fontSize: 13, color: 'var(--heading)', fontWeight: 600, fontFamily: 'var(--fb)', animation: 'emailPulse 2s infinite', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="vis0-bubble vis0-ai" style={{ top: 16, left: 20, animationDelay: '.3s' }}>資料をお送りしますね！<br />メールアドレスを教えてください 📧</div>
+                <div style={{ position: 'absolute', top: 82, left: 20, right: 20, padding: '10px 14px', borderRadius: 10, border: '2px solid var(--cta)', background: '#fff', fontSize: 13, color: 'var(--heading)', fontWeight: 600, fontFamily: 'var(--fb)', animation: 'emailPulse 2s infinite', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span>tanaka@example.co.jp</span>
                   <span style={{ background: 'var(--cta)', color: '#fff', borderRadius: 6, padding: '4px 10px', fontSize: 11, fontWeight: 700 }}>送信</span>
                 </div>
-                <div style={{ position: 'absolute', top: 138, left: 20, display: 'flex', alignItems: 'center', gap: 4, animation: 'slideIn .6s .6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                <div style={{ position: 'absolute', top: 128, left: 20, display: 'flex', alignItems: 'center', gap: 4, animation: 'slideIn .6s .6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                   <span style={{ fontSize: 10, color: 'var(--cta)', fontWeight: 600 }}>✓ メール形式OK</span>
                 </div>
-                <div style={{ position: 'absolute', top: 164, right: 20, background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '8px 12px', fontSize: 11, fontWeight: 700, color: 'var(--cta)', animation: 'slideIn .6s .9s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ position: 'absolute', top: 152, right: 20, background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '8px 12px', fontSize: 11, fontWeight: 700, color: 'var(--cta)', animation: 'slideIn .6s .9s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--cta)', animation: 'pulse 1.5s infinite' }} />CRMへ即時登録
                 </div>
-                <div style={{ position: 'absolute', top: 202, left: 20, right: 20, animation: 'slideIn .6s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                <div style={{ position: 'absolute', top: 188, left: 20, right: 20, animation: 'slideIn .6s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 14px' }}>
                     <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)', marginBottom: 8 }}>📎 ご希望の資料はこちらです：</div>
                     <div style={{ display: 'flex', gap: 8 }}>
@@ -465,10 +477,10 @@ export default function ChatbotPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>STEP 04</div>
-              <div className="phase-h">見込み度に応じて自動で商談予約</div>
-              <div className="phase-desc">訪問者のページ閲覧履歴、チャットの内容、訪問パターンをリアルタイムで点数化し、設定した基準を満たした訪問者にのみカレンダーを表示して商談予約を促します。無駄な商談を防ぎ、営業チームのリソースを最適化します。</div>
+              <div className="phase-h">資料DLなどの関心に応じてすぐに商談を打診</div>
+              <div className="phase-desc">資料のダウンロードやチャットでの質問など、温度感が高い行動をAIが検知。条件を満たした訪問者にはチャット内でそのまま商談予約を促し、カレンダー振り分けまで自動で完結します。</div>
               <div className="phase-features">
-                {['リアルタイムスコアリング', '条件に基づく自動振り分け', 'カレンダー連携', '確認メール・リマインダー自動化'].map((feat, i) => (
+                {['温度感の高い行動を即検知', '条件に基づく自動カレンダー振り分け', 'チャット内で商談予約まで完結', '確認メール・リマインダー自動化'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
                 ))}
               </div>
@@ -521,7 +533,9 @@ export default function ChatbotPageClient() {
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
-                <div className="why-icon">{w.icon}</div>
+                <div className="why-icon" style={{width:48,height:48,borderRadius:12,background:`${w.color}12`,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={w.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={w.iconPath}/></svg>
+                </div>
                 <div className="why-title">{w.title}</div>
                 <div className="why-desc">{w.desc}</div>
               </div>

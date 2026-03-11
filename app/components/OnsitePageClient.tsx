@@ -179,9 +179,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const channelCards = [
-  { icon: "\u{1F4C4}", title: "\u8CC7\u6599\u30DA\u30FC\u30B8", sub: "AI\u8CC7\u6599\u30D6\u30E9\u30A6\u30B8\u30F3\u30B0\u4F53\u9A13", desc: "\u304A\u5BA2\u69D8\u306E\u8CC7\u6599\u3092\u4E00\u89A7\u8868\u793A\u3059\u308B\u5C02\u7528\u30DA\u30FC\u30B8\u3002AI\u304C\u8A2A\u554F\u8005\u306E\u8208\u5473\u306B\u5408\u3063\u305F\u8CC7\u6599\u3092\u63D0\u6848\u3057\u3001\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u6642\u306B\u81EA\u7136\u306B\u30EA\u30FC\u30C9\u60C5\u5831\u3092\u53D6\u5F97\u3057\u307E\u3059\u3002" },
-  { icon: "\u2705", title: "\u30B5\u30F3\u30AF\u30B9\u30DA\u30FC\u30B8", sub: "\u30B3\u30F3\u30D0\u30FC\u30B8\u30E7\u30F3\u5F8C\u306E\u8FFD\u52A0\u30A2\u30AF\u30B7\u30E7\u30F3", desc: "\u30D5\u30A9\u30FC\u30E0\u9001\u4FE1\u5F8C\u306E\u9AD8\u3044\u95A2\u5FC3\u3092\u9003\u3055\u305A\u3001\u8FFD\u52A0\u8CC7\u6599\u306E\u63D0\u6848\u3084\u5546\u8AC7\u4E88\u7D04\u3078\u306E\u8A98\u5C0E\u3092AI\u304C\u81EA\u52D5\u3067\u884C\u3044\u307E\u3059\u3002" },
-  { icon: "\u{1F4A1}", title: "\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7", sub: "\u884C\u52D5\u30C8\u30EA\u30AC\u30FC\u578B\u306EAI\u30A2\u30D7\u30ED\u30FC\u30C1", desc: "\u96E2\u8131\u30BF\u30A4\u30DF\u30F3\u30B0\u3084\u30B9\u30AF\u30ED\u30FC\u30EB\u5230\u9054\u306A\u3069\u3001\u884C\u52D5\u306B\u5FDC\u3058\u305F\u6700\u9069\u306A\u30BF\u30A4\u30DF\u30F3\u30B0\u3067AI\u304C\u58F0\u3092\u304B\u3051\u307E\u3059\u3002" },
+  { iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3", color: "#0891b2", title: "資料ページ", sub: "AI資料ブラウジング体験", desc: "お客様の資料を一覧表示する専用ページ。AIが訪問者の興味に合った資料を提案し、ダウンロード時に自然にリード情報を取得します。" },
+  { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", color: "#12a37d", title: "サンクスページ", sub: "コンバージョン後の追加アクション", desc: "フォーム送信後の高い関心を逃さず、追加資料の提案や商談予約への誘導をAIが自動で行います。" },
+  { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", color: "#7c5cfc", title: "資料ポップアップ", sub: "関心に応じた資料表示", desc: "訪問者の閲覧ページやスクロール位置に応じて、関心にマッチした資料をポップアップで表示。興味を引いた訪問者を商談予約まで誘導します。" },
 ];
 
 const faqData = [
@@ -239,13 +239,15 @@ export default function OnsitePageClient() {
             </div>
             <div className="channel-cards">
               {[
-                { icon: "📄", title: "資料ページ", sub: "AI資料ブラウジング", color: "#0891b2", bg: "var(--cyan-light)", border: "rgba(8,145,178,.2)", delay: "0s" },
-                { icon: "✅", title: "サンクスページ", sub: "CV後の追加アクション", color: "#12a37d", bg: "var(--cta-light)", border: "rgba(18,163,125,.2)", delay: ".5s" },
-                { icon: "💬", title: "ポップアップ", sub: "行動トリガー型AI", color: "#7c5cfc", bg: "var(--accent-light)", border: "rgba(124,92,252,.2)", delay: "1s" },
+                { iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3", title: "資料ページ", sub: "AI資料ブラウジング", color: "#0891b2", bg: "var(--cyan-light)", border: "rgba(8,145,178,.2)", delay: "0s" },
+                { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", title: "サンクスページ", sub: "CV後の追加アクション", color: "#12a37d", bg: "var(--cta-light)", border: "rgba(18,163,125,.2)", delay: ".5s" },
+                { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", title: "資料ポップアップ", sub: "関心に応じた資料表示", color: "#7c5cfc", bg: "var(--accent-light)", border: "rgba(124,92,252,.2)", delay: "1s" },
               ].map((ch, i) => (
                 <div className="ch-card" key={i} style={{ animation: `cardFloat${i + 1} 4s ${ch.delay} ease-in-out infinite` }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, borderRadius: "14px 14px 0 0", background: `linear-gradient(90deg,${ch.color},var(--accent))` }} />
-                  <div style={{ fontSize: 32, marginBottom: 12 }}>{ch.icon}</div>
+                  <div style={{width:36,height:36,borderRadius:10,background:`${ch.color}15`,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:12}}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.iconPath}/></svg>
+                  </div>
                   <div style={{ fontSize: 15, fontWeight: 800, color: "var(--heading)", marginBottom: 4 }}>{ch.title}</div>
                   <div style={{ fontSize: 11, fontWeight: 700, color: ch.color, fontFamily: "var(--fm)", letterSpacing: .5 }}>{ch.sub}</div>
                   {/* AI indicator */}
@@ -260,7 +262,8 @@ export default function OnsitePageClient() {
             <div style={{ padding: "0 24px 20px", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
               <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg,transparent,var(--border2))" }} />
               <div style={{ display: "flex", alignItems: "center", gap: 6, background: "linear-gradient(135deg,var(--cta),#0fc19a)", padding: "6px 14px", borderRadius: 8 }}>
-                <span style={{ fontSize: 11, color: "#fff", fontWeight: 800 }}>🤖 AI Chat コアに統合</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{display:'inline',verticalAlign:'middle',marginRight:4}}><path d="M12 2a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4v2a2 2 0 0 1-4 0v-2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/></svg>
+                <span style={{ fontSize: 11, color: "#fff", fontWeight: 800 }}>AI Chat コアに統合</span>
               </div>
               <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg,var(--border2),transparent)" }} />
             </div>
@@ -277,7 +280,7 @@ export default function OnsitePageClient() {
           <div className="why-grid">
             {channelCards.map((c, i) => (
               <div className="why-card" key={i}>
-                <div className="why-icon">{c.icon}</div>
+                <div className="why-icon"><div style={{width:44,height:44,borderRadius:12,background:`${c.color}15`,display:'flex',alignItems:'center',justifyContent:'center'}}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={c.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={c.iconPath}/></svg></div></div>
                 <div className="why-title">{c.title}</div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--cta)", marginBottom: 10, fontFamily: "var(--fm)", letterSpacing: 1 }}>{c.sub}</div>
                 <div className="why-desc">{c.desc}</div>
@@ -432,10 +435,10 @@ export default function OnsitePageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: "#7c5cfc10", color: "#7c5cfc" }}>CHANNEL 03</div>
-              <div className="phase-h">最適なタイミングでAIが声をかける</div>
-              <div className="phase-desc">離脱しようとしたタイミング、一定時間の滞在後、スクロール到達時など、訪問者の行動に応じたトリガーでAIポップアップを表示。閲覧ページの文脈に合わせたメッセージで、離脱を商談に変えます。</div>
+              <div className="phase-h">関心に合わせた資料をポップアップで表示</div>
+              <div className="phase-desc">訪問者の閲覧ページやスクロール位置に応じて、関心にマッチした資料をポップアップで表示。興味を引いた訪問者をそのまま商談予約まで誘導します。Exit Intentやスクロール到達などのトリガーで最適なタイミングを判断。</div>
               <div className="phase-features">
-                {["Exit Intent検知", "スクロール到達トリガー", "滞在時間トリガー", "ページ文脈対応メッセージ"].map((f, i) => (
+                {["関心に応じた資料のポップアップ表示", "Exit Intent・スクロール到達トリガー", "ポップアップから商談予約への誘導", "ページ文脈対応メッセージ"].map((f, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: "#7c5cfc" }} />{f}</div>
                 ))}
               </div>
@@ -464,15 +467,24 @@ export default function OnsitePageClient() {
                   {/* Popup overlay */}
                   <div style={{ background: "rgba(15,17,40,.4)", borderRadius: 12, padding: 8, animation: "popupSlide .6s .9s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
                     <div style={{ background: "#fff", borderRadius: 12, padding: "12px 14px", boxShadow: "0 8px 32px rgba(0,0,0,.15)" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
-                        <div style={{ width: 22, height: 22, borderRadius: 6, background: "linear-gradient(135deg,#7c5cfc,#a78bfa)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, color: "#fff", fontWeight: 800 }}>AI</div>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: "var(--heading)" }}>ちょっとお待ちください！</span>
+                      <div style={{ fontSize: 11, fontWeight: 800, color: "var(--heading)", marginBottom: 10 }}>こちらの資料もおすすめです</div>
+                      {/* Resource cards */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 10 }}>
+                        {[
+                          { name: "料金比較表 PDF", color: "#e0475b" },
+                          { name: "SaaS導入事例集 PDF", color: "#3b6ff5" },
+                        ].map((doc, k) => (
+                          <div key={k} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: "6px 10px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                              <div style={{ width: 20, height: 20, borderRadius: 5, background: doc.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: "#fff", fontWeight: 800 }}>PDF</div>
+                              <span style={{ fontSize: 9, fontWeight: 700, color: "var(--heading)" }}>{doc.name}</span>
+                            </div>
+                            <div style={{ background: doc.color, color: "#fff", borderRadius: 5, padding: "2px 7px", fontSize: 8, fontWeight: 700 }}>DL</div>
+                          </div>
+                        ))}
                       </div>
-                      <div style={{ fontSize: 10, color: "var(--sub)", lineHeight: 1.5, marginBottom: 10 }}>料金ページをご覧いただいていましたね。<br />御社に最適なプランをご提案できます。</div>
-                      <div style={{ display: "flex", gap: 6 }}>
-                        <div style={{ flex: 1, background: "linear-gradient(135deg,#7c5cfc,#a78bfa)", color: "#fff", borderRadius: 8, padding: "6px 8px", fontSize: 9, fontWeight: 700, textAlign: "center" }}>プランを相談する</div>
-                        <div style={{ flex: 1, background: "var(--surface)", color: "var(--heading)", borderRadius: 8, padding: "6px 8px", fontSize: 9, fontWeight: 700, textAlign: "center" }}>料金表をDL</div>
-                      </div>
+                      {/* Meeting CTA */}
+                      <div style={{ background: "linear-gradient(135deg,#7c5cfc,#a78bfa)", color: "#fff", borderRadius: 8, padding: "7px 10px", fontSize: 10, fontWeight: 700, textAlign: "center" }}>詳しい話を聞く →</div>
                     </div>
                   </div>
                   {/* Trigger indicators */}
@@ -504,35 +516,35 @@ export default function OnsitePageClient() {
           <div className="flow-container">
             {/* Visitor */}
             <div className="flow-node" style={{ animation: "popIn .5s .2s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-              <div className="flow-node-icon" style={{ background: "linear-gradient(135deg,var(--surface2),#fff)" }}>👤</div>
+              <div className="flow-node-icon" style={{ background: "linear-gradient(135deg,var(--surface2),#fff)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
               <div className="flow-node-label">訪問者</div>
               <div className="flow-node-sub">Webサイト来訪</div>
             </div>
             <div className="flow-arrow" style={{ animationDelay: ".4s" }}>→</div>
             {/* Resource Page */}
             <div className="flow-node" style={{ borderColor: "rgba(8,145,178,.2)", animation: "popIn .5s .5s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-              <div className="flow-node-icon" style={{ background: "var(--cyan-light)" }}>📄</div>
+              <div className="flow-node-icon" style={{ background: "var(--cyan-light)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0891b2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"/></svg></div>
               <div className="flow-node-label">資料ページ</div>
               <div className="flow-node-sub">AI資料提案</div>
             </div>
             <div className="flow-arrow" style={{ animationDelay: ".7s" }}>→</div>
             {/* Thank you Page */}
             <div className="flow-node" style={{ borderColor: "rgba(18,163,125,.2)", animation: "popIn .5s .8s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-              <div className="flow-node-icon" style={{ background: "var(--cta-light)" }}>✅</div>
+              <div className="flow-node-icon" style={{ background: "var(--cta-light)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3"/></svg></div>
               <div className="flow-node-label">サンクスページ</div>
               <div className="flow-node-sub">追加アクション</div>
             </div>
             <div className="flow-arrow" style={{ animationDelay: "1s" }}>→</div>
             {/* Popup */}
             <div className="flow-node" style={{ borderColor: "rgba(124,92,252,.2)", animation: "popIn .5s 1.1s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-              <div className="flow-node-icon" style={{ background: "var(--accent-light)" }}>💡</div>
-              <div className="flow-node-label">ポップアップ</div>
-              <div className="flow-node-sub">離脱防止</div>
+              <div className="flow-node-icon" style={{ background: "var(--accent-light)", fontSize: undefined }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+              <div className="flow-node-label">資料ポップアップ</div>
+              <div className="flow-node-sub">関心資料の表示</div>
             </div>
             <div className="flow-arrow" style={{ animationDelay: "1.3s" }}>→</div>
             {/* AI Core */}
             <div className="flow-core" style={{ animation: "popIn .5s 1.4s cubic-bezier(.16,1,.3,1) forwards", opacity: 0 }}>
-              <div className="flow-core-icon">🤖</div>
+              <div className="flow-core-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4v2a2 2 0 0 1-4 0v-2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2z"/><path d="M9 12h.01 M15 12h.01"/></svg></div>
               <div className="flow-core-label">AI Chat コア</div>
               <div className="flow-core-sub">統合リードスコア管理</div>
             </div>
@@ -540,12 +552,12 @@ export default function OnsitePageClient() {
           {/* Connection details */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, maxWidth: 800, margin: "20px auto 0" }}>
             {[
-              { icon: "📄", channel: "資料ページ", action: "興味・閲覧履歴", color: "#0891b2", bg: "var(--cyan-light)" },
-              { icon: "✅", channel: "サンクスページ", action: "CV後の行動", color: "#12a37d", bg: "var(--cta-light)" },
-              { icon: "💡", channel: "ポップアップ", action: "離脱意図・反応", color: "#7c5cfc", bg: "var(--accent-light)" },
+              { iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6", channel: "資料ページ", action: "興味・閲覧履歴", color: "#0891b2", bg: "var(--cyan-light)" },
+              { iconPath: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3", channel: "サンクスページ", action: "CV後の行動", color: "#12a37d", bg: "var(--cta-light)" },
+              { iconPath: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0", channel: "資料ポップアップ", action: "関心資料の表示", color: "#7c5cfc", bg: "var(--accent-light)" },
             ].map((item, i) => (
               <div key={i} style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 12, padding: "14px 16px", textAlign: "center", transition: "all .3s" }}>
-                <div style={{ fontSize: 22, marginBottom: 6 }}>{item.icon}</div>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: `${item.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={item.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.iconPath}/></svg></div>
                 <div style={{ fontSize: 13, fontWeight: 800, color: item.color, marginBottom: 4 }}>{item.channel}</div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
                   <div style={{ width: 5, height: 5, borderRadius: "50%", background: item.color }} />

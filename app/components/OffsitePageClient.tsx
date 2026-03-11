@@ -203,33 +203,27 @@ export default function OffsitePageClient(){
           {/* Network Diagram */}
           <div className="anim d5 net-diagram">
             {/* SVG connection lines */}
-            <svg width="100%" height="120" viewBox="0 0 700 120" fill="none" style={{position:"absolute",top:0,left:0,pointerEvents:"none"}}>
-              {/* Lines from channels to core */}
-              <line x1="110" y1="60" x2="310" y2="60" stroke="#3b6ff5" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s linear infinite"}}/>
-              <line x1="110" y1="60" x2="310" y2="60" stroke="url(#blueGrad)" strokeWidth="1.5" strokeOpacity=".3"/>
-              <line x1="110" y1="60" x2="310" y2="60" stroke="#3b6ff5" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s linear infinite"}}/>
-              {/* Top line */}
-              <path d="M110 20 Q210 20 310 60" stroke="#7c5cfc" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s .3s linear infinite"}} fill="none"/>
-              {/* Bottom line */}
-              <path d="M110 100 Q210 100 310 60" stroke="#12a37d" strokeWidth="1.5" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s .6s linear infinite"}} fill="none"/>
-              {/* Core to booking */}
-              <line x1="390" y1="60" x2="590" y2="60" stroke="url(#greenGrad)" strokeWidth="2" strokeDasharray="4 4" style={{animation:"dashFlow 1.5s .9s linear infinite"}}/>
+            <svg width="100%" height="100%" viewBox="0 0 700 120" fill="none" preserveAspectRatio="xMidYMid meet" style={{position:"absolute",top:0,left:0,right:0,bottom:0,pointerEvents:"none",opacity:.35}}>
               <defs>
-                <linearGradient id="blueGrad" x1="110" y1="0" x2="310" y2="0"><stop stopColor="#3b6ff5"/><stop offset="1" stopColor="#7c5cfc"/></linearGradient>
-                <linearGradient id="greenGrad" x1="390" y1="0" x2="590" y2="0"><stop stopColor="#12a37d"/><stop offset="1" stopColor="#3b82f6"/></linearGradient>
+                <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#3b6ff5" stopOpacity=".6"/><stop offset="1" stopColor="#12a37d" stopOpacity=".6"/></linearGradient>
+                <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#12a37d" stopOpacity=".6"/><stop offset="1" stopColor="#3b82f6" stopOpacity=".6"/></linearGradient>
               </defs>
+              <path d="M140 30 Q250 60 350 60" stroke="#7c5cfc" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M140 60 Q250 60 350 60" stroke="url(#lineGrad1)" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M140 90 Q250 60 350 60" stroke="#12a37d" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M350 60 Q450 60 560 60" stroke="url(#lineGrad2)" strokeWidth="2" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
             </svg>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",position:"relative",zIndex:2,gap:16}}>
               {/* Left: 3 channel nodes */}
               <div style={{display:"flex",flexDirection:"column",gap:14,alignItems:"center"}}>
                 {[
-                  {icon:"✉️",label:"AIメール",color:"#3b6ff5",bg:"rgba(59,111,245,.12)",delay:".2s"},
-                  {icon:"🔗",label:"カレンダーリンク",color:"#7c5cfc",bg:"rgba(124,92,252,.12)",delay:".4s"},
-                  {icon:"📱",label:"カレンダーQR",color:"#12a37d",bg:"rgba(18,163,125,.12)",delay:".6s"},
+                  {iconPath:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",label:"AIメール",color:"#3b6ff5",bg:"rgba(59,111,245,.12)",delay:".2s"},
+                  {iconPath:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",label:"カレンダーリンク",color:"#7c5cfc",bg:"rgba(124,92,252,.12)",delay:".4s"},
+                  {iconPath:"M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z M12 18h.01",label:"カレンダーQR",color:"#12a37d",bg:"rgba(18,163,125,.12)",delay:".6s"},
                 ].map((n,i)=>(
                   <div className="net-node" key={i} style={{animationDelay:n.delay}}>
                     <div className="net-node-circle" style={{background:n.bg}}>
-                      <span>{n.icon}</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={n.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={n.iconPath}/></svg>
                     </div>
                     <div className="net-node-label">{n.label}</div>
                   </div>
@@ -237,14 +231,16 @@ export default function OffsitePageClient(){
               </div>
               {/* Center: AI Core */}
               <div className="net-node" style={{animationDelay:".8s"}}>
-                <div className="net-core">🤖</div>
+                <div className="net-core">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M9 12h.01M15 12h.01M12 2v4M6 18v2M18 18v2"/></svg>
+                </div>
                 <div className="net-node-label">AI CORE</div>
                 <div className="net-node-sub">統合スコア管理</div>
               </div>
               {/* Right: Booking */}
               <div className="net-node" style={{animationDelay:"1.1s"}}>
                 <div className="net-node-circle" style={{background:"rgba(18,163,125,.15)",border:"1px solid rgba(18,163,125,.3)"}}>
-                  <span>📅</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
                 </div>
                 <div className="net-node-label">商談予約</div>
                 <div className="net-node-sub">自動確定</div>
@@ -544,13 +540,15 @@ export default function OffsitePageClient(){
             {/* Row 1: Sources */}
             <div style={{display:"flex",justifyContent:"center",gap:12,marginBottom:8,flexWrap:"wrap"}}>
               {[
-                {icon:"✉️",label:"メール",color:"#3b6ff5",bg:"#eaf0fe",border:"#bcc8f5"},
-                {icon:"📄",label:"PDF",color:"#12a37d",bg:"#e5f8f2",border:"#b8e6d8"},
-                {icon:"🪪",label:"名刺",color:"#7c5cfc",bg:"#f0ecfe",border:"#c9bef5"},
-                {icon:"🎪",label:"展示会",color:"#d03ea1",bg:"#fce7f6",border:"#f0b4da"},
+                {iconPath:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",label:"メール",color:"#3b6ff5",bg:"#eaf0fe",border:"#bcc8f5"},
+                {iconPath:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",label:"PDF",color:"#12a37d",bg:"#e5f8f2",border:"#b8e6d8"},
+                {iconPath:"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",label:"名刺",color:"#7c5cfc",bg:"#f0ecfe",border:"#c9bef5"},
+                {iconPath:"M3 3h18v18H3z M3 9h18 M9 3v18",label:"展示会",color:"#d03ea1",bg:"#fce7f6",border:"#f0b4da"},
               ].map((s,i)=>(
                 <div key={i} style={{background:s.bg,border:`1px solid ${s.border}`,borderRadius:12,padding:"14px 20px",textAlign:"center",animation:`nodeGrow .5s ${i*0.15}s cubic-bezier(.16,1,.3,1) forwards`,opacity:0,transform:"scale(0)",minWidth:100}}>
-                  <div style={{fontSize:24,marginBottom:4}}>{s.icon}</div>
+                  <div style={{width:32,height:32,margin:'0 auto 4px'}}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={s.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={s.iconPath}/></svg>
+                  </div>
                   <div style={{fontSize:11,fontWeight:800,color:s.color}}>{s.label}</div>
                 </div>
               ))}
@@ -569,11 +567,13 @@ export default function OffsitePageClient(){
             {/* Row 2: Channels */}
             <div style={{display:"flex",justifyContent:"center",gap:20,marginBottom:8,flexWrap:"wrap"}}>
               {[
-                {icon:"🔗",label:"カレンダーリンク",color:"#12a37d",bg:"#e5f8f2",border:"#b8e6d8"},
-                {icon:"📱",label:"カレンダーQR",color:"#7c5cfc",bg:"#f0ecfe",border:"#c9bef5"},
+                {iconPath:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",label:"カレンダーリンク",color:"#12a37d",bg:"#e5f8f2",border:"#b8e6d8"},
+                {iconPath:"M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z M12 18h.01",label:"カレンダーQR",color:"#7c5cfc",bg:"#f0ecfe",border:"#c9bef5"},
               ].map((s,i)=>(
                 <div key={i} style={{background:"#fff",border:`2px solid ${s.border}`,borderRadius:14,padding:"18px 28px",textAlign:"center",boxShadow:"0 4px 16px rgba(0,0,0,.04)",animation:`nodeGrow .5s ${0.6+i*0.15}s cubic-bezier(.16,1,.3,1) forwards`,opacity:0,transform:"scale(0)",minWidth:160}}>
-                  <div style={{fontSize:28,marginBottom:6}}>{s.icon}</div>
+                  <div style={{width:32,height:32,margin:'0 auto 4px'}}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={s.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={s.iconPath}/></svg>
+                  </div>
                   <div style={{fontSize:13,fontWeight:800,color:s.color}}>{s.label}</div>
                 </div>
               ))}
@@ -590,7 +590,9 @@ export default function OffsitePageClient(){
             {/* Row 3: Booking */}
             <div style={{display:"flex",justifyContent:"center",marginBottom:8}}>
               <div style={{background:"linear-gradient(135deg,var(--cta),#0fc19a)",borderRadius:16,padding:"22px 40px",textAlign:"center",boxShadow:"0 8px 32px rgba(18,163,125,.2)",animation:"nodeGrow .5s 1s cubic-bezier(.16,1,.3,1) forwards",opacity:0,transform:"scale(0)"}}>
-                <div style={{fontSize:32,marginBottom:4}}>📅</div>
+                <div style={{width:32,height:32,margin:'0 auto 4px'}}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+                </div>
                 <div style={{fontSize:15,fontWeight:900,color:"#fff"}}>商談予約</div>
                 <div style={{fontSize:10,color:"rgba(255,255,255,.8)",marginTop:4}}>事前認定情報が引き継がれた状態で予約</div>
               </div>
@@ -607,7 +609,9 @@ export default function OffsitePageClient(){
             {/* Row 4: Follow-up */}
             <div style={{display:"flex",justifyContent:"center"}}>
               <div style={{background:"#fff",border:"2px solid #c9bef5",borderRadius:16,padding:"18px 36px",textAlign:"center",boxShadow:"0 4px 20px rgba(124,92,252,.08)",animation:"nodeGrow .5s 1.3s cubic-bezier(.16,1,.3,1) forwards",opacity:0,transform:"scale(0)"}}>
-                <div style={{fontSize:28,marginBottom:4}}>💬</div>
+                <div style={{width:32,height:32,margin:'0 auto 4px'}}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
                 <div style={{fontSize:14,fontWeight:800,color:"#7c5cfc"}}>AI Chat フォローアップ</div>
                 <div style={{fontSize:10,color:"var(--sub)",marginTop:4}}>確認メール・リマインダー・事前資料を自動送信</div>
               </div>
