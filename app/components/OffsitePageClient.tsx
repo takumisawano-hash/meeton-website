@@ -199,15 +199,15 @@ export default function OffsitePageClient(){
           {/* Network Diagram */}
           <div className="anim d5 net-diagram">
             {/* SVG connection lines */}
-            <svg width="100%" height="100%" viewBox="0 0 700 120" fill="none" preserveAspectRatio="xMidYMid meet" style={{position:"absolute",top:0,left:0,right:0,bottom:0,pointerEvents:"none",opacity:.35}}>
+            <svg width="100%" height="100%" viewBox="0 0 700 140" fill="none" preserveAspectRatio="xMidYMid meet" style={{position:"absolute",top:0,left:0,right:0,bottom:0,pointerEvents:"none",opacity:.35}}>
               <defs>
                 <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#3b6ff5" stopOpacity=".6"/><stop offset="1" stopColor="#12a37d" stopOpacity=".6"/></linearGradient>
                 <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#12a37d" stopOpacity=".6"/><stop offset="1" stopColor="#3b82f6" stopOpacity=".6"/></linearGradient>
               </defs>
-              <path d="M140 30 Q250 60 350 60" stroke="#7c5cfc" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-              <path d="M140 60 Q250 60 350 60" stroke="url(#lineGrad1)" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-              <path d="M140 90 Q250 60 350 60" stroke="#12a37d" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-              <path d="M350 60 Q450 60 560 60" stroke="url(#lineGrad2)" strokeWidth="2" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M120 25 Q240 70 350 70" stroke="#7c5cfc" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M120 70 Q240 70 350 70" stroke="url(#lineGrad1)" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M120 115 Q240 70 350 70" stroke="#12a37d" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
+              <path d="M350 70 Q460 70 580 70" stroke="url(#lineGrad2)" strokeWidth="2" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
             </svg>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",position:"relative",zIndex:2,gap:16}}>
               {/* Left: 3 channel nodes */}

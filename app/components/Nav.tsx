@@ -625,13 +625,11 @@ export default function Nav({ variant = 'light' }: NavProps) {
               </div>
               {navLinks.map(item => (
                 item.onClick ? (
-                  <button
+                  <a
                     key={item.href}
-                    onClick={() => { (window as any).Meeton && (window as any).Meeton.openDownloadCenter() }}
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); (window as any).Meeton && (window as any).Meeton.openDownloadCenter() }}
                     style={{
-                      background: 'none',
-                      border: 'none',
-                      padding: 0,
                       fontSize: 15,
                       color: colors.text,
                       textDecoration: 'none',
@@ -641,7 +639,7 @@ export default function Nav({ variant = 'light' }: NavProps) {
                     }}
                   >
                     {item.label}
-                  </button>
+                  </a>
                 ) : (
                   <Link
                     key={item.href}
