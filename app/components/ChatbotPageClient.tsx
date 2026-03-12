@@ -401,9 +401,9 @@ export default function ChatbotPageClient() {
             <div className="phase-vis">
               <div className="pvis vis1">
                 <div className="vis0-bubble vis0-ai" style={{ top: 12, left: 16, animationDelay: '.2s' }}>どのような課題をお持ちですか？</div>
-                <div className="vis0-bubble" style={{ top: 62, right: 16, animationDelay: '.7s', background: 'var(--cta)', color: '#fff', borderBottomRightRadius: 4 }}>リード獲得を効率化したいです</div>
-                <div className="vis0-bubble vis0-ai" style={{ top: 116, left: 16, animationDelay: '1.2s', fontSize: 11 }}>それなら、こちらの資料がおすすめです：</div>
-                <div style={{ position: 'absolute', top: 152, left: 16, right: 16, animation: 'slideIn .6s 1.6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                <div className="vis0-bubble" style={{ top: 68, right: 16, animationDelay: '.7s', background: 'var(--cta)', color: '#fff', borderBottomRightRadius: 4 }}>リード獲得を効率化したいです</div>
+                <div className="vis0-bubble vis0-ai" style={{ top: 124, left: 16, animationDelay: '1.2s', fontSize: 11 }}>それなら、こちらの資料がおすすめです：</div>
+                <div style={{ position: 'absolute', top: 170, left: 16, right: 16, animation: 'slideIn .6s 1.6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                   <div style={{ display: 'flex', gap: 8 }}>
                     {[{ name: 'リード獲得ガイド.pdf', size: '3.2 MB', match: '98%' }, { name: '導入事例集.pdf', size: '2.1 MB', match: '92%' }].map((f, j) => (
                       <div key={j} style={{ flex: 1, background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '10px', transition: 'all .2s' }}>
@@ -442,17 +442,17 @@ export default function ChatbotPageClient() {
             <div className="phase-vis">
               <div className="pvis vis2-email">
                 <div className="vis0-bubble vis0-ai" style={{ top: 16, left: 20, animationDelay: '.3s' }}>資料をお送りしますね！<br />メールアドレスを教えてください 📧</div>
-                <div style={{ position: 'absolute', top: 82, left: 20, right: 20, padding: '10px 14px', borderRadius: 10, border: '2px solid var(--cta)', background: '#fff', fontSize: 13, color: 'var(--heading)', fontWeight: 600, fontFamily: 'var(--fb)', animation: 'emailPulse 2s infinite', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ position: 'absolute', top: 90, left: 20, right: 20, padding: '10px 14px', borderRadius: 10, border: '2px solid var(--cta)', background: '#fff', fontSize: 13, color: 'var(--heading)', fontWeight: 600, fontFamily: 'var(--fb)', animation: 'emailPulse 2s infinite', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span>tanaka@example.co.jp</span>
                   <span style={{ background: 'var(--cta)', color: '#fff', borderRadius: 6, padding: '4px 10px', fontSize: 11, fontWeight: 700 }}>送信</span>
                 </div>
-                <div style={{ position: 'absolute', top: 128, left: 20, display: 'flex', alignItems: 'center', gap: 4, animation: 'slideIn .6s .6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                <div style={{ position: 'absolute', top: 138, left: 20, display: 'flex', alignItems: 'center', gap: 4, animation: 'slideIn .6s .6s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                   <span style={{ fontSize: 10, color: 'var(--cta)', fontWeight: 600 }}>✓ メール形式OK</span>
                 </div>
-                <div style={{ position: 'absolute', top: 152, right: 20, background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '8px 12px', fontSize: 11, fontWeight: 700, color: 'var(--cta)', animation: 'slideIn .6s .9s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ position: 'absolute', top: 162, right: 20, background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '8px 12px', fontSize: 11, fontWeight: 700, color: 'var(--cta)', animation: 'slideIn .6s .9s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--cta)', animation: 'pulse 1.5s infinite' }} />CRMへ即時登録
                 </div>
-                <div style={{ position: 'absolute', top: 188, left: 20, right: 20, animation: 'slideIn .6s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                <div style={{ position: 'absolute', top: 198, left: 20, right: 20, animation: 'slideIn .6s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 14px' }}>
                     <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)', marginBottom: 8 }}>📎 ご希望の資料はこちらです：</div>
                     <div style={{ display: 'flex', gap: 8 }}>

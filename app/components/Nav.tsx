@@ -80,8 +80,8 @@ export default function Nav({ variant = 'light' }: NavProps) {
   ]
 
   const navLinks = [
-    { href: '/blog/', label: 'ブログ' },
     { href: '#download-center', label: 'お役立ち資料', onClick: true },
+    { href: '/blog/', label: 'ブログ' },
     { href: '/contact/', label: 'お問い合わせ' },
     { href: '/careers/', label: '採用情報' },
   ]
