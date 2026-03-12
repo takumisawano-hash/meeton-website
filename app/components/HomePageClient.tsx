@@ -81,20 +81,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
 .stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
 
-/* FEATURE CARDS - 7 features zigzag */
-.feat-grid{display:flex;flex-direction:column;gap:56px;margin-top:56px}
-.feat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:0;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:420px;align-items:stretch}
-.feat-card:nth-child(even){direction:rtl}
-.feat-card:nth-child(even)>*{direction:ltr}
-.feat-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.12)}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
-.feat-card:hover::before{opacity:1}
-.feat-card-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
-.feat-card-vis{min-height:400px;position:relative;overflow:hidden;border-left:1px solid var(--border);background:var(--surface)}
-.feat-card:nth-child(even) .feat-card-vis{border-left:none;border-right:1px solid var(--border)}
-.feat-num{font-family:var(--fm);font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:12px;display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:8px}
-.feat-title{font-size:clamp(22px,3vw,28px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:14px;line-height:1.3}
-.feat-desc{font-size:16px;line-height:1.85;color:var(--sub)}
+/* CATEGORY CARDS - 3 categories */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:36px 32px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 16px 48px rgba(18,163,125,.12)}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
+.cat-card:hover::before{opacity:1}
+.cat-label{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px}
+.cat-title{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:12px;line-height:1.3}
+.cat-desc{font-size:15px;line-height:1.8;color:var(--sub);margin-bottom:24px}
+.cat-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
+.cat-feat{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--text)}
+.cat-feat-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-link{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:800;color:var(--cta);text-decoration:none;transition:all .25s;margin-top:auto;padding-top:20px;border-top:1px solid var(--border)}
+.cat-link:hover{gap:10px;color:var(--cta-hover)}
 
 /* QUALITY FLOW DIAGRAM — horizontal */
 .qflow-hz{display:flex;align-items:stretch;gap:0;max-width:1100px;margin:0 auto;width:100%}
@@ -184,10 +184,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* RESPONSIVE */
 @media(max-width:1024px){
-  .feat-card{grid-template-columns:1fr;min-height:auto}
-  .feat-card:nth-child(even){direction:ltr}
-  .feat-card-vis{border-left:none!important;border-right:none!important;border-top:1px solid var(--border);min-height:280px}
-  .feat-card-body{padding:32px 28px}
+  .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
   .qflow-hz{flex-direction:column;gap:0}
   .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
   .qflow-hz-gate{padding:8px 0}
@@ -1370,32 +1367,87 @@ export default function HomePageClient(){
         </div>
       </section>
 
-      {/* 7 FEATURES */}
+      {/* 3 CATEGORY CARDS */}
       <section className="section" id="features" style={{position:"relative"}}>
         <div className="dot-grid" style={{opacity:.3}}/>
         <div className="section-inner" style={{position:"relative",zIndex:2}}>
-          <div className="slabel" style={{textAlign:"center"}}>7 Channels</div>
-          <div className="stitle" style={{textAlign:"center"}}>商談をつくる、7つの武器</div>
-          <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>それぞれが単体で成果を出し、組み合わせることで商談獲得を最大化します。</p>
+          <div className="slabel" style={{textAlign:"center"}}>Products</div>
+          <div className="stitle" style={{textAlign:"center"}}>商談をつくる、<span style={{color:"var(--cta)"}}>3つのアプローチ</span></div>
+          <p className="ssub" style={{textAlign:"center",margin:"0 auto"}}>AIチャットボットを軸に、サイト内外のあらゆる接点から商談を自動獲得します。</p>
 
-          <div className="feat-grid">
-            {features.map((f,i)=>{
-              const Diagram = diagramComponents[i];
-              return(
-                <div className="feat-card" key={i} style={{"--card-color":f.color} as React.CSSProperties}>
-                  <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:f.gradient,opacity:0,transition:"opacity .3s"}} className="feat-card-accent"/>
-                  <style dangerouslySetInnerHTML={{__html:`.feat-card:hover .feat-card-accent{opacity:1 !important}`}}/>
-                  <div className="feat-card-body">
-                    <div className="feat-num" style={{background:f.bg,color:f.color}}>{f.num}</div>
-                    <div className="feat-title">{f.title}</div>
-                    <div className="feat-desc">{f.desc}</div>
+          <div className="cat-grid">
+            {/* CORE ENGINE */}
+            <div className="cat-card" style={{"--cat-color":"#0891b2"} as React.CSSProperties}>
+              <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg,#0891b2,#06b6d4)",opacity:0,transition:"opacity .3s"}} className="cat-card-accent"/>
+              <style dangerouslySetInnerHTML={{__html:`.cat-card:hover .cat-card-accent{opacity:1 !important}`}}/>
+              <div className="cat-label" style={{background:"#0891b210",color:"#0891b2"}}>CORE ENGINE</div>
+              <div className="cat-title">AI チャットボット</div>
+              <div className="cat-desc">AIが訪問者に自ら話しかけ、ニーズを把握し、リード獲得から商談予約まで会話の流れで完結。</div>
+              <div className="cat-features">
+                {[
+                  {label:"ページ文脈に応じた自動声かけ",color:"#0891b2",icon:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"},
+                  {label:"会話からニーズ把握＆資料提案",color:"#12a37d",icon:"M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"},
+                  {label:"チャット内でリード獲得",color:"#3b6ff5",icon:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"},
+                  {label:"温度感に応じて商談予約まで完結",color:"#7c5cfc",icon:"M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"},
+                ].map((f,i)=>(
+                  <div className="cat-feat" key={i}>
+                    <div className="cat-feat-icon" style={{background:`${f.color}12`}}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={f.icon}/></svg>
+                    </div>
+                    {f.label}
                   </div>
-                  <div className="feat-card-vis" style={{background:f.bg}}>
-                    <Diagram/>
+                ))}
+              </div>
+              <a href="/features/chatbot/" className="cat-link">詳しく見る <span>→</span></a>
+            </div>
+
+            {/* ON-SITE CHANNELS */}
+            <div className="cat-card" style={{"--cat-color":"#12a37d"} as React.CSSProperties}>
+              <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg,#12a37d,#0fc19a)",opacity:0,transition:"opacity .3s"}} className="cat-card-accent"/>
+              <style dangerouslySetInnerHTML={{__html:`.cat-card:hover .cat-card-accent{opacity:1 !important}`}}/>
+              <div className="cat-label" style={{background:"#12a37d10",color:"#12a37d"}}>ON-SITE CHANNELS</div>
+              <div className="cat-title">サイト内チャネル</div>
+              <div className="cat-desc">資料ページ・ポップアップ・サンクスページ。サイト内の3つの接点にAIを配置し、取りこぼしゼロを実現。</div>
+              <div className="cat-features">
+                {[
+                  {label:"AI付き資料ダウンロードページ",color:"#3b6ff5",icon:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3"},
+                  {label:"関心に応じた資料ポップアップ",color:"#d03ea1",icon:"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0"},
+                  {label:"サンクスページで追加アクション",color:"#7c5cfc",icon:"M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3"},
+                ].map((f,i)=>(
+                  <div className="cat-feat" key={i}>
+                    <div className="cat-feat-icon" style={{background:`${f.color}12`}}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={f.icon}/></svg>
+                    </div>
+                    {f.label}
                   </div>
-                </div>
-              );
-            })}
+                ))}
+              </div>
+              <a href="/features/onsite/" className="cat-link">詳しく見る <span>→</span></a>
+            </div>
+
+            {/* OFF-SITE CHANNELS */}
+            <div className="cat-card" style={{"--cat-color":"#3b6ff5"} as React.CSSProperties}>
+              <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg,#3b6ff5,#6690fa)",opacity:0,transition:"opacity .3s"}} className="cat-card-accent"/>
+              <style dangerouslySetInnerHTML={{__html:`.cat-card:hover .cat-card-accent{opacity:1 !important}`}}/>
+              <div className="cat-label" style={{background:"#3b6ff510",color:"#3b6ff5"}}>OUTREACH CHANNELS</div>
+              <div className="cat-title">サイト外チャネル</div>
+              <div className="cat-desc">AIメール・カレンダーリンク・カレンダーQR。サイトの外でもリードを育成し、商談予約を獲得。</div>
+              <div className="cat-features">
+                {[
+                  {label:"AIパーソナライズメール",color:"#12a37d",icon:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"},
+                  {label:"メール・PDFにカレンダーリンク",color:"#e0475b",icon:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"},
+                  {label:"名刺・展示会にカレンダーQR",color:"#c026d3",icon:"M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z M12 18h.01"},
+                ].map((f,i)=>(
+                  <div className="cat-feat" key={i}>
+                    <div className="cat-feat-icon" style={{background:`${f.color}12`}}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={f.icon}/></svg>
+                    </div>
+                    {f.label}
+                  </div>
+                ))}
+              </div>
+              <a href="/features/offsite/" className="cat-link">詳しく見る <span>→</span></a>
+            </div>
           </div>
         </div>
       </section>
