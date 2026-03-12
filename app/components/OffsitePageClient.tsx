@@ -58,15 +58,21 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .stat-l{font-size:clamp(12px,1.8vw,14px);color:var(--sub);margin-top:6px;font-weight:600}
 
 /* Network Diagram */
-@keyframes dashFlow{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
 @keyframes coreGlow{0%,100%{box-shadow:0 0 20px rgba(18,163,125,.3),0 0 60px rgba(18,163,125,.1)}50%{box-shadow:0 0 30px rgba(18,163,125,.5),0 0 80px rgba(18,163,125,.2)}}
 @keyframes netNodeIn{0%{opacity:0;transform:scale(0) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes flowDot{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
 .net-diagram{max-width:700px;margin:0 auto;position:relative;padding:20px 0}
 .net-node{display:flex;flex-direction:column;align-items:center;gap:6px;animation:netNodeIn .5s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
 .net-node-circle{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.06)}
 .net-node-label{font-size:12px;font-weight:800;color:var(--heading)}
 .net-node-sub{font-size:10px;color:var(--sub);font-weight:600}
 .net-core{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#12a37d,#0fc19a);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 30px rgba(18,163,125,.4);animation:coreGlow 3s ease-in-out infinite}
+.net-connector{position:relative;display:flex;align-items:center;flex:1;min-width:40px;height:2px;background:linear-gradient(90deg,var(--border2),var(--cta));border-radius:1px;overflow:visible}
+.net-connector::after{content:'';position:absolute;right:-6px;top:-4px;width:0;height:0;border-left:8px solid var(--cta);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.net-connector .flow-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--cta);animation:flowDot 2s linear infinite;box-shadow:0 0 6px var(--cta-glow)}
+.net-lines{display:flex;flex-direction:column;align-items:stretch;justify-content:center;flex:1;min-width:30px;gap:14px;position:relative}
+.net-line{height:2px;border-radius:1px;position:relative;overflow:visible}
+.net-line .flow-dot{position:absolute;width:5px;height:5px;border-radius:50%;animation:flowDot 2s linear infinite;top:-1.5px}
 
 /* PHASE ROWS */
 .phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,64px);padding:clamp(40px,8vw,80px) 0;position:relative}
@@ -198,20 +204,9 @@ export default function OffsitePageClient(){
           </div>
           {/* Network Diagram */}
           <div className="anim d5 net-diagram">
-            {/* SVG connection lines */}
-            <svg width="100%" height="100%" viewBox="0 0 700 140" fill="none" preserveAspectRatio="xMidYMid meet" style={{position:"absolute",top:0,left:0,right:0,bottom:0,pointerEvents:"none",opacity:.35}}>
-              <defs>
-                <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#3b6ff5" stopOpacity=".6"/><stop offset="1" stopColor="#12a37d" stopOpacity=".6"/></linearGradient>
-                <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#12a37d" stopOpacity=".6"/><stop offset="1" stopColor="#3b82f6" stopOpacity=".6"/></linearGradient>
-              </defs>
-              <path d="M120 25 Q240 70 350 70" stroke="#7c5cfc" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-              <path d="M120 70 Q240 70 350 70" stroke="url(#lineGrad1)" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-              <path d="M120 115 Q240 70 350 70" stroke="#12a37d" strokeWidth="1.5" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-              <path d="M350 70 Q460 70 580 70" stroke="url(#lineGrad2)" strokeWidth="2" strokeDasharray="6 4" fill="none"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>
-            </svg>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",position:"relative",zIndex:2,gap:16}}>
+            <div style={{display:"flex",alignItems:"center",position:"relative",zIndex:2,gap:0}}>
               {/* Left: 3 channel nodes */}
-              <div style={{display:"flex",flexDirection:"column",gap:14,alignItems:"center"}}>
+              <div style={{display:"flex",flexDirection:"column",gap:14,alignItems:"center",flexShrink:0}}>
                 {[
                   {iconPath:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",label:"AIメール",color:"#3b6ff5",bg:"rgba(59,111,245,.12)",delay:".2s"},
                   {iconPath:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",label:"カレンダーリンク",color:"#7c5cfc",bg:"rgba(124,92,252,.12)",delay:".4s"},
@@ -225,16 +220,32 @@ export default function OffsitePageClient(){
                   </div>
                 ))}
               </div>
+
+              {/* Left connector: 3 lines merging */}
+              <div className="net-lines" style={{animation:"netNodeIn .5s .6s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+                {[{color:"#3b6ff5",delay:"0s"},{color:"#7c5cfc",delay:".3s"},{color:"#12a37d",delay:".6s"}].map((l,i)=>(
+                  <div className="net-line" key={i} style={{background:`linear-gradient(90deg,${l.color}40,${l.color})`}}>
+                    <div className="flow-dot" style={{background:l.color,boxShadow:`0 0 6px ${l.color}50`,animationDelay:l.delay}}/>
+                  </div>
+                ))}
+              </div>
+
               {/* Center: AI Core */}
-              <div className="net-node" style={{animationDelay:".8s"}}>
+              <div className="net-node" style={{animationDelay:".8s",flexShrink:0}}>
                 <div className="net-core">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M9 12h.01M15 12h.01M12 2v4M6 18v2M18 18v2"/></svg>
                 </div>
                 <div className="net-node-label">AI CORE</div>
                 <div className="net-node-sub">統合スコア管理</div>
               </div>
+
+              {/* Right connector: single strong arrow */}
+              <div className="net-connector" style={{animation:"netNodeIn .5s 1s cubic-bezier(.16,1,.3,1) forwards",opacity:0}}>
+                <div className="flow-dot" style={{animationDelay:".5s"}}/>
+              </div>
+
               {/* Right: Booking */}
-              <div className="net-node" style={{animationDelay:"1.1s"}}>
+              <div className="net-node" style={{animationDelay:"1.1s",flexShrink:0}}>
                 <div className="net-node-circle" style={{background:"rgba(18,163,125,.15)",border:"1px solid rgba(18,163,125,.3)"}}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
                 </div>
