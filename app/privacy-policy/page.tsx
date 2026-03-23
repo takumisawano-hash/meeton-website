@@ -163,9 +163,49 @@ export default function PrivacyPolicyPage() {
               </p>
             </Section>
 
-            <Section title="第9条（外部サービスとの連携）">
+            <Section title="第9条（外部サービスおよびOAuth連携におけるデータ取り扱い）">
+              <SubHeading>1. 共通規定</SubHeading>
               <p>
-                当社サービスは、お客様の利便性向上のため、外部サービス（CRM、カレンダー等）と連携する場合があります。連携に際しては、必要最小限の情報のみを共有し、各外部サービスのプライバシーポリシーに従って取り扱われます。
+                当社サービスは、お客様の利便性向上および機能提供のため、外部サービス（Google、Microsoft、Slack、Zoom、Salesforce、HubSpot等）と連携（OAuth認証等）を行う場合があります。連携に際しては、当該機能の提供に必要な最小限の情報のみを収集し、各外部サービスの規約および本条の定めに従って適切に取り扱います。
+              </p>
+
+              <SubHeading>2. Google APIユーザーデータの限定的使用</SubHeading>
+              <p>
+                当社サービスがGoogle APIから受け取った情報の使用および他アプリへの転送は、
+                <a
+                  href="https://developers.google.com/terms/api-services-user-data-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#12a37d' }}
+                >
+                  Google API サービスのユーザーデータに関するポリシー
+                </a>
+                （Limited Use（限定的使用）要件を含む）を遵守します。Google APIから取得したデータ（カレンダー情報等）は、本サービスの機能提供および改善の目的にのみ使用し、広告配信、マーケティング、または本サービスの機能に無関係な第三者への提供には一切使用いたしません。
+              </p>
+
+              <SubHeading>3. Microsoft（Teams/Outlook）との連携</SubHeading>
+              <p>
+                Microsoft Graph APIを通じて取得したデータは、商談の日程調整、会議設定、およびそれらに付随する通知目的にのみ使用されます。取得したデータが広告やプロファイリング目的で使用されることはありません。
+              </p>
+
+              <SubHeading>4. SlackおよびZoomとの連携</SubHeading>
+              <p>
+                連携により取得したワークスペース情報、チャンネル情報、およびミーティングデータは、本サービス内での通知、ログ作成、および会議URLの発行を目的として利用されます。
+              </p>
+
+              <SubHeading>5. CRM（Salesforce/HubSpot）との連携</SubHeading>
+              <p>
+                外部CRMとのデータ送受信は、お客様が指定したデータの同期および商談管理の効率化を目的として行われます。
+              </p>
+
+              <SubHeading>6. 人間の閲覧制限</SubHeading>
+              <p>
+                当社は、セキュリティ上の理由（不正利用の調査等）、法的義務、またはお客様の同意を得たサポート対応の場合を除き、外部連携によって取得したユーザーデータを従業員が閲覧することを制限しています。
+              </p>
+
+              <SubHeading>7. AI学習利用との関係</SubHeading>
+              <p>
+                本条に定める外部連携により取得したデータについても、利用規約第9条の3（AIモデルの学習利用について）に定める制限が適用されます。
               </p>
             </Section>
 
@@ -198,7 +238,7 @@ export default function PrivacyPolicyPage() {
             <p style={{ marginTop: 48, color: '#6e7494', fontSize: 14 }}>
               制定日：2024年10月3日
               <br />
-              最終更新日：2026年3月17日
+              最終更新日：2026年3月23日
             </p>
           </div>
         </div>
@@ -231,5 +271,21 @@ function Section({
       </h2>
       {children}
     </section>
+  )
+}
+
+function SubHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3
+      style={{
+        fontSize: 'clamp(14px, 2vw, 16px)',
+        fontWeight: 700,
+        color: '#0f1128',
+        marginTop: 20,
+        marginBottom: 8,
+      }}
+    >
+      {children}
+    </h3>
   )
 }
