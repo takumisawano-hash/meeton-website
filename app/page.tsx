@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     url: 'https://dynameet.ai',
     type: 'website',
   },
+  other: { "zoom-domain-verification": "ZOOM_verify_276c56f29d0b4de99f5f218f163582a7" },
 }
 
 export default function Page() {
