@@ -184,6 +184,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .diagram{width:100%;height:100%;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
 
 /* RESPONSIVE */
+/* PROOF STATS */
+.proof-stat-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px 24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:all .3s}
+.proof-stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(18,163,125,.1);border-color:transparent}
+
+/* LOGO CAROUSEL */
+.logo-carousel{overflow:hidden;position:relative;width:100%;mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.logo-track{display:flex;gap:32px;animation:logoScroll 25s linear infinite;width:max-content}
+.logo-track:hover{animation-play-state:paused}
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.logo-item{padding:16px 28px;background:var(--bg);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:150px;height:72px;flex-shrink:0;transition:all .3s}
+.logo-item:hover{border-color:transparent;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.logo-item img{height:36px;width:auto;max-width:120px;object-fit:contain}
+
+/* WHY AI SDR */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.why-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px;transition:all .35s;position:relative;overflow:hidden}
+.why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.1)}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
+.why-card:hover::before{opacity:1}
+.why-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:28px}
+.why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
+.why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
+
 @media(max-width:1024px){
   .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
   .qflow-hz{flex-direction:column;gap:0}
@@ -191,6 +214,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .qflow-hz-gate{padding:8px 0}
   .qflow-hz-gate>div{writing-mode:horizontal-tb!important;flex-direction:row!important;padding:10px 20px!important}
   .qual-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .proof-stats-grid{grid-template-columns:repeat(2,1fr)!important}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
   .step-arrow{display:none}
@@ -3050,34 +3075,34 @@ export default function HomePageClient() {
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            AI インサイドセールス
+            Japan&apos;s #1 AI SDR Platform
           </div>
           <h1 className="anim d2">
-            営業が動く前に、
+            あなたの<em>AI SDR</em>が、
             <br />
-            <em>商談が届く</em>
+            ファネル全体を動かす
           </h1>
           <p className="anim d3 hero-sub">
-            Webサイト・メール・資料——あらゆる接点にAIを配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。
+            Meeton aiは、見込み客の発見からナーチャリング、商談獲得まで自律的にこなすAI SDRエージェント。7つのチャネルを駆使し、24時間365日、あなたの営業チームのために商談を創出し続けます。
           </p>
           <div className="anim d4 hero-ctas">
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => setIsMeetingModalOpen(true)}
             >
-              資料請求
+              AIデモを体験
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => setIsDocModalOpen(true)}
             >
-              デモを予約 →
+              資料請求 →
             </button>
           </div>
           <div className="anim d5 hero-stats">
             {[
-              { v: "7", l: "つの自動獲得チャネル" },
-              { v: "24/7", l: "眠らないAIセールス" },
+              { v: "80%+", l: "商談化率" },
+              { v: "24/7", l: "自律稼働するAI SDR" },
               { v: "5min", l: "で導入完了" },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: "center" }}>
@@ -3086,6 +3111,53 @@ export default function HomePageClient() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SOCIAL PROOF STATS */}
+      <section style={{
+        padding: "0 clamp(16px,5vw,48px) clamp(40px,6vw,60px)",
+        background: "var(--bg)",
+        position: "relative",
+        zIndex: 2,
+        marginTop: -40,
+      }}>
+        <div style={{
+          maxWidth: 1000,
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 16,
+        }} className="proof-stats-grid">
+          {[
+            { v: "80%+", l: "商談化率", sub: "Univis社実績", color: "var(--cta)" },
+            { v: "10件+", l: "月間商談創出", sub: "G-gen社実績", color: "var(--blue)" },
+            { v: "6件", l: "初週で商談獲得", sub: "BizteX社実績", color: "var(--accent)" },
+            { v: "SDR 3人分", l: "の仕事をAI 1台で", sub: "平均導入効果", color: "var(--pink)" },
+          ].map((s, i) => (
+            <div key={i} className="proof-stat-card">
+              <div style={{
+                fontFamily: "var(--fm)",
+                fontSize: "clamp(28px,4vw,40px)",
+                fontWeight: 700,
+                color: s.color,
+                letterSpacing: -1,
+                lineHeight: 1.1,
+              }}>{s.v}</div>
+              <div style={{
+                fontSize: 15,
+                fontWeight: 800,
+                color: "var(--heading)",
+                marginTop: 6,
+              }}>{s.l}</div>
+              <div style={{
+                fontSize: 12,
+                color: "var(--sub)",
+                marginTop: 4,
+                fontWeight: 500,
+              }}>{s.sub}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -3101,11 +3173,11 @@ export default function HomePageClient() {
         <div className="section-inner">
           <div className="slabel">How it works</div>
           <div className="stitle">
-            接点すべてが、
-            <span style={{ color: "var(--cta)" }}>商談獲得マシン</span>に変わる
+            AI SDRが自ら判断し、
+            <span style={{ color: "var(--cta)" }}>最適なアプローチを選択</span>
           </div>
           <p className="ssub" style={{ margin: "0 auto" }}>
-            7つのチャネルが同時に稼働。訪問者を逃さず捉え、温度感が高いうちに商談へ変換します。
+            単なるカレンダー表示ツールではありません。Meeton aiは見込み客の行動を分析し、7つのチャネルから最適な手段を自律的に選んで商談を創出します。
           </p>
 
           {/* Vertical Funnel: 7 channels inside Meeton ai → AI pipeline → Sales */}
@@ -4541,6 +4613,85 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      {/* WHY AI SDR */}
+      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
+        <div className="dot-grid" style={{ opacity: 0.3 }} />
+        <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
+          <div className="slabel" style={{ textAlign: "center" }}>Why AI SDR?</div>
+          <div className="stitle" style={{ textAlign: "center" }}>
+            なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
+          </div>
+          <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
+            人間のSDRが行ってきた業務を、AIが24時間・高精度で代替する時代が来ました。
+          </p>
+          <div className="why-grid">
+            {[
+              {
+                icon: "🤖",
+                color: "var(--cta)",
+                bg: "var(--cta-light)",
+                border: "linear-gradient(135deg,var(--cta),var(--blue))",
+                title: "自律的に判断・行動",
+                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
+              },
+              {
+                icon: "⚡",
+                color: "var(--accent)",
+                bg: "var(--accent-light)",
+                border: "linear-gradient(135deg,var(--accent),var(--pink))",
+                title: "SDR 3人分を24時間稼働",
+                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
+              },
+              {
+                icon: "🎯",
+                color: "var(--blue)",
+                bg: "var(--blue-light)",
+                border: "linear-gradient(135deg,var(--blue),var(--cyan))",
+                title: "ファネル全体を一気通貫",
+                desc: "初回接触→ナーチャリング→商談予約→事前ヒアリングまで。従来バラバラだったツールが1つのAIエージェントに統合され、リードが途中で途切れません。",
+              },
+            ].map((item, i) => (
+              <div className="why-card" key={i} style={{ boxShadow: "0 2px 8px rgba(0,0,0,.03)" }}>
+                <div className="why-card" style={{ all: "unset" }}>
+                  <div style={{ display: "none" }} className="why-card-before" />
+                </div>
+                <div className="why-icon" style={{ background: item.bg }}>
+                  {item.icon}
+                </div>
+                <div className="why-title">{item.title}</div>
+                <div className="why-desc">{item.desc}</div>
+              </div>
+            ))}
+          </div>
+          {/* Comparison strip */}
+          <div style={{
+            marginTop: 48,
+            background: "linear-gradient(135deg, var(--surface), var(--surface2))",
+            borderRadius: 16,
+            padding: "32px 40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 48,
+            flexWrap: "wrap",
+          }}>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>従来のSDR</div>
+              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
+                1日8時間 / 手動フォロー / チャネルごとに別ツール<br/>リード対応の遅延 / 属人的な品質
+              </div>
+            </div>
+            <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton AI SDR</div>
+              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
+                24時間365日 / 自律フォロー / 7チャネル統合<br/>即時レスポンス / 一貫した高品質対応
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>
         <div className="section-inner">
@@ -4648,12 +4799,18 @@ export default function HomePageClient() {
           <div className="slabel">導入企業</div>
           <div className="stitle">先進企業に選ばれています</div>
           <div style={{ height: 36 }} />
-          <div className="client-logos">
-            {clients.map((c) => (
-              <div className="client-logo" key={c.name}>
-                <img src={c.logo} alt={c.name} />
-              </div>
-            ))}
+          <div className="logo-carousel">
+            <div className="logo-track">
+              {/* Double the logos for seamless infinite scroll */}
+              {[...clients, ...clients].map((c, i) => (
+                <div className="logo-item" key={`${c.name}-${i}`}>
+                  <img src={c.logo} alt={c.name} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginTop: 24, fontSize: 14, fontWeight: 700, color: "var(--sub)" }}>
+            ...ほか多数の企業様にご導入いただいています
           </div>
         </div>
       </section>
@@ -4675,15 +4832,15 @@ export default function HomePageClient() {
         <div className="final-cta-inner">
           <div className="slabel">Get Started</div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            営業チームが、
+            AI SDRの時代へ、
             <br />
-            商談に集中できる世界へ
+            今すぐ一歩を
           </div>
           <p
             className="ssub"
             style={{ textAlign: "center", margin: "16px auto 36px" }}
           >
-            導入は5分。7つのAIチャネルが24時間稼働し、商談を自動で獲得し続けます。
+            導入は5分。あなた専属のAI SDRが24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
           </p>
           <div
             style={{
@@ -4695,15 +4852,15 @@ export default function HomePageClient() {
           >
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => setIsMeetingModalOpen(true)}
             >
-              資料請求
+              AIデモを体験
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => setIsDocModalOpen(true)}
             >
-              デモを予約 →
+              資料請求 →
             </button>
           </div>
         </div>
