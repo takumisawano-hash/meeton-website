@@ -267,7 +267,7 @@ const features = [
     color: "#0891b2",
     bg: "#0891b210",
     gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-    title: "Meeton ai \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
     desc: "\u8a2a\u554f\u8005\u3092\u5f85\u305f\u306a\u3044\u3002AI\u304c\u5148\u306b\u58f0\u3092\u304b\u3051\u3001\u30cb\u30fc\u30ba\u3092\u5f15\u304d\u51fa\u3057\u3001\u8cc7\u6599\u3092\u5c4a\u3051\u3001\u305d\u306e\u307e\u307e\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u5b8c\u7d50\u3002\u901a\u5e38\u306e\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8\u306f\u3082\u3061\u308d\u3093\u3001Google\u5e83\u544a\u30fbLinkedIn\u5e83\u544a\u7d4c\u7531\u306eLP\u306b\u3082\u8a2d\u7f6e\u3067\u304d\u308b\u306e\u3067\u3001\u5e83\u544a\u8cbb\u3092\u304b\u3051\u305f\u6d41\u5165\u3092\u53d6\u308a\u3053\u307c\u3055\u305a\u5546\u8ac7\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
@@ -275,7 +275,7 @@ const features = [
     color: "#12a37d",
     bg: "#12a37d10",
     gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-    title: "Meeton ai \u30e1\u30fc\u30eb",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30e1\u30fc\u30eb",
     desc: "\u30a4\u30f3\u30d0\u30a6\u30f3\u30c9\u30ea\u30fc\u30c9\u306b\u5bfe\u3057\u3066AI\u304c\u81ea\u52d5\u3067\u30ca\u30fc\u30c1\u30e3\u30ea\u30f3\u30b0\u30fb\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u3001\u5546\u8ac7\u78ba\u5b9a\u307e\u3067\u8a98\u5c0e\u3002\u30a6\u30a7\u30d3\u30ca\u30fc\u30fb\u30bb\u30df\u30ca\u30fc\u306e\u53c2\u52a0\u8005\u30ea\u30b9\u30c8\u3082CRM\u9023\u643a\u3084Webhook\u7d4c\u7531\u3067\u81ea\u52d5\u53d6\u308a\u8fbc\u307f\u3001\u30a4\u30d9\u30f3\u30c8\u76f4\u5f8c\u306e\u71b1\u91cf\u304c\u9ad8\u3044\u30bf\u30a4\u30df\u30f3\u30b0\u3092\u9003\u3057\u307e\u305b\u3093\u3002",
   },
   {
@@ -283,7 +283,7 @@ const features = [
     color: "#3b6ff5",
     bg: "#3b6ff510",
     gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-    title: "Meeton ai \u8cc7\u6599\u30da\u30fc\u30b8",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u8cc7\u6599\u30da\u30fc\u30b8",
     desc: "AI\u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5\u4ed8\u304d\u306e\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8\u3092\u30b5\u30a4\u30c8\u306b\u7c21\u5358\u8ffd\u52a0\u3002AI\u304c\u300c\u3069\u306e\u8cc7\u6599\u304c\u5408\u3046\u304b\u300d\u3092\u63d0\u6848\u3057\u306a\u304c\u3089\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u304b\u3089\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u4e00\u6c17\u306b\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
   {
@@ -291,7 +291,7 @@ const features = [
     color: "#7c5cfc",
     bg: "#7c5cfc10",
     gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-    title: "Meeton ai \u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
     desc: "\u554f\u3044\u5408\u308f\u305b\u3084\u8cc7\u6599\u8acb\u6c42\u306e\u76f4\u5f8c\u2014\u2014\u6700\u3082\u71b1\u91cf\u304c\u9ad8\u3044\u77ac\u9593\u306b\u3001\u30ab\u30ec\u30f3\u30c0\u30fc\u3092\u63d0\u793a\u3002AI\u30c1\u30e3\u30c3\u30c8\u304c\u6a2a\u3067\u7591\u554f\u306b\u7b54\u3048\u308b\u306e\u3067\u3001\u300c\u3061\u3087\u3063\u3068\u8074\u304d\u305f\u3044\u3053\u3068\u304c\u3042\u308b\u3051\u3069\u2026\u300d\u3067\u96e2\u8131\u3055\u305b\u307e\u305b\u3093\u3002",
   },
   {
@@ -299,7 +299,7 @@ const features = [
     color: "#d03ea1",
     bg: "#d03ea110",
     gradient: "linear-gradient(135deg,#d03ea1,#e879b9)",
-    title: "Meeton ai \u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
     desc: "\u300c\u4eca\u898b\u3066\u3044\u308b\u30da\u30fc\u30b8\u300d\u306b\u5408\u3063\u305f\u8cc7\u6599\u3092\u3001AI\u304c\u81ea\u52d5\u3067\u9078\u3073\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7\u63d0\u6848\u3002\u8cc7\u6599DL\u3092\u5165\u308a\u53e3\u306b\u3001\u81ea\u7136\u306a\u6d41\u308c\u3067\u5546\u8ac7\u7372\u5f97\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
@@ -307,7 +307,7 @@ const features = [
     color: "#e0475b",
     bg: "#e0475b10",
     gradient: "linear-gradient(135deg,#e0475b,#f87171)",
-    title: "Meeton ai \u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
     desc: "\u30a2\u30dd\u96fb\u5f8c\u306e\u8cc7\u6599\u9001\u4ed8\u3084\u65e5\u7a0b\u8abf\u6574\u30e1\u30fc\u30eb\u306b\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af\u3092\u633f\u5165\u3002\u300c\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u306f\uff1f\u300d\u306e\u3084\u308a\u3068\u308a\u304c\u6d88\u3048\u3001\u30ef\u30f3\u30af\u30ea\u30c3\u30af\u3067\u5546\u8ac7\u78ba\u5b9a\u3002AI\u30c1\u30e3\u30c3\u30c8\u304c\u4e88\u7d04\u524d\u306e\u4e0d\u5b89\u3082\u89e3\u6d88\u3057\u307e\u3059\u3002",
   },
   {
@@ -315,7 +315,7 @@ const features = [
     color: "#c026d3",
     bg: "#c026d310",
     gradient: "linear-gradient(135deg,#c026d3,#d946ef)",
-    title: "Meeton ai \u30ab\u30ec\u30f3\u30c0\u30fcQR",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fcQR",
     desc: "\u8cc7\u6599\u3092\u8aad\u3093\u3067\u3044\u308b\u4eba\u306f\u3001\u6700\u3082\u71b1\u91cf\u304c\u9ad8\u3044\u898b\u8fbc\u5ba2\u3002PDF\u5185\u306eURL\u3084QR\u30b3\u30fc\u30c9\u304b\u3089\u3001\u8aad\u3093\u3067\u3044\u308b\u305d\u306e\u77ac\u9593\u306b\u5546\u8ac7\u4e88\u7d04\u3078\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
 ];
@@ -446,7 +446,7 @@ const caseData = [
     name: "G-gen",
     industry: "Google Cloud プレミアパートナー",
     quote:
-      "Meeton ai 導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
+      "ミートン導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
     stats: [
       { v: "10件+", l: "月間商談創出", c: "var(--cta)" },
       { v: "40%+", l: "リード→商談 転換率", c: "var(--blue)" },
@@ -457,7 +457,7 @@ const caseData = [
     name: "Univis",
     industry: "M&Aアドバイザリー・財務会計コンサル",
     quote:
-      "商談化率は80%超え。Meeton ai が精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
+      "商談化率は80%超え。ミートンが精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
     stats: [
       { v: "80%+", l: "商談化率", c: "var(--cta)" },
       { v: "高精度", l: "Meeting創出", c: "var(--blue)" },
@@ -468,7 +468,7 @@ const caseData = [
     name: "BizteX",
     industry: "クラウドRPA・業務自動化ツール",
     quote:
-      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton ai の最大の魅力です。",
+      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がミートンの最大の魅力です。",
     stats: [
       { v: "6件", l: "初週の商談創出", c: "var(--cta)" },
       { v: "1週目", l: "成果が出るまで", c: "var(--blue)" },
@@ -3078,12 +3078,12 @@ export default function HomePageClient() {
             Japan&apos;s #1 AI SDR Platform
           </div>
           <h1 className="anim d2">
-            あなたの<em>AI SDR</em>が、
+            <em>ミートン</em>が、
             <br />
             ファネル全体を動かす
           </h1>
           <p className="anim d3 hero-sub">
-            Meeton aiは、見込み客の発見からナーチャリング、商談獲得まで自律的にこなすAI SDRエージェント。7つのチャネルを駆使し、24時間365日、あなたの営業チームのために商談を創出し続けます。
+            ミートンは、見込み客の発見からナーチャリング、商談獲得まで自律的にこなすAI SDRエージェント。7つのチャネルを駆使し、24時間365日、あなたの営業チームのために商談を創出し続けます。
           </p>
           <div className="anim d4 hero-ctas">
             <button
@@ -3102,7 +3102,7 @@ export default function HomePageClient() {
           <div className="anim d5 hero-stats">
             {[
               { v: "80%+", l: "商談化率" },
-              { v: "24/7", l: "自律稼働するAI SDR" },
+              { v: "24/7", l: "ミートンが自律稼働" },
               { v: "5min", l: "で導入完了" },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: "center" }}>
@@ -3110,6 +3110,53 @@ export default function HomePageClient() {
                 <div className="stat-l">{s.l}</div>
               </div>
             ))}
+          </div>
+
+          {/* HERO DEMO VIDEO */}
+          <div className="anim d5" style={{
+            marginTop: "clamp(40px,6vw,64px)",
+            borderRadius: 16,
+            overflow: "hidden",
+            border: "1px solid var(--border)",
+            boxShadow: "0 12px 48px rgba(18,163,125,.12), 0 2px 8px rgba(0,0,0,.04)",
+            background: "var(--heading)",
+            aspectRatio: "16/9",
+            maxWidth: 720,
+            marginLeft: "auto",
+            marginRight: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            cursor: "pointer",
+          }}>
+            {/* Placeholder — replace src with actual demo video */}
+            <div style={{
+              textAlign: "center",
+              color: "rgba(255,255,255,.6)",
+            }}>
+              <div style={{
+                width: 72,
+                height: 72,
+                borderRadius: "50%",
+                background: "rgba(18,163,125,.9)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 16px",
+                boxShadow: "0 0 0 12px rgba(18,163,125,.2)",
+              }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "rgba(255,255,255,.8)" }}>
+                ミートンのデモを見る
+              </div>
+              <div style={{ fontSize: 13, marginTop: 4 }}>
+                2分でわかるAI SDRの実力
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -3173,14 +3220,14 @@ export default function HomePageClient() {
         <div className="section-inner">
           <div className="slabel">How it works</div>
           <div className="stitle">
-            AI SDRが自ら判断し、
+            ミートンが自ら判断し、
             <span style={{ color: "var(--cta)" }}>最適なアプローチを選択</span>
           </div>
           <p className="ssub" style={{ margin: "0 auto" }}>
-            単なるカレンダー表示ツールではありません。Meeton aiは見込み客の行動を分析し、7つのチャネルから最適な手段を自律的に選んで商談を創出します。
+            単なるカレンダー表示ツールではありません。ミートンは見込み客の行動を分析し、7つのチャネルから最適な手段を自律的に選んで商談を創出します。
           </p>
 
-          {/* Vertical Funnel: 7 channels inside Meeton ai → AI pipeline → Sales */}
+          {/* Vertical Funnel: 7 channels inside ミートン → AI pipeline → Sales */}
           <div style={{ marginTop: 48, overflowX: "auto", padding: "8px 0" }}>
             {isMobile ? (
               <svg
@@ -3256,7 +3303,7 @@ export default function HomePageClient() {
                   fill="#12a37d"
                   fontFamily="var(--fb)"
                 >
-                  Meeton ai
+                  ミートン
                 </text>
 
                 {/* 7 Channel cards - 2 columns */}
@@ -3660,7 +3707,7 @@ export default function HomePageClient() {
                   </linearGradient>
                 </defs>
 
-                {/* ── Trapezoid funnel boundary (Meeton ai ecosystem) ── */}
+                {/* ── Trapezoid funnel boundary (ミートン ecosystem) ── */}
                 <g filter="url(#hubGlow)">
                   <path
                     d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z"
@@ -3697,7 +3744,7 @@ export default function HomePageClient() {
                   fill="#12a37d"
                   fontFamily="var(--fb)"
                 >
-                  Meeton ai
+                  ミートン
                 </text>
 
                 {/* ── 7 Channel cards (top zone inside funnel) ── */}
@@ -4135,7 +4182,7 @@ export default function HomePageClient() {
               </div>
               <div className="cat-title">AI チャットボット</div>
               <div className="cat-desc">
-                AIが訪問者に自ら話しかけ、ニーズを把握し、リード獲得から商談予約まで会話の流れで完結。
+                ミートンが訪問者に自ら話しかけ、ニーズを把握し、リード獲得から商談予約まで会話の流れで完結。
               </div>
               <div className="cat-features">
                 {[
@@ -4376,11 +4423,11 @@ export default function HomePageClient() {
             AI CONCIERGE
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            {"すべてのチャネルに、予約を後押しするAIがいる"}
+            {"すべてのチャネルに、ミートンがいる"}
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
             {
-              "カレンダー表示だけでは予約されない。AIチャットが疑問を解消し、最後の一押しで離脱を防ぎます。"
+              "カレンダー表示だけでは予約されない。ミートンが疑問を解消し、最後の一押しで離脱を防ぎます。"
             }
           </p>
           <div style={{ marginTop: 48, overflowX: "auto" }}>
@@ -4408,7 +4455,7 @@ export default function HomePageClient() {
             <span style={{ color: "var(--cta)" }}>質の高い商談</span>を届ける
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            AIが事前に見極め、ヒアリングし、営業が本当に会うべき相手だけを商談として届けます。
+            ミートンが事前に見極め、ヒアリングし、営業が本当に会うべき相手だけを商談として届けます。
           </p>
 
           {/* Quality Flow Diagram */}
@@ -4622,7 +4669,7 @@ export default function HomePageClient() {
             なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
-            人間のSDRが行ってきた業務を、AIが24時間・高精度で代替する時代が来ました。
+            人間のSDRが行ってきた業務を、ミートンが24時間・高精度で代替する時代が来ました。
           </p>
           <div className="why-grid">
             {[
@@ -4632,7 +4679,7 @@ export default function HomePageClient() {
                 bg: "var(--cta-light)",
                 border: "linear-gradient(135deg,var(--cta),var(--blue))",
                 title: "自律的に判断・行動",
-                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
+                desc: "設定に従って表示するだけのツールとは違います。ミートンはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
               },
               {
                 icon: "⚡",
@@ -4640,7 +4687,7 @@ export default function HomePageClient() {
                 bg: "var(--accent-light)",
                 border: "linear-gradient(135deg,var(--accent),var(--pink))",
                 title: "SDR 3人分を24時間稼働",
-                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
+                desc: "人間のSDRは1日8時間。ミートンは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
               },
               {
                 icon: "🎯",
@@ -4683,7 +4730,7 @@ export default function HomePageClient() {
             </div>
             <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton AI SDR</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>ミートン（AI SDR）</div>
               <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
                 24時間365日 / 自律フォロー / 7チャネル統合<br/>即時レスポンス / 一貫した高品質対応
               </div>
@@ -4705,7 +4752,7 @@ export default function HomePageClient() {
             className="ssub"
             style={{ textAlign: "center", margin: "0 auto 44px" }}
           >
-            Meeton ai が生み出した商談成果をご紹介します。
+            ミートンが生み出した商談成果をご紹介します。
           </p>
           <CaseCarousel />
         </div>
@@ -4832,15 +4879,15 @@ export default function HomePageClient() {
         <div className="final-cta-inner">
           <div className="slabel">Get Started</div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            AI SDRの時代へ、
+            ミートンに、
             <br />
-            今すぐ一歩を
+            商談獲得を任せよう
           </div>
           <p
             className="ssub"
             style={{ textAlign: "center", margin: "16px auto 36px" }}
           >
-            導入は5分。あなた専属のAI SDRが24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
+            導入は5分。あなた専属のAI SDR「ミートン」が24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
           </p>
           <div
             style={{
