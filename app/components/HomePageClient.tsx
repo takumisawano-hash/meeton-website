@@ -84,6 +84,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* CATEGORY CARDS - 3 categories */
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
 .cat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:36px 32px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
 .cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 16px 48px rgba(18,163,125,.12)}
 .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
@@ -275,6 +276,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 @media(max-width:1024px){
   .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .phase-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
   .qflow-hz{flex-direction:column;gap:0}
   .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
   .qflow-hz-gate{padding:8px 0}
@@ -4344,7 +4346,7 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* 3 CATEGORY CARDS */}
+      {/* 4 PHASE CARDS */}
       <section
         className="section"
         id="features"
@@ -4356,255 +4358,160 @@ export default function HomePageClient() {
           style={{ position: "relative", zIndex: 2 }}
         >
           <div className="slabel" style={{ textAlign: "center" }}>
-            Products
+            What Meeton Does
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            商談をつくる、
-            <span style={{ color: "var(--cta)" }}>3つのアプローチ</span>
+            ミートンが商談をつくる、
+            <span style={{ color: "var(--cta)" }}>4つのフェーズ</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            AIチャットボットを軸に、サイト内外のあらゆる接点から商談を自動獲得します。
+            リードの温度感に応じてミートンが順番を自動で判断。フォーム送信直後なら即カレンダーへ、まだ温まっていなければじっくり育成してから商談化します。
           </p>
 
-          <div className="cat-grid">
-            {/* CORE ENGINE */}
-            <div
-              className="cat-card"
-              style={{ "--cat-color": "#0891b2" } as React.CSSProperties}
-            >
+          <div className="phase-grid">
+            {[
+              {
+                num: "01",
+                color: "#0891b2",
+                gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
+                label: "DETECT",
+                title: "見つける",
+                desc: "サイト訪問・フォーム送信・資料DL——あらゆる接点でリードの行動を検知し、温度感を瞬時にスコアリング。",
+                features: [
+                  { label: "サイト訪問をリアルタイム検知", icon: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0" },
+                  { label: "フォーム送信・資料DLをトリガーに", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "リードの温度感を自動スコアリング", icon: "M22 12h-4l-3 9L9 3l-3 9H2" },
+                ],
+                link: "/features/chatbot/",
+              },
+              {
+                num: "02",
+                color: "#12a37d",
+                gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                label: "ENGAGE",
+                title: "話しかける",
+                desc: "チャットやメールでミートンが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開。",
+                features: [
+                  { label: "AIチャットで即座に会話開始", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "パーソナライズドメールを自動送信", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "未反応リードには自動フォローアップ", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
+                ],
+                link: "/features/chatbot/",
+              },
+              {
+                num: "03",
+                color: "#7c5cfc",
+                gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
+                label: "NURTURE",
+                title: "理解を深める",
+                desc: "資料提案・Q&A対応・ヒアリングでリードの理解を促進。ポップアップや資料ページも活用し、検討度を引き上げる。",
+                features: [
+                  { label: "閲覧ページに合わせて資料を自動提案", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
+                  { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
+                  { label: "チャットでQ&A対応、疑問を即解消", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" },
+                ],
+                link: "/features/onsite/",
+              },
+              {
+                num: "04",
+                color: "#3b6ff5",
+                gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
+                label: "CONVERT",
+                title: "商談を決める",
+                desc: "サンクスページ・メール・チャット内——あらゆる場面でカレンダーを提示。事前ヒアリングからCRM登録まで自動で完結。",
+                features: [
+                  { label: "サンクスページで即カレンダー提示", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
+                  { label: "メール・PDF・QRにカレンダーリンク", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
+                  { label: "事前ヒアリング＆CRM自動登録", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14 M7 23l-4-4 4-4 M21 13v2a4 4 0 0 1-4 4H3" },
+                ],
+                link: "/features/offsite/",
+              },
+            ].map((phase, i) => (
               <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: "linear-gradient(90deg,#0891b2,#06b6d4)",
-                  opacity: 0,
-                  transition: "opacity .3s",
-                }}
-                className="cat-card-accent"
-              />
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
-                }}
-              />
-              <div
-                className="cat-label"
-                style={{ background: "#0891b210", color: "#0891b2" }}
+                className="cat-card"
+                key={i}
+                style={{ "--cat-color": phase.color } as React.CSSProperties}
               >
-                CORE ENGINE
-              </div>
-              <div className="cat-title">AI チャットボット</div>
-              <div className="cat-desc">
-                ミートンが訪問者に自ら話しかけ、ニーズを把握し、リード獲得から商談予約まで会話の流れで完結。
-              </div>
-              <div className="cat-features">
-                {[
-                  {
-                    label: "ページ文脈に応じた自動声かけ",
-                    color: "#0891b2",
-                    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                  },
-                  {
-                    label: "会話からニーズ把握＆資料提案",
-                    color: "#12a37d",
-                    icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z",
-                  },
-                  {
-                    label: "チャット内でリード獲得",
-                    color: "#3b6ff5",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "温度感に応じて商談予約まで完結",
-                    color: "#7c5cfc",
-                    icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-                  },
-                ].map((f, i) => (
-                  <div className="cat-feat" key={i}>
-                    <div
-                      className="cat-feat-icon"
-                      style={{ background: `${f.color}12` }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={f.color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background: phase.gradient,
+                    opacity: 0,
+                    transition: "opacity .3s",
+                  }}
+                  className="cat-card-accent"
+                />
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
+                  }}
+                />
+                <div
+                  className="cat-label"
+                  style={{ background: `${phase.color}10`, color: phase.color }}
+                >
+                  <span style={{
+                    fontFamily: "var(--fm)",
+                    fontSize: 18,
+                    fontWeight: 900,
+                    background: phase.gradient,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    marginRight: 6,
+                  }}>{phase.num}</span>
+                  {phase.label}
+                </div>
+                <div className="cat-title">{phase.title}</div>
+                <div className="cat-desc">{phase.desc}</div>
+                <div className="cat-features">
+                  {phase.features.map((f, j) => (
+                    <div className="cat-feat" key={j}>
+                      <div
+                        className="cat-feat-icon"
+                        style={{ background: `${phase.color}12` }}
                       >
-                        <path d={f.icon} />
-                      </svg>
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke={phase.color}
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d={f.icon} />
+                        </svg>
+                      </div>
+                      {f.label}
                     </div>
-                    {f.label}
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <a href={phase.link} className="cat-link">
+                  詳しく見る <span>→</span>
+                </a>
               </div>
-              <a href="/features/chatbot/" className="cat-link">
-                詳しく見る <span>→</span>
-              </a>
-            </div>
+            ))}
+          </div>
 
-            {/* ON-SITE CHANNELS */}
-            <div
-              className="cat-card"
-              style={{ "--cat-color": "#12a37d" } as React.CSSProperties}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: "linear-gradient(90deg,#12a37d,#0fc19a)",
-                  opacity: 0,
-                  transition: "opacity .3s",
-                }}
-                className="cat-card-accent"
-              />
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
-                }}
-              />
-              <div
-                className="cat-label"
-                style={{ background: "#12a37d10", color: "#12a37d" }}
-              >
-                ON-SITE CHANNELS
-              </div>
-              <div className="cat-title">サイト内チャネル</div>
-              <div className="cat-desc">
-                資料ページ・ポップアップ・サンクスページ。サイト内の3つの接点にAIを配置し、取りこぼしゼロを実現。
-              </div>
-              <div className="cat-features">
-                {[
-                  {
-                    label: "AI付き資料ダウンロードページ",
-                    color: "#3b6ff5",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3",
-                  },
-                  {
-                    label: "関心に応じた資料ポップアップ",
-                    color: "#d03ea1",
-                    icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
-                  },
-                  {
-                    label: "サンクスページで追加アクション",
-                    color: "#7c5cfc",
-                    icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3",
-                  },
-                ].map((f, i) => (
-                  <div className="cat-feat" key={i}>
-                    <div
-                      className="cat-feat-icon"
-                      style={{ background: `${f.color}12` }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={f.color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d={f.icon} />
-                      </svg>
-                    </div>
-                    {f.label}
-                  </div>
-                ))}
-              </div>
-              <a href="/features/onsite/" className="cat-link">
-                詳しく見る <span>→</span>
-              </a>
-            </div>
-
-            {/* OFF-SITE CHANNELS */}
-            <div
-              className="cat-card"
-              style={{ "--cat-color": "#3b6ff5" } as React.CSSProperties}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: "linear-gradient(90deg,#3b6ff5,#6690fa)",
-                  opacity: 0,
-                  transition: "opacity .3s",
-                }}
-                className="cat-card-accent"
-              />
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
-                }}
-              />
-              <div
-                className="cat-label"
-                style={{ background: "#3b6ff510", color: "#3b6ff5" }}
-              >
-                OUTREACH CHANNELS
-              </div>
-              <div className="cat-title">サイト外チャネル</div>
-              <div className="cat-desc">
-                AIメール・カレンダーリンク・カレンダーQR。サイトの外でもリードを育成し、商談予約を獲得。
-              </div>
-              <div className="cat-features">
-                {[
-                  {
-                    label: "AIパーソナライズメール",
-                    color: "#12a37d",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "メール・PDFにカレンダーリンク",
-                    color: "#e0475b",
-                    icon: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",
-                  },
-                  {
-                    label: "名刺・展示会にカレンダーQR",
-                    color: "#c026d3",
-                    icon: "M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z M12 18h.01",
-                  },
-                ].map((f, i) => (
-                  <div className="cat-feat" key={i}>
-                    <div
-                      className="cat-feat-icon"
-                      style={{ background: `${f.color}12` }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={f.color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d={f.icon} />
-                      </svg>
-                    </div>
-                    {f.label}
-                  </div>
-                ))}
-              </div>
-              <a href="/features/offsite/" className="cat-link">
-                詳しく見る <span>→</span>
-              </a>
-            </div>
+          {/* Adaptive flow note */}
+          <div style={{
+            marginTop: 32,
+            textAlign: "center",
+            padding: "16px 24px",
+            background: "var(--surface)",
+            borderRadius: 12,
+            maxWidth: 640,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}>
+            <span style={{ fontSize: 14, color: "var(--sub)", lineHeight: 1.8 }}>
+              💡 フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——ミートンがリードの状態を見て自動で判断します。
+            </span>
           </div>
         </div>
       </section>
