@@ -184,6 +184,72 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .diagram{width:100%;height:100%;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
 
 /* RESPONSIVE */
+/* HERO DEMO */
+.demo-wrap{max-width:720px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 12px 48px rgba(18,163,125,.12),0 2px 8px rgba(0,0,0,.04);background:var(--bg)}
+.demo-steps-bar{display:flex;align-items:center;gap:0;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.demo-step-dot{display:flex;align-items:center;gap:6px;flex:1;font-size:12px;font-weight:700;color:var(--sub);transition:all .4s;z-index:1;justify-content:center}
+.demo-step-dot.active{color:var(--cta)}
+.demo-step-dot.done{color:var(--cta);opacity:.5}
+.demo-step-icon{font-size:16px}
+.demo-step-label{display:inline}
+.demo-progress{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--cta-light),rgba(18,163,125,.08));transition:width .6s cubic-bezier(.16,1,.3,1);z-index:0}
+.demo-screen{min-height:340px;padding:24px;position:relative;display:flex;align-items:flex-start;gap:16px}
+.demo-avatar{flex-shrink:0}
+.demo-avatar-inner{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cta),#0fc19a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;font-family:var(--fd);box-shadow:0 4px 12px var(--cta-glow)}
+.demo-avatar-status{width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid var(--bg);position:relative;top:-12px;left:32px;animation:pulse 2s infinite}
+.demo-scene{flex:1;min-width:0}
+.demo-scene-title{font-size:13px;font-weight:800;color:var(--heading);margin-bottom:16px;font-family:var(--fm);letter-spacing:1px;text-transform:uppercase}
+
+/* Demo chat */
+.demo-chat{display:flex;flex-direction:column;gap:10px}
+.demo-msg{display:flex;align-items:flex-start;gap:8px}
+.demo-msg-user{flex-direction:row-reverse}
+.demo-msg-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--cta),#0fc19a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:11px;flex-shrink:0}
+.demo-msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6;max-width:320px;font-weight:500}
+.demo-msg-bot .demo-msg-bubble{background:var(--surface);color:var(--text);border-bottom-left-radius:4px}
+.demo-msg-user .demo-msg-bubble{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;border-bottom-right-radius:4px}
+.demo-msg-appear{animation:chatPop .4s cubic-bezier(.16,1,.3,1) forwards}
+
+/* Demo email */
+.demo-email{background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.demo-email-header{padding:14px 16px;border-bottom:1px solid var(--border)}
+.demo-email-from{font-size:13px;font-weight:700;color:var(--heading);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.demo-email-subject{font-size:12px;color:var(--sub);font-weight:600}
+.demo-email-body{padding:16px}
+.demo-email-body p{font-size:13px;line-height:1.7;color:var(--text);margin-bottom:8px}
+.demo-email-cta{display:inline-block;padding:10px 20px;background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;border-radius:8px;font-size:13px;font-weight:700;margin-top:8px;box-shadow:0 4px 12px var(--cta-glow)}
+
+/* Demo docs */
+.demo-docs{display:flex;flex-direction:column;gap:10px}
+.demo-doc-card{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:all .3s}
+.demo-doc-card:hover{border-color:var(--cta);box-shadow:0 4px 16px var(--cta-glow)}
+.demo-doc-icon{font-size:24px}
+.demo-doc-info{flex:1}
+.demo-doc-name{font-size:13px;font-weight:700;color:var(--heading)}
+.demo-doc-match{font-size:11px;color:var(--sub);margin-top:2px}
+
+/* Demo calendar */
+.demo-cal{background:var(--surface);border-radius:12px;padding:16px;border:1px solid var(--border)}
+.demo-cal-header{font-size:14px;font-weight:800;color:var(--heading);text-align:center;margin-bottom:12px}
+.demo-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px}
+.demo-cal-day-label{font-size:11px;font-weight:700;color:var(--sub);text-align:center;padding:4px}
+.demo-cal-day{font-size:12px;text-align:center;padding:8px 4px;border-radius:8px;color:var(--sub);background:var(--bg);border:1px solid var(--border);font-weight:600;transition:all .3s}
+.demo-cal-day.available{color:var(--cta);border-color:var(--cta);background:var(--cta-light);font-weight:700}
+.demo-cal-day.selected{background:var(--cta);color:#fff;border-color:var(--cta);transform:scale(1.1);box-shadow:0 4px 12px var(--cta-glow)}
+.demo-cal-confirmed{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--cta-light);border-radius:8px;font-size:13px;font-weight:700;color:var(--cta)}
+
+/* Demo CRM */
+.demo-crm{display:flex;flex-direction:column;gap:12px}
+.demo-crm-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.demo-crm-label{padding:10px 16px;background:linear-gradient(135deg,#1a73e8,#4285f4);color:#fff;font-size:12px;font-weight:800;letter-spacing:1px}
+.demo-crm-fields{padding:12px 16px}
+.demo-crm-field{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
+.demo-crm-field:last-child{border-bottom:none}
+.demo-crm-field span{color:var(--sub)}
+.demo-crm-field strong{color:var(--heading)}
+.demo-slack-notif{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;border-left:4px solid #e01e5a}
+.demo-slack-icon{font-size:20px}
+
 /* PROOF STATS */
 .proof-stat-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px 24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:all .3s}
 .proof-stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(18,163,125,.1);border-color:transparent}
@@ -227,6 +293,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
   .hero-stats{flex-direction:column;gap:20px;align-items:center}
   .int-grid{grid-template-columns:repeat(2,1fr)}
+  .demo-screen{min-height:280px;padding:16px;gap:10px}
+  .demo-avatar-inner{width:32px;height:32px;font-size:14px}
+  .demo-avatar-status{top:-10px;left:22px}
+  .demo-step-label{display:none}
+  .demo-steps-bar{padding:10px 12px}
+  .demo-msg-bubble{max-width:220px;font-size:12px;padding:8px 12px}
+  .demo-email-body{padding:12px}
+  .demo-cal-grid{gap:4px}
+  .demo-cal-day{padding:6px 2px;font-size:11px}
   .final-cta{padding:60px 20px 80px}
   .case-carousel{overflow:hidden;width:100%}
   .case-track{gap:0}
@@ -3026,6 +3101,189 @@ function CaseCarousel() {
   );
 }
 
+/* ── Hero Demo Animation ── */
+const DEMO_STEPS = [
+  { key: "chat", label: "チャット", icon: "💬" },
+  { key: "email", label: "メール", icon: "📧" },
+  { key: "doc", label: "資料提案", icon: "📄" },
+  { key: "cal", label: "カレンダー予約", icon: "📅" },
+  { key: "crm", label: "CRM登録", icon: "✅" },
+] as const;
+
+function HeroDemoAnimation() {
+  const [step, setStep] = useState(0);
+  const [msgIndex, setMsgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStep((prev) => {
+        const next = (prev + 1) % DEMO_STEPS.length;
+        setMsgIndex(0);
+        return next;
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Staggered message reveal within each step
+  useEffect(() => {
+    if (msgIndex < 3) {
+      const t = setTimeout(() => setMsgIndex((p) => p + 1), 600);
+      return () => clearTimeout(t);
+    }
+  }, [step, msgIndex]);
+
+  const current = DEMO_STEPS[step];
+
+  return (
+    <div className="demo-wrap">
+      {/* Step indicator */}
+      <div className="demo-steps-bar">
+        {DEMO_STEPS.map((s, i) => (
+          <div key={s.key} className={`demo-step-dot${i === step ? " active" : ""}${i < step ? " done" : ""}`}>
+            <span className="demo-step-icon">{s.icon}</span>
+            <span className="demo-step-label">{s.label}</span>
+          </div>
+        ))}
+        <div className="demo-progress" style={{ width: `${((step + 1) / DEMO_STEPS.length) * 100}%` }} />
+      </div>
+
+      {/* Demo screen */}
+      <div className="demo-screen">
+        {/* Meeton avatar */}
+        <div className="demo-avatar">
+          <div className="demo-avatar-inner">M</div>
+          <div className="demo-avatar-status" />
+        </div>
+
+        {/* Chat step */}
+        {current.key === "chat" && (
+          <div className="demo-scene">
+            <div className="demo-scene-title">Webサイトでチャット対応</div>
+            <div className="demo-chat">
+              {msgIndex >= 1 && (
+                <div className="demo-msg demo-msg-bot demo-msg-appear">
+                  <span className="demo-msg-avatar">M</span>
+                  <div className="demo-msg-bubble">こんにちは！何かお探しですか？御社の課題に合った資料をご案内できますよ。</div>
+                </div>
+              )}
+              {msgIndex >= 2 && (
+                <div className="demo-msg demo-msg-user demo-msg-appear">
+                  <div className="demo-msg-bubble">マーケティングのリード獲得を改善したいです</div>
+                </div>
+              )}
+              {msgIndex >= 3 && (
+                <div className="demo-msg demo-msg-bot demo-msg-appear">
+                  <span className="demo-msg-avatar">M</span>
+                  <div className="demo-msg-bubble">ぴったりの資料がありますよ！📎 こちらをどうぞ</div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Email step */}
+        {current.key === "email" && (
+          <div className="demo-scene">
+            <div className="demo-scene-title">パーソナライズドメール送信</div>
+            <div className="demo-email demo-msg-appear">
+              <div className="demo-email-header">
+                <div className="demo-email-from"><span className="demo-msg-avatar" style={{width:24,height:24,fontSize:10}}>M</span> ミートン &lt;meeton@example.com&gt;</div>
+                <div className="demo-email-subject">先ほどの資料に関連して、追加のご提案があります</div>
+              </div>
+              <div className="demo-email-body">
+                <p>先ほどはチャットでお話しいただきありがとうございます。</p>
+                <p>リード獲得の改善に関して、こちらの事例もお役に立つかと思います。</p>
+                {msgIndex >= 2 && (
+                  <div className="demo-email-cta demo-msg-appear">📅 ミーティングを予約する</div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Doc step */}
+        {current.key === "doc" && (
+          <div className="demo-scene">
+            <div className="demo-scene-title">最適な資料を自動提案</div>
+            <div className="demo-docs">
+              {[
+                { name: "リード獲得ガイド.pdf", match: "98%", delay: 0 },
+                { name: "導入事例集.pdf", match: "94%", delay: 1 },
+                { name: "料金プラン.pdf", match: "87%", delay: 2 },
+              ].map((doc, i) => (
+                msgIndex >= i + 1 && (
+                  <div key={i} className="demo-doc-card demo-msg-appear">
+                    <div className="demo-doc-icon">📄</div>
+                    <div className="demo-doc-info">
+                      <div className="demo-doc-name">{doc.name}</div>
+                      <div className="demo-doc-match">マッチ度 <strong style={{color:"var(--cta)"}}>{doc.match}</strong></div>
+                    </div>
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Calendar step */}
+        {current.key === "cal" && (
+          <div className="demo-scene">
+            <div className="demo-scene-title">商談カレンダーを自動提示</div>
+            <div className="demo-cal">
+              <div className="demo-cal-header">4月 2026</div>
+              <div className="demo-cal-grid">
+                {["月","火","水","木","金"].map((d) => (
+                  <div key={d} className="demo-cal-day-label">{d}</div>
+                ))}
+                {[7,8,9,10,11,14,15,16,17,18].map((d, i) => (
+                  <div key={d} className={`demo-cal-day${d === 10 && msgIndex >= 2 ? " selected" : ""}${[8,10,15,17].includes(d) ? " available" : ""}`}>
+                    {d}
+                  </div>
+                ))}
+              </div>
+              {msgIndex >= 3 && (
+                <div className="demo-cal-confirmed demo-msg-appear">
+                  <span style={{fontSize:20}}>✅</span> 4月10日 14:00 で確定しました！
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* CRM step */}
+        {current.key === "crm" && (
+          <div className="demo-scene">
+            <div className="demo-scene-title">CRM自動登録 & チーム通知</div>
+            <div className="demo-crm">
+              {msgIndex >= 1 && (
+                <div className="demo-crm-card demo-msg-appear">
+                  <div className="demo-crm-label">Salesforce</div>
+                  <div className="demo-crm-fields">
+                    <div className="demo-crm-field"><span>リード名</span><strong>田中 太郎</strong></div>
+                    <div className="demo-crm-field"><span>企業</span><strong>株式会社ABC</strong></div>
+                    <div className="demo-crm-field"><span>課題</span><strong>リード獲得の改善</strong></div>
+                    <div className="demo-crm-field"><span>商談日</span><strong>4/10 14:00</strong></div>
+                  </div>
+                </div>
+              )}
+              {msgIndex >= 2 && (
+                <div className="demo-slack-notif demo-msg-appear">
+                  <div className="demo-slack-icon">🔔</div>
+                  <div>
+                    <div style={{fontWeight:700,fontSize:13,color:"var(--heading)"}}>Slack通知</div>
+                    <div style={{fontSize:12,color:"var(--sub)"}}>ミートンが新しい商談を獲得しました — 田中太郎様 (4/10 14:00)</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function HomePageClient() {
   const pathname = usePathname();
   const isJa = pathname.startsWith("/ja");
@@ -3112,51 +3370,9 @@ export default function HomePageClient() {
             ))}
           </div>
 
-          {/* HERO DEMO VIDEO */}
-          <div className="anim d5" style={{
-            marginTop: "clamp(40px,6vw,64px)",
-            borderRadius: 16,
-            overflow: "hidden",
-            border: "1px solid var(--border)",
-            boxShadow: "0 12px 48px rgba(18,163,125,.12), 0 2px 8px rgba(0,0,0,.04)",
-            background: "var(--heading)",
-            aspectRatio: "16/9",
-            maxWidth: 720,
-            marginLeft: "auto",
-            marginRight: "auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            cursor: "pointer",
-          }}>
-            {/* Placeholder — replace src with actual demo video */}
-            <div style={{
-              textAlign: "center",
-              color: "rgba(255,255,255,.6)",
-            }}>
-              <div style={{
-                width: 72,
-                height: 72,
-                borderRadius: "50%",
-                background: "rgba(18,163,125,.9)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 auto 16px",
-                boxShadow: "0 0 0 12px rgba(18,163,125,.2)",
-              }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: "rgba(255,255,255,.8)" }}>
-                ミートンのデモを見る
-              </div>
-              <div style={{ fontSize: 13, marginTop: 4 }}>
-                2分でわかるAI SDRの実力
-              </div>
-            </div>
+          {/* HERO DEMO ANIMATION */}
+          <div className="anim d5" style={{ marginTop: "clamp(40px,6vw,64px)" }}>
+            <HeroDemoAnimation />
           </div>
         </div>
       </section>
