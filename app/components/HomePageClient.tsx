@@ -479,16 +479,16 @@ const qualityData = [
     color: "#12a37d",
     bg: "linear-gradient(135deg,#e5f8f2,#eaf0fe)",
     border: "#b8e6d8",
-    title: "AI\u304c\u4e8b\u524d\u306b\u898b\u6975\u3081\u308b",
-    desc: "\u30c1\u30e3\u30c3\u30c8\u306e\u56de\u7b54\u3084\u30d5\u30a9\u30fc\u30e0\u5165\u529b\u3092\u3082\u3068\u306b\u3001\u30ab\u30ec\u30f3\u30c0\u30fc\u306e\u8868\u793a/\u975e\u8868\u793a\u30fb\u62c5\u5f53\u8005\u632f\u308a\u5206\u3051\u3092\u81ea\u52d5\u5206\u5c90\u3002\u300c\u4f1a\u3046\u4fa1\u5024\u306e\u3042\u308b\u5546\u8ac7\u300d\u3060\u3051\u304c\u5c4a\u304d\u307e\u3059\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u304c\u4e8b\u524d\u306b\u898b\u6975\u3081\u308b",
+    desc: "\u30c1\u30e3\u30c3\u30c8\u306e\u56de\u7b54\u3084\u30d5\u30a9\u30fc\u30e0\u5165\u529b\u3092\u3082\u3068\u306b\u3001\u30df\u30fc\u30c8\u30f3\u304c\u30ab\u30ec\u30f3\u30c0\u30fc\u306e\u8868\u793a/\u975e\u8868\u793a\u30fb\u62c5\u5f53\u8005\u632f\u308a\u5206\u3051\u3092\u81ea\u52d5\u5206\u5c90\u3002\u300c\u4f1a\u3046\u4fa1\u5024\u306e\u3042\u308b\u5546\u8ac7\u300d\u3060\u3051\u304c\u5c4a\u304d\u307e\u3059\u3002",
   },
   {
     iconKey: "hearing" as const,
     color: "#7c5cfc",
     bg: "linear-gradient(135deg,#f0ecfe,#eaf0fe)",
     border: "#c9bef5",
-    title: "AI\u304c\u6df1\u6398\u308a\u30d2\u30a2\u30ea\u30f3\u30b0",
-    desc: "\u4e88\u7d04\u6e08\u307f\u306e\u9867\u5ba2\u306bAI\u304c\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0\u3002\u55b6\u696d\u306f\u300c\u4f55\u306b\u56f0\u3063\u3066\u3044\u308b\u304b\u300d\u3092\u628a\u63e1\u3057\u305f\u72b6\u614b\u3067\u5546\u8ac7\u306b\u81e8\u3081\u308b\u306e\u3067\u3001\u521d\u56de\u304b\u3089\u63d0\u6848\u306e\u7cbe\u5ea6\u304c\u9055\u3044\u307e\u3059\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u304c\u6df1\u6398\u308a\u30d2\u30a2\u30ea\u30f3\u30b0",
+    desc: "\u4e88\u7d04\u6e08\u307f\u306e\u9867\u5ba2\u306b\u30df\u30fc\u30c8\u30f3\u304c\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0\u3002\u55b6\u696d\u306f\u300c\u4f55\u306b\u56f0\u3063\u3066\u3044\u308b\u304b\u300d\u3092\u628a\u63e1\u3057\u305f\u72b6\u614b\u3067\u5546\u8ac7\u306b\u81e8\u3081\u308b\u306e\u3067\u3001\u521d\u56de\u304b\u3089\u63d0\u6848\u306e\u7cbe\u5ea6\u304c\u9055\u3044\u307e\u3059\u3002",
   },
   {
     iconKey: "sync" as const,
@@ -508,13 +508,13 @@ const stepsData = [
   },
   {
     num: "02",
-    title: "AI\u3092\u8a2d\u5b9a",
-    desc: "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u304b\u3089AI\u306e\u58f0\u304b\u3051\u5185\u5bb9\u3001\u5546\u8ac7\u4e88\u7d04\u306e\u30eb\u30fc\u30eb\u3001\u63d0\u6848\u306b\u4f7f\u3046\u8cc7\u6599\u7b49\u3092\u8a2d\u5b9a\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u3092\u8a2d\u5b9a",
+    desc: "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u304b\u3089\u30df\u30fc\u30c8\u30f3\u306e\u58f0\u304b\u3051\u5185\u5bb9\u3001\u5546\u8ac7\u4e88\u7d04\u306e\u30eb\u30fc\u30eb\u3001\u63d0\u6848\u306b\u4f7f\u3046\u8cc7\u6599\u7b49\u3092\u8a2d\u5b9a\u3002",
   },
   {
     num: "03",
-    title: "\u5546\u8ac7\u304c\u5165\u308a\u59cb\u3081\u308b",
-    desc: "\u8a2d\u5b9a\u5b8c\u4e86\u3057\u305f\u77ac\u9593\u304b\u3089AI\u304c\u7a3c\u50cd\u3002\u5546\u8ac7\u7372\u5f97\u304c\u81ea\u52d5\u3067\u56de\u308a\u59cb\u3081\u307e\u3059\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u304c\u50cd\u304d\u59cb\u3081\u308b",
+    desc: "\u8a2d\u5b9a\u5b8c\u4e86\u3057\u305f\u77ac\u9593\u304b\u3089\u30df\u30fc\u30c8\u30f3\u304c\u7a3c\u50cd\u3002\u5546\u8ac7\u7372\u5f97\u304c\u81ea\u52d5\u3067\u56de\u308a\u59cb\u3081\u307e\u3059\u3002",
   },
 ];
 
@@ -609,20 +609,24 @@ const integrations = [
 
 const faqData = [
   {
-    q: "\u5c0e\u5165\u306b\u3069\u306e\u304f\u3089\u3044\u6642\u9593\u304c\u304b\u304b\u308a\u307e\u3059\u304b\uff1f",
-    a: "JavaScript\u30bf\u30b0\u306e\u8a2d\u7f6e\u306f5\u5206\u3067\u3059\u3002AI\u306e\u8a2d\u5b9a\u3092\u542b\u3081\u3066\u3082\u3001\u6700\u77ed\u3067\u5f53\u65e5\u4e2d\u306b\u7a3c\u50cd\u958b\u59cb\u3067\u304d\u307e\u3059\u3002",
+    q: "ミートンの導入にどのくらい時間がかかりますか？",
+    a: "JavaScriptタグの設置は5分です。ミートンの設定を含めても、最短で当日中に稼働開始できます。",
   },
   {
-    q: "\u65e2\u5b58\u306eCRM\uff08Salesforce / HubSpot\uff09\u3068\u9023\u643a\u3067\u304d\u307e\u3059\u304b\uff1f",
-    a: "\u306f\u3044\u3002Salesforce\u3001HubSpot\u3068\u306e\u30cd\u30a4\u30c6\u30a3\u30d6\u9023\u643a\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u3059\u3002Webhook\u7d4c\u7531\u3067\u4ed6\u306eCRM\u306b\u3082\u63a5\u7d9a\u53ef\u80fd\u3067\u3059\u3002",
+    q: "既存のCRM（Salesforce / HubSpot）と連携できますか？",
+    a: "はい。Salesforce、HubSpotとのネイティブ連携に対応しています。ミートンが獲得した商談情報は自動でCRMに登録されます。Webhook経由で他のCRMにも接続可能です。",
   },
   {
-    q: "\u591a\u8a00\u8a9e\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u3059\u304b\uff1f",
-    a: "\u306f\u3044\u3002\u65e5\u672c\u8a9e\u30fb\u82f1\u8a9e\u30fb\u4e2d\u56fd\u8a9e\u30fb\u97d3\u56fd\u8a9e\u3092\u306f\u3058\u3081\u3001\u4e3b\u8981\u8a00\u8a9e\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u3059\u3002",
+    q: "ミートンは何語に対応していますか？",
+    a: "日本語・英語・中国語・韓国語をはじめ、主要言語に対応しています。リードの言語を自動検知し、適切な言語で会話します。",
   },
   {
-    q: "\u7121\u6599\u30c8\u30e9\u30a4\u30a2\u30eb\u306f\u3042\u308a\u307e\u3059\u304b\uff1f",
-    a: "14\u65e5\u9593\u306e\u7121\u6599\u30c8\u30e9\u30a4\u30a2\u30eb\u3092\u3054\u7528\u610f\u3057\u3066\u3044\u307e\u3059\u3002\u30af\u30ec\u30b8\u30c3\u30c8\u30ab\u30fc\u30c9\u4e0d\u8981\u3067\u5168\u6a5f\u80fd\u3092\u304a\u8a66\u3057\u3044\u305f\u3060\u3051\u307e\u3059\u3002",
+    q: "無料トライアルはありますか？",
+    a: "14日間の無料トライアルをご用意しています。クレジットカード不要で、ミートンの全機能をお試しいただけます。",
+  },
+  {
+    q: "ミートンと従来のチャットボットやImmedio等のツールとの違いは？",
+    a: "従来のツールはカレンダー表示やルールベースの応答が中心です。ミートンはAI SDRとして、リードの温度感を判断し、チャット・メール・資料提案・カレンダーの中から最適なアプローチを自律的に選択して商談を獲得します。",
   },
 ];
 
@@ -3103,184 +3107,142 @@ function CaseCarousel() {
   );
 }
 
-/* ── Hero Demo Animation ── */
-const DEMO_STEPS = [
-  { key: "chat", label: "チャット", icon: "💬" },
-  { key: "email", label: "メール", icon: "📧" },
-  { key: "doc", label: "資料提案", icon: "📄" },
-  { key: "cal", label: "カレンダー予約", icon: "📅" },
-  { key: "crm", label: "CRM登録", icon: "✅" },
-] as const;
+/* ── Hero Demo Animation — Two-lead branching ── */
+const LEAD_A_STEPS = [
+  { key: "detect", label: "フォーム送信を検知", icon: "🔍" },
+  { key: "score", label: "温度: HIGH 🔥", icon: "🎯" },
+  { key: "calendar", label: "即カレンダー提示", icon: "📅" },
+  { key: "done", label: "商談確定 → CRM登録", icon: "✅" },
+];
+const LEAD_B_STEPS = [
+  { key: "detect", label: "サイト訪問を検知", icon: "🔍" },
+  { key: "score", label: "温度: LOW", icon: "🎯" },
+  { key: "chat", label: "チャットで会話", icon: "💬" },
+  { key: "doc", label: "資料を提案", icon: "📄" },
+  { key: "email", label: "メールでフォロー", icon: "📧" },
+  { key: "calendar", label: "カレンダー提示", icon: "📅" },
+  { key: "done", label: "商談確定 → CRM登録", icon: "✅" },
+];
 
 function HeroDemoAnimation() {
-  const [step, setStep] = useState(0);
-  const [msgIndex, setMsgIndex] = useState(0);
+  const [stepA, setStepA] = useState(0);
+  const [stepB, setStepB] = useState(0);
+  const [msgIdx, setMsgIdx] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStep((prev) => {
-        const next = (prev + 1) % DEMO_STEPS.length;
-        setMsgIndex(0);
-        return next;
-      });
-    }, 4000);
+      setMsgIdx(0);
+      setStepA((p) => (p + 1) % LEAD_A_STEPS.length);
+      setStepB((p) => (p + 1) % LEAD_B_STEPS.length);
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
-  // Staggered message reveal within each step
   useEffect(() => {
-    if (msgIndex < 3) {
-      const t = setTimeout(() => setMsgIndex((p) => p + 1), 600);
+    if (msgIdx < 3) {
+      const t = setTimeout(() => setMsgIdx((p) => p + 1), 500);
       return () => clearTimeout(t);
     }
-  }, [step, msgIndex]);
+  }, [stepA, stepB, msgIdx]);
 
-  const current = DEMO_STEPS[step];
+  const curA = LEAD_A_STEPS[stepA];
+  const curB = LEAD_B_STEPS[stepB];
+
+  const renderLeadContent = (cur: { key: string }, idx: number, isHot = false) => {
+    if (cur.key === "detect") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--surface)",borderRadius:10,fontSize:13,color:"var(--text)",fontWeight:600}}>
+        <span style={{fontSize:18}}>🔔</span> 新しいリードを検知しました
+      </div>
+    );
+    if (cur.key === "score") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10}}>
+        <div style={{fontSize:13,fontWeight:700,color:"var(--heading)"}}>スコアリング中...</div>
+        {idx >= 2 && <div className="demo-msg-appear" style={{padding:"4px 12px",borderRadius:20,fontSize:12,fontWeight:800,background: isHot ? "linear-gradient(135deg,#ef4444,#f97316)" : "var(--border)",color: isHot ? "#fff" : "var(--sub)" }}>{isHot ? "HIGH 🔥" : "LOW"}</div>}
+      </div>
+    );
+    if (cur.key === "chat") return (
+      <div className="demo-chat">
+        {idx >= 1 && <div className="demo-msg demo-msg-bot demo-msg-appear"><span className="demo-msg-avatar">M</span><div className="demo-msg-bubble">こんにちは！何かお探しですか？</div></div>}
+        {idx >= 2 && <div className="demo-msg demo-msg-user demo-msg-appear"><div className="demo-msg-bubble">リード獲得を改善したいです</div></div>}
+      </div>
+    );
+    if (cur.key === "doc") return (
+      <div className="demo-doc-card demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
+        <span style={{fontSize:20}}>📄</span>
+        <div><div style={{fontSize:12,fontWeight:700,color:"var(--heading)"}}>リード獲得ガイド.pdf</div><div style={{fontSize:11,color:"var(--sub)"}}>マッチ度 <strong style={{color:"var(--cta)"}}>98%</strong></div></div>
+      </div>
+    );
+    if (cur.key === "email") return (
+      <div className="demo-msg-appear" style={{padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
+        <div style={{fontSize:11,fontWeight:700,color:"var(--heading)",marginBottom:4}}>📧 フォローアップメール送信</div>
+        <div style={{fontSize:11,color:"var(--sub)"}}>事例資料+ミーティングリンクを添付</div>
+      </div>
+    );
+    if (cur.key === "calendar") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8}}>
+        <div style={{display:"flex",gap:4}}>
+          {["10:00","14:00","16:00"].map((t,j) => (
+            <div key={j} style={{padding:"6px 10px",borderRadius:8,fontSize:11,fontWeight:700,border:"1px solid",borderColor: j===1 ? "var(--cta)" : "var(--border)",background: j===1 ? "var(--cta)" : "var(--bg)",color: j===1 ? "#fff" : "var(--sub)",transition:"all .3s"}}>{t}</div>
+          ))}
+        </div>
+      </div>
+    );
+    if (cur.key === "done") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--cta-light)",borderRadius:10,border:"1px solid rgba(18,163,125,.2)"}}>
+        <span style={{fontSize:18}}>✅</span>
+        <div style={{fontSize:12,fontWeight:700,color:"var(--cta)"}}>商談確定！CRM登録 & Slack通知完了</div>
+      </div>
+    );
+    return null;
+  };
 
   return (
     <div className="demo-wrap">
-      {/* Step indicator */}
-      <div className="demo-steps-bar">
-        {DEMO_STEPS.map((s, i) => (
-          <div key={s.key} className={`demo-step-dot${i === step ? " active" : ""}${i < step ? " done" : ""}`}>
-            <span className="demo-step-icon">{s.icon}</span>
-            <span className="demo-step-label">{s.label}</span>
-          </div>
-        ))}
-        <div className="demo-progress" style={{ width: `${((step + 1) / DEMO_STEPS.length) * 100}%` }} />
+      {/* Header */}
+      <div className="demo-steps-bar" style={{justifyContent:"center",gap:8}}>
+        <div className="demo-avatar-inner" style={{width:28,height:28,fontSize:12}}>M</div>
+        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>ミートンが2つのリードを同時に対応中</span>
+        <div className="demo-avatar-status" style={{position:"static",width:8,height:8,marginLeft:4}} />
       </div>
 
-      {/* Demo screen */}
-      <div className="demo-screen">
-        {/* Meeton avatar */}
-        <div className="demo-avatar">
-          <div className="demo-avatar-inner">M</div>
-          <div className="demo-avatar-status" />
+      {/* Two lanes */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,minHeight:280}}>
+        {/* Lead A — Hot */}
+        <div style={{padding:"20px 20px",borderRight:"1px solid var(--border)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
+            <div style={{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,#ef4444,#f97316)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>A</div>
+            <div>
+              <div style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>田中さん</div>
+              <div style={{fontSize:11,color:"var(--sub)"}}>フォーム送信済み 🔥</div>
+            </div>
+          </div>
+          {/* Step indicator */}
+          <div style={{display:"flex",gap:4,marginBottom:12}}>
+            {LEAD_A_STEPS.map((_,i) => (
+              <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepA ? "var(--cta)" : "var(--border)",transition:"background .3s"}} />
+            ))}
+          </div>
+          <div style={{fontSize:11,fontWeight:700,color:"var(--cta)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}>{curA.icon} {curA.label}</div>
+          {renderLeadContent(curA, msgIdx, true)}
         </div>
 
-        {/* Chat step */}
-        {current.key === "chat" && (
-          <div className="demo-scene">
-            <div className="demo-scene-title">Webサイトでチャット対応</div>
-            <div className="demo-chat">
-              {msgIndex >= 1 && (
-                <div className="demo-msg demo-msg-bot demo-msg-appear">
-                  <span className="demo-msg-avatar">M</span>
-                  <div className="demo-msg-bubble">こんにちは！何かお探しですか？御社の課題に合った資料をご案内できますよ。</div>
-                </div>
-              )}
-              {msgIndex >= 2 && (
-                <div className="demo-msg demo-msg-user demo-msg-appear">
-                  <div className="demo-msg-bubble">マーケティングのリード獲得を改善したいです</div>
-                </div>
-              )}
-              {msgIndex >= 3 && (
-                <div className="demo-msg demo-msg-bot demo-msg-appear">
-                  <span className="demo-msg-avatar">M</span>
-                  <div className="demo-msg-bubble">ぴったりの資料がありますよ！📎 こちらをどうぞ</div>
-                </div>
-              )}
+        {/* Lead B — Cold */}
+        <div style={{padding:"20px 20px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
+            <div style={{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,#3b6ff5,#6690fa)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>B</div>
+            <div>
+              <div style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>佐藤さん</div>
+              <div style={{fontSize:11,color:"var(--sub)"}}>初回サイト訪問</div>
             </div>
           </div>
-        )}
-
-        {/* Email step */}
-        {current.key === "email" && (
-          <div className="demo-scene">
-            <div className="demo-scene-title">パーソナライズドメール送信</div>
-            <div className="demo-email demo-msg-appear">
-              <div className="demo-email-header">
-                <div className="demo-email-from"><span className="demo-msg-avatar" style={{width:24,height:24,fontSize:10}}>M</span> ミートン &lt;meeton@example.com&gt;</div>
-                <div className="demo-email-subject">先ほどの資料に関連して、追加のご提案があります</div>
-              </div>
-              <div className="demo-email-body">
-                <p>先ほどはチャットでお話しいただきありがとうございます。</p>
-                <p>リード獲得の改善に関して、こちらの事例もお役に立つかと思います。</p>
-                {msgIndex >= 2 && (
-                  <div className="demo-email-cta demo-msg-appear">📅 ミーティングを予約する</div>
-                )}
-              </div>
-            </div>
+          <div style={{display:"flex",gap:4,marginBottom:12}}>
+            {LEAD_B_STEPS.map((_,i) => (
+              <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepB ? "var(--blue)" : "var(--border)",transition:"background .3s"}} />
+            ))}
           </div>
-        )}
-
-        {/* Doc step */}
-        {current.key === "doc" && (
-          <div className="demo-scene">
-            <div className="demo-scene-title">最適な資料を自動提案</div>
-            <div className="demo-docs">
-              {[
-                { name: "リード獲得ガイド.pdf", match: "98%", delay: 0 },
-                { name: "導入事例集.pdf", match: "94%", delay: 1 },
-                { name: "料金プラン.pdf", match: "87%", delay: 2 },
-              ].map((doc, i) => (
-                msgIndex >= i + 1 && (
-                  <div key={i} className="demo-doc-card demo-msg-appear">
-                    <div className="demo-doc-icon">📄</div>
-                    <div className="demo-doc-info">
-                      <div className="demo-doc-name">{doc.name}</div>
-                      <div className="demo-doc-match">マッチ度 <strong style={{color:"var(--cta)"}}>{doc.match}</strong></div>
-                    </div>
-                  </div>
-                )
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Calendar step */}
-        {current.key === "cal" && (
-          <div className="demo-scene">
-            <div className="demo-scene-title">商談カレンダーを自動提示</div>
-            <div className="demo-cal">
-              <div className="demo-cal-header">4月 2026</div>
-              <div className="demo-cal-grid">
-                {["月","火","水","木","金"].map((d) => (
-                  <div key={d} className="demo-cal-day-label">{d}</div>
-                ))}
-                {[7,8,9,10,11,14,15,16,17,18].map((d, i) => (
-                  <div key={d} className={`demo-cal-day${d === 10 && msgIndex >= 2 ? " selected" : ""}${[8,10,15,17].includes(d) ? " available" : ""}`}>
-                    {d}
-                  </div>
-                ))}
-              </div>
-              {msgIndex >= 3 && (
-                <div className="demo-cal-confirmed demo-msg-appear">
-                  <span style={{fontSize:20}}>✅</span> 4月10日 14:00 で確定しました！
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* CRM step */}
-        {current.key === "crm" && (
-          <div className="demo-scene">
-            <div className="demo-scene-title">CRM自動登録 & チーム通知</div>
-            <div className="demo-crm">
-              {msgIndex >= 1 && (
-                <div className="demo-crm-card demo-msg-appear">
-                  <div className="demo-crm-label">Salesforce</div>
-                  <div className="demo-crm-fields">
-                    <div className="demo-crm-field"><span>リード名</span><strong>田中 太郎</strong></div>
-                    <div className="demo-crm-field"><span>企業</span><strong>株式会社ABC</strong></div>
-                    <div className="demo-crm-field"><span>課題</span><strong>リード獲得の改善</strong></div>
-                    <div className="demo-crm-field"><span>商談日</span><strong>4/10 14:00</strong></div>
-                  </div>
-                </div>
-              )}
-              {msgIndex >= 2 && (
-                <div className="demo-slack-notif demo-msg-appear">
-                  <div className="demo-slack-icon">🔔</div>
-                  <div>
-                    <div style={{fontWeight:700,fontSize:13,color:"var(--heading)"}}>Slack通知</div>
-                    <div style={{fontSize:12,color:"var(--sub)"}}>ミートンが新しい商談を獲得しました — 田中太郎様 (4/10 14:00)</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+          <div style={{fontSize:11,fontWeight:700,color:"var(--blue)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}>{curB.icon} {curB.label}</div>
+          {renderLeadContent(curB, msgIdx)}
+        </div>
       </div>
     </div>
   );
@@ -3395,10 +3357,10 @@ export default function HomePageClient() {
           gap: 16,
         }} className="proof-stats-grid">
           {[
-            { v: "80%+", l: "商談化率", sub: "Univis社実績", color: "var(--cta)" },
-            { v: "10件+", l: "月間商談創出", sub: "G-gen社実績", color: "var(--blue)" },
-            { v: "6件", l: "初週で商談獲得", sub: "BizteX社実績", color: "var(--accent)" },
-            { v: "SDR 3人分", l: "の仕事をAI 1台で", sub: "平均導入効果", color: "var(--pink)" },
+            { v: "< 5秒", l: "リード検知→初回アプローチ", sub: "人間SDRの平均42時間→即時", color: "var(--cta)" },
+            { v: "3x", l: "SDR一人分の商談創出量", sub: "同じコストで3倍の成果", color: "var(--blue)" },
+            { v: "24/7", l: "深夜・週末も自律稼働", sub: "リードの熱い瞬間を逃さない", color: "var(--accent)" },
+            { v: "5min", l: "導入から稼働開始まで", sub: "開発リソース不要", color: "var(--pink)" },
           ].map((s, i) => (
             <div key={i} className="proof-stat-card">
               <div style={{
@@ -3426,7 +3388,7 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* HOW IT WORKS - Overview Diagram */}
+      {/* HOW IT WORKS - 4 Phase Overview */}
       <section
         className="section"
         style={{
@@ -3442,909 +3404,109 @@ export default function HomePageClient() {
             <span style={{ color: "var(--cta)" }}>最適なアプローチを選択</span>
           </div>
           <p className="ssub" style={{ margin: "0 auto" }}>
-            単なるカレンダー表示ツールではありません。ミートンは見込み客の行動を分析し、7つのチャネルから最適な手段を自律的に選んで商談を創出します。
+            単なるカレンダー表示ツールではありません。ミートンはリードの温度感を見極め、4つのフェーズを自在に組み合わせて商談を創出します。
           </p>
 
-          {/* Vertical Funnel: 7 channels inside ミートン → AI pipeline → Sales */}
-          <div style={{ marginTop: 48, overflowX: "auto", padding: "8px 0" }}>
-            {isMobile ? (
-              <svg
-                width="100%"
-                viewBox="0 0 380 780"
-                fill="none"
-                style={{ maxWidth: 400, margin: "0 auto", display: "block" }}
-              >
-                <defs>
-                  <filter id="hubGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="4"
-                      stdDeviation="12"
-                      floodColor="#12a37d"
-                      floodOpacity=".18"
-                    />
-                  </filter>
-                  <filter id="nodeGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="2"
-                      stdDeviation="6"
-                      floodOpacity=".08"
-                    />
-                  </filter>
-                  <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" stopOpacity=".07" />
-                    <stop offset="100%" stopColor="#0fc19a" stopOpacity=".02" />
-                  </linearGradient>
-                  <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#3b6ff5" />
-                    <stop offset="100%" stopColor="#6690fa" />
-                  </linearGradient>
-                  <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" />
-                    <stop offset="100%" stopColor="#0fc19a" />
-                  </linearGradient>
-                </defs>
-
-                {/* Trapezoid funnel */}
-                <g filter="url(#hubGlow)">
-                  <path
-                    d="M20,20 L360,20 Q375,20 375,35 L310,600 Q307,615 295,615 L85,615 Q73,615 70,600 L5,35 Q5,20 20,20 Z"
-                    fill="url(#hubGrad)"
-                    stroke="#12a37d"
-                    strokeWidth="2.5"
-                  />
-                </g>
-                <path
-                  d="M20,20 L360,20 Q375,20 375,35 L310,600 Q307,615 295,615 L85,615 Q73,615 70,600 L5,35 Q5,20 20,20 Z"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1"
-                  strokeDasharray="6 6"
-                  opacity=".3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="0"
-                    to="-48"
-                    dur="6s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-
-                <text
-                  x="190"
-                  y="50"
-                  textAnchor="middle"
-                  fontSize="22"
-                  fontWeight="900"
-                  fill="#12a37d"
-                  fontFamily="var(--fb)"
-                >
-                  ミートン
-                </text>
-
-                {/* 7 Channel cards - 2 columns */}
-                {[
-                  {
-                    label: "AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
-                    color: "#0891b2",
-                    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                  },
-                  {
-                    label: "AI \u30e1\u30fc\u30eb",
-                    color: "#12a37d",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30da\u30fc\u30b8",
-                    color: "#3b6ff5",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3",
-                  },
-                  {
-                    label: "\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
-                    color: "#7c5cfc",
-                    icon: "M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
-                    color: "#d03ea1",
-                    icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
-                    color: "#e0475b",
-                    icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fcQR",
-                    color: "#c026d3",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",
-                  },
-                ].map((ch, i) => {
-                  const col = i % 2;
-                  const row = Math.floor(i / 2);
-                  const cardW = 155;
-                  const gap = 10;
-                  const cx = col === 0 ? 190 - cardW - gap / 2 : 190 + gap / 2;
-                  const cy = 64 + row * 46;
-                  return (
-                    <g key={i}>
-                      <line
-                        x1={cx + cardW / 2}
-                        y1={cy + 38}
-                        x2={190}
-                        y2={260}
-                        stroke={ch.color}
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        opacity=".25"
-                      >
-                        <animate
-                          attributeName="stroke-dashoffset"
-                          from="16"
-                          to="0"
-                          dur={`${1.5 + i * 0.12}s`}
-                          repeatCount="indefinite"
-                        />
-                      </line>
-                      <circle r="2" fill={ch.color} opacity=".5">
-                        <animateMotion
-                          dur={`${2.5 + i * 0.18}s`}
-                          repeatCount="indefinite"
-                          path={`M${cx + cardW / 2},${cy + 38} L190,260`}
-                        />
-                      </circle>
-                      <g filter="url(#nodeGlow)">
-                        <rect
-                          x={cx}
-                          y={cy}
-                          width={cardW}
-                          height="36"
-                          rx="10"
-                          fill="white"
-                          stroke={ch.color}
-                          strokeWidth="1.5"
-                        />
-                        <g transform={`translate(${cx + 10}, ${cy + 6})`}>
-                          <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke={ch.color}
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d={ch.icon} />
-                          </svg>
-                        </g>
-                        <text
-                          x={cx + 38}
-                          y={cy + 23}
-                          fontSize="12"
-                          fontWeight="700"
-                          fill="#0f1128"
-                          fontFamily="var(--fb)"
-                        >
-                          {ch.label}
-                        </text>
-                      </g>
-                    </g>
-                  );
-                })}
-
-                {/* Convergence */}
-                <circle cx="190" cy="260" r="14" fill="#12a37d" opacity=".12" />
-                <circle cx="190" cy="260" r="5" fill="#12a37d" />
-                <circle
-                  cx="190"
-                  cy="260"
-                  r="14"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1.5"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="5"
-                    to="22"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".4"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* Arrow down */}
-                <line
-                  x1="190"
-                  y1="276"
-                  x2="190"
-                  y2="305"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="184,303 190,315 196,303" fill="#12a37d" />
-
-                {/* Pipeline steps */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="120"
-                    y="320"
-                    width="140"
-                    height="48"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="350"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u7cbe\u67fb"}
-                  </text>
-                </g>
-                <line
-                  x1="190"
-                  y1="368"
-                  x2="190"
-                  y2="393"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="184,391 190,403 196,391" fill="#12a37d" />
-
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="120"
-                    y="408"
-                    width="140"
-                    height="48"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="438"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u5546\u8ac7\u4e88\u7d04"}
-                  </text>
-                </g>
-                <line
-                  x1="190"
-                  y1="456"
-                  x2="190"
-                  y2="481"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="184,479 190,491 196,479" fill="#12a37d" />
-
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="120"
-                    y="496"
-                    width="140"
-                    height="48"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="526"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u30d2\u30a2\u30ea\u30f3\u30b0"}
-                  </text>
-                </g>
-
-                <circle r="4" fill="white" opacity=".8">
-                  <animateMotion
-                    dur="3.5s"
-                    repeatCount="indefinite"
-                    path="M190,345 L190,433 L190,521"
-                  />
-                </circle>
-
-                {/* Exit */}
-                <rect
-                  x="172"
-                  y="608"
-                  width="36"
-                  height="14"
-                  fill="var(--surface)"
-                />
-                <line
-                  x1="190"
-                  y1="544"
-                  x2="190"
-                  y2="645"
-                  stroke="#3b6ff5"
-                  strokeWidth="3"
-                  strokeDasharray="8 4"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="24"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="183,643 190,657 197,643" fill="#3b6ff5" />
-                <circle r="4" fill="#3b6ff5" opacity=".6">
-                  <animateMotion
-                    dur="1.5s"
-                    repeatCount="indefinite"
-                    path="M190,544 L190,653"
-                  />
-                </circle>
-                <circle
-                  cx="190"
-                  cy="657"
-                  r="6"
-                  fill="none"
-                  stroke="#3b6ff5"
-                  strokeWidth="2"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="6"
-                    to="20"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".5"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* Sales team */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="100"
-                    y="670"
-                    width="180"
-                    height="76"
-                    rx="18"
-                    fill="url(#salesGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="700"
-                    textAnchor="middle"
-                    fontSize="18"
-                    fontWeight="900"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u55b6\u696d\u30c1\u30fc\u30e0"}
-                  </text>
-                  <text
-                    x="190"
-                    y="722"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fontWeight="600"
-                    fill="rgba(255,255,255,.8)"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}
-                  </text>
-                </g>
-              </svg>
-            ) : (
-              <svg
-                width="100%"
-                viewBox="0 0 800 700"
-                fill="none"
-                style={{ maxWidth: 800, margin: "0 auto", display: "block" }}
-              >
-                <defs>
-                  <filter id="hubGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="4"
-                      stdDeviation="12"
-                      floodColor="#12a37d"
-                      floodOpacity=".18"
-                    />
-                  </filter>
-                  <filter id="nodeGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="2"
-                      stdDeviation="6"
-                      floodOpacity=".08"
-                    />
-                  </filter>
-                  <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" stopOpacity=".07" />
-                    <stop offset="100%" stopColor="#0fc19a" stopOpacity=".02" />
-                  </linearGradient>
-                  <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#3b6ff5" />
-                    <stop offset="100%" stopColor="#6690fa" />
-                  </linearGradient>
-                  <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" />
-                    <stop offset="100%" stopColor="#0fc19a" />
-                  </linearGradient>
-                </defs>
-
-                {/* ── Trapezoid funnel boundary (ミートン ecosystem) ── */}
-                <g filter="url(#hubGlow)">
-                  <path
-                    d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z"
-                    fill="url(#hubGrad)"
-                    stroke="#12a37d"
-                    strokeWidth="2.5"
-                  />
-                </g>
-                {/* Animated border */}
-                <path
-                  d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1"
-                  strokeDasharray="6 6"
-                  opacity=".3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="0"
-                    to="-48"
-                    dur="6s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-
-                {/* Ecosystem label at top */}
-                <text
-                  x="400"
-                  y="52"
-                  textAnchor="middle"
-                  fontSize="24"
-                  fontWeight="900"
-                  fill="#12a37d"
-                  fontFamily="var(--fb)"
-                >
-                  ミートン
-                </text>
-
-                {/* ── 7 Channel cards (top zone inside funnel) ── */}
-                {[
-                  {
-                    label: "AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
-                    color: "#0891b2",
-                    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                  },
-                  {
-                    label: "AI \u30e1\u30fc\u30eb",
-                    color: "#12a37d",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30da\u30fc\u30b8",
-                    color: "#3b6ff5",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3",
-                  },
-                  {
-                    label: "\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
-                    color: "#7c5cfc",
-                    icon: "M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
-                    color: "#d03ea1",
-                    icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
-                    color: "#e0475b",
-                    icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fcQR",
-                    color: "#c026d3",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",
-                  },
-                ].map((ch, i) => {
-                  /* Row 1: 4 cards, Row 2: 3 cards centered */
-                  const isRow1 = i < 4;
-                  const colIdx = isRow1 ? i : i - 4;
-                  const rowCount = isRow1 ? 4 : 3;
-                  const cardW = 148;
-                  const gap = 12;
-                  const totalW = rowCount * cardW + (rowCount - 1) * gap;
-                  const startX = 400 - totalW / 2;
-                  const cx = startX + colIdx * (cardW + gap);
-                  const cy = isRow1 ? 74 : 124;
-                  return (
-                    <g key={i}>
-                      {/* Animated flow line downward to convergence */}
-                      <line
-                        x1={cx + cardW / 2}
-                        y1={cy + 40}
-                        x2={400}
-                        y2={230}
-                        stroke={ch.color}
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        opacity=".25"
-                      >
-                        <animate
-                          attributeName="stroke-dashoffset"
-                          from="16"
-                          to="0"
-                          dur={`${1.5 + i * 0.12}s`}
-                          repeatCount="indefinite"
-                        />
-                      </line>
-                      <circle r="2.5" fill={ch.color} opacity=".5">
-                        <animateMotion
-                          dur={`${2.5 + i * 0.18}s`}
-                          repeatCount="indefinite"
-                          path={`M${cx + cardW / 2},${cy + 40} L400,230`}
-                        />
-                      </circle>
-                      {/* Channel card */}
-                      <g filter="url(#nodeGlow)">
-                        <rect
-                          x={cx}
-                          y={cy}
-                          width={cardW}
-                          height="38"
-                          rx="10"
-                          fill="white"
-                          stroke={ch.color}
-                          strokeWidth="1.5"
-                        />
-                        <g transform={`translate(${cx + 10}, ${cy + 7})`}>
-                          <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke={ch.color}
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d={ch.icon} />
-                          </svg>
-                        </g>
-                        <text
-                          x={cx + 40}
-                          y={cy + 24}
-                          fontSize="10.5"
-                          fontWeight="700"
-                          fill="#0f1128"
-                          fontFamily="var(--fb)"
-                        >
-                          {ch.label}
-                        </text>
-                      </g>
-                    </g>
-                  );
-                })}
-
-                {/* ── Convergence zone ── */}
-                <circle cx="400" cy="230" r="16" fill="#12a37d" opacity=".12" />
-                <circle cx="400" cy="230" r="6" fill="#12a37d" />
-                <circle
-                  cx="400"
-                  cy="230"
-                  r="16"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1.5"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="6"
-                    to="24"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".4"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* Arrow down to pipeline */}
-                <line
-                  x1="400"
-                  y1="246"
-                  x2="400"
-                  y2="275"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="394,273 400,285 406,273" fill="#12a37d" />
-
-                {/* ── AI Processing Pipeline (3 vertical steps) ── */}
-                {/* Step 1: 精査 */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="330"
-                    y="290"
-                    width="140"
-                    height="50"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="320"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u7cbe\u67fb"}
-                  </text>
-                </g>
-                <line
-                  x1="400"
-                  y1="340"
-                  x2="400"
-                  y2="365"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="394,363 400,375 406,363" fill="#12a37d" />
-
-                {/* Step 2: 商談予約 */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="330"
-                    y="380"
-                    width="140"
-                    height="50"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="410"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u5546\u8ac7\u4e88\u7d04"}
-                  </text>
-                </g>
-                <line
-                  x1="400"
-                  y1="430"
-                  x2="400"
-                  y2="455"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="394,453 400,465 406,453" fill="#12a37d" />
-
-                {/* Step 3: ヒアリング */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="330"
-                    y="470"
-                    width="140"
-                    height="50"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="500"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u30d2\u30a2\u30ea\u30f3\u30b0"}
-                  </text>
-                </g>
-
-                {/* Animated dot along vertical pipeline */}
-                <circle r="4" fill="white" opacity=".8">
-                  <animateMotion
-                    dur="3.5s"
-                    repeatCount="indefinite"
-                    path="M400,315 L400,405 L400,495"
-                  />
-                </circle>
-
-                {/* ── Exit: arrow breaking through funnel bottom ── */}
-                <rect
-                  x="382"
-                  y="548"
-                  width="36"
-                  height="14"
-                  fill="var(--surface)"
-                />
-                <line
-                  x1="400"
-                  y1="520"
-                  x2="400"
-                  y2="585"
-                  stroke="#3b6ff5"
-                  strokeWidth="3"
-                  strokeDasharray="8 4"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="24"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="392,583 400,597 408,583" fill="#3b6ff5" />
-
-                {/* Animated exit dot */}
-                <circle r="4" fill="#3b6ff5" opacity=".6">
-                  <animateMotion
-                    dur="1.5s"
-                    repeatCount="indefinite"
-                    path="M400,520 L400,593"
-                  />
-                </circle>
-
-                {/* Pulse at exit */}
-                <circle
-                  cx="400"
-                  cy="597"
-                  r="6"
-                  fill="none"
-                  stroke="#3b6ff5"
-                  strokeWidth="2"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="6"
-                    to="20"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".5"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* ── 営業チーム (OUTSIDE the funnel) ── */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="310"
-                    y="610"
-                    width="180"
-                    height="76"
-                    rx="18"
-                    fill="url(#salesGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="640"
-                    textAnchor="middle"
-                    fontSize="18"
-                    fontWeight="900"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u55b6\u696d\u30c1\u30fc\u30e0"}
-                  </text>
-                  <text
-                    x="400"
-                    y="662"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fontWeight="600"
-                    fill="rgba(255,255,255,.8)"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}
-                  </text>
-                </g>
-              </svg>
-            )}
+          {/* 4-Phase Flow Diagram */}
+          <div style={{ marginTop: 48 }}>
+            {/* New CSS-based 4-phase diagram */}
+            <div style={{
+              display: "flex",
+              alignItems: "stretch",
+              gap: 0,
+              maxWidth: 900,
+              margin: "0 auto",
+              flexWrap: isMobile ? "wrap" : "nowrap",
+            }}>
+              {[
+                { num: "01", title: "見つける", icon: "🔍", color: "#0891b2", desc: "訪問・フォーム・DLを検知しスコアリング", tools: ["サイト訪問検知", "フォーム連携", "リードスコア"] },
+                { num: "02", title: "話しかける", icon: "💬", color: "#12a37d", desc: "チャット・メールで最適なタイミングに接触", tools: ["AIチャット", "AIメール", "自動フォロー"] },
+                { num: "03", title: "理解を深める", icon: "📄", color: "#7c5cfc", desc: "資料提案・Q&A対応で検討度を引き上げ", tools: ["資料提案", "ポップアップ", "Q&A対応"] },
+                { num: "04", title: "商談を決める", icon: "📅", color: "#3b6ff5", desc: "カレンダー提示・ヒアリング・CRM登録", tools: ["カレンダー", "事前ヒアリング", "CRM連携"] },
+              ].map((phase, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "stretch", flex: isMobile ? "1 1 100%" : 1 }}>
+                  <div style={{
+                    flex: 1,
+                    padding: "28px 20px",
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
+                    borderRadius: i === 0 ? "16px 0 0 16px" : i === 3 ? "0 16px 16px 0" : 0,
+                    ...(isMobile ? { borderRadius: i === 0 ? "16px 16px 0 0" : i === 3 ? "0 0 16px 16px" : 0 } : {}),
+                    borderLeft: i > 0 && !isMobile ? "none" : undefined,
+                    borderTop: i > 0 && isMobile ? "none" : undefined,
+                    textAlign: "center",
+                    position: "relative",
+                    transition: "all .3s",
+                  }}>
+                    <div style={{
+                      fontSize: 28,
+                      marginBottom: 8,
+                    }}>{phase.icon}</div>
+                    <div style={{
+                      fontFamily: "var(--fm)",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: phase.color,
+                      letterSpacing: 2,
+                      marginBottom: 4,
+                    }}>{phase.num}</div>
+                    <div style={{
+                      fontSize: 18,
+                      fontWeight: 900,
+                      color: "var(--heading)",
+                      marginBottom: 8,
+                    }}>{phase.title}</div>
+                    <div style={{
+                      fontSize: 13,
+                      color: "var(--sub)",
+                      lineHeight: 1.6,
+                      marginBottom: 12,
+                    }}>{phase.desc}</div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
+                      {phase.tools.map((t, j) => (
+                        <span key={j} style={{
+                          fontSize: 11,
+                          padding: "3px 8px",
+                          borderRadius: 6,
+                          background: `${phase.color}10`,
+                          color: phase.color,
+                          fontWeight: 700,
+                        }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  {i < 3 && !isMobile && (
+                    <div style={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "var(--border2)",
+                      fontSize: 18,
+                      padding: "0 2px",
+                      background: "var(--bg)",
+                      marginTop: -1,
+                      marginBottom: -1,
+                    }}>→</div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Adaptive note */}
+            <div style={{
+              marginTop: 20,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              fontSize: 13,
+              color: "var(--sub)",
+            }}>
+              <span style={{ fontSize: 16 }}>🧠</span>
+              <span>順番は固定ではありません。ミートンがリードの温度感に応じて自動で判断します。</span>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* 4 PHASE CARDS */}
       <section
@@ -4516,49 +3678,6 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* AI CONCIERGE */}
-      <section
-        className="section"
-        id="concierge"
-        style={{
-          background:
-            "linear-gradient(165deg,#f3f0ff 0%,#fff 40%,#edfcf7 100%)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div className="dot-grid" style={{ opacity: 0.2 }} />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(124,92,252,.12)",
-            width: 500,
-            height: 500,
-            top: -100,
-            right: -80,
-          }}
-        />
-        <div
-          className="section-inner"
-          style={{ position: "relative", zIndex: 2 }}
-        >
-          <div className="slabel" style={{ textAlign: "center" }}>
-            AI CONCIERGE
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            {"すべてのチャネルに、ミートンがいる"}
-          </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            {
-              "カレンダー表示だけでは予約されない。ミートンが疑問を解消し、最後の一押しで離脱を防ぎます。"
-            }
-          </p>
-          <div style={{ marginTop: 48, overflowX: "auto" }}>
-            {isMobile ? <DiagramAIConciergeMobile /> : <DiagramAIConcierge />}
-          </div>
-        </div>
-      </section>
-
       {/* QUALITY MEETINGS */}
       <section
         className="section"
@@ -4574,11 +3693,11 @@ export default function HomePageClient() {
             Quality Control
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            数だけじゃない。
+            ミートンは数だけじゃない。
             <span style={{ color: "var(--cta)" }}>質の高い商談</span>を届ける
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            ミートンが事前に見極め、ヒアリングし、営業が本当に会うべき相手だけを商談として届けます。
+            ミートンはリードを精査し、事前ヒアリングまで自動で完了。営業チームには「会う価値のある商談」だけが届きます。
           </p>
 
           {/* Quality Flow Diagram */}
@@ -4614,13 +3733,13 @@ export default function HomePageClient() {
             導入ステップ
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            かんたん3ステップで導入
+            かんたん3ステップで<span style={{ color: "var(--cta)" }}>ミートンが稼働開始</span>
           </div>
           <p
             className="ssub"
             style={{ textAlign: "center", margin: "0 auto 44px" }}
           >
-            開発リソース不要。最短当日から稼働開始。
+            開発リソース不要。最短当日からミートンがあなたのAI SDRとして働き始めます。
           </p>
           <div className="steps-row">
             {stepsData.map((s, i) => (
