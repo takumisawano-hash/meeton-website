@@ -3107,21 +3107,42 @@ function CaseCarousel() {
   );
 }
 
+/* ── Inline SVG Icons ── */
+const Icon = ({ d, size = 16, color = "currentColor" }: { d: string; size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>
+);
+const ICONS = {
+  search: "M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z M16.65 16.65L21 21",
+  target: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
+  calendar: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+  check: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3",
+  chat: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+  doc: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",
+  mail: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
+  bell: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
+  bolt: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
+  brain: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6",
+  robot: "M12 2a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2z M9 12h.01 M15 12h.01 M10 16h4",
+  info: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 16v-4 M12 8h.01",
+};
+type IconKey = keyof typeof ICONS;
+const Ico = ({ name, size = 16, color = "currentColor" }: { name: IconKey; size?: number; color?: string }) => <Icon d={ICONS[name]} size={size} color={color} />;
+
 /* ── Hero Demo Animation — Two-lead branching ── */
 const LEAD_A_STEPS = [
-  { key: "detect", label: "フォーム送信を検知", icon: "🔍" },
-  { key: "score", label: "温度: HIGH 🔥", icon: "🎯" },
-  { key: "calendar", label: "即カレンダー提示", icon: "📅" },
-  { key: "done", label: "商談確定 → CRM登録", icon: "✅" },
+  { key: "detect", label: "フォーム送信を検知", iconKey: "search" as IconKey },
+  { key: "score", label: "温度: HIGH", iconKey: "target" as IconKey },
+  { key: "calendar", label: "即カレンダー提示", iconKey: "calendar" as IconKey },
+  { key: "done", label: "商談確定 → CRM登録", iconKey: "check" as IconKey },
 ];
 const LEAD_B_STEPS = [
-  { key: "detect", label: "サイト訪問を検知", icon: "🔍" },
-  { key: "score", label: "温度: LOW", icon: "🎯" },
-  { key: "chat", label: "チャットで会話", icon: "💬" },
-  { key: "doc", label: "資料を提案", icon: "📄" },
-  { key: "email", label: "メールでフォロー", icon: "📧" },
-  { key: "calendar", label: "カレンダー提示", icon: "📅" },
-  { key: "done", label: "商談確定 → CRM登録", icon: "✅" },
+  { key: "detect", label: "サイト訪問を検知", iconKey: "search" as IconKey },
+  { key: "score", label: "温度: LOW", iconKey: "target" as IconKey },
+  { key: "chat", label: "チャットで会話", iconKey: "chat" as IconKey },
+  { key: "doc", label: "資料を提案", iconKey: "doc" as IconKey },
+  { key: "email", label: "メールでフォロー", iconKey: "mail" as IconKey },
+  { key: "calendar", label: "カレンダー提示", iconKey: "calendar" as IconKey },
+  { key: "done", label: "商談確定 → CRM登録", iconKey: "check" as IconKey },
 ];
 
 function HeroDemoAnimation() {
@@ -3151,7 +3172,7 @@ function HeroDemoAnimation() {
   const renderLeadContent = (cur: { key: string }, idx: number, isHot = false) => {
     if (cur.key === "detect") return (
       <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--surface)",borderRadius:10,fontSize:13,color:"var(--text)",fontWeight:600}}>
-        <span style={{fontSize:18}}>🔔</span> 新しいリードを検知しました
+        <Ico name="bell" size={18} color="var(--cta)" /> 新しいリードを検知しました
       </div>
     );
     if (cur.key === "score") return (
@@ -3168,13 +3189,13 @@ function HeroDemoAnimation() {
     );
     if (cur.key === "doc") return (
       <div className="demo-doc-card demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
-        <span style={{fontSize:20}}>📄</span>
+        <Ico name="doc" size={20} color="var(--blue)" />
         <div><div style={{fontSize:12,fontWeight:700,color:"var(--heading)"}}>リード獲得ガイド.pdf</div><div style={{fontSize:11,color:"var(--sub)"}}>マッチ度 <strong style={{color:"var(--cta)"}}>98%</strong></div></div>
       </div>
     );
     if (cur.key === "email") return (
       <div className="demo-msg-appear" style={{padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
-        <div style={{fontSize:11,fontWeight:700,color:"var(--heading)",marginBottom:4}}>📧 フォローアップメール送信</div>
+        <div style={{display:"flex",alignItems:"center",gap:4,fontSize:11,fontWeight:700,color:"var(--heading)",marginBottom:4}}><Ico name="mail" size={14} color="var(--cta)" /> フォローアップメール送信</div>
         <div style={{fontSize:11,color:"var(--sub)"}}>事例資料+ミーティングリンクを添付</div>
       </div>
     );
@@ -3189,7 +3210,7 @@ function HeroDemoAnimation() {
     );
     if (cur.key === "done") return (
       <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--cta-light)",borderRadius:10,border:"1px solid rgba(18,163,125,.2)"}}>
-        <span style={{fontSize:18}}>✅</span>
+        <Ico name="check" size={18} color="var(--cta)" />
         <div style={{fontSize:12,fontWeight:700,color:"var(--cta)"}}>商談確定！CRM登録 & Slack通知完了</div>
       </div>
     );
@@ -3222,7 +3243,7 @@ function HeroDemoAnimation() {
               <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepA ? "var(--cta)" : "var(--border)",transition:"background .3s"}} />
             ))}
           </div>
-          <div style={{fontSize:11,fontWeight:700,color:"var(--cta)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}>{curA.icon} {curA.label}</div>
+          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:700,color:"var(--cta)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}><Ico name={curA.iconKey} size={14} color="var(--cta)" /> {curA.label}</div>
           {renderLeadContent(curA, msgIdx, true)}
         </div>
 
@@ -3240,7 +3261,7 @@ function HeroDemoAnimation() {
               <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepB ? "var(--blue)" : "var(--border)",transition:"background .3s"}} />
             ))}
           </div>
-          <div style={{fontSize:11,fontWeight:700,color:"var(--blue)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}>{curB.icon} {curB.label}</div>
+          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:700,color:"var(--blue)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}><Ico name={curB.iconKey} size={14} color="var(--blue)" /> {curB.label}</div>
           {renderLeadContent(curB, msgIdx)}
         </div>
       </div>
@@ -3321,19 +3342,6 @@ export default function HomePageClient() {
               資料請求 →
             </button>
           </div>
-          <div className="anim d5 hero-stats">
-            {[
-              { v: "80%+", l: "商談化率" },
-              { v: "24/7", l: "ミートンが自律稼働" },
-              { v: "5min", l: "で導入完了" },
-            ].map((s, i) => (
-              <div key={i} style={{ textAlign: "center" }}>
-                <div className="stat-v">{s.v}</div>
-                <div className="stat-l">{s.l}</div>
-              </div>
-            ))}
-          </div>
-
           {/* HERO DEMO ANIMATION */}
           <div className="anim d5" style={{ marginTop: "clamp(40px,6vw,64px)" }}>
             <HeroDemoAnimation />
@@ -3419,10 +3427,10 @@ export default function HomePageClient() {
               flexWrap: isMobile ? "wrap" : "nowrap",
             }}>
               {[
-                { num: "01", title: "見つける", icon: "🔍", color: "#0891b2", desc: "訪問・フォーム・DLを検知しスコアリング", tools: ["サイト訪問検知", "フォーム連携", "リードスコア"] },
-                { num: "02", title: "話しかける", icon: "💬", color: "#12a37d", desc: "チャット・メールで最適なタイミングに接触", tools: ["AIチャット", "AIメール", "自動フォロー"] },
-                { num: "03", title: "理解を深める", icon: "📄", color: "#7c5cfc", desc: "資料提案・Q&A対応で検討度を引き上げ", tools: ["資料提案", "ポップアップ", "Q&A対応"] },
-                { num: "04", title: "商談を決める", icon: "📅", color: "#3b6ff5", desc: "カレンダー提示・ヒアリング・CRM登録", tools: ["カレンダー", "事前ヒアリング", "CRM連携"] },
+                { num: "01", title: "見つける", iconKey: "search" as IconKey, color: "#0891b2", desc: "訪問・フォーム・DLを検知しスコアリング", tools: ["サイト訪問検知", "フォーム連携", "リードスコア"] },
+                { num: "02", title: "話しかける", iconKey: "chat" as IconKey, color: "#12a37d", desc: "チャット・メールで最適なタイミングに接触", tools: ["AIチャット", "AIメール", "自動フォロー"] },
+                { num: "03", title: "理解を深める", iconKey: "doc" as IconKey, color: "#7c5cfc", desc: "資料提案・Q&A対応で検討度を引き上げ", tools: ["資料提案", "ポップアップ", "Q&A対応"] },
+                { num: "04", title: "商談を決める", iconKey: "calendar" as IconKey, color: "#3b6ff5", desc: "カレンダー提示・ヒアリング・CRM登録", tools: ["カレンダー", "事前ヒアリング", "CRM連携"] },
               ].map((phase, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "stretch", flex: isMobile ? "1 1 100%" : 1 }}>
                   <div style={{
@@ -3439,9 +3447,10 @@ export default function HomePageClient() {
                     transition: "all .3s",
                   }}>
                     <div style={{
-                      fontSize: 28,
                       marginBottom: 8,
-                    }}>{phase.icon}</div>
+                      display: "flex",
+                      justifyContent: "center",
+                    }}><Ico name={phase.iconKey} size={28} color={phase.color} /></div>
                     <div style={{
                       fontFamily: "var(--fm)",
                       fontSize: 11,
@@ -3500,7 +3509,7 @@ export default function HomePageClient() {
               fontSize: 13,
               color: "var(--sub)",
             }}>
-              <span style={{ fontSize: 16 }}>🧠</span>
+              <Ico name="brain" size={16} color="var(--cta)" />
               <span>順番は固定ではありません。ミートンがリードの温度感に応じて自動で判断します。</span>
             </div>
           </div>
@@ -3672,7 +3681,7 @@ export default function HomePageClient() {
             marginRight: "auto",
           }}>
             <span style={{ fontSize: 14, color: "var(--sub)", lineHeight: 1.8 }}>
-              💡 フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——ミートンがリードの状態を見て自動で判断します。
+              <Ico name="info" size={16} color="var(--cta)" /> フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——ミートンがリードの状態を見て自動で判断します。
             </span>
           </div>
         </div>
@@ -3783,11 +3792,10 @@ export default function HomePageClient() {
                         </div>
                         <div
                           style={{
-                            fontSize: 18,
                             animation: "pulse 2s infinite",
                           }}
                         >
-                          ✅
+                          <Ico name="check" size={18} color="var(--cta)" />
                         </div>
                       </div>
                     )}
@@ -3803,9 +3811,9 @@ export default function HomePageClient() {
                         }}
                       >
                         {[
-                          "💬 声かけ内容",
-                          "📅 予約ルール",
-                          "🎯 見込み基準",
+                          { iconKey: "chat" as IconKey, label: "声かけ内容" },
+                          { iconKey: "calendar" as IconKey, label: "予約ルール" },
+                          { iconKey: "target" as IconKey, label: "見込み基準" },
                         ].map((item, j) => (
                           <div
                             key={j}
@@ -3818,7 +3826,7 @@ export default function HomePageClient() {
                               color: "var(--heading)",
                             }}
                           >
-                            <span>{item}</span>
+                            <span style={{display:"flex",alignItems:"center",gap:4}}><Ico name={item.iconKey} size={12} color="var(--cta)" />{item.label}</span>
                             <div
                               style={{
                                 flex: 1,
@@ -3857,7 +3865,7 @@ export default function HomePageClient() {
                         }}
                       >
                         <div style={{ display: "flex", gap: 4 }}>
-                          {["📧", "🎯", "📅"].map((e, j) => (
+                          {(["mail", "target", "calendar"] as IconKey[]).map((iconName, j) => (
                             <div
                               key={j}
                               style={{
@@ -3869,13 +3877,12 @@ export default function HomePageClient() {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                fontSize: 14,
                                 animation: `nodeGrow .4s ${j * 0.2}s cubic-bezier(.16,1,.3,1) forwards`,
                                 opacity: 0,
                                 transform: "scale(0)",
                               }}
                             >
-                              {e}
+                              <Ico name={iconName} size={14} color="var(--cta)" />
                             </div>
                           ))}
                         </div>
@@ -3916,7 +3923,7 @@ export default function HomePageClient() {
           <div className="why-grid">
             {[
               {
-                icon: "🤖",
+                iconKey: "robot" as IconKey,
                 color: "var(--cta)",
                 bg: "var(--cta-light)",
                 border: "linear-gradient(135deg,var(--cta),var(--blue))",
@@ -3924,7 +3931,7 @@ export default function HomePageClient() {
                 desc: "設定に従って表示するだけのツールとは違います。ミートンはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
               },
               {
-                icon: "⚡",
+                iconKey: "bolt" as IconKey,
                 color: "var(--accent)",
                 bg: "var(--accent-light)",
                 border: "linear-gradient(135deg,var(--accent),var(--pink))",
@@ -3932,7 +3939,7 @@ export default function HomePageClient() {
                 desc: "人間のSDRは1日8時間。ミートンは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
               },
               {
-                icon: "🎯",
+                iconKey: "target" as IconKey,
                 color: "var(--blue)",
                 bg: "var(--blue-light)",
                 border: "linear-gradient(135deg,var(--blue),var(--cyan))",
@@ -3945,7 +3952,7 @@ export default function HomePageClient() {
                   <div style={{ display: "none" }} className="why-card-before" />
                 </div>
                 <div className="why-icon" style={{ background: item.bg }}>
-                  {item.icon}
+                  <Ico name={item.iconKey} size={28} color={item.color} />
                 </div>
                 <div className="why-title">{item.title}</div>
                 <div className="why-desc">{item.desc}</div>
