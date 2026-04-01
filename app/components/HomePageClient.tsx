@@ -3339,11 +3339,10 @@ export default function HomePageClient() {
 
       {/* SOCIAL PROOF STATS */}
       <section style={{
-        padding: "0 clamp(16px,5vw,48px) clamp(40px,6vw,60px)",
+        padding: "clamp(40px,6vw,60px) clamp(16px,5vw,48px)",
         background: "var(--bg)",
         position: "relative",
         zIndex: 2,
-        marginTop: -40,
       }}>
         <div style={{
           maxWidth: 1000,
