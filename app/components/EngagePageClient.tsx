@@ -350,25 +350,51 @@ export default function EngagePageClient() {
               </div>
             </div>
             <div className="phase-vis">
-              <div className="pvis vis0">
-                {/* Page context indicator */}
-                <div style={{ position: 'absolute', top: 12, left: 16, right: 16, display: 'flex', alignItems: 'center', gap: 8, animation: 'chatPop .4s .1s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                  <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '5px 10px', fontSize: 10, fontWeight: 700, color: 'var(--sub)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)', display: 'inline-block' }} />
-                    料金ページを閲覧中
+              <div className="pvis vis0" style={{ display: 'flex', flexDirection: 'column' }}>
+                {/* Chat header */}
+                <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#f8fffe,#f8f6ff)', flexShrink: 0 }}>
+                  <div style={{ width: 24, height: 24, borderRadius: 7, background: 'linear-gradient(135deg,var(--cta),#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800 }}>M</div>
+                  <div>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>ミートン</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                      <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cta)' }} />
+                      <span style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>オンライン</span>
+                    </div>
                   </div>
                 </div>
-                <div style={{ position: 'absolute', top: 42, left: 20, background: '#fff', border: '1px solid var(--border)', borderRadius: 14, borderBottomLeftRadius: 4, padding: '10px 16px', fontSize: 12, fontWeight: 600, maxWidth: 200, lineHeight: 1.5, color: 'var(--heading)', animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>こんにちは！<br />プランについてご質問ありますか？</div>
-                <div style={{ position: 'absolute', top: 116, left: 20, background: '#fff', border: '1px solid var(--border)', borderRadius: 14, borderBottomLeftRadius: 4, padding: '8px 14px', fontSize: 11, fontWeight: 600, color: 'var(--sub)', animation: 'chatPop .5s 1s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>こちらの資料もおすすめです：</div>
-                <div style={{ position: 'absolute', top: 154, left: 20, background: 'linear-gradient(135deg,#e5f8f2,#eaf0fe)', border: '1px solid rgba(18,163,125,.15)', borderRadius: 10, padding: '8px 14px', fontSize: 11, fontWeight: 700, color: 'var(--cta)', animation: 'chatPop .5s 1.4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, maxWidth: 145, cursor: 'default' }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ display: 'inline', verticalAlign: -2, marginRight: 4 }}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                  導入ガイド
+                {/* Chat body */}
+                <div style={{ flex: 1, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8, overflow: 'hidden' }}>
+                  {/* Context badge */}
+                  <div style={{ textAlign: 'center', opacity: 0, animation: 'chatPop .4s .1s cubic-bezier(.16,1,.3,1) forwards' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '3px 8px', fontSize: 9, fontWeight: 700, color: 'var(--sub)' }}>
+                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cta)' }} />料金ページを閲覧中
+                    </span>
+                  </div>
+                  {/* AI message 1 */}
+                  <div className="chat-msg" style={{ animationDelay: '.4s' }}>
+                    <div className="chat-avatar" style={{ width: 22, height: 22, borderRadius: 6, fontSize: 8 }}>AI</div>
+                    <div className="chat-bubble" style={{ fontSize: 11, padding: '8px 12px' }}>こんにちは！<br />プランについてご質問ありますか？</div>
+                  </div>
+                  {/* AI message 2 + resource cards */}
+                  <div className="chat-msg" style={{ animationDelay: '1s' }}>
+                    <div className="chat-avatar" style={{ width: 22, height: 22, borderRadius: 6, fontSize: 8 }}>AI</div>
+                    <div>
+                      <div className="chat-bubble" style={{ fontSize: 11, padding: '8px 12px', marginBottom: 6 }}>こちらの資料もおすすめです：</div>
+                      <div style={{ display: 'flex', gap: 6 }}>
+                        {[{ name: '導入ガイド', icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6' }, { name: '料金比較表', icon: 'M22 12h-4l-3 9L9 3l-3 9H2' }].map((doc, j) => (
+                          <div key={j} style={{ background: 'linear-gradient(135deg,#e5f8f2,#eaf0fe)', border: '1px solid rgba(18,163,125,.15)', borderRadius: 8, padding: '6px 10px', fontSize: 10, fontWeight: 700, color: 'var(--cta)', cursor: 'default', opacity: 0, animation: `chatPop .4s ${1.3 + j * .3}s cubic-bezier(.16,1,.3,1) forwards` }}>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ display: 'inline', verticalAlign: -1, marginRight: 3 }}><path d={doc.icon}/></svg>
+                            {doc.name}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  {/* User reply */}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s 2s cubic-bezier(.16,1,.3,1) forwards' }}>
+                    <div style={{ background: 'var(--cta)', color: '#fff', borderRadius: 12, borderBottomRightRadius: 3, padding: '8px 12px', fontSize: 11, fontWeight: 600, maxWidth: '70%' }}>料金について詳しく知りたいです</div>
+                  </div>
                 </div>
-                <div style={{ position: 'absolute', top: 154, left: 175, background: 'linear-gradient(135deg,#e5f8f2,#eaf0fe)', border: '1px solid rgba(18,163,125,.15)', borderRadius: 10, padding: '8px 14px', fontSize: 11, fontWeight: 700, color: 'var(--cta)', animation: 'chatPop .5s 1.7s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, maxWidth: 145, cursor: 'default' }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ display: 'inline', verticalAlign: -2, marginRight: 4 }}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                  料金比較表
-                </div>
-                <div style={{ position: 'absolute', top: 210, right: 20, background: 'var(--cta)', color: '#fff', borderRadius: 14, borderBottomRightRadius: 4, padding: '10px 16px', fontSize: 12, fontWeight: 600, animation: 'chatPop .5s 2.2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>料金について詳しく知りたいです</div>
               </div>
             </div>
           </div>
