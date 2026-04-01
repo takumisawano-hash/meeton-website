@@ -166,34 +166,34 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
-  { q: 'サンクスページでのカレンダー表示はどう動きますか？', a: 'フォーム送信後のサンクスページにAIチャットとカレンダーウィジェットを自動表示します。「資料をお送りしました。ぜひデモもご覧になりませんか？」のように自然に商談予約を促し、その場でカレンダーから空き時間を選択できます。コンバージョン直後の高い関心を逃しません。' },
-  { q: 'カレンダーリンクはどこに設置できますか？', a: 'メール本文、PDF資料内、名刺のQRコード、展示会のパンフレット、チャット内など、あらゆる場所にカレンダーリンクを設置できます。リンクをクリックするだけで空き時間一覧が表示され、ワンクリックで予約が完了します。' },
+  { q: 'チャット内でどのようにカレンダーが表示されますか？', a: 'AIが会話の中でリードの温度感を判定し、商談意欲が高いと判断した時点でチャット内にカレンダーウィジェットを自動表示します。訪問者はページ遷移なしで空き時間を選択し、そのまま予約を完了できます。' },
+  { q: 'サンクスページでのカレンダー表示はどう動きますか？', a: 'フォーム送信後のサンクスページにAIチャットとカレンダーウィジェットを自動表示します。「資料をお送りしました。ぜひデモもご覧になりませんか？」のように自然に商談予約を促し、その場で空き時間を選択できます。' },
+  { q: '予約しなかったリードへの自動メールはどう動きますか？', a: 'チャットやサンクスページで商談予約に至らなかったリードに対して、AIがカレンダーURL付きのフォローメールを自動送信します。送信タイミングやメール内容はリードの行動履歴に基づいてパーソナライズされます。' },
   { q: '事前ヒアリングとは何ですか？', a: '商談予約時に、AIが自動で簡単なヒアリングを実施します。「お問い合わせの背景」「現在利用中のツール」「ご予算感」など、営業が商談前に知っておきたい情報を事前に収集。営業担当は準備万端で商談に臨めます。' },
-  { q: 'どのCRMツールと連携できますか？', a: 'HubSpot、Salesforceをはじめとする主要CRM/MAツールとネイティブ連携しています。予約情報、事前ヒアリング内容、リードスコアがすべてCRMに自動登録されます。確認メールやリマインダーも自動送信されます。' },
   { q: '導入にどのくらい時間がかかりますか？', a: 'JavaScriptタグの設置とカレンダー連携で約10分です。Google Calendar、TimeRexなど主要な日程調整ツールに対応しています。サンクスページへの設置もJSタグ1行で完了します。' },
 ];
 
 const whyData = [
-  { title: 'あらゆる場面にカレンダー', desc: 'サンクスページ・メール・PDF・QR。リードの温度感が高い瞬間を逃さず、どこでも商談予約を可能に。', color: '#3b6ff5', iconPath: 'M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z' },
-  { title: '事前ヒアリング自動化', desc: '商談前にAIが自動でヒアリング。営業は準備万端で商談に臨め、初回から質の高い会話を展開。', color: '#7c5cfc', iconPath: 'M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7 M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z' },
-  { title: 'CRM完全自動登録', desc: '予約情報・ヒアリング内容・リードスコアを自動でCRMに登録。手動入力ゼロで情報を一元管理。', color: '#12a37d', iconPath: 'M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14 M7 23l-4-4 4-4 M21 13v2a4 4 0 0 1-4 4H3' },
-  { title: '確認・リマインダー自動化', desc: '予約確認メール、前日リマインダー、当日通知を自動送信。ノーショー率を大幅に削減。', color: '#0891b2', iconPath: 'M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3' },
+  { title: 'チャットからそのまま予約', desc: '会話の流れでカレンダーを提示。ページ遷移なしで予約完了。温度感が高い瞬間を逃さない。', color: '#3b6ff5', iconPath: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' },
+  { title: '未CVリードを自動追客', desc: 'チャット・サンクスページで予約しなかったリードにAIがカレンダーURL付きメールを自動送信。', color: '#7c5cfc', iconPath: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6' },
+  { title: '事前ヒアリング自動化', desc: '商談前にAIが自動でヒアリング。営業は準備万端で商談に臨め、初回から質の高い会話を展開。', color: '#12a37d', iconPath: 'M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7 M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z' },
+  { title: 'CRM完全自動登録', desc: '予約情報・ヒアリング内容・リードスコアを自動でCRMに登録。確認メール・リマインダーも自動。', color: '#0891b2', iconPath: 'M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14 M7 23l-4-4 4-4 M21 13v2a4 4 0 0 1-4 4H3' },
 ];
 
 const flowSteps = [
-  { num: '1', title: '育成済みリード', sub: 'From Nurture phase', color: '#7c5cfc' },
-  { num: '2', title: 'カレンダー提示', sub: 'Calendar shown', color: '#3b6ff5' },
-  { num: '3', title: '事前ヒアリング', sub: 'Pre-qualification', color: '#6690fa' },
-  { num: '4', title: 'CRM登録', sub: 'Auto sync', color: '#12a37d' },
+  { num: '1', title: '温度感の高いリード', sub: 'Hot lead detected', color: '#7c5cfc' },
+  { num: '2', title: 'チャット内予約', sub: 'In-chat calendar', color: '#3b6ff5' },
+  { num: '3', title: 'サンクスページ', sub: 'Post-form calendar', color: '#6690fa' },
+  { num: '4', title: 'AIメール追客', sub: 'Auto follow-up', color: '#12a37d' },
   { num: '5', title: '商談確定', sub: 'Meeting confirmed', color: '#0891b2' },
 ];
 
 const flowStepIcons = [
   <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>,
-  <><path d="M8 2v4 M16 2v4 M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/></>,
-  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7 M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>,
-  <path d="M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14 M7 23l-4-4 4-4 M21 13v2a4 4 0 0 1-4 4H3"/>,
+  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>,
   <><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></>,
+  <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></>,
+  <><path d="M8 2v4 M16 2v4 M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/></>,
 ];
 
 export default function ConvertPageClient() {
@@ -215,7 +215,7 @@ export default function ConvertPageClient() {
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />PHASE 04 — CONVERT</div>
             <h1 className="anim d2">あらゆる場面で<br /><em>商談を決める</em></h1>
-            <p className="anim d3 hero-sub">サンクスページ・メール・チャット内——あらゆる場面でカレンダーを提示。事前ヒアリングからCRM登録まで自動で完結します。</p>
+            <p className="anim d3 hero-sub">チャット内・サンクスページでカレンダーを提示。予約しなかったリードにはAIがカレンダーURL付きメールを自動送信。商談獲得を最大化します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
@@ -287,7 +287,7 @@ export default function ConvertPageClient() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
           <div className="stitle" style={{ textAlign: 'center' }}>育成から商談確定まで</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>育成済みリードにカレンダーを提示し、事前ヒアリングからCRM登録まで完全自動化します。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>チャット・サンクスページ・メールの3ルートで商談予約を獲得。取りこぼしゼロを実現します。</p>
           <div className="flow-steps">
             {flowSteps.map((step, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
@@ -319,23 +319,80 @@ export default function ConvertPageClient() {
         </div>
       </section>
 
-      {/* Phase 1: Thanks Page Calendar */}
+      {/* Phase 1: In-Chat Calendar */}
       <section style={{ padding: '0 clamp(16px,5vw,48px)', position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#3b6ff510', color: '#3b6ff5' }}>STEP 01</div>
-              <div className="phase-h">サンクスページで即カレンダー提示</div>
-              <div className="phase-desc">フォーム送信後のサンクスページにAIチャットとカレンダーウィジェットを自動配置。「資料をお送りしました。デモもご覧になりませんか？」とAIが声をかけ、その場でカレンダーから空き時間を選択。コンバージョン直後の高い関心を逃さず、商談予約まで一気通貫で完結します。</div>
+              <div className="phase-h">チャット内でそのまま商談予約</div>
+              <div className="phase-desc">AIが会話の中でリードの温度感を判定し、商談意欲が高いと判断した時点でチャット内にカレンダーを自動表示。訪問者はページ遷移なしで空き時間を選び、そのまま予約を完了できます。会話の流れを壊さない、最も自然なコンバージョン体験です。</div>
               <div className="phase-features">
-                {['サンクスページへの自動配置', 'AIによる自然な商談予約誘導', 'その場でカレンダー選択', 'フォーム情報の自動引き継ぎ'].map((feat, i) => (
+                {['温度感に応じた自動カレンダー表示', 'ページ遷移なしで予約完了', '会話の流れを壊さない自然なUX', '事前ヒアリングもチャット内で完結'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#3b6ff5' }} />{feat}</div>
                 ))}
               </div>
             </div>
             <div className="phase-vis">
-              <div className="pvis vis0">
+              <div className="pvis vis0" style={{ display: 'flex', flexDirection: 'column' }}>
+                {/* Chat header */}
+                <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#f0f4ff,#f8f6ff)', flexShrink: 0 }}>
+                  <div style={{ width: 24, height: 24, borderRadius: 7, background: 'linear-gradient(135deg,#3b6ff5,#6690fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800 }}>M</div>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>ミートン</div>
+                </div>
+                {/* Chat body */}
+                <div style={{ flex: 1, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8, overflow: 'hidden' }}>
+                  {/* User message */}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards' }}>
+                    <div style={{ background: '#3b6ff5', color: '#fff', borderRadius: 12, borderBottomRightRadius: 3, padding: '7px 12px', fontSize: 10, fontWeight: 600, maxWidth: '75%' }}>デモを見てみたいです</div>
+                  </div>
+                  {/* AI message with calendar */}
+                  <div style={{ display: 'flex', gap: 6, opacity: 0, animation: 'chatPop .5s .8s cubic-bezier(.16,1,.3,1) forwards' }}>
+                    <div style={{ width: 22, height: 22, borderRadius: 6, background: 'linear-gradient(135deg,#3b6ff5,#6690fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#fff', fontWeight: 800, flexShrink: 0 }}>AI</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, borderTopLeftRadius: 3, padding: '7px 10px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5, marginBottom: 6 }}>ぜひ！空き時間をお選びください</div>
+                      {/* Calendar widget */}
+                      <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: 10, opacity: 0, animation: 'chatPop .5s 1.3s cubic-bezier(.16,1,.3,1) forwards' }}>
+                        <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--sub)', marginBottom: 6 }}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3b6ff5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: -1, marginRight: 3 }}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4 M8 2v4 M3 10h18"/></svg>
+                          空き時間を選択
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 4 }}>
+                          {['10:00', '14:00', '16:00'].map((t, j) => (
+                            <div key={j} style={{ padding: '5px 4px', textAlign: 'center', borderRadius: 6, fontSize: 9, fontWeight: 700, background: j === 1 ? '#3b6ff5' : '#fff', color: j === 1 ? '#fff' : 'var(--heading)', border: j === 1 ? 'none' : '1px solid var(--border)', cursor: 'default', animation: j === 1 ? 'calPulse 2s infinite' : 'none' }}>{t}</div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Confirmation badge */}
+                  <div style={{ textAlign: 'center', opacity: 0, animation: 'chatPop .5s 1.8s cubic-bezier(.16,1,.3,1) forwards' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#e5f8f2', border: '1px solid rgba(18,163,125,.2)', borderRadius: 8, padding: '5px 12px', fontSize: 9, fontWeight: 800, color: '#12a37d' }}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      14:00で予約完了
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="phase-divider" />
+
+          {/* Phase 2: Thanks Page Calendar */}
+          <div className="phase-row reverse">
+            <div className="phase-text">
+              <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>STEP 02</div>
+              <div className="phase-h">サンクスページで即カレンダー提示</div>
+              <div className="phase-desc">フォーム送信後のサンクスページにAIチャットとカレンダーウィジェットを自動配置。「資料をお送りしました。デモもご覧になりませんか？」とAIが声をかけ、その場で空き時間を選択。コンバージョン直後の高い関心を逃さず、商談予約まで一気に完結します。</div>
+              <div className="phase-features">
+                {['サンクスページへの自動配置', 'AIによる自然な商談予約誘導', 'その場でカレンダー選択', 'フォーム情報の自動引き継ぎ'].map((feat, i) => (
+                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
+                ))}
+              </div>
+            </div>
+            <div className="phase-vis">
+              <div className="pvis vis1">
                 <div style={{ padding: 16 }}>
                   {/* Thanks page mockup */}
                   <div style={{ textAlign: 'center', marginBottom: 10, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
@@ -368,53 +425,14 @@ export default function ConvertPageClient() {
           </div>
           <div className="phase-divider" />
 
-          {/* Phase 2: Calendar Links Everywhere */}
-          <div className="phase-row reverse">
-            <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>STEP 02</div>
-              <div className="phase-h">メール・PDF・QRにカレンダーリンク</div>
-              <div className="phase-desc">メール本文、PDF資料内、名刺のQRコード、展示会パンフレット——あらゆるタッチポイントにカレンダーリンクを設置。リードがどこにいても、ワンクリックで商談予約が完了します。オンラインもオフラインもAIがつなぎます。</div>
-              <div className="phase-features">
-                {['メール内カレンダーリンク', 'PDF・資料内への埋め込み', 'QRコードで名刺・展示会対応', 'ワンクリック予約完了'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
-                ))}
-              </div>
-            </div>
-            <div className="phase-vis">
-              <div className="pvis vis1">
-                <div style={{ padding: 16 }}>
-                  {/* Multi-channel calendar */}
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 8, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>カレンダーリンクの設置先</div>
-                  {[
-                    { icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6', label: 'メール', desc: 'フォローアップメールに埋め込み', color: '#3b6ff5', delay: '.4s' },
-                    { icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6', label: 'PDF資料', desc: 'ホワイトペーパー内にリンク設置', color: '#e0475b', delay: '.7s' },
-                    { icon: 'M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5z M7 7h4v4H7z M13 7h4v4h-4z M7 13h4v4H7z', label: 'QRコード', desc: '名刺・展示会パンフレットに印刷', color: '#7c5cfc', delay: '1.0s' },
-                  ].map((ch, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', background: '#fff', border: '1px solid var(--border)', borderRadius: 10, marginBottom: 6, opacity: 0, animation: `slideIn .5s ${ch.delay} cubic-bezier(.16,1,.3,1) forwards` }}>
-                      <div style={{ width: 32, height: 32, borderRadius: 8, background: `${ch.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={ch.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ch.icon}/></svg>
-                      </div>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)' }}>{ch.label}</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>{ch.desc}</div>
-                      </div>
-                      <div style={{ fontSize: 9, fontWeight: 700, color: '#3b6ff5', background: '#eaf0fe', padding: '3px 8px', borderRadius: 6 }}>予約</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="phase-divider" />
-
-          {/* Phase 3: Pre-hearing & CRM */}
+          {/* Phase 3: AI Email Follow-up for Non-Converters */}
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>STEP 03</div>
-              <div className="phase-h">事前ヒアリング＆CRM自動登録</div>
-              <div className="phase-desc">商談予約時にAIが自動でヒアリングを実施。「お問い合わせの背景」「現在利用中のツール」「ご予算感」など、営業が商談前に知っておきたい情報を事前収集。すべての情報はCRMに自動登録され、確認メールやリマインダーも自動送信されます。</div>
+              <div className="phase-h">未予約リードにAIメールで自動追客</div>
+              <div className="phase-desc">チャットやサンクスページで商談予約に至らなかったリードに対して、AIがカレンダーURL付きのフォローメールを自動送信。リードの行動履歴に基づいてメール内容と送信タイミングをパーソナライズし、最適な瞬間に再アプローチします。</div>
               <div className="phase-features">
-                {['AIによる自動ヒアリング', '回答内容のCRM自動登録', '確認メール・リマインダー自動送信', '営業への事前情報共有'].map((feat, i) => (
+                {['カレンダーURL付きメール自動送信', '行動履歴に基づくパーソナライズ', '最適タイミングでの再アプローチ', '開封・クリック率のリアルタイム追跡'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
                 ))}
               </div>
@@ -422,36 +440,39 @@ export default function ConvertPageClient() {
             <div className="phase-vis">
               <div className="pvis vis2">
                 <div style={{ padding: 16 }}>
-                  {/* Hearing form */}
-                  <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, marginBottom: 8, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)', marginBottom: 10 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: -2, marginRight: 4 }}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                      事前ヒアリング
-                    </div>
-                    {[
-                      { q: 'お問い合わせの背景', a: 'リード獲得を効率化したい', delay: '.5s' },
-                      { q: '現在利用中のツール', a: 'HubSpot CRM', delay: '.8s' },
-                      { q: 'ご予算感', a: '月額10〜30万円', delay: '1.1s' },
-                    ].map((item, i) => (
-                      <div key={i} style={{ marginBottom: 8, opacity: 0, animation: `slideIn .5s ${item.delay} cubic-bezier(.16,1,.3,1) forwards` }}>
-                        <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--sub)', marginBottom: 2 }}>{item.q}</div>
-                        <div style={{ background: 'var(--surface)', borderRadius: 6, padding: '6px 10px', fontSize: 10, fontWeight: 600, color: 'var(--heading)' }}>{item.a}</div>
+                  {/* Email preview */}
+                  <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, marginBottom: 10, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                       </div>
-                    ))}
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>AIフォローメール</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>トリガー: チャットで未予約</div>
+                      </div>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '3px 8px', borderRadius: 6 }}>自動送信</span>
+                    </div>
+                    <div style={{ background: 'var(--surface)', borderRadius: 8, padding: 10, fontSize: 10, color: 'var(--text)', lineHeight: 1.6, marginBottom: 8 }}>
+                      <div style={{ fontWeight: 700, color: 'var(--heading)', marginBottom: 4 }}>田中様</div>
+                      先日はご検討ありがとうございます。デモのご都合がつきましたら、下記からご予約ください。
+                    </div>
+                    {/* Calendar CTA in email */}
+                    <div style={{ background: '#3b6ff5', borderRadius: 8, padding: '8px 12px', textAlign: 'center', animation: 'chatPop .5s .8s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                      <span style={{ fontSize: 10, fontWeight: 800, color: '#fff' }}>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: -1, marginRight: 4 }}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4 M8 2v4 M3 10h18"/></svg>
+                        空き時間を選んで予約する
+                      </span>
+                    </div>
                   </div>
-                  {/* CRM sync + notifications */}
-                  <div style={{ display: 'flex', gap: 6, animation: 'chatPop .5s 1.4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ flex: 1, background: '#e5f8f2', border: '1px solid rgba(18,163,125,.2)', borderRadius: 8, padding: '6px 8px', textAlign: 'center' }}>
-                      <div style={{ fontSize: 9, fontWeight: 800, color: '#12a37d' }}>CRM登録</div>
-                      <div style={{ fontSize: 8, color: '#12a37d', fontWeight: 600 }}>自動完了</div>
+                  {/* Stats */}
+                  <div style={{ display: 'flex', gap: 6, animation: 'slideIn .5s 1.2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                    <div style={{ flex: 1, background: '#fff', border: '1px solid var(--border)', borderRadius: 8, padding: '6px 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--heading)' }}>開封率 <span style={{ color: '#12a37d' }}>72%</span></span>
                     </div>
-                    <div style={{ flex: 1, background: '#eaf0fe', border: '1px solid rgba(59,111,245,.2)', borderRadius: 8, padding: '6px 8px', textAlign: 'center' }}>
-                      <div style={{ fontSize: 9, fontWeight: 800, color: '#3b6ff5' }}>確認メール</div>
-                      <div style={{ fontSize: 8, color: '#3b6ff5', fontWeight: 600 }}>送信済み</div>
-                    </div>
-                    <div style={{ flex: 1, background: '#f0ecfe', border: '1px solid rgba(124,92,252,.2)', borderRadius: 8, padding: '6px 8px', textAlign: 'center' }}>
-                      <div style={{ fontSize: 9, fontWeight: 800, color: '#7c5cfc' }}>リマインダー</div>
-                      <div style={{ fontSize: 8, color: '#7c5cfc', fontWeight: 600 }}>設定済み</div>
+                    <div style={{ flex: 1, background: '#fff', border: '1px solid var(--border)', borderRadius: 8, padding: '6px 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3b6ff5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--heading)' }}>予約率 <span style={{ color: '#3b6ff5' }}>28%</span></span>
                     </div>
                   </div>
                 </div>
@@ -467,7 +488,7 @@ export default function ConvertPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton ai のコンバージョンなのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>あらゆるタッチポイントにカレンダーを配置。商談機会を最大化。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>チャット・サンクスページ・メールの3ルートで取りこぼしゼロ。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
@@ -509,7 +530,7 @@ export default function ConvertPageClient() {
         <div className="final-cta-inner">
           <div className="slabel">今すぐ始める</div>
           <div className="stitle" style={{ textAlign: 'center' }}>商談予約を<br />自動化しませんか？</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>カレンダー提示・事前ヒアリング・CRM登録。商談確定までのすべてをAIが自動で完結します。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>チャット内予約・サンクスページ・AIメール追客。3ルートで商談獲得を最大化します。</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
