@@ -3311,12 +3311,10 @@ export default function HomePageClient() {
             Japan&apos;s #1 AI SDR Platform
           </div>
           <h1 className="anim d2">
-            <em>ミートン</em>が、
-            <br />
-            ファネル全体を動かす
+            AIが商談をつくる時代へ
           </h1>
           <p className="anim d3 hero-sub">
-            ミートンは、見込み客の発見からナーチャリング、商談獲得まで自律的にこなすAI SDRエージェント。7つのチャネルを駆使し、24時間365日、あなたの営業チームのために商談を創出し続けます。
+            見込み客の育成から商談獲得まで、ミートンが自動でこなします。
           </p>
           <div className="anim d4 hero-ctas">
             <button
