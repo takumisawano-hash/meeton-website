@@ -105,13 +105,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .qflow-hz-gate{display:flex;align-items:center;justify-content:center;width:auto;flex-shrink:0;padding:0 6px}
 
 /* QUALITY SECTION */
-.qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-.qual-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px;transition:all .35s;box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden}
-.qual-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.12)}
-.qual-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
-.qual-card:hover::before{opacity:1}
-.qual-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:26px;transition:all .35s}
-.qual-card:hover .qual-icon{transform:scale(1.1) rotate(-3deg)}
 .qual-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
 .qual-desc{font-size:15px;line-height:1.75;color:var(--sub)}
 
@@ -281,7 +274,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
   .qflow-hz-gate{padding:8px 0}
   .qflow-hz-gate>div{writing-mode:horizontal-tb!important;flex-direction:row!important;padding:10px 20px!important}
-  .qual-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
   .proof-stats-grid{grid-template-columns:repeat(2,1fr)!important}
   .int-grid{grid-template-columns:repeat(3,1fr)}
@@ -319,7 +311,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .btn-ghost{padding:14px 24px;font-size:16px;width:100%}
   .feat-card-body{padding:24px 20px 20px}
   .feat-card-vis{min-height:180px}
-  .qual-card{padding:24px}
   .step-card{padding:24px}
   .faq-q{padding:16px 20px;font-size:16px}
   .faq-a{padding:0 20px 16px;font-size:14px}
@@ -2788,8 +2779,7 @@ const diagramComponents = [
   DiagramPDF,
 ];
 
-/* ── Quality Section Diagram ── */
-function QualityFlowDiagram() {
+function QualityFlowDiagram_UNUSED() {
   const card: React.CSSProperties = { borderRadius: 18, padding: "20px 18px" };
   const stepLabel: React.CSSProperties = {
     fontSize: 12,
@@ -3421,7 +3411,7 @@ export default function HomePageClient() {
             <div style={{
               display: "flex",
               alignItems: "stretch",
-              gap: 0,
+              gap: isMobile ? 0 : 0,
               maxWidth: 900,
               margin: "0 auto",
               flexWrap: isMobile ? "wrap" : "nowrap",
@@ -3438,10 +3428,7 @@ export default function HomePageClient() {
                     padding: "28px 20px",
                     background: "var(--bg)",
                     border: "1px solid var(--border)",
-                    borderRadius: i === 0 ? "16px 0 0 16px" : i === 3 ? "0 16px 16px 0" : 0,
-                    ...(isMobile ? { borderRadius: i === 0 ? "16px 16px 0 0" : i === 3 ? "0 0 16px 16px" : 0 } : {}),
-                    borderLeft: i > 0 && !isMobile ? "none" : undefined,
-                    borderTop: i > 0 && isMobile ? "none" : undefined,
+                    borderRadius: 16,
                     textAlign: "center",
                     position: "relative",
                     transition: "all .3s",
@@ -3490,10 +3477,8 @@ export default function HomePageClient() {
                       alignItems: "center",
                       color: "var(--border2)",
                       fontSize: 18,
-                      padding: "0 2px",
-                      background: "var(--bg)",
-                      marginTop: -1,
-                      marginBottom: -1,
+                      padding: "0 4px",
+                      flexShrink: 0,
                     }}>→</div>
                   )}
                 </div>
@@ -3683,54 +3668,6 @@ export default function HomePageClient() {
             <span style={{ fontSize: 14, color: "var(--sub)", lineHeight: 1.8 }}>
               <Ico name="info" size={16} color="var(--cta)" /> フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——ミートンがリードの状態を見て自動で判断します。
             </span>
-          </div>
-        </div>
-      </section>
-
-      {/* QUALITY MEETINGS */}
-      <section
-        className="section"
-        id="quality"
-        style={{ background: "var(--surface)", position: "relative" }}
-      >
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
-        <div
-          className="section-inner"
-          style={{ position: "relative", zIndex: 2 }}
-        >
-          <div className="slabel" style={{ textAlign: "center" }}>
-            Quality Control
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            ミートンは数だけじゃない。
-            <span style={{ color: "var(--cta)" }}>質の高い商談</span>を届ける
-          </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            ミートンはリードを精査し、事前ヒアリングまで自動で完了。営業チームには「会う価値のある商談」だけが届きます。
-          </p>
-
-          {/* Quality Flow Diagram */}
-          <div style={{ overflowX: "auto" }}>
-            <QualityFlowDiagram />
-          </div>
-
-          <div className="qual-grid">
-            {qualityData.map((q, i) => (
-              <div className="qual-card" key={i}>
-                <div
-                  className="qual-icon"
-                  style={{
-                    background: q.bg,
-                    border: `1px solid ${q.border}`,
-                    color: q.color,
-                  }}
-                >
-                  {qualityIcons[q.iconKey]}
-                </div>
-                <div className="qual-title">{q.title}</div>
-                <div className="qual-desc">{q.desc}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
