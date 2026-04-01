@@ -13,13 +13,13 @@ const faqItems = [
 
 export const metadata: Metadata = {
   title: 'リードナーチャリング｜資料提案・Q&A対応で検討度を引き上げ',
-  description: 'Meeton AIのナーチャリング機能が、閲覧ページに合わせた資料提案、AI付き資料ダウンロードページ、チャットQ&A対応でリードの理解を深め、検討度を引き上げます。',
+  description: 'Meeton AIのナーチャリング機能が、匿名訪問者にもリードにも、閲覧ページに合わせた資料提案・AI付き資料ダウンロードページ・チャットQ&A対応で理解を深め、検討度を引き上げます。',
   alternates: {
     canonical: '/features/nurture/',
   },
   openGraph: {
     title: 'リードナーチャリング｜資料提案・Q&A対応で検討度を引き上げ',
-    description: 'Meeton AIのナーチャリング機能が、資料提案・Q&A対応でリードの理解を深め、検討度を引き上げます。',
+    description: 'Meeton AIのナーチャリング機能が、匿名訪問者にもリードにも、資料提案・Q&A対応で理解を深め、検討度を引き上げます。',
     url: 'https://dynameet.ai/features/nurture/',
   },
 }

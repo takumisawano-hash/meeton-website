@@ -182,7 +182,7 @@ const whyData = [
 ];
 
 const flowSteps = [
-  { num: '1', title: '接触済みリード', sub: 'From Engage phase', color: '#12a37d' },
+  { num: '1', title: '訪問者 / リード', sub: 'Anonymous & known', color: '#12a37d' },
   { num: '2', title: '資料提案', sub: 'Contextual suggestion', color: '#7c5cfc' },
   { num: '3', title: 'Q&A対応', sub: 'AI answers questions', color: '#0891b2' },
   { num: '4', title: '検討度UP', sub: 'Understanding deepens', color: '#9b82fd' },
@@ -215,8 +215,8 @@ export default function NurturePageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />PHASE 03 — NURTURE</div>
-            <h1 className="anim d2">リードの理解を深め<br /><em>検討度を引き上げる</em></h1>
-            <p className="anim d3 hero-sub">資料提案・Q&A対応・ヒアリングでリードの理解を促進。ポップアップや資料ページも活用し、検討度を引き上げます。</p>
+            <h1 className="anim d2">訪問者の理解を深め<br /><em>検討度を引き上げる</em></h1>
+            <p className="anim d3 hero-sub">匿名訪問者にもリードにも、閲覧ページに合わせた資料提案・Q&A対応で理解を促進。ポップアップや資料ページも活用し、検討度を引き上げます。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
@@ -263,7 +263,7 @@ export default function NurturePageClient() {
                 {/* AI suggestion */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', background: 'linear-gradient(135deg,#f0ecfe,#e5f8f2)', border: '1px solid rgba(124,92,252,.15)', borderRadius: 10, opacity: 0, animation: 'chatPop .5s 1.5s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ width: 24, height: 24, borderRadius: 6, background: 'linear-gradient(135deg,#7c5cfc,#12a37d)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#fff', fontWeight: 800 }}>AI</div>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)' }}>料金ページを閲覧中のお客様には「料金比較表」がおすすめです</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)' }}>料金ページを閲覧中の訪問者には「料金比較表」がおすすめです</span>
                 </div>
               </div>
             </div>
@@ -277,7 +277,7 @@ export default function NurturePageClient() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
           <div className="stitle" style={{ textAlign: 'center' }}>エンゲージメントから理解促進へ</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>接触済みリードに対して、資料・Q&A・ヒアリングで理解を深め、商談へ引き上げます。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>匿名訪問者にもリードにも、資料・Q&A・ポップアップで理解を深め、商談へ引き上げます。</p>
           <div className="flow-steps">
             {flowSteps.map((step, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
@@ -305,7 +305,7 @@ export default function NurturePageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
           <div className="stitle" style={{ textAlign: 'center' }}>理解促進を深掘り</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>リードの検討度をどのように引き上げるか、ステップごとに解説します。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>訪問者・リードの検討度をどのように引き上げるか、ステップごとに解説します。</p>
         </div>
       </section>
 
@@ -407,7 +407,7 @@ export default function NurturePageClient() {
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>STEP 03</div>
               <div className="phase-h">チャットでQ&A対応、疑問を即解消</div>
-              <div className="phase-desc">製品やサービスに関する質問にAIチャットが即座に回答。資料の内容やWebサイトの情報を自動学習し、正確で一貫性のある回答を提供します。疑問を即解消することで、リードの検討度を引き上げ、商談への移行を促進します。</div>
+              <div className="phase-desc">製品やサービスに関する質問にAIチャットが即座に回答。資料の内容やWebサイトの情報を自動学習し、正確で一貫性のある回答を提供します。疑問を即解消することで、訪問者の検討度を引き上げ、商談への移行を促進します。</div>
               <div className="phase-features">
                 {['資料・サイト内容の自動学習', '正確で一貫性のあるAI回答', '回答不能時の有人エスカレーション', '質問傾向の分析レポート'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
@@ -465,7 +465,7 @@ export default function NurturePageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton ai のナーチャリングなのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>資料とAIを掛け合わせた、検討度引き上げの新しいアプローチ。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>匿名訪問者にもリードにも。資料とAIを掛け合わせた、検討度引き上げの新しいアプローチ。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
@@ -506,8 +506,8 @@ export default function NurturePageClient() {
         <div className="glow" style={{ background: 'rgba(124,92,252,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div className="slabel">今すぐ始める</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>リードの検討度を<br />引き上げませんか？</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>資料提案・Q&A対応・ポップアップ。AIが最適なコンテンツを最適なタイミングで届け、リードの理解を深めます。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>訪問者の検討度を<br />引き上げませんか？</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>資料提案・Q&A対応・ポップアップ。匿名訪問者にもリードにも、AIが最適なコンテンツを最適なタイミングで届けます。</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>

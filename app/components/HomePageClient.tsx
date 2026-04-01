@@ -3575,7 +3575,7 @@ export default function HomePageClient() {
                 gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
                 label: "NURTURE",
                 title: "理解を深める",
-                desc: "資料提案・Q&A対応・ヒアリングでリードの理解を促進。ポップアップや資料ページも活用し、検討度を引き上げる。",
+                desc: "匿名訪問者にもリードにも、資料提案・Q&A対応で理解を促進。ポップアップや資料ページも活用し、検討度を引き上げる。",
                 features: [
                   { label: "閲覧ページに合わせて資料を自動提案", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
                   { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
