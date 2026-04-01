@@ -514,7 +514,7 @@ const caseData = [
     name: "G-gen",
     industry: "Google Cloud プレミアパートナー",
     quote:
-      "ミートン導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
+      "Meeton ai導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
     stats: [
       { v: "10件+", l: "月間商談創出", c: "var(--cta)" },
       { v: "40%+", l: "リード→商談 転換率", c: "var(--blue)" },
@@ -525,7 +525,7 @@ const caseData = [
     name: "Univis",
     industry: "M&Aアドバイザリー・財務会計コンサル",
     quote:
-      "商談化率は80%超え。ミートンが精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
+      "商談化率は80%超え。Meeton aiが精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
     stats: [
       { v: "80%+", l: "商談化率", c: "var(--cta)" },
       { v: "高精度", l: "Meeting創出", c: "var(--blue)" },
@@ -536,7 +536,7 @@ const caseData = [
     name: "BizteX",
     industry: "クラウドRPA・業務自動化ツール",
     quote:
-      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がミートンの最大の魅力です。",
+      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton aiの最大の魅力です。",
     stats: [
       { v: "6件", l: "初週の商談創出", c: "var(--cta)" },
       { v: "1週目", l: "成果が出るまで", c: "var(--blue)" },
@@ -600,24 +600,24 @@ const integrations = [
 
 const faqData = [
   {
-    q: "ミートンの導入にどのくらい時間がかかりますか？",
-    a: "JavaScriptタグの設置は5分です。ミートンの設定を含めても、最短で当日中に稼働開始できます。",
+    q: "Meeton aiの導入にどのくらい時間がかかりますか？",
+    a: "JavaScriptタグの設置は5分です。Meeton aiの設定を含めても、最短で当日中に稼働開始できます。",
   },
   {
     q: "既存のCRM（Salesforce / HubSpot）と連携できますか？",
-    a: "はい。Salesforce、HubSpotとのネイティブ連携に対応しています。ミートンが獲得した商談情報は自動でCRMに登録されます。Webhook経由で他のCRMにも接続可能です。",
+    a: "はい。Salesforce、HubSpotとのネイティブ連携に対応しています。Meeton aiが獲得した商談情報は自動でCRMに登録されます。Webhook経由で他のCRMにも接続可能です。",
   },
   {
-    q: "ミートンは何語に対応していますか？",
+    q: "Meeton aiは何語に対応していますか？",
     a: "日本語・英語・中国語・韓国語をはじめ、主要言語に対応しています。リードの言語を自動検知し、適切な言語で会話します。",
   },
   {
     q: "無料トライアルはありますか？",
-    a: "14日間の無料トライアルをご用意しています。クレジットカード不要で、ミートンの全機能をお試しいただけます。",
+    a: "14日間の無料トライアルをご用意しています。クレジットカード不要で、Meeton aiの全機能をお試しいただけます。",
   },
   {
-    q: "ミートンと従来のチャットボットやImmedio等のツールとの違いは？",
-    a: "従来のツールはカレンダー表示やルールベースの応答が中心です。ミートンはAI SDRとして、リードの温度感を判断し、チャット・メール・資料提案・カレンダーの中から最適なアプローチを自律的に選択して商談を獲得します。",
+    q: "Meeton aiと従来のチャットボットやImmedio等のツールとの違いは？",
+    a: "従来のツールはカレンダー表示やルールベースの応答が中心です。Meeton aiはAI SDRとして、リードの温度感を判断し、チャット・メール・資料提案・カレンダーの中から最適なアプローチを自律的に選択して商談を獲得します。",
   },
 ];
 
@@ -3212,7 +3212,7 @@ function HeroDemoAnimation() {
       {/* Header */}
       <div className="demo-steps-bar" style={{justifyContent:"center",gap:8}}>
         <div className="demo-avatar-inner" style={{width:28,height:28,fontSize:12}}>M</div>
-        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>ミートンが2つのリードを同時に対応中</span>
+        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>Meeton aiが2つのリードを同時に対応中</span>
         <div className="demo-avatar-status" style={{position:"static",width:8,height:8,marginLeft:4}} />
       </div>
 
@@ -3308,13 +3308,13 @@ export default function HomePageClient() {
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            Japan&apos;s #1 AI SDR Platform
+            日本で最初のAI SDR
           </div>
           <h1 className="anim d2">
             AIが商談をつくる時代へ
           </h1>
           <p className="anim d3 hero-sub">
-            見込み客の育成から商談獲得まで、ミートンが自動でこなします。
+            見込み客の育成から商談獲得まで、Meeton aiが自動でこなします。
           </p>
           <div className="anim d4 hero-ctas">
             <button
@@ -3396,11 +3396,11 @@ export default function HomePageClient() {
         <div className="section-inner">
           <div className="slabel">How it works</div>
           <div className="stitle">
-            ミートンが自ら判断し、
+            Meeton aiが自ら判断し、
             <span style={{ color: "var(--cta)" }}>最適なアプローチを選択</span>
           </div>
           <p className="ssub" style={{ margin: "0 auto" }}>
-            単なるカレンダー表示ツールではありません。ミートンはリードの温度感を見極め、4つのフェーズを自在に組み合わせて商談を創出します。
+            単なるカレンダー表示ツールではありません。Meeton aiはリードの温度感を見極め、4つのフェーズを自在に組み合わせて商談を創出します。
           </p>
 
           {/* 4-Phase Flow Diagram */}
@@ -3493,7 +3493,7 @@ export default function HomePageClient() {
               color: "var(--sub)",
             }}>
               <Ico name="brain" size={16} color="var(--cta)" />
-              <span>順番は固定ではありません。ミートンがリードの温度感に応じて自動で判断します。</span>
+              <span>順番は固定ではありません。Meeton aiがリードの温度感に応じて自動で判断します。</span>
             </div>
           </div>
         </div>
@@ -3515,11 +3515,11 @@ export default function HomePageClient() {
             What Meeton Does
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            ミートンが商談をつくる、
+            Meeton aiが商談をつくる、
             <span style={{ color: "var(--cta)" }}>4つのフェーズ</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            リードの温度感に応じてミートンが順番を自動で判断。フォーム送信直後なら即カレンダーへ、まだ温まっていなければじっくり育成してから商談化します。
+            リードの温度感に応じてMeeton aiが順番を自動で判断。フォーム送信直後なら即カレンダーへ、まだ温まっていなければじっくり育成してから商談化します。
           </p>
 
           <div className="phase-grid">
@@ -3544,7 +3544,7 @@ export default function HomePageClient() {
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
                 label: "ENGAGE",
                 title: "話しかける",
-                desc: "チャットやメールでミートンが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開。",
+                desc: "チャットやメールでMeeton aiが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開。",
                 features: [
                   { label: "AIチャットで即座に会話開始", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
                   { label: "パーソナライズドメールを自動送信", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
@@ -3664,7 +3664,7 @@ export default function HomePageClient() {
             marginRight: "auto",
           }}>
             <span style={{ fontSize: 14, color: "var(--sub)", lineHeight: 1.8 }}>
-              <Ico name="info" size={16} color="var(--cta)" /> フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——ミートンがリードの状態を見て自動で判断します。
+              <Ico name="info" size={16} color="var(--cta)" /> フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——Meeton aiがリードの状態を見て自動で判断します。
             </span>
           </div>
         </div>
@@ -3677,13 +3677,13 @@ export default function HomePageClient() {
             導入ステップ
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            かんたん3ステップで<span style={{ color: "var(--cta)" }}>ミートンが稼働開始</span>
+            かんたん3ステップで<span style={{ color: "var(--cta)" }}>Meeton aiが稼働開始</span>
           </div>
           <p
             className="ssub"
             style={{ textAlign: "center", margin: "0 auto 44px" }}
           >
-            開発リソース不要。最短当日からミートンがあなたのAI SDRとして働き始めます。
+            開発リソース不要。最短当日からMeeton aiがあなたのAI SDRとして働き始めます。
           </p>
           <div className="steps-row">
             {stepsData.map((s, i) => (
@@ -3853,7 +3853,7 @@ export default function HomePageClient() {
             なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
-            人間のSDRが行ってきた業務を、ミートンが24時間・高精度で代替する時代が来ました。
+            人間のSDRが行ってきた業務を、Meeton aiが24時間・高精度で代替する時代が来ました。
           </p>
           <div className="why-grid">
             {[
@@ -3863,7 +3863,7 @@ export default function HomePageClient() {
                 bg: "var(--cta-light)",
                 border: "linear-gradient(135deg,var(--cta),var(--blue))",
                 title: "自律的に判断・行動",
-                desc: "設定に従って表示するだけのツールとは違います。ミートンはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
+                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
               },
               {
                 iconKey: "bolt" as IconKey,
@@ -3871,7 +3871,7 @@ export default function HomePageClient() {
                 bg: "var(--accent-light)",
                 border: "linear-gradient(135deg,var(--accent),var(--pink))",
                 title: "SDR 3人分を24時間稼働",
-                desc: "人間のSDRは1日8時間。ミートンは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
+                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
               },
               {
                 iconKey: "target" as IconKey,
@@ -3914,7 +3914,7 @@ export default function HomePageClient() {
             </div>
             <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>ミートン（AI SDR）</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
               <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
                 24時間365日 / 自律フォロー / 7チャネル統合<br/>即時レスポンス / 一貫した高品質対応
               </div>
@@ -3936,7 +3936,7 @@ export default function HomePageClient() {
             className="ssub"
             style={{ textAlign: "center", margin: "0 auto 44px" }}
           >
-            ミートンが生み出した商談成果をご紹介します。
+            Meeton aiが生み出した商談成果をご紹介します。
           </p>
           <CaseCarousel />
         </div>
@@ -4063,7 +4063,7 @@ export default function HomePageClient() {
         <div className="final-cta-inner">
           <div className="slabel">Get Started</div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            ミートンに、
+            Meeton aiに、
             <br />
             商談獲得を任せよう
           </div>
@@ -4071,7 +4071,7 @@ export default function HomePageClient() {
             className="ssub"
             style={{ textAlign: "center", margin: "16px auto 36px" }}
           >
-            導入は5分。あなた専属のAI SDR「ミートン」が24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
+            導入は5分。あなた専属のAI SDR「Meeton ai」が24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
           </p>
           <div
             style={{

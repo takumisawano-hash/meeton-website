@@ -339,7 +339,7 @@ export default function ConvertPageClient() {
                 {/* Chat header */}
                 <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#f0f4ff,#f8f6ff)', flexShrink: 0 }}>
                   <div style={{ width: 24, height: 24, borderRadius: 7, background: 'linear-gradient(135deg,#3b6ff5,#6690fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800 }}>M</div>
-                  <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>ミートン</div>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>Meeton ai</div>
                 </div>
                 {/* Chat body */}
                 <div style={{ flex: 1, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8, overflow: 'hidden' }}>

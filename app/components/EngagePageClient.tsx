@@ -230,7 +230,7 @@ export default function EngagePageClient() {
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />PHASE 02 — ENGAGE</div>
             <h1 className="anim d2">AIが自ら話しかけ<br /><em>会話を始める</em></h1>
-            <p className="anim d3 hero-sub">チャットやメールでミートンが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開します。</p>
+            <p className="anim d3 hero-sub">チャットやメールでMeeton aiが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
@@ -246,7 +246,7 @@ export default function EngagePageClient() {
               <div className="chat-hdr">
                 <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,var(--cta),#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 800 }}>M</div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>ミートン</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton ai</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)' }} />
                     <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>オンライン</span>
@@ -355,7 +355,7 @@ export default function EngagePageClient() {
                 <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#f8fffe,#f8f6ff)', flexShrink: 0 }}>
                   <div style={{ width: 24, height: 24, borderRadius: 7, background: 'linear-gradient(135deg,var(--cta),#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800 }}>M</div>
                   <div>
-                    <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>ミートン</div>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>Meeton ai</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
                       <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cta)' }} />
                       <span style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>オンライン</span>
