@@ -3915,7 +3915,7 @@ export default function HomePageClient() {
             <div style={{ textAlign: "center" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
               <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                24時間365日 / 自律フォロー / 7チャネル統合<br/>即時レスポンス / 一貫した高品質対応
+                24時間365日 / 自律フォロー / マルチチャネル<br/>即時レスポンス / 一貫した高品質対応
               </div>
             </div>
           </div>
