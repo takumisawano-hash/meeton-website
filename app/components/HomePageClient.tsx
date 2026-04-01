@@ -84,6 +84,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* CATEGORY CARDS - 3 categories */
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
 .cat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:36px 32px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
 .cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 16px 48px rgba(18,163,125,.12)}
 .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
@@ -104,13 +105,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .qflow-hz-gate{display:flex;align-items:center;justify-content:center;width:auto;flex-shrink:0;padding:0 6px}
 
 /* QUALITY SECTION */
-.qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-.qual-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px;transition:all .35s;box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden}
-.qual-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.12)}
-.qual-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
-.qual-card:hover::before{opacity:1}
-.qual-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:26px;transition:all .35s}
-.qual-card:hover .qual-icon{transform:scale(1.1) rotate(-3deg)}
 .qual-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
 .qual-desc{font-size:15px;line-height:1.75;color:var(--sub)}
 
@@ -184,13 +178,104 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .diagram{width:100%;height:100%;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
 
 /* RESPONSIVE */
+/* HERO DEMO */
+.demo-wrap{max-width:720px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 12px 48px rgba(18,163,125,.12),0 2px 8px rgba(0,0,0,.04);background:var(--bg)}
+.demo-steps-bar{display:flex;align-items:center;gap:0;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.demo-step-dot{display:flex;align-items:center;gap:6px;flex:1;font-size:12px;font-weight:700;color:var(--sub);transition:all .4s;z-index:1;justify-content:center}
+.demo-step-dot.active{color:var(--cta)}
+.demo-step-dot.done{color:var(--cta);opacity:.5}
+.demo-step-icon{font-size:16px}
+.demo-step-label{display:inline}
+.demo-progress{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--cta-light),rgba(18,163,125,.08));transition:width .6s cubic-bezier(.16,1,.3,1);z-index:0}
+.demo-screen{min-height:340px;padding:24px;position:relative;display:flex;align-items:flex-start;gap:16px}
+.demo-avatar{flex-shrink:0}
+.demo-avatar-inner{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cta),#0fc19a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;font-family:var(--fd);box-shadow:0 4px 12px var(--cta-glow)}
+.demo-avatar-status{width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid var(--bg);position:relative;top:-12px;left:32px;animation:pulse 2s infinite}
+.demo-scene{flex:1;min-width:0}
+.demo-scene-title{font-size:13px;font-weight:800;color:var(--heading);margin-bottom:16px;font-family:var(--fm);letter-spacing:1px;text-transform:uppercase}
+
+/* Demo chat */
+.demo-chat{display:flex;flex-direction:column;gap:10px}
+.demo-msg{display:flex;align-items:flex-start;gap:8px}
+.demo-msg-user{flex-direction:row-reverse}
+.demo-msg-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--cta),#0fc19a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:11px;flex-shrink:0}
+.demo-msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6;max-width:320px;font-weight:500}
+.demo-msg-bot .demo-msg-bubble{background:var(--surface);color:var(--text);border-bottom-left-radius:4px}
+.demo-msg-user .demo-msg-bubble{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;border-bottom-right-radius:4px}
+.demo-msg-appear{animation:chatPop .4s cubic-bezier(.16,1,.3,1) forwards}
+
+/* Demo email */
+.demo-email{background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.demo-email-header{padding:14px 16px;border-bottom:1px solid var(--border)}
+.demo-email-from{font-size:13px;font-weight:700;color:var(--heading);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.demo-email-subject{font-size:12px;color:var(--sub);font-weight:600}
+.demo-email-body{padding:16px}
+.demo-email-body p{font-size:13px;line-height:1.7;color:var(--text);margin-bottom:8px}
+.demo-email-cta{display:inline-block;padding:10px 20px;background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;border-radius:8px;font-size:13px;font-weight:700;margin-top:8px;box-shadow:0 4px 12px var(--cta-glow)}
+
+/* Demo docs */
+.demo-docs{display:flex;flex-direction:column;gap:10px}
+.demo-doc-card{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:all .3s}
+.demo-doc-card:hover{border-color:var(--cta);box-shadow:0 4px 16px var(--cta-glow)}
+.demo-doc-icon{font-size:24px}
+.demo-doc-info{flex:1}
+.demo-doc-name{font-size:13px;font-weight:700;color:var(--heading)}
+.demo-doc-match{font-size:11px;color:var(--sub);margin-top:2px}
+
+/* Demo calendar */
+.demo-cal{background:var(--surface);border-radius:12px;padding:16px;border:1px solid var(--border)}
+.demo-cal-header{font-size:14px;font-weight:800;color:var(--heading);text-align:center;margin-bottom:12px}
+.demo-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px}
+.demo-cal-day-label{font-size:11px;font-weight:700;color:var(--sub);text-align:center;padding:4px}
+.demo-cal-day{font-size:12px;text-align:center;padding:8px 4px;border-radius:8px;color:var(--sub);background:var(--bg);border:1px solid var(--border);font-weight:600;transition:all .3s}
+.demo-cal-day.available{color:var(--cta);border-color:var(--cta);background:var(--cta-light);font-weight:700}
+.demo-cal-day.selected{background:var(--cta);color:#fff;border-color:var(--cta);transform:scale(1.1);box-shadow:0 4px 12px var(--cta-glow)}
+.demo-cal-confirmed{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--cta-light);border-radius:8px;font-size:13px;font-weight:700;color:var(--cta)}
+
+/* Demo CRM */
+.demo-crm{display:flex;flex-direction:column;gap:12px}
+.demo-crm-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.demo-crm-label{padding:10px 16px;background:linear-gradient(135deg,#1a73e8,#4285f4);color:#fff;font-size:12px;font-weight:800;letter-spacing:1px}
+.demo-crm-fields{padding:12px 16px}
+.demo-crm-field{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
+.demo-crm-field:last-child{border-bottom:none}
+.demo-crm-field span{color:var(--sub)}
+.demo-crm-field strong{color:var(--heading)}
+.demo-slack-notif{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;border-left:4px solid #e01e5a}
+.demo-slack-icon{font-size:20px}
+
+/* PROOF STATS */
+.proof-stat-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px 24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:all .3s}
+.proof-stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(18,163,125,.1);border-color:transparent}
+
+/* LOGO CAROUSEL */
+.logo-carousel{overflow:hidden;position:relative;width:100%;mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.logo-track{display:flex;gap:32px;animation:logoScroll 25s linear infinite;width:max-content}
+.logo-track:hover{animation-play-state:paused}
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.logo-item{padding:16px 28px;background:var(--bg);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:150px;height:72px;flex-shrink:0;transition:all .3s}
+.logo-item:hover{border-color:transparent;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.logo-item img{height:36px;width:auto;max-width:120px;object-fit:contain}
+
+/* WHY AI SDR */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.why-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px;transition:all .35s;position:relative;overflow:hidden}
+.why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,163,125,.1)}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
+.why-card:hover::before{opacity:1}
+.why-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:28px}
+.why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
+.why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
+
 @media(max-width:1024px){
   .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .phase-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
   .qflow-hz{flex-direction:column;gap:0}
   .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
   .qflow-hz-gate{padding:8px 0}
   .qflow-hz-gate>div{writing-mode:horizontal-tb!important;flex-direction:row!important;padding:10px 20px!important}
-  .qual-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .proof-stats-grid{grid-template-columns:repeat(2,1fr)!important}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
   .step-arrow{display:none}
@@ -202,6 +287,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
   .hero-stats{flex-direction:column;gap:20px;align-items:center}
   .int-grid{grid-template-columns:repeat(2,1fr)}
+  .demo-screen{min-height:280px;padding:16px;gap:10px}
+  .demo-avatar-inner{width:32px;height:32px;font-size:14px}
+  .demo-avatar-status{top:-10px;left:22px}
+  .demo-step-label{display:none}
+  .demo-steps-bar{padding:10px 12px}
+  .demo-msg-bubble{max-width:220px;font-size:12px;padding:8px 12px}
+  .demo-email-body{padding:12px}
+  .demo-cal-grid{gap:4px}
+  .demo-cal-day{padding:6px 2px;font-size:11px}
   .final-cta{padding:60px 20px 80px}
   .case-carousel{overflow:hidden;width:100%}
   .case-track{gap:0}
@@ -217,7 +311,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .btn-ghost{padding:14px 24px;font-size:16px;width:100%}
   .feat-card-body{padding:24px 20px 20px}
   .feat-card-vis{min-height:180px}
-  .qual-card{padding:24px}
   .step-card{padding:24px}
   .faq-q{padding:16px 20px;font-size:16px}
   .faq-a{padding:0 20px 16px;font-size:14px}
@@ -242,7 +335,7 @@ const features = [
     color: "#0891b2",
     bg: "#0891b210",
     gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-    title: "Meeton ai \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
     desc: "\u8a2a\u554f\u8005\u3092\u5f85\u305f\u306a\u3044\u3002AI\u304c\u5148\u306b\u58f0\u3092\u304b\u3051\u3001\u30cb\u30fc\u30ba\u3092\u5f15\u304d\u51fa\u3057\u3001\u8cc7\u6599\u3092\u5c4a\u3051\u3001\u305d\u306e\u307e\u307e\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u5b8c\u7d50\u3002\u901a\u5e38\u306e\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8\u306f\u3082\u3061\u308d\u3093\u3001Google\u5e83\u544a\u30fbLinkedIn\u5e83\u544a\u7d4c\u7531\u306eLP\u306b\u3082\u8a2d\u7f6e\u3067\u304d\u308b\u306e\u3067\u3001\u5e83\u544a\u8cbb\u3092\u304b\u3051\u305f\u6d41\u5165\u3092\u53d6\u308a\u3053\u307c\u3055\u305a\u5546\u8ac7\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
@@ -250,7 +343,7 @@ const features = [
     color: "#12a37d",
     bg: "#12a37d10",
     gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-    title: "Meeton ai \u30e1\u30fc\u30eb",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30e1\u30fc\u30eb",
     desc: "\u30a4\u30f3\u30d0\u30a6\u30f3\u30c9\u30ea\u30fc\u30c9\u306b\u5bfe\u3057\u3066AI\u304c\u81ea\u52d5\u3067\u30ca\u30fc\u30c1\u30e3\u30ea\u30f3\u30b0\u30fb\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u3001\u5546\u8ac7\u78ba\u5b9a\u307e\u3067\u8a98\u5c0e\u3002\u30a6\u30a7\u30d3\u30ca\u30fc\u30fb\u30bb\u30df\u30ca\u30fc\u306e\u53c2\u52a0\u8005\u30ea\u30b9\u30c8\u3082CRM\u9023\u643a\u3084Webhook\u7d4c\u7531\u3067\u81ea\u52d5\u53d6\u308a\u8fbc\u307f\u3001\u30a4\u30d9\u30f3\u30c8\u76f4\u5f8c\u306e\u71b1\u91cf\u304c\u9ad8\u3044\u30bf\u30a4\u30df\u30f3\u30b0\u3092\u9003\u3057\u307e\u305b\u3093\u3002",
   },
   {
@@ -258,7 +351,7 @@ const features = [
     color: "#3b6ff5",
     bg: "#3b6ff510",
     gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-    title: "Meeton ai \u8cc7\u6599\u30da\u30fc\u30b8",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u8cc7\u6599\u30da\u30fc\u30b8",
     desc: "AI\u30b3\u30f3\u30b7\u30a7\u30eb\u30b8\u30e5\u4ed8\u304d\u306e\u8cc7\u6599\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u30da\u30fc\u30b8\u3092\u30b5\u30a4\u30c8\u306b\u7c21\u5358\u8ffd\u52a0\u3002AI\u304c\u300c\u3069\u306e\u8cc7\u6599\u304c\u5408\u3046\u304b\u300d\u3092\u63d0\u6848\u3057\u306a\u304c\u3089\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u304b\u3089\u5546\u8ac7\u4e88\u7d04\u307e\u3067\u4e00\u6c17\u306b\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
   {
@@ -266,7 +359,7 @@ const features = [
     color: "#7c5cfc",
     bg: "#7c5cfc10",
     gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-    title: "Meeton ai \u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
     desc: "\u554f\u3044\u5408\u308f\u305b\u3084\u8cc7\u6599\u8acb\u6c42\u306e\u76f4\u5f8c\u2014\u2014\u6700\u3082\u71b1\u91cf\u304c\u9ad8\u3044\u77ac\u9593\u306b\u3001\u30ab\u30ec\u30f3\u30c0\u30fc\u3092\u63d0\u793a\u3002AI\u30c1\u30e3\u30c3\u30c8\u304c\u6a2a\u3067\u7591\u554f\u306b\u7b54\u3048\u308b\u306e\u3067\u3001\u300c\u3061\u3087\u3063\u3068\u8074\u304d\u305f\u3044\u3053\u3068\u304c\u3042\u308b\u3051\u3069\u2026\u300d\u3067\u96e2\u8131\u3055\u305b\u307e\u305b\u3093\u3002",
   },
   {
@@ -274,7 +367,7 @@ const features = [
     color: "#d03ea1",
     bg: "#d03ea110",
     gradient: "linear-gradient(135deg,#d03ea1,#e879b9)",
-    title: "Meeton ai \u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
     desc: "\u300c\u4eca\u898b\u3066\u3044\u308b\u30da\u30fc\u30b8\u300d\u306b\u5408\u3063\u305f\u8cc7\u6599\u3092\u3001AI\u304c\u81ea\u52d5\u3067\u9078\u3073\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7\u63d0\u6848\u3002\u8cc7\u6599DL\u3092\u5165\u308a\u53e3\u306b\u3001\u81ea\u7136\u306a\u6d41\u308c\u3067\u5546\u8ac7\u7372\u5f97\u3078\u7e4b\u3052\u307e\u3059\u3002",
   },
   {
@@ -282,7 +375,7 @@ const features = [
     color: "#e0475b",
     bg: "#e0475b10",
     gradient: "linear-gradient(135deg,#e0475b,#f87171)",
-    title: "Meeton ai \u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
     desc: "\u30a2\u30dd\u96fb\u5f8c\u306e\u8cc7\u6599\u9001\u4ed8\u3084\u65e5\u7a0b\u8abf\u6574\u30e1\u30fc\u30eb\u306b\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af\u3092\u633f\u5165\u3002\u300c\u3054\u90fd\u5408\u306e\u826f\u3044\u65e5\u306f\uff1f\u300d\u306e\u3084\u308a\u3068\u308a\u304c\u6d88\u3048\u3001\u30ef\u30f3\u30af\u30ea\u30c3\u30af\u3067\u5546\u8ac7\u78ba\u5b9a\u3002AI\u30c1\u30e3\u30c3\u30c8\u304c\u4e88\u7d04\u524d\u306e\u4e0d\u5b89\u3082\u89e3\u6d88\u3057\u307e\u3059\u3002",
   },
   {
@@ -290,7 +383,7 @@ const features = [
     color: "#c026d3",
     bg: "#c026d310",
     gradient: "linear-gradient(135deg,#c026d3,#d946ef)",
-    title: "Meeton ai \u30ab\u30ec\u30f3\u30c0\u30fcQR",
+    title: "\u30df\u30fc\u30c8\u30f3\u306e\u30ab\u30ec\u30f3\u30c0\u30fcQR",
     desc: "\u8cc7\u6599\u3092\u8aad\u3093\u3067\u3044\u308b\u4eba\u306f\u3001\u6700\u3082\u71b1\u91cf\u304c\u9ad8\u3044\u898b\u8fbc\u5ba2\u3002PDF\u5185\u306eURL\u3084QR\u30b3\u30fc\u30c9\u304b\u3089\u3001\u8aad\u3093\u3067\u3044\u308b\u305d\u306e\u77ac\u9593\u306b\u5546\u8ac7\u4e88\u7d04\u3078\u8a98\u5c0e\u3057\u307e\u3059\u3002",
   },
 ];
@@ -377,16 +470,16 @@ const qualityData = [
     color: "#12a37d",
     bg: "linear-gradient(135deg,#e5f8f2,#eaf0fe)",
     border: "#b8e6d8",
-    title: "AI\u304c\u4e8b\u524d\u306b\u898b\u6975\u3081\u308b",
-    desc: "\u30c1\u30e3\u30c3\u30c8\u306e\u56de\u7b54\u3084\u30d5\u30a9\u30fc\u30e0\u5165\u529b\u3092\u3082\u3068\u306b\u3001\u30ab\u30ec\u30f3\u30c0\u30fc\u306e\u8868\u793a/\u975e\u8868\u793a\u30fb\u62c5\u5f53\u8005\u632f\u308a\u5206\u3051\u3092\u81ea\u52d5\u5206\u5c90\u3002\u300c\u4f1a\u3046\u4fa1\u5024\u306e\u3042\u308b\u5546\u8ac7\u300d\u3060\u3051\u304c\u5c4a\u304d\u307e\u3059\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u304c\u4e8b\u524d\u306b\u898b\u6975\u3081\u308b",
+    desc: "\u30c1\u30e3\u30c3\u30c8\u306e\u56de\u7b54\u3084\u30d5\u30a9\u30fc\u30e0\u5165\u529b\u3092\u3082\u3068\u306b\u3001\u30df\u30fc\u30c8\u30f3\u304c\u30ab\u30ec\u30f3\u30c0\u30fc\u306e\u8868\u793a/\u975e\u8868\u793a\u30fb\u62c5\u5f53\u8005\u632f\u308a\u5206\u3051\u3092\u81ea\u52d5\u5206\u5c90\u3002\u300c\u4f1a\u3046\u4fa1\u5024\u306e\u3042\u308b\u5546\u8ac7\u300d\u3060\u3051\u304c\u5c4a\u304d\u307e\u3059\u3002",
   },
   {
     iconKey: "hearing" as const,
     color: "#7c5cfc",
     bg: "linear-gradient(135deg,#f0ecfe,#eaf0fe)",
     border: "#c9bef5",
-    title: "AI\u304c\u6df1\u6398\u308a\u30d2\u30a2\u30ea\u30f3\u30b0",
-    desc: "\u4e88\u7d04\u6e08\u307f\u306e\u9867\u5ba2\u306bAI\u304c\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0\u3002\u55b6\u696d\u306f\u300c\u4f55\u306b\u56f0\u3063\u3066\u3044\u308b\u304b\u300d\u3092\u628a\u63e1\u3057\u305f\u72b6\u614b\u3067\u5546\u8ac7\u306b\u81e8\u3081\u308b\u306e\u3067\u3001\u521d\u56de\u304b\u3089\u63d0\u6848\u306e\u7cbe\u5ea6\u304c\u9055\u3044\u307e\u3059\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u304c\u6df1\u6398\u308a\u30d2\u30a2\u30ea\u30f3\u30b0",
+    desc: "\u4e88\u7d04\u6e08\u307f\u306e\u9867\u5ba2\u306b\u30df\u30fc\u30c8\u30f3\u304c\u8ffd\u52a0\u30d2\u30a2\u30ea\u30f3\u30b0\u3002\u55b6\u696d\u306f\u300c\u4f55\u306b\u56f0\u3063\u3066\u3044\u308b\u304b\u300d\u3092\u628a\u63e1\u3057\u305f\u72b6\u614b\u3067\u5546\u8ac7\u306b\u81e8\u3081\u308b\u306e\u3067\u3001\u521d\u56de\u304b\u3089\u63d0\u6848\u306e\u7cbe\u5ea6\u304c\u9055\u3044\u307e\u3059\u3002",
   },
   {
     iconKey: "sync" as const,
@@ -406,13 +499,13 @@ const stepsData = [
   },
   {
     num: "02",
-    title: "AI\u3092\u8a2d\u5b9a",
-    desc: "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u304b\u3089AI\u306e\u58f0\u304b\u3051\u5185\u5bb9\u3001\u5546\u8ac7\u4e88\u7d04\u306e\u30eb\u30fc\u30eb\u3001\u63d0\u6848\u306b\u4f7f\u3046\u8cc7\u6599\u7b49\u3092\u8a2d\u5b9a\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u3092\u8a2d\u5b9a",
+    desc: "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u304b\u3089\u30df\u30fc\u30c8\u30f3\u306e\u58f0\u304b\u3051\u5185\u5bb9\u3001\u5546\u8ac7\u4e88\u7d04\u306e\u30eb\u30fc\u30eb\u3001\u63d0\u6848\u306b\u4f7f\u3046\u8cc7\u6599\u7b49\u3092\u8a2d\u5b9a\u3002",
   },
   {
     num: "03",
-    title: "\u5546\u8ac7\u304c\u5165\u308a\u59cb\u3081\u308b",
-    desc: "\u8a2d\u5b9a\u5b8c\u4e86\u3057\u305f\u77ac\u9593\u304b\u3089AI\u304c\u7a3c\u50cd\u3002\u5546\u8ac7\u7372\u5f97\u304c\u81ea\u52d5\u3067\u56de\u308a\u59cb\u3081\u307e\u3059\u3002",
+    title: "\u30df\u30fc\u30c8\u30f3\u304c\u50cd\u304d\u59cb\u3081\u308b",
+    desc: "\u8a2d\u5b9a\u5b8c\u4e86\u3057\u305f\u77ac\u9593\u304b\u3089\u30df\u30fc\u30c8\u30f3\u304c\u7a3c\u50cd\u3002\u5546\u8ac7\u7372\u5f97\u304c\u81ea\u52d5\u3067\u56de\u308a\u59cb\u3081\u307e\u3059\u3002",
   },
 ];
 
@@ -421,7 +514,7 @@ const caseData = [
     name: "G-gen",
     industry: "Google Cloud プレミアパートナー",
     quote:
-      "Meeton ai 導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
+      "Meeton ai導入後、月10件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
     stats: [
       { v: "10件+", l: "月間商談創出", c: "var(--cta)" },
       { v: "40%+", l: "リード→商談 転換率", c: "var(--blue)" },
@@ -432,7 +525,7 @@ const caseData = [
     name: "Univis",
     industry: "M&Aアドバイザリー・財務会計コンサル",
     quote:
-      "商談化率は80%超え。Meeton ai が精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
+      "商談化率は80%超え。Meeton aiが精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
     stats: [
       { v: "80%+", l: "商談化率", c: "var(--cta)" },
       { v: "高精度", l: "Meeting創出", c: "var(--blue)" },
@@ -443,7 +536,7 @@ const caseData = [
     name: "BizteX",
     industry: "クラウドRPA・業務自動化ツール",
     quote:
-      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton ai の最大の魅力です。",
+      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton aiの最大の魅力です。",
     stats: [
       { v: "6件", l: "初週の商談創出", c: "var(--cta)" },
       { v: "1週目", l: "成果が出るまで", c: "var(--blue)" },
@@ -507,20 +600,24 @@ const integrations = [
 
 const faqData = [
   {
-    q: "\u5c0e\u5165\u306b\u3069\u306e\u304f\u3089\u3044\u6642\u9593\u304c\u304b\u304b\u308a\u307e\u3059\u304b\uff1f",
-    a: "JavaScript\u30bf\u30b0\u306e\u8a2d\u7f6e\u306f5\u5206\u3067\u3059\u3002AI\u306e\u8a2d\u5b9a\u3092\u542b\u3081\u3066\u3082\u3001\u6700\u77ed\u3067\u5f53\u65e5\u4e2d\u306b\u7a3c\u50cd\u958b\u59cb\u3067\u304d\u307e\u3059\u3002",
+    q: "Meeton aiの導入にどのくらい時間がかかりますか？",
+    a: "JavaScriptタグの設置は5分です。Meeton aiの設定を含めても、最短で当日中に稼働開始できます。",
   },
   {
-    q: "\u65e2\u5b58\u306eCRM\uff08Salesforce / HubSpot\uff09\u3068\u9023\u643a\u3067\u304d\u307e\u3059\u304b\uff1f",
-    a: "\u306f\u3044\u3002Salesforce\u3001HubSpot\u3068\u306e\u30cd\u30a4\u30c6\u30a3\u30d6\u9023\u643a\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u3059\u3002Webhook\u7d4c\u7531\u3067\u4ed6\u306eCRM\u306b\u3082\u63a5\u7d9a\u53ef\u80fd\u3067\u3059\u3002",
+    q: "既存のCRM（Salesforce / HubSpot）と連携できますか？",
+    a: "はい。Salesforce、HubSpotとのネイティブ連携に対応しています。Meeton aiが獲得した商談情報は自動でCRMに登録されます。Webhook経由で他のCRMにも接続可能です。",
   },
   {
-    q: "\u591a\u8a00\u8a9e\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u3059\u304b\uff1f",
-    a: "\u306f\u3044\u3002\u65e5\u672c\u8a9e\u30fb\u82f1\u8a9e\u30fb\u4e2d\u56fd\u8a9e\u30fb\u97d3\u56fd\u8a9e\u3092\u306f\u3058\u3081\u3001\u4e3b\u8981\u8a00\u8a9e\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u3059\u3002",
+    q: "Meeton aiは何語に対応していますか？",
+    a: "日本語・英語・中国語・韓国語をはじめ、主要言語に対応しています。リードの言語を自動検知し、適切な言語で会話します。",
   },
   {
-    q: "\u7121\u6599\u30c8\u30e9\u30a4\u30a2\u30eb\u306f\u3042\u308a\u307e\u3059\u304b\uff1f",
-    a: "14\u65e5\u9593\u306e\u7121\u6599\u30c8\u30e9\u30a4\u30a2\u30eb\u3092\u3054\u7528\u610f\u3057\u3066\u3044\u307e\u3059\u3002\u30af\u30ec\u30b8\u30c3\u30c8\u30ab\u30fc\u30c9\u4e0d\u8981\u3067\u5168\u6a5f\u80fd\u3092\u304a\u8a66\u3057\u3044\u305f\u3060\u3051\u307e\u3059\u3002",
+    q: "無料トライアルはありますか？",
+    a: "14日間の無料トライアルをご用意しています。クレジットカード不要で、Meeton aiの全機能をお試しいただけます。",
+  },
+  {
+    q: "Meeton aiと従来のチャットボットやImmedio等のツールとの違いは？",
+    a: "従来のツールはカレンダー表示やルールベースの応答が中心です。Meeton aiはAI SDRとして、リードの温度感を判断し、チャット・メール・資料提案・カレンダーの中から最適なアプローチを自律的に選択して商談を獲得します。",
   },
 ];
 
@@ -2682,8 +2779,7 @@ const diagramComponents = [
   DiagramPDF,
 ];
 
-/* ── Quality Section Diagram ── */
-function QualityFlowDiagram() {
+function QualityFlowDiagram_UNUSED() {
   const card: React.CSSProperties = { borderRadius: 18, padding: "20px 18px" };
   const stepLabel: React.CSSProperties = {
     fontSize: 12,
@@ -3001,6 +3097,168 @@ function CaseCarousel() {
   );
 }
 
+/* ── Inline SVG Icons ── */
+const Icon = ({ d, size = 16, color = "currentColor" }: { d: string; size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>
+);
+const ICONS = {
+  search: "M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z M16.65 16.65L21 21",
+  target: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
+  calendar: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+  check: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3",
+  chat: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+  doc: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",
+  mail: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
+  bell: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
+  bolt: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
+  brain: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6",
+  robot: "M12 2a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2z M9 12h.01 M15 12h.01 M10 16h4",
+  info: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 16v-4 M12 8h.01",
+};
+type IconKey = keyof typeof ICONS;
+const Ico = ({ name, size = 16, color = "currentColor" }: { name: IconKey; size?: number; color?: string }) => <Icon d={ICONS[name]} size={size} color={color} />;
+
+/* ── Hero Demo Animation — Two-lead branching ── */
+const LEAD_A_STEPS = [
+  { key: "detect", label: "フォーム送信を検知", iconKey: "search" as IconKey },
+  { key: "score", label: "温度: HIGH", iconKey: "target" as IconKey },
+  { key: "calendar", label: "即カレンダー提示", iconKey: "calendar" as IconKey },
+  { key: "done", label: "商談確定 → CRM登録", iconKey: "check" as IconKey },
+];
+const LEAD_B_STEPS = [
+  { key: "detect", label: "サイト訪問を検知", iconKey: "search" as IconKey },
+  { key: "score", label: "温度: LOW", iconKey: "target" as IconKey },
+  { key: "chat", label: "チャットで会話", iconKey: "chat" as IconKey },
+  { key: "doc", label: "資料を提案", iconKey: "doc" as IconKey },
+  { key: "email", label: "メールでフォロー", iconKey: "mail" as IconKey },
+  { key: "calendar", label: "カレンダー提示", iconKey: "calendar" as IconKey },
+  { key: "done", label: "商談確定 → CRM登録", iconKey: "check" as IconKey },
+];
+
+function HeroDemoAnimation() {
+  const [stepA, setStepA] = useState(0);
+  const [stepB, setStepB] = useState(0);
+  const [msgIdx, setMsgIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMsgIdx(0);
+      setStepA((p) => (p + 1) % LEAD_A_STEPS.length);
+      setStepB((p) => (p + 1) % LEAD_B_STEPS.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (msgIdx < 3) {
+      const t = setTimeout(() => setMsgIdx((p) => p + 1), 500);
+      return () => clearTimeout(t);
+    }
+  }, [stepA, stepB, msgIdx]);
+
+  const curA = LEAD_A_STEPS[stepA];
+  const curB = LEAD_B_STEPS[stepB];
+
+  const renderLeadContent = (cur: { key: string }, idx: number, isHot = false) => {
+    if (cur.key === "detect") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--surface)",borderRadius:10,fontSize:13,color:"var(--text)",fontWeight:600}}>
+        <Ico name="bell" size={18} color="var(--cta)" /> 新しいリードを検知しました
+      </div>
+    );
+    if (cur.key === "score") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10}}>
+        <div style={{fontSize:13,fontWeight:700,color:"var(--heading)"}}>スコアリング中...</div>
+        {idx >= 2 && <div className="demo-msg-appear" style={{padding:"4px 12px",borderRadius:20,fontSize:12,fontWeight:800,background: isHot ? "linear-gradient(135deg,#ef4444,#f97316)" : "var(--border)",color: isHot ? "#fff" : "var(--sub)" }}>{isHot ? "HIGH 🔥" : "LOW"}</div>}
+      </div>
+    );
+    if (cur.key === "chat") return (
+      <div className="demo-chat">
+        {idx >= 1 && <div className="demo-msg demo-msg-bot demo-msg-appear"><span className="demo-msg-avatar">M</span><div className="demo-msg-bubble">こんにちは！何かお探しですか？</div></div>}
+        {idx >= 2 && <div className="demo-msg demo-msg-user demo-msg-appear"><div className="demo-msg-bubble">リード獲得を改善したいです</div></div>}
+      </div>
+    );
+    if (cur.key === "doc") return (
+      <div className="demo-doc-card demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
+        <Ico name="doc" size={20} color="var(--blue)" />
+        <div><div style={{fontSize:12,fontWeight:700,color:"var(--heading)"}}>リード獲得ガイド.pdf</div><div style={{fontSize:11,color:"var(--sub)"}}>マッチ度 <strong style={{color:"var(--cta)"}}>98%</strong></div></div>
+      </div>
+    );
+    if (cur.key === "email") return (
+      <div className="demo-msg-appear" style={{padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
+        <div style={{display:"flex",alignItems:"center",gap:4,fontSize:11,fontWeight:700,color:"var(--heading)",marginBottom:4}}><Ico name="mail" size={14} color="var(--cta)" /> フォローアップメール送信</div>
+        <div style={{fontSize:11,color:"var(--sub)"}}>事例資料+ミーティングリンクを添付</div>
+      </div>
+    );
+    if (cur.key === "calendar") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8}}>
+        <div style={{display:"flex",gap:4}}>
+          {["10:00","14:00","16:00"].map((t,j) => (
+            <div key={j} style={{padding:"6px 10px",borderRadius:8,fontSize:11,fontWeight:700,border:"1px solid",borderColor: j===1 ? "var(--cta)" : "var(--border)",background: j===1 ? "var(--cta)" : "var(--bg)",color: j===1 ? "#fff" : "var(--sub)",transition:"all .3s"}}>{t}</div>
+          ))}
+        </div>
+      </div>
+    );
+    if (cur.key === "done") return (
+      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--cta-light)",borderRadius:10,border:"1px solid rgba(18,163,125,.2)"}}>
+        <Ico name="check" size={18} color="var(--cta)" />
+        <div style={{fontSize:12,fontWeight:700,color:"var(--cta)"}}>商談確定！CRM登録 & Slack通知完了</div>
+      </div>
+    );
+    return null;
+  };
+
+  return (
+    <div className="demo-wrap">
+      {/* Header */}
+      <div className="demo-steps-bar" style={{justifyContent:"center",gap:8}}>
+        <div className="demo-avatar-inner" style={{width:28,height:28,fontSize:12}}>M</div>
+        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>Meeton aiが2つのリードを同時に対応中</span>
+        <div className="demo-avatar-status" style={{position:"static",width:8,height:8,marginLeft:4}} />
+      </div>
+
+      {/* Two lanes */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,minHeight:280}}>
+        {/* Lead A — Hot */}
+        <div style={{padding:"20px 20px",borderRight:"1px solid var(--border)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
+            <div style={{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,#ef4444,#f97316)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>A</div>
+            <div>
+              <div style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>田中さん</div>
+              <div style={{fontSize:11,color:"var(--sub)"}}>フォーム送信済み 🔥</div>
+            </div>
+          </div>
+          {/* Step indicator */}
+          <div style={{display:"flex",gap:4,marginBottom:12}}>
+            {LEAD_A_STEPS.map((_,i) => (
+              <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepA ? "var(--cta)" : "var(--border)",transition:"background .3s"}} />
+            ))}
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:700,color:"var(--cta)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}><Ico name={curA.iconKey} size={14} color="var(--cta)" /> {curA.label}</div>
+          {renderLeadContent(curA, msgIdx, true)}
+        </div>
+
+        {/* Lead B — Cold */}
+        <div style={{padding:"20px 20px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
+            <div style={{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,#3b6ff5,#6690fa)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>B</div>
+            <div>
+              <div style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>佐藤さん</div>
+              <div style={{fontSize:11,color:"var(--sub)"}}>初回サイト訪問</div>
+            </div>
+          </div>
+          <div style={{display:"flex",gap:4,marginBottom:12}}>
+            {LEAD_B_STEPS.map((_,i) => (
+              <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepB ? "var(--blue)" : "var(--border)",transition:"background .3s"}} />
+            ))}
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:700,color:"var(--blue)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}><Ico name={curB.iconKey} size={14} color="var(--blue)" /> {curB.label}</div>
+          {renderLeadContent(curB, msgIdx)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePageClient() {
   const pathname = usePathname();
   const isJa = pathname.startsWith("/ja");
@@ -3050,46 +3308,82 @@ export default function HomePageClient() {
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            AI インサイドセールス
+            日本で最初のAI SDR
           </div>
           <h1 className="anim d2">
-            営業が動く前に、
-            <br />
-            <em>商談が届く</em>
+            AIが商談をつくる時代へ
           </h1>
           <p className="anim d3 hero-sub">
-            Webサイト・メール・資料——あらゆる接点にAIを配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。
+            見込み客の育成から商談獲得まで、Meeton aiが自動でこなします。
           </p>
           <div className="anim d4 hero-ctas">
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => setIsMeetingModalOpen(true)}
             >
-              資料請求
+              AIデモを体験
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => setIsDocModalOpen(true)}
             >
-              デモを予約 →
+              資料請求 →
             </button>
           </div>
-          <div className="anim d5 hero-stats">
-            {[
-              { v: "7", l: "つの自動獲得チャネル" },
-              { v: "24/7", l: "眠らないAIセールス" },
-              { v: "5min", l: "で導入完了" },
-            ].map((s, i) => (
-              <div key={i} style={{ textAlign: "center" }}>
-                <div className="stat-v">{s.v}</div>
-                <div className="stat-l">{s.l}</div>
-              </div>
-            ))}
+          {/* HERO DEMO ANIMATION */}
+          <div className="anim d5" style={{ marginTop: "clamp(40px,6vw,64px)" }}>
+            <HeroDemoAnimation />
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS - Overview Diagram */}
+      {/* SOCIAL PROOF STATS */}
+      <section style={{
+        padding: "clamp(40px,6vw,60px) clamp(16px,5vw,48px)",
+        background: "var(--bg)",
+        position: "relative",
+        zIndex: 2,
+      }}>
+        <div style={{
+          maxWidth: 1000,
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 16,
+        }} className="proof-stats-grid">
+          {[
+            { v: "< 5秒", l: "リード検知→初回アプローチ", sub: "人間SDRの平均42時間→即時", color: "var(--cta)" },
+            { v: "3x", l: "SDR一人分の商談創出量", sub: "同じコストで3倍の成果", color: "var(--blue)" },
+            { v: "24/7", l: "深夜・週末も自律稼働", sub: "リードの熱い瞬間を逃さない", color: "var(--accent)" },
+            { v: "5min", l: "導入から稼働開始まで", sub: "開発リソース不要", color: "var(--pink)" },
+          ].map((s, i) => (
+            <div key={i} className="proof-stat-card">
+              <div style={{
+                fontFamily: "var(--fm)",
+                fontSize: "clamp(28px,4vw,40px)",
+                fontWeight: 700,
+                color: s.color,
+                letterSpacing: -1,
+                lineHeight: 1.1,
+              }}>{s.v}</div>
+              <div style={{
+                fontSize: 15,
+                fontWeight: 800,
+                color: "var(--heading)",
+                marginTop: 6,
+              }}>{s.l}</div>
+              <div style={{
+                fontSize: 12,
+                color: "var(--sub)",
+                marginTop: 4,
+                fontWeight: 500,
+              }}>{s.sub}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS - 4 Phase Overview */}
       <section
         className="section"
         style={{
@@ -3101,915 +3395,111 @@ export default function HomePageClient() {
         <div className="section-inner">
           <div className="slabel">How it works</div>
           <div className="stitle">
-            接点すべてが、
-            <span style={{ color: "var(--cta)" }}>商談獲得マシン</span>に変わる
+            Meeton aiが自ら判断し、
+            <span style={{ color: "var(--cta)" }}>最適なアプローチを選択</span>
           </div>
           <p className="ssub" style={{ margin: "0 auto" }}>
-            7つのチャネルが同時に稼働。訪問者を逃さず捉え、温度感が高いうちに商談へ変換します。
+            単なるカレンダー表示ツールではありません。Meeton aiはリードの温度感を見極め、4つのフェーズを自在に組み合わせて商談を創出します。
           </p>
 
-          {/* Vertical Funnel: 7 channels inside Meeton ai → AI pipeline → Sales */}
-          <div style={{ marginTop: 48, overflowX: "auto", padding: "8px 0" }}>
-            {isMobile ? (
-              <svg
-                width="100%"
-                viewBox="0 0 380 780"
-                fill="none"
-                style={{ maxWidth: 400, margin: "0 auto", display: "block" }}
-              >
-                <defs>
-                  <filter id="hubGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="4"
-                      stdDeviation="12"
-                      floodColor="#12a37d"
-                      floodOpacity=".18"
-                    />
-                  </filter>
-                  <filter id="nodeGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="2"
-                      stdDeviation="6"
-                      floodOpacity=".08"
-                    />
-                  </filter>
-                  <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" stopOpacity=".07" />
-                    <stop offset="100%" stopColor="#0fc19a" stopOpacity=".02" />
-                  </linearGradient>
-                  <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#3b6ff5" />
-                    <stop offset="100%" stopColor="#6690fa" />
-                  </linearGradient>
-                  <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" />
-                    <stop offset="100%" stopColor="#0fc19a" />
-                  </linearGradient>
-                </defs>
-
-                {/* Trapezoid funnel */}
-                <g filter="url(#hubGlow)">
-                  <path
-                    d="M20,20 L360,20 Q375,20 375,35 L310,600 Q307,615 295,615 L85,615 Q73,615 70,600 L5,35 Q5,20 20,20 Z"
-                    fill="url(#hubGrad)"
-                    stroke="#12a37d"
-                    strokeWidth="2.5"
-                  />
-                </g>
-                <path
-                  d="M20,20 L360,20 Q375,20 375,35 L310,600 Q307,615 295,615 L85,615 Q73,615 70,600 L5,35 Q5,20 20,20 Z"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1"
-                  strokeDasharray="6 6"
-                  opacity=".3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="0"
-                    to="-48"
-                    dur="6s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-
-                <text
-                  x="190"
-                  y="50"
-                  textAnchor="middle"
-                  fontSize="22"
-                  fontWeight="900"
-                  fill="#12a37d"
-                  fontFamily="var(--fb)"
-                >
-                  Meeton ai
-                </text>
-
-                {/* 7 Channel cards - 2 columns */}
-                {[
-                  {
-                    label: "AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
-                    color: "#0891b2",
-                    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                  },
-                  {
-                    label: "AI \u30e1\u30fc\u30eb",
-                    color: "#12a37d",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30da\u30fc\u30b8",
-                    color: "#3b6ff5",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3",
-                  },
-                  {
-                    label: "\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
-                    color: "#7c5cfc",
-                    icon: "M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
-                    color: "#d03ea1",
-                    icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
-                    color: "#e0475b",
-                    icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fcQR",
-                    color: "#c026d3",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",
-                  },
-                ].map((ch, i) => {
-                  const col = i % 2;
-                  const row = Math.floor(i / 2);
-                  const cardW = 155;
-                  const gap = 10;
-                  const cx = col === 0 ? 190 - cardW - gap / 2 : 190 + gap / 2;
-                  const cy = 64 + row * 46;
-                  return (
-                    <g key={i}>
-                      <line
-                        x1={cx + cardW / 2}
-                        y1={cy + 38}
-                        x2={190}
-                        y2={260}
-                        stroke={ch.color}
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        opacity=".25"
-                      >
-                        <animate
-                          attributeName="stroke-dashoffset"
-                          from="16"
-                          to="0"
-                          dur={`${1.5 + i * 0.12}s`}
-                          repeatCount="indefinite"
-                        />
-                      </line>
-                      <circle r="2" fill={ch.color} opacity=".5">
-                        <animateMotion
-                          dur={`${2.5 + i * 0.18}s`}
-                          repeatCount="indefinite"
-                          path={`M${cx + cardW / 2},${cy + 38} L190,260`}
-                        />
-                      </circle>
-                      <g filter="url(#nodeGlow)">
-                        <rect
-                          x={cx}
-                          y={cy}
-                          width={cardW}
-                          height="36"
-                          rx="10"
-                          fill="white"
-                          stroke={ch.color}
-                          strokeWidth="1.5"
-                        />
-                        <g transform={`translate(${cx + 10}, ${cy + 6})`}>
-                          <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke={ch.color}
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d={ch.icon} />
-                          </svg>
-                        </g>
-                        <text
-                          x={cx + 38}
-                          y={cy + 23}
-                          fontSize="12"
-                          fontWeight="700"
-                          fill="#0f1128"
-                          fontFamily="var(--fb)"
-                        >
-                          {ch.label}
-                        </text>
-                      </g>
-                    </g>
-                  );
-                })}
-
-                {/* Convergence */}
-                <circle cx="190" cy="260" r="14" fill="#12a37d" opacity=".12" />
-                <circle cx="190" cy="260" r="5" fill="#12a37d" />
-                <circle
-                  cx="190"
-                  cy="260"
-                  r="14"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1.5"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="5"
-                    to="22"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".4"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* Arrow down */}
-                <line
-                  x1="190"
-                  y1="276"
-                  x2="190"
-                  y2="305"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="184,303 190,315 196,303" fill="#12a37d" />
-
-                {/* Pipeline steps */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="120"
-                    y="320"
-                    width="140"
-                    height="48"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="350"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u7cbe\u67fb"}
-                  </text>
-                </g>
-                <line
-                  x1="190"
-                  y1="368"
-                  x2="190"
-                  y2="393"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="184,391 190,403 196,391" fill="#12a37d" />
-
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="120"
-                    y="408"
-                    width="140"
-                    height="48"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="438"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u5546\u8ac7\u4e88\u7d04"}
-                  </text>
-                </g>
-                <line
-                  x1="190"
-                  y1="456"
-                  x2="190"
-                  y2="481"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="184,479 190,491 196,479" fill="#12a37d" />
-
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="120"
-                    y="496"
-                    width="140"
-                    height="48"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="526"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u30d2\u30a2\u30ea\u30f3\u30b0"}
-                  </text>
-                </g>
-
-                <circle r="4" fill="white" opacity=".8">
-                  <animateMotion
-                    dur="3.5s"
-                    repeatCount="indefinite"
-                    path="M190,345 L190,433 L190,521"
-                  />
-                </circle>
-
-                {/* Exit */}
-                <rect
-                  x="172"
-                  y="608"
-                  width="36"
-                  height="14"
-                  fill="var(--surface)"
-                />
-                <line
-                  x1="190"
-                  y1="544"
-                  x2="190"
-                  y2="645"
-                  stroke="#3b6ff5"
-                  strokeWidth="3"
-                  strokeDasharray="8 4"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="24"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="183,643 190,657 197,643" fill="#3b6ff5" />
-                <circle r="4" fill="#3b6ff5" opacity=".6">
-                  <animateMotion
-                    dur="1.5s"
-                    repeatCount="indefinite"
-                    path="M190,544 L190,653"
-                  />
-                </circle>
-                <circle
-                  cx="190"
-                  cy="657"
-                  r="6"
-                  fill="none"
-                  stroke="#3b6ff5"
-                  strokeWidth="2"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="6"
-                    to="20"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".5"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* Sales team */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="100"
-                    y="670"
-                    width="180"
-                    height="76"
-                    rx="18"
-                    fill="url(#salesGrad)"
-                  />
-                  <text
-                    x="190"
-                    y="700"
-                    textAnchor="middle"
-                    fontSize="18"
-                    fontWeight="900"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u55b6\u696d\u30c1\u30fc\u30e0"}
-                  </text>
-                  <text
-                    x="190"
-                    y="722"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fontWeight="600"
-                    fill="rgba(255,255,255,.8)"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}
-                  </text>
-                </g>
-              </svg>
-            ) : (
-              <svg
-                width="100%"
-                viewBox="0 0 800 700"
-                fill="none"
-                style={{ maxWidth: 800, margin: "0 auto", display: "block" }}
-              >
-                <defs>
-                  <filter id="hubGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="4"
-                      stdDeviation="12"
-                      floodColor="#12a37d"
-                      floodOpacity=".18"
-                    />
-                  </filter>
-                  <filter id="nodeGlow">
-                    <feDropShadow
-                      dx="0"
-                      dy="2"
-                      stdDeviation="6"
-                      floodOpacity=".08"
-                    />
-                  </filter>
-                  <linearGradient id="hubGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" stopOpacity=".07" />
-                    <stop offset="100%" stopColor="#0fc19a" stopOpacity=".02" />
-                  </linearGradient>
-                  <linearGradient id="salesGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#3b6ff5" />
-                    <stop offset="100%" stopColor="#6690fa" />
-                  </linearGradient>
-                  <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#12a37d" />
-                    <stop offset="100%" stopColor="#0fc19a" />
-                  </linearGradient>
-                </defs>
-
-                {/* ── Trapezoid funnel boundary (Meeton ai ecosystem) ── */}
-                <g filter="url(#hubGlow)">
-                  <path
-                    d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z"
-                    fill="url(#hubGrad)"
-                    stroke="#12a37d"
-                    strokeWidth="2.5"
-                  />
-                </g>
-                {/* Animated border */}
-                <path
-                  d="M60,20 L740,20 Q760,20 760,40 L600,540 Q595,555 580,555 L220,555 Q205,555 200,540 L40,40 Q40,20 60,20 Z"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1"
-                  strokeDasharray="6 6"
-                  opacity=".3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="0"
-                    to="-48"
-                    dur="6s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-
-                {/* Ecosystem label at top */}
-                <text
-                  x="400"
-                  y="52"
-                  textAnchor="middle"
-                  fontSize="24"
-                  fontWeight="900"
-                  fill="#12a37d"
-                  fontFamily="var(--fb)"
-                >
-                  Meeton ai
-                </text>
-
-                {/* ── 7 Channel cards (top zone inside funnel) ── */}
-                {[
-                  {
-                    label: "AI \u30c1\u30e3\u30c3\u30c8\u30dc\u30c3\u30c8",
-                    color: "#0891b2",
-                    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                  },
-                  {
-                    label: "AI \u30e1\u30fc\u30eb",
-                    color: "#12a37d",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30da\u30fc\u30b8",
-                    color: "#3b6ff5",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3",
-                  },
-                  {
-                    label: "\u30b5\u30f3\u30af\u30b9\u30da\u30fc\u30b8",
-                    color: "#7c5cfc",
-                    icon: "M19 4H5a2 2 0 0 0-2 2v14l7-3 7 3V6a2 2 0 0 0-2-2z",
-                  },
-                  {
-                    label: "\u8cc7\u6599\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7",
-                    color: "#d03ea1",
-                    icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fc\u30ea\u30f3\u30af",
-                    color: "#e0475b",
-                    icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-                  },
-                  {
-                    label: "\u30ab\u30ec\u30f3\u30c0\u30fcQR",
-                    color: "#c026d3",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6",
-                  },
-                ].map((ch, i) => {
-                  /* Row 1: 4 cards, Row 2: 3 cards centered */
-                  const isRow1 = i < 4;
-                  const colIdx = isRow1 ? i : i - 4;
-                  const rowCount = isRow1 ? 4 : 3;
-                  const cardW = 148;
-                  const gap = 12;
-                  const totalW = rowCount * cardW + (rowCount - 1) * gap;
-                  const startX = 400 - totalW / 2;
-                  const cx = startX + colIdx * (cardW + gap);
-                  const cy = isRow1 ? 74 : 124;
-                  return (
-                    <g key={i}>
-                      {/* Animated flow line downward to convergence */}
-                      <line
-                        x1={cx + cardW / 2}
-                        y1={cy + 40}
-                        x2={400}
-                        y2={230}
-                        stroke={ch.color}
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        opacity=".25"
-                      >
-                        <animate
-                          attributeName="stroke-dashoffset"
-                          from="16"
-                          to="0"
-                          dur={`${1.5 + i * 0.12}s`}
-                          repeatCount="indefinite"
-                        />
-                      </line>
-                      <circle r="2.5" fill={ch.color} opacity=".5">
-                        <animateMotion
-                          dur={`${2.5 + i * 0.18}s`}
-                          repeatCount="indefinite"
-                          path={`M${cx + cardW / 2},${cy + 40} L400,230`}
-                        />
-                      </circle>
-                      {/* Channel card */}
-                      <g filter="url(#nodeGlow)">
-                        <rect
-                          x={cx}
-                          y={cy}
-                          width={cardW}
-                          height="38"
-                          rx="10"
-                          fill="white"
-                          stroke={ch.color}
-                          strokeWidth="1.5"
-                        />
-                        <g transform={`translate(${cx + 10}, ${cy + 7})`}>
-                          <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke={ch.color}
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d={ch.icon} />
-                          </svg>
-                        </g>
-                        <text
-                          x={cx + 40}
-                          y={cy + 24}
-                          fontSize="10.5"
-                          fontWeight="700"
-                          fill="#0f1128"
-                          fontFamily="var(--fb)"
-                        >
-                          {ch.label}
-                        </text>
-                      </g>
-                    </g>
-                  );
-                })}
-
-                {/* ── Convergence zone ── */}
-                <circle cx="400" cy="230" r="16" fill="#12a37d" opacity=".12" />
-                <circle cx="400" cy="230" r="6" fill="#12a37d" />
-                <circle
-                  cx="400"
-                  cy="230"
-                  r="16"
-                  fill="none"
-                  stroke="#12a37d"
-                  strokeWidth="1.5"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="6"
-                    to="24"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".4"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* Arrow down to pipeline */}
-                <line
-                  x1="400"
-                  y1="246"
-                  x2="400"
-                  y2="275"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="394,273 400,285 406,273" fill="#12a37d" />
-
-                {/* ── AI Processing Pipeline (3 vertical steps) ── */}
-                {/* Step 1: 精査 */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="330"
-                    y="290"
-                    width="140"
-                    height="50"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="320"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u7cbe\u67fb"}
-                  </text>
-                </g>
-                <line
-                  x1="400"
-                  y1="340"
-                  x2="400"
-                  y2="365"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="394,363 400,375 406,363" fill="#12a37d" />
-
-                {/* Step 2: 商談予約 */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="330"
-                    y="380"
-                    width="140"
-                    height="50"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="410"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u5546\u8ac7\u4e88\u7d04"}
-                  </text>
-                </g>
-                <line
-                  x1="400"
-                  y1="430"
-                  x2="400"
-                  y2="455"
-                  stroke="#12a37d"
-                  strokeWidth="2.5"
-                  strokeDasharray="4 3"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="14"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="394,453 400,465 406,453" fill="#12a37d" />
-
-                {/* Step 3: ヒアリング */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="330"
-                    y="470"
-                    width="140"
-                    height="50"
-                    rx="14"
-                    fill="url(#stepGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="500"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontWeight="800"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u30d2\u30a2\u30ea\u30f3\u30b0"}
-                  </text>
-                </g>
-
-                {/* Animated dot along vertical pipeline */}
-                <circle r="4" fill="white" opacity=".8">
-                  <animateMotion
-                    dur="3.5s"
-                    repeatCount="indefinite"
-                    path="M400,315 L400,405 L400,495"
-                  />
-                </circle>
-
-                {/* ── Exit: arrow breaking through funnel bottom ── */}
-                <rect
-                  x="382"
-                  y="548"
-                  width="36"
-                  height="14"
-                  fill="var(--surface)"
-                />
-                <line
-                  x1="400"
-                  y1="520"
-                  x2="400"
-                  y2="585"
-                  stroke="#3b6ff5"
-                  strokeWidth="3"
-                  strokeDasharray="8 4"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="24"
-                    to="0"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </line>
-                <polygon points="392,583 400,597 408,583" fill="#3b6ff5" />
-
-                {/* Animated exit dot */}
-                <circle r="4" fill="#3b6ff5" opacity=".6">
-                  <animateMotion
-                    dur="1.5s"
-                    repeatCount="indefinite"
-                    path="M400,520 L400,593"
-                  />
-                </circle>
-
-                {/* Pulse at exit */}
-                <circle
-                  cx="400"
-                  cy="597"
-                  r="6"
-                  fill="none"
-                  stroke="#3b6ff5"
-                  strokeWidth="2"
-                  opacity="0"
-                >
-                  <animate
-                    attributeName="r"
-                    from="6"
-                    to="20"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from=".5"
-                    to="0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-                {/* ── 営業チーム (OUTSIDE the funnel) ── */}
-                <g filter="url(#nodeGlow)">
-                  <rect
-                    x="310"
-                    y="610"
-                    width="180"
-                    height="76"
-                    rx="18"
-                    fill="url(#salesGrad)"
-                  />
-                  <text
-                    x="400"
-                    y="640"
-                    textAnchor="middle"
-                    fontSize="18"
-                    fontWeight="900"
-                    fill="white"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u55b6\u696d\u30c1\u30fc\u30e0"}
-                  </text>
-                  <text
-                    x="400"
-                    y="662"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fontWeight="600"
-                    fill="rgba(255,255,255,.8)"
-                    fontFamily="var(--fb)"
-                  >
-                    {"\u8cea\u306e\u9ad8\u3044\u5546\u8ac7\u304c\u5c4a\u304f"}
-                  </text>
-                </g>
-              </svg>
-            )}
+          {/* 4-Phase Flow Diagram */}
+          <div style={{ marginTop: 48 }}>
+            {/* New CSS-based 4-phase diagram */}
+            <div style={{
+              display: "flex",
+              alignItems: "stretch",
+              gap: isMobile ? 0 : 0,
+              maxWidth: 900,
+              margin: "0 auto",
+              flexWrap: isMobile ? "wrap" : "nowrap",
+            }}>
+              {[
+                { num: "01", title: "見つける", iconKey: "search" as IconKey, color: "#0891b2", desc: "訪問・フォーム・DLを検知しスコアリング", tools: ["サイト訪問検知", "フォーム連携", "リードスコア"] },
+                { num: "02", title: "話しかける", iconKey: "chat" as IconKey, color: "#12a37d", desc: "チャット・メールで最適なタイミングに接触", tools: ["AIチャット", "AIメール", "自動フォロー"] },
+                { num: "03", title: "理解を深める", iconKey: "doc" as IconKey, color: "#7c5cfc", desc: "資料提案・Q&A対応で検討度を引き上げ", tools: ["資料提案", "ポップアップ", "Q&A対応"] },
+                { num: "04", title: "商談を決める", iconKey: "calendar" as IconKey, color: "#3b6ff5", desc: "カレンダー提示・ヒアリング・CRM登録", tools: ["カレンダー", "事前ヒアリング", "CRM連携"] },
+              ].map((phase, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "stretch", flex: isMobile ? "1 1 100%" : 1 }}>
+                  <div style={{
+                    flex: 1,
+                    padding: "28px 20px",
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 16,
+                    textAlign: "center",
+                    position: "relative",
+                    transition: "all .3s",
+                  }}>
+                    <div style={{
+                      marginBottom: 8,
+                      display: "flex",
+                      justifyContent: "center",
+                    }}><Ico name={phase.iconKey} size={28} color={phase.color} /></div>
+                    <div style={{
+                      fontFamily: "var(--fm)",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: phase.color,
+                      letterSpacing: 2,
+                      marginBottom: 4,
+                    }}>{phase.num}</div>
+                    <div style={{
+                      fontSize: 18,
+                      fontWeight: 900,
+                      color: "var(--heading)",
+                      marginBottom: 8,
+                    }}>{phase.title}</div>
+                    <div style={{
+                      fontSize: 13,
+                      color: "var(--sub)",
+                      lineHeight: 1.6,
+                      marginBottom: 12,
+                    }}>{phase.desc}</div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
+                      {phase.tools.map((t, j) => (
+                        <span key={j} style={{
+                          fontSize: 11,
+                          padding: "3px 8px",
+                          borderRadius: 6,
+                          background: `${phase.color}10`,
+                          color: phase.color,
+                          fontWeight: 700,
+                        }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  {i < 3 && !isMobile && (
+                    <div style={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "var(--border2)",
+                      fontSize: 18,
+                      padding: "0 4px",
+                      flexShrink: 0,
+                    }}>→</div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Adaptive note */}
+            <div style={{
+              marginTop: 20,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              fontSize: 13,
+              color: "var(--sub)",
+            }}>
+              <Ico name="brain" size={16} color="var(--cta)" />
+              <span>順番は固定ではありません。Meeton aiがリードの温度感に応じて自動で判断します。</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 3 CATEGORY CARDS */}
+
+      {/* 4 PHASE CARDS */}
       <section
         className="section"
         id="features"
@@ -4021,346 +3511,160 @@ export default function HomePageClient() {
           style={{ position: "relative", zIndex: 2 }}
         >
           <div className="slabel" style={{ textAlign: "center" }}>
-            Products
+            What Meeton Does
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            商談をつくる、
-            <span style={{ color: "var(--cta)" }}>3つのアプローチ</span>
+            Meeton aiが商談をつくる、
+            <span style={{ color: "var(--cta)" }}>4つのフェーズ</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            AIチャットボットを軸に、サイト内外のあらゆる接点から商談を自動獲得します。
+            リードの温度感に応じてMeeton aiが順番を自動で判断。フォーム送信直後なら即カレンダーへ、まだ温まっていなければじっくり育成してから商談化します。
           </p>
 
-          <div className="cat-grid">
-            {/* CORE ENGINE */}
-            <div
-              className="cat-card"
-              style={{ "--cat-color": "#0891b2" } as React.CSSProperties}
-            >
+          <div className="phase-grid">
+            {[
+              {
+                num: "01",
+                color: "#0891b2",
+                gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
+                label: "DETECT",
+                title: "見つける",
+                desc: "サイト訪問・フォーム送信・資料DL——あらゆる接点でリードの行動を検知し、温度感を瞬時にスコアリング。",
+                features: [
+                  { label: "サイト訪問をリアルタイム検知", icon: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0" },
+                  { label: "フォーム送信・資料DLをトリガーに", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "リードの温度感を自動スコアリング", icon: "M22 12h-4l-3 9L9 3l-3 9H2" },
+                ],
+                link: "/features/detect/",
+              },
+              {
+                num: "02",
+                color: "#12a37d",
+                gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                label: "ENGAGE",
+                title: "話しかける",
+                desc: "チャットやメールでMeeton aiが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開。",
+                features: [
+                  { label: "AIチャットで即座に会話開始", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "パーソナライズドメールを自動送信", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "未反応リードには自動フォローアップ", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
+                ],
+                link: "/features/engage/",
+              },
+              {
+                num: "03",
+                color: "#7c5cfc",
+                gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
+                label: "NURTURE",
+                title: "理解を深める",
+                desc: "匿名訪問者にもリードにも、資料提案・Q&A対応で理解を促進。ポップアップや資料ページも活用し、検討度を引き上げる。",
+                features: [
+                  { label: "閲覧ページに合わせて資料を自動提案", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
+                  { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
+                  { label: "チャットでQ&A対応、疑問を即解消", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" },
+                ],
+                link: "/features/nurture/",
+              },
+              {
+                num: "04",
+                color: "#3b6ff5",
+                gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
+                label: "CONVERT",
+                title: "商談を決める",
+                desc: "チャット内・サンクスページでカレンダーを提示。未予約リードにはAIメールで自動追客し、商談獲得を最大化。",
+                features: [
+                  { label: "チャット内でそのまま商談予約", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "サンクスページで即カレンダー提示", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
+                  { label: "未予約リードにAIメールで自動追客", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                ],
+                link: "/features/convert/",
+              },
+            ].map((phase, i) => (
               <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: "linear-gradient(90deg,#0891b2,#06b6d4)",
-                  opacity: 0,
-                  transition: "opacity .3s",
-                }}
-                className="cat-card-accent"
-              />
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
-                }}
-              />
-              <div
-                className="cat-label"
-                style={{ background: "#0891b210", color: "#0891b2" }}
+                className="cat-card"
+                key={i}
+                style={{ "--cat-color": phase.color } as React.CSSProperties}
               >
-                CORE ENGINE
-              </div>
-              <div className="cat-title">AI チャットボット</div>
-              <div className="cat-desc">
-                AIが訪問者に自ら話しかけ、ニーズを把握し、リード獲得から商談予約まで会話の流れで完結。
-              </div>
-              <div className="cat-features">
-                {[
-                  {
-                    label: "ページ文脈に応じた自動声かけ",
-                    color: "#0891b2",
-                    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                  },
-                  {
-                    label: "会話からニーズ把握＆資料提案",
-                    color: "#12a37d",
-                    icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z",
-                  },
-                  {
-                    label: "チャット内でリード獲得",
-                    color: "#3b6ff5",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "温度感に応じて商談予約まで完結",
-                    color: "#7c5cfc",
-                    icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-                  },
-                ].map((f, i) => (
-                  <div className="cat-feat" key={i}>
-                    <div
-                      className="cat-feat-icon"
-                      style={{ background: `${f.color}12` }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={f.color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d={f.icon} />
-                      </svg>
-                    </div>
-                    {f.label}
-                  </div>
-                ))}
-              </div>
-              <a href="/features/chatbot/" className="cat-link">
-                詳しく見る <span>→</span>
-              </a>
-            </div>
-
-            {/* ON-SITE CHANNELS */}
-            <div
-              className="cat-card"
-              style={{ "--cat-color": "#12a37d" } as React.CSSProperties}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: "linear-gradient(90deg,#12a37d,#0fc19a)",
-                  opacity: 0,
-                  transition: "opacity .3s",
-                }}
-                className="cat-card-accent"
-              />
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
-                }}
-              />
-              <div
-                className="cat-label"
-                style={{ background: "#12a37d10", color: "#12a37d" }}
-              >
-                ON-SITE CHANNELS
-              </div>
-              <div className="cat-title">サイト内チャネル</div>
-              <div className="cat-desc">
-                資料ページ・ポップアップ・サンクスページ。サイト内の3つの接点にAIを配置し、取りこぼしゼロを実現。
-              </div>
-              <div className="cat-features">
-                {[
-                  {
-                    label: "AI付き資料ダウンロードページ",
-                    color: "#3b6ff5",
-                    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3",
-                  },
-                  {
-                    label: "関心に応じた資料ポップアップ",
-                    color: "#d03ea1",
-                    icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
-                  },
-                  {
-                    label: "サンクスページで追加アクション",
-                    color: "#7c5cfc",
-                    icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3",
-                  },
-                ].map((f, i) => (
-                  <div className="cat-feat" key={i}>
-                    <div
-                      className="cat-feat-icon"
-                      style={{ background: `${f.color}12` }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={f.color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d={f.icon} />
-                      </svg>
-                    </div>
-                    {f.label}
-                  </div>
-                ))}
-              </div>
-              <a href="/features/onsite/" className="cat-link">
-                詳しく見る <span>→</span>
-              </a>
-            </div>
-
-            {/* OFF-SITE CHANNELS */}
-            <div
-              className="cat-card"
-              style={{ "--cat-color": "#3b6ff5" } as React.CSSProperties}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: "linear-gradient(90deg,#3b6ff5,#6690fa)",
-                  opacity: 0,
-                  transition: "opacity .3s",
-                }}
-                className="cat-card-accent"
-              />
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
-                }}
-              />
-              <div
-                className="cat-label"
-                style={{ background: "#3b6ff510", color: "#3b6ff5" }}
-              >
-                OUTREACH CHANNELS
-              </div>
-              <div className="cat-title">サイト外チャネル</div>
-              <div className="cat-desc">
-                AIメール・カレンダーリンク・カレンダーQR。サイトの外でもリードを育成し、商談予約を獲得。
-              </div>
-              <div className="cat-features">
-                {[
-                  {
-                    label: "AIパーソナライズメール",
-                    color: "#12a37d",
-                    icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                  },
-                  {
-                    label: "メール・PDFにカレンダーリンク",
-                    color: "#e0475b",
-                    icon: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",
-                  },
-                  {
-                    label: "名刺・展示会にカレンダーQR",
-                    color: "#c026d3",
-                    icon: "M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z M12 18h.01",
-                  },
-                ].map((f, i) => (
-                  <div className="cat-feat" key={i}>
-                    <div
-                      className="cat-feat-icon"
-                      style={{ background: `${f.color}12` }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={f.color}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d={f.icon} />
-                      </svg>
-                    </div>
-                    {f.label}
-                  </div>
-                ))}
-              </div>
-              <a href="/features/offsite/" className="cat-link">
-                詳しく見る <span>→</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AI CONCIERGE */}
-      <section
-        className="section"
-        id="concierge"
-        style={{
-          background:
-            "linear-gradient(165deg,#f3f0ff 0%,#fff 40%,#edfcf7 100%)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div className="dot-grid" style={{ opacity: 0.2 }} />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(124,92,252,.12)",
-            width: 500,
-            height: 500,
-            top: -100,
-            right: -80,
-          }}
-        />
-        <div
-          className="section-inner"
-          style={{ position: "relative", zIndex: 2 }}
-        >
-          <div className="slabel" style={{ textAlign: "center" }}>
-            AI CONCIERGE
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            {"すべてのチャネルに、予約を後押しするAIがいる"}
-          </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            {
-              "カレンダー表示だけでは予約されない。AIチャットが疑問を解消し、最後の一押しで離脱を防ぎます。"
-            }
-          </p>
-          <div style={{ marginTop: 48, overflowX: "auto" }}>
-            {isMobile ? <DiagramAIConciergeMobile /> : <DiagramAIConcierge />}
-          </div>
-        </div>
-      </section>
-
-      {/* QUALITY MEETINGS */}
-      <section
-        className="section"
-        id="quality"
-        style={{ background: "var(--surface)", position: "relative" }}
-      >
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
-        <div
-          className="section-inner"
-          style={{ position: "relative", zIndex: 2 }}
-        >
-          <div className="slabel" style={{ textAlign: "center" }}>
-            Quality Control
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            数だけじゃない。
-            <span style={{ color: "var(--cta)" }}>質の高い商談</span>を届ける
-          </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            AIが事前に見極め、ヒアリングし、営業が本当に会うべき相手だけを商談として届けます。
-          </p>
-
-          {/* Quality Flow Diagram */}
-          <div style={{ overflowX: "auto" }}>
-            <QualityFlowDiagram />
-          </div>
-
-          <div className="qual-grid">
-            {qualityData.map((q, i) => (
-              <div className="qual-card" key={i}>
                 <div
-                  className="qual-icon"
                   style={{
-                    background: q.bg,
-                    border: `1px solid ${q.border}`,
-                    color: q.color,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background: phase.gradient,
+                    opacity: 0,
+                    transition: "opacity .3s",
                   }}
+                  className="cat-card-accent"
+                />
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html: `.cat-card:hover .cat-card-accent{opacity:1 !important}`,
+                  }}
+                />
+                <div
+                  className="cat-label"
+                  style={{ background: `${phase.color}10`, color: phase.color }}
                 >
-                  {qualityIcons[q.iconKey]}
+                  <span style={{
+                    fontFamily: "var(--fm)",
+                    fontSize: 18,
+                    fontWeight: 900,
+                    background: phase.gradient,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    marginRight: 6,
+                  }}>{phase.num}</span>
+                  {phase.label}
                 </div>
-                <div className="qual-title">{q.title}</div>
-                <div className="qual-desc">{q.desc}</div>
+                <div className="cat-title">{phase.title}</div>
+                <div className="cat-desc">{phase.desc}</div>
+                <div className="cat-features">
+                  {phase.features.map((f, j) => (
+                    <div className="cat-feat" key={j}>
+                      <div
+                        className="cat-feat-icon"
+                        style={{ background: `${phase.color}12` }}
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke={phase.color}
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d={f.icon} />
+                        </svg>
+                      </div>
+                      {f.label}
+                    </div>
+                  ))}
+                </div>
+                <a href={phase.link} className="cat-link">
+                  詳しく見る <span>→</span>
+                </a>
               </div>
             ))}
+          </div>
+
+          {/* Adaptive flow note */}
+          <div style={{
+            marginTop: 32,
+            textAlign: "center",
+            padding: "16px 24px",
+            background: "var(--surface)",
+            borderRadius: 12,
+            maxWidth: 640,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}>
+            <span style={{ fontSize: 14, color: "var(--sub)", lineHeight: 1.8 }}>
+              <Ico name="info" size={16} color="var(--cta)" /> フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——Meeton aiがリードの状態を見て自動で判断します。
+            </span>
           </div>
         </div>
       </section>
@@ -4372,13 +3676,13 @@ export default function HomePageClient() {
             導入ステップ
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            かんたん3ステップで導入
+            かんたん3ステップで<span style={{ color: "var(--cta)" }}>Meeton aiが稼働開始</span>
           </div>
           <p
             className="ssub"
             style={{ textAlign: "center", margin: "0 auto 44px" }}
           >
-            開発リソース不要。最短当日から稼働開始。
+            開発リソース不要。最短当日からMeeton aiがあなたのAI SDRとして働き始めます。
           </p>
           <div className="steps-row">
             {stepsData.map((s, i) => (
@@ -4422,11 +3726,10 @@ export default function HomePageClient() {
                         </div>
                         <div
                           style={{
-                            fontSize: 18,
                             animation: "pulse 2s infinite",
                           }}
                         >
-                          ✅
+                          <Ico name="check" size={18} color="var(--cta)" />
                         </div>
                       </div>
                     )}
@@ -4442,9 +3745,9 @@ export default function HomePageClient() {
                         }}
                       >
                         {[
-                          "💬 声かけ内容",
-                          "📅 予約ルール",
-                          "🎯 見込み基準",
+                          { iconKey: "chat" as IconKey, label: "声かけ内容" },
+                          { iconKey: "calendar" as IconKey, label: "予約ルール" },
+                          { iconKey: "target" as IconKey, label: "見込み基準" },
                         ].map((item, j) => (
                           <div
                             key={j}
@@ -4457,7 +3760,7 @@ export default function HomePageClient() {
                               color: "var(--heading)",
                             }}
                           >
-                            <span>{item}</span>
+                            <span style={{display:"flex",alignItems:"center",gap:4}}><Ico name={item.iconKey} size={12} color="var(--cta)" />{item.label}</span>
                             <div
                               style={{
                                 flex: 1,
@@ -4496,7 +3799,7 @@ export default function HomePageClient() {
                         }}
                       >
                         <div style={{ display: "flex", gap: 4 }}>
-                          {["📧", "🎯", "📅"].map((e, j) => (
+                          {(["mail", "target", "calendar"] as IconKey[]).map((iconName, j) => (
                             <div
                               key={j}
                               style={{
@@ -4508,13 +3811,12 @@ export default function HomePageClient() {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                fontSize: 14,
                                 animation: `nodeGrow .4s ${j * 0.2}s cubic-bezier(.16,1,.3,1) forwards`,
                                 opacity: 0,
                                 transform: "scale(0)",
                               }}
                             >
-                              {e}
+                              <Ico name={iconName} size={14} color="var(--cta)" />
                             </div>
                           ))}
                         </div>
@@ -4541,6 +3843,85 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      {/* WHY AI SDR */}
+      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
+        <div className="dot-grid" style={{ opacity: 0.3 }} />
+        <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
+          <div className="slabel" style={{ textAlign: "center" }}>Why AI SDR?</div>
+          <div className="stitle" style={{ textAlign: "center" }}>
+            なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
+          </div>
+          <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
+            人間のSDRが行ってきた業務を、Meeton aiが24時間・高精度で代替する時代が来ました。
+          </p>
+          <div className="why-grid">
+            {[
+              {
+                iconKey: "robot" as IconKey,
+                color: "var(--cta)",
+                bg: "var(--cta-light)",
+                border: "linear-gradient(135deg,var(--cta),var(--blue))",
+                title: "自律的に判断・行動",
+                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
+              },
+              {
+                iconKey: "bolt" as IconKey,
+                color: "var(--accent)",
+                bg: "var(--accent-light)",
+                border: "linear-gradient(135deg,var(--accent),var(--pink))",
+                title: "SDR 3人分を24時間稼働",
+                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
+              },
+              {
+                iconKey: "target" as IconKey,
+                color: "var(--blue)",
+                bg: "var(--blue-light)",
+                border: "linear-gradient(135deg,var(--blue),var(--cyan))",
+                title: "ファネル全体を一気通貫",
+                desc: "初回接触→ナーチャリング→商談予約→事前ヒアリングまで。従来バラバラだったツールが1つのAIエージェントに統合され、リードが途中で途切れません。",
+              },
+            ].map((item, i) => (
+              <div className="why-card" key={i} style={{ boxShadow: "0 2px 8px rgba(0,0,0,.03)" }}>
+                <div className="why-card" style={{ all: "unset" }}>
+                  <div style={{ display: "none" }} className="why-card-before" />
+                </div>
+                <div className="why-icon" style={{ background: item.bg }}>
+                  <Ico name={item.iconKey} size={28} color={item.color} />
+                </div>
+                <div className="why-title">{item.title}</div>
+                <div className="why-desc">{item.desc}</div>
+              </div>
+            ))}
+          </div>
+          {/* Comparison strip */}
+          <div style={{
+            marginTop: 48,
+            background: "linear-gradient(135deg, var(--surface), var(--surface2))",
+            borderRadius: 16,
+            padding: "32px 40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 48,
+            flexWrap: "wrap",
+          }}>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>従来のSDR</div>
+              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
+                1日8時間 / 手動フォロー / チャネルごとに別ツール<br/>リード対応の遅延 / 属人的な品質
+              </div>
+            </div>
+            <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
+              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
+                24時間365日 / 自律フォロー / マルチチャネル<br/>即時レスポンス / 一貫した高品質対応
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>
         <div className="section-inner">
@@ -4554,7 +3935,7 @@ export default function HomePageClient() {
             className="ssub"
             style={{ textAlign: "center", margin: "0 auto 44px" }}
           >
-            Meeton ai が生み出した商談成果をご紹介します。
+            Meeton aiが生み出した商談成果をご紹介します。
           </p>
           <CaseCarousel />
         </div>
@@ -4648,12 +4029,18 @@ export default function HomePageClient() {
           <div className="slabel">導入企業</div>
           <div className="stitle">先進企業に選ばれています</div>
           <div style={{ height: 36 }} />
-          <div className="client-logos">
-            {clients.map((c) => (
-              <div className="client-logo" key={c.name}>
-                <img src={c.logo} alt={c.name} />
-              </div>
-            ))}
+          <div className="logo-carousel">
+            <div className="logo-track">
+              {/* Double the logos for seamless infinite scroll */}
+              {[...clients, ...clients].map((c, i) => (
+                <div className="logo-item" key={`${c.name}-${i}`}>
+                  <img src={c.logo} alt={c.name} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginTop: 24, fontSize: 14, fontWeight: 700, color: "var(--sub)" }}>
+            ...ほか多数の企業様にご導入いただいています
           </div>
         </div>
       </section>
@@ -4675,15 +4062,15 @@ export default function HomePageClient() {
         <div className="final-cta-inner">
           <div className="slabel">Get Started</div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            営業チームが、
+            Meeton aiに、
             <br />
-            商談に集中できる世界へ
+            商談獲得を任せよう
           </div>
           <p
             className="ssub"
             style={{ textAlign: "center", margin: "16px auto 36px" }}
           >
-            導入は5分。7つのAIチャネルが24時間稼働し、商談を自動で獲得し続けます。
+            導入は5分。あなた専属のAI SDR「Meeton ai」が24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
           </p>
           <div
             style={{
@@ -4695,15 +4082,15 @@ export default function HomePageClient() {
           >
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => setIsMeetingModalOpen(true)}
             >
-              資料請求
+              AIデモを体験
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => setIsDocModalOpen(true)}
             >
-              デモを予約 →
+              資料請求 →
             </button>
           </div>
         </div>

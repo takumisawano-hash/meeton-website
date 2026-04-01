@@ -39,9 +39,10 @@ export default function Footer({ variant = "light" }: FooterProps) {
   const links = [
     { href: "/", label: "Meeton ai" },
     { href: "/talent/", label: "Meeton Talent" },
-    { href: "/features/chatbot/", label: "AI Chat" },
-    { href: "/features/onsite/", label: "On-Site" },
-    { href: "/features/offsite/", label: "Outreach" },
+    { href: "/features/detect/", label: "Detect" },
+    { href: "/features/engage/", label: "Engage" },
+    { href: "/features/nurture/", label: "Nurture" },
+    { href: "/features/convert/", label: "Convert" },
     isJa
       ? { href: "/ja/integrations/", label: "連携" }
       : { href: "/integrations/", label: "Integrations" },

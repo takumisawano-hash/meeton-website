@@ -86,9 +86,10 @@ export default function Nav({
   ];
 
   const featuresDropdownItems = [
-    { href: "/features/chatbot/", label: "AI Chat", sub: "AIチャットボット" },
-    { href: "/features/onsite/", label: "On-Site", sub: "サイト内チャネル" },
-    { href: "/features/offsite/", label: "Outreach", sub: "サイト外チャネル" },
+    { href: "/features/detect/", label: "Detect", sub: "見つける" },
+    { href: "/features/engage/", label: "Engage", sub: "話しかける" },
+    { href: "/features/nurture/", label: "Nurture", sub: "理解を深める" },
+    { href: "/features/convert/", label: "Convert", sub: "商談を決める" },
   ];
 
   const navLinks = [
