@@ -3353,7 +3353,7 @@ export default function HomePageClient() {
         }} className="proof-stats-grid">
           {[
             { v: "< 5秒", l: "リード検知→初回アプローチ", sub: "人間SDRの平均42時間→即時", color: "var(--cta)" },
-            { v: "3x", l: "SDR一人分の商談創出量", sub: "同じコストで3倍の成果", color: "var(--blue)" },
+            { v: "40%+", l: "商談化率", sub: "人間SDRの2倍以上", color: "var(--blue)" },
             { v: "24/7", l: "深夜・週末も自律稼働", sub: "リードの熱い瞬間を逃さない", color: "var(--accent)" },
             { v: "5min", l: "導入から稼働開始まで", sub: "開発リソース不要", color: "var(--pink)" },
           ].map((s, i) => (
