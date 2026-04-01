@@ -3553,7 +3553,7 @@ export default function HomePageClient() {
                   { label: "フォーム送信・資料DLをトリガーに", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
                   { label: "リードの温度感を自動スコアリング", icon: "M22 12h-4l-3 9L9 3l-3 9H2" },
                 ],
-                link: "/features/chatbot/",
+                link: "/features/detect/",
               },
               {
                 num: "02",
@@ -3567,7 +3567,7 @@ export default function HomePageClient() {
                   { label: "パーソナライズドメールを自動送信", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
                   { label: "未反応リードには自動フォローアップ", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
                 ],
-                link: "/features/chatbot/",
+                link: "/features/engage/",
               },
               {
                 num: "03",
@@ -3581,7 +3581,7 @@ export default function HomePageClient() {
                   { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
                   { label: "チャットでQ&A対応、疑問を即解消", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" },
                 ],
-                link: "/features/onsite/",
+                link: "/features/nurture/",
               },
               {
                 num: "04",
@@ -3595,7 +3595,7 @@ export default function HomePageClient() {
                   { label: "メール・PDF・QRにカレンダーリンク", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
                   { label: "事前ヒアリング＆CRM自動登録", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14 M7 23l-4-4 4-4 M21 13v2a4 4 0 0 1-4 4H3" },
                 ],
-                link: "/features/offsite/",
+                link: "/features/convert/",
               },
             ].map((phase, i) => (
               <div

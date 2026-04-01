@@ -40,6 +40,36 @@ const nextConfig = {
         permanent: true,
       },
       ...blogRedirects,
+      {
+        source: '/features/chatbot',
+        destination: '/features/engage/',
+        permanent: true,
+      },
+      {
+        source: '/features/chatbot/',
+        destination: '/features/engage/',
+        permanent: true,
+      },
+      {
+        source: '/features/onsite',
+        destination: '/features/nurture/',
+        permanent: true,
+      },
+      {
+        source: '/features/onsite/',
+        destination: '/features/nurture/',
+        permanent: true,
+      },
+      {
+        source: '/features/offsite',
+        destination: '/features/convert/',
+        permanent: true,
+      },
+      {
+        source: '/features/offsite/',
+        destination: '/features/convert/',
+        permanent: true,
+      },
     ]
   },
 }
