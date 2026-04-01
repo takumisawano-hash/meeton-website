@@ -3308,7 +3308,7 @@ export default function HomePageClient() {
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            日本唯一の最先端AI SDR
+            日本唯一の最先端 AI SDR
           </div>
           <h1 className="anim d2">
             AIが商談をつくる時代へ
