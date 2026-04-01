@@ -3652,20 +3652,6 @@ export default function HomePageClient() {
           </div>
 
           {/* Adaptive flow note */}
-          <div style={{
-            marginTop: 32,
-            textAlign: "center",
-            padding: "16px 24px",
-            background: "var(--surface)",
-            borderRadius: 12,
-            maxWidth: 640,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}>
-            <span style={{ fontSize: 14, color: "var(--sub)", lineHeight: 1.8 }}>
-              <Ico name="info" size={16} color="var(--cta)" /> フェーズの順番は固定ではありません。フォーム送信直後なら<strong style={{color:"var(--heading)"}}>①→④へ直行</strong>、無視されたら<strong style={{color:"var(--heading)"}}>メールで再提案</strong>——Meeton aiがリードの状態を見て自動で判断します。
-            </span>
-          </div>
         </div>
       </section>
 
