@@ -37,12 +37,12 @@ const clients = [
 
 const faqData = [
   {
-    q: '導入にどのくらい時間がかかりま���か？',
+    q: '導入にどのくらい時間がかかりますか？',
     a: 'JavaScriptタグの設置は5分。設定を含めても最短当日で稼働開始。開発リソース不要です。',
   },
   {
     q: 'CRM（Salesforce / HubSpot）と連携できますか？',
-    a: 'はい。ネイティブ連携対応。商談情報は自動でCRMに登録されま��。',
+    a: 'はい。ネイティブ連携対応。商談情報は自動でCRMに登録されます。',
   },
   {
     q: '無料トライアルはありますか？',
@@ -127,7 +127,7 @@ function InlineHubSpotForm({ utmCampaign }: { utmCampaign: string }) {
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
         </div>
         <h3>ありがとうございます</h3>
-        <p>資料をメールでお送りしました。<br />デモのご予約もお待ちして��ます。</p>
+        <p>資料をメールでお送りしました。<br />デモのご予約もお待ちしています。</p>
       </div>
     )
   }
@@ -174,14 +174,14 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
     <>
       <style>{lpCSS}</style>
 
-      {/* ── STICKY TOP BAR ─��� */}
+      {/* ── STICKY TOP BAR ── */}
       <div className={'lp-sticky-bar' + (scrolled ? ' visible' : '')}>
         <div className="lp-sticky-inner">
           <span className="lp-sticky-text">
             <strong>Meeton ai</strong> — 14日間無料トライアル
           </span>
           <button className="lp-btn-primary lp-btn-sm" onClick={() => setMeetingOpen(true)}>
-            デモ��予約
+            デモを予約
           </button>
         </div>
       </div>
@@ -214,7 +214,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
                 <div className="lp-proof-divider" />
                 <div className="lp-proof-stat">
                   <span className="lp-proof-v">5分</span>
-                  <span className="lp-proof-l">セットア���プ</span>
+                  <span className="lp-proof-l">セットアップ</span>
                 </div>
               </div>
             </div>
@@ -394,7 +394,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .anim{opacity:0;animation:fadeUp .7s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.3s}
 
-/* ── STICKY BAR ���─ */
+/* ── STICKY BAR ── */
 .lp-sticky-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 24px;transform:translateY(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
 .lp-sticky-bar.visible{transform:translateY(0)}
 .lp-sticky-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
@@ -451,7 +451,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-trust-logo{height:26px;width:auto;object-fit:contain;opacity:.55;transition:opacity .2s;filter:grayscale(100%)}
 .lp-trust-logo:hover{opacity:1;filter:none}
 
-/* ── SECTIONS ��─ */
+/* ── SECTIONS ── */
 .lp-section{padding:clamp(48px,8vw,80px) clamp(16px,5vw,48px)}
 .lp-section-alt{background:var(--surface)}
 .lp-section-inner{max-width:960px;margin:0 auto}
@@ -492,7 +492,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-flow-desc{font-size:13px;color:var(--sub);font-weight:500}
 .lp-flow-connector{width:40px;height:2px;background:linear-gradient(90deg,var(--cta),var(--border));flex-shrink:0}
 
-/* ── FAQ ��─ */
+/* ── FAQ ── */
 .lp-faq{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
 .lp-faq-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .25s}
 .lp-faq-q{width:100%;padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:700;color:var(--heading);background:none;border:none;font-family:var(--fb);text-align:left;gap:12px;transition:color .2s}
