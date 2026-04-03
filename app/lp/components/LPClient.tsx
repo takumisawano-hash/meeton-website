@@ -56,15 +56,15 @@ const copy = {
     badge: 'AI SDR — 24時間365日稼働',
     h1: ['Webサイト訪問者を', '商談に変える'],
     sub: '人間SDRの平均対応42時間 → Meeton aiは5秒。見込み客の関心が最も高い瞬間に、自動で商談を獲得します。',
-    formHeading: '無料デモを予約',
-    formSub: '30分のデモで、Meeton aiの全機能をご紹介します',
+    formHeading: '3分で読める資料を無料ダウンロード',
+    formSub: 'Meeton aiの機能・導入事例・料金をまとめた資料をお送りします',
   },
   linkedin: {
     badge: '営業リーダー向け',
     h1: ['営業チームの商談数を', '3倍にする方法'],
     sub: '人材採用なし・ツール乱立なし。導入初週から成果。Meeton aiが検知→接触→商談設定を自動で完結します。',
-    formHeading: '無料デモを予約',
-    formSub: '導入事例と具体的なROIをお見せします',
+    formHeading: '導入事例と資料を無料ダウンロード',
+    formSub: '商談数3倍を実現した企業の具体的なROIをお見せします',
   },
 }
 
@@ -225,10 +225,12 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
               <h2 className="lp-form-heading">{c.formHeading}</h2>
               <p className="lp-form-sub">{c.formSub}</p>
               <InlineHubSpotForm utmCampaign={utmCampaign} />
-              <button className="lp-btn-primary lp-btn-full" onClick={() => setMeetingOpen(true)}>
-                カレンダーから日時を選ぶ
+              <div className="lp-form-divider">
+                <span>または</span>
+              </div>
+              <button className="lp-btn-meeting-link" onClick={() => setMeetingOpen(true)}>
+                今すぐ話を聞きたい方は<strong>デモを予約 →</strong>
               </button>
-              <p className="lp-form-note">クレジットカード不要 ・ 14日間無料</p>
             </div>
           </div>
         </div>
@@ -444,6 +446,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-form-success-icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--cta),var(--blue));display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
 .lp-form-success h3{font-size:20px;font-weight:800;color:var(--heading);margin-bottom:8px}
 .lp-form-success p{font-size:14px;color:var(--sub);line-height:1.6}
+.lp-form-divider{display:flex;align-items:center;gap:12px;margin:16px 0 12px}
+.lp-form-divider::before,.lp-form-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.lp-form-divider span{font-size:12px;color:var(--sub);font-weight:500;white-space:nowrap}
+.lp-btn-meeting-link{width:100%;background:none;border:none;cursor:pointer;font-family:var(--fb);font-size:13px;color:var(--sub);padding:8px;text-align:center;transition:color .2s;border-radius:8px}
+.lp-btn-meeting-link:hover{color:var(--cta)}
+.lp-btn-meeting-link strong{color:var(--cta);font-weight:700}
 
 /* ── TRUST BAR ── */
 .lp-trust-bar{padding:20px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
