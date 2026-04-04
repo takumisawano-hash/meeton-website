@@ -21,6 +21,7 @@ declare global {
         }) => void
       }
     }
+    gtag?: (...args: unknown[]) => void
   }
 }
 
@@ -87,7 +88,14 @@ function InlineHubSpotForm({ utmCampaign }: { utmCampaign: string }) {
           formId: 'dd42d8b3-e426-4079-9479-fa28287c0544',
           region: 'na2',
           target: '#lp-inline-form',
-          onFormSubmitted: () => setSubmitted(true),
+          onFormSubmitted: () => {
+            setSubmitted(true)
+            if (window.gtag) {
+              window.gtag('event', 'conversion', {
+                send_to: 'AW-18060590496/5EyJCIqrspUcEKD7-qND',
+              })
+            }
+          },
           onFormReady: ($form: HTMLFormElement) => {
             if (utmCampaign && $form) {
               const input = $form.querySelector('input[name="hs_context"]')
