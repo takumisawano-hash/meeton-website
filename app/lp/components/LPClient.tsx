@@ -282,6 +282,44 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
         </div>
       </section>
 
+      {/* ── 4つの武器 ── */}
+      <section className="lp-section">
+        <div className="lp-section-inner">
+          <h2 className="lp-h2">商談をつくる、4つの武器</h2>
+          <p className="lp-section-sub" style={{ marginBottom: 36 }}>AIチャットを軸に、メール・商談予約・資料提案が連携。あらゆる接点から商談を自動獲得します。</p>
+          <div className="lp-weapons">
+            <div className="lp-weapon">
+              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #12a37d, #0fc19a)' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+              </div>
+              <h3 className="lp-weapon-title">AIチャット</h3>
+              <p className="lp-weapon-desc">訪問者に自ら話しかけ、ニーズを把握し商談予約まで会話で完結</p>
+            </div>
+            <div className="lp-weapon">
+              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #3b6ff5, #60a5fa)' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+              </div>
+              <h3 className="lp-weapon-title">AIメール</h3>
+              <p className="lp-weapon-desc">未反応リードにDay 1/3/5で自動フォロー。休眠リードも逃さず商談化</p>
+            </div>
+            <div className="lp-weapon">
+              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #0891b2, #22d3ee)' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+              </div>
+              <h3 className="lp-weapon-title">商談予約</h3>
+              <p className="lp-weapon-desc">関心が高い瞬間にカレンダー提示。事前ヒアリングまでAIが完了</p>
+            </div>
+            <div className="lp-weapon">
+              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
+              </div>
+              <h3 className="lp-weapon-title">資料提案</h3>
+              <p className="lp-weapon-desc">閲覧ページに応じた最適な資料を自動レコメンド。DL時にリード獲得</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── CASE STUDIES (横並び、数字を目立たせる) ── */}
       <section className="lp-section lp-section-alt">
         <div className="lp-section-inner">
@@ -364,6 +402,13 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
           </div>
         </div>
       </section>
+
+      {/* ── MOBILE STICKY CTA ── */}
+      <div className={'lp-mobile-cta' + (scrolled ? ' visible' : '')}>
+        <button className="lp-btn-primary lp-mobile-cta-btn" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          無料で資料をダウンロード
+        </button>
+      </div>
 
       {/* ── FOOTER (legal only) ── */}
       <footer className="lp-footer">
@@ -527,6 +572,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-footer-links a{color:var(--sub);text-decoration:none;font-size:12px;transition:color .2s}
 .lp-footer-links a:hover{color:var(--cta)}
 
+/* ── 4 WEAPONS ── */
+.lp-weapons{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.lp-weapon{text-align:center;padding:28px 16px;background:var(--bg);border:1px solid var(--border);border-radius:18px;transition:all .3s}
+.lp-weapon:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.06)}
+.lp-weapon-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.lp-weapon-title{font-size:17px;font-weight:800;color:var(--heading);margin-bottom:8px}
+.lp-weapon-desc{font-size:13px;line-height:1.7;color:var(--sub)}
+
+/* ── MOBILE STICKY CTA ── */
+.lp-mobile-cta{display:none}
+
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
   .lp-hero{padding:60px 16px 40px}
@@ -541,12 +597,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .lp-vs{grid-template-columns:1fr;gap:16px}
   .lp-vs-arrow{transform:rotate(90deg);justify-content:center}
   .lp-results{grid-template-columns:1fr}
+  .lp-weapons{grid-template-columns:repeat(2,1fr);gap:12px}
+  .lp-weapon{padding:20px 12px}
+  .lp-weapon-icon{width:44px;height:44px;border-radius:12px;margin-bottom:12px}
+  .lp-weapon-title{font-size:15px}
+  .lp-weapon-desc{font-size:12px}
   .lp-flow{flex-direction:column;gap:12px}
   .lp-flow-item{flex-direction:row}
   .lp-flow-connector{width:2px;height:24px;display:none}
   .lp-ctas{flex-direction:column;align-items:center}
   .lp-btn-primary{width:100%;max-width:320px;text-align:center}
-  .lp-sticky-text{font-size:12px}
-  .lp-footer{flex-direction:column;text-align:center}
+  .lp-sticky-bar.visible{display:none}
+  .lp-mobile-cta{display:block;position:fixed;bottom:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:12px 16px;transform:translateY(100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .lp-mobile-cta.visible{transform:translateY(0)}
+  .lp-mobile-cta-btn{width:100%;padding:16px;font-size:16px;border-radius:12px}
+  .lp-footer{flex-direction:column;text-align:center;padding-bottom:80px}
 }
 `
