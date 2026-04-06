@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Engage - Meeton AIのAIエンゲージメント機能'
+export const alt = 'AI Chat - Meeton AIのAIチャット機能'
 export const size = {
   width: 1200,
   height: 630,
@@ -20,7 +20,7 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #edfcf7 0%, #fff 35%, #e5f8f2 65%, #f0fdfa 100%)',
+          background: 'linear-gradient(135deg, #edfcf7 0%, #fff 35%, #e5f8f2 65%, #edfcf7 100%)',
           position: 'relative',
         }}
       >
@@ -60,7 +60,7 @@ export default async function Image() {
             M
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            <span style={{ color: '#12a37d' }}>Engage</span>
+            <span style={{ color: '#12a37d' }}>AI Chat</span>
           </div>
         </div>
         <div
@@ -73,7 +73,7 @@ export default async function Image() {
             lineHeight: 1.4,
           }}
         >
-          AIエンゲージメント
+          AIチャットで商談予約まで完結
         </div>
         <div
           style={{
@@ -82,12 +82,12 @@ export default async function Image() {
             gap: 24,
           }}
         >
-          {['AIチャット', 'メール自動送信', 'フォローアップ', 'パーソナライズ'].map((item) => (
+          {['自動声かけ', 'ニーズ把握', '資料提案', '商談予約'].map((item) => (
             <div
               key={item}
               style={{
                 background: 'white',
-                border: '2px solid #c6efe2',
+                border: '2px solid #a7f3d0',
                 borderRadius: 12,
                 padding: '12px 24px',
                 fontSize: 20,

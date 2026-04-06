@@ -86,10 +86,10 @@ export default function Nav({
   ];
 
   const featuresDropdownItems = [
-    { href: "/features/detect/", label: "Detect", sub: "見つける" },
-    { href: "/features/engage/", label: "Engage", sub: "話しかける" },
-    { href: "/features/nurture/", label: "Nurture", sub: "理解を深める" },
-    { href: "/features/convert/", label: "Convert", sub: "商談を決める" },
+    { href: "/features/ai-chat/", label: "AI Chat", sub: "AIチャット" },
+    { href: "/features/ai-email/", label: "AI Email", sub: "AIメール" },
+    { href: "/features/meetings/", label: "Meetings", sub: "商談予約" },
+    { href: "/features/offers/", label: "Offers", sub: "資料提案" },
   ];
 
   const navLinks = [

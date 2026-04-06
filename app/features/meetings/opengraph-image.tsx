@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Convert - Meeton AIの商談予約自動化機能'
+export const alt = 'Meetings - Meeton AIの商談予約機能'
 export const size = {
   width: 1200,
   height: 630,
@@ -20,7 +20,7 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #eff6ff 0%, #fff 35%, #dbeafe 65%, #eff6ff 100%)',
+          background: 'linear-gradient(135deg, #ecfeff 0%, #fff 35%, #e0f7fa 65%, #ecfeff 100%)',
           position: 'relative',
         }}
       >
@@ -31,7 +31,7 @@ export default async function Image() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: 'radial-gradient(circle, rgba(59,111,245,0.06) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(8,145,178,0.06) 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           }}
         />
@@ -47,7 +47,7 @@ export default async function Image() {
             style={{
               width: 80,
               height: 80,
-              background: 'linear-gradient(135deg, #3b6ff5, #6690fa)',
+              background: 'linear-gradient(135deg, #0891b2, #06b6d4)',
               borderRadius: 20,
               display: 'flex',
               alignItems: 'center',
@@ -60,7 +60,7 @@ export default async function Image() {
             M
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            <span style={{ color: '#3b6ff5' }}>Convert</span>
+            <span style={{ color: '#0891b2' }}>Meetings</span>
           </div>
         </div>
         <div
@@ -73,7 +73,7 @@ export default async function Image() {
             lineHeight: 1.4,
           }}
         >
-          商談予約の自動化
+          関心が高い瞬間に確実に商談を獲得
         </div>
         <div
           style={{
@@ -82,17 +82,17 @@ export default async function Image() {
             gap: 24,
           }}
         >
-          {['カレンダー提示', 'CRM登録', '事前ヒアリング', '予約自動化'].map((item) => (
+          {['チャット内予約', 'サンクスページ', 'メール予約', '事前ヒアリング'].map((item) => (
             <div
               key={item}
               style={{
                 background: 'white',
-                border: '2px solid #bfdbfe',
+                border: '2px solid #a5f3fc',
                 borderRadius: 12,
                 padding: '12px 24px',
                 fontSize: 20,
                 fontWeight: 700,
-                color: '#3b6ff5',
+                color: '#0891b2',
               }}
             >
               {item}

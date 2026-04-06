@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Nurture - Meeton AIのリードナーチャリング機能'
+export const alt = 'AI Email - Meeton AIのAIメール機能'
 export const size = {
   width: 1200,
   height: 630,
@@ -20,7 +20,7 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #f5f3ff 0%, #fff 35%, #ede9fe 65%, #f5f3ff 100%)',
+          background: 'linear-gradient(135deg, #eaf0fe 0%, #fff 35%, #e8ecff 65%, #eaf0fe 100%)',
           position: 'relative',
         }}
       >
@@ -31,7 +31,7 @@ export default async function Image() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: 'radial-gradient(circle, rgba(124,92,252,0.06) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(59,111,245,0.06) 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           }}
         />
@@ -47,7 +47,7 @@ export default async function Image() {
             style={{
               width: 80,
               height: 80,
-              background: 'linear-gradient(135deg, #7c5cfc, #9b82fd)',
+              background: 'linear-gradient(135deg, #3b6ff5, #6690fa)',
               borderRadius: 20,
               display: 'flex',
               alignItems: 'center',
@@ -60,7 +60,7 @@ export default async function Image() {
             M
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            <span style={{ color: '#7c5cfc' }}>Nurture</span>
+            <span style={{ color: '#3b6ff5' }}>AI Email</span>
           </div>
         </div>
         <div
@@ -73,7 +73,7 @@ export default async function Image() {
             lineHeight: 1.4,
           }}
         >
-          リードナーチャリング
+          AIメールで自動フォロー&商談化
         </div>
         <div
           style={{
@@ -82,17 +82,17 @@ export default async function Image() {
             gap: 24,
           }}
         >
-          {['資料提案', 'Q&A対応', 'ヒアリング', '検討度UP'].map((item) => (
+          {['即時フォロー', 'パーソナライズ', '自動シーケンス', 'AI応答'].map((item) => (
             <div
               key={item}
               style={{
                 background: 'white',
-                border: '2px solid #ddd6fe',
+                border: '2px solid #bfdbfe',
                 borderRadius: 12,
                 padding: '12px 24px',
                 fontSize: 20,
                 fontWeight: 700,
-                color: '#7c5cfc',
+                color: '#3b6ff5',
               }}
             >
               {item}

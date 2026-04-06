@@ -40,34 +40,76 @@ const nextConfig = {
         permanent: true,
       },
       ...blogRedirects,
+      // Old phase URLs → new product URLs
+      {
+        source: '/features/detect',
+        destination: '/features/ai-chat/',
+        permanent: true,
+      },
+      {
+        source: '/features/detect/',
+        destination: '/features/ai-chat/',
+        permanent: true,
+      },
+      {
+        source: '/features/engage',
+        destination: '/features/ai-chat/',
+        permanent: true,
+      },
+      {
+        source: '/features/engage/',
+        destination: '/features/ai-chat/',
+        permanent: true,
+      },
+      {
+        source: '/features/nurture',
+        destination: '/features/offers/',
+        permanent: true,
+      },
+      {
+        source: '/features/nurture/',
+        destination: '/features/offers/',
+        permanent: true,
+      },
+      {
+        source: '/features/convert',
+        destination: '/features/meetings/',
+        permanent: true,
+      },
+      {
+        source: '/features/convert/',
+        destination: '/features/meetings/',
+        permanent: true,
+      },
+      // Legacy URLs → new product URLs
       {
         source: '/features/chatbot',
-        destination: '/features/engage/',
+        destination: '/features/ai-chat/',
         permanent: true,
       },
       {
         source: '/features/chatbot/',
-        destination: '/features/engage/',
+        destination: '/features/ai-chat/',
         permanent: true,
       },
       {
         source: '/features/onsite',
-        destination: '/features/nurture/',
+        destination: '/features/offers/',
         permanent: true,
       },
       {
         source: '/features/onsite/',
-        destination: '/features/nurture/',
+        destination: '/features/offers/',
         permanent: true,
       },
       {
         source: '/features/offsite',
-        destination: '/features/convert/',
+        destination: '/features/meetings/',
         permanent: true,
       },
       {
         source: '/features/offsite/',
-        destination: '/features/convert/',
+        destination: '/features/meetings/',
         permanent: true,
       },
     ]

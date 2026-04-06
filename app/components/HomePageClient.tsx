@@ -3383,7 +3383,7 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* HOW IT WORKS - 4 Phase Overview */}
+      {/* PRODUCTS - 4つの武器 Overview */}
       <section
         className="section"
         style={{
@@ -3393,95 +3393,80 @@ export default function HomePageClient() {
         }}
       >
         <div className="section-inner">
-          <div className="slabel">How it works</div>
+          <div className="slabel">Products</div>
           <div className="stitle">
-            Meeton aiが自ら判断し、
-            <span style={{ color: "var(--cta)" }}>最適なアプローチを選択</span>
+            商談をつくる、
+            <span style={{ color: "var(--cta)" }}>4つの武器</span>
           </div>
           <p className="ssub" style={{ margin: "0 auto" }}>
-            単なるカレンダー表示ツールではありません。Meeton aiはリードの温度感を見極め、4つのフェーズを自在に組み合わせて商談を創出します。
+            AIチャット・メール・商談予約・資料提案——4つのプロダクトが連携し、24時間商談を獲得し続けます。
           </p>
 
-          {/* 4-Phase Flow Diagram */}
+          {/* 4 Product Cards */}
           <div style={{ marginTop: 48 }}>
-            {/* New CSS-based 4-phase diagram */}
             <div style={{
-              display: "flex",
-              alignItems: "stretch",
-              gap: isMobile ? 0 : 0,
-              maxWidth: 900,
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
+              gap: 16,
+              maxWidth: 960,
               margin: "0 auto",
-              flexWrap: isMobile ? "wrap" : "nowrap",
             }}>
               {[
-                { num: "01", title: "見つける", iconKey: "search" as IconKey, color: "#0891b2", desc: "訪問・フォーム・DLを検知しスコアリング", tools: ["サイト訪問検知", "フォーム連携", "リードスコア"] },
-                { num: "02", title: "話しかける", iconKey: "chat" as IconKey, color: "#12a37d", desc: "チャット・メールで最適なタイミングに接触", tools: ["AIチャット", "AIメール", "自動フォロー"] },
-                { num: "03", title: "理解を深める", iconKey: "doc" as IconKey, color: "#7c5cfc", desc: "資料提案・Q&A対応で検討度を引き上げ", tools: ["資料提案", "ポップアップ", "Q&A対応"] },
-                { num: "04", title: "商談を決める", iconKey: "calendar" as IconKey, color: "#3b6ff5", desc: "カレンダー提示・ヒアリング・CRM登録", tools: ["カレンダー", "事前ヒアリング", "CRM連携"] },
-              ].map((phase, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "stretch", flex: isMobile ? "1 1 100%" : 1 }}>
+                { title: "AI Chat", sub: "AIチャット", iconKey: "chat" as IconKey, color: "#12a37d", desc: "サイト訪問者と対話し、商談予約まで会話で完結。", tools: ["自動声かけ", "ニーズ把握", "商談予約"] },
+                { title: "AI Email", sub: "AIメール", iconKey: "mail" as IconKey, color: "#3b6ff5", desc: "見込み客を自動フォロー。未反応リードも逃さず商談化。", tools: ["自動フォロー", "育成メール", "自動応答"] },
+                { title: "Meetings", sub: "商談予約", iconKey: "calendar" as IconKey, color: "#0891b2", desc: "関心が高い瞬間を逃さずカレンダーを提示。", tools: ["チャット内予約", "サンクスページ", "事前ヒアリング"] },
+                { title: "Offers", sub: "資料提案", iconKey: "doc" as IconKey, color: "#7c5cfc", desc: "訪問者の関心に合わせた資料を自動提案。", tools: ["自動マッチング", "ポップアップ", "資料ページ"] },
+              ].map((p, i) => (
+                <div key={i} style={{
+                  padding: "28px 20px",
+                  background: "var(--bg)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 16,
+                  textAlign: "center",
+                  transition: "all .3s",
+                }}>
                   <div style={{
-                    flex: 1,
-                    padding: "28px 20px",
-                    background: "var(--bg)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 16,
-                    textAlign: "center",
-                    position: "relative",
-                    transition: "all .3s",
-                  }}>
-                    <div style={{
-                      marginBottom: 8,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}><Ico name={phase.iconKey} size={28} color={phase.color} /></div>
-                    <div style={{
-                      fontFamily: "var(--fm)",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: phase.color,
-                      letterSpacing: 2,
-                      marginBottom: 4,
-                    }}>{phase.num}</div>
-                    <div style={{
-                      fontSize: 18,
-                      fontWeight: 900,
-                      color: "var(--heading)",
-                      marginBottom: 8,
-                    }}>{phase.title}</div>
-                    <div style={{
-                      fontSize: 13,
-                      color: "var(--sub)",
-                      lineHeight: 1.6,
-                      marginBottom: 12,
-                    }}>{phase.desc}</div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
-                      {phase.tools.map((t, j) => (
-                        <span key={j} style={{
-                          fontSize: 11,
-                          padding: "3px 8px",
-                          borderRadius: 6,
-                          background: `${phase.color}10`,
-                          color: phase.color,
-                          fontWeight: 700,
-                        }}>{t}</span>
-                      ))}
-                    </div>
+                    marginBottom: 8,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}><Ico name={p.iconKey} size={28} color={p.color} /></div>
+                  <div style={{
+                    fontFamily: "var(--fm)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: p.color,
+                    letterSpacing: 2,
+                    marginBottom: 4,
+                    textTransform: "uppercase" as const,
+                  }}>{p.title}</div>
+                  <div style={{
+                    fontSize: 18,
+                    fontWeight: 900,
+                    color: "var(--heading)",
+                    marginBottom: 8,
+                  }}>{p.sub}</div>
+                  <div style={{
+                    fontSize: 13,
+                    color: "var(--sub)",
+                    lineHeight: 1.6,
+                    marginBottom: 12,
+                  }}>{p.desc}</div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
+                    {p.tools.map((t, j) => (
+                      <span key={j} style={{
+                        fontSize: 11,
+                        padding: "3px 8px",
+                        borderRadius: 6,
+                        background: `${p.color}10`,
+                        color: p.color,
+                        fontWeight: 700,
+                      }}>{t}</span>
+                    ))}
                   </div>
-                  {i < 3 && !isMobile && (
-                    <div style={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "var(--border2)",
-                      fontSize: 18,
-                      padding: "0 4px",
-                      flexShrink: 0,
-                    }}>→</div>
-                  )}
                 </div>
               ))}
             </div>
-            {/* Adaptive note */}
+            {/* Synergy note */}
             <div style={{
               marginTop: 20,
               display: "flex",
@@ -3492,14 +3477,14 @@ export default function HomePageClient() {
               color: "var(--sub)",
             }}>
               <Ico name="brain" size={16} color="var(--cta)" />
-              <span>順番は固定ではありません。Meeton aiがリードの温度感に応じて自動で判断します。</span>
+              <span>4つの武器が連携し、リードの温度感に応じて最適なアプローチをAIが自律的に選択します。</span>
             </div>
           </div>
         </div>
       </section>
 
 
-      {/* 4 PHASE CARDS */}
+      {/* 4 PRODUCT CARDS */}
       <section
         className="section"
         id="features"
@@ -3515,75 +3500,71 @@ export default function HomePageClient() {
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
             Meeton aiが商談をつくる、
-            <span style={{ color: "var(--cta)" }}>4つのフェーズ</span>
+            <span style={{ color: "var(--cta)" }}>4つの武器</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            リードの温度感に応じてMeeton aiが順番を自動で判断。フォーム送信直後なら即カレンダーへ、まだ温まっていなければじっくり育成してから商談化します。
+            Webサイト・メール・資料——あらゆる接点にAIを配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。
           </p>
 
           <div className="phase-grid">
             {[
               {
-                num: "01",
-                color: "#0891b2",
-                gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-                label: "DETECT",
-                title: "見つける",
-                desc: "サイト訪問・フォーム送信・資料DL——あらゆる接点でリードの行動を検知し、温度感を瞬時にスコアリング。",
-                features: [
-                  { label: "サイト訪問をリアルタイム検知", icon: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z M12 12m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0" },
-                  { label: "フォーム送信・資料DLをトリガーに", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
-                  { label: "リードの温度感を自動スコアリング", icon: "M22 12h-4l-3 9L9 3l-3 9H2" },
-                ],
-                link: "/features/detect/",
-              },
-              {
-                num: "02",
                 color: "#12a37d",
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                label: "ENGAGE",
-                title: "話しかける",
-                desc: "チャットやメールでMeeton aiが自ら接触。ページの文脈やリードの行動履歴に合わせてパーソナライズされた会話を展開。",
+                label: "AI CHAT",
+                title: "AIチャット",
+                desc: "サイト訪問者と対話し、商談予約まで会話で完結。訪問者に自ら話しかけ、ニーズを把握し、温度感に応じて商談予約まで誘導。",
                 features: [
-                  { label: "AIチャットで即座に会話開始", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "パーソナライズドメールを自動送信", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
-                  { label: "未反応リードには自動フォローアップ", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
+                  { label: "ページ文脈に応じた自動声かけ", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "会話の流れで資料提案・疑問解消", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "温度感に応じて商談予約まで誘導", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
                 ],
-                link: "/features/engage/",
+                link: "/features/ai-chat/",
               },
               {
-                num: "03",
-                color: "#7c5cfc",
-                gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                label: "NURTURE",
-                title: "理解を深める",
-                desc: "匿名訪問者にもリードにも、資料提案・Q&A対応で理解を促進。ポップアップや資料ページも活用し、検討度を引き上げる。",
-                features: [
-                  { label: "閲覧ページに合わせて資料を自動提案", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
-                  { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
-                  { label: "チャットでQ&A対応、疑問を即解消", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" },
-                ],
-                link: "/features/nurture/",
-              },
-              {
-                num: "04",
                 color: "#3b6ff5",
                 gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-                label: "CONVERT",
-                title: "商談を決める",
-                desc: "チャット内・サンクスページでカレンダーを提示。未予約リードにはAIメールで自動追客し、商談獲得を最大化。",
+                label: "AI EMAIL",
+                title: "AIメール",
+                desc: "見込み客を自動フォロー。未反応リードも逃さず商談化。高関心リードに即座にフォローアップし、パーソナライズドメールで育成。",
+                features: [
+                  { label: "高関心リードに即座にフォローアップ", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
+                  { label: "パーソナライズドメールで育成", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "未反応リードにDay 1→3→5で自動再接触", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
+                ],
+                link: "/features/ai-email/",
+              },
+              {
+                color: "#0891b2",
+                gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
+                label: "MEETINGS",
+                title: "商談予約",
+                desc: "関心が高い瞬間を逃さずカレンダーを提示。チャット内・サンクスページ・メールで商談予約を獲得し、事前ヒアリングまで自動完了。",
                 features: [
                   { label: "チャット内でそのまま商談予約", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
                   { label: "サンクスページで即カレンダー提示", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
-                  { label: "未予約リードにAIメールで自動追客", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "AIが事前ヒアリングまで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
                 ],
-                link: "/features/convert/",
+                link: "/features/meetings/",
               },
-            ].map((phase, i) => (
+              {
+                color: "#7c5cfc",
+                gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
+                label: "OFFERS",
+                title: "資料提案",
+                desc: "訪問者の関心に合わせた資料を自動提案。閲覧ページに応じた自動マッチング、最適タイミングのポップアップでリードを獲得。",
+                features: [
+                  { label: "閲覧ページに応じて資料を自動マッチング", icon: "M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z M16.65 16.65L21 21" },
+                  { label: "最適タイミングでポップアップ表示", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
+                  { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
+                ],
+                link: "/features/offers/",
+              },
+            ].map((prod, i) => (
               <div
                 className="cat-card"
                 key={i}
-                style={{ "--cat-color": phase.color } as React.CSSProperties}
+                style={{ "--cat-color": prod.color } as React.CSSProperties}
               >
                 <div
                   style={{
@@ -3592,7 +3573,7 @@ export default function HomePageClient() {
                     left: 0,
                     right: 0,
                     height: 3,
-                    background: phase.gradient,
+                    background: prod.gradient,
                     opacity: 0,
                     transition: "opacity .3s",
                   }}
@@ -3605,34 +3586,25 @@ export default function HomePageClient() {
                 />
                 <div
                   className="cat-label"
-                  style={{ background: `${phase.color}10`, color: phase.color }}
+                  style={{ background: `${prod.color}10`, color: prod.color }}
                 >
-                  <span style={{
-                    fontFamily: "var(--fm)",
-                    fontSize: 18,
-                    fontWeight: 900,
-                    background: phase.gradient,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    marginRight: 6,
-                  }}>{phase.num}</span>
-                  {phase.label}
+                  {prod.label}
                 </div>
-                <div className="cat-title">{phase.title}</div>
-                <div className="cat-desc">{phase.desc}</div>
+                <div className="cat-title">{prod.title}</div>
+                <div className="cat-desc">{prod.desc}</div>
                 <div className="cat-features">
-                  {phase.features.map((f, j) => (
+                  {prod.features.map((f, j) => (
                     <div className="cat-feat" key={j}>
                       <div
                         className="cat-feat-icon"
-                        style={{ background: `${phase.color}12` }}
+                        style={{ background: `${prod.color}12` }}
                       >
                         <svg
                           width="16"
                           height="16"
                           viewBox="0 0 24 24"
                           fill="none"
-                          stroke={phase.color}
+                          stroke={prod.color}
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -3644,14 +3616,12 @@ export default function HomePageClient() {
                     </div>
                   ))}
                 </div>
-                <a href={phase.link} className="cat-link">
+                <a href={prod.link} className="cat-link">
                   詳しく見る <span>→</span>
                 </a>
               </div>
             ))}
           </div>
-
-          {/* Adaptive flow note */}
         </div>
       </section>
 

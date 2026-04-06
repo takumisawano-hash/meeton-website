@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Detect - Meeton AIのリード検知・スコアリング機能'
+export const alt = 'Offers - Meeton AIの資料提案機能'
 export const size = {
   width: 1200,
   height: 630,
@@ -20,7 +20,7 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #ecfeff 0%, #fff 35%, #e0f7fa 65%, #ecfeff 100%)',
+          background: 'linear-gradient(135deg, #f0ecfe 0%, #fff 35%, #ede9fe 65%, #f0ecfe 100%)',
           position: 'relative',
         }}
       >
@@ -31,7 +31,7 @@ export default async function Image() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: 'radial-gradient(circle, rgba(8,145,178,0.06) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(124,92,252,0.06) 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           }}
         />
@@ -47,7 +47,7 @@ export default async function Image() {
             style={{
               width: 80,
               height: 80,
-              background: 'linear-gradient(135deg, #0891b2, #06b6d4)',
+              background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)',
               borderRadius: 20,
               display: 'flex',
               alignItems: 'center',
@@ -60,7 +60,7 @@ export default async function Image() {
             M
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            <span style={{ color: '#0891b2' }}>Detect</span>
+            <span style={{ color: '#7c5cfc' }}>Offers</span>
           </div>
         </div>
         <div
@@ -73,7 +73,7 @@ export default async function Image() {
             lineHeight: 1.4,
           }}
         >
-          リード検知・スコアリング
+          訪問者に最適な資料を自動提案
         </div>
         <div
           style={{
@@ -82,17 +82,17 @@ export default async function Image() {
             gap: 24,
           }}
         >
-          {['リアルタイム検知', '行動トリガー', 'スコアリング', '温度感判定'].map((item) => (
+          {['自動マッチング', 'ポップアップ', '資料ページ', 'リード獲得'].map((item) => (
             <div
               key={item}
               style={{
                 background: 'white',
-                border: '2px solid #a5f3fc',
+                border: '2px solid #ddd6fe',
                 borderRadius: 12,
                 padding: '12px 24px',
                 fontSize: 20,
                 fontWeight: 700,
-                color: '#0891b2',
+                color: '#7c5cfc',
               }}
             >
               {item}
