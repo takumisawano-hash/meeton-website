@@ -306,14 +306,14 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
               <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #0891b2, #22d3ee)' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
               </div>
-              <h3 className="lp-weapon-title">商談予約</h3>
+              <h3 className="lp-weapon-title">AIカレンダー</h3>
               <p className="lp-weapon-desc">関心が高い瞬間にカレンダー提示。事前ヒアリングまでAIが完了</p>
             </div>
             <div className="lp-weapon">
               <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
               </div>
-              <h3 className="lp-weapon-title">資料提案</h3>
+              <h3 className="lp-weapon-title">AIオファー</h3>
               <p className="lp-weapon-desc">閲覧ページに応じた最適な資料を自動レコメンド。DL時にリード獲得</p>
             </div>
           </div>
