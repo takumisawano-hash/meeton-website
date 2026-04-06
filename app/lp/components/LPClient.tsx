@@ -282,41 +282,152 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
         </div>
       </section>
 
-      {/* ── 4つの武器 ── */}
+      {/* ── 4つの武器 with UI mockups ── */}
       <section className="lp-section">
         <div className="lp-section-inner">
           <h2 className="lp-h2">商談をつくる、4つの武器</h2>
-          <p className="lp-section-sub" style={{ marginBottom: 36 }}>AIチャットを軸に、メール・商談予約・資料提案が連携。あらゆる接点から商談を自動獲得します。</p>
-          <div className="lp-weapons">
-            <div className="lp-weapon">
-              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #12a37d, #0fc19a)' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-              </div>
-              <h3 className="lp-weapon-title">AIチャット</h3>
-              <p className="lp-weapon-desc">訪問者に自ら話しかけ、ニーズを把握し商談予約まで会話で完結</p>
+          <p className="lp-section-sub" style={{ marginBottom: 48 }}>AIチャットを軸に、メール・商談予約・資料提案が連携。あらゆる接点から商談を自動獲得します。</p>
+
+          {/* AI Chat */}
+          <div className="lp-weapon-row">
+            <div className="lp-weapon-copy">
+              <div className="lp-weapon-badge" style={{ color: '#12a37d', background: '#e5f8f2' }}>AIチャット</div>
+              <h3 className="lp-weapon-h3">訪問者と対話し、商談予約まで完結</h3>
+              <ul className="lp-weapon-list">
+                <li>ページ文脈に応じた自動声かけ</li>
+                <li>会話の流れで資料提案・疑問解消</li>
+                <li>温度感に応じて商談予約まで誘導</li>
+              </ul>
             </div>
-            <div className="lp-weapon">
-              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #3b6ff5, #60a5fa)' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+            <div className="lp-weapon-mockup">
+              <div className="lp-mock-chat">
+                <div className="lp-mock-chat-hdr">
+                  <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, #12a37d, #0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ color: '#fff', fontSize: 12, fontWeight: 700 }}>M</span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--heading)' }}>Meeton ai</div>
+                    <div style={{ fontSize: 10, color: '#12a37d', display: 'flex', alignItems: 'center', gap: 4 }}><span className="lp-pulse-dot" />オンライン</div>
+                  </div>
+                </div>
+                <div className="lp-mock-chat-body">
+                  <div className="lp-mock-msg lp-mock-ai">こんにちは！料金プランについてご質問はありますか？</div>
+                  <div className="lp-mock-msg lp-mock-user">導入事例を知りたいです</div>
+                  <div className="lp-mock-msg lp-mock-ai">御社と同じ業界の事例をご用意しています。資料をお送りしましょうか？</div>
+                  <div className="lp-mock-msg lp-mock-user">はい、お願いします</div>
+                  <div className="lp-mock-msg lp-mock-ai">
+                    ありがとうございます！さらに詳しくご説明しますので、商談をご予約ください。
+                    <div className="lp-mock-cal-mini">
+                      <span className="lp-mock-slot">月 10:00</span>
+                      <span className="lp-mock-slot lp-mock-slot-active">水 14:00</span>
+                      <span className="lp-mock-slot">金 11:00</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="lp-weapon-title">AIメール</h3>
-              <p className="lp-weapon-desc">未反応リードにDay 1/3/5で自動フォロー。休眠リードも逃さず商談化</p>
-            </div>
-            <div className="lp-weapon">
-              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #0891b2, #22d3ee)' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-              </div>
-              <h3 className="lp-weapon-title">AIカレンダー</h3>
-              <p className="lp-weapon-desc">関心が高い瞬間にカレンダー提示。事前ヒアリングまでAIが完了</p>
-            </div>
-            <div className="lp-weapon">
-              <div className="lp-weapon-icon" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
-              </div>
-              <h3 className="lp-weapon-title">AIオファー</h3>
-              <p className="lp-weapon-desc">閲覧ページに応じた最適な資料を自動レコメンド。DL時にリード獲得</p>
             </div>
           </div>
+
+          {/* AI Email */}
+          <div className="lp-weapon-row lp-weapon-row-rev">
+            <div className="lp-weapon-copy">
+              <div className="lp-weapon-badge" style={{ color: '#3b6ff5', background: '#eaf0fe' }}>AIメール</div>
+              <h3 className="lp-weapon-h3">未反応リードも逃さず商談化</h3>
+              <ul className="lp-weapon-list">
+                <li>フォーム送信直後にAIメールを自動送信</li>
+                <li>Day 1/3/5で自動フォローアップ</li>
+                <li>返信にもAIが自動応答</li>
+              </ul>
+            </div>
+            <div className="lp-weapon-mockup">
+              <div className="lp-mock-email">
+                {[
+                  { day: 'Day 0', subject: '資料をお送りしました', status: '開封済み', statusColor: '#12a37d', bar: '100%' },
+                  { day: 'Day 1', subject: 'ご確認いただけましたか？', status: '開封済み', statusColor: '#12a37d', bar: '80%' },
+                  { day: 'Day 3', subject: 'よくある質問をまとめました', status: '送信済み', statusColor: '#3b6ff5', bar: '60%' },
+                  { day: 'Day 5', subject: '15分だけお時間いただけませんか？', status: '送信予定', statusColor: '#6e7494', bar: '40%' },
+                ].map((e, i) => (
+                  <div className="lp-mock-email-row" key={i} style={{ animationDelay: `${0.3 + i * 0.15}s` }}>
+                    <div className="lp-mock-email-day">{e.day}</div>
+                    <div className="lp-mock-email-subject">{e.subject}</div>
+                    <div className="lp-mock-email-status" style={{ color: e.statusColor }}>{e.status}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* AI Calendar */}
+          <div className="lp-weapon-row">
+            <div className="lp-weapon-copy">
+              <div className="lp-weapon-badge" style={{ color: '#0891b2', background: '#ecfeff' }}>AIカレンダー</div>
+              <h3 className="lp-weapon-h3">関心が高い瞬間に、商談を獲得</h3>
+              <ul className="lp-weapon-list">
+                <li>チャット内でそのまま商談予約</li>
+                <li>サンクスページで即カレンダー提示</li>
+                <li>事前ヒアリングまでAIが自動完了</li>
+              </ul>
+            </div>
+            <div className="lp-weapon-mockup">
+              <div className="lp-mock-cal">
+                <div className="lp-mock-cal-hdr">商談日時を選択</div>
+                <div className="lp-mock-cal-grid">
+                  {['月 10:00', '月 14:00', '火 10:00', '火 15:00', '水 11:00', '水 14:00', '木 10:00', '木 16:00', '金 11:00'].map((t, i) => (
+                    <div className={'lp-mock-cal-slot' + (i === 5 ? ' active' : '')} key={i}>{t}</div>
+                  ))}
+                </div>
+                <div className="lp-mock-cal-confirm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                  <span>水 14:00 で商談確定！営業チームへ自動通知</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Offer */}
+          <div className="lp-weapon-row lp-weapon-row-rev">
+            <div className="lp-weapon-copy">
+              <div className="lp-weapon-badge" style={{ color: '#7c5cfc', background: '#f0ecfe' }}>AIオファー</div>
+              <h3 className="lp-weapon-h3">最適な資料を自動で提案</h3>
+              <ul className="lp-weapon-list">
+                <li>閲覧ページに応じて資料を自動マッチング</li>
+                <li>最適タイミングでポップアップ表示</li>
+                <li>DL時にリード情報を獲得</li>
+              </ul>
+            </div>
+            <div className="lp-weapon-mockup">
+              <div className="lp-mock-offer">
+                {[
+                  { title: 'サービス概要資料', match: '98%', tag: 'おすすめ', tagColor: '#12a37d' },
+                  { title: '料金比較表', match: '92%', tag: '閲覧中', tagColor: '#3b6ff5' },
+                  { title: '導入事例集', match: '85%', tag: '', tagColor: '' },
+                ].map((o, i) => (
+                  <div className="lp-mock-offer-card" key={i}>
+                    <div className="lp-mock-offer-info">
+                      <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--heading)' }}>{o.title}</div>
+                      <div style={{ fontSize: 11, color: 'var(--sub)' }}>マッチ度 {o.match}</div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      {o.tag && <span className="lp-mock-offer-tag" style={{ color: o.tagColor, background: `${o.tagColor}15` }}>{o.tag}</span>}
+                      <div className="lp-mock-offer-dl">DL</div>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ fontSize: 11, color: 'var(--sub)', textAlign: 'center', marginTop: 8 }}>AIが閲覧行動から最適な資料をレコメンド</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── MID CTA ── */}
+      <section className="lp-mid-cta">
+        <div className="lp-mid-cta-inner">
+          <h2 className="lp-h2" style={{ marginBottom: 8, fontSize: 'clamp(20px,3vw,28px)' }}>4つの武器を資料で詳しく見る</h2>
+          <p className="lp-section-sub" style={{ marginBottom: 24 }}>機能・導入事例・料金をまとめた資料を無料でお送りします</p>
+          <button className="lp-btn-primary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            無料で資料をダウンロード
+          </button>
         </div>
       </section>
 
@@ -339,6 +450,35 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
               <div className="lp-result-v">6件</div>
               <div className="lp-result-l">初週の商談創出</div>
               <div className="lp-result-company">BizteX — クラウドRPA</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="lp-section">
+        <div className="lp-section-inner">
+          <h2 className="lp-h2">導入企業の声</h2>
+          <div className="lp-testimonials">
+            <div className="lp-testimonial">
+              <div className="lp-testimonial-quote">&ldquo;導入初週から商談が入り始めました。深夜のリードにも即座に対応してくれるので、営業チームは朝出社すると商談が入っている状態です。&rdquo;</div>
+              <div className="lp-testimonial-author">
+                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #12a37d, #0fc19a)' }}>G</div>
+                <div>
+                  <div className="lp-testimonial-name">G-gen</div>
+                  <div className="lp-testimonial-role">Google Cloud Premier Partner</div>
+                </div>
+              </div>
+            </div>
+            <div className="lp-testimonial">
+              <div className="lp-testimonial-quote">&ldquo;AIが事前ヒアリングまで済ませてくれるので、商談の質が格段に上がりました。営業メンバーが本来の提案業務に集中できるようになりました。&rdquo;</div>
+              <div className="lp-testimonial-author">
+                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #3b6ff5, #60a5fa)' }}>B</div>
+                <div>
+                  <div className="lp-testimonial-name">BizteX</div>
+                  <div className="lp-testimonial-role">クラウドRPA</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -572,13 +712,65 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-footer-links a{color:var(--sub);text-decoration:none;font-size:12px;transition:color .2s}
 .lp-footer-links a:hover{color:var(--cta)}
 
-/* ── 4 WEAPONS ── */
-.lp-weapons{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.lp-weapon{text-align:center;padding:28px 16px;background:var(--bg);border:1px solid var(--border);border-radius:18px;transition:all .3s}
-.lp-weapon:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.06)}
-.lp-weapon-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
-.lp-weapon-title{font-size:17px;font-weight:800;color:var(--heading);margin-bottom:8px}
-.lp-weapon-desc{font-size:13px;line-height:1.7;color:var(--sub)}
+/* ── 4 WEAPONS (rich rows) ── */
+.lp-weapon-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:56px}
+.lp-weapon-row:last-child{margin-bottom:0}
+.lp-weapon-row-rev{direction:rtl}.lp-weapon-row-rev>*{direction:ltr}
+.lp-weapon-badge{display:inline-block;font-size:13px;font-weight:700;padding:5px 14px;border-radius:8px;margin-bottom:14px}
+.lp-weapon-h3{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--heading);line-height:1.3;margin-bottom:16px}
+.lp-weapon-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.lp-weapon-list li{font-size:15px;line-height:1.6;color:var(--text);padding-left:22px;position:relative}
+.lp-weapon-list li::before{content:'';position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--cta)}
+
+/* Mock: Chat */
+.lp-mock-chat{border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06)}
+.lp-mock-chat-hdr{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface)}
+.lp-mock-chat-body{padding:16px;display:flex;flex-direction:column;gap:10px;background:#fff;min-height:220px}
+.lp-mock-msg{max-width:80%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6;color:var(--text)}
+.lp-mock-ai{background:var(--surface);align-self:flex-start;border-bottom-left-radius:4px}
+.lp-mock-user{background:var(--cta);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.lp-mock-cal-mini{display:flex;gap:6px;margin-top:8px}
+.lp-mock-slot{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--border);color:var(--sub);font-weight:600}
+.lp-mock-slot-active{background:#0891b2;color:#fff;border-color:#0891b2}
+.lp-pulse-dot{width:6px;height:6px;border-radius:50%;background:#12a37d;display:inline-block;animation:pulse 2s infinite}
+
+/* Mock: Email */
+.lp-mock-email{border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06);background:#fff}
+.lp-mock-email-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);animation:fadeUp .5s ease-out forwards;opacity:0}
+.lp-mock-email-row:last-child{border-bottom:none}
+.lp-mock-email-day{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--heading);min-width:44px}
+.lp-mock-email-subject{flex:1;font-size:13px;color:var(--text);font-weight:500}
+.lp-mock-email-status{font-size:11px;font-weight:700;white-space:nowrap}
+
+/* Mock: Calendar */
+.lp-mock-cal{border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06);background:#fff;padding:20px}
+.lp-mock-cal-hdr{font-size:15px;font-weight:800;color:var(--heading);margin-bottom:16px;text-align:center}
+.lp-mock-cal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.lp-mock-cal-slot{font-size:12px;padding:10px 8px;border-radius:8px;background:var(--surface);border:1px solid var(--border);text-align:center;color:var(--text);font-weight:600;transition:all .2s;cursor:default}
+.lp-mock-cal-slot.active{background:#0891b2;color:#fff;border-color:#0891b2;box-shadow:0 4px 12px rgba(8,145,178,.3)}
+.lp-mock-cal-confirm{display:flex;align-items:center;gap:8px;font-size:13px;color:#12a37d;font-weight:700;justify-content:center;padding:12px;background:#ecfdf5;border-radius:10px}
+
+/* Mock: Offer */
+.lp-mock-offer{border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06);background:#fff;padding:16px}
+.lp-mock-offer-card{display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:10px;border:1px solid var(--border);margin-bottom:8px;transition:all .2s}
+.lp-mock-offer-card:last-of-type{margin-bottom:0}
+.lp-mock-offer-card:hover{border-color:var(--cta);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.lp-mock-offer-info{display:flex;flex-direction:column;gap:2px}
+.lp-mock-offer-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px}
+.lp-mock-offer-dl{width:32px;height:32px;border-radius:8px;background:var(--cta);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:default}
+
+/* ── MID CTA ── */
+.lp-mid-cta{padding:48px 24px;text-align:center;background:linear-gradient(135deg,#ecfdf5 0%,#eaf0fe 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.lp-mid-cta-inner{max-width:560px;margin:0 auto}
+
+/* ── TESTIMONIALS ── */
+.lp-testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.lp-testimonial{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;position:relative}
+.lp-testimonial-quote{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:20px;font-style:italic}
+.lp-testimonial-author{display:flex;align-items:center;gap:12px}
+.lp-testimonial-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;flex-shrink:0}
+.lp-testimonial-name{font-size:14px;font-weight:800;color:var(--heading)}
+.lp-testimonial-role{font-size:12px;color:var(--sub)}
 
 /* ── MOBILE STICKY CTA ── */
 .lp-mobile-cta{display:none}
@@ -597,11 +789,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .lp-vs{grid-template-columns:1fr;gap:16px}
   .lp-vs-arrow{transform:rotate(90deg);justify-content:center}
   .lp-results{grid-template-columns:1fr}
-  .lp-weapons{grid-template-columns:repeat(2,1fr);gap:12px}
-  .lp-weapon{padding:20px 12px}
-  .lp-weapon-icon{width:44px;height:44px;border-radius:12px;margin-bottom:12px}
-  .lp-weapon-title{font-size:15px}
-  .lp-weapon-desc{font-size:12px}
+  .lp-weapon-row,.lp-weapon-row-rev{grid-template-columns:1fr;gap:24px;direction:ltr;margin-bottom:40px}
+  .lp-weapon-row-rev>*{direction:ltr}
+  .lp-testimonials{grid-template-columns:1fr;gap:16px}
   .lp-flow{flex-direction:column;gap:12px}
   .lp-flow-item{flex-direction:row}
   .lp-flow-connector{width:2px;height:24px;display:none}
