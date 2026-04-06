@@ -254,7 +254,7 @@ export default function OffersPageClient() {
         <div className="glow" style={{ background: 'rgba(59,111,245,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
         <div className="hero-inner">
           <div className="hero-text">
-            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />OFFERS</div>
+            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />AI OFFER</div>
             <h1 className="anim d2">訪問者ごとに、<br /><em>最適な資料を自動提案</em></h1>
             <p className="anim d3 hero-sub">閲覧ページに応じた資料マッチング、最適タイミングのポップアップ、AI付き資料ダウンロードページ——訪問者の関心に合わせて資料を自動提案し、リードを獲得します。</p>
             <div className="anim d4 hero-ctas">

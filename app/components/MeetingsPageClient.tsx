@@ -252,7 +252,7 @@ export default function MeetingsPageClient() {
         <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
         <div className="hero-inner">
           <div className="hero-text">
-            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />MEETINGS</div>
+            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />AI CALENDAR</div>
             <h1 className="anim d2">関心が高い瞬間に、<br /><em>確実に商談を獲得</em></h1>
             <p className="anim d3 hero-sub">チャット内・サンクスページ・メール——あらゆる接点でカレンダーを提示。AIが事前ヒアリングまで完了し、営業チームは準備万全で商談に臨めます。</p>
             <div className="anim d4 hero-ctas">

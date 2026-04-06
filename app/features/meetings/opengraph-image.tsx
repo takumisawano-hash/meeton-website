@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Meetings - Meeton AIの商談予約機能'
+export const alt = 'AI Calendar - Meeton AIのAIカレンダー機能'
 export const size = {
   width: 1200,
   height: 630,
@@ -60,7 +60,7 @@ export default async function Image() {
             M
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            <span style={{ color: '#0891b2' }}>Meetings</span>
+            <span style={{ color: '#0891b2' }}>AI Calendar</span>
           </div>
         </div>
         <div

@@ -7,8 +7,8 @@
 |---------|-----|-------|-----------|
 | AI Chat | /features/ai-chat/ | #12a37d | AiChatPageClient.tsx |
 | AI Email | /features/ai-email/ | #3b6ff5 | AiEmailPageClient.tsx |
-| Meetings | /features/meetings/ | #0891b2 | MeetingsPageClient.tsx |
-| Offers | /features/offers/ | #7c5cfc | OffersPageClient.tsx |
+| AI Calendar | /features/meetings/ | #0891b2 | MeetingsPageClient.tsx |
+| AI Offer | /features/offers/ | #7c5cfc | OffersPageClient.tsx |
 
 ### リダイレクト
 - /features/detect/ → /features/ai-chat/

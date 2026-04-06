@@ -48,7 +48,7 @@ Depth is communicated through subtle box-shadows and border treatments rather th
 ### Product Feature Colors
 - **Blue** (#3b6ff5 / `--blue`): AI Email product — trust, communication
 - **Blue Light** (#eaf0fe / `--blue-light`): Blue badges, light backgrounds
-- **Cyan** (#0891b2 / `--cyan`): Meetings product — action, scheduling
+- **Cyan** (#0891b2 / `--cyan`): AI Calendar product — action, scheduling
 - **Pink** (#d03ea1 / `--pink`): Sparingly used for differentiation
 - **Red** (#e0475b / `--red`): Hot lead indicators, urgency, alerts
 
@@ -61,8 +61,8 @@ Depth is communicated through subtle box-shadows and border treatments rather th
 |---------|---------|----------|----------|
 | AI Chat | #12a37d | linear-gradient(135deg,#12a37d,#0fc19a) | #edfcf7 |
 | AI Email | #3b6ff5 | linear-gradient(135deg,#3b6ff5,#6690fa) | #eaf0fe |
-| Meetings | #0891b2 | linear-gradient(135deg,#0891b2,#06b6d4) | #ecfeff |
-| Offers | #7c5cfc | linear-gradient(135deg,#7c5cfc,#a78bfa) | #f0ecfe |
+| AI Calendar | #0891b2 | linear-gradient(135deg,#0891b2,#06b6d4) | #ecfeff |
+| AI Offer | #7c5cfc | linear-gradient(135deg,#7c5cfc,#a78bfa) | #f0ecfe |
 
 ## 3. Typography Rules
 
@@ -326,8 +326,8 @@ Generous vertical padding between sections (80-100px on desktop). White backgrou
 - Strong Border: #c8cedf
 - AI Chat color: #12a37d
 - AI Email color: #3b6ff5
-- Meetings color: #0891b2
-- Offers color: #7c5cfc
+- AI Calendar color: #0891b2
+- AI Offer color: #7c5cfc
 
 ### Component Prompt Examples
 

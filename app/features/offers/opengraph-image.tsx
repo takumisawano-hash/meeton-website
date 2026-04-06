@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Offers - Meeton AIの資料提案機能'
+export const alt = 'AI Offer - Meeton AIのAIオファー機能'
 export const size = {
   width: 1200,
   height: 630,
@@ -60,7 +60,7 @@ export default async function Image() {
             M
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            <span style={{ color: '#7c5cfc' }}>Offers</span>
+            <span style={{ color: '#7c5cfc' }}>AI Offer</span>
           </div>
         </div>
         <div

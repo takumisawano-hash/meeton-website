@@ -12,13 +12,13 @@ const faqItems = [
 ]
 
 export const metadata: Metadata = {
-  title: '資料提案｜訪問者の関心に合わせた資料を自動提案',
-  description: 'Meeton AIの資料提案機能が、閲覧ページに応じた資料マッチング、最適タイミングのポップアップ、AI付き資料ダウンロードページで訪問者の関心に合わせた資料を自動提案。',
+  title: 'AIオファー｜訪問者の関心に合わせた資料を自動提案',
+  description: 'Meeton AIのAIオファー機能が、閲覧ページに応じた資料マッチング、最適タイミングのポップアップ、AI付き資料ダウンロードページで訪問者の関心に合わせた資料を自動提案。',
   alternates: {
     canonical: '/features/offers/',
   },
   openGraph: {
-    title: '資料提案｜訪問者の関心に合わせた資料を自動提案',
+    title: 'AIオファー｜訪問者の関心に合わせた資料を自動提案',
     description: '閲覧ページに応じた資料マッチング、最適タイミングのポップアップでリードを獲得。',
     url: 'https://dynameet.ai/features/offers/',
   },
@@ -36,7 +36,7 @@ export default function OffersLayout({
         breadcrumbs={[
           { name: 'ホーム', url: 'https://dynameet.ai' },
           { name: '機能', url: 'https://dynameet.ai/features/' },
-          { name: '資料提案', url: 'https://dynameet.ai/features/offers/' },
+          { name: 'AIオファー', url: 'https://dynameet.ai/features/offers/' },
         ]}
       />
       <FAQJsonLd
@@ -44,8 +44,8 @@ export default function OffersLayout({
         pageUrl="https://dynameet.ai/features/offers/"
       />
       <SoftwareAppJsonLd
-        name="Meeton AI - 資料提案"
-        description="訪問者の閲覧行動に基づいて最適な資料を自動マッチングし、最適タイミングで提案するAI資料提案エンジン"
+        name="Meeton AI - AIオファー"
+        description="訪問者の閲覧行動に基づいて最適な資料を自動マッチングし、最適タイミングで提案するAIオファーエンジン"
         featureList={[
           '閲覧ページベース自動マッチング',
           'Exit Intentポップアップ',

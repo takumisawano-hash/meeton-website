@@ -3414,8 +3414,8 @@ export default function HomePageClient() {
               {[
                 { title: "AI Chat", sub: "AIチャット", iconKey: "chat" as IconKey, color: "#12a37d", desc: "サイト訪問者と対話し、商談予約まで会話で完結。", tools: ["自動声かけ", "ニーズ把握", "商談予約"] },
                 { title: "AI Email", sub: "AIメール", iconKey: "mail" as IconKey, color: "#3b6ff5", desc: "見込み客を自動フォロー。未反応リードも逃さず商談化。", tools: ["自動フォロー", "育成メール", "自動応答"] },
-                { title: "Meetings", sub: "商談予約", iconKey: "calendar" as IconKey, color: "#0891b2", desc: "関心が高い瞬間を逃さずカレンダーを提示。", tools: ["チャット内予約", "サンクスページ", "事前ヒアリング"] },
-                { title: "Offers", sub: "資料提案", iconKey: "doc" as IconKey, color: "#7c5cfc", desc: "訪問者の関心に合わせた資料を自動提案。", tools: ["自動マッチング", "ポップアップ", "資料ページ"] },
+                { title: "AI Calendar", sub: "AIカレンダー", iconKey: "calendar" as IconKey, color: "#0891b2", desc: "関心が高い瞬間を逃さずカレンダーを提示。", tools: ["チャット内予約", "サンクスページ", "事前ヒアリング"] },
+                { title: "AI Offer", sub: "AIオファー", iconKey: "doc" as IconKey, color: "#7c5cfc", desc: "訪問者の関心に合わせた資料を自動提案。", tools: ["自動マッチング", "ポップアップ", "資料ページ"] },
               ].map((p, i) => (
                 <div key={i} style={{
                   padding: "28px 20px",
@@ -3537,8 +3537,8 @@ export default function HomePageClient() {
               {
                 color: "#0891b2",
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-                label: "MEETINGS",
-                title: "商談予約",
+                label: "AI CALENDAR",
+                title: "AIカレンダー",
                 desc: "関心が高い瞬間を逃さずカレンダーを提示。チャット内・サンクスページ・メールで商談予約を獲得し、事前ヒアリングまで自動完了。",
                 features: [
                   { label: "チャット内でそのまま商談予約", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
@@ -3550,8 +3550,8 @@ export default function HomePageClient() {
               {
                 color: "#7c5cfc",
                 gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                label: "OFFERS",
-                title: "資料提案",
+                label: "AI OFFER",
+                title: "AIオファー",
                 desc: "訪問者の関心に合わせた資料を自動提案。閲覧ページに応じた自動マッチング、最適タイミングのポップアップでリードを獲得。",
                 features: [
                   { label: "閲覧ページに応じて資料を自動マッチング", icon: "M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z M16.65 16.65L21 21" },

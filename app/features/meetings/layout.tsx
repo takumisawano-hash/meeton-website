@@ -12,13 +12,13 @@ const faqItems = [
 ]
 
 export const metadata: Metadata = {
-  title: '商談予約｜関心が高い瞬間にカレンダーを提示し確実に商談獲得',
-  description: 'Meeton AIの商談予約機能が、チャット内・サンクスページ・メールであらゆる接点にカレンダーを提示。AIが事前ヒアリングまで完了し、営業チームは準備万全で商談に臨めます。',
+  title: 'AIカレンダー｜関心が高い瞬間にカレンダーを提示し確実に商談獲得',
+  description: 'Meeton AIのAIカレンダー機能が、チャット内・サンクスページ・メールであらゆる接点にカレンダーを提示。AIが事前ヒアリングまで完了し、営業チームは準備万全で商談に臨めます。',
   alternates: {
     canonical: '/features/meetings/',
   },
   openGraph: {
-    title: '商談予約｜関心が高い瞬間にカレンダーを提示し確実に商談獲得',
+    title: 'AIカレンダー｜関心が高い瞬間にカレンダーを提示し確実に商談獲得',
     description: 'チャット内・サンクスページ・メールでカレンダーを提示。AIが事前ヒアリングまで自動完了。',
     url: 'https://dynameet.ai/features/meetings/',
   },
@@ -36,7 +36,7 @@ export default function MeetingsLayout({
         breadcrumbs={[
           { name: 'ホーム', url: 'https://dynameet.ai' },
           { name: '機能', url: 'https://dynameet.ai/features/' },
-          { name: '商談予約', url: 'https://dynameet.ai/features/meetings/' },
+          { name: 'AIカレンダー', url: 'https://dynameet.ai/features/meetings/' },
         ]}
       />
       <FAQJsonLd
@@ -44,8 +44,8 @@ export default function MeetingsLayout({
         pageUrl="https://dynameet.ai/features/meetings/"
       />
       <SoftwareAppJsonLd
-        name="Meeton AI - 商談予約"
-        description="チャット内・サンクスページ・メールであらゆる接点にカレンダーを提示し、AIが事前ヒアリングまで完了する商談予約エンジン"
+        name="Meeton AI - AIカレンダー"
+        description="チャット内・サンクスページ・メールであらゆる接点にカレンダーを提示し、AIが事前ヒアリングまで完了するAIカレンダーエンジン"
         featureList={[
           'チャット内商談予約',
           'サンクスページカレンダー表示',

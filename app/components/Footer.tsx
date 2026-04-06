@@ -41,8 +41,8 @@ export default function Footer({ variant = "light" }: FooterProps) {
     { href: "/talent/", label: "Meeton Talent" },
     { href: "/features/ai-chat/", label: "AI Chat" },
     { href: "/features/ai-email/", label: "AI Email" },
-    { href: "/features/meetings/", label: "Meetings" },
-    { href: "/features/offers/", label: "Offers" },
+    { href: "/features/meetings/", label: "AI Calendar" },
+    { href: "/features/offers/", label: "AI Offer" },
     isJa
       ? { href: "/ja/integrations/", label: "連携" }
       : { href: "/integrations/", label: "Integrations" },
