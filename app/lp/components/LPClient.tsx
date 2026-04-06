@@ -57,8 +57,8 @@ const copy = {
     badge: 'AI SDR — 24時間365日稼働',
     h1: ['Webサイト訪問者を', '商談に変える'],
     sub: '人間SDRの平均対応42時間 → Meeton aiは5秒。見込み客の関心が最も高い瞬間に、自動で商談を獲得します。',
-    formHeading: '3分で読める資料を無料ダウンロード',
-    formSub: 'Meeton aiの機能・導入事例・料金をまとめた資料をお送りします',
+    formHeading: '3分で読める資料を\n無料ダウンロード',
+    formSub: 'Meeton aiの機能・導入事例をまとめた資料をお送りします',
   },
   linkedin: {
     badge: '営業リーダー向け',
@@ -230,7 +230,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
           {/* Right: Form */}
           <div className="lp-hero-form anim d2">
             <div className="lp-form-card">
-              <h2 className="lp-form-heading">{c.formHeading}</h2>
+              <h2 className="lp-form-heading">{c.formHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}</h2>
               <p className="lp-form-sub">{c.formSub}</p>
               <InlineHubSpotForm utmCampaign={utmCampaign} />
               <div className="lp-form-divider">
@@ -244,12 +244,16 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
         </div>
       </section>
 
-      {/* ── CLIENT LOGOS (trust bar) ── */}
+      {/* ── CLIENT LOGOS (scrolling carousel) ── */}
       <section className="lp-trust-bar">
-        <div className="lp-trust-inner">
-          {clients.map((cl) => (
-            <img key={cl.name} src={cl.logo} alt={cl.name} className="lp-trust-logo" loading="lazy" />
-          ))}
+        <div className="lp-trust-carousel">
+          <div className="lp-trust-track">
+            {[...clients, ...clients].map((cl, i) => (
+              <div className="lp-trust-item" key={`${cl.name}-${i}`}>
+                <img src={cl.logo} alt={cl.name} className="lp-trust-logo" loading="lazy" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -646,11 +650,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-btn-meeting-link:hover{color:var(--cta)}
 .lp-btn-meeting-link strong{color:var(--cta);font-weight:700}
 
-/* ── TRUST BAR ── */
-.lp-trust-bar{padding:20px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.lp-trust-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap}
-.lp-trust-logo{height:26px;width:auto;object-fit:contain;opacity:.55;transition:opacity .2s;filter:grayscale(100%)}
-.lp-trust-logo:hover{opacity:1;filter:none}
+/* ── TRUST BAR (scrolling carousel) ── */
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.lp-trust-bar{padding:20px 0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+.lp-trust-carousel{overflow:hidden;position:relative;width:100%;mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.lp-trust-track{display:flex;gap:24px;animation:logoScroll 20s linear infinite;width:max-content}
+.lp-trust-track:hover{animation-play-state:paused}
+.lp-trust-item{padding:12px 24px;background:var(--bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;min-width:120px;height:56px;flex-shrink:0;transition:all .3s}
+.lp-trust-item:hover{border-color:var(--cta);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.lp-trust-logo{height:24px;width:auto;object-fit:contain;opacity:.55;transition:opacity .2s;filter:grayscale(100%)}
+.lp-trust-item:hover .lp-trust-logo{opacity:1;filter:none}
 
 /* ── SECTIONS ── */
 .lp-section{padding:clamp(48px,8vw,80px) clamp(16px,5vw,48px)}
