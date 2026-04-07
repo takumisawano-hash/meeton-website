@@ -1,0 +1,72 @@
+{
+  "mappings": [
+    {
+      "title": "2026年、BtoB営業は「フォーム」を捨てる —— シグナルベースセリングと即時商談化が変える収益モデル",
+      "newSlug": "2026-signal-based-selling-instant-meeting"
+    },
+    {
+      "title": "SEOからSXO（検索体験最適化）へ。2026年、検索の「回答化」で消失するトラフィックを商談に変える技術",
+      "newSlug": "seo-to-sxo-2026-answer-traffic-to-meetings"
+    },
+    {
+      "title": "2025年版:AIで強化するRevOpsによる営業・マーケ統合ガイド",
+      "newSlug": "2025-ai-revops-sales-marketing-integration-guide"
+    },
+    {
+      "title": "CRO必見:AIインテントとコンバーセーショナルAIの統合で「セールスベロシティ」を最大化する戦略的KPI",
+      "newSlug": "cro-ai-intent-conversational-ai-sales-velocity-kpi"
+    },
+    {
+      "title": "AI×コンテンツマーケティング:営業連携で商談創出を最大化する実践ガイド",
+      "newSlug": "ai-content-marketing-sales-alignment-guide"
+    },
+    {
+      "title": "ABMの成否を分けるインテントデータ活用術とは?見込み客の98%を逃さない新たな手法",
+      "newSlug": "abm-intent-data-98-percent-lead-capture"
+    },
+    {
+      "title": "B2B SaaS成長を加速させるAI戦略:MQL-SQL間の摩擦を解消するリードハンドオフの未来",
+      "newSlug": "b2b-saas-ai-mql-sql-lead-handoff"
+    },
+    {
+      "title": "AIインテントデータとエージェントAIで実現する「ファネル凝縮」戦略:B2B営業の新常識",
+      "newSlug": "ai-intent-agent-funnel-compression-b2b"
+    },
+    {
+      "title": "AIによるパイプライン予測:フォアキャスト精度を高め、売上予測の「当たらない」を解消する方法",
+      "newSlug": "ai-pipeline-forecast-accuracy-method"
+    },
+    {
+      "title": "B2Bバイヤーの43%が陥る「購入後悔」の罠:2026年の商談創出を左右する「センスメイキング」の正体",
+      "newSlug": "b2b-buyer-regret-sensemaking-2026"
+    },
+    {
+      "title": "80%のリードをムダにしない!AIリードクオリフィケーション最前線",
+      "newSlug": "80-percent-lead-ai-qualification-frontier"
+    },
+    {
+      "title": "5分以内の対応で商談化率8倍!Speed to Leadが変えるB2B営業戦略",
+      "newSlug": "speed-to-lead-5min-8x-conversion-b2b"
+    },
+    {
+      "title": "CROのためのAgentic RevOpsフレームワーク:リアルタイムインテントがパイプラインROIを4倍にする仕組み",
+      "newSlug": "cro-agentic-revops-realtime-intent-4x-roi"
+    },
+    {
+      "title": "AI時代のパイプライン「変換率30%」を実現する企業が知る、Chat→Call→Deal一気通貫の実装ロードマップ",
+      "newSlug": "ai-pipeline-30-conversion-chat-call-deal-roadmap"
+    },
+    {
+      "title": "CROのためのKPI革命:リアルタイム・インテント・アクティベーションでパイプライン・ベロシティを30%加速する方法",
+      "newSlug": "cro-kpi-realtime-intent-activation-30-velocity"
+    },
+    {
+      "title": "80%のリードを死蔵しない!AIナーチャリングで商談化率を劇的に向上させる方法",
+      "newSlug": "80-percent-lead-ai-nurturing-conversion"
+    },
+    {
+      "title": "Pipelineが積み上がるのにCloseできない—Engagement Velocity × Deal Stalling Detectionで実現する売上予測精度87%への道筋",
+      "newSlug": "pipeline-stalling-engagement-velocity-87-accuracy"
+    }
+  ]
+}
