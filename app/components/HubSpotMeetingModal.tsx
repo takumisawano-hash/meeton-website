@@ -40,10 +40,15 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
     const handleMessage = (e: MessageEvent) => {
       if (e.origin.includes('hubspot.com') && e.data?.meetingBookSucceeded) {
         setBooked(true)
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'conversion', {
-            send_to: 'AW-18060590496/5EyJCIqrspUcEKD7-qND',
-          })
+        if (typeof window !== 'undefined') {
+          if (window.gtag) {
+            window.gtag('event', 'conversion', {
+              send_to: 'AW-18060590496/5EyJCIqrspUcEKD7-qND',
+            })
+          }
+          if ((window as unknown as { lintrk?: (a: string, b: { conversion_id: number }) => void }).lintrk) {
+            (window as unknown as { lintrk: (a: string, b: { conversion_id: number }) => void }).lintrk('track', { conversion_id: 25161212 })
+          }
         }
       }
     }

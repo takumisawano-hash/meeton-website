@@ -22,6 +22,7 @@ declare global {
       }
     }
     gtag?: (...args: unknown[]) => void
+    lintrk?: (action: string, data: { conversion_id: number }) => void
   }
 }
 
@@ -94,6 +95,9 @@ function InlineHubSpotForm({ utmCampaign }: { utmCampaign: string }) {
               window.gtag('event', 'conversion', {
                 send_to: 'AW-18060590496/5EyJCIqrspUcEKD7-qND',
               })
+            }
+            if (window.lintrk) {
+              window.lintrk('track', { conversion_id: 25161212 })
             }
           },
           onFormReady: ($form: HTMLFormElement) => {
