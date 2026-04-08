@@ -62,10 +62,10 @@ const copy = {
     formSub: 'Meeton aiの機能・導入事例をまとめた資料をお送りします',
   },
   linkedin: {
-    badge: '営業リーダー向け',
+    badge: '営業/マーケリーダー向け',
     h1: ['商談化率40%以上の', 'AI SDR'],
     sub: '人間SDRの平均対応42時間 → Meeton aiは5秒。リード検知から商談設定まで完全自動化します。',
-    formHeading: '導入事例と資料を\n無料ダウンロード',
+    formHeading: '3分で読める資料を\n無料ダウンロード',
     formSub: 'Meeton aiの機能・導入事例をまとめた資料をお送りします',
   },
 }
