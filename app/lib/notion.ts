@@ -126,7 +126,7 @@ function getThumbnailUrl(page: PageObjectResponse): string | null {
   const title = (getPropertyValue(page.properties, 'Title') as string) || ''
   if (!title) return null
   const category = (getPropertyValue(page.properties, 'Category') as string) || ''
-  return `/api/thumbnail?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
+  return `/api/thumbnail/?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
 }
 
 function getFeaturedImageUrl(page: PageObjectResponse): string | null {
@@ -139,7 +139,7 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   const file = prop.files[0]
   if (file.type === 'file') {
     // Notion S3ファイル → プロキシ経由
-    return `/api/notion-image?pageId=${page.id}&type=page-property&property=FeaturedImage`
+    return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage`
   }
 
   const url = file.type === 'external' ? file.external.url : ''
@@ -151,7 +151,7 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   }
 
   // その他外部URL → プロキシ経由
-  return `/api/notion-image?pageId=${page.id}&type=page-property&property=FeaturedImage`
+  return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage`
 }
 
 function pageToPost(page: PageObjectResponse): BlogPost {
