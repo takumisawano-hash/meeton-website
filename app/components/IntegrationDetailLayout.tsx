@@ -14,7 +14,13 @@ const strings = {
     breadcrumbRoot: "Integrations",
     breadcrumbRootHref: "/integrations",
     howToInstall: "How to install",
-    howToUninstall: "How to uninstall",
+    troubleshootingLinkText: "Contact support",
+    usageAndPrereqs: "Usage & Prerequisites",
+    prerequisites: "Prerequisites:",
+    featuresAndUseCases: "Features & Use Cases",
+    howToUninstall: "Removing the App",
+    implications: "Implications of removal:",
+    dataHandlingTitle: "How your data is handled:",
     developer: "Developer",
     developerName: "DynaMeet K.K.",
     website: "Website",
@@ -29,7 +35,13 @@ const strings = {
     breadcrumbRoot: "連携一覧",
     breadcrumbRootHref: "/ja/integrations",
     howToInstall: "導入手順",
-    howToUninstall: "アンインストール手順",
+    troubleshootingLinkText: "サポートに問い合わせる",
+    usageAndPrereqs: "使い方と前提条件",
+    prerequisites: "前提条件：",
+    featuresAndUseCases: "機能と利用シナリオ",
+    howToUninstall: "アプリの削除",
+    implications: "削除後の影響：",
+    dataHandlingTitle: "データの取り扱い：",
     developer: "開発元",
     developerName: "DynaMeet株式会社",
     website: "ウェブサイト",
@@ -157,6 +169,41 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
           background: #fff; text-decoration: none; transition: all .2s;
         }
         .int-detail-lang-chip:hover{ border-color: #12a37d; color: #12a37d; }
+        /* Install note (troubleshooting) */
+        .int-detail-install-note{
+          font-size: 14px; color: #5a7080; font-style: italic;
+          margin-top: 16px; line-height: 1.6;
+        }
+        .int-detail-install-note a{ color: #12a37d; text-decoration: none; }
+        .int-detail-install-note a:hover{ text-decoration: underline; }
+        /* Usage & Prerequisites section */
+        .int-detail-prereq-block{
+          margin-top: 40px; padding: 20px 24px;
+          background: #f0fdf9; border: 1.5px solid #a7f3d0;
+          border-radius: 12px;
+        }
+        .int-detail-prereq-prereq{
+          font-size: 15px; color: #3d5566; margin-bottom: 16px; line-height: 1.7;
+        }
+        .int-detail-prereq-prereq strong{ color: #0f2d40; }
+        .int-detail-use-cases{ display: flex; flex-direction: column; gap: 12px; }
+        .int-detail-use-case{
+          background: #fff; border: 1px solid #d1fae5;
+          border-radius: 8px; padding: 14px 16px;
+        }
+        .int-detail-use-case-title{
+          font-size: 14px; font-weight: 700; color: #12a37d; margin-bottom: 6px;
+        }
+        .int-detail-use-case-desc{
+          font-size: 14px; color: #3d5566; line-height: 1.7;
+        }
+        /* Post-uninstall notes */
+        .int-detail-uninstall-note{
+          margin-top: 20px; padding: 14px 16px;
+          background: #fef9ec; border: 1px solid #fde68a;
+          border-radius: 8px; font-size: 14px; color: #3d5566; line-height: 1.7;
+        }
+        .int-detail-uninstall-note strong{ color: #0f2d40; }
         @media(max-width:860px){
           .int-detail-grid{
             grid-template-columns: 1fr;
@@ -220,6 +267,59 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
                 ))}
               </ol>
 
+              {content.installNote && (
+                <p className="int-detail-install-note">
+                  {content.installNote}{" "}
+                  <a
+                    href={integration.links.support}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {s.troubleshootingLinkText}
+                  </a>
+                  .
+                </p>
+              )}
+
+              {(content.prerequisites ||
+                (content.useCases && content.useCases.length > 0)) && (
+                <div className="int-detail-prereq-block">
+                  <div
+                    className="int-detail-steps-label"
+                    style={{ marginBottom: 12 }}
+                  >
+                    {s.usageAndPrereqs}
+                  </div>
+                  {content.prerequisites && (
+                    <p className="int-detail-prereq-prereq">
+                      <strong>{s.prerequisites}</strong> {content.prerequisites}
+                    </p>
+                  )}
+                  {content.useCases && content.useCases.length > 0 && (
+                    <>
+                      <div
+                        className="int-detail-steps-label"
+                        style={{ marginBottom: 12 }}
+                      >
+                        {s.featuresAndUseCases}
+                      </div>
+                      <div className="int-detail-use-cases">
+                        {content.useCases.map((uc, i) => (
+                          <div key={i} className="int-detail-use-case">
+                            <div className="int-detail-use-case-title">
+                              {uc.title}
+                            </div>
+                            <div className="int-detail-use-case-desc">
+                              {uc.description}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
               <div className="int-detail-steps-label" style={{ marginTop: 40 }}>
                 {s.howToUninstall}
               </div>
@@ -234,6 +334,22 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
                   </li>
                 ))}
               </ol>
+
+              {content.uninstallImplications && (
+                <div className="int-detail-uninstall-note">
+                  <strong>{s.implications}</strong>{" "}
+                  {content.uninstallImplications}
+                </div>
+              )}
+
+              {content.dataHandling && (
+                <div
+                  className="int-detail-uninstall-note"
+                  style={{ marginTop: 10 }}
+                >
+                  <strong>{s.dataHandlingTitle}</strong> {content.dataHandling}
+                </div>
+              )}
             </div>
 
             {/* Right sidebar */}

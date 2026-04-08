@@ -1,26 +1,36 @@
 export type IntegrationCategory = "crm" | "notify" | "calendar" | "meeting";
 
+export type IntegrationUseCase = {
+  title: string;
+  description: string;
+};
+
+export type IntegrationLocaleContent = {
+  categoryLabel: string;
+  tagline: string;
+  description: string;
+  ctaText: string;
+  steps: string[];
+  /** Optional note shown after install steps (e.g. troubleshooting link). */
+  installNote?: string;
+  /** Optional prerequisites text shown in "Usage & Prerequisites" section. */
+  prerequisites?: string;
+  /** Optional feature use-cases shown in "Usage & Prerequisites" section. */
+  useCases?: IntegrationUseCase[];
+  uninstallSteps: string[];
+  /** Optional paragraph describing implications of removal. */
+  uninstallImplications?: string;
+  /** Optional paragraph describing how user data is handled after removal. */
+  dataHandling?: string;
+};
+
 export type Integration = {
   slug: string;
   name: string;
   logo: string;
   category: IntegrationCategory;
-  en: {
-    categoryLabel: string;
-    tagline: string;
-    description: string;
-    ctaText: string;
-    steps: string[];
-    uninstallSteps: string[];
-  };
-  ja: {
-    categoryLabel: string;
-    tagline: string;
-    description: string;
-    ctaText: string;
-    steps: string[];
-    uninstallSteps: string[];
-  };
+  en: IntegrationLocaleContent;
+  ja: IntegrationLocaleContent;
   links: {
     cta: string;
     website: string;
@@ -97,18 +107,32 @@ export const integrations: Integration[] = [
         "Click Connect next to the Zoom logo and authorize your Zoom account.",
         "All future bookings will automatically include a Zoom link.",
       ],
-      uninstallSteps: [
-        "Log into your Meeton ai account at app.dynameet.ai.",
-        "Navigate to Settings → Integrations.",
-        "Click Disconnect next to the Zoom logo.",
-        "Confirm the disconnection. New bookings will no longer include a Zoom link.",
+      installNote: "Having trouble?",
+      prerequisites:
+        "You must have an active DynaMeet account and a Zoom account.",
+      useCases: [
+        {
+          title: "Auto-Generate Meeting Links",
+          description:
+            "Once connected, Meeton AI automatically generates a unique Zoom meeting link the moment a meeting is booked. When a client schedules a meeting with you through your Meeton AI booking page, our integration automatically creates a Zoom meeting and adds the join link directly to both your and your client's calendar invite. No manual copy-pasting is needed.",
+        },
       ],
+      uninstallSteps: [
+        "Log in to your Zoom account and navigate to the Zoom App Marketplace.",
+        "Click Manage > Added Apps or search for the \u201cDynaMeet\u201d app.",
+        "Select the \u201cDynaMeet\u201d app.",
+        "Click Remove.",
+      ],
+      uninstallImplications:
+        "Once removed, DynaMeet will immediately lose access to your Zoom account. Any new meetings booked through DynaMeet will no longer include an automatically generated Zoom link.",
+      dataHandling:
+        "Upon de-authorizing the app, DynaMeet will permanently delete your Zoom authentication tokens from our database. We do not retain any Zoom-specific data after removal. Any Zoom meetings that were successfully scheduled prior to removal will remain intact on your calendar.",
     },
     ja: {
       categoryLabel: "Web会議連携",
       tagline: "商談予約と同時にZoomリンクを自動生成。",
       description:
-        "ZoomアカウントをMeeton aiと接続することで、商談が予約されると同時にZoomミーティングリンクを自動生成・カレンダーに追加します。URLの発行・共有作業をゼロにします。",
+        "ZoomアカウントをDynaMeetと接続することで、商談が予約されると同時にZoomミーティングリンクを自動生成・カレンダーに追加します。URLの発行・共有作業をゼロにします。",
       ctaText: "Zoomと連携する",
       steps: [
         "app.dynameet.ai にログインします。",
@@ -116,17 +140,30 @@ export const integrations: Integration[] = [
         "Zoomの「連携を開始する」をクリックし、Zoomアカウントを認証します。",
         "以降、すべての商談予約にZoomリンクが自動付与されます。",
       ],
-      uninstallSteps: [
-        "app.dynameet.ai にログインします。",
-        "設定 → 連携 を開きます。",
-        "Zoomの「連携を解除する」をクリックします。",
-        "確認ダイアログで解除を確定します。以降の予約にはZoomリンクが付与されなくなります。",
+      installNote: "うまくいかない場合は、",
+      prerequisites: "DynaMeetアカウントおよびZoomアカウントが必要です。",
+      useCases: [
+        {
+          title: "ミーティングリンクの自動生成",
+          description:
+            "連携後、Meeton AIは商談が予約された瞬間にZoomミーティングリンクを自動生成します。クライアントがMeeton AIの予約ページから商談を予約すると、Zoomミーティングが自動的に作成され、あなたとクライアントの両方のカレンダー招待にリンクが追加されます。手動でのコピー＆ペーストは不要です。",
+        },
       ],
+      uninstallSteps: [
+        "Zoomアカウントにログインし、Zoom App Marketplaceに移動します。",
+        "「管理」→「追加済みアプリ」をクリックするか、「DynaMeet」アプリを検索します。",
+        "「DynaMeet」アプリを選択します。",
+        "「削除」をクリックします。",
+      ],
+      uninstallImplications:
+        "削除後、DynaMeetは直ちにZoomアカウントへのアクセスを失います。以降にDynaMeetを通じて予約された商談には、Zoomリンクが自動付与されなくなります。",
+      dataHandling:
+        "アプリの認証解除後、DynaMeetはお客様のZoom認証トークンをデータベースから完全に削除します。削除後、Zoom関連のデータは一切保持しません。削除前に正常にスケジュールされたZoomミーティングは、カレンダー上にそのまま残ります。",
     },
     links: {
       cta: "https://app.dynameet.ai/settings/integrations",
       website: "https://dynameet.ai",
-      support: "https://dynameet.ai/support/zoom",
+      support: "mailto:support@dynameet.ai",
       privacyPolicy: "https://dynameet.ai/privacy-policy",
     },
   },
