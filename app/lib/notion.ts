@@ -150,6 +150,11 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
     return getThumbnailUrl(page)
   }
 
+  // Imgur等の安定した外部URL → 直接返す（XのOGPクローラーがプロキシだとタイムアウトする）
+  if (url.includes('i.imgur.com') || url.includes('imgur.com')) {
+    return url
+  }
+
   // その他外部URL → プロキシ経由
   return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage`
 }
