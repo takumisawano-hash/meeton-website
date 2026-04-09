@@ -49,7 +49,7 @@ export const integrations: Integration[] = [
       categoryLabel: "Notifications & alerts",
       tagline: "Get instant deal and lead alerts in any Slack channel.",
       description:
-        "Connect Meeton ai to Slack and receive real-time notifications for new leads, booked meetings, and completed AI interviews — delivered to any channel your team chooses. Keep every rep in the loop automatically, with zero manual forwarding.",
+        "Meeton AI is an AI-powered sales assistant that runs on your website — automatically engaging visitors, qualifying leads, and booking meetings. Connect Meeton AI to Slack and your whole team stays informed in real time: receive alerts the moment a visitor sends a message, a lead shares their contact info, a meeting is booked, or a known lead returns to your site. Every notification includes a direct link to the visitor's profile in Meeton AI, so your reps can jump into context and act fast.",
       ctaText: "Connect Slack",
       steps: [
         "Log into your Meeton ai account at app.dynameet.ai.",
@@ -57,18 +57,48 @@ export const integrations: Integration[] = [
         "Click Connect next to the Slack logo and authorize your workspace.",
         "Select the channel(s) to receive notifications and click Save.",
       ],
+      installNote:
+        "Need help finding the Slack setup? Log in to app.dynameet.ai and go to Settings → Integrations.",
+      prerequisites:
+        "An active Meeton AI account at app.dynameet.ai and Slack workspace Admin or App Management permissions to authorize third-party apps.",
+      useCases: [
+        {
+          title: "Real-Time Chat Alerts",
+          description:
+            "See visitor messages and the AI's replies posted to your Slack channel the moment they happen. Your team can monitor conversations and jump in whenever a high-value lead appears.",
+        },
+        {
+          title: "Lead Capture & Meeting Booking Notifications",
+          description:
+            "Get a Slack alert the moment a visitor shares their contact info or books a meeting — including their name, email, and scheduled time. No need to log in to stay on top of your pipeline.",
+        },
+        {
+          title: "Return Visitor & Content Engagement Alerts",
+          description:
+            "Know when a known lead revisits your site or opens your Download Center. Perfectly timed outreach starts with knowing exactly when a prospect is actively engaging.",
+        },
+        {
+          title: "Direct Links to Visitor Profiles",
+          description:
+            "Every Slack notification includes a clickable link to that visitor's full profile in Meeton AI — conversation history, contact info, and intent signals — so your team can act without switching contexts.",
+        },
+      ],
       uninstallSteps: [
-        "Log into your Meeton ai account at app.dynameet.ai.",
+        "Log into your DynaMeet account at app.dynameet.ai.",
         "Navigate to Settings → Integrations.",
         "Click Disconnect next to the Slack logo.",
         "Confirm the disconnection. Notifications to Slack will stop immediately.",
       ],
+      uninstallImplications:
+        "Once disconnected, Meeton AI will immediately stop sending notifications to Slack. Your existing Slack messages and channel history are not affected.",
+      dataHandling:
+        "Upon disconnection, Meeton AI permanently deletes your Slack OAuth tokens from our database. No visitor data or notification history is retained by Meeton AI after removal.",
     },
     ja: {
       categoryLabel: "通知・アラート",
       tagline: "商談予約・リード獲得をSlackへリアルタイム通知。",
       description:
-        "Meeton aiとSlackを連携すると、新規リード獲得・商談予約・AIヒアリング完了などのイベントを、指定したSlackチャンネルへリアルタイムで通知します。営業チーム全員への即時共有が自動化され、対応漏れをゼロにします。",
+        "Meeton AIは、Webサイト上でリアルタイムに訪問者と対話し、リードを自動獲得・商談予約まで行うAI搭載の営業アシスタントです。Meeton AIとSlackを連携すると、訪問者からのチャットメッセージ送信・リード化・商談予約・既知リードの再訪問など、重要なイベントが起きた瞬間にチームへSlack通知が届きます。すべての通知には訪問者プロフィールへの直接リンクが含まれており、ダッシュボードにログインせずとも即座にアクションできます。",
       ctaText: "Slackと連携する",
       steps: [
         "app.dynameet.ai にログインします。",
@@ -76,12 +106,42 @@ export const integrations: Integration[] = [
         "Slackの「連携を開始する」をクリックし、ワークスペースを認証します。",
         "通知を受け取るチャンネルを選択して「保存」をクリックすれば完了です。",
       ],
+      installNote:
+        "Slack連携の設定が見つからない場合は、app.dynameet.ai にログインし、設定 → 連携 を開いてください。",
+      prerequisites:
+        "app.dynameet.ai のMeeton AIアカウントと、Slackワークスペースでのアプリ管理またはAdmin権限が必要です。",
+      useCases: [
+        {
+          title: "リアルタイムチャットアラート",
+          description:
+            "訪問者のメッセージとAIの返答が、送信された瞬間にSlackチャンネルへ投稿されます。チームはチャットをモニタリングし、重要なリードが現れた際にすぐ対応できます。",
+        },
+        {
+          title: "リード獲得・商談予約通知",
+          description:
+            "訪問者が連絡先を共有した瞬間・商談を予約した瞬間にSlack通知が届きます。氏名・メールアドレス・予約日時が含まれるため、ダッシュボードにログインしなくてもパイプラインを把握できます。",
+        },
+        {
+          title: "再訪問・コンテンツエンゲージメントアラート",
+          description:
+            "既知のリードがサイトを再訪問したり、ダウンロードセンターを開いたりした際に通知が届きます。見込み客がアクティブなタイミングを把握して、最適な間隔でアウトリーチを実施できます。",
+        },
+        {
+          title: "訪問者プロフィールへの直接リンク",
+          description:
+            "すべてのSlack通知に、訪問者のMeeton AI上のプロフィールへのリンクが含まれます。会話履歴・連絡先・購買意向シグナルにワンクリックでアクセスでき、すぐにアクションへ移れます。",
+        },
+      ],
       uninstallSteps: [
         "app.dynameet.ai にログインします。",
         "設定 → 連携 を開きます。",
         "Slackの「連携を解除する」をクリックします。",
         "確認ダイアログで解除を確定します。Slackへの通知は即座に停止されます。",
       ],
+      uninstallImplications:
+        "連携解除後、Meeton AIからSlackへの通知は即座に停止されます。すでにSlack上に投稿されたメッセージやチャンネル履歴には影響しません。",
+      dataHandling:
+        "連携解除後、Meeton AIはSlack OAuth認証トークンをデータベースから完全に削除します。解除後、訪問者データや通知履歴はMeeton AI側に一切保持されません。",
     },
     links: {
       cta: "https://app.dynameet.ai/settings/integrations",
