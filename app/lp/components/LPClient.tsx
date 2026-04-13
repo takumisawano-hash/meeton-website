@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import HubSpotMeetingModal from '../../components/HubSpotMeetingModal'
 
 /* ── Types ── */
-type Variant = 'google' | 'linkedin'
+type Variant = 'google' | 'linkedin' | 'web-chat' | 'inside-sales' | 'meeting' | 'lead-gen'
 type LPClientProps = { variant?: Variant }
 
 declare global {
@@ -52,6 +52,29 @@ const faqData = [
   },
 ]
 
+const variantFaq: Record<string, typeof faqData> = {
+  'web-chat': [
+    { q: 'Web接客ツールとして何ができますか？', a: 'AIチャットボットがサイト訪問者に自動で声をかけ、質問応答・資料提案・商談予約まで完結します。BtoB特化のWeb接客を24時間自動化します。' },
+    { q: '既存のチャットボットとの違いは？', a: '従来のチャットボットはシナリオ型で定型応答のみ。Meeton aiはAIが会話を理解し、訪問者の関心に合わせて最適な対応を自律選択します。' },
+    ...faqData,
+  ],
+  'inside-sales': [
+    { q: 'インサイドセールスの工数はどのくらい削減できますか？', a: 'SDR業務の初期対応をAIが代行することで、リード対応工数を最大80%削減。営業チームは商談に集中できます。' },
+    { q: 'セールスイネーブルメントツールとして使えますか？', a: 'はい。AIが見込み客の温度感を判定し、最適なコンテンツを自動提案。営業効率化とセールスイネーブルメントを同時に実現します。' },
+    ...faqData,
+  ],
+  'meeting': [
+    { q: '商談自動化の仕組みを教えてください', a: 'AIがWebサイト訪問者を検知し、チャットで会話→温度感を判定→カレンダー連携で商談予約まで自動完結。アポ獲得を完全自動化します。' },
+    { q: '商談化率はどのくらい改善しますか？', a: '導入企業では商談化率40%以上を実現。人間SDRの平均対応42時間がAIなら5秒で、商談化率が劇的に改善します。' },
+    ...faqData,
+  ],
+  'lead-gen': [
+    { q: 'BtoBリード獲得の自動化はどう実現しますか？', a: 'Webサイト訪問者をAIがリアルタイム検知し、チャット・メール・資料提案で自動アプローチ。24時間リードを獲得し続けます。' },
+    { q: 'マーケティングオートメーションとの違いは？', a: 'MAはリードのスコアリングとメール配信が主軸。Meeton aiはリード検知→対話→商談獲得まで一気通貫で自動化します。' },
+    ...faqData,
+  ],
+}
+
 /* ── Variant copy ── */
 const copy = {
   google: {
@@ -67,6 +90,34 @@ const copy = {
     sub: '人間SDRの平均対応42時間 → Meeton aiは5秒。リード検知から商談設定まで完全自動化します。',
     formHeading: '3分で読める資料を\n無料ダウンロード',
     formSub: 'Meeton aiの機能・導入事例をまとめた資料をお送りします',
+  },
+  'web-chat': {
+    badge: 'BtoB Web接客ツール — AI搭載',
+    h1: ['AIチャットボットで', 'Web接客を自動化'],
+    sub: 'BtoB向けWeb接客ツール。サイト訪問者にAIチャットボットが自動対応し、商談予約まで完結。従来のチャットボットでは不可能だったオンライン接客の自動化を実現。',
+    formHeading: 'Web接客ツールの資料を\n無料ダウンロード',
+    formSub: 'AIチャットボットの機能・導入事例をまとめた資料をお送りします',
+  },
+  'inside-sales': {
+    badge: 'インサイドセールス自動化ツール',
+    h1: ['インサイドセールスを', 'AIで効率化'],
+    sub: 'SDR業務をAIが代行するインサイドセールスツール。リード対応の営業効率化からセールスイネーブルメントまで、営業DXを5分で実現します。',
+    formHeading: '営業効率化ツールの資料を\n無料ダウンロード',
+    formSub: 'インサイドセールス自動化の機能・事例資料をお送りします',
+  },
+  'meeting': {
+    badge: '商談自動化AI — アポ獲得を完全自動',
+    h1: ['アポ獲得を', 'AIが完全自動化'],
+    sub: 'リード検知から商談設定まで完全自動化。AIがアポ獲得を代行し、商談化率40%以上を実現。商談自動化で営業チームは提案に集中できます。',
+    formHeading: '商談自動化の資料を\n無料ダウンロード',
+    formSub: 'アポ獲得AI・商談化率改善の事例資料をお送りします',
+  },
+  'lead-gen': {
+    badge: 'BtoBリード獲得自動化',
+    h1: ['リード獲得を', '24時間自動化'],
+    sub: 'Webサイト訪問者からのBtoBリード獲得をAIが24時間自動化。マーケティングオートメーションの先へ — リード検知から商談化まで一気通貫。',
+    formHeading: 'リード獲得自動化の資料を\n無料ダウンロード',
+    formSub: 'BtoBリード獲得の機能・導入事例をまとめた資料をお送りします',
   },
 }
 
@@ -520,7 +571,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
         <div className="lp-section-inner">
           <h2 className="lp-h2">よくある質問</h2>
           <div className="lp-faq">
-            {faqData.map((f, i) => (
+            {(variantFaq[variant] || [...faqData]).map((f, i) => (
               <div className={'lp-faq-item' + (openFaq === i ? ' open' : '')} key={i}>
                 <button className="lp-faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                   <span>{f.q}</span>
