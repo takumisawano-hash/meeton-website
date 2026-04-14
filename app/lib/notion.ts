@@ -19,6 +19,29 @@ const notionDataSources = (notion as any).dataSources as {
   }>
 }
 
+// Global throttle: max 2 concurrent Notion API calls with 350ms gap
+let _lastCallTime = 0
+let _activeCalls = 0
+const MAX_CONCURRENT = 2
+const MIN_GAP_MS = 350
+
+async function throttle(): Promise<void> {
+  while (_activeCalls >= MAX_CONCURRENT) {
+    await new Promise(r => setTimeout(r, 100))
+  }
+  const now = Date.now()
+  const elapsed = now - _lastCallTime
+  if (elapsed < MIN_GAP_MS) {
+    await new Promise(r => setTimeout(r, MIN_GAP_MS - elapsed))
+  }
+  _lastCallTime = Date.now()
+  _activeCalls++
+}
+
+function releaseThrottle(): void {
+  _activeCalls = Math.max(0, _activeCalls - 1)
+}
+
 // Retry helper for rate-limited requests with jitter
 async function withRetry<T>(
   fn: () => Promise<T>,
@@ -27,9 +50,13 @@ async function withRetry<T>(
 ): Promise<T> {
   let lastError: unknown
   for (let attempt = 0; attempt < maxRetries; attempt++) {
+    await throttle()
     try {
-      return await fn()
+      const result = await fn()
+      releaseThrottle()
+      return result
     } catch (error) {
+      releaseThrottle()
       lastError = error
       if (isNotionClientError(error) && error.code === APIErrorCode.RateLimited) {
         const jitter = Math.random() * 1000
