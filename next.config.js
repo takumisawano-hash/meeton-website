@@ -3,6 +3,10 @@ const blogRedirects = require('./scripts/blog-redirects.js')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
+  experimental: {
+    // Limit parallel static page generation to avoid Notion API rate limits
+    staticGenerationMaxConcurrency: 3,
+  },
   images: {
     remotePatterns: [
       {

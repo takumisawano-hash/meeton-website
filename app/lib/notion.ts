@@ -19,11 +19,11 @@ const notionDataSources = (notion as any).dataSources as {
   }>
 }
 
-// Retry helper for rate-limited requests
+// Retry helper for rate-limited requests with jitter
 async function withRetry<T>(
   fn: () => Promise<T>,
-  maxRetries: number = 5,
-  baseDelay: number = 1000
+  maxRetries: number = 8,
+  baseDelay: number = 1500
 ): Promise<T> {
   let lastError: unknown
   for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -32,8 +32,9 @@ async function withRetry<T>(
     } catch (error) {
       lastError = error
       if (isNotionClientError(error) && error.code === APIErrorCode.RateLimited) {
-        const delay = baseDelay * Math.pow(2, attempt) // Exponential backoff
-        console.log(`Rate limited, retrying in ${delay}ms (attempt ${attempt + 1}/${maxRetries})`)
+        const jitter = Math.random() * 1000
+        const delay = baseDelay * Math.pow(2, attempt) + jitter
+        console.log(`Rate limited, retrying in ${Math.round(delay)}ms (attempt ${attempt + 1}/${maxRetries})`)
         await new Promise(resolve => setTimeout(resolve, delay))
       } else {
         throw error
