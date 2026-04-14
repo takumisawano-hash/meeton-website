@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { Plus_Jakarta_Sans, Noto_Sans_JP, JetBrains_Mono } from 'next/font/google'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
+import DocoDocoTracker from './components/DocoDocoTracker'
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -73,6 +74,7 @@ export default function RootLayout({
     <html lang="ja" className={`${plusJakarta.variable} ${notoSansJP.variable} ${jetbrainsMono.variable}`}>
       <body>
         <GoogleAnalytics />
+        <DocoDocoTracker />
         <JsonLd type="organization" />
         <JsonLd type="website" />
         {children}
