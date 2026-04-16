@@ -3182,17 +3182,8 @@ function HeroDemoAnimation() {
           transition:"transform .3s, box-shadow .3s",
         }}>
           <div style={{
-            width:56,height:56,borderRadius:16,
-            background:s.gradient,
-            boxShadow:`0 8px 24px ${s.glow}, inset 0 1px 0 rgba(255,255,255,.2)`,
-            display:"flex",alignItems:"center",justifyContent:"center",
-            margin:"0 auto 16px",
-          }}>
-            <Ico name={s.icon} size={26} color="#fff" />
-          </div>
-          <div style={{
             fontFamily:"var(--fm)",
-            fontSize:"clamp(36px,5vw,52px)",
+            fontSize:"clamp(48px,7vw,72px)",
             fontWeight:800,
             background:s.gradient,
             WebkitBackgroundClip:"text",
