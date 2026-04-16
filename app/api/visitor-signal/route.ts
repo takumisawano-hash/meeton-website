@@ -82,8 +82,13 @@ export async function POST(request: NextRequest) {
 // GET endpoint for Mac Mini to pull signals
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
-  if (authHeader !== `Bearer ${process.env.VISITOR_SIGNAL_SECRET}`) {
-    return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  const secret = process.env.VISITOR_SIGNAL_SECRET
+  if (!secret || authHeader !== `Bearer ${secret}`) {
+    return NextResponse.json({
+      error: 'unauthorized',
+      debug_has_secret: !!secret,
+      debug_secret_len: secret?.length ?? 0,
+    }, { status: 401 })
   }
 
   const signals = await getSignals()
