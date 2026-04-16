@@ -26,19 +26,18 @@ export default function MeetonScript() {
 
     ;(window as Window & { DynaMeetConfig?: { teamId: string } }).DynaMeetConfig = { teamId }
 
-    if (document.readyState === 'complete') {
-      loadMeetonScript()
-      return
+    if (document.readyState === 'loading') {
+      const onLoad = () => {
+        loadMeetonScript()
+      }
+
+      window.addEventListener('load', onLoad)
+      return () => {
+        window.removeEventListener('load', onLoad)
+      }
     }
 
-    const onLoad = () => {
-      loadMeetonScript()
-    }
-
-    window.addEventListener('load', onLoad)
-    return () => {
-      window.removeEventListener('load', onLoad)
-    }
+    loadMeetonScript()
   }, [teamId])
 
   return null
