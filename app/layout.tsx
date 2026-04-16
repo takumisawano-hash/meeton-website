@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { Plus_Jakarta_Sans, Noto_Sans_JP, JetBrains_Mono } from 'next/font/google'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
+import MeetonScript from './components/MeetonScript'
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -78,17 +78,7 @@ export default function RootLayout({
         <JsonLd type="organization" />
         <JsonLd type="website" />
         {children}
-        <Script
-          id="dynameet-config"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: 'window.DynaMeetConfig = { teamId: "70801bb6-9b39-4989-8be9-7d93076424c1" };',
-          }}
-        />
-        <Script
-          src="https://app.dynameet.ai/meeton.js"
-          strategy="lazyOnload"
-        />
+        <MeetonScript />
       </body>
     </html>
   )
