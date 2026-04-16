@@ -31,9 +31,13 @@ export default function MeetonScript() {
       return
     }
 
-    window.addEventListener('load', loadMeetonScript, { once: true })
+    const onLoad = () => {
+      loadMeetonScript()
+    }
+
+    window.addEventListener('load', onLoad)
     return () => {
-      window.removeEventListener('load', loadMeetonScript)
+      window.removeEventListener('load', onLoad)
     }
   }, [teamId])
 
