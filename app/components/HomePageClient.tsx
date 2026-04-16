@@ -3121,9 +3121,9 @@ const Ico = ({ name, size = 16, color = "currentColor" }: { name: IconKey; size?
 
 /* ── Hero Stats — Impact numbers ── */
 const HERO_STATS = [
-  { num: "2", suffix: "倍以上", label: "商談化率", desc: "人間SDRと比較", color: "var(--cta)", icon: "target" as IconKey },
-  { num: "66", suffix: "%削減", label: "商談獲得コスト", desc: "人件費を大幅カット", color: "var(--blue)", icon: "bolt" as IconKey },
-  { num: "20", suffix: "h+/人", label: "月間工数削減", desc: "より重要な営業活動に集中", color: "#7c5cfc", icon: "calendar" as IconKey },
+  { num: "2", suffix: "倍以上", label: "商談化率", desc: "人間SDRと比較", icon: "target" as IconKey, gradient: "linear-gradient(135deg, #12a37d, #34d399)", glow: "rgba(18,163,125,.25)" },
+  { num: "66", suffix: "%削減", label: "商談獲得コスト", desc: "人件費を大幅カット", icon: "bolt" as IconKey, gradient: "linear-gradient(135deg, #3b6ff5, #60a5fa)", glow: "rgba(59,111,245,.25)" },
+  { num: "20", suffix: "h+/人", label: "月間工数削減", desc: "より重要な営業活動に集中", icon: "calendar" as IconKey, gradient: "linear-gradient(135deg, #7c5cfc, #a78bfa)", glow: "rgba(124,92,252,.25)" },
 ];
 
 function useCountUp(target: number, duration = 1800, start = false) {
@@ -3172,28 +3172,31 @@ function HeroDemoAnimation() {
     }} className="hero-stats-grid">
       {HERO_STATS.map((s, i) => (
         <div key={i} style={{
-          background:"rgba(255,255,255,.85)",
-          backdropFilter:"blur(12px)",
-          borderRadius:16,
-          padding:"clamp(20px,3vw,32px) clamp(16px,2vw,24px)",
+          background:"rgba(255,255,255,.9)",
+          backdropFilter:"blur(16px)",
+          borderRadius:20,
+          padding:"clamp(24px,3vw,36px) clamp(20px,2.5vw,28px)",
           textAlign:"center",
-          border:"1px solid rgba(0,0,0,.06)",
-          boxShadow:"0 4px 24px rgba(0,0,0,.04)",
+          border:"1px solid rgba(0,0,0,.05)",
+          boxShadow:`0 8px 32px rgba(0,0,0,.06), 0 1px 0 rgba(255,255,255,.8) inset`,
           transition:"transform .3s, box-shadow .3s",
         }}>
           <div style={{
-            width:44,height:44,borderRadius:12,
-            background:`${s.color}15`,
+            width:56,height:56,borderRadius:16,
+            background:s.gradient,
+            boxShadow:`0 8px 24px ${s.glow}, inset 0 1px 0 rgba(255,255,255,.2)`,
             display:"flex",alignItems:"center",justifyContent:"center",
-            margin:"0 auto 12px",
+            margin:"0 auto 16px",
           }}>
-            <Ico name={s.icon} size={22} color={s.color} />
+            <Ico name={s.icon} size={26} color="#fff" />
           </div>
           <div style={{
             fontFamily:"var(--fm)",
             fontSize:"clamp(36px,5vw,52px)",
             fontWeight:800,
-            color:s.color,
+            background:s.gradient,
+            WebkitBackgroundClip:"text",
+            WebkitTextFillColor:"transparent",
             letterSpacing:-2,
             lineHeight:1,
           }}>
