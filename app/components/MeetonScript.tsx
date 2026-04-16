@@ -24,20 +24,28 @@ export default function MeetonScript() {
       document.body.appendChild(script)
     }
 
-    ;(window as Window & { DynaMeetConfig?: { teamId: string } }).DynaMeetConfig = { teamId }
+    const win = window as Window & { DynaMeetConfig?: { teamId: string } }
+    win.DynaMeetConfig = { teamId }
 
+    let onLoad: (() => void) | undefined
     if (document.readyState === 'loading') {
-      const onLoad = () => {
+      onLoad = () => {
         loadMeetonScript()
       }
 
       window.addEventListener('load', onLoad)
-      return () => {
-        window.removeEventListener('load', onLoad)
-      }
+    } else {
+      loadMeetonScript()
     }
 
-    loadMeetonScript()
+    return () => {
+      if (onLoad) {
+        window.removeEventListener('load', onLoad)
+      }
+
+      const existingScript = document.querySelector(MEETON_SCRIPT_SELECTOR)
+      existingScript?.remove()
+    }
   }, [teamId])
 
   return null
