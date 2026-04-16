@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
 import HubSpotModal from "./HubSpotModal";
@@ -276,6 +276,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .qflow-hz-gate>div{writing-mode:horizontal-tb!important;flex-direction:row!important;padding:10px 20px!important}
   .why-grid{grid-template-columns:1fr}
   .proof-stats-grid{grid-template-columns:repeat(2,1fr)!important}
+  .hero-stats-grid{grid-template-columns:1fr!important;max-width:360px!important}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
   .step-arrow{display:none}
@@ -3118,119 +3119,100 @@ const ICONS = {
 type IconKey = keyof typeof ICONS;
 const Ico = ({ name, size = 16, color = "currentColor" }: { name: IconKey; size?: number; color?: string }) => <Icon d={ICONS[name]} size={size} color={color} />;
 
-/* ── Hero Demo Animation — Before/After comparison ── */
-const COMPARE_STEPS = [
-  {
-    human: { icon: "bell" as IconKey, label: "リードを検知", color: "var(--heading)" },
-    ai:    { icon: "bell" as IconKey, label: "リードを検知", color: "var(--cta)" },
-  },
-  {
-    human: { icon: "search" as IconKey, label: "担当者を探す...", color: "#9ca3af" },
-    ai:    { icon: "bolt" as IconKey, label: "5秒で自動対応", color: "var(--cta)" },
-  },
-  {
-    human: { icon: "mail" as IconKey, label: "テンプレメール送信", color: "#9ca3af" },
-    ai:    { icon: "chat" as IconKey, label: "AIが課題をヒアリング", color: "var(--cta)" },
-  },
-  {
-    human: { icon: "target" as IconKey, label: "返信なし...失注", color: "#ef4444" },
-    ai:    { icon: "check" as IconKey, label: "商談確定！CRM登録", color: "var(--cta)" },
-  },
+/* ── Hero Stats — Impact numbers ── */
+const HERO_STATS = [
+  { num: "2", suffix: "倍以上", label: "商談化率", desc: "人間SDRと比較", color: "var(--cta)", icon: "target" as IconKey },
+  { num: "66", suffix: "%削減", label: "商談獲得コスト", desc: "人件費を大幅カット", color: "var(--blue)", icon: "bolt" as IconKey },
+  { num: "20", suffix: "h+/人", label: "月間工数削減", desc: "より重要な営業活動に集中", color: "#7c5cfc", icon: "calendar" as IconKey },
 ];
 
+function useCountUp(target: number, duration = 1800, start = false) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let raf: number;
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min((now - t0) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(target * ease));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, start]);
+  return val;
+}
+
 function HeroDemoAnimation() {
-  const [step, setStep] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setStep((p) => (p + 1) % COMPARE_STEPS.length);
-    }, 2800);
-    return () => clearInterval(interval);
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.3 });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
-  const cur = COMPARE_STEPS[step];
-  const isFail = step === 3;
-  const isWin = step === 3;
+  const v0 = useCountUp(2, 1200, visible);
+  const v1 = useCountUp(66, 1800, visible);
+  const v2 = useCountUp(20, 1600, visible);
+  const vals = [v0, v1, v2];
 
   return (
-    <div className="demo-wrap">
-      {/* Header */}
-      <div className="demo-steps-bar" style={{justifyContent:"center",gap:8}}>
-        <Ico name="bell" size={16} color="var(--cta)" />
-        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>新しいリードが来ました — 対応の差は？</span>
-      </div>
-
-      {/* Progress */}
-      <div style={{display:"flex",gap:4,padding:"0 24px 16px"}}>
-        {COMPARE_STEPS.map((_,i) => (
-          <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= step ? "var(--cta)" : "var(--border)",transition:"background .4s"}} />
-        ))}
-      </div>
-
-      {/* Two lanes */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,minHeight:220}}>
-        {/* Human SDR — Left */}
-        <div style={{padding:"0 24px 24px",borderRight:"1px solid var(--border)"}}>
-          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
-            <div style={{width:36,height:36,borderRadius:"50%",background:"linear-gradient(135deg,#94a3b8,#cbd5e1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}}>👤</div>
-            <div>
-              <div style={{fontSize:14,fontWeight:800,color:"var(--heading)"}}>従来のSDR</div>
-              <div style={{fontSize:11,color:"var(--sub)"}}>人力で対応</div>
-            </div>
-          </div>
-
-          {/* Time indicator */}
-          <div className="demo-msg-appear" key={`h-time-${step}`} style={{textAlign:"center",marginBottom:16}}>
-            <div style={{fontSize: step === 1 ? 36 : 14,fontWeight:900,color: step >= 2 ? "#9ca3af" : "var(--heading)",transition:"all .4s",fontFamily:"var(--fm)"}}>
-              {step === 0 ? "" : step === 1 ? "42時間後..." : step === 2 ? "42時間後" : ""}
-            </div>
-          </div>
-
-          {/* Step content */}
-          <div className="demo-msg-appear" key={`h-${step}`} style={{
-            display:"flex",alignItems:"center",gap:10,padding:"14px 16px",
-            borderRadius:12,fontSize:14,fontWeight:700,
-            background: isFail ? "rgba(239,68,68,.08)" : "var(--surface)",
-            border: isFail ? "1px solid rgba(239,68,68,.2)" : "1px solid var(--border)",
-            color: cur.human.color,
+    <div ref={ref} style={{
+      display:"grid",
+      gridTemplateColumns:"repeat(3, 1fr)",
+      gap:"clamp(12px,2vw,24px)",
+      width:"100%",
+      maxWidth:800,
+      margin:"0 auto",
+    }} className="hero-stats-grid">
+      {HERO_STATS.map((s, i) => (
+        <div key={i} style={{
+          background:"rgba(255,255,255,.85)",
+          backdropFilter:"blur(12px)",
+          borderRadius:16,
+          padding:"clamp(20px,3vw,32px) clamp(16px,2vw,24px)",
+          textAlign:"center",
+          border:"1px solid rgba(0,0,0,.06)",
+          boxShadow:"0 4px 24px rgba(0,0,0,.04)",
+          transition:"transform .3s, box-shadow .3s",
+        }}>
+          <div style={{
+            width:44,height:44,borderRadius:12,
+            background:`${s.color}15`,
+            display:"flex",alignItems:"center",justifyContent:"center",
+            margin:"0 auto 12px",
           }}>
-            <Ico name={cur.human.icon} size={20} color={cur.human.color} />
-            {cur.human.label}
-            {isFail && <span style={{marginLeft:"auto",fontSize:20}}>✕</span>}
+            <Ico name={s.icon} size={22} color={s.color} />
           </div>
-        </div>
-
-        {/* Meeton AI — Right */}
-        <div style={{padding:"0 24px 24px"}}>
-          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
-            <div style={{width:36,height:36,borderRadius:"50%",background:"linear-gradient(135deg,#12a37d,#34d399)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>M</div>
-            <div>
-              <div style={{fontSize:14,fontWeight:800,color:"var(--heading)"}}>Meeton ai</div>
-              <div style={{fontSize:11,color:"var(--cta)"}}>AI自動対応</div>
-            </div>
-          </div>
-
-          {/* Time indicator */}
-          <div className="demo-msg-appear" key={`a-time-${step}`} style={{textAlign:"center",marginBottom:16}}>
-            <div style={{fontSize: step === 1 ? 36 : 14,fontWeight:900,color:"var(--cta)",transition:"all .4s",fontFamily:"var(--fm)"}}>
-              {step === 0 ? "" : step === 1 ? "5秒" : step === 2 ? "対応中..." : ""}
-            </div>
-          </div>
-
-          {/* Step content */}
-          <div className="demo-msg-appear" key={`a-${step}`} style={{
-            display:"flex",alignItems:"center",gap:10,padding:"14px 16px",
-            borderRadius:12,fontSize:14,fontWeight:700,
-            background: isWin ? "rgba(18,163,125,.08)" : "var(--surface)",
-            border: isWin ? "1px solid rgba(18,163,125,.25)" : "1px solid var(--border)",
-            color: cur.ai.color,
+          <div style={{
+            fontFamily:"var(--fm)",
+            fontSize:"clamp(36px,5vw,52px)",
+            fontWeight:800,
+            color:s.color,
+            letterSpacing:-2,
+            lineHeight:1,
           }}>
-            <Ico name={cur.ai.icon} size={20} color={cur.ai.color} />
-            {cur.ai.label}
-            {isWin && <span style={{marginLeft:"auto",fontSize:20}}>🎉</span>}
+            {vals[i]}<span style={{fontSize:"clamp(18px,2.5vw,28px)",fontWeight:700,letterSpacing:0}}>{s.suffix}</span>
           </div>
+          <div style={{
+            fontSize:"clamp(14px,1.5vw,16px)",
+            fontWeight:800,
+            color:"var(--heading)",
+            marginTop:8,
+          }}>{s.label}</div>
+          <div style={{
+            fontSize:"clamp(11px,1.2vw,13px)",
+            color:"var(--sub)",
+            marginTop:4,
+            fontWeight:500,
+          }}>{s.desc}</div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }
