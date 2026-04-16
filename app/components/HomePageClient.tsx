@@ -3295,52 +3295,6 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* SOCIAL PROOF STATS */}
-      <section style={{
-        padding: "clamp(40px,6vw,60px) clamp(16px,5vw,48px)",
-        background: "var(--bg)",
-        position: "relative",
-        zIndex: 2,
-      }}>
-        <div style={{
-          maxWidth: 1000,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 16,
-        }} className="proof-stats-grid">
-          {[
-            { v: "< 5秒", l: "リード検知→初回アプローチ", sub: "人間SDRの平均42時間→即時", color: "var(--cta)" },
-            { v: "40%+", l: "商談化率", sub: "人間SDRの2倍以上", color: "var(--blue)" },
-            { v: "24/7", l: "深夜・週末も自律稼働", sub: "リードの熱い瞬間を逃さない", color: "var(--accent)" },
-            { v: "5min", l: "導入から稼働開始まで", sub: "開発リソース不要", color: "var(--pink)" },
-          ].map((s, i) => (
-            <div key={i} className="proof-stat-card">
-              <div style={{
-                fontFamily: "var(--fm)",
-                fontSize: "clamp(28px,4vw,40px)",
-                fontWeight: 700,
-                color: s.color,
-                letterSpacing: -1,
-                lineHeight: 1.1,
-              }}>{s.v}</div>
-              <div style={{
-                fontSize: 15,
-                fontWeight: 800,
-                color: "var(--heading)",
-                marginTop: 6,
-              }}>{s.l}</div>
-              <div style={{
-                fontSize: 12,
-                color: "var(--sub)",
-                marginTop: 4,
-                fontWeight: 500,
-              }}>{s.sub}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* 4 PRODUCT CARDS */}
       <section
         className="section"
