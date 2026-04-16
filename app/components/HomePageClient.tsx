@@ -3118,141 +3118,117 @@ const ICONS = {
 type IconKey = keyof typeof ICONS;
 const Ico = ({ name, size = 16, color = "currentColor" }: { name: IconKey; size?: number; color?: string }) => <Icon d={ICONS[name]} size={size} color={color} />;
 
-/* ── Hero Demo Animation — Two-lead branching ── */
-const LEAD_A_STEPS = [
-  { key: "detect", label: "フォーム送信を検知", iconKey: "search" as IconKey },
-  { key: "score", label: "温度: HIGH", iconKey: "target" as IconKey },
-  { key: "calendar", label: "即カレンダー提示", iconKey: "calendar" as IconKey },
-  { key: "done", label: "商談確定 → CRM登録", iconKey: "check" as IconKey },
-];
-const LEAD_B_STEPS = [
-  { key: "detect", label: "サイト訪問を検知", iconKey: "search" as IconKey },
-  { key: "score", label: "温度: LOW", iconKey: "target" as IconKey },
-  { key: "chat", label: "チャットで会話", iconKey: "chat" as IconKey },
-  { key: "doc", label: "資料を提案", iconKey: "doc" as IconKey },
-  { key: "email", label: "メールでフォロー", iconKey: "mail" as IconKey },
-  { key: "calendar", label: "カレンダー提示", iconKey: "calendar" as IconKey },
-  { key: "done", label: "商談確定 → CRM登録", iconKey: "check" as IconKey },
+/* ── Hero Demo Animation — Before/After comparison ── */
+const COMPARE_STEPS = [
+  {
+    human: { icon: "bell" as IconKey, label: "リードを検知", color: "var(--heading)" },
+    ai:    { icon: "bell" as IconKey, label: "リードを検知", color: "var(--cta)" },
+  },
+  {
+    human: { icon: "search" as IconKey, label: "担当者を探す...", color: "#9ca3af" },
+    ai:    { icon: "bolt" as IconKey, label: "5秒で自動対応", color: "var(--cta)" },
+  },
+  {
+    human: { icon: "mail" as IconKey, label: "テンプレメール送信", color: "#9ca3af" },
+    ai:    { icon: "chat" as IconKey, label: "AIが課題をヒアリング", color: "var(--cta)" },
+  },
+  {
+    human: { icon: "target" as IconKey, label: "返信なし...失注", color: "#ef4444" },
+    ai:    { icon: "check" as IconKey, label: "商談確定！CRM登録", color: "var(--cta)" },
+  },
 ];
 
 function HeroDemoAnimation() {
-  const [stepA, setStepA] = useState(0);
-  const [stepB, setStepB] = useState(0);
-  const [msgIdx, setMsgIdx] = useState(0);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMsgIdx(0);
-      setStepA((p) => (p + 1) % LEAD_A_STEPS.length);
-      setStepB((p) => (p + 1) % LEAD_B_STEPS.length);
-    }, 3500);
+      setStep((p) => (p + 1) % COMPARE_STEPS.length);
+    }, 2800);
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (msgIdx < 3) {
-      const t = setTimeout(() => setMsgIdx((p) => p + 1), 500);
-      return () => clearTimeout(t);
-    }
-  }, [stepA, stepB, msgIdx]);
-
-  const curA = LEAD_A_STEPS[stepA];
-  const curB = LEAD_B_STEPS[stepB];
-
-  const renderLeadContent = (cur: { key: string }, idx: number, isHot = false) => {
-    if (cur.key === "detect") return (
-      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--surface)",borderRadius:10,fontSize:13,color:"var(--text)",fontWeight:600}}>
-        <Ico name="bell" size={18} color="var(--cta)" /> 新しいリードを検知しました
-      </div>
-    );
-    if (cur.key === "score") return (
-      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10}}>
-        <div style={{fontSize:13,fontWeight:700,color:"var(--heading)"}}>スコアリング中...</div>
-        {idx >= 2 && <div className="demo-msg-appear" style={{padding:"4px 12px",borderRadius:20,fontSize:12,fontWeight:800,background: isHot ? "linear-gradient(135deg,#ef4444,#f97316)" : "var(--border)",color: isHot ? "#fff" : "var(--sub)" }}>{isHot ? "HIGH 🔥" : "LOW"}</div>}
-      </div>
-    );
-    if (cur.key === "chat") return (
-      <div className="demo-chat">
-        {idx >= 1 && <div className="demo-msg demo-msg-bot demo-msg-appear"><span className="demo-msg-avatar">M</span><div className="demo-msg-bubble">こんにちは！何かお探しですか？</div></div>}
-        {idx >= 2 && <div className="demo-msg demo-msg-user demo-msg-appear"><div className="demo-msg-bubble">リード獲得を改善したいです</div></div>}
-      </div>
-    );
-    if (cur.key === "doc") return (
-      <div className="demo-doc-card demo-msg-appear" style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
-        <Ico name="doc" size={20} color="var(--blue)" />
-        <div><div style={{fontSize:12,fontWeight:700,color:"var(--heading)"}}>リード獲得ガイド.pdf</div><div style={{fontSize:11,color:"var(--sub)"}}>マッチ度 <strong style={{color:"var(--cta)"}}>98%</strong></div></div>
-      </div>
-    );
-    if (cur.key === "email") return (
-      <div className="demo-msg-appear" style={{padding:"10px 14px",background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)"}}>
-        <div style={{display:"flex",alignItems:"center",gap:4,fontSize:11,fontWeight:700,color:"var(--heading)",marginBottom:4}}><Ico name="mail" size={14} color="var(--cta)" /> フォローアップメール送信</div>
-        <div style={{fontSize:11,color:"var(--sub)"}}>事例資料+ミーティングリンクを添付</div>
-      </div>
-    );
-    if (cur.key === "calendar") return (
-      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8}}>
-        <div style={{display:"flex",gap:4}}>
-          {["10:00","14:00","16:00"].map((t,j) => (
-            <div key={j} style={{padding:"6px 10px",borderRadius:8,fontSize:11,fontWeight:700,border:"1px solid",borderColor: j===1 ? "var(--cta)" : "var(--border)",background: j===1 ? "var(--cta)" : "var(--bg)",color: j===1 ? "#fff" : "var(--sub)",transition:"all .3s"}}>{t}</div>
-          ))}
-        </div>
-      </div>
-    );
-    if (cur.key === "done") return (
-      <div className="demo-msg-appear" style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"var(--cta-light)",borderRadius:10,border:"1px solid rgba(18,163,125,.2)"}}>
-        <Ico name="check" size={18} color="var(--cta)" />
-        <div style={{fontSize:12,fontWeight:700,color:"var(--cta)"}}>商談確定！CRM登録 & Slack通知完了</div>
-      </div>
-    );
-    return null;
-  };
+  const cur = COMPARE_STEPS[step];
+  const isFail = step === 3;
+  const isWin = step === 3;
 
   return (
     <div className="demo-wrap">
       {/* Header */}
       <div className="demo-steps-bar" style={{justifyContent:"center",gap:8}}>
-        <div className="demo-avatar-inner" style={{width:28,height:28,fontSize:12}}>M</div>
-        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>Meeton aiが2つのリードを同時に対応中</span>
-        <div className="demo-avatar-status" style={{position:"static",width:8,height:8,marginLeft:4}} />
+        <Ico name="bell" size={16} color="var(--cta)" />
+        <span style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>新しいリードが来ました — 対応の差は？</span>
+      </div>
+
+      {/* Progress */}
+      <div style={{display:"flex",gap:4,padding:"0 24px 16px"}}>
+        {COMPARE_STEPS.map((_,i) => (
+          <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= step ? "var(--cta)" : "var(--border)",transition:"background .4s"}} />
+        ))}
       </div>
 
       {/* Two lanes */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,minHeight:280}}>
-        {/* Lead A — Hot */}
-        <div style={{padding:"20px 20px",borderRight:"1px solid var(--border)"}}>
-          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
-            <div style={{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,#ef4444,#f97316)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>A</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,minHeight:220}}>
+        {/* Human SDR — Left */}
+        <div style={{padding:"0 24px 24px",borderRight:"1px solid var(--border)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+            <div style={{width:36,height:36,borderRadius:"50%",background:"linear-gradient(135deg,#94a3b8,#cbd5e1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}}>👤</div>
             <div>
-              <div style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>田中さん</div>
-              <div style={{fontSize:11,color:"var(--sub)"}}>フォーム送信済み 🔥</div>
+              <div style={{fontSize:14,fontWeight:800,color:"var(--heading)"}}>従来のSDR</div>
+              <div style={{fontSize:11,color:"var(--sub)"}}>人力で対応</div>
             </div>
           </div>
-          {/* Step indicator */}
-          <div style={{display:"flex",gap:4,marginBottom:12}}>
-            {LEAD_A_STEPS.map((_,i) => (
-              <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepA ? "var(--cta)" : "var(--border)",transition:"background .3s"}} />
-            ))}
+
+          {/* Time indicator */}
+          <div className="demo-msg-appear" key={`h-time-${step}`} style={{textAlign:"center",marginBottom:16}}>
+            <div style={{fontSize: step === 1 ? 36 : 14,fontWeight:900,color: step >= 2 ? "#9ca3af" : "var(--heading)",transition:"all .4s",fontFamily:"var(--fm)"}}>
+              {step === 0 ? "" : step === 1 ? "42時間後..." : step === 2 ? "42時間後" : ""}
+            </div>
           </div>
-          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:700,color:"var(--cta)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}><Ico name={curA.iconKey} size={14} color="var(--cta)" /> {curA.label}</div>
-          {renderLeadContent(curA, msgIdx, true)}
+
+          {/* Step content */}
+          <div className="demo-msg-appear" key={`h-${step}`} style={{
+            display:"flex",alignItems:"center",gap:10,padding:"14px 16px",
+            borderRadius:12,fontSize:14,fontWeight:700,
+            background: isFail ? "rgba(239,68,68,.08)" : "var(--surface)",
+            border: isFail ? "1px solid rgba(239,68,68,.2)" : "1px solid var(--border)",
+            color: cur.human.color,
+          }}>
+            <Ico name={cur.human.icon} size={20} color={cur.human.color} />
+            {cur.human.label}
+            {isFail && <span style={{marginLeft:"auto",fontSize:20}}>✕</span>}
+          </div>
         </div>
 
-        {/* Lead B — Cold */}
-        <div style={{padding:"20px 20px"}}>
-          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
-            <div style={{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,#3b6ff5,#6690fa)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>B</div>
+        {/* Meeton AI — Right */}
+        <div style={{padding:"0 24px 24px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+            <div style={{width:36,height:36,borderRadius:"50%",background:"linear-gradient(135deg,#12a37d,#34d399)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:14,fontWeight:800}}>M</div>
             <div>
-              <div style={{fontSize:13,fontWeight:800,color:"var(--heading)"}}>佐藤さん</div>
-              <div style={{fontSize:11,color:"var(--sub)"}}>初回サイト訪問</div>
+              <div style={{fontSize:14,fontWeight:800,color:"var(--heading)"}}>Meeton ai</div>
+              <div style={{fontSize:11,color:"var(--cta)"}}>AI自動対応</div>
             </div>
           </div>
-          <div style={{display:"flex",gap:4,marginBottom:12}}>
-            {LEAD_B_STEPS.map((_,i) => (
-              <div key={i} style={{flex:1,height:3,borderRadius:2,background: i <= stepB ? "var(--blue)" : "var(--border)",transition:"background .3s"}} />
-            ))}
+
+          {/* Time indicator */}
+          <div className="demo-msg-appear" key={`a-time-${step}`} style={{textAlign:"center",marginBottom:16}}>
+            <div style={{fontSize: step === 1 ? 36 : 14,fontWeight:900,color:"var(--cta)",transition:"all .4s",fontFamily:"var(--fm)"}}>
+              {step === 0 ? "" : step === 1 ? "5秒" : step === 2 ? "対応中..." : ""}
+            </div>
           </div>
-          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:700,color:"var(--blue)",marginBottom:10,fontFamily:"var(--fm)",letterSpacing:1}}><Ico name={curB.iconKey} size={14} color="var(--blue)" /> {curB.label}</div>
-          {renderLeadContent(curB, msgIdx)}
+
+          {/* Step content */}
+          <div className="demo-msg-appear" key={`a-${step}`} style={{
+            display:"flex",alignItems:"center",gap:10,padding:"14px 16px",
+            borderRadius:12,fontSize:14,fontWeight:700,
+            background: isWin ? "rgba(18,163,125,.08)" : "var(--surface)",
+            border: isWin ? "1px solid rgba(18,163,125,.25)" : "1px solid var(--border)",
+            color: cur.ai.color,
+          }}>
+            <Ico name={cur.ai.icon} size={20} color={cur.ai.color} />
+            {cur.ai.label}
+            {isWin && <span style={{marginLeft:"auto",fontSize:20}}>🎉</span>}
+          </div>
         </div>
       </div>
     </div>
