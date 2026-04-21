@@ -8,7 +8,7 @@ export default function HubSpotTracker() {
   return (
     <Script
       id="hs-script-loader"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       src={`//js.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js`}
     />
   )

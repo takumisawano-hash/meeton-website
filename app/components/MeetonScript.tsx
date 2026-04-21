@@ -11,11 +11,17 @@ const MEETON_SCRIPT_SELECTOR = 'script[data-dynameet-meeton-script="true"]'
 export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
+  const skipOnLp = pathname?.startsWith('/lp')
 
   useEffect(() => {
     const removeManagedScript = () => {
       const existingScript = document.querySelector(MEETON_SCRIPT_SELECTOR)
       existingScript?.remove()
+    }
+
+    if (skipOnLp) {
+      removeManagedScript()
+      return
     }
 
     const loadMeetonScript = () => {
@@ -48,7 +54,7 @@ export default function MeetonScript() {
       }
       removeManagedScript()
     }
-  }, [teamId])
+  }, [teamId, skipOnLp])
 
   return null
 }

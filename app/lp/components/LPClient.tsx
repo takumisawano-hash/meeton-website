@@ -75,49 +75,52 @@ const variantFaq: Record<string, typeof faqData> = {
   ],
 }
 
-/* ── Variant copy ── */
+/* ── Variant copy ──
+ * エビデンス: Unbounce 2024（短く具体的 > 抽象的）+ HubSpot（オファー先行 > 機能説明）
+ * MCP実績で DL率の高い資料を各variantに紐付け
+ */
 const copy = {
   google: {
-    badge: 'AI SDR — 24時間365日稼働',
-    h1: ['Webサイト訪問者を', '商談に変える'],
-    sub: '人間SDRの平均対応42時間 → Meeton aiは5秒。見込み客の関心が最も高い瞬間に、自動で商談を獲得します。',
-    formHeading: '3分で読める資料を\n無料ダウンロード',
-    formSub: 'Meeton aiの機能・導入事例をまとめた資料をお送りします',
+    badge: '【無料DL】AI SDR導入の適性診断シート',
+    h1: ['自社に本当にAI SDRは必要？', '10分で分かる適性診断'],
+    sub: '人手不足のSDR部門にAIを入れるべきか、診断シートで可視化。商談数・対応速度・工数を定量評価し、導入判断の根拠をまとめます。',
+    formHeading: '【無料】AI SDR導入の\n適性診断シートをDL',
+    formSub: '10ページ / 4分で読める。人手不足・商談数低迷の課題を整理した診断ワークブック。',
   },
   linkedin: {
-    badge: '営業/マーケリーダー向け',
-    h1: ['商談化率40%以上の', 'AI SDR'],
-    sub: '人間SDRの平均対応42時間 → Meeton aiは5秒。リード検知から商談設定まで完全自動化します。',
-    formHeading: '3分で読める資料を\n無料ダウンロード',
-    formSub: 'Meeton aiの機能・導入事例をまとめた資料をお送りします',
+    badge: '営業/マーケリーダー向け 限定配布',
+    h1: ['商談数+40%を達成した', 'AI SDR 運用ガイド'],
+    sub: '導入初週から商談を創出した企業の実例と、AI SDRを「使いこなす」ための運用設計・KPI設定を解説。',
+    formHeading: '【無料】商談数+40%達成の\n運用ガイドをDL',
+    formSub: '13ページ / 6分で読める。導入から定着までの実施ステップを時系列でまとめました。',
   },
   'web-chat': {
-    badge: 'BtoB Web接客ツール — AI搭載',
-    h1: ['AIチャットボットで', 'Web接客を自動化'],
-    sub: 'BtoB向けWeb接客ツール。サイト訪問者にAIチャットボットが自動対応し、商談予約まで完結。従来のチャットボットでは不可能だったオンライン接客の自動化を実現。',
-    formHeading: 'Web接客ツールの資料を\n無料ダウンロード',
-    formSub: 'AIチャットボットの機能・導入事例をまとめた資料をお送りします',
+    badge: '【無料DL】比較ホワイトペーパー',
+    h1: ['AIチャットボット vs', 'AI営業エージェント 徹底比較'],
+    sub: 'サイト訪問者対応の自動化ツール選定で迷う担当者向け。機能・コスト・商談化率で両者の違いを定量比較します。',
+    formHeading: '【無料】AIチャットボット vs\nAI営業エージェント比較資料',
+    formSub: '10ページ / 4分で読める。よくある比較ポイント14項目を一覧化した選定ガイド。',
   },
   'inside-sales': {
-    badge: 'インサイドセールス自動化ツール',
-    h1: ['インサイドセールスを', 'AIで効率化'],
-    sub: 'SDR業務をAIが代行するインサイドセールスツール。リード対応の営業効率化からセールスイネーブルメントまで、営業DXを5分で実現します。',
-    formHeading: '営業効率化ツールの資料を\n無料ダウンロード',
-    formSub: 'インサイドセールス自動化の機能・事例資料をお送りします',
+    badge: '【無料DL】営業インパクト実証データ',
+    h1: ['問い合わせ直後の対応速度が', '商談化率を左右する'],
+    sub: '対応までの時間を42時間→5秒に短縮すると何が起きるか。実データで示す、インサイドセールスの「初動」が売上に与える影響。',
+    formHeading: '【無料】即時対応の\n営業インパクト資料をDL',
+    formSub: '10ページ / 4分で読める。対応速度別の商談化率、成約率、失注率の実測データ付き。',
   },
   'meeting': {
-    badge: '商談自動化AI — アポ獲得を完全自動',
-    h1: ['アポ獲得を', 'AIが完全自動化'],
-    sub: 'リード検知から商談設定まで完全自動化。AIがアポ獲得を代行し、商談化率40%以上を実現。商談自動化で営業チームは提案に集中できます。',
-    formHeading: '商談自動化の資料を\n無料ダウンロード',
-    formSub: 'アポ獲得AI・商談化率改善の事例資料をお送りします',
+    badge: '【無料DL】商談自動化事例集',
+    h1: ['商談化率40%以上を実現した', '導入事例まとめ'],
+    sub: '業界・規模別にAI商談自動化の導入事例を収録。運用体制、KPI、改善プロセスまで解説した事例集。',
+    formHeading: '【無料】商談自動化\n導入事例集をDL',
+    formSub: '業種別の成功パターンと失敗回避のチェックポイントを事例と共にまとめました。',
   },
   'lead-gen': {
-    badge: 'BtoBリード獲得自動化',
-    h1: ['リード獲得を', '24時間自動化'],
-    sub: 'Webサイト訪問者からのBtoBリード獲得をAIが24時間自動化。マーケティングオートメーションの先へ — リード検知から商談化まで一気通貫。',
-    formHeading: 'リード獲得自動化の資料を\n無料ダウンロード',
-    formSub: 'BtoBリード獲得の機能・導入事例をまとめた資料をお送りします',
+    badge: '【無料DL】業界別ベンチマーク資料',
+    h1: ['業界別 問い合わせ率の', '平均値と改善ポイント'],
+    sub: '自社の問い合わせ率は業界平均より上か下か。業種別ベンチマーク値と、問い合わせ率を2倍にした施策の実例を一覧化。',
+    formHeading: '【無料】業界別\nベンチマーク資料をDL',
+    formSub: '10ページ / 4分で読める。業種別の問い合わせ率平均値と、改善の優先ポイントを1冊に。',
   },
 }
 
@@ -179,7 +182,11 @@ function InlineHubSpotForm({ utmCampaign }: { utmCampaign: string }) {
         existing?.addEventListener('load', initForm)
       }
     }
-    load()
+    const schedule = (cb: () => void) => {
+      const idle = (window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback
+      if (idle) { idle(cb, { timeout: 2000 }) } else { setTimeout(cb, 1500) }
+    }
+    schedule(load)
     return () => { cancelled = true }
   }, [utmCampaign])
 
@@ -227,11 +234,47 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
     if (Object.keys(utmData).length > 0) {
       sessionStorage.setItem('utm_data', JSON.stringify(utmData))
     }
-    // Sticky CTA on scroll
-    const onScroll = () => setScrolled(window.scrollY > 600)
+
+    const fired = { scroll25: false, scroll50: false, scroll75: false, formView: false }
+
+    const onScroll = () => {
+      setScrolled(window.scrollY > 600)
+      const scrollPct = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100
+      if (!fired.scroll25 && scrollPct >= 25) {
+        fired.scroll25 = true
+        window.gtag?.('event', 'lp_scroll_25', { lp_variant: variant })
+      }
+      if (!fired.scroll50 && scrollPct >= 50) {
+        fired.scroll50 = true
+        window.gtag?.('event', 'lp_scroll_50', { lp_variant: variant })
+      }
+      if (!fired.scroll75 && scrollPct >= 75) {
+        fired.scroll75 = true
+        window.gtag?.('event', 'lp_scroll_75', { lp_variant: variant })
+      }
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+
+    const formEl = document.getElementById('lp-inline-form')
+    let observer: IntersectionObserver | null = null
+    if (formEl && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !fired.formView) {
+            fired.formView = true
+            window.gtag?.('event', 'lp_form_view', { lp_variant: variant })
+            observer?.disconnect()
+          }
+        }
+      }, { threshold: 0.5 })
+      observer.observe(formEl)
+    }
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      observer?.disconnect()
+    }
+  }, [variant])
 
   return (
     <>
@@ -243,7 +286,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
           <span className="lp-sticky-text">
             <strong>Meeton ai</strong> — 14日間無料トライアル
           </span>
-          <button className="lp-btn-primary lp-btn-sm" onClick={() => setMeetingOpen(true)}>
+          <button className="lp-btn-primary lp-btn-sm" onClick={() => { window.gtag?.('event', 'lp_cta_demo_click', { lp_variant: variant, location: 'sticky_bar' }); setMeetingOpen(true) }}>
             デモを予約
           </button>
         </div>
@@ -291,7 +334,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
               <div className="lp-form-divider">
                 <span>または</span>
               </div>
-              <button className="lp-btn-meeting-link" onClick={() => setMeetingOpen(true)}>
+              <button className="lp-btn-meeting-link" onClick={() => { window.gtag?.('event', 'lp_cta_demo_click', { lp_variant: variant, location: 'form_secondary' }); setMeetingOpen(true) }}>
                 今すぐ話を聞きたい方は<strong>デモを予約 →</strong>
               </button>
             </div>
@@ -613,8 +656,8 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
       <footer className="lp-footer">
         <span>© {new Date().getFullYear()} DynaMeet Inc.</span>
         <div className="lp-footer-links">
-          <a href="https://dynameet.ai/privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
-          <a href="https://dynameet.ai/terms/" target="_blank" rel="noopener noreferrer">利用規約</a>
+          <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
+          <a href="/terms/" target="_blank" rel="noopener noreferrer">利用規約</a>
         </div>
       </footer>
 
