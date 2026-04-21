@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Noto_Sans_JP, JetBrains_Mono } from 'next/font/googl
 import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
+import HubSpotTracker from './components/HubSpotTracker'
 import MeetonScript from './components/MeetonScript'
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -75,6 +76,7 @@ export default function RootLayout({
       <body>
         <GoogleAnalytics />
         <DocoDocoTracker />
+        <HubSpotTracker />
         <JsonLd type="organization" />
         <JsonLd type="website" />
         {children}
