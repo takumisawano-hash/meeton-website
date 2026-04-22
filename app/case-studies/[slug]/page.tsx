@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import BlogContent from '../../components/BlogContent'
+import DemoBookingButton from '../../components/DemoBookingButton'
 import {
   getAllCaseStudySlugs,
   getCaseStudyBlocks,
@@ -517,8 +518,8 @@ export default async function CaseStudyPage({
           >
             Meeton ai のデモをご希望の方は、お気軽にお問い合わせください。
           </p>
-          <Link
-            href="/contact/"
+          <DemoBookingButton
+            utmCampaign={`case-study-${item.slug}-bottom`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -529,11 +530,12 @@ export default async function CaseStudyPage({
               borderRadius: 999,
               fontSize: 16,
               fontWeight: 800,
-              textDecoration: 'none',
+              border: 'none',
+              cursor: 'pointer',
             }}
           >
             デモを予約する <span>→</span>
-          </Link>
+          </DemoBookingButton>
         </div>
       </section>
 
@@ -608,8 +610,8 @@ function MidArticleCTA({
         プラットフォームです。貴社の業界・課題に合わせたデモをご用意します。
       </p>
       <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-        <Link
-          href="/contact/"
+        <DemoBookingButton
+          utmCampaign={`case-study-${company}-mid`}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -620,11 +622,12 @@ function MidArticleCTA({
             borderRadius: 999,
             fontSize: 15,
             fontWeight: 800,
-            textDecoration: 'none',
+            border: 'none',
+            cursor: 'pointer',
           }}
         >
           デモを予約する <span>→</span>
-        </Link>
+        </DemoBookingButton>
         <Link
           href="/features/ai-chat/"
           style={{
