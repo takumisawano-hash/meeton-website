@@ -161,8 +161,10 @@ function fileUrl(page: PageObjectResponse, property: string): string | null {
   if (!p || p.type !== 'files' || p.files.length === 0) return null
   const file = p.files[0]
   if (file.type === 'file') {
-    // Proxy Notion-hosted files to avoid signed-URL expiration.
-    return `/api/notion-image/?pageId=${page.id}&type=page-property&property=${property}`
+    // Include last_edited_time as a version param so the URL changes when the
+    // underlying file is replaced in Notion, busting any stale browser/CDN cache.
+    const v = Date.parse(page.last_edited_time || '') || 0
+    return `/api/notion-image/?pageId=${page.id}&type=page-property&property=${property}&v=${v}`
   }
   if (file.type === 'external') return file.external.url
   return null
