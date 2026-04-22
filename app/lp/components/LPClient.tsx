@@ -325,7 +325,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
               </div>
               <blockquote className="lp-hero-quote">
                 <p>&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてくださる。商談化の観点で非常に有効だと感じています&rdquo;</p>
-                <cite>― 株式会社EdulinX 銭場氏</cite>
+                <cite>― 千羽 正章 氏 / エデュリンクス株式会社</cite>
               </blockquote>
             </div>
           </div>
@@ -567,12 +567,12 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
           <h2 className="lp-h2">導入企業の声</h2>
           <div className="lp-testimonials">
             <div className="lp-testimonial">
-              <div className="lp-testimonial-quote">&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてくださる。知識を得ていて、興味を持っている。商談化の観点で非常に有効だと感じています。&rdquo;</div>
+              <div className="lp-testimonial-quote">&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてきてくださっています。知識を得た状態、興味を持った状態——商談化の観点で非常に有効だと感じています。&rdquo;</div>
               <div className="lp-testimonial-author">
-                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>E</div>
+                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>千</div>
                 <div>
-                  <div className="lp-testimonial-name">株式会社EdulinX 銭場氏</div>
-                  <div className="lp-testimonial-role">英語eラーニング「Reallyenglish」 / 人材育成「Prospera Training Solutions」</div>
+                  <div className="lp-testimonial-name">千羽 正章 氏</div>
+                  <div className="lp-testimonial-role">エデュリンクス株式会社 / 英語eラーニング「Reallyenglish」</div>
                 </div>
               </div>
             </div>

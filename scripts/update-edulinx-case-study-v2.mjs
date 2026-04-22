@@ -14,11 +14,34 @@ const bullet = (t) => ({
   bulleted_list_item: { rich_text: rt(t) },
 })
 
+// ---------- property updates (title/description/stats) ----------
+const stats = [
+  { label: 'Meeton ai 経由の商談化率', value: '60%+', context: '業界平均の約3倍' },
+  { label: '関与リード数', value: '49件', context: '2026年1-3月' },
+  { label: '有効リード（商談中）', value: '6件', context: '1Q' },
+]
+
+const newTitle =
+  '業界平均20%→60%超。研修業界リーダーが実感した"温まったリード"の威力——Meeton ai 導入事例'
+
+const newDescription =
+  '「Reallyenglish」を展開するエデュリンクス株式会社。Meeton ai 経由リードの商談化率は、業界平均20%に対し60%超——約3倍に到達。比較検討・営業チームの心境変化・受講生サポートの副次効果まで詳解。'
+
+const propertyUpdates = {
+  Title: { title: rt(newTitle) },
+  Description: { rich_text: rt(newDescription) },
+  HeroMetric: { rich_text: rt('60%+') },
+  HeroMetricLabel: {
+    rich_text: rt('Meeton ai 経由の商談化率（業界平均20%、同社全体23%の約3倍）'),
+  },
+  StatsJson: { rich_text: rt(JSON.stringify(stats)) },
+}
+
 const children = [
   // =============================
   h2('会社について'),
   p(
-    'エデュリンクス株式会社は、「Education × DX をリンクする」をミッションに掲げ、研修業界の変革をリードする企業。大学・企業向けの英語研修プラットフォーム「リアリ Engンシ」を中心に、教育機関と法人の双方で支持される研修サービスを展開。業界内でいち早く AI 活用に踏み込む姿勢が特徴で、「業界をリードする立場でありたい」という思想が意思決定に通底している。'
+    'エデュリンクス株式会社は、「Education × DX をリンクする」をミッションに掲げ、研修業界の変革をリードする企業。大学・企業向けの英語研修プラットフォーム「Reallyenglish」を中心に、教育機関と法人の双方で支持される研修サービスを展開。業界内でいち早く AI 活用に踏み込む姿勢が特徴で、「業界をリードする立場でありたい」という思想が意思決定に通底している。'
   ),
 
   // =============================
@@ -91,12 +114,12 @@ const children = [
   bullet('比較サイト経由のコールドリードとの対比で、自社サイト経由リードの温度感が顕著に向上'),
 
   quote(
-    'ミートAI経由で来たお客さんの方が、明らかに少しチャリングされた状態、知識を得た状態、興味を持った状態で問い合わせをしてきてくれる。商談化の部分で非常に有効的だと感じています。'
+    'Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態、つまり知識を得た状態・興味を持った状態で問い合わせをしてきてくださっています。商談化の部分で非常に有効だと感じています。'
   ),
 
   h3('思わぬ副次的価値——受講生サポート領域での自己解決率向上'),
   p(
-    '想定していなかった領域でも成果が生まれた。リアリ Engンシを利用する受講生（学生）から、アカウント作成・メール不達・操作方法などの問い合わせが一定量発生しており、サポートチームの対応負荷が課題となっていた。'
+    '想定していなかった領域でも成果が生まれた。Reallyenglish を利用する受講生（学生）から、アカウント作成・メール不達・操作方法などの問い合わせが一定量発生しており、サポートチームの対応負荷が課題となっていた。'
   ),
   p(
     'この状況を DynaMeet に相談したところ、受講生サポート向けにカスタマイズした専用ボットを短期間で構築。ヘルプデスクページに設置した結果、受講生側の自己解決率が向上し、サポートチームに届く問い合わせ件数そのものが減少した。商談獲得 AI として導入したツールが、サポート工数削減という副次的価値まで生み出す——本来スコープ外の領域でも投資対効果が積み上がる結果となった。'
@@ -134,7 +157,11 @@ const children = [
 ]
 
 ;(async () => {
-  console.log('1) Archiving existing children blocks...')
+  console.log('1) Updating page properties (title/description/stats)...')
+  await notion.pages.update({ page_id: PAGE_ID, properties: propertyUpdates })
+  console.log('   properties updated')
+
+  console.log('2) Archiving existing children blocks...')
   let removed = 0
   let cursor
   do {
@@ -151,7 +178,7 @@ const children = [
   } while (cursor)
   console.log('   removed ' + removed + ' blocks')
 
-  console.log('2) Appending new children (' + children.length + ' blocks)...')
+  console.log('3) Appending new children (' + children.length + ' blocks)...')
   await notion.blocks.children.append({ block_id: PAGE_ID, children })
 
   console.log('DONE')
