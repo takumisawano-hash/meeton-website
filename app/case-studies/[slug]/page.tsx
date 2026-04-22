@@ -306,27 +306,37 @@ export default async function CaseStudyPage({
             padding: '0 clamp(20px, 4vw, 48px) clamp(40px, 6vw, 72px)',
           }}
         >
-          <div
-            style={{
-              maxWidth: 1200,
-              margin: '0 auto',
-              position: 'relative',
-              aspectRatio: '16 / 9',
-              borderRadius: 24,
-              overflow: 'hidden',
-              border: '1px solid #e4e3dd',
-              boxShadow: '0 24px 60px -30px rgba(10,14,12,0.2)',
-            }}
-          >
-            <Image
-              src={item.heroImage}
-              alt={`${item.company} のオフィス風景`}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 1200px) 100vw, 1200px"
-              priority
-            />
-          </div>
+          <figure style={{ maxWidth: 1200, margin: '0 auto' }}>
+            <div
+              style={{
+                position: 'relative',
+                aspectRatio: '16 / 9',
+                borderRadius: 24,
+                overflow: 'hidden',
+                border: '1px solid #e4e3dd',
+                boxShadow: '0 24px 60px -30px rgba(10,14,12,0.2)',
+              }}
+            >
+              <Image
+                src={item.heroImage}
+                alt={`${item.company} 社内の様子`}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
+              />
+            </div>
+            <figcaption
+              style={{
+                textAlign: 'center',
+                fontSize: 14,
+                color: '#9ca3af',
+                marginTop: 12,
+              }}
+            >
+              {item.company} 社内の様子
+            </figcaption>
+          </figure>
         </section>
       )}
 

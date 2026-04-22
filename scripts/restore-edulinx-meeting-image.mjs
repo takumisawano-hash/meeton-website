@@ -55,7 +55,7 @@ const imageBlock = {
     caption: [
       {
         type: 'text',
-        text: { content: 'AI活用について議論するエデュリンクス社内の様子' },
+        text: { content: 'AI活用について議論する株式会社EdulinX 社内の様子' },
       },
     ],
   },
