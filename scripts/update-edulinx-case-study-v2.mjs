@@ -27,6 +27,7 @@ const newDescription =
 
 const propertyUpdates = {
   Title: { title: rt(newTitle) },
+  Company: { rich_text: rt('株式会社EdulinX') },
   Description: { rich_text: rt(newDescription) },
   HeroMetric: { rich_text: rt('60%+') },
   HeroMetricLabel: {
