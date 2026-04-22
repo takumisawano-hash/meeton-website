@@ -616,7 +616,7 @@ function MidArticleCTA({
           margin: '0 0 32px',
         }}
       >
-        Meeton ai は、Web サイト訪問者の意図を理解し、温まった状態で商談へと運ぶ AI SDR
+        Meeton ai は、Web サイト訪問者の意図を理解し、ホットな状態で商談へと運ぶ AI SDR
         プラットフォームです。貴社の業界・課題に合わせたデモをご用意します。
       </p>
       <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
