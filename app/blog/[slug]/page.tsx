@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
-import { getPostBySlug, getPostBlocks, getAllPostSlugs, getRelatedPosts, calculateReadingTime } from '@/app/lib/notion'
+import { notFound, redirect } from 'next/navigation'
+import { getPostBySlug, getPostBlocks, getAllPostSlugs, getRelatedPosts, calculateReadingTime, categoryToSlug, tagToSlug } from '@/app/lib/notion'
 import BlogContent from '@/app/components/BlogContent'
 import BlogJsonLd from '@/app/components/BlogJsonLd'
 import BreadcrumbJsonLd from '@/app/components/BreadcrumbJsonLd'
@@ -129,8 +129,11 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
 
+  // Legacy URL recovery: if slug not found (e.g. old Japanese-slug or
+  // deleted post from WordPress migration), 308 permanent redirect to /blog/
+  // so Google replaces the old 404 entry in the index.
   if (!post) {
-    notFound()
+    redirect('/blog/')
   }
 
   const [blocks, relatedPosts] = await Promise.all([
@@ -225,7 +228,8 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Header */}
         <header style={{ marginBottom: 'clamp(24px, 5vw, 40px)' }}>
           {post.category && (
-            <span
+            <Link
+              href={`/blog/category/${categoryToSlug(post.category)}/`}
               style={{
                 display: 'inline-block',
                 fontSize: 'clamp(11px, 1.8vw, 13px)',
@@ -235,10 +239,11 @@ export default async function BlogPostPage({ params }: Props) {
                 padding: 'clamp(4px, 1vw, 6px) clamp(10px, 2vw, 14px)',
                 borderRadius: 8,
                 marginBottom: 'clamp(14px, 3vw, 20px)',
+                textDecoration: 'none',
               }}
             >
               {post.category}
-            </span>
+            </Link>
           )}
           <h1
             style={{
@@ -287,18 +292,20 @@ export default async function BlogPostPage({ params }: Props) {
             {post.tags.length > 0 && (
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {post.tags.map((tag) => (
-                  <span
+                  <Link
                     key={tag}
+                    href={`/blog/tag/${tagToSlug(tag)}/`}
                     style={{
                       fontSize: 'clamp(10px, 1.5vw, 12px)',
                       color: '#6e7494',
                       background: '#f0f2f5',
                       padding: '4px 10px',
                       borderRadius: 6,
+                      textDecoration: 'none',
                     }}
                   >
-                    {tag}
-                  </span>
+                    #{tag}
+                  </Link>
                 ))}
               </div>
             )}

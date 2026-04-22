@@ -94,6 +94,7 @@ export default function Nav({
 
   const navLinks = [
     { href: "#download-center", label: "お役立ち資料", onClick: true },
+    { href: "/case-studies/", label: "導入事例" },
     { href: "/blog/", label: "ブログ" },
     { href: "/contact/", label: "お問い合わせ" },
     { href: "/careers/", label: "採用情報" },

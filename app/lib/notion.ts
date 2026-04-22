@@ -1,4 +1,5 @@
 import { Client, APIErrorCode, isNotionClientError } from '@notionhq/client'
+import { cache } from 'react'
 import type {
   PageObjectResponse,
   BlockObjectResponse,
@@ -85,7 +86,10 @@ async function getDataSourceId(): Promise<string> {
   const db = await withRetry(() => notion.databases.retrieve({ database_id: databaseId }))
   const dataSources = (db as Record<string, unknown>).data_sources as { id: string; name: string }[] | undefined
   if (dataSources && dataSources.length > 0) {
-    resolvedDataSourceId = dataSources[0].id
+    // Prefer the "Blog Posts" data source by name so adding/reordering other
+    // data sources on the same database doesn't silently switch us to an empty one.
+    const preferred = dataSources.find((ds) => ds.name === 'Blog Posts')
+    resolvedDataSourceId = (preferred ?? dataSources[0]).id
   } else {
     resolvedDataSourceId = databaseId
   }
@@ -210,7 +214,9 @@ function pageToPost(page: PageObjectResponse): BlogPost {
   }
 }
 
-export async function getAllPosts(): Promise<BlogPost[]> {
+// Cached across the entire build / single request, so category/tag pages that
+// depend on the full post list don't hit Notion API repeatedly (rate-limit-safe).
+export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
   if (!isConfigured()) return []
 
   try {
@@ -248,7 +254,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   } catch {
     return []
   }
-}
+})
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!isConfigured()) return null
@@ -318,6 +324,73 @@ export async function getPostBlocks(pageId: string): Promise<NotionBlock[]> {
 export async function getAllPostSlugs(): Promise<string[]> {
   const posts = await getAllPosts()
   return posts.map((post) => post.slug)
+}
+
+// Map human-readable category/tag names to URL-safe slugs used in routes.
+export function categoryToSlug(category: string): string {
+  return encodeURIComponent(category.toLowerCase().trim().replace(/\s+/g, '-'))
+}
+
+export function slugToCategory(slug: string): string {
+  try {
+    return decodeURIComponent(slug).replace(/-/g, ' ')
+  } catch {
+    return slug
+  }
+}
+
+export function tagToSlug(tag: string): string {
+  return encodeURIComponent(tag.toLowerCase().trim().replace(/\s+/g, '-'))
+}
+
+export function slugToTag(slug: string): string {
+  try {
+    return decodeURIComponent(slug).replace(/-/g, ' ')
+  } catch {
+    return slug
+  }
+}
+
+// Return unique categories that have at least `minPosts` published posts.
+export async function getCategoriesWithCounts(minPosts: number = 3): Promise<{ name: string; slug: string; count: number }[]> {
+  const posts = await getAllPosts()
+  const counts = new Map<string, number>()
+  for (const p of posts) {
+    if (!p.category || p.category.toLowerCase() === 'uncategorized') continue
+    counts.set(p.category, (counts.get(p.category) ?? 0) + 1)
+  }
+  return Array.from(counts.entries())
+    .filter(([, n]) => n >= minPosts)
+    .map(([name, count]) => ({ name, slug: categoryToSlug(name), count }))
+    .sort((a, b) => b.count - a.count)
+}
+
+// Return unique tags that have at least `minPosts` published posts.
+export async function getTagsWithCounts(minPosts: number = 5): Promise<{ name: string; slug: string; count: number }[]> {
+  const posts = await getAllPosts()
+  const counts = new Map<string, number>()
+  for (const p of posts) {
+    for (const tag of p.tags) {
+      if (!tag) continue
+      counts.set(tag, (counts.get(tag) ?? 0) + 1)
+    }
+  }
+  return Array.from(counts.entries())
+    .filter(([, n]) => n >= minPosts)
+    .map(([name, count]) => ({ name, slug: tagToSlug(name), count }))
+    .sort((a, b) => b.count - a.count)
+}
+
+export async function getPostsByCategory(categoryName: string): Promise<BlogPost[]> {
+  const posts = await getAllPosts()
+  const lower = categoryName.toLowerCase().trim()
+  return posts.filter((p) => p.category.toLowerCase().trim() === lower)
+}
+
+export async function getPostsByTag(tagName: string): Promise<BlogPost[]> {
+  const posts = await getAllPosts()
+  const lower = tagName.toLowerCase().trim()
+  return posts.filter((p) => p.tags.some((t) => t.toLowerCase().trim() === lower))
 }
 
 export async function getRelatedPosts(category: string, currentSlug: string, limit: number = 4): Promise<BlogPost[]> {

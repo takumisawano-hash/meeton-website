@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/app/lib/notion'
+import { getAllPosts, getCategoriesWithCounts, getTagsWithCounts } from '@/app/lib/notion'
+import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dynameet.ai'
@@ -27,6 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/blog/`,
       lastModified: new Date(),
       changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/case-studies/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
@@ -97,5 +104,47 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion API接続前やエラー時は空配列
   }
 
-  return [...staticPages, ...blogPosts]
+  let caseStudies: MetadataRoute.Sitemap = []
+
+  try {
+    const items = await getAllCaseStudies()
+    caseStudies = items.map((c) => ({
+      url: `${baseUrl}/case-studies/${c.slug}/`,
+      lastModified: c.modifiedDate
+        ? new Date(c.modifiedDate)
+        : c.publishedDate
+          ? new Date(c.publishedDate)
+          : new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
+  } catch {
+    // Notion 未接続時は空で返す
+  }
+
+  let categoryPages: MetadataRoute.Sitemap = []
+  let tagPages: MetadataRoute.Sitemap = []
+
+  try {
+    const [cats, tags] = await Promise.all([
+      getCategoriesWithCounts(3),
+      getTagsWithCounts(5),
+    ])
+    categoryPages = cats.map((c) => ({
+      url: `${baseUrl}/blog/category/${c.slug}/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }))
+    tagPages = tags.map((t) => ({
+      url: `${baseUrl}/blog/tag/${t.slug}/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
+    }))
+  } catch {
+    // Notion 未接続時は空で返す
+  }
+
+  return [...staticPages, ...blogPosts, ...caseStudies, ...categoryPages, ...tagPages]
 }
