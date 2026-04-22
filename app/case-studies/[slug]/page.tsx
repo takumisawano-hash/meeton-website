@@ -505,7 +505,7 @@ export default async function CaseStudyPage({
               marginBottom: 28,
             }}
           >
-            次の事例は、あなたの会社かもしれない。
+            同じ変化を、あなたの会社でも。
           </h2>
           <p
             style={{
@@ -516,7 +516,7 @@ export default async function CaseStudyPage({
               margin: '0 auto 40px',
             }}
           >
-            Meeton ai のデモをご希望の方は、お気軽にお問い合わせください。
+            15分のデモで、Meeton ai が御社の営業にどうフィットするかをご案内します。
           </p>
           <DemoBookingButton
             utmCampaign={`case-study-${item.slug}-bottom`}
