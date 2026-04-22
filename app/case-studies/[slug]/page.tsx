@@ -138,7 +138,7 @@ export default async function CaseStudyPage({
             }}
             className="cs-hero-grid"
           >
-            <div>
+            <div style={{ minWidth: 0 }}>
               {item.companyLogo && (
                 <div style={{ position: 'relative', width: 140, height: 40, marginBottom: 20 }}>
                   <Image
@@ -179,11 +179,11 @@ export default async function CaseStudyPage({
               <h1
                 style={{
                   fontWeight: 900,
-                  fontSize: 'clamp(32px, 4.5vw, 64px)',
-                  lineHeight: 1.15,
-                  letterSpacing: '-0.035em',
+                  fontSize: 'clamp(28px, 3.6vw, 52px)',
+                  lineHeight: 1.2,
+                  letterSpacing: '-0.03em',
                   margin: '0 0 32px',
-                  wordBreak: 'keep-all',
+                  overflowWrap: 'anywhere',
                 }}
               >
                 {item.title}
