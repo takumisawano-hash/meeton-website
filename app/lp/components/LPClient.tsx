@@ -325,7 +325,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
               </div>
               <blockquote className="lp-hero-quote">
                 <p>&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてくださる。商談化の観点で非常に有効だと感じています&rdquo;</p>
-                <cite>― 千羽 正章 氏 / エデュリンクス株式会社</cite>
+                <cite>― 銭場氏 / 株式会社EdulinX</cite>
               </blockquote>
             </div>
           </div>
@@ -569,10 +569,10 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
             <div className="lp-testimonial">
               <div className="lp-testimonial-quote">&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてきてくださっています。知識を得た状態、興味を持った状態——商談化の観点で非常に有効だと感じています。&rdquo;</div>
               <div className="lp-testimonial-author">
-                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>千</div>
+                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>銭</div>
                 <div>
-                  <div className="lp-testimonial-name">千羽 正章 氏</div>
-                  <div className="lp-testimonial-role">エデュリンクス株式会社 / 英語eラーニング「Reallyenglish」</div>
+                  <div className="lp-testimonial-name">銭場氏</div>
+                  <div className="lp-testimonial-role">株式会社EdulinX / 英語eラーニング「Reallyenglish」</div>
                 </div>
               </div>
             </div>
