@@ -17,8 +17,6 @@ const bullet = (t) => ({
 // ---------- property updates (title/description/stats) ----------
 const stats = [
   { label: 'Meeton ai 経由の商談化率', value: '60%+', context: '業界平均の約3倍' },
-  { label: '関与リード数', value: '49件', context: '2026年1-3月' },
-  { label: '有効リード（商談中）', value: '6件', context: '1Q' },
 ]
 
 const newTitle =
@@ -115,8 +113,6 @@ const children = [
 
   h3('数字：商談化率は業界平均の約3倍'),
   bullet('Meeton ai 経由リードの商談化率：60%+（業界平均20%、同社全体23%の約3倍）'),
-  bullet('2026年1-3月に Meeton ai が関与したリード：49件'),
-  bullet('有効リード（商談進行中）：6件'),
   bullet('比較サイト経由のコールドリードとの対比で、自社サイト経由リードの温度感が顕著に向上'),
 
   quote(
