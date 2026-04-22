@@ -323,6 +323,10 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
                   <span className="lp-proof-l">セットアップ</span>
                 </div>
               </div>
+              <blockquote className="lp-hero-quote">
+                <p>&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてくださる。商談化の観点で非常に有効だと感じています&rdquo;</p>
+                <cite>― 株式会社EdulinX 銭場氏</cite>
+              </blockquote>
             </div>
           </div>
           {/* Right: Form */}
@@ -563,6 +567,16 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
           <h2 className="lp-h2">導入企業の声</h2>
           <div className="lp-testimonials">
             <div className="lp-testimonial">
+              <div className="lp-testimonial-quote">&ldquo;Meeton aiを経由してきたお客様は、明らかにナーチャリングされた状態で問い合わせをしてくださる。知識を得ていて、興味を持っている。商談化の観点で非常に有効だと感じています。&rdquo;</div>
+              <div className="lp-testimonial-author">
+                <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #7c5cfc, #a78bfa)' }}>E</div>
+                <div>
+                  <div className="lp-testimonial-name">株式会社EdulinX 銭場氏</div>
+                  <div className="lp-testimonial-role">英語eラーニング「Reallyenglish」 / 人材育成「Prospera Training Solutions」</div>
+                </div>
+              </div>
+            </div>
+            <div className="lp-testimonial">
               <div className="lp-testimonial-quote">&ldquo;導入初週から商談が入り始めました。深夜のリードにも即座に対応してくれるので、営業チームは朝出社すると商談が入っている状態です。&rdquo;</div>
               <div className="lp-testimonial-author">
                 <div className="lp-testimonial-avatar" style={{ background: 'linear-gradient(135deg, #12a37d, #0fc19a)' }}>G</div>
@@ -721,8 +735,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-sub{font-size:clamp(15px,2vw,18px);line-height:1.8;color:var(--sub);max-width:480px;margin-bottom:28px}
 
 /* Hero proof stats */
-.lp-hero-proof{display:flex;align-items:center}
+.lp-hero-proof{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
 .lp-proof-stats{display:flex;align-items:center;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 24px}
+.lp-hero-quote{margin:0;padding:14px 18px;background:linear-gradient(135deg,rgba(124,92,252,.06),rgba(18,163,125,.06));border-left:3px solid #7c5cfc;border-radius:0 10px 10px 0;max-width:640px}
+.lp-hero-quote p{font-size:14px;line-height:1.7;color:var(--text);font-style:italic;margin:0 0 8px 0}
+.lp-hero-quote cite{font-size:12px;color:var(--sub);font-style:normal;font-weight:600}
 .lp-proof-stat{display:flex;flex-direction:column;align-items:center;padding:0 20px}
 .lp-proof-v{font-family:var(--fm);font-size:24px;font-weight:700;color:var(--heading)}
 .lp-proof-l{font-size:11px;color:var(--sub);font-weight:600;margin-top:2px}
@@ -871,7 +888,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .lp-mid-cta-inner{max-width:560px;margin:0 auto}
 
 /* ── TESTIMONIALS ── */
-.lp-testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.lp-testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .lp-testimonial{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;position:relative}
 .lp-testimonial-quote{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:20px;font-style:italic}
 .lp-testimonial-author{display:flex;align-items:center;gap:12px}
@@ -888,8 +905,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .lp-hero-split{grid-template-columns:1fr;gap:32px}
   .lp-hero-text{text-align:center}
   .lp-sub{margin-left:auto;margin-right:auto}
-  .lp-hero-proof{justify-content:center}
+  .lp-hero-proof{justify-content:center;align-items:center}
   .lp-proof-stats{flex-direction:row;gap:0;padding:10px 16px}
+  .lp-hero-quote{max-width:100%;font-size:13px}
   .lp-proof-stat{padding:0 12px}
   .lp-proof-v{font-size:18px}
   .lp-proof-l{font-size:10px}
@@ -898,7 +916,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .lp-results{grid-template-columns:1fr}
   .lp-weapon-row,.lp-weapon-row-rev{grid-template-columns:1fr;gap:24px;direction:ltr;margin-bottom:40px}
   .lp-weapon-row-rev>*{direction:ltr}
-  .lp-testimonials{grid-template-columns:1fr;gap:16px}
+  .lp-testimonials{grid-template-columns:1fr;gap:14px}
   .lp-flow{flex-direction:column;gap:12px}
   .lp-flow-item{flex-direction:row}
   .lp-flow-connector{width:2px;height:24px;display:none}
