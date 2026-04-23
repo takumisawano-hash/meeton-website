@@ -418,9 +418,9 @@ export default function SecurityPageClient() {
               }}
             >
               <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontSize: 24, fontWeight: 850, marginBottom: 8 }}>ホワイトペーパーは別導線でご案内予定です</h3>
+                <h3 style={{ fontSize: 24, fontWeight: 850, marginBottom: 8 }}>ホワイトペーパーをご確認ください</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: '#5b7169' }}>
-                  フォーム設計を調整中のため、このページでは現在ダウンロード申請を受け付けていません。必要な場合はお問い合わせから個別にご案内できます。
+                  より詳細なセキュリティ仕様は、専用のホワイトペーパーから確認できます。以下のリンクからダウンロードページへ進んでください。
                 </p>
               </div>
               <div
@@ -439,9 +439,9 @@ export default function SecurityPageClient() {
                   }}
                 >
                   {[
-                    '詳細資料の公開準備中',
-                    '必要時は個別案内に切り替え可能',
-                    '公開後はこのセクションから導線を再設置予定',
+                    'インフラ構成とデータ保護方針を収録',
+                    'バックアップ体制と運用統制の概要を掲載',
+                    '専用ダウンロードページからすぐ確認可能',
                   ].map((item) => (
                     <div
                       key={item}
@@ -469,7 +469,9 @@ export default function SecurityPageClient() {
                   ))}
                 </div>
                 <a
-                  href="/contact/"
+                  href="https://dynameet.ai/security?downloadCenter&docId=f91ea9e9-5efa-4f2a-a29b-14dcb13928f0&page=1"
+                  target="_blank"
+                  rel="noreferrer"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -482,7 +484,7 @@ export default function SecurityPageClient() {
                     textDecoration: 'none',
                   }}
                 >
-                  お問い合わせはこちら
+                  ホワイトペーパーを見る
                 </a>
               </div>
             </div>
