@@ -100,6 +100,68 @@ export default function SecurityPolicyPage() {
               </p>
             ))}
           </div>
+
+          <section
+            style={{
+              marginTop: 'clamp(32px, 6vw, 56px)',
+              padding: 'clamp(22px, 4vw, 30px)',
+              borderRadius: 24,
+              background: 'linear-gradient(135deg, #f3faf7 0%, #ffffff 100%)',
+              border: '1px solid #dceae4',
+              boxShadow: '0 12px 32px rgba(15, 23, 42, 0.05)',
+            }}
+          >
+            <div
+              style={{
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: '#0f766e',
+                marginBottom: 10,
+              }}
+            >
+              Security Overview
+            </div>
+            <h2
+              style={{
+                fontSize: 'clamp(22px, 4vw, 28px)',
+                fontWeight: 850,
+                lineHeight: 1.3,
+                color: '#0f1128',
+                margin: '0 0 10px',
+              }}
+            >
+              具体的なセキュリティ対策は別ページで公開しています
+            </h2>
+            <p
+              style={{
+                fontSize: 'clamp(14px, 2vw, 15px)',
+                lineHeight: 1.85,
+                color: '#4b5563',
+                margin: '0 0 18px',
+              }}
+            >
+              情報セキュリティの基本方針に加えて、ISMS認証取得に向けた取り組み、インフラ構成、暗号化方針、AI運用上の保護策は「セキュリティ対策について」ページで確認できます。
+            </p>
+            <Link
+              href="/security/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '14px 22px',
+                borderRadius: 999,
+                background: 'linear-gradient(135deg, #12a37d, #0f8d73)',
+                color: '#fff',
+                fontWeight: 700,
+                textDecoration: 'none',
+                boxShadow: '0 12px 28px rgba(18, 163, 125, 0.22)',
+              }}
+            >
+              セキュリティ対策について見る
+            </Link>
+          </section>
         </div>
       </main>
       <Footer />
