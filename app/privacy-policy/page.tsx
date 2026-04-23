@@ -82,7 +82,7 @@ export default function PrivacyPolicyPage() {
             }}
           >
             <p style={{ marginBottom: 32 }}>
-              DynaMeet株式会社（以下「当社」といいます）は、お客様の個人情報の保護を重要な責務と考え、以下のプライバシーポリシーに従って個人情報を適切に取り扱います。
+                DynaMeet株式会社（以下「当社」といいます）は、当社が提供する「DynaMeet Platform」（Meeton ai等を含み、以下「本サービス」といいます）において、お客様の個人情報の保護を重要な責務と考え、以下のプライバシーポリシーに従って個人情報を適切に取り扱います。
             </p>
 
             <Section title="第1条（個人情報の定義）">

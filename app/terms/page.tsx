@@ -79,7 +79,7 @@ export default function TermsPage() {
             }}
           >
             <p style={{ marginBottom: 32 }}>
-              本利用規約（以下「本規約」といいます）は、DynaMeet株式会社（以下「当社」といいます）が提供するサービス「Meeton AI」（以下「本サービス」といいます）の利用条件を定めるものです。ご利用の前に必ずお読みください。
+                本利用規約（以下「本規約」といいます）は、DynaMeet株式会社（以下「当社」といいます）が提供する「DynaMeet Platform」（Meeton ai等を含み、以下「本サービス」といいます）の利用条件を定めるものです。ご利用の前に必ずお読みください。
             </p>
 
             <Section title="第1条（適用）">
