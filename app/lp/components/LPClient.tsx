@@ -125,7 +125,7 @@ const copy = {
 }
 
 /* ── Inline HubSpot Form ── */
-function InlineHubSpotForm({ utmCampaign }: { utmCampaign: string }) {
+function InlineHubSpotForm({ utmCampaign, variant }: { utmCampaign: string; variant: Variant }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [loaded, setLoaded] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -148,6 +148,15 @@ function InlineHubSpotForm({ utmCampaign }: { utmCampaign: string }) {
             if (window.gtag) {
               window.gtag('event', 'conversion', {
                 send_to: 'AW-18060590496/5EyJCIqrspUcEKD7-qND',
+              })
+              window.gtag('event', 'generate_lead', {
+                lp_variant: variant,
+                form_id: 'dd42d8b3-e426-4079-9479-fa28287c0544',
+                value: 0,
+                currency: 'JPY',
+              })
+              window.gtag('event', 'lp_form_submit', {
+                lp_variant: variant,
               })
             }
             if (window.lintrk) {
@@ -334,7 +343,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
             <div className="lp-form-card">
               <h2 className="lp-form-heading">{c.formHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}</h2>
               <p className="lp-form-sub">{c.formSub}</p>
-              <InlineHubSpotForm utmCampaign={utmCampaign} />
+              <InlineHubSpotForm utmCampaign={utmCampaign} variant={variant} />
               <div className="lp-form-divider">
                 <span>または</span>
               </div>
