@@ -319,7 +319,7 @@ export default async function CaseStudyPage({
             >
               <Image
                 src={item.heroImage}
-                alt={`${item.company} 事例インタビュー中の様子`}
+                alt={item.company}
                 fill
                 style={{ objectFit: 'cover' }}
                 sizes="(max-width: 1200px) 100vw, 1200px"
@@ -334,7 +334,7 @@ export default async function CaseStudyPage({
                 marginTop: 12,
               }}
             >
-              事例インタビュー中の様子
+              {item.company}
             </figcaption>
           </figure>
         </section>
