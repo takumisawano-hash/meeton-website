@@ -113,118 +113,190 @@ export default async function CaseStudiesPage() {
           {items.length === 0 ? (
             <p style={{ color: '#82897f' }}>導入事例は準備中です。</p>
           ) : (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-                gap: 20,
-              }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
               {items.map((item) => (
                 <Link
                   key={item.id}
                   href={`/case-studies/${item.slug}/`}
+                  className="cs-index-card"
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(0, 5fr) minmax(0, 6fr)',
+                    gap: 0,
                     background: '#fff',
                     border: '1px solid #e4e3dd',
-                    borderRadius: 20,
-                    padding: 32,
+                    borderRadius: 24,
+                    overflow: 'hidden',
                     textDecoration: 'none',
                     color: '#0a0e0c',
                     transition: 'all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                    minHeight: 320,
                   }}
                 >
                   <div
+                    className="cs-index-image"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginBottom: 28,
+                      position: 'relative',
+                      minHeight: 320,
+                      background: '#f3f2ed',
                     }}
                   >
-                    {item.companyLogo ? (
-                      <div style={{ position: 'relative', width: 100, height: 32 }}>
-                        <Image
-                          src={item.companyLogo}
-                          alt={item.company}
-                          fill
-                          style={{ objectFit: 'contain', objectPosition: 'left center' }}
-                          sizes="100px"
-                        />
-                      </div>
-                    ) : (
-                      <span style={{ fontWeight: 800, fontSize: 18 }}>{item.company}</span>
-                    )}
-                    <span
+                    {item.heroImage ? (
+                      <Image
+                        src={item.heroImage}
+                        alt={item.company}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        sizes="(max-width: 900px) 100vw, 500px"
+                      />
+                    ) : null}
+                  </div>
+
+                  <div
+                    className="cs-index-body"
+                    style={{
+                      padding: 'clamp(28px, 4vw, 48px)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 20,
+                    }}
+                  >
+                    <div
                       style={{
-                        fontFamily: 'var(--font-mono), ui-monospace, monospace',
-                        fontSize: 10,
-                        color: '#82897f',
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 16,
                       }}
                     >
-                      {item.industry}
-                    </span>
-                  </div>
+                      {item.companyLogo ? (
+                        <div style={{ position: 'relative', width: 120, height: 36 }}>
+                          <Image
+                            src={item.companyLogo}
+                            alt={item.company}
+                            fill
+                            style={{ objectFit: 'contain', objectPosition: 'left center' }}
+                            sizes="120px"
+                          />
+                        </div>
+                      ) : (
+                        <span style={{ fontWeight: 800, fontSize: 18 }}>{item.company}</span>
+                      )}
+                      {item.industry && (
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-mono), ui-monospace, monospace',
+                            fontSize: 10,
+                            color: '#82897f',
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          {item.industry}
+                        </span>
+                      )}
+                    </div>
 
-                  {item.heroMetric && (
-                    <div style={{ marginBottom: 20 }}>
+                    <div
+                      style={{
+                        fontWeight: 800,
+                        fontSize: 'clamp(20px, 2.4vw, 26px)',
+                        lineHeight: 1.4,
+                        letterSpacing: '-0.02em',
+                      }}
+                    >
+                      {item.title}
+                    </div>
+
+                    {item.heroMetric && (
                       <div
                         style={{
-                          fontWeight: 900,
-                          fontSize: 48,
-                          color: '#065f46',
-                          letterSpacing: '-0.04em',
-                          lineHeight: 1,
-                          marginBottom: 6,
+                          display: 'flex',
+                          alignItems: 'baseline',
+                          gap: 14,
+                          paddingTop: 4,
                         }}
                       >
-                        {item.heroMetric}
+                        <div
+                          style={{
+                            fontWeight: 900,
+                            fontSize: 'clamp(40px, 5.2vw, 56px)',
+                            color: '#065f46',
+                            letterSpacing: '-0.04em',
+                            lineHeight: 1,
+                          }}
+                        >
+                          {item.heroMetric}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            color: '#3d4541',
+                            lineHeight: 1.5,
+                          }}
+                        >
+                          {item.heroMetricLabel}
+                        </div>
                       </div>
-                      <div style={{ fontSize: 13, color: '#3d4541' }}>{item.heroMetricLabel}</div>
-                    </div>
-                  )}
+                    )}
 
-                  <div
-                    style={{
-                      fontWeight: 700,
-                      fontSize: 18,
-                      lineHeight: 1.5,
-                      color: '#0a0e0c',
-                      marginBottom: 'auto',
-                    }}
-                  >
-                    {item.title}
-                  </div>
+                    {item.description && (
+                      <p
+                        style={{
+                          margin: 0,
+                          fontSize: 15,
+                          lineHeight: 1.75,
+                          color: '#3d4541',
+                          display: '-webkit-box',
+                          WebkitBoxOrient: 'vertical',
+                          WebkitLineClamp: 3,
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {item.description}
+                      </p>
+                    )}
 
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: 6,
-                      marginTop: 24,
-                    }}
-                  >
-                    {item.usedProducts.slice(0, 3).map((prod) => (
+                    <div
+                      style={{
+                        marginTop: 'auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        flexWrap: 'wrap',
+                        gap: 16,
+                        paddingTop: 8,
+                      }}
+                    >
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                        {item.usedProducts.slice(0, 4).map((prod) => (
+                          <span
+                            key={prod}
+                            style={{
+                              fontFamily: 'var(--font-mono), ui-monospace, monospace',
+                              fontSize: 10,
+                              padding: '3px 8px',
+                              border: '1px solid #e4e3dd',
+                              borderRadius: 4,
+                              color: '#3d4541',
+                              letterSpacing: '0.03em',
+                            }}
+                          >
+                            {prod}
+                          </span>
+                        ))}
+                      </div>
                       <span
-                        key={prod}
                         style={{
                           fontFamily: 'var(--font-mono), ui-monospace, monospace',
-                          fontSize: 10,
-                          padding: '3px 8px',
-                          border: '1px solid #e4e3dd',
-                          borderRadius: 4,
-                          color: '#3d4541',
-                          letterSpacing: '0.03em',
+                          fontSize: 12,
+                          color: '#065f46',
+                          letterSpacing: '0.05em',
+                          fontWeight: 600,
                         }}
                       >
-                        {prod}
+                        Read case study →
                       </span>
-                    ))}
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -234,6 +306,18 @@ export default async function CaseStudiesPage() {
       </section>
 
       <Footer variant="light" />
+
+      <style>{`
+        .cs-index-card:hover {
+          border-color: #065f46 !important;
+          transform: translateY(-2px);
+          box-shadow: 0 24px 48px -24px rgba(10, 14, 12, 0.18);
+        }
+        @media (max-width: 820px) {
+          .cs-index-card { grid-template-columns: 1fr !important; }
+          .cs-index-image { min-height: 220px !important; aspect-ratio: 16 / 9 !important; }
+        }
+      `}</style>
     </div>
   )
 }
