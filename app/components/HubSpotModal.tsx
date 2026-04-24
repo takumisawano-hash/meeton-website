@@ -17,6 +17,7 @@ declare global {
         }) => void
       }
     }
+    gtag?: (...args: unknown[]) => void
   }
 }
 
@@ -87,7 +88,15 @@ export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotMo
         formId: 'dd42d8b3-e426-4079-9479-fa28287c0544',
         region: 'na2',
         target: '#hubspot-form-container',
-        onFormSubmitted: () => setSubmitted(true),
+        onFormSubmitted: () => {
+          setSubmitted(true)
+          window.gtag?.('event', 'form_submit', {
+            form_type: 'resource_request',
+            form_id: 'dd42d8b3-e426-4079-9479-fa28287c0544',
+            utm_campaign: utmCampaign || '',
+          })
+          window.gtag?.('event', 'generate_lead', { form_type: 'resource_request' })
+        },
         onFormReady: ($form: HTMLFormElement) => {
           if (utmCampaign && $form) {
             const pageUrlInput = $form.querySelector('input[name="hs_context"]')

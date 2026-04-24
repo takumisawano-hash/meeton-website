@@ -36,7 +36,15 @@ export default function ContactPageClient() {
       formId: '08dc0777-eba7-419f-befe-70ae7bc44f02',
       region: 'na2',
       target: '#contact-hubspot-form',
-      onFormSubmitted: () => setSubmitted(true),
+      onFormSubmitted: () => {
+        setSubmitted(true)
+        const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
+        gtag?.('event', 'form_submit', {
+          form_type: 'contact',
+          form_id: '08dc0777-eba7-419f-befe-70ae7bc44f02',
+        })
+        gtag?.('event', 'generate_lead', { form_type: 'contact' })
+      },
     })
     setFormLoaded(true)
   }

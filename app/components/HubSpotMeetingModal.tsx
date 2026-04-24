@@ -45,6 +45,11 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
             window.gtag('event', 'conversion', {
               send_to: 'AW-18060590496/5EyJCIqrspUcEKD7-qND',
             })
+            window.gtag('event', 'form_submit', {
+              form_type: 'meeting',
+              utm_campaign: utmCampaign || '',
+            })
+            window.gtag('event', 'generate_lead', { form_type: 'meeting' })
           }
           if ((window as unknown as { lintrk?: (a: string, b: { conversion_id: number }) => void }).lintrk) {
             (window as unknown as { lintrk: (a: string, b: { conversion_id: number }) => void }).lintrk('track', { conversion_id: 25161212 })
