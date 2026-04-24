@@ -111,7 +111,7 @@ export type BlogPost = {
   views: number                // ビュー数（注目記事の選定用）
 }
 
-export type NotionBlock = BlockObjectResponse
+export type NotionBlock = BlockObjectResponse & { children?: NotionBlock[] }
 
 function getRichTextContent(richText: RichTextItemResponse[]): string {
   return richText.map((item) => item.plain_text).join('')
@@ -314,6 +314,28 @@ export async function getPostBlocks(pageId: string): Promise<NotionBlock[]> {
       )
       cursor = response.has_more ? response.next_cursor ?? undefined : undefined
     } while (cursor)
+
+    // Fetch children for block types that need them for rendering (e.g. table rows)
+    for (const block of blocks) {
+      if (block.type === 'table' && block.has_children) {
+        const children: NotionBlock[] = []
+        let c: string | undefined
+        do {
+          const r = await withRetry(() =>
+            notion.blocks.children.list({
+              block_id: block.id,
+              start_cursor: c,
+              page_size: 100,
+            })
+          )
+          children.push(
+            ...r.results.filter((b): b is NotionBlock => 'type' in b)
+          )
+          c = r.has_more ? r.next_cursor ?? undefined : undefined
+        } while (c)
+        block.children = children
+      }
+    }
 
     return blocks
   } catch {

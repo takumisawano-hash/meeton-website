@@ -284,6 +284,70 @@ function renderBlock(block: NotionBlock): React.ReactNode {
         </details>
       )
 
+    case 'table': {
+      const rows = (block.children || []).filter(
+        (b): b is NotionBlock & { type: 'table_row' } => b.type === 'table_row'
+      )
+      if (rows.length === 0) return null
+      const hasColumnHeader = block.table.has_column_header
+      const headerRow = hasColumnHeader ? rows[0] : null
+      const bodyRows = hasColumnHeader ? rows.slice(1) : rows
+      return (
+        <div key={block.id} style={{ overflowX: 'auto', margin: '28px 0' }}>
+          <table
+            style={{
+              width: '100%',
+              borderCollapse: 'collapse',
+              fontSize: 14,
+              lineHeight: 1.6,
+            }}
+          >
+            {headerRow && (
+              <thead>
+                <tr>
+                  {headerRow.table_row.cells.map((cell, i) => (
+                    <th
+                      key={i}
+                      style={{
+                        border: '1px solid #e5e7eb',
+                        padding: '10px 12px',
+                        background: '#f0fdf4',
+                        textAlign: 'left',
+                        fontWeight: 700,
+                        color: '#0f1128',
+                        verticalAlign: 'top',
+                      }}
+                    >
+                      {renderRichText(cell)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {bodyRows.map((r) => (
+                <tr key={r.id}>
+                  {r.table_row.cells.map((cell, i) => (
+                    <td
+                      key={i}
+                      style={{
+                        border: '1px solid #e5e7eb',
+                        padding: '10px 12px',
+                        verticalAlign: 'top',
+                        color: '#374151',
+                      }}
+                    >
+                      {renderRichText(cell)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+
     case 'bookmark':
       return (
         <a
