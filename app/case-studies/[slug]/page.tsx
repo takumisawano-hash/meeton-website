@@ -306,7 +306,7 @@ export default async function CaseStudyPage({
             padding: '0 clamp(20px, 4vw, 48px) clamp(40px, 6vw, 72px)',
           }}
         >
-          <figure style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <div
               style={{
                 position: 'relative',
@@ -326,17 +326,7 @@ export default async function CaseStudyPage({
                 priority
               />
             </div>
-            <figcaption
-              style={{
-                textAlign: 'center',
-                fontSize: 14,
-                color: '#9ca3af',
-                marginTop: 12,
-              }}
-            >
-              {item.company}
-            </figcaption>
-          </figure>
+          </div>
         </section>
       )}
 
