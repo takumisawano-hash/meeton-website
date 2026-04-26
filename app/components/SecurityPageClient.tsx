@@ -470,7 +470,6 @@ export default function SecurityPageClient() {
                 </div>
                 <a
                   href="https://dynameet.ai/security?downloadCenter&docId=f91ea9e9-5efa-4f2a-a29b-14dcb13928f0&page=1"
-                  target="_blank"
                   rel="noreferrer"
                   style={{
                     display: 'inline-flex',
