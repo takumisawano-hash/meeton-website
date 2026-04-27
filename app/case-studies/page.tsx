@@ -318,7 +318,7 @@ export default async function CaseStudiesPage() {
         }
         @media (max-width: 820px) {
           .cs-index-card { grid-template-columns: 1fr !important; }
-          .cs-index-image { min-height: 220px !important; aspect-ratio: 16 / 9 !important; }
+          .cs-index-image { min-height: 0 !important; aspect-ratio: 16 / 9 !important; }
         }
       `}</style>
     </div>
