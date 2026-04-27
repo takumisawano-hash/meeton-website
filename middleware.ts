@@ -21,6 +21,18 @@ export function middleware(req: NextRequest) {
     }
   })()
 
+  // Specific legacy URLs that still rank in Google but no longer resolve.
+  // These must come before the broader Japanese-slug → /blog/ catch-alls.
+  const legacyArticleMap: Record<string, string> = {
+    '/blog/sales/オーガニックリード47減の危機！aiで変革する次世/': '/blog/jp-mlutg7bj-fj0o/',
+    '/blog/sales/オーガニックリード47減の危機！aiで変革する次世': '/blog/jp-mlutg7bj-fj0o/',
+    '/blog/inside-sales/【revops責任者必見】パイプライン・ベロシティを2倍/': '/blog/revops-velocity-2/',
+    '/blog/inside-sales/【revops責任者必見】パイプライン・ベロシティを2倍': '/blog/revops-velocity-2/',
+  }
+  if (legacyArticleMap[decoded]) {
+    return NextResponse.redirect(new URL(legacyArticleMap[decoded], req.url), 308)
+  }
+
   // Legacy Japanese-named blog category paths → /blog/ index
   const jpBlogCategories = [
     '/blog/セールス/',
