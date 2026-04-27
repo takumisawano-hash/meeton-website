@@ -40,6 +40,34 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // High-impact SEO recovery: Google indexed Japanese-slug URLs whose
+      // articles have since been re-slugged. Without these, the broad
+      // /blog/sales/:slug rule strips the category but the resulting slug
+      // doesn't exist, so Google searchers land on /blog/ index.
+      {
+        source: '/blog/sales/オーガニックリード47減の危機！aiで変革する次世/',
+        destination: '/blog/jp-mlutg7bj-fj0o/',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/blog/sales/オーガニックリード47減の危機！aiで変革する次世',
+        destination: '/blog/jp-mlutg7bj-fj0o/',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/blog/inside-sales/【revops責任者必見】パイプライン・ベロシティを2倍/',
+        destination: '/blog/revops-velocity-2/',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/blog/inside-sales/【revops責任者必見】パイプライン・ベロシティを2倍',
+        destination: '/blog/revops-velocity-2/',
+        permanent: true,
+        locale: false,
+      },
       {
         source: '/demo',
         destination: '/',
