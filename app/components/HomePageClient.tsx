@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import BusinessChallenges from "./BusinessChallenges";
 import ComparisonTable from "./ComparisonTable";
 import Footer from "./Footer";
-import HowItWorksFlow from "./HowItWorksFlow";
+import MeetingFlowDiagram from "./MeetingFlowDiagram";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
 import HubSpotModal from "./HubSpotModal";
 import Nav from "./Nav";
@@ -3351,8 +3351,8 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
       {/* CHALLENGES — BtoB営業の現実 */}
       <BusinessChallenges />
 
-      {/* HOW IT WORKS — animated flow */}
-      <HowItWorksFlow />
+      {/* HOW IT WORKS — Meeton ai flow diagram */}
+      <MeetingFlowDiagram />
 
       {/* 3 PRODUCT CARDS */}
       <section
