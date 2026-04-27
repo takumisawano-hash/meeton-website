@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts, getCategoriesWithCounts, getTagsWithCounts } from '@/app/lib/notion'
+import { getAllPosts } from '@/app/lib/notion'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -122,29 +122,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion 未接続時は空で返す
   }
 
-  let categoryPages: MetadataRoute.Sitemap = []
-  let tagPages: MetadataRoute.Sitemap = []
-
-  try {
-    const [cats, tags] = await Promise.all([
-      getCategoriesWithCounts(3),
-      getTagsWithCounts(5),
-    ])
-    categoryPages = cats.map((c) => ({
-      url: `${baseUrl}/blog/category/${c.slug}/`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    }))
-    tagPages = tags.map((t) => ({
-      url: `${baseUrl}/blog/tag/${t.slug}/`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.5,
-    }))
-  } catch {
-    // Notion 未接続時は空で返す
-  }
-
-  return [...staticPages, ...blogPosts, ...caseStudies, ...categoryPages, ...tagPages]
+  return [...staticPages, ...blogPosts, ...caseStudies]
 }
