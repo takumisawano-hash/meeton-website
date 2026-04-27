@@ -344,11 +344,27 @@ function DesktopFlow({
             delay={D.branchArrows + 0.2}
           />
           <PathLabel
-            text="会話中に送信"
+            text="会話後にフォーム送信"
             x={(N.chat.cx + N.thanks.cx) / 2}
             y={N.chat.cy - 16}
             visible={active || reduce}
             delay={D.chatThanksDashed + 0.2}
+            color={COLOR.amber}
+          />
+          <PathLabel
+            text="会話内でコンバージョン"
+            x={N.chat.cx + 95}
+            y={395}
+            visible={active || reduce}
+            delay={D.toCalendar + 0.2}
+            color={COLOR.chat}
+          />
+          <PathLabel
+            text="問い合わせからコンバージョン"
+            x={N.thanks.cx - 95}
+            y={395}
+            visible={active || reduce}
+            delay={D.toCalendar + 0.2}
             color={COLOR.amber}
           />
           <PathLabel
@@ -368,13 +384,12 @@ function DesktopFlow({
             color={COLOR.email}
           />
           <PathLabel
-            text="メール内URLから再表示"
-            x={930}
-            y={(N.email.cy + N.calendar.cy) / 2}
+            text="メールから再誘導"
+            x={870}
+            y={500}
             visible={active || reduce}
             delay={D.loopBack + 0.2}
             color={COLOR.email}
-            rotate={-90}
           />
 
           {/* Pacing dots — start after sequence completes */}

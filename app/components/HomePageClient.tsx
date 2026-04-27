@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import BusinessChallenges from "./BusinessChallenges";
 import ComparisonTable from "./ComparisonTable";
 import Footer from "./Footer";
 import MeetingFlowDiagram from "./MeetingFlowDiagram";
@@ -3347,9 +3346,6 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
           </div>
         </div>
       </section>
-
-      {/* CHALLENGES — BtoB営業の現実 */}
-      <BusinessChallenges />
 
       {/* HOW IT WORKS — Meeton ai flow diagram */}
       <MeetingFlowDiagram />
