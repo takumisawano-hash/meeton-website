@@ -33,6 +33,16 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(legacyArticleMap[decoded], req.url), 308)
   }
 
+  // Strip legacy category prefix from blog URLs (replaces broader
+  // next.config.js rules that path-to-regexp couldn't reliably match
+  // because non-ASCII slugs preceded by category were intercepted
+  // before middleware could see them).
+  const categoryStripMatch = decoded.match(/^\/blog\/(sales|inside-sales|marketing|intern-student-interviews)\/(.+?)\/?$/)
+  if (categoryStripMatch) {
+    const slug = categoryStripMatch[2]
+    return NextResponse.redirect(new URL(`/blog/${slug}/`, req.url), 308)
+  }
+
   // Legacy Japanese-named blog category paths → /blog/ index
   const jpBlogCategories = [
     '/blog/セールス/',

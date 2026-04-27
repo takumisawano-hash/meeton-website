@@ -122,46 +122,9 @@ const nextConfig = {
         permanent: true,
       },
       // Old category-prefixed blog URLs → flat /blog/:slug/
-      {
-        source: '/blog/sales/:slug',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/sales/:slug/',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/inside-sales/:slug',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/inside-sales/:slug/',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/marketing/:slug',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/marketing/:slug/',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/intern-student-interviews/:slug',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
-      {
-        source: '/blog/intern-student-interviews/:slug/',
-        destination: '/blog/:slug/',
-        permanent: true,
-      },
+      // NOTE: handled in middleware.ts instead — path-to-regexp here cannot
+      // reliably match non-ASCII slugs, so legacy Japanese-slug URLs were
+      // intercepting before specific legacy mappings could fire.
       // Note: /blog/category/:slug is now a REAL page (SEO silo), not a redirect.
       // Old nested blog paths that were never migrated (Japanese slugs or old sub-categories)
       {
