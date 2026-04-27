@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import BusinessChallenges from "./BusinessChallenges";
 import ComparisonTable from "./ComparisonTable";
 import Footer from "./Footer";
 import HowItWorksFlow from "./HowItWorksFlow";
@@ -509,42 +510,6 @@ const stepsData = [
     num: "03",
     title: "\u30df\u30fc\u30c8\u30f3\u304c\u50cd\u304d\u59cb\u3081\u308b",
     desc: "\u8a2d\u5b9a\u5b8c\u4e86\u3057\u305f\u77ac\u9593\u304b\u3089\u30df\u30fc\u30c8\u30f3\u304c\u7a3c\u50cd\u3002\u5546\u8ac7\u7372\u5f97\u304c\u81ea\u52d5\u3067\u56de\u308a\u59cb\u3081\u307e\u3059\u3002",
-  },
-];
-
-const caseData = [
-  {
-    name: "G-gen",
-    industry: "Google Cloud プレミアパートナー",
-    quote:
-      "Meeton ai導入後、月20件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
-    stats: [
-      { v: "20件+", l: "月間商談創出", c: "var(--cta)" },
-      { v: "40%+", l: "リード→商談 転換率", c: "var(--blue)" },
-      { v: "安定", l: "毎月の商談パイプライン", c: "var(--accent)" },
-    ],
-  },
-  {
-    name: "Univis",
-    industry: "M&Aアドバイザリー・財務会計コンサル",
-    quote:
-      "商談化率は80%超え。Meeton aiが精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
-    stats: [
-      { v: "80%+", l: "商談化率", c: "var(--cta)" },
-      { v: "高精度", l: "Meeting創出", c: "var(--blue)" },
-      { v: "確度◎", l: "商談の質", c: "var(--accent)" },
-    ],
-  },
-  {
-    name: "BizteX",
-    industry: "クラウドRPA・業務自動化ツール",
-    quote:
-      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton aiの最大の魅力です。",
-    stats: [
-      { v: "6件", l: "初週の商談創出", c: "var(--cta)" },
-      { v: "1週目", l: "成果が出るまで", c: "var(--blue)" },
-      { v: "即効性", l: "導入スピード", c: "var(--accent)" },
-    ],
   },
 ];
 
@@ -3039,32 +3004,74 @@ function QualityFlowDiagram_UNUSED() {
   );
 }
 
-function CaseCarousel() {
+type CaseCarouselItem = {
+  slug: string;
+  name: string;
+  industry: string;
+  quote: string;
+  quotePerson?: string | null;
+  heroMetric?: string;
+  heroMetricLabel?: string;
+  stats: { value: string; label: string; context?: string }[];
+};
+
+const STAT_COLORS = ["var(--cta)", "var(--blue)", "var(--accent)"];
+
+function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
   const [idx, setIdx] = useState(0);
-  const maxIdx = caseData.length - 1;
+  const maxIdx = Math.max(0, items.length - 1);
   const prev = () => setIdx((i) => Math.max(0, i - 1));
   const next = () => setIdx((i) => Math.min(maxIdx, i + 1));
+  if (items.length === 0) return null;
   return (
     <div className="case-carousel">
       <div
         className="case-track"
         style={{ transform: `translateX(-${idx * 100}%)` }}
       >
-        {caseData.map((c, i) => (
+        {items.map((c, i) => (
           <div className="case-card" key={i}>
             <div className="case-logo">{c.name}</div>
             <div className="case-industry">{c.industry}</div>
             <div className="case-quote">{c.quote}</div>
+            {c.quotePerson && (
+              <div
+                style={{
+                  fontSize: 12,
+                  color: "var(--sub)",
+                  marginTop: -8,
+                  marginBottom: 12,
+                }}
+              >
+                — {c.quotePerson}
+              </div>
+            )}
             <div className="case-stats">
-              {c.stats.map((s, j) => (
+              {c.stats.slice(0, 3).map((s, j) => (
                 <div key={j}>
-                  <div className="case-stat-v" style={{ color: s.c }}>
-                    {s.v}
+                  <div
+                    className="case-stat-v"
+                    style={{ color: STAT_COLORS[j % STAT_COLORS.length] }}
+                  >
+                    {s.value}
                   </div>
-                  <div className="case-stat-l">{s.l}</div>
+                  <div className="case-stat-l">{s.label}</div>
                 </div>
               ))}
             </div>
+            <a
+              href={`/case-studies/${c.slug}/`}
+              style={{
+                marginTop: 20,
+                display: "inline-block",
+                color: "var(--cta)",
+                fontSize: 13,
+                fontWeight: 700,
+                textDecoration: "none",
+              }}
+            >
+              事例の詳細を読む →
+            </a>
           </div>
         ))}
       </div>
@@ -3081,14 +3088,14 @@ function CaseCarousel() {
             fontWeight: 600,
           }}
         >
-          {idx + 1} / {caseData.length}
+          {idx + 1} / {items.length}
         </span>
         <button className="case-arrow" onClick={next} disabled={idx >= maxIdx}>
           →
         </button>
       </div>
       <div className="case-dots">
-        {caseData.map((_, i) => (
+        {items.map((_, i) => (
           <div
             key={i}
             className={"case-dot" + (i === idx ? " active" : "")}
@@ -3213,7 +3220,22 @@ function HeroDemoAnimation() {
   );
 }
 
-export default function HomePageClient() {
+export type HomeCaseStudy = {
+  slug: string;
+  name: string;
+  industry: string;
+  quote: string;
+  quotePerson: string | null;
+  heroMetric: string;
+  heroMetricLabel: string;
+  stats: { value: string; label: string; context?: string }[];
+};
+
+type HomePageClientProps = {
+  caseStudies?: HomeCaseStudy[];
+};
+
+export default function HomePageClient({ caseStudies = [] }: HomePageClientProps) {
   const pathname = usePathname();
   const isJa = pathname.startsWith("/ja");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -3291,6 +3313,9 @@ export default function HomePageClient() {
           </div>
         </div>
       </section>
+
+      {/* CHALLENGES — BtoB営業の現実 */}
+      <BusinessChallenges />
 
       {/* HOW IT WORKS — animated flow */}
       <HowItWorksFlow />
@@ -3694,7 +3719,20 @@ export default function HomePageClient() {
           >
             Meeton aiが生み出した商談成果をご紹介します。
           </p>
-          <CaseCarousel />
+          <CaseCarousel items={caseStudies} />
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <a
+              href="/case-studies/"
+              style={{
+                color: "var(--cta)",
+                fontSize: 15,
+                fontWeight: 800,
+                textDecoration: "none",
+              }}
+            >
+              すべての導入事例を見る →
+            </a>
+          </div>
         </div>
       </section>
 
