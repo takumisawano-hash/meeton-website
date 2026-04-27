@@ -388,9 +388,11 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
                       marginBottom: 8,
                       lineHeight: 1.5,
                       display: '-webkit-box',
-                      WebkitLineClamp: 2,
+                      WebkitLineClamp: 3,
                       WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden'
+                      overflow: 'hidden',
+                      wordBreak: 'break-word',
+                      overflowWrap: 'anywhere'
                     }}>
                       {post.title}
                     </h3>
