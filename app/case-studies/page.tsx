@@ -158,6 +158,7 @@ export default async function CaseStudiesPage() {
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 20,
+                      minWidth: 0,
                     }}
                   >
                     <div
@@ -202,6 +203,8 @@ export default async function CaseStudiesPage() {
                         fontSize: 'clamp(20px, 2.4vw, 26px)',
                         lineHeight: 1.4,
                         letterSpacing: '-0.02em',
+                        wordBreak: 'break-word',
+                        overflowWrap: 'anywhere',
                       }}
                     >
                       {item.title}
