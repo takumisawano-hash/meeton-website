@@ -26,6 +26,7 @@ export default async function Page() {
     quotePerson: c.quotePerson,
     heroMetric: c.heroMetric,
     heroMetricLabel: c.heroMetricLabel,
+    heroImage: c.heroImage,
     stats: c.stats.slice(0, 3),
   }))
   return <HomePageClient caseStudies={featured} />

@@ -133,8 +133,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 /* CASES */
 .case-carousel{position:relative;overflow:hidden;width:100%}
 .case-track{display:flex;gap:0;transition:transform .5s cubic-bezier(.16,1,.3,1);padding:4px 0}
-.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 36px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden}
-.case-card:hover{box-shadow:0 8px 32px rgba(18,163,125,.08)}
+.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 36px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden;display:block}
+.case-card:hover{box-shadow:0 16px 40px -16px rgba(18,163,125,.18);border-color:var(--cta);transform:translateY(-2px)}
+.case-card-link{cursor:pointer}
 .case-arrows{display:flex;justify-content:center;gap:14px;margin-top:28px}
 .case-arrow{width:48px;height:48px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--heading);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .case-arrow:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);box-shadow:0 6px 20px var(--cta-glow)}
@@ -3012,6 +3013,7 @@ type CaseCarouselItem = {
   quotePerson?: string | null;
   heroMetric?: string;
   heroMetricLabel?: string;
+  heroImage?: string | null;
   stats: { value: string; label: string; context?: string }[];
 };
 
@@ -3030,7 +3032,38 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
         style={{ transform: `translateX(-${idx * 100}%)` }}
       >
         {items.map((c, i) => (
-          <div className="case-card" key={i}>
+          <a
+            key={i}
+            href={`/case-studies/${c.slug}/`}
+            className="case-card case-card-link"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            {c.heroImage && (
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "16 / 9",
+                  marginBottom: 20,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  background: "#f3f2ed",
+                }}
+              >
+                <img
+                  src={c.heroImage}
+                  alt={c.name}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  loading="lazy"
+                />
+              </div>
+            )}
             <div className="case-logo">{c.name}</div>
             <div className="case-industry">{c.industry}</div>
             <div className="case-quote">{c.quote}</div>
@@ -3059,20 +3092,20 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
                 </div>
               ))}
             </div>
-            <a
-              href={`/case-studies/${c.slug}/`}
+            <div
               style={{
                 marginTop: 20,
-                display: "inline-block",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
                 color: "var(--cta)",
                 fontSize: 13,
                 fontWeight: 700,
-                textDecoration: "none",
               }}
             >
-              事例の詳細を読む →
-            </a>
-          </div>
+              事例の詳細を読む <span>→</span>
+            </div>
+          </a>
         ))}
       </div>
       <div className="case-arrows">
@@ -3228,6 +3261,7 @@ export type HomeCaseStudy = {
   quotePerson: string | null;
   heroMetric: string;
   heroMetricLabel: string;
+  heroImage: string | null;
   stats: { value: string; label: string; context?: string }[];
 };
 
