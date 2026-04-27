@@ -6,8 +6,13 @@ import type {
   RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints'
 
+// Bypass Next.js' default fetch cache so revalidatePath() actually
+// re-fetches Notion. Without this, edits to article titles/descriptions
+// in Notion never reach production until the next deploy.
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+  fetch: ((url: RequestInfo | URL, init?: RequestInit) =>
+    fetch(url, { ...init, cache: 'no-store' })) as typeof fetch,
 })
 
 // Notion API 2025-09-03+ の dataSources エンドポイント（SDK型定義未対応）
