@@ -2,7 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import ComparisonTable from "./ComparisonTable";
 import Footer from "./Footer";
+import HowItWorksFlow from "./HowItWorksFlow";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
 import HubSpotModal from "./HubSpotModal";
 import Nav from "./Nav";
@@ -3266,7 +3268,8 @@ export default function HomePageClient() {
             AIが商談をつくる時代へ
           </h1>
           <p className="anim d3 hero-sub">
-            見込み客の育成から商談獲得まで、Meeton aiが自動でこなします。
+            Web サイト・サンクスページ・メール — あらゆる接点に AI を配置。
+            見込み客の関心が高いうちに、商談予約まで自動で完結します。
           </p>
           <div className="anim d4 hero-ctas">
             <button
@@ -3289,7 +3292,10 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* 4 PRODUCT CARDS */}
+      {/* HOW IT WORKS — animated flow */}
+      <HowItWorksFlow />
+
+      {/* 3 PRODUCT CARDS */}
       <section
         className="section"
         id="features"
@@ -3304,11 +3310,11 @@ export default function HomePageClient() {
             What Meeton Does
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            Meeton aiが商談をつくる、
-            <span style={{ color: "var(--cta)" }}>4つの武器</span>
+            Meeton ai が商談をつくる、
+            <span style={{ color: "var(--cta)" }}>3 つの AI 機能</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            Webサイト・メール・資料——あらゆる接点にAIを配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。
+            Chat / Calendar / Email — 3 つの AI が連動し、リード発見から商談獲得までを 24 時間自動で実行します。
           </p>
 
           <div className="phase-grid">
@@ -3316,54 +3322,41 @@ export default function HomePageClient() {
               {
                 color: "#12a37d",
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                label: "AI CHAT",
-                title: "AIチャット",
-                desc: "サイト訪問者と対話し、商談予約まで会話で完結。訪問者に自ら話しかけ、ニーズを把握し、温度感に応じて商談予約まで誘導。",
+                label: "① AI CHAT",
+                title: "AI チャット",
+                desc: "サイト訪問者と対話し、商談予約まで会話で完結。ページ文脈に応じた声かけ、資料提案を内蔵し、温度感に応じてカレンダー提示まで自動で行います。",
                 features: [
                   { label: "ページ文脈に応じた自動声かけ", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "会話の流れで資料提案・疑問解消", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "資料提案 (AI Offer) を内蔵・自動レコメンド", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
                   { label: "温度感に応じて商談予約まで誘導", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
                 ],
                 link: "/features/ai-chat/",
               },
               {
-                color: "#3b6ff5",
-                gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-                label: "AI EMAIL",
-                title: "AIメール",
-                desc: "見込み客を自動フォロー。未反応リードも逃さず商談化。高関心リードに即座にフォローアップし、パーソナライズドメールで育成。",
-                features: [
-                  { label: "高関心リードに即座にフォローアップ", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
-                  { label: "パーソナライズドメールで育成", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
-                  { label: "未反応リードにDay 1→3→5で自動再接触", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
-                ],
-                link: "/features/ai-email/",
-              },
-              {
                 color: "#0891b2",
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-                label: "AI CALENDAR",
-                title: "AIカレンダー",
-                desc: "関心が高い瞬間を逃さずカレンダーを提示。チャット内・サンクスページ・メールで商談予約を獲得し、事前ヒアリングまで自動完了。",
+                label: "② AI CALENDAR",
+                title: "AI カレンダー",
+                desc: "関心が高い瞬間を逃さずカレンダーを提示。チャット内・サンクスページ・メールで商談予約を獲得し、事前ヒアリング + CRM 自動登録まで一気通貫。",
                 features: [
                   { label: "チャット内でそのまま商談予約", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
                   { label: "サンクスページで即カレンダー提示", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
-                  { label: "AIが事前ヒアリングまで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
+                  { label: "AI が事前ヒアリングまで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
                 ],
                 link: "/features/meetings/",
               },
               {
                 color: "#7c5cfc",
                 gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                label: "AI OFFER",
-                title: "AIオファー",
-                desc: "訪問者の関心に合わせた資料を自動提案。閲覧ページに応じた自動マッチング、最適タイミングのポップアップでリードを獲得。",
+                label: "③ AI EMAIL",
+                title: "AI メール",
+                desc: "離脱リードを自動で取り戻す。行動シグナルに応じた自動再接触、パーソナライズドメールで育成。メール内 URL から AI Calendar へ誘導し再度商談獲得。",
                 features: [
-                  { label: "閲覧ページに応じて資料を自動マッチング", icon: "M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z M16.65 16.65L21 21" },
-                  { label: "最適タイミングでポップアップ表示", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
-                  { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
+                  { label: "高関心リードに即座にフォローアップ", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
+                  { label: "行動履歴をもとにパーソナライズ", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "未反応リードに自動再接触 → 商談予約", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
                 ],
-                link: "/features/offers/",
+                link: "/features/ai-email/",
               },
             ].map((prod, i) => (
               <div
@@ -3682,6 +3675,9 @@ export default function HomePageClient() {
           </div>
         </div>
       </section>
+
+      {/* COMPARISON — vs Human SDR vs Chatbot */}
+      <ComparisonTable />
 
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>

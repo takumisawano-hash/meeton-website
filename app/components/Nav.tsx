@@ -86,10 +86,9 @@ export default function Nav({
   ];
 
   const featuresDropdownItems = [
-    { href: "/features/ai-chat/", label: "AI Chat", sub: "AIチャット" },
-    { href: "/features/ai-email/", label: "AI Email", sub: "AIメール" },
+    { href: "/features/ai-chat/", label: "AI Chat", sub: "AIチャット (資料提案 内蔵)" },
     { href: "/features/meetings/", label: "AI Calendar", sub: "AIカレンダー" },
-    { href: "/features/offers/", label: "AI Offer", sub: "AIオファー" },
+    { href: "/features/ai-email/", label: "AI Email", sub: "AIメール" },
   ];
 
   const navLinks = [
