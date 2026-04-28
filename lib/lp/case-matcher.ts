@@ -1,4 +1,5 @@
-import { getAllCaseStudies, type CaseStudy } from '../../app/lib/case-studies'
+import type { CaseStudy } from '../../app/lib/case-studies'
+import { getCachedCaseStudies } from './notion-cache'
 
 export type CaseStudyHit = {
   slug: string
@@ -104,7 +105,7 @@ export async function matchCaseStudies(target: {
   limit?: number
 }): Promise<CaseStudyHit[]> {
   try {
-    const all = await getAllCaseStudies()
+    const all = await getCachedCaseStudies()
     if (!all.length) return []
     const ranked = rankCases(all, target)
     return ranked.slice(0, target.limit ?? 3)

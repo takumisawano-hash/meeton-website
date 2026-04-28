@@ -1,4 +1,5 @@
-import { getAllPosts, type BlogPost } from '../../app/lib/notion'
+import type { BlogPost } from '../../app/lib/notion'
+import { getCachedBlogPosts } from './notion-cache'
 
 export type BlogHit = {
   slug: string
@@ -90,7 +91,7 @@ export async function matchBlogs(args: {
   limit?: number
 }): Promise<BlogHit[]> {
   try {
-    const all = await getAllPosts()
+    const all = await getCachedBlogPosts()
     if (!all.length) return []
     const topics = topicsFromContext(args)
     if (topics.size === 0) return []
