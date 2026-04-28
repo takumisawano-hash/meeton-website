@@ -137,23 +137,23 @@ export default function ComparisonTable() {
           Comparison
         </div>
         <div
-          className="stitle"
-          style={{ textAlign: "center", wordBreak: "keep-all" }}
+          className="stitle comp-stitle"
+          style={{ textAlign: "center", wordBreak: "keep-all", overflowWrap: "anywhere" }}
         >
-          <span style={{ display: "inline-block" }}>
-            人間 SDR の<span style={{ color: "var(--cta)" }}>判断力</span>と
-          </span>
-          {" "}
-          <span style={{ display: "inline-block" }}>
-            チャットボットの<span style={{ color: "var(--accent)" }}>稼働量</span>を、両立
-          </span>
+          人間 SDR の<span style={{ color: "var(--cta)" }}>判断力</span>と
+          チャットボットの<span style={{ color: "var(--accent)" }}>稼働量</span>を、両立
         </div>
         <p
           className="ssub"
-          style={{ textAlign: "center", margin: "0 auto", maxWidth: 720 }}
+          style={{
+            textAlign: "center",
+            margin: "0 auto",
+            maxWidth: 720,
+            wordBreak: "keep-all",
+            overflowWrap: "anywhere",
+          }}
         >
-          Meeton ai は、人間 SDR の「自律的な判断」と従来チャットボットの「24 時間稼働」を
-          兼ね備えた AI SDR プラットフォームです。
+          Meeton ai は、人間 SDR の「自律的な判断」と従来チャットボットの「24 時間稼働」を兼ね備えた AI SDR プラットフォームです。
         </p>
 
         <div className="comp-wrap">
