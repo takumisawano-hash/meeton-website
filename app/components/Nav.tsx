@@ -82,7 +82,7 @@ export default function Nav({
 
   const dropdownItems = [
     { href: "/", label: "AI for 営業・マーケ" },
-    { href: "/talent/", label: "AI for 採用" },
+    // { href: "/talent/", label: "AI for 採用" }, // Meeton Talent: temporarily hidden
   ];
 
   const featuresDropdownItems = [
