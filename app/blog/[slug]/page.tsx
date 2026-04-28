@@ -7,7 +7,7 @@ import BlogContent from '@/app/components/BlogContent'
 import BlogJsonLd from '@/app/components/BlogJsonLd'
 import BreadcrumbJsonLd from '@/app/components/BreadcrumbJsonLd'
 import RelatedPosts from '@/app/components/RelatedPosts'
-import BlogCTA from '@/app/components/BlogCTA'
+import BlogCTA, { BlogInlineCTA } from '@/app/components/BlogCTA'
 import FAQJsonLd, { extractFAQFromContent } from '@/app/components/FAQJsonLd'
 import HowToJsonLd, { extractHowToFromContent } from '@/app/components/HowToJsonLd'
 
@@ -336,10 +336,13 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* Content */}
-        <BlogContent blocks={blocks} />
+        <BlogContent
+          blocks={blocks}
+          inlineCTA={<BlogInlineCTA category={post.category} slug={post.slug} />}
+        />
 
         {/* CTA Section */}
-        <BlogCTA />
+        <BlogCTA category={post.category} slug={post.slug} />
 
         {/* Related Posts */}
         <RelatedPosts posts={relatedPosts} currentSlug={post.slug} />

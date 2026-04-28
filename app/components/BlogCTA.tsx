@@ -4,9 +4,44 @@ import { useState } from 'react'
 import HubSpotModal from './HubSpotModal'
 import HubSpotMeetingModal from './HubSpotMeetingModal'
 
-export default function BlogCTA() {
+type BlogCTAProps = {
+  category?: string
+  slug?: string
+}
+
+const COPY_BY_CATEGORY: Record<string, { eyebrow: string; headline: React.ReactNode; description: string; primary: string }> = {
+  Sales: {
+    eyebrow: 'Meeton AI for Sales',
+    headline: <>営業の<span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談化率を2倍</span>にするAI</>,
+    description: 'AIが見込み客を自動でナーチャリングし、商談予約までを完結。営業組織の生産性を抜本的に変える実装ガイドを資料でお届けします。',
+    primary: '実装ガイドを受け取る',
+  },
+  'Inside Sales': {
+    eyebrow: 'Meeton AI for Inside Sales',
+    headline: <><span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI SDR</span>で 月間商談数を倍増</>,
+    description: 'インサイドセールスの架電・メール・LinkedIn DMをAIエージェントが自動化。商談化率40%超を実現する選定ガイドと事例集をお送りします。',
+    primary: 'AI SDR選定ガイドを受け取る',
+  },
+  Marketing: {
+    eyebrow: 'Meeton AI for Marketing',
+    headline: <>Web訪問者を<span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談に変える</span>AI</>,
+    description: 'チャットボット × 行動ログ × AIナーチャリングで、サイト訪問者を見込み客→商談へ自動転換。マーケ施策のCV率改善ガイドを資料でお届けします。',
+    primary: 'CV改善ガイドを受け取る',
+  },
+}
+
+const DEFAULT_COPY = {
+  eyebrow: 'Meeton AI',
+  headline: <>Webサイト訪問者を<br /><span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談に変える</span> AI</>,
+  description: 'AIがすべてのWebサイト訪問者に対応し、リードを自動で獲得・育成。商談予約まで自動化します。',
+  primary: '資料請求',
+}
+
+export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
+  const copy = (category && COPY_BY_CATEGORY[category]) || DEFAULT_COPY
+  const utmCampaign = slug ? `blog-${slug}` : 'meeton-ai-blog'
 
   return (
     <>
@@ -49,7 +84,7 @@ export default function BlogCTA() {
               marginBottom: 16,
             }}
           >
-            Meeton AI
+            {copy.eyebrow}
           </p>
           <h3
             style={{
@@ -60,30 +95,18 @@ export default function BlogCTA() {
               marginBottom: 16,
             }}
           >
-            Webサイト訪問者を
-            <br />
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #12a37d, #3b6ff5)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              商談に変える
-            </span>{' '}
-            AI
+            {copy.headline}
           </h3>
           <p
             style={{
               fontSize: 15,
               lineHeight: 1.8,
               color: '#6e7494',
-              maxWidth: 480,
+              maxWidth: 520,
               margin: '0 auto 28px',
             }}
           >
-            AIがすべてのWebサイト訪問者に対応し、リードを自動で獲得・育成。商談予約まで自動化します。
+            {copy.description}
           </p>
           <div
             style={{
@@ -108,7 +131,7 @@ export default function BlogCTA() {
                 transition: 'all 0.25s',
               }}
             >
-              資料請求
+              {copy.primary}
             </button>
             <button
               onClick={() => setIsMeetingModalOpen(true)}
@@ -133,12 +156,68 @@ export default function BlogCTA() {
       <HubSpotModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        utmCampaign="meeton-ai-blog"
+        utmCampaign={utmCampaign}
       />
       <HubSpotMeetingModal
         isOpen={isMeetingModalOpen}
         onClose={() => setIsMeetingModalOpen(false)}
-        utmCampaign="meeton-ai-blog"
+        utmCampaign={utmCampaign}
+      />
+    </>
+  )
+}
+
+export function BlogInlineCTA({ category, slug }: BlogCTAProps = {}) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const copy = (category && COPY_BY_CATEGORY[category]) || DEFAULT_COPY
+  const utmCampaign = slug ? `blog-inline-${slug}` : 'meeton-ai-blog-inline'
+
+  return (
+    <>
+      <aside
+        style={{
+          margin: '40px 0',
+          padding: '20px 24px',
+          background: 'linear-gradient(135deg, #f0fdf8 0%, #f5f3ff 100%)',
+          borderLeft: '4px solid #12a37d',
+          borderRadius: 12,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 20,
+          flexWrap: 'wrap',
+        }}
+      >
+        <div style={{ flex: '1 1 320px', minWidth: 0 }}>
+          <p style={{ fontSize: 13, fontWeight: 700, color: '#12a37d', marginBottom: 4 }}>
+            📘 関連資料 — 無料ダウンロード
+          </p>
+          <p style={{ fontSize: 14, color: '#3c4257', lineHeight: 1.6, margin: 0 }}>
+            {copy.description}
+          </p>
+        </div>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          style={{
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 700,
+            borderRadius: 8,
+            background: '#12a37d',
+            color: '#fff',
+            padding: '10px 20px',
+            fontSize: 14,
+            whiteSpace: 'nowrap',
+            transition: 'all 0.2s',
+          }}
+        >
+          {copy.primary} →
+        </button>
+      </aside>
+
+      <HubSpotModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        utmCampaign={utmCampaign}
       />
     </>
   )

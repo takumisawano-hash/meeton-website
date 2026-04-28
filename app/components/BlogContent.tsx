@@ -4,6 +4,7 @@ import type { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoi
 
 type BlogContentProps = {
   blocks: NotionBlock[]
+  inlineCTA?: React.ReactNode
 }
 
 function renderRichText(richText: RichTextItemResponse[]): React.ReactNode {
@@ -378,7 +379,7 @@ function renderBlock(block: NotionBlock): React.ReactNode {
 
 type ListGroup = { type: 'bulleted' | 'numbered'; items: React.ReactNode[] }
 
-export default function BlogContent({ blocks }: BlogContentProps) {
+export default function BlogContent({ blocks, inlineCTA }: BlogContentProps) {
   const groupedBlocks: React.ReactNode[] = []
   let currentList: ListGroup | null = null
 
@@ -415,6 +416,23 @@ export default function BlogContent({ blocks }: BlogContentProps) {
 
   flushList('list-final')
 
+  // Insert inline CTA before the next h2 boundary closest to mid-article so
+  // it doesn't break a section. Skip if the article is too short (<10 blocks).
+  let nodes: React.ReactNode[] = groupedBlocks
+  if (inlineCTA && groupedBlocks.length >= 10) {
+    const target = Math.floor(groupedBlocks.length / 2)
+    let insertAt = target
+    for (let i = target; i < groupedBlocks.length; i++) {
+      const b = blocks[i]
+      if (b && b.type === 'heading_2') { insertAt = i; break }
+    }
+    nodes = [
+      ...groupedBlocks.slice(0, insertAt),
+      <div key="inline-cta">{inlineCTA}</div>,
+      ...groupedBlocks.slice(insertAt),
+    ]
+  }
+
   return (
     <div
       style={{
@@ -422,7 +440,7 @@ export default function BlogContent({ blocks }: BlogContentProps) {
         fontFamily: 'var(--font-noto), sans-serif',
       }}
     >
-      {groupedBlocks}
+      {nodes}
     </div>
   )
 }
