@@ -185,21 +185,39 @@ function fallbackComponents(profile: UnifiedProfile, roi: RoiCalc | null, cases:
 
 function safeParseJson(text: string): unknown {
   const trimmed = text.trim()
-  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i)
-  const candidate = fenced ? fenced[1] : trimmed
+  let candidate = trimmed
+  const fencedFull = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i)
+  if (fencedFull) {
+    candidate = fencedFull[1]
+  } else if (trimmed.startsWith('```')) {
+    candidate = trimmed.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '')
+  }
   try {
     return JSON.parse(candidate)
   } catch {
     const start = candidate.indexOf('{')
-    const end = candidate.lastIndexOf('}')
-    if (start >= 0 && end > start) {
-      try {
-        return JSON.parse(candidate.slice(start, end + 1))
-      } catch {
-        return null
+    let end = candidate.lastIndexOf('}')
+    if (start < 0) return null
+    if (end <= start) {
+      let depth = 0
+      for (let i = start; i < candidate.length; i++) {
+        const ch = candidate[i]
+        if (ch === '{') depth++
+        else if (ch === '}') {
+          depth--
+          if (depth === 0) {
+            end = i
+            break
+          }
+        }
       }
+      if (end <= start) return null
     }
-    return null
+    try {
+      return JSON.parse(candidate.slice(start, end + 1))
+    } catch {
+      return null
+    }
   }
 }
 
@@ -277,7 +295,7 @@ ${SCHEMA_HINT}
     const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY })
     const response = await client.messages.create({
       model: MODEL_ID,
-      max_tokens: 2400,
+      max_tokens: 4096,
       system: [
         {
           type: 'text',
