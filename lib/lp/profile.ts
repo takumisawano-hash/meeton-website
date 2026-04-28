@@ -33,8 +33,8 @@ function deriveScoreTier(opts: {
   if (funnelStage === 'sql' || funnelStage === 'opportunity' || funnelStage === 'customer') return 'super-high'
   if (typeof intentScore === 'number') {
     if (intentScore >= 80) return 'super-high'
-    if (intentScore >= 60) return 'high'
-    if (intentScore >= 35) return 'mid'
+    if (intentScore >= 50) return 'high'
+    if (intentScore >= 25) return 'mid'
   }
   const eng = (engagementLevel || '').toLowerCase()
   if (eng === 'high' || eng === 'engaged-high') return 'high'

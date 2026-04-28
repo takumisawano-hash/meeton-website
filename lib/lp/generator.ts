@@ -198,11 +198,12 @@ ${SCHEMA_HINT}
       | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
       | null
     if (!parsed?.components?.length) return fallbackDoc(profile)
+    const cta = pickCtaForTier(profile.scoreTier, profile.funnelStage)
     return {
       visitorId: profile.visitorId,
       generatedAt: new Date().toISOString(),
       components: parsed.components,
-      primaryCta: parsed.primaryCta || pickCtaForTier(profile.scoreTier, profile.funnelStage).primary,
+      primaryCta: cta.primary,
       rationale: parsed.rationale,
     }
   } catch {
