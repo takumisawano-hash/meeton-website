@@ -469,7 +469,7 @@ export default function SecurityPageClient() {
                   ))}
                 </div>
                 <a
-                  href="https://dynameet.ai/security?downloadCenter&docId=f91ea9e9-5efa-4f2a-a29b-14dcb13928f0&page=1"
+                  href="https://dynameet.ai/?downloadCenter&docId=54a7d40d-e99d-40f2-bed2-80d64a400093&page=1"
                   rel="noreferrer"
                   style={{
                     display: 'inline-flex',
