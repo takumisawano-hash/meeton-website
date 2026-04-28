@@ -314,7 +314,7 @@ ${SCHEMA_HINT}
       | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
       | null
     if (!parsed?.components?.length) {
-      return { ...baseDoc, rationale: `[debug] parse fail. keys=${parsed ? Object.keys(parsed).join(',') : 'null'} head=${block.text.slice(0, 240)}` }
+      return { ...baseDoc, rationale: `[debug] parse fail. stop=${response.stop_reason} model=${response.model} usage_out=${response.usage?.output_tokens} text_len=${block.text.length} tail=${block.text.slice(-200)}` }
     }
     return {
       ...baseDoc,
