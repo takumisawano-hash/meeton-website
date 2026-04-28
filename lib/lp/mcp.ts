@@ -4,8 +4,10 @@ const BASE_URL = process.env.MEETON_MCP_BASE_URL || 'https://mcp.dynameet.ai'
 const API_KEY = process.env.MEETON_MCP_API_KEY || ''
 const TEAM_ID = process.env.MEETON_TEAM_ID || '70801bb6-9b39-4989-8be9-7d93076424c1'
 
-async function callTool<T = unknown>(toolName: string, params: Record<string, unknown>): Promise<T | null> {
+async function callTool<T = unknown>(toolName: string, params: Record<string, unknown>, timeoutMs = 8000): Promise<T | null> {
   if (!API_KEY) return null
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs)
   try {
     const res = await fetch(`${BASE_URL}/api/tools/${toolName}`, {
       method: 'POST',
@@ -15,11 +17,14 @@ async function callTool<T = unknown>(toolName: string, params: Record<string, un
       },
       body: JSON.stringify(params),
       cache: 'no-store',
+      signal: ctrl.signal,
     })
     if (!res.ok) return null
     return (await res.json()) as T
   } catch {
     return null
+  } finally {
+    clearTimeout(timer)
   }
 }
 
@@ -102,8 +107,12 @@ export async function fetchMcpProfile(opts: {
     }
   }
 
+  const targetVisitor = opts.visitorId || result.visitorId
+  if (!targetVisitor) {
+    return Object.keys(result).length ? result : null
+  }
   const today = new Date()
-  const startDate = new Date(today.getTime() - 7 * 86400000).toISOString().slice(0, 10)
+  const startDate = new Date(today.getTime() - 86400000).toISOString().slice(0, 10)
   const endDate = today.toISOString().slice(0, 10)
   const tl = await callTool<TimelineResponse>('export_visitor_timelines', {
     teamId: TEAM_ID,
@@ -111,8 +120,7 @@ export async function fetchMcpProfile(opts: {
     endDate,
   })
 
-  const targetVisitor = opts.visitorId || result.visitorId
-  if (targetVisitor && tl?.visitors) {
+  if (tl?.visitors) {
     const v = tl.visitors.find(vv => vv.visitorId === targetVisitor)
     if (v?.sessions?.length) {
       const pagesViewed: Record<string, number> = {}
