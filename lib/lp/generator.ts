@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { jsonrepair } from 'jsonrepair'
 import type { UnifiedProfile, LpDocument, LpComponent, ScoreTier } from './types'
 import {
   HERO_VARIANTS,
@@ -417,6 +418,15 @@ ${SCHEMA_HINT}
     } else if (typeof parsed.components === 'string') {
       const arr = safeParseArray(parsed.components)
       if (arr) components = arr as LpComponent[]
+      else {
+        try {
+          const repaired = jsonrepair(parsed.components)
+          const v = JSON.parse(repaired)
+          if (Array.isArray(v)) components = v as LpComponent[]
+        } catch {
+          // give up
+        }
+      }
     }
     if (!components || components.length === 0) {
       const cType = Array.isArray(parsed.components) ? 'arr' : typeof parsed.components
