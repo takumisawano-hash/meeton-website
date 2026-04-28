@@ -37,15 +37,17 @@ type RoiCalcShape = {
   expected: {
     meetingsPerMonth: number
     autoFollowedLeadsPerMonth: number
-    hoursSavedPerSdrPerMonth: number
+    hoursSavedPerMonth: number
+    hoursSavedAsHeadcount: number
   }
   basis: {
     engageableRate: number
     leadCvrPct: number
     meetingCvrPct: number
     boost: number
+    hoursPerMeeting: number
+    hoursPerFollowup: number
     standardSdrHoursPerMonth: number
-    sdrHoursSavedPct: number
     sourceLabel: string
   }
 }
@@ -518,12 +520,12 @@ function GeneratedLpModal({
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <StatBig label="自動獲得される商談/月" value={`${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
                 <StatBig label="AIが自動フォローするリード/月" value={`${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label="SDR1人あたり工数削減/月" value={`${roi.expected.hoursSavedPerSdrPerMonth}時間`} accent="#0eab6e" />
+                <StatBig label={`工数削減/月 (営業${roi.expected.hoursSavedAsHeadcount}人分)`} value={`${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
               </div>
               <div style={{ fontSize: 11, color: '#6b7873', marginTop: 14, lineHeight: 1.7 }}>
                 ※ {roi.basis.sourceLabel}
                 <br />※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'}
-                <br />※ AIが自動フォロー = 商談未達リードに対し AI Email/Chat が継続的に最適タイミングで再接触する分。SDR工数削減 = 標準月160h × {Math.round(roi.basis.sdrHoursSavedPct * 100)}%
+                <br />※ 工数削減 = 商談1件あたり {roi.basis.hoursPerMeeting}h(初動・調整・準備) × 商談数 + AIフォロー1件 {roi.basis.hoursPerFollowup}h × フォロー件数。営業1人 = 月 {roi.basis.standardSdrHoursPerMonth}h で換算。
               </div>
             </div>
           </section>

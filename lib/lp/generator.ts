@@ -94,7 +94,7 @@ function buildContextDigest(profile: UnifiedProfile, roi: RoiCalc | null, cases:
     lines.push(`  Meeton ai が提供する月次価値:`)
     lines.push(`    自動獲得される商談: ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 件/月`)
     lines.push(`    AI が自動フォローするリード: ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')} 件/月 (商談未達でAI Email/Chatが継続ナーチャリング)`)
-    lines.push(`    SDR 1人あたり工数削減: ${roi.expected.hoursSavedPerSdrPerMonth.toLocaleString('ja-JP')} h/月 (= ${Math.round(roi.basis.sdrHoursSavedPct * 100)}%削減)`)
+    lines.push(`    工数削減合計: ${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')} h/月 = 営業 ${roi.expected.hoursSavedAsHeadcount} 人分相当 (商談1件3h × ${roi.expected.meetingsPerMonth}件 + フォロー1件1h × ${roi.expected.autoFollowedLeadsPerMonth}件)`)
     lines.push(`  根拠: ${roi.basis.sourceLabel}`)
   } else {
     lines.push(`■ トラフィック試算: 取得できず`)
@@ -151,7 +151,7 @@ function fallbackComponents(profile: UnifiedProfile, roi: RoiCalc | null, cases:
       variant: 'default',
       copy: {
         headline: `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から Meeton ai が提供する月次価値`,
-        subline: `自動獲得される商談 ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件/月、AI が自動フォローするリード ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件/月、SDR 1人あたり ${roi.expected.hoursSavedPerSdrPerMonth}h/月の工数削減を見込みます`,
+        subline: `自動獲得される商談 ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件/月、AI が自動フォローするリード ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件/月、工数削減 ${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')}h/月 (営業 ${roi.expected.hoursSavedAsHeadcount} 人分) を見込みます`,
       },
     })
   }
