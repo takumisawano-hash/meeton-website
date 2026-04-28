@@ -366,13 +366,24 @@ ${SCHEMA_HINT}
     if (!toolUse || toolUse.type !== 'tool_use') {
       return { ...baseDoc, rationale: `[debug] no tool_use block. types=${response.content.map(c => c.type).join(',')} stop=${response.stop_reason}` }
     }
-    const parsed = toolUse.input as { rationale?: string; components?: LpComponent[] }
-    if (!parsed?.components?.length) {
-      return { ...baseDoc, rationale: `[debug] tool_use missing components. keys=${Object.keys(parsed || {}).join(',')}` }
+    const parsed = toolUse.input as { rationale?: string; components?: unknown }
+    let components: LpComponent[] | null = null
+    if (Array.isArray(parsed.components)) {
+      components = parsed.components as LpComponent[]
+    } else if (typeof parsed.components === 'string') {
+      try {
+        const reparsed = JSON.parse(parsed.components)
+        if (Array.isArray(reparsed)) components = reparsed as LpComponent[]
+      } catch {
+        // ignore
+      }
+    }
+    if (!components || components.length === 0) {
+      return { ...baseDoc, rationale: `[debug] tool_use components invalid. type=${Array.isArray(parsed.components) ? 'arr' : typeof parsed.components} keys=${Object.keys(parsed || {}).join(',')}` }
     }
     return {
       ...baseDoc,
-      components: parsed.components,
+      components,
       rationale: parsed.rationale,
     }
   } catch (e) {
