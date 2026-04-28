@@ -410,6 +410,26 @@ function DesktopFlow({
                 delay="0.6s"
                 big
               />
+              {/* Thanks-page path: visitor → thanks → calendar */}
+              <Dot
+                color={COLOR.amber}
+                dur="2.4s"
+                pathRef="mfd-path-6"
+                delay="0.15s"
+              />
+              <Dot
+                color={COLOR.amber}
+                dur="2.4s"
+                pathRef="mfd-path-8"
+                delay="0.45s"
+              />
+              {/* Chat → Thanks (dashed handoff): conversation that ends with form submission */}
+              <Dot
+                color={COLOR.amber}
+                dur="3.0s"
+                pathRef="mfd-path-7"
+                delay="1.2s"
+              />
               {/* Drop-off loop: calendar → email → calendar */}
               <Dot
                 color={COLOR.email}
@@ -433,6 +453,9 @@ function DesktopFlow({
             <path id="mfd-path-3" d={PATHS.calendarToWin} fill="none" />
             <path id="mfd-path-4" d={PATHS.calendarToEmail} fill="none" />
             <path id="mfd-path-5" d={PATHS.emailToCalendar} fill="none" />
+            <path id="mfd-path-6" d={PATHS.visitorToThanks} fill="none" />
+            <path id="mfd-path-7" d={PATHS.chatToThanks} fill="none" />
+            <path id="mfd-path-8" d={PATHS.thanksToCalendar} fill="none" />
           </defs>
         </svg>
 
