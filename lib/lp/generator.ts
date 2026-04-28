@@ -251,6 +251,50 @@ function safeParseJson(text: string): unknown {
   return safeParseJsonWithDebug(text).value
 }
 
+function safeParseArray(text: string): unknown[] | null {
+  const trimmed = text.trim()
+  try {
+    const v = JSON.parse(trimmed)
+    return Array.isArray(v) ? v : null
+  } catch {
+    // continue
+  }
+  const start = trimmed.indexOf('[')
+  if (start < 0) return null
+  let depth = 0
+  let inString = false
+  let escape = false
+  for (let i = start; i < trimmed.length; i++) {
+    const ch = trimmed[i]
+    if (escape) {
+      escape = false
+      continue
+    }
+    if (inString && ch === '\\') {
+      escape = true
+      continue
+    }
+    if (ch === '"') {
+      inString = !inString
+      continue
+    }
+    if (inString) continue
+    if (ch === '[') depth++
+    else if (ch === ']') {
+      depth--
+      if (depth === 0) {
+        try {
+          const v = JSON.parse(trimmed.slice(start, i + 1))
+          return Array.isArray(v) ? v : null
+        } catch {
+          return null
+        }
+      }
+    }
+  }
+  return null
+}
+
 export async function generateLp(profile: UnifiedProfile): Promise<LpDocument> {
   const logo = buildLogoCandidate({
     domain: profile.company.domain,
@@ -371,12 +415,8 @@ ${SCHEMA_HINT}
     if (Array.isArray(parsed.components)) {
       components = parsed.components as LpComponent[]
     } else if (typeof parsed.components === 'string') {
-      try {
-        const reparsed = JSON.parse(parsed.components)
-        if (Array.isArray(reparsed)) components = reparsed as LpComponent[]
-      } catch {
-        // ignore
-      }
+      const arr = safeParseArray(parsed.components)
+      if (arr) components = arr as LpComponent[]
     }
     if (!components || components.length === 0) {
       const cType = Array.isArray(parsed.components) ? 'arr' : typeof parsed.components
