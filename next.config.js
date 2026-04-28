@@ -29,6 +29,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'imgur.com',
+      },
     ],
     // Allow local API routes that serve thumbnails / notion image proxy
     // to be used with next/image (Next.js 16 requires explicit allowlist).
