@@ -136,9 +136,17 @@ export default function ComparisonTable() {
         <div className="slabel" style={{ textAlign: "center" }}>
           Comparison
         </div>
-        <div className="stitle" style={{ textAlign: "center" }}>
-          人間 SDR の<span style={{ color: "var(--cta)" }}>判断力</span>と
-          チャットボットの<span style={{ color: "var(--accent)" }}>稼働量</span>を、両立
+        <div
+          className="stitle"
+          style={{ textAlign: "center", wordBreak: "keep-all" }}
+        >
+          <span style={{ display: "inline-block" }}>
+            人間 SDR の<span style={{ color: "var(--cta)" }}>判断力</span>と
+          </span>
+          {" "}
+          <span style={{ display: "inline-block" }}>
+            チャットボットの<span style={{ color: "var(--accent)" }}>稼働量</span>を、両立
+          </span>
         </div>
         <p
           className="ssub"

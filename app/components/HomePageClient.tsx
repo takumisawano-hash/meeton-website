@@ -3020,12 +3020,33 @@ const STAT_COLORS = ["var(--cta)", "var(--blue)", "var(--accent)"];
 
 function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
   const [idx, setIdx] = useState(0);
-  const maxIdx = Math.max(0, items.length - 1);
-  const prev = () => setIdx((i) => Math.max(0, i - 1));
-  const next = () => setIdx((i) => Math.min(maxIdx, i + 1));
-  if (items.length === 0) return null;
+  const [paused, setPaused] = useState(false);
+  // Bumped on every manual interaction to restart the auto-rotate timer
+  const [touch, setTouch] = useState(0);
+  const len = items.length;
+  // Wrap-around so auto-rotate can loop indefinitely
+  const goto = (i: number) => {
+    setTouch((t) => t + 1);
+    setIdx(((i % len) + len) % len);
+  };
+  const prev = () => goto(idx - 1);
+  const next = () => goto(idx + 1);
+
+  useEffect(() => {
+    if (paused || len <= 1) return;
+    const id = setInterval(() => {
+      setIdx((i) => (i + 1) % len);
+    }, 6000);
+    return () => clearInterval(id);
+  }, [paused, touch, len]);
+
+  if (len === 0) return null;
   return (
-    <div className="case-carousel">
+    <div
+      className="case-carousel"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div
         className="case-track"
         style={{ transform: `translateX(-${idx * 100}%)` }}
@@ -3108,7 +3129,7 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
         ))}
       </div>
       <div className="case-arrows">
-        <button className="case-arrow" onClick={prev} disabled={idx === 0}>
+        <button className="case-arrow" onClick={prev}>
           ←
         </button>
         <span
@@ -3122,7 +3143,7 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
         >
           {idx + 1} / {items.length}
         </span>
-        <button className="case-arrow" onClick={next} disabled={idx >= maxIdx}>
+        <button className="case-arrow" onClick={next}>
           →
         </button>
       </div>
@@ -3131,7 +3152,7 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
           <div
             key={i}
             className={"case-dot" + (i === idx ? " active" : "")}
-            onClick={() => setIdx(i)}
+            onClick={() => goto(i)}
           />
         ))}
       </div>
