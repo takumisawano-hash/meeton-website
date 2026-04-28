@@ -28,7 +28,13 @@ const SYSTEM_PROMPT = `あなたはMeeton ai のAIランディングページ生
 - 事例・関連記事は提供されたリストから選ぶだけで、項目名・URL・指標は変えない
 - 個人化のガイドライン:
 ${SAFE_PERSONALIZATION_RULES}
-- 出力は JSON 1つだけ。コードブロックや解説テキストは付けない`
+
+JSON出力の厳格ルール (絶対遵守):
+- 出力は { から } までの単一 JSON オブジェクトのみ。前後の説明、コードフェンス \`\`\`、改行などすべて禁止
+- 文字列値の中ではダブルクォートを使わない。代わりに「」や全角ダブルクォート" "を使う(エスケープ忘れ防止)
+- 文字列値に改行を入れない。一文で簡潔に
+- 末尾カンマ禁止
+- 各プロパティはカンマでまっすぐ区切る`
 
 const SCHEMA_HINT = `{
   "rationale": "なぜこの構成にしたか日本語2文",
@@ -327,14 +333,18 @@ ${SCHEMA_HINT}
           cache_control: { type: 'ephemeral' },
         },
       ],
-      messages: [{ role: 'user', content: userText }],
+      messages: [
+        { role: 'user', content: userText },
+        { role: 'assistant', content: '{' },
+      ],
       metadata: { user_id: `lp-${PROMPT_CACHE_VERSION}` },
     })
     const block = response.content.find(c => c.type === 'text')
     if (!block || block.type !== 'text') {
       return { ...baseDoc, rationale: `[debug] no text block. types=${response.content.map(c => c.type).join(',')} stop=${response.stop_reason}` }
     }
-    const parseResult = safeParseJsonWithDebug(block.text)
+    const reassembled = '{' + block.text
+    const parseResult = safeParseJsonWithDebug(reassembled)
     const parsed = parseResult.value as
       | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
       | null
