@@ -333,23 +333,42 @@ ${SCHEMA_HINT}
           cache_control: { type: 'ephemeral' },
         },
       ],
-      messages: [
-        { role: 'user', content: userText },
-        { role: 'assistant', content: '{' },
+      messages: [{ role: 'user', content: userText }],
+      tools: [
+        {
+          name: 'render_lp',
+          description: '訪問者向けに個別最適化されたランディングページの構成とコピーを返す',
+          input_schema: {
+            type: 'object',
+            properties: {
+              rationale: { type: 'string', description: 'なぜこの構成にしたか日本語2文' },
+              components: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    key: { type: 'string' },
+                    variant: { type: 'string' },
+                    copy: { type: 'object', additionalProperties: true },
+                  },
+                  required: ['key', 'variant', 'copy'],
+                },
+              },
+            },
+            required: ['rationale', 'components'],
+          },
+        },
       ],
+      tool_choice: { type: 'tool', name: 'render_lp' },
       metadata: { user_id: `lp-${PROMPT_CACHE_VERSION}` },
     })
-    const block = response.content.find(c => c.type === 'text')
-    if (!block || block.type !== 'text') {
-      return { ...baseDoc, rationale: `[debug] no text block. types=${response.content.map(c => c.type).join(',')} stop=${response.stop_reason}` }
+    const toolUse = response.content.find(c => c.type === 'tool_use')
+    if (!toolUse || toolUse.type !== 'tool_use') {
+      return { ...baseDoc, rationale: `[debug] no tool_use block. types=${response.content.map(c => c.type).join(',')} stop=${response.stop_reason}` }
     }
-    const reassembled = '{' + block.text
-    const parseResult = safeParseJsonWithDebug(reassembled)
-    const parsed = parseResult.value as
-      | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
-      | null
+    const parsed = toolUse.input as { rationale?: string; components?: LpComponent[] }
     if (!parsed?.components?.length) {
-      return { ...baseDoc, rationale: `[debug] parse fail. dbg=${parseResult.debug} stop=${response.stop_reason} text_len=${block.text.length}` }
+      return { ...baseDoc, rationale: `[debug] tool_use missing components. keys=${Object.keys(parsed || {}).join(',')}` }
     }
     return {
       ...baseDoc,
