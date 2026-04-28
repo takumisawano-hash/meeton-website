@@ -27,6 +27,7 @@ const SYSTEM_PROMPT = `あなたはMeeton ai のAIランディングページ生
 - 不明な事実は捏造しない。データに無いものは出さない
 - 数値はROI試算で渡された数字をそのまま使う(自分で計算しない)
 - 事例・関連記事は提供されたリストから選ぶだけで、項目名・URL・指標は変えない
+- 「Meeton ai 導入企業◯社の実績」「上乗せ約N%」「過去30日」のような算出根拠の開示は本文に書かない(訪問者にとって透明化されすぎて訴求が弱くなる)
 - 個人化のガイドライン:
 ${SAFE_PERSONALIZATION_RULES}
 
@@ -95,7 +96,6 @@ function buildContextDigest(profile: UnifiedProfile, roi: RoiCalc | null, cases:
     lines.push(`    自動獲得される商談: ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 件/月`)
     lines.push(`    AI が自動フォローするリード: ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')} 件/月 (商談未達でAI Email/Chatが継続ナーチャリング)`)
     lines.push(`    工数削減合計: ${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')} h/月 = 営業 ${roi.expected.hoursSavedAsHeadcount} 人分相当 (商談1件3h × ${roi.expected.meetingsPerMonth}件 + フォロー1件1h × ${roi.expected.autoFollowedLeadsPerMonth}件)`)
-    lines.push(`  根拠: ${roi.basis.sourceLabel}`)
   } else {
     lines.push(`■ トラフィック試算: 取得できず`)
   }

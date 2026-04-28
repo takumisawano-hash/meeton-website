@@ -523,8 +523,7 @@ function GeneratedLpModal({
                 <StatBig label={`工数削減/月 (営業${roi.expected.hoursSavedAsHeadcount}人分)`} value={`${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
               </div>
               <div style={{ fontSize: 11, color: '#6b7873', marginTop: 14, lineHeight: 1.7 }}>
-                ※ {roi.basis.sourceLabel}
-                <br />※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'}
+                ※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'}
                 <br />※ 工数削減 = 商談1件あたり {roi.basis.hoursPerMeeting}h(初動・調整・準備) × 商談数 + AIフォロー1件 {roi.basis.hoursPerFollowup}h × フォロー件数。営業1人 = 月 {roi.basis.standardSdrHoursPerMonth}h で換算。
               </div>
             </div>
