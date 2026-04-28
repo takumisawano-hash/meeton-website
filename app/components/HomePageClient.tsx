@@ -132,9 +132,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 /* CASES */
 .case-carousel{position:relative;overflow:hidden;width:100%}
 .case-track{display:flex;gap:0;transition:transform .5s cubic-bezier(.16,1,.3,1);padding:4px 0}
-.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 36px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden;display:block}
+.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:center}
 .case-card:hover{box-shadow:0 16px 40px -16px rgba(18,163,125,.18);border-color:var(--cta);transform:translateY(-2px)}
 .case-card-link{cursor:pointer}
+.case-img{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#f3f2ed}
+.case-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.case-content{display:flex;flex-direction:column;min-width:0}
 .case-arrows{display:flex;justify-content:center;gap:14px;margin-top:28px}
 .case-arrow{width:48px;height:48px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--heading);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .case-arrow:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);box-shadow:0 6px 20px var(--cta-glow)}
@@ -306,7 +309,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .case-stats{gap:12px;flex-direction:column;align-items:center;width:100%}
   .case-stats>div{text-align:center;width:100%}
   .case-quote{padding:14px 16px;font-size:13px;line-height:1.7;box-sizing:border-box}
-  .case-card{padding:20px 16px;min-width:100%;max-width:100%;width:100%;box-sizing:border-box;overflow:hidden}
+  .case-card{padding:20px 16px;min-width:100%;max-width:100%;width:100%;box-sizing:border-box;overflow:hidden;grid-template-columns:1fr;gap:16px;align-items:stretch}
+  .case-img{aspect-ratio:16/9}
   .case-logo{font-size:16px}
   .case-industry{font-size:11px;margin-bottom:14px}
   .case-stat-v{font-size:20px}
@@ -3058,32 +3062,14 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
             className="case-card case-card-link"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            {c.heroImage && (
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "16 / 9",
-                  marginBottom: 20,
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  background: "#f3f2ed",
-                }}
-              >
-                <img
-                  src={c.heroImage}
-                  alt={c.name}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                  loading="lazy"
-                />
+            {c.heroImage ? (
+              <div className="case-img">
+                <img src={c.heroImage} alt={c.name} loading="lazy" />
               </div>
+            ) : (
+              <div className="case-img" style={{ background: "linear-gradient(135deg, #f4f6fb, #eaedfa)" }} />
             )}
+            <div className="case-content">
             <div className="case-logo">{c.name}</div>
             <div className="case-industry">{c.industry}</div>
             <div className="case-quote">{c.quote}</div>
@@ -3124,6 +3110,7 @@ function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
               }}
             >
               事例の詳細を読む <span>→</span>
+            </div>
             </div>
           </a>
         ))}
