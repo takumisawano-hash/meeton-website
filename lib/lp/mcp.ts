@@ -30,16 +30,31 @@ async function callTool<T = unknown>(toolName: string, params: Record<string, un
 
 type SearchContactsResponse = {
   contacts?: Array<{
-    id?: string
+    contactId?: string
     name?: string
+    firstName?: string
+    lastName?: string
     email?: string
     company?: string
-    engagementLevel?: string
-    intentScore?: number
-    hasMeeting?: boolean
-    conversionSource?: string
-    visitorId?: string
-    sessions?: Array<{ startedAt?: string; pageCount?: number; durationSeconds?: number }>
+    title?: string
+    department?: string
+    formSubmissionCount?: number
+    meetingCount?: number
+    latestMeetingDate?: string
+    latestConversionSource?: string
+    originalConversionSource?: string
+    latestMeetonAssisted?: number
+    meetonAssists?: { calendarClick?: number; calendarConversion?: number; chatClick?: number; chatConversion?: number }
+    engagement?: {
+      engagementScore?: number
+      totalSessions?: number
+      totalPageViews?: number
+      totalMessages?: number
+      totalSessionTime?: number
+      lastActiveDate?: string
+    }
+    persona?: { intentPrediction?: string | null; visitorPersona?: string | null }
+    visitors?: Array<{ visitorId?: string; displayName?: string | null; isRealtime?: boolean }>
   }>
 }
 
@@ -91,19 +106,20 @@ export async function fetchMcpProfile(opts: {
     })
     const top = sc?.contacts?.[0]
     if (top) {
-      result.contactId = top.id
-      result.visitorId = top.visitorId
-      result.intentScore = top.intentScore
-      result.engagementLevel = top.engagementLevel
-      result.hasMeeting = top.hasMeeting
-      result.conversionSource = top.conversionSource
-      if (top.sessions) {
-        result.recentSessions = top.sessions.map(s => ({
-          startedAt: s.startedAt,
-          pageCount: s.pageCount,
-          duration: s.durationSeconds,
-        }))
+      result.contactId = top.contactId
+      result.visitorId = top.visitors?.[0]?.visitorId
+      result.intentScore = top.engagement?.engagementScore
+      const messages = top.engagement?.totalMessages || 0
+      const sessions = top.engagement?.totalSessions || 0
+      if ((top.engagement?.engagementScore ?? 0) >= 50 || messages >= 30 || sessions >= 5) {
+        result.engagementLevel = 'high'
+      } else if ((top.engagement?.engagementScore ?? 0) >= 25 || messages >= 10 || sessions >= 2) {
+        result.engagementLevel = 'medium'
+      } else {
+        result.engagementLevel = 'low'
       }
+      result.hasMeeting = (top.meetingCount || 0) > 0
+      result.conversionSource = top.latestConversionSource || top.originalConversionSource
     }
   }
 
