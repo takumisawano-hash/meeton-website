@@ -289,13 +289,14 @@ ${SCHEMA_HINT}
       metadata: { user_id: `lp-${PROMPT_CACHE_VERSION}` },
     })
     const block = response.content.find(c => c.type === 'text')
-    if (!block || block.type !== 'text') return baseDoc
+    if (!block || block.type !== 'text') {
+      return { ...baseDoc, rationale: `[debug] no text block. types=${response.content.map(c => c.type).join(',')} stop=${response.stop_reason}` }
+    }
     const parsed = safeParseJson(block.text) as
       | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
       | null
     if (!parsed?.components?.length) {
-      console.error('[lp-generate] LLM returned no components, using fallback')
-      return baseDoc
+      return { ...baseDoc, rationale: `[debug] parse fail. keys=${parsed ? Object.keys(parsed).join(',') : 'null'} head=${block.text.slice(0, 240)}` }
     }
     return {
       ...baseDoc,
