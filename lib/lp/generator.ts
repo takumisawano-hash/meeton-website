@@ -379,7 +379,9 @@ ${SCHEMA_HINT}
       }
     }
     if (!components || components.length === 0) {
-      return { ...baseDoc, rationale: `[debug] tool_use components invalid. type=${Array.isArray(parsed.components) ? 'arr' : typeof parsed.components} keys=${Object.keys(parsed || {}).join(',')}` }
+      const cType = Array.isArray(parsed.components) ? 'arr' : typeof parsed.components
+      const sample = typeof parsed.components === 'string' ? parsed.components.slice(0, 240) : JSON.stringify(parsed.components).slice(0, 240)
+      return { ...baseDoc, rationale: `[debug] tool_use components invalid. type=${cType} sample=${sample}` }
     }
     return {
       ...baseDoc,
