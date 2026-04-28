@@ -30,12 +30,20 @@ type LpComponentRender = {
 
 type RoiCalcShape = {
   monthlyVisits: number
+  monthlyEngageable: number
   trafficSource: string
   confidence: 'high' | 'medium' | 'low'
-  baseline: { leadsPerMonth: number; leadCvrPct: number; meetingsPerMonth: number; meetingCvrPct: number; sdrHoursPerMonth: number }
-  withMeetonAi: { leadsPerMonth: number; leadCvrPct: number; meetingsPerMonth: number; meetingCvrPct: number; sdrHoursPerMonth: number }
-  uplift: { addLeadsPerMonth: number; addMeetingsPerMonth: number; sdrHoursSaved: number; leadCvrLiftPct: number; meetingCvrLiftPct: number }
-  assumptions: { industry?: string; employees?: string; sdrHeadcount: number }
+  trancoRank?: number
+  expected: { leadsPerMonth: number; meetingsPerMonth: number; sdrHoursSavedPerMonth: number }
+  basis: {
+    engageableRate: number
+    leadCvrPct: number
+    meetingCvrPct: number
+    boost: number
+    sdrHeadcount: number
+    sdrHoursSavedPct: number
+    sourceLabel: string
+  }
 }
 
 type CaseHitShape = {
@@ -495,50 +503,22 @@ function GeneratedLpModal({
           <section style={{ padding: 'clamp(8px, 2vw, 24px) clamp(24px, 5vw, 56px) clamp(28px, 4vw, 40px)' }}>
             <div style={{ background: '#fff', border: '1px solid #e4e3dd', borderRadius: 14, padding: 'clamp(20px, 3vw, 28px)' }}>
               <div style={{ fontSize: 11, letterSpacing: '0.1em', color: '#065f46', textTransform: 'uppercase', marginBottom: 8 }}>
-                ▸ 貴社想定インパクト ({roi.confidence === 'high' ? '実トラフィックベース' : '業種・規模ベース推定'})
+                ▸ Meeton ai 導入後の見込み
               </div>
-              <h2 style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.35, margin: '0 0 18px' }}>
-                {copyOf(trafficRoiComp, 'headline') || `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から見える伸びしろ`}
+              <h2 style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.35, margin: '0 0 6px' }}>
+                {copyOf(trafficRoiComp, 'headline') || `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から想定される効果`}
               </h2>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <StatBig label="リード/月" value={`+${roi.uplift.addLeadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label="商談/月" value={`+${roi.uplift.addMeetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label="SDR工数削減/月" value={`-${roi.uplift.sdrHoursSaved.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
+              <div style={{ fontSize: 13, color: '#3d4a44', margin: '0 0 18px' }}>
+                月間訪問数 {roi.monthlyVisits.toLocaleString('ja-JP')} → 有能訪問者 {roi.monthlyEngageable.toLocaleString('ja-JP')}({Math.round(roi.basis.engageableRate * 100)}%)
               </div>
-              <table style={{ width: '100%', marginTop: 18, borderCollapse: 'collapse', fontSize: 13 }}>
-                <thead>
-                  <tr style={{ color: '#6b7873', textAlign: 'left' }}>
-                    <th style={{ padding: '8px 6px', fontWeight: 600 }}></th>
-                    <th style={{ padding: '8px 6px', fontWeight: 600 }}>現状</th>
-                    <th style={{ padding: '8px 6px', fontWeight: 600, color: '#0eab6e' }}>Meeton ai 導入後</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
-                    <td style={{ padding: '8px 6px' }}>月間訪問数</td>
-                    <td style={{ padding: '8px 6px' }} colSpan={2}>{roi.monthlyVisits.toLocaleString('ja-JP')}</td>
-                  </tr>
-                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
-                    <td style={{ padding: '8px 6px' }}>リード化CVR</td>
-                    <td style={{ padding: '8px 6px' }}>{roi.baseline.leadCvrPct}% ({roi.baseline.leadsPerMonth}件)</td>
-                    <td style={{ padding: '8px 6px', color: '#0eab6e', fontWeight: 700 }}>{roi.withMeetonAi.leadCvrPct}% ({roi.withMeetonAi.leadsPerMonth}件)</td>
-                  </tr>
-                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
-                    <td style={{ padding: '8px 6px' }}>商談化CVR</td>
-                    <td style={{ padding: '8px 6px' }}>{roi.baseline.meetingCvrPct}% ({roi.baseline.meetingsPerMonth}件)</td>
-                    <td style={{ padding: '8px 6px', color: '#0eab6e', fontWeight: 700 }}>{roi.withMeetonAi.meetingCvrPct}% ({roi.withMeetonAi.meetingsPerMonth}件)</td>
-                  </tr>
-                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
-                    <td style={{ padding: '8px 6px' }}>SDR工数 (推定{roi.assumptions.sdrHeadcount}名)</td>
-                    <td style={{ padding: '8px 6px' }}>{roi.baseline.sdrHoursPerMonth}h / 月</td>
-                    <td style={{ padding: '8px 6px', color: '#0eab6e', fontWeight: 700 }}>{roi.withMeetonAi.sdrHoursPerMonth}h / 月</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div style={{ fontSize: 11, color: '#6b7873', marginTop: 12, lineHeight: 1.6 }}>
-                {roi.confidence === 'high'
-                  ? '※ SimilarWeb実データを参照し、業種別ベンチマークから導入後の数字を試算しています。'
-                  : '※ 業種・従業員規模ベースのベンチマーク値での推定です。実トラフィック値はデモ時に詳細試算します。'}
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <StatBig label="リード/月" value={`${roi.expected.leadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
+                <StatBig label="商談/月" value={`${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
+                <StatBig label="SDR工数削減/月" value={`${roi.expected.sdrHoursSavedPerMonth.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
+              </div>
+              <div style={{ fontSize: 11, color: '#6b7873', marginTop: 14, lineHeight: 1.7 }}>
+                ※ {roi.basis.sourceLabel}
+                <br />※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'} / SDR推定 {roi.basis.sdrHeadcount}名
               </div>
             </div>
           </section>

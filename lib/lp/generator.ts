@@ -89,13 +89,15 @@ function buildContextDigest(profile: UnifiedProfile, roi: RoiCalc | null, cases:
   lines.push(`■ スコア: tier=${profile.scoreTier}, funnel=${profile.funnelStage}`)
 
   if (roi) {
-    lines.push(`■ トラフィックROI試算 (出典=${roi.trafficSource}, 信頼度=${roi.confidence}):`)
-    lines.push(`  月間訪問数: ${roi.monthlyVisits.toLocaleString('ja-JP')}`)
-    lines.push(`  現状: リード ${roi.baseline.leadsPerMonth}件/月 (CVR ${roi.baseline.leadCvrPct}%) / 商談 ${roi.baseline.meetingsPerMonth}件/月 (CVR ${roi.baseline.meetingCvrPct}%) / SDR工数 ${roi.baseline.sdrHoursPerMonth}h/月`)
-    lines.push(`  Meeton ai導入後: リード ${roi.withMeetonAi.leadsPerMonth}件/月 (CVR ${roi.withMeetonAi.leadCvrPct}%) / 商談 ${roi.withMeetonAi.meetingsPerMonth}件/月 (CVR ${roi.withMeetonAi.meetingCvrPct}%) / SDR工数 ${roi.withMeetonAi.sdrHoursPerMonth}h/月`)
-    lines.push(`  上乗せ: +${roi.uplift.addLeadsPerMonth}リード/月, +${roi.uplift.addMeetingsPerMonth}商談/月, -${roi.uplift.sdrHoursSaved}h SDR工数/月`)
+    lines.push(`■ トラフィック試算 (出典=${roi.trafficSource}, 信頼度=${roi.confidence}${roi.trancoRank ? `, Tranco rank=${roi.trancoRank}` : ''}):`)
+    lines.push(`  月間訪問数: ${roi.monthlyVisits.toLocaleString('ja-JP')} / 有能訪問者: ${roi.monthlyEngageable.toLocaleString('ja-JP')}`)
+    lines.push(`  Meeton ai 導入後の見込み:`)
+    lines.push(`    リード: ${roi.expected.leadsPerMonth.toLocaleString('ja-JP')} 件/月`)
+    lines.push(`    商談: ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 件/月`)
+    lines.push(`    SDR工数削減: ${roi.expected.sdrHoursSavedPerMonth.toLocaleString('ja-JP')} h/月 (推定SDR ${roi.basis.sdrHeadcount}名)`)
+    lines.push(`  根拠: ${roi.basis.sourceLabel}`)
   } else {
-    lines.push(`■ トラフィックROI試算: 取得できず`)
+    lines.push(`■ トラフィック試算: 取得できず`)
   }
 
   if (cases.length) {
@@ -149,7 +151,7 @@ function fallbackComponents(profile: UnifiedProfile, roi: RoiCalc | null, cases:
       variant: 'default',
       copy: {
         headline: `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から見える伸びしろ`,
-        subline: `Meeton ai導入で月+${roi.uplift.addLeadsPerMonth}リード / +${roi.uplift.addMeetingsPerMonth}商談 / SDR工数 -${roi.uplift.sdrHoursSaved}h を見込みます`,
+        subline: `Meeton ai 導入で月 ${roi.expected.leadsPerMonth.toLocaleString('ja-JP')} リード / ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 商談 / SDR工数 ${roi.expected.sdrHoursSavedPerMonth.toLocaleString('ja-JP')}h削減を見込みます`,
       },
     })
   }

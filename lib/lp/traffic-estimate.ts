@@ -1,8 +1,10 @@
+import { getTrancoRank, rankToMonthlyVisits } from './tranco'
+
 const SIMILARWEB_API_KEY = process.env.SIMILARWEB_API_KEY || ''
 
 export type TrafficEstimate = {
   monthlyVisits: number
-  source: 'similarweb' | 'industry-employee-bench' | 'fallback'
+  source: 'similarweb' | 'tranco-rank' | 'industry-employee-bench' | 'fallback'
   confidence: 'high' | 'medium' | 'low'
   details?: {
     rank?: number
@@ -67,6 +69,17 @@ async function fromSimilarWeb(domain: string): Promise<TrafficEstimate | null> {
   }
 }
 
+async function fromTranco(domain: string): Promise<TrafficEstimate | null> {
+  const rank = await getTrancoRank(domain)
+  if (!rank) return null
+  return {
+    monthlyVisits: rankToMonthlyVisits(rank),
+    source: 'tranco-rank',
+    confidence: 'medium',
+    details: { rank },
+  }
+}
+
 export async function estimateTraffic(opts: {
   domain?: string
   industry?: string
@@ -75,6 +88,8 @@ export async function estimateTraffic(opts: {
   if (opts.domain) {
     const sw = await fromSimilarWeb(opts.domain)
     if (sw) return sw
+    const tr = await fromTranco(opts.domain)
+    if (tr) return tr
   }
   const visits = fromBenchmark(opts.industry, opts.employees)
   return {
