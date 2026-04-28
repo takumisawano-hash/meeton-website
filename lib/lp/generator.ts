@@ -303,7 +303,8 @@ ${SCHEMA_HINT}
       rationale: parsed.rationale,
     }
   } catch (e) {
-    console.error('[lp-generate] LLM error:', (e as Error)?.message || e)
-    return baseDoc
+    const msg = (e as Error)?.message || String(e)
+    console.error('[lp-generate] LLM error:', msg)
+    return { ...baseDoc, rationale: `[debug] LLM error: ${msg.slice(0, 300)}` }
   }
 }
