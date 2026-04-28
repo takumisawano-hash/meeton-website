@@ -7,7 +7,19 @@
 
 type Score = "yes" | "partial" | "no";
 
-const ROWS: { label: string; human: Score; chatbot: Score; meeton: Score; humanNote?: string; chatbotNote?: string; meetonNote?: string }[] = [
+type Row = {
+  label: string;
+  human: Score;
+  chatbot: Score;
+  meeton: Score;
+  humanNote?: string;
+  chatbotNote?: string;
+  meetonNote?: string;
+  /** Highlight badge under the Meeton check (feature attribution) */
+  meetonBadge?: string;
+};
+
+const ROWS: Row[] = [
   {
     label: "24 時間 365 日 稼働",
     human: "no",
@@ -42,11 +54,20 @@ const ROWS: { label: string; human: Score; chatbot: Score; meeton: Score; humanN
     meeton: "yes",
   },
   {
+    label: "相手の関心に合う資料を自動提案",
+    human: "partial",
+    chatbot: "no",
+    meeton: "yes",
+    humanNote: "手動 / 属人的",
+    meetonBadge: "AI Chat が閲覧から自動マッチング",
+  },
+  {
     label: "離脱リードへの自動フォロー",
     human: "no",
     chatbot: "no",
     meeton: "yes",
     humanNote: "44% が 1 回で諦める",
+    meetonBadge: "AI Email が自動送信",
   },
   {
     label: "ページ文脈に応じた声かけ",
@@ -162,6 +183,9 @@ export default function ComparisonTable() {
                 </div>
                 <div className="comp-cell comp-meeton">
                   {ICON[r.meeton]}
+                  {r.meetonBadge && (
+                    <div className="comp-badge">{r.meetonBadge}</div>
+                  )}
                   {r.meetonNote && <div className="comp-note">{r.meetonNote}</div>}
                 </div>
               </div>
@@ -246,6 +270,20 @@ export default function ComparisonTable() {
           font-size: 10px;
           color: #82897f;
           line-height: 1.3;
+        }
+        .comp-badge {
+          margin-top: 6px;
+          display: inline-block;
+          padding: 4px 10px;
+          font-size: 10.5px;
+          font-weight: 800;
+          color: #065f46;
+          background: linear-gradient(135deg, rgba(18, 163, 125, 0.18), rgba(18, 163, 125, 0.08));
+          border: 1px solid rgba(18, 163, 125, 0.28);
+          border-radius: 999px;
+          letter-spacing: 0.02em;
+          line-height: 1.2;
+          white-space: nowrap;
         }
       `}</style>
     </section>
