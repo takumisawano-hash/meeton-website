@@ -3,10 +3,9 @@
 import {
   AnimatePresence,
   motion,
-  useInView,
   useReducedMotion,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 /**
  * Meeton ai セールスフロー — animated funnel diagram.
@@ -85,17 +84,11 @@ const PATHS = {
 export default function MeetingFlowDiagram() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const inView = useInView(sectionRef, { once: true, amount: 0.3 });
-  const animActive = inView && !reduce;
-  // After the sequence finishes, start the pacing dots
-  const [dotsActive, setDotsActive] = useState(false);
-  useEffect(() => {
-    if (animActive) {
-      const t = setTimeout(() => setDotsActive(true), 3600);
-      return () => clearTimeout(t);
-    }
-    if (reduce && inView) setDotsActive(false);
-  }, [animActive, reduce, inView]);
+  // The chart should be fully visible from page load — no scroll-triggered
+  // reveal (users were skipping past the slow staggered reveal). Static
+  // everything immediately, only pacing dots animate continuously.
+  const animActive = !reduce;
+  const dotsActive = !reduce;
 
   return (
     <section
@@ -370,7 +363,7 @@ function DesktopFlow({
           <PathLabel
             text="予約完了"
             x={N.calendar.cx - 130}
-            y={605}
+            y={575}
             visible={active || reduce}
             delay={D.calendarBranches + 0.2}
             color={COLOR.win}
@@ -378,7 +371,7 @@ function DesktopFlow({
           <PathLabel
             text="離脱"
             x={N.calendar.cx + 130}
-            y={605}
+            y={575}
             visible={active || reduce}
             delay={D.calendarBranches + 0.2}
             color={COLOR.email}
@@ -462,9 +455,6 @@ function DesktopFlow({
         {/* Cards positioned absolutely over the SVG */}
         <Card
           node={N.visitor}
-          variants={fadeUp}
-          custom={D.visitor}
-          state={show("show")}
           tone="muted"
           label="STEP 0"
           title="Website 訪問者"
@@ -473,20 +463,15 @@ function DesktopFlow({
         />
         <Card
           node={N.chat}
-          variants={fadeUp}
-          custom={D.chatThanks}
-          state={show("show")}
           tone="chat"
           label="① AI CHAT"
           title="訪問者と対話・関心醸成"
           sub="閲覧に合わせて関連資料を自動提案"
           icon="chat"
+          meeton
         />
         <Card
           node={N.thanks}
-          variants={fadeUp}
-          custom={D.chatThanks + 0.05}
-          state={show("show")}
           tone="amber"
           label="THANKS PAGE"
           title="サンクスページ"
@@ -495,21 +480,16 @@ function DesktopFlow({
         />
         <Card
           node={N.calendar}
-          variants={fadeUp}
-          custom={D.calendar}
-          state={show("show")}
           tone="calendar"
           label="② AI CALENDAR"
           title="商談予約まで完結"
           sub="チャット内・サンクスページ・メール経由で発動 / 割り振りルールを細かく設定可能"
           icon="calendar"
           hub
+          meeton
         />
         <Card
           node={N.win}
-          variants={fadeUp}
-          custom={D.outcomes}
-          state={show("show")}
           tone="win"
           label="OUTCOME"
           title="✓ サイト内で商談獲得"
@@ -518,14 +498,12 @@ function DesktopFlow({
         />
         <Card
           node={N.email}
-          variants={fadeUp}
-          custom={D.outcomes + 0.05}
-          state={show("show")}
           tone="email"
           label="③ AI EMAIL"
           title="離脱リードを再アプローチ"
           sub="カスタムメールでフォロー＆カレンダーURL自動挿入"
           icon="mail"
+          meeton
         />
       </div>
 
@@ -567,26 +545,26 @@ const TONE_COLOR: Record<Tone, string> = {
 
 function Card({
   node,
-  state,
-  custom,
-  variants,
   tone,
   label,
   title,
   sub,
   icon,
   hub = false,
+  meeton = false,
 }: {
   node: { cx: number; cy: number; w: number; h: number };
-  state: "hidden" | "show";
-  custom: number;
-  variants: typeof fadeUp;
+  state?: "hidden" | "show";
+  custom?: number;
+  variants?: typeof fadeUp;
   tone: Tone;
   label: string;
   title: string;
   sub: string;
   icon: IconName;
   hub?: boolean;
+  /** Mark this card as a Meeton ai product (Chat / Calendar / Email) — adds badge + stronger styling */
+  meeton?: boolean;
 }) {
   const c = TONE_COLOR[tone];
   // viewBox is 1000 wide. translate node coords into % of svg width/height (760 tall).
@@ -597,10 +575,8 @@ function Card({
 
   return (
     <motion.div
-      initial="hidden"
-      animate={state}
-      variants={variants}
-      custom={custom}
+      initial={false}
+      animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.03 }}
       transition={{ scale: { type: "spring", stiffness: 320, damping: 22 } }}
       style={{
@@ -609,13 +585,17 @@ function Card({
         top: `${top}%`,
         width: `${widthPct}%`,
         height: `${heightPct}%`,
-        background: "#fff",
-        border: `1.5px solid ${tone === "muted" ? COLOR.visitorBorder : c + "55"}`,
+        background: meeton ? `linear-gradient(180deg, #fff 0%, ${c}0a 100%)` : "#fff",
+        border: meeton
+          ? `2px solid ${c}`
+          : `1.5px solid ${tone === "muted" ? COLOR.visitorBorder : c + "55"}`,
         borderRadius: hub ? 20 : 14,
         boxShadow: hub
-          ? `0 16px 40px -16px ${c}66, 0 0 0 1px ${c}22 inset`
+          ? `0 20px 48px -14px ${c}80, 0 0 0 2px ${c}30 inset`
+          : meeton
+          ? `0 14px 36px -12px ${c}66, 0 0 0 1.5px ${c}25 inset`
           : `0 6px 20px -10px ${c}44, 0 1px 0 #fff inset`,
-        padding: hub ? "16px 20px" : "12px 16px",
+        padding: hub ? "18px 20px 14px" : meeton ? "14px 16px 12px" : "12px 16px",
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
@@ -626,6 +606,27 @@ function Card({
         boxSizing: "border-box",
       }}
     >
+      {meeton && (
+        <div
+          style={{
+            position: "absolute",
+            top: -10,
+            right: 14,
+            background: `linear-gradient(135deg, ${c}, ${c}d8)`,
+            color: "#fff",
+            fontSize: 9,
+            fontWeight: 800,
+            letterSpacing: "0.12em",
+            padding: "3px 9px",
+            borderRadius: 999,
+            boxShadow: `0 4px 12px ${c}66, 0 0 0 1.5px #fff`,
+            fontFamily: "var(--fm), ui-monospace, monospace",
+            whiteSpace: "nowrap",
+          }}
+        >
+          MEETON AI
+        </div>
+      )}
       <div
         style={{
           display: "flex",
@@ -770,18 +771,8 @@ function Connector({
       strokeLinecap="round"
       strokeDasharray={dashed ? "6 6" : undefined}
       markerEnd={marker}
-      initial={reduce ? false : { pathLength: 0, opacity: 0 }}
-      animate={
-        reduce
-          ? { pathLength: 1, opacity: 1 }
-          : visible
-          ? { pathLength: 1, opacity: 1 }
-          : { pathLength: 0, opacity: 0 }
-      }
-      transition={{
-        pathLength: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
-        opacity: { duration: 0.2, delay },
-      }}
+      initial={false}
+      animate={{ pathLength: 1, opacity: 1 }}
     />
   );
 }
@@ -805,9 +796,8 @@ function PathLabel({
 }) {
   return (
     <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: visible ? 1 : 0 }}
-      transition={{ duration: 0.4, delay }}
+      initial={false}
+      animate={{ opacity: 1 }}
     >
       <text
         x={x}
@@ -875,11 +865,11 @@ function MobileFlow({
 }) {
   const items = [
     { tone: "muted" as const, label: "STEP 0", title: "Website 訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
-    { tone: "chat" as const, label: "① AI CHAT", title: "訪問者と対話・関心醸成", sub: "閲覧に合わせて関連資料を自動提案", icon: "chat" as const },
+    { tone: "chat" as const, label: "① AI CHAT", title: "訪問者と対話・関心醸成", sub: "閲覧に合わせて関連資料を自動提案", icon: "chat" as const, meeton: true },
     { tone: "amber" as const, label: "THANKS PAGE", title: "サンクスページ", sub: "フォーム送信直後の高関心を捕捉", icon: "thanks" as const, branchNote: "AI Chat 経由 / フォーム送信直後 どちらからも到達" },
-    { tone: "calendar" as const, label: "② AI CALENDAR", title: "商談予約まで完結", sub: "チャット内・サンクスページ・メール経由で発動 / 割り振りルール設定可能", icon: "calendar" as const, hub: true },
+    { tone: "calendar" as const, label: "② AI CALENDAR", title: "商談予約まで完結", sub: "チャット内・サンクスページ・メール経由で発動 / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
     { tone: "win" as const, label: "OUTCOME", title: "✓ サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
-    { tone: "email" as const, label: "③ AI EMAIL", title: "離脱リードを再アプローチ", sub: "カスタムメール → AI Calendar に戻す", icon: "mail" as const, branchNote: "離脱した場合のみ。② に戻り商談獲得へ" },
+    { tone: "email" as const, label: "③ AI EMAIL", title: "離脱リードを再アプローチ", sub: "カスタムメール → AI Calendar に戻す", icon: "mail" as const, meeton: true },
   ];
 
   return (
@@ -918,10 +908,8 @@ function MobileNode({
   icon,
   hub,
   branchNote,
-  delay,
-  state,
   isLast,
-  reduce,
+  meeton = false,
 }: {
   tone: Tone;
   label: string;
@@ -930,32 +918,52 @@ function MobileNode({
   icon: IconName;
   hub?: boolean;
   branchNote?: string;
-  delay: number;
-  state: "hidden" | "show";
+  delay?: number;
+  state?: "hidden" | "show";
   isLast: boolean;
-  reduce: boolean;
+  reduce?: boolean;
+  meeton?: boolean;
 }) {
   const c = TONE_COLOR[tone];
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "stretch" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "stretch", position: "relative" }}>
+      {meeton && (
+        <div
+          style={{
+            position: "absolute",
+            top: -8,
+            right: 12,
+            background: `linear-gradient(135deg, ${c}, ${c}d8)`,
+            color: "#fff",
+            fontSize: 9,
+            fontWeight: 800,
+            letterSpacing: "0.12em",
+            padding: "3px 9px",
+            borderRadius: 999,
+            boxShadow: `0 4px 12px ${c}66, 0 0 0 1.5px #fff`,
+            fontFamily: "var(--fm), ui-monospace, monospace",
+            whiteSpace: "nowrap",
+            zIndex: 2,
+          }}
+        >
+          MEETON AI
+        </div>
+      )}
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 14 }}
-        animate={
-          reduce
-            ? { opacity: 1, y: 0 }
-            : state === "show"
-            ? { opacity: 1, y: 0 }
-            : { opacity: 0, y: 14 }
-        }
-        transition={{ duration: 0.4, delay }}
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.02 }}
         style={{
-          background: "#fff",
-          border: `1.5px solid ${tone === "muted" ? COLOR.visitorBorder : c + "55"}`,
+          background: meeton ? `linear-gradient(180deg, #fff 0%, ${c}0a 100%)` : "#fff",
+          border: meeton
+            ? `2px solid ${c}`
+            : `1.5px solid ${tone === "muted" ? COLOR.visitorBorder : c + "55"}`,
           borderRadius: hub ? 18 : 14,
           padding: "16px 18px",
           boxShadow: hub
-            ? `0 14px 32px -16px ${c}55, 0 0 0 1px ${c}22 inset`
+            ? `0 16px 36px -14px ${c}66, 0 0 0 1.5px ${c}25 inset`
+            : meeton
+            ? `0 12px 28px -10px ${c}55, 0 0 0 1.2px ${c}25 inset`
             : `0 6px 18px -10px ${c}44`,
         }}
       >
