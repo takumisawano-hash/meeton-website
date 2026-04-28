@@ -181,15 +181,15 @@ export default function ComparisonTable() {
             {ROWS.map((r, i) => (
               <div className="comp-row" key={i}>
                 <div className="comp-cell comp-label">{r.label}</div>
-                <div className="comp-cell">
+                <div className="comp-cell" data-provider="人間 SDR">
                   {ICON[r.human]}
                   {r.humanNote && <div className="comp-note">{r.humanNote}</div>}
                 </div>
-                <div className="comp-cell">
+                <div className="comp-cell" data-provider="従来チャットボット">
                   {ICON[r.chatbot]}
                   {r.chatbotNote && <div className="comp-note">{r.chatbotNote}</div>}
                 </div>
-                <div className="comp-cell comp-meeton">
+                <div className="comp-cell comp-meeton" data-provider="Meeton ai">
                   {ICON[r.meeton]}
                   {r.meetonBadge && (
                     <div className="comp-badge">{r.meetonBadge}</div>
@@ -292,6 +292,90 @@ export default function ComparisonTable() {
           letter-spacing: 0.02em;
           line-height: 1.2;
           white-space: nowrap;
+        }
+        /* Mobile: stack each row as a card with per-provider sub-rows */
+        @media (max-width: 760px) {
+          .comp-wrap {
+            overflow-x: visible;
+          }
+          .comp-table {
+            min-width: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+          }
+          .comp-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #fafaf7;
+            border: 1px solid #e4e3dd;
+            border-radius: 16px;
+            padding: 16px 14px;
+          }
+          .comp-row + .comp-row {
+            border-top: 1px solid #e4e3dd;
+          }
+          .comp-head {
+            display: none;
+          }
+          .comp-cell {
+            padding: 10px 12px;
+            text-align: left;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            background: #ffffff;
+            border: 1px solid #ececec;
+            border-radius: 10px;
+            flex-wrap: wrap;
+          }
+          .comp-cell::before {
+            content: attr(data-provider);
+            font-family: var(--fm), ui-monospace, monospace;
+            font-size: 10px;
+            font-weight: 800;
+            color: #82897f;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            min-width: 88px;
+            flex-shrink: 0;
+          }
+          .comp-label {
+            background: transparent;
+            border: none;
+            padding: 0 4px 6px;
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f1128;
+            text-align: left;
+            align-items: flex-start !important;
+          }
+          .comp-label::before {
+            content: none;
+          }
+          .comp-meeton {
+            background: linear-gradient(180deg, rgba(18, 163, 125, 0.06), rgba(18, 163, 125, 0.02));
+            border-color: rgba(18, 163, 125, 0.25);
+          }
+          .comp-meeton::before {
+            color: #065f46;
+          }
+          .comp-note {
+            margin-left: auto;
+            font-size: 11px;
+            text-align: right;
+          }
+          .comp-badge {
+            margin-top: 0;
+            margin-left: auto;
+            white-space: normal;
+          }
         }
       `}</style>
     </section>
