@@ -183,20 +183,24 @@ function fallbackComponents(profile: UnifiedProfile, roi: RoiCalc | null, cases:
   return components
 }
 
-function safeParseJson(text: string): unknown {
+type ParseResult = { value: unknown; debug: string }
+
+function safeParseJsonWithDebug(text: string): ParseResult {
   const trimmed = text.trim()
   try {
-    return JSON.parse(trimmed)
-  } catch {
+    return { value: JSON.parse(trimmed), debug: 'direct' }
+  } catch (e1) {
     // continue
   }
   let cleaned = trimmed
+  let cleanedDbg = 'no-fence'
   if (cleaned.startsWith('```')) {
     cleaned = cleaned.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '')
+    cleanedDbg = `fence-stripped len=${cleaned.length} tail="${cleaned.slice(-30)}"`
     try {
-      return JSON.parse(cleaned)
-    } catch {
-      // continue
+      return { value: JSON.parse(cleaned), debug: 'cleaned-direct' }
+    } catch (e2) {
+      cleanedDbg += ` parse_err=${(e2 as Error).message.slice(0, 80)}`
     }
   }
   for (const src of [cleaned, trimmed]) {
@@ -225,16 +229,20 @@ function safeParseJson(text: string): unknown {
         depth--
         if (depth === 0) {
           try {
-            return JSON.parse(src.slice(start, i + 1))
-          } catch {
-            // try next source
+            return { value: JSON.parse(src.slice(start, i + 1)), debug: `depth-extract src_len=${src.length} extract_len=${i + 1 - start}` }
+          } catch (e3) {
+            cleanedDbg += ` depth_err=${(e3 as Error).message.slice(0, 80)}`
           }
           break
         }
       }
     }
   }
-  return null
+  return { value: null, debug: cleanedDbg }
+}
+
+function safeParseJson(text: string): unknown {
+  return safeParseJsonWithDebug(text).value
 }
 
 export async function generateLp(profile: UnifiedProfile): Promise<LpDocument> {
@@ -326,11 +334,12 @@ ${SCHEMA_HINT}
     if (!block || block.type !== 'text') {
       return { ...baseDoc, rationale: `[debug] no text block. types=${response.content.map(c => c.type).join(',')} stop=${response.stop_reason}` }
     }
-    const parsed = safeParseJson(block.text) as
+    const parseResult = safeParseJsonWithDebug(block.text)
+    const parsed = parseResult.value as
       | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
       | null
     if (!parsed?.components?.length) {
-      return { ...baseDoc, rationale: `[debug] parse fail. stop=${response.stop_reason} model=${response.model} usage_out=${response.usage?.output_tokens} text_len=${block.text.length} tail=${block.text.slice(-200)}` }
+      return { ...baseDoc, rationale: `[debug] parse fail. dbg=${parseResult.debug} stop=${response.stop_reason} text_len=${block.text.length}` }
     }
     return {
       ...baseDoc,
