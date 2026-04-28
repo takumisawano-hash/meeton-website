@@ -295,7 +295,7 @@ ${SCHEMA_HINT}
     const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY })
     const response = await client.messages.create({
       model: MODEL_ID,
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: [
         {
           type: 'text',
