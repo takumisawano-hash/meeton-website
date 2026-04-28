@@ -293,13 +293,17 @@ ${SCHEMA_HINT}
     const parsed = safeParseJson(block.text) as
       | { primaryCta?: 'demo' | 'document' | 'chat'; rationale?: string; components?: LpComponent[] }
       | null
-    if (!parsed?.components?.length) return baseDoc
+    if (!parsed?.components?.length) {
+      console.error('[lp-generate] LLM returned no components, using fallback')
+      return baseDoc
+    }
     return {
       ...baseDoc,
       components: parsed.components,
       rationale: parsed.rationale,
     }
-  } catch {
+  } catch (e) {
+    console.error('[lp-generate] LLM error:', (e as Error)?.message || e)
     return baseDoc
   }
 }
