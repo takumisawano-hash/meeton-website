@@ -91,10 +91,10 @@ function buildContextDigest(profile: UnifiedProfile, roi: RoiCalc | null, cases:
   if (roi) {
     lines.push(`■ トラフィック試算 (出典=${roi.trafficSource}, 信頼度=${roi.confidence}${roi.trancoRank ? `, Tranco rank=${roi.trancoRank}` : ''}):`)
     lines.push(`  月間訪問数: ${roi.monthlyVisits.toLocaleString('ja-JP')} / 有能訪問者: ${roi.monthlyEngageable.toLocaleString('ja-JP')}`)
-    lines.push(`  Meeton ai 導入後の見込み:`)
-    lines.push(`    リード: ${roi.expected.leadsPerMonth.toLocaleString('ja-JP')} 件/月`)
-    lines.push(`    商談: ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 件/月`)
-    lines.push(`    SDR工数削減: ${roi.expected.sdrHoursSavedPerMonth.toLocaleString('ja-JP')} h/月 (推定SDR ${roi.basis.sdrHeadcount}名)`)
+    lines.push(`  Meeton ai が提供する月次価値:`)
+    lines.push(`    自動獲得される商談: ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 件/月`)
+    lines.push(`    AI が自動フォローするリード: ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')} 件/月 (商談未達でAI Email/Chatが継続ナーチャリング)`)
+    lines.push(`    SDR 1人あたり工数削減: ${roi.expected.hoursSavedPerSdrPerMonth.toLocaleString('ja-JP')} h/月 (= ${Math.round(roi.basis.sdrHoursSavedPct * 100)}%削減)`)
     lines.push(`  根拠: ${roi.basis.sourceLabel}`)
   } else {
     lines.push(`■ トラフィック試算: 取得できず`)
@@ -150,8 +150,8 @@ function fallbackComponents(profile: UnifiedProfile, roi: RoiCalc | null, cases:
       key: 'traffic_roi',
       variant: 'default',
       copy: {
-        headline: `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から見える伸びしろ`,
-        subline: `Meeton ai 導入で月 ${roi.expected.leadsPerMonth.toLocaleString('ja-JP')} リード / ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 商談 / SDR工数 ${roi.expected.sdrHoursSavedPerMonth.toLocaleString('ja-JP')}h削減を見込みます`,
+        headline: `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から Meeton ai が提供する月次価値`,
+        subline: `自動獲得される商談 ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件/月、AI が自動フォローするリード ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件/月、SDR 1人あたり ${roi.expected.hoursSavedPerSdrPerMonth}h/月の工数削減を見込みます`,
       },
     })
   }

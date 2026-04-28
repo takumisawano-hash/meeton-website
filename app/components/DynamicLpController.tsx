@@ -34,13 +34,17 @@ type RoiCalcShape = {
   trafficSource: string
   confidence: 'high' | 'medium' | 'low'
   trancoRank?: number
-  expected: { leadsPerMonth: number; meetingsPerMonth: number; sdrHoursSavedPerMonth: number }
+  expected: {
+    meetingsPerMonth: number
+    autoFollowedLeadsPerMonth: number
+    hoursSavedPerSdrPerMonth: number
+  }
   basis: {
     engageableRate: number
     leadCvrPct: number
     meetingCvrPct: number
     boost: number
-    sdrHeadcount: number
+    standardSdrHoursPerMonth: number
     sdrHoursSavedPct: number
     sourceLabel: string
   }
@@ -512,13 +516,14 @@ function GeneratedLpModal({
                 月間訪問数 {roi.monthlyVisits.toLocaleString('ja-JP')} → 有能訪問者 {roi.monthlyEngageable.toLocaleString('ja-JP')}({Math.round(roi.basis.engageableRate * 100)}%)
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <StatBig label="リード/月" value={`${roi.expected.leadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label="商談/月" value={`${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label="SDR工数削減/月" value={`${roi.expected.sdrHoursSavedPerMonth.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
+                <StatBig label="自動獲得される商談/月" value={`${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
+                <StatBig label="AIが自動フォローするリード/月" value={`${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
+                <StatBig label="SDR1人あたり工数削減/月" value={`${roi.expected.hoursSavedPerSdrPerMonth}時間`} accent="#0eab6e" />
               </div>
               <div style={{ fontSize: 11, color: '#6b7873', marginTop: 14, lineHeight: 1.7 }}>
                 ※ {roi.basis.sourceLabel}
-                <br />※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'} / SDR推定 {roi.basis.sdrHeadcount}名
+                <br />※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'}
+                <br />※ AIが自動フォロー = 商談未達リードに対し AI Email/Chat が継続的に最適タイミングで再接触する分。SDR工数削減 = 標準月160h × {Math.round(roi.basis.sdrHoursSavedPct * 100)}%
               </div>
             </div>
           </section>
