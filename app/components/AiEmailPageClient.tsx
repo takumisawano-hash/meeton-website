@@ -183,26 +183,27 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
-  { q: 'AIメールはどのようなタイミングで送信されますか？', a: 'フォーム送信・資料ダウンロード・チャット終了などのトリガーイベント直後に自動送信されます。また、Day 1→Day 3→Day 5の自動フォローアップシーケンスにより、未反応リードへの再接触も自動で行います。' },
-  { q: 'メール文面は自分で作成する必要がありますか？', a: 'いいえ。AIがリードの行動履歴やナレッジベースをもとに、パーソナライズされたメール文面を自動生成します。もちろん、テンプレートやトーンの指定も可能です。' },
-  { q: '既存のMAツール（Marketo等）と競合しませんか？', a: '競合ではなく補完関係です。Meeton aiのAIメールはリードの初回フォローと育成に特化しており、MAツールのワークフローと並行して利用できます。Marketo・Eloquaとの連携も可能です。' },
-  { q: '送信数に制限はありますか？', a: 'プランにより月間送信数の上限があります。詳細は資料をご請求いただくか、デモでご確認ください。' },
-  { q: '配信停止（オプトアウト）は対応していますか？', a: 'はい。すべてのメールに配信停止リンクが自動挿入されます。GDPR・特定電子メール法に準拠した運用が可能です。' },
+  { q: 'AIメールはどのようなタイミングで送信されますか？', a: 'AI Calendar で商談予約に至らなかったリードに対し、AIが自動でフォローメールを送信します。1通目以降は、開封・クリック・サイト再訪などの行動データを分析し、文面を都度生成して継続的にアプローチします。' },
+  { q: 'メール文面は自分で作成する必要がありますか？', a: 'いいえ。AIがリードの行動履歴やナレッジベースをもとに、メール文面を毎通自動生成します。テンプレートやトーンの指定も可能です。' },
+  { q: '完全自動と承認モードはどう違いますか？', a: '完全自動モードは AI が作成から送信まですべて自動で行います。承認モードは AI が下書きを作成し、送信前に人間が確認・編集してから送信できます。チームの運用方針に合わせて選択でき、1通単位での切り替えも可能です。' },
+  { q: 'リードからの返信には対応していますか？', a: 'いいえ、Meeton AIメールは送信専用です。返信が届いた場合は、ご担当者様のメールアドレスへ通知され、人による対応となります（CC で営業マネジメント層を含めることも可能）。' },
+  { q: '既存のMAツール（Marketo等）と競合しませんか？', a: '競合ではなく補完関係です。Meeton AIメールは AI Calendar で取りこぼしたリードの自動フォローに特化しており、MAツールのワークフローと並行して利用できます。Marketo・Eloquaとの連携も可能です。' },
+  { q: '送信数や送信間隔は制限できますか？', a: 'はい。リード 1 人あたりの最大送信数（例: 5通まで）、送信間隔（例: 72時間ごと）を管理画面で細かく設定できます。配信停止リンクもすべてのメールに自動挿入されます。' },
 ];
 
 const whyData = [
-  { title: '即時フォロー', desc: 'フォーム送信・資料DL直後にAIが自動送信。42時間の遅延をゼロに。', color: '#3b6ff5', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
-  { title: '個別最適化', desc: '一斉配信ではなく、行動履歴に基づくパーソナライズドメール。', color: '#7c5cfc', iconPath: 'M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M12.5 7a4 4 0 1 0-8 0 4 4 0 0 0 8 0z M20 8v6 M23 11h-6' },
-  { title: '自動シーケンス', desc: 'Day 1→3→5で自動フォロー。休眠リードも逃さない。', color: '#12a37d', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-  { title: 'AI応答', desc: 'リードからの返信にも自動で文脈に合った応答を生成。', color: '#0891b2', iconPath: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' },
+  { title: '取りこぼしを自動回収', desc: 'AI Calendar で予約しなかった見込み客を、AIが自動でメールフォロー。1件も諦めない。', color: '#3b6ff5', iconPath: 'M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3' },
+  { title: '毎通、行動から再生成', desc: '前回の開封・クリック・サイト再訪・閲覧ページから、次のメール文面を都度生成。', color: '#7c5cfc', iconPath: 'M3 12a9 9 0 0 1 15-6.7L21 8 M21 3v5h-5 M21 12a9 9 0 0 1-15 6.7L3 16 M3 21v-5h5' },
+  { title: '2通目・3通目も自動で継続', desc: '1通で諦めない。未反応なら別の切り口で、開封済みなら次のステップへ。', color: '#12a37d', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
+  { title: '完全自動 / 承認モード', desc: 'AI に完全に任せるか、送信前に人間が確認・編集するか、運用方針で選択可能。', color: '#0891b2', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
 ];
 
 const flowSteps = [
-  { num: '1', title: 'トリガー検知', sub: 'Trigger detected', color: '#6e7494' },
-  { num: '2', title: '即座にフォロー', sub: 'Instant follow-up', color: '#3b6ff5' },
-  { num: '3', title: 'パーソナライズ', sub: 'Personalized', color: '#6690fa' },
-  { num: '4', title: '自動再接触', sub: 'Auto re-engage', color: '#7c5cfc' },
-  { num: '5', title: '商談獲得', sub: 'Meeting booked', color: '#12a37d' },
+  { num: '1', title: '離脱を自動検知', sub: 'Drop-off detected', color: '#6e7494' },
+  { num: '2', title: '1通目を自動送信', sub: 'First email', color: '#3b6ff5' },
+  { num: '3', title: '行動を分析', sub: 'Analyze behavior', color: '#6690fa' },
+  { num: '4', title: '次のメールを再生成', sub: 'Regenerate', color: '#7c5cfc' },
+  { num: '5', title: '商談予約獲得', sub: 'Meeting booked', color: '#12a37d' },
 ];
 
 const flowStepIcons = [
@@ -215,22 +216,22 @@ const flowStepIcons = [
 
 const useCaseData = [
   {
-    title: 'フォーム送信直後',
+    title: '商談予約に至らなかったリードの回収',
     color: '#3b6ff5',
-    desc: '問い合わせフォーム送信の直後に、AIが即座にパーソナライズドメールを送信。スピードが商談獲得の鍵。',
-    example: 'お問い合わせありがとうございます。ご関心のプランについて詳しい資料をお送りしました。',
+    desc: 'AI Chat や AI Calendar で予約に至らなかった見込み客に、AIが自動でフォローメールを送信。離脱を取り戻します。',
+    example: '先ほどはサイトをご覧いただきありがとうございます。御社の課題に近い導入事例を1つご紹介させてください。',
   },
   {
-    title: '資料ダウンロード後',
+    title: '資料DL 後の継続育成',
     color: '#7c5cfc',
-    desc: '資料をDLしたリードに対し、関連コンテンツの追加案内や商談予約の提案を自動送信。',
-    example: '導入事例集をダウンロードいただきありがとうございます。御社の業界に近い事例をピックアップしました。',
+    desc: '資料DL したリードのその後の閲覧履歴を分析し、興味の方向に合わせて 2 通目・3 通目を自動生成。',
+    example: '資料の中で特にご関心が高そうな「料金最適化」の章について、追加資料をお送りしました。',
   },
   {
-    title: '未予約リードへの追客',
+    title: '休眠リードの再接触',
     color: '#12a37d',
-    desc: 'チャットやサンクスページで予約しなかったリードに、カレンダーURL付きメールを自動送信。',
-    example: '15分で概要をご説明できます。下記からご都合の良い日時をお選びください。',
+    desc: '過去に接点があったが冷えてしまったリードへ、最新の閲覧データを踏まえて再アプローチ。',
+    example: '半年ぶりにサイトをご覧いただいたようなので、改めて15分のお時間をいただけませんか？',
   },
 ];
 
@@ -252,14 +253,14 @@ export default function AiEmailPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />AI EMAIL</div>
-            <h1 className="anim d2">AIメールで<br /><em>自動フォロー&商談化</em></h1>
-            <p className="anim d3 hero-sub">フォーム送信・資料DL直後にAIが即座にフォローアップ。パーソナライズドメールで育成し、未反応リードも逃さず商談化します。</p>
+            <h1 className="anim d2">離脱リードを<br /><em>自動で取り戻す</em></h1>
+            <p className="anim d3 hero-sub">AI Calendar で予約に至らなかった見込み客に、AIが自動でメールを送信。2通目・3通目も継続フォローし、毎通のメール文面は前回の開封・クリック・サイト再訪などの最新行動から再生成します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '< 5秒', l: 'フォロー開始' }, { v: 'Day 1-5', l: '自動シーケンス' }, { v: '24/7', l: '自律稼働' }].map((s, i) => (
+              {[{ v: '24/7', l: '自動フォロー' }, { v: '毎通', l: '行動から再生成' }, { v: '自動 / 承認', l: '送信モード切替' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -271,29 +272,30 @@ export default function AiEmailPageClient() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                 </div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>フォローアップシーケンス</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>取りこぼし回収フロー</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)', animation: 'dotBlink 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>実行中</span>
+                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>AI 稼働中</span>
                   </div>
                 </div>
               </div>
               <div style={{ padding: '6px 0' }}>
                 {[
-                  { day: 'Day 0', subject: '資料をお送りしました', status: '送信済み ✓', statusColor: '#12a37d', statusBg: '#e5f8f2', delay: '.6s' },
-                  { day: 'Day 1', subject: 'ご確認いただけましたか？', status: '開封済み', statusColor: '#3b6ff5', statusBg: '#eaf0fe', delay: '.9s' },
-                  { day: 'Day 3', subject: 'よくある質問をまとめました', status: '送信予定', statusColor: '#6e7494', statusBg: '#f4f6fb', delay: '1.2s' },
-                  { day: 'Day 5', subject: '15分だけお時間いただけませんか？', status: '送信予定', statusColor: '#6e7494', statusBg: '#f4f6fb', delay: '1.5s' },
+                  { step: '1 通目', subject: '初動メール', status: '開封 ✗', statusColor: '#6e7494', statusBg: '#f4f6fb', delay: '.6s', behavior: 'AI Calendar 離脱を検知' },
+                  { step: '2 通目', subject: '別アングルで再アプローチ', status: '開封 ✓', statusColor: '#3b6ff5', statusBg: '#eaf0fe', delay: '.9s', behavior: '料金ページ再訪を反映' },
+                  { step: '3 通目', subject: '事例を交えてフォロー', status: 'クリック ✓', statusColor: '#7c5cfc', statusBg: '#f0ecfe', delay: '1.2s', behavior: '前回クリックした章を深掘り' },
+                  { step: '4 通目', subject: 'カレンダー提案', status: '送信予定', statusColor: '#12a37d', statusBg: '#e5f8f2', delay: '1.5s', behavior: '行動データから商談提案へ' },
                 ].map((v, i) => (
                   <div className="dash-row" key={i} style={{ animationDelay: v.delay }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg,${v.statusColor}cc,${v.statusColor})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800, flexShrink: 0 }}>{v.day.replace('Day ', 'D')}</div>
+                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg,${v.statusColor}cc,${v.statusColor})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800, flexShrink: 0 }}>{(i + 1).toString()}</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 3 }}>
                         <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--heading)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.subject}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>{v.day}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>{v.step}</span>
                         <span style={{ fontSize: 9, fontWeight: 700, color: v.statusColor, background: v.statusBg, padding: '2px 6px', borderRadius: 4 }}>{v.status}</span>
+                        <span style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 500 }}>{v.behavior}</span>
                       </div>
                     </div>
                   </div>
@@ -302,9 +304,9 @@ export default function AiEmailPageClient() {
               <div style={{ padding: '10px 16px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b6ff5', animation: 'pulse 1.5s infinite' }} />
-                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>4通のシーケンス</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>毎通、行動から再生成</span>
                 </div>
-                <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)' }}>すべて表示 →</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)' }}>承認 / 完全自動 切替可能</span>
               </div>
             </div>
           </div>
@@ -317,7 +319,7 @@ export default function AiEmailPageClient() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
           <div className="stitle" style={{ textAlign: 'center' }}>AIメールの流れ</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>トリガーからフォローアップ完了まで、AIが自動で最適なメールを送信し続けます。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>離脱検知から商談獲得まで、AIが行動データを更新しながらメール文面を都度生成し続けます。</p>
           <div className="flow-steps">
             {flowSteps.map((step, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
@@ -345,7 +347,7 @@ export default function AiEmailPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
           <div className="stitle" style={{ textAlign: 'center' }}>AIメールの仕組みを深掘り</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>トリガー検知からフォローアップ完了まで、AIメールの各機能をステップごとに解説します。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>取りこぼしリードの自動回収から、行動データに応じた継続フォロー、送信モード切替まで。</p>
         </div>
       </section>
 
@@ -356,10 +358,15 @@ export default function AiEmailPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#3b6ff510', color: '#3b6ff5' }}>FEATURE 01</div>
-              <div className="phase-h">高関心リードに即座にフォローアップ</div>
-              <div className="phase-desc">フォーム送信・資料DL直後にAIメールを自動送信。人間SDRの平均42時間に対し、Meeton aiは数分以内にフォロー開始。リードの関心が最も高い瞬間を逃しません。</div>
+              <div className="phase-h">取りこぼしリードを自動で取り戻す</div>
+              <div className="phase-desc">即時の商談予約は AI Calendar が担います。AI Email はその先 ── 商談予約に至らずに離脱してしまったリードへの自動フォローを担当します。サイトを離れたあとも、AIが諦めずに接触を続けます。</div>
               <div className="phase-features">
-                {['フォーム送信直後に自動送信', '資料DL直後にフォローアップ', 'レスポンスは分単位', '関心が高い瞬間を逃さない'].map((feat, i) => (
+                {[
+                  'AI Calendar で予約に至らなかったリードを自動検知',
+                  '行動データから初動メールを自動生成',
+                  '通常は離脱して終わるリードを商談化へ',
+                  '人間 SDR を増やさずに取りこぼしを回収',
+                ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#3b6ff5' }} />{feat}</div>
                 ))}
               </div>
@@ -367,43 +374,46 @@ export default function AiEmailPageClient() {
             <div className="phase-vis">
               <div className="pvis vis0">
                 <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>フォロー速度の比較</div>
-                  {/* Speed comparison */}
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>離脱リードの行方</div>
+                  {/* Without AI Email */}
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, marginBottom: 10, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: '#f4f6fb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>👤</div>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18 M6 6l12 12"/></svg>
+                      </div>
                       <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>人間SDR</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>平均レスポンス時間</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>AI Email なしの場合</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>離脱したらそのまま消滅</div>
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <div style={{ flex: 1, height: 8, background: 'var(--surface)', borderRadius: 4, overflow: 'hidden' }}>
-                        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg,#e0475b,#ff6b81)', borderRadius: 4 }} />
+                        <div style={{ width: '8%', height: '100%', background: 'linear-gradient(90deg,#dc2626,#ef4444)', borderRadius: 4 }} />
                       </div>
-                      <span style={{ fontSize: 14, fontWeight: 900, color: '#e0475b', fontFamily: 'var(--fm)' }}>42h</span>
+                      <span style={{ fontSize: 12, fontWeight: 900, color: '#dc2626', fontFamily: 'var(--fm)' }}>回収率 数%</span>
                     </div>
                   </div>
+                  {/* With AI Email */}
                   <div style={{ background: '#fff', border: '1px solid #3b6ff530', borderRadius: 12, padding: 14, animation: 'chatPop .5s .8s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, boxShadow: '0 4px 16px rgba(59,111,245,.1)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#3b6ff5,#6690fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: '#fff', fontWeight: 800 }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#3b6ff5,#6690fa)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
                       </div>
                       <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>Meeton ai</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>AIメール自動送信</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>AI Email あり</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>離脱者を継続フォロー</div>
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <div style={{ flex: 1, height: 8, background: 'var(--surface)', borderRadius: 4, overflow: 'hidden' }}>
-                        <div style={{ width: '5%', height: '100%', background: 'linear-gradient(90deg,#3b6ff5,#6690fa)', borderRadius: 4 }} />
+                        <div style={{ width: '78%', height: '100%', background: 'linear-gradient(90deg,#3b6ff5,#6690fa)', borderRadius: 4 }} />
                       </div>
-                      <span style={{ fontSize: 14, fontWeight: 900, color: '#3b6ff5', fontFamily: 'var(--fm)' }}>&lt;5秒</span>
+                      <span style={{ fontSize: 12, fontWeight: 900, color: '#3b6ff5', fontFamily: 'var(--fm)' }}>継続フォロー</span>
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 12, animation: 'slideIn .5s 1.2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <span style={{ fontSize: 11, fontWeight: 800, color: '#3b6ff5' }}>840倍高速</span>
-                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>なフォローアップ</span>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#3b6ff5', animation: 'pulse 1.5s infinite' }} />
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#3b6ff5' }}>離脱の先までAIが追いかける</span>
                   </div>
                 </div>
               </div>
@@ -415,10 +425,15 @@ export default function AiEmailPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 02</div>
-              <div className="phase-h">パーソナライズドメールで育成</div>
-              <div className="phase-desc">行動履歴をもとにメール文面を個別最適化。一斉配信ではなく、リードごとにカスタマイズされたメッセージで検討度を引き上げます。</div>
+              <div className="phase-h">毎通、最新の行動データから再生成</div>
+              <div className="phase-desc">テンプレートを使い回す一斉配信とは違います。前回送ったメールの開封・クリック、その後のサイト再訪、新たに見たページ。AIはそれらを毎回反映し、次のメール文面を都度生成し直します。</div>
               <div className="phase-features">
-                {['行動履歴ベースの文面最適化', 'リードごとにカスタマイズ', '一斉配信ではない個別対応', '検討段階に応じた内容'].map((feat, i) => (
+                {[
+                  '前回メールの開封・クリックを反映',
+                  'サイト再訪後に見たページを次の話題に',
+                  '一斉配信ではない毎通生成方式',
+                  'リード 1 人 1 人で全く違う文面',
+                ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
                 ))}
               </div>
@@ -461,10 +476,15 @@ export default function AiEmailPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>FEATURE 03</div>
-              <div className="phase-h">未反応リードに自動再接触</div>
-              <div className="phase-desc">Day 1→Day 3→Day 5で自動フォローアップシーケンスを実行。休眠リードの掘り起こしもAIが自動で行い、商談機会を最大化します。</div>
+              <div className="phase-h">2 通目・3 通目も自動で継続</div>
+              <div className="phase-desc">1 通だけで諦めません。未開封なら別の切り口で、開封済みなら次のステップへ。最大送信数（例: 5通まで）と送信間隔（例: 72時間ごと）を細かく設定でき、リードの行動に応じて次の手を変えていきます。</div>
               <div className="phase-features">
-                {['Day 1→3→5の自動シーケンス', '休眠リードの掘り起こし', '開封・クリック追跡で最適化', 'カレンダーURL自動挿入'].map((feat, i) => (
+                {[
+                  '未反応なら自動で 2 通目・3 通目',
+                  '開封・未開封で次のメールの方向性を切替',
+                  '最大送信数 / 送信間隔を細かく設定',
+                  'カレンダー URL を自動挿入',
+                ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
                 ))}
               </div>
@@ -472,36 +492,31 @@ export default function AiEmailPageClient() {
             <div className="phase-vis">
               <div className="pvis vis2">
                 <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>自動シーケンス タイムライン</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>継続フォローのフロー</div>
                   {[
-                    { day: 'Day 1', label: 'フォローアップ①', status: '送信済み', statusColor: '#12a37d', icon: '✓', delay: '.4s' },
-                    { day: 'Day 3', label: 'フォローアップ②', status: '開封済み', statusColor: '#3b6ff5', icon: '📧', delay: '.7s' },
-                    { day: 'Day 5', label: '商談提案', status: '送信予定', statusColor: '#6e7494', icon: '📅', delay: '1.0s' },
-                  ].map((item, i) => (
+                    { step: '1 通目', label: '初動メール', status: '開封 ✗', statusColor: '#6e7494', subDesc: '未反応 → 別の切り口で次のメール生成', delay: '.4s' },
+                    { step: '2 通目', label: '別アングルで再アプローチ', status: '開封 ✓', statusColor: '#3b6ff5', subDesc: '開封 + リンククリック → 興味あり', delay: '.7s' },
+                    { step: '3 通目', label: 'カレンダー提案', status: 'クリック ✓', statusColor: '#12a37d', subDesc: '行動データから商談提案へ移行', delay: '1.0s' },
+                  ].map((item, i, arr) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'stretch', gap: 12, marginBottom: 0 }}>
-                      {/* Timeline line */}
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 20 }}>
                         <div style={{ width: 12, height: 12, borderRadius: '50%', background: item.statusColor, flexShrink: 0, animation: `nodeGrow .4s ${item.delay} cubic-bezier(.16,1,.3,1) forwards`, transform: 'scale(0)', opacity: 0 }} />
-                        {i < 2 && <div style={{ width: 2, flex: 1, background: `linear-gradient(180deg,${item.statusColor}40,${['#3b6ff5', '#6e7494'][i]}40)`, minHeight: 20 }} />}
+                        {i < arr.length - 1 && <div style={{ width: 2, flex: 1, background: `linear-gradient(180deg,${item.statusColor}40,${arr[i + 1].statusColor}40)`, minHeight: 20 }} />}
                       </div>
                       <div style={{ flex: 1, paddingBottom: 12, opacity: 0, animation: `slideIn .5s ${item.delay} cubic-bezier(.16,1,.3,1) forwards` }}>
                         <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-                            <span style={{ fontSize: 10, fontWeight: 800, color: 'var(--heading)' }}>{item.day} — {item.label}</span>
+                            <span style={{ fontSize: 10, fontWeight: 800, color: 'var(--heading)' }}>{item.step} — {item.label}</span>
                             <span style={{ fontSize: 9, fontWeight: 700, color: item.statusColor, background: `${item.statusColor}15`, padding: '2px 6px', borderRadius: 4 }}>{item.status}</span>
                           </div>
-                          <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>
-                            {i === 0 && '資料の内容についてフォロー'}
-                            {i === 1 && 'よくある質問と追加情報を送付'}
-                            {i === 2 && 'カレンダーURL付きで商談提案'}
-                          </div>
+                          <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>{item.subDesc}</div>
                         </div>
                       </div>
                     </div>
                   ))}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 4, animation: 'slideIn .5s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d' }}>シーケンス実行中...</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d' }}>反応に合わせて文面が変わる</span>
                   </div>
                 </div>
               </div>
@@ -513,10 +528,15 @@ export default function AiEmailPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#0891b210', color: '#0891b2' }}>FEATURE 04</div>
-              <div className="phase-h">返信にもAIが自動応答</div>
-              <div className="phase-desc">リードからの返信に対し、ナレッジベースから文脈に合った回答を即時生成。営業チームが対応するまでの間も、AIが会話を途切れさせません。</div>
+              <div className="phase-h">完全自動モード or 承認モードを選択</div>
+              <div className="phase-desc">AI に完全に任せて自動送信させるか、AI が下書きを作成してから人間が確認・編集してから送信するか。チームの運用方針や慎重度に応じて選択でき、1 通単位での切り替えも可能です。</div>
               <div className="phase-features">
-                {['リード返信への即時自動応答', 'ナレッジベースから回答生成', '文脈を理解した対応', '営業チームへの自動エスカレーション'].map((feat, i) => (
+                {[
+                  '完全自動モード: AI が作成・送信まで完結',
+                  '承認モード: 送信前に人間が確認・編集',
+                  '1 通単位で承認可否を切り替え可能',
+                  'チーム単位で初期モードを設定可能',
+                ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#0891b2' }} />{feat}</div>
                 ))}
               </div>
@@ -524,34 +544,39 @@ export default function AiEmailPageClient() {
             <div className="phase-vis">
               <div className="pvis vis3">
                 <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 10, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>メール返信チェーン</div>
-                  {/* Lead reply */}
-                  <div style={{ background: '#f4f6fb', border: '1px solid var(--border)', borderRadius: '12px 12px 12px 4px', padding: 12, marginBottom: 8, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 6, background: '#6e7494', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800 }}>田</div>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--heading)' }}>田中様</span>
-                      <span style={{ fontSize: 8, color: 'var(--sub)' }}>10:32</span>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 10, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>送信モード</div>
+                  {/* Mode toggle */}
+                  <div style={{ display: 'flex', gap: 6, marginBottom: 10, animation: 'chatPop .5s .35s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                    <div style={{ flex: 1, padding: '8px 10px', borderRadius: 8, background: '#fff', border: '1px solid var(--border)', textAlign: 'center' }}>
+                      <div style={{ fontSize: 9, fontWeight: 800, color: 'var(--sub)', marginBottom: 2 }}>完全自動</div>
+                      <div style={{ fontSize: 8, color: 'var(--sub)' }}>AI 任せ</div>
                     </div>
-                    <div style={{ fontSize: 10, lineHeight: 1.7, color: 'var(--text)' }}>料金プランについて詳しく教えていただけますか？年間契約の割引はありますか？</div>
+                    <div style={{ flex: 1, padding: '8px 10px', borderRadius: 8, background: 'linear-gradient(135deg, #ecfeff, #fff)', border: '1.5px solid #0891b2', textAlign: 'center', boxShadow: '0 2px 8px rgba(8,145,178,.18)' }}>
+                      <div style={{ fontSize: 9, fontWeight: 800, color: '#0891b2', marginBottom: 2 }}>承認モード ✓</div>
+                      <div style={{ fontSize: 8, color: '#0891b2' }}>送信前に確認</div>
+                    </div>
                   </div>
-                  {/* AI reply */}
-                  <div style={{ background: '#fff', border: '1px solid #0891b230', borderRadius: '12px 12px 4px 12px', padding: 12, marginBottom: 8, animation: 'chatPop .5s .9s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, boxShadow: '0 2px 8px rgba(8,145,178,.08)' }}>
+                  {/* Pending email card */}
+                  <div style={{ background: '#fff', border: '1px solid #0891b230', borderRadius: 12, padding: 12, animation: 'chatPop .5s .8s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, boxShadow: '0 4px 16px rgba(8,145,178,.1)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 6, background: 'linear-gradient(135deg,#0891b2,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <div style={{ width: 22, height: 22, borderRadius: 6, background: 'linear-gradient(135deg,#f59e0b,#fbbf24)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
                       </div>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: '#0891b2' }}>AI自動応答</span>
-                      <span style={{ fontSize: 8, color: 'var(--sub)' }}>10:32</span>
+                      <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--heading)' }}>承認待ち</span>
+                      <span style={{ fontSize: 8, color: 'var(--sub)' }}>3 分後に送信予定</span>
                     </div>
-                    <div style={{ fontSize: 10, lineHeight: 1.7, color: 'var(--text)' }}>田中様、ご質問ありがとうございます。年間契約では20%の割引がございます。詳しい料金表をお送りいたします。</div>
-                    <div style={{ marginTop: 6, display: 'flex', gap: 4 }}>
-                      <span style={{ fontSize: 8, fontWeight: 700, color: '#0891b2', background: '#ecfeff', padding: '2px 6px', borderRadius: 4 }}>ナレッジベース参照</span>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--heading)', marginBottom: 4 }}>To: tanaka@example.com</div>
+                    <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--heading)', marginBottom: 6 }}>導入事例の追加情報をお送りします</div>
+                    <div style={{ fontSize: 9, color: 'var(--sub)', lineHeight: 1.5, marginBottom: 8 }}>先日ご覧いただいた料金ページの内容について、御社の業界に近い導入事例を 3 つピックアップしました…</div>
+                    <div style={{ display: 'flex', gap: 6 }}>
+                      <button style={{ flex: 1, padding: '6px 8px', fontSize: 9, fontWeight: 800, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer' }}>承認 → 送信</button>
+                      <button style={{ flex: 1, padding: '6px 8px', fontSize: 9, fontWeight: 700, background: '#fff', color: 'var(--text)', border: '1px solid var(--border)', borderRadius: 6, cursor: 'pointer' }}>編集</button>
+                      <button style={{ padding: '6px 8px', fontSize: 9, fontWeight: 700, background: '#fff', color: 'var(--sub)', border: '1px solid var(--border)', borderRadius: 6, cursor: 'pointer' }}>却下</button>
                     </div>
                   </div>
-                  {/* Escalation */}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, animation: 'slideIn .5s 1.4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10, animation: 'slideIn .5s 1.4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#0891b2', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#0891b2' }}>営業チームに通知済み</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#0891b2' }}>運用方針に合わせて切替可能</span>
                   </div>
                 </div>
               </div>
@@ -636,8 +661,8 @@ export default function AiEmailPageClient() {
         <div className="glow" style={{ background: 'rgba(59,111,245,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div className="slabel">今すぐ始める</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIメールで、<br />フォロー漏れをゼロに</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>フォーム送信直後から自動フォロー。パーソナライズドメールで見込み客を商談につなげます。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>AI Email で、<br />取りこぼしをゼロへ</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>AI Calendar で予約しなかった見込み客を、AIが行動データから毎通文面を生成し、自動でフォローし続けます。</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
