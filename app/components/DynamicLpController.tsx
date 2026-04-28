@@ -28,12 +28,48 @@ type LpComponentRender = {
   copy: Record<string, string | string[]>
 }
 
+type RoiCalcShape = {
+  monthlyVisits: number
+  trafficSource: string
+  confidence: 'high' | 'medium' | 'low'
+  baseline: { leadsPerMonth: number; leadCvrPct: number; meetingsPerMonth: number; meetingCvrPct: number; sdrHoursPerMonth: number }
+  withMeetonAi: { leadsPerMonth: number; leadCvrPct: number; meetingsPerMonth: number; meetingCvrPct: number; sdrHoursPerMonth: number }
+  uplift: { addLeadsPerMonth: number; addMeetingsPerMonth: number; sdrHoursSaved: number; leadCvrLiftPct: number; meetingCvrLiftPct: number }
+  assumptions: { industry?: string; employees?: string; sdrHeadcount: number }
+}
+
+type CaseHitShape = {
+  slug: string
+  title: string
+  company: string
+  industry: string
+  employeeSize: string | null
+  heroMetric: string
+  heroMetricLabel: string
+  description: string
+  url: string
+}
+
+type BlogHitShape = {
+  slug: string
+  title: string
+  description: string
+  category: string
+  url: string
+}
+
+type LogoShape = { primary: string; fallbacks: string[]; domain: string } | null
+
 type LpDocument = {
   visitorId: string
   generatedAt: string
   components: LpComponentRender[]
   primaryCta: 'demo' | 'document' | 'chat'
   rationale?: string
+  logo?: LogoShape
+  trafficRoi?: RoiCalcShape | null
+  relatedCases?: CaseHitShape[]
+  relatedBlogs?: BlogHitShape[]
 }
 
 type ProfileSnapshot = {
@@ -251,10 +287,10 @@ function CompanyPopup({
           ▸ AI Personalized Page
         </div>
         <h3 style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.35, margin: '0 0 8px' }}>
-          あなたの会社向けに、最適化したご提案を3秒で生成します
+          あなたの会社向けに、最適化したご提案を30秒以内に生成します
         </h3>
         <p style={{ color: '#3d4a44', fontSize: 14, lineHeight: 1.7, margin: '0 0 22px' }}>
-          会社名から、業種・規模・流入経路を考慮した専用ページを作成します。
+          会社名から、業種・規模・トラフィック・流入経路を踏まえた専用ページを作成します。
         </p>
         <form onSubmit={handleSubmit}>
           <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>
@@ -340,6 +376,43 @@ function arrOf(comp: LpComponentRender | undefined, key: string): string[] {
   return Array.isArray(v) ? v : []
 }
 
+function CompanyLogo({ logo, size = 56 }: { logo: LogoShape; size?: number }) {
+  const [src, setSrc] = useState<string | null>(logo?.primary || null)
+  const fallbackIdx = useRef(0)
+  useEffect(() => {
+    setSrc(logo?.primary || null)
+    fallbackIdx.current = 0
+  }, [logo?.primary])
+  if (!logo || !src) return null
+  return (
+    <img
+      src={src}
+      alt={logo.domain}
+      width={size}
+      height={size}
+      onError={() => {
+        const next = logo.fallbacks[fallbackIdx.current]
+        if (next) {
+          fallbackIdx.current += 1
+          setSrc(next)
+        } else {
+          setSrc(null)
+        }
+      }}
+      style={{ width: size, height: size, objectFit: 'contain', borderRadius: 8, background: '#fff', border: '1px solid #e4e3dd', padding: 4 }}
+    />
+  )
+}
+
+function StatBig({ label, value, accent }: { label: string; value: string; accent?: string }) {
+  return (
+    <div style={{ flex: '1 1 160px', minWidth: 160, background: '#fff', border: '1px solid #e4e3dd', borderRadius: 12, padding: '18px 20px' }}>
+      <div style={{ fontSize: 11, color: '#6b7873', letterSpacing: '0.05em', marginBottom: 6 }}>{label}</div>
+      <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1.2, color: accent || '#0a0e0c' }}>{value}</div>
+    </div>
+  )
+}
+
 function GeneratedLpModal({
   data,
   onClose,
@@ -354,12 +427,17 @@ function GeneratedLpModal({
   const { profile, lp } = data
   const heroComp = lp.components.find(c => c.key === 'hero')
   const socialComp = lp.components.find(c => c.key === 'social_proof')
-  const caseComp = lp.components.find(c => c.key === 'case_study')
-  const roiComp = lp.components.find(c => c.key === 'roi')
+  const caseComp = lp.components.find(c => c.key === 'case_study' || c.key === 'related_cases')
+  const roiTextComp = lp.components.find(c => c.key === 'roi')
+  const trafficRoiComp = lp.components.find(c => c.key === 'traffic_roi')
   const useCasesComp = lp.components.find(c => c.key === 'use_cases')
   const comparisonComp = lp.components.find(c => c.key === 'comparison')
+  const blogsComp = lp.components.find(c => c.key === 'related_blogs')
   const urgencyComp = lp.components.find(c => c.key === 'urgency')
   const ctaComp = lp.components.find(c => c.key === 'cta')
+  const cases = lp.relatedCases || []
+  const blogs = lp.relatedBlogs || []
+  const roi = lp.trafficRoi || null
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -378,24 +456,33 @@ function GeneratedLpModal({
     <div role="dialog" aria-modal="true" style={{ position: 'fixed', inset: 0, background: 'rgba(10,14,12,0.65)', zIndex: 9999, overflowY: 'auto', padding: '24px 16px' }}>
       <div style={{ maxWidth: 880, margin: '0 auto', background: '#fafaf7', color: '#0a0e0c', borderRadius: 16, overflow: 'hidden', boxShadow: '0 32px 80px rgba(0,0,0,0.3)', fontFamily: 'var(--font-noto, -apple-system, system-ui), sans-serif' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 20px', borderBottom: '1px solid #e4e3dd', background: '#fff' }}>
-          <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, letterSpacing: '0.15em', color: '#065f46', textTransform: 'uppercase' }}>
-            ▸ {profile.company.name} 様向け · AI生成
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {lp.logo ? (
+              <>
+                <CompanyLogo logo={lp.logo} size={36} />
+                <span style={{ fontSize: 18, color: '#9aa39e' }}>×</span>
+                <img src="/icon.png" alt="Meeton ai" width={36} height={36} style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 8 }} />
+              </>
+            ) : null}
+            <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, letterSpacing: '0.15em', color: '#065f46', textTransform: 'uppercase' }}>
+              ▸ {profile.company.name} 様向け · AI生成
+            </div>
           </div>
           <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 22, color: '#3d4a44', padding: 4 }} aria-label="閉じる">×</button>
         </div>
 
-        <section style={{ padding: 'clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px)' }}>
+        <section style={{ padding: 'clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px) 24px' }}>
           <h1 style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, lineHeight: 1.3, margin: '0 0 16px' }}>
             {copyOf(heroComp, 'headline') || `${profile.company.name} の商談を、AIが自動で増やす`}
           </h1>
-          <p style={{ fontSize: 16, color: '#3d4a44', lineHeight: 1.75, margin: '0 0 32px' }}>
+          <p style={{ fontSize: 16, color: '#3d4a44', lineHeight: 1.75, margin: '0 0 28px' }}>
             {copyOf(heroComp, 'sub') || '訪問者識別から商談予約までAIが自動化します'}
           </p>
           <button
             onClick={() => onCta(lp.primaryCta)}
             style={{ padding: '14px 28px', fontSize: 16, fontWeight: 700, background: '#0eab6e', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer' }}
           >
-            {copyOf(heroComp, 'ctaLabel') || '相談する（30分・無料）'}
+            {copyOf(heroComp, 'ctaLabel') || (lp.primaryCta === 'demo' ? '30分で相談する（無料）' : '資料をダウンロード')}
           </button>
           {urgencyComp && copyOf(urgencyComp, 'message') ? (
             <div style={{ marginTop: 16, padding: '10px 14px', background: '#fef3c7', color: '#92400e', borderRadius: 8, fontSize: 13, display: 'inline-block' }}>
@@ -403,6 +490,59 @@ function GeneratedLpModal({
             </div>
           ) : null}
         </section>
+
+        {roi ? (
+          <section style={{ padding: 'clamp(8px, 2vw, 24px) clamp(24px, 5vw, 56px) clamp(28px, 4vw, 40px)' }}>
+            <div style={{ background: '#fff', border: '1px solid #e4e3dd', borderRadius: 14, padding: 'clamp(20px, 3vw, 28px)' }}>
+              <div style={{ fontSize: 11, letterSpacing: '0.1em', color: '#065f46', textTransform: 'uppercase', marginBottom: 8 }}>
+                ▸ 貴社想定インパクト ({roi.confidence === 'high' ? '実トラフィックベース' : '業種・規模ベース推定'})
+              </div>
+              <h2 style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.35, margin: '0 0 18px' }}>
+                {copyOf(trafficRoiComp, 'headline') || `${profile.company.name} の月間訪問数 約${roi.monthlyVisits.toLocaleString('ja-JP')} から見える伸びしろ`}
+              </h2>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <StatBig label="リード/月" value={`+${roi.uplift.addLeadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
+                <StatBig label="商談/月" value={`+${roi.uplift.addMeetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
+                <StatBig label="SDR工数削減/月" value={`-${roi.uplift.sdrHoursSaved.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
+              </div>
+              <table style={{ width: '100%', marginTop: 18, borderCollapse: 'collapse', fontSize: 13 }}>
+                <thead>
+                  <tr style={{ color: '#6b7873', textAlign: 'left' }}>
+                    <th style={{ padding: '8px 6px', fontWeight: 600 }}></th>
+                    <th style={{ padding: '8px 6px', fontWeight: 600 }}>現状</th>
+                    <th style={{ padding: '8px 6px', fontWeight: 600, color: '#0eab6e' }}>Meeton ai 導入後</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
+                    <td style={{ padding: '8px 6px' }}>月間訪問数</td>
+                    <td style={{ padding: '8px 6px' }} colSpan={2}>{roi.monthlyVisits.toLocaleString('ja-JP')}</td>
+                  </tr>
+                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
+                    <td style={{ padding: '8px 6px' }}>リード化CVR</td>
+                    <td style={{ padding: '8px 6px' }}>{roi.baseline.leadCvrPct}% ({roi.baseline.leadsPerMonth}件)</td>
+                    <td style={{ padding: '8px 6px', color: '#0eab6e', fontWeight: 700 }}>{roi.withMeetonAi.leadCvrPct}% ({roi.withMeetonAi.leadsPerMonth}件)</td>
+                  </tr>
+                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
+                    <td style={{ padding: '8px 6px' }}>商談化CVR</td>
+                    <td style={{ padding: '8px 6px' }}>{roi.baseline.meetingCvrPct}% ({roi.baseline.meetingsPerMonth}件)</td>
+                    <td style={{ padding: '8px 6px', color: '#0eab6e', fontWeight: 700 }}>{roi.withMeetonAi.meetingCvrPct}% ({roi.withMeetonAi.meetingsPerMonth}件)</td>
+                  </tr>
+                  <tr style={{ borderTop: '1px solid #e4e3dd' }}>
+                    <td style={{ padding: '8px 6px' }}>SDR工数 (推定{roi.assumptions.sdrHeadcount}名)</td>
+                    <td style={{ padding: '8px 6px' }}>{roi.baseline.sdrHoursPerMonth}h / 月</td>
+                    <td style={{ padding: '8px 6px', color: '#0eab6e', fontWeight: 700 }}>{roi.withMeetonAi.sdrHoursPerMonth}h / 月</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style={{ fontSize: 11, color: '#6b7873', marginTop: 12, lineHeight: 1.6 }}>
+                {roi.confidence === 'high'
+                  ? '※ SimilarWeb実データを参照し、業種別ベンチマークから導入後の数字を試算しています。'
+                  : '※ 業種・従業員規模ベースのベンチマーク値での推定です。実トラフィック値はデモ時に詳細試算します。'}
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         {socialComp && arrOf(socialComp, 'stats').length ? (
           <section style={{ padding: '0 clamp(24px, 5vw, 56px) 36px' }}>
@@ -416,26 +556,43 @@ function GeneratedLpModal({
           </section>
         ) : null}
 
-        {caseComp ? (
+        {cases.length ? (
           <section style={{ padding: '24px clamp(24px, 5vw, 56px)' }}>
-            <h2 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 16px' }}>
-              {copyOf(caseComp, 'headline') || `${profile.company.industry || ''}業界での導入事例`}
+            <h2 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 6px' }}>
+              {copyOf(caseComp, 'headline') || `${profile.company.industry ? profile.company.industry + '業界の' : ''}実際の導入事例`}
             </h2>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10 }}>
-              {arrOf(caseComp, 'items').map((it, i) => (
-                <li key={i} style={{ background: '#fff', border: '1px solid #e4e3dd', borderRadius: 8, padding: '12px 16px', fontSize: 14, color: '#3d4a44' }}>{it}</li>
+            <p style={{ fontSize: 13, color: '#6b7873', margin: '0 0 16px' }}>
+              {copyOf(caseComp, 'intro') || '貴社に近い業種・規模での実績です。クリックで詳細レポートが開きます。'}
+            </p>
+            <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+              {cases.map(cs => (
+                <a
+                  key={cs.slug}
+                  href={cs.url}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => trackEvent(visitorId, 'cta_click', { kind: 'case_study', slug: cs.slug, source: 'mlp_modal' })}
+                  style={{ display: 'block', background: '#fff', border: '1px solid #e4e3dd', borderRadius: 12, padding: 18, textDecoration: 'none', color: '#0a0e0c' }}
+                >
+                  <div style={{ fontSize: 11, color: '#6b7873', marginBottom: 6 }}>{cs.industry}{cs.employeeSize ? ` · ${cs.employeeSize}` : ''}</div>
+                  <div style={{ fontSize: 28, fontWeight: 800, color: '#0eab6e', lineHeight: 1.1 }}>{cs.heroMetric}</div>
+                  <div style={{ fontSize: 12, color: '#3d4a44', marginTop: 2 }}>{cs.heroMetricLabel}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, marginTop: 12, lineHeight: 1.4 }}>{cs.company}</div>
+                  <div style={{ fontSize: 12, color: '#3d4a44', marginTop: 6, lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{cs.description}</div>
+                  <div style={{ fontSize: 11, color: '#0eab6e', marginTop: 10 }}>事例詳細を読む →</div>
+                </a>
               ))}
-            </ul>
+            </div>
           </section>
         ) : null}
 
-        {roiComp ? (
+        {roiTextComp ? (
           <section style={{ padding: '24px clamp(24px, 5vw, 56px)' }}>
             <h2 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 16px' }}>
-              {copyOf(roiComp, 'headline') || '貴社想定ROI'}
+              {copyOf(roiTextComp, 'headline') || '想定効果サマリー'}
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8 }}>
-              {arrOf(roiComp, 'lines').map((it, i) => (
+              {arrOf(roiTextComp, 'lines').map((it, i) => (
                 <li key={i} style={{ fontSize: 14, color: '#0a0e0c', padding: '8px 0', borderBottom: '1px dashed #e4e3dd' }}>● {it}</li>
               ))}
             </ul>
@@ -457,6 +614,31 @@ function GeneratedLpModal({
             <p style={{ color: '#3d4a44', fontSize: 14, lineHeight: 1.75, margin: 0 }}>
               IP→企業特定の自動化、AI Email/Calendar/Offer の標準搭載、日本市場特化の事例数。詳細はデモでご案内します。
             </p>
+          </section>
+        ) : null}
+
+        {blogs.length ? (
+          <section style={{ padding: '24px clamp(24px, 5vw, 56px)' }}>
+            <h2 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 16px' }}>
+              {copyOf(blogsComp, 'headline') || '貴社の状況にあわせた深掘り読み物'}
+            </h2>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10 }}>
+              {blogs.map(b => (
+                <li key={b.slug}>
+                  <a
+                    href={b.url}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => trackEvent(visitorId, 'cta_click', { kind: 'blog', slug: b.slug, source: 'mlp_modal' })}
+                    style={{ display: 'block', background: '#fff', border: '1px solid #e4e3dd', borderRadius: 10, padding: '14px 18px', textDecoration: 'none', color: '#0a0e0c' }}
+                  >
+                    <div style={{ fontSize: 11, color: '#6b7873', marginBottom: 4 }}>{b.category}</div>
+                    <div style={{ fontSize: 15, fontWeight: 700, lineHeight: 1.4 }}>{b.title}</div>
+                    {b.description ? <div style={{ fontSize: 12, color: '#3d4a44', marginTop: 4, lineHeight: 1.6, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{b.description}</div> : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </section>
         ) : null}
 

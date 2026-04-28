@@ -116,6 +116,10 @@ export type LpComponentKey =
   | 'cta'
   | 'urgency'
   | 'team'
+  | 'logo_header'
+  | 'traffic_roi'
+  | 'related_cases'
+  | 'related_blogs'
 
 export type LpComponent = {
   key: LpComponentKey
@@ -130,4 +134,8 @@ export type LpDocument = {
   primaryCta: 'demo' | 'document' | 'chat'
   themeAccent?: string
   rationale?: string
+  logo?: { primary: string; fallbacks: string[]; domain: string } | null
+  trafficRoi?: import('./roi-calculator').RoiCalc | null
+  relatedCases?: import('./case-matcher').CaseStudyHit[]
+  relatedBlogs?: import('./blog-matcher').BlogHit[]
 }
