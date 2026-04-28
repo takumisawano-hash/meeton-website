@@ -456,7 +456,7 @@ function DesktopFlow({
           tone="chat"
           label="① AI CHAT"
           title="訪問者と対話・関心醸成"
-          sub="資料提案 / AI Offer 内蔵"
+          sub="閲覧に合わせて関連資料を自動提案"
           icon="chat"
         />
         <Card
@@ -478,7 +478,7 @@ function DesktopFlow({
           tone="calendar"
           label="② AI CALENDAR"
           title="商談予約まで完結"
-          sub="事前ヒアリング・CRM自動登録 / チャット内・サンクスページ・メール経由で発動"
+          sub="チャット内・サンクスページ・メール経由で発動 / 割り振りルールを細かく設定可能"
           icon="calendar"
           hub
         />
@@ -852,9 +852,9 @@ function MobileFlow({
 }) {
   const items = [
     { tone: "muted" as const, label: "STEP 0", title: "Website 訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
-    { tone: "chat" as const, label: "① AI CHAT", title: "訪問者と対話・関心醸成", sub: "資料提案 / AI Offer 内蔵", icon: "chat" as const },
+    { tone: "chat" as const, label: "① AI CHAT", title: "訪問者と対話・関心醸成", sub: "閲覧に合わせて関連資料を自動提案", icon: "chat" as const },
     { tone: "amber" as const, label: "THANKS PAGE", title: "サンクスページ", sub: "フォーム送信直後の高関心を捕捉", icon: "thanks" as const, branchNote: "AI Chat 経由 / フォーム送信直後 どちらからも到達" },
-    { tone: "calendar" as const, label: "② AI CALENDAR", title: "商談予約まで完結", sub: "事前ヒアリング + CRM 自動登録", icon: "calendar" as const, hub: true },
+    { tone: "calendar" as const, label: "② AI CALENDAR", title: "商談予約まで完結", sub: "チャット内・サンクスページ・メール経由で発動 / 割り振りルール設定可能", icon: "calendar" as const, hub: true },
     { tone: "win" as const, label: "OUTCOME", title: "✓ サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
     { tone: "email" as const, label: "③ AI EMAIL", title: "離脱リードを再アプローチ", sub: "カスタムメール → AI Calendar に戻す", icon: "mail" as const, branchNote: "離脱した場合のみ。② に戻り商談獲得へ" },
   ];

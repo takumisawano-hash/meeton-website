@@ -86,11 +86,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* CATEGORY CARDS - 3 categories */
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
-.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:36px 32px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 16px 48px rgba(18,163,125,.12)}
-.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
-.cat-card:hover::before{opacity:1}
+.phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 56px -16px rgba(18,163,125,.18)}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cat-color, #12a37d);opacity:.85;transition:opacity .3s, height .3s}
+.cat-card:hover::before{opacity:1;height:5px}
 .cat-label{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px}
 .cat-title{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:12px;line-height:1.3}
 .cat-desc{font-size:15px;line-height:1.8;color:var(--sub);margin-bottom:24px}
@@ -272,7 +272,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 @media(max-width:1024px){
   .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
-  .phase-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .phase-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto;gap:18px}
   .qflow-hz{flex-direction:column;gap:0}
   .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
   .qflow-hz-gate{padding:8px 0}
@@ -3379,10 +3379,10 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
                 label: "① AI CHAT",
                 title: "AI チャット",
-                desc: "サイト訪問者と対話し、商談予約まで会話で完結。ページ文脈に応じた声かけ、資料提案を内蔵し、温度感に応じてカレンダー提示まで自動で行います。",
+                desc: "サイト訪問者と対話し、商談予約まで会話で完結。ページ文脈に応じた声かけと、関心に合った資料の自動提案で、温度感に応じてカレンダー提示まで自動で行います。",
                 features: [
                   { label: "ページ文脈に応じた自動声かけ", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "資料提案 (AI Offer) を内蔵・自動レコメンド", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "閲覧ページに合わせて関連資料を自動提案", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
                   { label: "温度感に応じて商談予約まで誘導", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
                 ],
                 link: "/features/ai-chat/",
@@ -3392,11 +3392,11 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
                 label: "② AI CALENDAR",
                 title: "AI カレンダー",
-                desc: "関心が高い瞬間を逃さずカレンダーを提示。チャット内・サンクスページ・メールで商談予約を獲得し、事前ヒアリング + CRM 自動登録まで一気通貫。",
+                desc: "チャット内・サンクスページ・メール経由で発動し、関心が高い瞬間を逃さずカレンダーを提示。割り振りルールを細かく設定でき、適切な担当者に自動アサインします。",
                 features: [
-                  { label: "チャット内でそのまま商談予約", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "サンクスページで即カレンダー提示", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
-                  { label: "AI が事前ヒアリングまで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
+                  { label: "チャット内・サンクスページ・メール経由で発動", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "割り振りルールを細かく設定可能", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
+                  { label: "AI が事前ヒアリング・CRM 自動登録まで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
                 ],
                 link: "/features/meetings/",
               },
