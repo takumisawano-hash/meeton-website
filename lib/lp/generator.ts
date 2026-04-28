@@ -185,40 +185,56 @@ function fallbackComponents(profile: UnifiedProfile, roi: RoiCalc | null, cases:
 
 function safeParseJson(text: string): unknown {
   const trimmed = text.trim()
-  let candidate = trimmed
-  const fencedFull = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i)
-  if (fencedFull) {
-    candidate = fencedFull[1]
-  } else if (trimmed.startsWith('```')) {
-    candidate = trimmed.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '')
-  }
   try {
-    return JSON.parse(candidate)
+    return JSON.parse(trimmed)
   } catch {
-    const start = candidate.indexOf('{')
-    let end = candidate.lastIndexOf('}')
-    if (start < 0) return null
-    if (end <= start) {
-      let depth = 0
-      for (let i = start; i < candidate.length; i++) {
-        const ch = candidate[i]
-        if (ch === '{') depth++
-        else if (ch === '}') {
-          depth--
-          if (depth === 0) {
-            end = i
-            break
+    // continue
+  }
+  let cleaned = trimmed
+  if (cleaned.startsWith('```')) {
+    cleaned = cleaned.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '')
+    try {
+      return JSON.parse(cleaned)
+    } catch {
+      // continue
+    }
+  }
+  for (const src of [cleaned, trimmed]) {
+    const start = src.indexOf('{')
+    if (start < 0) continue
+    let depth = 0
+    let inString = false
+    let escape = false
+    for (let i = start; i < src.length; i++) {
+      const ch = src[i]
+      if (escape) {
+        escape = false
+        continue
+      }
+      if (inString && ch === '\\') {
+        escape = true
+        continue
+      }
+      if (ch === '"') {
+        inString = !inString
+        continue
+      }
+      if (inString) continue
+      if (ch === '{') depth++
+      else if (ch === '}') {
+        depth--
+        if (depth === 0) {
+          try {
+            return JSON.parse(src.slice(start, i + 1))
+          } catch {
+            // try next source
           }
+          break
         }
       }
-      if (end <= start) return null
-    }
-    try {
-      return JSON.parse(candidate.slice(start, end + 1))
-    } catch {
-      return null
     }
   }
+  return null
 }
 
 export async function generateLp(profile: UnifiedProfile): Promise<LpDocument> {
