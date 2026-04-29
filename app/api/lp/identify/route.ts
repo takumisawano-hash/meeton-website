@@ -26,6 +26,9 @@ export async function POST(request: NextRequest) {
       gaClientId: body.gaClientId,
       docodoco: body.docodoco,
       pageHistory: body.pageHistory,
+      userMonthlyVisits: body.userMonthlyVisits,
+      userMonthlyLeads: body.userMonthlyLeads,
+      userSdrCount: body.userSdrCount,
     }
     const profile = await buildUnifiedProfile(req)
     return NextResponse.json({ profile })

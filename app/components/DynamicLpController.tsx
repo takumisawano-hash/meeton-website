@@ -34,11 +34,19 @@ type RoiCalcShape = {
   trafficSource: string
   confidence: 'high' | 'medium' | 'low'
   trancoRank?: number
+  category?: string
+  jpShareRatio?: number
+  topKeywords?: Array<{ name: string; volume?: number }>
   expected: {
     meetingsPerMonth: number
     autoFollowedLeadsPerMonth: number
     hoursSavedPerMonth: number
     hoursSavedAsHeadcount: number
+  }
+  uplift?: {
+    addLeadsPerMonth: number
+    currentLeadsPerMonth: number
+    expectedLeadsPerMonth: number
   }
   basis: {
     engageableRate: number
@@ -48,7 +56,9 @@ type RoiCalcShape = {
     hoursPerMeeting: number
     hoursPerFollowup: number
     standardSdrHoursPerMonth: number
-    sourceLabel: string
+    sdrHeadcount?: number
+    sdrHeadcountSource: 'user-input' | 'unknown'
+    capApplied: boolean
   }
 }
 
@@ -78,7 +88,7 @@ type LpDocument = {
   visitorId: string
   generatedAt: string
   components: LpComponentRender[]
-  primaryCta: 'demo' | 'document' | 'chat'
+  primaryCta: 'demo' | 'document'
   rationale?: string
   logo?: LogoShape
   trafficRoi?: RoiCalcShape | null
@@ -238,13 +248,23 @@ function CompanyPopup({
   initialName: string
   initialUrl?: string
   docodoco?: DocoDocoSignal
-  onSubmit: (data: { companyName: string; companyUrl?: string; email?: string }) => void
+  onSubmit: (data: {
+    companyName: string
+    companyUrl?: string
+    email?: string
+    userMonthlyVisits?: number
+    userMonthlyLeads?: number
+    userSdrCount?: number
+  }) => void
   onClose: () => void
   visitorId: string
 }) {
   const [companyName, setCompanyName] = useState(initialName)
   const [companyUrl, setCompanyUrl] = useState(initialUrl || '')
   const [email, setEmail] = useState('')
+  const [monthlyVisits, setMonthlyVisits] = useState('')
+  const [monthlyLeads, setMonthlyLeads] = useState('')
+  const [sdrCount, setSdrCount] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const wasPrefilledRef = useRef(Boolean(initialName))
@@ -263,7 +283,18 @@ function CompanyPopup({
       trackEvent(visitorId, 'docodoco_corrected', { from: initialName, to: trimmed })
     }
     setSubmitting(true)
-    onSubmit({ companyName: trimmed, companyUrl: companyUrl.trim() || undefined, email: email.trim() || undefined })
+    const toInt = (v: string) => {
+      const n = parseInt(v.replace(/[^0-9]/g, ''), 10)
+      return Number.isFinite(n) && n > 0 ? n : undefined
+    }
+    onSubmit({
+      companyName: trimmed,
+      companyUrl: companyUrl.trim() || undefined,
+      email: email.trim() || undefined,
+      userMonthlyVisits: toInt(monthlyVisits),
+      userMonthlyLeads: toInt(monthlyLeads),
+      userSdrCount: toInt(sdrCount),
+    })
   }
 
   return (
@@ -339,7 +370,7 @@ function CompanyPopup({
 
           <details style={{ marginTop: 18 }}>
             <summary style={{ fontSize: 12, color: '#0eab6e', cursor: 'pointer', listStyle: 'none' }}>
-              ＋ 会社サイトURL・メールアドレスでより精度を上げる（任意）
+              ＋ 任意項目を追加するとより正確な試算になります
             </summary>
             <div style={{ marginTop: 12 }}>
               <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>会社サイトURL</label>
@@ -356,8 +387,44 @@ function CompanyPopup({
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="name@company.co.jp"
+                style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff', marginBottom: 14 }}
+              />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>月間訪問数(およそ)</label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={monthlyVisits}
+                    onChange={e => setMonthlyVisits(e.target.value)}
+                    placeholder="例) 50000"
+                    style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff' }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>月間獲得リード数</label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={monthlyLeads}
+                    onChange={e => setMonthlyLeads(e.target.value)}
+                    placeholder="例) 100"
+                    style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff' }}
+                  />
+                </div>
+              </div>
+              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>営業/SDR人数</label>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={sdrCount}
+                onChange={e => setSdrCount(e.target.value)}
+                placeholder="例) 5"
                 style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff' }}
               />
+              <div style={{ fontSize: 11, color: '#6b7873', marginTop: 8, lineHeight: 1.6 }}>
+                入力された値は推定より優先されます。何も入れなくても外部データから自動推定します。
+              </div>
             </div>
           </details>
 
@@ -435,7 +502,7 @@ function GeneratedLpModal({
 }: {
   data: IdentifyResponse
   onClose: () => void
-  onCta: (kind: 'demo' | 'document' | 'chat') => void
+  onCta: (kind: 'demo' | 'document') => void
   visitorId: string
 }) {
   const { profile, lp } = data
@@ -496,7 +563,7 @@ function GeneratedLpModal({
             onClick={() => onCta(lp.primaryCta)}
             style={{ padding: '14px 28px', fontSize: 16, fontWeight: 700, background: '#0eab6e', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer' }}
           >
-            {copyOf(heroComp, 'ctaLabel') || (lp.primaryCta === 'demo' ? '30分で相談する（無料）' : '資料をダウンロード')}
+            {lp.primaryCta === 'demo' ? 'デモを予約' : '資料請求'}
           </button>
           {urgencyComp && copyOf(urgencyComp, 'message') ? (
             <div style={{ marginTop: 16, padding: '10px 14px', background: '#fef3c7', color: '#92400e', borderRadius: 8, fontSize: 13, display: 'inline-block' }}>
@@ -519,12 +586,41 @@ function GeneratedLpModal({
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <StatBig label="自動獲得される商談/月" value={`${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label="AIが自動フォローするリード/月" value={`${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
-                <StatBig label={`工数削減/月 (営業${roi.expected.hoursSavedAsHeadcount}人分)`} value={`${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')}時間`} accent="#0eab6e" />
+                {roi.uplift ? (
+                  <StatBig
+                    label={`リード上乗せ/月 (現状${roi.uplift.currentLeadsPerMonth}件→)`}
+                    value={`+${roi.uplift.addLeadsPerMonth.toLocaleString('ja-JP')}件`}
+                    accent="#0eab6e"
+                  />
+                ) : (
+                  <StatBig
+                    label="AIが自動フォローするリード/月"
+                    value={`${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')}件`}
+                    accent="#0eab6e"
+                  />
+                )}
+                <StatBig
+                  label={
+                    roi.basis.sdrHeadcount
+                      ? `工数削減/月 (営業${roi.basis.sdrHeadcount}名チーム)`
+                      : `工数削減/月 (営業${roi.expected.hoursSavedAsHeadcount}人分)`
+                  }
+                  value={`${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')}時間`}
+                  accent="#0eab6e"
+                />
               </div>
               <div style={{ fontSize: 11, color: '#6b7873', marginTop: 14, lineHeight: 1.7 }}>
-                ※ トラフィック出典: {roi.trafficSource === 'tranco-rank' ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定` : roi.trafficSource === 'similarweb' ? 'SimilarWeb 実データ' : '業種・規模ベンチマーク'}
-                <br />※ 工数削減 = 商談1件あたり {roi.basis.hoursPerMeeting}h(初動・調整・準備) × 商談数 + AIフォロー1件 {roi.basis.hoursPerFollowup}h × フォロー件数。営業1人 = 月 {roi.basis.standardSdrHoursPerMonth}h で換算。
+                ※ トラフィック出典:{' '}
+                {roi.trafficSource === 'user-input'
+                  ? '訪問者ご入力の月間訪問数'
+                  : roi.trafficSource === 'similarweb-free'
+                    ? `SimilarWeb 実データ${roi.trancoRank ? ` (世界 ${roi.trancoRank.toLocaleString('ja-JP')} 位)` : ''}`
+                    : roi.trafficSource === 'similarweb'
+                      ? 'SimilarWeb 実データ'
+                      : roi.trafficSource === 'tranco-rank'
+                        ? `Tranco rank ${roi.trancoRank?.toLocaleString('ja-JP')}位 から推定`
+                        : '業種・規模ベンチマーク'}
+                <br />※ 工数削減 = 商談1件あたり {roi.basis.hoursPerMeeting}h × 商談数 + AIフォロー1件 {roi.basis.hoursPerFollowup}h × フォロー件数{roi.basis.capApplied ? '（営業人数で上限調整）' : ''}
               </div>
             </div>
           </section>
@@ -643,7 +739,7 @@ function GeneratedLpModal({
               <button
                 onClick={() => {
                   const sec = lp.primaryCta === 'demo' ? 'document' : 'demo'
-                  onCta(sec as 'demo' | 'document' | 'chat')
+                  onCta(sec as 'demo' | 'document')
                 }}
                 style={{ padding: '14px 24px', fontSize: 15, fontWeight: 600, background: 'transparent', color: '#fafaf7', border: '1px solid #fafaf7', borderRadius: 10, cursor: 'pointer' }}
               >
@@ -768,7 +864,14 @@ export default function DynamicLpController() {
   const initialName = useMemo(() => docodoco?.company_name || '', [docodoco?.company_name])
 
   const handleSubmit = useCallback(
-    async (input: { companyName: string; companyUrl?: string; email?: string }) => {
+    async (input: {
+      companyName: string
+      companyUrl?: string
+      email?: string
+      userMonthlyVisits?: number
+      userMonthlyLeads?: number
+      userSdrCount?: number
+    }) => {
       const q = parseQuery()
       const payload = {
         companyName: input.companyName,
@@ -785,6 +888,9 @@ export default function DynamicLpController() {
         gaClientId: readCookie('_ga'),
         docodoco,
         pageHistory: pageHistoryRef.current,
+        userMonthlyVisits: input.userMonthlyVisits,
+        userMonthlyLeads: input.userMonthlyLeads,
+        userSdrCount: input.userSdrCount,
       }
       trackEvent(visitorId, 'company_submit', { company: input.companyName })
       try {
@@ -818,25 +924,14 @@ export default function DynamicLpController() {
   }, [visitorId])
 
   const handleCta = useCallback(
-    (kind: 'demo' | 'document' | 'chat') => {
+    (kind: 'demo' | 'document') => {
       if (!visitorId) return
       trackEvent(visitorId, 'cta_click', { kind, source: 'mlp_modal' })
       if (kind === 'demo') {
         setDemoOpen(true)
         return
       }
-      if (kind === 'document') {
-        window.open('/contact/?form=document', '_blank')
-        return
-      }
-      if (kind === 'chat') {
-        const w = window as unknown as { DynaMeet?: { openChat?: () => void } }
-        if (w.DynaMeet?.openChat) {
-          w.DynaMeet.openChat()
-        } else {
-          setDemoOpen(true)
-        }
-      }
+      window.open('/contact/?form=document', '_blank')
     },
     [visitorId]
   )

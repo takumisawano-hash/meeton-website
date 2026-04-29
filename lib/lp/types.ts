@@ -29,6 +29,9 @@ export type IdentifyRequest = {
     org_url?: string
   }
   pageHistory?: string[]
+  userMonthlyVisits?: number
+  userMonthlyLeads?: number
+  userSdrCount?: number
 }
 
 export type CompanyProfile = {
@@ -102,6 +105,7 @@ export type UnifiedProfile = {
   scoreTier: ScoreTier
   funnelStage: FunnelStage
   intentSignals: string[]
+  userInputs?: { monthlyVisits?: number; monthlyLeads?: number; sdrCount?: number }
   generatedAt: string
 }
 
@@ -131,7 +135,7 @@ export type LpDocument = {
   visitorId: string
   generatedAt: string
   components: LpComponent[]
-  primaryCta: 'demo' | 'document' | 'chat'
+  primaryCta: 'demo' | 'document'
   themeAccent?: string
   rationale?: string
   logo?: { primary: string; fallbacks: string[]; domain: string } | null

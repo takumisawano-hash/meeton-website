@@ -1,47 +1,54 @@
 import { getTrancoRank, rankToMonthlyVisits } from './tranco'
+import { fetchSimilarWebFree, type SimilarWebFreeResult } from './similarweb-free'
 
 const SIMILARWEB_API_KEY = process.env.SIMILARWEB_API_KEY || ''
 
 export type TrafficEstimate = {
   monthlyVisits: number
-  source: 'similarweb' | 'tranco-rank' | 'industry-employee-bench' | 'fallback'
+  source: 'user-input' | 'similarweb-free' | 'similarweb' | 'tranco-rank' | 'industry-employee-bench' | 'fallback'
   confidence: 'high' | 'medium' | 'low'
   details?: {
     rank?: number
+    countryRank?: number
     bounceRate?: number
     avgVisitDuration?: number
     pagesPerVisit?: number
+    category?: string
+    jpShareRatio?: number
+    trafficSources?: SimilarWebFreeResult['trafficSources']
+    topKeywords?: SimilarWebFreeResult['topKeywords']
+    recentMonths?: SimilarWebFreeResult['recentMonths']
   }
 }
 
 const INDUSTRY_BASE_VISITS: Record<string, number> = {
-  '金融': 80000,
-  '物流': 35000,
-  '製造': 40000,
-  'IT': 60000,
-  '商社': 28000,
-  '小売': 120000,
-  '建設': 18000,
-  '医療': 35000,
-  '不動産': 70000,
-  '教育': 60000,
-  'コンサル': 25000,
-  '広告マーケ': 40000,
-  'エネルギー': 30000,
-  '食品': 45000,
-  default: 35000,
+  '金融': 35000,
+  '物流': 14000,
+  '製造': 16000,
+  'IT': 22000,
+  '商社': 11000,
+  '小売': 50000,
+  '建設': 7000,
+  '医療': 14000,
+  '不動産': 28000,
+  '教育': 24000,
+  'コンサル': 10000,
+  '広告マーケ': 16000,
+  'エネルギー': 12000,
+  '食品': 18000,
+  default: 14000,
 }
 
 const EMPLOYEE_MULTIPLIER: Record<string, number> = {
-  '1-9': 0.15,
-  '10-29': 0.3,
-  '30-49': 0.5,
-  '50-99': 0.8,
-  '100-299': 1.2,
-  '300-499': 1.7,
-  '500-999': 2.4,
-  '1000-2999': 3.5,
-  '3000+': 5.5,
+  '1-9': 0.1,
+  '10-29': 0.2,
+  '30-49': 0.35,
+  '50-99': 0.5,
+  '100-299': 0.8,
+  '300-499': 1.2,
+  '500-999': 1.7,
+  '1000-2999': 2.5,
+  '3000+': 4.0,
 }
 
 function fromBenchmark(industry?: string, employees?: string): number {
@@ -69,6 +76,25 @@ async function fromSimilarWeb(domain: string): Promise<TrafficEstimate | null> {
   }
 }
 
+async function fromSimilarWebFreeSrc(domain: string): Promise<TrafficEstimate | null> {
+  const sw = await fetchSimilarWebFree(domain)
+  if (!sw) return null
+  return {
+    monthlyVisits: sw.monthlyVisits,
+    source: 'similarweb-free',
+    confidence: 'high',
+    details: {
+      rank: sw.globalRank,
+      countryRank: sw.countryRank,
+      category: sw.category,
+      jpShareRatio: sw.jpShareRatio,
+      trafficSources: sw.trafficSources,
+      topKeywords: sw.topKeywords,
+      recentMonths: sw.recentMonths,
+    },
+  }
+}
+
 async function fromTranco(domain: string): Promise<TrafficEstimate | null> {
   const rank = await getTrancoRank(domain)
   if (!rank) return null
@@ -84,8 +110,14 @@ export async function estimateTraffic(opts: {
   domain?: string
   industry?: string
   employees?: string
+  userMonthlyVisits?: number
 }): Promise<TrafficEstimate> {
+  if (opts.userMonthlyVisits && opts.userMonthlyVisits > 0) {
+    return { monthlyVisits: opts.userMonthlyVisits, source: 'user-input', confidence: 'high' }
+  }
   if (opts.domain) {
+    const swFree = await fromSimilarWebFreeSrc(opts.domain)
+    if (swFree) return swFree
     const sw = await fromSimilarWeb(opts.domain)
     if (sw) return sw
     const tr = await fromTranco(opts.domain)

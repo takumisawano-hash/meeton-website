@@ -36,6 +36,9 @@ export async function POST(request: NextRequest) {
         gaClientId: req.gaClientId,
         docodoco: req.docodoco,
         pageHistory: req.pageHistory,
+        userMonthlyVisits: req.userMonthlyVisits,
+        userMonthlyLeads: req.userMonthlyLeads,
+        userSdrCount: req.userSdrCount,
       })
     }
     const lp = await generateLp(profile)

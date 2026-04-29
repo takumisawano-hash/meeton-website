@@ -90,12 +90,24 @@ function buildContextDigest(profile: UnifiedProfile, roi: RoiCalc | null, cases:
   lines.push(`■ スコア: tier=${profile.scoreTier}, funnel=${profile.funnelStage}`)
 
   if (roi) {
-    lines.push(`■ トラフィック試算 (出典=${roi.trafficSource}, 信頼度=${roi.confidence}${roi.trancoRank ? `, Tranco rank=${roi.trancoRank}` : ''}):`)
-    lines.push(`  月間訪問数: ${roi.monthlyVisits.toLocaleString('ja-JP')} / 有能訪問者: ${roi.monthlyEngageable.toLocaleString('ja-JP')}`)
+    lines.push(`■ トラフィック試算 (出典=${roi.trafficSource}, 信頼度=${roi.confidence}${roi.trancoRank ? `, GlobalRank=${roi.trancoRank}` : ''}${roi.category ? `, Category=${roi.category}` : ''}):`)
+    lines.push(`  月間訪問数: ${roi.monthlyVisits.toLocaleString('ja-JP')} / 有能訪問者: ${roi.monthlyEngageable.toLocaleString('ja-JP')} (engageable率 ${(roi.basis.engageableRate * 100).toFixed(0)}%)`)
+    if (roi.jpShareRatio) lines.push(`  日本国内比率: ${(roi.jpShareRatio * 100).toFixed(1)}%`)
+    if (roi.topKeywords?.length) {
+      lines.push(`  TOP検索KW: ${roi.topKeywords.slice(0, 3).map(k => k.name).join(' / ')}`)
+    }
     lines.push(`  Meeton ai が提供する月次価値:`)
     lines.push(`    自動獲得される商談: ${roi.expected.meetingsPerMonth.toLocaleString('ja-JP')} 件/月`)
-    lines.push(`    AI が自動フォローするリード: ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')} 件/月 (商談未達でAI Email/Chatが継続ナーチャリング)`)
-    lines.push(`    工数削減合計: ${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')} h/月 = 営業 ${roi.expected.hoursSavedAsHeadcount} 人分相当 (商談1件3h × ${roi.expected.meetingsPerMonth}件 + フォロー1件1h × ${roi.expected.autoFollowedLeadsPerMonth}件)`)
+    lines.push(`    AI が自動フォローするリード: ${roi.expected.autoFollowedLeadsPerMonth.toLocaleString('ja-JP')} 件/月`)
+    if (roi.uplift) {
+      lines.push(`    リード上乗せ: 現状 ${roi.uplift.currentLeadsPerMonth}件 → 見込み ${roi.uplift.expectedLeadsPerMonth}件 (+${roi.uplift.addLeadsPerMonth}件 / 月) ※訪問者本人申告ベース`)
+    }
+    if (roi.basis.sdrHeadcount) {
+      lines.push(`    工数削減: ${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')} h/月 (営業${roi.basis.sdrHeadcount}名チームの実数換算)`)
+    } else {
+      lines.push(`    工数削減: ${roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')} h/月 = 営業 ${roi.expected.hoursSavedAsHeadcount} 人分相当`)
+    }
+    if (roi.basis.capApplied) lines.push(`    ※ 入力されたSDR数で上限キャップ適用済`)
   } else {
     lines.push(`■ トラフィック試算: 取得できず`)
   }
@@ -309,6 +321,7 @@ export async function generateLp(profile: UnifiedProfile): Promise<LpDocument> {
     domain: profile.company.domain || logo?.domain,
     industry: profile.company.industry,
     employees: profile.company.employees,
+    userMonthlyVisits: profile.userInputs?.monthlyVisits,
   })
   const casesPromise = matchCaseStudies({
     industry: profile.company.industry,
@@ -326,7 +339,15 @@ export async function generateLp(profile: UnifiedProfile): Promise<LpDocument> {
   })
 
   const [traffic, cases, blogs] = await Promise.all([trafficPromise, casesPromise, blogsPromise])
-  const roi = traffic ? calculateRoi({ traffic, industry: profile.company.industry, employees: profile.company.employees }) : null
+  const roi = traffic
+    ? calculateRoi({
+        traffic,
+        industry: profile.company.industry,
+        employees: profile.company.employees,
+        userMonthlyLeads: profile.userInputs?.monthlyLeads,
+        userSdrCount: profile.userInputs?.sdrCount,
+      })
+    : null
   const cta = pickCtaForTier(profile.scoreTier, profile.funnelStage)
 
   const baseDoc: LpDocument = {

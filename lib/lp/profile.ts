@@ -150,6 +150,14 @@ export async function buildUnifiedProfile(req: IdentifyRequest): Promise<Unified
   const intentSignals = deriveIntentSignals(partial)
   if (searchIntent) intentSignals.push(`search-intent:${searchIntent}`)
 
+  const userInputs = (req.userMonthlyVisits || req.userMonthlyLeads || req.userSdrCount)
+    ? {
+        monthlyVisits: req.userMonthlyVisits,
+        monthlyLeads: req.userMonthlyLeads,
+        sdrCount: req.userSdrCount,
+      }
+    : undefined
+
   return {
     visitorId: req.visitorId || `vid_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
     company,
@@ -160,6 +168,7 @@ export async function buildUnifiedProfile(req: IdentifyRequest): Promise<Unified
     scoreTier,
     funnelStage,
     intentSignals,
+    userInputs,
     generatedAt: new Date().toISOString(),
   }
 }

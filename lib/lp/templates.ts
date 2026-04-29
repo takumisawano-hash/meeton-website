@@ -170,52 +170,31 @@ export const URGENCY_BANK: Record<string, string> = {
 }
 
 export type CtaSpec = {
-  primary: 'demo' | 'document' | 'chat'
+  primary: 'demo' | 'document'
   primaryLabel: string
-  secondary?: 'demo' | 'document' | 'chat'
-  secondaryLabel?: string
+  secondary: 'demo' | 'document'
+  secondaryLabel: string
   accentMessage?: string
 }
 
+const DEMO_LABEL = 'デモを予約'
+const DOCUMENT_LABEL = '資料請求'
+
 export function pickCtaForTier(tier: ScoreTier, stage: FunnelStage): CtaSpec {
-  if (stage === 'customer') {
+  if (stage === 'customer' || tier === 'super-high' || tier === 'high') {
     return {
       primary: 'demo',
-      primaryLabel: '担当者と新機能の相談をする',
+      primaryLabel: DEMO_LABEL,
       secondary: 'document',
-      secondaryLabel: '最新リリースノートを見る',
-    }
-  }
-  if (tier === 'super-high') {
-    return {
-      primary: 'demo',
-      primaryLabel: '担当営業と直接話す（30分）',
-      secondary: 'document',
-      secondaryLabel: '貴社向けROI試算書をダウンロード',
-      accentMessage: '通常より優先的に日程をお取りします',
-    }
-  }
-  if (tier === 'high') {
-    return {
-      primary: 'demo',
-      primaryLabel: '30分で相談する（無料）',
-      secondary: 'document',
-      secondaryLabel: '導入事例を3社まとめてDL',
-    }
-  }
-  if (tier === 'mid') {
-    return {
-      primary: 'document',
-      primaryLabel: 'ROI試算と事例集をDL',
-      secondary: 'demo',
-      secondaryLabel: '質問だけでも30分でOK',
+      secondaryLabel: DOCUMENT_LABEL,
+      accentMessage: tier === 'super-high' ? '通常より優先的に日程をお取りします' : undefined,
     }
   }
   return {
     primary: 'document',
-    primaryLabel: '3分で分かる Meeton ai（PDF）',
-    secondary: 'chat',
-    secondaryLabel: 'AIチャットで質問する',
+    primaryLabel: DOCUMENT_LABEL,
+    secondary: 'demo',
+    secondaryLabel: DEMO_LABEL,
   }
 }
 
