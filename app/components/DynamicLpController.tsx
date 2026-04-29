@@ -10,9 +10,22 @@ const STORAGE_LAST_SHOW = 'mlp_last_show'
 const DISMISS_COOLDOWN_MS = 1000 * 60 * 60 * 24
 const SHOW_COOLDOWN_MS = 1000 * 60 * 30
 
-const HIGH_INTENT_PATHS = ['/pricing', '/case-studies', '/features/', '/contact']
-const SCROLL_THRESHOLD = 0.25
-const TIME_THRESHOLD_MS = 20_000
+const HIGH_INTENT_EXACT_PATHS = ['/contact', '/security']
+const HIGH_INTENT_PREFIXES = [
+  '/features/ai-chat',
+  '/features/ai-email',
+  '/features/meetings',
+  '/features/offers',
+]
+const HIGH_INTENT_PATTERNS: RegExp[] = [/^\/case-studies\/[^/]+/]
+const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/']
+
+const SCROLL_THRESHOLD = 0.3
+const TIME_THRESHOLD_MS = 30_000
+const HIGH_INTENT_TIME_MS = 10_000
+const EXIT_INTENT_MIN_MS = 15_000
+const MULTI_PAGE_TIME_MS = 20_000
+const SESSION_PAGE_VISITS_KEY = 'mlp_page_visits'
 
 type DocoDocoSignal = {
   company_name?: string
@@ -151,7 +164,37 @@ function parseQuery(): { utm: Record<string, string>; gclid?: string; yclid?: st
 }
 
 function isHighIntentPage(path: string): boolean {
-  return HIGH_INTENT_PATHS.some(p => path.includes(p))
+  if (HIGH_INTENT_EXACT_PATHS.some(p => path === p || path === p + '/')) return true
+  if (HIGH_INTENT_PREFIXES.some(p => path === p || path.startsWith(p + '/') || path === p + '/')) return true
+  if (HIGH_INTENT_PATTERNS.some(re => re.test(path))) return true
+  return false
+}
+
+function isExcludedPage(path: string): boolean {
+  return EXCLUDED_PREFIXES.some(p => path === p || path.startsWith(p))
+}
+
+function isAiChatActive(): boolean {
+  if (typeof window === 'undefined') return false
+  const w = window as unknown as {
+    DynaMeet?: { isChatOpen?: boolean; chatOpen?: boolean }
+    __dynameetChatOpen?: boolean
+  }
+  if (w.DynaMeet?.isChatOpen || w.DynaMeet?.chatOpen) return true
+  if (w.__dynameetChatOpen) return true
+  const el = document.querySelector('[data-dynameet-chat-open="true"], .dynameet-chat-open')
+  return Boolean(el)
+}
+
+function bumpSessionPageVisit(): number {
+  try {
+    const cur = Number(sessionStorage.getItem(SESSION_PAGE_VISITS_KEY) || 0)
+    const next = cur + 1
+    sessionStorage.setItem(SESSION_PAGE_VISITS_KEY, String(next))
+    return next
+  } catch {
+    return 1
+  }
 }
 
 function trackEvent(visitorId: string, type: string, context?: Record<string, unknown>): void {
@@ -787,34 +830,41 @@ export default function DynamicLpController() {
     return true
   }, [])
 
-  const triggerPopup = useCallback(() => {
-    if (triggeredRef.current) return
-    if (!checkCooldown()) return
-    if (data) return
-    triggeredRef.current = true
-    try {
-      localStorage.setItem(STORAGE_LAST_SHOW, String(Date.now()))
-    } catch {
-      // ignore
-    }
-    setPopupOpen(true)
-    if (visitorId) {
-      trackEvent(visitorId, 'popup_view', { path: location.pathname, prefill: docodoco?.company_name || null })
-    }
-  }, [checkCooldown, data, docodoco, visitorId])
+  const triggerPopup = useCallback(
+    (reason: string) => {
+      if (triggeredRef.current) return
+      if (!checkCooldown()) return
+      if (data) return
+      if (isAiChatActive()) return
+      triggeredRef.current = true
+      try {
+        localStorage.setItem(STORAGE_LAST_SHOW, String(Date.now()))
+      } catch {
+        // ignore
+      }
+      setPopupOpen(true)
+      if (visitorId) {
+        trackEvent(visitorId, 'popup_view', { path: location.pathname, reason, prefill: docodoco?.company_name || null })
+      }
+    },
+    [checkCooldown, data, docodoco, visitorId]
+  )
 
   useEffect(() => {
     if (!visitorId) return
-    if (location.pathname.startsWith('/lp')) return
+    const path = location.pathname
+    if (isExcludedPage(path)) return
 
-    let timer: ReturnType<typeof setTimeout> | null = null
+    const pageVisitNumber = bumpSessionPageVisit()
+    const highIntent = isHighIntentPage(path)
+    const isMultiPage = pageVisitNumber >= 2
+
+    const timers: Array<ReturnType<typeof setTimeout>> = []
     let scrollPassed = false
     let timePassed = false
 
-    const tryFire = () => {
-      if (scrollPassed && timePassed) {
-        triggerPopup()
-      }
+    const tryL2 = () => {
+      if (scrollPassed && timePassed) triggerPopup('L2:scroll+time')
     }
 
     const onScroll = () => {
@@ -823,39 +873,35 @@ export default function DynamicLpController() {
       const pct = window.scrollY / max
       if (pct >= SCROLL_THRESHOLD && !scrollPassed) {
         scrollPassed = true
-        tryFire()
+        tryL2()
       }
     }
-    timer = setTimeout(() => {
-      timePassed = true
-      tryFire()
-    }, TIME_THRESHOLD_MS)
+
+    if (highIntent) {
+      timers.push(setTimeout(() => triggerPopup('L1:high-intent'), HIGH_INTENT_TIME_MS))
+    } else {
+      timers.push(
+        setTimeout(() => {
+          timePassed = true
+          tryL2()
+        }, TIME_THRESHOLD_MS)
+      )
+      window.addEventListener('scroll', onScroll, { passive: true })
+    }
+
+    if (isMultiPage) {
+      timers.push(setTimeout(() => triggerPopup('L4:multi-page'), MULTI_PAGE_TIME_MS))
+    }
 
     const onMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && Date.now() - startTsRef.current > 8000) {
-        triggerPopup()
+      if (e.clientY <= 0 && Date.now() - startTsRef.current >= EXIT_INTENT_MIN_MS) {
+        triggerPopup('L3:exit-intent')
       }
     }
-
-    if (isHighIntentPage(location.pathname)) {
-      const fast = setTimeout(triggerPopup, 8000)
-      const cleanup = () => {
-        clearTimeout(fast)
-      }
-      window.addEventListener('scroll', onScroll, { passive: true })
-      document.addEventListener('mouseleave', onMouseLeave)
-      return () => {
-        cleanup()
-        if (timer) clearTimeout(timer)
-        window.removeEventListener('scroll', onScroll)
-        document.removeEventListener('mouseleave', onMouseLeave)
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
     document.addEventListener('mouseleave', onMouseLeave)
+
     return () => {
-      if (timer) clearTimeout(timer)
+      timers.forEach(t => clearTimeout(t))
       window.removeEventListener('scroll', onScroll)
       document.removeEventListener('mouseleave', onMouseLeave)
     }
