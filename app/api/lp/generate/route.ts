@@ -18,12 +18,12 @@ export async function POST(request: NextRequest) {
       profile = body.profile
     } else {
       const req = body as Partial<IdentifyRequest>
-      if (!req.companyName || !req.pagePath) {
-        return NextResponse.json({ error: 'companyName and pagePath required when profile not given' }, { status: 400 })
+      if (!req.companyUrl || !req.pagePath) {
+        return NextResponse.json({ error: 'companyUrl and pagePath required when profile not given' }, { status: 400 })
       }
       profile = await buildUnifiedProfile({
-        companyName: req.companyName.trim(),
-        companyUrl: req.companyUrl,
+        companyUrl: req.companyUrl.trim(),
+        companyName: req.companyName?.trim(),
         email: req.email,
         hubspotutk: req.hubspotutk,
         visitorId: req.visitorId,

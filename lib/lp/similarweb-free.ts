@@ -9,6 +9,7 @@ type SimilarWebRaw = {
   Category?: string
   Description?: string
   Title?: string
+  SiteName?: string
   IsSmall?: boolean
   TopCountryShares?: Array<{ CountryCode?: string; Value?: number }>
   TrafficSources?: { Direct?: number; Search?: number; Social?: number; Referrals?: number; Mail?: number; 'Paid Referrals'?: number }
@@ -23,6 +24,8 @@ export type SimilarWebFreeResult = {
   countryCode?: string
   category?: string
   description?: string
+  title?: string
+  siteName?: string
   isSmall?: boolean
   jpShareRatio?: number
   trafficSources?: { direct?: number; search?: number; social?: number; referrals?: number; mail?: number; paid?: number }
@@ -58,6 +61,8 @@ export async function fetchSimilarWebFree(domain: string, timeoutMs = 7000): Pro
       countryCode: data.CountryRank?.CountryCode,
       category: data.Category,
       description: data.Description,
+      title: data.Title,
+      siteName: data.SiteName,
       isSmall: data.IsSmall,
       jpShareRatio: jpShare,
       trafficSources: data.TrafficSources

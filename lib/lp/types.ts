@@ -3,8 +3,8 @@ export type FunnelStage = 'lead' | 'mql' | 'sql' | 'opportunity' | 'customer' | 
 export type ScoreTier = 'low' | 'mid' | 'high' | 'super-high'
 
 export type IdentifyRequest = {
-  companyName: string
-  companyUrl?: string
+  companyUrl: string
+  companyName?: string
   email?: string
   hubspotutk?: string
   visitorId?: string

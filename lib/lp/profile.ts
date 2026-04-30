@@ -9,6 +9,7 @@ import { fetchHubspotProfile } from './hubspot'
 import { fetchMcpProfile } from './mcp'
 import { lookupHoujin } from './houjin'
 import { deriveTraffic, inferSearchIntent } from './traffic'
+import { resolveCompany } from './company-resolve'
 
 function deriveFunnelStage(lifecyclestage?: string, hsLeadStatus?: string): FunnelStage {
   const ls = (lifecyclestage || '').toLowerCase()
@@ -68,7 +69,7 @@ function pickCompany(input: IdentifyRequest, houjin: CompanyProfile | null): Com
     }
   }
   return houjin || {
-    name: input.companyName,
+    name: input.companyName || input.companyUrl,
     source: 'user-input',
     confidence: input.companyUrl || input.email ? 'medium' : 'low',
   }
@@ -102,21 +103,41 @@ function buildPageContext(req: IdentifyRequest, mcpPages?: string[]) {
 }
 
 export async function buildUnifiedProfile(req: IdentifyRequest): Promise<UnifiedProfile> {
+  const resolved = await resolveCompany({
+    companyUrl: req.companyUrl,
+    userCompanyName: req.companyName,
+  })
+  const resolvedName = resolved?.name || req.companyName || req.companyUrl
+  const resolvedDomain = resolved?.domain
+    || (req.companyUrl ? req.companyUrl.replace(/^https?:\/\//, '').replace(/\/.*$/, '') : undefined)
+
   const [hubspot, mcp, houjin] = await Promise.all([
     fetchHubspotProfile({
       email: req.email,
       hubspotutk: req.hubspotutk,
-      companyName: req.companyName,
+      companyName: resolvedName,
     }),
     fetchMcpProfile({
       email: req.email,
-      companyName: req.companyName,
+      companyName: resolvedName,
       visitorId: req.visitorId,
     }),
-    lookupHoujin(req.companyName),
+    lookupHoujin(resolvedName),
   ])
 
-  const company = pickCompany(req, houjin)
+  const reqWithName: IdentifyRequest = {
+    ...req,
+    companyName: resolvedName,
+    docodoco: req.docodoco
+      ? { ...req.docodoco, domain: req.docodoco.domain || resolvedDomain }
+      : resolvedDomain
+        ? { company_name: resolvedName, domain: resolvedDomain, industry: resolved?.category }
+        : undefined,
+  }
+
+  const company = pickCompany(reqWithName, houjin)
+  if (resolvedDomain && !company.domain) company.domain = resolvedDomain
+  if (resolved?.category && !company.industry) company.industry = resolved.category
   const traffic = deriveTraffic(req)
   if (traffic.searchKeyword || req.utm?.term) {
     traffic.searchKeyword = traffic.searchKeyword || req.utm?.term

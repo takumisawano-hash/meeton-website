@@ -313,8 +313,8 @@ function CompanyPopup({
   initialUrl?: string
   docodoco?: DocoDocoSignal
   onSubmit: (data: {
-    companyName: string
-    companyUrl?: string
+    companyName?: string
+    companyUrl: string
     email?: string
     userMonthlyVisits?: number
     userMonthlyLeads?: number
@@ -341,19 +341,16 @@ function CompanyPopup({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const trimmed = companyName.trim()
-    if (!trimmed) return
-    if (wasPrefilledRef.current && trimmed !== initialName) {
-      trackEvent(visitorId, 'docodoco_corrected', { from: initialName, to: trimmed })
-    }
+    const urlTrimmed = companyUrl.trim()
+    if (!urlTrimmed) return
     setSubmitting(true)
     const toInt = (v: string) => {
       const n = parseInt(v.replace(/[^0-9]/g, ''), 10)
       return Number.isFinite(n) && n > 0 ? n : undefined
     }
     onSubmit({
-      companyName: trimmed,
-      companyUrl: companyUrl.trim() || undefined,
+      companyName: companyName.trim() || undefined,
+      companyUrl: urlTrimmed,
       email: email.trim() || undefined,
       userMonthlyVisits: toInt(monthlyVisits),
       userMonthlyLeads: toInt(monthlyLeads),
@@ -396,24 +393,24 @@ function CompanyPopup({
           ▸ AI Personalized Page
         </div>
         <h3 style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.35, margin: '0 0 8px' }}>
-          あなたの会社向けに、最適化したご提案を30秒以内に生成します
+          貴社のWebサイトURLから、最適化したご提案を30秒以内に生成します
         </h3>
         <p style={{ color: '#3d4a44', fontSize: 14, lineHeight: 1.7, margin: '0 0 22px' }}>
-          会社名から、業種・規模・トラフィック・流入経路を踏まえた専用ページを作成します。
+          ロゴ・業種・トラフィック・流入経路を自動解析して、貴社専用ページを作成します。
         </p>
         <form onSubmit={handleSubmit}>
           <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>
-            会社名 <span style={{ color: '#b91c1c' }}>*</span>
+            Webサイト URL またはドメイン <span style={{ color: '#b91c1c' }}>*</span>
           </label>
           <input
             ref={inputRef}
             type="text"
-            value={companyName}
-            onChange={e => setCompanyName(e.target.value)}
+            value={companyUrl}
+            onChange={e => setCompanyUrl(e.target.value)}
             onFocus={e => e.target.select()}
-            placeholder="例) 株式会社○○"
+            placeholder="例) example.co.jp / https://corp.example.com"
             required
-            autoComplete="organization"
+            autoComplete="url"
             style={{
               width: '100%',
               padding: '12px 14px',
@@ -425,27 +422,26 @@ function CompanyPopup({
               outline: 'none',
             }}
           />
-          {wasPrefilledRef.current && companyName === initialName ? (
-            <div style={{ fontSize: 11, color: '#6b7873', marginTop: 6 }}>
-              ↑ 自動推定です（{docodoco?.industry || '推定'}）。違う場合は修正してください
-            </div>
-          ) : null}
-          <HoujinSuggest query={companyName} onPick={n => setCompanyName(n)} />
+          <div style={{ fontSize: 11, color: '#6b7873', marginTop: 6 }}>
+            URLから会社名・業種・月間訪問数を自動取得します
+          </div>
 
           <details style={{ marginTop: 18 }}>
             <summary style={{ fontSize: 12, color: '#0eab6e', cursor: 'pointer', listStyle: 'none' }}>
               ＋ 任意項目を追加するとより正確な試算になります
             </summary>
             <div style={{ marginTop: 12 }}>
-              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>会社サイトURL</label>
+              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>会社名(URLから自動取得します)</label>
               <input
-                type="url"
-                value={companyUrl}
-                onChange={e => setCompanyUrl(e.target.value)}
-                placeholder="https://example.co.jp"
+                type="text"
+                value={companyName}
+                onChange={e => setCompanyName(e.target.value)}
+                placeholder="例) 株式会社○○"
+                autoComplete="organization"
                 style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff', marginBottom: 10 }}
               />
-              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>会社のメールアドレス</label>
+              <HoujinSuggest query={companyName} onPick={n => setCompanyName(n)} />
+              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6, marginTop: 10 }}>会社のメールアドレス</label>
               <input
                 type="email"
                 value={email}
@@ -496,7 +492,7 @@ function CompanyPopup({
             <button type="button" onClick={onClose} style={{ flex: '0 0 auto', padding: '12px 18px', background: 'transparent', border: '1px solid #d4d2c7', borderRadius: 8, color: '#3d4a44', cursor: 'pointer', fontSize: 14 }}>
               閉じる
             </button>
-            <button type="submit" disabled={submitting || !companyName.trim()} style={{ flex: '1 1 auto', padding: '12px 18px', background: '#0eab6e', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 700, opacity: submitting ? 0.6 : 1 }}>
+            <button type="submit" disabled={submitting || !companyUrl.trim()} style={{ flex: '1 1 auto', padding: '12px 18px', background: '#0eab6e', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 700, opacity: submitting ? 0.6 : 1 }}>
               {submitting ? '生成中…' : '専用ページを表示'}
             </button>
           </div>
@@ -1028,6 +1024,9 @@ export default function DynamicLpController() {
 
   const checkCooldown = useCallback((): boolean => {
     try {
+      if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('mlp_test') === '1') {
+        return true
+      }
       const dismissed = Number(localStorage.getItem(STORAGE_DISMISSED_KEY) || 0)
       if (Date.now() - dismissed < DISMISS_COOLDOWN_MS) return false
       const lastShow = Number(localStorage.getItem(STORAGE_LAST_SHOW) || 0)
@@ -1061,7 +1060,13 @@ export default function DynamicLpController() {
   useEffect(() => {
     if (!visitorId) return
     const path = location.pathname
-    if (isExcludedPage(path)) return
+    const isTestMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('mlp_test') === '1'
+    if (!isTestMode && isExcludedPage(path)) return
+
+    if (isTestMode) {
+      const t = setTimeout(() => triggerPopup('TEST'), 500)
+      return () => clearTimeout(t)
+    }
 
     const pageVisitNumber = bumpSessionPageVisit()
     const highIntent = isHighIntentPage(path)
@@ -1116,11 +1121,12 @@ export default function DynamicLpController() {
   }, [triggerPopup, visitorId])
 
   const initialName = useMemo(() => docodoco?.company_name || '', [docodoco?.company_name])
+  const initialUrl = useMemo(() => docodoco?.domain || docodoco?.org_url || '', [docodoco?.domain, docodoco?.org_url])
 
   const handleSubmit = useCallback(
     async (input: {
-      companyName: string
-      companyUrl?: string
+      companyName?: string
+      companyUrl: string
       email?: string
       userMonthlyVisits?: number
       userMonthlyLeads?: number
@@ -1197,6 +1203,7 @@ export default function DynamicLpController() {
       {popupOpen ? (
         <CompanyPopup
           initialName={initialName}
+          initialUrl={initialUrl}
           docodoco={docodoco}
           onSubmit={handleSubmit}
           onClose={handlePopupClose}

@@ -8,12 +8,12 @@ export const runtime = 'nodejs'
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as Partial<IdentifyRequest>
-    if (!body.companyName || !body.pagePath) {
-      return NextResponse.json({ error: 'companyName and pagePath are required' }, { status: 400 })
+    if (!body.companyUrl || !body.pagePath) {
+      return NextResponse.json({ error: 'companyUrl and pagePath are required' }, { status: 400 })
     }
     const req: IdentifyRequest = {
-      companyName: body.companyName.trim(),
-      companyUrl: body.companyUrl,
+      companyUrl: body.companyUrl.trim(),
+      companyName: body.companyName?.trim(),
       email: body.email,
       hubspotutk: body.hubspotutk,
       visitorId: body.visitorId,
