@@ -44,6 +44,8 @@ const nextConfig = {
       { pathname: '/api/thumbnail/**' },
       { pathname: '/api/notion-image/**' },
       { pathname: '/api/og/**' },
+      // Allow public/integrations/* images for next/image
+      { pathname: '/integrations/**' },
     ],
   },
   async redirects() {
