@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import HubSpotModal from "./HubSpotModal";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
+import MidPageCta from "./MidPageCta";
 
 const css = `
 :root {
@@ -572,6 +573,15 @@ export default function AiChatPageClient() {
         </div>
       </section>
 
+      {/* CTA — after USE CASES: demo (visualizing real conversations boosts intent) */}
+      <MidPageCta
+        eyebrow="See it in action"
+        heading="実際のチャット動作と AI コンシェルジュの応答品質を、御社の業界に合わせたデモで 15 分で体験"
+        ctaLabel="デモを予約する"
+        variant="demo"
+        onClick={() => setIsMeetingModalOpen(true)}
+      />
+
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
@@ -592,6 +602,15 @@ export default function AiChatPageClient() {
           </div>
         </div>
       </section>
+
+      {/* CTA — after WHY: doc (internal review framing) */}
+      <MidPageCta
+        eyebrow="For internal review"
+        heading="AI チャットの仕様・導入事例・料金プランをまとめた資料を社内検討用にお送りします"
+        ctaLabel="資料を請求する"
+        variant="doc"
+        onClick={() => setIsDocModalOpen(true)}
+      />
 
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--surface)' }}>

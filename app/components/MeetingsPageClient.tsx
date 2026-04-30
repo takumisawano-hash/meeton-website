@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import HubSpotModal from "./HubSpotModal";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
+import MidPageCta from "./MidPageCta";
 
 const css = `
 :root {
@@ -584,6 +585,15 @@ export default function MeetingsPageClient() {
         </div>
       </section>
 
+      {/* CTA — after USE CASES: demo */}
+      <MidPageCta
+        eyebrow="See it in action"
+        heading="チャット内・サンクスページ・メール経由のカレンダー提示と割り振り設定を、実機で 15 分で体験"
+        ctaLabel="デモを予約する"
+        variant="demo"
+        onClick={() => setIsMeetingModalOpen(true)}
+      />
+
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
@@ -604,6 +614,15 @@ export default function MeetingsPageClient() {
           </div>
         </div>
       </section>
+
+      {/* CTA — after WHY: doc (internal review) */}
+      <MidPageCta
+        eyebrow="For internal review"
+        heading="AI カレンダーの仕様・割り振りルール・連携先一覧をまとめた資料を社内検討用にお送りします"
+        ctaLabel="資料を請求する"
+        variant="doc"
+        onClick={() => setIsDocModalOpen(true)}
+      />
 
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--surface)' }}>

@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import HubSpotModal from "./HubSpotModal";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
+import MidPageCta from "./MidPageCta";
 
 const css = `
 :root {
@@ -614,6 +615,15 @@ export default function AiEmailPageClient() {
         </div>
       </section>
 
+      {/* CTA — after USE CASES: demo */}
+      <MidPageCta
+        eyebrow="See it in action"
+        heading="行動データから AI が文面を都度生成する流れと、承認モードの操作感を実機で 15 分で体験"
+        ctaLabel="デモを予約する"
+        variant="demo"
+        onClick={() => setIsMeetingModalOpen(true)}
+      />
+
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
@@ -634,6 +644,15 @@ export default function AiEmailPageClient() {
           </div>
         </div>
       </section>
+
+      {/* CTA — after WHY: doc */}
+      <MidPageCta
+        eyebrow="For internal review"
+        heading="AI メールの仕様・行動再生成の仕組み・送信モード・連携先をまとめた資料を社内検討用にお送りします"
+        ctaLabel="資料を請求する"
+        variant="doc"
+        onClick={() => setIsDocModalOpen(true)}
+      />
 
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--surface)' }}>
