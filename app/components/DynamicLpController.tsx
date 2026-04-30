@@ -7,8 +7,11 @@ import HubSpotMeetingModal from './HubSpotMeetingModal'
 const STORAGE_VISITOR_KEY = 'mlp_vid'
 const STORAGE_DISMISSED_KEY = 'mlp_dismissed_at'
 const STORAGE_LAST_SHOW = 'mlp_last_show'
+const STORAGE_BANNER_DISMISSED_KEY = 'mlp_banner_dismissed_at'
 const DISMISS_COOLDOWN_MS = 1000 * 60 * 60 * 24
 const SHOW_COOLDOWN_MS = 1000 * 60 * 30
+const BANNER_DISMISS_COOLDOWN_MS = 1000 * 60 * 60 * 24
+const BANNER_NORMAL_DELAY_MS = 15_000
 
 const HIGH_INTENT_EXACT_PATHS = ['/contact', '/security']
 const HIGH_INTENT_PREFIXES = [
@@ -297,6 +300,84 @@ function HoujinSuggest({ query, onPick }: { query: string; onPick: (name: string
           {it.prefecture ? <div style={{ fontSize: 11, color: '#6b7873', marginTop: 2 }}>{it.prefecture}</div> : null}
         </button>
       ))}
+    </div>
+  )
+}
+
+function InvitationBanner({
+  prefillCompany,
+  onOpen,
+  onDismiss,
+}: {
+  prefillCompany?: string
+  onOpen: () => void
+  onDismiss: () => void
+}) {
+  return (
+    <div
+      role="region"
+      aria-label="貴社向けLP生成オファー"
+      style={{
+        position: 'fixed',
+        left: 'clamp(16px, 3vw, 28px)',
+        bottom: 'clamp(16px, 3vw, 28px)',
+        zIndex: 9990,
+        maxWidth: 320,
+        background: '#fafaf7',
+        color: '#0a0e0c',
+        border: '1px solid #d4d2c7',
+        borderRadius: 14,
+        boxShadow: '0 18px 48px rgba(0,0,0,0.12)',
+        padding: '14px 16px 14px 18px',
+        fontFamily: 'var(--font-noto, -apple-system, system-ui), sans-serif',
+        animation: 'mlpSlideUp 0.32s ease-out',
+      }}
+    >
+      <style>{`@keyframes mlpSlideUp { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }`}</style>
+      <button
+        onClick={onDismiss}
+        aria-label="閉じる"
+        style={{
+          position: 'absolute',
+          top: 6,
+          right: 8,
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          fontSize: 16,
+          color: '#6b7873',
+          padding: 4,
+          lineHeight: 1,
+        }}
+      >
+        ×
+      </button>
+      <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 10, letterSpacing: '0.12em', color: '#065f46', textTransform: 'uppercase', marginBottom: 6 }}>
+        ▸ AI Personalized Offer
+      </div>
+      <div style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.45, margin: '0 0 4px' }}>
+        {prefillCompany ? `${prefillCompany} 様向けの` : '貴社向けの'}試算と専用LPを30秒で
+      </div>
+      <div style={{ fontSize: 12, color: '#3d4a44', lineHeight: 1.6, margin: '0 0 12px' }}>
+        Webサイトを入れるだけで、月間商談数とSDR工数削減を試算します
+      </div>
+      <button
+        type="button"
+        onClick={onOpen}
+        style={{
+          width: '100%',
+          padding: '10px 14px',
+          background: '#0eab6e',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 8,
+          fontSize: 13,
+          fontWeight: 700,
+          cursor: 'pointer',
+        }}
+      >
+        ▸ 30秒で試算を見る
+      </button>
     </div>
   )
 }
@@ -1004,10 +1085,12 @@ export default function DynamicLpController() {
   const [visitorId, setVisitorId] = useState<string>('')
   const [docodoco, setDocodoco] = useState<DocoDocoSignal | undefined>(undefined)
   const [popupOpen, setPopupOpen] = useState(false)
+  const [bannerOpen, setBannerOpen] = useState(false)
   const [data, setData] = useState<IdentifyResponse | null>(null)
   const [demoOpen, setDemoOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const triggeredRef = useRef(false)
+  const popupTriggeredRef = useRef(false)
+  const bannerTriggeredRef = useRef(false)
   const startTsRef = useRef(Date.now())
   const pageHistoryRef = useRef<string[]>([])
 
@@ -1022,11 +1105,13 @@ export default function DynamicLpController() {
     return () => detach()
   }, [])
 
-  const checkCooldown = useCallback((): boolean => {
+  const isTestMode = useCallback((): boolean => {
+    return typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('mlp_test') === '1'
+  }, [])
+
+  const checkPopupCooldown = useCallback((): boolean => {
     try {
-      if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('mlp_test') === '1') {
-        return true
-      }
+      if (isTestMode()) return true
       const dismissed = Number(localStorage.getItem(STORAGE_DISMISSED_KEY) || 0)
       if (Date.now() - dismissed < DISMISS_COOLDOWN_MS) return false
       const lastShow = Number(localStorage.getItem(STORAGE_LAST_SHOW) || 0)
@@ -1035,15 +1120,27 @@ export default function DynamicLpController() {
       // ignore
     }
     return true
-  }, [])
+  }, [isTestMode])
+
+  const checkBannerCooldown = useCallback((): boolean => {
+    try {
+      if (isTestMode()) return true
+      const dismissed = Number(localStorage.getItem(STORAGE_BANNER_DISMISSED_KEY) || 0)
+      if (Date.now() - dismissed < BANNER_DISMISS_COOLDOWN_MS) return false
+    } catch {
+      // ignore
+    }
+    return true
+  }, [isTestMode])
 
   const triggerPopup = useCallback(
     (reason: string) => {
-      if (triggeredRef.current) return
-      if (!checkCooldown()) return
+      if (popupTriggeredRef.current) return
+      if (!checkPopupCooldown()) return
       if (data) return
       if (isAiChatActive()) return
-      triggeredRef.current = true
+      popupTriggeredRef.current = true
+      setBannerOpen(false)
       try {
         localStorage.setItem(STORAGE_LAST_SHOW, String(Date.now()))
       } catch {
@@ -1054,16 +1151,31 @@ export default function DynamicLpController() {
         trackEvent(visitorId, 'popup_view', { path: location.pathname, reason, prefill: docodoco?.company_name || null })
       }
     },
-    [checkCooldown, data, docodoco, visitorId]
+    [checkPopupCooldown, data, docodoco, visitorId]
+  )
+
+  const triggerBanner = useCallback(
+    (reason: string) => {
+      if (bannerTriggeredRef.current) return
+      if (!checkBannerCooldown()) return
+      if (popupOpen || data) return
+      if (isAiChatActive()) return
+      bannerTriggeredRef.current = true
+      setBannerOpen(true)
+      if (visitorId) {
+        trackEvent(visitorId, 'banner_view', { path: location.pathname, reason, prefill: docodoco?.company_name || null })
+      }
+    },
+    [checkBannerCooldown, data, docodoco, popupOpen, visitorId]
   )
 
   useEffect(() => {
     if (!visitorId) return
     const path = location.pathname
-    const isTestMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('mlp_test') === '1'
-    if (!isTestMode && isExcludedPage(path)) return
+    const testMode = isTestMode()
+    if (!testMode && isExcludedPage(path)) return
 
-    if (isTestMode) {
+    if (testMode) {
       const t = setTimeout(() => triggerPopup('TEST'), 500)
       return () => clearTimeout(t)
     }
@@ -1073,34 +1185,13 @@ export default function DynamicLpController() {
     const isMultiPage = pageVisitNumber >= 2
 
     const timers: Array<ReturnType<typeof setTimeout>> = []
-    let scrollPassed = false
-    let timePassed = false
 
-    const tryL2 = () => {
-      if (scrollPassed && timePassed) triggerPopup('L2:scroll+time')
-    }
-
-    const onScroll = () => {
-      const max = document.body.scrollHeight - window.innerHeight
-      if (max <= 0) return
-      const pct = window.scrollY / max
-      if (pct >= SCROLL_THRESHOLD && !scrollPassed) {
-        scrollPassed = true
-        tryL2()
-      }
-    }
-
-    if (highIntent) {
-      timers.push(setTimeout(() => triggerPopup('L1:high-intent'), HIGH_INTENT_TIME_MS))
-    } else {
-      timers.push(
-        setTimeout(() => {
-          timePassed = true
-          tryL2()
-        }, TIME_THRESHOLD_MS)
+    timers.push(
+      setTimeout(
+        () => triggerBanner(highIntent ? 'L1:high-intent' : 'L2:normal-page'),
+        highIntent ? HIGH_INTENT_TIME_MS : BANNER_NORMAL_DELAY_MS
       )
-      window.addEventListener('scroll', onScroll, { passive: true })
-    }
+    )
 
     if (isMultiPage) {
       timers.push(setTimeout(() => triggerPopup('L4:multi-page'), MULTI_PAGE_TIME_MS))
@@ -1115,10 +1206,9 @@ export default function DynamicLpController() {
 
     return () => {
       timers.forEach(t => clearTimeout(t))
-      window.removeEventListener('scroll', onScroll)
       document.removeEventListener('mouseleave', onMouseLeave)
     }
-  }, [triggerPopup, visitorId])
+  }, [triggerBanner, triggerPopup, isTestMode, visitorId])
 
   const initialName = useMemo(() => docodoco?.company_name || '', [docodoco?.company_name])
   const initialUrl = useMemo(() => docodoco?.domain || docodoco?.org_url || '', [docodoco?.domain, docodoco?.org_url])
@@ -1183,6 +1273,23 @@ export default function DynamicLpController() {
     setPopupOpen(false)
   }, [visitorId])
 
+  const handleBannerOpen = useCallback(() => {
+    if (visitorId) trackEvent(visitorId, 'banner_click')
+    setBannerOpen(false)
+    popupTriggeredRef.current = false
+    triggerPopup('banner-click')
+  }, [triggerPopup, visitorId])
+
+  const handleBannerDismiss = useCallback(() => {
+    try {
+      localStorage.setItem(STORAGE_BANNER_DISMISSED_KEY, String(Date.now()))
+    } catch {
+      // ignore
+    }
+    if (visitorId) trackEvent(visitorId, 'banner_dismiss')
+    setBannerOpen(false)
+  }, [visitorId])
+
   const handleCta = useCallback(
     (kind: 'demo' | 'document') => {
       if (!visitorId) return
@@ -1200,6 +1307,13 @@ export default function DynamicLpController() {
 
   return createPortal(
     <>
+      {bannerOpen && !popupOpen && !data ? (
+        <InvitationBanner
+          prefillCompany={initialName || undefined}
+          onOpen={handleBannerOpen}
+          onDismiss={handleBannerDismiss}
+        />
+      ) : null}
       {popupOpen ? (
         <CompanyPopup
           initialName={initialName}
