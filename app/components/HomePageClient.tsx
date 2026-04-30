@@ -3505,8 +3505,8 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* HOW IT WORKS — Meeton ai flow diagram (skipped in LP) */}
-      {!isLp && <MeetingFlowDiagram />}
+      {/* HOW IT WORKS — Meeton ai flow diagram (lazy-loaded in both modes) */}
+      <MeetingFlowDiagram />
 
       {/* 3 PRODUCT CARDS */}
       <section
@@ -3636,8 +3636,7 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* WHY AI SDR (skipped in LP) */}
-      {!isLp && (
+      {/* WHY AI SDR */}
       <section className="section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="dot-grid" style={{ opacity: 0.3 }} />
         <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
@@ -3715,10 +3714,9 @@ export default function HomePageClient({
           </div>
         </div>
       </section>
-      )}
 
-      {/* COMPARISON — vs Human SDR vs Chatbot (skipped in LP) */}
-      {!isLp && <ComparisonTable />}
+      {/* COMPARISON — vs Human SDR vs Chatbot (lazy-loaded in both modes) */}
+      <ComparisonTable />
 
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>
@@ -3752,8 +3750,7 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* INTEGRATIONS (skipped in LP) */}
-      {!isLp && (
+      {/* INTEGRATIONS */}
       <section
         className="section"
         id="integrations"
@@ -3800,9 +3797,8 @@ export default function HomePageClient({
           </div>
         </div>
       </section>
-      )}
 
-      {/* STEPS (skipped in LP) */}
+      {/* STEPS (skipped in LP — focus on conversion) */}
       {!isLp && (
       <section className="section">
         <div className="section-inner">

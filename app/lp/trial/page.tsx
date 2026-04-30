@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import HomePageClient from '@/app/components/HomePageClient'
+import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export const metadata: Metadata = {
   title: '14日間無料トライアル｜Meeton ai',
@@ -8,9 +9,24 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function TrialLP() {
+export const revalidate = 3600
+
+export default async function TrialLP() {
+  const cases = await getAllCaseStudies()
+  const featured = cases.slice(0, 3).map((c) => ({
+    slug: c.slug,
+    name: c.company,
+    industry: c.industry,
+    quote: c.quote || c.description,
+    quotePerson: c.quotePerson,
+    heroMetric: c.heroMetric,
+    heroMetricLabel: c.heroMetricLabel,
+    heroImage: c.heroImage,
+    stats: c.stats.slice(0, 3),
+  }))
   return (
     <HomePageClient
+      caseStudies={featured}
       mode="lp"
       lpVariant="trial"
       lpHeadline="AI SDRの効果を、14日間無料で体感"

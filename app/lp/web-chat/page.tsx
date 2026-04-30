@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import HomePageClient from '@/app/components/HomePageClient'
+import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export const metadata: Metadata = {
   title: 'BtoB向けWeb接客ツール｜AIチャットボットで商談獲得｜Meeton ai',
@@ -8,9 +9,24 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-export default function WebChatLP() {
+export const revalidate = 3600
+
+export default async function WebChatLP() {
+  const cases = await getAllCaseStudies()
+  const featured = cases.slice(0, 3).map((c) => ({
+    slug: c.slug,
+    name: c.company,
+    industry: c.industry,
+    quote: c.quote || c.description,
+    quotePerson: c.quotePerson,
+    heroMetric: c.heroMetric,
+    heroMetricLabel: c.heroMetricLabel,
+    heroImage: c.heroImage,
+    stats: c.stats.slice(0, 3),
+  }))
   return (
     <HomePageClient
+      caseStudies={featured}
       mode="lp"
       lpVariant="web-chat"
       lpHeadline="AIチャットボットで、商談まで完結"
