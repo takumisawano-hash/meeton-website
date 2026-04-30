@@ -3307,6 +3307,195 @@ type HomePageClientProps = {
   lpSubheadline?: string;
 };
 
+/* ──────────────────────────────────────────────────────────────────
+ * MidPageCta — single-CTA "speed bump" inserted between sections to
+ * give readers a contextual next step. Two visual flavors:
+ *   variant='demo'  : デモ予約 (primary green pill)
+ *   variant='doc'   : 資料請求 (subdued purple pill)
+ * Mobile: stacks heading on top of CTA; CTA stretches full-width.
+ * ────────────────────────────────────────────────────────────────── */
+function MidPageCta({
+  eyebrow,
+  heading,
+  ctaLabel,
+  onClick,
+  variant = "demo",
+  tone = "light",
+}: {
+  eyebrow: string;
+  heading: string;
+  ctaLabel: string;
+  onClick: () => void;
+  variant?: "demo" | "doc";
+  tone?: "light" | "surface";
+}) {
+  const accent = variant === "demo" ? "var(--cta)" : "var(--accent)";
+  const accentLight =
+    variant === "demo" ? "var(--cta-light)" : "var(--accent-light)";
+  const btnGradient =
+    variant === "demo"
+      ? "linear-gradient(135deg, var(--cta), #0fc19a)"
+      : "linear-gradient(135deg, var(--accent), #a78bfa)";
+  const btnGlow =
+    variant === "demo" ? "var(--cta-glow)" : "var(--accent-glow)";
+  const sectionBg =
+    tone === "surface" ? "var(--surface)" : "transparent";
+  return (
+    <section
+      className="mpc-section"
+      style={{ background: sectionBg, padding: "clamp(20px,4vw,36px) clamp(16px,5vw,48px)" }}
+    >
+      <div
+        className="mpc-card"
+        style={{
+          maxWidth: 1140,
+          margin: "0 auto",
+          background: "#fff",
+          border: `1px solid var(--border)`,
+          borderLeft: `4px solid ${accent}`,
+          borderRadius: 16,
+          padding: "clamp(20px, 3vw, 28px) clamp(20px, 4vw, 36px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 24,
+          flexWrap: "wrap",
+          boxShadow: "0 4px 18px rgba(15,17,40,0.05)",
+        }}
+      >
+        <div style={{ flex: "1 1 320px", minWidth: 0 }}>
+          <div
+            style={{
+              fontFamily: "var(--fm)",
+              fontSize: 11,
+              fontWeight: 800,
+              letterSpacing: "0.12em",
+              color: accent,
+              textTransform: "uppercase",
+              marginBottom: 6,
+            }}
+          >
+            {eyebrow}
+          </div>
+          <div
+            style={{
+              fontSize: "clamp(16px, 2.4vw, 19px)",
+              fontWeight: 800,
+              color: "var(--heading)",
+              lineHeight: 1.55,
+              wordBreak: "keep-all",
+              overflowWrap: "anywhere",
+            }}
+          >
+            {heading}
+          </div>
+        </div>
+        <button
+          onClick={onClick}
+          className="mpc-btn"
+          style={{
+            background: btnGradient,
+            color: "#fff",
+            border: "none",
+            padding: "14px 28px",
+            borderRadius: 10,
+            fontSize: 15,
+            fontWeight: 800,
+            cursor: "pointer",
+            fontFamily: "var(--fb)",
+            boxShadow: `0 4px 16px ${btnGlow}`,
+            transition: "transform .2s, box-shadow .2s",
+            whiteSpace: "nowrap",
+            flexShrink: 0,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = `0 8px 24px ${btnGlow}`;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = `0 4px 16px ${btnGlow}`;
+          }}
+        >
+          {ctaLabel} →
+        </button>
+        {/* tiny accent dot decoration */}
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            opacity: 0,
+            background: accentLight,
+          }}
+        />
+      </div>
+      <style jsx>{`
+        @media (max-width: 640px) {
+          .mpc-card {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            text-align: left;
+          }
+          .mpc-btn {
+            width: 100% !important;
+            padding: 16px 24px !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────
+ * Mobile sticky CTA bar — fixed at bottom on phones only, single
+ * primary "デモを予約" action.
+ * ────────────────────────────────────────────────────────────────── */
+function MobileStickyCta({ onClick }: { onClick: () => void }) {
+  return (
+    <>
+      <div className="m-sticky-cta">
+        <button onClick={onClick} className="m-sticky-cta-btn">
+          デモを予約 →
+        </button>
+      </div>
+      <style jsx>{`
+        .m-sticky-cta {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .m-sticky-cta {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            z-index: 90;
+            box-shadow: 0 -4px 18px rgba(15, 17, 40, 0.08);
+          }
+          .m-sticky-cta-btn {
+            width: 100%;
+            padding: 14px 22px;
+            background: linear-gradient(135deg, var(--cta), #0fc19a);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: var(--fb);
+            box-shadow: 0 4px 16px var(--cta-glow);
+          }
+        }
+      `}</style>
+    </>
+  );
+}
+
 export default function HomePageClient({
   caseStudies = [],
   mode = "home",
@@ -3636,6 +3825,15 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* CTA #1 — after 3 product cards: doc download (low-friction next step) */}
+      <MidPageCta
+        eyebrow="Resource"
+        heading="3 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
+        ctaLabel="資料を請求する"
+        variant="doc"
+        onClick={() => setIsDocModalOpen(true)}
+      />
+
       {/* WHY AI SDR */}
       <section className="section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="dot-grid" style={{ opacity: 0.3 }} />
@@ -3718,6 +3916,15 @@ export default function HomePageClient({
       {/* COMPARISON — vs Human SDR vs Chatbot (lazy-loaded in both modes) */}
       <ComparisonTable />
 
+      {/* CTA #2 — after comparison table: demo (high-intent moment after seeing differentiation) */}
+      <MidPageCta
+        eyebrow="Live Demo"
+        heading="比較表で見えた違いを、実際の管理画面で 15 分で体験してください"
+        ctaLabel="デモを予約する"
+        variant="demo"
+        onClick={() => setIsMeetingModalOpen(true)}
+      />
+
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>
         <div className="section-inner">
@@ -3749,6 +3956,16 @@ export default function HomePageClient({
           </div>
         </div>
       </section>
+
+      {/* CTA #3 — after cases: demo (social-proof momentum) */}
+      <MidPageCta
+        eyebrow="Try it on your site"
+        heading="同じ仕組みを自社サイトでも。15 分のデモで御社の業界に合わせた成果イメージをお伝えします"
+        ctaLabel="デモを予約する"
+        variant="demo"
+        tone="surface"
+        onClick={() => setIsMeetingModalOpen(true)}
+      />
 
       {/* INTEGRATIONS */}
       <section
@@ -3974,6 +4191,15 @@ export default function HomePageClient({
       </section>
       )}
 
+      {/* CTA #4 — after STEPS: doc download (post-implementation context, social-proof internal stakeholders) */}
+      <MidPageCta
+        eyebrow="For internal review"
+        heading="社内検討用の資料 (機能・導入事例・料金プラン入り) を無料でダウンロードできます"
+        ctaLabel="資料を請求する"
+        variant="doc"
+        onClick={() => setIsDocModalOpen(true)}
+      />
+
       {/* FAQ */}
       <section
         className="section"
@@ -4095,6 +4321,7 @@ export default function HomePageClient({
           onSecondary={() => openDocModal("sticky")}
         />
       )}
+      {!isLp && <MobileStickyCta onClick={() => setIsMeetingModalOpen(true)} />}
 
       <HubSpotModal
         isOpen={isDocModalOpen}
