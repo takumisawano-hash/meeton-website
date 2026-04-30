@@ -5,7 +5,7 @@ const nextConfig = {
   trailingSlash: true,
   experimental: {
     // Limit parallel static page generation to avoid Notion API rate limits
-    staticGenerationMaxConcurrency: 3,
+    staticGenerationMaxConcurrency: 1,
   },
   images: {
     remotePatterns: [
