@@ -28,6 +28,7 @@ const SYSTEM_PROMPT = `あなたはMeeton ai のAIランディングページ生
 - 数値はROI試算で渡された数字をそのまま使う(自分で計算しない)
 - 事例・関連記事は提供されたリストから選ぶだけで、項目名・URL・指標は変えない
 - 「Meeton ai 導入企業◯社の実績」「上乗せ約N%」「過去30日」のような算出根拠の開示は本文に書かない(訪問者にとって透明化されすぎて訴求が弱くなる)
+- 「会社インサイト」が渡されている場合は、 主力製品名・顧客層・強み・直近の動きを必ずヒーローやROIサブコピーで具体的に引用する(訪問者に「うちのこと知ってる」と感じさせるため)。 一般論や業種一般のコピーは避け、 サイトに記載があった具体名で語る
 - 個人化のガイドライン:
 ${SAFE_PERSONALIZATION_RULES}
 
@@ -88,6 +89,16 @@ function buildContextDigest(profile: UnifiedProfile, roi: RoiCalc | null, cases:
 
   lines.push(`■ シグナル: ${profile.intentSignals.join(', ') || '(なし)'}`)
   lines.push(`■ スコア: tier=${profile.scoreTier}, funnel=${profile.funnelStage}`)
+
+  if (profile.companyInsights) {
+    const ci = profile.companyInsights
+    lines.push(`■ 会社インサイト (Webサイト解析):`)
+    if (ci.flagshipProduct) lines.push(`  主力製品: ${ci.flagshipProduct}`)
+    if (ci.customerType) lines.push(`  顧客層: ${ci.customerType}`)
+    if (ci.strength) lines.push(`  強み: ${ci.strength}`)
+    if (ci.recentActivity) lines.push(`  直近の動き: ${ci.recentActivity}`)
+    if (ci.meetingAiOpportunity) lines.push(`  Meeton ai 貢献ポイント仮説: ${ci.meetingAiOpportunity}`)
+  }
 
   if (roi) {
     lines.push(`■ トラフィック試算 (出典=${roi.trafficSource}, 信頼度=${roi.confidence}${roi.trancoRank ? `, GlobalRank=${roi.trancoRank}` : ''}${roi.category ? `, Category=${roi.category}` : ''}):`)

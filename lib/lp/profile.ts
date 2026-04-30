@@ -10,6 +10,8 @@ import { fetchMcpProfile } from './mcp'
 import { lookupHoujin } from './houjin'
 import { deriveTraffic, inferSearchIntent } from './traffic'
 import { resolveCompany } from './company-resolve'
+import { scrapeWebsiteText } from './website-scrape'
+import { inferCompanyInsights } from './company-insights'
 
 function deriveFunnelStage(lifecyclestage?: string, hsLeadStatus?: string): FunnelStage {
   const ls = (lifecyclestage || '').toLowerCase()
@@ -111,7 +113,14 @@ export async function buildUnifiedProfile(req: IdentifyRequest): Promise<Unified
   const resolvedDomain = resolved?.domain
     || (req.companyUrl ? req.companyUrl.replace(/^https?:\/\//, '').replace(/\/.*$/, '') : undefined)
 
-  const [hubspot, mcp, houjin] = await Promise.all([
+  const insightsPromise = (async () => {
+    if (!resolvedDomain) return null
+    const scraped = await scrapeWebsiteText(resolvedDomain)
+    if (!scraped) return null
+    return await inferCompanyInsights(scraped, resolvedName)
+  })()
+
+  const [hubspot, mcp, houjin, companyInsights] = await Promise.all([
     fetchHubspotProfile({
       email: req.email,
       hubspotutk: req.hubspotutk,
@@ -123,6 +132,7 @@ export async function buildUnifiedProfile(req: IdentifyRequest): Promise<Unified
       visitorId: req.visitorId,
     }),
     lookupHoujin(resolvedName),
+    insightsPromise,
   ])
 
   const reqWithName: IdentifyRequest = {
@@ -190,6 +200,7 @@ export async function buildUnifiedProfile(req: IdentifyRequest): Promise<Unified
     funnelStage,
     intentSignals,
     userInputs,
+    companyInsights: companyInsights || undefined,
     generatedAt: new Date().toISOString(),
   }
 }

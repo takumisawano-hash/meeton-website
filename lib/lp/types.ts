@@ -106,6 +106,7 @@ export type UnifiedProfile = {
   funnelStage: FunnelStage
   intentSignals: string[]
   userInputs?: { monthlyVisits?: number; monthlyLeads?: number; sdrCount?: number }
+  companyInsights?: import('./company-insights').CompanyInsights
   generatedAt: string
 }
 
