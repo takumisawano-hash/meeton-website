@@ -9,22 +9,40 @@ export type ResolvedCompany = {
   similarweb?: SimilarWebFreeResult
 }
 
-const SEPARATORS = ['｜', '|', '–', '—', '-', '：', ':', '・', '/']
+const SPLIT_REGEX = /[｜|–—\-：:・/]+/
+const PAGE_TERMS_RE = /(コミュニティ|ログイン|資料|料金|事例|機能|について|ニュース|サポート|プラン|お知らせ|活用|使い方|FAQ|ヘルプ|サンクス|ホーム|問い合わせ|新着|セミナー|イベント|採用|キャリア|ブログ|公式|オフィシャル|無料|ダウンロード)/i
+const COMPANY_HINT_RE = /(株式会社|有限会社|合同会社|Inc\.?|LLC|Co\.?,?\s*Ltd\.?|GmbH|Corp\.?|Corporation)/i
+
+function scorePart(part: string, domainPrefix: string): number {
+  let score = 0
+  if (PAGE_TERMS_RE.test(part)) score -= 10
+  if (COMPANY_HINT_RE.test(part)) score += 8
+  if (part.toLowerCase().includes(domainPrefix)) score += 5
+  if (part.length <= 12) score += 3
+  else if (part.length <= 20) score += 1
+  return score
+}
 
 function extractHead(text: string | undefined, fallbackDomain?: string): string | null {
   if (!text) return null
-  let head = text.trim()
-  for (const sep of SEPARATORS) {
-    const idx = head.indexOf(sep)
-    if (idx > 0) {
-      head = head.slice(0, idx).trim()
-      break
-    }
+  let cleaned = text.split(/[【「『（(]/)[0]
+  cleaned = cleaned.replace(/[】」』）)]/g, '').trim()
+  if (!cleaned) cleaned = text
+  const parts = cleaned
+    .split(SPLIT_REGEX)
+    .map(s => s.trim())
+    .filter(s => s.length >= 2 && s.length <= 40)
+  if (!parts.length) return null
+  const domainPrefix = (fallbackDomain || '').split('.')[0].toLowerCase()
+  let best: { name: string; score: number } | null = null
+  for (const p of parts) {
+    if (fallbackDomain && p.toLowerCase() === fallbackDomain.toLowerCase()) continue
+    const s = scorePart(p, domainPrefix)
+    if (!best || s > best.score) best = { name: p, score: s }
   }
-  if (!head) return null
-  if (fallbackDomain && head.toLowerCase() === fallbackDomain.toLowerCase()) return null
-  if (head.length < 2 || head.length > 50) return null
-  return head
+  if (!best) return null
+  if (best.score < -5) return null
+  return best.name
 }
 
 function extractFromDescription(description: string | undefined): string | null {
