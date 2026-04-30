@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import HubSpotMeetingModal from './HubSpotMeetingModal'
+import HubSpotModal from './HubSpotModal'
 
 const STORAGE_VISITOR_KEY = 'mlp_vid'
 const STORAGE_DISMISSED_KEY = 'mlp_dismissed_at'
@@ -1088,6 +1089,7 @@ export default function DynamicLpController() {
   const [bannerOpen, setBannerOpen] = useState(false)
   const [data, setData] = useState<IdentifyResponse | null>(null)
   const [demoOpen, setDemoOpen] = useState(false)
+  const [docOpen, setDocOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const popupTriggeredRef = useRef(false)
   const bannerTriggeredRef = useRef(false)
@@ -1296,9 +1298,9 @@ export default function DynamicLpController() {
       trackEvent(visitorId, 'cta_click', { kind, source: 'mlp_modal' })
       if (kind === 'demo') {
         setDemoOpen(true)
-        return
+      } else {
+        setDocOpen(true)
       }
-      window.open('/contact/?form=document', '_blank')
     },
     [visitorId]
   )
@@ -1333,6 +1335,7 @@ export default function DynamicLpController() {
         />
       ) : null}
       <HubSpotMeetingModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} utmCampaign={`mlp_${data?.lp.components.find(c => c.key === 'hero')?.variant || 'default'}`} />
+      <HubSpotModal isOpen={docOpen} onClose={() => setDocOpen(false)} utmCampaign={`mlp_${data?.lp.components.find(c => c.key === 'hero')?.variant || 'default'}`} />
     </>,
     document.body
   )
