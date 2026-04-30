@@ -82,14 +82,13 @@ export default function Nav({
 
   const dropdownItems = [
     { href: "/", label: "AI for 営業・マーケ" },
-    { href: "/talent/", label: "AI for 採用" },
+    // { href: "/talent/", label: "AI for 採用" }, // Meeton Talent: temporarily hidden
   ];
 
   const featuresDropdownItems = [
-    { href: "/features/ai-chat/", label: "AI Chat", sub: "AIチャット" },
-    { href: "/features/ai-email/", label: "AI Email", sub: "AIメール" },
+    { href: "/features/ai-chat/", label: "AI Chat", sub: "AIチャット (資料提案 内蔵)" },
     { href: "/features/meetings/", label: "AI Calendar", sub: "AIカレンダー" },
-    { href: "/features/offers/", label: "AI Offer", sub: "AIオファー" },
+    { href: "/features/ai-email/", label: "AI Email", sub: "AIメール" },
   ];
 
   const navLinks = [
@@ -502,104 +501,19 @@ export default function Nav({
         {!isMobile && (
           <>
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-              {/* Dropdown */}
-              <div
-                ref={dropdownRef}
-                style={{ position: "relative" }}
-                onMouseEnter={() => setIsDropdownOpen(true)}
-                onMouseLeave={() => setIsDropdownOpen(false)}
+              {/* Meeton ai (single product link, dropdown removed since Meeton Talent is hidden) */}
+              <Link
+                href="/"
+                style={{
+                  fontSize: 15,
+                  color: isProductActive ? colors.textActive : colors.text,
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  transition: "color .2s",
+                }}
               >
-                <button
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    fontSize: 15,
-                    color: isProductActive ? colors.textActive : colors.text,
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    padding: 0,
-                    transition: "color .2s",
-                  }}
-                >
-                  Meeton ai
-                  <svg
-                    width="10"
-                    height="6"
-                    viewBox="0 0 10 6"
-                    fill="none"
-                    style={{
-                      transform: isDropdownOpen
-                        ? "rotate(180deg)"
-                        : "rotate(0deg)",
-                      transition: "transform .2s",
-                    }}
-                  >
-                    <path
-                      d="M1 1L5 5L9 1"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                {isDropdownOpen && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "100%",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      paddingTop: 12,
-                      zIndex: 200,
-                    }}
-                  >
-                    <div
-                      style={{
-                        background: colors.dropdownBg,
-                        border: `1px solid ${colors.dropdownBorder}`,
-                        borderRadius: 12,
-                        padding: "8px 0",
-                        minWidth: 180,
-                        boxShadow: isDark
-                          ? "0 8px 32px rgba(0,0,0,.4)"
-                          : "0 8px 32px rgba(0,0,0,.12)",
-                      }}
-                    >
-                      {dropdownItems.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={() => setIsDropdownOpen(false)}
-                          style={{
-                            display: "block",
-                            padding: "12px 20px",
-                            fontSize: 14,
-                            color:
-                              pathname === item.href ||
-                              (item.href === "/talent/" &&
-                                pathname.startsWith("/talent"))
-                                ? colors.textActive
-                                : isDark
-                                  ? "#a8a8c8"
-                                  : colors.text,
-                            textDecoration: "none",
-                            fontWeight: 600,
-                            transition: "all .2s",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+                Meeton ai
+              </Link>
               {/* Features Dropdown */}
               <div
                 ref={featuresDropdownRef}

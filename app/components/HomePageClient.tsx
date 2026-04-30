@@ -1,11 +1,31 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
 import HubSpotModal from "./HubSpotModal";
 import Nav from "./Nav";
+
+// Lazy: heavy presentational components used only in home mode
+const ComparisonTable = dynamic(() => import("./ComparisonTable"), {
+  ssr: true,
+  loading: () => null,
+});
+const MeetingFlowDiagram = dynamic(() => import("./MeetingFlowDiagram"), {
+  ssr: true,
+  loading: () => null,
+});
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    lintrk?: (action: string, data: { conversion_id: number }) => void;
+  }
+}
 
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(false);
@@ -84,11 +104,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* CATEGORY CARDS - 3 categories */
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
-.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:36px 32px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 16px 48px rgba(18,163,125,.12)}
-.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
-.cat-card:hover::before{opacity:1}
+.phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 56px -16px rgba(18,163,125,.18)}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cat-color, #12a37d);opacity:.85;transition:opacity .3s, height .3s}
+.cat-card:hover::before{opacity:1;height:5px}
 .cat-label{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px}
 .cat-title{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:12px;line-height:1.3}
 .cat-desc{font-size:15px;line-height:1.8;color:var(--sub);margin-bottom:24px}
@@ -130,8 +150,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 /* CASES */
 .case-carousel{position:relative;overflow:hidden;width:100%}
 .case-track{display:flex;gap:0;transition:transform .5s cubic-bezier(.16,1,.3,1);padding:4px 0}
-.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 36px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden}
-.case-card:hover{box-shadow:0 8px 32px rgba(18,163,125,.08)}
+.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:center}
+.case-card:hover{box-shadow:0 16px 40px -16px rgba(18,163,125,.18);border-color:var(--cta);transform:translateY(-2px)}
+.case-card-link{cursor:pointer}
+.case-img{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#f3f2ed}
+.case-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.case-content{display:flex;flex-direction:column;min-width:0}
 .case-arrows{display:flex;justify-content:center;gap:14px;margin-top:28px}
 .case-arrow{width:48px;height:48px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--heading);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .case-arrow:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);box-shadow:0 6px 20px var(--cta-glow)}
@@ -269,7 +293,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 @media(max-width:1024px){
   .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
-  .phase-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .phase-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto;gap:18px}
   .qflow-hz{flex-direction:column;gap:0}
   .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
   .qflow-hz-gate{padding:8px 0}
@@ -303,7 +327,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .case-stats{gap:12px;flex-direction:column;align-items:center;width:100%}
   .case-stats>div{text-align:center;width:100%}
   .case-quote{padding:14px 16px;font-size:13px;line-height:1.7;box-sizing:border-box}
-  .case-card{padding:20px 16px;min-width:100%;max-width:100%;width:100%;box-sizing:border-box;overflow:hidden}
+  .case-card{padding:20px 16px;min-width:100%;max-width:100%;width:100%;box-sizing:border-box;overflow:hidden;grid-template-columns:1fr;gap:16px;align-items:stretch}
+  .case-img{aspect-ratio:16/9}
   .case-logo{font-size:16px}
   .case-industry{font-size:11px;margin-bottom:14px}
   .case-stat-v{font-size:20px}
@@ -507,42 +532,6 @@ const stepsData = [
     num: "03",
     title: "\u30df\u30fc\u30c8\u30f3\u304c\u50cd\u304d\u59cb\u3081\u308b",
     desc: "\u8a2d\u5b9a\u5b8c\u4e86\u3057\u305f\u77ac\u9593\u304b\u3089\u30df\u30fc\u30c8\u30f3\u304c\u7a3c\u50cd\u3002\u5546\u8ac7\u7372\u5f97\u304c\u81ea\u52d5\u3067\u56de\u308a\u59cb\u3081\u307e\u3059\u3002",
-  },
-];
-
-const caseData = [
-  {
-    name: "G-gen",
-    industry: "Google Cloud プレミアパートナー",
-    quote:
-      "Meeton ai導入後、月20件以上の商談を安定的に創出。リードからの転換率は40%以上を実現し、営業チームが商談対応に集中できる体制が整いました。",
-    stats: [
-      { v: "20件+", l: "月間商談創出", c: "var(--cta)" },
-      { v: "40%+", l: "リード→商談 転換率", c: "var(--blue)" },
-      { v: "安定", l: "毎月の商談パイプライン", c: "var(--accent)" },
-    ],
-  },
-  {
-    name: "Univis",
-    industry: "M&Aアドバイザリー・財務会計コンサル",
-    quote:
-      "商談化率は80%超え。Meeton aiが精度の高いMeetingを創出し、確度の高い商談だけが営業に届く仕組みが実現しています。",
-    stats: [
-      { v: "80%+", l: "商談化率", c: "var(--cta)" },
-      { v: "高精度", l: "Meeting創出", c: "var(--blue)" },
-      { v: "確度◎", l: "商談の質", c: "var(--accent)" },
-    ],
-  },
-  {
-    name: "BizteX",
-    industry: "クラウドRPA・業務自動化ツール",
-    quote:
-      "導入した1週目から6件の商談を創出。複雑な設定なしで即座に成果が出る、そのスピード感がMeeton aiの最大の魅力です。",
-    stats: [
-      { v: "6件", l: "初週の商談創出", c: "var(--cta)" },
-      { v: "1週目", l: "成果が出るまで", c: "var(--blue)" },
-      { v: "即効性", l: "導入スピード", c: "var(--accent)" },
-    ],
   },
 ];
 
@@ -3037,37 +3026,115 @@ function QualityFlowDiagram_UNUSED() {
   );
 }
 
-function CaseCarousel() {
+type CaseCarouselItem = {
+  slug: string;
+  name: string;
+  industry: string;
+  quote: string;
+  quotePerson?: string | null;
+  heroMetric?: string;
+  heroMetricLabel?: string;
+  heroImage?: string | null;
+  stats: { value: string; label: string; context?: string }[];
+};
+
+const STAT_COLORS = ["var(--cta)", "var(--blue)", "var(--accent)"];
+
+function CaseCarousel({ items }: { items: CaseCarouselItem[] }) {
   const [idx, setIdx] = useState(0);
-  const maxIdx = caseData.length - 1;
-  const prev = () => setIdx((i) => Math.max(0, i - 1));
-  const next = () => setIdx((i) => Math.min(maxIdx, i + 1));
+  const [paused, setPaused] = useState(false);
+  // Bumped on every manual interaction to restart the auto-rotate timer
+  const [touch, setTouch] = useState(0);
+  const len = items.length;
+  // Wrap-around so auto-rotate can loop indefinitely
+  const goto = (i: number) => {
+    setTouch((t) => t + 1);
+    setIdx(((i % len) + len) % len);
+  };
+  const prev = () => goto(idx - 1);
+  const next = () => goto(idx + 1);
+
+  useEffect(() => {
+    if (paused || len <= 1) return;
+    const id = setInterval(() => {
+      setIdx((i) => (i + 1) % len);
+    }, 6000);
+    return () => clearInterval(id);
+  }, [paused, touch, len]);
+
+  if (len === 0) return null;
   return (
-    <div className="case-carousel">
+    <div
+      className="case-carousel"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div
         className="case-track"
         style={{ transform: `translateX(-${idx * 100}%)` }}
       >
-        {caseData.map((c, i) => (
-          <div className="case-card" key={i}>
+        {items.map((c, i) => (
+          <a
+            key={i}
+            href={`/case-studies/${c.slug}/`}
+            className="case-card case-card-link"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            {c.heroImage ? (
+              <div className="case-img">
+                <img src={c.heroImage} alt={c.name} loading="lazy" />
+              </div>
+            ) : (
+              <div className="case-img" style={{ background: "linear-gradient(135deg, #f4f6fb, #eaedfa)" }} />
+            )}
+            <div className="case-content">
             <div className="case-logo">{c.name}</div>
             <div className="case-industry">{c.industry}</div>
             <div className="case-quote">{c.quote}</div>
+            {c.quotePerson && (
+              <div
+                style={{
+                  fontSize: 12,
+                  color: "var(--sub)",
+                  marginTop: -8,
+                  marginBottom: 12,
+                }}
+              >
+                — {c.quotePerson}
+              </div>
+            )}
             <div className="case-stats">
-              {c.stats.map((s, j) => (
+              {c.stats.slice(0, 3).map((s, j) => (
                 <div key={j}>
-                  <div className="case-stat-v" style={{ color: s.c }}>
-                    {s.v}
+                  <div
+                    className="case-stat-v"
+                    style={{ color: STAT_COLORS[j % STAT_COLORS.length] }}
+                  >
+                    {s.value}
                   </div>
-                  <div className="case-stat-l">{s.l}</div>
+                  <div className="case-stat-l">{s.label}</div>
                 </div>
               ))}
             </div>
-          </div>
+            <div
+              style={{
+                marginTop: 20,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                color: "var(--cta)",
+                fontSize: 13,
+                fontWeight: 700,
+              }}
+            >
+              事例の詳細を読む <span>→</span>
+            </div>
+            </div>
+          </a>
         ))}
       </div>
       <div className="case-arrows">
-        <button className="case-arrow" onClick={prev} disabled={idx === 0}>
+        <button className="case-arrow" onClick={prev}>
           ←
         </button>
         <span
@@ -3079,18 +3146,18 @@ function CaseCarousel() {
             fontWeight: 600,
           }}
         >
-          {idx + 1} / {caseData.length}
+          {idx + 1} / {items.length}
         </span>
-        <button className="case-arrow" onClick={next} disabled={idx >= maxIdx}>
+        <button className="case-arrow" onClick={next}>
           →
         </button>
       </div>
       <div className="case-dots">
-        {caseData.map((_, i) => (
+        {items.map((_, i) => (
           <div
             key={i}
             className={"case-dot" + (i === idx ? " active" : "")}
-            onClick={() => setIdx(i)}
+            onClick={() => goto(i)}
           />
         ))}
       </div>
@@ -3211,18 +3278,153 @@ function HeroDemoAnimation() {
   );
 }
 
-export default function HomePageClient() {
+export type HomeCaseStudy = {
+  slug: string;
+  name: string;
+  industry: string;
+  quote: string;
+  quotePerson: string | null;
+  heroMetric: string;
+  heroMetricLabel: string;
+  heroImage: string | null;
+  stats: { value: string; label: string; context?: string }[];
+};
+
+export type LPVariant =
+  | "inside-sales"
+  | "lead-gen"
+  | "linkedin"
+  | "meeting"
+  | "trial"
+  | "web-chat"
+  | "google";
+
+type HomePageClientProps = {
+  caseStudies?: HomeCaseStudy[];
+  mode?: "home" | "lp";
+  lpVariant?: LPVariant;
+  lpHeadline?: string;
+  lpSubheadline?: string;
+};
+
+export default function HomePageClient({
+  caseStudies = [],
+  mode = "home",
+  lpVariant,
+  lpHeadline,
+  lpSubheadline,
+}: HomePageClientProps) {
   const pathname = usePathname();
   const isJa = pathname.startsWith("/ja");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isDocModalOpen, setIsDocModalOpen] = useState(false);
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
+  const [scrolledLp, setScrolledLp] = useState(false);
   const isMobile = useIsMobile(768);
+  const isLp = mode === "lp";
+  const utmCampaign = isLp ? `lp_${lpVariant ?? "google"}` : "meeton-ai";
+
+  // LP-mode: capture UTM, scroll milestone tracking, sticky CTA visibility
+  useEffect(() => {
+    if (!isLp) return;
+    if (typeof window === "undefined") return;
+
+    // UTM capture
+    const params = new URLSearchParams(window.location.search);
+    const utmData: Record<string, string> = {};
+    for (const key of [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+    ]) {
+      const val = params.get(key);
+      if (val) utmData[key] = val;
+    }
+    if (Object.keys(utmData).length > 0) {
+      try {
+        sessionStorage.setItem("utm_data", JSON.stringify(utmData));
+      } catch {
+        /* ignore */
+      }
+    }
+
+    const fired = {
+      scroll25: false,
+      scroll50: false,
+      scroll75: false,
+    };
+
+    const onScroll = () => {
+      const docH = document.documentElement.scrollHeight;
+      const winH = window.innerHeight;
+      const y = window.scrollY;
+      const totalScrollable = Math.max(docH - winH, 1);
+      const pctTop = (y / totalScrollable) * 100;
+      // sticky CTA after ~30% page-view scroll
+      setScrolledLp(pctTop > 30 || y > 600);
+
+      const scrollPct = ((y + winH) / docH) * 100;
+      if (!fired.scroll25 && scrollPct >= 25) {
+        fired.scroll25 = true;
+        window.gtag?.("event", "lp_scroll_25", { lp_variant: lpVariant });
+      }
+      if (!fired.scroll50 && scrollPct >= 50) {
+        fired.scroll50 = true;
+        window.gtag?.("event", "lp_scroll_50", { lp_variant: lpVariant });
+      }
+      if (!fired.scroll75 && scrollPct >= 75) {
+        fired.scroll75 = true;
+        window.gtag?.("event", "lp_scroll_75", { lp_variant: lpVariant });
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isLp, lpVariant]);
+
+  // LP-mode: enriched CTA handlers (track + open modal)
+  const openMeetingModal = (location: string) => {
+    if (isLp && typeof window !== "undefined") {
+      window.gtag?.("event", "lp_cta_demo_click", {
+        lp_variant: lpVariant,
+        location,
+      });
+      window.gtag?.("event", "conversion", {
+        send_to: "AW-18060590496/5EyJCIqrspUcEKD7-qND",
+      });
+      window.gtag?.("event", "generate_lead", {
+        lp_variant: lpVariant,
+        cta_location: location,
+        value: 0,
+        currency: "JPY",
+      });
+      window.lintrk?.("track", { conversion_id: 25161212 });
+    }
+    setIsMeetingModalOpen(true);
+  };
+
+  const openDocModal = (location: string) => {
+    if (isLp && typeof window !== "undefined") {
+      window.gtag?.("event", "lp_cta_doc_click", {
+        lp_variant: lpVariant,
+        location,
+      });
+    }
+    setIsDocModalOpen(true);
+  };
+
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      {isLp && <style dangerouslySetInnerHTML={{ __html: lpCss }} />}
 
-      <Nav variant="light" />
+      {isLp ? (
+        <LpNav onCtaClick={() => openMeetingModal("nav")} isMobile={isMobile} />
+      ) : (
+        <Nav variant="light" />
+      )}
 
       {/* HERO */}
       <section className="hero">
@@ -3260,36 +3462,53 @@ export default function HomePageClient() {
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            日本唯一の最先端 AI SDR
+            {isLp
+              ? (lpVariant === "trial"
+                ? "14日間無料トライアル"
+                : "AI SDR で商談を自動獲得")
+              : "日本唯一の最先端 AI SDR"}
           </div>
           <h1 className="anim d2">
-            AIが商談をつくる時代へ
+            {lpHeadline ?? "AIが商談をつくる時代へ"}
           </h1>
           <p className="anim d3 hero-sub">
-            見込み客の育成から商談獲得まで、Meeton aiが自動でこなします。
+            {lpSubheadline ??
+              "Web サイト・サンクスページ・メール — あらゆる接点に AI を配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。"}
           </p>
-          <div className="anim d4 hero-ctas">
+          <div
+            className="anim d4 hero-ctas"
+            style={isLp ? { gap: 12 } : undefined}
+          >
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => openMeetingModal("hero")}
+              style={isLp ? { padding: "20px 44px", fontSize: 19 } : undefined}
             >
-              AIデモを体験
+              {isLp ? "無料デモを予約する" : "AIデモを体験"}
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => openDocModal("hero")}
             >
               資料請求 →
             </button>
           </div>
-          {/* HERO DEMO ANIMATION */}
-          <div className="anim d5" style={{ marginTop: "clamp(40px,6vw,64px)" }}>
-            <HeroDemoAnimation />
-          </div>
+          {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
+          {!isLp && (
+            <div
+              className="anim d5"
+              style={{ marginTop: "clamp(40px,6vw,64px)" }}
+            >
+              <HeroDemoAnimation />
+            </div>
+          )}
         </div>
       </section>
 
-      {/* 4 PRODUCT CARDS */}
+      {/* HOW IT WORKS — Meeton ai flow diagram (lazy-loaded in both modes) */}
+      <MeetingFlowDiagram />
+
+      {/* 3 PRODUCT CARDS */}
       <section
         className="section"
         id="features"
@@ -3304,11 +3523,11 @@ export default function HomePageClient() {
             What Meeton Does
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            Meeton aiが商談をつくる、
-            <span style={{ color: "var(--cta)" }}>4つの武器</span>
+            Meeton ai が商談をつくる、
+            <span style={{ color: "var(--cta)" }}>3 つの AI 機能</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            Webサイト・メール・資料——あらゆる接点にAIを配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。
+            Chat / Calendar / Email — 3 つの AI が連動し、リード発見から商談獲得までを 24 時間自動で実行します。
           </p>
 
           <div className="phase-grid">
@@ -3316,54 +3535,41 @@ export default function HomePageClient() {
               {
                 color: "#12a37d",
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                label: "AI CHAT",
-                title: "AIチャット",
-                desc: "サイト訪問者と対話し、商談予約まで会話で完結。訪問者に自ら話しかけ、ニーズを把握し、温度感に応じて商談予約まで誘導。",
+                label: "① AI CHAT",
+                title: "AI チャット",
+                desc: "サイト訪問者と対話し、商談予約まで会話で完結。ページ文脈に応じた声かけと、関心に合った資料の自動提案で、温度感に応じてカレンダー提示まで自動で行います。",
                 features: [
                   { label: "ページ文脈に応じた自動声かけ", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "会話の流れで資料提案・疑問解消", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "閲覧ページに合わせて関連資料を自動提案", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
                   { label: "温度感に応じて商談予約まで誘導", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
                 ],
                 link: "/features/ai-chat/",
               },
               {
-                color: "#3b6ff5",
-                gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-                label: "AI EMAIL",
-                title: "AIメール",
-                desc: "見込み客を自動フォロー。未反応リードも逃さず商談化。高関心リードに即座にフォローアップし、パーソナライズドメールで育成。",
-                features: [
-                  { label: "高関心リードに即座にフォローアップ", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
-                  { label: "パーソナライズドメールで育成", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
-                  { label: "未反応リードにDay 1→3→5で自動再接触", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
-                ],
-                link: "/features/ai-email/",
-              },
-              {
                 color: "#0891b2",
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-                label: "AI CALENDAR",
-                title: "AIカレンダー",
-                desc: "関心が高い瞬間を逃さずカレンダーを提示。チャット内・サンクスページ・メールで商談予約を獲得し、事前ヒアリングまで自動完了。",
+                label: "② AI CALENDAR",
+                title: "AI カレンダー",
+                desc: "チャット内・サンクスページ・メール経由で発動し、関心が高い瞬間を逃さずカレンダーを提示。割り振りルールを細かく設定でき、適切な担当者に自動アサインします。",
                 features: [
-                  { label: "チャット内でそのまま商談予約", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "サンクスページで即カレンダー提示", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
-                  { label: "AIが事前ヒアリングまで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
+                  { label: "チャット内・サンクスページ・メール経由で発動", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "割り振りルールを細かく設定可能", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
+                  { label: "AI が事前ヒアリング・CRM 自動登録まで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
                 ],
                 link: "/features/meetings/",
               },
               {
                 color: "#7c5cfc",
                 gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                label: "AI OFFER",
-                title: "AIオファー",
-                desc: "訪問者の関心に合わせた資料を自動提案。閲覧ページに応じた自動マッチング、最適タイミングのポップアップでリードを獲得。",
+                label: "③ AI EMAIL",
+                title: "AI メール",
+                desc: "離脱リードを自動で取り戻す。行動シグナルに応じた自動再接触、パーソナライズドメールで育成。メール内 URL から AI Calendar へ誘導し再度商談獲得。",
                 features: [
-                  { label: "閲覧ページに応じて資料を自動マッチング", icon: "M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z M16.65 16.65L21 21" },
-                  { label: "最適タイミングでポップアップ表示", icon: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0" },
-                  { label: "AI付き資料ダウンロードページ", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M12 18v-6 M9 15l3 3 3-3" },
+                  { label: "高関心リードに即座にフォローアップ", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
+                  { label: "行動履歴をもとにパーソナライズ", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "未反応リードに自動再接触 → 商談予約", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
                 ],
-                link: "/features/offers/",
+                link: "/features/ai-email/",
               },
             ].map((prod, i) => (
               <div
@@ -3430,7 +3636,170 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* STEPS */}
+      {/* WHY AI SDR */}
+      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
+        <div className="dot-grid" style={{ opacity: 0.3 }} />
+        <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
+          <div className="slabel" style={{ textAlign: "center" }}>Why AI SDR?</div>
+          <div className="stitle" style={{ textAlign: "center" }}>
+            なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
+          </div>
+          <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
+            人間のSDRが行ってきた業務を、Meeton aiが24時間・高精度で代替する時代が来ました。
+          </p>
+          <div className="why-grid">
+            {[
+              {
+                iconKey: "robot" as IconKey,
+                color: "var(--cta)",
+                bg: "var(--cta-light)",
+                border: "linear-gradient(135deg,var(--cta),var(--blue))",
+                title: "自律的に判断・行動",
+                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
+              },
+              {
+                iconKey: "bolt" as IconKey,
+                color: "var(--accent)",
+                bg: "var(--accent-light)",
+                border: "linear-gradient(135deg,var(--accent),var(--pink))",
+                title: "SDR 3人分を24時間稼働",
+                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
+              },
+              {
+                iconKey: "target" as IconKey,
+                color: "var(--blue)",
+                bg: "var(--blue-light)",
+                border: "linear-gradient(135deg,var(--blue),var(--cyan))",
+                title: "ファネル全体を一気通貫",
+                desc: "初回接触→ナーチャリング→商談予約→事前ヒアリングまで。従来バラバラだったツールが1つのAIエージェントに統合され、リードが途中で途切れません。",
+              },
+            ].map((item, i) => (
+              <div className="why-card" key={i} style={{ boxShadow: "0 2px 8px rgba(0,0,0,.03)" }}>
+                <div className="why-card" style={{ all: "unset" }}>
+                  <div style={{ display: "none" }} className="why-card-before" />
+                </div>
+                <div className="why-icon" style={{ background: item.bg }}>
+                  <Ico name={item.iconKey} size={28} color={item.color} />
+                </div>
+                <div className="why-title">{item.title}</div>
+                <div className="why-desc">{item.desc}</div>
+              </div>
+            ))}
+          </div>
+          {/* Comparison strip */}
+          <div style={{
+            marginTop: 48,
+            background: "linear-gradient(135deg, var(--surface), var(--surface2))",
+            borderRadius: 16,
+            padding: "32px 40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 48,
+            flexWrap: "wrap",
+          }}>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>従来のSDR</div>
+              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
+                1日8時間 / 手動フォロー / チャネルごとに別ツール<br/>リード対応の遅延 / 属人的な品質
+              </div>
+            </div>
+            <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
+              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
+                24時間365日 / 自律フォロー / マルチチャネル<br/>即時レスポンス / 一貫した高品質対応
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARISON — vs Human SDR vs Chatbot (lazy-loaded in both modes) */}
+      <ComparisonTable />
+
+      {/* CASES */}
+      <section className="section" style={{ background: "var(--surface)" }}>
+        <div className="section-inner">
+          <div className="slabel" style={{ textAlign: "center" }}>
+            導入実績
+          </div>
+          <div className="stitle" style={{ textAlign: "center" }}>
+            商談創出の実績
+          </div>
+          <p
+            className="ssub"
+            style={{ textAlign: "center", margin: "0 auto 44px" }}
+          >
+            Meeton aiが生み出した商談成果をご紹介します。
+          </p>
+          <CaseCarousel items={caseStudies} />
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <a
+              href="/case-studies/"
+              style={{
+                color: "var(--cta)",
+                fontSize: 15,
+                fontWeight: 800,
+                textDecoration: "none",
+              }}
+            >
+              すべての導入事例を見る →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* INTEGRATIONS */}
+      <section
+        className="section"
+        id="integrations"
+        style={{ position: "relative" }}
+      >
+        <div className="dot-grid" style={{ opacity: 0.3 }} />
+        <div
+          className="section-inner"
+          style={{ position: "relative", zIndex: 2 }}
+        >
+          <div className="slabel" style={{ textAlign: "center" }}>
+            ツール連携
+          </div>
+          <div className="stitle" style={{ textAlign: "center" }}>
+            主要ツールとシームレスに連携
+          </div>
+          <p
+            className="ssub"
+            style={{ textAlign: "center", margin: "0 auto 44px" }}
+          >
+            既存のビジネスツールとかんたんに統合し、すぐに使い始められます。
+          </p>
+          <div className="int-grid">
+            {integrations.map((t, i) => (
+              <div className="int-card" key={i}>
+                <img src={t.logo} alt={t.name} className="int-icon" loading="lazy" decoding="async" />
+                <div className="int-name">{t.name}</div>
+                <div className="int-desc">{t.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 24 }}>
+            <a
+              href={isJa ? "/ja/integrations/" : "/integrations/"}
+              style={{
+                color: "#12a37d",
+                fontSize: 15,
+                fontWeight: 800,
+                textDecoration: "none",
+              }}
+            >
+              {isJa ? "連携一覧を見る →" : "View all integrations →"}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* STEPS (skipped in LP — focus on conversion) */}
+      {!isLp && (
       <section className="section">
         <div className="section-inner">
           <div className="slabel" style={{ textAlign: "center" }}>
@@ -3603,152 +3972,7 @@ export default function HomePageClient() {
           </div>
         </div>
       </section>
-
-      {/* WHY AI SDR */}
-      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
-        <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: "center" }}>Why AI SDR?</div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
-          </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
-            人間のSDRが行ってきた業務を、Meeton aiが24時間・高精度で代替する時代が来ました。
-          </p>
-          <div className="why-grid">
-            {[
-              {
-                iconKey: "robot" as IconKey,
-                color: "var(--cta)",
-                bg: "var(--cta-light)",
-                border: "linear-gradient(135deg,var(--cta),var(--blue))",
-                title: "自律的に判断・行動",
-                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
-              },
-              {
-                iconKey: "bolt" as IconKey,
-                color: "var(--accent)",
-                bg: "var(--accent-light)",
-                border: "linear-gradient(135deg,var(--accent),var(--pink))",
-                title: "SDR 3人分を24時間稼働",
-                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
-              },
-              {
-                iconKey: "target" as IconKey,
-                color: "var(--blue)",
-                bg: "var(--blue-light)",
-                border: "linear-gradient(135deg,var(--blue),var(--cyan))",
-                title: "ファネル全体を一気通貫",
-                desc: "初回接触→ナーチャリング→商談予約→事前ヒアリングまで。従来バラバラだったツールが1つのAIエージェントに統合され、リードが途中で途切れません。",
-              },
-            ].map((item, i) => (
-              <div className="why-card" key={i} style={{ boxShadow: "0 2px 8px rgba(0,0,0,.03)" }}>
-                <div className="why-card" style={{ all: "unset" }}>
-                  <div style={{ display: "none" }} className="why-card-before" />
-                </div>
-                <div className="why-icon" style={{ background: item.bg }}>
-                  <Ico name={item.iconKey} size={28} color={item.color} />
-                </div>
-                <div className="why-title">{item.title}</div>
-                <div className="why-desc">{item.desc}</div>
-              </div>
-            ))}
-          </div>
-          {/* Comparison strip */}
-          <div style={{
-            marginTop: 48,
-            background: "linear-gradient(135deg, var(--surface), var(--surface2))",
-            borderRadius: 16,
-            padding: "32px 40px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 48,
-            flexWrap: "wrap",
-          }}>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>従来のSDR</div>
-              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                1日8時間 / 手動フォロー / チャネルごとに別ツール<br/>リード対応の遅延 / 属人的な品質
-              </div>
-            </div>
-            <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
-              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                24時間365日 / 自律フォロー / マルチチャネル<br/>即時レスポンス / 一貫した高品質対応
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CASES */}
-      <section className="section" style={{ background: "var(--surface)" }}>
-        <div className="section-inner">
-          <div className="slabel" style={{ textAlign: "center" }}>
-            導入実績
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            商談創出の実績
-          </div>
-          <p
-            className="ssub"
-            style={{ textAlign: "center", margin: "0 auto 44px" }}
-          >
-            Meeton aiが生み出した商談成果をご紹介します。
-          </p>
-          <CaseCarousel />
-        </div>
-      </section>
-
-      {/* INTEGRATIONS */}
-      <section
-        className="section"
-        id="integrations"
-        style={{ position: "relative" }}
-      >
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
-        <div
-          className="section-inner"
-          style={{ position: "relative", zIndex: 2 }}
-        >
-          <div className="slabel" style={{ textAlign: "center" }}>
-            ツール連携
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            主要ツールとシームレスに連携
-          </div>
-          <p
-            className="ssub"
-            style={{ textAlign: "center", margin: "0 auto 44px" }}
-          >
-            既存のビジネスツールとかんたんに統合し、すぐに使い始められます。
-          </p>
-          <div className="int-grid">
-            {integrations.map((t, i) => (
-              <div className="int-card" key={i}>
-                <img src={t.logo} alt={t.name} className="int-icon" />
-                <div className="int-name">{t.name}</div>
-                <div className="int-desc">{t.desc}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: 24 }}>
-            <a
-              href={isJa ? "/ja/integrations/" : "/integrations/"}
-              style={{
-                color: "#12a37d",
-                fontSize: 15,
-                fontWeight: 800,
-                textDecoration: "none",
-              }}
-            >
-              {isJa ? "連携一覧を見る →" : "View all integrations →"}
-            </a>
-          </div>
-        </div>
-      </section>
+      )}
 
       {/* FAQ */}
       <section
@@ -3795,7 +4019,7 @@ export default function HomePageClient() {
               {/* Double the logos for seamless infinite scroll */}
               {[...clients, ...clients].map((c, i) => (
                 <div className="logo-item" key={`${c.name}-${i}`}>
-                  <img src={c.logo} alt={c.name} />
+                  <img src={c.logo} alt={c.name} loading="lazy" decoding="async" />
                 </div>
               ))}
             </div>
@@ -3843,13 +4067,13 @@ export default function HomePageClient() {
           >
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => openMeetingModal("final_cta")}
             >
-              AIデモを体験
+              {isLp ? "無料デモを予約する" : "AIデモを体験"}
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => openDocModal("final_cta")}
             >
               資料請求 →
             </button>
@@ -3857,18 +4081,228 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <Footer variant="light" />
+      {isLp ? (
+        <LpFooter />
+      ) : (
+        <Footer variant="light" />
+      )}
+
+      {isLp && (
+        <LpStickyCta
+          visible={scrolledLp}
+          isMobile={isMobile}
+          onPrimary={() => openMeetingModal("sticky")}
+          onSecondary={() => openDocModal("sticky")}
+        />
+      )}
 
       <HubSpotModal
         isOpen={isDocModalOpen}
         onClose={() => setIsDocModalOpen(false)}
-        utmCampaign="meeton-ai"
+        utmCampaign={utmCampaign}
       />
       <HubSpotMeetingModal
         isOpen={isMeetingModalOpen}
         onClose={() => setIsMeetingModalOpen(false)}
-        utmCampaign="meeton-ai"
+        utmCampaign={utmCampaign}
       />
     </div>
   );
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+ * LP-mode sub-components (rendered only when mode='lp')
+ * Goal: minimal nav, distraction-free shell, sticky CTA, lean footer
+ * ────────────────────────────────────────────────────────────────────── */
+
+function LpNav({
+  onCtaClick,
+  isMobile,
+}: {
+  onCtaClick: () => void;
+  isMobile: boolean;
+}) {
+  return (
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        padding: isMobile ? "12px 16px" : "14px 48px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        background: "rgba(255,255,255,.95)",
+        backdropFilter: "blur(24px) saturate(1.4)",
+        borderBottom: "1px solid rgba(223,227,240,.6)",
+      }}
+    >
+      <Link
+        href="/"
+        style={{
+          textDecoration: "none",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
+        <Image
+          src="/logo-dark.svg"
+          alt="DynaMeet"
+          width={140}
+          height={30}
+          style={{ height: isMobile ? 24 : 28, width: "auto" }}
+        />
+      </Link>
+      <button
+        onClick={onCtaClick}
+        style={{
+          border: "none",
+          cursor: "pointer",
+          fontWeight: 700,
+          borderRadius: 10,
+          background: "linear-gradient(135deg,#12a37d,#0fc19a)",
+          color: "#fff",
+          padding: isMobile ? "10px 18px" : "12px 26px",
+          fontSize: isMobile ? 13 : 15,
+          boxShadow: "0 4px 16px rgba(18,163,125,.25)",
+          transition: "all .25s",
+          fontFamily: "var(--fb)",
+        }}
+      >
+        デモを予約
+      </button>
+    </nav>
+  );
+}
+
+function LpStickyCta({
+  visible,
+  isMobile,
+  onPrimary,
+  onSecondary,
+}: {
+  visible: boolean;
+  isMobile: boolean;
+  onPrimary: () => void;
+  onSecondary: () => void;
+}) {
+  return (
+    <div
+      className={`lp-sticky-cta${visible ? " visible" : ""}`}
+      style={{
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 90,
+        padding: isMobile ? "10px 12px" : "14px 24px",
+        background: "rgba(255,255,255,.96)",
+        backdropFilter: "blur(12px)",
+        borderTop: "1px solid #dfe3f0",
+        boxShadow: "0 -4px 24px rgba(15,17,40,.08)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+        flexWrap: "wrap",
+      }}
+    >
+      <button
+        onClick={onPrimary}
+        style={{
+          border: "none",
+          cursor: "pointer",
+          fontWeight: 800,
+          borderRadius: 10,
+          background: "linear-gradient(135deg,#12a37d,#0fc19a)",
+          color: "#fff",
+          padding: isMobile ? "12px 22px" : "14px 32px",
+          fontSize: isMobile ? 14 : 16,
+          boxShadow: "0 4px 16px rgba(18,163,125,.3)",
+          flex: isMobile ? 1 : "0 0 auto",
+          minWidth: isMobile ? 0 : 200,
+          fontFamily: "var(--fb)",
+        }}
+      >
+        無料デモを予約
+      </button>
+      <button
+        onClick={onSecondary}
+        style={{
+          background: "transparent",
+          border: "2px solid #c8cedf",
+          color: "#0f1128",
+          cursor: "pointer",
+          fontWeight: 700,
+          borderRadius: 10,
+          padding: isMobile ? "10px 18px" : "12px 26px",
+          fontSize: isMobile ? 13 : 15,
+          flex: isMobile ? 1 : "0 0 auto",
+          minWidth: isMobile ? 0 : 160,
+          fontFamily: "var(--fb)",
+        }}
+      >
+        資料DL
+      </button>
+    </div>
+  );
+}
+
+function LpFooter() {
+  return (
+    <footer
+      style={{
+        padding: "20px 24px 100px",
+        borderTop: "1px solid #dfe3f0",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: 12,
+        fontSize: 12,
+        color: "#6e7494",
+        maxWidth: 1140,
+        margin: "0 auto",
+      }}
+    >
+      <span>© {new Date().getFullYear()} DynaMeet K.K.</span>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+        <a
+          href="/privacy-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
+        >
+          プライバシーポリシー
+        </a>
+        <a
+          href="/terms/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
+        >
+          利用規約
+        </a>
+        <a
+          href="/security-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
+        >
+          セキュリティポリシー
+        </a>
+      </div>
+    </footer>
+  );
+}
+
+const lpCss = `
+.lp-sticky-cta{transform:translateY(100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.lp-sticky-cta.visible{transform:translateY(0)}
+@media(max-width:768px){
+  .lp-sticky-cta{padding:8px 10px !important;gap:8px !important}
+}
+`;

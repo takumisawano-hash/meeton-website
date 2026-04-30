@@ -29,18 +29,20 @@ export default function DocoDocoTracker() {
       var lineCode = d.LineCode || '';
       if (lineCode === '1' || lineCode === '2') return;
 
+      var payload = {
+        company_name: org,
+        domain: d.DomainName,
+        org_url: d.OrgUrl || '',
+        employees: d.OrgEmployeesCode || '',
+        industry: d.OrgIndustrialCategoryL || '',
+        page_url: location.href,
+        referrer: document.referrer || ''
+      };
+      try { sessionStorage.setItem('mlp_docodoco', JSON.stringify(payload)); } catch (e) {}
       fetch('/api/visitor-signal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          company_name: org,
-          domain: d.DomainName,
-          org_url: d.OrgUrl || '',
-          employees: d.OrgEmployeesCode || '',
-          industry: d.OrgIndustrialCategoryL || '',
-          page_url: location.href,
-          referrer: document.referrer || ''
-        }),
+        body: JSON.stringify(payload),
         keepalive: true
       }).catch(function() {});
     }).catch(function() {});

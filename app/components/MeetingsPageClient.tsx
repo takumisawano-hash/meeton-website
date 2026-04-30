@@ -194,14 +194,14 @@ const faqData = [
 const whyData = [
   { title: 'マルチチャネル', desc: 'チャット・サンクスページ・メール——あらゆる接点で商談予約の機会を提供。', color: '#0891b2', iconPath: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' },
   { title: '離脱防止', desc: 'ページ遷移なしで予約完了。離脱率-40%の実績。', color: '#12a37d', iconPath: 'M9 12l2 2 4-4 M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z' },
-  { title: '事前ヒアリング', desc: 'AIが課題・予算・利用ツールを事前に収集。商談の質が向上。', color: '#7c5cfc', iconPath: 'M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11' },
+  { title: '細かな割り振りルール', desc: 'フォーム入力・業界・規模・関心領域に応じて、表示するカレンダー・担当者を条件分岐で自動制御。', color: '#7c5cfc', iconPath: 'M3 12h7 M10 12l4-6h6 M10 12l4 6h6' },
   { title: 'CRM連携', desc: '予約情報・ヒアリング内容を自動でCRMに登録。手入力ゼロ。', color: '#3b6ff5', iconPath: 'M4 4h16v16H4z M4 9h16 M9 4v16' },
 ];
 
 const flowSteps = [
   { num: '1', title: '関心を検知', sub: 'Interest detected', color: '#6e7494' },
   { num: '2', title: 'カレンダー提示', sub: 'Show calendar', color: '#0891b2' },
-  { num: '3', title: '事前ヒアリング', sub: 'Pre-meeting Q&A', color: '#06b6d4' },
+  { num: '3', title: '担当者へ自動割り振り', sub: 'Smart routing', color: '#06b6d4' },
   { num: '4', title: '商談確定', sub: 'Meeting confirmed', color: '#12a37d' },
   { num: '5', title: 'CRM自動連携', sub: 'CRM sync', color: '#3b6ff5' },
 ];
@@ -254,13 +254,13 @@ export default function MeetingsPageClient() {
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />AI CALENDAR</div>
             <h1 className="anim d2">関心が高い瞬間に、<br /><em>確実に商談を獲得</em></h1>
-            <p className="anim d3 hero-sub">チャット内・サンクスページ・メール——あらゆる接点でカレンダーを提示。AIが事前ヒアリングまで完了し、営業チームは準備万全で商談に臨めます。</p>
+            <p className="anim d3 hero-sub">チャット内・サンクスページ・メール——あらゆる接点でカレンダーを提示。フォーム入力・業界・規模に応じて、適切なチーム・担当者へ自動で割り振ります。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '-40%', l: '離脱率' }, { v: '+35%', l: '予約率' }, { v: '自動', l: '事前ヒアリング' }].map((s, i) => (
+              {[{ v: '-40%', l: '離脱率' }, { v: '+35%', l: '予約率' }, { v: '自動', l: '担当者割り振り' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -500,14 +500,19 @@ export default function MeetingsPageClient() {
           </div>
           <div className="phase-divider" />
 
-          {/* Feature 4: Pre-meeting Q&A */}
+          {/* Feature 4: Routing rules */}
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 04</div>
-              <div className="phase-h">事前ヒアリングまで自動完了</div>
-              <div className="phase-desc">背景・利用ツール・予算感をAIが収集し、CRMに自動登録。営業は準備万全で商談に臨めます。商談の質が大幅に向上します。</div>
+              <div className="phase-h">細かな割り振りルールを自由に設定</div>
+              <div className="phase-desc">フォーム入力・閲覧履歴・関心領域に応じて、表示するカレンダー・担当者を自動で振り分け。条件分岐でチーム単位から個人単位まで、細部までコントロールできます。</div>
               <div className="phase-features">
-                {['課題・背景を自動ヒアリング', '利用ツール・予算感を把握', 'CRMに自動登録', '営業チームへ即日通知'].map((feat, i) => (
+                {[
+                  'フォーム入力に応じてカレンダーを表示/非表示',
+                  '業界・企業規模で担当チームを自動切替',
+                  'チーム内のラウンドロビン or 指名割当',
+                  '営業時間外・休日のフォールバックも条件設定可能',
+                ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
                 ))}
               </div>
@@ -515,32 +520,34 @@ export default function MeetingsPageClient() {
             <div className="phase-vis">
               <div className="pvis vis3">
                 <div style={{ padding: 16 }}>
-                  {/* Pre-meeting summary card */}
+                  {/* Routing rules card */}
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
                       <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#7c5cfc,#9b7dfd)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 3v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v3a3 3 0 0 1-3 3H9"/></svg>
                       </div>
                       <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>事前ヒアリングサマリー</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>AI自動収集 — 田中様</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>ルーティングルール</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>4 件 アクティブ</div>
                       </div>
                     </div>
                     {[
-                      { label: '課題', value: 'リード対応の遅延', color: '#7c5cfc' },
-                      { label: '利用ツール', value: 'HubSpot, Slack', color: '#3b6ff5' },
-                      { label: '予算感', value: '月額10-30万円', color: '#0891b2' },
-                      { label: '導入時期', value: '1ヶ月以内', color: '#12a37d' },
-                    ].map((item, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, opacity: 0, animation: `slideIn .5s ${.5 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
-                        <span style={{ fontSize: 9, fontWeight: 700, color: item.color, background: `${item.color}12`, padding: '2px 8px', borderRadius: 4, minWidth: 60, textAlign: 'center' }}>{item.label}</span>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--heading)' }}>{item.value}</span>
+                      { cond: '従業員数 ≥ 500', then: 'エンタープライズチーム', color: '#7c5cfc' },
+                      { cond: '業界 = SaaS', then: 'SaaS Team / 田中', color: '#3b6ff5' },
+                      { cond: '営業時間外', then: '翌営業日 10:00 に再表示', color: '#0891b2' },
+                      { cond: 'それ以外', then: 'ラウンドロビン', color: '#12a37d' },
+                    ].map((rule, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, padding: '6px 8px', background: '#fafaf7', borderRadius: 6, opacity: 0, animation: `slideIn .5s ${.5 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
+                        <span style={{ fontFamily: 'var(--fm)', fontSize: 8, fontWeight: 800, color: 'var(--sub)', letterSpacing: 0.5 }}>IF</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--heading)' }}>{rule.cond}</span>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--sub)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14 M12 5l7 7-7 7"/></svg>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: rule.color, background: `${rule.color}14`, padding: '2px 8px', borderRadius: 4 }}>{rule.then}</span>
                       </div>
                     ))}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10, animation: 'slideIn .5s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10, animation: 'slideIn .5s 1.5s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#7c5cfc', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#7c5cfc' }}>CRMへ自動登録完了</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#7c5cfc' }}>適切なカレンダーを自動表示</span>
                   </div>
                 </div>
               </div>

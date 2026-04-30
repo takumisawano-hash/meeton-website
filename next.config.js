@@ -5,7 +5,7 @@ const nextConfig = {
   trailingSlash: true,
   experimental: {
     // Limit parallel static page generation to avoid Notion API rate limits
-    staticGenerationMaxConcurrency: 3,
+    staticGenerationMaxConcurrency: 1,
   },
   images: {
     remotePatterns: [
@@ -28,6 +28,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'imgur.com',
       },
     ],
     // Allow local API routes that serve thumbnails / notion image proxy

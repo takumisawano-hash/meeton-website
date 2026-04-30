@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import LPClient from '../components/LPClient'
+import HomePageClient from '@/app/components/HomePageClient'
+import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export const metadata: Metadata = {
   title: '営業チームの商談数を3倍にする方法｜Meeton ai',
@@ -14,6 +15,28 @@ export const metadata: Metadata = {
   },
 }
 
-export default function LinkedInLPPage() {
-  return <LPClient variant="linkedin" />
+export const revalidate = 3600
+
+export default async function LinkedInLPPage() {
+  const cases = await getAllCaseStudies()
+  const featured = cases.slice(0, 3).map((c) => ({
+    slug: c.slug,
+    name: c.company,
+    industry: c.industry,
+    quote: c.quote || c.description,
+    quotePerson: c.quotePerson,
+    heroMetric: c.heroMetric,
+    heroMetricLabel: c.heroMetricLabel,
+    heroImage: c.heroImage,
+    stats: c.stats.slice(0, 3),
+  }))
+  return (
+    <HomePageClient
+      caseStudies={featured}
+      mode="lp"
+      lpVariant="linkedin"
+      lpHeadline="商談数+40%を達成した、AI SDR 運用の型"
+      lpSubheadline="導入初週から商談を創出した実例と、AI SDRを「使いこなす」ためのKPI設計・運用設計を解説。"
+    />
+  )
 }

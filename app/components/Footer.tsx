@@ -38,7 +38,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
 
   const links = [
     { href: "/", label: "Meeton ai" },
-    { href: "/talent/", label: "Meeton Talent" },
+    // { href: "/talent/", label: "Meeton Talent" }, // Meeton Talent: temporarily hidden
     { href: "/features/ai-chat/", label: "AI Chat" },
     { href: "/features/ai-email/", label: "AI Email" },
     { href: "/features/meetings/", label: "AI Calendar" },

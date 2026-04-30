@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import LPClient from './components/LPClient'
+import HomePageClient from '@/app/components/HomePageClient'
 
 export const metadata: Metadata = {
   title: 'Webサイト訪問者を商談に変えるAI｜Meeton ai',
@@ -15,5 +15,12 @@ export const metadata: Metadata = {
 }
 
 export default function LPPage() {
-  return <LPClient variant="google" />
+  return (
+    <HomePageClient
+      mode="lp"
+      lpVariant="google"
+      lpHeadline="Webサイト訪問者を、商談に変えるAI"
+      lpSubheadline="リード検知から商談予約まで5秒。AIがあらゆる接点で営業し、商談を自動で生み出します。"
+    />
+  )
 }

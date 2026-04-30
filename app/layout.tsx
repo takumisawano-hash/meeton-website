@@ -5,6 +5,7 @@ import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
 import HubSpotTracker from './components/HubSpotTracker'
 import MeetonScript from './components/MeetonScript'
+import DynamicLpController from './components/DynamicLpController'
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -81,6 +82,7 @@ export default function RootLayout({
         <JsonLd type="website" />
         {children}
         <MeetonScript />
+        <DynamicLpController />
       </body>
     </html>
   )

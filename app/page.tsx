@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import HomePageClient from './components/HomePageClient'
+import { getAllCaseStudies } from './lib/case-studies'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Meeton ai｜あらゆる接点から商談を自動創出するAIセールスプラットフォーム',
@@ -13,6 +16,18 @@ export const metadata: Metadata = {
   other: { "zoom-domain-verification": "ZOOM_verify_276c56f29d0b4de99f5f218f163582a7" },
 }
 
-export default function Page() {
-  return <HomePageClient />
+export default async function Page() {
+  const cases = await getAllCaseStudies()
+  const featured = cases.slice(0, 3).map((c) => ({
+    slug: c.slug,
+    name: c.company,
+    industry: c.industry,
+    quote: c.quote || c.description,
+    quotePerson: c.quotePerson,
+    heroMetric: c.heroMetric,
+    heroMetricLabel: c.heroMetricLabel,
+    heroImage: c.heroImage,
+    stats: c.stats.slice(0, 3),
+  }))
+  return <HomePageClient caseStudies={featured} />
 }
