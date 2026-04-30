@@ -10,11 +10,11 @@ export default function LPLayout({ children }: { children: React.ReactNode }) {
     <>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=AW-18060590496"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script
         id="google-ads-tag"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -26,7 +26,7 @@ export default function LPLayout({ children }: { children: React.ReactNode }) {
       />
       <Script
         id="linkedin-insight-init"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             _linkedin_partner_id = "9112612";
@@ -37,7 +37,7 @@ export default function LPLayout({ children }: { children: React.ReactNode }) {
       />
       <Script
         id="linkedin-insight"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             (function(l) {

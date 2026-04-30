@@ -59,9 +59,15 @@ function preloadHubSpotScript(): Promise<void> {
   return scriptLoadPromise
 }
 
-// Start preloading immediately when module loads
+// Defer HubSpot script preload until browser idle (or 2s fallback) so it
+// doesn't compete with LCP. Without this, the 197KB embed.js is fetched on
+// every page that imports this modal, even when the modal is never opened.
 if (typeof window !== 'undefined') {
-  preloadHubSpotScript()
+  const idle = (window as Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
+  }).requestIdleCallback
+  if (idle) idle(() => preloadHubSpotScript(), { timeout: 3000 })
+  else setTimeout(preloadHubSpotScript, 2000)
 }
 
 export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotModalProps) {

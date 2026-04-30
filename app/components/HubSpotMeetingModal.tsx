@@ -9,19 +9,28 @@ type HubSpotMeetingModalProps = {
   utmCampaign?: string
 }
 
-// Preload the meeting iframe
+// Defer link hints to browser idle. preconnect alone is cheap, but prefetch
+// pulls the full meeting page bundle and was competing with LCP on every
+// page that imports this modal — even when the modal never opens.
 let preloadedIframe: HTMLLinkElement | null = null
 if (typeof window !== 'undefined' && !preloadedIframe) {
-  preloadedIframe = document.createElement('link')
-  preloadedIframe.rel = 'preconnect'
-  preloadedIframe.href = 'https://meetings-na2.hubspot.com'
-  document.head.appendChild(preloadedIframe)
+  const addHints = () => {
+    if (preloadedIframe) return
+    preloadedIframe = document.createElement('link')
+    preloadedIframe.rel = 'preconnect'
+    preloadedIframe.href = 'https://meetings-na2.hubspot.com'
+    document.head.appendChild(preloadedIframe)
 
-  // Also prefetch the meeting page
-  const prefetch = document.createElement('link')
-  prefetch.rel = 'prefetch'
-  prefetch.href = 'https://meetings-na2.hubspot.com/takumi-sawano?embed=true'
-  document.head.appendChild(prefetch)
+    const prefetch = document.createElement('link')
+    prefetch.rel = 'prefetch'
+    prefetch.href = 'https://meetings-na2.hubspot.com/takumi-sawano?embed=true'
+    document.head.appendChild(prefetch)
+  }
+  const idle = (window as Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
+  }).requestIdleCallback
+  if (idle) idle(addHints, { timeout: 3000 })
+  else setTimeout(addHints, 2000)
 }
 
 export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: HubSpotMeetingModalProps) {
