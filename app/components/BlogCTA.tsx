@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import HubSpotModal from './HubSpotModal'
 import HubSpotMeetingModal from './HubSpotMeetingModal'
@@ -7,6 +8,35 @@ import HubSpotMeetingModal from './HubSpotMeetingModal'
 type BlogCTAProps = {
   category?: string
   slug?: string
+}
+
+// Map blog categories to the most relevant published case study so we
+// always send readers to a proof point that matches their context.
+type CaseRef = {
+  slug: string
+  company: string
+  metric: string
+  context: string
+}
+const CASE_BY_CATEGORY: Record<string, CaseRef> = {
+  Sales: {
+    slug: 'biztex-chat-leads-10x',
+    company: 'BizteX 株式会社',
+    metric: 'チャット経由リード 月1〜2件 → 月20件以上 (20倍+)',
+    context: '従来のシナリオ型チャット運用を Meeton ai に置き換え',
+  },
+  'Inside Sales': {
+    slug: 'edulinx-ai-chat-40-percent',
+    company: 'EdulinX 株式会社',
+    metric: 'AI Chat 経由のリード商談化率 40%+',
+    context: 'インサイドセールス強化に Meeton ai を採用',
+  },
+  Marketing: {
+    slug: 'univis-multi-service-3month-2deals',
+    company: 'Univis 株式会社',
+    metric: '導入3ヶ月で受注 2件、提案件数も増加',
+    context: '多サービス展開する企業のマーケ施策で活用',
+  },
 }
 
 const COPY_BY_CATEGORY: Record<string, { eyebrow: string; headline: React.ReactNode; description: string; primary: string }> = {
@@ -42,6 +72,7 @@ export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
   const copy = (category && COPY_BY_CATEGORY[category]) || DEFAULT_COPY
   const utmCampaign = slug ? `blog-${slug}` : 'meeton-ai-blog'
+  const caseRef = category ? CASE_BY_CATEGORY[category] : undefined
 
   return (
     <>
@@ -152,6 +183,44 @@ export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
           </div>
         </div>
       </section>
+
+      {caseRef && (
+        <Link
+          href={`/case-studies/${caseRef.slug}/`}
+          style={{
+            display: 'block',
+            marginTop: 16,
+            padding: '20px 24px',
+            background: '#fff',
+            border: '1px solid #e5e7eb',
+            borderRadius: 14,
+            textDecoration: 'none',
+            color: 'inherit',
+            transition: 'all 0.2s',
+          }}
+        >
+          <p style={{
+            fontFamily: 'var(--font-mono), monospace',
+            fontSize: 11,
+            fontWeight: 700,
+            color: '#7c5cfc',
+            letterSpacing: 2,
+            textTransform: 'uppercase',
+            marginBottom: 6,
+          }}>
+            CASE STUDY
+          </p>
+          <p style={{ fontSize: 16, fontWeight: 800, color: '#0f1128', marginBottom: 4 }}>
+            {caseRef.company}
+          </p>
+          <p style={{ fontSize: 13, color: '#12a37d', fontWeight: 700, marginBottom: 4 }}>
+            📊 {caseRef.metric}
+          </p>
+          <p style={{ fontSize: 13, color: '#6e7494', lineHeight: 1.5 }}>
+            {caseRef.context}　<span style={{ color: '#3b6ff5', fontWeight: 600 }}>導入事例を読む →</span>
+          </p>
+        </Link>
+      )}
 
       <HubSpotModal
         isOpen={isModalOpen}
