@@ -1136,9 +1136,9 @@ export default function DynamicLpController() {
   }, [isTestMode])
 
   const triggerPopup = useCallback(
-    (reason: string) => {
-      if (popupTriggeredRef.current) return
-      if (!checkPopupCooldown()) return
+    (reason: string, opts?: { force?: boolean }) => {
+      if (popupTriggeredRef.current && !opts?.force) return
+      if (!opts?.force && !checkPopupCooldown()) return
       if (data) return
       if (isAiChatActive()) return
       popupTriggeredRef.current = true
@@ -1279,7 +1279,7 @@ export default function DynamicLpController() {
     if (visitorId) trackEvent(visitorId, 'banner_click')
     setBannerOpen(false)
     popupTriggeredRef.current = false
-    triggerPopup('banner-click')
+    triggerPopup('banner-click', { force: true })
   }, [triggerPopup, visitorId])
 
   const handleBannerDismiss = useCallback(() => {
