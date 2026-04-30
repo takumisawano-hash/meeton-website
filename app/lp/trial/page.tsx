@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: '14日間無料トライアル｜Meeton ai',
   description:
     'Meeton aiを14日間無料でお試しください。AI SDRがウェブサイト訪問者を商談に変換します。クレジットカード不要。',
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 }
 
 export const revalidate = 3600
