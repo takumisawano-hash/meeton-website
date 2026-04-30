@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-30 — Replaced by HomePageClient mode="lp".
+ * Trial LP migrated to HomePageClient. Keep ~2 weeks then delete.
+ */
+
 import Nav from '@/app/components/Nav'
 import Footer from '@/app/components/Footer'
 

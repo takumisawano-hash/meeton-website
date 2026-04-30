@@ -1,13 +1,31 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import ComparisonTable from "./ComparisonTable";
 import Footer from "./Footer";
-import MeetingFlowDiagram from "./MeetingFlowDiagram";
 import HubSpotMeetingModal from "./HubSpotMeetingModal";
 import HubSpotModal from "./HubSpotModal";
 import Nav from "./Nav";
+
+// Lazy: heavy presentational components used only in home mode
+const ComparisonTable = dynamic(() => import("./ComparisonTable"), {
+  ssr: true,
+  loading: () => null,
+});
+const MeetingFlowDiagram = dynamic(() => import("./MeetingFlowDiagram"), {
+  ssr: true,
+  loading: () => null,
+});
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    lintrk?: (action: string, data: { conversion_id: number }) => void;
+  }
+}
 
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(false);
@@ -3272,22 +3290,141 @@ export type HomeCaseStudy = {
   stats: { value: string; label: string; context?: string }[];
 };
 
+export type LPVariant =
+  | "inside-sales"
+  | "lead-gen"
+  | "linkedin"
+  | "meeting"
+  | "trial"
+  | "web-chat"
+  | "google";
+
 type HomePageClientProps = {
   caseStudies?: HomeCaseStudy[];
+  mode?: "home" | "lp";
+  lpVariant?: LPVariant;
+  lpHeadline?: string;
+  lpSubheadline?: string;
 };
 
-export default function HomePageClient({ caseStudies = [] }: HomePageClientProps) {
+export default function HomePageClient({
+  caseStudies = [],
+  mode = "home",
+  lpVariant,
+  lpHeadline,
+  lpSubheadline,
+}: HomePageClientProps) {
   const pathname = usePathname();
   const isJa = pathname.startsWith("/ja");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isDocModalOpen, setIsDocModalOpen] = useState(false);
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
+  const [scrolledLp, setScrolledLp] = useState(false);
   const isMobile = useIsMobile(768);
+  const isLp = mode === "lp";
+  const utmCampaign = isLp ? `lp_${lpVariant ?? "google"}` : "meeton-ai";
+
+  // LP-mode: capture UTM, scroll milestone tracking, sticky CTA visibility
+  useEffect(() => {
+    if (!isLp) return;
+    if (typeof window === "undefined") return;
+
+    // UTM capture
+    const params = new URLSearchParams(window.location.search);
+    const utmData: Record<string, string> = {};
+    for (const key of [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+    ]) {
+      const val = params.get(key);
+      if (val) utmData[key] = val;
+    }
+    if (Object.keys(utmData).length > 0) {
+      try {
+        sessionStorage.setItem("utm_data", JSON.stringify(utmData));
+      } catch {
+        /* ignore */
+      }
+    }
+
+    const fired = {
+      scroll25: false,
+      scroll50: false,
+      scroll75: false,
+    };
+
+    const onScroll = () => {
+      const docH = document.documentElement.scrollHeight;
+      const winH = window.innerHeight;
+      const y = window.scrollY;
+      const totalScrollable = Math.max(docH - winH, 1);
+      const pctTop = (y / totalScrollable) * 100;
+      // sticky CTA after ~30% page-view scroll
+      setScrolledLp(pctTop > 30 || y > 600);
+
+      const scrollPct = ((y + winH) / docH) * 100;
+      if (!fired.scroll25 && scrollPct >= 25) {
+        fired.scroll25 = true;
+        window.gtag?.("event", "lp_scroll_25", { lp_variant: lpVariant });
+      }
+      if (!fired.scroll50 && scrollPct >= 50) {
+        fired.scroll50 = true;
+        window.gtag?.("event", "lp_scroll_50", { lp_variant: lpVariant });
+      }
+      if (!fired.scroll75 && scrollPct >= 75) {
+        fired.scroll75 = true;
+        window.gtag?.("event", "lp_scroll_75", { lp_variant: lpVariant });
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isLp, lpVariant]);
+
+  // LP-mode: enriched CTA handlers (track + open modal)
+  const openMeetingModal = (location: string) => {
+    if (isLp && typeof window !== "undefined") {
+      window.gtag?.("event", "lp_cta_demo_click", {
+        lp_variant: lpVariant,
+        location,
+      });
+      window.gtag?.("event", "conversion", {
+        send_to: "AW-18060590496/5EyJCIqrspUcEKD7-qND",
+      });
+      window.gtag?.("event", "generate_lead", {
+        lp_variant: lpVariant,
+        cta_location: location,
+        value: 0,
+        currency: "JPY",
+      });
+      window.lintrk?.("track", { conversion_id: 25161212 });
+    }
+    setIsMeetingModalOpen(true);
+  };
+
+  const openDocModal = (location: string) => {
+    if (isLp && typeof window !== "undefined") {
+      window.gtag?.("event", "lp_cta_doc_click", {
+        lp_variant: lpVariant,
+        location,
+      });
+    }
+    setIsDocModalOpen(true);
+  };
+
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      {isLp && <style dangerouslySetInnerHTML={{ __html: lpCss }} />}
 
-      <Nav variant="light" />
+      {isLp ? (
+        <LpNav onCtaClick={() => openMeetingModal("nav")} isMobile={isMobile} />
+      ) : (
+        <Nav variant="light" />
+      )}
 
       {/* HERO */}
       <section className="hero">
@@ -3325,38 +3462,51 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            日本唯一の最先端 AI SDR
+            {isLp
+              ? (lpVariant === "trial"
+                ? "14日間無料トライアル"
+                : "AI SDR で商談を自動獲得")
+              : "日本唯一の最先端 AI SDR"}
           </div>
           <h1 className="anim d2">
-            AIが商談をつくる時代へ
+            {lpHeadline ?? "AIが商談をつくる時代へ"}
           </h1>
           <p className="anim d3 hero-sub">
-            Web サイト・サンクスページ・メール — あらゆる接点に AI を配置。
-            見込み客の関心が高いうちに、商談予約まで自動で完結します。
+            {lpSubheadline ??
+              "Web サイト・サンクスページ・メール — あらゆる接点に AI を配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。"}
           </p>
-          <div className="anim d4 hero-ctas">
+          <div
+            className="anim d4 hero-ctas"
+            style={isLp ? { gap: 12 } : undefined}
+          >
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => openMeetingModal("hero")}
+              style={isLp ? { padding: "20px 44px", fontSize: 19 } : undefined}
             >
-              AIデモを体験
+              {isLp ? "無料デモを予約する" : "AIデモを体験"}
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => openDocModal("hero")}
             >
               資料請求 →
             </button>
           </div>
-          {/* HERO DEMO ANIMATION */}
-          <div className="anim d5" style={{ marginTop: "clamp(40px,6vw,64px)" }}>
-            <HeroDemoAnimation />
-          </div>
+          {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
+          {!isLp && (
+            <div
+              className="anim d5"
+              style={{ marginTop: "clamp(40px,6vw,64px)" }}
+            >
+              <HeroDemoAnimation />
+            </div>
+          )}
         </div>
       </section>
 
-      {/* HOW IT WORKS — Meeton ai flow diagram */}
-      <MeetingFlowDiagram />
+      {/* HOW IT WORKS — Meeton ai flow diagram (skipped in LP) */}
+      {!isLp && <MeetingFlowDiagram />}
 
       {/* 3 PRODUCT CARDS */}
       <section
@@ -3486,7 +3636,8 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
         </div>
       </section>
 
-      {/* WHY AI SDR */}
+      {/* WHY AI SDR (skipped in LP) */}
+      {!isLp && (
       <section className="section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="dot-grid" style={{ opacity: 0.3 }} />
         <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
@@ -3564,9 +3715,10 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
           </div>
         </div>
       </section>
+      )}
 
-      {/* COMPARISON — vs Human SDR vs Chatbot */}
-      <ComparisonTable />
+      {/* COMPARISON — vs Human SDR vs Chatbot (skipped in LP) */}
+      {!isLp && <ComparisonTable />}
 
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>
@@ -3600,7 +3752,8 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
         </div>
       </section>
 
-      {/* INTEGRATIONS */}
+      {/* INTEGRATIONS (skipped in LP) */}
+      {!isLp && (
       <section
         className="section"
         id="integrations"
@@ -3626,7 +3779,7 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
           <div className="int-grid">
             {integrations.map((t, i) => (
               <div className="int-card" key={i}>
-                <img src={t.logo} alt={t.name} className="int-icon" />
+                <img src={t.logo} alt={t.name} className="int-icon" loading="lazy" decoding="async" />
                 <div className="int-name">{t.name}</div>
                 <div className="int-desc">{t.desc}</div>
               </div>
@@ -3647,8 +3800,10 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
           </div>
         </div>
       </section>
+      )}
 
-      {/* STEPS */}
+      {/* STEPS (skipped in LP) */}
+      {!isLp && (
       <section className="section">
         <div className="section-inner">
           <div className="slabel" style={{ textAlign: "center" }}>
@@ -3821,6 +3976,7 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
           </div>
         </div>
       </section>
+      )}
 
       {/* FAQ */}
       <section
@@ -3867,7 +4023,7 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
               {/* Double the logos for seamless infinite scroll */}
               {[...clients, ...clients].map((c, i) => (
                 <div className="logo-item" key={`${c.name}-${i}`}>
-                  <img src={c.logo} alt={c.name} />
+                  <img src={c.logo} alt={c.name} loading="lazy" decoding="async" />
                 </div>
               ))}
             </div>
@@ -3915,13 +4071,13 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
           >
             <button
               className="btn btn-cta btn-cta-lg"
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={() => openMeetingModal("final_cta")}
             >
-              AIデモを体験
+              {isLp ? "無料デモを予約する" : "AIデモを体験"}
             </button>
             <button
               className="btn-ghost"
-              onClick={() => setIsDocModalOpen(true)}
+              onClick={() => openDocModal("final_cta")}
             >
               資料請求 →
             </button>
@@ -3929,18 +4085,228 @@ export default function HomePageClient({ caseStudies = [] }: HomePageClientProps
         </div>
       </section>
 
-      <Footer variant="light" />
+      {isLp ? (
+        <LpFooter />
+      ) : (
+        <Footer variant="light" />
+      )}
+
+      {isLp && (
+        <LpStickyCta
+          visible={scrolledLp}
+          isMobile={isMobile}
+          onPrimary={() => openMeetingModal("sticky")}
+          onSecondary={() => openDocModal("sticky")}
+        />
+      )}
 
       <HubSpotModal
         isOpen={isDocModalOpen}
         onClose={() => setIsDocModalOpen(false)}
-        utmCampaign="meeton-ai"
+        utmCampaign={utmCampaign}
       />
       <HubSpotMeetingModal
         isOpen={isMeetingModalOpen}
         onClose={() => setIsMeetingModalOpen(false)}
-        utmCampaign="meeton-ai"
+        utmCampaign={utmCampaign}
       />
     </div>
   );
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+ * LP-mode sub-components (rendered only when mode='lp')
+ * Goal: minimal nav, distraction-free shell, sticky CTA, lean footer
+ * ────────────────────────────────────────────────────────────────────── */
+
+function LpNav({
+  onCtaClick,
+  isMobile,
+}: {
+  onCtaClick: () => void;
+  isMobile: boolean;
+}) {
+  return (
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        padding: isMobile ? "12px 16px" : "14px 48px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        background: "rgba(255,255,255,.95)",
+        backdropFilter: "blur(24px) saturate(1.4)",
+        borderBottom: "1px solid rgba(223,227,240,.6)",
+      }}
+    >
+      <Link
+        href="/"
+        style={{
+          textDecoration: "none",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
+        <Image
+          src="/logo-dark.svg"
+          alt="DynaMeet"
+          width={140}
+          height={30}
+          style={{ height: isMobile ? 24 : 28, width: "auto" }}
+        />
+      </Link>
+      <button
+        onClick={onCtaClick}
+        style={{
+          border: "none",
+          cursor: "pointer",
+          fontWeight: 700,
+          borderRadius: 10,
+          background: "linear-gradient(135deg,#12a37d,#0fc19a)",
+          color: "#fff",
+          padding: isMobile ? "10px 18px" : "12px 26px",
+          fontSize: isMobile ? 13 : 15,
+          boxShadow: "0 4px 16px rgba(18,163,125,.25)",
+          transition: "all .25s",
+          fontFamily: "var(--fb)",
+        }}
+      >
+        デモを予約
+      </button>
+    </nav>
+  );
+}
+
+function LpStickyCta({
+  visible,
+  isMobile,
+  onPrimary,
+  onSecondary,
+}: {
+  visible: boolean;
+  isMobile: boolean;
+  onPrimary: () => void;
+  onSecondary: () => void;
+}) {
+  return (
+    <div
+      className={`lp-sticky-cta${visible ? " visible" : ""}`}
+      style={{
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 90,
+        padding: isMobile ? "10px 12px" : "14px 24px",
+        background: "rgba(255,255,255,.96)",
+        backdropFilter: "blur(12px)",
+        borderTop: "1px solid #dfe3f0",
+        boxShadow: "0 -4px 24px rgba(15,17,40,.08)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+        flexWrap: "wrap",
+      }}
+    >
+      <button
+        onClick={onPrimary}
+        style={{
+          border: "none",
+          cursor: "pointer",
+          fontWeight: 800,
+          borderRadius: 10,
+          background: "linear-gradient(135deg,#12a37d,#0fc19a)",
+          color: "#fff",
+          padding: isMobile ? "12px 22px" : "14px 32px",
+          fontSize: isMobile ? 14 : 16,
+          boxShadow: "0 4px 16px rgba(18,163,125,.3)",
+          flex: isMobile ? 1 : "0 0 auto",
+          minWidth: isMobile ? 0 : 200,
+          fontFamily: "var(--fb)",
+        }}
+      >
+        無料デモを予約
+      </button>
+      <button
+        onClick={onSecondary}
+        style={{
+          background: "transparent",
+          border: "2px solid #c8cedf",
+          color: "#0f1128",
+          cursor: "pointer",
+          fontWeight: 700,
+          borderRadius: 10,
+          padding: isMobile ? "10px 18px" : "12px 26px",
+          fontSize: isMobile ? 13 : 15,
+          flex: isMobile ? 1 : "0 0 auto",
+          minWidth: isMobile ? 0 : 160,
+          fontFamily: "var(--fb)",
+        }}
+      >
+        資料DL
+      </button>
+    </div>
+  );
+}
+
+function LpFooter() {
+  return (
+    <footer
+      style={{
+        padding: "20px 24px 100px",
+        borderTop: "1px solid #dfe3f0",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: 12,
+        fontSize: 12,
+        color: "#6e7494",
+        maxWidth: 1140,
+        margin: "0 auto",
+      }}
+    >
+      <span>© {new Date().getFullYear()} DynaMeet K.K.</span>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+        <a
+          href="/privacy-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
+        >
+          プライバシーポリシー
+        </a>
+        <a
+          href="/terms/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
+        >
+          利用規約
+        </a>
+        <a
+          href="/security-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
+        >
+          セキュリティポリシー
+        </a>
+      </div>
+    </footer>
+  );
+}
+
+const lpCss = `
+.lp-sticky-cta{transform:translateY(100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.lp-sticky-cta.visible{transform:translateY(0)}
+@media(max-width:768px){
+  .lp-sticky-cta{padding:8px 10px !important;gap:8px !important}
+}
+`;

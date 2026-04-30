@@ -1,5 +1,11 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-30 — Replaced by HomePageClient mode="lp".
+ * All /lp/* page wrappers now render <HomePageClient mode="lp" ... />.
+ * Keep this file for ~2 weeks as backup, then delete.
+ */
+
 import { useEffect, useRef, useState } from 'react'
 import HubSpotMeetingModal from '../../components/HubSpotMeetingModal'
 
