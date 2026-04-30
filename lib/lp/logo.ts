@@ -28,18 +28,29 @@ export type LogoCandidate = {
 export function buildLogoCandidate(opts: { domain?: string; companyUrl?: string; email?: string }): LogoCandidate | null {
   const domain = pickDomain(opts)
   if (!domain) return null
+
+  // Fallback chain (in order):
+  //   1. Primary: best-quality source we can reach (logo.dev > brandfetch > duckduckgo)
+  //   2. duckduckgo (if not already primary) — free, no key, decent quality
+  //   3. google s2 favicons — universal fallback, low quality but reliable
+  //   4. site's own /favicon.ico
+  // The component renders an initials circle if every URL fails.
+  const ddg = `https://icons.duckduckgo.com/ip3/${domain}.ico`
+  const google = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
+  const ownFavicon = `https://${domain}/favicon.ico`
+
+  let primary: string
   const fallbacks: string[] = []
-  let primary = ''
   if (LOGODEV_TOKEN) {
     primary = `https://img.logo.dev/${domain}?token=${LOGODEV_TOKEN}&size=200&format=png`
+    fallbacks.push(ddg, google, ownFavicon)
   } else if (BRANDFETCH_TOKEN) {
     primary = `https://cdn.brandfetch.io/${domain}/w/200/h/200?c=${BRANDFETCH_TOKEN}`
+    fallbacks.push(ddg, google, ownFavicon)
   } else {
-    primary = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
+    // No token — DuckDuckGo gives much better quality than Google s2 for most domains
+    primary = ddg
+    fallbacks.push(google, ownFavicon)
   }
-  if (LOGODEV_TOKEN || BRANDFETCH_TOKEN) {
-    fallbacks.push(`https://www.google.com/s2/favicons?domain=${domain}&sz=128`)
-  }
-  fallbacks.push(`https://${domain}/favicon.ico`)
   return { domain, primary, fallbacks }
 }

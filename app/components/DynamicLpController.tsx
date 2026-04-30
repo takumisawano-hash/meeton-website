@@ -111,10 +111,31 @@ type LpDocument = {
 
 type ProfileSnapshot = {
   visitorId: string
-  company: { name: string; industry?: string; employees?: string }
+  company: { name: string; industry?: string; employees?: string; prefecture?: string }
   scoreTier: string
   funnelStage: string
-  hubspot?: { firstName?: string; lastName?: string }
+  hubspot?: {
+    firstName?: string
+    lastName?: string
+    jobTitle?: string
+    lifecyclestage?: string
+    numFormSubmissions?: number
+    recentConversionEvent?: string
+    lastModified?: string
+  }
+  mcp?: {
+    intentScore?: number
+    engagementLevel?: string
+    topInterest?: string
+    hasMeeting?: boolean
+  }
+  pageContext?: {
+    landingPath?: string
+    currentPath?: string
+    pagesViewed?: string[]
+    isPricingViewed?: boolean
+    isCaseStudyViewed?: boolean
+  }
 }
 
 type IdentifyResponse = { profile: ProfileSnapshot; lp: LpDocument }
@@ -500,14 +521,52 @@ function arrOf(comp: LpComponentRender | undefined, key: string): string[] {
   return Array.isArray(v) ? v : []
 }
 
-function CompanyLogo({ logo, size = 56 }: { logo: LogoShape; size?: number }) {
+function CompanyLogo({
+  logo,
+  size = 56,
+  fallbackName,
+}: {
+  logo: LogoShape
+  size?: number
+  fallbackName?: string
+}) {
   const [src, setSrc] = useState<string | null>(logo?.primary || null)
+  const [allFailed, setAllFailed] = useState(false)
   const fallbackIdx = useRef(0)
   useEffect(() => {
     setSrc(logo?.primary || null)
+    setAllFailed(false)
     fallbackIdx.current = 0
   }, [logo?.primary])
-  if (!logo || !src) return null
+  // Initials avatar — final fallback when no logo URL works (or no domain at all).
+  if (!logo || allFailed || !src) {
+    const seed = fallbackName || logo?.domain || ''
+    // First non-ASCII / Latin letter for the initial. Latin: uppercase. CJK: keep as-is.
+    const initial = seed.replace(/[\s（）()「」『』·・]/g, '').charAt(0)
+    return (
+      <div
+        style={{
+          width: size,
+          height: size,
+          borderRadius: 8,
+          background: 'linear-gradient(135deg, #12a37d, #0fc19a)',
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 800,
+          fontSize: Math.round(size * 0.45),
+          fontFamily: 'var(--font-mono, monospace)',
+          letterSpacing: '-0.02em',
+          boxShadow: '0 2px 8px rgba(18,163,125,0.25)',
+          flexShrink: 0,
+        }}
+        aria-label={fallbackName || logo?.domain || ''}
+      >
+        {initial ? initial.toUpperCase() : '·'}
+      </div>
+    )
+  }
   return (
     <img
       src={src}
@@ -520,7 +579,7 @@ function CompanyLogo({ logo, size = 56 }: { logo: LogoShape; size?: number }) {
           fallbackIdx.current += 1
           setSrc(next)
         } else {
-          setSrc(null)
+          setAllFailed(true)
         }
       }}
       style={{ width: size, height: size, objectFit: 'contain', borderRadius: 8, background: '#fff', border: '1px solid #e4e3dd', padding: 4 }}
@@ -533,6 +592,153 @@ function StatBig({ label, value, accent }: { label: string; value: string; accen
     <div style={{ flex: '1 1 160px', minWidth: 160, background: '#fff', border: '1px solid #e4e3dd', borderRadius: 12, padding: '18px 20px' }}>
       <div style={{ fontSize: 11, color: '#6b7873', letterSpacing: '0.05em', marginBottom: 6 }}>{label}</div>
       <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1.2, color: accent || '#0a0e0c' }}>{value}</div>
+    </div>
+  )
+}
+
+/* ──────────────────────────────────────────────────────────────────
+ * Personalization helpers — turn structured profile data into
+ * surface-visible signals so the LP feels like it knows the visitor.
+ * ────────────────────────────────────────────────────────────────── */
+
+function addressee(profile: ProfileSnapshot): string | null {
+  const last = profile.hubspot?.lastName?.trim()
+  const first = profile.hubspot?.firstName?.trim()
+  if (last) return `${last} 様`
+  if (first) return `${first} 様`
+  return null
+}
+
+function computeGreetingPill(profile: ProfileSnapshot): string {
+  const person = addressee(profile)
+  const isReturning =
+    (profile.hubspot?.numFormSubmissions ?? 0) > 0 ||
+    Boolean(profile.hubspot?.lastModified)
+  const company = profile.company.name
+  if (person && isReturning) return `${person}、お久しぶりです`
+  if (person && company) return `${company} ${person}向け`
+  if (person) return `${person}向け`
+  if (company) return `${company} 様向け`
+  return 'AI 生成 LP'
+}
+
+function computeHeroLead(profile: ProfileSnapshot, fallback: string): string {
+  const person = addressee(profile)
+  const company = profile.company.name
+  if (person && company) {
+    return `${person}、${company} の商談を AI で自動増加させます`
+  }
+  if (company) return `${company} の商談を、AI が自動で増やす`
+  return fallback
+}
+
+function funnelStageLabel(stage?: string): string | null {
+  if (!stage) return null
+  const map: Record<string, string> = {
+    awareness: '情報収集中',
+    evaluation: '比較検討中',
+    decision: '導入検討中',
+    customer: '既存顧客',
+  }
+  return map[stage] || null
+}
+
+function lifecycleLabel(stage?: string): string | null {
+  if (!stage) return null
+  const map: Record<string, string> = {
+    subscriber: '購読者',
+    lead: 'リード',
+    marketingqualifiedlead: 'MQL',
+    salesqualifiedlead: 'SQL',
+    opportunity: '商談',
+    customer: '顧客',
+  }
+  return map[stage.toLowerCase()] || null
+}
+
+type DetectedItem = { label: string; value: string }
+
+function buildDetectedInfo(profile: ProfileSnapshot, lp: LpDocument): DetectedItem[] {
+  const items: DetectedItem[] = []
+  if (profile.company.industry) items.push({ label: '業界', value: profile.company.industry })
+  if (profile.company.employees) items.push({ label: '従業員', value: profile.company.employees })
+  if (profile.hubspot?.jobTitle) items.push({ label: '役職', value: profile.hubspot.jobTitle })
+  const lifecycle = lifecycleLabel(profile.hubspot?.lifecyclestage)
+  if (lifecycle) items.push({ label: 'ステージ', value: lifecycle })
+  const funnel = funnelStageLabel(profile.funnelStage)
+  if (funnel) items.push({ label: '検討段階', value: funnel })
+  const visits = lp.trafficRoi?.monthlyVisits
+  if (visits) items.push({ label: '月間流入', value: `~${visits.toLocaleString('ja-JP')}` })
+  const trancoRank = lp.trafficRoi?.trancoRank
+  if (trancoRank) items.push({ label: 'Tranco', value: `${trancoRank.toLocaleString('ja-JP')} 位` })
+  const submissions = profile.hubspot?.numFormSubmissions
+  if (submissions && submissions > 0) items.push({ label: 'お問い合わせ', value: `${submissions} 回` })
+  if (profile.mcp?.topInterest) items.push({ label: '関心領域', value: profile.mcp.topInterest })
+  const recent = profile.pageContext?.currentPath
+  if (recent) items.push({ label: '直近閲覧', value: recent })
+  return items
+}
+
+function DetectedInfoStrip({ items }: { items: DetectedItem[] }) {
+  if (items.length === 0) return null
+  return (
+    <div
+      style={{
+        padding: '14px 20px',
+        borderBottom: '1px solid #e4e3dd',
+        background: 'linear-gradient(180deg, #f3f8f6 0%, #ffffff 100%)',
+      }}
+    >
+      <div
+        style={{
+          fontFamily: 'var(--font-mono, monospace)',
+          fontSize: 10,
+          letterSpacing: '0.12em',
+          color: '#065f46',
+          textTransform: 'uppercase',
+          marginBottom: 8,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+        }}
+      >
+        <span
+          style={{
+            display: 'inline-block',
+            width: 6,
+            height: 6,
+            borderRadius: '50%',
+            background: '#10b981',
+            boxShadow: '0 0 0 3px rgba(16,185,129,0.18)',
+          }}
+        />
+        AI が解析した貴社情報
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        {items.map((it, i) => (
+          <span
+            key={i}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: 11,
+              padding: '4px 10px',
+              borderRadius: 999,
+              background: '#fff',
+              border: '1px solid #d4e8df',
+              color: '#1a3530',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%',
+            }}
+          >
+            <span style={{ color: '#6b7873', fontWeight: 600 }}>{it.label}</span>
+            <span style={{ color: '#0a0e0c', fontWeight: 800, overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 200 }}>
+              {it.value}
+            </span>
+          </span>
+        ))}
+      </div>
     </div>
   )
 }
@@ -576,28 +782,30 @@ function GeneratedLpModal({
     }
   }, [heroComp?.variant, lp.primaryCta, onClose, profile.scoreTier, visitorId])
 
+  const greeting = computeGreetingPill(profile)
+  const detectedItems = buildDetectedInfo(profile, lp)
+  const heroFallback = computeHeroLead(profile, '訪問者識別から商談予約まで AI が自動化します')
+
   return (
     <div role="dialog" aria-modal="true" style={{ position: 'fixed', inset: 0, background: 'rgba(10,14,12,0.65)', zIndex: 9999, overflowY: 'auto', padding: '24px 16px' }}>
       <div style={{ maxWidth: 880, margin: '0 auto', background: '#fafaf7', color: '#0a0e0c', borderRadius: 16, overflow: 'hidden', boxShadow: '0 32px 80px rgba(0,0,0,0.3)', fontFamily: 'var(--font-noto, -apple-system, system-ui), sans-serif' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 20px', borderBottom: '1px solid #e4e3dd', background: '#fff' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            {lp.logo ? (
-              <>
-                <CompanyLogo logo={lp.logo} size={36} />
-                <span style={{ fontSize: 18, color: '#9aa39e' }}>×</span>
-                <img src="/icon.png" alt="Meeton ai" width={36} height={36} style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 8 }} />
-              </>
-            ) : null}
-            <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, letterSpacing: '0.15em', color: '#065f46', textTransform: 'uppercase' }}>
-              ▸ {profile.company.name} 様向け · AI生成
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+            <CompanyLogo logo={lp.logo ?? null} size={36} fallbackName={profile.company.name} />
+            <span style={{ fontSize: 18, color: '#9aa39e' }}>×</span>
+            <img src="/icon.png" alt="Meeton ai" width={36} height={36} style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 8 }} />
+            <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, letterSpacing: '0.12em', color: '#065f46', textTransform: 'uppercase', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              ▸ {greeting} · AI 生成
             </div>
           </div>
-          <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 22, color: '#3d4a44', padding: 4 }} aria-label="閉じる">×</button>
+          <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 22, color: '#3d4a44', padding: 4, flexShrink: 0 }} aria-label="閉じる">×</button>
         </div>
+
+        <DetectedInfoStrip items={detectedItems} />
 
         <section style={{ padding: 'clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px) 24px' }}>
           <h1 style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, lineHeight: 1.3, margin: '0 0 16px' }}>
-            {copyOf(heroComp, 'headline') || `${profile.company.name} の商談を、AIが自動で増やす`}
+            {copyOf(heroComp, 'headline') || heroFallback}
           </h1>
           <p style={{ fontSize: 16, color: '#3d4a44', lineHeight: 1.75, margin: '0 0 28px' }}>
             {copyOf(heroComp, 'sub') || '訪問者識別から商談予約までAIが自動化します'}
