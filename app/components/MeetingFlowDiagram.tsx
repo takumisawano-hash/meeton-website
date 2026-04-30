@@ -346,16 +346,16 @@ function DesktopFlow({
           />
           <PathLabel
             text="会話内でコンバージョン"
-            x={N.chat.cx + 95}
-            y={395}
+            x={N.chat.cx + 110}
+            y={365}
             visible={active || reduce}
             delay={D.toCalendar + 0.2}
             color={COLOR.chat}
           />
           <PathLabel
             text="問い合わせからコンバージョン"
-            x={N.thanks.cx - 95}
-            y={395}
+            x={N.thanks.cx - 110}
+            y={365}
             visible={active || reduce}
             delay={D.toCalendar + 0.2}
             color={COLOR.amber}
