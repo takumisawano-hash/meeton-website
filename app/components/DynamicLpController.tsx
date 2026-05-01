@@ -1196,12 +1196,12 @@ export default function DynamicLpController() {
     )
 
     if (isMultiPage) {
-      timers.push(setTimeout(() => triggerPopup('L4:multi-page'), MULTI_PAGE_TIME_MS))
+      timers.push(setTimeout(() => triggerBanner('L4:multi-page'), MULTI_PAGE_TIME_MS))
     }
 
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && Date.now() - startTsRef.current >= EXIT_INTENT_MIN_MS) {
-        triggerPopup('L3:exit-intent')
+        triggerBanner('L3:exit-intent')
       }
     }
     document.addEventListener('mouseleave', onMouseLeave)
@@ -1278,9 +1278,13 @@ export default function DynamicLpController() {
   const handleBannerOpen = useCallback(() => {
     if (visitorId) trackEvent(visitorId, 'banner_click')
     setBannerOpen(false)
-    popupTriggeredRef.current = false
-    triggerPopup('banner-click', { force: true })
-  }, [triggerPopup, visitorId])
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams()
+    if (docodoco?.domain) params.set('domain', docodoco.domain)
+    else if (docodoco?.org_url) params.set('domain', docodoco.org_url)
+    const qs = params.toString()
+    window.location.href = qs ? `/roi-simulator/?${qs}` : '/roi-simulator/'
+  }, [docodoco, visitorId])
 
   const handleBannerDismiss = useCallback(() => {
     try {
@@ -1309,33 +1313,13 @@ export default function DynamicLpController() {
 
   return createPortal(
     <>
-      {bannerOpen && !popupOpen && !data ? (
+      {bannerOpen ? (
         <InvitationBanner
           prefillCompany={initialName || undefined}
           onOpen={handleBannerOpen}
           onDismiss={handleBannerDismiss}
         />
       ) : null}
-      {popupOpen ? (
-        <CompanyPopup
-          initialName={initialName}
-          initialUrl={initialUrl}
-          docodoco={docodoco}
-          onSubmit={handleSubmit}
-          onClose={handlePopupClose}
-          visitorId={visitorId}
-        />
-      ) : null}
-      {data ? (
-        <GeneratedLpModal
-          data={data}
-          onClose={() => setData(null)}
-          onCta={handleCta}
-          visitorId={visitorId}
-        />
-      ) : null}
-      <HubSpotMeetingModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} utmCampaign={`mlp_${data?.lp.components.find(c => c.key === 'hero')?.variant || 'default'}`} />
-      <HubSpotModal isOpen={docOpen} onClose={() => setDocOpen(false)} utmCampaign={`mlp_${data?.lp.components.find(c => c.key === 'hero')?.variant || 'default'}`} />
     </>,
     document.body
   )
