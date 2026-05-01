@@ -35,7 +35,7 @@ export default function MidPageCta({
   return (
     <section
       className="mpc-section"
-      style={{ background: sectionBg, padding: "clamp(20px,4vw,36px) clamp(16px,5vw,48px)" }}
+      style={{ background: sectionBg }}
     >
       <div
         className="mpc-card"
@@ -117,15 +117,24 @@ export default function MidPageCta({
         />
       </div>
       <style jsx>{`
+        .mpc-section {
+          padding: clamp(20px, 4vw, 36px) clamp(16px, 5vw, 48px);
+        }
         @media (max-width: 640px) {
+          .mpc-section {
+            padding: 14px 16px !important;
+          }
           .mpc-card {
             flex-direction: column !important;
             align-items: stretch !important;
             text-align: left;
+            padding: 16px 18px !important;
+            gap: 12px !important;
           }
           .mpc-btn {
             width: 100% !important;
-            padding: 16px 24px !important;
+            padding: 12px 20px !important;
+            font-size: 14px !important;
           }
         }
       `}</style>
