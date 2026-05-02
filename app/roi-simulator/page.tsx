@@ -6,7 +6,7 @@ import RoiSimulatorClient from './RoiSimulatorClient'
 export const metadata: Metadata = {
   title: '貴社向けROI試算 | Meeton ai',
   description:
-    '貴社のWebサイトURLを入力するだけで、 月間訪問数・有能訪問者・自動獲得商談数・営業工数削減を即座に試算。 Meeton ai 導入企業4社の実データに基づく試算をPDFで持ち帰れます。',
+    '貴社のWebサイトURLを入力するだけで、 月間訪問数・有能訪問者・自動獲得商談数・営業工数削減を即座に試算。 結果はPDFで持ち帰れます。',
   alternates: { canonical: '/roi-simulator/' },
   openGraph: {
     title: '貴社向けROI試算 | Meeton ai',
