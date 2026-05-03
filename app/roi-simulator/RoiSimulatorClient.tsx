@@ -91,6 +91,54 @@ function StatBig({ label, value, accent, blurred }: { label: string; value: stri
   )
 }
 
+const ANALYSIS_STEPS = [
+  'SimilarWeb から月間訪問数・業種・流入経路を取得',
+  '貴社サイト本文を読み込み',
+  'AI が主力製品・顧客層・強みを要約',
+  'Meeton ai 導入後の月次ROIを計算',
+] as const
+
+function AnalysisProgress({ step }: { step: number }) {
+  return (
+    <div style={{ marginTop: 22, padding: '20px 22px', background: '#f4f7f5', border: '1px solid #d4dcd6', borderRadius: 12 }}>
+      <style>{`
+        @keyframes mlpSpin { to { transform: rotate(360deg) } }
+        .mlp-spinner {
+          width: 16px; height: 16px;
+          border: 2px solid #c8d3cd;
+          border-top-color: #0eab6e;
+          border-radius: 50%;
+          animation: mlpSpin 0.7s linear infinite;
+          flex-shrink: 0;
+        }
+      `}</style>
+      <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, letterSpacing: '0.05em', marginBottom: 12 }}>
+        ▸ AI が貴社のWebサイトを解析しています
+      </div>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10 }}>
+        {ANALYSIS_STEPS.map((label, i) => {
+          const state = step > i ? 'done' : step === i ? 'active' : 'pending'
+          return (
+            <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 13, color: state === 'pending' ? '#9aa39e' : '#0a0e0c', fontWeight: state === 'active' ? 600 : 400 }}>
+              {state === 'done' ? (
+                <span style={{ width: 16, height: 16, background: '#0eab6e', color: '#fff', borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0 }}>✓</span>
+              ) : state === 'active' ? (
+                <span className="mlp-spinner" />
+              ) : (
+                <span style={{ width: 16, height: 16, border: '2px solid #c8d3cd', borderRadius: '50%', flexShrink: 0 }} />
+              )}
+              {label}
+            </li>
+          )
+        })}
+      </ul>
+      <div style={{ marginTop: 14, height: 4, background: '#d4dcd6', borderRadius: 2, overflow: 'hidden' }}>
+        <div style={{ width: `${Math.min(100, (Math.max(0, step) / ANALYSIS_STEPS.length) * 100)}%`, height: '100%', background: '#0eab6e', transition: 'width 1.2s ease-out' }} />
+      </div>
+    </div>
+  )
+}
+
 function ProgressBar({ step }: { step: Step }) {
   const order: Step[] = ['welcome', 'inputs', 'result']
   const idx = order.indexOf(step) + 1
@@ -176,6 +224,7 @@ export default function RoiSimulatorClient() {
   const [result, setResult] = useState<Result | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [demoOpen, setDemoOpen] = useState(false)
+  const [analysisStep, setAnalysisStep] = useState(-1)
   const autoRanRef = useRef(false)
 
   useEffect(() => {
@@ -199,7 +248,12 @@ export default function RoiSimulatorClient() {
     const trimmed = domain.trim()
     if (!trimmed) return
     setCalcSubmitting(true)
+    setAnalysisStep(0)
     setError(null)
+    const stepTimers: Array<ReturnType<typeof setTimeout>> = []
+    stepTimers.push(setTimeout(() => setAnalysisStep(1), 2000))
+    stepTimers.push(setTimeout(() => setAnalysisStep(2), 5500))
+    stepTimers.push(setTimeout(() => setAnalysisStep(3), 9500))
     const toInt = (v: string) => {
       const n = parseInt(v.replace(/[^0-9]/g, ''), 10)
       return Number.isFinite(n) && n > 0 ? n : undefined
@@ -218,17 +272,21 @@ export default function RoiSimulatorClient() {
           userSdrCount: toInt(sdr),
         }),
       })
+      stepTimers.forEach(clearTimeout)
       if (!r.ok) {
         setError('試算に失敗しました。 もう一度お試しください。')
         return
       }
       const data = await r.json()
+      setAnalysisStep(4)
       setResult({ company: data.profile.company, companyInsights: data.profile.companyInsights, roi: data.lp.trafficRoi })
       setStep('result')
     } catch {
+      stepTimers.forEach(clearTimeout)
       setError('試算に失敗しました。 ネットワークをご確認ください。')
     } finally {
       setCalcSubmitting(false)
+      setTimeout(() => setAnalysisStep(-1), 800)
     }
   }, [companyName, domain, leads, sdr, visits])
 
@@ -425,14 +483,16 @@ export default function RoiSimulatorClient() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
-            <button type="button" onClick={() => setStep('welcome')} style={{ padding: '12px 18px', background: 'transparent', border: '1px solid #d4d2c7', borderRadius: 8, color: '#3d4a44', cursor: 'pointer', fontSize: 14 }}>
+            <button type="button" onClick={() => setStep('welcome')} disabled={calcSubmitting} style={{ padding: '12px 18px', background: 'transparent', border: '1px solid #d4d2c7', borderRadius: 8, color: '#3d4a44', cursor: calcSubmitting ? 'not-allowed' : 'pointer', fontSize: 14, opacity: calcSubmitting ? 0.5 : 1 }}>
               戻る
             </button>
-            <button type="submit" disabled={calcSubmitting || !domain.trim()} style={{ flex: '1 1 auto', padding: '12px 18px', background: '#0eab6e', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 15, fontWeight: 700, opacity: calcSubmitting ? 0.6 : 1 }}>
-              {calcSubmitting ? '解析中…' : '貴社向けROIを試算 →'}
+            <button type="submit" disabled={calcSubmitting || !domain.trim()} style={{ flex: '1 1 auto', padding: '12px 18px', background: '#0eab6e', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 15, fontWeight: 700, opacity: calcSubmitting ? 0.7 : 1 }}>
+              {calcSubmitting ? '貴社のWebサイトを解析中…' : '貴社向けROIを試算 →'}
             </button>
           </div>
           {error ? <div style={{ marginTop: 12, color: '#b91c1c', fontSize: 13 }}>{error}</div> : null}
+
+          {analysisStep >= 0 ? <AnalysisProgress step={analysisStep} /> : null}
         </form>
       ) : null}
 
