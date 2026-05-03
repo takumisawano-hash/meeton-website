@@ -1,6 +1,7 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import HubSpotMeetingModal from '../components/HubSpotMeetingModal'
 
 type RoiCalcShape = {
   monthlyVisits: number
@@ -174,6 +175,8 @@ export default function RoiSimulatorClient() {
   const [calcSubmitting, setCalcSubmitting] = useState(false)
   const [result, setResult] = useState<Result | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [demoOpen, setDemoOpen] = useState(false)
+  const autoRanRef = useRef(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -229,6 +232,16 @@ export default function RoiSimulatorClient() {
     }
   }, [companyName, domain, leads, sdr, visits])
 
+  useEffect(() => {
+    if (autoRanRef.current) return
+    if (step !== 'inputs' || !domain || result || calcSubmitting) return
+    const q = readQuery()
+    if (q.domain && q.domain === domain) {
+      autoRanRef.current = true
+      runCalc()
+    }
+  }, [step, domain, result, calcSubmitting, runCalc])
+
   const handleUnlock = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault()
@@ -273,10 +286,24 @@ export default function RoiSimulatorClient() {
     <main style={{ maxWidth: 980, margin: '0 auto', padding: 'clamp(96px, 12vw, 140px) clamp(20px, 4vw, 48px) 80px' }}>
       <style>{`
         @media print {
+          @page { margin: 14mm; size: A4; }
           .no-print { display: none !important; }
-          body { background: white !important; }
-          main { padding: 24px !important; max-width: none !important; }
-          .blur-target { filter: none !important; pointer-events: auto !important; }
+          html, body { background: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+          main { padding: 0 !important; max-width: none !important; margin: 0 !important; }
+          header { margin-bottom: 14px !important; }
+          h1 { font-size: 22px !important; line-height: 1.4 !important; }
+          h2 { font-size: 16px !important; line-height: 1.4 !important; page-break-after: avoid; }
+          h3 { font-size: 14px !important; }
+          section { padding: 12px 0 !important; border: none !important; box-shadow: none !important; page-break-inside: avoid; }
+          .blur-target { filter: none !important; pointer-events: auto !important; user-select: auto !important; }
+          /* Stat row 3列を縦並びに(PDFで横切れ防止) */
+          .stat-row { display: block !important; }
+          .stat-row > div { width: 100% !important; max-width: none !important; flex: none !important; margin-bottom: 10px !important; padding: 12px 16px !important; box-shadow: none !important; }
+          .stat-row > div > div:last-child { font-size: 22px !important; }
+          /* 文字切れ防止 */
+          *, *::before, *::after { overflow: visible !important; word-wrap: break-word !important; overflow-wrap: anywhere !important; }
+          /* ぼかしフォーム gate を完全非表示 */
+          .gate-overlay { display: none !important; }
         }
       `}</style>
 
@@ -385,7 +412,7 @@ export default function RoiSimulatorClient() {
             月間訪問 {result.roi.monthlyVisits.toLocaleString('ja-JP')} → 自動商談 {result.roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件 / 工数削減 {result.roi.expected.hoursSavedPerMonth.toLocaleString('ja-JP')}h
           </h2>
 
-          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 18 }}>
+          <div className="stat-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 18 }}>
             <StatBig label="自動獲得される商談/月" value={`${result.roi.expected.meetingsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
             {result.roi.uplift ? (
               <StatBig label={`リード上乗せ/月 (現状${result.roi.uplift.currentLeadsPerMonth}件→)`} value={`+${result.roi.uplift.addLeadsPerMonth.toLocaleString('ja-JP')}件`} accent="#0eab6e" />
@@ -424,7 +451,7 @@ export default function RoiSimulatorClient() {
             </div>
 
             {!unlocked ? (
-              <div className="no-print" style={{ position: 'absolute', inset: '0 -8px -8px -8px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+              <div className="no-print gate-overlay" style={{ position: 'absolute', inset: '0 -8px -8px -8px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
                 <form
                   onSubmit={handleUnlock}
                   style={{ background: '#fff', border: '1px solid #d4d2c7', borderRadius: 14, padding: 'clamp(22px, 3vw, 32px)', maxWidth: 460, width: '100%', boxShadow: '0 18px 48px rgba(0,0,0,0.12)' }}
@@ -469,31 +496,38 @@ export default function RoiSimulatorClient() {
           </div>
 
           <div className="no-print" style={{ display: 'flex', gap: 10, marginTop: 22, flexWrap: 'wrap' }}>
-            {unlocked ? (
-              <button onClick={handlePrint} style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0a0e0c', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
-                📄 PDFとして保存・印刷
-              </button>
-            ) : null}
-            <a href="/" style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0eab6e', color: '#fff', borderRadius: 8, textDecoration: 'none' }}>
-              デモ予約・資料請求 →
-            </a>
             <button
               type="button"
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  navigator.clipboard?.writeText(window.location.href)
-                  alert('URLをコピーしました')
-                }
-              }}
-              style={{ padding: '12px 22px', fontSize: 14, fontWeight: 600, background: 'transparent', color: '#3d4a44', border: '1px solid #d4d2c7', borderRadius: 8, cursor: 'pointer' }}
+              onClick={() => setDemoOpen(true)}
+              style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0eab6e', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}
             >
-              🔗 結果URLをコピー
+              デモを予約 →
             </button>
+            {unlocked ? (
+              <>
+                <button onClick={handlePrint} style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0a0e0c', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
+                  📄 PDFとして保存・印刷
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      navigator.clipboard?.writeText(window.location.href)
+                      alert('URLをコピーしました')
+                    }
+                  }}
+                  style={{ padding: '12px 22px', fontSize: 14, fontWeight: 600, background: 'transparent', color: '#3d4a44', border: '1px solid #d4d2c7', borderRadius: 8, cursor: 'pointer' }}
+                >
+                  🔗 結果URLをコピー
+                </button>
+              </>
+            ) : null}
             <button
               type="button"
               onClick={() => {
                 setStep('inputs')
                 setResult(null)
+                autoRanRef.current = true
               }}
               style={{ padding: '12px 22px', fontSize: 14, fontWeight: 600, background: 'transparent', color: '#3d4a44', border: '1px solid #d4d2c7', borderRadius: 8, cursor: 'pointer' }}
             >
@@ -502,6 +536,8 @@ export default function RoiSimulatorClient() {
           </div>
         </section>
       ) : null}
+
+      <HubSpotMeetingModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} utmCampaign="roi_simulator" />
     </main>
   )
 }
