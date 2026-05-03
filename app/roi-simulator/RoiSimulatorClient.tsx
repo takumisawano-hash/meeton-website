@@ -374,22 +374,55 @@ export default function RoiSimulatorClient() {
             autoFocus
             style={{ width: '100%', padding: '12px 14px', fontSize: 16, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff', outline: 'none', marginBottom: 16 }}
           />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 16 }}>
+          <div style={{ display: 'grid', gap: 18, marginBottom: 8 }}>
             <div>
-              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>月間訪問数</label>
-              <input type="text" inputMode="numeric" value={visits} onChange={e => setVisits(e.target.value)} placeholder="50000" style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff' }} />
+              <label style={{ display: 'block', fontSize: 13, color: '#0a0e0c', fontWeight: 600, marginBottom: 4 }}>
+                月間訪問数(およそ) <span style={{ fontSize: 11, color: '#6b7873', fontWeight: 400 }}>任意</span>
+              </label>
+              <div style={{ fontSize: 11, color: '#6b7873', marginBottom: 8 }}>
+                ご存知でない場合は空欄で結構です。 SimilarWeb 等から自動取得します。
+              </div>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={visits}
+                onChange={e => setVisits(e.target.value)}
+                placeholder="例) 50000"
+                style={{ width: '100%', padding: '12px 14px', fontSize: 15, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff', outline: 'none' }}
+              />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>月間獲得リード</label>
-              <input type="text" inputMode="numeric" value={leads} onChange={e => setLeads(e.target.value)} placeholder="100" style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff' }} />
+              <label style={{ display: 'block', fontSize: 13, color: '#0a0e0c', fontWeight: 600, marginBottom: 4 }}>
+                月間獲得リード数 <span style={{ fontSize: 11, color: '#6b7873', fontWeight: 400 }}>任意</span>
+              </label>
+              <div style={{ fontSize: 11, color: '#6b7873', marginBottom: 8 }}>
+                現状値があれば「現状◯件 → 導入後+◯件」 の差分試算になります。
+              </div>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={leads}
+                onChange={e => setLeads(e.target.value)}
+                placeholder="例) 100"
+                style={{ width: '100%', padding: '12px 14px', fontSize: 15, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff', outline: 'none' }}
+              />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, color: '#3d4a44', marginBottom: 6 }}>営業/SDR人数</label>
-              <input type="text" inputMode="numeric" value={sdr} onChange={e => setSdr(e.target.value)} placeholder="5" style={{ width: '100%', padding: '10px 12px', fontSize: 14, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff' }} />
+              <label style={{ display: 'block', fontSize: 13, color: '#0a0e0c', fontWeight: 600, marginBottom: 4 }}>
+                営業 / SDR の人数 <span style={{ fontSize: 11, color: '#6b7873', fontWeight: 400 }}>任意</span>
+              </label>
+              <div style={{ fontSize: 11, color: '#6b7873', marginBottom: 8 }}>
+                工数削減を「営業◯人分」 として実数換算します。
+              </div>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={sdr}
+                onChange={e => setSdr(e.target.value)}
+                placeholder="例) 5"
+                style={{ width: '100%', padding: '12px 14px', fontSize: 15, border: '1px solid #d4d2c7', borderRadius: 8, background: '#fff', outline: 'none' }}
+              />
             </div>
-          </div>
-          <div style={{ fontSize: 11, color: '#6b7873', marginBottom: 16, lineHeight: 1.6 }}>
-            数値は推定より優先されます。 空欄なら SimilarWeb 等から自動取得します。
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <button type="button" onClick={() => setStep('welcome')} style={{ padding: '12px 18px', background: 'transparent', border: '1px solid #d4d2c7', borderRadius: 8, color: '#3d4a44', cursor: 'pointer', fontSize: 14 }}>
