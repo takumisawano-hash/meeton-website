@@ -15,12 +15,10 @@ export const metadata: Metadata = {
 }
 
 export default function LPPage() {
-  return (
-    <HomePageClient
-      mode="lp"
-      lpVariant="google"
-      lpHeadline="Webサイト訪問者を、商談に変えるAI"
-      lpSubheadline="リード検知から商談予約まで5秒。AIがあらゆる接点で営業し、商談を自動で生み出します。"
-    />
-  )
+  // Hero copy + badge + CTA inherit from HomePageClient defaults so
+  // ad → LP → site message is identical end-to-end (avoids confusing
+  // mismatches between Google Ads creative and the homepage that the
+  // visitor will navigate to next). Past Google Ads attribution showed
+  // 36 clicks → 0 CV with the divergent copy version.
+  return <HomePageClient mode="lp" lpVariant="google" />
 }

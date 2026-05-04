@@ -3513,10 +3513,8 @@ export default function HomePageClient({
         <div className="hero-content">
           <div className="anim d1 hero-badge">
             <div className="hero-badge-dot" />
-            {isLp
-              ? (lpVariant === "trial"
-                ? "14日間無料トライアル"
-                : "AI SDR で商談を自動獲得")
+            {isLp && lpVariant === "trial"
+              ? "14日間無料トライアル"
               : "日本唯一の最先端 AI SDR"}
           </div>
           <h1 className="anim d2">
@@ -3535,7 +3533,7 @@ export default function HomePageClient({
               onClick={() => openMeetingModal("hero")}
               style={isLp ? { padding: "20px 44px", fontSize: 19 } : undefined}
             >
-              {isLp ? "無料デモを予約する" : "AIデモを体験"}
+              AIデモを体験
             </button>
             <button
               className="btn-ghost"

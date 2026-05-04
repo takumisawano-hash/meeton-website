@@ -24,13 +24,13 @@ export default async function InsideSalesLP() {
     heroImage: c.heroImage,
     stats: c.stats.slice(0, 3),
   }))
+  // Hero copy aligned with homepage so ad → LP → site is consistent.
+  // Variant tag is preserved for analytics segmentation.
   return (
     <HomePageClient
       caseStudies={featured}
       mode="lp"
       lpVariant="inside-sales"
-      lpHeadline="インサイドセールスを、AIで自動化"
-      lpSubheadline="問い合わせ対応の初動を42時間→5秒に。SDR業務をAIが代行し、営業チームは商談に集中できる。"
     />
   )
 }

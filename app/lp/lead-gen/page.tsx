@@ -24,13 +24,13 @@ export default async function LeadGenLP() {
     heroImage: c.heroImage,
     stats: c.stats.slice(0, 3),
   }))
+  // Hero copy aligned with homepage so ad → LP → site is consistent.
+  // Variant tag is preserved for analytics segmentation.
   return (
     <HomePageClient
       caseStudies={featured}
       mode="lp"
       lpVariant="lead-gen"
-      lpHeadline="BtoBリードを、24時間自動獲得"
-      lpSubheadline="Webサイト訪問者をAIがリアルタイム検知。チャット・メール・資料提案で休まずリードを生み続けます。"
     />
   )
 }
