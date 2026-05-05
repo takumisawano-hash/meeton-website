@@ -346,6 +346,11 @@ export default function RoiSimulatorClient() {
         @media print {
           @page { margin: 14mm; size: A4; }
           .no-print { display: none !important; }
+          /* Hide site chrome (Nav + Footer) so the PDF only shows the ROI report.
+             Nav and Footer are rendered by /roi-simulator/page.tsx outside this
+             component, so use element selectors instead of class names. */
+          body > nav, body > footer,
+          body > div > nav, body > div > footer { display: none !important; }
           html, body { background: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
           main { padding: 0 !important; max-width: none !important; margin: 0 !important; }
           header { margin-bottom: 14px !important; }
@@ -597,24 +602,15 @@ export default function RoiSimulatorClient() {
               デモを予約 →
             </button>
             {unlocked ? (
-              <>
-                <button onClick={handlePrint} style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0a0e0c', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
-                  📄 PDFとして保存・印刷
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (typeof window !== 'undefined') {
-                      navigator.clipboard?.writeText(window.location.href)
-                      alert('URLをコピーしました')
-                    }
-                  }}
-                  style={{ padding: '12px 22px', fontSize: 14, fontWeight: 600, background: 'transparent', color: '#3d4a44', border: '1px solid #d4d2c7', borderRadius: 8, cursor: 'pointer' }}
-                >
-                  🔗 結果URLをコピー
-                </button>
-              </>
+              <button onClick={handlePrint} style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0a0e0c', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
+                📄 PDFとして保存・印刷
+              </button>
             ) : null}
+            {/* "結果URLをコピー" was removed: the URL only carries inputs, not the
+                cached result, so reopening it re-runs a 10s+ Claude analysis from
+                scratch — feels broken to users. Bringing this back requires
+                durable storage for profiles (current /tmp store is ephemeral
+                across Vercel function instances). */}
             <button
               type="button"
               onClick={() => {
