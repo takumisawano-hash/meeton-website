@@ -306,16 +306,16 @@ export default function ComparisonTable() {
             border-radius: 0;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
           }
           .comp-row {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 5px;
             background: #fafaf7;
             border: 1px solid #e4e3dd;
-            border-radius: 16px;
-            padding: 16px 14px;
+            border-radius: 12px;
+            padding: 12px 11px;
           }
           .comp-row + .comp-row {
             border-top: 1px solid #e4e3dd;
@@ -324,16 +324,17 @@ export default function ComparisonTable() {
             display: none;
           }
           .comp-cell {
-            padding: 10px 12px;
+            padding: 6px 10px;
             text-align: left;
             flex-direction: row;
             align-items: center;
             justify-content: flex-start;
-            gap: 12px;
+            gap: 10px;
             background: #ffffff;
             border: 1px solid #ececec;
-            border-radius: 10px;
+            border-radius: 8px;
             flex-wrap: wrap;
+            min-height: 0;
           }
           .comp-cell::before {
             content: attr(data-provider);
@@ -341,20 +342,21 @@ export default function ComparisonTable() {
             font-size: 10px;
             font-weight: 800;
             color: #82897f;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
-            min-width: 88px;
+            min-width: 78px;
             flex-shrink: 0;
           }
           .comp-label {
             background: transparent;
             border: none;
-            padding: 0 4px 6px;
-            font-size: 15px;
+            padding: 0 4px 4px;
+            font-size: 14px;
             font-weight: 800;
             color: #0f1128;
             text-align: left;
             align-items: flex-start !important;
+            line-height: 1.4;
           }
           .comp-label::before {
             content: none;

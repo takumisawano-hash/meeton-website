@@ -301,7 +301,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .qflow-hz-gate>div{writing-mode:horizontal-tb!important;flex-direction:row!important;padding:10px 20px!important}
   .why-grid{grid-template-columns:1fr}
   .proof-stats-grid{grid-template-columns:repeat(2,1fr)!important}
-  .hero-stats-grid{grid-template-columns:1fr!important;max-width:360px!important}
+  .hero-stats-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
   .int-grid{grid-template-columns:repeat(3,1fr)}
   .steps-row{flex-direction:column}
   .step-arrow{display:none}
@@ -312,7 +312,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .hero-badge{padding:7px 16px;margin-bottom:24px}
   .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
   .hero-stats{flex-direction:column;gap:20px;align-items:center}
-  .int-grid{grid-template-columns:repeat(2,1fr)}
+  .int-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .int-card{padding:14px 10px}
+  .int-icon{width:36px;height:36px;margin-bottom:8px}
+  .int-name{font-size:12px}
+  .int-desc{font-size:10px;margin-top:2px}
   .demo-screen{min-height:280px;padding:16px;gap:10px}
   .demo-avatar-inner{width:32px;height:32px;font-size:14px}
   .demo-avatar-status{top:-10px;left:22px}
@@ -347,7 +351,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 }
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
-  .int-grid{grid-template-columns:1fr}
+  .int-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .int-card{padding:12px 8px}
+  .int-icon{width:32px;height:32px;margin-bottom:6px}
+  .int-name{font-size:11px}
+  .int-desc{font-size:9px}
   .feat-card-vis{min-height:160px}
   .case-card{padding:16px 14px}
   .case-quote{font-size:12px;padding:12px 14px}
@@ -3239,42 +3247,51 @@ function HeroDemoAnimation() {
       margin:"0 auto",
     }} className="hero-stats-grid">
       {HERO_STATS.map((s, i) => (
-        <div key={i} style={{
+        <div key={i} className="hero-stat-card" style={{
           background:"rgba(255,255,255,.9)",
           backdropFilter:"blur(16px)",
-          borderRadius:20,
-          padding:"clamp(24px,3vw,36px) clamp(20px,2.5vw,28px)",
+          borderRadius:16,
+          padding:"clamp(14px,3vw,36px) clamp(10px,2.5vw,28px)",
           textAlign:"center",
           border:"1px solid rgba(0,0,0,.05)",
           boxShadow:`0 8px 32px rgba(0,0,0,.06), 0 1px 0 rgba(255,255,255,.8) inset`,
           transition:"transform .3s, box-shadow .3s",
         }}>
-          <div style={{
+          <div className="hero-stat-num" style={{
             fontFamily:"var(--fm)",
-            fontSize:"clamp(48px,7vw,72px)",
+            fontSize:"clamp(28px,7vw,72px)",
             fontWeight:800,
             background:s.gradient,
             WebkitBackgroundClip:"text",
             WebkitTextFillColor:"transparent",
-            letterSpacing:-2,
+            letterSpacing:-1,
             lineHeight:1,
           }}>
-            {vals[i]}<span style={{fontSize:"clamp(18px,2.5vw,28px)",fontWeight:700,letterSpacing:0}}>{s.suffix}</span>
+            {vals[i]}<span className="hero-stat-suffix" style={{fontSize:"clamp(11px,2.5vw,28px)",fontWeight:700,letterSpacing:0}}>{s.suffix}</span>
           </div>
-          <div style={{
-            fontSize:"clamp(14px,1.5vw,16px)",
+          <div className="hero-stat-label" style={{
+            fontSize:"clamp(11px,1.5vw,16px)",
             fontWeight:800,
             color:"var(--heading)",
-            marginTop:8,
+            marginTop:6,
+            lineHeight:1.3,
           }}>{s.label}</div>
-          <div style={{
-            fontSize:"clamp(11px,1.2vw,13px)",
+          <div className="hero-stat-desc" style={{
+            fontSize:"clamp(9px,1.2vw,13px)",
             color:"var(--sub)",
-            marginTop:4,
+            marginTop:3,
             fontWeight:500,
+            lineHeight:1.35,
           }}>{s.desc}</div>
         </div>
       ))}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          :global(.hero-stat-desc) {
+            display: none;
+          }
+        }
+      `}</style>
     </div>
   );
 }
