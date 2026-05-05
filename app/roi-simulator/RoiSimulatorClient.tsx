@@ -371,7 +371,7 @@ export default function RoiSimulatorClient() {
         </div>
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 48px)', fontWeight: 800, lineHeight: 1.25, margin: '0 0 14px' }}>
           {step === 'welcome'
-            ? '貴社のROIを60秒で試算'
+            ? '貴社のROIを30秒で試算'
             : step === 'inputs'
               ? '現状をいくつか教えてください'
               : `${result?.company.name || '貴社'} 様向け ROI 試算結果`}
@@ -406,7 +406,7 @@ export default function RoiSimulatorClient() {
             試算を始める →
           </button>
           <div style={{ fontSize: 11, color: '#6b7873', marginTop: 14 }}>
-            所要時間 約60秒 / すべて任意 / メールアドレスは詳細結果の表示時に
+            所要時間 約30秒 / すべて任意 / メールアドレスは詳細結果の表示時に
           </div>
         </section>
       ) : null}

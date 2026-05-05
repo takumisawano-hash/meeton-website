@@ -22,7 +22,9 @@ const HIGH_INTENT_PREFIXES = [
   '/features/offers',
 ]
 const HIGH_INTENT_PATTERNS: RegExp[] = [/^\/case-studies\/[^/]+/]
-const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/']
+// /roi-simulator is the very destination this overlay drives to — showing
+// it on the same page is both confusing and self-defeating.
+const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/', '/roi-simulator']
 
 const SCROLL_THRESHOLD = 0.3
 const TIME_THRESHOLD_MS = 30_000
