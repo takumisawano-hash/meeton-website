@@ -55,8 +55,9 @@ export default function MidPageCta({
           boxShadow: "0 4px 18px rgba(15,17,40,0.05)",
         }}
       >
-        <div style={{ flex: "1 1 320px", minWidth: 0 }}>
+        <div className="mpc-text" style={{ flex: "1 1 320px", minWidth: 0 }}>
           <div
+            className="mpc-eyebrow"
             style={{
               fontFamily: "var(--fm)",
               fontSize: 11,
@@ -70,6 +71,7 @@ export default function MidPageCta({
             {eyebrow}
           </div>
           <div
+            className="mpc-heading"
             style={{
               fontSize: "clamp(16px, 2.4vw, 19px)",
               fontWeight: 800,
@@ -122,18 +124,29 @@ export default function MidPageCta({
         }
         @media (max-width: 640px) {
           .mpc-section {
-            padding: 14px 16px !important;
+            padding: 10px 14px !important;
           }
           .mpc-card {
             flex-direction: column !important;
             align-items: stretch !important;
             text-align: left;
-            padding: 16px 18px !important;
-            gap: 12px !important;
+            padding: 14px 16px !important;
+            gap: 8px !important;
+          }
+          .mpc-text {
+            flex: 0 0 auto !important;
+          }
+          .mpc-eyebrow {
+            margin-bottom: 3px !important;
+            font-size: 10px !important;
+          }
+          .mpc-heading {
+            font-size: 14px !important;
+            line-height: 1.45 !important;
           }
           .mpc-btn {
             width: 100% !important;
-            padding: 12px 20px !important;
+            padding: 11px 18px !important;
             font-size: 14px !important;
           }
         }
