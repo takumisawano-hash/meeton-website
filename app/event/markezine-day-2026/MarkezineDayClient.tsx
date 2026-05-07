@@ -51,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
 .offers-inner{max-width:1080px;margin:0 auto}
 .offers-title{text-align:center;font-size:28px;font-weight:800;color:var(--heading);margin-bottom:8px}
 .offers-subtitle{text-align:center;color:var(--sub);font-size:15px;margin-bottom:48px}
-.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media (max-width:880px){.offers-grid{grid-template-columns:1fr}.event-h1{font-size:30px}}
+.offers-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;max-width:860px;margin:0 auto}
+@media (max-width:880px){.offers-grid{grid-template-columns:1fr;max-width:100%}.event-h1{font-size:30px}}
 .offer-card{padding:32px 28px;background:#fff;border:1.5px solid var(--border);border-radius:16px;display:flex;flex-direction:column;gap:16px;transition:all .25s;position:relative;overflow:hidden}
 .offer-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 20px 40px -12px rgba(124,92,252,.15)}
 .offer-card.primary{background:linear-gradient(135deg,#1a1d3a 0%,#0f1128 100%);color:#fff;border-color:#0f1128}
@@ -111,10 +111,6 @@ export default function MarkezineDayClient({ cases }: Props) {
   const [formCampaign, setFormCampaign] = useState("markezine_day_2026");
 
   const openConsultation = () => setMeetingOpen(true);
-  const openSlideDl = () => {
-    setFormCampaign("markezine_day_2026_slide_dl");
-    setFormOpen(true);
-  };
   const openTrial = () => {
     setFormCampaign("markezine_day_2026_trial");
     setFormOpen(true);
@@ -134,13 +130,13 @@ export default function MarkezineDayClient({ cases }: Props) {
           <h1 className="event-h1">
             ご視聴ありがとうございました
             <br />
-            <strong>3つの視聴者特典</strong>をご用意しました
+            <strong>視聴者限定で、まず試せる環境</strong>をご用意しました
           </h1>
           <p className="event-sub">
             「AI SDR が変える BtoB 営業の新常識 ─ 商談獲得を自動化する実践アプローチ」
             を最後までご視聴いただき、誠にありがとうございました。
-            セッションでお話しした内容をさらに深掘りいただける3つの特典を、
-            視聴者の皆様限定でご提供します。
+            セッションでお話しした AI SDR を、視聴者限定の環境で
+            実際に試していただけます。
           </p>
           <div className="event-meta">
             <div className="event-meta-item">
@@ -162,55 +158,37 @@ export default function MarkezineDayClient({ cases }: Props) {
       {/* Offers */}
       <section className="offers-section">
         <div className="offers-inner">
-          <h2 className="offers-title">3つの視聴者限定特典</h2>
-          <p className="offers-subtitle">本セッション視聴者だけにご提供する個別オファーです</p>
+          <h2 className="offers-title">視聴者限定オファー</h2>
+          <p className="offers-subtitle">「まず実運用で試す」が最短ルート。判断に迷う場合は個別相談もご用意しています</p>
           <div className="offers-grid">
-            {/* Card 1: 30分相談 */}
+            {/* Primary: 30日トライアル */}
             <div className="offer-card primary">
-              <div className="offer-icon">💬</div>
-              <span className="offer-tag">最も人気</span>
-              <h3 className="offer-h">30分 AI SDR 戦略相談</h3>
-              <p className="offer-desc">
-                登壇者の澤野が直接、貴社の営業課題に合わせた
-                AI SDR 導入の具体策を 30 分でご提案します。
-                現状ヒアリング → 想定 ROI → 導入ステップの3部構成。
-              </p>
-              <button className="offer-cta" onClick={openConsultation}>
-                相談を予約する →
-              </button>
-            </div>
-
-            {/* Card 2: スライドDL */}
-            <div className="offer-card">
-              <div className="offer-icon">📄</div>
-              <span className="offer-tag" style={{ background: "var(--accent)" }}>
-                資料3点セット
-              </span>
-              <h3 className="offer-h">登壇スライド + 補足データ集</h3>
-              <p className="offer-desc">
-                登壇スライド本体に加え、セッション内で触れきれなかった
-                EdulinX / BizteX の事例詳細・運用フロー・
-                AI SDR 導入チェックリスト の3点を PDF でお渡しします。
-              </p>
-              <button className="offer-cta outline" onClick={openSlideDl}>
-                ダウンロード →
-              </button>
-            </div>
-
-            {/* Card 3: 45日トライアル */}
-            <div className="offer-card">
               <div className="offer-icon">🚀</div>
-              <span className="offer-tag" style={{ background: "var(--pink)" }}>
-                通常14日 → 45日
+              <span className="offer-tag" style={{ background: "var(--cta)" }}>
+                通常14日 → 30日
               </span>
-              <h3 className="offer-h">45日間 無料トライアル</h3>
+              <h3 className="offer-h">30日間 無料トライアル</h3>
               <p className="offer-desc">
-                通常 14 日間の無料トライアルを 45 日間に延長。
+                通常 14 日間の無料トライアルを 30 日間に延長。
                 カード情報不要、全機能利用可能、初期設定の
-                無料サポート付。実運用で効果を検証ください。
+                無料サポート付。実運用で AI SDR の効果を体感してください。
               </p>
-              <button className="offer-cta outline" onClick={openTrial}>
-                トライアル開始 →
+              <button className="offer-cta" onClick={openTrial}>
+                無料で始める →
+              </button>
+            </div>
+
+            {/* Secondary: 30分相談 */}
+            <div className="offer-card">
+              <div className="offer-icon">💬</div>
+              <h3 className="offer-h">まずは相談したい方へ</h3>
+              <p className="offer-desc">
+                30分 AI SDR 戦略相談（無料）。
+                澤野が直接、貴社の営業課題に合わせた
+                導入ステップをご提案します。質問だけでも歓迎です。
+              </p>
+              <button className="offer-cta outline" onClick={openConsultation}>
+                相談を予約する →
               </button>
             </div>
           </div>
@@ -296,15 +274,12 @@ export default function MarkezineDayClient({ cases }: Props) {
             ご質問・ご相談は澤野が直接対応いたします。
           </p>
           <div className="cta-buttons">
-            <button className="offer-cta" onClick={openConsultation}>
+            <button className="offer-cta" onClick={openTrial}>
+              30日間 無料トライアル →
+            </button>
+            <button className="offer-cta outline" onClick={openConsultation}>
               30分 相談を予約する →
             </button>
-            <Link
-              href={`/roi-simulator/${utm("roi_sim")}`}
-              className="offer-cta outline"
-            >
-              ROI を 30秒で試算 →
-            </Link>
           </div>
         </div>
       </section>
