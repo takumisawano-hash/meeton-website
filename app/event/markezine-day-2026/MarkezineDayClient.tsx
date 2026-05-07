@@ -125,18 +125,17 @@ export default function MarkezineDayClient({ cases }: Props) {
       <section className="event-hero">
         <div className="event-hero-inner">
           <div className="event-badge">
-            <span>★</span> MarkeZine Day 2026 視聴者限定特典
+            <span>★</span> MarkeZine Day 2026 登録者限定特典
           </div>
           <h1 className="event-h1">
-            ご視聴ありがとうございました
+            MarkeZine Day 2026 ご参加ありがとうございました
             <br />
-            <strong>視聴者限定で、まず試せる環境</strong>をご用意しました
+            <strong>登録者限定で、まず試せる環境</strong>をご用意しました
           </h1>
           <p className="event-sub">
             「AI SDR が変える BtoB 営業の新常識 ─ 商談獲得を自動化する実践アプローチ」
-            を最後までご視聴いただき、誠にありがとうございました。
-            セッションでお話しした AI SDR を、視聴者限定の環境で
-            実際に試していただけます。
+            にご関心をお寄せいただき、誠にありがとうございました。
+            登壇内容を実際に試せる視聴者限定の環境を、ご登録者の皆様にもご提供します。
           </p>
           <div className="event-meta">
             <div className="event-meta-item">
