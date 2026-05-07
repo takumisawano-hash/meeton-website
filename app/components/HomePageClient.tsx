@@ -3559,6 +3559,29 @@ export default function HomePageClient({
               資料請求 →
             </button>
           </div>
+          {/* ROI Simulator entry point — placed below the primary CTAs so it
+              doesn't dilute "demo / resource" action priority but is still
+              visible. Active LPs (/lp/, /lp/inside-sales/, /lp/lead-gen/)
+              currently sit at 0 conversions despite 3% CTR, and the ROI
+              calculator is the only interactive lead magnet we have.
+              Light hero background → use --sub color, not white. */}
+          <div
+            className="anim d4"
+            style={{ marginTop: 18, fontSize: 14, color: "var(--sub)" }}
+          >
+            <Link
+              href="/roi-simulator/"
+              style={{
+                color: "var(--cta)",
+                textDecoration: "underline",
+                textUnderlineOffset: 4,
+                textDecorationThickness: 1,
+                fontWeight: 600,
+              }}
+            >
+              ▸ 30秒で貴社のROIを試算する
+            </Link>
+          </div>
           {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
           {!isLp && (
             <div
