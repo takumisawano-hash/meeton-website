@@ -70,6 +70,67 @@ function setQuery(params: Record<string, string | number | undefined>) {
   window.history.replaceState(null, '', url.toString())
 }
 
+// ── Result snapshot in URL hash ──────────────────────────────────────
+//
+// The Claude analysis costs 10s+ per run, and Vercel's /tmp doesn't
+// persist across function instances, so re-opening a saved URL would
+// silently re-run the API. To make the result genuinely shareable
+// (and instantly re-loadable), we encode just the visible result
+// payload into the URL hash. Hash isn't sent to the server, so SSR
+// is unaffected; client decodes on mount and skips straight to the
+// result step. ~600B raw → ~800B base64, well within the practical
+// hash budget.
+function encodeSnapshot(r: Result): string {
+  try {
+    const json = JSON.stringify({ v: 1, r })
+    // Use UTF-8 safe base64 (handle Japanese characters)
+    const utf8 = new TextEncoder().encode(json)
+    let bin = ''
+    utf8.forEach((b) => (bin += String.fromCharCode(b)))
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+  } catch {
+    return ''
+  }
+}
+
+function decodeSnapshot(s: string): Result | null {
+  try {
+    const bin = atob(s.replace(/-/g, '+').replace(/_/g, '/'))
+    const bytes = new Uint8Array(bin.length)
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+    const json = new TextDecoder().decode(bytes)
+    const parsed = JSON.parse(json) as { v: number; r: Result }
+    if (parsed.v !== 1 || !parsed.r) return null
+    return parsed.r
+  } catch {
+    return null
+  }
+}
+
+function readSnapshotFromHash(): Result | null {
+  if (typeof window === 'undefined') return null
+  const hash = window.location.hash
+  const m = hash.match(/[#&]r=([^&]+)/)
+  return m ? decodeSnapshot(decodeURIComponent(m[1])) : null
+}
+
+function setHashSnapshot(r: Result | null) {
+  if (typeof window === 'undefined') return
+  if (!r) {
+    if (window.location.hash) {
+      const url = new URL(window.location.href)
+      url.hash = ''
+      window.history.replaceState(null, '', url.toString())
+    }
+    return
+  }
+  const enc = encodeSnapshot(r)
+  if (!enc) return
+  const url = new URL(window.location.href)
+  url.hash = `r=${enc}`
+  window.history.replaceState(null, '', url.toString())
+}
+
 function StatBig({ label, value, accent, blurred }: { label: string; value: string; accent?: string; blurred?: boolean }) {
   return (
     <div
@@ -234,6 +295,16 @@ export default function RoiSimulatorClient() {
     } catch {
       // ignore
     }
+    // Restore from hash snapshot first — if the URL was shared, we can
+    // jump straight to the result without re-running the 10s analysis.
+    const snapshot = readSnapshotFromHash()
+    if (snapshot) {
+      setResult(snapshot)
+      setDomain(snapshot.company?.domain || '')
+      setStep('result')
+      autoRanRef.current = true  // suppress auto-rerun
+      return
+    }
     const q = readQuery()
     if (q.domain) {
       setDomain(q.domain)
@@ -279,8 +350,16 @@ export default function RoiSimulatorClient() {
       }
       const data = await r.json()
       setAnalysisStep(4)
-      setResult({ company: data.profile.company, companyInsights: data.profile.companyInsights, roi: data.lp.trafficRoi })
+      const snapshot: Result = {
+        company: data.profile.company,
+        companyInsights: data.profile.companyInsights,
+        roi: data.lp.trafficRoi,
+      }
+      setResult(snapshot)
       setStep('result')
+      // Persist snapshot in URL hash so the result is shareable + reopen-able
+      // without a fresh 10s API call.
+      setHashSnapshot(snapshot)
     } catch {
       stepTimers.forEach(clearTimeout)
       setError('試算に失敗しました。 ネットワークをご確認ください。')
@@ -602,15 +681,24 @@ export default function RoiSimulatorClient() {
               デモを予約 →
             </button>
             {unlocked ? (
-              <button onClick={handlePrint} style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0a0e0c', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
-                📄 PDFとして保存・印刷
-              </button>
+              <>
+                <button onClick={handlePrint} style={{ padding: '12px 22px', fontSize: 14, fontWeight: 700, background: '#0a0e0c', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
+                  📄 PDFとして保存・印刷
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      navigator.clipboard?.writeText(window.location.href)
+                      alert('URLをコピーしました')
+                    }
+                  }}
+                  style={{ padding: '12px 22px', fontSize: 14, fontWeight: 600, background: 'transparent', color: '#3d4a44', border: '1px solid #d4d2c7', borderRadius: 8, cursor: 'pointer' }}
+                >
+                  🔗 結果URLをコピー
+                </button>
+              </>
             ) : null}
-            {/* "結果URLをコピー" was removed: the URL only carries inputs, not the
-                cached result, so reopening it re-runs a 10s+ Claude analysis from
-                scratch — feels broken to users. Bringing this back requires
-                durable storage for profiles (current /tmp store is ephemeral
-                across Vercel function instances). */}
             <button
               type="button"
               onClick={() => {
