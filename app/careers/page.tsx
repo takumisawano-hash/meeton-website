@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '採用情報｜Meeton ai',
+    title: '採用情報',
     description: 'DynaMeetでは、AIで営業のあたりまえを変える仲間を募集しています。',
   },
 }

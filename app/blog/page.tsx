@@ -6,8 +6,8 @@ import BlogPageClient from '@/app/components/BlogPageClient'
 export const revalidate = 3600 // 1時間ごとに再検証
 
 export const metadata: Metadata = {
-  title: 'ブログ',
-  description: 'Meeton aiの最新情報、AI営業に関するノウハウ、インサイドセールスのベストプラクティス、業界トレンドをお届けします。B2B営業・マーケティングの効率化に役立つ情報が満載です。',
+  title: 'AI営業ブログ｜AI SDR・インサイドセールス・商談化ノウハウ',
+  description: 'AI SDR・インサイドセールス・商談化率改善・ABM運用のベストプラクティスを毎日配信。B2B営業の最前線を実例と数字で解説する160本超の記事。',
   alternates: {
     canonical: '/blog/',
     languages: {
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'ブログ｜Meeton ai',
-    description: 'Meeton aiの最新情報、AI営業に関するノウハウ、業界トレンドをお届けします。',
+    title: 'AI営業ブログ｜AI SDR・インサイドセールス・商談化ノウハウ',
+    description: 'AI SDR・インサイドセールス・商談化率改善・ABM運用のベストプラクティスを毎日配信。B2B営業の最前線を実例と数字で解説する160本超の記事。',
     url: 'https://dynameet.ai/blog/',
     type: 'website',
     siteName: 'Meeton ai',
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ブログ｜Meeton ai',
-    description: 'AI営業に関する最新情報やノウハウをお届けします。',
+    title: 'AI営業ブログ｜AI SDR・商談化ノウハウ',
+    description: 'AI SDR・インサイドセールス・商談化率改善のベストプラクティスを毎日配信。160本超の記事。',
     site: '@meetonai',
   },
   robots: {

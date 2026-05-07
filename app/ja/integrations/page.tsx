@@ -2,7 +2,7 @@ import IntegrationDirectoryClient from "@/app/components/IntegrationDirectoryCli
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "連携 | Meeton ai",
+  title: "連携",
   description:
     "Meeton aiをSlack、Zoom、Salesforce、HubSpot、Googleカレンダー、Microsoft Teamsなどと連携できます。",
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "連携 | Meeton ai",
+    title: "連携",
     description: "Meeton aiを主要ビジネスツールとシームレスに連携。",
     url: "https://dynameet.ai/ja/integrations/",
     siteName: "Meeton ai",

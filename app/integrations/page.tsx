@@ -2,7 +2,7 @@ import IntegrationDirectoryClient from "@/app/components/IntegrationDirectoryCli
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Integrations | Meeton ai",
+  title: "Integrations",
   description:
     "Connect Meeton ai to Slack, Zoom, Salesforce, HubSpot, Google Calendar, Microsoft Teams, and more.",
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Integrations | Meeton ai",
+    title: "Integrations",
     description:
       "Connect Meeton ai to Slack, Zoom, Salesforce, HubSpot, and more.",
     url: "https://dynameet.ai/integrations/",

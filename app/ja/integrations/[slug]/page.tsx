@@ -17,7 +17,7 @@ export async function generateMetadata({
   if (!integration) return {};
 
   return {
-    title: `${integration.name}連携 | Meeton ai`,
+    title: `${integration.name}連携`,
     description: integration.ja.description,
     alternates: {
       canonical: `/ja/integrations/${slug}/`,
@@ -26,7 +26,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: `${integration.name}連携 | Meeton ai`,
+      title: `${integration.name}連携`,
       description: integration.ja.description,
       url: `https://dynameet.ai/ja/integrations/${slug}/`,
       siteName: "Meeton ai",

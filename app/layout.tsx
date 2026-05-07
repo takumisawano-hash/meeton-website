@@ -35,9 +35,12 @@ export const metadata: Metadata = {
   },
   description: 'DynaMeetが提供するAIプラットフォーム。Meeton aiでウェブサイト訪問者を商談に変換、Meeton Talentで採用マッチングを革新。B2B SaaS企業の成長を加速します。',
   metadataBase: new URL('https://dynameet.ai'),
-  alternates: {
-    canonical: '/',
-  },
+  // No site-wide canonical: setting one in the root layout makes EVERY
+  // page render <link rel=canonical href=/> which collapses every URL
+  // (including /lp/, /roi-simulator/, /blog/) into a homepage canonical
+  // and confuses Google's URL grouping. Each page that needs an explicit
+  // canonical sets it in its own metadata. Pages without an explicit
+  // canonical fall back to their request URL, which is what we want.
   openGraph: {
     type: 'website',
     locale: 'ja_JP',

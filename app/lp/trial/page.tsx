@@ -3,7 +3,7 @@ import HomePageClient from '@/app/components/HomePageClient'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export const metadata: Metadata = {
-  title: '14日間無料トライアル｜Meeton ai',
+  title: '14日間無料トライアル',
   description:
     'Meeton aiを14日間無料でお試しください。AI SDRがウェブサイト訪問者を商談に変換します。クレジットカード不要。',
   robots: { index: false, follow: false },

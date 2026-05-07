@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "/privacy-policy/",
   },
   openGraph: {
-    title: "プライバシーポリシー｜Meeton ai",
+    title: "プライバシーポリシー",
     description:
       "DynaMeet株式会社のプライバシーポリシー。個人情報の取り扱いについて定めています。",
     url: "https://dynameet.ai/privacy-policy/",

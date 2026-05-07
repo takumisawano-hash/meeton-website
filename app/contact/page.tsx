@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'お問い合わせ｜Meeton ai',
+    title: 'お問い合わせ',
     description: '製品に関するご質問、デモのご依頼、導入のご相談など、お気軽にお問い合わせください。',
     url: 'https://dynameet.ai/contact/',
     type: 'website',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'お問い合わせ｜Meeton ai',
+    title: 'お問い合わせ',
     description: '製品に関するご質問、デモのご依頼、導入のご相談など、お気軽にお問い合わせください。',
   },
 }

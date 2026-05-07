@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     'Meeton ai を導入した企業の実績。商談化率・初動対応時間・工数削減など、具体的な成果と運用の実態を業種別にご紹介します。',
   alternates: { canonical: '/case-studies/' },
   openGraph: {
-    title: '導入事例｜Meeton ai',
+    title: '導入事例',
     description: 'Meeton ai 導入企業の実績と運用の実態。',
     url: 'https://dynameet.ai/case-studies/',
     siteName: 'Meeton ai',

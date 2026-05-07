@@ -360,6 +360,8 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
                       <img
                         src={post.featuredImage}
                         alt={post.title}
+                        loading="lazy"
+                        decoding="async"
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                         onError={(e) => { e.currentTarget.style.display = 'none' }}
                       />

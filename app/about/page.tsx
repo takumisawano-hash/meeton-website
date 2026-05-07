@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     canonical: '/about/',
   },
   openGraph: {
-    title: '会社概要｜Meeton ai',
+    title: '会社概要',
     description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton ai」を開発・運用しています。',
     url: 'https://dynameet.ai/about/',
   },

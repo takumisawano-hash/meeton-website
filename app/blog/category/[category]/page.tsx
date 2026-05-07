@@ -48,7 +48,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: `/blog/category/${category}/` },
     openGraph: {
-      title: `${title}｜Meeton ai`,
+      title: `${title}`,
       description,
       url: `https://dynameet.ai/blog/category/${category}/`,
       siteName: 'Meeton ai',
