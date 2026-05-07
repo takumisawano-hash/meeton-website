@@ -421,48 +421,36 @@ export async function getPostsByTag(tagName: string): Promise<BlogPost[]> {
 }
 
 export async function getRelatedPosts(category: string, currentSlug: string, limit: number = 4): Promise<BlogPost[]> {
-  if (!isConfigured() || !category) return []
-
+  // Original "most recent N in same category" concentrated all incoming
+  // related-post links on the 4 newest articles per category. 59 of 154
+  // site URLs ended up with only 1 incoming link total — poor for crawl
+  // budget, ranking, and AI citation distribution.
+  //
+  // New approach: rank ALL published posts (excluding self) by tag
+  // overlap with the current article. Same category gets a +2 bias so
+  // results still feel topically right, but tag matches do most of the
+  // work — which spreads incoming links across the long tail.
+  if (!isConfigured()) return []
   try {
-    const dataSourceId = await getDataSourceId()
-    const response = await withRetry(() =>
-      notionDataSources.query({
-        data_source_id: dataSourceId,
-        filter: {
-          and: [
-            {
-              property: 'Published',
-              checkbox: {
-                equals: true,
-              },
-            },
-            {
-              property: 'Category',
-              select: {
-                equals: category,
-              },
-            },
-            {
-              property: 'Slug',
-              rich_text: {
-                does_not_equal: currentSlug,
-              },
-            },
-          ],
-        },
-        sorts: [
-          {
-            property: 'PublishedDate',
-            direction: 'descending',
-          },
-        ],
-        page_size: limit,
+    const allPosts = await getAllPosts()
+    const current = allPosts.find((p) => p.slug === currentSlug)
+    if (!current) return []
+    const currentTags = new Set((current.tags || []).map((t) => t.toLowerCase().trim()))
+    const scored = allPosts
+      .filter((p) => p.slug !== currentSlug)
+      .map((p) => {
+        const tagOverlap = (p.tags || []).reduce(
+          (n, t) => n + (currentTags.has(t.toLowerCase().trim()) ? 1 : 0),
+          0,
+        )
+        const sameCategory = category && p.category === category ? 1 : 0
+        const recencyTiebreak = p.publishedDate ? new Date(p.publishedDate).getTime() / 1e15 : 0
+        const score = tagOverlap * 3 + sameCategory * 2 + recencyTiebreak
+        return { post: p, score }
       })
-    )
-
-    return response.results
-      .filter((page): page is PageObjectResponse => 'properties' in page)
-      .map(pageToPost)
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+    return scored.slice(0, limit).map((x) => x.post)
   } catch {
     return []
   }
