@@ -3,7 +3,35 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import FAQJsonLd from '../components/FAQJsonLd'
 import { getAllCaseStudies } from '../lib/case-studies'
+
+// FAQ on the case-studies hub helps Google + AI search engines extract
+// answers about Meeton ai's track record, supported industries, and
+// implementation timeline — these are exactly the questions a vendor-
+// research session typically opens with.
+const CASE_STUDIES_FAQ = [
+  {
+    question: 'Meeton ai はどのような業種・規模の企業で導入されていますか？',
+    answer: 'SaaS、コンサルティング、教育、業務自動化など、Webサイト経由でリードを獲得している幅広い業界で導入されています。従業員数は数十名のスタートアップから数百名の中堅企業まで対応しています。',
+  },
+  {
+    question: '導入後どのくらいで成果が出始めますか？',
+    answer: '初期設定は最短5分、AIが自律学習を開始するため設置直後から商談獲得が可能です。多くの導入企業が初月で目に見える商談数の増加を実感しており、3ヶ月以内に商談化率の有意な改善を達成しています。',
+  },
+  {
+    question: 'どのような成果が期待できますか？',
+    answer: '導入企業の実績では、チャット経由のリード獲得20倍以上、AIチャット経由の商談化率40%超、3ヶ月で複数受注など、業種・運用設計により多様な成果を実現しています。各事例ページで具体的な数字をご確認いただけます。',
+  },
+  {
+    question: '既存のCRM・MAツールと併用できますか？',
+    answer: 'HubSpot・Salesforce・Slack・Google Calendar とネイティブ連携しており、既存のセールススタックを置き換えずにそのまま強化できます。導入企業の多くがこの構成で運用しています。',
+  },
+  {
+    question: '事例として取り上げられた企業のインタビューは可能ですか？',
+    answer: '一部の導入企業様はリファレンス対応に応じていただいています。ご希望の場合は、お問い合わせまたは資料請求の際にお知らせください。',
+  },
+]
 
 export const revalidate = 3600
 
@@ -34,6 +62,10 @@ export default async function CaseStudiesPage() {
 
   return (
     <div style={{ background: '#fafaf7', color: '#0a0e0c', minHeight: '100vh' }}>
+      <FAQJsonLd
+        items={CASE_STUDIES_FAQ}
+        pageUrl="https://dynameet.ai/case-studies/"
+      />
       <Nav variant="light" />
 
       <section

@@ -53,6 +53,14 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    // Bing Webmaster Tools verification: required so Bing crawls and
+    // indexes us — and ChatGPT (which sources from Bing) starts citing
+    // dynameet.ai. Set NEXT_PUBLIC_BING_SITE_VERIFICATION in Vercel
+    // env vars to the verification code from
+    // https://www.bing.com/webmasters > Add Site > Meta tag.
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
   },
   robots: {
     index: true,
