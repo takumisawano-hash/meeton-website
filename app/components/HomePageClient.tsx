@@ -119,7 +119,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* CATEGORY CARDS - 3 categories */
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.phase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:56px}
+@media (max-width:1100px){.phase-grid{grid-template-columns:repeat(2,1fr)}}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:32px}
+@media (max-width:1100px){.problem-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.problem-grid{grid-template-columns:1fr}}
 .cat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
 .cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 56px -16px rgba(18,163,125,.18)}
 .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cat-color, #12a37d);opacity:.85;transition:opacity .3s, height .3s}
@@ -1239,14 +1243,7 @@ export default function HomePageClient({
             >
               MA でリードは集まる。CRM にも溜まる。でも、その大半は商談にならずに消えていく。
             </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                gap: 20,
-                marginBottom: 32,
-              }}
-            >
+            <div className="problem-grid">
               {[
                 { num: "5分", label: "以内のフォローで商談化率 100倍", note: "業界標準" },
                 { num: "42時間", label: "実際の B2B 営業の平均レスポンスタイム", note: "現実" },
