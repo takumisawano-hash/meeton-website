@@ -276,8 +276,8 @@ export default function MarkezineDayClient({ cases }: Props) {
               <div className="recap-num">L</div>
               <h3 className="recap-h">Meeton Live</h3>
               <p className="recap-p">
-                識別済みリードが再訪した瞬間、過去の全文脈を引き継いで対話。
-                匿名訪問者には起動しない、専用 AI SDR 対話。
+                再訪した識別済みリードに、過去の全文脈を引き継いで AI SDR が即時応答。
+                商談予約までその場で完結するラストワンマイル対話。
               </p>
             </div>
             <div className="recap-card">

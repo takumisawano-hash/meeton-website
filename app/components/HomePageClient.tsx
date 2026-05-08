@@ -1165,7 +1165,7 @@ export default function HomePageClient({
           </h1>
           <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
-              "リードがコンバートした瞬間、Meeton Calendar が起動。リード発生から商談予約まで、人間の介在ゼロ。MA や CRM では届かない「コンバージョン直前の最後の100m」を AI SDR が走る。"}
+              "問い合わせが発生した直後に商談を獲得。逃したリードには AI がメールで自動追跡して商談化。リード発生からフォロー、商談予約まで、人間の介在ゼロ。MA や CRM では届かない「ラストワンマイル」を AI SDR が走る。"}
           </p>
           <div
             className="anim-y d4 hero-ctas"
@@ -1382,11 +1382,11 @@ export default function HomePageClient({
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
                 label: "③ MEETON LIVE",
                 title: "Meeton Live",
-                desc: "過去にコンバートしたリードがサイトに再訪した瞬間、過去の全文脈を引き継いで対話を開始。匿名訪問者には起動しない、識別済みリード専用の AI SDR 対話。",
+                desc: "再訪した識別済みリードに、過去の全文脈を引き継いで AI SDR が即時応答。CRM 上の閲覧・DL・メール履歴をそのまま会話に持ち込み、商談予約までその場で完結。ラストワンマイルの AI SDR プラットフォーム。",
                 features: [
-                  { label: "再訪した識別済みリードのみに起動", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "過去の閲覧・DL・メール履歴を全文脈で活用", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
-                  { label: "HubSpot / Salesforce 連携でその場で商談予約", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
+                  { label: "過去の全文脈を引き継いで対話開始", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "再訪リードに AI SDR がリアルタイム応答", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "商談予約までその場で完結", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
                 ],
                 link: "/features/ai-chat/",
               },

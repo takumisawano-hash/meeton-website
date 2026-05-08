@@ -191,18 +191,18 @@ const faqData = [
 ];
 
 const whyData = [
-  { title: '識別済みリードのみに起動', desc: '匿名訪問者には反応せず、CRM で識別済みの再訪リードに集中。営業組織が追うべきリードに AI SDR のリソースを集中投下します。', color: '#12a37d', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 11l-3 3-2-2' },
-  { title: '全文脈を引き継ぐ AI SDR', desc: '過去の閲覧履歴・DL 履歴・メール反応・CRM 上のメモまで全文脈として把握。営業担当者の代わりに、知っているリードと会話します。', color: '#7c5cfc', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M21 12c0 4.97-4.03 9-9 9 M14 8l4 4-4 4 M3 12h15' },
-  { title: 'コンバート直前の最後の100m', desc: '識別済みリードがサイトに戻ってきた瞬間、リアルタイム対話で商談予約まで導く。MA や CRM の上に乗り、最後の意思決定を後押しします。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
+  { title: '過去の全文脈を引き継いで対話', desc: '過去の閲覧履歴・DL 履歴・メール反応・CRM 上のメモまで全文脈として把握。営業担当者が把握しているコンテキストをそのまま会話に持ち込みます。', color: '#7c5cfc', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M21 12c0 4.97-4.03 9-9 9 M14 8l4 4-4 4 M3 12h15' },
+  { title: '再訪リードに AI SDR が即時応答', desc: 'CRM で識別済みの再訪リードに、AI SDR がリアルタイム対話。営業組織が追うべきリードに AI SDR のリソースを集中投下します。', color: '#12a37d', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 11l-3 3-2-2' },
+  { title: '商談予約までその場で完結', desc: 'AI SDR との対話の流れの中で Meeton Calendar の予約 UI が起動。ページ遷移なしで商談確定まで導き、ラストワンマイルの会話を完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
   { title: 'シナリオ不要・5分で稼働', desc: 'JavaScript タグ 1 行と CRM 連携で AI SDR が稼働。ルール分岐やフロー設計は不要、開発リソース不要。', color: '#0891b2', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
 ];
 
 const flowSteps = [
   { num: '1', title: '識別済みリードが再訪', sub: 'Known lead returns', color: '#6e7494' },
-  { num: '2', title: 'CRM文脈を自動取得', sub: 'Pull CRM context', color: '#12a37d' },
-  { num: '3', title: 'AI SDR が対話開始', sub: 'AI SDR engages', color: '#0fc19a' },
+  { num: '2', title: '過去の全文脈を引継ぎ', sub: 'Pull full context', color: '#12a37d' },
+  { num: '3', title: 'AI SDR が即時応答', sub: 'AI SDR engages', color: '#0fc19a' },
   { num: '4', title: '関心領域を深掘り', sub: 'Deepen interest', color: '#7c5cfc' },
-  { num: '5', title: '商談予約', sub: 'Meeting booked', color: '#3b6ff5' },
+  { num: '5', title: 'その場で商談予約', sub: 'Meeting booked', color: '#3b6ff5' },
 ];
 
 const flowStepIcons = [
@@ -237,14 +237,14 @@ export default function AiChatPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />MEETON LIVE</div>
-            <h1 className="anim d2">識別済み再訪リードに、<br /><em>AI SDR がリアルタイム対話</em></h1>
-            <p className="anim d3 hero-sub">匿名訪問者には起動しません。CRM で識別済みのリードがサイトに戻ってきた瞬間に、過去の閲覧履歴・DL 履歴・メール反応をすべて引き継いだ AI SDR が対話を開始。コンバージョン直前の最後の100mを担います。</p>
+            <h1 className="anim d2">過去の全文脈を引き継いで、<br /><em>AI SDR がその場で商談化</em></h1>
+            <p className="anim d3 hero-sub">CRM で識別済みの再訪リードに、AI SDR が即時応答。過去の閲覧・DL・メール反応をすべて引き継いで対話を開始し、商談予約までその場で完結。ラストワンマイルの会話を AI SDR が走り、コンバージョン直前の意思決定を後押しします。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '識別済み', l: 'リードのみに起動' }, { v: '40%+', l: '商談化率 (EdulinX)' }, { v: '全文脈', l: 'CRM/履歴を引き継ぐ' }].map((s, i) => (
+              {[{ v: '全文脈', l: 'CRM/履歴を引き継ぐ' }, { v: '40%+', l: '商談化率 (EdulinX)' }, { v: 'その場', l: '商談予約まで完結' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -354,10 +354,10 @@ export default function AiChatPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>FEATURE 01</div>
-              <div className="phase-h">識別済みリードの再訪を検知して起動</div>
-              <div className="phase-desc">匿名訪問者には起動しません。HubSpot / Salesforce で識別済みのリードがサイトに戻ってきた瞬間にだけ、Meeton Live が立ち上がります。営業組織が追っているリードに AI SDR のリソースを集中投下する設計です。</div>
+              <div className="phase-h">再訪リードに、AI SDR が即時応答</div>
+              <div className="phase-desc">HubSpot / Salesforce で識別済みのリードがサイトに戻ってきた瞬間、AI SDR が即座に対話を開始。営業組織が追っているリードへ、リアルタイムでラストワンマイルの会話を届けます。</div>
               <div className="phase-features">
-                {['CRM 連携で識別済みリードを即時判定', '匿名訪問者には起動しない（営業効率を担保）', 'フォーム送信・メールクリック・サンクスページで識別済みに昇格', 'シナリオ設計・ルール分岐不要'].map((feat, i) => (
+                {['CRM 連携で識別済みリードを即時判定', '再訪検知から AI SDR 起動まで自動', 'フォーム送信・メールクリック・サンクスページで識別済みに昇格', 'シナリオ設計・ルール分岐不要'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
                 ))}
               </div>
@@ -372,7 +372,7 @@ export default function AiChatPageClient() {
                   {[
                     { page: 'HubSpot識別済', msg: '田中様の再訪を検知 → AI SDR 起動', icon: '✅', bg: '#e5f8f2', border: '#12a37d' },
                     { page: 'メールクリック経由', msg: '事例メールから再訪 → 同テーマで深掘り', icon: '📧', bg: '#f0ecfe', border: '#7c5cfc' },
-                    { page: '匿名訪問者', msg: '識別未済のため起動しません', icon: '🚫', bg: '#f4f6fb', border: '#9ca3af' },
+                    { page: 'サンクスページ通過', msg: 'フォーム送信直後の再訪 → 即時対話', icon: '⚡', bg: '#eaf0fe', border: '#3b6ff5' },
                   ].map((item, i) => (
                     <div key={i} style={{ background: '#fff', border: `1px solid ${item.border}20`, borderRadius: 12, padding: 12, marginBottom: 8, opacity: 0, animation: `slideIn .5s ${.4 + i * .3}s cubic-bezier(.16,1,.3,1) forwards` }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
