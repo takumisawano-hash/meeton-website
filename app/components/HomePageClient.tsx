@@ -7,9 +7,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import MidPageCta from "./MidPageCta";
-import HubSpotMeetingModal from "./HubSpotMeetingModal";
-import HubSpotModal from "./HubSpotModal";
 import Nav from "./Nav";
+
+// Modals only render after a user click, so there's no reason to ship
+// their JS in the initial homepage bundle. Dynamic-import shaves
+// ~30-50KB minified off the critical path which directly hits LCP/FCP
+// on mobile 4G simulations. ssr:false because the modals never paint
+// during SSR anyway.
+const HubSpotMeetingModal = dynamic(() => import("./HubSpotMeetingModal"), { ssr: false });
+const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
 
 // Lazy: heavy presentational components used only in home mode
 const ComparisonTable = dynamic(() => import("./ComparisonTable"), {
