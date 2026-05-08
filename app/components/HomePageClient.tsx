@@ -55,6 +55,7 @@ const css = `
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUpOnly{from{transform:translateY(24px)}to{transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
@@ -71,7 +72,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @keyframes hubStep1{0%,5%{opacity:0}10%{opacity:1}28%{opacity:1}33%{opacity:0}34%,100%{opacity:0}}
 @keyframes hubStep2{0%,33%{opacity:0}38%{opacity:1}61%{opacity:1}66%{opacity:0}67%,100%{opacity:0}}
 @keyframes hubStep3{0%,66%{opacity:0}71%{opacity:1}95%{opacity:1}100%{opacity:0}}
+/* .anim: legacy fadeUp (opacity 0→1) — opacity:0 hides the LCP element
+   from Lighthouse's paint detection until the animation runs, costing
+   ~1s on every above-the-fold "anim" element. Keep below-the-fold uses
+   but DO NOT use it on hero h1/badge/sub. */
 .anim{opacity:0;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) forwards}
+/* .anim-y: same vertical slide-in feel but never sets opacity:0 — safe
+   for LCP-critical elements. */
+.anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
 .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
@@ -3528,21 +3536,25 @@ export default function HomePageClient({
           }}
         />
         <div className="hero-content">
-          <div className="anim d1 hero-badge">
+          {/* Hero elements use anim-y (transform-only) instead of anim
+              (opacity 0→1). Initial opacity:0 was preventing Lighthouse
+              from registering the H1 as painted until ~1s after CSS load,
+              which alone added ~1s to LCP. Visual slide-in is preserved. */}
+          <div className="anim-y d1 hero-badge">
             <div className="hero-badge-dot" />
             {isLp && lpVariant === "trial"
               ? "14日間無料トライアル"
               : "日本唯一の最先端 AI SDR"}
           </div>
-          <h1 className="anim d2">
+          <h1 className="anim-y d2">
             {lpHeadline ?? "AIが商談をつくる時代へ"}
           </h1>
-          <p className="anim d3 hero-sub">
+          <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
               "Web サイト・サンクスページ・メール — あらゆる接点に AI を配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。"}
           </p>
           <div
-            className="anim d4 hero-ctas"
+            className="anim-y d4 hero-ctas"
             style={isLp ? { gap: 12 } : undefined}
           >
             <button
@@ -3566,7 +3578,7 @@ export default function HomePageClient({
               calculator is the only interactive lead magnet we have.
               Light hero background → use --sub color, not white. */}
           <div
-            className="anim d4"
+            className="anim-y d4"
             style={{ marginTop: 18, fontSize: 14, color: "var(--sub)" }}
           >
             <Link
