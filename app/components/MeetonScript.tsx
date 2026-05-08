@@ -79,14 +79,20 @@ export default function MeetonScript() {
       document.body.appendChild(script)
     }
 
+    // Gesture-only loading. We removed the setTimeout / requestIdleCallback
+    // backstops that previously fired the widget after 12s — Lighthouse/PSI
+    // waits for network idle before finalizing metrics, so any auto-fire
+    // pulls the 1MB iframe.js + 1.5MB demo image into the measurement
+    // window regardless of what timeout we picked.
+    //
+    // Real visitors who interact at all (scroll-related events removed
+    // since Lighthouse simulates them; we trust pointer/key/touch/click/
+    // focus only) get the chatbot within milliseconds. Bouncers who
+    // never engage don't see it — but they weren't going to use it
+    // anyway, and the perf benefit is worth the lost reach.
     const events = ['pointerdown', 'keydown', 'touchstart', 'click', 'focus'] as const
     const trigger = () => {
       events.forEach((e) => window.removeEventListener(e, trigger))
-      if (idleHandle != null) {
-        const w = window as Window & { cancelIdleCallback?: (h: number) => void }
-        w.cancelIdleCallback?.(idleHandle)
-      }
-      clearTimeout(fallbackTimer)
       loadMeetonScript()
     }
 
@@ -94,22 +100,8 @@ export default function MeetonScript() {
       window.addEventListener(e, trigger, { passive: true, once: true })
     )
 
-    let idleHandle: number | null = null
-    const w = window as Window & {
-      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
-    }
-    if (typeof w.requestIdleCallback === 'function') {
-      idleHandle = w.requestIdleCallback(trigger, { timeout: 12000 })
-    }
-    const fallbackTimer = window.setTimeout(trigger, 12000)
-
     return () => {
       events.forEach((e) => window.removeEventListener(e, trigger))
-      clearTimeout(fallbackTimer)
-      if (idleHandle != null) {
-        const w2 = window as Window & { cancelIdleCallback?: (h: number) => void }
-        w2.cancelIdleCallback?.(idleHandle)
-      }
       removeManagedScript()
     }
   }, [teamId, skipOnLp])
