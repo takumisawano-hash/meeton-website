@@ -294,7 +294,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .logo-item{padding:16px 28px;background:var(--bg);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:150px;height:72px;flex-shrink:0;transition:all .3s}
 .logo-item:hover{border-color:transparent;box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.logo-item img{height:36px;width:auto;max-width:120px;object-fit:contain}
+.logo-item img{width:120px;height:36px;object-fit:contain}
 
 /* WHY AI SDR */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
@@ -2081,7 +2081,14 @@ export default function HomePageClient({
               {/* Double the logos for seamless infinite scroll */}
               {[...clients, ...clients].map((c, i) => (
                 <div className="logo-item" key={`${c.name}-${i}`}>
-                  <img src={c.logo} alt={c.name} loading="lazy" decoding="async" />
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    width={120}
+                    height={36}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               ))}
             </div>
