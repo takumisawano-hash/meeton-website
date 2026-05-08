@@ -1468,10 +1468,203 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* USE CASES — 具体的な3つの解決パターン */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{ background: "#fff", paddingTop: 64, paddingBottom: 64 }}
+        >
+          <div className="section-inner" style={{ maxWidth: 1080 }}>
+            <div className="slabel" style={{ textAlign: "center" }}>
+              Use Cases
+            </div>
+            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
+              こんな課題を、<span style={{ color: "var(--cta)" }}>Meeton ai</span> が解きます
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                gap: 24,
+                marginTop: 48,
+              }}
+            >
+              {[
+                {
+                  title: "Speed to Lead",
+                  subtitle: "リードコンバートの瞬間に商談化",
+                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、5 秒以内に商談予約まで完結させる。",
+                  metric: "5秒",
+                  metricLabel: "業界平均は42時間",
+                },
+                {
+                  title: "Persistent Follow-up",
+                  subtitle: "即時予約しなかったリードを諦めない",
+                  body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
+                  metric: "1:1",
+                  metricLabel: "MA メールはセグメント配信",
+                },
+                {
+                  title: "Re-engage on Return",
+                  subtitle: "戻ってきたリードを逃さない",
+                  body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
+                  metric: "100%",
+                  metricLabel: "再訪リードに即対応",
+                },
+              ].map((uc, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 32,
+                    background: "var(--surface)",
+                    borderRadius: 16,
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: "var(--accent)",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {uc.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 800,
+                      color: "var(--heading)",
+                      lineHeight: 1.4,
+                      marginBottom: 16,
+                    }}
+                  >
+                    {uc.subtitle}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: "var(--text)",
+                      lineHeight: 1.8,
+                      marginBottom: 20,
+                    }}
+                  >
+                    {uc.body}
+                  </p>
+                  <div
+                    style={{
+                      paddingTop: 16,
+                      borderTop: "1px solid var(--border)",
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 12,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 36,
+                        fontWeight: 900,
+                        color: "var(--cta)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {uc.metric}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "var(--sub)",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {uc.metricLabel}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* BUILT FOR SALES — 営業組織向け明示 */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{
+            background: "linear-gradient(135deg, #1a1d3a 0%, #0f1128 100%)",
+            color: "#fff",
+            paddingTop: 56,
+            paddingBottom: 56,
+          }}
+        >
+          <div className="section-inner" style={{ maxWidth: 920, textAlign: "center" }}>
+            <div
+              className="slabel"
+              style={{ textAlign: "center", color: "rgba(255,255,255,0.6)" }}
+            >
+              Built for Sales Organizations
+            </div>
+            <div
+              className="stitle"
+              style={{ textAlign: "center", color: "#fff", marginBottom: 16 }}
+            >
+              CRO・VP Sales・IS 部長 のためのプラットフォーム
+            </div>
+            <p
+              style={{
+                fontSize: 16,
+                color: "rgba(255,255,255,0.7)",
+                lineHeight: 1.8,
+                maxWidth: 640,
+                margin: "0 auto 32px",
+              }}
+            >
+              Meeton ai はマーケティング部門のキャンペーン管理ツールではありません。
+              営業組織が、リードを商談に変えるための AI SDR Platform です。
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                gap: 20,
+                marginTop: 40,
+                textAlign: "left",
+              }}
+            >
+              {[
+                "インサイドセールスチームを持つ B2B SaaS / サービス企業",
+                "SDR の採用 / 育成 / 離職コストを削減したい組織",
+                "リードはあるが商談化が課題の組織",
+                "エンタープライズ営業を体系化したい組織",
+              ].map((line, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 20,
+                    background: "rgba(255,255,255,0.05)",
+                    borderRadius: 12,
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    fontSize: 14,
+                    lineHeight: 1.7,
+                    color: "#fff",
+                  }}
+                >
+                  {line}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA #1 — after 3 product cards: doc download (low-friction next step) */}
       <MidPageCta
         eyebrow="Resource"
-        heading="3 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
+        heading="4 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
         ctaLabel="資料を請求する"
         variant="doc"
         onClick={() => setIsDocModalOpen(true)}
