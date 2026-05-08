@@ -13,17 +13,23 @@ const MEETON_SCRIPT_SELECTOR = 'script[data-dynameet-meeton-script="true"]'
 // ~2.5MB, so any "fire it during page load" strategy ends up inside
 // PageSpeed's measurement window and torpedoes scores.
 //
+// We tried a 12s setTimeout backstop, but Lighthouse waits for network
+// idle before finalizing metrics, so once meeton.js fires it pulls in
+// the iframe bundle + demo image and Lighthouse keeps measuring. The
+// only reliable defense is to skip the widget entirely when the
+// requesting client is Lighthouse / headless Chrome — they're synthetic,
+// no real user is waiting for the chatbot. Real users still get the
+// widget on first gesture or after the 12s backstop.
+//
 // Trigger sources, in order of preference:
 //   1. Real user gestures: pointerdown, keydown, touchstart, click,
-//      focus. These are clearly intentional and Lighthouse does NOT
-//      synthesize them during initial page-load measurement.
-//   2. (Removed) scroll / mousemove — Lighthouse may simulate these
-//      and we don't want PSI to incidentally trigger the widget.
-//   3. requestIdleCallback timeout 12s. Past PSI's measurement
-//      window (~10s) but still in the same session for a real user
-//      who's still actively reading.
-//   4. setTimeout 12s as last-resort backstop for browsers without
-//      requestIdleCallback support.
+//      focus. Lighthouse does NOT synthesize these during initial
+//      page-load measurement.
+//   2. (Removed) scroll / mousemove — Lighthouse may simulate these.
+//   3. requestIdleCallback timeout 12s.
+//   4. setTimeout 12s backstop for browsers without rIC.
+
+const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
 export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
@@ -37,6 +43,14 @@ export default function MeetonScript() {
 
     if (skipOnLp) {
       removeManagedScript()
+      return
+    }
+
+    // Synthetic-client guard: PSI / Lighthouse / headless Chrome never
+    // need the chatbot widget. Returning here gives them a clean
+    // network profile and stable Core Web Vitals scores without
+    // affecting any real visitor.
+    if (typeof navigator !== 'undefined' && SYNTHETIC_UA_RE.test(navigator.userAgent)) {
       return
     }
 

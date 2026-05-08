@@ -189,9 +189,9 @@ const faqData = [
 ];
 
 const whyData = [
-  { title: '資料をアップロードするだけ', desc: 'PDF・スライド・ホワイトペーパーをアップロードすると、AI チャット付きの資料ライブラリー（ポップアップ UI）が自動で立ち上がります。新しいページをサイトに追加する必要はありません。', color: '#d03ea1', iconPath: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M17 8l-5-5-5 5 M12 3v12' },
+  { title: '行動履歴から最適資料を AI 推薦', desc: 'CRM 上の閲覧ページ・DL 履歴・興味分野を AI が解析し、検討フェーズに合った最適な資料を能動的に提案。「資料を探す責任」をリードに負わせません。', color: '#d03ea1', iconPath: 'M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11' },
   { title: 'AI チャット解説を内蔵', desc: '資料の中身を AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、章単位・項目単位の質問にもリアルタイムで回答します。', color: '#7c5cfc', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8' },
-  { title: 'デザイン・ページ追加不要', desc: '既存サイトに JS タグ 1 行を入れるだけで、ポップアップ形式のライブラリーが起動。Web 制作・デザイン・新規ページ追加といった工数が一切かかりません。', color: '#0891b2', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8' },
+  { title: 'アップロードだけでライブラリー自動生成', desc: 'PDF・スライドをアップロードするだけで、AI チャット付きの資料ライブラリー（ポップアップ UI）が自動立ち上がり。デザイン作業も新規ページ追加も不要、JS タグ 1 行で既存サイトに即組み込みできます。', color: '#0891b2', iconPath: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M17 8l-5-5-5 5 M12 3v12' },
   { title: '検討再開を検知して商談化', desc: 'AI チャット解説の中で検討再開のシグナル（料金・導入時期・比較検討）を AI が検知。Meeton Calendar の予約 UI を会話内に直接展開し、商談予約までその場で完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
 ];
 
@@ -354,7 +354,7 @@ export default function LibraryPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の仕組みを深掘り</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>AI 推薦・AI 解説・CRM 連携・Meeton Calendar 引き渡しまで、4 つのコア機能で既存リードの検討再開を捉えます。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>AI 推薦・AI チャット解説・自動ライブラリー生成・Meeton Calendar 引き渡しまで、4 つのコア機能で既存リードの検討再開を捉えます。</p>
         </div>
       </section>
 
@@ -365,10 +365,10 @@ export default function LibraryPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#d03ea110', color: '#d03ea1' }}>FEATURE 01</div>
-              <div className="phase-h">資料アップロードで AI ライブラリー自動生成</div>
-              <div className="phase-desc">PDF・スライド・ホワイトペーパーをアップロードするだけで、AI チャット付きの資料ライブラリーがポップアップ形式で自動立ち上がり。Web 制作・デザイン・新規ページ追加といった工数は一切ゼロ。既存サイトに JS タグ 1 行を入れるだけで稼働します。</div>
+              <div className="phase-h">AI 資料推薦 — 行動履歴から最適資料を選定</div>
+              <div className="phase-desc">CRM 上の閲覧ページ・DL 履歴・メール反応・直近の興味分野を AI が解析し、検討フェーズに合った資料を能動的に推薦。「リード自身に資料を探させる」体験を、「AI が最適な資料を持ってくる」体験に変えます。</div>
               <div className="phase-features">
-                {['資料をアップロードするだけ、UI は自動生成', 'デザイン作業不要・新規ページ追加不要', 'JS タグ 1 行で既存サイトに即組み込み', '資料の追加・差し替えはアップロードだけで反映'].map((feat, i) => (
+                {['行動履歴・閲覧ページから興味領域を AI 推定', '検討フェーズ（情報収集 / 比較 / 稟議）に合わせた推薦', '関連度スコアで複数候補をランキング', '推薦理由を AI が会話内で説明'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#d03ea1' }} />{feat}</div>
                 ))}
               </div>
@@ -460,10 +460,10 @@ export default function LibraryPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#0891b210', color: '#0891b2' }}>FEATURE 03</div>
-              <div className="phase-h">CRM 連携 — 識別済みリードのみに起動</div>
-              <div className="phase-desc">HubSpot / Salesforce で識別済みの既存リード（過去にコンバートしたリード）の再訪に対してのみ起動。CRM 上の会社情報・直近の活動・営業担当のメモまで全文脈を引き継ぎ、検討フェーズに合った推薦を行います。</div>
+              <div className="phase-h">資料アップロードで AI ライブラリー自動生成</div>
+              <div className="phase-desc">PDF・スライド・ホワイトペーパーをアップロードするだけで、AI チャット付きの資料ライブラリーがポップアップ形式で自動立ち上がり。Web 制作・デザイン・新規ページ追加といった工数は一切ゼロ。既存サイトに JS タグ 1 行を入れるだけで稼働します。</div>
               <div className="phase-features">
-                {['HubSpot / Salesforce ネイティブ連携', '識別済み既存リードの再訪を即時検知', 'CRM 上のステータス・直近活動を文脈反映', '対話で得た情報を CRM に自動書き戻し'].map((feat, i) => (
+                {['資料をアップロードするだけ、UI は自動生成', 'デザイン作業不要・新規ページ追加不要', 'JS タグ 1 行で既存サイトに即組み込み', '資料の追加・差し替えはアップロードだけで反映'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#0891b2' }} />{feat}</div>
                 ))}
               </div>
@@ -624,7 +624,7 @@ export default function LibraryPageClient() {
       {/* CTA — after WHY */}
       <MidPageCta
         eyebrow="For internal review"
-        heading="Meeton Library の仕様・推薦アルゴリズム・CRM 連携・料金プランをまとめた資料を社内検討用にお送りします"
+        heading="Meeton Library の仕様・推薦アルゴリズム・自動ライブラリー生成・料金プランをまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
         onClick={() => setIsDocModalOpen(true)}

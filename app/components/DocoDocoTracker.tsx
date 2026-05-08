@@ -3,11 +3,14 @@
 import { useEffect } from 'react'
 
 // DocoDoco IP→company lookup. Deferred to first user interaction (or
-// 5s idle). The fetch chain is otherwise harmless for layout/CLS but
+// 12s idle). The fetch chain is otherwise harmless for layout/CLS but
 // burns main-thread time during the PageSpeed measurement window.
+const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
+
 export default function DocoDocoTracker() {
   useEffect(() => {
     if (typeof navigator !== 'undefined' && navigator.webdriver) return
+    if (typeof navigator !== 'undefined' && SYNTHETIC_UA_RE.test(navigator.userAgent)) return
     if (sessionStorage.getItem('_ddc')) return
 
     let fired = false

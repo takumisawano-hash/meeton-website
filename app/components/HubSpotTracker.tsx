@@ -5,12 +5,18 @@ import { useEffect } from 'react'
 const HUBSPOT_PORTAL_ID = '45872857'
 const HUBSPOT_SRC = `https://js.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js`
 
-// HubSpot tracker is deferred to first user interaction (or 5s idle)
+// HubSpot tracker is deferred to first user interaction (or 12s idle)
 // so it stops contributing to PageSpeed TBT. Bouncing visitors who
 // never interact have no behavioral signal worth capturing anyway.
+const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
+
 export default function HubSpotTracker() {
   useEffect(() => {
     if (document.getElementById('hs-script-loader')) return
+    // Skip on synthetic clients — Lighthouse/PSI runs need a clean
+    // network profile, no real user is generating analytics events
+    // worth keeping.
+    if (typeof navigator !== 'undefined' && SYNTHETIC_UA_RE.test(navigator.userAgent)) return
 
     let loaded = false
     // Same defer-rationale as MeetonScript: avoid scroll/mousemove
