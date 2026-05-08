@@ -327,7 +327,7 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
               gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
               gap: 'clamp(16px, 3vw, 24px)'
             }}>
-              {filteredPosts.map(post => (
+              {filteredPosts.map((post, idx) => (
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}/`}
@@ -357,13 +357,14 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
                     background: 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%)'
                   }}>
                     {post.featuredImage && (
-                      <img
+                      <Image
                         src={post.featuredImage}
                         alt={post.title}
-                        loading="lazy"
-                        decoding="async"
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                        onError={(e) => { e.currentTarget.style.display = 'none' }}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={idx < 2}
+                        loading={idx < 2 ? 'eager' : 'lazy'}
+                        style={{ objectFit: 'cover' }}
                       />
                     )}
                     {post.category && (
