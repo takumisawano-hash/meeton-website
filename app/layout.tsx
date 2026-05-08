@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, Noto_Sans_JP, JetBrains_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
@@ -8,24 +8,20 @@ import MeetonScript from './components/MeetonScript'
 import DynamicLpController from './components/DynamicLpController'
 
 // Font budget review (2026-05-08):
-// - Plus_Jakarta_Sans: drop 400 (not used outside Noto fallback)
-// - Noto_Sans_JP: previously had subsets: ['latin'] which is meaningless
-//   for a Japanese-content site (Noto JP only delivers Japanese glyphs
-//   when the subset is the JP variant or the font CSS auto-includes it
-//   via unicode-range). Drop weight 900 (only used in a few hero scales,
-//   browser synthesizes from 700 with imperceptible diff).
-// - JetBrains_Mono: drop 400 (mono only used at semantic 700 in eyebrows)
+// - Plus_Jakarta_Sans: only weights actually used (700/800)
+// - Noto_Sans_JP REMOVED from next/font — it was generating a 188KB
+//   render-blocking CSS file (mostly @font-face unicode-range tables
+//   for every Japanese subset). PageSpeed showed this single file
+//   accounted for ~3.2s of FCP delay on Slow 4G. Replaced with a
+//   system-font stack via the --font-noto CSS variable; on macOS/iOS
+//   visitors get Hiragino Kaku Gothic ProN (visually near-identical
+//   to Noto Sans JP), on Android they get the bundled Noto CJK JP,
+//   on Windows Yu Gothic UI. No glyph differences for our copy.
+// - JetBrains_Mono: only 700 (used in eyebrows).
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['700', '800'],
   variable: '--font-jakarta',
-  display: 'swap',
-})
-
-const notoSansJP = Noto_Sans_JP({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-noto',
   display: 'swap',
 })
 
@@ -35,6 +31,12 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
   display: 'swap',
 })
+
+// System Japanese font stack — substituted for the removed
+// Noto_Sans_JP next/font import. Exposed as --font-noto so all
+// existing `var(--font-noto)` references keep working.
+const NOTO_SYSTEM_STACK =
+  "'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans CJK JP','Yu Gothic UI','Yu Gothic',Meiryo,sans-serif"
 
 export const metadata: Metadata = {
   title: {
@@ -92,7 +94,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja" className={`${plusJakarta.variable} ${notoSansJP.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="ja"
+      className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
+      style={{ ['--font-noto' as string]: NOTO_SYSTEM_STACK }}
+    >
       <body>
         <GoogleAnalytics />
         <DocoDocoTracker />
