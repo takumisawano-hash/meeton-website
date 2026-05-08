@@ -9,28 +9,21 @@ type HubSpotMeetingModalProps = {
   utmCampaign?: string
 }
 
-// Defer link hints to browser idle. preconnect alone is cheap, but prefetch
-// pulls the full meeting page bundle and was competing with LCP on every
-// page that imports this modal — even when the modal never opens.
-let preloadedIframe: HTMLLinkElement | null = null
-if (typeof window !== 'undefined' && !preloadedIframe) {
-  const addHints = () => {
-    if (preloadedIframe) return
-    preloadedIframe = document.createElement('link')
-    preloadedIframe.rel = 'preconnect'
-    preloadedIframe.href = 'https://meetings-na2.hubspot.com'
-    document.head.appendChild(preloadedIframe)
-
-    const prefetch = document.createElement('link')
-    prefetch.rel = 'prefetch'
-    prefetch.href = 'https://meetings-na2.hubspot.com/takumi-sawano?embed=true'
-    document.head.appendChild(prefetch)
-  }
-  const idle = (window as Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
-  }).requestIdleCallback
-  if (idle) idle(addHints, { timeout: 3000 })
-  else setTimeout(addHints, 2000)
+// Link hints (preconnect + prefetch) are only added once the modal is
+// actually opened. Previously we added them on browser idle to make
+// open feel instant, but the prefetch pulls the full meeting page —
+// roughly 1-2 MB of HubSpot JS — and was firing inside the Lighthouse
+// LCP measurement window on every page that imports this modal.
+// Open-time hint injection is fast enough that real users barely
+// notice (browser still preconnects before the iframe src resolves).
+let hintsAdded = false
+function addHubSpotMeetingHints() {
+  if (hintsAdded || typeof document === 'undefined') return
+  hintsAdded = true
+  const preconnect = document.createElement('link')
+  preconnect.rel = 'preconnect'
+  preconnect.href = 'https://meetings-na2.hubspot.com'
+  document.head.appendChild(preconnect)
 }
 
 export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: HubSpotMeetingModalProps) {
@@ -67,6 +60,7 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
       }
     }
     if (isOpen) {
+      addHubSpotMeetingHints()
       document.addEventListener('keydown', handleEscape)
       window.addEventListener('message', handleMessage)
       document.body.style.overflow = 'hidden'

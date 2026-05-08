@@ -27,9 +27,17 @@ type HubSpotModalProps = {
   utmCampaign?: string
 }
 
-// Preload HubSpot script on page load
+// Lazy-load the 197KB HubSpot embed only when the modal is actually
+// opened. Earlier we eagerly pre-loaded on browser idle, but in
+// practice (a) the dynamic import already resolves shortly after
+// page mount, and (b) requestIdleCallback fires inside the
+// Lighthouse measurement window — so the script was being fetched
+// on every page that imports this modal whether or not anyone
+// clicked. PSI was attributing 200KB of "unused JavaScript" to it
+// on /lp/ alone. Switching to load-on-open trades a small one-time
+// open delay for a much faster LCP across the entire site.
 let scriptLoadPromise: Promise<void> | null = null
-function preloadHubSpotScript(): Promise<void> {
+function loadHubSpotScript(): Promise<void> {
   if (scriptLoadPromise) return scriptLoadPromise
   if (typeof window !== 'undefined' && window.hbspt) {
     return Promise.resolve()
@@ -59,25 +67,15 @@ function preloadHubSpotScript(): Promise<void> {
   return scriptLoadPromise
 }
 
-// Defer HubSpot script preload until browser idle (or 2s fallback) so it
-// doesn't compete with LCP. Without this, the 197KB embed.js is fetched on
-// every page that imports this modal, even when the modal is never opened.
-if (typeof window !== 'undefined') {
-  const idle = (window as Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
-  }).requestIdleCallback
-  if (idle) idle(() => preloadHubSpotScript(), { timeout: 3000 })
-  else setTimeout(preloadHubSpotScript, 2000)
-}
-
 export default function HubSpotModal({ isOpen, onClose, utmCampaign }: HubSpotModalProps) {
   const formContainerRef = useRef<HTMLDivElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    preloadHubSpotScript().then(() => setScriptLoaded(true))
-  }, [])
+    if (!isOpen) return
+    loadHubSpotScript().then(() => setScriptLoaded(true))
+  }, [isOpen])
 
   useEffect(() => {
     if (isOpen && scriptLoaded && formContainerRef.current && window.hbspt) {

@@ -155,15 +155,22 @@ function getPropertyValue(
   }
 }
 
-// サムネイル画像URLを取得する
-// - Notion S3画像: プロキシ経由（署名URL失効を回避）
-// - Google Drive / 旧WordPress: アクセス不可のため、サムネイル生成APIで代替
-// - その他外部URL: プロキシ経由（ホットリンク問題回避）
+// FeaturedImage 未設定記事のフォールバック画像。
+//
+// 以前は /api/thumbnail/ で post 毎に PNG を動的生成していたが、
+// Vercel image optimizer が edge route の出力 PNG を WebP に変換できず、
+// 1枚 ~162KB が next/image proxy 経由でも PNG のまま返ってきていた。
+// PageSpeed で /blog/ の image bytes を 4.4MB → 639KB に削った後、
+// 残った 500KB はこの自動生成 PNG×3 だった。
+//
+// カード上はタイトルがテキストとして描画されるため、画像内タイトルは
+// 重複情報。ブランド placeholder の静的 SVG (1.7KB) に統一して
+// 共有キャッシュ可能にする。/api/thumbnail/ ルートは OG 画像など
+// 他用途に残してある。
 function getThumbnailUrl(page: PageObjectResponse): string | null {
   const title = (getPropertyValue(page.properties, 'Title') as string) || ''
   if (!title) return null
-  const category = (getPropertyValue(page.properties, 'Category') as string) || ''
-  return `/api/thumbnail/?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`
+  return '/blog-placeholder.svg'
 }
 
 function getFeaturedImageUrl(page: PageObjectResponse): string | null {
