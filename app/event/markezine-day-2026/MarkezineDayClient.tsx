@@ -128,14 +128,16 @@ export default function MarkezineDayClient({ cases }: Props) {
             <span>★</span> MarkeZine Day 2026 登録者限定特典
           </div>
           <h1 className="event-h1">
-            MarkeZine Day 2026 ご参加ありがとうございました
+            ウェブサイトのリードを、<strong>5秒で商談に変える</strong>
             <br />
-            <strong>登録者限定で、まず試せる環境</strong>をご用意しました
+            <span style={{ fontSize: "0.65em", color: "#6e7494", fontWeight: 700 }}>
+              MarkeZine Day 2026 登録者限定 — まず実運用で試せる環境をご用意しました
+            </span>
           </h1>
           <p className="event-sub">
-            「AI SDR が変える BtoB 営業の新常識 ─ 商談獲得を自動化する実践アプローチ」
-            にご関心をお寄せいただき、誠にありがとうございました。
-            登壇内容を実際に試せる視聴者限定の環境を、ご登録者の皆様にもご提供します。
+            「AI SDR が変える BtoB 営業の新常識」にご関心をお寄せいただきありがとうございました。
+            Meeton ai は MA や CRM では届かない「コンバージョン直前の最後の100m」を AI SDR が走るプラットフォームです。
+            登壇内容を実際に試せる環境を、ご登録者の皆様にも 30 日間無料でご提供します。
           </p>
           <div className="event-meta">
             <div className="event-meta-item">
@@ -169,8 +171,8 @@ export default function MarkezineDayClient({ cases }: Props) {
               <h3 className="offer-h">30日間 無料トライアル</h3>
               <p className="offer-desc">
                 通常 14 日間の無料トライアルを 30 日間に延長。
-                カード情報不要、全機能利用可能、初期設定の
-                無料サポート付。実運用で AI SDR の効果を体感してください。
+                カード情報不要、全機能利用可能、初期設定の無料サポート付。
+                Meeton Calendar / Email / Live / Library を実運用で体感してください。
               </p>
               <button className="offer-cta" onClick={openTrial}>
                 無料で始める →
@@ -204,7 +206,7 @@ export default function MarkezineDayClient({ cases }: Props) {
               <h3 className="recap-h">AI SDR とは何か</h3>
               <p className="recap-p">
                 従来の SDR 業務（リード対応・初期接触・商談設定）を AI エージェントが
-                24時間365日、5 秒以内のスピードで処理する仕組み。
+                24時間365日、Speed to Lead の業界標準 5 分の 1/60 — 5秒で処理する仕組み。
               </p>
             </div>
             <div className="recap-card">
@@ -221,6 +223,74 @@ export default function MarkezineDayClient({ cases }: Props) {
               <p className="recap-p">
                 人間 SDR を AI に置き換える話ではなく、
                 人がより高付加価値な仕事に集中できる構造への移行。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meeton ai 4機能の紹介 */}
+      <section className="recap-section" style={{ background: "#fff" }}>
+        <div className="recap-inner">
+          <h2 className="recap-title">Meeton ai の 4 つの機能</h2>
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--sub)",
+              fontSize: 15,
+              marginBottom: 40,
+              maxWidth: 720,
+              margin: "0 auto 40px",
+            }}
+          >
+            リードコンバートから商談予約まで、4 つの AI が連動して 24 時間自動で実行します
+          </p>
+          <div className="recap-grid">
+            <div className="recap-card">
+              <div
+                className="recap-num"
+                style={{ background: "#0891b2" }}
+              >
+                C
+              </div>
+              <h3 className="recap-h">Meeton Calendar</h3>
+              <p className="recap-p">
+                リードがコンバートした瞬間、5 秒以内に商談予約を提示。
+                フォーム送信・サンクスページ・メール経由で発動。
+              </p>
+            </div>
+            <div className="recap-card">
+              <div
+                className="recap-num"
+                style={{ background: "#7c5cfc" }}
+              >
+                E
+              </div>
+              <h3 className="recap-h">Meeton Email</h3>
+              <p className="recap-p">
+                即時予約しなかったリードを 1:1 で追跡。
+                AI が動的に内容・タイミングを判断する、もう一人の SDR。
+              </p>
+            </div>
+            <div className="recap-card">
+              <div className="recap-num">L</div>
+              <h3 className="recap-h">Meeton Live</h3>
+              <p className="recap-p">
+                識別済みリードが再訪した瞬間、過去の全文脈を引き継いで対話。
+                匿名訪問者には起動しない、専用 AI SDR 対話。
+              </p>
+            </div>
+            <div className="recap-card">
+              <div
+                className="recap-num"
+                style={{ background: "#d03ea1" }}
+              >
+                Lib
+              </div>
+              <h3 className="recap-h">Meeton Library</h3>
+              <p className="recap-p">
+                既存リードに AI が文脈に応じた資料を提案・解説。
+                検討再開タイミングで Meeton Calendar に引き渡し。
               </p>
             </div>
           </div>
