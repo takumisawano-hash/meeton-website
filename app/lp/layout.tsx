@@ -5,25 +5,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
+// AW-18060590496 (Google Ads) は GoogleAnalytics コンポーネントで
+// グローバルに gtag('config') 済み。/lp/ で重複 gtag.js (140KB)
+// をロードしていた問題を解消したため、ここでは LinkedIn のみ。
 export default function LPLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=AW-18060590496"
-        strategy="lazyOnload"
-      />
-      <Script
-        id="google-ads-tag"
-        strategy="lazyOnload"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18060590496');
-          `,
-        }}
-      />
       <Script
         id="linkedin-insight-init"
         strategy="lazyOnload"

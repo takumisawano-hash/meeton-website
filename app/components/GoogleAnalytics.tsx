@@ -3,6 +3,7 @@
 import Script from 'next/script'
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-82W1HG59QL'
+const ADS_TAG_ID = 'AW-18060590496'
 
 export default function GoogleAnalytics() {
   if (!GA_MEASUREMENT_ID) {
@@ -24,6 +25,7 @@ export default function GoogleAnalytics() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GA_MEASUREMENT_ID}');
+            gtag('config', '${ADS_TAG_ID}');
           `,
         }}
       />
