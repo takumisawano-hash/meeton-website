@@ -86,13 +86,14 @@ export default function Nav({
   ];
 
   const featuresDropdownItems = [
-    { href: "/features/ai-chat/", label: "AI Chat", sub: "AIチャット (資料提案 内蔵)" },
-    { href: "/features/meetings/", label: "AI Calendar", sub: "AIカレンダー" },
-    { href: "/features/ai-email/", label: "AI Email", sub: "AIメール" },
+    { href: "/features/meetings/", label: "Meeton Calendar", sub: "5秒で商談予約" },
+    { href: "/features/ai-email/", label: "Meeton Email", sub: "1:1自律フォロー" },
+    { href: "/features/ai-chat/", label: "Meeton Live", sub: "再訪リード対話" },
+    { href: "/features/ai-library/", label: "Meeton Library", sub: "既存リードナーチャ" },
   ];
 
   const navLinks = [
-    { href: "/roi-simulator/", label: "ROI試算" },
+    { href: "/roi-simulator/", label: "SDRコスト試算" },
     { href: "#download-center", label: "お役立ち資料", onClick: true },
     { href: "/case-studies/", label: "導入事例" },
     { href: "/blog/", label: "ブログ" },

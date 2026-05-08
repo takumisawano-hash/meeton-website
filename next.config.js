@@ -407,12 +407,12 @@ const nextConfig = {
       },
       {
         source: '/features/nurture',
-        destination: '/features/offers/',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/features/nurture/',
-        destination: '/features/offers/',
+        destination: '/',
         permanent: true,
       },
       {
@@ -438,12 +438,12 @@ const nextConfig = {
       },
       {
         source: '/features/onsite',
-        destination: '/features/offers/',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/features/onsite/',
-        destination: '/features/offers/',
+        destination: '/',
         permanent: true,
       },
       {
@@ -454,6 +454,17 @@ const nextConfig = {
       {
         source: '/features/offsite/',
         destination: '/features/meetings/',
+        permanent: true,
+      },
+      // 2026-05-08: AI Offer 廃止に伴うリダイレクト
+      {
+        source: '/features/offers',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/features/offers/',
+        destination: '/',
         permanent: true,
       },
     ]

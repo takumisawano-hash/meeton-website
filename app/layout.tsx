@@ -40,10 +40,10 @@ const NOTO_SYSTEM_STACK =
 
 export const metadata: Metadata = {
   title: {
-    default: 'Meeton ai｜AIで営業と採用を革新するDynaMeetのプロダクト',
+    default: 'Meeton ai｜ウェブサイトのリードを商談に変える AI SDR Platform',
     template: '%s｜Meeton ai',
   },
-  description: 'DynaMeetが提供するAIプラットフォーム。Meeton aiでウェブサイト訪問者を商談に変換、Meeton Talentで採用マッチングを革新。B2B SaaS企業の成長を加速します。',
+  description: 'ウェブサイトで獲得したリードを、5秒で商談化。即時予約しなかったリードもMeeton Emailが1:1で諦めず追跡。MAやCRMでは届かない「コンバージョン直前の最後の100m」をAI SDRが自動化。',
   metadataBase: new URL('https://dynameet.ai'),
   // No site-wide canonical: setting one in the root layout makes EVERY
   // page render <link rel=canonical href=/> which collapses every URL

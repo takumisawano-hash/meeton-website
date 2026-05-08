@@ -613,6 +613,18 @@ const integrations = [
 
 const faqData = [
   {
+    q: "マーケティング部門でも使えますか？",
+    a: "Meeton ai は営業組織向けのツールです。マーケ部門が集めたリードの商談化に使うのが用途で、マーケキャンペーン管理や新規リード獲得が主目的の場合は適していません。マーケ向けの機能をお探しなら、Marketo / HubSpot 等の MA ツールをご検討ください。",
+  },
+  {
+    q: "Marketo / HubSpot Workflows との違いは？",
+    a: "MA メールは「リストへの一斉配信」「事前定義したシナリオ」が基本です。Meeton Email は「個別リードのリアルタイム行動シグナルに対する 1:1 の動的フォロー」で、AI が文面・タイミング・トーンを都度判断します。MA を置き換えるのではなく、その上で動く補完プロダクトです。",
+  },
+  {
+    q: "Drift / Intercom などのチャットボットとの違いは？",
+    a: "Meeton ai はチャットボット製品ではなく AI SDR プラットフォームです。匿名訪問者全員に話しかけるのではなく、識別済みリードを商談に押し上げることに特化しています。Meeton Live は再訪した識別済みリードのみに起動し、過去の全文脈を引き継いで対話を開始します。",
+  },
+  {
     q: "Meeton aiの導入にどのくらい時間がかかりますか？",
     a: "JavaScriptタグの設置は5分です。Meeton aiの設定を含めても、最短で当日中に稼働開始できます。",
   },
@@ -627,10 +639,6 @@ const faqData = [
   {
     q: "無料トライアルはありますか？",
     a: "14日間の無料トライアルをご用意しています。クレジットカード不要で、Meeton aiの全機能をお試しいただけます。",
-  },
-  {
-    q: "Meeton aiと従来のチャットボットやImmedio等のツールとの違いは？",
-    a: "従来のツールはカレンダー表示やルールベースの応答が中心です。Meeton aiはAI SDRとして、リードの温度感を判断し、チャット・メール・資料提案・カレンダーの中から最適なアプローチを自律的に選択して商談を獲得します。",
   },
 ];
 
@@ -1150,14 +1158,14 @@ export default function HomePageClient({
             <div className="hero-badge-dot" />
             {isLp && lpVariant === "trial"
               ? "14日間無料トライアル"
-              : "日本唯一の最先端 AI SDR"}
+              : "AI SDR Platform for B2B Sales Teams"}
           </div>
           <h1 className="anim-y d2">
-            {lpHeadline ?? "AIが商談をつくる時代へ"}
+            {lpHeadline ?? "ウェブサイトのリードを、5秒で商談に変える"}
           </h1>
           <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
-              "Web サイト・サンクスページ・メール — あらゆる接点に AI を配置。見込み客の関心が高いうちに、商談予約まで自動で完結します。"}
+              "リードがコンバートした瞬間、Meeton Calendar が起動。リード発生から商談予約まで、人間の介在ゼロ。MA や CRM では届かない「コンバージョン直前の最後の100m」を AI SDR が走る。"}
           </p>
           <div
             className="anim-y d4 hero-ctas"
@@ -1197,7 +1205,7 @@ export default function HomePageClient({
                 fontWeight: 600,
               }}
             >
-              ▸ 30秒で貴社のROIを試算する
+              ▸ SDRコストを試算する（30秒）
             </Link>
           </div>
           {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
@@ -1230,53 +1238,66 @@ export default function HomePageClient({
             What Meeton Does
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            Meeton ai が商談をつくる、
-            <span style={{ color: "var(--cta)" }}>3 つの AI 機能</span>
+            リードを商談に変える、
+            <span style={{ color: "var(--cta)" }}>4 つの AI 機能</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            Chat / Calendar / Email — 3 つの AI が連動し、リード発見から商談獲得までを 24 時間自動で実行します。
+            リードコンバートから商談予約まで、4 つの AI が連動して 24 時間自動で実行します。
           </p>
 
           <div className="phase-grid">
             {[
               {
-                color: "#12a37d",
-                gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                label: "① AI CHAT",
-                title: "AI チャット",
-                desc: "サイト訪問者と対話し、商談予約まで会話で完結。ページ文脈に応じた声かけと、関心に合った資料の自動提案で、温度感に応じてカレンダー提示まで自動で行います。",
-                features: [
-                  { label: "ページ文脈に応じた自動声かけ", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "閲覧ページに合わせて関連資料を自動提案", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
-                  { label: "温度感に応じて商談予約まで誘導", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
-                ],
-                link: "/features/ai-chat/",
-              },
-              {
                 color: "#0891b2",
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-                label: "② AI CALENDAR",
-                title: "AI カレンダー",
-                desc: "チャット内・サンクスページ・メール経由で発動し、関心が高い瞬間を逃さずカレンダーを提示。割り振りルールを細かく設定でき、適切な担当者に自動アサインします。",
+                label: "① MEETON CALENDAR",
+                title: "Meeton Calendar",
+                desc: "リードがコンバートした瞬間、即座に商談予約を提示。フォーム送信・サンクスページ・メール経由で発動し、5秒以内に動く。リード発生から商談予約完了まで人間の介在ゼロ。",
                 features: [
-                  { label: "チャット内・サンクスページ・メール経由で発動", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "割り振りルールを細かく設定可能", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
-                  { label: "AI が事前ヒアリング・CRM 自動登録まで完了", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
+                  { label: "コンバート直後に5秒で商談予約を提示", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "担当者の自動アサイン（業種・規模ベース）", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
+                  { label: "AI が事前ヒアリング・CRM 自動登録", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
                 ],
                 link: "/features/meetings/",
               },
               {
                 color: "#7c5cfc",
                 gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                label: "③ AI EMAIL",
-                title: "AI メール",
-                desc: "離脱リードを自動で取り戻す。行動シグナルに応じた自動再接触、パーソナライズドメールで育成。メール内 URL から AI Calendar へ誘導し再度商談獲得。",
+                label: "② MEETON EMAIL",
+                title: "Meeton Email",
+                desc: "即時予約しなかったリードを 1:1 で追跡。AI が動的に内容・タイミング・トーンを判断するパーソナライズドフォロー。MA メールではなく、もう一人の SDR。",
                 features: [
-                  { label: "高関心リードに即座にフォローアップ", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
-                  { label: "行動履歴をもとにパーソナライズ", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
-                  { label: "未反応リードに自動再接触 → 商談予約", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
+                  { label: "リードの行動シグナルでリアルタイム発火", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
+                  { label: "AI 生成の個別文面（テンプレートではない）", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "返信に AI が自律的に対話継続", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
                 ],
                 link: "/features/ai-email/",
+              },
+              {
+                color: "#12a37d",
+                gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                label: "③ MEETON LIVE",
+                title: "Meeton Live",
+                desc: "過去にコンバートしたリードがサイトに再訪した瞬間、過去の全文脈を引き継いで対話を開始。匿名訪問者には起動しない、識別済みリード専用の AI SDR 対話。",
+                features: [
+                  { label: "再訪した識別済みリードのみに起動", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "過去の閲覧・DL・メール履歴を全文脈で活用", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "HubSpot / Salesforce 連携でその場で商談予約", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
+                ],
+                link: "/features/ai-chat/",
+              },
+              {
+                color: "#d03ea1",
+                gradient: "linear-gradient(135deg,#d03ea1,#e0475b)",
+                label: "④ MEETON LIBRARY",
+                title: "Meeton Library",
+                desc: "再訪した既存リードに、AI が文脈に応じた資料を提案・解説。検討フェーズが進んだリードに適切な情報提供で商談機会を再発火。新規リード獲得用ではない、既存リードのナーチャリング専用機能。",
+                features: [
+                  { label: "行動履歴・興味分野から最適な資料を AI 推薦", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
+                  { label: "AI チャットが資料の中身を解説・質問対応", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+                  { label: "検討再開のタイミングで Meeton Calendar に引き渡し", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
+                ],
+                link: "/features/ai-library/",
               },
             ].map((prod, i) => (
               <div
@@ -1417,14 +1438,14 @@ export default function HomePageClient({
             <div style={{ textAlign: "center" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>従来のSDR</div>
               <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                1日8時間 / 手動フォロー / チャネルごとに別ツール<br/>リード対応の遅延 / 属人的な品質
+                平均レスポンス 42時間 / 1日8時間稼働<br/>属人的な品質 / 採用と離職の繰り返し
               </div>
             </div>
             <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
             <div style={{ textAlign: "center" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
               <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                24時間365日 / 自律フォロー / マルチチャネル<br/>即時レスポンス / 一貫した高品質対応
+                <strong>初動5秒</strong> / 24時間365日稼働<br/>AI 動的判断 / 一貫した高品質対応
               </div>
             </div>
           </div>

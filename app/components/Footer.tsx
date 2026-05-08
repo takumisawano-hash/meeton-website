@@ -38,11 +38,10 @@ export default function Footer({ variant = "light" }: FooterProps) {
 
   const links = [
     { href: "/", label: "Meeton ai" },
-    // { href: "/talent/", label: "Meeton Talent" }, // Meeton Talent: temporarily hidden
-    { href: "/features/ai-chat/", label: "AI Chat" },
-    { href: "/features/ai-email/", label: "AI Email" },
-    { href: "/features/meetings/", label: "AI Calendar" },
-    { href: "/features/offers/", label: "AI Offer" },
+    { href: "/features/meetings/", label: "Meeton Calendar" },
+    { href: "/features/ai-email/", label: "Meeton Email" },
+    { href: "/features/ai-chat/", label: "Meeton Live" },
+    { href: "/features/ai-library/", label: "Meeton Library" },
     isJa
       ? { href: "/ja/integrations/", label: "連携" }
       : { href: "/integrations/", label: "Integrations" },
