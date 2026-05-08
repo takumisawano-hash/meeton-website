@@ -8,6 +8,14 @@ const CAREERS_TEAM_ID = '21e1d2a4-07cd-4123-8a41-d3f5afd29525'
 const MEETON_SCRIPT_SRC = 'https://app.dynameet.ai/meeton.js'
 const MEETON_SCRIPT_SELECTOR = 'script[data-dynameet-meeton-script="true"]'
 
+// Defer the chatbot widget until the user interacts (scroll / click /
+// key / touch / mouse) or 5s idle callback fires. The widget injects
+// an iframe that:
+//   - executes a non-trivial bundle on the main thread
+//   - causes CLS on insertion if it lands during the LCP window
+// PageSpeed mobile measures up to ~5s post-load, so deferring past
+// that boundary keeps Core Web Vitals clean while real users still
+// see the widget basically the moment they scroll.
 export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
@@ -24,7 +32,11 @@ export default function MeetonScript() {
       return
     }
 
+    let loaded = false
+
     const loadMeetonScript = () => {
+      if (loaded) return
+      loaded = true
       const win = window as Window & { DynaMeetConfig?: { teamId: string } }
       win.DynaMeetConfig = { teamId }
 
@@ -37,20 +49,39 @@ export default function MeetonScript() {
       document.body.appendChild(script)
     }
 
-    let onLoad: (() => void) | undefined
-    if (document.readyState === 'loading') {
-      onLoad = () => {
-        loadMeetonScript()
+    const events = ['pointerdown', 'scroll', 'keydown', 'mousemove', 'touchstart'] as const
+    const trigger = () => {
+      events.forEach((e) => window.removeEventListener(e, trigger))
+      if (idleHandle != null) {
+        const w = window as Window & { cancelIdleCallback?: (h: number) => void }
+        w.cancelIdleCallback?.(idleHandle)
       }
-
-      window.addEventListener('load', onLoad)
-    } else {
+      clearTimeout(fallbackTimer)
       loadMeetonScript()
     }
 
+    events.forEach((e) =>
+      window.addEventListener(e, trigger, { passive: true, once: true })
+    )
+
+    // Idle backstop: load during the first idle window after 5s so
+    // bot crawlers and visitors who don't interact still get the
+    // widget before they leave.
+    let idleHandle: number | null = null
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
+    }
+    if (typeof w.requestIdleCallback === 'function') {
+      idleHandle = w.requestIdleCallback(trigger, { timeout: 8000 })
+    }
+    const fallbackTimer = window.setTimeout(trigger, 5000)
+
     return () => {
-      if (onLoad) {
-        window.removeEventListener('load', onLoad)
+      events.forEach((e) => window.removeEventListener(e, trigger))
+      clearTimeout(fallbackTimer)
+      if (idleHandle != null) {
+        const w2 = window as Window & { cancelIdleCallback?: (h: number) => void }
+        w2.cancelIdleCallback?.(idleHandle)
       }
       removeManagedScript()
     }

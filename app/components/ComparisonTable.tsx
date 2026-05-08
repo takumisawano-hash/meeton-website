@@ -1,8 +1,10 @@
 "use client";
 
 /**
- * Three-way comparison: Human SDR vs traditional chatbot vs Meeton ai.
- * Mirrors the pitch deck "Comparison" page (p.8).
+ * Three-way comparison: Human SDR vs MA/SFA vs Meeton ai.
+ * 2026-05-08: Repositioned from "vs chatbot" to "vs MA/SFA"
+ * to align with new positioning as AI SDR Platform that works
+ * on top of MA/CRM (not a chatbot company).
  */
 
 type Score = "yes" | "partial" | "no";
@@ -10,10 +12,10 @@ type Score = "yes" | "partial" | "no";
 type Row = {
   label: string;
   human: Score;
-  chatbot: Score;
+  ma: Score;
   meeton: Score;
   humanNote?: string;
-  chatbotNote?: string;
+  maNote?: string;
   meetonNote?: string;
   /** Highlight badge under the Meeton check (feature attribution) */
   meetonBadge?: string;
@@ -21,74 +23,74 @@ type Row = {
 
 const ROWS: Row[] = [
   {
+    label: "Speed to Lead（リード対応速度）",
+    human: "partial",
+    ma: "partial",
+    meeton: "yes",
+    humanNote: "平均 42 時間",
+    maNote: "数時間〜数日",
+    meetonBadge: "5 秒",
+  },
+  {
     label: "24 時間 365 日 稼働",
     human: "no",
-    chatbot: "yes",
+    ma: "partial",
     meeton: "yes",
     humanNote: "営業時間のみ",
+    maNote: "配信のみ",
   },
   {
     label: "自律的にリードを判断",
     human: "yes",
-    chatbot: "no",
+    ma: "no",
     meeton: "yes",
-    chatbotNote: "シナリオ通り",
+    maNote: "ルール / シナリオ",
   },
   {
-    label: "ホットリードへ即時対応",
+    label: "1:1 パーソナライズ",
+    human: "yes",
+    ma: "partial",
+    meeton: "yes",
+    humanNote: "属人化",
+    maNote: "テンプレ + トークン",
+    meetonBadge: "AI 動的生成",
+  },
+  {
+    label: "返信対応",
+    human: "yes",
+    ma: "no",
+    meeton: "yes",
+    meetonBadge: "AI 自律対話",
+  },
+  {
+    label: "商談予約までの完結",
+    human: "yes",
+    ma: "no",
+    meeton: "yes",
+    maNote: "別ツール必要",
+  },
+  {
+    label: "目標達成までの持続性",
     human: "partial",
-    chatbot: "yes",
+    ma: "no",
     meeton: "yes",
-    humanNote: "5 分以内が困難",
+    humanNote: "限界あり",
+    maNote: "ステップ完了で離脱",
+    meetonBadge: "終了条件まで実行",
   },
   {
-    label: "商談予約まで会話で完結",
-    human: "yes",
-    chatbot: "no",
-    meeton: "yes",
-  },
-  {
-    label: "事前ヒアリングで質を担保",
-    human: "yes",
-    chatbot: "no",
-    meeton: "yes",
-  },
-  {
-    label: "相手の関心に合う資料を自動提案",
-    human: "partial",
-    chatbot: "no",
-    meeton: "yes",
-    humanNote: "手動 / 属人的",
-    meetonBadge: "AI Chat が閲覧から自動マッチング",
-  },
-  {
-    label: "離脱リードへの自動フォロー",
+    label: "採用・育成・離職コスト",
     human: "no",
-    chatbot: "no",
+    ma: "yes",
     meeton: "yes",
-    humanNote: "44% が 1 回で諦める",
-    meetonBadge: "AI Email が自動送信",
+    humanNote: "12 ヶ月で離職",
   },
   {
-    label: "ページ文脈に応じた声かけ",
+    label: "スケーラビリティ",
     human: "no",
-    chatbot: "partial",
+    ma: "yes",
     meeton: "yes",
-    chatbotNote: "URL ルールベース",
-  },
-  {
-    label: "シナリオ設計が不要",
-    human: "yes",
-    chatbot: "no",
-    meeton: "yes",
-    chatbotNote: "工数膨大",
-  },
-  {
-    label: "スケール (リード 10 倍でも同コスト)",
-    human: "no",
-    chatbot: "yes",
-    meeton: "yes",
-    humanNote: "増員が必須",
+    humanNote: "採用に依存",
   },
 ];
 
@@ -141,7 +143,7 @@ export default function ComparisonTable() {
           style={{ textAlign: "center", wordBreak: "keep-all", overflowWrap: "anywhere" }}
         >
           人間 SDR の<span style={{ color: "var(--cta)" }}>判断力</span>と
-          チャットボットの<span style={{ color: "var(--accent)" }}>稼働量</span>を、両立
+          MA / SFA の<span style={{ color: "var(--accent)" }}>スケール</span>を、両立
         </div>
         <p
           className="ssub"
@@ -153,7 +155,7 @@ export default function ComparisonTable() {
             overflowWrap: "anywhere",
           }}
         >
-          Meeton ai は、人間 SDR の「自律的な判断」と従来チャットボットの「24 時間稼働」を兼ね備えた AI SDR プラットフォームです。
+          Meeton ai は、人間 SDR の「自律的な判断」と MA / SFA の「24 時間スケール」を兼ね備えた AI SDR プラットフォームです。MA や CRM を置き換えるのではなく、その上で動く補完プロダクトです。
         </p>
 
         <div className="comp-wrap">
@@ -165,8 +167,8 @@ export default function ComparisonTable() {
                 <div className="comp-h-sub">採用 / 育成 / 離職</div>
               </div>
               <div className="comp-cell">
-                <div className="comp-h-label">従来のチャットボット</div>
-                <div className="comp-h-sub">シナリオ型・ルールベース</div>
+                <div className="comp-h-label">MA / SFA</div>
+                <div className="comp-h-sub">Marketo / HubSpot / Salesforce</div>
               </div>
               <div className="comp-cell comp-h-meeton">
                 <div className="comp-h-label">
@@ -185,9 +187,9 @@ export default function ComparisonTable() {
                   {ICON[r.human]}
                   {r.humanNote && <div className="comp-note">{r.humanNote}</div>}
                 </div>
-                <div className="comp-cell" data-provider="従来チャットボット">
-                  {ICON[r.chatbot]}
-                  {r.chatbotNote && <div className="comp-note">{r.chatbotNote}</div>}
+                <div className="comp-cell" data-provider="MA / SFA">
+                  {ICON[r.ma]}
+                  {r.maNote && <div className="comp-note">{r.maNote}</div>}
                 </div>
                 <div className="comp-cell comp-meeton" data-provider="Meeton ai">
                   {ICON[r.meeton]}
