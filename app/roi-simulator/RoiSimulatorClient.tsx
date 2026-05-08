@@ -1,7 +1,8 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import HubSpotMeetingModal from '../components/HubSpotMeetingModal'
+import dynamic from 'next/dynamic'
+const HubSpotMeetingModal = dynamic(() => import('../components/HubSpotMeetingModal'), { ssr: false })
 
 type RoiCalcShape = {
   monthlyVisits: number

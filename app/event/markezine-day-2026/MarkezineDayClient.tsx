@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
-import HubSpotMeetingModal from "@/app/components/HubSpotMeetingModal";
-import HubSpotModal from "@/app/components/HubSpotModal";
+const HubSpotMeetingModal = dynamic(() => import("@/app/components/HubSpotMeetingModal"), { ssr: false });
+const HubSpotModal = dynamic(() => import("@/app/components/HubSpotModal"), { ssr: false });
 
 type CaseCard = {
   slug: string;

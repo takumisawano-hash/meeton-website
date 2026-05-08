@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import HubSpotModal from "../components/HubSpotModal";
-import HubSpotMeetingModal from "../components/HubSpotMeetingModal";
+const HubSpotModal = dynamic(() => import("../components/HubSpotModal"), { ssr: false });
+const HubSpotMeetingModal = dynamic(() => import("../components/HubSpotMeetingModal"), { ssr: false });
 
 const css = `
 :root {

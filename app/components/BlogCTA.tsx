@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import HubSpotModal from './HubSpotModal'
-import HubSpotMeetingModal from './HubSpotMeetingModal'
+import dynamic from 'next/dynamic'
+const HubSpotModal = dynamic(() => import('./HubSpotModal'), { ssr: false })
+const HubSpotMeetingModal = dynamic(() => import('./HubSpotMeetingModal'), { ssr: false })
 
 type BlogCTAProps = {
   category?: string

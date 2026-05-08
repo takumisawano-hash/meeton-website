@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import HubSpotMeetingModal from './HubSpotMeetingModal'
-import HubSpotModal from './HubSpotModal'
+import dynamic from 'next/dynamic'
+const HubSpotMeetingModal = dynamic(() => import('./HubSpotMeetingModal'), { ssr: false })
+const HubSpotModal = dynamic(() => import('./HubSpotModal'), { ssr: false })
 
 const STORAGE_VISITOR_KEY = 'mlp_vid'
 const STORAGE_DISMISSED_KEY = 'mlp_dismissed_at'

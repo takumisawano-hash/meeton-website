@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, type CSSProperties, type ReactNode } from 'react'
-import HubSpotMeetingModal from './HubSpotMeetingModal'
+import dynamic from 'next/dynamic'
+const HubSpotMeetingModal = dynamic(() => import('./HubSpotMeetingModal'), { ssr: false })
 
 type DemoBookingButtonProps = {
   children: ReactNode

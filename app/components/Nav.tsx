@@ -2,10 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import HubSpotMeetingModal from "./HubSpotMeetingModal";
-import HubSpotModal from "./HubSpotModal";
+
+// Modal bodies are 200+ lines each and the embed scripts they pull in
+// dwarf the rest of the Nav bundle. Hydration deserialization runs on
+// first paint of every page that renders <Nav />, so static imports
+// here forced the modal code into the critical-path chunk for /, /lp/,
+// /case-studies/, /blog/, /features/* — basically the whole site.
+// ssr:false avoids a hydration mismatch since the modals render to
+// document.body via createPortal and depend on `window`.
+const HubSpotMeetingModal = dynamic(() => import("./HubSpotMeetingModal"), { ssr: false });
+const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
 
 type NavProps = {
   variant?: "light" | "dark";
