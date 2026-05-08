@@ -7,23 +7,31 @@ import HubSpotTracker from './components/HubSpotTracker'
 import MeetonScript from './components/MeetonScript'
 import DynamicLpController from './components/DynamicLpController'
 
+// Font budget review (2026-05-08):
+// - Plus_Jakarta_Sans: drop 400 (not used outside Noto fallback)
+// - Noto_Sans_JP: previously had subsets: ['latin'] which is meaningless
+//   for a Japanese-content site (Noto JP only delivers Japanese glyphs
+//   when the subset is the JP variant or the font CSS auto-includes it
+//   via unicode-range). Drop weight 900 (only used in a few hero scales,
+//   browser synthesizes from 700 with imperceptible diff).
+// - JetBrains_Mono: drop 400 (mono only used at semantic 700 in eyebrows)
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '700', '800'],
+  weight: ['700', '800'],
   variable: '--font-jakarta',
   display: 'swap',
 })
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
+  weight: ['400', '700'],
   variable: '--font-noto',
   display: 'swap',
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['700'],
   variable: '--font-mono',
   display: 'swap',
 })
