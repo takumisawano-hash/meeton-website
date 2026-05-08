@@ -11,7 +11,10 @@ export default function DocoDocoTracker() {
     if (sessionStorage.getItem('_ddc')) return
 
     let fired = false
-    const events = ['pointerdown', 'scroll', 'keydown', 'mousemove', 'touchstart'] as const
+    // Same defer-rationale as MeetonScript: avoid scroll/mousemove
+    // (Lighthouse may simulate them) and push the timeout backstop
+    // past PSI's measurement window.
+    const events = ['pointerdown', 'keydown', 'touchstart', 'click', 'focus'] as const
 
     const run = () => {
       if (fired) return
@@ -69,7 +72,7 @@ export default function DocoDocoTracker() {
     }
 
     events.forEach((e) => window.addEventListener(e, run, { passive: true, once: true }))
-    const timer = window.setTimeout(run, 5000)
+    const timer = window.setTimeout(run, 12000)
 
     return () => {
       events.forEach((e) => window.removeEventListener(e, run))

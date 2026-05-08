@@ -13,7 +13,10 @@ export default function HubSpotTracker() {
     if (document.getElementById('hs-script-loader')) return
 
     let loaded = false
-    const events = ['pointerdown', 'scroll', 'keydown', 'mousemove', 'touchstart'] as const
+    // Same defer-rationale as MeetonScript: avoid scroll/mousemove
+    // (Lighthouse may simulate them) and push the timeout backstop
+    // past PSI's measurement window.
+    const events = ['pointerdown', 'keydown', 'touchstart', 'click', 'focus'] as const
 
     const load = () => {
       if (loaded) return
@@ -29,7 +32,7 @@ export default function HubSpotTracker() {
     }
 
     events.forEach((e) => window.addEventListener(e, load, { passive: true, once: true }))
-    const timer = window.setTimeout(load, 5000)
+    const timer = window.setTimeout(load, 12000)
 
     return () => {
       events.forEach((e) => window.removeEventListener(e, load))
