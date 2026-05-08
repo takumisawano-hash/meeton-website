@@ -12,14 +12,14 @@ const faqItems = [
 ]
 
 export const metadata: Metadata = {
-  title: 'AIチャット｜訪問者と対話し商談予約まで会話で完結',
-  description: 'Meeton AIのAIチャットが、サイト訪問者と自律的に会話。ページ文脈に応じた声かけ、ニーズ把握、資料提案、商談予約までチャット内で完結します。シナリオ設計不要。',
+  title: 'Meeton Live｜再訪したリードを商談に変える AI SDR 対話',
+  description: 'Meeton Live は再訪した識別済みリード専用の AI SDR 対話。過去の閲覧・DL・メール履歴を全文脈で引き継ぎ、その場で商談予約まで完結。匿名訪問者には起動しない、営業組織のためのリアルタイム対話エンジン。',
   alternates: {
     canonical: '/features/ai-chat/',
   },
   openGraph: {
-    title: 'AIチャット｜訪問者と対話し商談予約まで会話で完結',
-    description: 'Meeton AIのAIチャットが、サイト訪問者と自律的に会話。ページ文脈に応じた声かけから商談予約まで完結。',
+    title: 'Meeton Live｜再訪したリードを商談に変える AI SDR 対話',
+    description: '識別済み再訪リードに、過去の全文脈を引き継いだ AI 対話で商談予約まで完結。',
     url: 'https://dynameet.ai/features/ai-chat/',
   },
 }

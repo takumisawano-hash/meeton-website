@@ -12,14 +12,14 @@ const faqItems = [
 ]
 
 export const metadata: Metadata = {
-  title: 'AIメール｜自動フォロー&パーソナライズで商談化',
-  description: 'Meeton AIのAIメールが、フォーム送信・資料DL直後に即座にフォローアップ。パーソナライズドメールで育成し、未反応リードもDay 1→3→5で自動再接触。',
+  title: 'Meeton Email｜諦めない 1:1 自律フォロー｜MA メールではない、もう一人の SDR',
+  description: '即時予約しなかったリードを、Meeton Email が 1:1 で追跡。AI が動的に内容・タイミング・トーンを判断するパーソナライズドフォロー。MA メールのような静的配信ではなく、リードの返信に AI が自律的に対話継続。',
   alternates: {
     canonical: '/features/ai-email/',
   },
   openGraph: {
-    title: 'AIメール｜自動フォロー&パーソナライズで商談化',
-    description: 'Meeton AIのAIメールが即座にフォローアップ。パーソナライズドメールで未反応リードも商談化。',
+    title: 'Meeton Email｜諦めない 1:1 自律フォロー',
+    description: 'AI が動的に判断する 1:1 パーソナライズドフォロー。リードの返信にも自律対応。',
     url: 'https://dynameet.ai/features/ai-email/',
   },
 }

@@ -12,14 +12,14 @@ const faqItems = [
 ]
 
 export const metadata: Metadata = {
-  title: 'AIカレンダー｜関心が高い瞬間にカレンダーを提示し確実に商談獲得',
-  description: 'Meeton AIのAIカレンダー機能が、チャット内・サンクスページ・メールであらゆる接点にカレンダーを提示。AIが事前ヒアリングまで完了し、営業チームは準備万全で商談に臨めます。',
+  title: 'Meeton Calendar｜初動 5 秒で商談化｜リード発生から商談予約まで人間の介在ゼロ',
+  description: 'Meeton Calendar はリードがコンバートした瞬間、5 秒以内に商談予約を提示。フォーム送信・サンクスページ・メール経由で発動し、AI が事前ヒアリング・CRM 自動登録まで完了。Speed to Lead 業界標準 5 分の 1/60。',
   alternates: {
     canonical: '/features/meetings/',
   },
   openGraph: {
-    title: 'AIカレンダー｜関心が高い瞬間にカレンダーを提示し確実に商談獲得',
-    description: 'チャット内・サンクスページ・メールでカレンダーを提示。AIが事前ヒアリングまで自動完了。',
+    title: 'Meeton Calendar｜初動 5 秒で商談化',
+    description: 'リードコンバートの瞬間に5秒で商談予約。AIが事前ヒアリング・CRM登録まで完了。',
     url: 'https://dynameet.ai/features/meetings/',
   },
 }
