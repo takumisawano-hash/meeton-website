@@ -1025,7 +1025,7 @@ function GeneratedLpModal({
           <section style={{ padding: '24px clamp(24px, 5vw, 56px)' }}>
             <h2 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 16px' }}>{copyOf(comparisonComp, 'headline') || 'Meeton ai が選ばれる理由'}</h2>
             <p style={{ color: '#3d4a44', fontSize: 14, lineHeight: 1.75, margin: 0 }}>
-              IP→企業特定の自動化、AI Email/Calendar/Offer の標準搭載、日本市場特化の事例数。詳細はデモでご案内します。
+              リードコンバート瞬間の Meeton Calendar 5秒発動、Meeton Email の AI SDR 1:1 追跡、Meeton Live の識別済みリード対話 ── すべてが標準搭載。日本市場特化の事例数。詳細はデモでご案内します。
             </p>
           </section>
         ) : null}

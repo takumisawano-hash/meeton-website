@@ -184,26 +184,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
-  { q: 'AIメールはどのようなタイミングで送信されますか？', a: 'AI Calendar で商談予約に至らなかったリードに対し、AIが自動でフォローメールを送信します。1通目以降は、開封・クリック・サイト再訪などの行動データを分析し、文面を都度生成して継続的にアプローチします。' },
-  { q: 'メール文面は自分で作成する必要がありますか？', a: 'いいえ。AIがリードの行動履歴やナレッジベースをもとに、メール文面を毎通自動生成します。テンプレートやトーンの指定も可能です。' },
-  { q: '完全自動と承認モードはどう違いますか？', a: '完全自動モードは AI が作成から送信まですべて自動で行います。承認モードは AI が下書きを作成し、送信前に人間が確認・編集してから送信できます。チームの運用方針に合わせて選択でき、1通単位での切り替えも可能です。' },
-  { q: 'リードからの返信には対応していますか？', a: 'いいえ、Meeton AIメールは送信専用です。返信が届いた場合は、ご担当者様のメールアドレスへ通知され、人による対応となります（CC で営業マネジメント層を含めることも可能）。' },
-  { q: '既存のMAツール（Marketo等）と競合しませんか？', a: '競合ではなく補完関係です。Meeton AIメールは AI Calendar で取りこぼしたリードの自動フォローに特化しており、MAツールのワークフローと並行して利用できます。Marketo・Eloquaとの連携も可能です。' },
-  { q: '送信数や送信間隔は制限できますか？', a: 'はい。リード 1 人あたりの最大送信数（例: 5通まで）、送信間隔（例: 72時間ごと）を管理画面で細かく設定できます。配信停止リンクもすべてのメールに自動挿入されます。' },
+  { q: 'Meeton Email は MA のメール配信と何が違いますか？', a: 'MA メールは「事前定義したシナリオ × テンプレート文面」を時間ベースで配信します。Meeton Email は「リードの最新行動 × AI 動的生成」をリアルタイムで判断し、送るタイミング・送る内容・送らない判断まで AI が文脈で都度決めます。商談予約獲得をゴールに据えた、もう一人の SDR として動きます。' },
+  { q: 'Meeton Calendar で予約しなかったリードに、いつ送られますか？', a: '事前定義の「Day 1 / Day 3 / Day 5」のような固定シーケンスではありません。リードの再訪・メール反応・閲覧ページ・MA 上のスコア変化を AI が監視し、送るべきタイミングと内容を文脈で動的判断します。' },
+  { q: 'メール文面は自分で作成する必要がありますか？', a: 'いいえ。AIがリードの行動履歴・CRM 上の文脈・ナレッジベースをもとに、メール文面を毎通動的に生成します。トーン・テンプレートのガードレール設定は可能です。' },
+  { q: '完全自動と承認モードはどう違いますか？', a: '完全自動モードは AI が生成から送信まですべて自動で行います。承認モードは AI が下書きを作成し、送信前に SDR / 営業担当が確認・編集してから送信できます。リード単位・チーム単位で切替可能です。' },
+  { q: '既存の MA ツール（Marketo・HubSpot Marketing 等）と競合しませんか？', a: '競合ではなく、MA の上に乗ります。MA がマーケファネル全体のメール配信を担い、Meeton Email は MA で取りこぼした個別リードへの 1:1 SDR 追跡を担当。Marketo・HubSpot Marketing・Pardot などとの連携・並走を前提に設計されています。' },
+  { q: 'リードからの返信には対応していますか？', a: 'Meeton Email は送信専用です。返信が届いた場合は、CRM 上の担当 SDR / 営業に通知され、人による対応となります（CC で営業マネジメント層を含めることも可能）。' },
 ];
 
 const whyData = [
-  { title: '取りこぼしを自動回収', desc: 'AI Calendar で予約しなかった見込み客を、AIが自動でメールフォロー。1件も諦めない。', color: '#3b6ff5', iconPath: 'M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3' },
-  { title: '毎通、行動から再生成', desc: '前回の開封・クリック・サイト再訪・閲覧ページから、次のメール文面を都度生成。', color: '#7c5cfc', iconPath: 'M3 12a9 9 0 0 1 15-6.7L21 8 M21 3v5h-5 M21 12a9 9 0 0 1-15 6.7L3 16 M3 21v-5h5' },
-  { title: '2通目・3通目も自動で継続', desc: '1通で諦めない。未反応なら別の切り口で、開封済みなら次のステップへ。', color: '#12a37d', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-  { title: '完全自動 / 承認モード', desc: 'AI に完全に任せるか、送信前に人間が確認・編集するか、運用方針で選択可能。', color: '#0891b2', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
+  { title: 'MA メールではなく、もう一人の SDR', desc: 'テンプレート × 時間トリガーの一斉配信ではない。AI が文脈で判断する 1:1 のフォロー。', color: '#3b6ff5', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
+  { title: 'AI が文脈で動的判断', desc: '送るタイミング・送る内容・送らない判断まで、リードの最新行動から AI が都度決定。', color: '#7c5cfc', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M14 8l4 4-4 4 M3 12h15' },
+  { title: '商談予約獲得がゴール', desc: 'スコアリングや育成のためではなく、Meeton Calendar への着地（商談確定）を目的に動く。', color: '#12a37d', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
+  { title: 'MA の上に乗る設計', desc: 'Marketo / HubSpot Marketing と並走可能。MA が取りこぼしたリードに 1:1 で追いつく。', color: '#0891b2', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
 ];
 
 const flowSteps = [
-  { num: '1', title: '離脱を自動検知', sub: 'Drop-off detected', color: '#6e7494' },
-  { num: '2', title: '1通目を自動送信', sub: 'First email', color: '#3b6ff5' },
-  { num: '3', title: '行動を分析', sub: 'Analyze behavior', color: '#6690fa' },
-  { num: '4', title: '次のメールを再生成', sub: 'Regenerate', color: '#7c5cfc' },
+  { num: '1', title: '即時予約しなかったリードを検知', sub: 'No-book detected', color: '#6e7494' },
+  { num: '2', title: 'AIが文脈で送信判断', sub: 'AI decides timing', color: '#3b6ff5' },
+  { num: '3', title: '最新行動から動的生成', sub: 'Dynamic generation', color: '#6690fa' },
+  { num: '4', title: '反応次第で次手を変更', sub: 'Adapt by signal', color: '#7c5cfc' },
   { num: '5', title: '商談予約獲得', sub: 'Meeting booked', color: '#12a37d' },
 ];
 
@@ -217,22 +217,22 @@ const flowStepIcons = [
 
 const useCaseData = [
   {
-    title: '商談予約に至らなかったリードの回収',
+    title: '即時予約しなかったリードの追跡',
     color: '#3b6ff5',
-    desc: 'AI Chat や AI Calendar で予約に至らなかった見込み客に、AIが自動でフォローメールを送信。離脱を取り戻します。',
-    example: '先ほどはサイトをご覧いただきありがとうございます。御社の課題に近い導入事例を1つご紹介させてください。',
+    desc: 'Meeton Calendar や Meeton Live で即時予約に至らなかった見込み客を、Meeton Email が SDR として 1:1 で追跡。MA の一斉配信では拾えない個別文脈に踏み込みます。',
+    example: '先ほど料金ページでお迷いだった点、御社の業界に近い事例を 1 つだけお送りします。15 分でご案内可能です。',
   },
   {
-    title: '資料DL 後の継続育成',
+    title: '資料 DL 後の文脈追跡',
     color: '#7c5cfc',
-    desc: '資料DL したリードのその後の閲覧履歴を分析し、興味の方向に合わせて 2 通目・3 通目を自動生成。',
-    example: '資料の中で特にご関心が高そうな「料金最適化」の章について、追加資料をお送りしました。',
+    desc: '資料 DL 後の再訪・閲覧ページ・別資料の DL を AI が監視。次に送るべき情報を行動文脈から動的に判断します。',
+    example: '先日 DL いただいたガイドの中で、特にご関心が高そうな「料金最適化」の章について、補足資料をお送りしました。',
   },
   {
     title: '休眠リードの再接触',
     color: '#12a37d',
-    desc: '過去に接点があったが冷えてしまったリードへ、最新の閲覧データを踏まえて再アプローチ。',
-    example: '半年ぶりにサイトをご覧いただいたようなので、改めて15分のお時間をいただけませんか？',
+    desc: '過去に接点があったが冷えてしまった CRM 上のリードへ、最新のサイト再訪をトリガーに AI が再アプローチを判断。',
+    example: '半年ぶりにサイトをご覧いただいたようなので、改めて 15 分のお時間をいただけませんか？',
   },
 ];
 
@@ -253,15 +253,15 @@ export default function AiEmailPageClient() {
         <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
         <div className="hero-inner">
           <div className="hero-text">
-            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />AI EMAIL</div>
-            <h1 className="anim d2">離脱リードを<br /><em>自動で取り戻す</em></h1>
-            <p className="anim d3 hero-sub">AI Calendar で予約に至らなかった見込み客に、AIが自動でメールを送信。2通目・3通目も継続フォローし、毎通のメール文面は前回の開封・クリック・サイト再訪などの最新行動から再生成します。</p>
+            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />MEETON EMAIL</div>
+            <h1 className="anim d2">MA メールではなく、<br /><em>もう一人の SDR</em></h1>
+            <p className="anim d3 hero-sub">Meeton Calendar で即時予約に至らなかったリードを、Meeton Email が 1:1 で諦めず追跡。送るタイミング・送る内容・送らない判断まで、AI が最新行動の文脈で動的判断します。テンプレート × 時間トリガーの MA メールとは異なる、商談予約獲得ゴールの SDR エージェントです。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '24/7', l: '自動フォロー' }, { v: '毎通', l: '行動から再生成' }, { v: '自動 / 承認', l: '送信モード切替' }].map((s, i) => (
+              {[{ v: '1:1', l: 'AI SDR 追跡' }, { v: '動的判断', l: 'MAテンプレでない' }, { v: '商談予約', l: 'ゴール一本化' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -273,19 +273,19 @@ export default function AiEmailPageClient() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                 </div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>取りこぼし回収フロー</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton Email — AI SDR フロー</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)', animation: 'dotBlink 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>AI 稼働中</span>
+                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>AI が文脈で判断中</span>
                   </div>
                 </div>
               </div>
               <div style={{ padding: '6px 0' }}>
                 {[
-                  { step: '1 通目', subject: '初動メール', status: '開封 ✗', statusColor: '#6e7494', statusBg: '#f4f6fb', delay: '.6s', behavior: 'AI Calendar 離脱を検知' },
-                  { step: '2 通目', subject: '別アングルで再アプローチ', status: '開封 ✓', statusColor: '#3b6ff5', statusBg: '#eaf0fe', delay: '.9s', behavior: '料金ページ再訪を反映' },
-                  { step: '3 通目', subject: '事例を交えてフォロー', status: 'クリック ✓', statusColor: '#7c5cfc', statusBg: '#f0ecfe', delay: '1.2s', behavior: '前回クリックした章を深掘り' },
-                  { step: '4 通目', subject: 'カレンダー提案', status: '送信予定', statusColor: '#12a37d', statusBg: '#e5f8f2', delay: '1.5s', behavior: '行動データから商談提案へ' },
+                  { step: 'タッチ #1', subject: 'Meeton Calendar 未予約を検知', status: '即時送信', statusColor: '#6e7494', statusBg: '#f4f6fb', delay: '.6s', behavior: '初動メール: 関心領域に直接触れる' },
+                  { step: 'タッチ #2', subject: '別アングルで再アプローチ', status: '開封 ✓', statusColor: '#3b6ff5', statusBg: '#eaf0fe', delay: '.9s', behavior: '料金ページ再訪を AI が検知' },
+                  { step: 'タッチ #3', subject: '前回クリックした章を深掘り', status: 'クリック ✓', statusColor: '#7c5cfc', statusBg: '#f0ecfe', delay: '1.2s', behavior: '反応領域に絞って追加資料' },
+                  { step: 'タッチ #4', subject: 'Meeton Calendar 提案', status: '送信判断', statusColor: '#12a37d', statusBg: '#e5f8f2', delay: '1.5s', behavior: '商談予約への着地を AI が判断' },
                 ].map((v, i) => (
                   <div className="dash-row" key={i} style={{ animationDelay: v.delay }}>
                     <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg,${v.statusColor}cc,${v.statusColor})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800, flexShrink: 0 }}>{(i + 1).toString()}</div>
@@ -305,7 +305,7 @@ export default function AiEmailPageClient() {
               <div style={{ padding: '10px 16px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b6ff5', animation: 'pulse 1.5s infinite' }} />
-                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>毎通、行動から再生成</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>AI が文脈で動的判断</span>
                 </div>
                 <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)' }}>承認 / 完全自動 切替可能</span>
               </div>
@@ -319,8 +319,8 @@ export default function AiEmailPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIメールの流れ</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>離脱検知から商談獲得まで、AIが行動データを更新しながらメール文面を都度生成し続けます。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email の流れ</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>即時予約しなかったリードを、AI が最新行動の文脈で動的判断しながら、商談予約まで 1:1 で追跡します。</p>
           <div className="flow-steps">
             {flowSteps.map((step, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
@@ -347,8 +347,8 @@ export default function AiEmailPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIメールの仕組みを深掘り</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>取りこぼしリードの自動回収から、行動データに応じた継続フォロー、送信モード切替まで。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email の仕組みを深掘り</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>MA メールとの違い・AI による動的判断・送信モード切替まで、SDR エージェントの動作を詳しく。</p>
         </div>
       </section>
 
@@ -359,13 +359,13 @@ export default function AiEmailPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#3b6ff510', color: '#3b6ff5' }}>FEATURE 01</div>
-              <div className="phase-h">取りこぼしリードを自動で取り戻す</div>
-              <div className="phase-desc">即時の商談予約は AI Calendar が担います。AI Email はその先 ── 商談予約に至らずに離脱してしまったリードへの自動フォローを担当します。サイトを離れたあとも、AIが諦めずに接触を続けます。</div>
+              <div className="phase-h">MA メールではなく、もう一人の SDR</div>
+              <div className="phase-desc">即時の商談予約は Meeton Calendar が担います。Meeton Email はその先 ── 即時予約に至らなかった個別リードを、SDR として 1:1 で諦めず追跡します。MA の一斉配信では拾えない文脈に踏み込み、商談予約までをゴールに動きます。</div>
               <div className="phase-features">
                 {[
-                  'AI Calendar で予約に至らなかったリードを自動検知',
-                  '行動データから初動メールを自動生成',
-                  '通常は離脱して終わるリードを商談化へ',
+                  'Meeton Calendar 未予約リードを自動検知',
+                  '一斉配信ではなく、個別リードの 1:1 追跡',
+                  'MA の上に乗る設計（Marketo / HubSpot Marketing 並走可）',
                   '人間 SDR を増やさずに取りこぼしを回収',
                 ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#3b6ff5' }} />{feat}</div>
@@ -375,46 +375,46 @@ export default function AiEmailPageClient() {
             <div className="phase-vis">
               <div className="pvis vis0">
                 <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>離脱リードの行方</div>
-                  {/* Without AI Email */}
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>MA メール vs Meeton Email</div>
+                  {/* MA email comparison */}
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, marginBottom: 10, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
                       <div style={{ width: 28, height: 28, borderRadius: 8, background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18 M6 6l12 12"/></svg>
                       </div>
                       <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>AI Email なしの場合</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>離脱したらそのまま消滅</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>従来の MA メール</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>テンプレ × 時間トリガーの一斉配信</div>
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <div style={{ flex: 1, height: 8, background: 'var(--surface)', borderRadius: 4, overflow: 'hidden' }}>
                         <div style={{ width: '8%', height: '100%', background: 'linear-gradient(90deg,#dc2626,#ef4444)', borderRadius: 4 }} />
                       </div>
-                      <span style={{ fontSize: 12, fontWeight: 900, color: '#dc2626', fontFamily: 'var(--fm)' }}>回収率 数%</span>
+                      <span style={{ fontSize: 12, fontWeight: 900, color: '#dc2626', fontFamily: 'var(--fm)' }}>固定シーケンス</span>
                     </div>
                   </div>
-                  {/* With AI Email */}
+                  {/* With Meeton Email */}
                   <div style={{ background: '#fff', border: '1px solid #3b6ff530', borderRadius: 12, padding: 14, animation: 'chatPop .5s .8s cubic-bezier(.16,1,.3,1) forwards', opacity: 0, boxShadow: '0 4px 16px rgba(59,111,245,.1)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
                       <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#3b6ff5,#6690fa)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
                       </div>
                       <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>AI Email あり</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>離脱者を継続フォロー</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>Meeton Email</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>AI が文脈で動的判断・1:1 追跡</div>
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <div style={{ flex: 1, height: 8, background: 'var(--surface)', borderRadius: 4, overflow: 'hidden' }}>
                         <div style={{ width: '78%', height: '100%', background: 'linear-gradient(90deg,#3b6ff5,#6690fa)', borderRadius: 4 }} />
                       </div>
-                      <span style={{ fontSize: 12, fontWeight: 900, color: '#3b6ff5', fontFamily: 'var(--fm)' }}>継続フォロー</span>
+                      <span style={{ fontSize: 12, fontWeight: 900, color: '#3b6ff5', fontFamily: 'var(--fm)' }}>動的判断</span>
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 12, animation: 'slideIn .5s 1.2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#3b6ff5', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#3b6ff5' }}>離脱の先までAIが追いかける</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#3b6ff5' }}>SDR として、文脈で 1:1 追跡</span>
                   </div>
                 </div>
               </div>
@@ -426,14 +426,14 @@ export default function AiEmailPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 02</div>
-              <div className="phase-h">毎通、最新の行動データから再生成</div>
-              <div className="phase-desc">テンプレートを使い回す一斉配信とは違います。前回送ったメールの開封・クリック、その後のサイト再訪、新たに見たページ。AIはそれらを毎回反映し、次のメール文面を都度生成し直します。</div>
+              <div className="phase-h">AI が文脈で送るタイミング・内容を動的判断</div>
+              <div className="phase-desc">「Day 1 / Day 3 / Day 5」のような事前定義シーケンスではありません。リードの再訪・メール開封・クリック・閲覧ページ・MA スコアの変化を AI が監視し、次にいつ・何を送るか（あるいは送らないか）を文脈で都度判断します。</div>
               <div className="phase-features">
                 {[
-                  '前回メールの開封・クリックを反映',
-                  'サイト再訪後に見たページを次の話題に',
-                  '一斉配信ではない毎通生成方式',
-                  'リード 1 人 1 人で全く違う文面',
+                  '送信タイミングは時間ではなく行動シグナルで判断',
+                  'リードの最新文脈から文面を都度動的生成',
+                  '反応が悪ければ送らない判断も AI が実施',
+                  'リード 1 人 1 人で全く違う追跡パス',
                 ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
                 ))}
@@ -442,7 +442,7 @@ export default function AiEmailPageClient() {
             <div className="phase-vis">
               <div className="pvis vis1">
                 <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 10, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>パーソナライズドメール プレビュー</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 10, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>AI 動的生成メール プレビュー</div>
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600, marginBottom: 6 }}>To: tanaka@example.com</div>
                     <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)', marginBottom: 10 }}>田中様、導入事例をお送りします</div>
@@ -458,14 +458,14 @@ export default function AiEmailPageClient() {
                       <span>で詳しくご説明できます。</span>
                     </div>
                     <div style={{ marginTop: 10, display: 'flex', gap: 6 }}>
-                      {['行動履歴', '業界情報', 'CRMデータ'].map((tag, j) => (
+                      {['最新閲覧', 'CRM文脈', 'AI動的生成'].map((tag, j) => (
                         <span key={j} style={{ fontSize: 8, fontWeight: 700, color: '#7c5cfc', background: '#f0ecfe', padding: '2px 6px', borderRadius: 4 }}>{tag}</span>
                       ))}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10, animation: 'slideIn .5s 1s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#7c5cfc', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#7c5cfc' }}>AIが自動生成中...</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#7c5cfc' }}>AIが文脈で動的生成中...</span>
                   </div>
                 </div>
               </div>
@@ -477,14 +477,14 @@ export default function AiEmailPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>FEATURE 03</div>
-              <div className="phase-h">2 通目・3 通目も自動で継続</div>
-              <div className="phase-desc">1 通だけで諦めません。未開封なら別の切り口で、開封済みなら次のステップへ。最大送信数（例: 5通まで）と送信間隔（例: 72時間ごと）を細かく設定でき、リードの行動に応じて次の手を変えていきます。</div>
+              <div className="phase-h">商談予約獲得をゴールに、反応で次手を変える</div>
+              <div className="phase-desc">スコアリングや育成のためのメールではありません。Meeton Calendar への着地（商談確定）を一本のゴールに据え、未反応なら別の切り口で、開封・クリックがあれば反応領域を深掘りで、AI が次の一手を都度動的判断します。</div>
               <div className="phase-features">
                 {[
-                  '未反応なら自動で 2 通目・3 通目',
-                  '開封・未開封で次のメールの方向性を切替',
-                  '最大送信数 / 送信間隔を細かく設定',
-                  'カレンダー URL を自動挿入',
+                  'すべての判断は商談予約獲得をゴールに収束',
+                  '開封・クリック・再訪で次手の方向性を AI が切替',
+                  '最大送信数・最低間隔のガードレール設定可能',
+                  'Meeton Calendar URL を文脈に応じて自動挿入',
                 ].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
                 ))}
@@ -493,11 +493,11 @@ export default function AiEmailPageClient() {
             <div className="phase-vis">
               <div className="pvis vis2">
                 <div style={{ padding: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>継続フォローのフロー</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)', marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>商談予約への AI 動的判断</div>
                   {[
-                    { step: '1 通目', label: '初動メール', status: '開封 ✗', statusColor: '#6e7494', subDesc: '未反応 → 別の切り口で次のメール生成', delay: '.4s' },
-                    { step: '2 通目', label: '別アングルで再アプローチ', status: '開封 ✓', statusColor: '#3b6ff5', subDesc: '開封 + リンククリック → 興味あり', delay: '.7s' },
-                    { step: '3 通目', label: 'カレンダー提案', status: 'クリック ✓', statusColor: '#12a37d', subDesc: '行動データから商談提案へ移行', delay: '1.0s' },
+                    { step: 'タッチ #1', label: '初動アプローチ', status: '開封 ✗', statusColor: '#6e7494', subDesc: '未反応 → 別アングルで次手を AI 判断', delay: '.4s' },
+                    { step: 'タッチ #2', label: '別アングルで再接触', status: '開封 ✓', statusColor: '#3b6ff5', subDesc: '開封 + リンククリック → 関心領域を特定', delay: '.7s' },
+                    { step: 'タッチ #3', label: 'Meeton Calendar 提案', status: 'クリック ✓', statusColor: '#12a37d', subDesc: '商談予約への着地を AI が判断', delay: '1.0s' },
                   ].map((item, i, arr) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'stretch', gap: 12, marginBottom: 0 }}>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 20 }}>
@@ -517,7 +517,7 @@ export default function AiEmailPageClient() {
                   ))}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 4, animation: 'slideIn .5s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d' }}>反応に合わせて文面が変わる</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d' }}>すべての判断は商談予約獲得へ</span>
                   </div>
                 </div>
               </div>
@@ -591,7 +591,7 @@ export default function AiEmailPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>USE CASES</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIメールの活用シーン</div>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email の活用シーン</div>
           <div className="usecase-grid">
             {useCaseData.map((uc, i) => (
               <div className="usecase-card" key={i}>
@@ -618,7 +618,7 @@ export default function AiEmailPageClient() {
       {/* CTA — after USE CASES: demo */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="行動データから AI が文面を都度生成する流れと、承認モードの操作感を実機で 15 分で体験"
+        heading="MA メールとの違い・AI が文脈で動的判断する流れ・承認モードの操作感を、実機で 15 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={() => setIsMeetingModalOpen(true)}
@@ -629,8 +629,8 @@ export default function AiEmailPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton ai のAIメールなのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>従来のメール配信とは根本的に異なるアプローチ。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Email なのか</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>MA メールではなく、もう一人の SDR として動く AI エージェント。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
@@ -648,7 +648,7 @@ export default function AiEmailPageClient() {
       {/* CTA — after WHY: doc */}
       <MidPageCta
         eyebrow="For internal review"
-        heading="AI メールの仕様・行動再生成の仕組み・送信モード・連携先をまとめた資料を社内検討用にお送りします"
+        heading="Meeton Email の仕様・MA メールとの違い・送信モード・連携先をまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
         onClick={() => setIsDocModalOpen(true)}
@@ -680,8 +680,8 @@ export default function AiEmailPageClient() {
         <div className="glow" style={{ background: 'rgba(59,111,245,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div className="slabel">今すぐ始める</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AI Email で、<br />取りこぼしをゼロへ</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>AI Calendar で予約しなかった見込み客を、AIが行動データから毎通文面を生成し、自動でフォローし続けます。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email で、<br />MA の上にもう一人の SDR を</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>Meeton Calendar で即時予約しなかったリードを、AI が文脈で動的判断しながら 1:1 で追跡。商談予約獲得を一本のゴールに据えた AI SDR エージェントです。</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>

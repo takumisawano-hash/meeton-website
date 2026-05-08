@@ -32,7 +32,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       availableLanguage: ['Japanese', 'English'],
       url: 'https://meetings-na2.hubspot.com/takumi-sawano',
     },
-    description: 'DynaMeetが提供するAI SDRプラットフォーム「Meeton ai」。Webサイト訪問者をAIが対話・育成し、商談予約まで自動化。B2B SaaS企業の商談獲得を加速します。',
+    description: 'DynaMeetが提供するAI SDRプラットフォーム「Meeton ai」。ウェブサイトのリードを5秒で商談に変える、コンバージョン直前の最後の100mを担う営業組織向けプラットフォーム。Meeton Calendar / Meeton Email / Meeton Live で商談予約獲得を加速します。',
     // AEO/GEO: 組織の専門分野
     knowsAbout: [
       'AI営業',
@@ -52,7 +52,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
         name: 'Meeton AI',
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
-        description: 'AIチャットボットによるリード獲得・商談自動化プラットフォーム',
+        description: 'リードを5秒で商談に変える AI SDR プラットフォーム（Meeton Calendar / Meeton Email / Meeton Live）',
       },
     },
     // GEO: サービス提供地域
@@ -69,7 +69,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
     name: 'Meeton AI',
     alternateName: 'DynaMeet',
     url: baseUrl,
-    description: 'Meeton AIは、ウェブサイト訪問者をAIで商談に変えるB2B SaaSプラットフォームです。',
+    description: 'Meeton AIは、ウェブサイトのリードを5秒で商談に変えるAI SDRプラットフォームです。',
     inLanguage: 'ja-JP',
     publisher: {
       '@id': `${baseUrl}/#organization`,

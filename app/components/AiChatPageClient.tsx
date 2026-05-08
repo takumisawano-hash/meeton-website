@@ -183,25 +183,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
-  { q: 'AIチャットの設定にどのくらい時間がかかりますか？', a: 'JavaScriptタグの設置は約5分です。AIはナレッジベースを自動学習するため、シナリオ設計は不要。設置直後から自律的に最適な対応を開始します。' },
-  { q: '既存のチャットボットとの違いは何ですか？', a: '従来のチャットボットはルール分岐やシナリオ設計が必要で、想定外の質問に対応できません。Meeton aiのAIチャットは文脈を理解し、自律的に最適な回答を生成。商談予約まで会話内で完結します。' },
+  { q: 'Meeton Live は匿名訪問者にも起動しますか？', a: 'いいえ。Meeton Live は CRM 連携で識別済みの再訪リードに対してのみ起動します。匿名訪問者への声かけは行わず、フォーム送信・メールクリック・サンクスページ通過などで識別済みになったリードに集中して、AI SDR としてリアルタイム対話を行います。' },
+  { q: '既存のチャットボットとの違いは何ですか？', a: '従来のチャットボットはルール分岐やシナリオ設計が必要で、想定外の質問に対応できません。Meeton Live は HubSpot / Salesforce 上のリード情報・閲覧履歴・DL 履歴・メール反応を全文脈として引き継ぎ、AI SDR として自律的に最適な回答を生成。営業担当者が把握しているコンテキストをそのまま会話に持ち込みます。' },
+  { q: '導入にどのくらい時間がかかりますか？', a: 'JavaScript タグの設置は約 5 分です。CRM 連携を済ませれば、識別済みリードの再訪検知から AI SDR 対話までシナリオ設計なしで稼働します。' },
   { q: 'どの言語に対応していますか？', a: '日本語・英語・中国語・韓国語をはじめ、主要な言語に対応しています。多言語のサイトでもそのままご利用いただけます。' },
-  { q: 'CRMとの連携は可能ですか？', a: 'HubSpot、Salesforceとネイティブ連携しています。チャットで取得したリード情報はリアルタイムでCRMに自動登録されます。Webhookによる他ツールとの連携も可能です。' },
-  { q: '無料トライアルはありますか？', a: '14日間の無料トライアルをご用意しています。クレジットカード不要で、全機能をお試しいただけます。' },
+  { q: 'CRM との連携は可能ですか？', a: 'HubSpot、Salesforce とネイティブ連携しています。識別済みリードの過去のやりとり・DL 資料・メール開封状況などを Meeton Live が自動取得し、AI SDR の対話に文脈として反映します。会話で得た情報もリアルタイムで CRM に自動登録されます。' },
 ];
 
 const whyData = [
-  { title: 'シナリオ不要', desc: 'ルールベースのチャットボットとは根本的に異なります。AIが文脈を理解し、最適な対応を自律的に判断。', color: '#12a37d', iconPath: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z M12 6v6l4 2' },
-  { title: '即時レスポンス', desc: '24時間365日、5秒以内に初回アプローチ。深夜・週末のリードも逃しません。', color: '#7c5cfc', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
-  { title: 'フルファネル対応', desc: '声かけから資料提案、商談予約まで一気通貫。チャット内ですべて完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-  { title: '5分で導入', desc: 'JavaScriptタグ1行でAIチャットが稼働。開発リソース不要。', color: '#0891b2', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
+  { title: '識別済みリードのみに起動', desc: '匿名訪問者には反応せず、CRM で識別済みの再訪リードに集中。営業組織が追うべきリードに AI SDR のリソースを集中投下します。', color: '#12a37d', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 11l-3 3-2-2' },
+  { title: '全文脈を引き継ぐ AI SDR', desc: '過去の閲覧履歴・DL 履歴・メール反応・CRM 上のメモまで全文脈として把握。営業担当者の代わりに、知っているリードと会話します。', color: '#7c5cfc', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M21 12c0 4.97-4.03 9-9 9 M14 8l4 4-4 4 M3 12h15' },
+  { title: 'コンバート直前の最後の100m', desc: '識別済みリードがサイトに戻ってきた瞬間、リアルタイム対話で商談予約まで導く。MA や CRM の上に乗り、最後の意思決定を後押しします。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
+  { title: 'シナリオ不要・5分で稼働', desc: 'JavaScript タグ 1 行と CRM 連携で AI SDR が稼働。ルール分岐やフロー設計は不要、開発リソース不要。', color: '#0891b2', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
 ];
 
 const flowSteps = [
-  { num: '1', title: '訪問者が来訪', sub: 'Visitor arrives', color: '#6e7494' },
-  { num: '2', title: 'AIが声かけ', sub: 'Auto greeting', color: '#12a37d' },
-  { num: '3', title: '会話でニーズ把握', sub: 'Needs discovery', color: '#0fc19a' },
-  { num: '4', title: '資料提案', sub: 'Resource offer', color: '#7c5cfc' },
+  { num: '1', title: '識別済みリードが再訪', sub: 'Known lead returns', color: '#6e7494' },
+  { num: '2', title: 'CRM文脈を自動取得', sub: 'Pull CRM context', color: '#12a37d' },
+  { num: '3', title: 'AI SDR が対話開始', sub: 'AI SDR engages', color: '#0fc19a' },
+  { num: '4', title: '関心領域を深掘り', sub: 'Deepen interest', color: '#7c5cfc' },
   { num: '5', title: '商談予約', sub: 'Meeting booked', color: '#3b6ff5' },
 ];
 
@@ -214,9 +214,9 @@ const flowStepIcons = [
 ];
 
 const useCases = [
-  { title: '高関心リード', color: '#12a37d', desc: '料金ページを閲覧中の訪問者を検知し、すぐに声かけ。関心が高いうちにカレンダーを提示して商談を獲得します。', msg: 'こんにちは！料金ページをご覧いただきありがとうございます。プランについてご質問はありますか？' },
-  { title: 'ターゲットアカウント', color: '#7c5cfc', desc: 'CRM連携で重点企業の訪問を即座に検知。企業名入りのパーソナライズメッセージで会話を開始します。', msg: 'ようこそ、{会社名}様！以前ウェビナーにご参加いただきましたね。' },
-  { title: 'リピート訪問者', color: '#3b6ff5', desc: '過去の閲覧履歴やチャット履歴を踏まえた声かけ。前回の続きからスムーズに会話を再開します。', msg: 'お帰りなさい！前回お話した導入事例、お役に立ちましたか？' },
+  { title: '資料DL後の再訪リード', color: '#12a37d', desc: '資料DL したリードが料金ページに戻ってきたタイミングで起動。DL した資料の章まで把握した状態で AI SDR が対話を再開します。', msg: '田中様、お帰りなさい。先日ダウンロードいただいた料金最適化ガイドで気になる点はございましたか？' },
+  { title: 'ターゲットアカウント', color: '#7c5cfc', desc: 'CRM 上の重点企業ステータスをそのまま把握。企業名・直近のメール反応・営業担当のメモまで踏まえて、AI SDR が会話を開始します。', msg: '{会社名}様、ウェビナー後に料金ページをご覧いただいている件、AI SDR としてご質問にお答えします。' },
+  { title: 'メール反応からの再訪', color: '#3b6ff5', desc: 'AI Email や MA からのメールをクリックして再訪したリードを検知。クリックしたリンク先・関心領域を文脈として継続して対話します。', msg: '先ほどのメールでお送りした事例、ご興味の章を中心に詳細をご案内できます。' },
 ];
 
 export default function AiChatPageClient() {
@@ -236,15 +236,15 @@ export default function AiChatPageClient() {
         <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
         <div className="hero-inner">
           <div className="hero-text">
-            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />AI CHAT</div>
-            <h1 className="anim d2">AIが対話し、<br /><em>商談予約まで完結</em></h1>
-            <p className="anim d3 hero-sub">シナリオ設計は不要。Meeton aiが訪問者と自律的に会話し、ニーズを把握、資料提案、商談予約までチャット内で完結します。</p>
+            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />MEETON LIVE</div>
+            <h1 className="anim d2">識別済み再訪リードに、<br /><em>AI SDR がリアルタイム対話</em></h1>
+            <p className="anim d3 hero-sub">匿名訪問者には起動しません。CRM で識別済みのリードがサイトに戻ってきた瞬間に、過去の閲覧履歴・DL 履歴・メール反応をすべて引き継いだ AI SDR が対話を開始。コンバージョン直前の最後の100mを担います。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
               <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '即時', l: '初回アプローチ' }, { v: '40%+', l: '商談化率' }, { v: '24/7', l: '自律稼働' }].map((s, i) => (
+              {[{ v: '識別済み', l: 'リードのみに起動' }, { v: '40%+', l: '商談化率 (EdulinX)' }, { v: '全文脈', l: 'CRM/履歴を引き継ぐ' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -256,10 +256,10 @@ export default function AiChatPageClient() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>AI チャット</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton Live</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#12a37d', animation: 'dotBlink 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>オンライン</span>
+                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>識別済みリード対話中</span>
                   </div>
                 </div>
               </div>
@@ -270,13 +270,13 @@ export default function AiChatPageClient() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
                   <div style={{ background: '#e5f8f2', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    こんにちは！料金ページをご覧いただきありがとうございます。プランについてご質問はありますか？
+                    田中様、お帰りなさい。先日DLいただいた料金最適化ガイドの件でご質問はございますか？
                   </div>
                 </div>
                 {/* Visitor message */}
                 <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.0s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ background: 'var(--surface)', borderRadius: '12px 12px 4px 12px', padding: '10px 14px', maxWidth: '75%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    プランについて質問があるのですが
+                    料金プランの選び方を聞きたいです
                   </div>
                 </div>
                 {/* AI message 2 */}
@@ -285,7 +285,7 @@ export default function AiChatPageClient() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
                   <div style={{ background: '#e5f8f2', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    御社の規模ですとスタンダードプランが最適です！右のカレンダーからご予約ください
+                    CRMの履歴から、御社の規模ですとスタンダードが最適です。15分で詳細ご説明します
                   </div>
                 </div>
                 {/* Calendar confirmation badge */}
@@ -300,7 +300,7 @@ export default function AiChatPageClient() {
               <div style={{ padding: '10px 16px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
-                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>AI応答中</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>HubSpot 文脈引継ぎ済み</span>
                 </div>
                 <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)' }}>商談予約完了 →</span>
               </div>
@@ -314,8 +314,8 @@ export default function AiChatPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIチャットの流れ</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>訪問者の来訪から商談予約まで、AIがすべて自律的に対応します。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live の流れ</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>識別済みリードの再訪検知から商談予約まで、AI SDR が CRM 文脈を引き継いで対応します。</p>
           <div className="flow-steps">
             {flowSteps.map((step, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
@@ -342,8 +342,8 @@ export default function AiChatPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIチャットの仕組みを深掘り</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>訪問者への声かけから商談予約まで、AIチャットがどのように機能するかをステップごとに解説します。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live の仕組みを深掘り</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>識別済みリードの再訪検知から、CRM 文脈の引き継ぎ・関心領域の深掘り・商談予約まで、AI SDR がどう動くかをステップで解説します。</p>
         </div>
       </section>
 
@@ -354,10 +354,10 @@ export default function AiChatPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>FEATURE 01</div>
-              <div className="phase-h">ページ文脈に応じた自動声かけ</div>
-              <div className="phase-desc">料金ページなら料金の質問、事例ページなら導入事例の深掘り。訪問者が見ているページの文脈を理解し、最適な声かけを自動で行います。シナリオ設計は不要です。</div>
+              <div className="phase-h">識別済みリードの再訪を検知して起動</div>
+              <div className="phase-desc">匿名訪問者には起動しません。HubSpot / Salesforce で識別済みのリードがサイトに戻ってきた瞬間にだけ、Meeton Live が立ち上がります。営業組織が追っているリードに AI SDR のリソースを集中投下する設計です。</div>
               <div className="phase-features">
-                {['ページ内容を自動解析', '文脈に合った声かけメッセージ', '訪問者ごとにパーソナライズ', 'シナリオ設計・ルール分岐不要'].map((feat, i) => (
+                {['CRM 連携で識別済みリードを即時判定', '匿名訪問者には起動しない（営業効率を担保）', 'フォーム送信・メールクリック・サンクスページで識別済みに昇格', 'シナリオ設計・ルール分岐不要'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
                 ))}
               </div>
@@ -367,12 +367,12 @@ export default function AiChatPageClient() {
                 <div style={{ padding: 16 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>ページ別声かけ</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>識別済みリードの再訪検知</span>
                   </div>
                   {[
-                    { page: '料金ページ', msg: 'プランについてご質問はありますか？', icon: '💰', bg: '#e5f8f2', border: '#12a37d' },
-                    { page: '事例ページ', msg: '導入事例の詳細をご案内しましょうか？', icon: '📋', bg: '#f0ecfe', border: '#7c5cfc' },
-                    { page: '機能ページ', msg: 'お探しの機能はございますか？', icon: '⚙️', bg: '#eaf0fe', border: '#3b6ff5' },
+                    { page: 'HubSpot識別済', msg: '田中様の再訪を検知 → AI SDR 起動', icon: '✅', bg: '#e5f8f2', border: '#12a37d' },
+                    { page: 'メールクリック経由', msg: '事例メールから再訪 → 同テーマで深掘り', icon: '📧', bg: '#f0ecfe', border: '#7c5cfc' },
+                    { page: '匿名訪問者', msg: '識別未済のため起動しません', icon: '🚫', bg: '#f4f6fb', border: '#9ca3af' },
                   ].map((item, i) => (
                     <div key={i} style={{ background: '#fff', border: `1px solid ${item.border}20`, borderRadius: 12, padding: 12, marginBottom: 8, opacity: 0, animation: `slideIn .5s ${.4 + i * .3}s cubic-bezier(.16,1,.3,1) forwards` }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
@@ -394,10 +394,10 @@ export default function AiChatPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 02</div>
-              <div className="phase-h">会話からニーズ把握&資料提案</div>
-              <div className="phase-desc">訪問者の質問に即座に回答しながら、会話の流れで最適な資料を提示。押し売りではなく、自然な対話の中でリードの関心を深めます。</div>
+              <div className="phase-h">過去の閲覧・DL・メール反応を全文脈で引き継ぐ</div>
+              <div className="phase-desc">営業担当者が把握している「このリードは何に関心があるか」を、AI SDR がそのまま会話に持ち込みます。閲覧履歴・DL 資料・メール開封状況・CRM 上のメモまで、リード一人分の全文脈を会話の前提に。</div>
               <div className="phase-features">
-                {['質問への即座の回答', '会話内で最適な資料を提示', 'ナレッジベースから自動生成', '自然な対話でリード育成'].map((feat, i) => (
+                {['過去の閲覧ページを文脈として把握', 'DL した資料の章まで会話に反映', 'メール開封・クリック履歴を引き継ぎ', 'HubSpot / Salesforce のリード情報を自動取得'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
                 ))}
               </div>
@@ -409,7 +409,7 @@ export default function AiChatPageClient() {
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', marginBottom: 10, opacity: 0, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards' }}>
                     <div style={{ width: 22, height: 22, borderRadius: 6, background: 'var(--surface)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 9, fontWeight: 800, color: 'var(--heading)' }}>U</div>
                     <div style={{ background: 'var(--surface)', borderRadius: '10px 10px 10px 4px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
-                      リード獲得の方法について知りたいです
+                      AI SDRの導入事例ありますか？
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', marginBottom: 10, opacity: 0, animation: 'chatPop .5s .7s cubic-bezier(.16,1,.3,1) forwards' }}>
@@ -417,7 +417,7 @@ export default function AiChatPageClient() {
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div style={{ background: '#f0ecfe', borderRadius: '10px 10px 10px 4px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
-                      こちらのガイドが参考になりますよ！
+                      過去にDLされた業界に近い事例をご案内します
                     </div>
                   </div>
                   {/* Resource card */}
@@ -425,13 +425,13 @@ export default function AiChatPageClient() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
                       <div style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg,#e0475b,#ff6b81)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800 }}>PDF</div>
                       <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>リード獲得ガイド.pdf</div>
-                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>マッチ度 98%</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>EdulinX 商談化率 40%+ 事例</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>過去DLとの関連度 98%</div>
                       </div>
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: '#7c5cfc', background: '#f0ecfe', padding: '3px 8px', borderRadius: 6 }}>リード獲得</span>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '3px 8px', borderRadius: 6 }}>自動提案</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#7c5cfc', background: '#f0ecfe', padding: '3px 8px', borderRadius: 6 }}>過去閲覧と関連</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '3px 8px', borderRadius: 6 }}>同業界事例</span>
                     </div>
                   </div>
                 </div>
@@ -444,10 +444,10 @@ export default function AiChatPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#3b6ff510', color: '#3b6ff5' }}>FEATURE 03</div>
-              <div className="phase-h">チャット内でリード情報を獲得</div>
-              <div className="phase-desc">自然な会話の中で連絡先・課題・利用ツールをヒアリング。フォーム入力のハードルなく、会話の流れでリード情報を収集しCRMに自動登録します。</div>
+              <div className="phase-h">CRM 上のリード情報を自動取得して対話に反映</div>
+              <div className="phase-desc">HubSpot / Salesforce 上の会社規模・業界・直近のメール反応・営業担当のメモまで、AI SDR が会話の前提として把握。会話で得た新情報もリアルタイムで CRM に書き戻し、営業担当者に引き継ぎます。</div>
               <div className="phase-features">
-                {['会話の流れでリード情報を収集', '連絡先・課題・利用ツールを把握', 'フォーム不要で離脱率を削減', 'CRMへ自動登録'].map((feat, i) => (
+                {['HubSpot / Salesforce ネイティブ連携', '会社情報・直近の活動を自動取得', '会話内で得た情報を CRM に書き戻し', '営業担当者へリアルタイム通知'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#3b6ff5' }} />{feat}</div>
                 ))}
               </div>
@@ -457,16 +457,16 @@ export default function AiChatPageClient() {
                 <div style={{ padding: 16 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b6ff5', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>リード情報カード</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>CRM から自動取得した文脈</span>
                   </div>
                   {/* Collected lead info card */}
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, opacity: 0, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards' }}>
                     {[
                       { label: '会社名', value: 'ABC株式会社', color: '#3b6ff5' },
-                      { label: '担当者名', value: '田中 太郎', color: '#3b6ff5' },
-                      { label: 'メール', value: 'tanaka@abc.co.jp', color: '#12a37d' },
-                      { label: '課題', value: 'リード獲得の自動化', color: '#7c5cfc' },
-                      { label: '利用ツール', value: 'HubSpot', color: '#0891b2' },
+                      { label: 'リード', value: '田中 太郎 (識別済)', color: '#12a37d' },
+                      { label: '直近 DL', value: '料金最適化ガイド', color: '#7c5cfc' },
+                      { label: 'メール反応', value: '事例リンク クリック', color: '#0891b2' },
+                      { label: 'CRM 担当', value: '佐藤 SDR', color: '#3b6ff5' },
                     ].map((field, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '7px 0', borderBottom: i < 4 ? '1px solid var(--border)' : 'none', opacity: 0, animation: `slideIn .5s ${.6 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
                         <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>{field.label}</span>
@@ -477,7 +477,7 @@ export default function AiChatPageClient() {
                   {/* CRM sync badge */}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 12, opacity: 0, animation: 'slideIn .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#3b6ff5', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#3b6ff5' }}>CRMへ自動登録中...</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#3b6ff5' }}>HubSpot / Salesforce から取得中...</span>
                   </div>
                 </div>
               </div>
@@ -489,10 +489,10 @@ export default function AiChatPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#0891b210', color: '#0891b2' }}>FEATURE 04</div>
-              <div className="phase-h">温度感に応じて商談予約まで完結</div>
-              <div className="phase-desc">高関心リードにはカレンダーを自動表示し、離脱前に予約を獲得。温度感の低いリードには資料提案や育成メールにつなげ、最適な次のアクションをAIが自律判断します。</div>
+              <div className="phase-h">Meeton Calendar に直接つなぎ商談予約</div>
+              <div className="phase-desc">識別済みリードとの対話で関心が固まった瞬間、Meeton Calendar の予約 UI がそのまま会話内に表示されます。CRM 上の担当者ルールに従って自動割り振り、ページ遷移なしで商談確定まで導きます。</div>
               <div className="phase-features">
-                {['高関心リードに自動でカレンダー表示', 'ページ遷移なしで予約完了', '温度感に応じたアクション判断', '離脱前のタイミングで提案'].map((feat, i) => (
+                {['Meeton Calendar とシームレス連動', 'ページ遷移なしで予約完了', 'CRM の担当者ルールで自動割り振り', '低温度リードは Meeton Email に引き継ぎ'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#0891b2' }} />{feat}</div>
                 ))}
               </div>
@@ -506,7 +506,7 @@ export default function AiChatPageClient() {
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div style={{ background: '#ecfeff', borderRadius: '10px 10px 10px 4px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
-                      ぜひデモをご覧ください！ご都合の良い日時をお選びください。
+                      佐藤SDRと15分でお話しできるお時間をお選びください
                     </div>
                   </div>
                   {/* Calendar widget */}
@@ -546,7 +546,7 @@ export default function AiChatPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>USE CASES</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIチャットの活用シーン</div>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live の活用シーン</div>
           <div className="usecase-grid">
             {useCases.map((uc, i) => (
               <div className="usecase-card" key={i}>
@@ -561,7 +561,7 @@ export default function AiChatPageClient() {
                 <div style={{ background: `${uc.color}08`, border: `1px solid ${uc.color}20`, borderRadius: 10, padding: '10px 14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                     <div style={{ width: 5, height: 5, borderRadius: '50%', background: uc.color }} />
-                    <span style={{ fontSize: 9, fontWeight: 700, color: uc.color }}>声かけ例</span>
+                    <span style={{ fontSize: 9, fontWeight: 700, color: uc.color }}>AI SDR 対話例</span>
                   </div>
                   <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5, fontStyle: 'italic' }}>
                     &ldquo;{uc.msg}&rdquo;
@@ -576,7 +576,7 @@ export default function AiChatPageClient() {
       {/* CTA — after USE CASES: demo (visualizing real conversations boosts intent) */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="実際のチャット動作と AI コンシェルジュの応答品質を、御社の業界に合わせたデモで 15 分で体験"
+        heading="識別済みリードへの AI SDR 対話と CRM 文脈の引き継ぎ精度を、御社の業界に合わせたデモで 15 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={() => setIsMeetingModalOpen(true)}
@@ -587,8 +587,8 @@ export default function AiChatPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton ai のAIチャットなのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>従来のチャットボットとは根本的に異なるアプローチ。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Live なのか</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>マーケ部門のチャットボットではなく、営業組織のための AI SDR プラットフォーム。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
@@ -606,7 +606,7 @@ export default function AiChatPageClient() {
       {/* CTA — after WHY: doc (internal review framing) */}
       <MidPageCta
         eyebrow="For internal review"
-        heading="AI チャットの仕様・導入事例・料金プランをまとめた資料を社内検討用にお送りします"
+        heading="Meeton Live の仕様・CRM 連携・導入事例・料金プランをまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
         onClick={() => setIsDocModalOpen(true)}
@@ -638,8 +638,8 @@ export default function AiChatPageClient() {
         <div className="glow" style={{ background: 'rgba(18,163,125,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div className="slabel">今すぐ始める</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>AIチャットで、<br />商談獲得を自動化しよう</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>シナリオ設計不要。AIが訪問者と自律的に会話し、商談予約まで完結します。</p>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live で、<br />識別済みリードを商談へ</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>CRM 連携で識別済みリードに集中。AI SDR が全文脈を引き継いで対話し、商談予約まで完結します。</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
             <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>

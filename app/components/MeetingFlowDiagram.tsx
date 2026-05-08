@@ -11,12 +11,12 @@ import { useRef } from "react";
  * Meeton ai セールスフロー — animated funnel diagram.
  *
  * Spec:
- *   訪問者 → 通常閲覧 → ① AI Chat
+ *   訪問者 → 通常閲覧 → ① Meeton Live (識別済み再訪リードのみ)
  *           → フォーム送信 → サンクスページ
- *   AI Chat ⇢ (会話中に送信) サンクスページ
- *   AI Chat / サンクスページ → ② AI Calendar (hub)
- *   AI Calendar → 予約完了 → ✓ サイト内で商談獲得
- *               → 離脱 → ③ AI Email ⇢ (メール内URLから再表示) AI Calendar
+ *   Meeton Live ⇢ (会話中に予約UI起動) サンクスページ
+ *   Meeton Live / サンクスページ → ② Meeton Calendar (hub, 5秒発動)
+ *   Meeton Calendar → 予約完了 → ✓ サイト内で商談獲得
+ *                  → 離脱 → ③ Meeton Email ⇢ (メール内URLから再表示) Meeton Calendar
  *
  * Animation: scroll-trigger (whileInView, once) → sequenced reveal in 3–4s.
  * After sequence: pacing dots loop (teal on main path, coral on drop-off loop).
@@ -464,9 +464,9 @@ function DesktopFlow({
         <Card
           node={N.chat}
           tone="chat"
-          label="① AI CHAT"
-          title="訪問者と対話・関心醸成"
-          sub="閲覧に合わせて関連資料を自動提案"
+          label="① MEETON LIVE"
+          title="識別済み再訪リードへAI SDR対話"
+          sub="過去の閲覧・DL・メール反応を全文脈で引き継ぐ"
           icon="chat"
           meeton
         />
@@ -475,15 +475,15 @@ function DesktopFlow({
           tone="amber"
           label="THANKS PAGE"
           title="サンクスページ"
-          sub="フォーム送信直後の高関心リードを即捕捉"
+          sub="フォーム送信直後のリードコンバート瞬間"
           icon="thanks"
         />
         <Card
           node={N.calendar}
           tone="calendar"
-          label="② AI CALENDAR"
-          title="商談予約まで完結"
-          sub="チャット内・サンクスページ・メール経由で発動 / 割り振りルールを細かく設定可能"
+          label="② MEETON CALENDAR"
+          title="初動5秒で商談化"
+          sub="リードコンバート瞬間に発動（業界42時間→5秒）/ 割り振りルール設定可能"
           icon="calendar"
           hub
           meeton
@@ -499,9 +499,9 @@ function DesktopFlow({
         <Card
           node={N.email}
           tone="email"
-          label="③ AI EMAIL"
-          title="離脱リードを再アプローチ"
-          sub="カスタムメールでフォロー＆カレンダーURL自動挿入"
+          label="③ MEETON EMAIL"
+          title="即時予約しなかったリードを1:1追跡"
+          sub="MAではなくAI SDR / Meeton Calendar URL自動挿入"
           icon="mail"
           meeton
         />
@@ -865,11 +865,11 @@ function MobileFlow({
 }) {
   const items = [
     { tone: "muted" as const, label: "STEP 0", title: "Website 訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
-    { tone: "chat" as const, label: "① AI CHAT", title: "訪問者と対話・関心醸成", sub: "閲覧に合わせて関連資料を自動提案", icon: "chat" as const, meeton: true },
-    { tone: "amber" as const, label: "THANKS PAGE", title: "サンクスページ", sub: "フォーム送信直後の高関心を捕捉", icon: "thanks" as const, branchNote: "AI Chat 経由 / フォーム送信直後 どちらからも到達" },
-    { tone: "calendar" as const, label: "② AI CALENDAR", title: "商談予約まで完結", sub: "チャット内・サンクスページ・メール経由で発動 / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
+    { tone: "chat" as const, label: "① MEETON LIVE", title: "識別済み再訪リードへAI SDR対話", sub: "過去の閲覧・DL・メール反応を全文脈で引き継ぐ", icon: "chat" as const, meeton: true },
+    { tone: "amber" as const, label: "THANKS PAGE", title: "サンクスページ", sub: "フォーム送信直後のリードコンバート瞬間", icon: "thanks" as const, branchNote: "Meeton Live 経由 / フォーム送信直後 どちらからも到達" },
+    { tone: "calendar" as const, label: "② MEETON CALENDAR", title: "初動5秒で商談化", sub: "業界42時間→5秒のSpeed to Lead / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
     { tone: "win" as const, label: "OUTCOME", title: "✓ サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
-    { tone: "email" as const, label: "③ AI EMAIL", title: "離脱リードを再アプローチ", sub: "カスタムメール → AI Calendar に戻す", icon: "mail" as const, meeton: true },
+    { tone: "email" as const, label: "③ MEETON EMAIL", title: "即時予約しなかったリードを1:1追跡", sub: "MAではなくAI SDR → Meeton Calendar に戻す", icon: "mail" as const, meeton: true },
   ];
 
   return (
