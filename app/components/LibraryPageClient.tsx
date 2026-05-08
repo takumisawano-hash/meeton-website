@@ -180,7 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
-  { q: 'Meeton Library と通常の資料 DL ページの違いは何ですか？', a: '通常の資料 DL ページは「探す責任」がリード側にあり、検討フェーズに合った資料に到達できないことが多くあります。Meeton Library は AI が CRM 上の行動履歴・興味分野を読み解いて、最適な資料を能動的に推薦・解説。さらに資料の中身に関する質問にもその場で回答し、検討の壁を取り除きます。' },
+  { q: 'Meeton Library と通常の資料 DL ページの違いは何ですか？', a: '通常の資料 DL ページは Web 制作工数がかかり、PDF を一覧で並べるだけで「中身を読まないと判断できない」体験になります。Meeton Library は資料をアップロードするだけでポップアップ形式の AI チャット付きライブラリーが自動生成。デザイン・新規ページ追加は不要で、AI チャットが資料の中身を要約・解説するため、リードは資料全文を読まなくても要点を把握できます。' },
   { q: '既存リードに対してのみ動作するのですか？', a: 'はい。Meeton Library は HubSpot / Salesforce で識別済みの既存リード（過去にコンバートしたリード）の再訪に対して起動する、ナーチャリング専用機能です。新規リード獲得用ではなく、検討フェーズが進んだリードに適切な情報提供を行い、商談機会を再発火させる設計です。' },
   { q: '資料の更新は AI が自動で学習しますか？', a: 'はい。資料を Meeton Library にアップロードまたは連携すると、AI がコンテンツを自動でインデックス化します。資料の更新・差し替えがあれば、再学習も自動で行われ、常に最新の情報をベースに推薦・解説します。' },
   { q: 'Meeton Calendar との連携はどう動きますか？', a: 'AI が資料解説対話の中で「検討再開」のシグナル（具体的な料金質問・導入時期の言及・比較検討の発言など）を検知すると、Meeton Calendar の予約 UI を会話内に直接展開します。CRM 上の担当者ルールに従って自動割り振り、ページ遷移なしで商談確定まで導きます。' },
@@ -189,10 +189,10 @@ const faqData = [
 ];
 
 const whyData = [
-  { title: '行動履歴から最適資料を AI 推薦', desc: 'CRM 上の閲覧ページ・DL 履歴・興味分野を AI が解析し、検討フェーズに合った最適な資料を能動的に提案。「資料を探す責任」をリードに負わせません。', color: '#d03ea1', iconPath: 'M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11' },
-  { title: 'AI がその場で資料を解説', desc: '推薦した資料の中身を AI が要約・解説。リードが資料を読まなくても要点を把握でき、章ごとの質問にもリアルタイムで回答します。', color: '#7c5cfc', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8' },
-  { title: '検討再開を検知して商談化', desc: '解説対話の中で検討再開のシグナル（料金・導入時期・比較検討）を AI が検知。Meeton Calendar の予約 UI を会話内に直接展開し、商談予約までその場で完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-  { title: 'ナーチャリング専用設計', desc: 'CRM 識別済みの既存リードに限定して起動。新規リードを混入させず、検討フェーズが進んだリードへの「商談機会の再発火」だけに集中します。', color: '#0891b2', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
+  { title: '資料をアップロードするだけ', desc: 'PDF・スライド・ホワイトペーパーをアップロードすると、AI チャット付きの資料ライブラリー（ポップアップ UI）が自動で立ち上がります。新しいページをサイトに追加する必要はありません。', color: '#d03ea1', iconPath: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M17 8l-5-5-5 5 M12 3v12' },
+  { title: 'AI チャット解説を内蔵', desc: '資料の中身を AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、章単位・項目単位の質問にもリアルタイムで回答します。', color: '#7c5cfc', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8' },
+  { title: 'デザイン・ページ追加不要', desc: '既存サイトに JS タグ 1 行を入れるだけで、ポップアップ形式のライブラリーが起動。Web 制作・デザイン・新規ページ追加といった工数が一切かかりません。', color: '#0891b2', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8' },
+  { title: '検討再開を検知して商談化', desc: 'AI チャット解説の中で検討再開のシグナル（料金・導入時期・比較検討）を AI が検知。Meeton Calendar の予約 UI を会話内に直接展開し、商談予約までその場で完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
 ];
 
 const flowSteps = [
@@ -235,14 +235,14 @@ export default function LibraryPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim d1 hero-badge"><div className="hero-badge-dot" />RE-ENGAGEMENT MODULE</div>
-            <h1 className="anim d2">戻ってきたリードに、<br /><em>最適な資料を AI が提案</em></h1>
-            <p className="anim d3 hero-sub">過去にコンバートしたリードが再訪した瞬間、AI が行動履歴・興味分野から最適な資料を推薦・解説。検討再開のタイミングを捉えて Meeton Calendar に引き渡し、商談機会を再発火させる、既存リードのナーチャリング専用機能。</p>
+            <h1 className="anim d2">戻ってきたリードに、<br /><em>AI が資料でナーチャリング</em></h1>
+            <p className="anim d3 hero-sub">資料をアップロードするだけで、AI チャット付きの資料ライブラリー（資料一覧ポップアップ）が自動で立ち上がる。デザインを組んだり、新しいページをサイトに追加する必要はゼロ。検討再開した既存リードに、AI チャット解説付きの資料一覧をその場で届けられる、既存リードのナーチャリング専用機能。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsMeetingModalOpen(true)}>デモを予約</button>
               <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>資料請求 →</button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: 'AI 推薦', l: '行動履歴ベース' }, { v: '解説対話', l: '質問にその場で回答' }, { v: '再発火', l: '商談機会を再点火' }].map((s, i) => (
+              {[{ v: '5 分', l: '資料アップロードで開始' }, { v: 'ノーコード', l: 'デザイン・ページ追加不要' }, { v: 'AI チャット解説', l: '資料の中身を AI が説明' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -365,10 +365,10 @@ export default function LibraryPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#d03ea110', color: '#d03ea1' }}>FEATURE 01</div>
-              <div className="phase-h">AI 資料推薦 — 行動履歴から最適資料を選定</div>
-              <div className="phase-desc">CRM 上の閲覧ページ・DL 履歴・メール反応・直近の興味分野を AI が解析し、検討フェーズに合った資料を能動的に推薦。「リード自身に資料を探させる」体験を、「AI が最適な資料を持ってくる」体験に変えます。</div>
+              <div className="phase-h">資料アップロードで AI ライブラリー自動生成</div>
+              <div className="phase-desc">PDF・スライド・ホワイトペーパーをアップロードするだけで、AI チャット付きの資料ライブラリーがポップアップ形式で自動立ち上がり。Web 制作・デザイン・新規ページ追加といった工数は一切ゼロ。既存サイトに JS タグ 1 行を入れるだけで稼働します。</div>
               <div className="phase-features">
-                {['行動履歴・閲覧ページから興味領域を AI 推定', '検討フェーズ（情報収集 / 比較 / 稟議）に合わせた推薦', '関連度スコアで複数候補をランキング', '推薦理由を AI が会話内で説明'].map((feat, i) => (
+                {['資料をアップロードするだけ、UI は自動生成', 'デザイン作業不要・新規ページ追加不要', 'JS タグ 1 行で既存サイトに即組み込み', '資料の追加・差し替えはアップロードだけで反映'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#d03ea1' }} />{feat}</div>
                 ))}
               </div>
@@ -408,7 +408,7 @@ export default function LibraryPageClient() {
           <div className="phase-row reverse">
             <div className="phase-text">
               <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 02</div>
-              <div className="phase-h">AI 解説対話 — 資料の中身を AI がその場で説明</div>
+              <div className="phase-h">AI チャット解説 — 資料の中身を AI がその場で説明</div>
               <div className="phase-desc">推薦した資料の中身を、AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、「ROI 計算式の章だけ要約して」「他社との違いは？」といった章単位の質問にもリアルタイムで回答します。</div>
               <div className="phase-features">
                 {['資料全文を AI が要約・章単位で解説', '質問に資料の根拠を引用して回答', '複数資料を横断した要点抽出', 'リードの理解度に合わせた説明トーン調整'].map((feat, i) => (
