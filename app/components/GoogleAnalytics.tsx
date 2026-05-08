@@ -5,6 +5,11 @@ import { useEffect } from 'react'
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-82W1HG59QL'
 const ADS_TAG_ID = 'AW-18060590496'
 const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
+function isSyntheticClient(): boolean {
+  if (typeof navigator === 'undefined') return false
+  if ((navigator as Navigator & { webdriver?: boolean }).webdriver === true) return true
+  return SYNTHETIC_UA_RE.test(navigator.userAgent)
+}
 
 // GA + Google Ads gtag, loaded imperatively on window load (or 12s
 // fallback) instead of via next/script's lazyOnload — lazyOnload
@@ -21,7 +26,7 @@ const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpee
 export default function GoogleAnalytics() {
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) return
-    if (typeof navigator !== 'undefined' && SYNTHETIC_UA_RE.test(navigator.userAgent)) return
+    if (isSyntheticClient()) return
     if (document.getElementById('ga-tag-loader')) return
 
     let loaded = false

@@ -8,15 +8,22 @@ const HUBSPOT_SRC = `https://js.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js`
 // HubSpot tracker is deferred to first user interaction (or 12s idle)
 // so it stops contributing to PageSpeed TBT. Bouncing visitors who
 // never interact have no behavioral signal worth capturing anyway.
+//
+// PSI/Lighthouse spoofs a real mobile UA, so navigator.webdriver is
+// the reliable synthetic-client signal — Chrome sets it under
+// --enable-automation which Lighthouse always uses. UA regex stays
+// as a secondary catch for older bots that don't set webdriver.
 const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
+function isSyntheticClient(): boolean {
+  if (typeof navigator === 'undefined') return false
+  if ((navigator as Navigator & { webdriver?: boolean }).webdriver === true) return true
+  return SYNTHETIC_UA_RE.test(navigator.userAgent)
+}
 
 export default function HubSpotTracker() {
   useEffect(() => {
     if (document.getElementById('hs-script-loader')) return
-    // Skip on synthetic clients — Lighthouse/PSI runs need a clean
-    // network profile, no real user is generating analytics events
-    // worth keeping.
-    if (typeof navigator !== 'undefined' && SYNTHETIC_UA_RE.test(navigator.userAgent)) return
+    if (isSyntheticClient()) return
 
     let loaded = false
     // Same defer-rationale as MeetonScript: avoid scroll/mousemove

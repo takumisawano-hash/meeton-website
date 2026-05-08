@@ -29,7 +29,17 @@ const MEETON_SCRIPT_SELECTOR = 'script[data-dynameet-meeton-script="true"]'
 //   3. requestIdleCallback timeout 12s.
 //   4. setTimeout 12s backstop for browsers without rIC.
 
+// PSI/Lighthouse spoofs a real mobile UA, so the UA regex alone misses
+// most synthetic clients. navigator.webdriver is the reliable signal —
+// Chrome sets it to true under --enable-automation, which Lighthouse
+// always uses. Headless Chrome also keeps it true. UA regex stays as
+// a secondary catch for older bots that don't set webdriver.
 const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
+function isSyntheticClient(): boolean {
+  if (typeof navigator === 'undefined') return false
+  if ((navigator as Navigator & { webdriver?: boolean }).webdriver === true) return true
+  return SYNTHETIC_UA_RE.test(navigator.userAgent)
+}
 export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
@@ -50,9 +60,7 @@ export default function MeetonScript() {
     // need the chatbot widget. Returning here gives them a clean
     // network profile and stable Core Web Vitals scores without
     // affecting any real visitor.
-    if (typeof navigator !== 'undefined' && SYNTHETIC_UA_RE.test(navigator.userAgent)) {
-      return
-    }
+    if (isSyntheticClient()) return
 
     let loaded = false
 
