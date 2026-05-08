@@ -1220,6 +1220,110 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* THE PROBLEM — リードはあるのに、商談にならない */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{ background: "var(--surface)", paddingTop: 64, paddingBottom: 64 }}
+        >
+          <div className="section-inner" style={{ maxWidth: 920 }}>
+            <div className="slabel" style={{ textAlign: "center" }}>
+              The Problem
+            </div>
+            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
+              リードはあるのに、<span style={{ color: "var(--cta)" }}>商談にならない</span>
+            </div>
+            <p
+              className="ssub"
+              style={{ textAlign: "center", margin: "0 auto 40px", maxWidth: 720 }}
+            >
+              MA でリードは集まる。CRM にも溜まる。でも、その大半は商談にならずに消えていく。
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                gap: 20,
+                marginBottom: 32,
+              }}
+            >
+              {[
+                { num: "5分", label: "以内のフォローで商談化率 100倍", note: "業界標準" },
+                { num: "42時間", label: "実際の B2B 営業の平均レスポンスタイム", note: "現実" },
+                { num: "78%", label: "「最初に応答した会社」から購入", note: "顧客行動" },
+                { num: "12ヶ月", label: "SDR 採用 → 立ち上げ → 離職のサイクル", note: "組織課題" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 24,
+                    background: "#fff",
+                    borderRadius: 12,
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: "var(--sub)",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {item.note}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 32,
+                      fontWeight: 900,
+                      color: "var(--cta)",
+                      lineHeight: 1.2,
+                      marginBottom: 8,
+                    }}
+                  >
+                    {item.num}
+                  </div>
+                  <div
+                    style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.6 }}
+                  >
+                    {item.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div
+              style={{
+                padding: "24px 28px",
+                background: "linear-gradient(135deg, var(--cta-light), #fff)",
+                borderRadius: 14,
+                borderLeft: "4px solid var(--cta)",
+              }}
+            >
+              <p style={{ fontSize: 16, color: "var(--heading)", lineHeight: 1.8, fontWeight: 600 }}>
+                リードを集めるツール（MA / 広告 / コンテンツ）はあっても、
+                <br />
+                <span style={{ color: "var(--cta)" }}>
+                  「集めたリードを商談に変える」
+                </span>
+                ところで、ほぼ全ての企業が詰まっています。
+              </p>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "var(--sub)",
+                  marginTop: 12,
+                  lineHeight: 1.7,
+                }}
+              >
+                Meeton ai は、その「最後の100m」だけに特化した AI SDR Platform です。
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* HOW IT WORKS — Meeton ai flow diagram (lazy-loaded in both modes) */}
       <MeetingFlowDiagram />
 
