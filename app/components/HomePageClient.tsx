@@ -1479,8 +1479,11 @@ export default function HomePageClient({
               Use Cases
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              こんな課題を、<span style={{ color: "var(--cta)" }}>Meeton ai</span> が解きます
+              <span style={{ color: "var(--cta)" }}>3 つの活用パターン</span>
             </div>
+            <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
+              リードの状態に応じて、Meeton ai が自動で動き分けます。
+            </p>
             <div
               style={{
                 display: "grid",
@@ -1612,7 +1615,7 @@ export default function HomePageClient({
               className="stitle"
               style={{ textAlign: "center", color: "#fff", marginBottom: 16 }}
             >
-              4 つの立場が直面する、<span style={{ color: "var(--cta-hover)" }}>1 つの課題</span>
+              Meeton ai は、<span style={{ color: "var(--cta-hover)" }}>こんな立場の方に効きます</span>
             </div>
             <p
               style={{
@@ -1623,8 +1626,8 @@ export default function HomePageClient({
                 margin: "0 auto 40px",
               }}
             >
-              リードを集めても商談にならない ── 営業・マーケ・IS、それぞれの立場で
-              抱える共通の課題を、Meeton ai がラストワンマイルで解きます。
+              営業・マーケ・IS・経営、それぞれの立場で「リードを商談に変える」課題に
+              向き合っている方に、Meeton ai が貢献できる価値をご紹介します。
             </p>
             <div
               className="buyer-grid"
@@ -1772,86 +1775,7 @@ export default function HomePageClient({
         onClick={() => setIsDocModalOpen(true)}
       />
 
-      {/* WHY AI SDR */}
-      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
-        <div className="section-inner" style={{ position: "relative", zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: "center" }}>Why AI SDR?</div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            なぜ今、<span style={{ color: "var(--cta)" }}>AI SDR</span>なのか
-          </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0" }}>
-            人間のSDRが行ってきた業務を、Meeton aiが24時間・高精度で代替する時代が来ました。
-          </p>
-          <div className="why-grid">
-            {[
-              {
-                iconKey: "robot" as IconKey,
-                color: "var(--cta)",
-                bg: "var(--cta-light)",
-                border: "linear-gradient(135deg,var(--cta),var(--blue))",
-                title: "自律的に判断・行動",
-                desc: "設定に従って表示するだけのツールとは違います。Meeton aiはリードの行動データを分析し、最適なチャネル・タイミング・メッセージを自分で選択して商談を獲得します。",
-              },
-              {
-                iconKey: "bolt" as IconKey,
-                color: "var(--accent)",
-                bg: "var(--accent-light)",
-                border: "linear-gradient(135deg,var(--accent),var(--pink))",
-                title: "SDR 3人分を24時間稼働",
-                desc: "人間のSDRは1日8時間。Meeton aiは深夜も週末も休まず、見込み客の熱量が最も高い瞬間を逃さずアプローチ。休眠リードの掘り起こしも自動で行います。",
-              },
-              {
-                iconKey: "target" as IconKey,
-                color: "var(--blue)",
-                bg: "var(--blue-light)",
-                border: "linear-gradient(135deg,var(--blue),var(--cyan))",
-                title: "ファネル全体を一気通貫",
-                desc: "初回接触→ナーチャリング→商談予約→事前ヒアリングまで。従来バラバラだったツールが1つのAIエージェントに統合され、リードが途中で途切れません。",
-              },
-            ].map((item, i) => (
-              <div className="why-card" key={i} style={{ boxShadow: "0 2px 8px rgba(0,0,0,.03)" }}>
-                <div className="why-card" style={{ all: "unset" }}>
-                  <div style={{ display: "none" }} className="why-card-before" />
-                </div>
-                <div className="why-icon" style={{ background: item.bg }}>
-                  <Ico name={item.iconKey} size={28} color={item.color} />
-                </div>
-                <div className="why-title">{item.title}</div>
-                <div className="why-desc">{item.desc}</div>
-              </div>
-            ))}
-          </div>
-          {/* Comparison strip */}
-          <div style={{
-            marginTop: 48,
-            background: "linear-gradient(135deg, var(--surface), var(--surface2))",
-            borderRadius: 16,
-            padding: "32px 40px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 48,
-            flexWrap: "wrap",
-          }}>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>従来のSDR</div>
-              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                平均レスポンス 42時間 / 1日8時間稼働<br/>属人的な品質 / 採用と離職の繰り返し
-              </div>
-            </div>
-            <div style={{ fontSize: 32, color: "var(--cta)", fontWeight: 900 }}>→</div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--cta)", marginBottom: 8, textTransform: "uppercase", letterSpacing: 2, fontFamily: "var(--fm)" }}>Meeton ai（AI SDR）</div>
-              <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.8 }}>
-                <strong>初動5秒</strong> / 24時間365日稼働<br/>AI 動的判断 / 一貫した高品質対応
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* COMPARISON — vs Human SDR vs Chatbot (lazy-loaded in both modes) */}
+      {/* COMPARISON — 詳細比較表 (人間SDR / MA・SFA / Meeton ai) */}
       <ComparisonTable />
 
       {/* CTA #2 — after comparison table: demo (high-intent moment after seeing differentiation) */}
