@@ -127,6 +127,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .buyer-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:20px}
 @media (max-width:1100px){.buyer-grid{grid-template-columns:repeat(2,1fr)!important}}
 @media (max-width:600px){.buyer-grid{grid-template-columns:1fr!important}}
+.philosophy-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:20px}
+@media (max-width:880px){.philosophy-grid{grid-template-columns:1fr!important;max-width:520px;margin-left:auto;margin-right:auto}}
 .cat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
 .cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 56px -16px rgba(18,163,125,.18)}
 .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cat-color, #12a37d);opacity:.85;transition:opacity .3s, height .3s}
@@ -1311,14 +1313,116 @@ export default function HomePageClient({
               </p>
               <p
                 style={{
-                  fontSize: 14,
+                  fontSize: 15,
+                  color: "var(--heading)",
+                  marginTop: 14,
+                  lineHeight: 1.8,
+                  fontWeight: 700,
+                }}
+              >
+                これは、マーケでも営業でもない ──
+                <span style={{ color: "var(--cta)" }}>組織構造の空白</span>。
+                <br />
+                AI だけが、ここを埋められます。
+              </p>
+              <p
+                style={{
+                  fontSize: 13,
                   color: "var(--sub)",
                   marginTop: 12,
                   lineHeight: 1.7,
                 }}
               >
-                Meeton ai は、その「最後の100m」だけに特化した AI SDR Platform です。
+                Meeton ai は、その「ラストワンマイル」だけに特化した AI SDR Platform です。
               </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* DESIGN PHILOSOPHY — 3-line manifesto */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{
+            background: "linear-gradient(180deg, #fff 0%, var(--surface) 100%)",
+            paddingTop: 56,
+            paddingBottom: 56,
+          }}
+        >
+          <div className="section-inner" style={{ maxWidth: 880, textAlign: "center" }}>
+            <div className="slabel" style={{ textAlign: "center" }}>
+              Design Philosophy
+            </div>
+            <div
+              className="stitle"
+              style={{ textAlign: "center", marginBottom: 36, fontSize: "clamp(24px, 4vw, 36px)" }}
+            >
+              Meeton ai が、<span style={{ color: "var(--cta)" }}>解くと決めたこと</span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: 20,
+                textAlign: "left",
+              }}
+              className="philosophy-grid"
+            >
+              {[
+                {
+                  num: "01",
+                  title: "リード獲得は、お客様の仕事",
+                  body: "MA・広告・コンテンツ・展示会。リードを集めるのは既存ツールに任せる。我々は手を出しません。",
+                },
+                {
+                  num: "02",
+                  title: "我々は「ラストワンマイル」を解く",
+                  body: "リードがコンバートしてから商談予約に至るまでのコンバージョン領域に集中。",
+                },
+                {
+                  num: "03",
+                  title: "Speed × Persistence × Context",
+                  body: "5 秒以内の即時対応、諦めない追跡、過去文脈を持った再エンゲージ。3 つの掛け算で攻めます。",
+                },
+              ].map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 24,
+                    background: "#fff",
+                    borderRadius: 12,
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 800,
+                      color: "var(--cta)",
+                      letterSpacing: "0.08em",
+                      fontFamily: "var(--fm)",
+                      marginBottom: 10,
+                    }}
+                  >
+                    {p.num}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 800,
+                      color: "var(--heading)",
+                      lineHeight: 1.4,
+                      marginBottom: 10,
+                    }}
+                  >
+                    {p.title}
+                  </div>
+                  <div style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.7 }}>
+                    {p.body}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -1519,7 +1623,7 @@ export default function HomePageClient({
                   role: "マーケティング責任者",
                   subtitle: "CMO / マーケ部長",
                   pain: "予算を使ってリード獲得しても商談化せず、CPL は下がっても商談獲得コストが上昇。",
-                  value: "ラストワンマイルを AI SDR が走り、既存 MA の効果を最大化。",
+                  value: "AI SDR を含むテクノロジースタックの「設計者」として、ファネル全体を自分で握り、マーケの仕事を縮小ではなく拡張させる。",
                   color: "#7c5cfc",
                 },
                 {
