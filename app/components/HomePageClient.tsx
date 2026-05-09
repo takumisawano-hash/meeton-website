@@ -124,6 +124,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:32px}
 @media (max-width:1100px){.problem-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.problem-grid{grid-template-columns:1fr}}
+.buyer-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:20px}
+@media (max-width:1100px){.buyer-grid{grid-template-columns:repeat(2,1fr)!important}}
+@media (max-width:600px){.buyer-grid{grid-template-columns:1fr!important}}
 .cat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
 .cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 56px -16px rgba(18,163,125,.18)}
 .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cat-color, #12a37d);opacity:.85;transition:opacity .3s, height .3s}
@@ -1598,59 +1601,161 @@ export default function HomePageClient({
             paddingBottom: 56,
           }}
         >
-          <div className="section-inner" style={{ maxWidth: 920, textAlign: "center" }}>
+          <div className="section-inner" style={{ maxWidth: 1080, textAlign: "center" }}>
             <div
               className="slabel"
               style={{ textAlign: "center", color: "rgba(255,255,255,0.6)" }}
             >
-              Built for Sales Organizations
+              Who&rsquo;s it for
             </div>
             <div
               className="stitle"
               style={{ textAlign: "center", color: "#fff", marginBottom: 16 }}
             >
-              CRO・VP Sales・IS 部長 のためのプラットフォーム
+              4 つの立場が直面する、<span style={{ color: "var(--cta-hover)" }}>1 つの課題</span>
             </div>
             <p
               style={{
                 fontSize: 16,
                 color: "rgba(255,255,255,0.7)",
                 lineHeight: 1.8,
-                maxWidth: 640,
-                margin: "0 auto 32px",
+                maxWidth: 720,
+                margin: "0 auto 40px",
               }}
             >
-              Meeton ai はマーケティング部門のキャンペーン管理ツールではありません。
-              営業組織が、リードを商談に変えるための AI SDR Platform です。
+              リードを集めても商談にならない ── 営業・マーケ・IS、それぞれの立場で
+              抱える共通の課題を、Meeton ai がラストワンマイルで解きます。
             </p>
             <div
+              className="buyer-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                gridTemplateColumns: "repeat(4, 1fr)",
                 gap: 20,
-                marginTop: 40,
+                marginTop: 8,
                 textAlign: "left",
               }}
             >
               {[
-                "インサイドセールスチームを持つ B2B SaaS / サービス企業",
-                "SDR の採用 / 育成 / 離職コストを削減したい組織",
-                "リードはあるが商談化が課題の組織",
-                "エンタープライズ営業を体系化したい組織",
-              ].map((line, i) => (
+                {
+                  role: "マーケティング責任者",
+                  subtitle: "CMO / マーケ部長",
+                  pain: "予算を使ってリード獲得しても商談化せず、CPL は下がっても商談獲得コストが上昇。",
+                  value: "ラストワンマイルを AI SDR が走り、既存 MA の効果を最大化。",
+                  color: "#7c5cfc",
+                },
+                {
+                  role: "営業責任者",
+                  subtitle: "CRO / VP Sales",
+                  pain: "SDR 採用・育成・離職のサイクル。商談化率の天井で営業組織がスケールしない。",
+                  value: "AI SDR が初動を担い、人 SDR は VIP 顧客対応など高付加価値業務にシフト。",
+                  color: "#12a37d",
+                },
+                {
+                  role: "インサイドセールス責任者",
+                  subtitle: "IS / SDR マネージャー",
+                  pain: "業務時間外のリード流出、月曜朝のバックログ、24h 対応シフトは人件費的に不可能。",
+                  value: "Meeton ai が 24/365 で初動応答、IS チームは深掘り対応に集中可能。",
+                  color: "#0891b2",
+                },
+                {
+                  role: "経営層",
+                  subtitle: "CEO / COO / 事業責任者",
+                  pain: "営業組織のスケーラビリティと CAC 上昇。人を増やすだけでは収益が伸びない構造。",
+                  value: "リード→商談変換率の改善で、人を増やさず ARR を伸ばす AI SDR レイヤー。",
+                  color: "#d03ea1",
+                },
+              ].map((b, i) => (
                 <div
                   key={i}
                   style={{
-                    padding: 20,
-                    background: "rgba(255,255,255,0.05)",
-                    borderRadius: 12,
+                    padding: 24,
+                    background: "rgba(255,255,255,0.04)",
+                    borderRadius: 14,
                     border: "1px solid rgba(255,255,255,0.1)",
-                    fontSize: 14,
-                    lineHeight: 1.7,
-                    color: "#fff",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 12,
                   }}
                 >
-                  {line}
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: b.color,
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        marginBottom: 6,
+                      }}
+                    >
+                      {b.subtitle}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 800,
+                        color: "#fff",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {b.role}
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      paddingTop: 12,
+                      borderTop: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: "rgba(255,255,255,0.5)",
+                        letterSpacing: "0.05em",
+                        marginBottom: 6,
+                      }}
+                    >
+                      抱える課題
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: "rgba(255,255,255,0.85)",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {b.pain}
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      paddingTop: 12,
+                      borderTop: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: b.color,
+                        letterSpacing: "0.05em",
+                        marginBottom: 6,
+                      }}
+                    >
+                      Meeton ai が解く
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: "#fff",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {b.value}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
