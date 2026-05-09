@@ -1468,131 +1468,6 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* USE CASES — 具体的な3つの解決パターン */}
-      {!isLp && (
-        <section
-          className="section"
-          style={{ background: "#fff", paddingTop: 64, paddingBottom: 64 }}
-        >
-          <div className="section-inner" style={{ maxWidth: 1080 }}>
-            <div className="slabel" style={{ textAlign: "center" }}>
-              Use Cases
-            </div>
-            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              <span style={{ color: "var(--cta)" }}>3 つの活用パターン</span>
-            </div>
-            <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
-              リードの状態に応じて、Meeton ai が自動で動き分けます。
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                gap: 24,
-                marginTop: 48,
-              }}
-            >
-              {[
-                {
-                  title: "Speed to Lead",
-                  subtitle: "リードコンバートの瞬間に商談化",
-                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、5 秒以内に商談予約まで完結させる。",
-                  metric: "5秒",
-                  metricLabel: "業界平均は42時間",
-                },
-                {
-                  title: "Persistent Follow-up",
-                  subtitle: "即時予約しなかったリードを諦めない",
-                  body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
-                  metric: "1:1",
-                  metricLabel: "MA メールはセグメント配信",
-                },
-                {
-                  title: "Re-engage on Return",
-                  subtitle: "戻ってきたリードを逃さない",
-                  body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
-                  metric: "100%",
-                  metricLabel: "再訪リードに即対応",
-                },
-              ].map((uc, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: 32,
-                    background: "var(--surface)",
-                    borderRadius: 16,
-                    border: "1px solid var(--border)",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "var(--accent)",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      marginBottom: 8,
-                    }}
-                  >
-                    {uc.title}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 800,
-                      color: "var(--heading)",
-                      lineHeight: 1.4,
-                      marginBottom: 16,
-                    }}
-                  >
-                    {uc.subtitle}
-                  </div>
-                  <p
-                    style={{
-                      fontSize: 14,
-                      color: "var(--text)",
-                      lineHeight: 1.8,
-                      marginBottom: 20,
-                    }}
-                  >
-                    {uc.body}
-                  </p>
-                  <div
-                    style={{
-                      paddingTop: 16,
-                      borderTop: "1px solid var(--border)",
-                      display: "flex",
-                      alignItems: "baseline",
-                      gap: 12,
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: 36,
-                        fontWeight: 900,
-                        color: "var(--cta)",
-                        lineHeight: 1,
-                      }}
-                    >
-                      {uc.metric}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 12,
-                        color: "var(--sub)",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {uc.metricLabel}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* BUILT FOR SALES — 営業組織向け明示 */}
       {!isLp && (
         <section
@@ -1757,6 +1632,131 @@ export default function HomePageClient({
                       }}
                     >
                       {b.value}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* USE CASES — 具体的な3つの解決パターン */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{ background: "#fff", paddingTop: 64, paddingBottom: 64 }}
+        >
+          <div className="section-inner" style={{ maxWidth: 1080 }}>
+            <div className="slabel" style={{ textAlign: "center" }}>
+              Use Cases
+            </div>
+            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
+              <span style={{ color: "var(--cta)" }}>3 つの活用パターン</span>
+            </div>
+            <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
+              リードの状態に応じて、Meeton ai が自動で動き分けます。
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                gap: 24,
+                marginTop: 48,
+              }}
+            >
+              {[
+                {
+                  title: "Speed to Lead",
+                  subtitle: "リードコンバートの瞬間に商談化",
+                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、5 秒以内に商談予約まで完結させる。",
+                  metric: "5秒",
+                  metricLabel: "業界平均は42時間",
+                },
+                {
+                  title: "Persistent Follow-up",
+                  subtitle: "即時予約しなかったリードを諦めない",
+                  body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
+                  metric: "1:1",
+                  metricLabel: "MA メールはセグメント配信",
+                },
+                {
+                  title: "Re-engage on Return",
+                  subtitle: "戻ってきたリードを逃さない",
+                  body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
+                  metric: "100%",
+                  metricLabel: "再訪リードに即対応",
+                },
+              ].map((uc, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 32,
+                    background: "var(--surface)",
+                    borderRadius: 16,
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: "var(--accent)",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {uc.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 800,
+                      color: "var(--heading)",
+                      lineHeight: 1.4,
+                      marginBottom: 16,
+                    }}
+                  >
+                    {uc.subtitle}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: "var(--text)",
+                      lineHeight: 1.8,
+                      marginBottom: 20,
+                    }}
+                  >
+                    {uc.body}
+                  </p>
+                  <div
+                    style={{
+                      paddingTop: 16,
+                      borderTop: "1px solid var(--border)",
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 12,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 36,
+                        fontWeight: 900,
+                        color: "var(--cta)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {uc.metric}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "var(--sub)",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {uc.metricLabel}
                     </div>
                   </div>
                 </div>
