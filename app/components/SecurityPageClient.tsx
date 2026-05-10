@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import Footer from './Footer'
 import Nav from './Nav'
 
@@ -31,6 +32,8 @@ const securityFeatures = [
 ]
 
 export default function SecurityPageClient() {
+  const router = useRouter()
+
   return (
     <>
       <Nav />
@@ -468,9 +471,8 @@ export default function SecurityPageClient() {
                     </div>
                   ))}
                 </div>
-                <a
-                  href="https://dynameet.ai/security?downloadCenter&docId=54a7d40d-e99d-40f2-bed2-80d64a400093&page=1"
-                  rel="noreferrer"
+                <button
+                  onClick={() => router.push('?downloadCenter&docId=54a7d40d-e99d-40f2-bed2-80d64a400093&page=1')}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -480,11 +482,12 @@ export default function SecurityPageClient() {
                     background: '#132822',
                     color: '#fff',
                     fontWeight: 700,
-                    textDecoration: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
                   }}
                 >
                   ホワイトペーパーを見る
-                </a>
+                </button>
               </div>
             </div>
           </div>
