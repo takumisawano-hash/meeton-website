@@ -4,13 +4,13 @@ import Nav from '@/app/components/Nav'
 import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'セキュリティポリシー',
+  title: '情報セキュリティポリシー',
   description: 'DynaMeet株式会社のセキュリティポリシー。情報セキュリティへの取り組み方針を掲載しています。',
   alternates: {
     canonical: '/security-policy/',
   },
   openGraph: {
-    title: 'セキュリティポリシー｜Meeton ai',
+    title: '情報セキュリティポリシー｜Meeton ai',
     description:
       'DynaMeet株式会社のセキュリティポリシー。情報セキュリティへの取り組み方針を掲載しています。',
     url: 'https://dynameet.ai/security-policy/',
@@ -65,7 +65,7 @@ export default function SecurityPolicyPage() {
               ホーム
             </Link>
             <span style={{ margin: '0 8px' }}>/</span>
-            <span style={{ color: '#0f1128' }}>セキュリティポリシー</span>
+            <span style={{ color: '#0f1128' }}>情報セキュリティポリシー</span>
           </nav>
 
           <header style={{ marginBottom: 'clamp(32px, 6vw, 48px)' }}>
@@ -77,7 +77,7 @@ export default function SecurityPolicyPage() {
                 margin: 0,
               }}
             >
-              セキュリティポリシー
+              情報セキュリティポリシー
             </h1>
           </header>
 
@@ -132,7 +132,7 @@ export default function SecurityPolicyPage() {
                 margin: '0 0 10px',
               }}
             >
-              具体的なセキュリティ対策は別ページで公開しています
+              具体的な情報セキュリティ対策は別ページで公開しています
             </h2>
             <p
               style={{
@@ -142,7 +142,7 @@ export default function SecurityPolicyPage() {
                 margin: '0 0 18px',
               }}
             >
-              情報セキュリティの基本方針に加えて、ISMS認証取得に向けた取り組み、インフラ構成、暗号化方針、AI運用上の保護策は「セキュリティ対策について」ページで確認できます。
+              情報セキュリティの基本方針に加えて、ISMS認証取得に向けた取り組み、インフラ構成、暗号化方針、AI運用上の保護策は「情報セキュリティ対策について」ページで確認できます。
             </p>
             <Link
               href="/security/"
@@ -159,7 +159,7 @@ export default function SecurityPolicyPage() {
                 boxShadow: '0 12px 28px rgba(18, 163, 125, 0.22)',
               }}
             >
-              セキュリティ対策について見る
+              情報セキュリティ対策について見る
             </Link>
           </section>
         </div>

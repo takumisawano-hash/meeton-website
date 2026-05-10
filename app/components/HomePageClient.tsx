@@ -2492,7 +2492,7 @@ function LpFooter() {
           rel="noopener noreferrer"
           style={{ color: "#6e7494", textDecoration: "none", fontWeight: 600 }}
         >
-          セキュリティポリシー
+          情報セキュリティポリシー
         </a>
       </div>
     </footer>

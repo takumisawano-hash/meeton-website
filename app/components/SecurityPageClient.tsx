@@ -121,7 +121,7 @@ export default function SecurityPageClient() {
                   letterSpacing: '-0.04em',
                 }}
               >
-                セキュリティ対策について
+                情報セキュリティ対策について
               </h1>
               <p
                 style={{
@@ -132,7 +132,7 @@ export default function SecurityPageClient() {
                   marginBottom: 30,
                 }}
               >
-                Meeton AIはお客様のデータを安全に保護するため、国際水準のセキュリティ体制を構築しています。
+                Meeton AIはお客様のデータを安全に保護するため、国際水準の情報セキュリティ体制を構築しています。
               </p>
               <div
                 style={{
@@ -266,7 +266,7 @@ export default function SecurityPageClient() {
                   marginBottom: 10,
                 }}
               >
-                Meeton AI のセキュリティ体制
+                Meeton AI の情報セキュリティ体制
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.8, color: '#567168', maxWidth: 760 }}>
                 対外的な信頼性と実運用上の安全性の両方を担保するため、認証・インフラ・暗号化・AI運用を分離せずに設計しています。
@@ -363,7 +363,7 @@ export default function SecurityPageClient() {
                   marginBottom: 16,
                 }}
               >
-                セキュリティホワイトペーパー
+                情報セキュリティホワイトペーパー
               </h2>
               <p
                 style={{
@@ -374,7 +374,7 @@ export default function SecurityPageClient() {
                   maxWidth: 560,
                 }}
               >
-                インフラ構成、データ保護方針、バックアップ体制など、より詳細なセキュリティ仕様をまとめたホワイトペーパーをご用意しています。
+                インフラ構成、データ保護方針、バックアップ体制など、より詳細な情報セキュリティ仕様をまとめたホワイトペーパーをご用意しています。
               </p>
               <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
                 {[
@@ -420,7 +420,7 @@ export default function SecurityPageClient() {
               <div style={{ marginBottom: 20 }}>
                 <h3 style={{ fontSize: 24, fontWeight: 850, marginBottom: 8 }}>ホワイトペーパーをご確認ください</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: '#5b7169' }}>
-                  より詳細なセキュリティ仕様は、専用のホワイトペーパーから確認できます。以下のリンクからダウンロードページへ進んでください。
+                  より詳細な情報セキュリティ仕様は、専用のホワイトペーパーから確認できます。以下のリンクからダウンロードページへ進んでください。
                 </p>
               </div>
               <div
