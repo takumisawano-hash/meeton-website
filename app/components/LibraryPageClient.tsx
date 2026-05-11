@@ -23,43 +23,56 @@ const css = `
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUpOnly{from{transform:translateY(24px)}to{transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 .anim{opacity:0;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) forwards}
+.anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
 .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(208,62,161,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
 .glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
 
-.btn{border:none;cursor:pointer;font-family:var(--fb);transition:all .25s;font-weight:700;border-radius:10px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#e555b6);color:#fff;padding:12px 26px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow)}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--cta-glow)}
-.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 6px 28px var(--cta-glow)}
-.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 38px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s}
-.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light)}
+.btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-cta{background:linear-gradient(135deg,var(--cta),#e555b6);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
+.btn-cta:active{transform:translateY(0)}
+.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
+.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 36px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);transform:translateY(-1px)}
+.btn-ghost:active{transform:translateY(0)}
+.btn-ghost svg{transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.btn-ghost:hover svg{transform:translateX(3px)}
 
-.slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
-.section{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px)}
+.slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
+.slabel::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+.slabel-c{justify-content:center}
+.slabel-c::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+.section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
-.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.2;letter-spacing:-.5px;margin-bottom:18px}
-.ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
+.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
+.stitle em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:680px}
 
 /* HERO - Split Layout */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#fdeaf5 0%,#fff 30%,#f0ecfe 60%,#fff 100%)}
-.hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,64px);position:relative;z-index:2}
-.hero-text{flex:1.2;min-width:0}
+.hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,72px);position:relative;z-index:2}
+.hero-text{flex:1.15;min-width:0}
 .hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(208,62,161,.15);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,5vw,62px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2px;margin-bottom:22px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:520px;margin-bottom:36px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(208,62,161,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(208,62,161,.4)}
+.hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;color:var(--heading);line-height:1.1;letter-spacing:-.025em;margin-bottom:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
+.hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:540px;margin-bottom:36px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:clamp(24px,4vw,48px);margin-top:clamp(32px,5vw,48px);padding-top:clamp(24px,4vw,36px);border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--cta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
-.stat-l{font-size:clamp(12px,1.5vw,14px);color:var(--sub);margin-top:6px;font-weight:600}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,auto));gap:clamp(20px,4vw,48px);margin-top:clamp(32px,5vw,44px);padding-top:clamp(24px,4vw,32px);border-top:1px solid var(--border)}
+.hero-stat{position:relative;padding-left:clamp(16px,2vw,20px)}
+.hero-stat:first-child{padding-left:0}
+.hero-stat:not(:first-child)::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border)}
+.stat-v{font-family:var(--fm);font-size:clamp(22px,3.4vw,32px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--cta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
+.stat-l{font-size:clamp(11px,1.5vw,13px);color:var(--sub);margin-top:8px;font-weight:600;letter-spacing:.02em}
 
 /* Library Visual */
 @keyframes chatPop{0%{opacity:0;transform:translateY(16px) scale(.92)}100%{opacity:1;transform:translateY(0) scale(1)}}
@@ -68,24 +81,28 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @keyframes dotBlink{0%,100%{opacity:.3}50%{opacity:1}}
 @keyframes badgePop{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}
 
-.dash{width:100%;max-width:420px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
+.dash{width:100%;max-width:420px;background:#fff;border-radius:22px;box-shadow:0 24px 64px rgba(208,62,161,.1),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.dash:hover{transform:translateY(-4px);box-shadow:0 32px 80px rgba(208,62,161,.18),0 1px 3px rgba(0,0,0,.04)}
 .dash-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fdeaf5,#f5f3ff)}
 
 /* PHASE ROWS */
-.phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,64px);padding:clamp(40px,8vw,80px) 0;position:relative}
+.phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,72px);padding:clamp(40px,8vw,80px) 0;position:relative}
 .phase-row.reverse{flex-direction:row-reverse}
 .phase-text{flex:1;min-width:0}
 .phase-vis{flex:1;min-width:0;display:flex;align-items:center;justify-content:center}
-.phase-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px;font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
-.phase-h{font-size:clamp(24px,4vw,32px);font-weight:900;color:var(--heading);letter-spacing:-.5px;margin-bottom:14px;line-height:1.25}
-.phase-desc{font-size:clamp(14px,2vw,16px);line-height:1.85;color:var(--sub);margin-bottom:22px}
+.phase-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;border:1px solid currentColor;position:relative}
+.phase-tag::before{content:'';position:absolute;inset:0;border-radius:inherit;background:currentColor;opacity:.08;pointer-events:none}
+.phase-h{font-size:clamp(24px,4vw,34px);font-weight:900;color:var(--heading);letter-spacing:-.022em;margin-bottom:14px;line-height:1.22}
+.phase-desc{font-size:clamp(14px,2vw,16px);line-height:1.85;color:var(--sub);margin-bottom:24px;max-width:480px}
 .phase-features{display:flex;flex-direction:column;gap:10px}
-.phase-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:600;color:var(--text)}
-.phase-feat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:8px}
-.phase-divider{height:1px;background:var(--border);max-width:1140px;margin:0 auto}
+.phase-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:600;color:var(--text);line-height:1.55}
+.phase-feat-icon{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.phase-feat-icon svg{width:11px;height:11px}
+.phase-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);max-width:1140px;margin:0 auto}
 
 /* PHASE VISUALS */
-.pvis{width:100%;max-width:440px;aspect-ratio:4/3;border-radius:20px;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.06);border:1px solid var(--border)}
+.pvis{width:100%;max-width:440px;aspect-ratio:4/3;border-radius:22px;position:relative;overflow:hidden;box-shadow:0 10px 44px rgba(208,62,161,.08),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s}
+.pvis:hover{transform:translateY(-3px);box-shadow:0 16px 56px rgba(208,62,161,.14),0 1px 3px rgba(0,0,0,.04)}
 
 .vis0{background:linear-gradient(160deg,#fdeaf5,#f0f9ff)}
 .vis1{background:linear-gradient(160deg,#fdeaf5,#f5f3ff)}
@@ -93,45 +110,54 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .vis3{background:linear-gradient(160deg,#ecfeff,#fdeaf5)}
 
 /* FLOW STEPS */
-.flow-section{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px);background:var(--surface);position:relative;overflow:hidden}
+.flow-section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px);background:linear-gradient(180deg,var(--surface) 0%,#eef1f8 100%);position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .flow-steps{display:flex;align-items:flex-start;justify-content:center;gap:0;max-width:1140px;margin:0 auto;position:relative}
-.flow-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;position:relative;padding:0 8px;min-width:0}
-.flow-num{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:20px;font-weight:800;color:#fff;margin-bottom:14px;position:relative;z-index:2;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.flow-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;position:relative;padding:0 8px;min-width:0;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.flow-step:hover{transform:translateY(-3px)}
+.flow-num{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:22px;font-weight:800;color:#fff;margin-bottom:14px;position:relative;z-index:2;box-shadow:0 6px 20px rgba(0,0,0,.12),0 0 0 6px rgba(255,255,255,.7),0 0 0 7px var(--border)}
+.flow-step:hover .flow-num{box-shadow:0 10px 28px rgba(208,62,161,.25),0 0 0 6px rgba(255,255,255,.9),0 0 0 7px var(--cta)}
 .flow-icon{font-size:24px;margin-bottom:8px}
-.flow-title{font-size:clamp(12px,1.5vw,15px);font-weight:800;color:var(--heading);line-height:1.3;margin-bottom:4px}
-.flow-sub{font-size:clamp(10px,1.2vw,12px);color:var(--sub);line-height:1.4;font-weight:500}
-.flow-arrow{display:flex;align-items:center;padding-top:20px;color:var(--border2);font-size:24px;font-family:var(--fm);flex-shrink:0;width:40px;justify-content:center}
-.flow-connector{position:absolute;top:28px;left:calc(50% + 28px);width:calc(100% - 56px);height:2px;background:linear-gradient(90deg,var(--border2),var(--cta),var(--border2));z-index:1}
+.flow-title{font-size:clamp(12px,1.5vw,15px);font-weight:800;color:var(--heading);line-height:1.3;margin-bottom:4px;letter-spacing:-.005em}
+.flow-sub{font-size:clamp(10px,1.2vw,12px);color:var(--sub);line-height:1.4;font-weight:500;font-family:var(--fm);letter-spacing:.02em}
+.flow-arrow{display:flex;align-items:center;padding-top:24px;color:var(--border2);font-size:24px;font-family:var(--fm);flex-shrink:0;width:40px;justify-content:center}
+.flow-connector{position:absolute;top:30px;left:calc(50% + 30px);width:calc(100% - 60px);height:2px;background:linear-gradient(90deg,var(--border2),var(--cta),var(--border2));z-index:1;opacity:.5}
 .flow-step:last-child .flow-connector{display:none}
 
 /* USE CASES */
-.usecase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-.usecase-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:28px;transition:all .35s;position:relative;overflow:hidden}
-.usecase-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(208,62,161,.1);border-color:transparent}
+.usecase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+.usecase-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 28px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(15,17,40,.03)}
+.usecase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--uc-color,#d03ea1);opacity:.9;transition:opacity .25s,height .25s}
+.usecase-card:hover{transform:translateY(-4px);box-shadow:0 24px 56px -20px rgba(208,62,161,.18);border-color:transparent}
+.usecase-card:hover::before{height:4px}
+.usecase-num{position:absolute;top:24px;right:28px;font-family:var(--fm);font-size:12px;font-weight:800;color:var(--sub);letter-spacing:.1em;opacity:.6}
 
 /* WHY */
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.why-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden}
-.why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(208,62,161,.1)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px 26px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.why-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 24px 56px -20px rgba(208,62,161,.2)}
 .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
 .why-card:hover::before{opacity:1}
-.why-icon{margin-bottom:16px}
-.why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
-.why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
+.why-icon{margin-bottom:18px;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.why-card:hover .why-icon{transform:scale(1.06)}
+.why-num{position:absolute;top:24px;right:24px;font-family:var(--fm);font-size:11px;font-weight:800;color:var(--sub);letter-spacing:.08em;opacity:.55}
+.why-title{font-size:17px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.01em;line-height:1.35}
+.why-desc{font-size:14.5px;line-height:1.75;color:var(--sub)}
 
 /* FAQ */
-.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s}
-.faq-item:hover{border-color:var(--border2)}
-.faq-q{padding:20px 26px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:700;color:var(--heading);transition:color .2s}
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .2s}
+.faq-item:hover{border-color:var(--border2);box-shadow:0 6px 20px -10px rgba(15,17,40,.1)}
+.faq-item.open{border-color:var(--cta);box-shadow:0 10px 32px -16px var(--cta-glow)}
+.faq-q{padding:22px 26px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:700;color:var(--heading);transition:color .2s;gap:16px;line-height:1.5;letter-spacing:-.005em;min-height:64px}
 .faq-q:hover{color:var(--cta)}
-.faq-toggle{width:28px;height:28px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--sub);transition:all .25s;flex-shrink:0}
+.faq-toggle{width:32px;height:32px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:300;color:var(--sub);transition:transform .3s cubic-bezier(.16,1,.3,1),background .25s,color .2s;flex-shrink:0}
 .faq-item.open .faq-toggle{background:var(--cta-light);color:var(--cta);transform:rotate(45deg)}
-.faq-a{padding:0 26px 20px;font-size:16px;line-height:1.8;color:var(--sub)}
+.faq-a{padding:0 26px 22px;font-size:15px;line-height:1.85;color:var(--sub)}
 
 /* CTA */
-.final-cta{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px) clamp(80px,12vw,120px);text-align:center;position:relative;overflow:hidden;background:linear-gradient(165deg,#fdeaf5 0%,#fff 40%,#f0ecfe 80%,#eaf0fe 100%)}
-.final-cta-inner{max-width:620px;margin:0 auto;position:relative;z-index:2}
+.final-cta{padding:clamp(72px,10vw,112px) clamp(16px,5vw,48px) clamp(88px,12vw,128px);text-align:center;position:relative;overflow:hidden;background:linear-gradient(165deg,#fdeaf5 0%,#fff 40%,#f0ecfe 80%,#eaf0fe 100%);border-top:1px solid var(--border)}
+.final-cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:2}
+.final-cta-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -139,13 +165,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .hero-text{text-align:center}
   .hero-sub{margin-left:auto;margin-right:auto}
   .hero-ctas{justify-content:center}
-  .hero-stats{justify-content:center}
+  .hero-stats{justify-content:center;grid-template-columns:repeat(3,minmax(0,auto))}
   .dash{max-width:360px}
   .phase-row{flex-direction:column;gap:40px}
   .phase-row.reverse{flex-direction:column}
+  .phase-desc{max-width:none}
   .why-grid{grid-template-columns:repeat(2,1fr)}
   .usecase-grid{grid-template-columns:repeat(2,1fr)}
-  .flow-steps{flex-wrap:wrap;gap:20px;justify-content:center}
+  .flow-steps{flex-wrap:wrap;gap:24px 0;justify-content:center}
   .flow-step{flex:0 0 calc(33.33% - 14px);min-width:120px}
   .flow-connector{display:none}
   .flow-arrow{display:none}
@@ -153,21 +180,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @media(max-width:768px){
   .hero{padding:90px 20px 50px;min-height:auto}
   .hero-badge{padding:7px 16px;margin-bottom:20px}
-  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
-  .hero-stats{flex-direction:row;gap:24px;justify-content:center}
-  .dash{max-width:320px}
-  .why-grid{grid-template-columns:1fr}
-  .usecase-grid{grid-template-columns:1fr}
+  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:320px;margin:0 auto}
+  .hero-stats{gap:18px;grid-template-columns:repeat(3,1fr);text-align:center;width:100%}
+  .hero-stat{padding-left:0}
+  .hero-stat:not(:first-child)::before{display:none}
+  .dash{max-width:340px}
+  .why-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .usecase-grid{grid-template-columns:1fr;max-width:480px;margin:44px auto 0}
   .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
-  .final-cta{padding:60px 20px 80px}
   .btn-cta-lg{padding:14px 24px;font-size:16px;width:100%}
   .btn-ghost{padding:14px 24px;font-size:16px;width:100%}
   .phase-features{gap:8px}
   .phase-feat{font-size:13px}
-  .why-card{padding:22px}
-  .faq-q{padding:16px 20px;font-size:16px}
-  .faq-a{padding:0 20px 16px;font-size:14px}
+  .why-card{padding:24px}
+  .faq-q{padding:18px 22px;font-size:16px;min-height:60px}
+  .faq-a{padding:0 22px 18px;font-size:14px}
   .flow-step{flex:0 0 calc(50% - 10px)}
+  .final-cta-ctas{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}
 }
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
@@ -175,7 +204,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .pvis{aspect-ratio:1/1.4;min-height:400px}
   .pvis>div{transform:scale(0.78);transform-origin:top center}
   .flow-step{flex:0 0 100%}
-  .flow-num{width:48px;height:48px;font-size:18px}
+  .flow-num{width:50px;height:50px;font-size:18px}
 }
 `;
 
@@ -204,11 +233,11 @@ const flowSteps = [
 ];
 
 const flowStepIcons = [
-  <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>,
-  <path d="M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>,
-  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>,
-  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>,
-  <><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></>,
+  <><circle key="f0a" cx="12" cy="12" r="10"/><path key="f0b" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>,
+  <path key="f1" d="M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>,
+  <path key="f2" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>,
+  <path key="f3" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>,
+  <><rect key="f4a" x="3" y="4" width="18" height="18" rx="2" ry="2"/><line key="f4b" x1="16" y1="2" x2="16" y2="6"/><line key="f4c" x1="8" y1="2" x2="8" y2="6"/><line key="f4d" x1="3" y1="10" x2="21" y2="10"/><path key="f4e" d="M9 16l2 2 4-4"/></>,
 ];
 
 const useCases = [
@@ -234,23 +263,26 @@ export default function LibraryPageClient() {
         <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
         <div className="hero-inner">
           <div className="hero-text">
-            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />RE-ENGAGEMENT MODULE</div>
-            <h1 className="anim d2">戻ってきたリードに、<br /><em>AI が資料でナーチャリング</em></h1>
-            <p className="anim d3 hero-sub">資料をアップロードするだけで、AI チャット付きの資料ライブラリー（資料一覧ポップアップ）が自動で立ち上がる。デザインを組んだり、新しいページをサイトに追加する必要はゼロ。検討再開した既存リードに、AI チャット解説付きの資料一覧をその場で届けられる、既存リードのナーチャリング専用機能。</p>
+            <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON LIBRARY</div>
+            <h1 className="anim-y d2">戻ってきたリードに、<br /><em>AI が資料でナーチャリング</em></h1>
+            <p className="anim-y d3 hero-sub">資料をアップロードするだけで、AI チャット付きの資料ライブラリー（資料一覧ポップアップ）が自動で立ち上がる。デザインを組んだり、新しいページをサイトに追加する必要はゼロ。検討再開した既存リードに、AI チャット解説付きの資料一覧をその場で届けられる、既存リードのナーチャリング専用機能。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsMeetingModalOpen(true)}>デモを予約</button>
-              <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>資料請求 →</button>
+              <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>
+                資料請求
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '5 分', l: '資料アップロードで開始' }, { v: 'ノーコード', l: 'デザイン・ページ追加不要' }, { v: 'AI チャット解説', l: '資料の中身を AI が説明' }].map((s, i) => (
-                <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
+              {[{ v: '5 分', l: '資料アップで開始' }, { v: 'ノーコード', l: 'ページ追加不要' }, { v: 'AI 解説', l: '中身を AI が説明' }].map((s, i) => (
+                <div key={i} className="hero-stat"><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
           </div>
           <div className="hero-visual anim d4">
             <div className="dash">
               <div className="dash-hdr">
-                <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#d03ea1,#e555b6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 800 }}>
+                <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#d03ea1,#e555b6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 </div>
                 <div>
@@ -267,12 +299,12 @@ export default function LibraryPageClient() {
                   <div style={{ width: 24, height: 24, borderRadius: 8, background: 'linear-gradient(135deg,#d03ea1,#e555b6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                   </div>
-                  <div style={{ background: '#fdeaf5', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
+                  <div style={{ background: '#fdeaf5', border: '1px solid rgba(208,62,161,.15)', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
                     田中様、お帰りなさい。前回 DL された資料の続編と、ご興味の章に近い事例をご用意しました
                   </div>
                 </div>
                 {/* Resource card 1 */}
-                <div style={{ background: '#fff', border: '1px solid #d03ea120', borderRadius: 10, padding: 10, marginLeft: 30, opacity: 0, animation: 'chatPop .5s 1.0s cubic-bezier(.16,1,.3,1) forwards' }}>
+                <div style={{ background: '#fff', border: '1px solid rgba(208,62,161,.18)', borderRadius: 10, padding: 10, marginLeft: 30, opacity: 0, animation: 'chatPop .5s 1.0s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 28, height: 28, borderRadius: 6, background: 'linear-gradient(135deg,#d03ea1,#e555b6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#fff', fontWeight: 800 }}>PDF</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -282,7 +314,7 @@ export default function LibraryPageClient() {
                   </div>
                 </div>
                 {/* Resource card 2 */}
-                <div style={{ background: '#fff', border: '1px solid #7c5cfc20', borderRadius: 10, padding: 10, marginLeft: 30, opacity: 0, animation: 'chatPop .5s 1.3s cubic-bezier(.16,1,.3,1) forwards' }}>
+                <div style={{ background: '#fff', border: '1px solid rgba(124,92,252,.18)', borderRadius: 10, padding: 10, marginLeft: 30, opacity: 0, animation: 'chatPop .5s 1.3s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 28, height: 28, borderRadius: 6, background: 'linear-gradient(135deg,#7c5cfc,#9b7fff)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#fff', fontWeight: 800 }}>事例</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -292,17 +324,17 @@ export default function LibraryPageClient() {
                   </div>
                 </div>
                 {/* Visitor message */}
-                <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
-                  <div style={{ background: 'var(--surface)', borderRadius: '12px 12px 4px 12px', padding: '10px 14px', maxWidth: '75%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
+                  <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px 4px 12px 12px', padding: '10px 14px', maxWidth: '75%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
                     ROI 試算の章を要約して
                   </div>
                 </div>
                 {/* AI explanation */}
                 <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.9s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ width: 24, height: 24, borderRadius: 8, background: 'linear-gradient(135deg,#d03ea1,#e555b6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
-                  <div style={{ background: '#fdeaf5', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
+                  <div style={{ background: '#fdeaf5', border: '1px solid rgba(208,62,161,.15)', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
                     第3章のポイントは ROI 計算式と業界平均値です。御社規模ですと年間 2,400 万円の効果試算です
                   </div>
                 </div>
@@ -313,7 +345,10 @@ export default function LibraryPageClient() {
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#d03ea1', animation: 'pulse 1.5s infinite' }} />
                   <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>行動履歴に基づく推薦</span>
                 </div>
-                <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)' }}>検討再開検知 →</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)', display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                  検討再開検知
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </span>
               </div>
             </div>
           </div>
@@ -324,7 +359,7 @@ export default function LibraryPageClient() {
       <section className="flow-section">
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>パイプライン</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の流れ</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>既存リードの再訪検知から、AI による資料推薦・解説、Meeton Calendar への引き渡しまで。</p>
           <div className="flow-steps">
@@ -341,7 +376,7 @@ export default function LibraryPageClient() {
                   <div className="flow-title" style={{ whiteSpace: 'pre-line' }}>{step.title}</div>
                   <div className="flow-sub">{step.sub}</div>
                 </div>
-                {i < 4 && <div className="flow-arrow">→</div>}
+                {i < 4 && <div className="flow-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>}
               </div>
             ))}
           </div>
@@ -352,7 +387,7 @@ export default function LibraryPageClient() {
       <section className="section" style={{ position: 'relative', paddingBottom: 0 }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>機能詳細</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の仕組みを深掘り</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>AI 推薦・AI チャット解説・自動ライブラリー生成・Meeton Calendar 引き渡しまで、4 つのコア機能で既存リードの検討再開を捉えます。</p>
         </div>
@@ -364,12 +399,12 @@ export default function LibraryPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#d03ea110', color: '#d03ea1' }}>FEATURE 01</div>
+              <div className="phase-tag" style={{ color: '#d03ea1' }}><span style={{ position: 'relative' }}>FEATURE 01</span></div>
               <div className="phase-h">AI 資料推薦 — 行動履歴から最適資料を選定</div>
               <div className="phase-desc">CRM 上の閲覧ページ・DL 履歴・メール反応・直近の興味分野を AI が解析し、検討フェーズに合った資料を能動的に推薦。「リード自身に資料を探させる」体験を、「AI が最適な資料を持ってくる」体験に変えます。</div>
               <div className="phase-features">
                 {['行動履歴・閲覧ページから興味領域を AI 推定', '検討フェーズ（情報収集 / 比較 / 稟議）に合わせた推薦', '関連度スコアで複数候補をランキング', '推薦理由を AI が会話内で説明'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#d03ea1' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#d03ea115', color: '#d03ea1' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -385,7 +420,7 @@ export default function LibraryPageClient() {
                     { title: '同業界導入事例 5 選', score: '92%', tag: '比較検討フェーズ', icon: '事例', bg: '#f0ecfe', border: '#7c5cfc' },
                     { title: '稟議書テンプレート', score: '88%', tag: '社内稟議フェーズ', icon: 'DOC', bg: '#eaf0fe', border: '#3b6ff5' },
                   ].map((item, i) => (
-                    <div key={i} style={{ background: '#fff', border: `1px solid ${item.border}20`, borderRadius: 10, padding: 10, marginBottom: 8, opacity: 0, animation: `slideIn .5s ${.4 + i * .3}s cubic-bezier(.16,1,.3,1) forwards`, display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div key={i} style={{ background: '#fff', border: `1px solid ${item.border}25`, borderRadius: 10, padding: 10, marginBottom: 8, opacity: 0, animation: `slideIn .5s ${.4 + i * .3}s cubic-bezier(.16,1,.3,1) forwards`, display: 'flex', alignItems: 'center', gap: 10 }}>
                       <div style={{ width: 28, height: 28, borderRadius: 6, background: `linear-gradient(135deg, ${item.border}, ${item.border}cc)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#fff', fontWeight: 800, flexShrink: 0 }}>
                         {item.icon}
                       </div>
@@ -407,12 +442,12 @@ export default function LibraryPageClient() {
           {/* Feature 2: AI Explanation */}
           <div className="phase-row reverse">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 02</div>
+              <div className="phase-tag" style={{ color: '#7c5cfc' }}><span style={{ position: 'relative' }}>FEATURE 02</span></div>
               <div className="phase-h">AI チャット解説 — 資料の中身を AI がその場で説明</div>
               <div className="phase-desc">推薦した資料の中身を、AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、「ROI 計算式の章だけ要約して」「他社との違いは？」といった章単位の質問にもリアルタイムで回答します。</div>
               <div className="phase-features">
                 {['資料全文を AI が要約・章単位で解説', '質問に資料の根拠を引用して回答', '複数資料を横断した要点抽出', 'リードの理解度に合わせた説明トーン調整'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#7c5cfc15', color: '#7c5cfc' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -421,24 +456,24 @@ export default function LibraryPageClient() {
                 <div style={{ padding: 16 }}>
                   {/* User question */}
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', marginBottom: 10, opacity: 0, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards', justifyContent: 'flex-end' }}>
-                    <div style={{ background: 'var(--surface)', borderRadius: '10px 10px 4px 10px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5, maxWidth: '75%' }}>
+                    <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px 4px 10px 10px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5, maxWidth: '75%' }}>
                       ROI 計算の章を要約して
                     </div>
-                    <div style={{ width: 22, height: 22, borderRadius: 6, background: 'var(--surface)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 9, fontWeight: 800, color: 'var(--heading)' }}>U</div>
                   </div>
                   {/* AI explanation */}
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', marginBottom: 10, opacity: 0, animation: 'chatPop .5s .7s cubic-bezier(.16,1,.3,1) forwards' }}>
                     <div style={{ width: 22, height: 22, borderRadius: 6, background: 'linear-gradient(135deg,#7c5cfc,#9b7fff)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
                     </div>
-                    <div style={{ background: '#f0ecfe', borderRadius: '10px 10px 10px 4px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
+                    <div style={{ background: '#f0ecfe', border: '1px solid rgba(124,92,252,.18)', borderRadius: '4px 10px 10px 10px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
                       第3章のポイントは ROI 計算式と業界平均値です。御社規模ですと年間 2,400 万円の効果試算です
                     </div>
                   </div>
                   {/* Citation card */}
-                  <div style={{ background: '#fff', border: '1px solid #7c5cfc20', borderRadius: 10, padding: 10, marginLeft: 30, opacity: 0, animation: 'chatPop .5s 1.1s cubic-bezier(.16,1,.3,1) forwards' }}>
+                  <div style={{ background: '#fff', border: '1px solid rgba(124,92,252,.2)', borderRadius: 10, padding: 10, marginLeft: 30, opacity: 0, animation: 'chatPop .5s 1.1s cubic-bezier(.16,1,.3,1) forwards' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: '#7c5cfc' }}>📎 引用元</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                      <span style={{ fontSize: 9, fontWeight: 800, color: '#7c5cfc', letterSpacing: '.1em', fontFamily: 'var(--fm)' }}>引用元</span>
                     </div>
                     <div style={{ fontSize: 9, fontWeight: 600, color: 'var(--sub)', lineHeight: 1.5 }}>
                       ROI 試算実践ガイド v3 · 第 3 章「業界別 ROI 計算式」(p.12-15)
@@ -447,7 +482,7 @@ export default function LibraryPageClient() {
                   {/* Follow up */}
                   <div style={{ display: 'flex', gap: 6, marginTop: 10, marginLeft: 30, flexWrap: 'wrap', opacity: 0, animation: 'chatPop .5s 1.5s cubic-bezier(.16,1,.3,1) forwards' }}>
                     {['他社事例は？', '導入工数は？', '料金詳細を見る'].map((q, i) => (
-                      <span key={i} style={{ fontSize: 9, fontWeight: 700, color: '#7c5cfc', background: '#f0ecfe', border: '1px solid #7c5cfc30', padding: '4px 10px', borderRadius: 12 }}>{q}</span>
+                      <span key={i} style={{ fontSize: 9, fontWeight: 700, color: '#7c5cfc', background: '#f0ecfe', border: '1px solid rgba(124,92,252,.25)', padding: '4px 10px', borderRadius: 12 }}>{q}</span>
                     ))}
                   </div>
                 </div>
@@ -456,15 +491,15 @@ export default function LibraryPageClient() {
           </div>
           <div className="phase-divider" />
 
-          {/* Feature 3: CRM Integration */}
+          {/* Feature 3: Auto Library Generation */}
           <div className="phase-row">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#0891b210', color: '#0891b2' }}>FEATURE 03</div>
+              <div className="phase-tag" style={{ color: '#0891b2' }}><span style={{ position: 'relative' }}>FEATURE 03</span></div>
               <div className="phase-h">資料アップロードで AI ライブラリー自動生成</div>
               <div className="phase-desc">PDF・スライド・ホワイトペーパーをアップロードするだけで、AI チャット付きの資料ライブラリーがポップアップ形式で自動立ち上がり。Web 制作・デザイン・新規ページ追加といった工数は一切ゼロ。既存サイトに JS タグ 1 行を入れるだけで稼働します。</div>
               <div className="phase-features">
                 {['資料をアップロードするだけ、UI は自動生成', 'デザイン作業不要・新規ページ追加不要', 'JS タグ 1 行で既存サイトに即組み込み', '資料の追加・差し替えはアップロードだけで反映'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#0891b2' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#0891b215', color: '#0891b2' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -473,25 +508,36 @@ export default function LibraryPageClient() {
                 <div style={{ padding: 16 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0891b2', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>CRM 文脈で推薦精度を向上</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>アップロードで自動生成</span>
                   </div>
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, opacity: 0, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                      <div style={{ width: 26, height: 26, borderRadius: 6, background: 'linear-gradient(135deg,#0891b2,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M17 8l-5-5-5 5 M12 3v12"/></svg>
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--heading)' }}>資料アップロード</div>
+                        <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>PDF / PPTX / DOCX 対応</div>
+                      </div>
+                    </div>
                     {[
-                      { label: 'リード', value: '田中 太郎 (識別済)', color: '#12a37d' },
-                      { label: '会社規模', value: '従業員 500-1000', color: '#3b6ff5' },
-                      { label: '初回コンバート', value: '6 ヶ月前', color: '#7c5cfc' },
-                      { label: '直近活動', value: '料金ページ 3 回閲覧', color: '#d03ea1' },
-                      { label: '検討フェーズ', value: '比較検討中 (推定)', color: '#0891b2' },
-                    ].map((field, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '7px 0', borderBottom: i < 4 ? '1px solid var(--border)' : 'none', opacity: 0, animation: `slideIn .5s ${.6 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>{field.label}</span>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: field.color }}>{field.value}</span>
+                      { name: 'ROI試算ガイド.pdf', size: '2.4 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
+                      { name: '導入事例集.pdf', size: '5.1 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
+                      { name: '稟議書テンプレ.pptx', size: '1.8 MB', status: '解析中 78%', color: '#d03ea1', icon: 'PPT' },
+                    ].map((f, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0', borderBottom: i < 2 ? '1px solid var(--border)' : 'none', opacity: 0, animation: `slideIn .5s ${.6 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
+                        <div style={{ width: 22, height: 22, borderRadius: 4, background: `linear-gradient(135deg, ${f.color}, ${f.color}cc)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 7, color: '#fff', fontWeight: 800 }}>{f.icon}</div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--heading)' }}>{f.name}</div>
+                          <div style={{ fontSize: 8, color: 'var(--sub)', fontWeight: 600 }}>{f.size}</div>
+                        </div>
+                        <span style={{ fontSize: 8.5, fontWeight: 800, color: f.color, background: `${f.color}14`, padding: '2px 7px', borderRadius: 4 }}>{f.status}</span>
                       </div>
                     ))}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 12, opacity: 0, animation: 'slideIn .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#0891b2', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#0891b2' }}>HubSpot / Salesforce 同期中...</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0891b2" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#0891b2' }}>AI チャット付きライブラリーを自動生成</span>
                   </div>
                 </div>
               </div>
@@ -502,12 +548,12 @@ export default function LibraryPageClient() {
           {/* Feature 4: Calendar Handoff */}
           <div className="phase-row reverse">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#3b6ff510', color: '#3b6ff5' }}>FEATURE 04</div>
+              <div className="phase-tag" style={{ color: '#3b6ff5' }}><span style={{ position: 'relative' }}>FEATURE 04</span></div>
               <div className="phase-h">Meeton Calendar 連携 — 検討再開を捉えて商談化</div>
-              <div className="phase-desc">資料解説対話の中で AI が「検討再開のシグナル」（具体的な料金質問・導入時期の言及・比較検討の発言など）を検知すると、Meeton Calendar の予約 UI を会話内に直接展開。商談機会を逃さず、その場で予約まで完結します。</div>
+              <div className="phase-desc">AI チャット解説の中で「検討再開のシグナル」（具体的な料金質問・導入時期の言及・比較検討の発言など）を検知すると、Meeton Calendar の予約 UI を会話内に直接展開。商談機会を逃さず、その場で予約まで完結します。</div>
               <div className="phase-features">
                 {['検討再開シグナルを AI が自動検知', 'Meeton Calendar の予約 UI を会話内展開', 'CRM の担当者ルールで自動割り振り', 'ページ遷移なしで商談確定'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#3b6ff5' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#3b6ff515', color: '#3b6ff5' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -516,7 +562,7 @@ export default function LibraryPageClient() {
                 <div style={{ padding: 16 }}>
                   {/* Signal detected */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10, opacity: 0, animation: 'slideIn .5s .2s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    <span style={{ fontSize: 12 }}>⚡</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d03ea1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                     <span style={{ fontSize: 10, fontWeight: 800, color: '#d03ea1' }}>検討再開シグナル検知: 料金詳細への質問</span>
                   </div>
                   {/* AI message */}
@@ -524,7 +570,7 @@ export default function LibraryPageClient() {
                     <div style={{ width: 22, height: 22, borderRadius: 6, background: 'linear-gradient(135deg,#3b6ff5,#5b8aff)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
-                    <div style={{ background: '#eaf0fe', borderRadius: '10px 10px 10px 4px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
+                    <div style={{ background: '#eaf0fe', border: '1px solid rgba(59,111,245,.18)', borderRadius: '4px 10px 10px 10px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
                       佐藤 SDR と 15 分で詳細料金をご案内します。お時間をお選びください
                     </div>
                   </div>
@@ -547,8 +593,8 @@ export default function LibraryPageClient() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10, opacity: 0, animation: 'chatPop .5s 1.8s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    <div style={{ background: '#fdeaf5', border: '1px solid #d03ea130', borderRadius: 8, padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 6, animation: 'ringPulse 2s infinite' }}>
-                      <span style={{ fontSize: 12 }}>✓</span>
+                    <div style={{ background: 'linear-gradient(135deg,#fdeaf5,#fae5f0)', border: '1px solid rgba(208,62,161,.25)', borderRadius: 10, padding: '6px 14px', display: 'inline-flex', alignItems: 'center', gap: 6, animation: 'ringPulse 2s infinite' }}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#d03ea1" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                       <span style={{ fontSize: 10, fontWeight: 800, color: '#d03ea1' }}>15:00 で商談化完了</span>
                     </div>
                   </div>
@@ -560,30 +606,27 @@ export default function LibraryPageClient() {
       </section>
 
       {/* USE CASES */}
-      <section className="section" style={{ position: 'relative' }}>
+      <section className="section" style={{ background: 'var(--surface)', position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>USE CASES</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>USE CASES</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の活用シーン</div>
           <div className="usecase-grid">
             {useCases.map((uc, i) => (
-              <div className="usecase-card" key={i}>
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: uc.color, borderRadius: '20px 20px 0 0' }} />
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: `${uc.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              <div className="usecase-card" key={i} style={{ ['--uc-color' as string]: uc.color }}>
+                <div className="usecase-num">{String(i + 1).padStart(2, '0')}</div>
+                <div style={{ width: 52, height: 52, borderRadius: 14, background: `${uc.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    {i === 0 && <path d="M3 3v18h18 M7 14l4-4 4 4 6-6"/>}
+                    {i === 1 && <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>}
+                    {i === 2 && <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6 M16 13H8 M16 17H8 M10 9H8"/></>}
                   </svg>
                 </div>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', marginBottom: 10 }}>{uc.title}</div>
-                <div style={{ fontSize: 14, lineHeight: 1.75, color: 'var(--sub)', marginBottom: 16 }}>{uc.desc}</div>
-                <div style={{ background: `${uc.color}08`, border: `1px solid ${uc.color}20`, borderRadius: 10, padding: '10px 14px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: uc.color }} />
-                    <span style={{ fontSize: 9, fontWeight: 700, color: uc.color }}>AI 推薦・解説例</span>
-                  </div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5, fontStyle: 'italic' }}>
-                    &ldquo;{uc.msg}&rdquo;
-                  </div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', marginBottom: 12, letterSpacing: '-.01em', lineHeight: 1.35 }}>{uc.title}</div>
+                <div style={{ fontSize: 14.5, lineHeight: 1.75, color: 'var(--sub)', marginBottom: 20, flex: 1 }}>{uc.desc}</div>
+                <div style={{ background: `${uc.color}08`, border: `1px solid ${uc.color}25`, borderRadius: 10, padding: '14px 16px', borderLeft: `3px solid ${uc.color}` }}>
+                  <div style={{ fontSize: 10, fontWeight: 800, color: uc.color, marginBottom: 6, letterSpacing: '.15em', fontFamily: 'var(--fm)' }}>AI 推薦・解説例</div>
+                  <div style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--text)', lineHeight: 1.65 }}>{uc.msg}</div>
                 </div>
               </div>
             ))}
@@ -604,13 +647,14 @@ export default function LibraryPageClient() {
       <section className="section" style={{ position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Library なのか</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>静的な資料 DL ページではなく、既存リードの検討再開を捉える AI ナーチャリングプラットフォーム。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
-                <div className="why-icon" style={{width:48,height:48,borderRadius:12,background:`${w.color}12`,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <div className="why-num">0{i + 1}</div>
+                <div className="why-icon" style={{width:48,height:48,borderRadius:12,background:`${w.color}12`,display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={w.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={w.iconPath}/></svg>
                 </div>
                 <div className="why-title">{w.title}</div>
@@ -633,7 +677,7 @@ export default function LibraryPageClient() {
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--surface)' }}>
         <div className="section-inner">
-          <div className="slabel" style={{ textAlign: 'center' }}>よくある質問</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>よくある質問</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>FAQ</div>
           <div style={{ height: 36 }} />
           <div className="faq-list">
@@ -655,12 +699,15 @@ export default function LibraryPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="glow" style={{ background: 'rgba(208,62,161,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
-          <div className="slabel">今すぐ始める</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library で、<br />既存リードの商談機会を再発火</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library で、<br /><em>既存リードの商談機会を再発火</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>AI が行動履歴から最適資料を推薦・解説。検討再開を捉えて Meeton Calendar に引き渡し、商談機会を再点火させます。</p>
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsMeetingModalOpen(true)}>デモを予約</button>
-            <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>資料請求 →</button>
+            <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>
+              資料請求
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </div>
       </section>
