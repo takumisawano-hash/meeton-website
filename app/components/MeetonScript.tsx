@@ -48,7 +48,9 @@ export default function MeetonScript() {
   // primary content. These are noindex so Lighthouse/PSI never sees them.
   // Load the widget eagerly here — gesture-gating creates a perceived-slow
   // experience because users wait for the calendar after their CV action.
-  const eagerLoad = pathname?.startsWith('/thanks')
+  // Match both /thanks/* (e.g. /thanks/document/) and any nested */thanks/*
+  // (e.g. /contact/thanks/).
+  const eagerLoad = !!pathname && /(^|\/)thanks(\/|$)/.test(pathname)
 
   useEffect(() => {
     const removeManagedScript = () => {
