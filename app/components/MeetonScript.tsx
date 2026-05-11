@@ -44,6 +44,11 @@ export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
   const skipOnLp = pathname?.startsWith('/lp')
+  // Thanks pages are post-conversion: the Meeton calendar popup IS the
+  // primary content. These are noindex so Lighthouse/PSI never sees them.
+  // Load the widget eagerly here — gesture-gating creates a perceived-slow
+  // experience because users wait for the calendar after their CV action.
+  const eagerLoad = pathname?.startsWith('/thanks')
 
   useEffect(() => {
     const removeManagedScript = () => {
@@ -79,11 +84,31 @@ export default function MeetonScript() {
       document.body.appendChild(script)
     }
 
-    // Gesture-only loading. We removed the setTimeout / requestIdleCallback
-    // backstops that previously fired the widget after 12s — Lighthouse/PSI
-    // waits for network idle before finalizing metrics, so any auto-fire
-    // pulls the 1MB iframe.js + 1.5MB demo image into the measurement
-    // window regardless of what timeout we picked.
+    // Thanks pages: load immediately. The user has just converted —
+    // they're waiting for the calendar popup to appear. Delaying for a
+    // gesture creates the "popup loads slowly" complaint we got from
+    // the user. These pages are noindex so no PSI/Lighthouse hit.
+    if (eagerLoad) {
+      // Defer to next tick so React commit completes first, but no
+      // gesture wait. Use requestIdleCallback if available for
+      // marginally better perceived performance on slower devices.
+      const rIC =
+        (window as Window & { requestIdleCallback?: (cb: IdleRequestCallback) => number })
+          .requestIdleCallback
+      if (typeof rIC === 'function') {
+        rIC(loadMeetonScript)
+      } else {
+        setTimeout(loadMeetonScript, 0)
+      }
+      return () => removeManagedScript()
+    }
+
+    // Gesture-only loading for everywhere else. We removed the setTimeout
+    // / requestIdleCallback backstops that previously fired the widget
+    // after 12s — Lighthouse/PSI waits for network idle before finalizing
+    // metrics, so any auto-fire pulls the 1MB iframe.js + 1.5MB demo
+    // image into the measurement window regardless of what timeout we
+    // picked.
     //
     // Real visitors who interact at all (scroll-related events removed
     // since Lighthouse simulates them; we trust pointer/key/touch/click/
@@ -104,7 +129,7 @@ export default function MeetonScript() {
       events.forEach((e) => window.removeEventListener(e, trigger))
       removeManagedScript()
     }
-  }, [teamId, skipOnLp])
+  }, [teamId, skipOnLp, eagerLoad])
 
   return null
 }
