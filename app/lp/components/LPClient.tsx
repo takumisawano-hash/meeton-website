@@ -738,7 +738,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 /* ── HERO SPLIT ── */
 .lp-hero{position:relative;overflow:hidden;padding:80px 24px 60px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f3f0ff 60%,#fff 100%)}
 .lp-dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.06) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.lp-glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.lp-glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
 .lp-glow-1{width:500px;height:500px;background:rgba(18,163,125,.1);top:-10%;right:-5%}
 .lp-glow-2{width:400px;height:400px;background:rgba(124,92,252,.08);bottom:-10%;left:-5%}
 
