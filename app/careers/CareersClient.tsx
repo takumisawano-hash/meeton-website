@@ -104,44 +104,116 @@ const proof = [
   },
 ];
 
-const bentos = [
+type BentoItem = {
+  size: "lg" | "md" | "sm";
+  eyebrow: string;
+  title: string;
+  body: string;
+  icon: "equity" | "tools" | "impact" | "speed" | "customer" | "global";
+};
+
+const bentos: BentoItem[] = [
   {
     size: "lg",
     eyebrow: "01 / EQUITY",
     title: "Pre-Series A の当事者権",
     body: "会社が 10 倍になる前のメンバーとして、意思決定とストックオプションの双方にアクセスできる。",
+    icon: "equity",
   },
   {
     size: "sm",
     eyebrow: "02 / TOOLS",
     title: "AI ツールは全支給",
     body: "Claude / Cursor / ChatGPT Enterprise / Gemini ほか、最先端ツールを会社負担で。",
+    icon: "tools",
   },
   {
     size: "sm",
     eyebrow: "03 / IMPACT",
     title: "1 人の影響力",
     body: "小さなチームだからこそ、一人の選択がプロダクトと会社の輪郭を決める。",
+    icon: "impact",
   },
   {
     size: "md",
     eyebrow: "04 / SPEED",
     title: "議論は15分、実装は翌日",
     body: "ルールではなくプリンシプル。スピードは文化で、プロセスで守るものではない。",
+    icon: "speed",
   },
   {
     size: "md",
     eyebrow: "05 / CUSTOMER",
     title: "毎週、顧客と話す距離感",
     body: "成果が出た瞬間に立ち会える仕事。導入企業のリアルが、意思決定の素材になる。",
+    icon: "customer",
   },
   {
     size: "lg",
     eyebrow: "06 / GLOBAL",
     title: "日本語と英語が、同じ会議で飛び交う。",
     body: "社内は日英ハイブリッド。海外メンバーと日本メンバーが同じ Slack で議論し、日本発のカテゴリを最初からアジア・世界の文脈で設計する。「英語環境で働きたい」も「日本語で深く議論したい」も、両方叶う環境。",
+    icon: "global",
   },
 ];
+
+function BentoIcon({ name }: { name: BentoItem["icon"] }) {
+  const common = {
+    width: 22,
+    height: 22,
+    viewBox: "0 0 24 24",
+    fill: "none" as const,
+    stroke: "currentColor",
+    strokeWidth: 1.8,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  switch (name) {
+    case "equity":
+      return (
+        <svg {...common}>
+          <path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4Z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      );
+    case "tools":
+      return (
+        <svg {...common}>
+          <path d="m14.7 6.3 3 3a1 1 0 0 1 0 1.4l-9 9a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 0-1.4l9-9a1 1 0 0 1 1.4 0Z" />
+          <path d="m13 8 3 3" />
+          <path d="M18 3v4M16 5h4" />
+        </svg>
+      );
+    case "impact":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="3" />
+          <circle cx="12" cy="12" r="7" />
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+        </svg>
+      );
+    case "speed":
+      return (
+        <svg {...common}>
+          <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+        </svg>
+      );
+    case "customer":
+      return (
+        <svg {...common}>
+          <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z" />
+        </svg>
+      );
+    case "global":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z" />
+        </svg>
+      );
+  }
+}
 
 const processSteps = [
   { num: "01", title: "カジュアル面談", desc: "まずは 30 分、互いの温度を合わせる。" },
@@ -671,12 +743,32 @@ const css = `
 .bento-cell.sz-sm { grid-column: span 2; }
 .bento-cell.first { background: linear-gradient(155deg, var(--surface) 0%, var(--surface) 60%, var(--accent-glow) 100%); }
 .bento-cell.last { background: linear-gradient(215deg, var(--surface) 0%, var(--surface) 65%, rgba(59,111,245,0.10) 100%); }
+.bento-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
 .bento-meta {
   font-family: var(--fm);
   font-size: 11px;
   color: var(--accent);
   letter-spacing: 0.12em;
-  margin-bottom: 24px;
+}
+.bento-ico {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-glow);
+  color: var(--accent-deep);
+  border: 1px solid rgba(14,171,110,0.18);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.bento-cell:hover .bento-ico {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: rotate(-4deg) scale(1.05);
 }
 .bento-title {
   font-weight: 800;
@@ -883,6 +975,7 @@ export default function CareersClient() {
       {/* ============ HERO ============ */}
       <section className="hero">
         <div className="hero-mesh" />
+        <div className="hero-mesh l" />
         <div className="hero-grid-overlay" />
         <div className="hero-inner">
           <div className="hero-eyebrow-pill">
@@ -1122,7 +1215,10 @@ export default function CareersClient() {
                 className={`bento-cell sz-${b.size}${i === 0 ? " first" : ""}${i === bentos.length - 1 ? " last" : ""}`}
                 key={b.eyebrow}
               >
-                <div className="bento-meta">{b.eyebrow}</div>
+                <div className="bento-head">
+                  <span className="bento-ico" aria-hidden="true"><BentoIcon name={b.icon} /></span>
+                  <div className="bento-meta">{b.eyebrow}</div>
+                </div>
                 <div>
                   <div className="bento-title">{b.title}</div>
                   <div className="bento-body">{b.body}</div>
