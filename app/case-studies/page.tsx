@@ -74,8 +74,6 @@ export default async function CaseStudiesPage() {
       {/* HERO */}
       <section className="cs-hero">
         <div className="cs-hero-grid" aria-hidden />
-        <div className="cs-hero-glow cs-hero-glow-1" aria-hidden />
-        <div className="cs-hero-glow cs-hero-glow-2" aria-hidden />
         <div className="cs-hero-inner">
           <div className="cs-eyebrow">
             <span className="cs-eyebrow-dash" />
@@ -424,7 +422,10 @@ export default async function CaseStudiesPage() {
           padding: clamp(120px, 16vw, 180px) clamp(20px, 4vw, 48px) clamp(48px, 7vw, 80px);
           border-bottom: 1px solid var(--cs-border);
           overflow: hidden;
+          /* Pre-baked glow via stacked radial-gradients (GPU-cheap, no filter:blur) */
           background:
+            radial-gradient(circle 360px at calc(100% - 40px) -80px, rgba(18, 163, 125, 0.22), transparent 70%),
+            radial-gradient(circle 280px at -40px calc(100% - 40px), rgba(124, 92, 252, 0.16), transparent 70%),
             radial-gradient(ellipse 80% 60% at 20% 0%, rgba(18, 163, 125, 0.06), transparent 60%),
             radial-gradient(ellipse 60% 50% at 90% 30%, rgba(124, 92, 252, 0.05), transparent 60%),
             #fafaf7;
@@ -438,27 +439,6 @@ export default async function CaseStudiesPage() {
           background-size: 64px 64px;
           mask-image: radial-gradient(ellipse at top, black 30%, transparent 80%);
           pointer-events: none;
-        }
-        .cs-hero-glow {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(110px);
-          pointer-events: none;
-          z-index: 0;
-        }
-        .cs-hero-glow-1 {
-          width: 480px;
-          height: 480px;
-          background: rgba(18, 163, 125, 0.18);
-          top: -180px;
-          right: -120px;
-        }
-        .cs-hero-glow-2 {
-          width: 380px;
-          height: 380px;
-          background: rgba(124, 92, 252, 0.12);
-          bottom: -120px;
-          left: -80px;
         }
         .cs-hero-inner {
           position: relative;
