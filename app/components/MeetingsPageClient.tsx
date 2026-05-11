@@ -23,69 +23,87 @@ const css = `
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUpOnly{from{transform:translateY(24px)}to{transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 .anim{opacity:0;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) forwards}
+.anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
 .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(8,145,178,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
 .glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
 
-.btn{border:none;cursor:pointer;font-family:var(--fb);transition:all .25s;font-weight:700;border-radius:10px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#06b6d4);color:#fff;padding:12px 26px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow)}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--cta-glow)}
-.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 6px 28px var(--cta-glow)}
-.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 38px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s}
-.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light)}
+.btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-cta{background:linear-gradient(135deg,var(--cta),#06b6d4);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
+.btn-cta:active{transform:translateY(0)}
+.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
+.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 36px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);transform:translateY(-1px)}
+.btn-ghost:active{transform:translateY(0)}
+.btn-ghost svg{transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.btn-ghost:hover svg{transform:translateX(3px)}
 
-.slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
-.section{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px)}
+.slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
+.slabel::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+.slabel-c{justify-content:center}
+.slabel-c::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+.section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
-.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.2;letter-spacing:-.5px;margin-bottom:18px}
-.ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
+.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
+.stitle em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:680px}
 
 /* HERO - Split Layout */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#ecfeff 0%,#fff 30%,#f0f9ff 60%,#fff 100%)}
-.hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,64px);position:relative;z-index:2}
-.hero-text{flex:1.2;min-width:0}
+.hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,72px);position:relative;z-index:2}
+.hero-text{flex:1.15;min-width:0}
 .hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(8,145,178,.15);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,5vw,62px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2px;margin-bottom:22px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:520px;margin-bottom:36px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(8,145,178,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(8,145,178,.4)}
+.hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;color:var(--heading);line-height:1.1;letter-spacing:-.025em;margin-bottom:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
+.hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:540px;margin-bottom:36px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:clamp(24px,4vw,48px);margin-top:clamp(32px,5vw,48px);padding-top:clamp(24px,4vw,36px);border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--cta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
-.stat-l{font-size:clamp(12px,1.5vw,14px);color:var(--sub);margin-top:6px;font-weight:600}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,auto));gap:clamp(20px,4vw,48px);margin-top:clamp(32px,5vw,44px);padding-top:clamp(24px,4vw,32px);border-top:1px solid var(--border)}
+.hero-stat{position:relative;padding-left:clamp(16px,2vw,20px)}
+.hero-stat:first-child{padding-left:0}
+.hero-stat:not(:first-child)::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border)}
+.stat-v{font-family:var(--fm);font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--cta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em;line-height:1.05}
+.stat-l{font-size:clamp(11px,1.5vw,13px);color:var(--sub);margin-top:8px;font-weight:600;letter-spacing:.02em}
 
 /* Dashboard Visual */
 @keyframes rowSlide{0%{opacity:0;transform:translateX(-16px)}100%{opacity:1;transform:translateX(0)}}
 @keyframes barGrow{0%{width:0}100%{width:var(--bw)}}
 @keyframes badgePop{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}
 @keyframes dotBlink{0%,100%{opacity:.3}50%{opacity:1}}
-.dash{width:100%;max-width:420px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
+.dash{width:100%;max-width:420px;background:#fff;border-radius:22px;box-shadow:0 24px 64px rgba(8,145,178,.1),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.dash:hover{transform:translateY(-4px);box-shadow:0 32px 80px rgba(8,145,178,.18),0 1px 3px rgba(0,0,0,.04)}
 .dash-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f0fffe,#f5f3ff)}
 .dash-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(223,227,240,.5);opacity:0;animation:rowSlide .5s cubic-bezier(.16,1,.3,1) forwards}
 .dash-avatar{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:800;flex-shrink:0}
 
 /* PHASE ROWS */
-.phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,64px);padding:clamp(40px,8vw,80px) 0;position:relative}
+.phase-row{display:flex;align-items:center;gap:clamp(32px,6vw,72px);padding:clamp(40px,8vw,80px) 0;position:relative}
 .phase-row.reverse{flex-direction:row-reverse}
 .phase-text{flex:1;min-width:0}
 .phase-vis{flex:1;min-width:0;display:flex;align-items:center;justify-content:center}
-.phase-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px;font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
-.phase-h{font-size:clamp(24px,4vw,32px);font-weight:900;color:var(--heading);letter-spacing:-.5px;margin-bottom:14px;line-height:1.25}
-.phase-desc{font-size:clamp(14px,2vw,16px);line-height:1.85;color:var(--sub);margin-bottom:22px}
+.phase-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;border:1px solid currentColor;position:relative}
+.phase-tag::before{content:'';position:absolute;inset:0;border-radius:inherit;background:currentColor;opacity:.08;pointer-events:none}
+.phase-tag-num{font-family:var(--fm);opacity:.6;font-size:10px}
+.phase-h{font-size:clamp(24px,4vw,34px);font-weight:900;color:var(--heading);letter-spacing:-.022em;margin-bottom:14px;line-height:1.22}
+.phase-desc{font-size:clamp(14px,2vw,16px);line-height:1.85;color:var(--sub);margin-bottom:24px;max-width:480px}
 .phase-features{display:flex;flex-direction:column;gap:10px}
-.phase-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:600;color:var(--text)}
-.phase-feat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:8px}
-.phase-divider{height:1px;background:var(--border);max-width:1140px;margin:0 auto}
+.phase-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:600;color:var(--text);line-height:1.55}
+.phase-feat-icon{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.phase-feat-icon svg{width:11px;height:11px}
+.phase-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);max-width:1140px;margin:0 auto}
 
 /* PHASE VISUALS */
-.pvis{width:100%;max-width:440px;aspect-ratio:4/3;border-radius:20px;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.06);border:1px solid var(--border)}
+.pvis{width:100%;max-width:440px;aspect-ratio:4/3;border-radius:22px;position:relative;overflow:hidden;box-shadow:0 10px 44px rgba(8,145,178,.08),0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s}
+.pvis:hover{transform:translateY(-3px);box-shadow:0 16px 56px rgba(8,145,178,.14),0 1px 3px rgba(0,0,0,.04)}
 
 @keyframes chatPop{0%{opacity:0;transform:translateY(16px) scale(.92)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes scoreUp{0%{width:0}100%{width:var(--sw)}}
@@ -94,50 +112,59 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @keyframes ringPulse{0%{box-shadow:0 0 0 0 rgba(8,145,178,.4)}70%{box-shadow:0 0 0 12px rgba(8,145,178,0)}100%{box-shadow:0 0 0 0 rgba(8,145,178,0)}}
 
 .vis0{background:linear-gradient(160deg,#ecfeff,#f0f9ff)}
-.vis1{background:linear-gradient(160deg,#ecfeff,#f5f3ff)}
-.vis2{background:linear-gradient(160deg,#f0f9ff,#ecfeff)}
-.vis3{background:linear-gradient(160deg,#f5f3ff,#ecfeff)}
+.vis1{background:linear-gradient(160deg,#edfcf7,#ecfeff)}
+.vis2{background:linear-gradient(160deg,#eaf0fe,#ecfeff)}
+.vis3{background:linear-gradient(160deg,#f0ecfe,#ecfeff)}
 
 /* FLOW STEPS */
-.flow-section{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px);background:var(--surface);position:relative;overflow:hidden}
+.flow-section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px);background:linear-gradient(180deg,var(--surface) 0%,#eef1f8 100%);position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .flow-steps{display:flex;align-items:flex-start;justify-content:center;gap:0;max-width:1140px;margin:0 auto;position:relative}
-.flow-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;position:relative;padding:0 8px;min-width:0}
-.flow-num{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:20px;font-weight:800;color:#fff;margin-bottom:14px;position:relative;z-index:2;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.flow-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;position:relative;padding:0 8px;min-width:0;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.flow-step:hover{transform:translateY(-3px)}
+.flow-num{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:22px;font-weight:800;color:#fff;margin-bottom:14px;position:relative;z-index:2;box-shadow:0 6px 20px rgba(0,0,0,.12),0 0 0 6px rgba(255,255,255,.7),0 0 0 7px var(--border)}
+.flow-step:hover .flow-num{box-shadow:0 10px 28px rgba(8,145,178,.25),0 0 0 6px rgba(255,255,255,.9),0 0 0 7px var(--cta)}
 .flow-icon{font-size:24px;margin-bottom:8px}
-.flow-title{font-size:clamp(12px,1.5vw,15px);font-weight:800;color:var(--heading);line-height:1.3;margin-bottom:4px}
-.flow-sub{font-size:clamp(10px,1.2vw,12px);color:var(--sub);line-height:1.4;font-weight:500}
-.flow-arrow{display:flex;align-items:center;padding-top:20px;color:var(--border2);font-size:24px;font-family:var(--fm);flex-shrink:0;width:40px;justify-content:center}
-.flow-connector{position:absolute;top:28px;left:calc(50% + 28px);width:calc(100% - 56px);height:2px;background:linear-gradient(90deg,var(--border2),var(--cta),var(--border2));z-index:1}
+.flow-title{font-size:clamp(12px,1.5vw,15px);font-weight:800;color:var(--heading);line-height:1.3;margin-bottom:4px;letter-spacing:-.005em}
+.flow-sub{font-size:clamp(10px,1.2vw,12px);color:var(--sub);line-height:1.4;font-weight:500;font-family:var(--fm);letter-spacing:.02em}
+.flow-arrow{display:flex;align-items:center;padding-top:24px;color:var(--border2);font-size:24px;font-family:var(--fm);flex-shrink:0;width:40px;justify-content:center}
+.flow-connector{position:absolute;top:30px;left:calc(50% + 30px);width:calc(100% - 60px);height:2px;background:linear-gradient(90deg,var(--border2),var(--cta),var(--border2));z-index:1;opacity:.5}
 .flow-step:last-child .flow-connector{display:none}
 
 /* USE CASES */
-.usecase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-.usecase-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:28px;transition:all .35s;position:relative;overflow:hidden}
-.usecase-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(8,145,178,.1);border-color:transparent}
+.usecase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+.usecase-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 28px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(15,17,40,.03)}
+.usecase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--uc-color,#0891b2);opacity:.9;transition:opacity .25s,height .25s}
+.usecase-card:hover{transform:translateY(-4px);box-shadow:0 24px 56px -20px rgba(8,145,178,.18);border-color:transparent}
+.usecase-card:hover::before{height:4px}
+.usecase-num{position:absolute;top:24px;right:28px;font-family:var(--fm);font-size:12px;font-weight:800;color:var(--sub);letter-spacing:.1em;opacity:.6}
 
 /* WHY */
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.why-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden}
-.why-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 12px 40px rgba(8,145,178,.1)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px 26px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.why-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 24px 56px -20px rgba(8,145,178,.2)}
 .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cta),var(--accent));opacity:0;transition:opacity .3s}
 .why-card:hover::before{opacity:1}
-.why-icon{margin-bottom:16px}
-.why-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
-.why-desc{font-size:15px;line-height:1.75;color:var(--sub)}
+.why-icon{margin-bottom:18px;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.why-card:hover .why-icon{transform:scale(1.06)}
+.why-num{position:absolute;top:24px;right:24px;font-family:var(--fm);font-size:11px;font-weight:800;color:var(--sub);letter-spacing:.08em;opacity:.55}
+.why-title{font-size:17px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.01em;line-height:1.35}
+.why-desc{font-size:14.5px;line-height:1.75;color:var(--sub)}
 
 /* FAQ */
-.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s}
-.faq-item:hover{border-color:var(--border2)}
-.faq-q{padding:20px 26px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:700;color:var(--heading);transition:color .2s}
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .2s}
+.faq-item:hover{border-color:var(--border2);box-shadow:0 6px 20px -10px rgba(15,17,40,.1)}
+.faq-item.open{border-color:var(--cta);box-shadow:0 10px 32px -16px var(--cta-glow)}
+.faq-q{padding:22px 26px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:700;color:var(--heading);transition:color .2s;gap:16px;line-height:1.5;letter-spacing:-.005em;min-height:64px}
 .faq-q:hover{color:var(--cta)}
-.faq-toggle{width:28px;height:28px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--sub);transition:all .25s;flex-shrink:0}
+.faq-toggle{width:32px;height:32px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:300;color:var(--sub);transition:transform .3s cubic-bezier(.16,1,.3,1),background .25s,color .2s;flex-shrink:0}
 .faq-item.open .faq-toggle{background:var(--cta-light);color:var(--cta);transform:rotate(45deg)}
-.faq-a{padding:0 26px 20px;font-size:16px;line-height:1.8;color:var(--sub)}
+.faq-a{padding:0 26px 22px;font-size:15px;line-height:1.85;color:var(--sub)}
 
 /* CTA */
-.final-cta{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px) clamp(80px,12vw,120px);text-align:center;position:relative;overflow:hidden;background:linear-gradient(165deg,#ecfeff 0%,#fff 40%,#f0f9ff 80%,#eaf0fe 100%)}
-.final-cta-inner{max-width:620px;margin:0 auto;position:relative;z-index:2}
+.final-cta{padding:clamp(72px,10vw,112px) clamp(16px,5vw,48px) clamp(88px,12vw,128px);text-align:center;position:relative;overflow:hidden;background:linear-gradient(165deg,#ecfeff 0%,#fff 40%,#f0f9ff 80%,#eaf0fe 100%);border-top:1px solid var(--border)}
+.final-cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:2}
+.final-cta-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -145,13 +172,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .hero-text{text-align:center}
   .hero-sub{margin-left:auto;margin-right:auto}
   .hero-ctas{justify-content:center}
-  .hero-stats{justify-content:center}
+  .hero-stats{justify-content:center;grid-template-columns:repeat(3,minmax(0,auto))}
   .dash{max-width:360px}
   .phase-row{flex-direction:column;gap:40px}
   .phase-row.reverse{flex-direction:column}
+  .phase-desc{max-width:none}
   .why-grid{grid-template-columns:repeat(2,1fr)}
   .usecase-grid{grid-template-columns:repeat(2,1fr)}
-  .flow-steps{flex-wrap:wrap;gap:20px;justify-content:center}
+  .flow-steps{flex-wrap:wrap;gap:24px 0;justify-content:center}
   .flow-step{flex:0 0 calc(33.33% - 14px);min-width:120px}
   .flow-connector{display:none}
   .flow-arrow{display:none}
@@ -159,21 +187,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @media(max-width:768px){
   .hero{padding:90px 20px 50px;min-height:auto}
   .hero-badge{padding:7px 16px;margin-bottom:20px}
-  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
-  .hero-stats{flex-direction:row;gap:24px;justify-content:center}
-  .dash{max-width:320px}
-  .why-grid{grid-template-columns:1fr}
-  .usecase-grid{grid-template-columns:1fr}
+  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:320px;margin:0 auto}
+  .hero-stats{gap:18px;grid-template-columns:repeat(3,1fr);text-align:center;width:100%}
+  .hero-stat{padding-left:0}
+  .hero-stat:not(:first-child)::before{display:none}
+  .dash{max-width:340px}
+  .why-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .usecase-grid{grid-template-columns:1fr;max-width:480px;margin:44px auto 0}
   .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
-  .final-cta{padding:60px 20px 80px}
   .btn-cta-lg{padding:14px 24px;font-size:16px;width:100%}
   .btn-ghost{padding:14px 24px;font-size:16px;width:100%}
   .phase-features{gap:8px}
   .phase-feat{font-size:13px}
-  .why-card{padding:22px}
-  .faq-q{padding:16px 20px;font-size:16px}
-  .faq-a{padding:0 20px 16px;font-size:14px}
+  .why-card{padding:24px}
+  .faq-q{padding:18px 22px;font-size:16px;min-height:60px}
+  .faq-a{padding:0 22px 18px;font-size:14px}
   .flow-step{flex:0 0 calc(50% - 10px)}
+  .final-cta-ctas{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}
 }
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
@@ -181,7 +211,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .pvis{aspect-ratio:1/1.4;min-height:400px}
   .pvis>div{transform:scale(0.78);transform-origin:top center}
   .flow-step{flex:0 0 100%}
-  .flow-num{width:48px;height:48px;font-size:18px}
+  .flow-num{width:50px;height:50px;font-size:18px}
 }
 `;
 
@@ -255,16 +285,19 @@ export default function MeetingsPageClient() {
         <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
         <div className="hero-inner">
           <div className="hero-text">
-            <div className="anim d1 hero-badge"><div className="hero-badge-dot" />MEETON CALENDAR</div>
-            <h1 className="anim d2">初動5秒で、<br /><em>商談化</em></h1>
-            <p className="anim d3 hero-sub">業界平均 42 時間の Speed to Lead を、Meeton Calendar は 5 秒に短縮。リードがコンバートした瞬間（フォーム送信・サンクスページ・メール経由）に、商談予約 UI が即座に発動。コンバージョン直前の最後の100mを担います。</p>
+            <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON CALENDAR</div>
+            <h1 className="anim-y d2">初動5秒で、<br /><em>商談化</em></h1>
+            <p className="anim-y d3 hero-sub">業界平均 42 時間の Speed to Lead を、Meeton Calendar は 5 秒に短縮。リードがコンバートした瞬間（フォーム送信・サンクスページ・メール経由）に、商談予約 UI が即座に発動。コンバージョン直前の最後の100mを担います。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-              <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
+              <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+                デモを予約
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </button>
             </div>
             <div className="anim d5 hero-stats">
               {[{ v: '5秒', l: 'Speed to Lead' }, { v: '42h→5s', l: 'BizteX 事例' }, { v: '自動', l: '担当者割り振り' }].map((s, i) => (
-                <div key={i} style={{ textAlign: 'center' }}><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
+                <div key={i} className="hero-stat"><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
           </div>
@@ -317,8 +350,9 @@ export default function MeetingsPageClient() {
                 </div>
                 {/* Confirmation */}
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: 4, opacity: 0, animation: 'chatPop .5s 1.8s cubic-bezier(.16,1,.3,1) forwards' }}>
-                  <div style={{ background: 'linear-gradient(135deg,#ecfeff,#e5f8f2)', border: '1px solid rgba(8,145,178,.2)', borderRadius: 10, padding: '6px 14px', fontSize: 11, fontWeight: 800, color: '#0891b2' }}>
-                    ✓ 金曜 11:00 で商談確定！
+                  <div style={{ background: 'linear-gradient(135deg,#ecfeff,#e5f8f2)', border: '1px solid rgba(8,145,178,.2)', borderRadius: 10, padding: '6px 14px', fontSize: 11, fontWeight: 800, color: '#0891b2', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0891b2" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    金曜 11:00 で商談確定
                   </div>
                 </div>
               </div>
@@ -328,7 +362,10 @@ export default function MeetingsPageClient() {
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0891b2', animation: 'pulse 1.5s infinite' }} />
                   <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>Speed to Lead: 5秒</span>
                 </div>
-                <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)' }}>詳細 →</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)', display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                  詳細
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </span>
               </div>
             </div>
           </div>
@@ -339,7 +376,7 @@ export default function MeetingsPageClient() {
       <section className="flow-section">
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>パイプライン</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>パイプライン</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar の流れ</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>リードコンバート瞬間に Meeton Calendar が 5 秒で発動。最後の100mを担い、商談確定まで導きます。</p>
           <div className="flow-steps">
@@ -356,7 +393,7 @@ export default function MeetingsPageClient() {
                   <div className="flow-title" style={{ whiteSpace: 'pre-line' }}>{step.title}</div>
                   <div className="flow-sub">{step.sub}</div>
                 </div>
-                {i < 4 && <div className="flow-arrow">→</div>}
+                {i < 4 && <div className="flow-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>}
               </div>
             ))}
           </div>
@@ -367,7 +404,7 @@ export default function MeetingsPageClient() {
       <section className="section" style={{ position: 'relative', paddingBottom: 0 }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>機能詳細</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>機能詳細</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar の仕組みを深掘り</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>リードコンバート瞬間の検知から 5 秒発動・割り振り・商談確定まで、Speed to Lead を実装するプロセスを解説します。</p>
         </div>
@@ -379,12 +416,12 @@ export default function MeetingsPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#0891b210', color: '#0891b2' }}>FEATURE 01</div>
+              <div className="phase-tag" style={{ color: '#0891b2' }}><span style={{ position: 'relative' }}>FEATURE 01</span></div>
               <div className="phase-h">リードコンバート瞬間に5秒で発動</div>
               <div className="phase-desc">フォーム送信・サンクスページ通過・Meeton Live 内での予約意思表示など、リードコンバートのトリガーを複数経路で捕捉。意思決定が冷めないうちに、Meeton Calendar が 5 秒で起動します。</div>
               <div className="phase-features">
                 {['業界平均 42 時間 → Meeton ai 5 秒', 'フォーム送信・サンクスページ・メール経由から発動', 'ページ遷移なしで予約完了', 'コンバージョン直前の最後の100mを担う'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#0891b2' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#0891b215', color: '#0891b2' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -405,7 +442,10 @@ export default function MeetingsPageClient() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', opacity: 0, animation: 'slideIn .5s .9s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '4px 10px', borderRadius: 6 }}>✓ 5秒で予約確定 — 業界42時間→5秒</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '4px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      5秒で予約確定 — 業界42時間→5秒
+                    </span>
                   </div>
                 </div>
               </div>
@@ -416,12 +456,12 @@ export default function MeetingsPageClient() {
           {/* Feature 2: Thank you page */}
           <div className="phase-row reverse">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#12a37d10', color: '#12a37d' }}>FEATURE 02</div>
+              <div className="phase-tag" style={{ color: '#12a37d' }}><span style={{ position: 'relative' }}>FEATURE 02</span></div>
               <div className="phase-h">サンクスページで即カレンダー提示</div>
               <div className="phase-desc">フォーム送信直後がリードコンバートの瞬間。Speed to Lead 5 秒の発動ポイントとして、サンクスページに Meeton Calendar を自動表示し、即座に商談予約を獲得します。</div>
               <div className="phase-features">
                 {['フォーム送信完了の瞬間に5秒発動', 'リードコンバート直後の意思決定を捕捉', 'サンクスページに自動埋め込み', '追加設定なしで即稼働'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#12a37d' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#12a37d15', color: '#12a37d' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -459,12 +499,12 @@ export default function MeetingsPageClient() {
           {/* Feature 3: Email calendar URL */}
           <div className="phase-row">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#3b6ff510', color: '#3b6ff5' }}>FEATURE 03</div>
+              <div className="phase-tag" style={{ color: '#3b6ff5' }}><span style={{ position: 'relative' }}>FEATURE 03</span></div>
               <div className="phase-h">Meeton Email でカレンダー URL を再提示</div>
               <div className="phase-desc">即時予約に至らなかったリードにも、Meeton Email が文脈で動的判断しながら Meeton Calendar URL を再提示。再訪・反応のタイミングで再度 5 秒で発動します。</div>
               <div className="phase-features">
                 {['即時予約しなかったリードを Meeton Email が追跡', 'メール内に Meeton Calendar URL を文脈で自動挿入', 'AI が文脈で送信タイミングを動的判断', '再訪検知で再度5秒発動'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#3b6ff5' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#3b6ff515', color: '#3b6ff5' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -485,8 +525,10 @@ export default function MeetingsPageClient() {
                     <div style={{ fontSize: 10, color: 'var(--sub)', lineHeight: 1.7, marginBottom: 10, fontWeight: 600 }}>
                       先ほど料金ページに戻ってきていただいたので、<br />15分でデモのご案内可能です。
                     </div>
-                    <div style={{ background: '#eaf0fe', border: '1px solid rgba(59,111,245,.2)', borderRadius: 8, padding: '8px 12px', textAlign: 'center', fontSize: 10, fontWeight: 800, color: '#3b6ff5', cursor: 'pointer' }}>
-                      📅 Meeton Calendar で予約 →
+                    <div style={{ background: '#eaf0fe', border: '1px solid rgba(59,111,245,.2)', borderRadius: 8, padding: '8px 12px', textAlign: 'center', fontSize: 10, fontWeight: 800, color: '#3b6ff5', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5, width: '100%' }}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3b6ff5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      Meeton Calendar で予約
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3b6ff5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 10, opacity: 0, animation: 'slideIn .5s .8s cubic-bezier(.16,1,.3,1) forwards' }}>
@@ -506,7 +548,7 @@ export default function MeetingsPageClient() {
           {/* Feature 4: Routing rules */}
           <div className="phase-row reverse">
             <div className="phase-text">
-              <div className="phase-tag" style={{ background: '#7c5cfc10', color: '#7c5cfc' }}>FEATURE 04</div>
+              <div className="phase-tag" style={{ color: '#7c5cfc' }}><span style={{ position: 'relative' }}>FEATURE 04</span></div>
               <div className="phase-h">細かな割り振りルールを自由に設定</div>
               <div className="phase-desc">フォーム入力・閲覧履歴・関心領域に応じて、表示するカレンダー・担当者を自動で振り分け。条件分岐でチーム単位から個人単位まで、細部までコントロールできます。</div>
               <div className="phase-features">
@@ -516,7 +558,7 @@ export default function MeetingsPageClient() {
                   'チーム内のラウンドロビン or 指名割当',
                   '営業時間外・休日のフォールバックも条件設定可能',
                 ].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-dot" style={{ background: '#7c5cfc' }} />{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#7c5cfc15', color: '#7c5cfc' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -563,23 +605,24 @@ export default function MeetingsPageClient() {
       <section className="section" style={{ background: 'var(--surface)', position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>USE CASES</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>USE CASES</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar の活用シーン</div>
           <div className="usecase-grid">
             {useCases.map((uc, i) => (
-              <div className="usecase-card" key={i}>
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: `${uc.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="usecase-card" key={i} style={{ ['--uc-color' as string]: uc.color }}>
+                <div className="usecase-num">{String(i + 1).padStart(2, '0')}</div>
+                <div style={{ width: 52, height: 52, borderRadius: 14, background: `${uc.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     {i === 0 && <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>}
                     {i === 1 && <><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></>}
                     {i === 2 && <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></>}
                   </svg>
                 </div>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', marginBottom: 10 }}>{uc.title}</div>
-                <div style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--sub)', marginBottom: 16 }}>{uc.desc}</div>
-                <div style={{ background: `${uc.color}08`, border: `1px solid ${uc.color}20`, borderRadius: 10, padding: '12px 14px' }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: uc.color, marginBottom: 4, letterSpacing: 1 }}>EXAMPLE</div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6, fontStyle: 'italic' }}>{uc.example}</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', marginBottom: 12, letterSpacing: '-.01em', lineHeight: 1.35 }}>{uc.title}</div>
+                <div style={{ fontSize: 14.5, lineHeight: 1.75, color: 'var(--sub)', marginBottom: 20, flex: 1 }}>{uc.desc}</div>
+                <div style={{ background: `${uc.color}08`, border: `1px solid ${uc.color}25`, borderRadius: 10, padding: '14px 16px', borderLeft: `3px solid ${uc.color}` }}>
+                  <div style={{ fontSize: 10, fontWeight: 800, color: uc.color, marginBottom: 6, letterSpacing: '.15em', fontFamily: 'var(--fm)' }}>EXAMPLE</div>
+                  <div style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--text)', lineHeight: 1.65 }}>{uc.example}</div>
                 </div>
               </div>
             ))}
@@ -600,13 +643,14 @@ export default function MeetingsPageClient() {
       <section className="section" style={{ position: 'relative' }}>
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="slabel" style={{ textAlign: 'center' }}>選ばれる理由</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Calendar なのか</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>業界42時間の Speed to Lead を 5 秒に。営業組織のための AI SDR プラットフォームの中核。</p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>
-                <div className="why-icon" style={{width:48,height:48,borderRadius:12,background:`${w.color}12`,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <div className="why-num">0{i + 1}</div>
+                <div className="why-icon" style={{width:48,height:48,borderRadius:12,background:`${w.color}12`,display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={w.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={w.iconPath}/></svg>
                 </div>
                 <div className="why-title">{w.title}</div>
@@ -629,7 +673,7 @@ export default function MeetingsPageClient() {
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--surface)' }}>
         <div className="section-inner">
-          <div className="slabel" style={{ textAlign: 'center' }}>よくある質問</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>よくある質問</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>FAQ</div>
           <div style={{ height: 36 }} />
           <div className="faq-list">
@@ -651,12 +695,15 @@ export default function MeetingsPageClient() {
         <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="glow" style={{ background: 'rgba(8,145,178,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
-          <div className="slabel">今すぐ始める</div>
-          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar で、<br />初動5秒で商談化</div>
+          <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar で、<br /><em>初動5秒で商談化</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>業界42時間の Speed to Lead を 5 秒に。リードコンバート瞬間に発動し、コンバージョン直前の最後の100mを担います。</p>
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>デモを予約 →</button>
+            <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+              デモを予約
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </div>
       </section>
