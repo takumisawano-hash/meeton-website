@@ -383,6 +383,29 @@ const nextConfig = {
         destination: '/blog/',
         permanent: true,
       },
+      // 2026-05-11: GSC index diagnostic で「クロール済み未登録」と判定された
+      // 2 本を削除。typo slug (objecitons) と SMB 向け汎用 ABM ガイドは
+      // dynameet.ai の核心 target (B2B 中堅以上) とズレるため放出。
+      {
+        source: '/blog/15-common-turn-offs-to-objecitons-in-business-meetings',
+        destination: '/blog/',
+        permanent: true,
+      },
+      {
+        source: '/blog/15-common-turn-offs-to-objecitons-in-business-meetings/',
+        destination: '/blog/',
+        permanent: true,
+      },
+      {
+        source: '/blog/abm-tool-sme-selection-guide-meeting-conversion',
+        destination: '/blog/',
+        permanent: true,
+      },
+      {
+        source: '/blog/abm-tool-sme-selection-guide-meeting-conversion/',
+        destination: '/blog/',
+        permanent: true,
+      },
       ...blogRedirects,
       // Old phase URLs → new product URLs
       {
