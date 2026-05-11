@@ -1263,94 +1263,68 @@ export default function HomePageClient({
             >
               MA でリードは集まる。CRM にも溜まる。でも、その大半は商談にならずに消えていく。
             </p>
-            <div className="problem-grid">
-              {[
-                { num: "5", unit: "分", label: "以内のフォローで商談化率 100倍", note: "業界標準", color: "#12a37d", gradient: "linear-gradient(135deg,#12a37d,#0fc19a)" },
-                { num: "42", unit: "時間", label: "B2B 営業の平均レスポンスタイム", note: "現実", color: "#e0475b", gradient: "linear-gradient(135deg,#e0475b,#f87171)" },
-                { num: "78", unit: "%", label: "「最初に応答した会社」から購入", note: "顧客行動", color: "#3b6ff5", gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)" },
-                { num: "12", unit: "ヶ月", label: "SDR 採用 → 立ち上げ → 離職のサイクル", note: "組織課題", color: "#7c5cfc", gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="problem-stat-card"
-                  style={{
-                    padding: "28px 24px",
-                    background: "#fff",
-                    borderRadius: 14,
-                    border: "1px solid var(--border)",
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .2s",
-                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
-                  }}
-                >
-                  <div
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: 3,
-                      background: item.gradient,
-                    }}
-                  />
-                  <div
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 700,
-                      color: item.color,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      marginBottom: 12,
-                      fontFamily: "var(--fm)",
-                    }}
-                  >
-                    {item.note}
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "baseline",
-                      gap: 4,
-                      marginBottom: 12,
-                      lineHeight: 1,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "clamp(40px, 7vw, 56px)",
-                        fontWeight: 900,
-                        background: item.gradient,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        letterSpacing: "-0.03em",
-                        fontFamily: "var(--fm)",
-                      }}
-                    >
-                      {item.num}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 800,
-                        color: item.color,
-                        letterSpacing: "-0.01em",
-                      }}
-                    >
-                      {item.unit}
-                    </span>
-                  </div>
-                  <div
-                    style={{ fontSize: 13.5, color: "var(--text)", lineHeight: 1.65, fontWeight: 500 }}
-                  >
-                    {item.label}
-                  </div>
+            {/* Dramatic contrast: 業界 42時間 vs Meeton ai 5秒 */}
+            <div className="problem-contrast">
+              <div className="problem-side problem-side-bad">
+                <div className="problem-side-label">業界の現実</div>
+                <div className="problem-side-num">
+                  42<span className="problem-side-unit">時間</span>
                 </div>
-              ))}
+                <div className="problem-side-desc">
+                  B2B 営業の平均リードレスポンスタイム。<br />この間にリードの 7 割が他社へ流出している。
+                </div>
+              </div>
+              <div className="problem-arrow" aria-hidden>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14 M13 6l6 6-6 6" />
+                </svg>
+              </div>
+              <div className="problem-side problem-side-good">
+                <div className="problem-side-label">Meeton ai</div>
+                <div className="problem-side-num">
+                  5<span className="problem-side-unit">秒</span>
+                </div>
+                <div className="problem-side-desc">
+                  Speed to Lead 業界標準の 5 分 ── その <b>1/60</b>。<br />
+                  ウェブ Convert の瞬間に AI SDR が初動応答。
+                </div>
+              </div>
             </div>
-            <style dangerouslySetInnerHTML={{ __html: `.problem-stat-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -16px rgba(15,17,40,.12);border-color:transparent}` }} />
+            <div className="problem-supporting">
+              <div className="problem-fact">
+                <span className="problem-fact-num">100<span className="problem-fact-unit">倍</span></span>
+                <span className="problem-fact-text">5 分以内 vs 30 分後でのコンタクト率の差（MIT, 2007）</span>
+              </div>
+              <div className="problem-fact">
+                <span className="problem-fact-num">78<span className="problem-fact-unit">%</span></span>
+                <span className="problem-fact-text">B2B 顧客は「最初に応答した会社」から購入する</span>
+              </div>
+            </div>
+            <style dangerouslySetInnerHTML={{ __html: `
+.problem-contrast{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(20px,4vw,40px);margin-bottom:36px;padding:clamp(28px,4vw,48px) clamp(20px,4vw,40px);background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:0 1px 2px rgba(15,17,40,.03)}
+.problem-side{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.problem-side-label{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-family:var(--fm)}
+.problem-side-bad .problem-side-label{color:#e0475b}
+.problem-side-good .problem-side-label{color:var(--cta)}
+.problem-side-num{font-size:clamp(64px,11vw,112px);font-weight:900;line-height:.9;letter-spacing:-.04em;font-family:var(--fm)}
+.problem-side-bad .problem-side-num{background:linear-gradient(135deg,#e0475b,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.problem-side-good .problem-side-num{background:linear-gradient(135deg,#12a37d,#0fc19a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.problem-side-unit{font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-left:6px;letter-spacing:-.01em}
+.problem-side-bad .problem-side-unit{color:#e0475b}
+.problem-side-good .problem-side-unit{color:var(--cta)}
+.problem-side-desc{font-size:13.5px;color:var(--sub);line-height:1.7;max-width:280px}
+.problem-arrow{color:var(--cta);display:flex;align-items:center;justify-content:center}
+.problem-supporting{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px}
+.problem-fact{display:flex;align-items:center;gap:16px;padding:18px 22px;background:#fff;border:1px solid var(--border);border-radius:12px}
+.problem-fact-num{font-size:32px;font-weight:900;color:var(--heading);letter-spacing:-.03em;font-family:var(--fm);line-height:1;flex-shrink:0}
+.problem-fact-unit{font-size:18px;font-weight:800;color:var(--sub);margin-left:2px}
+.problem-fact-text{font-size:13px;color:var(--text);line-height:1.6}
+@media (max-width:760px){
+  .problem-contrast{grid-template-columns:1fr;gap:24px}
+  .problem-arrow svg{transform:rotate(90deg)}
+  .problem-supporting{grid-template-columns:1fr}
+  .problem-fact-num{font-size:28px}
+}` }} />
             <div
               style={{
                 padding: "24px 28px",
@@ -1391,136 +1365,6 @@ export default function HomePageClient({
               >
                 Meeton ai は、その「ラストワンマイル」だけに特化した AI SDR Platform です。
               </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* DESIGN PHILOSOPHY — 3-line manifesto */}
-      {!isLp && (
-        <section
-          className="section"
-          style={{
-            background: "linear-gradient(180deg, #fff 0%, var(--surface) 100%)",
-            paddingTop: 72,
-            paddingBottom: 72,
-          }}
-        >
-          <div className="section-inner" style={{ maxWidth: 880, textAlign: "center" }}>
-            <div className="slabel" style={{ textAlign: "center" }}>
-              Design Philosophy
-            </div>
-            <div
-              className="stitle"
-              style={{ textAlign: "center", marginBottom: 36, fontSize: "clamp(24px, 4vw, 36px)" }}
-            >
-              Meeton ai が、<span style={{ color: "var(--cta)" }}>解くと決めたこと</span>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: 20,
-                textAlign: "left",
-              }}
-              className="philosophy-grid"
-            >
-              {[
-                {
-                  num: "01",
-                  title: "リード獲得は、お客様の仕事",
-                  body: "MA・広告・コンテンツ・展示会。リードを集めるのは既存ツールに任せる。我々は手を出しません。",
-                  color: "#3b6ff5",
-                  bg: "linear-gradient(135deg,#eaf0fe,#f0ecfe)",
-                  iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M9 13h6 M9 17h6 M9 9h1",
-                },
-                {
-                  num: "02",
-                  title: "我々は「ラストワンマイル」を解く",
-                  body: "リードがコンバートしてから商談予約に至るまでのコンバージョン領域に集中。",
-                  color: "#12a37d",
-                  bg: "linear-gradient(135deg,#e5f8f2,#eaf0fe)",
-                  iconPath: "M5 12h14 M13 6l6 6-6 6 M3 12a9 9 0 0 1 9-9",
-                },
-                {
-                  num: "03",
-                  title: "Speed × Persistence × Context",
-                  body: "5 秒以内の即時対応、諦めない追跡、過去文脈を持った再エンゲージ。3 つの掛け算で攻めます。",
-                  color: "#7c5cfc",
-                  bg: "linear-gradient(135deg,#f0ecfe,#e5f8f2)",
-                  iconPath: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
-                },
-              ].map((p, i) => (
-                <div
-                  key={i}
-                  className="philosophy-card"
-                  style={{
-                    padding: "28px 26px",
-                    background: "#fff",
-                    borderRadius: 14,
-                    border: "1px solid var(--border)",
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .2s",
-                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 16,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: 12,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 48,
-                        height: 48,
-                        borderRadius: 12,
-                        background: p.bg,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={p.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d={p.iconPath} />
-                      </svg>
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 800,
-                        color: p.color,
-                        letterSpacing: "0.16em",
-                        fontFamily: "var(--fm)",
-                      }}
-                    >
-                      {p.num}
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 17,
-                      fontWeight: 800,
-                      color: "var(--heading)",
-                      lineHeight: 1.45,
-                      letterSpacing: "-0.005em",
-                    }}
-                  >
-                    {p.title}
-                  </div>
-                  <div style={{ fontSize: 13.5, color: "var(--sub)", lineHeight: 1.8 }}>
-                    {p.body}
-                  </div>
-                </div>
-              ))}
-              <style dangerouslySetInnerHTML={{ __html: `.philosophy-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -16px rgba(15,17,40,.12);border-color:var(--border2)}` }} />
             </div>
           </div>
         </section>
