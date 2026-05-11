@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import Nav from "@/app/components/Nav";
+import Image from "next/image";
 import Footer from "@/app/components/Footer";
 const HubSpotMeetingModal = dynamic(() => import("@/app/components/HubSpotMeetingModal"), { ssr: false });
 const HubSpotModal = dynamic(() => import("@/app/components/HubSpotModal"), { ssr: false });
@@ -287,7 +287,41 @@ export default function MarkezineDayClient({ cases }: Props) {
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <Nav variant="light" />
+
+      {/* Minimal LP header — logo only, no navigation (focus on CTA) */}
+      <header
+        style={{
+          padding: "20px 24px",
+          borderBottom: "1px solid #eef0f7",
+          background: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          maxWidth: 1280,
+          margin: "0 auto",
+        }}
+      >
+        <Link href="/" aria-label="Meeton ai homepage">
+          <Image
+            src="/logo-dark.svg"
+            alt="DynaMeet"
+            width={120}
+            height={26}
+            style={{ height: 26, width: "auto" }}
+            priority
+          />
+        </Link>
+        <div
+          style={{
+            fontSize: 12,
+            fontWeight: 700,
+            color: "#6e7494",
+            letterSpacing: "0.06em",
+          }}
+        >
+          MarkeZine Day 2026
+        </div>
+      </header>
 
       {/* Hero */}
       <section className="event-hero">
