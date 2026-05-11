@@ -38,6 +38,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
 
   const links = [
     { href: "/", label: "Meeton ai" },
+    { href: "/blog/what-is-meeton-ai-sdr-platform/", label: "Meeton ai とは" },
     { href: "/features/meetings/", label: "Meeton Calendar" },
     { href: "/features/ai-email/", label: "Meeton Email" },
     { href: "/features/ai-chat/", label: "Meeton Live" },
