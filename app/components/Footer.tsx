@@ -48,6 +48,8 @@ export default function Footer({ variant = "light" }: FooterProps) {
       : { href: "/integrations/", label: "Integrations" },
     ...(isDark ? [] : [{ href: "/blog/", label: "ブログ" }]),
     { href: "/about/", label: "会社概要" },
+    { href: "/careers/", label: "採用情報" },
+    { href: "/contact/", label: "お問い合わせ" },
     { href: "/privacy-policy/", label: "プライバシーポリシー" },
     { href: "/security-policy/", label: "情報セキュリティポリシー" },
     { href: "/terms/", label: "利用規約" },
