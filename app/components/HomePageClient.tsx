@@ -91,17 +91,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
 .glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
 
-.btn{border:none;cursor:pointer;font-family:var(--fb);transition:all .25s;font-weight:700;border-radius:10px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;padding:12px 26px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow)}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--cta-glow)}
-.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 6px 28px var(--cta-glow)}
-.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 38px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s}
-.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light)}
+.btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent}
+.btn-cta{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
+.btn-cta:active{transform:translateY(0)}
+.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
+.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 38px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s;min-height:44px;-webkit-tap-highlight-color:transparent}
+.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);transform:translateY(-1px)}
+.btn-ghost:active{transform:translateY(0)}
 
 .slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
-.section{padding:clamp(60px,10vw,100px) clamp(16px,5vw,48px)}
+.section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
-.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.2;letter-spacing:-.5px;margin-bottom:18px}
+.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
 
 /* HERO */
@@ -129,17 +131,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @media (max-width:600px){.buyer-grid{grid-template-columns:1fr!important}}
 .philosophy-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:20px}
 @media (max-width:880px){.philosophy-grid{grid-template-columns:1fr!important;max-width:520px;margin-left:auto;margin-right:auto}}
-.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 56px -16px rgba(18,163,125,.18)}
-.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cat-color, #12a37d);opacity:.85;transition:opacity .3s, height .3s}
-.cat-card:hover::before{opacity:1;height:5px}
-.cat-label{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px}
-.cat-title{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--heading);letter-spacing:-.3px;margin-bottom:12px;line-height:1.3}
-.cat-desc{font-size:15px;line-height:1.8;color:var(--sub);margin-bottom:24px}
-.cat-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
-.cat-feat{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--text)}
-.cat-feat-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cat-link{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:800;color:var(--cta);text-decoration:none;transition:all .25s;margin-top:auto;padding-top:20px;border-top:1px solid var(--border)}
+.cat-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px 26px;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 24px 56px -20px rgba(15,17,40,.18)}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cat-color, #12a37d);opacity:.9;transition:opacity .25s, height .25s}
+.cat-card:hover::before{opacity:1;height:4px}
+.cat-label{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:100px;width:fit-content}
+.cat-title{font-size:clamp(20px,3vw,24px);font-weight:800;color:var(--heading);letter-spacing:-.015em;margin-bottom:10px;line-height:1.3}
+.cat-desc{font-size:14px;line-height:1.8;color:var(--sub);margin-bottom:20px}
+.cat-features{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;flex:1;padding-top:16px;border-top:1px solid var(--border)}
+.cat-feat{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:600;color:var(--text);line-height:1.5}
+.cat-feat-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.cat-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:800;color:var(--cta);text-decoration:none;transition:gap .2s,color .2s;margin-top:auto;padding-top:18px;border-top:1px solid var(--border)}
 .cat-link:hover{gap:10px;color:var(--cta-hover)}
 
 /* QUALITY FLOW DIAGRAM — horizontal */
@@ -164,58 +166,60 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* STEPS */
 .steps-row{display:flex;gap:18px;align-items:stretch}
-.step-card{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:30px;box-shadow:0 2px 8px rgba(0,0,0,.03);transition:all .3s;position:relative;overflow:hidden}
-.step-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.06)}
-.step-num{font-family:var(--fm);font-size:38px;font-weight:700;margin-bottom:14px;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.step-title{font-size:20px;font-weight:800;color:var(--heading);margin-bottom:10px}
-.step-desc{font-size:15px;line-height:1.75;color:var(--sub)}
-.step-arrow{display:flex;align-items:center;font-family:var(--fm);font-size:22px;color:var(--border2);padding:0 4px}
+.step-card{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 1px 2px rgba(15,17,40,.03);transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .25s;position:relative;overflow:hidden}
+.step-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px -16px rgba(15,17,40,.12);border-color:var(--border2)}
+.step-num{font-family:var(--fm);font-size:38px;font-weight:800;margin-bottom:14px;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em;line-height:1}
+.step-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.005em;line-height:1.4}
+.step-desc{font-size:14px;line-height:1.8;color:var(--sub)}
+.step-arrow{display:flex;align-items:center;font-family:var(--fm);font-size:20px;color:var(--border2);padding:0 4px;font-weight:300}
 
 /* CASES */
 .case-carousel{position:relative;overflow:hidden;width:100%}
 .case-track{display:flex;gap:0;transition:transform .5s cubic-bezier(.16,1,.3,1);padding:4px 0}
-.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:center}
-.case-card:hover{box-shadow:0 16px 40px -16px rgba(18,163,125,.18);border-color:var(--cta);transform:translateY(-2px)}
+.case-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px;transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03);min-width:100%;max-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;word-break:break-word;overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;align-items:center}
+.case-card:hover{box-shadow:0 24px 56px -20px rgba(18,163,125,.2);border-color:var(--cta);transform:translateY(-3px)}
 .case-card-link{cursor:pointer}
-.case-img{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#f3f2ed}
-.case-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.case-img{position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#eef1fb,#e3e8f5)}
+.case-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.case-card:hover .case-img img{transform:scale(1.04)}
 .case-content{display:flex;flex-direction:column;min-width:0}
-.case-arrows{display:flex;justify-content:center;gap:14px;margin-top:28px}
-.case-arrow{width:48px;height:48px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--heading);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.case-arrow:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);box-shadow:0 6px 20px var(--cta-glow)}
+.case-arrows{display:flex;justify-content:center;gap:14px;margin-top:32px}
+.case-arrow{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--border2);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--heading);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.case-arrow:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);box-shadow:0 6px 20px var(--cta-glow);transform:translateY(-1px)}
 .case-arrow:disabled{opacity:.3;cursor:default;pointer-events:none}
 .case-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
 .case-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .25s;cursor:pointer}
 .case-dot.active{background:var(--cta);width:28px;border-radius:4px;box-shadow:0 0 8px var(--cta-glow)}
-.case-logo{font-family:var(--fb);font-size:22px;font-weight:900;color:var(--heading);margin-bottom:4px}
-.case-industry{font-size:13px;color:var(--sub);margin-bottom:18px;font-weight:500}
-.case-quote{font-size:16px;line-height:1.9;color:var(--text);margin-bottom:24px;padding:20px 26px;background:linear-gradient(135deg,var(--surface),var(--surface2));border-radius:14px;border-left:4px solid var(--cta);width:100%;box-sizing:border-box;overflow-wrap:break-word}
-.case-stats{display:flex;gap:48px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--border)}
-.case-stat-v{font-family:var(--fm);font-size:26px;font-weight:700}
-.case-stat-l{font-size:12px;color:var(--sub);margin-top:3px;font-weight:500}
+.case-logo{font-family:var(--fb);font-size:22px;font-weight:900;color:var(--heading);margin-bottom:4px;letter-spacing:-.015em}
+.case-industry{font-size:12px;color:var(--accent);margin-bottom:18px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:var(--fm)}
+.case-quote{font-size:15.5px;line-height:1.9;color:var(--text);margin-bottom:24px;padding:20px 24px;background:linear-gradient(135deg,var(--surface),var(--surface2));border-radius:12px;border-left:3px solid var(--cta);width:100%;box-sizing:border-box;overflow-wrap:break-word;font-weight:500}
+.case-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--border)}
+.case-stat-v{font-family:var(--fm);font-size:26px;font-weight:800;letter-spacing:-.015em;line-height:1}
+.case-stat-l{font-size:12px;color:var(--sub);margin-top:4px;font-weight:600}
 
 /* INTEGRATIONS */
-.int-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:900px;margin:0 auto}
-.int-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:22px 18px;text-align:center;transition:all .3s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03)}
-.int-card:hover{border-color:transparent;transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.07)}
-.int-icon{width:48px;height:48px;margin:0 auto 12px;object-fit:contain}
-.int-name{font-size:14px;font-weight:800;color:var(--heading)}
-.int-desc{font-size:11px;color:var(--sub);margin-top:3px;font-weight:500}
+.int-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:920px;margin:0 auto}
+.int-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:22px 16px;text-align:center;transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03)}
+.int-card:hover{border-color:transparent;transform:translateY(-3px);box-shadow:0 12px 32px -12px rgba(15,17,40,.12)}
+.int-icon{width:44px;height:44px;margin:0 auto 12px;object-fit:contain}
+.int-name{font-size:13.5px;font-weight:800;color:var(--heading);letter-spacing:-.005em}
+.int-desc{font-size:11px;color:var(--sub);margin-top:4px;font-weight:500}
 
 /* FAQ */
-.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s}
-.faq-item:hover{border-color:var(--border2)}
-.faq-q{padding:20px 26px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:700;color:var(--heading);transition:color .2s}
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s, box-shadow .25s, transform .2s}
+.faq-item:hover{border-color:var(--border2);box-shadow:0 6px 20px -10px rgba(15,17,40,.12)}
+.faq-item.open{border-color:var(--cta);box-shadow:0 10px 32px -16px var(--cta-glow)}
+.faq-q{padding:22px 26px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:700;color:var(--heading);transition:color .2s;gap:16px;line-height:1.5;letter-spacing:-.005em;min-height:64px;-webkit-tap-highlight-color:transparent}
 .faq-q:hover{color:var(--cta)}
-.faq-toggle{width:28px;height:28px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--sub);transition:all .25s;flex-shrink:0}
+.faq-toggle{width:32px;height:32px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:300;color:var(--sub);transition:transform .3s cubic-bezier(.16,1,.3,1), background .25s, color .2s;flex-shrink:0}
 .faq-item.open .faq-toggle{background:var(--cta-light);color:var(--cta);transform:rotate(45deg)}
-.faq-a{padding:0 26px 20px;font-size:16px;line-height:1.8;color:var(--sub)}
+.faq-a{padding:0 26px 22px;font-size:15px;line-height:1.85;color:var(--sub)}
 
 /* CLIENTS */
 .client-logos{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;align-items:center}
-.client-logo{padding:20px 32px;background:var(--bg);border:1px solid var(--border);border-radius:14px;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.03);display:flex;align-items:center;justify-content:center;min-width:160px;height:80px}
-.client-logo:hover{border-color:transparent;box-shadow:0 8px 24px rgba(0,0,0,.07);transform:translateY(-2px)}
+.client-logo{padding:20px 32px;background:var(--bg);border:1px solid var(--border);border-radius:14px;transition:transform .25s, box-shadow .25s, border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03);display:flex;align-items:center;justify-content:center;min-width:160px;height:80px}
+.client-logo:hover{border-color:transparent;box-shadow:0 10px 28px rgba(15,17,40,.08);transform:translateY(-2px)}
 .client-logo img{height:40px;width:auto;max-width:140px;object-fit:contain}
 
 /* CTA */
@@ -301,9 +305,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .logo-track{display:flex;gap:32px;animation:logoScroll 25s linear infinite;width:max-content}
 .logo-track:hover{animation-play-state:paused}
 @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.logo-item{padding:16px 28px;background:var(--bg);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:150px;height:72px;flex-shrink:0;transition:all .3s}
-.logo-item:hover{border-color:transparent;box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.logo-item img{width:120px;height:36px;object-fit:contain}
+.logo-item{padding:16px 28px;background:var(--bg);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:150px;height:72px;flex-shrink:0;transition:transform .25s, box-shadow .25s, border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.02)}
+.logo-item:hover{border-color:var(--border2);box-shadow:0 6px 18px rgba(15,17,40,.07);transform:translateY(-2px)}
+.logo-item img{width:120px;height:36px;object-fit:contain;filter:grayscale(.2);transition:filter .25s}
+.logo-item:hover img{filter:grayscale(0)}
 
 /* WHY AI SDR */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
@@ -331,10 +336,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .flow-row{justify-content:flex-start}
 }
 @media(max-width:768px){
-  .hero{padding:90px 20px 50px;min-height:auto}
+  .section{padding:56px 20px}
+  .hero{padding:90px 20px 56px;min-height:auto}
   .hero-badge{padding:7px 16px;margin-bottom:24px}
-  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:300px;margin:0 auto}
+  .hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:320px;margin:0 auto}
+  .hero-ctas .btn-cta-lg,.hero-ctas .btn-ghost{width:100%}
   .hero-stats{flex-direction:column;gap:20px;align-items:center}
+  .stitle{font-size:clamp(24px,7vw,32px);letter-spacing:-.015em}
+  .ssub{font-size:15px;line-height:1.8}
+  .cat-card{padding:24px 20px;border-radius:16px}
+  .cat-title{font-size:19px}
+  .cat-desc{font-size:13.5px;line-height:1.75}
+  .slabel{font-size:11px;letter-spacing:2.5px;margin-bottom:12px}
   .int-grid{grid-template-columns:repeat(3,1fr);gap:10px}
   .int-card{padding:14px 10px}
   .int-icon{width:36px;height:36px;margin-bottom:8px}
@@ -917,6 +930,8 @@ function HeroDemoAnimation() {
         </div>
       ))}
       <style jsx>{`
+        :global(.hero-stat-card){cursor:default}
+        :global(.hero-stat-card:hover){transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.08), 0 1px 0 rgba(255,255,255,.9) inset !important}
         @media (max-width: 640px) {
           :global(.hero-stat-desc) {
             display: none;
@@ -1233,7 +1248,7 @@ export default function HomePageClient({
       {!isLp && (
         <section
           className="section"
-          style={{ background: "var(--surface)", paddingTop: 64, paddingBottom: 64 }}
+          style={{ background: "var(--surface)", paddingTop: 80, paddingBottom: 80 }}
         >
           <div className="section-inner" style={{ maxWidth: 920 }}>
             <div className="slabel" style={{ textAlign: "center" }}>
@@ -1250,51 +1265,92 @@ export default function HomePageClient({
             </p>
             <div className="problem-grid">
               {[
-                { num: "5分", label: "以内のフォローで商談化率 100倍", note: "業界標準" },
-                { num: "42時間", label: "実際の B2B 営業の平均レスポンスタイム", note: "現実" },
-                { num: "78%", label: "「最初に応答した会社」から購入", note: "顧客行動" },
-                { num: "12ヶ月", label: "SDR 採用 → 立ち上げ → 離職のサイクル", note: "組織課題" },
+                { num: "5", unit: "分", label: "以内のフォローで商談化率 100倍", note: "業界標準", color: "#12a37d", gradient: "linear-gradient(135deg,#12a37d,#0fc19a)" },
+                { num: "42", unit: "時間", label: "B2B 営業の平均レスポンスタイム", note: "現実", color: "#e0475b", gradient: "linear-gradient(135deg,#e0475b,#f87171)" },
+                { num: "78", unit: "%", label: "「最初に応答した会社」から購入", note: "顧客行動", color: "#3b6ff5", gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)" },
+                { num: "12", unit: "ヶ月", label: "SDR 採用 → 立ち上げ → 離職のサイクル", note: "組織課題", color: "#7c5cfc", gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)" },
               ].map((item, i) => (
                 <div
                   key={i}
+                  className="problem-stat-card"
                   style={{
-                    padding: 24,
+                    padding: "28px 24px",
                     background: "#fff",
-                    borderRadius: 12,
+                    borderRadius: 14,
                     border: "1px solid var(--border)",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .2s",
+                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
                   }}
                 >
                   <div
+                    aria-hidden
                     style={{
-                      fontSize: 11,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 3,
+                      background: item.gradient,
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontSize: 10,
                       fontWeight: 700,
-                      color: "var(--sub)",
-                      letterSpacing: "0.08em",
+                      color: item.color,
+                      letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      marginBottom: 8,
+                      marginBottom: 12,
+                      fontFamily: "var(--fm)",
                     }}
                   >
                     {item.note}
                   </div>
                   <div
                     style={{
-                      fontSize: 32,
-                      fontWeight: 900,
-                      color: "var(--cta)",
-                      lineHeight: 1.2,
-                      marginBottom: 8,
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 4,
+                      marginBottom: 12,
+                      lineHeight: 1,
                     }}
                   >
-                    {item.num}
+                    <span
+                      style={{
+                        fontSize: "clamp(40px, 7vw, 56px)",
+                        fontWeight: 900,
+                        background: item.gradient,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        letterSpacing: "-0.03em",
+                        fontFamily: "var(--fm)",
+                      }}
+                    >
+                      {item.num}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 800,
+                        color: item.color,
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {item.unit}
+                    </span>
                   </div>
                   <div
-                    style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.6 }}
+                    style={{ fontSize: 13.5, color: "var(--text)", lineHeight: 1.65, fontWeight: 500 }}
                   >
                     {item.label}
                   </div>
                 </div>
               ))}
             </div>
+            <style dangerouslySetInnerHTML={{ __html: `.problem-stat-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -16px rgba(15,17,40,.12);border-color:transparent}` }} />
             <div
               style={{
                 padding: "24px 28px",
@@ -1346,8 +1402,8 @@ export default function HomePageClient({
           className="section"
           style={{
             background: "linear-gradient(180deg, #fff 0%, var(--surface) 100%)",
-            paddingTop: 56,
-            paddingBottom: 56,
+            paddingTop: 72,
+            paddingBottom: 72,
           }}
         >
           <div className="section-inner" style={{ maxWidth: 880, textAlign: "center" }}>
@@ -1374,55 +1430,97 @@ export default function HomePageClient({
                   num: "01",
                   title: "リード獲得は、お客様の仕事",
                   body: "MA・広告・コンテンツ・展示会。リードを集めるのは既存ツールに任せる。我々は手を出しません。",
+                  color: "#3b6ff5",
+                  bg: "linear-gradient(135deg,#eaf0fe,#f0ecfe)",
+                  iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M9 13h6 M9 17h6 M9 9h1",
                 },
                 {
                   num: "02",
                   title: "我々は「ラストワンマイル」を解く",
                   body: "リードがコンバートしてから商談予約に至るまでのコンバージョン領域に集中。",
+                  color: "#12a37d",
+                  bg: "linear-gradient(135deg,#e5f8f2,#eaf0fe)",
+                  iconPath: "M5 12h14 M13 6l6 6-6 6 M3 12a9 9 0 0 1 9-9",
                 },
                 {
                   num: "03",
                   title: "Speed × Persistence × Context",
                   body: "5 秒以内の即時対応、諦めない追跡、過去文脈を持った再エンゲージ。3 つの掛け算で攻めます。",
+                  color: "#7c5cfc",
+                  bg: "linear-gradient(135deg,#f0ecfe,#e5f8f2)",
+                  iconPath: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
                 },
               ].map((p, i) => (
                 <div
                   key={i}
+                  className="philosophy-card"
                   style={{
-                    padding: 24,
+                    padding: "28px 26px",
                     background: "#fff",
-                    borderRadius: 12,
+                    borderRadius: 14,
                     border: "1px solid var(--border)",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .2s",
+                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 16,
                   }}
                 >
                   <div
                     style={{
-                      fontSize: 12,
-                      fontWeight: 800,
-                      color: "var(--cta)",
-                      letterSpacing: "0.08em",
-                      fontFamily: "var(--fm)",
-                      marginBottom: 10,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 12,
                     }}
                   >
-                    {p.num}
+                    <div
+                      style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: 12,
+                        background: p.bg,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={p.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d={p.iconPath} />
+                      </svg>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 800,
+                        color: p.color,
+                        letterSpacing: "0.16em",
+                        fontFamily: "var(--fm)",
+                      }}
+                    >
+                      {p.num}
+                    </div>
                   </div>
                   <div
                     style={{
-                      fontSize: 16,
+                      fontSize: 17,
                       fontWeight: 800,
                       color: "var(--heading)",
-                      lineHeight: 1.4,
-                      marginBottom: 10,
+                      lineHeight: 1.45,
+                      letterSpacing: "-0.005em",
                     }}
                   >
                     {p.title}
                   </div>
-                  <div style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.7 }}>
+                  <div style={{ fontSize: 13.5, color: "var(--sub)", lineHeight: 1.8 }}>
                     {p.body}
                   </div>
                 </div>
               ))}
+              <style dangerouslySetInnerHTML={{ __html: `.philosophy-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -16px rgba(15,17,40,.12);border-color:var(--border2)}` }} />
             </div>
           </div>
         </section>
@@ -1579,8 +1677,8 @@ export default function HomePageClient({
           style={{
             background: "linear-gradient(135deg, #1a1d3a 0%, #0f1128 100%)",
             color: "#fff",
-            paddingTop: 56,
-            paddingBottom: 56,
+            paddingTop: 80,
+            paddingBottom: 80,
           }}
         >
           <div className="section-inner" style={{ maxWidth: 1080, textAlign: "center" }}>
@@ -1625,6 +1723,8 @@ export default function HomePageClient({
                   pain: "予算を使ってリード獲得しても商談化せず、CPL は下がっても商談獲得コストが上昇。",
                   value: "AI SDR を含むテクノロジースタックの「設計者」として、ファネル全体を自分で握り、マーケの仕事を縮小ではなく拡張させる。",
                   color: "#7c5cfc",
+                  // megaphone
+                  iconPath: "M3 11l18-5v12L3 14v-3z M11.6 16.8a3 3 0 1 1-5.8-1.6",
                 },
                 {
                   role: "営業責任者",
@@ -1632,6 +1732,8 @@ export default function HomePageClient({
                   pain: "SDR 採用・育成・離職のサイクル。商談化率の天井で営業組織がスケールしない。",
                   value: "AI SDR が初動を担い、人 SDR は VIP 顧客対応など高付加価値業務にシフト。",
                   color: "#12a37d",
+                  // trending up
+                  iconPath: "M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6",
                 },
                 {
                   role: "インサイドセールス責任者",
@@ -1639,6 +1741,8 @@ export default function HomePageClient({
                   pain: "業務時間外のリード流出、月曜朝のバックログ、24h 対応シフトは人件費的に不可能。",
                   value: "Meeton ai が 24/365 で初動応答、IS チームは深掘り対応に集中可能。",
                   color: "#0891b2",
+                  // headphones
+                  iconPath: "M3 18v-6a9 9 0 0 1 18 0v6 M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z",
                 },
                 {
                   role: "経営層",
@@ -1646,47 +1750,86 @@ export default function HomePageClient({
                   pain: "営業組織のスケーラビリティと CAC 上昇。人を増やすだけでは収益が伸びない構造。",
                   value: "リード→商談変換率の改善で、人を増やさず ARR を伸ばす AI SDR レイヤー。",
                   color: "#d03ea1",
+                  // target
+                  iconPath: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
                 },
               ].map((b, i) => (
                 <div
                   key={i}
+                  className="buyer-card"
                   style={{
-                    padding: 24,
+                    padding: "26px 24px",
                     background: "rgba(255,255,255,0.04)",
                     borderRadius: 14,
                     border: "1px solid rgba(255,255,255,0.1)",
                     display: "flex",
                     flexDirection: "column",
-                    gap: 12,
+                    gap: 14,
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform .25s cubic-bezier(.16,1,.3,1), border-color .25s, background .25s",
                   }}
                 >
-                  <div>
+                  <div
+                    aria-hidden
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 2,
+                      background: b.color,
+                      opacity: 0.7,
+                    }}
+                  />
+                  <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                     <div
                       style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        color: b.color,
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        marginBottom: 6,
+                        width: 44,
+                        height: 44,
+                        borderRadius: 11,
+                        background: `${b.color}22`,
+                        border: `1px solid ${b.color}40`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
                       }}
                     >
-                      {b.subtitle}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={b.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d={b.iconPath} />
+                      </svg>
                     </div>
-                    <div
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 800,
-                        color: "#fff",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {b.role}
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          color: b.color,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          marginBottom: 4,
+                          fontFamily: "var(--fm)",
+                        }}
+                      >
+                        {b.subtitle}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: 15,
+                          fontWeight: 800,
+                          color: "#fff",
+                          lineHeight: 1.35,
+                          letterSpacing: "-0.005em",
+                        }}
+                      >
+                        {b.role}
+                      </div>
                     </div>
                   </div>
                   <div
                     style={{
-                      paddingTop: 12,
+                      paddingTop: 14,
                       borderTop: "1px solid rgba(255,255,255,0.08)",
                     }}
                   >
@@ -1695,8 +1838,10 @@ export default function HomePageClient({
                         fontSize: 10,
                         fontWeight: 700,
                         color: "rgba(255,255,255,0.5)",
-                        letterSpacing: "0.05em",
+                        letterSpacing: "0.08em",
                         marginBottom: 6,
+                        textTransform: "uppercase",
+                        fontFamily: "var(--fm)",
                       }}
                     >
                       抱える課題
@@ -1704,8 +1849,8 @@ export default function HomePageClient({
                     <div
                       style={{
                         fontSize: 13,
-                        color: "rgba(255,255,255,0.85)",
-                        lineHeight: 1.7,
+                        color: "rgba(255,255,255,0.78)",
+                        lineHeight: 1.75,
                       }}
                     >
                       {b.pain}
@@ -1713,7 +1858,7 @@ export default function HomePageClient({
                   </div>
                   <div
                     style={{
-                      paddingTop: 12,
+                      paddingTop: 14,
                       borderTop: "1px solid rgba(255,255,255,0.08)",
                     }}
                   >
@@ -1722,8 +1867,10 @@ export default function HomePageClient({
                         fontSize: 10,
                         fontWeight: 700,
                         color: b.color,
-                        letterSpacing: "0.05em",
+                        letterSpacing: "0.08em",
                         marginBottom: 6,
+                        textTransform: "uppercase",
+                        fontFamily: "var(--fm)",
                       }}
                     >
                       Meeton ai が解く
@@ -1732,7 +1879,8 @@ export default function HomePageClient({
                       style={{
                         fontSize: 13,
                         color: "#fff",
-                        lineHeight: 1.7,
+                        lineHeight: 1.75,
+                        fontWeight: 500,
                       }}
                     >
                       {b.value}
@@ -1740,6 +1888,7 @@ export default function HomePageClient({
                   </div>
                 </div>
               ))}
+              <style dangerouslySetInnerHTML={{ __html: `.buyer-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.18)}` }} />
             </div>
           </div>
         </section>
@@ -1749,7 +1898,7 @@ export default function HomePageClient({
       {!isLp && (
         <section
           className="section"
-          style={{ background: "#fff", paddingTop: 64, paddingBottom: 64 }}
+          style={{ background: "#fff", paddingTop: 80, paddingBottom: 80 }}
         >
           <div className="section-inner" style={{ maxWidth: 1080 }}>
             <div className="slabel" style={{ textAlign: "center" }}>
@@ -1761,14 +1910,7 @@ export default function HomePageClient({
             <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
               リードの状態に応じて、Meeton ai が自動で動き分けます。
             </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                gap: 24,
-                marginTop: 48,
-              }}
-            >
+            <div className="usecases-grid">
               {[
                 {
                   title: "Speed to Lead",
@@ -1776,6 +1918,11 @@ export default function HomePageClient({
                   body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、5 秒以内に商談予約まで完結させる。",
                   metric: "5秒",
                   metricLabel: "業界平均は42時間",
+                  color: "#12a37d",
+                  gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                  bg: "linear-gradient(135deg,#e5f8f2,#f0fdf9)",
+                  // bolt
+                  iconPath: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
                 },
                 {
                   title: "Persistent Follow-up",
@@ -1783,6 +1930,11 @@ export default function HomePageClient({
                   body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
                   metric: "1:1",
                   metricLabel: "MA メールはセグメント配信",
+                  color: "#7c5cfc",
+                  gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
+                  bg: "linear-gradient(135deg,#f0ecfe,#faf5ff)",
+                  // mail / refresh
+                  iconPath: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
                 },
                 {
                   title: "Re-engage on Return",
@@ -1790,65 +1942,102 @@ export default function HomePageClient({
                   body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
                   metric: "100%",
                   metricLabel: "再訪リードに即対応",
+                  color: "#3b6ff5",
+                  gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
+                  bg: "linear-gradient(135deg,#eaf0fe,#f5f8ff)",
+                  // refresh
+                  iconPath: "M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
                 },
               ].map((uc, i) => (
                 <div
                   key={i}
+                  className="usecase-card"
                   style={{
-                    padding: 32,
-                    background: "var(--surface)",
+                    padding: 30,
+                    background: "#fff",
                     borderRadius: 16,
                     border: "1px solid var(--border)",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .25s",
+                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
                 >
                   <div
                     style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: 13,
+                      background: uc.bg,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: 16,
+                    }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={uc.iconPath} />
+                    </svg>
+                  </div>
+                  <div
+                    style={{
                       fontSize: 11,
                       fontWeight: 700,
-                      color: "var(--accent)",
-                      letterSpacing: "0.08em",
+                      color: uc.color,
+                      letterSpacing: "0.1em",
                       textTransform: "uppercase",
                       marginBottom: 8,
+                      fontFamily: "var(--fm)",
                     }}
                   >
                     {uc.title}
                   </div>
                   <div
                     style={{
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: 800,
                       color: "var(--heading)",
-                      lineHeight: 1.4,
-                      marginBottom: 16,
+                      lineHeight: 1.45,
+                      marginBottom: 14,
+                      letterSpacing: "-0.005em",
                     }}
                   >
                     {uc.subtitle}
                   </div>
                   <p
                     style={{
-                      fontSize: 14,
-                      color: "var(--text)",
+                      fontSize: 13.5,
+                      color: "var(--sub)",
                       lineHeight: 1.8,
                       marginBottom: 20,
+                      flex: 1,
                     }}
                   >
                     {uc.body}
                   </p>
                   <div
                     style={{
-                      paddingTop: 16,
+                      paddingTop: 18,
                       borderTop: "1px solid var(--border)",
                       display: "flex",
                       alignItems: "baseline",
                       gap: 12,
+                      marginTop: "auto",
                     }}
                   >
                     <div
                       style={{
                         fontSize: 36,
                         fontWeight: 900,
-                        color: "var(--cta)",
+                        background: uc.gradient,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
                         lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                        fontFamily: "var(--fm)",
                       }}
                     >
                       {uc.metric}
@@ -1858,6 +2047,7 @@ export default function HomePageClient({
                         fontSize: 12,
                         color: "var(--sub)",
                         lineHeight: 1.4,
+                        fontWeight: 500,
                       }}
                     >
                       {uc.metricLabel}
@@ -1866,6 +2056,11 @@ export default function HomePageClient({
                 </div>
               ))}
             </div>
+            <style dangerouslySetInnerHTML={{ __html: `
+              .usecases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+              @media (max-width:1000px){.usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}}
+              .usecase-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:transparent}
+            ` }} />
           </div>
         </section>
       )}
@@ -2231,28 +2426,87 @@ export default function HomePageClient({
 
       {/* FINAL CTA */}
       <section className="final-cta">
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
+        <div className="dot-grid" style={{ opacity: 0.35 }} />
         <div
           className="glow"
           style={{
-            background: "rgba(18,163,125,.15)",
-            width: 500,
-            height: 500,
-            top: "50%",
+            background: "rgba(18,163,125,.18)",
+            width: 560,
+            height: 560,
+            top: "40%",
             left: "50%",
             transform: "translate(-50%,-50%)",
           }}
         />
-        <div className="final-cta-inner">
-          <div className="slabel">Get Started</div>
-          <div className="stitle" style={{ textAlign: "center" }}>
+        <div
+          className="glow"
+          style={{
+            background: "rgba(124,92,252,.12)",
+            width: 420,
+            height: 420,
+            top: "20%",
+            right: "8%",
+          }}
+        />
+        <div className="final-cta-inner" style={{ maxWidth: 720 }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "7px 16px",
+              background: "linear-gradient(135deg,var(--cta-light),var(--accent-light))",
+              border: "1px solid rgba(18,163,125,.18)",
+              borderRadius: 100,
+              marginBottom: 28,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "var(--cta)",
+              letterSpacing: "0.06em",
+              fontFamily: "var(--fm)",
+            }}
+          >
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: "var(--cta)",
+                animation: "pulse 2s infinite",
+              }}
+            />
+            GET STARTED
+          </div>
+          <div
+            className="stitle"
+            style={{
+              textAlign: "center",
+              fontSize: "clamp(32px,6vw,56px)",
+              lineHeight: 1.15,
+              letterSpacing: "-0.025em",
+            }}
+          >
             Meeton aiに、
             <br />
-            商談獲得を任せよう
+            <span
+              style={{
+                background: "linear-gradient(135deg,var(--cta),var(--blue))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              商談獲得を任せよう
+            </span>
           </div>
           <p
             className="ssub"
-            style={{ textAlign: "center", margin: "16px auto 36px" }}
+            style={{
+              textAlign: "center",
+              margin: "20px auto 40px",
+              maxWidth: 580,
+              fontSize: "clamp(15px,2.2vw,17px)",
+            }}
           >
             導入は5分。あなた専属のAI SDR「Meeton ai」が24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
           </p>
@@ -2276,6 +2530,32 @@ export default function HomePageClient({
             >
               資料請求 →
             </button>
+          </div>
+          <div
+            style={{
+              marginTop: 28,
+              fontSize: 13,
+              color: "var(--sub)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 20,
+              flexWrap: "wrap",
+              fontWeight: 600,
+            }}
+          >
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              クレカ不要
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              5分で導入
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              既存CRMに自動連携
+            </span>
           </div>
         </div>
       </section>
