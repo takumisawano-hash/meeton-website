@@ -112,8 +112,10 @@ export default function WebinarRegistrationForm({
     const utmParams = `?utm_source=website&utm_medium=webinar-lp&utm_campaign=${utmCampaign}`
 
     window.hbspt.forms.create({
+      // Dedicated webinar registration form (separate from generic
+      // document/contact form). User-supplied 2026-05-12.
       portalId: '45872857',
-      formId: 'dd42d8b3-e426-4079-9479-fa28287c0544',
+      formId: '7aeb7f2e-1b74-4dca-a54e-dfdc5aec8ead',
       region: 'na2',
       target: `#${containerId}`,
       onFormSubmitted: () => {
