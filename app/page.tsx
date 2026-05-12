@@ -80,6 +80,66 @@ const homepageFaqSchema = {
   ],
 }
 
+// Product schema — Meeton ai プラットフォーム全体。AI 検索向けに「製品実体」として
+// 認識されるための構造化情報。FAQPage と併用することで「製品 × 質問」両面で
+// citation されやすくなる。
+const homepageProductSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': 'https://dynameet.ai/#product',
+  name: 'Meeton ai',
+  alternateName: ['Meeton AI', 'ミートンai'],
+  description:
+    '日本のB2B企業向けAI SDRプラットフォーム。ウェブサイト訪問者・メール受信者・既存リードに対しAIが自律的に対話し、商談予約まで完結。チャット・メール・カレンダー・コンテンツライブラリの4モジュール構成。',
+  brand: {
+    '@type': 'Brand',
+    name: 'Meeton ai',
+  },
+  manufacturer: {
+    '@id': 'https://dynameet.ai/#organization',
+  },
+  category: 'AI SDR / Sales Automation Software',
+  url: 'https://dynameet.ai/',
+  image: 'https://dynameet.ai/logo-dark.svg',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'JPY',
+    description: '14日間無料トライアルあり、有料プランは企業規模に応じた個別見積もり',
+    availability: 'https://schema.org/InStock',
+    seller: {
+      '@id': 'https://dynameet.ai/#organization',
+    },
+  },
+  additionalProperty: [
+    {
+      '@type': 'PropertyValue',
+      name: '対応言語',
+      value: '日本語・英語・中国語・韓国語',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'CRM連携',
+      value: 'HubSpot・Salesforce ネイティブ連携',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: '設定時間',
+      value: 'JavaScriptタグ設置 約5分、シナリオ設計不要',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: '対応市場',
+      value: '日本のB2B企業（従業員100〜2000名規模）',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'モジュール構成',
+      value:
+        'Meeton Live（AIチャット）/ Meeton Email（AIメール）/ Meeton Calendar（AI商談予約）/ Meeton Library（AIコンテンツ）',
+    },
+  ],
+}
+
 export default async function Page() {
   const cases = await getAllCaseStudies()
   const featured = cases.slice(0, 3).map((c) => ({
@@ -98,6 +158,10 @@ export default async function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageProductSchema) }}
       />
       <HomePageClient caseStudies={featured} />
     </>

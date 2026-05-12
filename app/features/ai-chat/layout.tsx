@@ -6,10 +6,51 @@ import SoftwareAppJsonLd from '../../components/SoftwareAppJsonLd'
 const faqItems = [
   { question: 'AIチャットの設定にどのくらい時間がかかりますか？', answer: 'JavaScriptタグの設置は約5分です。AIはナレッジベースを自動学習するため、シナリオ設計は不要。設置直後から自律的に最適な対応を開始します。' },
   { question: '既存のチャットボットとの違いは何ですか？', answer: '従来のチャットボットはルール分岐やシナリオ設計が必要で、想定外の質問に対応できません。Meeton aiのAIチャットは文脈を理解し、自律的に最適な回答を生成。商談予約まで会話内で完結します。' },
+  { question: 'AI SDR とチャットボットの違いは何ですか？', answer: 'チャットボットはルール分岐に基づき、想定外の質問に対応できません。AI SDR は LLM（大規模言語モデル）が文脈を理解し、訪問者ごとに最適な会話を自律生成します。ニーズ把握から商談予約まで、人間の SDR と同等の対話を 24 時間自動で実行する点が本質的な違いです。' },
+  { question: 'Web接客ツール（KARTE / sinclo 等）と何が違いますか？', answer: 'Web 接客ツールはポップアップ表示やシナリオ誘導が主体で、最終的に人間のフォローが必要なケースが多くあります。Meeton Live は会話の中でニーズを特定し、温度感の高いリードはその場で商談予約まで完結。低温度リードは自動でナーチャリングフローへ移行し、人手介在ゼロで商談化プロセスを完結します。' },
   { question: 'どの言語に対応していますか？', answer: '日本語・英語・中国語・韓国語をはじめ、主要な言語に対応しています。多言語のサイトでもそのままご利用いただけます。' },
   { question: 'CRMとの連携は可能ですか？', answer: 'HubSpot、Salesforceとネイティブ連携しています。チャットで取得したリード情報はリアルタイムでCRMに自動登録されます。Webhookによる他ツールとの連携も可能です。' },
   { question: '無料トライアルはありますか？', answer: '14日間の無料トライアルをご用意しています。クレジットカード不要で、全機能をお試しいただけます。' },
 ]
+
+// Product schema — Meeton Live モジュール単体
+// AI 検索が「Meeton Live = AI SDR / Business Chat 製品」と認識するための構造化情報
+const meetonLiveProductSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': 'https://dynameet.ai/features/ai-chat/#product',
+  name: 'Meeton Live',
+  description:
+    'ウェブサイト訪問者と即時に対話し、過去の閲覧・ダウンロード・メール履歴を全文脈で引き継いだ AI SDR が商談予約まで完結させる AI チャットモジュール。シナリオ設計不要で設置 5 分から稼働。',
+  brand: { '@type': 'Brand', name: 'Meeton ai' },
+  manufacturer: { '@id': 'https://dynameet.ai/#organization' },
+  category: 'AI SDR / Business Chat Software',
+  url: 'https://dynameet.ai/features/ai-chat/',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'JPY',
+    description: '14 日間無料トライアルあり',
+    availability: 'https://schema.org/InStock',
+    seller: { '@id': 'https://dynameet.ai/#organization' },
+  },
+  additionalProperty: [
+    {
+      '@type': 'PropertyValue',
+      name: '対応言語',
+      value: '日本語・英語・中国語・韓国語',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'CRM連携',
+      value: 'HubSpot・Salesforce ネイティブ連携',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: '設定時間',
+      value: 'JavaScript タグ設置 約 5 分、シナリオ設計不要',
+    },
+  ],
+}
 
 export const metadata: Metadata = {
   title: 'Meeton Live｜全文脈を引き継いで商談化する AI SDR 対話',
@@ -57,6 +98,10 @@ export default function AiChatLayout({
           '多言語対応',
         ]}
         url="https://dynameet.ai/features/ai-chat/"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(meetonLiveProductSchema) }}
       />
       {children}
     </>
