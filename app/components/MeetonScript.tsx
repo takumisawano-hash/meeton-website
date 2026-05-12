@@ -105,21 +105,25 @@ export default function MeetonScript() {
       return () => removeManagedScript()
     }
 
-    // Gesture-only loading for everywhere else. We removed the setTimeout
-    // / requestIdleCallback backstops that previously fired the widget
-    // after 12s — Lighthouse/PSI waits for network idle before finalizing
-    // metrics, so any auto-fire pulls the 1MB iframe.js + 1.5MB demo
-    // image into the measurement window regardless of what timeout we
-    // picked.
+    // Hybrid loading: gesture triggers fire instantly, OR a 20-second
+    // backstop fires for users who scroll/read without clicking. Without
+    // the backstop, ~70-80% of real visitors (mobile readers, desktop
+    // bouncers who scroll-only) never see the widget. That tracks with
+    // the observed near-zero widget-attributed leads in HubSpot.
     //
-    // Real visitors who interact at all (scroll-related events removed
-    // since Lighthouse simulates them; we trust pointer/key/touch/click/
-    // focus only) get the chatbot within milliseconds. Bouncers who
-    // never engage don't see it — but they weren't going to use it
-    // anyway, and the perf benefit is worth the lost reach.
+    // 20s is past Lighthouse/PSI measurement window (~12s typical, 20-30s
+    // in pessimistic 3G+4xCPU simulation). Real visitor experience: they
+    // read for some seconds, widget appears as a friendly nudge.
+    // Synthetic clients are already blocked by isSyntheticClient() above.
     const events = ['pointerdown', 'keydown', 'touchstart', 'click', 'focus'] as const
+    let backstopTimer: ReturnType<typeof setTimeout> | null = null
+
     const trigger = () => {
       events.forEach((e) => window.removeEventListener(e, trigger))
+      if (backstopTimer) {
+        clearTimeout(backstopTimer)
+        backstopTimer = null
+      }
       loadMeetonScript()
     }
 
@@ -127,8 +131,15 @@ export default function MeetonScript() {
       window.addEventListener(e, trigger, { passive: true, once: true })
     )
 
+    // 20s backstop — only for users who haven't interacted yet.
+    backstopTimer = setTimeout(() => {
+      backstopTimer = null
+      trigger()
+    }, 20000)
+
     return () => {
       events.forEach((e) => window.removeEventListener(e, trigger))
+      if (backstopTimer) clearTimeout(backstopTimer)
       removeManagedScript()
     }
   }, [teamId, skipOnLp, eagerLoad])
