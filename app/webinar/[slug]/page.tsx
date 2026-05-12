@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
@@ -193,11 +194,14 @@ export default async function WebinarDetailPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventLd) }}
         />
       )}
-      {/* Eager-load HubSpot portal embed script in HTML (parallel with
-          page download). Cuts form first-paint by 300-600ms vs the
-          useEffect-driven dynamic injection. */}
-      <link rel="preload" as="script" href="https://js-na2.hsforms.net/forms/embed/45872857.js" />
-      <script id="hubspot-portal-embed-script" defer src="https://js-na2.hsforms.net/forms/embed/45872857.js" />
+      {/* HubSpot portal embed — use next/script for guaranteed execution
+          after page becomes interactive. The script auto-scans for
+          .hs-form-frame divs and renders the iframe inside. */}
+      <Script
+        id="hubspot-portal-embed-script"
+        src="https://js-na2.hsforms.net/forms/embed/45872857.js"
+        strategy="afterInteractive"
+      />
       <Nav variant="light" />
 
       {/* ── HERO (split: copy left, registration form right — above-fold conversion) ── */}

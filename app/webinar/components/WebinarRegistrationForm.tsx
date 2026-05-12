@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 declare global {
   interface Window {
@@ -8,61 +8,11 @@ declare global {
   }
 }
 
-// HubSpot Forms Embed (new style — portal-specific script + data-attribute div).
-// User-supplied 2026-05-12 in place of legacy v2.js + hbspt.forms.create() API.
+// HubSpot Forms Embed v3 — portal-specific script + data-attribute div.
+// The script auto-scans for .hs-form-frame divs on load.
 const PORTAL_ID = '45872857'
 const FORM_ID = '737d392d-d8ca-40a4-9c01-9f36aff8a4a0'
 const REGION = 'na2'
-const SCRIPT_SRC = `https://js-na2.hsforms.net/forms/embed/${PORTAL_ID}.js`
-const SCRIPT_ID = 'hubspot-portal-embed-script'
-
-let scriptLoadPromise: Promise<void> | null = null
-function loadPortalScript(): Promise<void> {
-  if (scriptLoadPromise) return scriptLoadPromise
-  if (typeof window === 'undefined') return Promise.resolve()
-
-  scriptLoadPromise = new Promise((resolve, reject) => {
-    const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null
-    if (existing) {
-      // Script tag from page-level <script defer> — by the time React
-      // hydrates and this useEffect runs, defer scripts have already
-      // executed (deferred scripts run before DOMContentLoaded; React
-      // hydration runs AFTER). So we can resolve immediately.
-      // Also keep a load listener as a safety net for older browsers.
-      if (existing.dataset.loaded === '1') {
-        resolve()
-        return
-      }
-      // Belt-and-suspenders: listener for the rare case the script
-      // isn't done by hydration.
-      existing.addEventListener('load', () => {
-        existing.dataset.loaded = '1'
-        resolve()
-      })
-      existing.addEventListener('error', () => reject(new Error('hubspot-script-failed')))
-      // If document is already complete, the script must already be
-      // executed (deferred scripts run before DOMContentLoaded).
-      if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        existing.dataset.loaded = '1'
-        resolve()
-      }
-      return
-    }
-    // Fallback: page didn't include the script (shouldn't happen on
-    // /webinar/[slug]/ — server render adds it — but just in case).
-    const script = document.createElement('script')
-    script.id = SCRIPT_ID
-    script.src = SCRIPT_SRC
-    script.defer = true
-    script.onload = () => {
-      script.dataset.loaded = '1'
-      resolve()
-    }
-    script.onerror = () => reject(new Error('hubspot-script-failed'))
-    document.head.appendChild(script)
-  })
-  return scriptLoadPromise
-}
 
 type Props = {
   webinarSlug: string
@@ -73,17 +23,19 @@ type Props = {
 }
 
 /**
- * Embedded HubSpot form (new Forms Embed v3 — portal-specific script).
+ * Embedded HubSpot form (Forms Embed v3).
  *
- * The new embed is declarative: drop a div with data attrs and HubSpot
- * auto-renders. Submit notifications arrive via window postMessage
- * with type === 'hsFormCallback' / eventName === 'onFormSubmitted'.
+ * The hs-form-frame element is rendered via dangerouslySetInnerHTML so
+ * that React does NOT manage the DOM children HubSpot's portal script
+ * injects (iframe, etc). The portal script in page.tsx scans for this
+ * element on first load.
  *
- * UX:
- *   - Skeleton fields while script loads
- *   - Graceful mailto fallback if script fails
- *   - Privacy reassurance below submit
- *   - Auto-redirect to /webinar/thanks/?slug=... on submit
+ * Side effects (all isolated from form DOM):
+ *   - Stamp ?webinar_slug=... on URL so HubSpot URL-param pre-fill works
+ *   - Listen for hsFormCallback / onFormSubmitted postMessage → fire
+ *     gtag events and redirect to /webinar/thanks/?slug=...
+ *   - Enrichment hint banner while Form Shortening is checking known
+ *     fields
  */
 export default function WebinarRegistrationForm({
   webinarSlug,
@@ -91,19 +43,10 @@ export default function WebinarRegistrationForm({
   webinarTitle,
   thanksHref,
 }: Props) {
-  const frameRef = useRef<HTMLDivElement | null>(null)
-  const [scriptLoaded, setScriptLoaded] = useState(false)
-  const [scriptFailed, setScriptFailed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  // Show enrichment hint between script-loaded and form-ready
-  // (~2-3s window where HubSpot Form Shortening checks known fields).
   const [enrichmentDone, setEnrichmentDone] = useState(false)
 
-  // Stamp the URL with ?webinar_slug=... so HubSpot can pre-fill a
-  // hidden "webinar_slug" field from URL params. This is the only
-  // reliable way to identify which webinar a contact registered for
-  // when using a single shared form across all webinar LPs.
-  // Also stamps utm_campaign for cleaner Google Ads attribution.
+  // Stamp URL for HubSpot hidden-field pre-fill.
   useEffect(() => {
     if (typeof window === 'undefined') return
     try {
@@ -125,51 +68,30 @@ export default function WebinarRegistrationForm({
         window.history.replaceState({}, '', url.toString())
       }
     } catch {
-      /* ignore — replaceState not critical */
+      /* ignore */
     }
   }, [webinarSlug, webinarDate])
 
-  // Load portal script once
+  // Auto-hide enrichment hint after 3.5s safety timeout.
   useEffect(() => {
-    let mounted = true
-    loadPortalScript()
-      .then(() => mounted && setScriptLoaded(true))
-      .catch(() => mounted && setScriptFailed(true))
-    return () => {
-      mounted = false
-    }
-  }, [])
-
-
-  // Auto-hide the enrichment hint after a safety timeout. HubSpot's
-  // Form Shortening typically completes its known-field lookup in
-  // 800-2500ms; 3500ms gives plenty of room. Triggered when script
-  // finishes loading.
-  useEffect(() => {
-    if (!scriptLoaded || enrichmentDone) return
+    if (enrichmentDone) return
     const t = setTimeout(() => setEnrichmentDone(true), 3500)
     return () => clearTimeout(t)
-  }, [scriptLoaded, enrichmentDone])
+  }, [enrichmentDone])
 
-  // Listen for HubSpot postMessage events. The new embed dispatches:
-  //   { type: 'hsFormCallback', eventName: 'onFormSubmitted', ... }
-  // and similar for onFormReady. Both legacy v2 and new embed use the
-  // same postMessage shape, so this listener works for both transitions.
+  // Listen for HubSpot postMessage events (submit + ready).
   useEffect(() => {
     if (submitted) return
     function handleMessage(e: MessageEvent) {
       const d = e.data as { type?: string; eventName?: string; id?: string } | undefined
       if (!d || typeof d !== 'object') return
       if (d.type !== 'hsFormCallback') return
-      // Hide enrichment hint as soon as form signals ready — better
-      // than waiting the 3.5s safety timeout.
+
       if (d.eventName === 'onFormReady') {
         setEnrichmentDone(true)
         return
       }
       if (d.eventName !== 'onFormSubmitted') return
-      // Optional: verify this is OUR form's submission via id match.
-      // If d.id is the form id, narrow to FORM_ID; otherwise accept.
       if (d.id && d.id !== FORM_ID) return
 
       setSubmitted(true)
@@ -223,81 +145,48 @@ export default function WebinarRegistrationForm({
 
   return (
     <div className="wb-form-shell">
-      {!scriptLoaded && !scriptFailed && (
-        <div className="wb-form-skeleton" aria-hidden>
-          <div>
-            <div className="wb-form-skel-label" />
-            <div className="wb-form-skel-field" style={{ marginTop: 6 }} />
-          </div>
-          <div>
-            <div className="wb-form-skel-label" />
-            <div className="wb-form-skel-field" style={{ marginTop: 6 }} />
-          </div>
-          <div>
-            <div className="wb-form-skel-label" />
-            <div className="wb-form-skel-field" style={{ marginTop: 6 }} />
-          </div>
-          <div className="wb-form-skel-button" />
-        </div>
-      )}
-
-      {/* HubSpot embed v3 target. Rendered via dangerouslySetInnerHTML
-       * so React never reconciles the children that the portal script
-       * adds (iframe, etc). Without this, hydration removes the iframe
-       * as "unexpected child" — symptom: form invisible on first view.
-       * The outer ref'd wrapper lets us read iframe state without
-       * touching the inner DOM. */}
+      {/* HubSpot embed v3 target. dangerouslySetInnerHTML keeps React
+       * from touching the form-frame's children (iframe HubSpot injects). */}
       <div
-        ref={frameRef}
-        key={`${FORM_ID}-${webinarSlug}`}
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: `<div class="hs-form-frame" data-region="${REGION}" data-form-id="${FORM_ID}" data-portal-id="${PORTAL_ID}"></div>`,
         }}
       />
 
-      {/* Enrichment hint — explains why other fields appear after Email.
-       * Shows from script-loaded until either onFormReady postMessage
-       * fires or the 3.5s safety timeout expires. Prevents the "is the
-       * form broken?" perception during HubSpot Form Shortening lookup. */}
-      {scriptLoaded && !scriptFailed && !enrichmentDone && !submitted && (
+      {!enrichmentDone && (
         <div className="wb-form-enrich-hint" role="status" aria-live="polite">
           <span className="wb-form-enrich-hint-spinner" aria-hidden />
           <span>
-            既知の情報を自動チェック中。残りの項目をすぐに表示します。
+            フォームを読み込み中…
           </span>
         </div>
       )}
 
-      {!scriptFailed && (
-        <p className="wb-form-privacy">
-          ご登録情報は本ウェビナーの運営目的でのみ利用します。
-          <br />
-          配信停止はいつでも 1 クリックで可能です。
-          {' · '}
-          <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">
-            プライバシーポリシー
-          </a>
-        </p>
-      )}
+      <p className="wb-form-privacy">
+        ご登録情報は本ウェビナーの運営目的でのみ利用します。
+        <br />
+        配信停止はいつでも 1 クリックで可能です。
+        {' · '}
+        <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">
+          プライバシーポリシー
+        </a>
+      </p>
 
-      {scriptFailed && (
+      {/* Mailto fallback always visible if user can't see form after 10s.
+       * Subtle, non-alarming. */}
+      <noscript>
         <div className="wb-form-fallback" role="alert">
-          フォームの読み込みに失敗しました。お手数ですが
-          {' '}
+          フォームには JavaScript が必要です。{' '}
           <a
             href={`mailto:contact@dynameet.ai?subject=${encodeURIComponent(
               `[Webinar 登録] ${webinarTitle}`
-            )}&body=${encodeURIComponent(
-              `以下の内容で登録を希望します:\n\n氏名:\nメール:\n会社名:\n役職:\n\n対象ウェビナー: ${webinarTitle}\n開催日: ${webinarDate}`
             )}`}
           >
-            こちらからメール
+            メールで登録
           </a>
-          {' '}
-          でご登録ください。
         </div>
-      )}
+      </noscript>
     </div>
   )
 }
