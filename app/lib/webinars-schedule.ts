@@ -35,6 +35,9 @@ export type WebinarSchedule = {
     title: string
     bio: string
   }
+  /** Thumbnail (1200x630 OGP-spec image). Generated via
+   *  ~/Projects/meeton-ads/generate_webinar_thumbnail.py with Gemini 3 Pro. */
+  thumbnailUrl?: string
   /** True after the event is finished. Show in On-Demand library instead of upcoming. */
   past?: boolean
   /** Replay URL once available (post-event) */
@@ -55,6 +58,7 @@ export const WEBINAR_SCHEDULE: WebinarSchedule[] = [
     subtitle: 'B2B パイプラインから消える 80% を可視化する',
     date: '2026-06-18',
     dateLabel: '6 月 18 日(木) 14:00 - 14:30 JST',
+    thumbnailUrl: '/webinars/lead-to-meeting-loss.png',
     description:
       'リードはあるのに商談数が伸びない B2B 企業向けの 30 分セッション。業界統計から MQL→SQL の "見えない損失" を分解し、修復のフレームワークをコンパクトに提示します。',
     learnings: [
@@ -78,6 +82,7 @@ export const WEBINAR_SCHEDULE: WebinarSchedule[] = [
     subtitle: '初動 5 分・1 時間・24 時間で商談化率はどう変わるか',
     date: '2026-07-23',
     dateLabel: '7 月 23 日(木) 14:00 - 14:30 JST',
+    thumbnailUrl: '/webinars/speed-to-lead-research.png',
     description:
       'Harvard Business Review の Speed to Lead 古典研究と最新の B2B 実証データから、初動応答時間が商談化率にもたらす定量影響を 30 分でコンパクトに解説します。',
     learnings: [
@@ -101,6 +106,7 @@ export const WEBINAR_SCHEDULE: WebinarSchedule[] = [
     subtitle: 'メール開封率 5% 時代の代替モデル',
     date: '2026-08-27',
     dateLabel: '8 月 27 日(木) 14:00 - 14:30 JST',
+    thumbnailUrl: '/webinars/cool-lead-nurture-design.png',
     description:
       'B2B のメール開封率が下落するなか、温度低リードを失わずに育成するためのナーチャリング設計を、構造化されたフレームと業界データから 30 分でコンパクトに解説します。',
     learnings: [

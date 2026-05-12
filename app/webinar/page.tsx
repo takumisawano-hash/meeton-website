@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import FAQJsonLd from '../components/FAQJsonLd'
@@ -153,6 +154,18 @@ export default function WebinarIndexPage() {
 
             <div className="wb-featured">
               <div className="wb-featured-glow" aria-hidden />
+              {featured.thumbnailUrl && (
+                <div className="wb-featured-thumb">
+                  <Image
+                    src={featured.thumbnailUrl}
+                    alt={featured.title}
+                    width={1200}
+                    height={630}
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 1100px"
+                  />
+                </div>
+              )}
               <div className="wb-featured-inner">
                 <div>
                   <div className="wb-featured-badge">
@@ -281,15 +294,28 @@ export default function WebinarIndexPage() {
                   href={`/webinar/${w.slug}/`}
                   className="wb-upcoming-card"
                 >
-                  <div className="wb-upcoming-date">{w.dateLabel}</div>
-                  <h3 className="wb-upcoming-title">{w.title}</h3>
-                  <p className="wb-upcoming-subtitle">{w.subtitle}</p>
-                  <span className="wb-upcoming-cta">
-                    詳細 + リマインダー登録
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M13 5l7 7-7 7" />
-                    </svg>
-                  </span>
+                  {w.thumbnailUrl && (
+                    <div className="wb-upcoming-thumb">
+                      <Image
+                        src={w.thumbnailUrl}
+                        alt={w.title}
+                        width={1200}
+                        height={630}
+                        sizes="(max-width: 720px) 100vw, 540px"
+                      />
+                    </div>
+                  )}
+                  <div className="wb-upcoming-body">
+                    <div className="wb-upcoming-date">{w.dateLabel}</div>
+                    <h3 className="wb-upcoming-title">{w.title}</h3>
+                    <p className="wb-upcoming-subtitle">{w.subtitle}</p>
+                    <span className="wb-upcoming-cta">
+                      詳細 + リマインダー登録
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>

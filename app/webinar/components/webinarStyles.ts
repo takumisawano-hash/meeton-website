@@ -202,6 +202,15 @@ export function webinarCss(): string {
         radial-gradient(circle 280px at calc(100% - 40px) -40px, rgba(18, 163, 125, 0.12), transparent 70%),
         radial-gradient(circle 220px at -40px calc(100% - 40px), rgba(124, 92, 252, 0.10), transparent 70%);
     }
+    .wb-featured-thumb {
+      position: relative; width: 100%; aspect-ratio: 1200 / 630;
+      overflow: hidden;
+      border-bottom: 1px solid var(--w-border);
+      background: var(--w-paper);
+    }
+    .wb-featured-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
     .wb-featured-inner {
       position: relative; padding: clamp(32px, 4vw, 56px);
       display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 4vw, 48px);
@@ -305,15 +314,28 @@ export function webinarCss(): string {
     }
     .wb-upcoming-card {
       background: #fff; border: 1px solid var(--w-border); border-radius: 22px;
-      padding: clamp(24px, 2.5vw, 32px);
       text-decoration: none; color: var(--w-text);
-      display: flex; flex-direction: column; gap: 14px;
+      display: flex; flex-direction: column;
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
+      overflow: hidden;
     }
     .wb-upcoming-card:hover {
       transform: translateY(-3px);
       border-color: var(--w-green-deep);
       box-shadow: 0 24px 48px -24px rgba(6, 95, 70, 0.2);
+    }
+    .wb-upcoming-thumb {
+      position: relative; aspect-ratio: 1200 / 630;
+      background: var(--w-paper); overflow: hidden;
+    }
+    .wb-upcoming-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .wb-upcoming-card:hover .wb-upcoming-thumb img { transform: scale(1.03); }
+    .wb-upcoming-body {
+      padding: clamp(20px, 2.2vw, 28px);
+      display: flex; flex-direction: column; gap: 12px; flex: 1;
     }
     .wb-upcoming-date {
       font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;

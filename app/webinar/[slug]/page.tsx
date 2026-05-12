@@ -56,6 +56,17 @@ export async function generateMetadata({
       siteName: 'Meeton ai',
       locale: 'ja_JP',
       type: 'website',
+      images: webinar.thumbnailUrl
+        ? [{ url: `https://dynameet.ai${webinar.thumbnailUrl}`, width: 1200, height: 630, alt: webinar.title }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: webinar.title,
+      description: webinar.description,
+      images: webinar.thumbnailUrl
+        ? [`https://dynameet.ai${webinar.thumbnailUrl}`]
+        : undefined,
     },
     robots: {
       index: true,
@@ -130,7 +141,11 @@ function buildEventJsonLd(
       '@type': 'VirtualLocation',
       url,
     },
-    image: ['https://dynameet.ai/og-image.png'],
+    image: [
+      webinar.thumbnailUrl
+        ? `https://dynameet.ai${webinar.thumbnailUrl}`
+        : 'https://dynameet.ai/og-image.png',
+    ],
     organizer: {
       '@type': 'Organization',
       name: 'Meeton ai (DynaMeet 株式会社)',
