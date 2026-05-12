@@ -140,32 +140,6 @@ export default function WebinarRegistrationForm({
     }
   }, [])
 
-  // Heal-only: if the iframe still hasn't rendered ~2.5s after script
-  // load, fire a custom event the portal script listens to AND/OR
-  // dispatch a 'load' event on the script tag (some HubSpot embed
-  // versions re-scan on that). This kicks the portal script's observer
-  // without touching React's DOM, so first-visit isn't affected.
-  useEffect(() => {
-    if (!scriptLoaded || !frameRef.current || submitted) return
-    const el = frameRef.current
-
-    const t = setTimeout(() => {
-      // If iframe child already exists, no rescue needed.
-      if (el.querySelector('iframe')) return
-      // Nudge the portal script to rescan by dispatching events it
-      // commonly observes. Safe: just events, no DOM replacement.
-      try {
-        window.dispatchEvent(new Event('hsFormsV4Loaded'))
-        window.dispatchEvent(new Event('hsFormReady'))
-        const scriptEl = document.getElementById(SCRIPT_ID)
-        if (scriptEl) scriptEl.dispatchEvent(new Event('load'))
-      } catch {
-        /* ignore */
-      }
-    }, 2500)
-
-    return () => clearTimeout(t)
-  }, [scriptLoaded, submitted, webinarSlug])
 
   // Auto-hide the enrichment hint after a safety timeout. HubSpot's
   // Form Shortening typically completes its known-field lookup in
@@ -267,13 +241,19 @@ export default function WebinarRegistrationForm({
         </div>
       )}
 
-      {/* HubSpot embed v3 target — auto-rendered by /forms/embed/{portalId}.js */}
+      {/* HubSpot embed v3 target. Rendered via dangerouslySetInnerHTML
+       * so React never reconciles the children that the portal script
+       * adds (iframe, etc). Without this, hydration removes the iframe
+       * as "unexpected child" — symptom: form invisible on first view.
+       * The outer ref'd wrapper lets us read iframe state without
+       * touching the inner DOM. */}
       <div
         ref={frameRef}
-        className="hs-form-frame"
-        data-region={REGION}
-        data-form-id={FORM_ID}
-        data-portal-id={PORTAL_ID}
+        key={`${FORM_ID}-${webinarSlug}`}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: `<div class="hs-form-frame" data-region="${REGION}" data-form-id="${FORM_ID}" data-portal-id="${PORTAL_ID}"></div>`,
+        }}
       />
 
       {/* Enrichment hint — explains why other fields appear after Email.
