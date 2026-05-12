@@ -1,52 +1,49 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 declare global {
   interface Window {
-    hbspt?: {
-      forms: {
-        create: (config: {
-          portalId: string
-          formId: string
-          region: string
-          target: string
-          onFormReady?: ($form: HTMLFormElement) => void
-          onFormSubmitted?: () => void
-        }) => void
-      }
-    }
     gtag?: (...args: unknown[]) => void
   }
 }
 
+// HubSpot Forms Embed (new style — portal-specific script + data-attribute div).
+// User-supplied 2026-05-12 in place of legacy v2.js + hbspt.forms.create() API.
+const PORTAL_ID = '45872857'
+const FORM_ID = '737d392d-d8ca-40a4-9c01-9f36aff8a4a0'
+const REGION = 'na2'
+const SCRIPT_SRC = `https://js-na2.hsforms.net/forms/embed/${PORTAL_ID}.js`
+const SCRIPT_ID = 'hubspot-portal-embed-script'
+
 let scriptLoadPromise: Promise<void> | null = null
-function loadHubSpotScript(): Promise<void> {
+function loadPortalScript(): Promise<void> {
   if (scriptLoadPromise) return scriptLoadPromise
-  if (typeof window !== 'undefined' && window.hbspt) {
-    return Promise.resolve()
-  }
+  if (typeof window === 'undefined') return Promise.resolve()
+
   scriptLoadPromise = new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') {
-      resolve()
-      return
-    }
-    const existing = document.getElementById('hubspot-script') as HTMLScriptElement | null
+    const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null
     if (existing) {
-      if (window.hbspt) {
+      // Already loaded (or in-flight)
+      if (existing.dataset.loaded === '1') {
         resolve()
       } else {
-        existing.addEventListener('load', () => resolve())
+        existing.addEventListener('load', () => {
+          existing.dataset.loaded = '1'
+          resolve()
+        })
         existing.addEventListener('error', () => reject(new Error('hubspot-script-failed')))
       }
       return
     }
     const script = document.createElement('script')
-    script.id = 'hubspot-script'
-    script.src = '//js-na2.hsforms.net/forms/embed/v2.js'
-    script.charset = 'utf-8'
-    script.async = true
-    script.onload = () => resolve()
+    script.id = SCRIPT_ID
+    script.src = SCRIPT_SRC
+    script.defer = true
+    script.onload = () => {
+      script.dataset.loaded = '1'
+      resolve()
+    }
     script.onerror = () => reject(new Error('hubspot-script-failed'))
     document.head.appendChild(script)
   })
@@ -62,18 +59,17 @@ type Props = {
 }
 
 /**
- * Embedded HubSpot form for webinar registration.
+ * Embedded HubSpot form (new Forms Embed v3 — portal-specific script).
+ *
+ * The new embed is declarative: drop a div with data attrs and HubSpot
+ * auto-renders. Submit notifications arrive via window postMessage
+ * with type === 'hsFormCallback' / eventName === 'onFormSubmitted'.
  *
  * UX:
- *   - Skeleton fields while script loads (no jarring "Loading...")
- *   - Graceful fallback link if HubSpot fails to load (progressive enhancement)
+ *   - Skeleton fields while script loads
+ *   - Graceful mailto fallback if script fails
  *   - Privacy reassurance below submit
- *   - Optimistic success state (renders before redirect resolves)
- *
- * Data flow: reuses portal 45872857 / form dd42d8b3. Injects
- * webinarSlug + webinarDate + webinarTitle into hs_context so the
- * contact record carries registration source for routing/segmentation
- * in HubSpot.
+ *   - Auto-redirect to /webinar/thanks/?slug=... on submit
  */
 export default function WebinarRegistrationForm({
   webinarSlug,
@@ -81,17 +77,15 @@ export default function WebinarRegistrationForm({
   webinarTitle,
   thanksHref,
 }: Props) {
-  const reactId = useId()
-  // useId returns `:r0:`-style strings — strip colons so it's a valid CSS selector
-  const containerId = `webinar-form-${reactId.replace(/[^a-z0-9_-]/gi, '')}`
-  const containerRef = useRef<HTMLDivElement>(null)
+  const frameRef = useRef<HTMLDivElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
   const [scriptFailed, setScriptFailed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  // Load portal script once
   useEffect(() => {
     let mounted = true
-    loadHubSpotScript()
+    loadPortalScript()
       .then(() => mounted && setScriptLoaded(true))
       .catch(() => mounted && setScriptFailed(true))
     return () => {
@@ -99,91 +93,42 @@ export default function WebinarRegistrationForm({
     }
   }, [])
 
+  // Listen for HubSpot postMessage events. The new embed dispatches:
+  //   { type: 'hsFormCallback', eventName: 'onFormSubmitted', ... }
+  // and similar for onFormReady. Both legacy v2 and new embed use the
+  // same postMessage shape, so this listener works for both transitions.
   useEffect(() => {
-    if (!scriptLoaded || !containerRef.current || !window.hbspt) return
     if (submitted) return
-    containerRef.current.innerHTML = ''
+    function handleMessage(e: MessageEvent) {
+      const d = e.data as { type?: string; eventName?: string; id?: string } | undefined
+      if (!d || typeof d !== 'object') return
+      if (d.type !== 'hsFormCallback') return
+      if (d.eventName !== 'onFormSubmitted') return
+      // Optional: verify this is OUR form's submission via id match.
+      // If d.id is the form id, narrow to FORM_ID; otherwise accept.
+      if (d.id && d.id !== FORM_ID) return
 
-    const baseUrl =
-      typeof window !== 'undefined'
-        ? window.location.origin + window.location.pathname
-        : ''
-    const utmCampaign = `webinar-${webinarSlug}`
-    const utmParams = `?utm_source=website&utm_medium=webinar-lp&utm_campaign=${utmCampaign}`
-
-    window.hbspt.forms.create({
-      // Dedicated webinar registration form (separate from generic
-      // document/contact form). User-supplied 2026-05-12.
-      portalId: '45872857',
-      formId: '7aeb7f2e-1b74-4dca-a54e-dfdc5aec8ead',
-      region: 'na2',
-      target: `#${containerId}`,
-      onFormSubmitted: () => {
-        setSubmitted(true)
-        window.gtag?.('event', 'form_submit', {
-          form_type: 'webinar_registration',
-          webinar_slug: webinarSlug,
-          webinar_date: webinarDate,
-          utm_campaign: utmCampaign,
-        })
-        window.gtag?.('event', 'generate_lead', {
-          form_type: 'webinar_registration',
-          value: 1,
-        })
-        const target =
-          thanksHref ||
-          `/webinar/thanks/?slug=${encodeURIComponent(webinarSlug)}`
-        setTimeout(() => {
-          window.location.href = target
-        }, 800)
-      },
-      onFormReady: ($form: HTMLFormElement) => {
-        if (!$form) return
-        const ctx = $form.querySelector(
-          'input[name="hs_context"]'
-        ) as HTMLInputElement | null
-        if (ctx) {
-          try {
-            const parsed = JSON.parse(ctx.value || '{}')
-            parsed.pageUrl = baseUrl + utmParams
-            parsed.webinarSlug = webinarSlug
-            parsed.webinarDate = webinarDate
-            parsed.webinarTitle = webinarTitle
-            ctx.value = JSON.stringify(parsed)
-          } catch {
-            /* ignore */
-          }
-        }
-        // Improve mobile UX — add proper input modes/autocomplete to inputs
-        const email = $form.querySelector(
-          'input[type="email"]'
-        ) as HTMLInputElement | null
-        if (email && !email.getAttribute('autocomplete')) {
-          email.setAttribute('autocomplete', 'email')
-          email.setAttribute('inputmode', 'email')
-        }
-        const tel = $form.querySelector(
-          'input[type="tel"]'
-        ) as HTMLInputElement | null
-        if (tel && !tel.getAttribute('autocomplete')) {
-          tel.setAttribute('autocomplete', 'tel')
-          tel.setAttribute('inputmode', 'tel')
-        }
-        // Honeypot (basic bot deterrent — invisible to humans)
-        if (!$form.querySelector('input[name="wb_hp"]')) {
-          const hp = document.createElement('input')
-          hp.type = 'text'
-          hp.name = 'wb_hp'
-          hp.tabIndex = -1
-          hp.autocomplete = 'off'
-          hp.setAttribute('aria-hidden', 'true')
-          hp.style.cssText =
-            'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;'
-          $form.appendChild(hp)
-        }
-      },
-    })
-  }, [scriptLoaded, submitted, webinarSlug, webinarDate, webinarTitle, thanksHref, containerId])
+      setSubmitted(true)
+      const utmCampaign = `webinar-${webinarSlug}`
+      window.gtag?.('event', 'form_submit', {
+        form_type: 'webinar_registration',
+        webinar_slug: webinarSlug,
+        webinar_date: webinarDate,
+        utm_campaign: utmCampaign,
+      })
+      window.gtag?.('event', 'generate_lead', {
+        form_type: 'webinar_registration',
+        value: 1,
+      })
+      const target =
+        thanksHref || `/webinar/thanks/?slug=${encodeURIComponent(webinarSlug)}`
+      setTimeout(() => {
+        window.location.href = target
+      }, 800)
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [submitted, webinarSlug, webinarDate, thanksHref])
 
   if (submitted) {
     return (
@@ -231,9 +176,16 @@ export default function WebinarRegistrationForm({
           <div className="wb-form-skel-button" />
         </div>
       )}
-      <div id={containerId} ref={containerRef} />
 
-      {/* Privacy reassurance — only render once script is up (avoids double-render) */}
+      {/* HubSpot embed v3 target — auto-rendered by /forms/embed/{portalId}.js */}
+      <div
+        ref={frameRef}
+        className="hs-form-frame"
+        data-region={REGION}
+        data-form-id={FORM_ID}
+        data-portal-id={PORTAL_ID}
+      />
+
       {!scriptFailed && (
         <p className="wb-form-privacy">
           ご登録情報は本ウェビナーの運営目的でのみ利用します。

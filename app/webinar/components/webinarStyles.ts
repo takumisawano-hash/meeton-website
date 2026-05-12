@@ -488,6 +488,23 @@ export function webinarCss(): string {
       margin-right: clamp(24px, 2.4vw, 32px);
     }
     .wb-hero-form-card > .wb-hero-form-eyebrow { margin-top: clamp(24px, 2.4vw, 32px); }
+    /* New HubSpot embed (hs-form-frame → iframe). Parent must give it
+     * full width; iframe content styling is configured in HubSpot Form
+     * Settings (we can't reach into the iframe DOM from here). */
+    .wb-hero-form-card :global(.hs-form-frame) {
+      display: block;
+      width: 100%;
+      padding: 0 clamp(24px, 2.4vw, 32px) clamp(24px, 2.4vw, 32px);
+      box-sizing: border-box;
+    }
+    .wb-hero-form-card :global(.hs-form-frame iframe) {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-height: 480px;
+      border: 0;
+      display: block;
+    }
+    /* Legacy DOM-rendered form fallback selectors — harmless if iframe is used */
     .wb-hero-form-card :global(.hbspt-form),
     .wb-hero-form-card form {
       padding: 0 clamp(24px, 2.4vw, 32px) clamp(24px, 2.4vw, 32px);
