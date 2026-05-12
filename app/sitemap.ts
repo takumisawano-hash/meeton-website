@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllPosts } from '@/app/lib/notion'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 import { integrations } from '@/lib/integrations-data'
+import { getUpcomingWebinars } from '@/app/lib/webinars-schedule'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dynameet.ai'
@@ -42,6 +43,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/pillar/lead-generation/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/pillar/cookieless-marketing/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/roi-simulator/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // Webinar series — index + per-webinar registration LPs.
+    // /webinar/thanks/ is intentionally excluded (noindex).
+    { url: `${baseUrl}/webinar/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/careers/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/about/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/contact/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
@@ -50,6 +54,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/privacy-policy/`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/terms/`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ]
+
+  // Upcoming webinar registration LPs. We only list upcoming events
+  // (past webinars stay in the index page's On-Demand library but don't
+  // need their own sitemap entry — they cease to be transactional).
+  const webinarPages: MetadataRoute.Sitemap = getUpcomingWebinars().map((w) => ({
+    url: `${baseUrl}/webinar/${w.slug}/`,
+    lastModified: now,
+    changeFrequency: 'daily' as const,
+    priority: 0.85,
+  }))
 
   // Integration detail pages — high-quality, deep content per partner.
   // /integrations/slack gets 308s dwell time (10x site average). Indexing
@@ -105,5 +119,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion 未接続時は空で返す
   }
 
-  return [...staticPages, ...integrationPages, ...blogPosts, ...caseStudies]
+  return [
+    ...staticPages,
+    ...webinarPages,
+    ...integrationPages,
+    ...blogPosts,
+    ...caseStudies,
+  ]
 }
