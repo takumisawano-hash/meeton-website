@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
@@ -194,14 +193,6 @@ export default async function WebinarDetailPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventLd) }}
         />
       )}
-      {/* HubSpot portal embed — use next/script for guaranteed execution
-          after page becomes interactive. The script auto-scans for
-          .hs-form-frame divs and renders the iframe inside. */}
-      <Script
-        id="hubspot-portal-embed-script"
-        src="https://js-na2.hsforms.net/forms/embed/45872857.js"
-        strategy="afterInteractive"
-      />
       <Nav variant="light" />
 
       {/* ── HERO (split: copy left, registration form right — above-fold conversion) ── */}
@@ -210,6 +201,18 @@ export default async function WebinarDetailPage({
         <div className="wb-hero-inner wb-hero-split">
           {/* LEFT: copy column */}
           <div>
+            {webinar.thumbnailUrl && (
+              <div className="wb-hero-left-thumb">
+                <Image
+                  src={webinar.thumbnailUrl}
+                  alt={webinar.title}
+                  width={1200}
+                  height={630}
+                  priority
+                  sizes="(max-width: 980px) 100vw, 560px"
+                />
+              </div>
+            )}
             <div className="wb-eyebrow">
               <span className="wb-eyebrow-dash" />
               Live Webinar
@@ -310,18 +313,6 @@ export default async function WebinarDetailPage({
           {/* RIGHT: registration form (above-fold on desktop, sticky-ish) */}
           <aside className="wb-hero-aside">
             <div id="register" className="wb-hero-form-card">
-              {webinar.thumbnailUrl && (
-                <div className="wb-hero-form-thumb">
-                  <Image
-                    src={webinar.thumbnailUrl}
-                    alt={webinar.title}
-                    width={1200}
-                    height={630}
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 480px"
-                  />
-                </div>
-              )}
               <div className="wb-hero-form-eyebrow">
                 <span style={{
                   width: 6, height: 6, borderRadius: '50%',

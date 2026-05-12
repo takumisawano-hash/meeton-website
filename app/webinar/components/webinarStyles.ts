@@ -463,31 +463,32 @@ export function webinarCss(): string {
     }
     .wb-meta-strip-v { font-weight: 700; color: var(--w-text); font-size: 13px; }
 
+    /* ========== LEFT-COLUMN THUMBNAIL ========== */
+    /* Hero thumbnail moved to the left (copy) column, pushing the
+     * form-aside up. Sits above the eyebrow + countdown + H1. */
+    .wb-hero-left-thumb {
+      position: relative; width: 100%; aspect-ratio: 1200 / 630;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: clamp(20px, 2.2vw, 28px);
+      background: var(--w-paper);
+      border: 1px solid var(--w-border);
+      box-shadow: 0 20px 48px -24px rgba(6, 95, 70, 0.18);
+    }
+    .wb-hero-left-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
     /* ========== HERO-SIDE FORM CARD (above-fold) ========== */
     .wb-hero-form-card {
       background: #fff;
       border: 1px solid var(--w-border);
       border-radius: 24px;
-      overflow: hidden;
+      padding: clamp(24px, 2.4vw, 32px);
       box-shadow:
         0 28px 64px -28px rgba(6, 95, 70, 0.22),
         0 2px 0 rgba(255, 255, 255, 0.6) inset;
     }
-    .wb-hero-form-thumb {
-      position: relative; width: 100%; aspect-ratio: 1200 / 630;
-      background: var(--w-paper);
-    }
-    .wb-hero-form-thumb img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .wb-hero-form-card > .wb-hero-form-eyebrow,
-    .wb-hero-form-card > .wb-hero-form-h,
-    .wb-hero-form-card > .wb-hero-form-sub,
-    .wb-hero-form-card > .wb-hero-form-trust-chips {
-      margin-left: clamp(24px, 2.4vw, 32px);
-      margin-right: clamp(24px, 2.4vw, 32px);
-    }
-    .wb-hero-form-card > .wb-hero-form-eyebrow { margin-top: clamp(24px, 2.4vw, 32px); }
     /* New HubSpot embed (hs-form-frame → iframe). Parent must give it
      * full width; iframe content styling is configured in HubSpot Form
      * Settings (we can't reach into the iframe DOM from here). */
