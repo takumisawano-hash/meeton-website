@@ -26,7 +26,7 @@ const HIGH_INTENT_PREFIXES = [
 const HIGH_INTENT_PATTERNS: RegExp[] = [/^\/case-studies\/[^/]+/]
 // /roi-simulator is the very destination this overlay drives to — showing
 // it on the same page is both confusing and self-defeating.
-const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/', '/roi-simulator']
+const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/', '/roi-simulator', '/webinar']
 
 const SCROLL_THRESHOLD = 0.3
 const TIME_THRESHOLD_MS = 30_000
@@ -332,84 +332,150 @@ function InvitationBanner({
         left: 'clamp(16px, 3vw, 28px)',
         bottom: 'clamp(16px, 3vw, 28px)',
         zIndex: 9990,
-        maxWidth: 340,
+        width: 'min(380px, calc(100vw - 32px))',
         background: '#fafaf7',
         color: '#0a0e0c',
         border: '1px solid #d4d2c7',
-        borderRadius: 14,
-        boxShadow: '0 18px 48px rgba(0,0,0,0.12)',
-        padding: '14px 16px 14px 18px',
+        borderRadius: 16,
+        boxShadow: '0 24px 64px -16px rgba(6, 95, 70, 0.28), 0 8px 24px rgba(0,0,0,0.08)',
+        overflow: 'hidden',
         fontFamily: 'var(--font-noto, -apple-system, system-ui), sans-serif',
         animation: 'mlpSlideUp 0.32s ease-out',
       }}
     >
       <style>{`@keyframes mlpSlideUp { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }`}</style>
+
+      {/* Close button — positioned over thumbnail with backdrop blur for contrast */}
       <button
         onClick={onDismiss}
         aria-label="閉じる"
         style={{
           position: 'absolute',
-          top: 6,
+          top: 8,
           right: 8,
-          background: 'transparent',
-          border: 'none',
+          width: 28,
+          height: 28,
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+          border: '1px solid rgba(0,0,0,0.08)',
+          borderRadius: '50%',
           cursor: 'pointer',
-          fontSize: 16,
-          color: '#6b7873',
-          padding: 4,
+          fontSize: 14,
+          color: '#0a0e0c',
+          padding: 0,
           lineHeight: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2,
         }}
       >
         ×
       </button>
-      <div
-        style={{
-          fontFamily: 'var(--font-mono, monospace)',
-          fontSize: 10,
-          letterSpacing: '0.12em',
-          color: '#065f46',
-          textTransform: 'uppercase',
-          marginBottom: 6,
-        }}
-      >
-        ▸ Live Webinar · {webinar.dateLabel.split(' ')[0]}
+
+      {/* Thumbnail — anchor visual */}
+      {webinar.thumbnailUrl && (
+        <a
+          href={href}
+          aria-label={webinar.title}
+          style={{
+            display: 'block',
+            position: 'relative',
+            aspectRatio: '1200 / 630',
+            background: '#1a1f3d',
+            overflow: 'hidden',
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={webinar.thumbnailUrl}
+            alt={webinar.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+          />
+          {/* Live badge over thumb */}
+          <span
+            style={{
+              position: 'absolute',
+              top: 10,
+              left: 10,
+              fontFamily: 'var(--font-mono, monospace)',
+              fontSize: 10,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: '#fff',
+              background: 'rgba(18, 163, 125, 0.92)',
+              padding: '5px 10px',
+              borderRadius: 999,
+              fontWeight: 700,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                background: '#fff',
+                boxShadow: '0 0 0 3px rgba(255,255,255,0.3)',
+              }}
+              aria-hidden
+            />
+            Live Webinar
+          </span>
+        </a>
+      )}
+
+      {/* Body */}
+      <div style={{ padding: '14px 18px 16px' }}>
+        <div
+          style={{
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: 11,
+            letterSpacing: '0.08em',
+            color: '#065f46',
+            marginBottom: 6,
+            fontWeight: 700,
+          }}
+        >
+          {webinar.dateLabel}
+        </div>
+        <div style={{ fontSize: 15, fontWeight: 800, lineHeight: 1.4, margin: '0 0 6px', color: '#0a0e0c' }}>
+          {webinar.title}
+        </div>
+        <div style={{ fontSize: 12.5, color: '#3d4a44', lineHeight: 1.6, margin: '0 0 14px' }}>
+          {webinar.subtitle}
+        </div>
+        <a
+          href={href}
+          style={{
+            display: 'block',
+            width: '100%',
+            padding: '11px 14px',
+            background: 'linear-gradient(135deg, #12a37d, #0d7a5e)',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 9,
+            fontSize: 13.5,
+            fontWeight: 800,
+            cursor: 'pointer',
+            textAlign: 'center',
+            textDecoration: 'none',
+            boxSizing: 'border-box',
+            boxShadow: '0 6px 18px -4px rgba(18, 163, 125, 0.45)',
+          }}
+        >
+          ▸ 無料で登録する
+        </a>
       </div>
-      <div style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.45, margin: '0 0 4px' }}>
-        {webinar.title}
-      </div>
-      <div style={{ fontSize: 12, color: '#3d4a44', lineHeight: 1.6, margin: '0 0 4px' }}>
-        {webinar.subtitle}
-      </div>
-      <div
-        style={{
-          fontSize: 11,
-          color: '#6b7873',
-          fontFamily: 'var(--font-mono, monospace)',
-          marginBottom: 12,
-        }}
-      >
-        {webinar.dateLabel}
-      </div>
-      <a
-        href={href}
-        style={{
-          display: 'block',
-          width: '100%',
-          padding: '10px 14px',
-          background: '#0eab6e',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 8,
-          fontSize: 13,
-          fontWeight: 700,
-          cursor: 'pointer',
-          textAlign: 'center',
-          textDecoration: 'none',
-          boxSizing: 'border-box',
-        }}
-      >
-        ▸ 30 分の中身を見る
-      </a>
     </div>
   )
 }
