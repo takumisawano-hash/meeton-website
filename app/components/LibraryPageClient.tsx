@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
@@ -649,7 +650,14 @@ export default function LibraryPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Library なのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>静的な資料 DL ページではなく、既存リードの検討再開を捉える AI ナーチャリングプラットフォーム。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>
+            静的な資料 DL ページではなく、既存リードの検討再開を捉える AI ナーチャリングプラットフォーム。
+            長期評価サイクルの{' '}
+            <Link href="/use-cases/saas/" style={{ color: 'var(--cta)', fontWeight: 700 }}>SaaS 業界</Link>
+            ・
+            <Link href="/use-cases/manufacturing/" style={{ color: 'var(--cta)', fontWeight: 700 }}>製造業</Link>
+            での活用イメージもご覧ください。
+          </p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>

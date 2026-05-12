@@ -57,6 +57,23 @@ export const metadata: Metadata = {
   },
 }
 
+// Map Notion-managed industry labels to /use-cases/* landing pages so the
+// industry chips on the hub become real internal links, concentrating
+// PageRank toward our vertical LPs. Unknown industries fall through to a
+// plain (non-clickable) chip.
+const INDUSTRY_USE_CASE_HREF: Record<string, string> = {
+  SaaS: '/use-cases/saas/',
+  'IT・SaaS': '/use-cases/saas/',
+  '製造業': '/use-cases/manufacturing/',
+  '製造': '/use-cases/manufacturing/',
+  '専門サービス': '/use-cases/professional-services/',
+  'プロフェッショナルサービス': '/use-cases/professional-services/',
+  'コンサルティング': '/use-cases/professional-services/',
+  'フィンテック': '/use-cases/fintech/',
+  FinTech: '/use-cases/fintech/',
+  '金融': '/use-cases/fintech/',
+}
+
 export default async function CaseStudiesPage() {
   const items = await getAllCaseStudies()
   const industries = Array.from(new Set(items.map((i) => i.industry).filter(Boolean)))
@@ -112,11 +129,21 @@ export default async function CaseStudiesPage() {
           {industries.length > 0 && (
             <div className="cs-industries">
               <span className="cs-industries-label">業種</span>
-              {industries.map((ind) => (
-                <span key={ind} className="cs-industry-chip">
-                  {ind}
-                </span>
-              ))}
+              {industries.map((ind) => {
+                const href = INDUSTRY_USE_CASE_HREF[ind]
+                if (href) {
+                  return (
+                    <Link key={ind} href={href} className="cs-industry-chip">
+                      {ind}
+                    </Link>
+                  )
+                }
+                return (
+                  <span key={ind} className="cs-industry-chip">
+                    {ind}
+                  </span>
+                )
+              })}
             </div>
           )}
         </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
@@ -675,7 +676,12 @@ export default function AiEmailPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Email なのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>MA メールではなく、もう一人の SDR として動く AI エージェント。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>
+            MA メールではなく、もう一人の SDR として動く AI エージェント。
+            ステップメールの形骸化に悩む方は{' '}
+            <Link href="/for/marketing-manager/" style={{ color: 'var(--cta)', fontWeight: 700 }}>マーケマネージャー向けのナーチャリング解説</Link>
+            もご参照ください。
+          </p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>

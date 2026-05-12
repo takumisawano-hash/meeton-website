@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
@@ -654,6 +655,17 @@ export default function AiChatPageClient() {
         <div className="section-inner">
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>よくある質問</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>FAQ</div>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 0', maxWidth: 720 }}>
+            シナリオ型チャットボットとの違いについては、{' '}
+            <Link href="/compare/meeton-vs-sinclo/" style={{ color: 'var(--cta)', fontWeight: 700 }}>sinclo との比較</Link>
+            ・
+            <Link href="/compare/meeton-vs-karte/" style={{ color: 'var(--cta)', fontWeight: 700 }}>KARTE との比較</Link>
+            ・
+            <Link href="/compare/meeton-vs-chatplus/" style={{ color: 'var(--cta)', fontWeight: 700 }}>ChatPlus との比較</Link>
+            ・
+            <Link href="/compare/meeton-vs-anybot/" style={{ color: 'var(--cta)', fontWeight: 700 }}>anybot との比較</Link>
+            {' '}もあわせてご覧ください。
+          </p>
           <div style={{ height: 36 }} />
           <div className="faq-list">
             {faqData.map((f, i) => (

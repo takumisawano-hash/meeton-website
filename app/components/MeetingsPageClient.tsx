@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
@@ -645,7 +646,14 @@ export default function MeetingsPageClient() {
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Calendar なのか</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>業界42時間の Speed to Lead を 5 秒に。営業組織のための AI SDR プラットフォームの中核。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>
+            業界42時間の Speed to Lead を 5 秒に。営業組織のための AI SDR プラットフォームの中核。
+            商談数の天井に悩む方は{' '}
+            <Link href="/for/cro/" style={{ color: 'var(--cta)', fontWeight: 700 }}>CRO 向けの解説</Link>
+            、機会損失の可視化に課題のある IS チームは{' '}
+            <Link href="/for/inside-sales/" style={{ color: 'var(--cta)', fontWeight: 700 }}>インサイドセールス向けの解説</Link>
+            もご参照ください。
+          </p>
           <div className="why-grid">
             {whyData.map((w, i) => (
               <div className="why-card" key={i}>

@@ -1567,6 +1567,7 @@ export default function HomePageClient({
                   pain: "予算を使ってリード獲得しても商談化せず、CPL は下がっても商談獲得コストが上昇。",
                   value: "AI SDR を含むテクノロジースタックの「設計者」として、ファネル全体を自分で握り、マーケの仕事を縮小ではなく拡張させる。",
                   color: "#7c5cfc",
+                  href: "/for/cmo/",
                   // megaphone
                   iconPath: "M3 11l18-5v12L3 14v-3z M11.6 16.8a3 3 0 1 1-5.8-1.6",
                 },
@@ -1576,6 +1577,7 @@ export default function HomePageClient({
                   pain: "SDR 採用・育成・離職のサイクル。商談化率の天井で営業組織がスケールしない。",
                   value: "AI SDR が初動を担い、人 SDR は VIP 顧客対応など高付加価値業務にシフト。",
                   color: "#12a37d",
+                  href: "/for/cro/",
                   // trending up
                   iconPath: "M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6",
                 },
@@ -1585,6 +1587,7 @@ export default function HomePageClient({
                   pain: "業務時間外のリード流出、月曜朝のバックログ、24h 対応シフトは人件費的に不可能。",
                   value: "Meeton ai が 24/365 で初動応答、IS チームは深掘り対応に集中可能。",
                   color: "#0891b2",
+                  href: "/for/inside-sales/",
                   // headphones
                   iconPath: "M3 18v-6a9 9 0 0 1 18 0v6 M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z",
                 },
@@ -1594,6 +1597,7 @@ export default function HomePageClient({
                   pain: "営業組織のスケーラビリティと CAC 上昇。人を増やすだけでは収益が伸びない構造。",
                   value: "リード→商談変換率の改善で、人を増やさず ARR を伸ばす AI SDR レイヤー。",
                   color: "#d03ea1",
+                  href: undefined as string | undefined,
                   // target
                   iconPath: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
                 },
@@ -1730,6 +1734,25 @@ export default function HomePageClient({
                       {b.value}
                     </div>
                   </div>
+                  {b.href && (
+                    <Link
+                      href={b.href}
+                      style={{
+                        marginTop: 4,
+                        fontSize: 12,
+                        fontWeight: 800,
+                        color: b.color,
+                        textDecoration: "none",
+                        letterSpacing: "0.02em",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                      }}
+                    >
+                      {b.subtitle} 向けの詳細を見る
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  )}
                 </div>
               ))}
               <style dangerouslySetInnerHTML={{ __html: `.buyer-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.18)}` }} />

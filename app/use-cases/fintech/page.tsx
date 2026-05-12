@@ -88,7 +88,7 @@ export default function FintechUseCasePage() {
         {
           badge: 'AI Offer',
           name: 'Meeton Library',
-          href: '/features/offers/',
+          href: '/features/ai-library/',
           description: '訪問者の業種（銀行・証券・保険）に応じた事例・ホワイトペーパー・規制対応文書を自動レコメンド。',
           industryAngle: '銀行向け事例・保険向けユースケース・規制適合性ホワイトペーパーを訪問者の業種に応じて出し分け。技術バイヤーが評価期間中、深い情報を自分で見つけられる導線を作ります。',
         },

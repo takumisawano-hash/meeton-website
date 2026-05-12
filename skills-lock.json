@@ -19,6 +19,18 @@
       "skillPath": "skills/analytics/tracking/SKILL.md",
       "computedHash": "2655022cf72a71f3cf7ce886d9763a34c5e515837709794fef6e0feeef1fe066"
     },
+    "backlink-analyzer": {
+      "source": "aaron-he-zhu/seo-geo-claude-skills",
+      "sourceType": "github",
+      "skillPath": "monitor/backlink-analyzer/SKILL.md",
+      "computedHash": "9f78201866ba782e9326e77465ba66d6d5d1665d18621943f83e6652ecc81acd"
+    },
+    "build-clusters": {
+      "source": "calm-north/seojuice-skills",
+      "sourceType": "github",
+      "skillPath": "skills/build-clusters/SKILL.md",
+      "computedHash": "af81f6dbd420d82b5e928a5c35a30789b5863dccf30552fe6757ebdbb16d87dc"
+    },
     "content-strategy": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -36,6 +48,12 @@
       "sourceType": "github",
       "skillPath": "google-ads-manager/SKILL.md",
       "computedHash": "821d4199d97cae69dc1ec42a92ed991510a7e1010766dda8c2f4eaa472fd34b5"
+    },
+    "internal-linking-optimizer": {
+      "source": "aaron-he-zhu/seo-geo-claude-skills",
+      "sourceType": "github",
+      "skillPath": "optimize/internal-linking-optimizer/SKILL.md",
+      "computedHash": "fd3f558a5ec1410be74b81da36c51cdcf162322880d2725cad47bc1534969d59"
     },
     "landing-page-design": {
       "source": "inference-sh-skills/skills",

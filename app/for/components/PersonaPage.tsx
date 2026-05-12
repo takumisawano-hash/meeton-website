@@ -87,7 +87,7 @@ const MODULE_META: Record<ModuleKey, { name: string; href: string; color: string
   },
   library: {
     name: 'Meeton Library (AI ライブラリ)',
-    href: '/features/offers/',
+    href: '/features/ai-library/',
     color: '#7c5cfc',
     description: '訪問履歴に応じて最適な資料をレコメンドし、再訪リードを商談へ',
   },
