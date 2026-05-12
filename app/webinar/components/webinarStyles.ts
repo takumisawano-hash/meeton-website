@@ -51,11 +51,14 @@ export function webinarCss(): string {
       max-width: 1200px; margin: 0 auto;
     }
 
-    /* Detail hero variant — 2-column with sticky form on desktop */
+    /* Detail hero variant — 2-column with sticky form on desktop.
+     * Form column is intentionally wider (1.15fr vs 1fr) — registration
+     * is the primary conversion action, and a wider form reads less
+     * cramped especially with HubSpot's default field padding. */
     .wb-hero-split {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(32px, 4vw, 64px);
+      grid-template-columns: 1fr 1.15fr;
+      gap: clamp(32px, 4vw, 56px);
       align-items: start;
     }
     @media (max-width: 980px) {
@@ -488,6 +491,51 @@ export function webinarCss(): string {
     .wb-hero-form-card :global(.hbspt-form),
     .wb-hero-form-card form {
       padding: 0 clamp(24px, 2.4vw, 32px) clamp(24px, 2.4vw, 32px);
+      width: 100%;
+    }
+    /* HubSpot embedded form — force full-width fields. HubSpot default
+     * style sometimes leaves narrow inputs (~270px) on wider parents.
+     * These selectors target the rendered HubSpot HTML. */
+    .wb-hero-form-card :global(.hs-form),
+    .wb-hero-form-card :global(.hs-form-field),
+    .wb-hero-form-card :global(.hs-input) {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box;
+    }
+    .wb-hero-form-card :global(.hs-input:not([type='checkbox']):not([type='radio'])) {
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--w-border);
+      font-size: 15px;
+      font-family: inherit;
+    }
+    .wb-hero-form-card :global(.hs-form-field > label) {
+      font-size: 13px; font-weight: 700; color: var(--w-text);
+      margin-bottom: 6px; display: block;
+    }
+    .wb-hero-form-card :global(.hs-submit .hs-button) {
+      width: 100% !important;
+      min-height: 52px;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--w-green), var(--w-green-deep));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 22px -8px rgba(6, 95, 70, 0.45);
+    }
+    .wb-hero-form-card :global(.hs-submit .hs-button:hover) {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 32px -8px rgba(6, 95, 70, 0.6);
+    }
+    .wb-hero-form-card :global(.hs-form-field) {
+      margin-bottom: 14px;
     }
     .wb-hero-form-eyebrow {
       display: flex; align-items: center; gap: 10px;
