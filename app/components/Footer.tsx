@@ -55,20 +55,112 @@ export default function Footer({ variant = "light" }: FooterProps) {
     { href: "/terms/", label: "利用規約" },
   ];
 
+  // Site-wide discovery columns — feeds internal links to high-intent
+  // landing pages (persona, industry, comparison). Each new page below
+  // is reachable from every page on the site, accelerating indexation
+  // and concentrating PageRank toward conversion-intent destinations.
+  const discoverColumns = [
+    {
+      heading: "ロール別",
+      items: [
+        { href: "/for/cmo/", label: "CMO 向け" },
+        { href: "/for/cro/", label: "CRO 向け" },
+        { href: "/for/inside-sales/", label: "Inside Sales 向け" },
+        { href: "/for/marketing-manager/", label: "マーケマネージャー向け" },
+      ],
+    },
+    {
+      heading: "業界別",
+      items: [
+        { href: "/use-cases/saas/", label: "SaaS" },
+        { href: "/use-cases/manufacturing/", label: "製造業" },
+        { href: "/use-cases/professional-services/", label: "プロフェッショナルサービス" },
+        { href: "/use-cases/fintech/", label: "フィンテック" },
+      ],
+    },
+    {
+      heading: "他社比較",
+      items: [
+        { href: "/compare/meeton-vs-sinclo/", label: "vs sinclo" },
+        { href: "/compare/meeton-vs-karte/", label: "vs KARTE" },
+        { href: "/compare/meeton-vs-chatplus/", label: "vs ChatPlus" },
+        { href: "/compare/meeton-vs-anybot/", label: "vs anybot" },
+      ],
+    },
+    {
+      heading: "リソース",
+      items: [
+        { href: "/blog/", label: "ブログ" },
+        { href: "/case-studies/", label: "導入事例" },
+        { href: "/roi-simulator/", label: "ROI 試算" },
+        { href: "/integrations/", label: "連携一覧" },
+      ],
+    },
+  ];
+
+  const discoverHeadingStyle = {
+    fontSize: isMobile ? 11 : 12,
+    fontWeight: 800,
+    color: isDark ? "#9aa0c5" : "#3d4a73",
+    letterSpacing: "0.06em",
+    textTransform: "uppercase" as const,
+    marginBottom: 10,
+  };
+  const discoverLinkStyle = {
+    fontSize: isMobile ? 12 : 13,
+    color: isDark ? "#9aa0c5" : "#5a6285",
+    textDecoration: "none" as const,
+    fontWeight: 500,
+    lineHeight: 1.9,
+    display: "block" as const,
+  };
+  const DiscoverGrid = () => (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, minmax(0, 1fr))",
+        gap: isMobile ? "20px 16px" : "24px 32px",
+        padding: isMobile ? "0 0 24px" : "0 0 32px",
+        borderBottom: `1px solid ${isDark ? "#2a2a44" : "#dfe3f0"}`,
+        marginBottom: isMobile ? 24 : 32,
+        maxWidth: 1280,
+        margin: isMobile ? "0 auto 24px" : "0 auto 32px",
+      }}
+    >
+      {discoverColumns.map((col) => (
+        <div key={col.heading}>
+          <div style={discoverHeadingStyle}>{col.heading}</div>
+          {col.items.map((it) => (
+            <Link key={it.href} href={it.href} style={discoverLinkStyle}>
+              {it.label}
+            </Link>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+
   if (isDark) {
     return (
       <footer
         style={{
           borderTop: "1px solid #2a2a44",
-          padding: isMobile ? "32px 20px" : "32px 48px",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: isMobile ? 24 : 0,
+          padding: isMobile ? "32px 20px" : "40px 48px",
           background: "#12121e",
         }}
       >
+        <DiscoverGrid />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: isMobile ? 24 : 0,
+            maxWidth: 1280,
+            margin: "0 auto",
+          }}
+        >
         <Image
           src="/logo.svg"
           alt="DynaMeet"
@@ -99,6 +191,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
         >
           © 2026 DynaMeet K.K. All rights reserved.
         </div>
+        </div>
       </footer>
     );
   }
@@ -107,15 +200,22 @@ export default function Footer({ variant = "light" }: FooterProps) {
     <footer
       style={{
         borderTop: "1px solid #dfe3f0",
-        padding: isMobile ? "32px 20px" : "36px 48px",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: isMobile ? 24 : 0,
+        padding: isMobile ? "32px 20px" : "44px 48px 36px",
         background: isTalent ? "#f8f9fc" : "#f4f6fb",
       }}
     >
+      <DiscoverGrid />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: isMobile ? 24 : 0,
+          maxWidth: 1280,
+          margin: "0 auto",
+        }}
+      >
       <Image
         src="/logo-dark.svg"
         alt="DynaMeet"
@@ -145,6 +245,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
         }}
       >
         © 2026 DynaMeet K.K. All rights reserved.
+      </div>
       </div>
     </footer>
   );
