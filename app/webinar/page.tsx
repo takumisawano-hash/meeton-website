@@ -25,14 +25,14 @@ import { webinarCss } from './components/webinarStyles'
  */
 
 export const metadata: Metadata = {
-  title: '月次ラーニング型ウェビナー | Meeton ai',
+  title: '商談化に効く 30 分 — 月 1 回の現場向けウェビナー | Meeton ai',
   description:
-    'リードはあるけど商談化に困っている B2B 企業向けの thought leadership ウェビナー。毎月 1 回 Live で開催。Speed to Lead・ナーチャリング・パイプライン損失など、構造的な課題を分解します。',
+    '「リードは来てるのに商談にならない」を、現場の論点で分解する 30 分。月 1 回、第 3 木曜の昼 14:00 から。録画あり・無料。',
   alternates: { canonical: '/webinar/' },
   openGraph: {
-    title: '月次ラーニング型ウェビナー',
+    title: '商談化に効く 30 分 — 月 1 回の現場向けウェビナー',
     description:
-      'リードを商談化に変える、毎月のラーニング。Meeton ai 主催の thought leadership ウェビナー。',
+      '「リードは来てるのに商談にならない」を、現場の論点で分解する 30 分。録画あり・無料。',
     url: 'https://dynameet.ai/webinar/',
     siteName: 'Meeton ai',
     locale: 'ja_JP',
@@ -48,34 +48,34 @@ export const metadata: Metadata = {
 
 const INDEX_FAQ = [
   {
-    question: 'このウェビナーは誰向けですか？',
+    question: 'どんな人が参加してますか？',
     answer:
-      'リードはあるのに商談化に伸び悩む B2B 企業のマーケティングマネージャー、インサイドセールスマネージャー、CRO・営業企画責任者の方々を想定しています。リード獲得後の "見えない損失" を構造で捉えたい方に最適です。',
+      'マーケ・インサイドセールス・営業企画・CRO の方が多いです。「リードは取れてるけど商談化で詰まってる」「IS の現場が回ってない」と感じている、100 - 2000 名規模の B2B 企業の現場〜マネージャー層を想定しています。',
   },
   {
-    question: '参加費用はかかりますか？',
+    question: '営業されたりしませんか？',
     answer:
-      '無料です。事前登録のみでご参加いただけます。営業色のあるピッチではなく、業界統計と実装フレームを中心とした学習用コンテンツです。',
+      '当日は売り込みなしです。ウェビナー中にデモや個別営業を挟むことはありません。終了後にこちらから営業電話が掛かることもありません。資料や続編に興味があれば、登録後のメールから自由に進めてください。',
   },
   {
-    question: '当日参加できない場合、録画はもらえますか？',
+    question: '当日参加できないんですが…',
     answer:
-      'はい。ご登録いただいた方には開催後 1 週間以内に録画リンクをメールでお送りします。当日参加できなくても登録だけしておけば後日視聴できます。',
+      '登録だけしておいてください。終了後 1 週間以内に録画リンクをメールでお送りします。スライドも一緒にお送りするので、社内で共有してもらって構いません。',
   },
   {
-    question: 'Q&A セッションはありますか？',
+    question: '質問したいんですが、社名を出したくないです',
     answer:
-      '毎回 10 - 15 分の Live Q&A を設けています。事前登録時にも質問を書き込んでいただけます。匿名での質問も歓迎です。',
+      '匿名 OK です。登録フォームの質問欄に書いてもらえれば、当日こちらで読み上げて回答します。Zoom 上の Q&A も匿名で投げられます。',
   },
   {
-    question: '参加方法を教えてください。',
+    question: 'どうやって参加するんですか？',
     answer:
-      'Zoom Webinar で開催します。開催日前日にメールで Zoom リンクをお送りします。PC・スマホどちらからでも参加可能です。',
+      'Zoom Webinar で開催します。前日にメールで参加リンクをお送りするので、当日その時間にクリックするだけ。PC でもスマホでも入れます。',
   },
   {
-    question: '次回以降のトピックはどう決まりますか？',
+    question: '取り上げてほしいテーマがあるんですが',
     answer:
-      'B2B マーケティング・インサイドセールスの現場で実際にご相談を受ける構造課題から、月次でトピックを選定しています。リクエストがあれば登録フォームからお寄せください。',
+      '登録フォームの質問欄に書いてください。実際に複数の方から声が上がったテーマから、翌月以降の回を組んでいます。',
   },
 ]
 
@@ -100,13 +100,13 @@ export default function WebinarIndexPage() {
             <span className="wb-eyebrow-tag">毎月 第 3 木曜 14:00 JST</span>
           </div>
           <h1 className="wb-hero-h1">
-            リードを<em>商談化</em>に変える、<br />
-            毎月のラーニング
+            商談化に効く<em>30 分</em>。<br />
+            月 1 回、現場の論点だけ。
           </h1>
           <p className="wb-hero-sub">
-            「リードはあるのに商談化しない」という B2B の構造課題を、業界統計と
-            実装フレームで分解する thought leadership ウェビナー。
-            営業色のないラーニング設計です。
+            「リードは来てるのに商談につながらない」「IS の手が回らない」。
+            そんな現場で、明日から動かせる打ち手を 1 トピックずつ持ち帰れる
+            30 分のウェビナーです。録画あり・無料。
           </p>
 
           {featured && (
@@ -116,13 +116,13 @@ export default function WebinarIndexPage() {
                   href={`/webinar/${featured.slug}/`}
                   className="wb-btn wb-btn-primary"
                 >
-                  次回の席を確保する
+                  次回に申し込む
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
                 </Link>
                 <a href="#about" className="wb-btn wb-btn-ghost">
-                  シリーズについて
+                  どんなウェビナーか見る
                 </a>
               </div>
               <p
@@ -131,7 +131,7 @@ export default function WebinarIndexPage() {
                   fontWeight: 600, letterSpacing: 0.01,
                 }}
               >
-                無料 · 録画送付 · Live Q&amp;A
+                参加無料 · 後日録画もお送りします · 質問は匿名でも OK
               </p>
             </>
           )}
@@ -148,7 +148,7 @@ export default function WebinarIndexPage() {
                 Next Webinar
               </div>
               <h2 className="wb-h2">
-                次回開催の<em>テーマ</em>
+                次回、扱う<em>テーマ</em>
               </h2>
             </div>
 
@@ -199,13 +199,13 @@ export default function WebinarIndexPage() {
                       href={`/webinar/${featured.slug}/`}
                       className="wb-btn wb-btn-primary"
                     >
-                      席を確保する
+                      参加を申し込む
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M13 5l7 7-7 7" />
                       </svg>
                     </Link>
                     <Link href={`/webinar/${featured.slug}/`} className="wb-btn wb-btn-ghost">
-                      アジェンダを見る
+                      30 分の中身を見る
                     </Link>
                   </div>
                 </div>
@@ -280,10 +280,10 @@ export default function WebinarIndexPage() {
                 Coming Up
               </div>
               <h2 className="wb-h2">
-                これから<em>3 ヶ月</em>のラインナップ
+                これから<em>3 ヶ月</em>のテーマ
               </h2>
               <p className="wb-section-sub">
-                毎月 1 トピックずつ、構造で課題を分解します。事前にリマインダー登録しておくとリリース通知が届きます。
+                先のスケジュールも事前登録できます。気になる回があれば押さえておけば、リマインドと当日リンクが届きます。
               </p>
             </div>
 
@@ -310,7 +310,7 @@ export default function WebinarIndexPage() {
                     <h3 className="wb-upcoming-title">{w.title}</h3>
                     <p className="wb-upcoming-subtitle">{w.subtitle}</p>
                     <span className="wb-upcoming-cta">
-                      詳細 + リマインダー登録
+                      この回を詳しく見る
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M13 5l7 7-7 7" />
                       </svg>
@@ -323,7 +323,7 @@ export default function WebinarIndexPage() {
         </section>
       )}
 
-      {/* ── ABOUT SERIES (3-col thought leadership) ── */}
+      {/* ── ABOUT SERIES (3-col) ── */}
       <section id="about" className="wb-section">
         <div className="wb-section-inner">
           <div className="wb-section-head">
@@ -332,39 +332,39 @@ export default function WebinarIndexPage() {
               About This Series
             </div>
             <h2 className="wb-h2">
-              なぜ "ラーニング型"<em>ウェビナー</em>なのか
+              どんな<em>30 分</em>か
             </h2>
             <p className="wb-section-sub">
-              プロダクトピッチでも事例トークでもない。「リード→商談化」の構造を
-              業界統計と実装フレームで掘り下げる、現場の意思決定者向けラーニングです。
+              プロダクト紹介でも自慢話でもありません。月 1 トピック、現場のマネージャー目線で
+              「次に何をすればいいか」を持ち帰れる形にしてあります。
             </p>
           </div>
 
           <div className="wb-about">
             <article className="wb-about-card">
               <div className="wb-about-num">01</div>
-              <h3 className="wb-about-title">構造で課題を分解する</h3>
+              <h3 className="wb-about-title">月 1 トピックに絞る</h3>
               <p className="wb-about-body">
-                「リードはあるのに商談化しない」という曖昧な悩みを、
-                Speed to Lead・ナーチャリング設計・初動アーキテクチャといった
-                測れる単位まで分解。意思決定の前提を揃えます。
+                毎月 1 つだけ、商談化に直結する論点を選んで深掘りします。
+                範囲を広げすぎないので、30 分で「あ、そこ詰まってたな」と
+                持ち帰れます。
               </p>
             </article>
             <article className="wb-about-card">
               <div className="wb-about-num">02</div>
-              <h3 className="wb-about-title">業界統計 × 実証データ</h3>
+              <h3 className="wb-about-title">営業 MTG の合間に滑り込める</h3>
               <p className="wb-about-body">
-                Harvard Business Review の Speed to Lead 古典研究から、
-                Japan B2B 文脈での最新実証データまで。一次情報と二次情報を
-                組み合わせ、エビデンスベースで議論します。
+                第 3 木曜の 14:00 から 30 分だけ。MTG の前後に挟みやすい時間です。
+                ご都合つかなければ録画とスライドが後日届くので、
+                出張中でも夜の電車でも見られます。
               </p>
             </article>
             <article className="wb-about-card">
               <div className="wb-about-num">03</div>
-              <h3 className="wb-about-title">Live Q&A で持ち帰れる</h3>
+              <h3 className="wb-about-title">質問は匿名で OK</h3>
               <p className="wb-about-body">
-                毎回 10 - 15 分の Live Q&A。自社のリードジャーニーや組織体制に合わせて、
-                どこから着手すべきかを個別にお返ししています。匿名質問も歓迎です。
+                毎回 10〜15 分は Q&A の時間。自社の数字や社内事情込みで
+                相談してもらって構いません。社名を出したくなければ匿名で投げてください。
               </p>
             </article>
           </div>
@@ -393,10 +393,10 @@ export default function WebinarIndexPage() {
                 On-Demand Library
               </div>
               <h2 className="wb-h2">
-                過去回の<em>録画ライブラリ</em>
+                過去回の<em>録画</em>
               </h2>
               <p className="wb-section-sub">
-                各回のキーフレームと Q&A をフルバージョンで視聴できます。
+                以前の回も Q&A 込みでフルで見られます。気になるテーマから。
               </p>
             </div>
 
@@ -431,7 +431,7 @@ export default function WebinarIndexPage() {
               FAQ
             </div>
             <h2 className="wb-h2">
-              よく頂く<em>質問</em>
+              参加前の<em>気になること</em>
             </h2>
           </div>
 
@@ -462,12 +462,12 @@ export default function WebinarIndexPage() {
             <h2 className="wb-footer-cta-h">
               次回 <em>{featured.title}</em>
             </h2>
-            <p className="wb-footer-cta-p">{featured.dateLabel} 開催。事前登録は無料です。</p>
+            <p className="wb-footer-cta-p">{featured.dateLabel} 開催。参加は無料・録画も届きます。</p>
             <Link
               href={`/webinar/${featured.slug}/`}
               className="wb-btn wb-btn-primary"
             >
-              席を確保する
+              参加を申し込む
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>

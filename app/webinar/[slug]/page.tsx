@@ -46,7 +46,7 @@ export async function generateMetadata({
     }
   }
   return {
-    title: `${webinar.title} | ${webinar.dateLabel} ウェビナー | Meeton ai`,
+    title: `${webinar.title} | ${webinar.dateLabel} | Meeton ai ウェビナー`,
     description: webinar.description,
     alternates: { canonical: `/webinar/${webinar.slug}/` },
     openGraph: {
@@ -85,33 +85,33 @@ function buildFaq(webinar: ReturnType<typeof findWebinar>) {
   if (!webinar) return []
   return [
     {
-      question: `この回 (${webinar.title}) では何が学べますか？`,
+      question: `この回で具体的に何を持って帰れますか？`,
       answer: webinar.learnings.join(' / '),
     },
     {
-      question: '参加費はかかりますか？',
+      question: '営業されたりしませんか？',
       answer:
-        '無料です。事前登録のみでご参加いただけます。営業色のあるピッチではなく、ラーニング目的のコンテンツです。',
+        '当日は売り込みなしです。デモや個別営業を 30 分の中に挟むことはありませんし、終了後にこちらから営業電話が掛かることもありません。資料や続編に興味があれば、登録後のメールから自由に進めてください。',
     },
     {
-      question: '当日参加できなくても録画はもらえますか？',
+      question: '当日参加できないんですが…',
       answer:
-        'はい。ご登録いただいた方には開催後 1 週間以内に録画リンクをメールでお送りします。当日参加できなくても登録だけしておけば後日視聴できます。',
+        '登録だけしておいてください。終了後 1 週間以内に録画リンクをメールでお送りします。スライドも一緒にお送りするので、社内共有にも使ってもらって構いません。',
     },
     {
-      question: 'Live Q&A はありますか？',
+      question: '質問はできますか？匿名でもいいですか？',
       answer:
-        '毎回 10 - 15 分の Live Q&A を設けています。登録時にも質問を書き込んでいただけます。匿名での質問も歓迎です。',
+        '毎回 10〜15 分は Q&A の時間にしています。登録フォームの質問欄に事前に書いておくこともできますし、Zoom 上の Q&A は匿名でも投げられます。社名を出したくない場合も気にせずどうぞ。',
     },
     {
-      question: '参加方法を教えてください。',
+      question: 'どうやって入るんですか？',
       answer:
-        'Zoom Webinar で開催します。開催日前日にメールで Zoom リンクをお送りします。PC・スマホどちらからでも参加可能です。',
+        'Zoom Webinar で開催します。前日にメールで参加リンクをお送りするので、当日その時間にクリックするだけ。PC でもスマホでも入れます。',
     },
     {
-      question: '同業他社や競合の参加は可能ですか？',
+      question: '競合や同業の人が参加してても大丈夫ですか？',
       answer:
-        '原則歓迎しています。ラーニング目的のコンテンツであり、機密情報は扱いません。',
+        '気にせずどうぞ。特定の顧客名や機密データは扱わない構成にしてあります。',
     },
   ]
 }
@@ -256,7 +256,7 @@ export default async function WebinarDetailPage({
                 </svg>
                 <span>
                   <span className="wb-meta-strip-k">For</span>
-                  <span className="wb-meta-strip-v">B2B マーケ / IS / CRO</span>
+                  <span className="wb-meta-strip-v">マーケ / IS / 営業企画</span>
                 </span>
               </div>
             </div>
@@ -302,23 +302,23 @@ export default async function WebinarDetailPage({
                 }} aria-hidden />
                 Free Registration
               </div>
-              <h2 className="wb-hero-form-h">無料で席を確保する</h2>
+              <h2 className="wb-hero-form-h">無料で申し込む</h2>
               <p className="wb-hero-form-sub">
-                4 項目のみ・1 分で完了。Zoom リンクは前日にメール送付。
+                4 項目のみ・1 分で終わります。Zoom リンクは前日にメールで届きます。
                 <br />
                 <strong style={{ color: 'var(--w-text)' }}>
-                  ご都合付かない場合も、登録者には録画をお送りします。
+                  当日来られなくても、登録すれば録画とスライドが届きます。
                 </strong>
               </p>
               <div className="wb-hero-form-trust-chips">
                 <span className="wb-trust-chip">
-                  <span className="wb-trust-chip-dot" aria-hidden /> 完全無料
+                  <span className="wb-trust-chip-dot" aria-hidden /> 参加無料
                 </span>
                 <span className="wb-trust-chip">
-                  <span className="wb-trust-chip-dot" aria-hidden /> 録画あり
+                  <span className="wb-trust-chip-dot" aria-hidden /> 録画も届く
                 </span>
                 <span className="wb-trust-chip">
-                  <span className="wb-trust-chip-dot" aria-hidden /> Live Q&amp;A
+                  <span className="wb-trust-chip-dot" aria-hidden /> 質問は匿名 OK
                 </span>
               </div>
               <WebinarRegistrationForm
@@ -340,7 +340,7 @@ export default async function WebinarDetailPage({
               What You'll Learn
             </div>
             <h2 className="wb-h2">
-              この回で<em>持ち帰れる</em>もの
+              この 30 分で<em>持って帰れる</em>もの
             </h2>
             <p className="wb-section-sub">
               {webinar.subtitle}
@@ -371,11 +371,10 @@ export default async function WebinarDetailPage({
               Agenda
             </div>
             <h2 className="wb-h2">
-              30 分の<em>進行</em>
+              30 分の<em>流れ</em>
             </h2>
             <p className="wb-section-sub">
-              開始から終了まで、各セクションの想定タイムです。
-              Live Q&A は途中でも書き込めるよう常時受付しています。
+              各パートの目安時間です。質問は途中でも投げ込めるので、聞きながら気になったところを書いておいてください。
             </p>
           </div>
 
@@ -399,7 +398,7 @@ export default async function WebinarDetailPage({
               Registration
             </div>
             <h2 className="wb-h2">
-              席を<em>確保する</em>
+              参加を<em>申し込む</em>
             </h2>
             <p
               style={{
@@ -416,26 +415,24 @@ export default async function WebinarDetailPage({
 
             <div className="wb-reg-side">
               <div className="wb-reg-trust">
-                <div className="wb-reg-trust-l">なぜ参加するか</div>
+                <div className="wb-reg-trust-l">参加するメリット</div>
                 <div className="wb-reg-trust-row">
-                  <div className="wb-reg-trust-v">
-                    {WEBINAR_SCHEDULE.length}
-                  </div>
-                  <div className="wb-reg-trust-k">毎月開催の Live ウェビナー</div>
+                  <div className="wb-reg-trust-v">30<span style={{ fontSize: 12, marginLeft: 2 }}>分</span></div>
+                  <div className="wb-reg-trust-k">MTG の合間に入る短さ、要点に絞った構成</div>
                 </div>
                 <div className="wb-reg-trust-row">
-                  <div className="wb-reg-trust-v">60<span style={{ fontSize: 12, marginLeft: 2 }}>分</span></div>
-                  <div className="wb-reg-trust-k">業界統計 × 実装フレーム + Q&amp;A</div>
+                  <div className="wb-reg-trust-v">録画</div>
+                  <div className="wb-reg-trust-k">当日来られなくても後日メールで届きます</div>
                 </div>
                 <div className="wb-reg-trust-row">
                   <div className="wb-reg-trust-v">0<span style={{ fontSize: 12, marginLeft: 2 }}>円</span></div>
-                  <div className="wb-reg-trust-k">参加・録画視聴 すべて無料</div>
+                  <div className="wb-reg-trust-k">参加・録画視聴いずれも無料、営業電話なし</div>
                 </div>
                 <p style={{
                   marginTop: 14, fontSize: 12.5, lineHeight: 1.7,
                   color: 'var(--w-sub)',
                 }}>
-                  当日ご都合がつかない場合も、登録者の方には開催後 1 週間以内に録画リンクをお届けします。
+                  質問は匿名でも投げられます。社名や具体的な数字を出したくない場合もそのままどうぞ。
                 </p>
               </div>
             </div>
@@ -444,7 +441,7 @@ export default async function WebinarDetailPage({
           <div className="wb-reg-card">
             <h3 className="wb-reg-card-h">参加登録フォーム</h3>
             <p className="wb-reg-card-sub">
-              4 項目のみ・1 分で完了。Zoom リンクは前日にメール送付。
+              4 項目だけ、1 分で終わります。Zoom リンクは前日にメールで届きます。
             </p>
             <WebinarRegistrationForm
               webinarSlug={webinar.slug}
@@ -465,7 +462,7 @@ export default async function WebinarDetailPage({
               FAQ
             </div>
             <h2 className="wb-h2">
-              この回への<em>よくある質問</em>
+              申し込む前に<em>気になること</em>
             </h2>
           </div>
 
@@ -493,13 +490,13 @@ export default async function WebinarDetailPage({
             More Sessions
           </div>
           <h2 className="wb-footer-cta-h">
-            他の月の<em>ウェビナーを見る</em>
+            来月以降の<em>テーマも見てみる</em>
           </h2>
           <p className="wb-footer-cta-p">
-            3 ヶ月先までのトピックを公開しています。気になる回があればまとめて登録しておけます。
+            3 ヶ月先まで公開しています。気になるテーマがあれば、今のうちに押さえておけます。
           </p>
           <Link href="/webinar/" className="wb-btn wb-btn-primary">
-            シリーズ一覧へ
+            ラインナップを見る
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
@@ -516,7 +513,7 @@ export default async function WebinarDetailPage({
           <div className="wb-sticky-cta-v">{webinar.title}</div>
         </div>
         <a href="#register" className="wb-btn wb-btn-primary">
-          登録する
+          申し込む
         </a>
       </div>
 

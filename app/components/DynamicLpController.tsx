@@ -408,7 +408,7 @@ function InvitationBanner({
           boxSizing: 'border-box',
         }}
       >
-        ▸ 無料で登録する
+        ▸ 30 分の中身を見る
       </a>
     </div>
   )

@@ -19,8 +19,8 @@ import { webinarCss } from '../components/webinarStyles'
  */
 
 export const metadata: Metadata = {
-  title: '登録ありがとうございました | Meeton ai ウェビナー',
-  description: 'ウェビナー登録の確認ページです。',
+  title: '申し込みありがとうございました | Meeton ai ウェビナー',
+  description: 'ウェビナー申し込みの確認ページです。',
   robots: { index: false, follow: false },
   alternates: { canonical: '/webinar/thanks/' },
 }
@@ -148,11 +148,11 @@ export default async function WebinarThanksPage({
           </div>
 
           <h1 className="wb-hero-h1">
-            ご登録<em>ありがとうございました</em>
+            お申し込み<em>ありがとうございました</em>
           </h1>
 
           <p className="wb-hero-sub">
-            確認メールを送付しました。
+            確認メールを送りました。
             {webinar ? (
               <>
                 <br />
@@ -160,7 +160,7 @@ export default async function WebinarThanksPage({
               </>
             ) : null}
             <br />
-            Zoom 参加リンクは<strong>開催日前日</strong>にメールでお届けします。
+            当日の Zoom リンクは<strong>開催前日</strong>にメールで届きます。
           </p>
 
           {calendar && (
@@ -194,7 +194,7 @@ export default async function WebinarThanksPage({
                   margin: '0 0 8px', lineHeight: 1.35,
                 }}
               >
-                忘れないように、カレンダーに登録しましょう
+                カレンダーに入れておきましょう
               </h2>
               <div
                 style={{
@@ -204,7 +204,7 @@ export default async function WebinarThanksPage({
                   lineHeight: 1.7,
                 }}
               >
-                Zoom リンクは前日にメールでお届けします。
+                30 分のブロックを押さえておけば、当日に MTG をぶつけられずに済みます。Zoom リンクは前日にメールで届きます。
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
                 <a
@@ -248,9 +248,9 @@ export default async function WebinarThanksPage({
       {otherUpcoming.length > 0 && (
         <section style={{ padding: '0 clamp(20px, 4vw, 48px) clamp(60px, 8vw, 96px)' }}>
           <div className="wb-cross-sell">
-            <div className="wb-cross-sell-l">Step 2 · もう 1 回まとめて登録しておく</div>
+            <div className="wb-cross-sell-l">Step 2 · 来月以降も押さえておく</div>
             <h2 className="wb-cross-sell-h">
-              来月以降のテーマも公開中です
+              次回以降のテーマも見ておきますか
             </h2>
             <div className="wb-cross-sell-grid">
               {otherUpcoming.map((w) => (
@@ -262,7 +262,7 @@ export default async function WebinarThanksPage({
             </div>
             <div style={{ marginTop: 22, textAlign: 'center' }}>
               <Link href="/webinar/" className="wb-btn wb-btn-ghost">
-                シリーズ一覧を見る
+                ラインナップを見る
               </Link>
             </div>
           </div>
