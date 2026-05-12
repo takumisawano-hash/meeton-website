@@ -91,7 +91,7 @@ export default function WebinarRegistrationForm({
   webinarTitle,
   thanksHref,
 }: Props) {
-  const frameRef = useRef<HTMLDivElement>(null)
+  const frameRef = useRef<HTMLDivElement | null>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
   const [scriptFailed, setScriptFailed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -136,6 +136,74 @@ export default function WebinarRegistrationForm({
       mounted = false
     }
   }, [])
+
+  // CRITICAL: Force form re-render on every mount.
+  //
+  // The HubSpot embed v3 portal script scans the DOM for .hs-form-frame
+  // divs on initial load via MutationObserver. With Next.js SPA routing,
+  // when the user navigates away and comes back, the observer doesn't
+  // always pick up the new .hs-form-frame node — symptom: blank space
+  // where the form should be.
+  //
+  // Fix: on every mount, after the script is loaded, manually trigger
+  // form creation. Tries multiple known APIs the portal script exposes.
+  useEffect(() => {
+    if (!scriptLoaded || !frameRef.current || submitted) return
+    const el = frameRef.current
+    const w = window as unknown as {
+      hbspt?: {
+        forms?: {
+          create?: (config: {
+            portalId: string
+            formId: string
+            region: string
+            target: string
+          }) => void
+        }
+      }
+    }
+    let didInit = false
+
+    // Strategy 1: legacy v2 API via window.hbspt (portal script exposes it)
+    if (w.hbspt?.forms?.create) {
+      try {
+        // Clear any prior render attempts to avoid duplicate iframes
+        el.innerHTML = ''
+        // Re-set the data attributes (they get stripped if HubSpot processed
+        // this node before).
+        el.setAttribute('data-region', REGION)
+        el.setAttribute('data-form-id', FORM_ID)
+        el.setAttribute('data-portal-id', PORTAL_ID)
+        // Use the frame's own id as target. Add one if needed.
+        if (!el.id) el.id = `hs-form-${FORM_ID}-${Math.random().toString(36).slice(2, 8)}`
+        w.hbspt.forms.create({
+          portalId: PORTAL_ID,
+          formId: FORM_ID,
+          region: REGION,
+          target: `#${el.id}`,
+        })
+        didInit = true
+      } catch {
+        /* fall through */
+      }
+    }
+
+    // Strategy 2: if v2 didn't work, force re-scan by removing and
+    // re-creating the .hs-form-frame node. The portal script's
+    // MutationObserver should pick up the new node.
+    if (!didInit) {
+      const parent = el.parentNode
+      if (parent) {
+        const fresh = document.createElement('div')
+        fresh.className = 'hs-form-frame'
+        fresh.setAttribute('data-region', REGION)
+        fresh.setAttribute('data-form-id', FORM_ID)
+        fresh.setAttribute('data-portal-id', PORTAL_ID)
+        parent.replaceChild(fresh, el)
+        frameRef.current = fresh
+      }
+    }
+  }, [scriptLoaded, submitted, webinarSlug])
 
   // Listen for HubSpot postMessage events. The new embed dispatches:
   //   { type: 'hsFormCallback', eventName: 'onFormSubmitted', ... }
