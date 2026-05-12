@@ -24,18 +24,32 @@ function loadPortalScript(): Promise<void> {
   scriptLoadPromise = new Promise((resolve, reject) => {
     const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null
     if (existing) {
-      // Already loaded (or in-flight)
+      // Script tag from page-level <script defer> — by the time React
+      // hydrates and this useEffect runs, defer scripts have already
+      // executed (deferred scripts run before DOMContentLoaded; React
+      // hydration runs AFTER). So we can resolve immediately.
+      // Also keep a load listener as a safety net for older browsers.
       if (existing.dataset.loaded === '1') {
         resolve()
-      } else {
-        existing.addEventListener('load', () => {
-          existing.dataset.loaded = '1'
-          resolve()
-        })
-        existing.addEventListener('error', () => reject(new Error('hubspot-script-failed')))
+        return
+      }
+      // Belt-and-suspenders: listener for the rare case the script
+      // isn't done by hydration.
+      existing.addEventListener('load', () => {
+        existing.dataset.loaded = '1'
+        resolve()
+      })
+      existing.addEventListener('error', () => reject(new Error('hubspot-script-failed')))
+      // If document is already complete, the script must already be
+      // executed (deferred scripts run before DOMContentLoaded).
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        existing.dataset.loaded = '1'
+        resolve()
       }
       return
     }
+    // Fallback: page didn't include the script (shouldn't happen on
+    // /webinar/[slug]/ — server render adds it — but just in case).
     const script = document.createElement('script')
     script.id = SCRIPT_ID
     script.src = SCRIPT_SRC

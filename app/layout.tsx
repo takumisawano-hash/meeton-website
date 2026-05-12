@@ -99,6 +99,17 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
       style={{ ['--font-noto' as string]: NOTO_SYSTEM_STACK }}
     >
+      <head>
+        {/* HubSpot Forms embed — preconnect & DNS-prefetch shave 100-300ms
+            off form first-paint, since the iframe contacts multiple HS
+            subdomains during boot. */}
+        <link rel="preconnect" href="https://js-na2.hsforms.net" crossOrigin="" />
+        <link rel="preconnect" href="https://forms.hsforms.com" crossOrigin="" />
+        <link rel="preconnect" href="https://forms-na2.hsforms.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://js-na2.hsforms.net" />
+        <link rel="dns-prefetch" href="https://forms.hsforms.com" />
+        <link rel="dns-prefetch" href="https://forms-na2.hsforms.com" />
+      </head>
       <body>
         <GoogleAnalytics />
         <DocoDocoTracker />
