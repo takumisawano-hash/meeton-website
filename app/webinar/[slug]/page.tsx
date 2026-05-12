@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
@@ -91,7 +92,7 @@ function buildFaq(webinar: ReturnType<typeof findWebinar>) {
     {
       question: '当日の中で売り込みされたりしますか？',
       answer:
-        'ウェビナー中の 30 分は学習に集中いただける構成です。デモや個別営業のセクションを挟むことはありません。終了後、ご記入いただいた役職や事前質問内容を見て、こちらから個別にご連絡することがあります。電話やメールでのご連絡をご希望されない場合は、Q&A や登録時の質問欄でその旨を一言いただければ尊重いたします。',
+        'ウェビナー中の 30 分は学習に集中いただける構成です。デモや個別営業のセクションを挟むことはありません。',
     },
     {
       question: '当日参加できないんですが…',
@@ -182,7 +183,6 @@ export default async function WebinarDetailPage({
   const pageUrl = `https://dynameet.ai/webinar/${webinar.slug}/`
   const faq = buildFaq(webinar)
   const eventLd = buildEventJsonLd(webinar, pageUrl)
-  const speakerInitial = (webinar.speaker?.name || '澤').slice(0, 1)
 
   return (
     <div className="wb-root">
@@ -264,14 +264,20 @@ export default async function WebinarDetailPage({
             {/* Speaker card */}
             {webinar.speaker && (
               <div className="wb-speaker-card">
-                <div className="wb-speaker-avatar" aria-hidden>
-                  {speakerInitial}
+                <div className="wb-speaker-photo">
+                  <Image
+                    src="/team/sawano.png"
+                    alt={webinar.speaker.name}
+                    width={128}
+                    height={128}
+                    sizes="128px"
+                  />
                 </div>
                 <div className="wb-speaker-info">
                   <div className="wb-speaker-name">
                     {webinar.speaker.name}
                     <a
-                      href="https://www.linkedin.com/in/sawanotakumi/"
+                      href="https://www.linkedin.com/in/takumi-sawano-/"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${webinar.speaker.name} の LinkedIn`}
@@ -295,6 +301,18 @@ export default async function WebinarDetailPage({
           {/* RIGHT: registration form (above-fold on desktop, sticky-ish) */}
           <aside className="wb-hero-aside">
             <div id="register" className="wb-hero-form-card">
+              {webinar.thumbnailUrl && (
+                <div className="wb-hero-form-thumb">
+                  <Image
+                    src={webinar.thumbnailUrl}
+                    alt={webinar.title}
+                    width={1200}
+                    height={630}
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                  />
+                </div>
+              )}
               <div className="wb-hero-form-eyebrow">
                 <span style={{
                   width: 6, height: 6, borderRadius: '50%',

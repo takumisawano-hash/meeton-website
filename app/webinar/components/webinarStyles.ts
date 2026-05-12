@@ -465,10 +465,29 @@ export function webinarCss(): string {
       background: #fff;
       border: 1px solid var(--w-border);
       border-radius: 24px;
-      padding: clamp(24px, 2.4vw, 32px);
+      overflow: hidden;
       box-shadow:
         0 28px 64px -28px rgba(6, 95, 70, 0.22),
         0 2px 0 rgba(255, 255, 255, 0.6) inset;
+    }
+    .wb-hero-form-thumb {
+      position: relative; width: 100%; aspect-ratio: 1200 / 630;
+      background: var(--w-paper);
+    }
+    .wb-hero-form-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .wb-hero-form-card > .wb-hero-form-eyebrow,
+    .wb-hero-form-card > .wb-hero-form-h,
+    .wb-hero-form-card > .wb-hero-form-sub,
+    .wb-hero-form-card > .wb-hero-form-trust-chips {
+      margin-left: clamp(24px, 2.4vw, 32px);
+      margin-right: clamp(24px, 2.4vw, 32px);
+    }
+    .wb-hero-form-card > .wb-hero-form-eyebrow { margin-top: clamp(24px, 2.4vw, 32px); }
+    .wb-hero-form-card :global(.hbspt-form),
+    .wb-hero-form-card form {
+      padding: 0 clamp(24px, 2.4vw, 32px) clamp(24px, 2.4vw, 32px);
     }
     .wb-hero-form-eyebrow {
       display: flex; align-items: center; gap: 10px;
@@ -551,6 +570,16 @@ export function webinarCss(): string {
       color: #fff;
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    }
+    .wb-speaker-photo {
+      width: 72px; height: 72px; border-radius: 50%;
+      flex-shrink: 0; overflow: hidden;
+      border: 2px solid var(--w-green-light, rgba(18, 163, 125, 0.16));
+      background: var(--w-paper);
+      box-shadow: 0 4px 14px -4px rgba(6, 95, 70, 0.18);
+    }
+    .wb-speaker-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .wb-speaker-info { display: flex; flex-direction: column; gap: 4px; }
     .wb-speaker-name { font-size: 16px; font-weight: 800; color: var(--w-text); }

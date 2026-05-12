@@ -48,6 +48,8 @@ const nextConfig = {
       { pathname: '/integrations/**' },
       // Allow public/webinars/* (Gemini-generated webinar thumbnails)
       { pathname: '/webinars/**' },
+      // Allow public/team/* (speaker headshots)
+      { pathname: '/team/**' },
     ],
   },
   async redirects() {
