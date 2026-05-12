@@ -89,9 +89,9 @@ function buildFaq(webinar: ReturnType<typeof findWebinar>) {
       answer: webinar.learnings.join(' / '),
     },
     {
-      question: '営業されたりしませんか？',
+      question: '当日の中で売り込みされたりしますか？',
       answer:
-        '当日は売り込みなしです。デモや個別営業を 30 分の中に挟むことはありませんし、終了後にこちらから営業電話が掛かることもありません。資料や続編に興味があれば、登録後のメールから自由に進めてください。',
+        'ウェビナー中の 30 分は学習に集中いただける構成です。デモや個別営業のセクションを挟むことはありません。終了後、ご記入いただいた役職や事前質問内容を見て、こちらから個別にご連絡することがあります。電話やメールでのご連絡をご希望されない場合は、Q&A や登録時の質問欄でその旨を一言いただければ尊重いたします。',
     },
     {
       question: '当日参加できないんですが…',
@@ -426,7 +426,7 @@ export default async function WebinarDetailPage({
                 </div>
                 <div className="wb-reg-trust-row">
                   <div className="wb-reg-trust-v">0<span style={{ fontSize: 12, marginLeft: 2 }}>円</span></div>
-                  <div className="wb-reg-trust-k">参加・録画視聴いずれも無料、営業電話なし</div>
+                  <div className="wb-reg-trust-k">参加・録画視聴いずれも無料</div>
                 </div>
                 <p style={{
                   marginTop: 14, fontSize: 12.5, lineHeight: 1.7,
