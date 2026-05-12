@@ -322,7 +322,7 @@ export default async function WebinarDetailPage({
               </div>
               <h2 className="wb-hero-form-h">無料で申し込む</h2>
               <p className="wb-hero-form-sub">
-                4 項目のみ・1 分で終わります。Zoom リンクは前日にメールで届きます。
+                Zoom リンクは前日にメールで届きます。
                 <br />
                 <strong style={{ color: 'var(--w-text)' }}>
                   当日来られなくても、登録すれば録画とスライドが届きます。
@@ -459,7 +459,7 @@ export default async function WebinarDetailPage({
           <div className="wb-reg-card">
             <h3 className="wb-reg-card-h">参加登録フォーム</h3>
             <p className="wb-reg-card-sub">
-              4 項目だけ、1 分で終わります。Zoom リンクは前日にメールで届きます。
+              Zoom リンクは前日にメールで届きます。
             </p>
             <WebinarRegistrationForm
               webinarSlug={webinar.slug}
