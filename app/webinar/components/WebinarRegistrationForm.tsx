@@ -82,6 +82,36 @@ export default function WebinarRegistrationForm({
   const [scriptFailed, setScriptFailed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  // Stamp the URL with ?webinar_slug=... so HubSpot can pre-fill a
+  // hidden "webinar_slug" field from URL params. This is the only
+  // reliable way to identify which webinar a contact registered for
+  // when using a single shared form across all webinar LPs.
+  // Also stamps utm_campaign for cleaner Google Ads attribution.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    try {
+      const url = new URL(window.location.href)
+      let changed = false
+      if (url.searchParams.get('webinar_slug') !== webinarSlug) {
+        url.searchParams.set('webinar_slug', webinarSlug)
+        changed = true
+      }
+      if (!url.searchParams.has('webinar_date')) {
+        url.searchParams.set('webinar_date', webinarDate)
+        changed = true
+      }
+      if (!url.searchParams.has('utm_campaign')) {
+        url.searchParams.set('utm_campaign', `webinar-${webinarSlug}`)
+        changed = true
+      }
+      if (changed) {
+        window.history.replaceState({}, '', url.toString())
+      }
+    } catch {
+      /* ignore — replaceState not critical */
+    }
+  }, [webinarSlug, webinarDate])
+
   // Load portal script once
   useEffect(() => {
     let mounted = true
