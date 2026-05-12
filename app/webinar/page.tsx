@@ -25,14 +25,14 @@ import { webinarCss } from './components/webinarStyles'
  */
 
 export const metadata: Metadata = {
-  title: '商談化に効く 30 分 — 月 1 回の現場向けウェビナー | Meeton ai',
+  title: '商談化に悩むあなたへ — 月1回30分のウェビナー | Meeton ai',
   description:
-    '「リードは来てるのに商談にならない」を、現場の論点で分解する 30 分。月 1 回、第 3 木曜の昼 14:00 から。録画あり・無料。',
+    '「リードは来てるのに商談にならない」を、現場の論点で分解する月1回30分のウェビナー。第3木曜14:00から。録画あり・無料。',
   alternates: { canonical: '/webinar/' },
   openGraph: {
-    title: '商談化に効く 30 分 — 月 1 回の現場向けウェビナー',
+    title: '商談化に悩むあなたへ — 月1回30分のウェビナー',
     description:
-      '「リードは来てるのに商談にならない」を、現場の論点で分解する 30 分。録画あり・無料。',
+      '「リードは来てるのに商談にならない」を、現場の論点で分解する月1回30分のウェビナー。録画あり・無料。',
     url: 'https://dynameet.ai/webinar/',
     siteName: 'Meeton ai',
     locale: 'ja_JP',
@@ -100,8 +100,8 @@ export default function WebinarIndexPage() {
             <span className="wb-eyebrow-tag">毎月 第 3 木曜 14:00 JST</span>
           </div>
           <h1 className="wb-hero-h1">
-            商談化に効く<em>30 分</em>。<br />
-            月 1 回、現場の論点だけ。
+            商談化に悩む<em>あなたへ</em><br />
+            月1回30分のウェビナー
           </h1>
           <p className="wb-hero-sub">
             「リードは来てるのに商談につながらない」「IS の手が回らない」。
