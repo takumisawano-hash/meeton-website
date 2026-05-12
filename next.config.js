@@ -46,6 +46,8 @@ const nextConfig = {
       { pathname: '/api/og/**' },
       // Allow public/integrations/* images for next/image
       { pathname: '/integrations/**' },
+      // Allow public/webinars/* (Gemini-generated webinar thumbnails)
+      { pathname: '/webinars/**' },
     ],
   },
   async redirects() {

@@ -73,6 +73,12 @@
       "skillPath": "optimize/internal-linking-optimizer/SKILL.md",
       "computedHash": "fd3f558a5ec1410be74b81da36c51cdcf162322880d2725cad47bc1534969d59"
     },
+    "landing-page-copywriter": {
+      "source": "onewave-ai/claude-skills",
+      "sourceType": "github",
+      "skillPath": "landing-page-copywriter/SKILL.md",
+      "computedHash": "f7c7ceb8d99be73eb3e84c6281f1cd56121342f36c94b1d5d2835e4273598ab1"
+    },
     "landing-page-design": {
       "source": "inference-sh-skills/skills",
       "sourceType": "github",
@@ -84,6 +90,12 @@
       "sourceType": "github",
       "skillPath": "skills/paid-ads/platforms/linkedin-ads/SKILL.md",
       "computedHash": "3c6d6855fa0e7921ed6c6239345bde399342f586a71719c551ccfc6bbda337dc"
+    },
+    "positioning-messaging": {
+      "source": "refoundai/lenny-skills",
+      "sourceType": "github",
+      "skillPath": "skills/positioning-messaging/SKILL.md",
+      "computedHash": "58f9eb3ae58b0d7971c55dd95c4b62ec8520df611792aff7bb3bc1da0b0b7135"
     },
     "programmatic-seo": {
       "source": "coreyhaines31/marketingskills",
@@ -102,6 +114,12 @@
       "sourceType": "github",
       "skillPath": "skills/seo-audit/SKILL.md",
       "computedHash": "ddd028951738fcbcdebf0f9bd90b708c55d1b9370a31603e0c13e5b262d8b8bb"
+    },
+    "storybrand-messaging": {
+      "source": "wondelai/skills",
+      "sourceType": "github",
+      "skillPath": "storybrand-messaging/SKILL.md",
+      "computedHash": "eca7e0ca18da7a5833b7ff8553ebf4eac1030992a1de54165a4392333217db59"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
