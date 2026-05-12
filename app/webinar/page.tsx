@@ -8,6 +8,7 @@ import {
   getUpcomingWebinars,
   getPastWebinars,
 } from '../lib/webinars-schedule'
+import WebinarCountdown from './components/WebinarCountdown'
 import { webinarCss } from './components/webinarStyles'
 
 /**
@@ -108,20 +109,30 @@ export default function WebinarIndexPage() {
           </p>
 
           {featured && (
-            <div className="wb-hero-ctas">
-              <Link
-                href={`/webinar/${featured.slug}/`}
-                className="wb-btn wb-btn-primary"
+            <>
+              <div className="wb-hero-ctas">
+                <Link
+                  href={`/webinar/${featured.slug}/`}
+                  className="wb-btn wb-btn-primary"
+                >
+                  次回の席を確保する
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <a href="#about" className="wb-btn wb-btn-ghost">
+                  シリーズについて
+                </a>
+              </div>
+              <p
+                style={{
+                  marginTop: 18, fontSize: 13, color: 'var(--w-mute)',
+                  fontWeight: 600, letterSpacing: 0.01,
+                }}
               >
-                次回ウェビナーに登録
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </Link>
-              <a href="#about" className="wb-btn wb-btn-ghost">
-                シリーズについて
-              </a>
-            </div>
+                無料 · 録画送付 · Live Q&amp;A
+              </p>
+            </>
           )}
         </div>
       </section>
@@ -146,9 +157,12 @@ export default function WebinarIndexPage() {
                 <div>
                   <div className="wb-featured-badge">
                     <span className="wb-featured-badge-dot" />
-                    Featured
+                    Featured · Next Up
                   </div>
                   <div className="wb-featured-date">{featured.dateLabel}</div>
+                  <div style={{ marginBottom: 12 }}>
+                    <WebinarCountdown date={featured.date} />
+                  </div>
                   <h3 className="wb-featured-title">
                     {featured.title}
                   </h3>
@@ -172,13 +186,13 @@ export default function WebinarIndexPage() {
                       href={`/webinar/${featured.slug}/`}
                       className="wb-btn wb-btn-primary"
                     >
-                      登録する
+                      席を確保する
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M13 5l7 7-7 7" />
                       </svg>
                     </Link>
                     <Link href={`/webinar/${featured.slug}/`} className="wb-btn wb-btn-ghost">
-                      詳細を見る
+                      アジェンダを見る
                     </Link>
                   </div>
                 </div>
@@ -427,7 +441,7 @@ export default function WebinarIndexPage() {
               href={`/webinar/${featured.slug}/`}
               className="wb-btn wb-btn-primary"
             >
-              登録する
+              席を確保する
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>

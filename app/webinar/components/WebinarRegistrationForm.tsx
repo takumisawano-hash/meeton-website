@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 
 declare global {
   interface Window {
@@ -26,16 +26,18 @@ function loadHubSpotScript(): Promise<void> {
   if (typeof window !== 'undefined' && window.hbspt) {
     return Promise.resolve()
   }
-  scriptLoadPromise = new Promise((resolve) => {
+  scriptLoadPromise = new Promise((resolve, reject) => {
     if (typeof window === 'undefined') {
       resolve()
       return
     }
-    if (document.getElementById('hubspot-script')) {
-      if (window.hbspt) resolve()
-      else {
-        const existing = document.getElementById('hubspot-script')
-        existing?.addEventListener('load', () => resolve())
+    const existing = document.getElementById('hubspot-script') as HTMLScriptElement | null
+    if (existing) {
+      if (window.hbspt) {
+        resolve()
+      } else {
+        existing.addEventListener('load', () => resolve())
+        existing.addEventListener('error', () => reject(new Error('hubspot-script-failed')))
       }
       return
     }
@@ -45,6 +47,7 @@ function loadHubSpotScript(): Promise<void> {
     script.charset = 'utf-8'
     script.async = true
     script.onload = () => resolve()
+    script.onerror = () => reject(new Error('hubspot-script-failed'))
     document.head.appendChild(script)
   })
   return scriptLoadPromise
@@ -61,13 +64,16 @@ type Props = {
 /**
  * Embedded HubSpot form for webinar registration.
  *
- * Reuses portal 45872857 / form dd42d8b3 (general lead capture). We inject
- * webinarSlug + webinarDate into hs_context so the contact record carries
- * the registration source for routing/segmentation in HubSpot.
+ * UX:
+ *   - Skeleton fields while script loads (no jarring "Loading...")
+ *   - Graceful fallback link if HubSpot fails to load (progressive enhancement)
+ *   - Privacy reassurance below submit
+ *   - Optimistic success state (renders before redirect resolves)
  *
- * On submit: track form_submit + generate_lead events, then redirect to
- * /webinar/thanks/?slug=... so the user lands on a static confirmation
- * page with calendar download.
+ * Data flow: reuses portal 45872857 / form dd42d8b3. Injects
+ * webinarSlug + webinarDate + webinarTitle into hs_context so the
+ * contact record carries registration source for routing/segmentation
+ * in HubSpot.
  */
 export default function WebinarRegistrationForm({
   webinarSlug,
@@ -75,12 +81,22 @@ export default function WebinarRegistrationForm({
   webinarTitle,
   thanksHref,
 }: Props) {
+  const reactId = useId()
+  // useId returns `:r0:`-style strings — strip colons so it's a valid CSS selector
+  const containerId = `webinar-form-${reactId.replace(/[^a-z0-9_-]/gi, '')}`
   const containerRef = useRef<HTMLDivElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
+  const [scriptFailed, setScriptFailed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    loadHubSpotScript().then(() => setScriptLoaded(true))
+    let mounted = true
+    loadHubSpotScript()
+      .then(() => mounted && setScriptLoaded(true))
+      .catch(() => mounted && setScriptFailed(true))
+    return () => {
+      mounted = false
+    }
   }, [])
 
   useEffect(() => {
@@ -99,7 +115,7 @@ export default function WebinarRegistrationForm({
       portalId: '45872857',
       formId: 'dd42d8b3-e426-4079-9479-fa28287c0544',
       region: 'na2',
-      target: '#webinar-form-container',
+      target: `#${containerId}`,
       onFormSubmitted: () => {
         setSubmitted(true)
         window.gtag?.('event', 'form_submit', {
@@ -112,7 +128,6 @@ export default function WebinarRegistrationForm({
           form_type: 'webinar_registration',
           value: 1,
         })
-        // After a short delay so HubSpot finishes its POST, send to thanks.
         const target =
           thanksHref ||
           `/webinar/thanks/?slug=${encodeURIComponent(webinarSlug)}`
@@ -137,13 +152,40 @@ export default function WebinarRegistrationForm({
             /* ignore */
           }
         }
+        // Improve mobile UX — add proper input modes/autocomplete to inputs
+        const email = $form.querySelector(
+          'input[type="email"]'
+        ) as HTMLInputElement | null
+        if (email && !email.getAttribute('autocomplete')) {
+          email.setAttribute('autocomplete', 'email')
+          email.setAttribute('inputmode', 'email')
+        }
+        const tel = $form.querySelector(
+          'input[type="tel"]'
+        ) as HTMLInputElement | null
+        if (tel && !tel.getAttribute('autocomplete')) {
+          tel.setAttribute('autocomplete', 'tel')
+          tel.setAttribute('inputmode', 'tel')
+        }
+        // Honeypot (basic bot deterrent — invisible to humans)
+        if (!$form.querySelector('input[name="wb_hp"]')) {
+          const hp = document.createElement('input')
+          hp.type = 'text'
+          hp.name = 'wb_hp'
+          hp.tabIndex = -1
+          hp.autocomplete = 'off'
+          hp.setAttribute('aria-hidden', 'true')
+          hp.style.cssText =
+            'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;'
+          $form.appendChild(hp)
+        }
       },
     })
-  }, [scriptLoaded, submitted, webinarSlug, webinarDate, webinarTitle, thanksHref])
+  }, [scriptLoaded, submitted, webinarSlug, webinarDate, webinarTitle, thanksHref, containerId])
 
   if (submitted) {
     return (
-      <div className="wb-form-success">
+      <div className="wb-form-success" role="status" aria-live="polite">
         <div className="wb-form-success-icon" aria-hidden>
           <svg
             width="28"
@@ -170,12 +212,55 @@ export default function WebinarRegistrationForm({
 
   return (
     <div className="wb-form-shell">
-      {!scriptLoaded && (
-        <div className="wb-form-loading" aria-live="polite">
-          フォームを読み込み中...
+      {!scriptLoaded && !scriptFailed && (
+        <div className="wb-form-skeleton" aria-hidden>
+          <div>
+            <div className="wb-form-skel-label" />
+            <div className="wb-form-skel-field" style={{ marginTop: 6 }} />
+          </div>
+          <div>
+            <div className="wb-form-skel-label" />
+            <div className="wb-form-skel-field" style={{ marginTop: 6 }} />
+          </div>
+          <div>
+            <div className="wb-form-skel-label" />
+            <div className="wb-form-skel-field" style={{ marginTop: 6 }} />
+          </div>
+          <div className="wb-form-skel-button" />
         </div>
       )}
-      <div id="webinar-form-container" ref={containerRef} />
+      <div id={containerId} ref={containerRef} />
+
+      {/* Privacy reassurance — only render once script is up (avoids double-render) */}
+      {!scriptFailed && (
+        <p className="wb-form-privacy">
+          ご登録情報は本ウェビナーの運営目的でのみ利用します。
+          <br />
+          配信停止はいつでも 1 クリックで可能です。
+          {' · '}
+          <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">
+            プライバシーポリシー
+          </a>
+        </p>
+      )}
+
+      {scriptFailed && (
+        <div className="wb-form-fallback" role="alert">
+          フォームの読み込みに失敗しました。お手数ですが
+          {' '}
+          <a
+            href={`mailto:contact@dynameet.ai?subject=${encodeURIComponent(
+              `[Webinar 登録] ${webinarTitle}`
+            )}&body=${encodeURIComponent(
+              `以下の内容で登録を希望します:\n\n氏名:\nメール:\n会社名:\n役職:\n\n対象ウェビナー: ${webinarTitle}\n開催日: ${webinarDate}`
+            )}`}
+          >
+            こちらからメール
+          </a>
+          {' '}
+          でご登録ください。
+        </div>
+      )}
     </div>
   )
 }

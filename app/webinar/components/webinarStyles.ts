@@ -51,6 +51,49 @@ export function webinarCss(): string {
       max-width: 1200px; margin: 0 auto;
     }
 
+    /* Detail hero variant — 2-column with sticky form on desktop */
+    .wb-hero-split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(32px, 4vw, 64px);
+      align-items: start;
+    }
+    @media (max-width: 980px) {
+      .wb-hero-split { grid-template-columns: 1fr; gap: 32px; }
+    }
+    .wb-hero-aside { position: sticky; top: 24px; }
+    @media (max-width: 980px) {
+      .wb-hero-aside { position: static; }
+    }
+
+    /* ========== COUNTDOWN ========== */
+    .wb-countdown {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--w-border);
+      backdrop-filter: saturate(140%);
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; font-weight: 700;
+      color: var(--w-green-deep); letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+    .wb-countdown-pulse {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--w-green);
+      box-shadow: 0 0 0 0 rgba(18, 163, 125, 0.45);
+      animation: wb-count-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes wb-count-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(18, 163, 125, 0.45); }
+      50% { box-shadow: 0 0 0 7px rgba(18, 163, 125, 0); }
+    }
+    .wb-countdown-units {
+      display: inline-flex; gap: 6px; align-items: baseline;
+    }
+    .wb-countdown-unit { color: var(--w-text); }
+    .wb-countdown-label { color: var(--w-mute); font-weight: 600; margin-right: 2px; }
+
     /* ========== EYEBROW ========== */
     .wb-eyebrow {
       display: inline-flex; align-items: center; gap: 12px;
@@ -67,9 +110,18 @@ export function webinarCss(): string {
 
     /* ========== HERO H1 ========== */
     .wb-hero-h1 {
-      font-weight: 900; font-size: clamp(36px, 5.5vw, 72px);
-      line-height: 1.12; letter-spacing: -0.035em;
-      margin: 0 0 28px; word-break: keep-all;
+      font-weight: 900;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.1; letter-spacing: -0.038em;
+      margin: 0 0 24px; word-break: keep-all;
+      font-feature-settings: "palt" 1, "ss01" 1;
+      text-wrap: balance;
+    }
+    /* Slightly more compact H1 inside split hero (detail page) */
+    .wb-hero-split .wb-hero-h1 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.15;
+      margin-bottom: 16px;
     }
     .wb-hero-h1 em {
       font-style: normal;
@@ -367,6 +419,101 @@ export function webinarCss(): string {
       margin: 0; padding-left: 38px;
     }
 
+    /* ========== DETAIL: HERO META STRIP ========== */
+    .wb-meta-strip {
+      display: flex; flex-wrap: wrap; gap: 18px 28px;
+      margin: 8px 0 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--w-border);
+    }
+    .wb-meta-strip-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--w-sub);
+    }
+    .wb-meta-strip-item svg { color: var(--w-green-deep); flex-shrink: 0; }
+    .wb-meta-strip-k {
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--w-mute); font-weight: 700; margin-right: 2px;
+    }
+    .wb-meta-strip-v { font-weight: 700; color: var(--w-text); font-size: 13px; }
+
+    /* ========== HERO-SIDE FORM CARD (above-fold) ========== */
+    .wb-hero-form-card {
+      background: #fff;
+      border: 1px solid var(--w-border);
+      border-radius: 24px;
+      padding: clamp(24px, 2.4vw, 32px);
+      box-shadow:
+        0 28px 64px -28px rgba(6, 95, 70, 0.22),
+        0 2px 0 rgba(255, 255, 255, 0.6) inset;
+    }
+    .wb-hero-form-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--w-green-deep); font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .wb-hero-form-h {
+      font-size: clamp(18px, 1.9vw, 22px); font-weight: 900;
+      letter-spacing: -0.02em; margin: 0 0 6px; line-height: 1.3;
+    }
+    .wb-hero-form-sub {
+      font-size: 13px; color: var(--w-sub); line-height: 1.7;
+      margin: 0 0 18px;
+    }
+    .wb-hero-form-trust-chips {
+      display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px;
+    }
+    .wb-trust-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px;
+      background: rgba(18, 163, 125, 0.07);
+      color: var(--w-green-deep);
+      border-radius: 999px;
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .wb-trust-chip-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--w-green);
+    }
+
+    /* ========== MOBILE STICKY CTA (detail page) ========== */
+    .wb-sticky-cta {
+      display: none;
+      position: fixed; left: 12px; right: 12px; bottom: 12px;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--w-border);
+      border-radius: 16px;
+      padding: 10px 12px 10px 16px;
+      box-shadow: 0 18px 40px -18px rgba(6, 95, 70, 0.32);
+      backdrop-filter: saturate(140%);
+      align-items: center; justify-content: space-between;
+      gap: 12px;
+    }
+    .wb-sticky-cta-info {
+      display: flex; flex-direction: column; gap: 2px; min-width: 0;
+    }
+    .wb-sticky-cta-l {
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--w-mute); font-weight: 700;
+    }
+    .wb-sticky-cta-v {
+      font-size: 13px; font-weight: 800; color: var(--w-text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .wb-sticky-cta .wb-btn {
+      padding: 10px 16px; min-height: 40px; font-size: 13px; flex-shrink: 0;
+    }
+    @media (max-width: 720px) {
+      .wb-sticky-cta { display: flex; }
+      body { padding-bottom: 80px; }
+    }
+
     /* ========== DETAIL: SPEAKER ========== */
     .wb-speaker-card {
       display: flex; align-items: center; gap: 20px;
@@ -470,11 +617,47 @@ export function webinarCss(): string {
       margin: 0 0 20px;
     }
 
-    .wb-form-shell { position: relative; min-height: 200px; }
-    .wb-form-loading {
-      padding: 40px 0; text-align: center; font-size: 13px;
-      color: var(--w-mute);
+    .wb-form-shell { position: relative; min-height: 240px; }
+
+    /* Skeleton fields shown while HubSpot script loads */
+    .wb-form-skeleton { display: flex; flex-direction: column; gap: 14px; }
+    .wb-form-skel-label {
+      width: 38%; height: 12px; border-radius: 4px;
+      background: linear-gradient(90deg, #ececea 25%, #f5f5f2 37%, #ececea 63%);
+      background-size: 400% 100%;
+      animation: wb-shimmer 1.4s ease-in-out infinite;
     }
+    .wb-form-skel-field {
+      width: 100%; height: 42px; border-radius: 10px;
+      background: linear-gradient(90deg, #ececea 25%, #f5f5f2 37%, #ececea 63%);
+      background-size: 400% 100%;
+      animation: wb-shimmer 1.4s ease-in-out infinite;
+    }
+    .wb-form-skel-button {
+      width: 100%; height: 48px; border-radius: 12px; margin-top: 4px;
+      background: linear-gradient(90deg, #d4ebe2 25%, #e5f3ed 37%, #d4ebe2 63%);
+      background-size: 400% 100%;
+      animation: wb-shimmer 1.4s ease-in-out infinite;
+    }
+    @keyframes wb-shimmer {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .wb-form-fallback {
+      margin-top: 20px; padding: 16px;
+      background: #fff8f0; border: 1px solid #f3d6a3;
+      border-radius: 12px; font-size: 13px; line-height: 1.7;
+      color: #6b4f1a;
+    }
+    .wb-form-fallback a {
+      color: var(--w-green-deep); font-weight: 700; text-decoration: underline;
+    }
+    .wb-form-privacy {
+      margin-top: 14px; font-size: 11.5px; line-height: 1.7;
+      color: var(--w-mute); text-align: center;
+    }
+    .wb-form-privacy a { color: var(--w-sub); text-decoration: underline; }
+
     .wb-form-success {
       text-align: center; padding: 24px 0;
     }
@@ -555,6 +738,53 @@ export function webinarCss(): string {
 
     @media (max-width: 900px) {
       .wb-reg-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ========== THANKS PAGE CROSS-SELL ========== */
+    .wb-cross-sell {
+      max-width: 760px; margin: 56px auto 0;
+      padding: 28px clamp(20px, 4vw, 36px);
+      background: #fff;
+      border: 1px solid var(--w-border);
+      border-radius: 22px;
+      text-align: left;
+    }
+    .wb-cross-sell-l {
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--w-mute); font-weight: 700; margin-bottom: 14px;
+    }
+    .wb-cross-sell-h {
+      font-size: 18px; font-weight: 900; letter-spacing: -0.02em;
+      margin: 0 0 18px; line-height: 1.35;
+    }
+    .wb-cross-sell-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 720px) {
+      .wb-cross-sell-grid { grid-template-columns: 1fr; }
+    }
+    .wb-cross-sell-card {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 18px;
+      background: #fafaf7; border: 1px solid var(--w-border);
+      border-radius: 14px;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .wb-cross-sell-card:hover {
+      border-color: var(--w-green-deep);
+      transform: translateY(-2px);
+    }
+    .wb-cross-sell-date {
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px; color: var(--w-green-deep);
+      font-weight: 700; letter-spacing: 0.02em;
+    }
+    .wb-cross-sell-title {
+      font-size: 14px; font-weight: 800; line-height: 1.45;
+      margin: 0; color: var(--w-text);
     }
 
     /* ========== FOOTER CTA ========== */

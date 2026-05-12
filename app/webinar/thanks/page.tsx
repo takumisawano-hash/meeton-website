@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
-import { findWebinar } from '../../lib/webinars-schedule'
+import { findWebinar, getUpcomingWebinars } from '../../lib/webinars-schedule'
 import { webinarCss } from '../components/webinarStyles'
 
 /**
@@ -75,6 +75,10 @@ export default async function WebinarThanksPage({
 }) {
   const { slug } = await searchParams
   const webinar = slug ? findWebinar(slug) : null
+  // Cross-sell: show up to 2 upcoming webinars after the one user just registered for
+  const otherUpcoming = getUpcomingWebinars()
+    .filter((w) => w.slug !== webinar?.slug)
+    .slice(0, 2)
 
   // Compute calendar times only when we have a webinar to anchor.
   let calendar: {
@@ -163,45 +167,59 @@ export default async function WebinarThanksPage({
             <div
               style={{
                 marginTop: 8,
-                padding: 28,
+                padding: 32,
                 background: '#fff',
                 border: '1px solid var(--w-border)',
                 borderRadius: 22,
                 maxWidth: 620,
-                boxShadow: '0 18px 40px -28px rgba(6, 95, 70, 0.18)',
+                boxShadow: '0 24px 56px -28px rgba(6, 95, 70, 0.22)',
               }}
             >
               <div
                 style={{
                   fontFamily: 'var(--font-mono), ui-monospace, monospace',
                   fontSize: 10.5,
-                  letterSpacing: '0.14em',
+                  letterSpacing: '0.16em',
                   textTransform: 'uppercase',
-                  color: 'var(--w-mute)',
+                  color: 'var(--w-green-deep)',
                   fontWeight: 700,
-                  marginBottom: 12,
+                  marginBottom: 10,
                 }}
               >
-                Add to Calendar
+                Step 1 · Add to Calendar
               </div>
+              <h2
+                style={{
+                  fontSize: 20, fontWeight: 900, letterSpacing: '-0.02em',
+                  margin: '0 0 8px', lineHeight: 1.35,
+                }}
+              >
+                忘れないように、カレンダーに登録しましょう
+              </h2>
               <div
                 style={{
-                  fontSize: 14,
+                  fontSize: 13.5,
                   color: 'var(--w-sub)',
-                  marginBottom: 18,
+                  marginBottom: 22,
                   lineHeight: 1.7,
                 }}
               >
-                忘れないように、いまカレンダーに追加しておきましょう。
+                Zoom リンクは前日にメールでお届けします。
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
                 <a
                   href={calendar.googleUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="wb-btn wb-btn-ghost"
-                  style={{ fontSize: 13.5 }}
+                  className="wb-btn wb-btn-primary"
+                  style={{ fontSize: 14 }}
                 >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
                   Google Calendar
                 </a>
                 <a
@@ -209,31 +227,47 @@ export default async function WebinarThanksPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="wb-btn wb-btn-ghost"
-                  style={{ fontSize: 13.5 }}
+                  style={{ fontSize: 14 }}
                 >
                   Outlook
                 </a>
                 <a
                   href={calendar.icsUrl}
                   className="wb-btn wb-btn-ghost"
-                  style={{ fontSize: 13.5 }}
+                  style={{ fontSize: 14 }}
                 >
-                  .ics ダウンロード
+                  .ics (Apple / その他)
                 </a>
               </div>
             </div>
           )}
-
-          <div style={{ marginTop: 36 }}>
-            <Link href="/webinar/" className="wb-btn wb-btn-primary">
-              他のウェビナーも見る
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
         </div>
       </section>
+
+      {/* Cross-sell: other upcoming webinars (avoid abandoning the user on a dead-end page) */}
+      {otherUpcoming.length > 0 && (
+        <section style={{ padding: '0 clamp(20px, 4vw, 48px) clamp(60px, 8vw, 96px)' }}>
+          <div className="wb-cross-sell">
+            <div className="wb-cross-sell-l">Step 2 · もう 1 回まとめて登録しておく</div>
+            <h2 className="wb-cross-sell-h">
+              来月以降のテーマも公開中です
+            </h2>
+            <div className="wb-cross-sell-grid">
+              {otherUpcoming.map((w) => (
+                <Link key={w.slug} href={`/webinar/${w.slug}/`} className="wb-cross-sell-card">
+                  <div className="wb-cross-sell-date">{w.dateLabel}</div>
+                  <h3 className="wb-cross-sell-title">{w.title}</h3>
+                </Link>
+              ))}
+            </div>
+            <div style={{ marginTop: 22, textAlign: 'center' }}>
+              <Link href="/webinar/" className="wb-btn wb-btn-ghost">
+                シリーズ一覧を見る
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer variant="light" />
 
