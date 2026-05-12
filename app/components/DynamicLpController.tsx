@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import dynamic from 'next/dynamic'
+import { getCurrentWebinar } from '../lib/webinars-schedule'
 const HubSpotMeetingModal = dynamic(() => import('./HubSpotMeetingModal'), { ssr: false })
 const HubSpotModal = dynamic(() => import('./HubSpotModal'), { ssr: false })
 
@@ -309,24 +310,29 @@ function HoujinSuggest({ query, onPick }: { query: string; onPick: (name: string
 }
 
 function InvitationBanner({
-  prefillCompany,
-  onOpen,
   onDismiss,
 }: {
   prefillCompany?: string
   onOpen: () => void
   onDismiss: () => void
 }) {
+  // Auto-promote the closest upcoming webinar. Data lives in
+  // app/lib/webinars-schedule.ts — editing that file updates this banner.
+  const webinar = getCurrentWebinar()
+  if (!webinar) return null
+
+  const href = `/webinar/${webinar.slug}/?utm_source=site&utm_medium=banner&utm_campaign=webinar_${webinar.slug}`
+
   return (
     <div
       role="region"
-      aria-label="貴社向けLP生成オファー"
+      aria-label="今月のウェビナー案内"
       style={{
         position: 'fixed',
         left: 'clamp(16px, 3vw, 28px)',
         bottom: 'clamp(16px, 3vw, 28px)',
         zIndex: 9990,
-        maxWidth: 320,
+        maxWidth: 340,
         background: '#fafaf7',
         color: '#0a0e0c',
         border: '1px solid #d4d2c7',
@@ -356,19 +362,38 @@ function InvitationBanner({
       >
         ×
       </button>
-      <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 10, letterSpacing: '0.12em', color: '#065f46', textTransform: 'uppercase', marginBottom: 6 }}>
-        ▸ AI Personalized Offer
+      <div
+        style={{
+          fontFamily: 'var(--font-mono, monospace)',
+          fontSize: 10,
+          letterSpacing: '0.12em',
+          color: '#065f46',
+          textTransform: 'uppercase',
+          marginBottom: 6,
+        }}
+      >
+        ▸ Live Webinar · {webinar.dateLabel.split(' ')[0]}
       </div>
       <div style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.45, margin: '0 0 4px' }}>
-        {prefillCompany ? `${prefillCompany} 様向けの` : '貴社向けの'}試算と専用LPを30秒で
+        {webinar.title}
       </div>
-      <div style={{ fontSize: 12, color: '#3d4a44', lineHeight: 1.6, margin: '0 0 12px' }}>
-        Webサイトを入れるだけで、月間商談数とSDR工数削減を試算します
+      <div style={{ fontSize: 12, color: '#3d4a44', lineHeight: 1.6, margin: '0 0 4px' }}>
+        {webinar.subtitle}
       </div>
-      <button
-        type="button"
-        onClick={onOpen}
+      <div
         style={{
+          fontSize: 11,
+          color: '#6b7873',
+          fontFamily: 'var(--font-mono, monospace)',
+          marginBottom: 12,
+        }}
+      >
+        {webinar.dateLabel}
+      </div>
+      <a
+        href={href}
+        style={{
+          display: 'block',
           width: '100%',
           padding: '10px 14px',
           background: '#0eab6e',
@@ -378,10 +403,13 @@ function InvitationBanner({
           fontSize: 13,
           fontWeight: 700,
           cursor: 'pointer',
+          textAlign: 'center',
+          textDecoration: 'none',
+          boxSizing: 'border-box',
         }}
       >
-        ▸ 30秒で試算を見る
-      </button>
+        ▸ 無料で登録する
+      </a>
     </div>
   )
 }

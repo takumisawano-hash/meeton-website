@@ -90,9 +90,9 @@ export default function Footer({ variant = "light" }: FooterProps) {
     {
       heading: "リソース",
       items: [
+        { href: "/webinar/", label: "ウェビナー" },
         { href: "/blog/", label: "ブログ" },
         { href: "/case-studies/", label: "導入事例" },
-        { href: "/roi-simulator/", label: "ROI 試算" },
         { href: "/integrations/", label: "連携一覧" },
       ],
     },

@@ -102,7 +102,7 @@ export default function Nav({
   ];
 
   const navLinks = [
-    { href: "/roi-simulator/", label: "SDRコスト試算" },
+    { href: "/webinar/", label: "ウェビナー" },
     { href: "#download-center", label: "お役立ち資料", onClick: true },
     { href: "/case-studies/", label: "導入事例" },
     { href: "/blog/", label: "ブログ" },
