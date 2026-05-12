@@ -116,7 +116,7 @@ function buildEventJsonLd(
 ) {
   if (!webinar) return null
   const startDateIso = `${webinar.date}T14:00:00+09:00`
-  const endDateIso = `${webinar.date}T15:00:00+09:00`
+  const endDateIso = `${webinar.date}T14:30:00+09:00`
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -220,7 +220,7 @@ export default async function WebinarDetailPage({
                 </svg>
                 <span>
                   <span className="wb-meta-strip-k">Duration</span>
-                  <span className="wb-meta-strip-v">60 分 · Q&amp;A 含む</span>
+                  <span className="wb-meta-strip-v">30 分 · Q&amp;A 含む</span>
                 </span>
               </div>
               <div className="wb-meta-strip-item">
@@ -356,7 +356,7 @@ export default async function WebinarDetailPage({
               Agenda
             </div>
             <h2 className="wb-h2">
-              60 分の<em>進行</em>
+              30 分の<em>進行</em>
             </h2>
             <p className="wb-section-sub">
               開始から終了まで、各セクションの想定タイムです。
@@ -396,7 +396,7 @@ export default async function WebinarDetailPage({
             >
               {webinar.dateLabel}
               <br />
-              60 分 (Q&amp;A 含む) / Zoom Webinar / 参加費無料
+              30 分 (Q&amp;A 含む) / Zoom Webinar / 参加費無料
             </p>
 
             <div className="wb-reg-side">

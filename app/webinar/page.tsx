@@ -221,7 +221,7 @@ export default function WebinarIndexPage() {
                     </span>
                     <div>
                       <div className="wb-featured-meta-l">Duration</div>
-                      <div className="wb-featured-meta-v">60 分 (Q&A 含む)</div>
+                      <div className="wb-featured-meta-v">30 分 (Q&A 含む)</div>
                     </div>
                   </div>
                   <div className="wb-featured-meta-row">

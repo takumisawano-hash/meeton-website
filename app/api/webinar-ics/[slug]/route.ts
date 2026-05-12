@@ -9,7 +9,7 @@ import { findWebinar } from '@/app/lib/webinars-schedule'
  * download to add the event to their calendar (works with Apple Calendar,
  * Outlook desktop, Thunderbird, etc.).
  *
- * Times are anchored to JST 14:00 - 15:00 (UTC 05:00 - 06:00).
+ * Times are anchored to JST 14:00 - 14:30 (UTC 05:00 - 05:30).
  */
 export async function GET(
   _req: Request,
@@ -21,9 +21,9 @@ export async function GET(
     return new NextResponse('Webinar not found', { status: 404 })
   }
 
-  // JST 14:00 - 15:00 → UTC 05:00 - 06:00
+  // JST 14:00 - 14:30 → UTC 05:00 - 05:30
   const startUtc = `${webinar.date.replace(/-/g, '')}T050000Z`
-  const endUtc = `${webinar.date.replace(/-/g, '')}T060000Z`
+  const endUtc = `${webinar.date.replace(/-/g, '')}T053000Z`
   const nowUtc =
     new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')
 
