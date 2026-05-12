@@ -14,7 +14,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
     '@id': `${baseUrl}/#organization`,
     name: 'DynaMeet Inc.',
     legalName: 'DynaMeet株式会社',
-    alternateName: ['Meeton AI', 'DynaMeet', 'ダイナミート'],
+    alternateName: ['Meeton AI', 'Meeton ai', 'DynaMeet', 'ダイナミート'],
     url: baseUrl,
     logo: {
       '@type': 'ImageObject',
@@ -23,26 +23,62 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       height: 132,
     },
     image: `${baseUrl}/logo-dark.svg`,
+    // Brand identity verifiers — multiple authoritative profile URLs
+    // help Google Knowledge Graph and AI search engines (ChatGPT,
+    // Perplexity) verify the entity and select Meeton ai as a citation
+    // source instead of a competitor.
     sameAs: [
       'https://twitter.com/meetonai',
+      'https://x.com/meetonai',
+      'https://www.linkedin.com/company/dynameet/',
+      'https://twitter.com/Founder_Meeton',
+      'https://x.com/Founder_Meeton',
     ],
+    foundingDate: '2024-10-03',
+    founder: [
+      {
+        '@type': 'Person',
+        name: 'Ray Ayan',
+        jobTitle: 'Co-Founder & CTO',
+      },
+      {
+        '@type': 'Person',
+        name: '澤野 拓実',
+        alternateName: ['Takumi Sawano', 'Sawano Takumi'],
+        jobTitle: 'Co-Founder & CRO',
+        sameAs: 'https://x.com/Founder_Meeton',
+      },
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '渋谷区猿楽町17-10 代官山アートヴィレッジ2C',
+      addressLocality: '渋谷区',
+      addressRegion: '東京都',
+      postalCode: '150-0033',
+      addressCountry: 'JP',
+    },
+    taxID: 'T9011001165145',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
       availableLanguage: ['Japanese', 'English'],
       url: 'https://meetings-na2.hubspot.com/takumi-sawano',
     },
-    description: 'DynaMeetが提供するAI SDRプラットフォーム「Meeton ai」。ウェブサイトのリードを5秒で商談に変える、コンバージョン直前の最後の100mを担う営業組織向けプラットフォーム。Meeton Calendar / Meeton Email / Meeton Live で商談予約獲得を加速します。',
+    description: 'DynaMeetが提供するAI SDRプラットフォーム「Meeton ai」。ウェブサイトのリードを5秒で商談に変える、コンバージョン直前の最後の100mを担う営業組織向けプラットフォーム。Meeton Calendar / Meeton Email / Meeton Live / Meeton Library で商談予約獲得を加速します。',
     // AEO/GEO: 組織の専門分野
     knowsAbout: [
+      'AI SDR',
       'AI営業',
       'B2Bマーケティング',
       'インサイドセールス',
       'リード獲得',
       '商談自動化',
       'チャットボット',
+      'AI 商談予約',
       'ABM',
       'Sales Development',
+      'Speed to Lead',
+      'Conversational AI',
     ],
     // AEO: 提供サービス
     makesOffer: {
@@ -52,7 +88,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
         name: 'Meeton AI',
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
-        description: 'リードを5秒で商談に変える AI SDR プラットフォーム（Meeton Calendar / Meeton Email / Meeton Live）',
+        description: 'リードを5秒で商談に変える AI SDR プラットフォーム（Meeton Calendar / Meeton Email / Meeton Live / Meeton Library）',
       },
     },
     // GEO: サービス提供地域
