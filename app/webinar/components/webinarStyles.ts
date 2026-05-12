@@ -755,6 +755,34 @@ export function webinarCss(): string {
       background-size: 400% 100%;
       animation: wb-shimmer 1.4s ease-in-out infinite;
     }
+    /* Enrichment microcopy — shown for ~3s while HubSpot fetches
+     * known fields after the email loads (Form Shortening UX) */
+    .wb-form-enrich-hint {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: rgba(18, 163, 125, 0.06);
+      border: 1px solid rgba(18, 163, 125, 0.18);
+      border-radius: 10px;
+      color: var(--w-green-deep);
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 12px 0 0;
+      animation: wb-enrich-fade 0.4s ease-out;
+    }
+    .wb-form-enrich-hint-spinner {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid rgba(18, 163, 125, 0.25);
+      border-top-color: var(--w-green);
+      animation: wb-enrich-spin 0.85s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes wb-enrich-fade {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes wb-enrich-spin {
+      to { transform: rotate(360deg); }
+    }
     @keyframes wb-shimmer {
       0% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }

@@ -95,6 +95,9 @@ export default function WebinarRegistrationForm({
   const [scriptLoaded, setScriptLoaded] = useState(false)
   const [scriptFailed, setScriptFailed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  // Show enrichment hint between script-loaded and form-ready
+  // (~2-3s window where HubSpot Form Shortening checks known fields).
+  const [enrichmentDone, setEnrichmentDone] = useState(false)
 
   // Stamp the URL with ?webinar_slug=... so HubSpot can pre-fill a
   // hidden "webinar_slug" field from URL params. This is the only
@@ -205,6 +208,16 @@ export default function WebinarRegistrationForm({
     }
   }, [scriptLoaded, submitted, webinarSlug])
 
+  // Auto-hide the enrichment hint after a safety timeout. HubSpot's
+  // Form Shortening typically completes its known-field lookup in
+  // 800-2500ms; 3500ms gives plenty of room. Triggered when script
+  // finishes loading.
+  useEffect(() => {
+    if (!scriptLoaded || enrichmentDone) return
+    const t = setTimeout(() => setEnrichmentDone(true), 3500)
+    return () => clearTimeout(t)
+  }, [scriptLoaded, enrichmentDone])
+
   // Listen for HubSpot postMessage events. The new embed dispatches:
   //   { type: 'hsFormCallback', eventName: 'onFormSubmitted', ... }
   // and similar for onFormReady. Both legacy v2 and new embed use the
@@ -215,6 +228,12 @@ export default function WebinarRegistrationForm({
       const d = e.data as { type?: string; eventName?: string; id?: string } | undefined
       if (!d || typeof d !== 'object') return
       if (d.type !== 'hsFormCallback') return
+      // Hide enrichment hint as soon as form signals ready — better
+      // than waiting the 3.5s safety timeout.
+      if (d.eventName === 'onFormReady') {
+        setEnrichmentDone(true)
+        return
+      }
       if (d.eventName !== 'onFormSubmitted') return
       // Optional: verify this is OUR form's submission via id match.
       // If d.id is the form id, narrow to FORM_ID; otherwise accept.
@@ -297,6 +316,19 @@ export default function WebinarRegistrationForm({
         data-form-id={FORM_ID}
         data-portal-id={PORTAL_ID}
       />
+
+      {/* Enrichment hint — explains why other fields appear after Email.
+       * Shows from script-loaded until either onFormReady postMessage
+       * fires or the 3.5s safety timeout expires. Prevents the "is the
+       * form broken?" perception during HubSpot Form Shortening lookup. */}
+      {scriptLoaded && !scriptFailed && !enrichmentDone && !submitted && (
+        <div className="wb-form-enrich-hint" role="status" aria-live="polite">
+          <span className="wb-form-enrich-hint-spinner" aria-hidden />
+          <span>
+            既知の情報を自動チェック中。残りの項目をすぐに表示します。
+          </span>
+        </div>
+      )}
 
       {!scriptFailed && (
         <p className="wb-form-privacy">
