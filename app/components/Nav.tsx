@@ -431,7 +431,7 @@ export default function Nav({
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  setIsMeetingModalOpen(true);
+                  window.location.href = 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav-mobile&utm_campaign=meeting';
                 }}
                 style={{
                   width: "100%",
@@ -734,7 +734,9 @@ export default function Nav({
                     資料請求
                   </button>
                   <button
-                    onClick={() => setIsMeetingModalOpen(true)}
+                    onClick={() => {
+                      window.location.href = 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav-desktop&utm_campaign=meeting';
+                    }}
                     style={{
                       border: "none",
                       cursor: "pointer",
