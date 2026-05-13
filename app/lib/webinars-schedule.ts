@@ -56,8 +56,8 @@ export const WEBINAR_SCHEDULE: WebinarSchedule[] = [
     slug: 'lead-to-meeting-loss',
     title: '「リードは来てるのに、商談にならない」を分解する 30 分',
     subtitle: 'どこで落ちてるか、3 つの転換点に絞って見つけにいく',
-    date: '2026-06-18',
-    dateLabel: '6 月 18 日(木) 14:00 - 14:30 JST',
+    date: '2026-06-19',
+    dateLabel: '6 月 19 日(金) 14:00 - 14:30 JST',
     thumbnailUrl: '/webinars/lead-to-meeting-loss.png',
     description:
       'リードはあるのに商談につながらない。その「どこで落ちてるか」を、明日の社内会議で説明できる粒度まで分解する 30 分。',
