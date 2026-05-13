@@ -80,17 +80,10 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       'Speed to Lead',
       'Conversational AI',
     ],
-    // AEO: 提供サービス
-    makesOffer: {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'SoftwareApplication',
-        name: 'Meeton AI',
-        applicationCategory: 'BusinessApplication',
-        operatingSystem: 'Web',
-        description: 'リードを5秒で商談に変える AI SDR プラットフォーム（Meeton Calendar / Meeton Email / Meeton Live / Meeton Library）',
-      },
-    },
+    // 2026-05-13: Organization.makesOffer は削除。Offer に price が無いため
+    // GSC が「販売者のリスティング」エラーを出していた。SoftwareApplication
+    // schema は app/page.tsx と各 /features/* layout で個別に出しているので、
+    // Organization から重複定義する必要なし。
     // GEO: サービス提供地域
     areaServed: {
       '@type': 'Country',

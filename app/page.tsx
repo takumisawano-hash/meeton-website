@@ -80,36 +80,34 @@ const homepageFaqSchema = {
   ],
 }
 
-// Product schema — Meeton ai プラットフォーム全体。AI 検索向けに「製品実体」として
-// 認識されるための構造化情報。FAQPage と併用することで「製品 × 質問」両面で
-// citation されやすくなる。
+// SoftwareApplication schema — Meeton ai プラットフォーム全体。
+//
+// 2026-05-13: 以前は `@type: Product` で `offers` に `priceCurrency` のみ
+// 設定していたが、GSC が「販売者のリスティング」「商品スニペット」両方で
+// 重大エラーを出していた (Product/Offer は `price` 必須)。Meeton ai は
+// 公開価格を持たない B2B SaaS なので Product schema は誤適用だった。
+// SoftwareApplication なら `price` が任意でも合法、AI 検索向けの
+// citation 効果も保たれる。
 const homepageProductSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
+  '@type': 'SoftwareApplication',
   '@id': 'https://dynameet.ai/#product',
   name: 'Meeton ai',
   alternateName: ['Meeton AI', 'ミートンai'],
+  applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'AI SDR / Sales Automation Software',
+  operatingSystem: 'Web',
   description:
     '日本のB2B企業向けAI SDRプラットフォーム。ウェブサイト訪問者・メール受信者・既存リードに対しAIが自律的に対話し、商談予約まで完結。チャット・メール・カレンダー・コンテンツライブラリの4モジュール構成。',
   brand: {
     '@type': 'Brand',
     name: 'Meeton ai',
   },
-  manufacturer: {
+  publisher: {
     '@id': 'https://dynameet.ai/#organization',
   },
-  category: 'AI SDR / Sales Automation Software',
   url: 'https://dynameet.ai/',
   image: 'https://dynameet.ai/logo-dark.svg',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'JPY',
-    description: '14日間無料トライアルあり、有料プランは企業規模に応じた個別見積もり',
-    availability: 'https://schema.org/InStock',
-    seller: {
-      '@id': 'https://dynameet.ai/#organization',
-    },
-  },
   additionalProperty: [
     {
       '@type': 'PropertyValue',

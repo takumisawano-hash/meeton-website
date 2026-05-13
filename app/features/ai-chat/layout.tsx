@@ -13,26 +13,23 @@ const faqItems = [
   { question: '無料トライアルはありますか？', answer: '14日間の無料トライアルをご用意しています。クレジットカード不要で、全機能をお試しいただけます。' },
 ]
 
-// Product schema — Meeton Live モジュール単体
-// AI 検索が「Meeton Live = AI SDR / Business Chat 製品」と認識するための構造化情報
+// SoftwareApplication schema — Meeton Live モジュール単体
+// 2026-05-13: Product → SoftwareApplication 変更。詳細は app/page.tsx 同部参照
+// (GSC が Offer の price 必須を強制するため、公開価格のない B2B SaaS は
+// Product schema を出すべきでない)。
 const meetonLiveProductSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
+  '@type': 'SoftwareApplication',
   '@id': 'https://dynameet.ai/features/ai-chat/#product',
   name: 'Meeton Live',
+  applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'AI SDR / Business Chat Software',
+  operatingSystem: 'Web',
   description:
     'ウェブサイト訪問者と即時に対話し、過去の閲覧・ダウンロード・メール履歴を全文脈で引き継いだ AI SDR が商談予約まで完結させる AI チャットモジュール。シナリオ設計不要で設置 5 分から稼働。',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
-  manufacturer: { '@id': 'https://dynameet.ai/#organization' },
-  category: 'AI SDR / Business Chat Software',
+  publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/features/ai-chat/',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'JPY',
-    description: '14 日間無料トライアルあり',
-    availability: 'https://schema.org/InStock',
-    seller: { '@id': 'https://dynameet.ai/#organization' },
-  },
   additionalProperty: [
     {
       '@type': 'PropertyValue',
