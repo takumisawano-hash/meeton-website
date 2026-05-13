@@ -62,7 +62,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       '@type': 'ContactPoint',
       contactType: 'sales',
       availableLanguage: ['Japanese', 'English'],
-      url: 'https://meetings-na2.hubspot.com/takumi-sawano',
+      url: 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true',
     },
     description: 'DynaMeetが提供するAI SDRプラットフォーム「Meeton ai」。ウェブサイトのリードを5秒で商談に変える、コンバージョン直前の最後の100mを担う営業組織向けプラットフォーム。Meeton Calendar / Meeton Email / Meeton Live / Meeton Library で商談予約獲得を加速します。',
     // AEO/GEO: 組織の専門分野

@@ -1,8 +1,6 @@
 'use client'
 
-import { useState, type CSSProperties, type ReactNode } from 'react'
-import dynamic from 'next/dynamic'
-const HubSpotMeetingModal = dynamic(() => import('./HubSpotMeetingModal'), { ssr: false })
+import type { CSSProperties, ReactNode } from 'react'
 
 type DemoBookingButtonProps = {
   children: ReactNode
@@ -11,20 +9,26 @@ type DemoBookingButtonProps = {
   utmCampaign?: string
 }
 
+const BASE_URL = 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true'
+
+/**
+ * Demo booking CTA — navigates to the Meeton ai widget calendar flow
+ * (was: HubSpot iframe modal embed).
+ *
+ * The new URL opens the homepage with the Meeton chatbot widget
+ * pre-configured to scheduling mode. Better UX than iframe modal +
+ * keeps booking inside our own product.
+ */
 export default function DemoBookingButton({
   children,
   style,
   className,
   utmCampaign = 'case-study',
 }: DemoBookingButtonProps) {
-  const [open, setOpen] = useState(false)
-
+  const href = `${BASE_URL}&utm_source=website&utm_medium=cta&utm_campaign=${encodeURIComponent(utmCampaign)}`
   return (
-    <>
-      <button type="button" onClick={() => setOpen(true)} style={style} className={className}>
-        {children}
-      </button>
-      <HubSpotMeetingModal isOpen={open} onClose={() => setOpen(false)} utmCampaign={utmCampaign} />
-    </>
+    <a href={href} style={style} className={className}>
+      {children}
+    </a>
   )
 }
