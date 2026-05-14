@@ -44,13 +44,14 @@ export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
   const skipOnLp = pathname?.startsWith('/lp')
-  // Thanks pages are post-conversion: the Meeton calendar popup IS the
-  // primary content. These are noindex so Lighthouse/PSI never sees them.
-  // Load the widget eagerly here — gesture-gating creates a perceived-slow
-  // experience because users wait for the calendar after their CV action.
-  // Match both /thanks/* (e.g. /thanks/document/) and any nested */thanks/*
-  // (e.g. /contact/thanks/).
-  const eagerLoad = !!pathname && /(^|\/)thanks(\/|$)/.test(pathname)
+  // Eager-load triggers — widget is the primary content, gesture-gating
+  // creates "loads slowly" complaint:
+  // 1. /thanks/* and */thanks/* — post-conversion pages
+  // 2. ?showChat=true / ?calendarId=... — explicit URLs from email/CTA
+  //    that intend to open the widget popup immediately
+  const isThanksPath = !!pathname && /(^|\/)thanks(\/|$)/.test(pathname)
+  // Query-param check runs client-side only (pathname doesn't include search)
+  const eagerLoad = isThanksPath
 
   useEffect(() => {
     const removeManagedScript = () => {
@@ -68,6 +69,13 @@ export default function MeetonScript() {
     // network profile and stable Core Web Vitals scores without
     // affecting any real visitor.
     if (isSyntheticClient()) return
+
+    // Query-param eager-load: ?showChat=true or ?calendarId=...
+    // — explicit intent to open widget immediately (from emails, CTAs,
+    // direct calendar URLs). Overrides backstop and gesture-gating.
+    const params = new URLSearchParams(window.location.search)
+    const queryEager =
+      params.get('showChat') === 'true' || params.has('calendarId')
 
     let loaded = false
 
@@ -90,7 +98,7 @@ export default function MeetonScript() {
     // they're waiting for the calendar popup to appear. Delaying for a
     // gesture creates the "popup loads slowly" complaint we got from
     // the user. These pages are noindex so no PSI/Lighthouse hit.
-    if (eagerLoad) {
+    if (eagerLoad || queryEager) {
       // Defer to next tick so React commit completes first, but no
       // gesture wait. Use requestIdleCallback if available for
       // marginally better perceived performance on slower devices.
