@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 
 // Modal bodies are 200+ lines each and the embed scripts they pull in
 // dwarf the rest of the Nav bundle. Hydration deserialization runs on
@@ -412,7 +413,7 @@ export default function Nav({
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  setIsModalOpen(true);
+                  openMeetonDownloadCenter();
                 }}
                 style={{
                   width: "100%",
@@ -718,7 +719,7 @@ export default function Nav({
               ) : (
                 <>
                   <button
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={openMeetonDownloadCenter}
                     style={{
                       background: "transparent",
                       border: `2px solid ${colors.btnBorder}`,

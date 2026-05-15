@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/app/components/Nav'
 import Footer from '@/app/components/Footer'
+import DemoBookingButton from '@/app/components/DemoBookingButton'
 
 export const metadata: Metadata = {
   title: '会社概要',
@@ -340,10 +341,10 @@ export default function AboutPage() {
               プロダクトのデモも、キャリアの相談も、まずは気軽にお問い合わせください。
             </p>
             <div className="ab-cta-buttons">
-              <Link href="/contact/" className="ab-btn ab-btn-primary">
+              <DemoBookingButton className="ab-btn ab-btn-primary" utmCampaign="about">
                 デモを予約する
                 <span aria-hidden="true">→</span>
-              </Link>
+              </DemoBookingButton>
               <Link href="/careers/" className="ab-btn ab-btn-ghost">
                 採用情報を見る
               </Link>

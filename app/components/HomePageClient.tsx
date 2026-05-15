@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import MidPageCta from "./MidPageCta";
 import Nav from "./Nav";
+import { openMeetonCalendar, openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 
 // Modals only render after a user click, so there's no reason to ship
 // their JS in the initial homepage bundle. Dynamic-import shaves
@@ -1098,7 +1099,8 @@ export default function HomePageClient({
     return () => window.removeEventListener("scroll", onScroll);
   }, [isLp, lpVariant]);
 
-  // LP-mode: enriched CTA handlers (track + open modal)
+  // 2026-05-14: 「資料請求」「デモを予約」を HubSpot iframe modal から
+  // Meeton widget に切替。tracking event は維持。
   const openMeetingModal = (location: string) => {
     if (isLp && typeof window !== "undefined") {
       window.gtag?.("event", "lp_cta_demo_click", {
@@ -1116,7 +1118,7 @@ export default function HomePageClient({
       });
       window.lintrk?.("track", { conversion_id: 25161212 });
     }
-    setIsMeetingModalOpen(true);
+    openMeetonCalendar();
   };
 
   const openDocModal = (location: string) => {
@@ -1126,7 +1128,7 @@ export default function HomePageClient({
         location,
       });
     }
-    setIsDocModalOpen(true);
+    openMeetonDownloadCenter();
   };
 
   return (
@@ -1200,7 +1202,7 @@ export default function HomePageClient({
               onClick={() => openMeetingModal("hero")}
               style={isLp ? { padding: "20px 44px", fontSize: 19 } : undefined}
             >
-              AIデモを体験
+              デモを予約
             </button>
             <button
               className="btn-ghost"
@@ -1938,7 +1940,7 @@ export default function HomePageClient({
         heading="4 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
         ctaLabel="資料を請求する"
         variant="doc"
-        onClick={() => setIsDocModalOpen(true)}
+        onClick={openMeetonDownloadCenter}
       />
 
       {/* COMPARISON — 詳細比較表 (人間SDR / MA・SFA / Meeton ai) */}
@@ -1950,7 +1952,7 @@ export default function HomePageClient({
         heading="比較表で見えた違いを、実際の管理画面で 15 分で体験してください"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={() => setIsMeetingModalOpen(true)}
+        onClick={openMeetonCalendar}
       />
 
       {/* CASES */}
@@ -1992,7 +1994,7 @@ export default function HomePageClient({
         ctaLabel="デモを予約する"
         variant="demo"
         tone="surface"
-        onClick={() => setIsMeetingModalOpen(true)}
+        onClick={openMeetonCalendar}
       />
 
       {/* INTEGRATIONS */}
@@ -2225,7 +2227,7 @@ export default function HomePageClient({
         heading="社内検討用の資料 (機能・導入事例・料金プラン入り) を無料でダウンロードできます"
         ctaLabel="資料を請求する"
         variant="doc"
-        onClick={() => setIsDocModalOpen(true)}
+        onClick={openMeetonDownloadCenter}
       />
 
       {/* FAQ */}
@@ -2389,7 +2391,7 @@ export default function HomePageClient({
               className="btn btn-cta btn-cta-lg"
               onClick={() => openMeetingModal("final_cta")}
             >
-              {isLp ? "無料デモを予約する" : "AIデモを体験"}
+              {isLp ? "無料デモを予約する" : "デモを予約"}
             </button>
             <button
               className="btn-ghost"
@@ -2441,7 +2443,7 @@ export default function HomePageClient({
           onSecondary={() => openDocModal("sticky")}
         />
       )}
-      {!isLp && <MobileStickyCta onClick={() => setIsMeetingModalOpen(true)} />}
+      {!isLp && <MobileStickyCta onClick={openMeetonCalendar} />}
 
       <HubSpotModal
         isOpen={isDocModalOpen}

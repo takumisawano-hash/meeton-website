@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { openMeetonCalendar, openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Nav from "./Nav";
@@ -272,8 +273,8 @@ export default function AiChatPageClient() {
             <h1 className="anim-y d2">過去の全文脈を引き継いで、<br /><em>AI SDR がその場で商談化</em></h1>
             <p className="anim-y d3 hero-sub">CRM で識別済みの再訪リードに、AI SDR が即時応答。過去の閲覧・DL・メール反応をすべて引き継いで対話を開始し、商談予約までその場で完結。ラストワンマイルの会話を AI SDR が走り、コンバージョン直前の意思決定を後押しします。</p>
             <div className="anim d4 hero-ctas">
-              <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-              <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+              <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
+              <button className="btn-ghost" onClick={openMeetonCalendar}>
                 デモを予約
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -616,7 +617,7 @@ export default function AiChatPageClient() {
         heading="識別済みリードへの AI SDR 対話と CRM 文脈の引き継ぎ精度を、御社の業界に合わせたデモで 15 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={() => setIsMeetingModalOpen(true)}
+        onClick={openMeetonCalendar}
       />
 
       {/* WHY */}
@@ -647,7 +648,7 @@ export default function AiChatPageClient() {
         heading="Meeton Live の仕様・CRM 連携・導入事例・料金プランをまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
-        onClick={() => setIsDocModalOpen(true)}
+        onClick={openMeetonDownloadCenter}
       />
 
       {/* FAQ */}
@@ -690,8 +691,8 @@ export default function AiChatPageClient() {
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live で、<br /><em>識別済みリードを商談へ</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>CRM 連携で識別済みリードに集中。AI SDR が全文脈を引き継いで対話し、商談予約まで完結します。</p>
           <div className="final-cta-ctas">
-            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+            <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
+            <button className="btn-ghost" onClick={openMeetonCalendar}>
               デモを予約
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

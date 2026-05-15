@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { openMeetonCalendar, openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Nav from "./Nav";
@@ -268,8 +269,8 @@ export default function LibraryPageClient() {
             <h1 className="anim-y d2">戻ってきたリードに、<br /><em>AI が資料でナーチャリング</em></h1>
             <p className="anim-y d3 hero-sub">資料をアップロードするだけで、AI チャット付きの資料ライブラリー（資料一覧ポップアップ）が自動で立ち上がる。デザインを組んだり、新しいページをサイトに追加する必要はゼロ。検討再開した既存リードに、AI チャット解説付きの資料一覧をその場で届けられる、既存リードのナーチャリング専用機能。</p>
             <div className="anim d4 hero-ctas">
-              <button className="btn btn-cta btn-cta-lg" onClick={() => setIsMeetingModalOpen(true)}>デモを予約</button>
-              <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>
+              <button className="btn btn-cta btn-cta-lg" onClick={openMeetonCalendar}>デモを予約</button>
+              <button className="btn-ghost" onClick={openMeetonDownloadCenter}>
                 資料請求
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -641,7 +642,7 @@ export default function LibraryPageClient() {
         heading="既存リードへの AI 資料推薦と検討再開検知の精度を、御社の業界に合わせたデモで 15 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={() => setIsMeetingModalOpen(true)}
+        onClick={openMeetonCalendar}
       />
 
       {/* WHY */}
@@ -679,7 +680,7 @@ export default function LibraryPageClient() {
         heading="Meeton Library の仕様・推薦アルゴリズム・自動ライブラリー生成・料金プランをまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
-        onClick={() => setIsDocModalOpen(true)}
+        onClick={openMeetonDownloadCenter}
       />
 
       {/* FAQ */}
@@ -711,8 +712,8 @@ export default function LibraryPageClient() {
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library で、<br /><em>既存リードの商談機会を再発火</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>AI が行動履歴から最適資料を推薦・解説。検討再開を捉えて Meeton Calendar に引き渡し、商談機会を再点火させます。</p>
           <div className="final-cta-ctas">
-            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsMeetingModalOpen(true)}>デモを予約</button>
-            <button className="btn-ghost" onClick={() => setIsDocModalOpen(true)}>
+            <button className="btn btn-cta btn-cta-lg" onClick={openMeetonCalendar}>デモを予約</button>
+            <button className="btn-ghost" onClick={openMeetonDownloadCenter}>
               資料請求
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

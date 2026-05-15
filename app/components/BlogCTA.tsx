@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { openMeetonCalendar, openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 import dynamic from 'next/dynamic'
 const HubSpotModal = dynamic(() => import('./HubSpotModal'), { ssr: false })
 const HubSpotMeetingModal = dynamic(() => import('./HubSpotMeetingModal'), { ssr: false })
@@ -149,7 +150,7 @@ export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
             }}
           >
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={openMeetonDownloadCenter}
               style={{
                 border: 'none',
                 cursor: 'pointer',
@@ -166,7 +167,7 @@ export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
               {copy.primary}
             </button>
             <button
-              onClick={() => setIsMeetingModalOpen(true)}
+              onClick={openMeetonCalendar}
               style={{
                 background: 'transparent',
                 color: '#0f1128',
@@ -266,7 +267,7 @@ export function BlogInlineCTA({ category, slug }: BlogCTAProps = {}) {
           </p>
         </div>
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={openMeetonDownloadCenter}
           style={{
             border: 'none',
             cursor: 'pointer',

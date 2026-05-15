@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { openMeetonCalendar, openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Nav from "./Nav";
@@ -290,8 +291,8 @@ export default function MeetingsPageClient() {
             <h1 className="anim-y d2">初動5秒で、<br /><em>商談化</em></h1>
             <p className="anim-y d3 hero-sub">業界平均 42 時間の Speed to Lead を、Meeton Calendar は 5 秒に短縮。リードがコンバートした瞬間（フォーム送信・サンクスページ・メール経由）に、商談予約 UI が即座に発動。コンバージョン直前の最後の100mを担います。</p>
             <div className="anim d4 hero-ctas">
-              <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-              <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+              <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
+              <button className="btn-ghost" onClick={openMeetonCalendar}>
                 デモを予約
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -637,7 +638,7 @@ export default function MeetingsPageClient() {
         heading="リードコンバート瞬間の5秒発動・割り振りルール・Meeton Email 連携を、実機で 15 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={() => setIsMeetingModalOpen(true)}
+        onClick={openMeetonCalendar}
       />
 
       {/* WHY */}
@@ -675,7 +676,7 @@ export default function MeetingsPageClient() {
         heading="Meeton Calendar の仕様・5秒発動の仕組み・割り振りルール・連携先一覧をまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
-        onClick={() => setIsDocModalOpen(true)}
+        onClick={openMeetonDownloadCenter}
       />
 
       {/* FAQ */}
@@ -707,8 +708,8 @@ export default function MeetingsPageClient() {
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar で、<br /><em>初動5秒で商談化</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>業界42時間の Speed to Lead を 5 秒に。リードコンバート瞬間に発動し、コンバージョン直前の最後の100mを担います。</p>
           <div className="final-cta-ctas">
-            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+            <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
+            <button className="btn-ghost" onClick={openMeetonCalendar}>
               デモを予約
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { openMeetonCalendar, openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Nav from "./Nav";
@@ -290,8 +291,8 @@ export default function AiEmailPageClient() {
             <h1 className="anim-y d2">MA メールではなく、<br /><em>もう一人の SDR</em></h1>
             <p className="anim-y d3 hero-sub">Meeton Calendar で即時予約に至らなかったリードを、Meeton Email が 1:1 で諦めず追跡。送るタイミング・送る内容・送らない判断まで、AI が最新行動の文脈で動的判断します。テンプレート × 時間トリガーの MA メールとは異なる、商談予約獲得ゴールの SDR エージェントです。</p>
             <div className="anim d4 hero-ctas">
-              <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-              <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+              <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
+              <button className="btn-ghost" onClick={openMeetonCalendar}>
                 デモを予約
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -667,7 +668,7 @@ export default function AiEmailPageClient() {
         heading="MA メールとの違い・AI が文脈で動的判断する流れ・承認モードの操作感を、実機で 15 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={() => setIsMeetingModalOpen(true)}
+        onClick={openMeetonCalendar}
       />
 
       {/* WHY */}
@@ -703,7 +704,7 @@ export default function AiEmailPageClient() {
         heading="Meeton Email の仕様・MA メールとの違い・送信モード・連携先をまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
-        onClick={() => setIsDocModalOpen(true)}
+        onClick={openMeetonDownloadCenter}
       />
 
       {/* FAQ */}
@@ -735,8 +736,8 @@ export default function AiEmailPageClient() {
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email で、<br /><em>MA の上にもう一人の SDR を</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>Meeton Calendar で即時予約しなかったリードを、AI が文脈で動的判断しながら 1:1 で追跡。商談予約獲得を一本のゴールに据えた AI SDR エージェントです。</p>
           <div className="final-cta-ctas">
-            <button className="btn btn-cta btn-cta-lg" onClick={() => setIsDocModalOpen(true)}>資料請求</button>
-            <button className="btn-ghost" onClick={() => setIsMeetingModalOpen(true)}>
+            <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
+            <button className="btn-ghost" onClick={openMeetonCalendar}>
               デモを予約
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

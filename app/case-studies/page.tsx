@@ -5,6 +5,7 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import FAQJsonLd from '../components/FAQJsonLd'
 import DemoBookingButton from '../components/DemoBookingButton'
+import DocRequestButton from '../components/DocRequestButton'
 import { getAllCaseStudies } from '../lib/case-studies'
 
 // FAQ on the case-studies hub helps Google + AI search engines extract
@@ -416,9 +417,9 @@ export default async function CaseStudiesPage() {
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </DemoBookingButton>
-            <Link href="/contact/" className="cs-btn cs-btn-ghost">
+            <DocRequestButton className="cs-btn cs-btn-ghost">
               資料請求
-            </Link>
+            </DocRequestButton>
           </div>
         </div>
       </section>
