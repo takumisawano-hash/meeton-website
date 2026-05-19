@@ -115,6 +115,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .hero h1{font-size:clamp(32px,7vw,72px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:28px}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-size:clamp(16px,3vw,22px);line-height:1.8;color:var(--sub);max-width:640px;margin:0 auto 48px}
+.hero-webinar-band{display:inline-flex;align-items:center;gap:16px;margin-top:22px;padding:12px 18px;background:rgba(18,163,125,.06);border:1px solid rgba(18,163,125,.22);border-radius:14px;text-decoration:none;color:inherit;max-width:640px;transition:background .2s,border-color .2s,transform .2s;flex-wrap:wrap;justify-content:flex-start}
+.hero-webinar-band:hover{background:rgba(18,163,125,.10);border-color:rgba(18,163,125,.4);transform:translateY(-1px)}
+.hero-webinar-tag{display:inline-flex;align-items:center;padding:4px 10px;font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:0.08em;background:var(--cta);color:#fff;border-radius:999px;flex-shrink:0}
+.hero-webinar-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;text-align:left}
+.hero-webinar-body strong{font-size:14px;font-weight:800;color:var(--heading);line-height:1.4}
+.hero-webinar-meta{font-size:12px;color:var(--sub);font-weight:600}
+.hero-webinar-arrow{color:var(--cta);font-weight:800;font-size:18px;line-height:1;flex-shrink:0}
 .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .hero-stats{display:flex;justify-content:center;gap:clamp(32px,8vw,72px);margin-top:clamp(40px,8vw,72px);padding-top:clamp(32px,6vw,48px);border-top:1px solid var(--border);flex-wrap:wrap}
 .stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
@@ -841,10 +848,14 @@ type IconKey = keyof typeof ICONS;
 const Ico = ({ name, size = 16, color = "currentColor" }: { name: IconKey; size?: number; color?: string }) => <Icon d={ICONS[name]} size={size} color={color} />;
 
 /* ── Hero Stats — Impact numbers ── */
+// 2026-05-19: 外部レビュー Phase 2 指摘で「コスト削減」訴求を外し
+// 「商談創出」実績ベースに統一。導入事例 3 社 (BizteX / EdulinX /
+// Univis) と FV を直結させ、機能説明より先に「本物の成果が出ている」
+// 信頼資産で押す。
 const HERO_STATS = [
-  { num: "2", suffix: "倍以上", label: "商談化率", desc: "人間SDRと比較", icon: "target" as IconKey, gradient: "linear-gradient(135deg, #12a37d, #34d399)", glow: "rgba(18,163,125,.25)" },
-  { num: "66", suffix: "%削減", label: "商談獲得コスト", desc: "人件費を大幅カット", icon: "bolt" as IconKey, gradient: "linear-gradient(135deg, #3b6ff5, #60a5fa)", glow: "rgba(59,111,245,.25)" },
-  { num: "20", suffix: "h+/人", label: "月間工数削減", desc: "より重要な営業活動に集中", icon: "calendar" as IconKey, gradient: "linear-gradient(135deg, #7c5cfc, #a78bfa)", glow: "rgba(124,92,252,.25)" },
+  { num: "20", suffix: "倍+", label: "チャット経由リード", desc: "BizteX: 月1〜2件 → 月20件以上", icon: "target" as IconKey, gradient: "linear-gradient(135deg, #12a37d, #34d399)", glow: "rgba(18,163,125,.25)" },
+  { num: "60", suffix: "%+", label: "AI 経由商談化率", desc: "EdulinX: Meeton ai 経由の実績", icon: "bolt" as IconKey, gradient: "linear-gradient(135deg, #3b6ff5, #60a5fa)", glow: "rgba(59,111,245,.25)" },
+  { num: "2", suffix: "件 受注", label: "導入3 ヶ月の創出", desc: "Univis: 提案件数も増加", icon: "calendar" as IconKey, gradient: "linear-gradient(135deg, #7c5cfc, #a78bfa)", glow: "rgba(124,92,252,.25)" },
 ];
 
 // 2026-05-19: SSR + 初期paint で `val = 0` を返していたため、Google/AI
@@ -1197,8 +1208,11 @@ export default function HomePageClient({
           </h1>
           <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
-              "問い合わせが発生した直後に商談を獲得。逃したリードには AI がメールで自動追跡して商談化。リード発生からフォロー、商談予約まで、人間の介在ゼロ。MA や CRM では届かない「ラストワンマイル」を AI SDR が走る。"}
+              "問い合わせ・資料 DL・再訪問の瞬間に AI SDR が即時対応。会話・ヒアリング・日程調整・追客までを自動化し、リードを商談につなげます。"}
           </p>
+          {/* 2026-05-19: FV CTA を「デモを予約」+「ウェビナー」の 2 つに
+              絞り、資料請求は中盤の MidPageCta に移動。レビュー指摘
+              「FV の CTA が散る」対応。 */}
           <div
             className="anim-y d4 hero-ctas"
             style={isLp ? { gap: 12 } : undefined}
@@ -1210,33 +1224,33 @@ export default function HomePageClient({
             >
               デモを予約
             </button>
-            <button
-              className="btn-ghost"
-              onClick={() => openDocModal("hero")}
-            >
-              資料請求 →
-            </button>
-          </div>
-          {/* 2026-05-19: ROI Simulator entry point 削除。Calendar Starter
-              方針撤回 + 「リードは来てるのに商談化しない」を学ぶ動線へ整理。
-              代わりに無料ウェビナーへ誘導 (月1開催、課題分解型)。 */}
-          <div
-            className="anim-y d4"
-            style={{ marginTop: 18, fontSize: 14, color: "var(--sub)" }}
-          >
             <Link
               href="/webinar/"
-              style={{
-                color: "var(--cta)",
-                textDecoration: "underline",
-                textUnderlineOffset: 4,
-                textDecorationThickness: 1,
-                fontWeight: 600,
-              }}
+              className="btn-ghost"
+              style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}
             >
-              ▸ 無料ウェビナーで「商談化しない理由」を分解する（30分）
+              無料ウェビナーに参加
             </Link>
           </div>
+
+          {/* 2026-05-19: 旧「補助リンク」風だったウェビナー誘導を
+              「今月のおすすめ」帯にアップグレード。受講対象 + 値段 +
+              テーマを 1 行ずつ並べ、ちゃんとした conversion 動線として
+              見せる。 */}
+          {!isLp && (
+            <Link
+              href="/webinar/"
+              className="anim-y d4 hero-webinar-band"
+              aria-label="今月の無料ウェビナーに参加"
+            >
+              <span className="hero-webinar-tag">今月開催 / 無料</span>
+              <span className="hero-webinar-body">
+                <strong>「リードは来てるのに、商談にならない」を 30 分で分解</strong>
+                <span className="hero-webinar-meta">マーケ・IS 責任者向け · 第 3 木曜 14:00 · 録画あり</span>
+              </span>
+              <span className="hero-webinar-arrow" aria-hidden>→</span>
+            </Link>
+          )}
           {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
           {!isLp && (
             <div
@@ -1249,18 +1263,19 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* 2026-05-19: 外部レビュー指摘「導入実績を機能説明より前に」対応。
-          FV 直下に trust-bar (顧客ロゴ + 3 つの代表成果数字) を配置。
-          スタートアップで最初の壁が信頼なので、機能より前に「実績」と
-          「導入企業」を見せる。 */}
+      {/* 2026-05-19: trust-bar 第二改訂。FV 内の HERO_STATS が同じ 3 社の
+          数字 (BizteX 20倍+ / EdulinX 60%+ / Univis 3ヶ月で2件) に
+          差替されたため、ここで数字カードを再掲すると密集 + 重複に
+          なる。ロゴ band だけに減量し、FV (数字) → ここ (ロゴ) → 機能
+          というシンプルな縦の流れに整理。 */}
       {!isLp && (
         <section
           className="trust-bar"
-          aria-label="導入企業と代表成果"
+          aria-label="導入企業ロゴ"
           style={{
             background: "linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%)",
             borderBottom: "1px solid var(--border)",
-            padding: "clamp(36px, 5vw, 56px) clamp(16px, 5vw, 48px)",
+            padding: "clamp(28px, 4vw, 44px) clamp(16px, 5vw, 48px)",
           }}
         >
           <div
@@ -1280,75 +1295,6 @@ export default function HomePageClient({
               }}
             >
               先進企業に選ばれています
-            </div>
-
-            <div
-              className="trust-bar-results"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                gap: "clamp(12px, 2vw, 20px)",
-                maxWidth: 920,
-                margin: "0 auto 28px",
-              }}
-            >
-              {[
-                { co: "BizteX", metric: "20倍+", label: "チャット経由リード月20件以上 (月1〜2件 → )" },
-                { co: "EdulinX", metric: "60%+", label: "Meeton ai 経由の商談化率" },
-                { co: "Univis", metric: "3ヶ月で2件", label: "受注、提案件数も増加" },
-              ].map((r) => (
-                <a
-                  key={r.co}
-                  href={`/case-studies/`}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    padding: "14px 18px",
-                    background: "var(--bg)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 12,
-                    textDecoration: "none",
-                    color: "inherit",
-                    transition: "border-color .2s, transform .2s",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 800,
-                      letterSpacing: "0.08em",
-                      color: "var(--sub)",
-                      marginBottom: 4,
-                      fontFamily: "var(--fm)",
-                    }}
-                  >
-                    {r.co}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--fm)",
-                      fontSize: "clamp(20px, 3vw, 26px)",
-                      fontWeight: 800,
-                      color: "var(--cta)",
-                      letterSpacing: "-0.02em",
-                      lineHeight: 1,
-                      marginBottom: 6,
-                    }}
-                  >
-                    {r.metric}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: "var(--sub)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {r.label}
-                  </div>
-                </a>
-              ))}
             </div>
 
             <div
@@ -1391,9 +1337,13 @@ export default function HomePageClient({
               className="ssub"
               style={{ textAlign: "center", margin: "0 auto 40px", maxWidth: 720 }}
             >
-              MA でリードは集まる。CRM にも溜まる。でも、その大半は商談にならずに消えていく。
+              MA でリードは集まる。CRM にも溜まる。<br />
+              でも、初動対応・フォロー・再訪問のタイミングを逃すと、
+              多くのリードは商談化しないまま眠っていきます。
             </p>
-            {/* Dramatic contrast: 業界 42時間 vs Meeton ai 5秒 */}
+            {/* 2026-05-19: 数字の詰め込み (42h / 7割 / 5s / 100倍 / 78%) を
+                42h vs 5s の対比 1 つに集約。Supporting fact 2 件は補足
+                テキストに統合 (広告感を下げる)。 */}
             <div className="problem-contrast">
               <div className="problem-side problem-side-bad">
                 <div className="problem-side-label">業界の現実</div>
@@ -1401,7 +1351,7 @@ export default function HomePageClient({
                   42<span className="problem-side-unit">時間</span>
                 </div>
                 <div className="problem-side-desc">
-                  B2B 営業の平均リードレスポンスタイム。<br />この間にリードの 7 割が他社へ流出している。
+                  B2B 営業の平均リードレスポンスタイム。<br />この間にリードの温度は急速に下がります。
                 </div>
               </div>
               <div className="problem-arrow" aria-hidden>
@@ -1415,19 +1365,9 @@ export default function HomePageClient({
                   5<span className="problem-side-unit">秒</span>
                 </div>
                 <div className="problem-side-desc">
-                  Speed to Lead 業界標準の 5 分 ── その <b>1/60</b>。<br />
-                  ウェブ Convert の瞬間に AI SDR が初動応答。
+                  ウェブ Convert の瞬間に AI SDR が初動応答。<br />
+                  最初に応答した会社が選ばれる、を構造化。
                 </div>
-              </div>
-            </div>
-            <div className="problem-supporting">
-              <div className="problem-fact">
-                <span className="problem-fact-num">100<span className="problem-fact-unit">倍</span></span>
-                <span className="problem-fact-text">5 分以内 vs 30 分後でのコンタクト率の差（MIT, 2007）</span>
-              </div>
-              <div className="problem-fact">
-                <span className="problem-fact-num">78<span className="problem-fact-unit">%</span></span>
-                <span className="problem-fact-text">B2B 顧客は「最初に応答した会社」から購入する</span>
               </div>
             </div>
             <style dangerouslySetInnerHTML={{ __html: `
@@ -1483,7 +1423,7 @@ export default function HomePageClient({
                 これは、マーケでも営業でもない ──
                 <span style={{ color: "var(--cta)" }}>組織構造の空白</span>。
                 <br />
-                AI だけが、ここを埋められます。
+                AI SDR なら、この空白を 24 時間 365 日、即時に埋めることができます。
               </p>
               <p
                 style={{
@@ -1536,7 +1476,7 @@ export default function HomePageClient({
                 gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
                 label: "① MEETON LIVE",
                 title: "Meeton Live",
-                desc: "再訪した識別済みリードに、過去の全文脈を引き継いで AI SDR が即時応答。CRM 上の閲覧・DL・メール履歴をそのまま会話に持ち込み、商談予約までその場で完結。ラストワンマイルの AI SDR プラットフォーム。",
+                desc: "再訪したリードに、過去の閲覧・資料 DL・メール反応を踏まえて AI SDR が即時対応。検討状況に合わせて会話し、必要に応じて商談予約までその場でつなげます。",
                 features: [
                   { label: "過去の全文脈を引き継いで対話開始", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
                   { label: "再訪リードに AI SDR がリアルタイム応答", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
@@ -2553,7 +2493,7 @@ export default function HomePageClient({
               fontSize: "clamp(15px,2.2vw,17px)",
             }}
           >
-            導入は5分。あなた専属のAI SDR「Meeton ai」が24時間稼働し、ファネル全体を自律的に動かして商談を創出し続けます。
+            タグ設置は最短 5 分。初期設定から運用開始まで DynaMeet が伴走し、AI SDR「Meeton ai」が 24 時間ファネル全体を自律的に動かして商談を創出し続けます。
           </p>
           <div
             style={{
