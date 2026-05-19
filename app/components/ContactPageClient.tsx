@@ -218,6 +218,53 @@ export default function ContactPageClient() {
               製品に関するご質問、デモのご依頼、導入のご相談など、<br />
               下記フォームよりお寄せください。営業時間内に順次ご返信いたします。
             </p>
+
+            {/* 2026-05-19: お急ぎ向けの即時デモ予約導線を hero 内に昇格
+                (外部レビュー指摘)。Meeton ai は「5秒対応」を売り、
+                contact page だけ「営業時間内順次返信」だと矛盾するため
+                即時アクション窓口を H1 直下に明示。 */}
+            <div
+              style={{
+                marginTop: 28,
+                padding: '14px 22px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 14,
+                background: 'rgba(255,255,255,0.7)',
+                backdropFilter: 'blur(12px)',
+                border: '1px solid rgba(18,163,125,0.25)',
+                borderRadius: 999,
+                fontSize: 14,
+                fontWeight: 600,
+                color: '#0a0e0c',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                boxShadow: '0 8px 24px rgba(18,163,125,0.08)',
+              }}
+            >
+              <span>お急ぎの方は</span>
+              <DemoBookingButton
+                utmCampaign="contact-hero"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '7px 16px',
+                  background: 'linear-gradient(135deg,#12a37d,#0fc19a)',
+                  color: '#fff',
+                  borderRadius: 999,
+                  fontWeight: 800,
+                  fontSize: 13,
+                  textDecoration: 'none',
+                }}
+              >
+                カレンダーから直接デモを予約
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </DemoBookingButton>
+            </div>
           </div>
         </section>
 

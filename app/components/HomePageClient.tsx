@@ -847,10 +847,16 @@ const HERO_STATS = [
   { num: "20", suffix: "h+/人", label: "月間工数削減", desc: "より重要な営業活動に集中", icon: "calendar" as IconKey, gradient: "linear-gradient(135deg, #7c5cfc, #a78bfa)", glow: "rgba(124,92,252,.25)" },
 ];
 
+// 2026-05-19: SSR + 初期paint で `val = 0` を返していたため、Google/AI
+// 検索や no-JS 環境で「0倍以上」「0%削減」「0h+」と読まれていた (外部
+// 監査指摘)。target を初期値にし、IntersectionObserver が start=true に
+// したタイミングで一度 0 にリセット → ease-out で target まで count up。
+// Lighthouse / no-JS / 検索 bot は最終値を見る、アニメ恩恵は実ユーザー。
 function useCountUp(target: number, duration = 1800, start = false) {
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(target);
   useEffect(() => {
     if (!start) return;
+    setVal(0);
     let raf: number;
     const t0 = performance.now();
     const tick = (now: number) => {

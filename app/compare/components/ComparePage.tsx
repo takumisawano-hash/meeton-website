@@ -152,6 +152,20 @@ export default async function ComparePage({ config }: { config: CompareConfig })
           </h1>
           <p className="cmp-hero-sub">{config.heroSub}</p>
 
+          {/* 2026-05-19: 外部レビュー指摘「比較ページ上部に目的の違いを
+              明示する一文を入れる」対応。チャットボット系 vs AI SDR の
+              目的差 (FAQ 対応 vs 商談創出) を最初に整理しておくと、
+              競合を否定せずに棲み分けを伝えられる。 */}
+          <div className="cmp-purpose-divider">
+            <div className="cmp-purpose-card">
+              <div className="cmp-purpose-tag">目的の違い</div>
+              <p className="cmp-purpose-body">
+                <strong>問い合わせ対応・FAQ 削減</strong>が目的ならチャットボット系。<br />
+                <strong>商談予約・営業パイプライン創出</strong>が目的なら Meeton ai。
+              </p>
+            </div>
+          </div>
+
           <div className="cmp-hero-ctas">
             <DemoBookingButton className="cmp-btn cmp-btn-primary" utmCampaign={config.utmCampaign}>
               30分デモを予約する
@@ -522,8 +536,25 @@ function compareCss(): string {
     .cmp-hero-sub {
       font-size: clamp(15px, 2vw, 19px);
       line-height: 1.85; color: var(--c-sub);
-      max-width: 720px; margin: 0 0 36px;
+      max-width: 720px; margin: 0 0 28px;
     }
+    .cmp-purpose-divider { margin: 0 0 36px; max-width: 760px; }
+    .cmp-purpose-card {
+      padding: 18px 24px;
+      background: linear-gradient(135deg, rgba(18,163,125,0.06), rgba(124,92,252,0.04));
+      border-left: 3px solid var(--c-accent, #12a37d);
+      border-radius: 0 12px 12px 0;
+    }
+    .cmp-purpose-tag {
+      font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--c-accent, #12a37d);
+      margin-bottom: 8px;
+    }
+    .cmp-purpose-body {
+      font-size: 15px; line-height: 1.7; color: var(--c-text); margin: 0;
+    }
+    .cmp-purpose-body strong { color: var(--c-text); font-weight: 800; }
     .cmp-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
     .cmp-hero-proof {
       display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
