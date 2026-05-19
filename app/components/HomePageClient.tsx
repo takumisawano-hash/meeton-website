@@ -894,9 +894,13 @@ function HeroDemoAnimation() {
     return () => obs.disconnect();
   }, []);
 
-  const v0 = useCountUp(2, 1200, visible);
-  const v1 = useCountUp(66, 1800, visible);
-  const v2 = useCountUp(20, 1600, visible);
+  // 2026-05-19 fix: 旧 HERO_STATS の値 (2 / 66 / 20) のまま固定されており、
+  // 新データ (20 / 60 / 2) と乖離して「20倍+ が 2倍 になる」「2件 が
+  // 20件 になる」を起こしていた。HERO_STATS から自動的に取るよう変更
+  // し、今後 stats を差し替えても drift しない。
+  const v0 = useCountUp(parseInt(HERO_STATS[0].num, 10) || 0, 1200, visible);
+  const v1 = useCountUp(parseInt(HERO_STATS[1].num, 10) || 0, 1800, visible);
+  const v2 = useCountUp(parseInt(HERO_STATS[2].num, 10) || 0, 1600, visible);
   const vals = [v0, v1, v2];
 
   return (
@@ -1395,41 +1399,46 @@ export default function HomePageClient({
   .problem-supporting{grid-template-columns:1fr}
   .problem-fact-num{font-size:28px}
 }` }} />
+            {/* 2026-05-19: 左緑線+gradient bg の callout カードを撤去
+                (「AI生成でよく見るスタイル」というユーザー指摘)。
+                プレーンな本文 + 区切り線で、本のような落ち着いた誌面に。 */}
             <div
               style={{
-                padding: "24px 28px",
-                background: "linear-gradient(135deg, var(--cta-light), #fff)",
-                borderRadius: 14,
-                borderLeft: "4px solid var(--cta)",
+                maxWidth: 720,
+                margin: "0 auto",
+                paddingTop: 8,
+                textAlign: "center",
               }}
             >
-              <p style={{ fontSize: 16, color: "var(--heading)", lineHeight: 1.8, fontWeight: 600 }}>
+              <p
+                style={{
+                  fontSize: "clamp(15px, 2vw, 17px)",
+                  color: "var(--heading)",
+                  lineHeight: 1.85,
+                  fontWeight: 600,
+                  margin: 0,
+                }}
+              >
                 リードを集めるツール（MA / 広告 / コンテンツ）はあっても、
-                <br />
-                <span style={{ color: "var(--cta)" }}>
-                  「集めたリードを商談に変える」
-                </span>
-                ところで、ほぼ全ての企業が詰まっています。
+                「集めたリードを商談に変える」ところで、ほぼ全ての企業が詰まっています。
               </p>
               <p
                 style={{
-                  fontSize: 15,
+                  fontSize: "clamp(15px, 2vw, 17px)",
                   color: "var(--heading)",
-                  marginTop: 14,
-                  lineHeight: 1.8,
+                  marginTop: 18,
+                  lineHeight: 1.85,
                   fontWeight: 700,
                 }}
               >
-                これは、マーケでも営業でもない ──
-                <span style={{ color: "var(--cta)" }}>組織構造の空白</span>。
-                <br />
+                これは、マーケでも営業でもない、組織構造の空白。<br />
                 AI SDR なら、この空白を 24 時間 365 日、即時に埋めることができます。
               </p>
               <p
                 style={{
                   fontSize: 13,
                   color: "var(--sub)",
-                  marginTop: 12,
+                  marginTop: 16,
                   lineHeight: 1.7,
                 }}
               >
