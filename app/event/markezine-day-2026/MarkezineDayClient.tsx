@@ -453,12 +453,13 @@ export default function MarkezineDayClient({ cases }: Props) {
         </div>
       </section>
 
-      {/* Meeton ai 4 機能の紹介 */}
+      {/* 2026-05-19: 全サイト整合で 4 機能 → 3 主要機能 + Library 補助に修正 */}
       <section className="features-section">
         <div className="features-inner">
-          <h2 className="features-title">Meeton ai の 4 つの機能</h2>
+          <h2 className="features-title">Meeton ai の 3 つの AI 機能</h2>
           <p className="features-subtitle">
-            リードコンバートから商談予約まで、4 つの AI が連動して 24 時間自動で実行します。
+            話しかける → 商談を取る → 追いかける。3 つの AI が連動して
+            24 時間自動で実行します。
           </p>
           <div className="features-grid">
             {FEATURES.map((f) => (

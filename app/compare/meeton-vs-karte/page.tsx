@@ -104,7 +104,7 @@ const config: CompareConfig = {
       category: '料金帯',
       categoryNote: '導入規模感',
       competitor: { state: 'partial', text: '一般的にはエンタープライズ規模の予算が前提' },
-      meeton: { state: 'yes', text: 'B2B 中堅〜エンタープライズ。商談単価 / LTV ベースの ROI で評価' },
+      meeton: { state: 'yes', text: 'B2B 中堅〜エンタープライズ。商談単価 / LTV ベースの商談化価値で評価' },
     },
   ],
   useCases: {
@@ -127,7 +127,7 @@ const config: CompareConfig = {
     {
       tag: 'CRM NATIVE',
       title: 'HubSpot / Salesforce にネイティブ書き戻し',
-      body: '会話・流入経路・興味カテゴリ・商談化結果が、コンタクト単位で CRM に自動同期されます。OFFLINE / INTEGRATION に潰れがちなアトリビューションが消えずに残り、CMO がチャネル別 ROI を経営に説明できる状態になります。',
+      body: '会話・流入経路・興味カテゴリ・商談化結果が、コンタクト単位で CRM に自動同期されます。OFFLINE / INTEGRATION に潰れがちなアトリビューションが消えずに残り、CMO がチャネル別の商談化貢献を経営に説明できる状態になります。',
     },
   ],
   faq: [
@@ -144,7 +144,7 @@ const config: CompareConfig = {
     {
       question: '料金は KARTE と比べてどうですか？',
       answer:
-        '価格モデルが異なるため単純比較は難しいです。KARTE は CX プラットフォーム全体のサイト規模ベース、Meeton ai は商談化 ROI ベースで評価されることが多いツールです。商談単価・想定リード数を共有いただければ、デモ時に ROI 試算込みでご案内します。',
+        '価格モデルが異なるため単純比較は難しいです。KARTE は CX プラットフォーム全体のサイト規模ベース、Meeton ai は商談化価値ベースで評価されることが多いツールです。商談単価・想定リード数を共有いただければ、デモ時に効果試算込みでご案内します。',
     },
     {
       question: 'B2B 向けには Meeton ai が向いている、と理解して良いですか？',

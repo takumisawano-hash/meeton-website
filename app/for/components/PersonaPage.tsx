@@ -14,7 +14,7 @@ import { getAllCaseStudies, type CaseStudy } from '../../lib/case-studies'
  * - 3-pain section grounded in directional language (not fabricated stats)
  * - Solution mapping to Meeton's 4 modules
  * - Live case study chip row (sourced from getAllCaseStudies)
- * - ROI hint card linking to /roi-simulator/
+ * - Webinar hint card linking to /webinar/ (was: ROI simulator until 2026-05-19)
  * - FAQ section + JSON-LD FAQPage schema (for AI citation)
  * - Final CTA via DemoBookingButton with persona-tagged UTM
  *
@@ -131,8 +131,8 @@ export default async function PersonaPage({ config }: { config: PersonaConfig })
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </DemoBookingButton>
-            <Link href="/roi-simulator/" className="persona-btn persona-btn-ghost">
-              ROIを試算する
+            <Link href="/webinar/" className="persona-btn persona-btn-ghost">
+              無料ウェビナーに参加
             </Link>
           </div>
 
@@ -194,7 +194,7 @@ export default async function PersonaPage({ config }: { config: PersonaConfig })
             </div>
             <h2 className="persona-h2">
               {config.personaJa}の課題に、<br />
-              Meeton ai の<em>4 モジュール</em>でこう効く
+              Meeton ai の<em>3 つの AI 機能</em>でこう効く
             </h2>
             <p className="persona-section-sub">
               「営業のラストワンマイル」を AI が埋めることで、マーケが生んだリードを商談まで一気通貫で運びます。
@@ -300,26 +300,28 @@ export default async function PersonaPage({ config }: { config: PersonaConfig })
         </section>
       )}
 
-      {/* ── ROI HINT ── */}
+      {/* 2026-05-19: ROI Simulator セクション撤去。代わりに「商談化しない理由を
+          30分で分解する」課題分解型の無料ウェビナーへ誘導。学習導線 = ROI ではなく
+          ボトルネック診断に統一。 */}
       <section className="persona-roi">
         <div className="persona-roi-inner">
           <div className="persona-roi-head">
             <div className="persona-section-eyebrow">
               <span className="persona-eyebrow-dash" />
-              ROI Simulator
+              無料ウェビナー
             </div>
             <h2 className="persona-roi-h">
               {config.personaJa}向けに、<br />
-              <em>自社の数字</em>でインパクトを試算
+              <em>商談化しない理由</em>を 30 分で分解
             </h2>
             <p className="persona-roi-sub">
-              月間リード数・商談化率・LTV から、Meeton ai 導入で何が変わるかを 3 分で算出します。
-              意思決定の社内説明に、そのままお使いください。
+              リードは来ているのに商談につながらない原因を「初動・フォロー・再訪」の
+              3 つの転換点に絞って整理。明日から改善できる打ち手を持ち帰る、月 1 回 30 分の無料ウェビナーです。
             </p>
           </div>
           <div className="persona-roi-cta">
-            <Link href="/roi-simulator/" className="persona-btn persona-btn-primary">
-              ROI シミュレーターを開く
+            <Link href="/webinar/" className="persona-btn persona-btn-primary">
+              ウェビナーを予約する
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>

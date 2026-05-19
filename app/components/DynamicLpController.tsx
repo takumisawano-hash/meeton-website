@@ -24,8 +24,10 @@ const HIGH_INTENT_PREFIXES = [
   '/features/offers',
 ]
 const HIGH_INTENT_PATTERNS: RegExp[] = [/^\/case-studies\/[^/]+/]
-// /roi-simulator is the very destination this overlay drives to — showing
-// it on the same page is both confusing and self-defeating.
+// /webinar (and /lp etc.) are the destinations this overlay drives to —
+// showing it on the same page is both confusing and self-defeating.
+// 2026-05-19: /roi-simulator/ 撤去後はその除外も不要だが、historical
+// 301 redirect 経由のセッションでも overlay 出さないため残しておく。
 const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/', '/roi-simulator', '/webinar']
 
 const SCROLL_THRESHOLD = 0.3
@@ -1376,12 +1378,11 @@ export default function DynamicLpController() {
     if (visitorId) trackEvent(visitorId, 'banner_click')
     setBannerOpen(false)
     if (typeof window === 'undefined') return
-    const params = new URLSearchParams()
-    if (docodoco?.domain) params.set('domain', docodoco.domain)
-    else if (docodoco?.org_url) params.set('domain', docodoco.org_url)
-    const qs = params.toString()
-    window.location.href = qs ? `/roi-simulator/?${qs}` : '/roi-simulator/'
-  }, [docodoco, visitorId])
+    // 2026-05-19: /roi-simulator/ 撤去に伴い、banner click 動線を
+    // 無料ウェビナー(課題分解型)へ。docodoco 推定企業情報の引き継ぎは
+    // 不要 (ウェビナー側は会社単位でセグメントしない)。
+    window.location.href = '/webinar/'
+  }, [visitorId])
 
   const handleBannerDismiss = useCallback(() => {
     try {

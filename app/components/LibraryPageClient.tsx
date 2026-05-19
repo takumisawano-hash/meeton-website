@@ -242,10 +242,13 @@ const flowStepIcons = [
   <><rect key="f4a" x="3" y="4" width="18" height="18" rx="2" ry="2"/><line key="f4b" x1="16" y1="2" x2="16" y2="6"/><line key="f4c" x1="8" y1="2" x2="8" y2="6"/><line key="f4d" x1="3" y1="10" x2="21" y2="10"/><path key="f4e" d="M9 16l2 2 4-4"/></>,
 ];
 
+// 2026-05-19: ROI 系の例文を、Library の真の価値 (再訪リードに最適資料を即提示する)
+// に揃えて差替。料金表 / 同業事例 / 比較チェックリスト / 稟議用テンプレートが
+// 既存リードの「次の一歩」を促す資料群。
 const useCases = [
-  { title: '料金ページに戻ってきた既存リード', color: '#d03ea1', desc: '半年前にホワイトペーパーを DL したリードが料金ページに再訪。AI が直近の業界事例・ROI 試算資料を即座に推薦し、料金についての質問に解説で答えます。', msg: '田中様、お帰りなさい。半年前に DL いただいた資料の最新版と、御社規模での ROI 試算事例をご用意しました。' },
+  { title: '料金ページに戻ってきた既存リード', color: '#d03ea1', desc: '半年前にホワイトペーパーを DL したリードが料金ページに再訪。AI が最新の料金表・同業他社の導入事例を即座に推薦し、料金についての質問に解説で答えます。', msg: '田中様、お帰りなさい。半年前に DL いただいた資料の最新版と、御社業界での導入事例をご用意しました。' },
   { title: '比較検討中の既存リード', color: '#7c5cfc', desc: '他社製品と比較検討フェーズに入った既存リードに、競合との機能比較資料・差別化ポイントをまとめた事例集を AI が提案。質問にも資料根拠で回答します。', msg: '比較検討の論点に合わせて、競合との機能比較表と同業他社の選定基準事例をご案内します。' },
-  { title: '稟議準備フェーズの既存リード', color: '#3b6ff5', desc: '社内稟議の準備に入ったリードに、AI が稟議書テンプレート・ROI 計算ワークシート・導入事例 PDF を推薦。質問にもその場で回答し、稟議の壁を下げます。', msg: '稟議用の資料一式をご案内します。御社業界での導入後 ROI 試算もこちらでご覧いただけます。' },
+  { title: '稟議準備フェーズの既存リード', color: '#3b6ff5', desc: '社内稟議の準備に入ったリードに、AI が稟議書テンプレート・サービス紹介資料・導入事例 PDF を推薦。質問にもその場で回答し、稟議の壁を下げます。', msg: '稟議用の資料一式をご案内します。御社業界での導入事例・比較チェックリストもこちらでご覧いただけます。' },
 ];
 
 export default function LibraryPageClient() {
@@ -310,7 +313,7 @@ export default function LibraryPageClient() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 28, height: 28, borderRadius: 6, background: 'linear-gradient(135deg,#d03ea1,#e555b6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#fff', fontWeight: 800 }}>PDF</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--heading)' }}>ROI 試算実践ガイド v3</div>
+                      <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--heading)' }}>導入事例集 v3</div>
                       <div style={{ fontSize: 9, color: 'var(--sub)', fontWeight: 600 }}>関連度 96% · 8 分</div>
                     </div>
                   </div>
@@ -328,7 +331,7 @@ export default function LibraryPageClient() {
                 {/* Visitor message */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px 4px 12px 12px', padding: '10px 14px', maxWidth: '75%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    ROI 試算の章を要約して
+                    導入事例の章を要約して
                   </div>
                 </div>
                 {/* AI explanation */}
@@ -337,7 +340,7 @@ export default function LibraryPageClient() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
                   <div style={{ background: '#fdeaf5', border: '1px solid rgba(208,62,161,.15)', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    第3章のポイントは ROI 計算式と業界平均値です。御社規模ですと年間 2,400 万円の効果試算です
+                    第3章のポイントは導入後オペレーションと業界別実績値です。御社業界での平均商談化率 +28pt の事例があります
                   </div>
                 </div>
               </div>
@@ -418,7 +421,7 @@ export default function LibraryPageClient() {
                     <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>AI 推薦資料 (関連度順)</span>
                   </div>
                   {[
-                    { title: 'ROI 試算実践ガイド v3', score: '96%', tag: '料金検討フェーズ', icon: 'PDF', bg: '#fdeaf5', border: '#d03ea1' },
+                    { title: '導入事例集 v3', score: '96%', tag: '料金検討フェーズ', icon: 'PDF', bg: '#fdeaf5', border: '#d03ea1' },
                     { title: '同業界導入事例 5 選', score: '92%', tag: '比較検討フェーズ', icon: '事例', bg: '#f0ecfe', border: '#7c5cfc' },
                     { title: '稟議書テンプレート', score: '88%', tag: '社内稟議フェーズ', icon: 'DOC', bg: '#eaf0fe', border: '#3b6ff5' },
                   ].map((item, i) => (
@@ -446,7 +449,7 @@ export default function LibraryPageClient() {
             <div className="phase-text">
               <div className="phase-tag" style={{ color: '#7c5cfc' }}><span style={{ position: 'relative' }}>FEATURE 02</span></div>
               <div className="phase-h">AI チャット解説 — 資料の中身を AI がその場で説明</div>
-              <div className="phase-desc">推薦した資料の中身を、AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、「ROI 計算式の章だけ要約して」「他社との違いは？」といった章単位の質問にもリアルタイムで回答します。</div>
+              <div className="phase-desc">推薦した資料の中身を、AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、「導入実績の章だけ要約して」「他社との違いは？」といった章単位の質問にもリアルタイムで回答します。</div>
               <div className="phase-features">
                 {['資料全文を AI が要約・章単位で解説', '質問に資料の根拠を引用して回答', '複数資料を横断した要点抽出', 'リードの理解度に合わせた説明トーン調整'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#7c5cfc15', color: '#7c5cfc' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
@@ -459,7 +462,7 @@ export default function LibraryPageClient() {
                   {/* User question */}
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', marginBottom: 10, opacity: 0, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards', justifyContent: 'flex-end' }}>
                     <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px 4px 10px 10px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5, maxWidth: '75%' }}>
-                      ROI 計算の章を要約して
+                      導入実績の章を要約して
                     </div>
                   </div>
                   {/* AI explanation */}
@@ -468,7 +471,7 @@ export default function LibraryPageClient() {
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
                     </div>
                     <div style={{ background: '#f0ecfe', border: '1px solid rgba(124,92,252,.18)', borderRadius: '4px 10px 10px 10px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
-                      第3章のポイントは ROI 計算式と業界平均値です。御社規模ですと年間 2,400 万円の効果試算です
+                      第3章のポイントは導入後オペレーションと業界別実績値です。御社業界での平均商談化率 +28pt の事例があります
                     </div>
                   </div>
                   {/* Citation card */}
@@ -478,7 +481,7 @@ export default function LibraryPageClient() {
                       <span style={{ fontSize: 9, fontWeight: 800, color: '#7c5cfc', letterSpacing: '.1em', fontFamily: 'var(--fm)' }}>引用元</span>
                     </div>
                     <div style={{ fontSize: 9, fontWeight: 600, color: 'var(--sub)', lineHeight: 1.5 }}>
-                      ROI 試算実践ガイド v3 · 第 3 章「業界別 ROI 計算式」(p.12-15)
+                      導入事例集 v3 · 第 3 章「業界別 商談化実績」(p.12-15)
                     </div>
                   </div>
                   {/* Follow up */}
@@ -523,7 +526,7 @@ export default function LibraryPageClient() {
                       </div>
                     </div>
                     {[
-                      { name: 'ROI試算ガイド.pdf', size: '2.4 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
+                      { name: '料金プラン_v3.pdf', size: '2.4 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
                       { name: '導入事例集.pdf', size: '5.1 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
                       { name: '稟議書テンプレ.pptx', size: '1.8 MB', status: '解析中 78%', color: '#d03ea1', icon: 'PPT' },
                     ].map((f, i) => (

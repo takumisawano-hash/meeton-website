@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: {
     absolute: 'Meeton ai｜あらゆる接点から商談を自動創出するAI SDRプラットフォーム',
   },
-  description: 'Meeton ai は、ウェブサイト訪問者を5秒で商談に変える日本のB2B向けAI SDRプラットフォーム。チャット・メール・カレンダー・コンテンツライブラリの4モジュールで、リード獲得から商談予約までを24時間365日自動化します。',
+  description: 'Meeton ai は、ウェブサイト訪問者を5秒で商談に変える日本のB2B向けAI SDRプラットフォーム。AIチャット (Live)・AIカレンダー・AIメールの3つのAIが連動し、リード獲得から商談予約までを24時間365日自動化。検討再開時の資料推薦は追加機能 Meeton Library で対応。',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Meeton ai｜あらゆる接点から商談を自動創出するAI SDRプラットフォーム',
@@ -71,10 +71,10 @@ const homepageFaqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Meeton ai の 4 モジュールはそれぞれ何をしますか？',
+      name: 'Meeton ai の 3 つの AI 機能はそれぞれ何をしますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Meeton Live はサイト訪問者と即時に会話して商談予約まで完結するAIチャット。Meeton Email は受信メールにAIが返信して商談を予約。Meeton Calendar は商談時間調整を自動化。Meeton Library は再訪リードに最適化されたコンテンツでナーチャリングします。',
+        text: 'Meeton Live はサイト訪問者と即時に会話して商談予約まで完結する AI チャット (話しかける役割)。Meeton Calendar はコンバート直後の最も関心の高い瞬間に商談予約を提示 (商談を取る役割)。Meeton Email は即時予約しなかったリードに 1:1 の AI が動的に追跡 (追いかける役割)。検討再開時の資料推薦は追加機能 Meeton Library が担います。',
       },
     },
   ],
@@ -98,7 +98,7 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    '日本のB2B企業向けAI SDRプラットフォーム。ウェブサイト訪問者・メール受信者・既存リードに対しAIが自律的に対話し、商談予約まで完結。チャット・メール・カレンダー・コンテンツライブラリの4モジュール構成。',
+    '日本のB2B企業向けAI SDRプラットフォーム。ウェブサイト訪問者・メール受信者・既存リードに対しAIが自律的に対話し、商談予約まで完結。Live (AIチャット) / Calendar (AI商談予約) / Email (AIフォロー) の3つのAI機能で構成。検討再開時の資料推薦は追加機能 Meeton Library。',
   brand: {
     '@type': 'Brand',
     name: 'Meeton ai',

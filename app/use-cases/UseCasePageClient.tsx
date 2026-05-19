@@ -150,11 +150,11 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           <div className="uc-section-head">
             <div className="uc-section-eyebrow">
               <span className="uc-eyebrow-dash" />
-              Meeton ai の4モジュール
+              Meeton ai の AI 機能群
             </div>
             <h2 className="uc-section-h2">
               {props.industryJa} の営業課題を、<br />
-              <em>AI SDR が4モジュールで解く。</em>
+              <em>AI SDR が連動して解く。</em>
             </h2>
           </div>
           <div className="uc-mod-grid">

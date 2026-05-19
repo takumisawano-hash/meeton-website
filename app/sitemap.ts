@@ -42,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // and internal-link to 20+ cluster blog posts each.
     { url: `${baseUrl}/pillar/lead-generation/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/pillar/cookieless-marketing/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${baseUrl}/roi-simulator/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // 2026-05-19: /roi-simulator/ 撤去 → 301 to /webinar/。商談化文脈に合わず学習動線をウェビナーに統合。
     // Webinar series — index + per-webinar registration LPs.
     // /webinar/thanks/ is intentionally excluded (noindex).
     { url: `${baseUrl}/webinar/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },

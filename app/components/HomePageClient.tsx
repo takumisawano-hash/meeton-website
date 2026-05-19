@@ -1211,18 +1211,15 @@ export default function HomePageClient({
               資料請求 →
             </button>
           </div>
-          {/* ROI Simulator entry point — placed below the primary CTAs so it
-              doesn't dilute "demo / resource" action priority but is still
-              visible. Active LPs (/lp/, /lp/inside-sales/, /lp/lead-gen/)
-              currently sit at 0 conversions despite 3% CTR, and the ROI
-              calculator is the only interactive lead magnet we have.
-              Light hero background → use --sub color, not white. */}
+          {/* 2026-05-19: ROI Simulator entry point 削除。Calendar Starter
+              方針撤回 + 「リードは来てるのに商談化しない」を学ぶ動線へ整理。
+              代わりに無料ウェビナーへ誘導 (月1開催、課題分解型)。 */}
           <div
             className="anim-y d4"
             style={{ marginTop: 18, fontSize: 14, color: "var(--sub)" }}
           >
             <Link
-              href="/roi-simulator/"
+              href="/webinar/"
               style={{
                 color: "var(--cta)",
                 textDecoration: "underline",
@@ -1231,7 +1228,7 @@ export default function HomePageClient({
                 fontWeight: 600,
               }}
             >
-              ▸ SDRコストを試算する（30秒）
+              ▸ 無料ウェビナーで「商談化しない理由」を分解する（30分）
             </Link>
           </div>
           {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
@@ -1391,18 +1388,35 @@ export default function HomePageClient({
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
             リードを商談に変える、
-            <span style={{ color: "var(--cta)" }}>4 つの AI 機能</span>
+            <span style={{ color: "var(--cta)" }}>3 つの AI 機能</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            リードコンバートから商談予約まで、4 つの AI が連動して 24 時間自動で実行します。
+            話しかける → 商談を取る → 追いかける。3 つの AI が連動して
+            24 時間自動で実行します。検討再開時の資料推薦は追加機能 Meeton Library で対応。
           </p>
 
+          {/* 2026-05-19: 4 機能 → 3 機能に整理。Library は補助機能扱いとし、
+              トップでは「話しかける(Live) → 商談を取る(Calendar) → 追いかける(Email)」
+              の会話フロー順で見せる。レビュー指摘「3 機能 vs 4 機能の表記ブレ」対応。 */}
           <div className="phase-grid">
             {[
               {
+                color: "#12a37d",
+                gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                label: "① MEETON LIVE",
+                title: "Meeton Live",
+                desc: "再訪した識別済みリードに、過去の全文脈を引き継いで AI SDR が即時応答。CRM 上の閲覧・DL・メール履歴をそのまま会話に持ち込み、商談予約までその場で完結。ラストワンマイルの AI SDR プラットフォーム。",
+                features: [
+                  { label: "過去の全文脈を引き継いで対話開始", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
+                  { label: "再訪リードに AI SDR がリアルタイム応答", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "商談予約までその場で完結", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
+                ],
+                link: "/features/ai-chat/",
+              },
+              {
                 color: "#0891b2",
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
-                label: "① MEETON CALENDAR",
+                label: "② MEETON CALENDAR",
                 title: "Meeton Calendar",
                 desc: "リードがコンバートした瞬間、即座に商談予約を提示。フォーム送信・サンクスページ・メール経由で発動し、5秒以内に動く。リード発生から商談予約完了まで人間の介在ゼロ。",
                 features: [
@@ -1415,7 +1429,7 @@ export default function HomePageClient({
               {
                 color: "#7c5cfc",
                 gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                label: "② MEETON EMAIL",
+                label: "③ MEETON EMAIL",
                 title: "Meeton Email",
                 desc: "即時予約しなかったリードを 1:1 で追跡。AI が動的に内容・タイミング・トーンを判断するパーソナライズドフォロー。MA メールではなく、もう一人の SDR。",
                 features: [
@@ -1424,32 +1438,6 @@ export default function HomePageClient({
                   { label: "返信に AI が自律的に対話継続", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
                 ],
                 link: "/features/ai-email/",
-              },
-              {
-                color: "#12a37d",
-                gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                label: "③ MEETON LIVE",
-                title: "Meeton Live",
-                desc: "再訪した識別済みリードに、過去の全文脈を引き継いで AI SDR が即時応答。CRM 上の閲覧・DL・メール履歴をそのまま会話に持ち込み、商談予約までその場で完結。ラストワンマイルの AI SDR プラットフォーム。",
-                features: [
-                  { label: "過去の全文脈を引き継いで対話開始", icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6" },
-                  { label: "再訪リードに AI SDR がリアルタイム応答", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
-                  { label: "商談予約までその場で完結", icon: "M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" },
-                ],
-                link: "/features/ai-chat/",
-              },
-              {
-                color: "#d03ea1",
-                gradient: "linear-gradient(135deg,#d03ea1,#e0475b)",
-                label: "④ MEETON LIBRARY",
-                title: "Meeton Library",
-                desc: "再訪した既存リードに、AI が文脈に応じた資料を提案・解説。検討フェーズが進んだリードに適切な情報提供で商談機会を再発火。新規リード獲得用ではない、既存リードのナーチャリング専用機能。",
-                features: [
-                  { label: "行動履歴・興味分野から最適な資料を AI 推薦", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
-                  { label: "AI チャットが資料の中身を解説・質問対応", icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
-                  { label: "検討再開のタイミングで Meeton Calendar に引き渡し", icon: "M17 1l4 4-4 4 M3 11V9a4 4 0 0 1 4-4h14" },
-                ],
-                link: "/features/ai-library/",
               },
             ].map((prod, i) => (
               <div
@@ -1512,6 +1500,63 @@ export default function HomePageClient({
                 </a>
               </div>
             ))}
+          </div>
+
+          {/* 2026-05-19: Library を主要 3 機能から外し、補助機能として
+              軽量に紹介。3 vs 4 機能のブレを解消しつつ、既存リード
+              ナーチャリング動線は維持。 */}
+          <div
+            style={{
+              marginTop: 36,
+              padding: "20px 24px",
+              maxWidth: 720,
+              marginLeft: "auto",
+              marginRight: "auto",
+              background: "rgba(208,62,161,0.06)",
+              border: "1px solid rgba(208,62,161,0.18)",
+              borderRadius: 14,
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ minWidth: 240, flex: 1 }}>
+              <div
+                style={{
+                  fontFamily: "var(--fm)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  color: "#d03ea1",
+                  marginBottom: 4,
+                }}
+              >
+                + 追加機能
+              </div>
+              <div
+                style={{
+                  fontWeight: 800,
+                  fontSize: 16,
+                  color: "var(--heading)",
+                  marginBottom: 4,
+                }}
+              >
+                Meeton Library — 既存リードに最適資料を AI が提案
+              </div>
+              <div style={{ fontSize: 13, color: "var(--sub)", lineHeight: 1.65 }}>
+                検討フェーズが進んだ既存リードが再訪した瞬間に、行動履歴に応じて
+                料金表・事例・比較表・稟議用テンプレートを AI が推薦・解説。
+              </div>
+            </div>
+            <a
+              href="/features/ai-library/"
+              className="cat-link"
+              style={{ whiteSpace: "nowrap" }}
+            >
+              詳しく見る <span>→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -1937,7 +1982,7 @@ export default function HomePageClient({
       {/* CTA #1 — after 3 product cards: doc download (low-friction next step) */}
       <MidPageCta
         eyebrow="Resource"
-        heading="4 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
+        heading="3 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
         ctaLabel="資料を請求する"
         variant="doc"
         onClick={openMeetonDownloadCenter}

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'CMO 向け AI SDR | マーケティング起点の商談化を可視化',
     description:
-      'CMO の意思決定に効く 4 つの AI モジュール。マーケ起点パイプラインの可視化と、MQL→SQL 改善を同時に。',
+      'CMO の意思決定に効く 3 つの AI 機能 (Live / Calendar / Email)。マーケ起点パイプラインの可視化と、MQL→SQL 改善を同時に。',
     url: 'https://dynameet.ai/for/cmo/',
     siteName: 'Meeton ai',
     locale: 'ja_JP',

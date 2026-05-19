@@ -387,6 +387,24 @@ const nextConfig = {
         destination: '/blog/',
         permanent: true,
       },
+      // 2026-05-19: ROI Simulator 撤去。Calendar Starter pivot 後は
+      // 「リードは来てるのに商談化しない」を学ぶ流れがメインで、
+      // ROI 試算は逆に文脈ノイズに。ウェビナーへ統合誘導。
+      {
+        source: '/roi-simulator',
+        destination: '/webinar/',
+        permanent: true,
+      },
+      {
+        source: '/roi-simulator/',
+        destination: '/webinar/',
+        permanent: true,
+      },
+      {
+        source: '/roi-simulator/:path*',
+        destination: '/webinar/',
+        permanent: true,
+      },
       // 2026-05-11: GSC index diagnostic で「クロール済み未登録」と判定された
       // 2 本を削除。typo slug (objecitons) と SMB 向け汎用 ABM ガイドは
       // dynameet.ai の核心 target (B2B 中堅以上) とズレるため放出。

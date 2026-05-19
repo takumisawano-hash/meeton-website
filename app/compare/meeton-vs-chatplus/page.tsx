@@ -15,7 +15,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'ChatPlus と Meeton ai を比較 | AI チャット vs AI SDR',
   description:
-    'ChatPlus (AI 対応 chatbot、低価格帯) と Meeton ai (B2B 営業特化 AI SDR) を、機能・商談予約・CRM 連携・ROI で公正に並べて比較。乗り換え判断に必要な情報を整理しました。',
+    'ChatPlus (AI 対応 chatbot、低価格帯) と Meeton ai (B2B 営業特化 AI SDR) を、機能・商談予約・CRM 連携・商談化価値で公正に並べて比較。乗り換え判断に必要な情報を整理しました。',
   alternates: {
     canonical: '/compare/meeton-vs-chatplus/',
   },
@@ -98,7 +98,7 @@ const config: CompareConfig = {
       category: '料金帯',
       categoryNote: '導入規模感',
       competitor: { state: 'yes', text: '低〜中価格帯。スモールスタート向き' },
-      meeton: { state: 'partial', text: 'B2B 中堅〜エンタープライズ。商談単価 / LTV ベースの ROI で評価' },
+      meeton: { state: 'partial', text: 'B2B 中堅〜エンタープライズ。商談単価 / LTV ベースの商談化価値で評価' },
     },
     {
       category: '想定 ICP',
@@ -111,7 +111,7 @@ const config: CompareConfig = {
     forCompetitor:
       'コーポレートサイトの FAQ 自動化、簡易な問い合わせ振り分け、低予算でまずチャットボットを導入したい — こういった用途では ChatPlus の価格帯と運用しやすさが活きます。商談化が中心 KPI ではなく、サポート負荷削減や接客の補助が優先課題なら、ChatPlus は実利のある選択肢です。',
     forMeeton:
-      'B2B でリードを商談まで運ぶことが KPI、初動 5 秒で温度の高い瞬間を逃したくない、HubSpot / Salesforce 上でアトリビューションを残したい — これらに当てはまる場合は Meeton ai が向きます。価格帯は異なりますが、商談化 ROI ベースで評価すると合理化されるケースが大半です。',
+      'B2B でリードを商談まで運ぶことが KPI、初動 5 秒で温度の高い瞬間を逃したくない、HubSpot / Salesforce 上でアトリビューションを残したい — これらに当てはまる場合は Meeton ai が向きます。価格帯は異なりますが、商談化価値ベースで評価すると合理化されるケースが大半です。',
   },
   differentiators: [
     {
@@ -139,7 +139,7 @@ const config: CompareConfig = {
     {
       question: '料金は ChatPlus のほうが安いのでは？',
       answer:
-        '価格表ベースでは ChatPlus のほうが低価格帯です。一方で評価軸を「商談化 ROI」に置くと、Meeton ai は商談単価 × 商談数で投資回収を考えるツールとなり、合理化されることが多い構成です。デモ時に想定リード数・商談単価をもとに ROI 試算込みでご案内します。',
+        '価格表ベースでは ChatPlus のほうが低価格帯です。一方で評価軸を「商談化価値」に置くと、Meeton ai は商談単価 × 商談数で投資回収を考えるツールとなり、合理化されることが多い構成です。デモ時に想定リード数・商談単価をもとに効果試算込みでご案内します。',
     },
     {
       question: 'ChatPlus から乗り換える場合、シナリオは捨てることになりますか？',
