@@ -14,10 +14,22 @@ type Job = {
   subtitle?: string;
   pitch: string;
   tags: string[];
+  responsibilities?: string[];
+  required?: string[];
+  preferred?: string[];
+  reportLine?: string;
   /** Open/general positions — shown in the apply modal only, not in the
    * public position list. For candidates who don't fit a specific role. */
   hiddenFromList?: boolean;
 };
+
+const COMMON_REQUIRED = "日本語ビジネスレベル";
+const COMMON_PREFERRED = [
+  "SaaS / IT 業界経験",
+  "目標達成に向けた行動力と自走力",
+  "曖昧な状況でも前向きに動けるスタートアップ気質",
+  "AI / 営業テクノロジー / 働き方の未来への関心",
+];
 
 const jobs: Job[] = [
   {
@@ -28,6 +40,23 @@ const jobs: Job[] = [
     pitch:
       "Meeton ai のコアを一緒に育てる。LLM とプロダクトの境界を自ら設計し、機能ではなく体験を世に出す。仕様書を実装する人ではなく、何を作るべきかから決められる人へ。",
     tags: ["TypeScript", "Python", "LLM", "評価設計"],
+    responsibilities: [
+      "AI Chat / AI Email / AI Calendar / AI Offer 4モジュールのコア機能設計・実装",
+      "LLM プロンプト設計と本番環境での品質評価ループ構築",
+      "Next.js + Python バックエンドのフルスタック開発",
+      "顧客 / プロダクト要望を「何を作るべきか」 から決めて自走",
+    ],
+    required: [
+      COMMON_REQUIRED,
+      "Web アプリケーションの設計・実装経験 3年以上 (TypeScript / Python のいずれか)",
+      "本番環境への継続的なデプロイ経験",
+    ],
+    preferred: [
+      "LLM / 生成AI を本番プロダクトに組み込んだ経験",
+      "Next.js / React の実務経験",
+      ...COMMON_PREFERRED,
+    ],
+    reportLine: "CTO 直下",
   },
   {
     id: "DM-002",
@@ -37,6 +66,23 @@ const jobs: Job[] = [
     pitch:
       "まだ名前のないカテゴリを、自分の言葉で説明して売る。顧客の課題をプロダクトに翻訳し、プロダクトの価値を顧客に翻訳する。営業を「実行職」ではなく「戦略職」として再定義したい人へ。",
     tags: ["Enterprise", "SaaS", "カテゴリ創造"],
+    responsibilities: [
+      "エンタープライズ / 大手 SaaS 企業への新規開拓・提案・受注",
+      "顧客の課題ヒアリング → プロダクト価値への翻訳",
+      "CEO / CTO / プロダクトチームと連携し、 受注事例をプロダクト改善に反映",
+      "カテゴリ創造のための営業ナラティブ設計",
+    ],
+    required: [
+      COMMON_REQUIRED,
+      "B2B SaaS の法人営業経験 3年以上 (中堅〜エンタープライズ層)",
+      "新規開拓 / 提案 / クロージング の一気通貫経験",
+    ],
+    preferred: [
+      "MA / SFA / 営業支援 SaaS の営業経験",
+      "カテゴリが定義されていない新規プロダクトの営業経験",
+      ...COMMON_PREFERRED,
+    ],
+    reportLine: "CEO 直下",
   },
   {
     id: "DM-003",
@@ -45,6 +91,22 @@ const jobs: Job[] = [
     pitch:
       "自社でも Meeton ai を使い倒しながら、AI と人間の最適分業を設計する。量をこなすセールスではなく、AI に任せられる範囲を広げ続け、判断の質で成果を出すチームを作る。",
     tags: ["IS", "AI 協働", "商談化率"],
+    responsibilities: [
+      "Meeton ai 経由のインバウンドリードへの初動対応・商談獲得",
+      "Meeton ai を自社で運用しつつ、 AI / 人間の最適分業を設計",
+      "AE への商談 / 後追いリードのナーチャリング",
+      "数字で語る IS チームの立ち上げ",
+    ],
+    required: [
+      COMMON_REQUIRED,
+      "B2B SaaS の IS / SDR / BDR いずれかで 1年以上の経験",
+    ],
+    preferred: [
+      "AI / 自動化ツールを使ったセールス経験",
+      "アウトバウンド経験 (リスト作成 → 初動接触 → 商談化)",
+      ...COMMON_PREFERRED,
+    ],
+    reportLine: "Sales Lead 直下",
   },
   {
     id: "DM-004",
@@ -53,6 +115,22 @@ const jobs: Job[] = [
     pitch:
       "導入企業の AI SDR 運用を伴走し、商談化率 40〜80% という成果を再現可能にする。マニュアル通りに支援する人ではなく、顧客と一緒にベストプラクティスを発明できる人を探している。",
     tags: ["Onboarding", "ヘルススコア", "継続率"],
+    responsibilities: [
+      "導入企業のオンボーディング・運用伴走 (週次 / 月次レビュー)",
+      "AI Chat / Email / Calendar / Offer の活用方法を顧客と共に発明",
+      "ヘルススコア設計と継続率改善",
+      "顧客の成功事例を社内 / 外部にコンテンツ化",
+    ],
+    required: [
+      COMMON_REQUIRED,
+      "B2B SaaS の CS / カスタマーサポート / コンサル経験 2年以上",
+    ],
+    preferred: [
+      "MA / SFA / インサイドセールス領域の CS 経験",
+      "数字 (継続率 / アップセル) で成果を出した経験",
+      ...COMMON_PREFERRED,
+    ],
+    reportLine: "CEO 直下 (将来的に CS Lead アサイン予定)",
   },
   {
     id: "DM-005",
@@ -62,6 +140,22 @@ const jobs: Job[] = [
     pitch:
       "新しいカテゴリを市場に定着させる責任を持つ。コンテンツ・ブランド・デマンドジェネレーション・パートナーシップを横断し、Meeton ai を業界の標準語にしていく。",
     tags: ["Brand", "Content", "Demand Gen"],
+    responsibilities: [
+      "コンテンツ / ブランド / デマンドジェネレーションを横断するマーケ戦略立案・実行",
+      "SEO / 広告 / ウェビナー / SNS の運用",
+      "プロダクトマーケティング (PMM) としてのポジショニング設計",
+      "パートナーシップ / コミュニティ施策",
+    ],
+    required: [
+      COMMON_REQUIRED,
+      "B2B SaaS のマーケティング経験 2年以上 (コンテンツ / デマジェネいずれか)",
+    ],
+    preferred: [
+      "MA / SFA / 営業支援領域の B2B マーケティング経験",
+      "リード獲得 / パイプライン創出を数字で改善した経験",
+      ...COMMON_PREFERRED,
+    ],
+    reportLine: "CEO 直下",
   },
   // Open positions — shown only in the apply-form dropdown for candidates
   // who don't fit a specific role yet.
@@ -83,33 +177,12 @@ const jobs: Job[] = [
   },
 ];
 
-const proof = [
-  {
-    label: "OLD",
-    title: "電話・メールでの追客",
-    metric: "42時間",
-    detail: "初動対応までにかかっていた平均時間",
-  },
-  {
-    label: "NEW",
-    title: "AI SDR の自律応答",
-    metric: "5秒",
-    detail: "Meeton ai が同じ仕事を終わらせる時間",
-  },
-  {
-    label: "RESULT",
-    title: "商談化率の変化",
-    metric: "40–80%",
-    detail: "導入企業で再現されている成果レンジ",
-  },
-];
-
 type BentoItem = {
   size: "lg" | "md" | "sm";
   eyebrow: string;
   title: string;
   body: string;
-  icon: "equity" | "tools" | "impact" | "speed" | "customer" | "global";
+  icon: "equity" | "tools" | "customer" | "global";
 };
 
 const bentos: BentoItem[] = [
@@ -117,42 +190,28 @@ const bentos: BentoItem[] = [
     size: "lg",
     eyebrow: "01 / EQUITY",
     title: "Pre-Series A の当事者権",
-    body: "会社が 10 倍になる前のメンバーとして、意思決定とストックオプションの双方にアクセスできる。",
+    body: "会社が 10 倍になる前のメンバーとして、 意思決定とストックオプションの双方にアクセスできる。 議論は15分、 実装は翌日のスピード感で、 1人の選択がプロダクトと会社の輪郭を決める。",
     icon: "equity",
   },
   {
-    size: "sm",
+    size: "md",
     eyebrow: "02 / TOOLS",
     title: "AI ツールは全支給",
-    body: "Claude / Cursor / ChatGPT Enterprise / Gemini ほか、最先端ツールを会社負担で。",
+    body: "Claude / Cursor / ChatGPT Enterprise / Gemini ほか、 最先端ツールを会社負担で。",
     icon: "tools",
   },
   {
-    size: "sm",
-    eyebrow: "03 / IMPACT",
-    title: "1 人の影響力",
-    body: "小さなチームだからこそ、一人の選択がプロダクトと会社の輪郭を決める。",
-    icon: "impact",
-  },
-  {
     size: "md",
-    eyebrow: "04 / SPEED",
-    title: "議論は15分、実装は翌日",
-    body: "ルールではなくプリンシプル。スピードは文化で、プロセスで守るものではない。",
-    icon: "speed",
-  },
-  {
-    size: "md",
-    eyebrow: "05 / CUSTOMER",
-    title: "毎週、顧客と話す距離感",
-    body: "成果が出た瞬間に立ち会える仕事。導入企業のリアルが、意思決定の素材になる。",
+    eyebrow: "03 / CUSTOMER",
+    title: "毎週、 顧客と話す距離感",
+    body: "成果が出た瞬間に立ち会える仕事。 導入企業のリアルが、 意思決定の素材になる。",
     icon: "customer",
   },
   {
     size: "lg",
-    eyebrow: "06 / GLOBAL",
-    title: "日本語と英語が、同じ会議で飛び交う。",
-    body: "社内は日英ハイブリッド。海外メンバーと日本メンバーが同じ Slack で議論し、日本発のカテゴリを最初からアジア・世界の文脈で設計する。「英語環境で働きたい」も「日本語で深く議論したい」も、両方叶う環境。",
+    eyebrow: "04 / GLOBAL",
+    title: "日本語と英語が、 同じ会議で飛び交う",
+    body: "社内は日英ハイブリッド。 海外メンバーと日本メンバーが同じ Slack で議論し、 日本発のカテゴリを最初からアジア・世界の文脈で設計する。「英語環境で働きたい」も「日本語で深く議論したい」 も、 両方叶う環境。",
     icon: "global",
   },
 ];
@@ -184,20 +243,6 @@ function BentoIcon({ name }: { name: BentoItem["icon"] }) {
           <path d="M18 3v4M16 5h4" />
         </svg>
       );
-    case "impact":
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="3" />
-          <circle cx="12" cy="12" r="7" />
-          <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
-        </svg>
-      );
-    case "speed":
-      return (
-        <svg {...common}>
-          <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
-        </svg>
-      );
     case "customer":
       return (
         <svg {...common}>
@@ -220,12 +265,6 @@ const processSteps = [
   { num: "02", title: "スキル面接", desc: "職種に応じた実践課題 or ディスカッション。" },
   { num: "03", title: "最終面接", desc: "CEO / CTO とビジョンを交換する時間。" },
   { num: "04", title: "オファー", desc: "最短 1 週間。条件は透明に開示。" },
-];
-
-const marqueeItems = [
-  "G-gen", "Univis", "BizteX", "Salesforce 連携", "HubSpot 連携",
-  "Slack 連携", "Microsoft Teams", "Google Calendar", "Zoom",
-  "Marketo 連携", "Oracle Eloqua",
 ];
 
 const css = `
@@ -630,37 +669,78 @@ const css = `
   border-top: 1px solid var(--line);
 }
 .position-row {
+  border-bottom: 1px solid var(--line);
+}
+.position-row-summary {
   display: grid;
   grid-template-columns: 80px 1.1fr 2.4fr 0.8fr 50px;
   gap: 24px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background 0.2s ease;
   align-items: center;
-  position: relative;
-  /* Button reset — .position-row is now a <button> for modal trigger */
-  background: transparent;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  width: 100%;
+  list-style: none;
 }
-.position-row::before {
-  content: '';
-  position: absolute;
-  inset: 0 -16px;
-  background: transparent;
-  transition: background 0.3s;
-  z-index: -1;
-  border-radius: 6px;
+.position-row-summary::-webkit-details-marker { display: none; }
+.position-row-summary:hover { background: var(--surface-hi); }
+.position-row-summary:hover .pos-title { color: var(--accent); }
+.position-row[open] .position-row-summary { background: var(--surface-hi); }
+.position-row[open] .pos-arrow { transform: rotate(180deg); }
+.pos-arrow {
+  transition: transform 0.25s ease;
+  font-size: 20px;
+  color: var(--ink-mute);
+  text-align: right;
 }
-.position-row:hover::before { background: var(--surface-hi); }
-.position-row:hover .pos-arrow { background: var(--accent); color: var(--bg); transform: translate(4px, -4px) rotate(-45deg); }
-.position-row:hover .pos-title { color: var(--accent); }
+.position-detail {
+  padding: 8px 0 32px;
+  display: grid;
+  gap: 22px;
+  border-top: 1px dashed var(--line);
+  margin-top: -1px;
+}
+.pos-detail-block {
+  padding: 0 8px;
+}
+.pos-detail-label {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.pos-detail-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.pos-detail-text {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.pos-apply-btn {
+  display: inline-block;
+  margin-top: 8px;
+  margin-left: 8px;
+  padding: 12px 22px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: fit-content;
+}
+.pos-apply-btn:hover { opacity: 0.9; }
 .pos-id {
   font-family: var(--fm);
   font-size: 12px;
@@ -912,10 +992,12 @@ const css = `
   .bento-cell.sz-lg { grid-column: span 4; grid-row: span 1; }
   .bento-cell.sz-md { grid-column: span 2; }
   .bento-cell.sz-sm { grid-column: span 2; }
-  .position-row { grid-template-columns: 60px 1fr 50px; }
-  .position-row .pos-dept-wrap,
-  .position-row .pos-desc-mini,
-  .position-row .pos-tags { display: none; }
+  .position-row-summary { grid-template-columns: 60px 1fr 36px; gap: 14px; padding: 20px 0; }
+  .position-row-summary .pos-dept-wrap,
+  .position-row-summary .pos-desc-mini,
+  .position-row-summary .pos-tags { display: none; }
+  .pos-mid { min-width: 0; }
+  .pos-mid .pos-title { font-size: 15px; line-height: 1.45; word-break: break-word; overflow-wrap: anywhere; }
   .process-track { grid-template-columns: repeat(2, 1fr); }
   .process-step { border-bottom: 1px solid var(--line); }
   .process-step:nth-child(even) { border-right: none; }
@@ -925,6 +1007,45 @@ const css = `
   .bento-cell.sz-lg, .bento-cell.sz-md, .bento-cell.sz-sm { grid-column: span 1; }
   .process-track { grid-template-columns: 1fr; }
   .process-step { border-right: none; }
+}
+
+/* ===== Mobile overflow safety net (iPhone Safari / Android Chrome) ===== */
+@media (max-width: 768px) {
+  .careers-root { overflow-x: hidden; max-width: 100vw; }
+  .careers-root * { max-width: 100%; box-sizing: border-box; }
+  .hero h1 {
+    font-size: clamp(36px, 10vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-break: auto;
+  }
+  .hero-sub { font-size: 15px; line-height: 1.75; }
+  .hero-eyebrow-pill { font-size: 11px; padding: 8px 14px; }
+  .stat-num {
+    font-size: clamp(28px, 9vw, 52px);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .head-grid { grid-template-columns: 1fr; gap: 18px; }
+  .head-title {
+    font-size: clamp(24px, 6vw, 36px);
+    line-height: 1.35;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .mission-statement {
+    font-size: clamp(20px, 5vw, 28px);
+    line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .mission-columns { grid-template-columns: 1fr; }
+  .pos-detail-list { font-size: 13.5px; padding-left: 18px; }
+  .pos-detail-block { padding: 0; }
+  .pos-apply-btn { width: 100%; text-align: center; margin-left: 0; }
 }
 `;
 
@@ -1004,16 +1125,6 @@ export default function CareersClient() {
           </div>
         </div>
 
-        {/* Marquee */}
-        <div className="marquee" aria-hidden="true">
-          <div className="marquee-track">
-            {[...marqueeItems, ...marqueeItems].map((t, i) => (
-              <span className="marquee-item" key={i}>
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ============ STATS ============ */}
@@ -1021,22 +1132,8 @@ export default function CareersClient() {
         <div className="stats-inner">
           <div className="stat">
             <div className="stat-label">// COMPANY</div>
-            <div className="stat-num">2025</div>
+            <div className="stat-num">2024</div>
             <div className="stat-desc">設立 / Pre-Series A</div>
-          </div>
-          <div className="stat">
-            <div className="stat-label">// SPEED</div>
-            <div className="stat-num">
-              42h<span className="arrow">→</span>5<span className="unit">秒</span>
-            </div>
-            <div className="stat-desc">リード初動対応（人間 SDR 比）</div>
-          </div>
-          <div className="stat">
-            <div className="stat-label">// PRODUCT</div>
-            <div className="stat-num">
-              40–80<span className="unit">%</span>
-            </div>
-            <div className="stat-desc">導入企業の商談化率レンジ</div>
           </div>
           <div className="stat">
             <div className="stat-label">// HIRING</div>
@@ -1075,52 +1172,18 @@ export default function CareersClient() {
 
             <div className="mission-columns">
               <div className="mission-col">
-                <strong>// The Gap</strong>
-                買い手は購買プロセスの大半をオンラインで完了しているのに、売り手は今も電話・メール・手作業で追いついていない。このギャップが、私たちの出発点。
+                <strong>// フェーズ</strong>
+                2024年10月設立、 Pre-Series A。 既に G-gen / BizteX / Univis / EdulinX 等の B2B SaaS / 物流 SaaS が導入。 現在5ポジションで初期メンバーを募集中。
               </div>
               <div className="mission-col">
-                <strong>// The Build</strong>
-                24 時間 365 日、秒単位で動き続ける AI SDR。Webチャット・メール・サンキューページで見込み客をナーチャリングし、商談化する完全自律のエージェント。
+                <strong>// 入社1人目に期待する役割</strong>
+                既存メンバーの「次の手が出ない領域」を自分で見つけて、 自分で動かす。 マニュアルもオンボーディングも整っていない代わりに、 ポジションの輪郭を自分で描ける。
               </div>
               <div className="mission-col">
-                <strong>// The Bet</strong>
-                市場もプロダクトも、まだ途中。ここから先を一緒に設計できる仲間を、本気で探しています。
+                <strong>// 今ジョインする意味</strong>
+                ストックオプション、 経営陣との週次1on1、 顧客 / プロダクト / 採用 / 資金調達 まで一気通貫で経験できる Pre-Series A の数ヶ月は、 後から取り戻せない。
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ PROOF ============ */}
-      <section className="section">
-        <div className="inner">
-          <div className="head-grid">
-            <div className="head-left">
-              <div className="eyebrow">What changes</div>
-            </div>
-            <div>
-              <div className="head-title">
-                <span className="accent">前提</span>が変わると、結果も変わる。
-              </div>
-              <p className="head-sub">
-                人間 SDR の 42 時間を、AI SDR は 5 秒で終わらせる。この差が、商談化率を数倍に動かす。
-              </p>
-            </div>
-          </div>
-
-          <div className="proof-grid">
-            {proof.map((p) => (
-              <div className="proof-card" key={p.label}>
-                <div className="proof-head">
-                  <span className="proof-label">{p.label}</span>
-                </div>
-                <div className="proof-title">{p.title}</div>
-                <div>
-                  <div className="proof-metric">{p.metric}</div>
-                  <div className="proof-detail">{p.detail}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -1161,32 +1224,69 @@ export default function CareersClient() {
 
           <div className="position-list">
             {filteredJobs.map((job) => (
-              <button
-                type="button"
-                className="position-row"
-                key={job.id}
-                onClick={() => openApply(job.id)}
-              >
-                <div className="pos-id">{job.id}</div>
-                <div className="pos-dept-wrap">
-                  <span className="pos-dept">{job.dept}</span>
-                  {job.subtitle && <span className="pos-subtitle">{job.subtitle}</span>}
+              <details className="position-row" key={job.id}>
+                <summary className="position-row-summary">
+                  <div className="pos-id">{job.id}</div>
+                  <div className="pos-dept-wrap">
+                    <span className="pos-dept">{job.dept}</span>
+                    {job.subtitle && <span className="pos-subtitle">{job.subtitle}</span>}
+                  </div>
+                  <div className="pos-mid">
+                    <div className="pos-title">{job.title}</div>
+                    <div className="pos-desc-mini">{job.pitch}</div>
+                  </div>
+                  <div className="pos-tags">
+                    {job.tags.slice(0, 3).map((t) => (
+                      <span className="pos-tag-mini" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="pos-arrow" aria-hidden="true">
+                    ▾
+                  </div>
+                </summary>
+
+                <div className="position-detail">
+                  {job.responsibilities?.length ? (
+                    <div className="pos-detail-block">
+                      <div className="pos-detail-label">業務内容</div>
+                      <ul className="pos-detail-list">
+                        {job.responsibilities.map(r => <li key={r}>{r}</li>)}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {job.required?.length ? (
+                    <div className="pos-detail-block">
+                      <div className="pos-detail-label">必須要件</div>
+                      <ul className="pos-detail-list">
+                        {job.required.map(r => <li key={r}>{r}</li>)}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {job.preferred?.length ? (
+                    <div className="pos-detail-block">
+                      <div className="pos-detail-label">歓迎要件</div>
+                      <ul className="pos-detail-list">
+                        {job.preferred.map(r => <li key={r}>{r}</li>)}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {job.reportLine ? (
+                    <div className="pos-detail-block">
+                      <div className="pos-detail-label">レポートライン</div>
+                      <div className="pos-detail-text">{job.reportLine}</div>
+                    </div>
+                  ) : null}
+                  <button
+                    type="button"
+                    className="pos-apply-btn"
+                    onClick={() => openApply(job.id)}
+                  >
+                    このポジションに応募する →
+                  </button>
                 </div>
-                <div>
-                  <div className="pos-title">{job.title}</div>
-                  <div className="pos-desc-mini">{job.pitch}</div>
-                </div>
-                <div className="pos-tags">
-                  {job.tags.slice(0, 3).map((t) => (
-                    <span className="pos-tag-mini" key={t}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="pos-arrow" aria-hidden="true">
-                  →
-                </div>
-              </button>
+              </details>
             ))}
           </div>
         </div>
