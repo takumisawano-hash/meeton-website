@@ -2074,7 +2074,7 @@ export default function HomePageClient({
       {/* CTA #2 — after comparison table: demo (high-intent moment after seeing differentiation) */}
       <MidPageCta
         eyebrow="Live Demo"
-        heading="比較表で見えた違いを、実際の管理画面で 15 分で体験してください"
+        heading="比較表で見えた違いを、実際の管理画面で 30 分で体験してください"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={openMeetonCalendar}
@@ -2115,7 +2115,7 @@ export default function HomePageClient({
       {/* CTA #3 — after cases: demo (social-proof momentum) */}
       <MidPageCta
         eyebrow="Try it on your site"
-        heading="同じ仕組みを自社サイトでも。15 分のデモで御社の業界に合わせた成果イメージをお伝えします"
+        heading="同じ仕組みを自社サイトでも。30 分のデモで御社の業界に合わせた成果イメージをお伝えします"
         ctaLabel="デモを予約する"
         variant="demo"
         tone="surface"

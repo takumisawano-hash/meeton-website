@@ -321,7 +321,7 @@ export default function AiChatPageClient() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
                   <div style={{ background: '#e5f8f2', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    CRMの履歴から、御社の規模ですとスタンダードが最適です。15分で詳細ご説明します
+                    CRMの履歴から、御社の規模ですとスタンダードが最適です。30分で詳細ご説明します
                   </div>
                 </div>
                 {/* Calendar confirmation badge */}
@@ -545,7 +545,7 @@ export default function AiChatPageClient() {
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div style={{ background: '#ecfeff', borderRadius: '10px 10px 10px 4px', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.5 }}>
-                      佐藤SDRと15分でお話しできるお時間をお選びください
+                      佐藤SDRと30分でお話しできるお時間をお選びください
                     </div>
                   </div>
                   {/* Calendar widget */}
@@ -614,7 +614,7 @@ export default function AiChatPageClient() {
       {/* CTA — after USE CASES: demo (visualizing real conversations boosts intent) */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="識別済みリードへの AI SDR 対話と CRM 文脈の引き継ぎ精度を、御社の業界に合わせたデモで 15 分で体験"
+        heading="識別済みリードへの AI SDR 対話と CRM 文脈の引き継ぎ精度を、御社の業界に合わせたデモで 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={openMeetonCalendar}

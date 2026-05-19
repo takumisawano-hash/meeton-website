@@ -642,7 +642,7 @@ export default function LibraryPageClient() {
       {/* CTA — after USE CASES */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="既存リードへの AI 資料推薦と検討再開検知の精度を、御社の業界に合わせたデモで 15 分で体験"
+        heading="既存リードへの AI 資料推薦と検討再開検知の精度を、御社の業界に合わせたデモで 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={openMeetonCalendar}

@@ -254,7 +254,7 @@ const useCaseData = [
     title: '即時予約しなかったリードの追跡',
     color: '#7c5cfc',
     desc: 'Meeton Calendar や Meeton Live で即時予約に至らなかった見込み客を、Meeton Email が SDR として 1:1 で追跡。MA の一斉配信では拾えない個別文脈に踏み込みます。',
-    example: '先ほど料金ページでお迷いだった点、御社の業界に近い事例を 1 つだけお送りします。15 分でご案内可能です。',
+    example: '先ほど料金ページでお迷いだった点、御社の業界に近い事例を 1 つだけお送りします。30 分でご案内可能です。',
   },
   {
     title: '資料 DL 後の文脈追跡',
@@ -266,7 +266,7 @@ const useCaseData = [
     title: '休眠リードの再接触',
     color: '#12a37d',
     desc: '過去に接点があったが冷えてしまった CRM 上のリードへ、最新のサイト再訪をトリガーに AI が再アプローチを判断。',
-    example: '半年ぶりにサイトをご覧いただいたようなので、改めて 15 分のお時間をいただけませんか？',
+    example: '半年ぶりにサイトをご覧いただいたようなので、改めて 30 分のお時間をいただけませんか？',
   },
 ];
 
@@ -494,7 +494,7 @@ export default function AiEmailPageClient() {
                       <span>御社の</span>
                       <span style={{ background: '#7c5cfc18', color: '#7c5cfc', fontWeight: 700, padding: '1px 4px', borderRadius: 3 }}>IT業界</span>
                       <span>での導入事例をまとめました。</span><br /><br />
-                      <span style={{ background: '#3b6ff518', color: '#3b6ff5', fontWeight: 700, padding: '1px 4px', borderRadius: 3 }}>15分のデモ</span>
+                      <span style={{ background: '#3b6ff518', color: '#3b6ff5', fontWeight: 700, padding: '1px 4px', borderRadius: 3 }}>30分のデモ</span>
                       <span>で詳しくご説明できます。</span>
                     </div>
                     <div style={{ marginTop: 10, display: 'flex', gap: 6 }}>
@@ -665,7 +665,7 @@ export default function AiEmailPageClient() {
       {/* CTA — after USE CASES: demo */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="MA メールとの違い・AI が文脈で動的判断する流れ・承認モードの操作感を、実機で 15 分で体験"
+        heading="MA メールとの違い・AI が文脈で動的判断する流れ・承認モードの操作感を、実機で 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={openMeetonCalendar}

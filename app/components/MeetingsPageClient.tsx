@@ -260,13 +260,13 @@ const useCases = [
     title: 'Meeton Live 内でそのまま予約',
     color: '#12a37d',
     desc: '識別済みリードへの AI SDR 対話で関心が固まった瞬間、Meeton Calendar の予約 UI がそのまま会話内に表示されます。',
-    example: '佐藤SDRと15分でお話しできるお時間をお選びください。CRMから自動で担当を割り振っています。',
+    example: '佐藤SDRと30分でお話しできるお時間をお選びください。CRMから自動で担当を割り振っています。',
   },
   {
     title: 'メール経由の再訪リードに即提示',
     color: '#3b6ff5',
     desc: 'Meeton Email 経由で再訪したリードに、Meeton Calendar URL を文脈に応じて自動挿入。メール内から直接商談を予約できます。',
-    example: '15分でデモもご案内可能です → [Meeton Calendar URL]',
+    example: '30分でデモもご案内可能です → [Meeton Calendar URL]',
   },
 ];
 
@@ -525,7 +525,7 @@ export default function MeetingsPageClient() {
                       </div>
                     </div>
                     <div style={{ fontSize: 10, color: 'var(--sub)', lineHeight: 1.7, marginBottom: 10, fontWeight: 600 }}>
-                      先ほど料金ページに戻ってきていただいたので、<br />15分でデモのご案内可能です。
+                      先ほど料金ページに戻ってきていただいたので、<br />30分でデモのご案内可能です。
                     </div>
                     <div style={{ background: '#eaf0fe', border: '1px solid rgba(59,111,245,.2)', borderRadius: 8, padding: '8px 12px', textAlign: 'center', fontSize: 10, fontWeight: 800, color: '#3b6ff5', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5, width: '100%' }}>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3b6ff5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -635,7 +635,7 @@ export default function MeetingsPageClient() {
       {/* CTA — after USE CASES: demo */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="リードコンバート瞬間の5秒発動・割り振りルール・Meeton Email 連携を、実機で 15 分で体験"
+        heading="リードコンバート瞬間の5秒発動・割り振りルール・Meeton Email 連携を、実機で 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={openMeetonCalendar}

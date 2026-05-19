@@ -910,7 +910,7 @@ export default async function CaseStudyPage({
               margin: '0 auto 40px',
             }}
           >
-            15分のデモで、Meeton ai が御社の営業にどうフィットするかをご案内します。
+            30分のデモで、Meeton ai が御社の営業にどうフィットするかをご案内します。
           </p>
           <div
             style={{
