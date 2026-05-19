@@ -122,8 +122,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* CATEGORY CARDS - 3 categories */
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.phase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:56px}
-@media (max-width:1100px){.phase-grid{grid-template-columns:repeat(2,1fr)}}
+.phase-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:56px;max-width:1080px;margin-left:auto;margin-right:auto}
+@media (max-width:1100px){.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}}
 .problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:32px}
 @media (max-width:1100px){.problem-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.problem-grid{grid-template-columns:1fr}}
@@ -1248,6 +1248,131 @@ export default function HomePageClient({
           )}
         </div>
       </section>
+
+      {/* 2026-05-19: 外部レビュー指摘「導入実績を機能説明より前に」対応。
+          FV 直下に trust-bar (顧客ロゴ + 3 つの代表成果数字) を配置。
+          スタートアップで最初の壁が信頼なので、機能より前に「実績」と
+          「導入企業」を見せる。 */}
+      {!isLp && (
+        <section
+          className="trust-bar"
+          aria-label="導入企業と代表成果"
+          style={{
+            background: "linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%)",
+            borderBottom: "1px solid var(--border)",
+            padding: "clamp(36px, 5vw, 56px) clamp(16px, 5vw, 48px)",
+          }}
+        >
+          <div
+            className="section-inner"
+            style={{ maxWidth: 1140, margin: "0 auto" }}
+          >
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: "0.16em",
+                color: "var(--sub)",
+                marginBottom: 18,
+                textTransform: "uppercase",
+                fontFamily: "var(--fm)",
+              }}
+            >
+              先進企業に選ばれています
+            </div>
+
+            <div
+              className="trust-bar-results"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                gap: "clamp(12px, 2vw, 20px)",
+                maxWidth: 920,
+                margin: "0 auto 28px",
+              }}
+            >
+              {[
+                { co: "BizteX", metric: "20倍+", label: "チャット経由リード月20件以上 (月1〜2件 → )" },
+                { co: "EdulinX", metric: "60%+", label: "Meeton ai 経由の商談化率" },
+                { co: "Univis", metric: "3ヶ月で2件", label: "受注、提案件数も増加" },
+              ].map((r) => (
+                <a
+                  key={r.co}
+                  href={`/case-studies/`}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    padding: "14px 18px",
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 12,
+                    textDecoration: "none",
+                    color: "inherit",
+                    transition: "border-color .2s, transform .2s",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 800,
+                      letterSpacing: "0.08em",
+                      color: "var(--sub)",
+                      marginBottom: 4,
+                      fontFamily: "var(--fm)",
+                    }}
+                  >
+                    {r.co}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--fm)",
+                      fontSize: "clamp(20px, 3vw, 26px)",
+                      fontWeight: 800,
+                      color: "var(--cta)",
+                      letterSpacing: "-0.02em",
+                      lineHeight: 1,
+                      marginBottom: 6,
+                    }}
+                  >
+                    {r.metric}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: "var(--sub)",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {r.label}
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div
+              className="logo-carousel"
+              style={{ marginTop: 8 }}
+            >
+              <div className="logo-track">
+                {[...clients, ...clients].map((c, i) => (
+                  <div className="logo-item" key={`trust-${c.name}-${i}`}>
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      width={120}
+                      height={36}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* THE PROBLEM — リードはあるのに、商談にならない */}
       {!isLp && (

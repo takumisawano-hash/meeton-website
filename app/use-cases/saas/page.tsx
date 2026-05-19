@@ -42,7 +42,7 @@ export default function SaaSUseCasePage() {
       heroTitleAccent="関係者全員と商談化する AI SDR。"
       heroSub="長期の評価サイクル、複数のステークホルダー、リサーチが深いバイヤー。SaaS の購買行動に対し、Meeton ai は5秒で応答し、関係者全員との商談予約まで自動で運びます。"
       personaStatement="SaaS の評価期間は3〜9ヶ月。1人のリードが資料DLしてから決裁に至るまで、評価グループ全員と接点を持ち続ける必要があります。Meeton ai はその間、AIが関係者ごとに最適な情報を出し続け、関係者全員での商談を組みます。"
-      painsLead="SaaS バイヤーは、ITreview・比較サイト・X・LinkedIn・社内Slackと、5つ以上のチャネルを横断して数ヶ月かけて評価します。"
+      painsLead="資料 DL は増えているのに、デモ予約につながらない。"
       pains={[
         {
           title: 'リサーチ深掘り型バイヤーへの対応',

@@ -99,14 +99,16 @@ export default function WebinarIndexPage() {
             Monthly Live Webinar
             <span className="wb-eyebrow-tag">毎月 第 3 木曜 14:00 JST</span>
           </div>
+          {/* 2026-05-19: 外部レビュー指摘で見出しを「月1勉強会」感から
+              「商談化ボトルネック診断」型に強化。受講動機を明確化。 */}
           <h1 className="wb-hero-h1">
-            商談化に悩む<em>あなたへ</em><br />
-            月1回30分のウェビナー
+            リードは来ているのに、<em>商談にならない</em>理由を<br />
+            30 分で分解する
           </h1>
           <p className="wb-hero-sub">
-            「リードは来てるのに商談につながらない」「IS の手が回らない」。
-            そんな現場で、明日から動かせる打ち手を 1 トピックずつ持ち帰れる
-            30 分のウェビナーです。録画あり・無料。
+            初動対応・フォロー・再訪対応のどこで落ちているかを 3 つの転換点に整理し、
+            明日から改善できる打ち手を持ち帰る、月 1 回 30 分の無料ウェビナーです。
+            録画あり・質問は匿名でも OK。
           </p>
 
           {featured && (
@@ -116,7 +118,7 @@ export default function WebinarIndexPage() {
                   href={`/webinar/${featured.slug}/`}
                   className="wb-btn wb-btn-primary"
                 >
-                  次回に申し込む
+                  30 分で商談化のボトルネックを見つける
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>

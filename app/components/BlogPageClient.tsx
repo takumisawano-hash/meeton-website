@@ -187,6 +187,61 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
           pointer-events: none;
         }
 
+        /* ===== Personas (どこから読めばいい？) ===== */
+        .blog-personas{
+          max-width: 960px; margin: 36px auto 0;
+        }
+        .blog-personas-eyebrow{
+          text-align: center; font-family: var(--font-mono), ui-monospace, monospace;
+          font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
+          color: #5a7080; text-transform: uppercase; margin-bottom: 16px;
+        }
+        .blog-personas-grid{
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+        }
+        @media (max-width: 800px){
+          .blog-personas-grid{ grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+        }
+        .blog-persona-card{
+          text-align: left;
+          padding: 22px 22px 18px;
+          background: #fff;
+          border: 1px solid #e7edf2;
+          border-top: 3px solid #12a37d;
+          border-radius: 14px;
+          cursor: pointer;
+          font: inherit;
+          color: inherit;
+          transition: transform .2s, box-shadow .2s, border-color .2s;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .blog-persona-card:hover{
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px -16px rgba(15,45,64,.16);
+        }
+        .blog-persona-title{
+          font-size: 15px; font-weight: 800; color: #0f2d40; line-height: 1.35;
+        }
+        .blog-persona-list{
+          list-style: none; padding: 0; margin: 0;
+          display: flex; flex-direction: column; gap: 6px;
+        }
+        .blog-persona-list li{
+          font-size: 13px; color: #475569; line-height: 1.5;
+          padding-left: 16px; position: relative;
+        }
+        .blog-persona-list li::before{
+          content: ""; position: absolute; left: 0; top: 8px;
+          width: 8px; height: 2px; background: currentColor; opacity: .35;
+        }
+        .blog-persona-cta{
+          margin-top: auto; font-size: 13px; font-weight: 800;
+        }
+
         /* ===== Filter bar (sticky) ===== */
         .blog-filter-sticky{
           position: sticky; top: 64px;
@@ -642,6 +697,68 @@ export default function BlogPageClient({ posts, categories }: BlogPageClientProp
             className="blog-search-input"
             aria-label="記事を検索"
           />
+        </div>
+
+        {/* 2026-05-19: 外部レビュー指摘「記事数が増えるほど読者がどこから
+            読めばいいか分からない」対応。読者ロール別に最初の 1 本を案内
+            する Personas Grid を hero 下に配置。本文へのジャンプ + 関連
+            カテゴリへのジャンプの両方を提供。 */}
+        <div className="blog-personas">
+          <div className="blog-personas-eyebrow">どこから読めばいい？</div>
+          <div className="blog-personas-grid">
+            {[
+              {
+                title: 'マーケ担当者の方',
+                lines: ['リードが商談化しない原因', 'ナーチャリング改善', 'ウェビナー後フォロー'],
+                href: '/blog/?role=marketing',
+                category: 'Marketing',
+                accent: '#7c5cfc',
+              },
+              {
+                title: 'インサイドセールス責任者の方',
+                lines: ['初動対応の自動化', '日程調整の削減', 'フォロー漏れ防止'],
+                href: '/blog/?role=inside-sales',
+                category: 'Inside Sales',
+                accent: '#0891b2',
+              },
+              {
+                title: '営業 / Sales リーダーの方',
+                lines: ['商談化率の改善', 'Speed to Lead 実装', 'AI SDR とは？'],
+                href: '/blog/?role=sales',
+                category: 'Sales',
+                accent: '#12a37d',
+              },
+            ].map((p) => (
+              <button
+                key={p.title}
+                type="button"
+                onClick={() => {
+                  setSelectedCategory(p.category)
+                  setSelectedTag(null)
+                  setVisibleCount(PAGE_SIZE)
+                  // Smooth scroll to the filter sticky so the user lands on the filtered list
+                  setTimeout(() => {
+                    document
+                      .querySelector('.blog-filter-sticky')
+                      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }, 50)
+                }}
+                className="blog-persona-card"
+                style={{ borderTopColor: p.accent }}
+                aria-label={`${p.title}向けの記事を読む`}
+              >
+                <div className="blog-persona-title">{p.title}</div>
+                <ul className="blog-persona-list">
+                  {p.lines.map((l) => (
+                    <li key={l}>{l}</li>
+                  ))}
+                </ul>
+                <span className="blog-persona-cta" style={{ color: p.accent }}>
+                  記事を読む →
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
