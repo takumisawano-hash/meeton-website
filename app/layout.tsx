@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, JetBrains_Mono, Inter } from 'next/font/google'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
@@ -23,6 +23,15 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ['700', '800'],
   variable: '--font-jakarta',
   display: 'swap',
+})
+
+// Inter — premium B2B SaaS body/display font (Linear, Stripe, etc.).
+// Variable axis so 400-800 weight all served from one woff2 file.
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  axes: ['opsz'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -96,7 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
+      className={`${plusJakarta.variable} ${inter.variable} ${jetbrainsMono.variable}`}
       style={{ ['--font-noto' as string]: NOTO_SYSTEM_STACK }}
     >
       <head>
@@ -109,6 +118,25 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://js-na2.hsforms.net" />
         <link rel="dns-prefetch" href="https://forms.hsforms.com" />
         <link rel="dns-prefetch" href="https://forms-na2.hsforms.com" />
+        {/* Global CSS variables — design tokens accessible site-wide
+            (not just on home page). Other pages (/ai-sdr/, /compare/*,
+            etc.) rely on --fb / --fd / --fm / --cta tokens defined here. */}
+        <style dangerouslySetInnerHTML={{ __html: `
+:root{
+  --bg:#ffffff;--surface:#F7FAF8;--surface2:#EFF4F1;
+  --border:#E5EEE8;--border2:#D8E4DD;
+  --text:#4B5A52;--heading:#0B1712;--sub:#6C7B73;
+  --cta:#04cb78;--cta-hover:#0fc19a;--cta-glow:rgba(4,203,120,.22);--cta-light:#E8FBF1;
+  --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.18);
+  --blue:#3b6ff5;--blue-light:#eaf0fe;
+  --cyan:#0891b2;--pink:#d03ea1;--red:#e0475b;
+  --fd:'Inter',var(--font-inter),'Plus Jakarta Sans',var(--font-jakarta),${"'" + NOTO_SYSTEM_STACK.split(',')[0].trim() + "'"},${NOTO_SYSTEM_STACK},sans-serif;
+  --fb:'Inter',var(--font-inter),${NOTO_SYSTEM_STACK},sans-serif;
+  --fm:'JetBrains Mono',var(--font-mono),monospace;
+}
+html{font-feature-settings:'cv02','cv03','cv04','cv11','calt';font-variant-ligatures:contextual;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.65}
+` }} />
       </head>
       <body>
         <GoogleAnalytics />

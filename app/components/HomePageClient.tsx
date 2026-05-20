@@ -49,17 +49,26 @@ function useIsMobile(breakpoint = 768) {
 
 const css = `
 :root {
-  --bg:#ffffff;--surface:#f4f6fb;--surface2:#eaedfa;
-  --border:#dfe3f0;--border2:#c8cedf;
-  --text:#4a506e;--heading:#0f1128;--sub:#6e7494;
-  --cta:#12a37d;--cta-hover:#0fc19a;--cta-glow:rgba(18,163,125,.25);--cta-light:#e5f8f2;
-  --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.2);
+  /* 2026-05-20 design refresh: tighter neutral palette + Inter primary
+     display font (Linear / Stripe class). Light bg slightly cooler for
+     better contrast against dark sections. */
+  --bg:#ffffff;--surface:#F7FAF8;--surface2:#EFF4F1;
+  --border:#E5EEE8;--border2:#D8E4DD;
+  --text:#4B5A52;--heading:#0B1712;--sub:#6C7B73;
+  --cta:#04cb78;--cta-hover:#0fc19a;--cta-glow:rgba(4,203,120,.22);--cta-light:#E8FBF1;
+  --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.18);
   --blue:#3b6ff5;--blue-light:#eaf0fe;
   --cyan:#0891b2;--pink:#d03ea1;--red:#e0475b;
-  --fd:'Plus Jakarta Sans',var(--font-jakarta),sans-serif;--fb:'Noto Sans JP',var(--font-noto),'Plus Jakarta Sans',sans-serif;--fm:'JetBrains Mono',var(--font-mono),monospace;
+  /* Display: Inter (Latin) → Noto system stack (JP). */
+  --fd:'Inter',var(--font-inter),'Plus Jakarta Sans',var(--font-jakarta),var(--font-noto),sans-serif;
+  --fb:'Inter',var(--font-inter),var(--font-noto),'Plus Jakarta Sans',sans-serif;
+  --fm:'JetBrains Mono',var(--font-mono),monospace;
+  /* 8px grid spacing scale */
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{font-feature-settings:'cv02','cv03','cv04','cv11','calt';font-variant-ligatures:contextual}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideUpOnly{from{transform:translateY(24px)}to{transform:translateY(0)}}
@@ -92,26 +101,31 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
 .glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
 
-.btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
-.btn-cta:active{transform:translateY(0)}
-.btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
-.btn-ghost{background:transparent;color:var(--heading);border:2px solid var(--border2);padding:16px 38px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .25s;min-height:44px;-webkit-tap-highlight-color:transparent}
-.btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);transform:translateY(-1px)}
+/* Buttons — 8px grid padding, cubic-bezier(.16,1,.3,1) easing for premium feel.
+   Solid CTA color (no gradient) since gradient buttons read AI-cliché. */
+.btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .22s cubic-bezier(.16,1,.3,1),background .18s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;letter-spacing:-.005em}
+.btn:focus-visible{outline:2px solid var(--cta);outline-offset:3px}
+.btn-cta{background:var(--cta);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 4px 14px var(--cta-glow);letter-spacing:-.005em}
+.btn-cta:hover{background:var(--cta-hover);transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 8px 22px var(--cta-glow)}
+.btn-cta:active{transform:translateY(0);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 2px 8px var(--cta-glow)}
+.btn-cta-lg{padding:16px 32px;font-size:16px;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 6px 22px var(--cta-glow)}
+.btn-ghost{background:transparent;color:var(--heading);border:1px solid var(--border2);padding:15px 30px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:border-color .18s,color .18s,background .18s,transform .18s cubic-bezier(.16,1,.3,1);min-height:44px;-webkit-tap-highlight-color:transparent}
+.btn-ghost:hover{border-color:var(--heading);color:var(--heading);background:var(--surface);transform:translateY(-1px)}
+.btn-ghost:focus-visible{outline:2px solid var(--cta);outline-offset:3px}
 .btn-ghost:active{transform:translateY(0)}
 
-.slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
-.section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
+.slabel{font-family:var(--fm);font-size:11px;font-weight:700;color:var(--cta);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+/* 8px grid: section padding = 96px desktop / 64px mobile, both multiples of 8 */
+.section{padding:clamp(64px,9vw,96px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
-.stitle{font-size:clamp(28px,5vw,46px);font-weight:900;color:var(--heading);line-height:1.25;letter-spacing:-.02em;margin-bottom:18px;text-wrap:balance}
-.ssub{font-size:clamp(15px,2.5vw,18px);line-height:1.85;color:var(--sub);max-width:660px;text-wrap:pretty}
+.stitle{font-size:clamp(28px,4.6vw,44px);font-weight:800;color:var(--heading);line-height:1.25;letter-spacing:-.025em;margin-bottom:16px;text-wrap:balance}
+.ssub{font-size:clamp(15px,2.2vw,17px);line-height:1.8;color:var(--sub);max-width:640px;text-wrap:pretty}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f3f0ff 60%,#fff 100%)}
+/* HERO — clean, no gradient/glow/dot-grid (AI-template cliché removed) */
+.hero{min-height:88vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 24px 88px;background:#fff;border-bottom:1px solid var(--border)}
 .hero-content{max-width:860px;text-align:center;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:36px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cta-light);border:1px solid rgba(4,203,120,.18);padding:7px 16px;border-radius:999px;margin-bottom:28px;font-size:13px;font-weight:700;color:var(--cta);letter-spacing:.04em;font-family:var(--fm)}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
 .hero h1{font-size:clamp(30px,6vw,60px);font-weight:900;color:var(--heading);line-height:1.22;letter-spacing:-.025em;margin-bottom:28px;text-wrap:balance;max-width:18ch;margin-left:auto;margin-right:auto}
 .hero h1 em{font-style:normal;display:inline;color:var(--cta)}
 @media (min-width:780px){.hero-h1{max-width:24ch}}
@@ -1194,37 +1208,8 @@ export default function HomePageClient({
 
       {/* HERO */}
       <section className="hero">
-        <div className="dot-grid" />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(18,163,125,.2)",
-            width: 600,
-            height: 600,
-            top: -200,
-            right: -100,
-          }}
-        />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(124,92,252,.15)",
-            width: 500,
-            height: 500,
-            bottom: -150,
-            left: -80,
-          }}
-        />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(59,111,245,.1)",
-            width: 400,
-            height: 400,
-            top: "40%",
-            left: "50%",
-          }}
-        />
+
+
         <div className="hero-content">
           {/* Hero elements use anim-y (transform-only) instead of anim
               (opacity 0→1). Initial opacity:0 was preventing Lighthouse
@@ -1773,7 +1758,6 @@ export default function HomePageClient({
         id="features"
         style={{ position: "relative" }}
       >
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
         <div
           className="section-inner"
           style={{ position: "relative", zIndex: 2 }}
@@ -2053,7 +2037,6 @@ export default function HomePageClient({
         id="integrations"
         style={{ position: "relative" }}
       >
-        <div className="dot-grid" style={{ opacity: 0.3 }} />
         <div
           className="section-inner"
           style={{ position: "relative", zIndex: 2 }}
@@ -2142,28 +2125,7 @@ export default function HomePageClient({
 
       {/* FINAL CTA */}
       <section className="final-cta">
-        <div className="dot-grid" style={{ opacity: 0.35 }} />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(18,163,125,.18)",
-            width: 560,
-            height: 560,
-            top: "40%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-          }}
-        />
-        <div
-          className="glow"
-          style={{
-            background: "rgba(124,92,252,.12)",
-            width: 420,
-            height: 420,
-            top: "20%",
-            right: "8%",
-          }}
-        />
+
         <div className="final-cta-inner" style={{ maxWidth: 720 }}>
           <div
             style={{
