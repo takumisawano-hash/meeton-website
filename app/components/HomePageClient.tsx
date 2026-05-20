@@ -98,8 +98,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
 .anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
+/* AI-template cliché classes (.dot-grid, .glow) removed in commit 86a831a. */
 
 /* Buttons — 8px grid padding, cubic-bezier(.16,1,.3,1) easing for premium feel.
    Solid CTA color (no gradient) since gradient buttons read AI-cliché. */
