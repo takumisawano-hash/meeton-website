@@ -136,14 +136,13 @@ export default function MeetingFlowDiagram() {
           How It Works
         </div>
         <div className="stitle" style={{ textAlign: "center" }}>
-          AI SDR が営業フロー全体を{" "}
-          <span style={{ color: "var(--cta)" }}>自動化</span>する
+          AI SDR が、<span style={{ color: "var(--cta)" }}>リード対応から商談化まで</span>を自動化する
         </div>
         <p
           className="ssub"
           style={{ textAlign: "center", margin: "0 auto", maxWidth: 720 }}
         >
-          3 つの AI 機能（Chat / Calendar / Email）が連動し、リード発見から商談獲得まで 24 時間 365 日、一気通貫で実行します。
+          訪問・資料 DL・問い合わせの瞬間に AI が会話を開始。商談予約までつなぎ、予約しなかったリードも 1:1 で追客します。
         </p>
 
         <div className="mfd-stage">
@@ -456,16 +455,16 @@ function DesktopFlow({
         <Card
           node={N.visitor}
           tone="muted"
-          label="STEP 0"
-          title="Website 訪問者"
+          label="① 入口"
+          title="Web サイト訪問者"
           sub="あらゆる入口・あらゆる時間"
           icon="user"
         />
         <Card
           node={N.chat}
           tone="chat"
-          label="① MEETON LIVE"
-          title="識別済み再訪リードへAI SDR対話"
+          label="② MEETON LIVE"
+          title="識別済み再訪リードへ AI SDR が対話"
           sub="過去の閲覧・DL・メール反応を全文脈で引き継ぐ"
           icon="chat"
           meeton
@@ -473,17 +472,17 @@ function DesktopFlow({
         <Card
           node={N.thanks}
           tone="amber"
-          label="THANKS PAGE"
-          title="サンクスページ"
-          sub="フォーム送信直後のリードコンバート瞬間"
+          label="③ CV 直後"
+          title="フォーム送信・資料 DL 直後"
+          sub="リードの温度が最も高いタイミング"
           icon="thanks"
         />
         <Card
           node={N.calendar}
           tone="calendar"
-          label="② MEETON CALENDAR"
+          label="④ MEETON CALENDAR"
           title="商談予約を即時起動"
-          sub="リードコンバート瞬間に発動（業界42時間→5秒）/ 割り振りルール設定可能"
+          sub="リードコンバート瞬間に発動 / 割り振りルール設定可能"
           icon="calendar"
           hub
           meeton
@@ -491,17 +490,17 @@ function DesktopFlow({
         <Card
           node={N.win}
           tone="win"
-          label="OUTCOME"
-          title="✓ サイト内で商談獲得"
+          label="⑤ 商談予約完了"
+          title="サイト内で商談獲得"
           sub="リアルタイムで予約完了"
           icon="check"
         />
         <Card
           node={N.email}
           tone="email"
-          label="③ MEETON EMAIL"
-          title="即時予約しなかったリードを1:1追跡"
-          sub="MAではなくAI SDR / Meeton Calendar URL自動挿入"
+          label="⑥ MEETON EMAIL"
+          title="未予約リードを 1:1 で追客"
+          sub="MA ではなく AI SDR / Meeton Calendar URL 自動挿入"
           icon="mail"
           meeton
         />
@@ -864,12 +863,12 @@ function MobileFlow({
   reduce: boolean;
 }) {
   const items = [
-    { tone: "muted" as const, label: "STEP 0", title: "Website 訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
-    { tone: "chat" as const, label: "① MEETON LIVE", title: "識別済み再訪リードへAI SDR対話", sub: "過去の閲覧・DL・メール反応を全文脈で引き継ぐ", icon: "chat" as const, meeton: true },
-    { tone: "amber" as const, label: "THANKS PAGE", title: "サンクスページ", sub: "フォーム送信直後のリードコンバート瞬間", icon: "thanks" as const, branchNote: "Meeton Live 経由 / フォーム送信直後 どちらからも到達" },
-    { tone: "calendar" as const, label: "② MEETON CALENDAR", title: "商談予約を即時起動", sub: "業界42時間→5秒のSpeed to Lead / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
-    { tone: "win" as const, label: "OUTCOME", title: "✓ サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
-    { tone: "email" as const, label: "③ MEETON EMAIL", title: "即時予約しなかったリードを1:1追跡", sub: "MAではなくAI SDR → Meeton Calendar に戻す", icon: "mail" as const, meeton: true },
+    { tone: "muted" as const, label: "① 入口", title: "Web サイト訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
+    { tone: "chat" as const, label: "② MEETON LIVE", title: "識別済み再訪リードへ AI SDR が対話", sub: "過去の閲覧・DL・メール反応を全文脈で引き継ぐ", icon: "chat" as const, meeton: true },
+    { tone: "amber" as const, label: "③ CV 直後", title: "フォーム送信・資料 DL 直後", sub: "リードの温度が最も高いタイミング", icon: "thanks" as const, branchNote: "Meeton Live 経由 / CV 直後どちらからも到達" },
+    { tone: "calendar" as const, label: "④ MEETON CALENDAR", title: "商談予約を即時起動", sub: "リードコンバート瞬間に発動 / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
+    { tone: "win" as const, label: "⑤ 商談予約完了", title: "サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
+    { tone: "email" as const, label: "⑥ MEETON EMAIL", title: "未予約リードを 1:1 で追客", sub: "MA ではなく AI SDR → Meeton Calendar に戻す", icon: "mail" as const, meeton: true },
   ];
 
   return (
