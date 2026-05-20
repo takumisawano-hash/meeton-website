@@ -96,7 +96,7 @@ export default function Nav({
   ];
 
   const featuresDropdownItems = [
-    { href: "/features/meetings/", label: "Meeton Calendar", sub: "5秒で商談予約" },
+    { href: "/features/meetings/", label: "Meeton Calendar", sub: "即時に商談予約" },
     { href: "/features/ai-email/", label: "Meeton Email", sub: "1:1自律フォロー" },
     { href: "/features/ai-chat/", label: "Meeton Live", sub: "再訪リード対話" },
     { href: "/features/ai-library/", label: "Meeton Library", sub: "既存リードナーチャ" },

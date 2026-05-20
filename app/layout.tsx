@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     default: 'Meeton ai｜ウェブサイトのリードを商談に変える AI SDR Platform',
     template: '%s｜Meeton ai',
   },
-  description: 'ウェブサイトで獲得したリードを、5秒で商談化。即時予約しなかったリードもMeeton Emailが1:1で諦めず追跡。MAやCRMでは届かない「コンバージョン直前の最後の100m」をAI SDRが自動化。',
+  description: 'Web サイトに AI SDR を配属し、訪問・問い合わせ・資料 DL・再訪問の瞬間に会話・ヒアリング・資料提案・日程調整・追客まで自動化。フォームを待つ Web サイトから、商談を生み出す AI 営業チャネルへ。',
   metadataBase: new URL('https://dynameet.ai'),
   // No site-wide canonical: setting one in the root layout makes EVERY
   // page render <link rel=canonical href=/> which collapses every URL

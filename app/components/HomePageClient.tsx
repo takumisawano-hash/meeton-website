@@ -123,6 +123,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .hero-webinar-meta{font-size:12px;color:var(--sub);font-weight:600}
 .hero-webinar-arrow{color:var(--cta);font-weight:800;font-size:18px;line-height:1;flex-shrink:0}
 .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-mini-flow{display:inline-flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 auto 36px;padding:14px 22px;background:rgba(18,163,125,.05);border:1px solid rgba(18,163,125,.18);border-radius:12px;max-width:900px;justify-content:center}
+.hero-mini-step{font-size:13px;font-weight:700;color:var(--heading);font-family:var(--fb);white-space:nowrap}
+.hero-mini-arrow{font-size:12px;color:var(--cta);font-weight:700}
+@media (max-width:680px){.hero-mini-flow{padding:12px 14px}.hero-mini-step{font-size:12px}.hero-mini-arrow{font-size:10px}}
+.hero-tertiary{margin-top:22px;text-align:center}
+.hero-tertiary-link{color:var(--sub);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--border2);padding-bottom:2px;transition:color .2s,border-color .2s}
+.hero-tertiary-link:hover{color:var(--cta);border-color:var(--cta)}
+
+/* VISION SECTION — dark, AI SDR カテゴリ確立 */
+.vision-section{background:#050807;color:#fff;padding:clamp(72px,9vw,108px) clamp(16px,5vw,48px);border-top:1px solid #0d1411;border-bottom:1px solid #0d1411}
+.vision-heading{font-size:clamp(26px,4.2vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.3;color:#fff;text-align:center;max-width:880px;margin:0 auto 18px;font-family:var(--fb)}
+.vision-accent{color:#04cb78}
+.vision-sub{font-size:clamp(15px,2vw,17px);line-height:1.85;color:rgba(255,255,255,.7);max-width:680px;margin:0 auto 56px;text-align:center}
+.vision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:980px;margin:0 auto}
+@media (max-width:780px){.vision-grid{grid-template-columns:1fr;gap:16px;max-width:520px}}
+.vision-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:28px 24px;transition:background .25s,border-color .25s}
+.vision-card:hover{background:rgba(255,255,255,.05);border-color:rgba(4,203,120,.35)}
+.vision-card-label{font-family:var(--fm);font-size:12px;font-weight:700;color:#04cb78;letter-spacing:.2em;margin-bottom:14px}
+.vision-card-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.01em}
+.vision-card-desc{font-size:14px;line-height:1.75;color:rgba(255,255,255,.65)}
 .hero-stats{display:flex;justify-content:center;gap:clamp(32px,8vw,72px);margin-top:clamp(40px,8vw,72px);padding-top:clamp(32px,6vw,48px);border-top:1px solid var(--border);flex-wrap:wrap}
 .stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
 .stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
@@ -642,6 +662,14 @@ const integrations = [
 ];
 
 const faqData = [
+  {
+    q: "日程調整ツールとは何が違いますか？",
+    a: "日程調整ツールは、予約の導線を最適化するものです。Meeton ai はその前段で、訪問者と会話し、課題を整理し、必要な資料を届けたうえで、商談予約や追客まで行う AI SDR です。CV 後だけでなく、CV 前から商談機会を創出する点が大きな違いです。",
+  },
+  {
+    q: "AI チャットボットとは何が違いますか？",
+    a: "チャットボットは FAQ 応答が中心です。Meeton ai は AI SDR として、訪問者と会話し、課題を整理し、資料を提案し、商談予約や追客まで実行します。匿名訪問者全員に話しかけるのではなく、識別済みリードを商談に押し上げることに特化しています。",
+  },
   {
     q: "マーケティング部門でも使えますか？",
     a: "Meeton ai は営業組織向けのツールです。マーケ部門が集めたリードの商談化に使うのが用途で、マーケキャンペーン管理や新規リード獲得が主目的の場合は適していません。マーケ向けの機能をお探しなら、Marketo / HubSpot 等の MA ツールをご検討ください。",
@@ -1205,18 +1233,43 @@ export default function HomePageClient({
             <div className="hero-badge-dot" />
             {isLp && lpVariant === "trial"
               ? "14日間無料トライアル"
-              : "AI SDR Platform for B2B Sales Teams"}
+              : "AI SDR Platform"}
           </div>
           <h1 className="anim-y d2">
-            {lpHeadline ?? "ウェブサイトのリードを、5秒で商談に変える"}
+            {lpHeadline ?? (
+              <>
+                問い合わせを待つ<wbr />Web サイトから、<br />
+                <em>商談を生み出す AI 営業チャネルへ。</em>
+              </>
+            )}
           </h1>
           <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
-              "問い合わせ・資料 DL・再訪問の瞬間に AI SDR が即時対応。会話・ヒアリング・日程調整・追客までを自動化し、リードを商談につなげます。"}
+              "Meeton ai は、Web サイトに AI SDR を配属し、訪問・問い合わせ・資料 DL・再訪問の瞬間に、会話・ヒアリング・資料提案・日程調整・追客までを自動化します。"}
           </p>
-          {/* 2026-05-19: FV CTA を「デモを予約」+「ウェビナー」の 2 つに
-              絞り、資料請求は中盤の MidPageCta に移動。レビュー指摘
-              「FV の CTA が散る」対応。 */}
+
+          {/* Mini How It Works — Hero 内 element、横並び 7 step
+              （モバイルでは縦積み） */}
+          {!isLp && (
+            <div className="anim-y d3 hero-mini-flow" aria-label="Meeton ai の流れ">
+              <span className="hero-mini-step">訪問検知</span>
+              <span className="hero-mini-arrow" aria-hidden>→</span>
+              <span className="hero-mini-step">AI 会話</span>
+              <span className="hero-mini-arrow" aria-hidden>→</span>
+              <span className="hero-mini-step">ヒアリング</span>
+              <span className="hero-mini-arrow" aria-hidden>→</span>
+              <span className="hero-mini-step">資料提案</span>
+              <span className="hero-mini-arrow" aria-hidden>→</span>
+              <span className="hero-mini-step">日程調整</span>
+              <span className="hero-mini-arrow" aria-hidden>→</span>
+              <span className="hero-mini-step">追客</span>
+              <span className="hero-mini-arrow" aria-hidden>→</span>
+              <span className="hero-mini-step">CRM</span>
+            </div>
+          )}
+
+          {/* CTA: Primary デモ予約 / Secondary 仕組みを見る (#how-it-works) /
+              Tertiary text link 商談化余地診断 */}
           <div
             className="anim-y d4 hero-ctas"
             style={isLp ? { gap: 12 } : undefined}
@@ -1228,32 +1281,20 @@ export default function HomePageClient({
             >
               デモを予約
             </button>
-            <Link
-              href="/webinar/"
+            <a
+              href="#how-it-works"
               className="btn-ghost"
               style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}
             >
-              無料ウェビナーに参加
-            </Link>
+              仕組みを見る
+            </a>
           </div>
-
-          {/* 2026-05-19: 旧「補助リンク」風だったウェビナー誘導を
-              「今月のおすすめ」帯にアップグレード。受講対象 + 値段 +
-              テーマを 1 行ずつ並べ、ちゃんとした conversion 動線として
-              見せる。 */}
           {!isLp && (
-            <Link
-              href="/webinar/"
-              className="anim-y d4 hero-webinar-band"
-              aria-label="今月の無料ウェビナーに参加"
-            >
-              <span className="hero-webinar-tag">今月開催 / 無料</span>
-              <span className="hero-webinar-body">
-                <strong>「リードは来てるのに、商談にならない」を 30 分で分解</strong>
-                <span className="hero-webinar-meta">マーケ・IS 責任者向け · 第 3 木曜 14:00 · 録画あり</span>
-              </span>
-              <span className="hero-webinar-arrow" aria-hidden>→</span>
-            </Link>
+            <div className="anim-y d4 hero-tertiary">
+              <a href="#diagnose" className="hero-tertiary-link">
+                自社サイトの商談化余地を診断する →
+              </a>
+            </div>
           )}
           {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
           {!isLp && (
@@ -1266,6 +1307,49 @@ export default function HomePageClient({
           )}
         </div>
       </section>
+
+      {/* CATEGORY / VISION — 「Meeton ai は、Web サイトに配属する AI SDR」
+          ダーク背景で先進感、3 カードでコンパクトに */}
+      {!isLp && (
+        <section
+          className="vision-section"
+          aria-label="Meeton ai は Web サイトに配属する AI SDR"
+        >
+          <div className="section-inner" style={{ maxWidth: 1080, margin: "0 auto" }}>
+            <div className="vision-heading">
+              Meeton ai は、Web サイトに配属する <span className="vision-accent">AI SDR</span> です。
+            </div>
+            <p className="vision-sub">
+              チャットボットでも、単なる日程調整ツールでもありません。
+              訪問者を理解し、会話・提案・予約・追客まで、商談機会を生み出す
+              ために必要なアクションを実行します。
+            </p>
+            <div className="vision-grid">
+              <div className="vision-card">
+                <div className="vision-card-label">01</div>
+                <div className="vision-card-title">会話する</div>
+                <p className="vision-card-desc">
+                  訪問者の興味・行動を検知して、自然な会話で課題をヒアリング。
+                </p>
+              </div>
+              <div className="vision-card">
+                <div className="vision-card-label">02</div>
+                <div className="vision-card-title">提案する</div>
+                <p className="vision-card-desc">
+                  事例・料金・比較表など、文脈に合った資料を AI が選んで提示。
+                </p>
+              </div>
+              <div className="vision-card">
+                <div className="vision-card-label">03</div>
+                <div className="vision-card-title">商談化する</div>
+                <p className="vision-card-desc">
+                  温度感が高まったタイミングで日程調整。予約しなければ追客まで実行。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 2026-05-19: trust-bar 第二改訂。FV 内の HERO_STATS が同じ 3 社の
           数字 (BizteX 20倍+ / EdulinX 60%+ / Univis 3ヶ月で2件) に
@@ -1335,122 +1419,172 @@ export default function HomePageClient({
               The Problem
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              リードはあるのに、<span style={{ color: "var(--cta)" }}>商談にならない</span>
+              リードは増えた。<span style={{ color: "var(--cta)" }}>でも、商談は増えていない。</span>
             </div>
             <p
               className="ssub"
               style={{ textAlign: "center", margin: "0 auto 40px", maxWidth: 720 }}
             >
-              MA でリードは集まる。CRM にも溜まる。<br />
-              でも、初動対応・フォロー・再訪問のタイミングを逃すと、
-              多くのリードは商談化しないまま眠っていきます。
+              広告、SEO、ウェビナー、ホワイトペーパーでリードは集まる。
+              それでも多くの見込み客は、初動対応の遅れ、フォロー不足、再訪問の見逃しによって、
+              商談にならないまま離脱していきます。
             </p>
-            {/* 2026-05-19: 数字の詰め込み (42h / 7割 / 5s / 100倍 / 78%) を
-                42h vs 5s の対比 1 つに集約。Supporting fact 2 件は補足
-                テキストに統合 (広告感を下げる)。 */}
-            <div className="problem-contrast">
-              <div className="problem-side problem-side-bad">
-                <div className="problem-side-label">業界の現実</div>
-                <div className="problem-side-num">
-                  42<span className="problem-side-unit">時間</span>
-                </div>
-                <div className="problem-side-desc">
-                  B2B 営業の平均リードレスポンスタイム。<br />この間にリードの温度は急速に下がります。
-                </div>
+
+            {/* Funnel 図 + KPI Shift Table */}
+            <div className="problem-funnel">
+              <div className="problem-funnel-row">
+                <span className="problem-funnel-step">流入</span>
+                <span className="problem-funnel-arrow">→</span>
+                <span className="problem-funnel-step">CV</span>
+                <span className="problem-funnel-arrow">→</span>
+                <span className="problem-funnel-step problem-funnel-gap">初動対応</span>
+                <span className="problem-funnel-arrow">→</span>
+                <span className="problem-funnel-step problem-funnel-gap">ヒアリング</span>
+                <span className="problem-funnel-arrow">→</span>
+                <span className="problem-funnel-step problem-funnel-gap">日程調整</span>
+                <span className="problem-funnel-arrow">→</span>
+                <span className="problem-funnel-step">商談</span>
               </div>
-              <div className="problem-arrow" aria-hidden>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14 M13 6l6 6-6 6" />
-                </svg>
+              <p className="problem-funnel-caption">
+                ↑ ここが抜け落ちている
+              </p>
+            </div>
+
+            <div className="kpi-shift-heading">
+              Web サイトの KPI を、CV 数から <span style={{ color: "var(--cta)" }}>商談数</span> へ。
+            </div>
+            <div className="kpi-shift-table-wrap">
+              <table className="kpi-shift-table">
+                <thead>
+                  <tr>
+                    <th>従来の見方</th>
+                    <th>Meeton ai で見るべき見方</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>問い合わせ数</td><td>Web 経由商談数</td></tr>
+                  <tr><td>フォーム CVR</td><td>リード to 商談化率</td></tr>
+                  <tr><td>資料 DL 数</td><td>資料 DL 後の商談化率</td></tr>
+                  <tr><td>チャット数</td><td>有効会話からの商談化率</td></tr>
+                  <tr><td>PV 数</td><td>高意向訪問者の商談化数</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Webinar CTA (補助、Problem 直後の自然な誘導) */}
+            <Link href="/webinar/" className="problem-webinar-band" aria-label="無料ウェビナー">
+              <span className="problem-webinar-tag">今月開催 / 無料</span>
+              <span className="problem-webinar-body">
+                <strong>「リードは来ているのに、商談にならない」を 30 分で分解する無料ウェビナー</strong>
+                <span className="problem-webinar-meta">マーケ・IS 責任者向け · 第 3 木曜 14:00 · 録画あり</span>
+              </span>
+              <span className="problem-webinar-arrow" aria-hidden>→</span>
+            </Link>
+
+            <style dangerouslySetInnerHTML={{ __html: `
+.problem-funnel{margin:0 auto 48px;padding:28px clamp(16px,3vw,28px);background:#fff;border:1px solid var(--border);border-radius:18px;max-width:880px;text-align:center}
+.problem-funnel-row{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.problem-funnel-step{display:inline-block;padding:8px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;color:var(--heading);font-family:var(--fb)}
+.problem-funnel-gap{background:#fee2e2;border-color:#fecaca;color:#b91c1c}
+.problem-funnel-arrow{color:var(--sub);font-size:14px;font-weight:600}
+.problem-funnel-caption{font-size:13px;color:#b91c1c;font-weight:700;font-family:var(--fb);margin:0}
+.kpi-shift-heading{font-size:clamp(20px,3vw,26px);font-weight:800;color:var(--heading);text-align:center;margin-bottom:24px;letter-spacing:-.01em;line-height:1.4}
+.kpi-shift-table-wrap{max-width:720px;margin:0 auto 48px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(15,17,40,.03)}
+.kpi-shift-table{width:100%;border-collapse:collapse}
+.kpi-shift-table th{padding:16px 20px;font-size:13px;font-weight:800;text-align:left;background:var(--surface);color:var(--heading);font-family:var(--fb);letter-spacing:-.005em;border-bottom:1px solid var(--border)}
+.kpi-shift-table td{padding:14px 20px;font-size:15px;color:var(--heading);border-bottom:1px solid var(--border);font-weight:600}
+.kpi-shift-table tr:last-child td{border-bottom:none}
+.kpi-shift-table td:first-child{color:var(--sub);font-weight:500}
+.kpi-shift-table td:last-child{color:var(--cta);font-weight:800}
+.problem-webinar-band{display:flex;align-items:center;gap:16px;max-width:720px;margin:0 auto;padding:16px 22px;background:#fff;border:1px solid var(--border);border-radius:14px;text-decoration:none;color:inherit;transition:background .2s,border-color .2s,transform .2s;flex-wrap:wrap}
+.problem-webinar-band:hover{background:rgba(18,163,125,.04);border-color:rgba(18,163,125,.35);transform:translateY(-1px)}
+.problem-webinar-tag{display:inline-flex;align-items:center;padding:5px 12px;font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--cta);color:#fff;border-radius:999px;flex-shrink:0}
+.problem-webinar-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.problem-webinar-body strong{font-size:14px;font-weight:800;color:var(--heading);line-height:1.5}
+.problem-webinar-meta{font-size:12px;color:var(--sub);font-weight:600}
+.problem-webinar-arrow{color:var(--cta);font-weight:800;font-size:18px}
+@media (max-width:680px){
+  .problem-funnel-step{font-size:11px;padding:6px 10px}
+  .problem-funnel-arrow{font-size:11px}
+  .kpi-shift-table th,.kpi-shift-table td{padding:12px 14px;font-size:13px}
+}` }} />
+          </div>
+        </section>
+      )}
+
+      {/* NEW FUNNEL — フォーム送信を待つ Web サイトから、AI SDR が働く Web サイトへ */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{ background: "var(--bg)", paddingTop: 64, paddingBottom: 64 }}
+        >
+          <div className="section-inner" style={{ maxWidth: 1080 }}>
+            <div className="slabel" style={{ textAlign: "center" }}>
+              New Funnel
+            </div>
+            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
+              フォーム送信を待つだけの Web サイトから、<br />
+              <span style={{ color: "var(--cta)" }}>AI SDR が働く Web サイト</span>へ。
+            </div>
+            <p className="ssub" style={{ textAlign: "center", margin: "0 auto 48px", maxWidth: 720 }}>
+              従来の Web サイトは、訪問者がフォームを送るまで何も起きません。Meeton ai は、訪問者の興味や行動に合わせて会話を開始し、疑問に答え、必要な資料を提案し、温度感が高まったタイミングで商談予約へつなげます。
+            </p>
+            <div className="funnel-compare">
+              <div className="funnel-compare-side funnel-compare-before">
+                <div className="funnel-compare-label">Before — 待ちの Web サイト</div>
+                <div className="funnel-compare-flow">
+                  <span>フォーム送信</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>カレンダー表示</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>予約</span>
+                </div>
+                <p className="funnel-compare-note">3 step。会話・課題ヒアリングなし。</p>
               </div>
-              <div className="problem-side problem-side-good">
-                <div className="problem-side-label">Meeton ai</div>
-                <div className="problem-side-num">
-                  5<span className="problem-side-unit">秒</span>
+              <div className="funnel-compare-side funnel-compare-after">
+                <div className="funnel-compare-label">After — AI SDR が働く Web サイト</div>
+                <div className="funnel-compare-flow funnel-compare-flow-vertical">
+                  <span>訪問</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>会話</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>ヒアリング</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>資料提案</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>不安解消</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>カレンダー</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>予約</span>
+                  <span className="funnel-compare-arrow">→</span>
+                  <span>追客</span>
                 </div>
-                <div className="problem-side-desc">
-                  ウェブ Convert の瞬間に AI SDR が初動応答。<br />
-                  最初に応答した会社が選ばれる、を構造化。
-                </div>
+                <p className="funnel-compare-note">8 step。AI SDR が文脈を持って商談化まで導く。</p>
               </div>
             </div>
             <style dangerouslySetInnerHTML={{ __html: `
-.problem-contrast{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(20px,4vw,40px);margin-bottom:36px;padding:clamp(28px,4vw,48px) clamp(20px,4vw,40px);background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:0 1px 2px rgba(15,17,40,.03)}
-.problem-side{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
-.problem-side-label{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-family:var(--fm)}
-.problem-side-bad .problem-side-label{color:#e0475b}
-.problem-side-good .problem-side-label{color:var(--cta)}
-.problem-side-num{font-size:clamp(64px,11vw,112px);font-weight:900;line-height:.9;letter-spacing:-.04em;font-family:var(--fm)}
-.problem-side-bad .problem-side-num{background:linear-gradient(135deg,#e0475b,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.problem-side-good .problem-side-num{background:linear-gradient(135deg,#12a37d,#0fc19a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.problem-side-unit{font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-left:6px;letter-spacing:-.01em}
-.problem-side-bad .problem-side-unit{color:#e0475b}
-.problem-side-good .problem-side-unit{color:var(--cta)}
-.problem-side-desc{font-size:13.5px;color:var(--sub);line-height:1.7;max-width:280px}
-.problem-arrow{color:var(--cta);display:flex;align-items:center;justify-content:center}
-.problem-supporting{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px}
-.problem-fact{display:flex;align-items:center;gap:16px;padding:18px 22px;background:#fff;border:1px solid var(--border);border-radius:12px}
-.problem-fact-num{font-size:32px;font-weight:900;color:var(--heading);letter-spacing:-.03em;font-family:var(--fm);line-height:1;flex-shrink:0}
-.problem-fact-unit{font-size:18px;font-weight:800;color:var(--sub);margin-left:2px}
-.problem-fact-text{font-size:13px;color:var(--text);line-height:1.6}
-@media (max-width:760px){
-  .problem-contrast{grid-template-columns:1fr;gap:24px}
-  .problem-arrow svg{transform:rotate(90deg)}
-  .problem-supporting{grid-template-columns:1fr}
-  .problem-fact-num{font-size:28px}
-}` }} />
-            {/* 2026-05-19: 左緑線+gradient bg の callout カードを撤去
-                (「AI生成でよく見るスタイル」というユーザー指摘)。
-                プレーンな本文 + 区切り線で、本のような落ち着いた誌面に。 */}
-            <div
-              style={{
-                maxWidth: 720,
-                margin: "0 auto",
-                paddingTop: 8,
-                textAlign: "center",
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "clamp(15px, 2vw, 17px)",
-                  color: "var(--heading)",
-                  lineHeight: 1.85,
-                  fontWeight: 600,
-                  margin: 0,
-                }}
-              >
-                リードを集めるツール（MA / 広告 / コンテンツ）はあっても、
-                「集めたリードを商談に変える」ところで、ほぼ全ての企業が詰まっています。
-              </p>
-              <p
-                style={{
-                  fontSize: "clamp(15px, 2vw, 17px)",
-                  color: "var(--heading)",
-                  marginTop: 18,
-                  lineHeight: 1.85,
-                  fontWeight: 700,
-                }}
-              >
-                これは、マーケでも営業でもない、組織構造の空白。<br />
-                AI SDR なら、この空白を 24 時間 365 日、即時に埋めることができます。
-              </p>
-              <p
-                style={{
-                  fontSize: 13,
-                  color: "var(--sub)",
-                  marginTop: 16,
-                  lineHeight: 1.7,
-                }}
-              >
-                Meeton ai は、その「ラストワンマイル」だけに特化した AI SDR Platform です。
-              </p>
-            </div>
+.funnel-compare{display:grid;grid-template-columns:1fr 1.4fr;gap:24px;max-width:1000px;margin:0 auto}
+@media (max-width:880px){.funnel-compare{grid-template-columns:1fr}}
+.funnel-compare-side{padding:28px 24px;border-radius:16px;background:#fff;border:1px solid var(--border)}
+.funnel-compare-before{background:#fafafa}
+.funnel-compare-after{background:rgba(18,163,125,.04);border-color:rgba(18,163,125,.25)}
+.funnel-compare-label{font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--sub);margin-bottom:18px;text-transform:uppercase}
+.funnel-compare-after .funnel-compare-label{color:var(--cta)}
+.funnel-compare-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.funnel-compare-flow span:not(.funnel-compare-arrow){padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;color:var(--heading);font-family:var(--fb)}
+.funnel-compare-after .funnel-compare-flow span:not(.funnel-compare-arrow){background:#fff;border-color:rgba(18,163,125,.2)}
+.funnel-compare-arrow{color:var(--sub);font-size:13px;font-weight:600}
+.funnel-compare-note{font-size:13px;color:var(--sub);font-weight:600;margin:0}
+` }} />
           </div>
         </section>
       )}
 
       {/* HOW IT WORKS — Meeton ai flow diagram (lazy-loaded in both modes) */}
-      <MeetingFlowDiagram />
+      <div id="how-it-works">
+        <MeetingFlowDiagram />
+      </div>
 
       {/* 3 PRODUCT CARDS */}
       <section
@@ -1464,16 +1598,75 @@ export default function HomePageClient({
           style={{ position: "relative", zIndex: 2 }}
         >
           <div className="slabel" style={{ textAlign: "center" }}>
-            What Meeton Does
+            Capabilities
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
-            リードを商談に変える、
-            <span style={{ color: "var(--cta)" }}>3 つの AI 機能</span>
+            AI SDR の仕事を、<span style={{ color: "var(--cta)" }}>機能で支える</span>
           </div>
-          <p className="ssub" style={{ textAlign: "center", margin: "0 auto" }}>
-            話しかける → 商談を取る → 追いかける。3 つの AI が連動して
-            24 時間自動で実行します。検討再開時の資料推薦は追加機能 Meeton Library で対応。
+          <p className="ssub" style={{ textAlign: "center", margin: "0 auto 40px" }}>
+            会話する・予約する・提案する・追客する・判断する。AI SDR の一連の仕事を、
+            5 つの機能が連動して 24 時間自動で実行します。
           </p>
+
+          {/* Capabilities Matrix — AI SDR の仕事 → 対応機能 */}
+          <div className="capability-matrix-wrap">
+            <table className="capability-matrix">
+              <thead>
+                <tr>
+                  <th>AI SDR の仕事</th>
+                  <th>対応機能</th>
+                  <th>役割</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="cap-job">会話する</td>
+                  <td className="cap-feat">Meeton Live</td>
+                  <td className="cap-role">訪問者と自然な対話で課題ヒアリング</td>
+                </tr>
+                <tr>
+                  <td className="cap-job">商談予約する</td>
+                  <td className="cap-feat">Meeton Calendar</td>
+                  <td className="cap-role">温度の高い瞬間に即時カレンダー提示</td>
+                </tr>
+                <tr>
+                  <td className="cap-job">資料を提案する</td>
+                  <td className="cap-feat">Meeton Library</td>
+                  <td className="cap-role">会話文脈から最適な資料を自動選定</td>
+                </tr>
+                <tr>
+                  <td className="cap-job">追客する</td>
+                  <td className="cap-feat">Meeton Email</td>
+                  <td className="cap-role">予約しなかったリードに 1:1 で AI メール継続</td>
+                </tr>
+                <tr>
+                  <td className="cap-job">判断する</td>
+                  <td className="cap-feat">Meeton Intent</td>
+                  <td className="cap-role">訪問企業 ID + 行動シグナルから次のアクションを決定</td>
+                </tr>
+              </tbody>
+            </table>
+            <style dangerouslySetInnerHTML={{ __html: `
+.capability-matrix-wrap{max-width:880px;margin:0 auto 56px;background:#050807;border:1px solid rgba(255,255,255,.10);border-radius:18px;overflow:hidden;padding:8px}
+.capability-matrix{width:100%;border-collapse:collapse;color:#fff}
+.capability-matrix th{padding:18px 22px;font-size:11px;font-weight:800;letter-spacing:.18em;text-align:left;background:rgba(255,255,255,.04);color:rgba(255,255,255,.55);font-family:var(--fm);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.10)}
+.capability-matrix td{padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.06);font-size:14.5px;line-height:1.6}
+.capability-matrix tr:last-child td{border-bottom:none}
+.cap-job{font-weight:800;color:#fff;font-size:15px;white-space:nowrap}
+.cap-feat{font-weight:800;color:#04cb78;font-family:var(--fm);font-size:14px;white-space:nowrap}
+.cap-role{color:rgba(255,255,255,.7);font-weight:500}
+@media (max-width:680px){
+  .capability-matrix th{padding:12px 14px;font-size:10px}
+  .capability-matrix td{padding:12px 14px;font-size:13px}
+  .cap-job{font-size:13px}
+  .cap-feat{font-size:12px}
+}
+` }} />
+          </div>
+
+          <div className="slabel" style={{ textAlign: "center", marginTop: 24, marginBottom: 8, color: "var(--sub)" }}>
+            主要 3 機能の詳細
+          </div>
 
           {/* 2026-05-19: 4 機能 → 3 機能に整理。Library は補助機能扱いとし、
               トップでは「話しかける(Live) → 商談を取る(Calendar) → 追いかける(Email)」
@@ -1498,9 +1691,9 @@ export default function HomePageClient({
                 gradient: "linear-gradient(135deg,#0891b2,#06b6d4)",
                 label: "② MEETON CALENDAR",
                 title: "Meeton Calendar",
-                desc: "リードがコンバートした瞬間、フォーム送信・サンクスページ・メール経由で即座に商談予約を提示。5 秒以内に動き、温度の高いまま商談予約まで完了します。",
+                desc: "リードがコンバートした瞬間、フォーム送信・サンクスページ・メール経由で即座に商談予約を提示。温度の高いタイミングを逃さず商談予約まで完了します。",
                 features: [
-                  { label: "コンバート直後に5秒で商談予約を提示", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+                  { label: "高意向タイミングで即時に商談予約を提示", icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
                   { label: "担当者の自動アサイン（業種・規模ベース）", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" },
                   { label: "AI が事前ヒアリング・CRM 自動登録", icon: "M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z M9 22h6" },
                 ],
@@ -1899,7 +2092,7 @@ export default function HomePageClient({
               Use Cases
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              <span style={{ color: "var(--cta)" }}>3 つの活用パターン</span>
+              Meeton ai が <span style={{ color: "var(--cta)" }}>商談化する 4 つの瞬間</span>
             </div>
             <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
               リードの状態に応じて、Meeton ai が自動で動き分けます。
@@ -1907,39 +2100,48 @@ export default function HomePageClient({
             <div className="usecases-grid">
               {[
                 {
-                  title: "Speed to Lead",
-                  subtitle: "リードコンバートの瞬間に商談化",
-                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、5 秒以内に商談予約まで完結させる。",
-                  metric: "5秒",
-                  metricLabel: "業界平均は42時間",
+                  title: "問い合わせ前の訪問者",
+                  subtitle: "フォーム送信せず離脱する",
+                  body: "B2B サイト訪問者の 97% はフォームを送らずに離脱。Meeton ai は訪問者の興味・行動を検知し、AI SDR が会話を開始。疑問を解消しながら商談機会へ導きます。",
+                  metric: "97%",
+                  metricLabel: "離脱する未コンバート訪問者",
+                  color: "#0891b2",
+                  gradient: "linear-gradient(135deg,#0891b2,#22d3ee)",
+                  bg: "linear-gradient(135deg,#ecfeff,#f0fdfa)",
+                  // chat
+                  iconPath: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+                },
+                {
+                  title: "資料 DL 直後のリード",
+                  subtitle: "温度が高いのに放置される",
+                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、温度の高いまま商談予約まで完結させます。",
+                  metric: "即時",
+                  metricLabel: "高温度時点で商談化",
                   color: "#12a37d",
                   gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
                   bg: "linear-gradient(135deg,#e5f8f2,#f0fdf9)",
-                  // bolt
                   iconPath: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
                 },
                 {
-                  title: "Persistent Follow-up",
-                  subtitle: "即時予約しなかったリードを諦めない",
+                  title: "予約しなかったリード",
+                  subtitle: "その場で決めきれない",
                   body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
                   metric: "1:1",
                   metricLabel: "MA メールはセグメント配信",
                   color: "#7c5cfc",
                   gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
                   bg: "linear-gradient(135deg,#f0ecfe,#faf5ff)",
-                  // mail / refresh
                   iconPath: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
                 },
                 {
-                  title: "Re-engage on Return",
-                  subtitle: "戻ってきたリードを逃さない",
+                  title: "再訪問した既存リード",
+                  subtitle: "検討再開を見逃す",
                   body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
                   metric: "100%",
                   metricLabel: "再訪リードに即対応",
                   color: "#3b6ff5",
                   gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
                   bg: "linear-gradient(135deg,#eaf0fe,#f5f8ff)",
-                  // refresh
                   iconPath: "M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
                 },
               ].map((uc, i) => (
@@ -2051,8 +2253,8 @@ export default function HomePageClient({
               ))}
             </div>
             <style dangerouslySetInnerHTML={{ __html: `
-              .usecases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-              @media (max-width:1000px){.usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}}
+              .usecases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+              @media (max-width:780px){.usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}}
               .usecase-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:transparent}
             ` }} />
           </div>
@@ -2480,7 +2682,7 @@ export default function HomePageClient({
               letterSpacing: "-0.025em",
             }}
           >
-            Meeton aiに、
+            自社サイトで、
             <br />
             <span
               style={{
@@ -2490,7 +2692,7 @@ export default function HomePageClient({
                 backgroundClip: "text",
               }}
             >
-              商談獲得を任せよう
+              どれだけ商談化できるか診断しませんか？
             </span>
           </div>
           <p
@@ -2502,9 +2704,10 @@ export default function HomePageClient({
               fontSize: "clamp(15px,2.2vw,17px)",
             }}
           >
-            タグ設置は最短 5 分。初期設定から運用開始まで DynaMeet が伴走し、AI SDR「Meeton ai」が 24 時間ファネル全体を自律的に動かして商談を創出し続けます。
+            30 分のデモで、自社サイトの商談化余地を可視化します。タグ設置は最短 5 分。AI SDR「Meeton ai」が 24 時間、訪問者と会話・商談予約・追客まで自律的に実行します。
           </p>
           <div
+            id="diagnose"
             style={{
               display: "flex",
               gap: 14,
@@ -2520,10 +2723,15 @@ export default function HomePageClient({
             </button>
             <button
               className="btn-ghost"
-              onClick={() => openDocModal("final_cta")}
+              onClick={() => openMeetingModal("diagnose")}
             >
-              資料請求 →
+              自社サイトの商談化余地を診断
             </button>
+          </div>
+          <div style={{ marginTop: 16 }}>
+            <Link href="/webinar/" style={{ color: "var(--sub)", fontSize: 14, fontWeight: 600, textDecoration: "none", borderBottom: "1px solid var(--border2)", paddingBottom: 2 }}>
+              無料ウェビナーを見る →
+            </Link>
           </div>
           <div
             style={{
