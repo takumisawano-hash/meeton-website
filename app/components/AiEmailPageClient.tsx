@@ -18,7 +18,7 @@ const css = `
   --cta:#7c5cfc;--cta-hover:#9b7dfd;--cta-glow:rgba(124,92,252,.25);--cta-light:#f0ecfe;
   --accent:#3b6ff5;--accent-light:#eaf0fe;--accent-glow:rgba(59,111,245,.2);
   --blue:#3b6ff5;--blue-light:#eaf0fe;
-  --cyan:#0891b2;--green:#12a37d;--pink:#d03ea1;--red:#e0475b;
+  --cyan:#0891b2;--green:#04cb78;--pink:#d03ea1;--red:#e0475b;
   --fd:'Plus Jakarta Sans',var(--font-jakarta),sans-serif;--fb:'Noto Sans JP',var(--font-noto),'Plus Jakarta Sans',sans-serif;--fm:'JetBrains Mono',var(--font-mono),monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,11 +34,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
-
 .btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#9b7dfd);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:linear-gradient(135deg,var(--cta),#9b7dfd);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
 .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
 .btn-cta:active{transform:translateY(0)}
 .btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
@@ -49,9 +46,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .btn-ghost:hover svg{transform:translateX(3px)}
 
 .slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
-.slabel::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+
 .slabel-c{justify-content:center}
-.slabel-c::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+
 .section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
@@ -59,11 +56,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:680px}
 
 /* HERO - Split Layout */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#f0ecfe 0%,#fff 30%,#eaf0fe 60%,#fff 100%)}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:#fff;border-bottom:1px solid var(--border)}
 .hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,72px);position:relative;z-index:2}
 .hero-text{flex:1.15;min-width:0}
 .hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(124,92,252,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cta-light),var(--accent-light));border:1px solid rgba(124,92,252,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(124,92,252,.4)}
 .hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;color:var(--heading);line-height:1.1;letter-spacing:-.025em;margin-bottom:22px}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
@@ -229,7 +226,7 @@ const faqData = [
 const whyData = [
   { title: 'MA メールではなく、もう一人の SDR', desc: 'テンプレート × 時間トリガーの一斉配信ではない。AI が文脈で判断する 1:1 のフォロー。', color: '#7c5cfc', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
   { title: 'AI が文脈で動的判断', desc: '送るタイミング・送る内容・送らない判断まで、リードの最新行動から AI が都度決定。', color: '#3b6ff5', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M14 8l4 4-4 4 M3 12h15' },
-  { title: '商談予約獲得がゴール', desc: 'スコアリングや育成のためではなく、Meeton Calendar への着地（商談確定）を目的に動く。', color: '#12a37d', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
+  { title: '商談予約獲得がゴール', desc: 'スコアリングや育成のためではなく、Meeton Calendar への着地（商談確定）を目的に動く。', color: '#04cb78', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
   { title: 'MA の上に乗る設計', desc: 'Marketo / HubSpot Marketing と並走可能。MA が取りこぼしたリードに 1:1 で追いつく。', color: '#0891b2', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
 ];
 
@@ -238,7 +235,7 @@ const flowSteps = [
   { num: '2', title: 'AIが文脈で送信判断', sub: 'AI decides timing', color: '#7c5cfc' },
   { num: '3', title: '最新行動から動的生成', sub: 'Dynamic generation', color: '#9b7dfd' },
   { num: '4', title: '反応次第で次手を変更', sub: 'Adapt by signal', color: '#3b6ff5' },
-  { num: '5', title: '商談予約獲得', sub: 'Meeting booked', color: '#12a37d' },
+  { num: '5', title: '商談予約獲得', sub: 'Meeting booked', color: '#04cb78' },
 ];
 
 const flowStepIcons = [
@@ -264,7 +261,7 @@ const useCaseData = [
   },
   {
     title: '休眠リードの再接触',
-    color: '#12a37d',
+    color: '#04cb78',
     desc: '過去に接点があったが冷えてしまった CRM 上のリードへ、最新のサイト再訪をトリガーに AI が再アプローチを判断。',
     example: '半年ぶりにサイトをご覧いただいたようなので、改めて 30 分のお時間をいただけませんか？',
   },
@@ -282,9 +279,7 @@ export default function AiEmailPageClient() {
 
       {/* HERO - Split Layout */}
       <section className="hero">
-        <div className="dot-grid" />
-        <div className="glow" style={{ background: 'rgba(124,92,252,.2)', width: 600, height: 600, top: -200, right: -100 }} />
-        <div className="glow" style={{ background: 'rgba(59,111,245,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
+
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON EMAIL</div>
@@ -322,7 +317,7 @@ export default function AiEmailPageClient() {
                   { step: 'タッチ #1', subject: 'Meeton Calendar 未予約を検知', status: '即時送信', statusColor: '#6e7494', statusBg: '#f4f6fb', delay: '.6s', behavior: '初動メール: 関心領域に直接触れる' },
                   { step: 'タッチ #2', subject: '別アングルで再アプローチ', status: '開封 ✓', statusColor: '#7c5cfc', statusBg: '#f0ecfe', delay: '.9s', behavior: '料金ページ再訪を AI が検知' },
                   { step: 'タッチ #3', subject: '前回クリックした章を深掘り', status: 'クリック ✓', statusColor: '#3b6ff5', statusBg: '#eaf0fe', delay: '1.2s', behavior: '反応領域に絞って追加資料' },
-                  { step: 'タッチ #4', subject: 'Meeton Calendar 提案', status: '送信判断', statusColor: '#12a37d', statusBg: '#e5f8f2', delay: '1.5s', behavior: '商談予約への着地を AI が判断' },
+                  { step: 'タッチ #4', subject: 'Meeton Calendar 提案', status: '送信判断', statusColor: '#04cb78', statusBg: '#e5f8f2', delay: '1.5s', behavior: '商談予約への着地を AI が判断' },
                 ].map((v, i) => (
                   <div className="dash-row" key={i} style={{ animationDelay: v.delay }}>
                     <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg,${v.statusColor}cc,${v.statusColor})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 800, flexShrink: 0 }}>{(i + 1).toString()}</div>
@@ -356,7 +351,6 @@ export default function AiEmailPageClient() {
 
       {/* 5-STEP FLOW */}
       <section className="flow-section">
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>パイプライン</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email の流れ</div>
@@ -384,7 +378,6 @@ export default function AiEmailPageClient() {
 
       {/* FEATURE DETAILS */}
       <section className="section" style={{ position: 'relative', paddingBottom: 0 }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>機能詳細</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email の仕組みを深掘り</div>
@@ -394,7 +387,6 @@ export default function AiEmailPageClient() {
 
       {/* Feature 1: Instant Follow-up */}
       <section style={{ padding: '0 clamp(16px,5vw,48px)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
@@ -516,7 +508,7 @@ export default function AiEmailPageClient() {
           {/* Feature 3: Auto Sequence */}
           <div className="phase-row">
             <div className="phase-text">
-              <div className="phase-tag" style={{ color: '#12a37d' }}><span style={{ position: 'relative' }}>FEATURE 03</span></div>
+              <div className="phase-tag" style={{ color: '#04cb78' }}><span style={{ position: 'relative' }}>FEATURE 03</span></div>
               <div className="phase-h">商談予約獲得をゴールに、反応で次手を変える</div>
               <div className="phase-desc">スコアリングや育成のためのメールではありません。Meeton Calendar への着地（商談確定）を一本のゴールに据え、未反応なら別の切り口で、開封・クリックがあれば反応領域を深掘りで、AI が次の一手を都度動的判断します。</div>
               <div className="phase-features">
@@ -526,7 +518,7 @@ export default function AiEmailPageClient() {
                   '最大送信数・最低間隔のガードレール設定可能',
                   'Meeton Calendar URL を文脈に応じて自動挿入',
                 ].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#12a37d15', color: '#12a37d' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#04cb7815', color: '#04cb78' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -537,7 +529,7 @@ export default function AiEmailPageClient() {
                   {[
                     { step: 'タッチ #1', label: '初動アプローチ', status: '開封 ✗', statusColor: '#6e7494', subDesc: '未反応 → 別アングルで次手を AI 判断', delay: '.4s' },
                     { step: 'タッチ #2', label: '別アングルで再接触', status: '開封 ✓', statusColor: '#7c5cfc', subDesc: '開封 + リンククリック → 関心領域を特定', delay: '.7s' },
-                    { step: 'タッチ #3', label: 'Meeton Calendar 提案', status: 'クリック ✓', statusColor: '#12a37d', subDesc: '商談予約への着地を AI が判断', delay: '1.0s' },
+                    { step: 'タッチ #3', label: 'Meeton Calendar 提案', status: 'クリック ✓', statusColor: '#04cb78', subDesc: '商談予約への着地を AI が判断', delay: '1.0s' },
                   ].map((item, i, arr) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'stretch', gap: 12, marginBottom: 0 }}>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 20 }}>
@@ -556,8 +548,8 @@ export default function AiEmailPageClient() {
                     </div>
                   ))}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 4, animation: 'slideIn .5s 1.3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d' }}>すべての判断は商談予約獲得へ</span>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#04cb78', animation: 'pulse 1.5s infinite' }} />
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#04cb78' }}>すべての判断は商談予約獲得へ</span>
                   </div>
                 </div>
               </div>
@@ -613,7 +605,7 @@ export default function AiEmailPageClient() {
                     <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--heading)', marginBottom: 6 }}>導入事例の追加情報をお送りします</div>
                     <div style={{ fontSize: 9, color: 'var(--sub)', lineHeight: 1.5, marginBottom: 8 }}>先日ご覧いただいた料金ページの内容について、御社の業界に近い導入事例を 3 つピックアップしました…</div>
                     <div style={{ display: 'flex', gap: 6 }}>
-                      <button style={{ flex: 1, padding: '6px 8px', fontSize: 9, fontWeight: 800, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
+                      <button style={{ flex: 1, padding: '6px 8px', fontSize: 9, fontWeight: 800, background: '#04cb78', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
                         承認
                         <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                         送信
@@ -635,7 +627,6 @@ export default function AiEmailPageClient() {
 
       {/* USE CASES */}
       <section className="section" style={{ background: 'var(--surface)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>USE CASES</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email の活用シーン</div>
@@ -673,7 +664,6 @@ export default function AiEmailPageClient() {
 
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Email なのか</div>
@@ -729,8 +719,6 @@ export default function AiEmailPageClient() {
 
       {/* FINAL CTA */}
       <section className="final-cta">
-        <div className="dot-grid" style={{ opacity: .3 }} />
-        <div className="glow" style={{ background: 'rgba(124,92,252,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email で、<br /><em>MA の上にもう一人の SDR を</em></div>

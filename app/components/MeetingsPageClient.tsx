@@ -18,7 +18,7 @@ const css = `
   --cta:#0891b2;--cta-hover:#06b6d4;--cta-glow:rgba(8,145,178,.25);--cta-light:#ecfeff;
   --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.2);
   --blue:#3b6ff5;--blue-light:#eaf0fe;
-  --cyan:#0891b2;--green:#12a37d;--pink:#d03ea1;--red:#e0475b;
+  --cyan:#0891b2;--green:#04cb78;--pink:#d03ea1;--red:#e0475b;
   --fd:'Plus Jakarta Sans',var(--font-jakarta),sans-serif;--fb:'Noto Sans JP',var(--font-noto),'Plus Jakarta Sans',sans-serif;--fm:'JetBrains Mono',var(--font-mono),monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,11 +34,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(8,145,178,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
-
 .btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#06b6d4);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:linear-gradient(135deg,var(--cta),#06b6d4);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
 .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
 .btn-cta:active{transform:translateY(0)}
 .btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
@@ -49,24 +46,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .btn-ghost:hover svg{transform:translateX(3px)}
 
 .slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
-.slabel::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+
 .slabel-c{justify-content:center}
-.slabel-c::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+
 .section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
-.stitle em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stitle em{font-style:normal;color:var(--cta);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:680px}
 
 /* HERO - Split Layout */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#ecfeff 0%,#fff 30%,#f0f9ff 60%,#fff 100%)}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:#fff;border-bottom:1px solid var(--border)}
 .hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,72px);position:relative;z-index:2}
 .hero-text{flex:1.15;min-width:0}
 .hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(8,145,178,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cta-light),var(--accent-light));border:1px solid rgba(8,145,178,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(8,145,178,.4)}
 .hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;color:var(--heading);line-height:1.1;letter-spacing:-.025em;margin-bottom:22px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
+.hero h1 em{font-style:normal;color:var(--cta);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
 .hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:540px;margin-bottom:36px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
 .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,auto));gap:clamp(20px,4vw,48px);margin-top:clamp(32px,5vw,44px);padding-top:clamp(24px,4vw,32px);border-top:1px solid var(--border)}
@@ -228,7 +225,7 @@ const faqData = [
 
 const whyData = [
   { title: '商談予約を即時起動', desc: 'リードコンバート瞬間に Meeton Calendar が発動。業界平均 42 時間の初動対応を AI SDR が即時化、意思決定が冷めない。', color: '#0891b2', iconPath: 'M12 6v6l4 2 M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z' },
-  { title: '最後の100mを担う', desc: 'MA / CRM が積み上げたリードを商談確定まで導く、コンバージョン直前の意思決定支援レイヤー。', color: '#12a37d', iconPath: 'M9 12l2 2 4-4 M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z' },
+  { title: '最後の100mを担う', desc: 'MA / CRM が積み上げたリードを商談確定まで導く、コンバージョン直前の意思決定支援レイヤー。', color: '#04cb78', iconPath: 'M9 12l2 2 4-4 M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z' },
   { title: '細かな割り振りルール', desc: 'フォーム入力・業界・規模・関心領域に応じて、表示するカレンダー・担当者を条件分岐で自動制御。', color: '#7c5cfc', iconPath: 'M3 12h7 M10 12l4-6h6 M10 12l4 6h6' },
   { title: 'CRM 連携', desc: '予約情報・ヒアリング内容を自動で CRM に登録。HubSpot / Salesforce ネイティブ連携。', color: '#3b6ff5', iconPath: 'M4 4h16v16H4z M4 9h16 M9 4v16' },
 ];
@@ -237,7 +234,7 @@ const flowSteps = [
   { num: '1', title: 'リードコンバート瞬間', sub: 'Conversion trigger', color: '#6e7494' },
   { num: '2', title: '即時にカレンダー発動', sub: 'Instant calendar', color: '#0891b2' },
   { num: '3', title: '担当者へ自動割り振り', sub: 'Smart routing', color: '#06b6d4' },
-  { num: '4', title: '商談確定', sub: 'Meeting confirmed', color: '#12a37d' },
+  { num: '4', title: '商談確定', sub: 'Meeting confirmed', color: '#04cb78' },
   { num: '5', title: 'CRM 自動連携', sub: 'CRM sync', color: '#3b6ff5' },
 ];
 
@@ -258,7 +255,7 @@ const useCases = [
   },
   {
     title: 'Meeton Live 内でそのまま予約',
-    color: '#12a37d',
+    color: '#04cb78',
     desc: '識別済みリードへの AI SDR 対話で関心が固まった瞬間、Meeton Calendar の予約 UI がそのまま会話内に表示されます。',
     example: '佐藤SDRと30分でお話しできるお時間をお選びください。CRMから自動で担当を割り振っています。',
   },
@@ -282,9 +279,7 @@ export default function MeetingsPageClient() {
 
       {/* HERO - Split Layout */}
       <section className="hero">
-        <div className="dot-grid" />
-        <div className="glow" style={{ background: 'rgba(8,145,178,.2)', width: 600, height: 600, top: -200, right: -100 }} />
-        <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
+
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON CALENDAR</div>
@@ -298,7 +293,7 @@ export default function MeetingsPageClient() {
               </button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '5秒', l: 'Speed to Lead' }, { v: '42h→5s', l: 'BizteX 事例' }, { v: '自動', l: '担当者割り振り' }].map((s, i) => (
+              {[{ v: '即時', l: 'Speed to Lead' }, { v: '42h→5s', l: 'BizteX 事例' }, { v: '自動', l: '担当者割り振り' }].map((s, i) => (
                 <div key={i} className="hero-stat"><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -313,7 +308,7 @@ export default function MeetingsPageClient() {
                   <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton Calendar</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--cta)', animation: 'dotBlink 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>5秒で発動</span>
+                    <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>即時で発動</span>
                   </div>
                 </div>
               </div>
@@ -362,7 +357,7 @@ export default function MeetingsPageClient() {
               <div style={{ padding: '10px 16px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0891b2', animation: 'pulse 1.5s infinite' }} />
-                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>Speed to Lead: 5秒</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>Speed to Lead: 即時</span>
                 </div>
                 <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)', display: 'inline-flex', alignItems: 'center', gap: 3 }}>
                   詳細
@@ -376,11 +371,10 @@ export default function MeetingsPageClient() {
 
       {/* 5-STEP FLOW */}
       <section className="flow-section">
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>パイプライン</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar の流れ</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>リードコンバート瞬間に Meeton Calendar が 5 秒で発動。最後の100mを担い、商談確定まで導きます。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 52px' }}>リードコンバート瞬間に Meeton Calendar が 即時で発動。最後の100mを担い、商談確定まで導きます。</p>
           <div className="flow-steps">
             {flowSteps.map((step, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
@@ -404,25 +398,23 @@ export default function MeetingsPageClient() {
 
       {/* FEATURE DETAILS */}
       <section className="section" style={{ position: 'relative', paddingBottom: 0 }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>機能詳細</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar の仕組みを深掘り</div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>リードコンバート瞬間の検知から 5 秒発動・割り振り・商談確定まで、Speed to Lead を実装するプロセスを解説します。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 20px' }}>リードコンバート瞬間の検知から 即時発動・割り振り・商談確定まで、Speed to Lead を実装するプロセスを解説します。</p>
         </div>
       </section>
 
       {/* Feature 1: Chat inline booking */}
       <section style={{ padding: '0 clamp(16px,5vw,48px)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ color: '#0891b2' }}><span style={{ position: 'relative' }}>FEATURE 01</span></div>
-              <div className="phase-h">リードコンバート瞬間に5秒で発動</div>
-              <div className="phase-desc">フォーム送信・サンクスページ通過・Meeton Live 内での予約意思表示など、リードコンバートのトリガーを複数経路で捕捉。意思決定が冷めないうちに、Meeton Calendar が 5 秒で起動します。</div>
+              <div className="phase-h">リードコンバート瞬間に即時で発動</div>
+              <div className="phase-desc">フォーム送信・サンクスページ通過・Meeton Live 内での予約意思表示など、リードコンバートのトリガーを複数経路で捕捉。意思決定が冷めないうちに、Meeton Calendar が 即時で起動します。</div>
               <div className="phase-features">
-                {['業界平均 42 時間 → Meeton ai 5 秒', 'フォーム送信・サンクスページ・メール経由から発動', 'ページ遷移なしで予約完了', 'コンバージョン直前の最後の100mを担う'].map((feat, i) => (
+                {['業界平均 42 時間 → Meeton ai 即時', 'フォーム送信・サンクスページ・メール経由から発動', 'ページ遷移なしで予約完了', 'コンバージョン直前の最後の100mを担う'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#0891b215', color: '#0891b2' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
@@ -433,10 +425,10 @@ export default function MeetingsPageClient() {
                   {/* Chat with inline calendar */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0891b2', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>5秒で発動した Meeton Calendar</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>即時で発動した Meeton Calendar</span>
                   </div>
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 12, marginBottom: 8, opacity: 0, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--heading)', marginBottom: 8, lineHeight: 1.5 }}>5秒で発動 — お時間をお選びください</div>
+                    <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--heading)', marginBottom: 8, lineHeight: 1.5 }}>即時で発動 — お時間をお選びください</div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6 }}>
                       {['月 10:00', '火 14:00', '水 11:00', '木 15:00', '金 10:00', '金 14:00'].map((s, i) => (
                         <div key={i} style={{ background: i === 4 ? '#ecfeff' : 'var(--surface)', border: `1px solid ${i === 4 ? '#0891b2' : 'var(--border)'}`, borderRadius: 6, padding: '5px 2px', textAlign: 'center', fontSize: 9, fontWeight: 700, color: i === 4 ? '#0891b2' : 'var(--heading)' }}>{s}</div>
@@ -444,9 +436,9 @@ export default function MeetingsPageClient() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', opacity: 0, animation: 'slideIn .5s .9s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '4px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      5秒で予約確定 — 業界42時間→5秒
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#04cb78', background: '#e5f8f2', padding: '4px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#04cb78" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      即時で予約確定 — 業界平均 42 時間の初動
                     </span>
                   </div>
                 </div>
@@ -458,12 +450,12 @@ export default function MeetingsPageClient() {
           {/* Feature 2: Thank you page */}
           <div className="phase-row reverse">
             <div className="phase-text">
-              <div className="phase-tag" style={{ color: '#12a37d' }}><span style={{ position: 'relative' }}>FEATURE 02</span></div>
+              <div className="phase-tag" style={{ color: '#04cb78' }}><span style={{ position: 'relative' }}>FEATURE 02</span></div>
               <div className="phase-h">サンクスページで即カレンダー提示</div>
-              <div className="phase-desc">フォーム送信直後がリードコンバートの瞬間。Speed to Lead 5 秒の発動ポイントとして、サンクスページに Meeton Calendar を自動表示し、即座に商談予約を獲得します。</div>
+              <div className="phase-desc">フォーム送信直後がリードコンバートの瞬間。Speed to Lead 即時の発動ポイントとして、サンクスページに Meeton Calendar を自動表示し、即座に商談予約を獲得します。</div>
               <div className="phase-features">
-                {['フォーム送信完了の瞬間に5秒発動', 'リードコンバート直後の意思決定を捕捉', 'サンクスページに自動埋め込み', '追加設定なしで即稼働'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#12a37d15', color: '#12a37d' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
+                {['フォーム送信完了の瞬間に即時発動', 'リードコンバート直後の意思決定を捕捉', 'サンクスページに自動埋め込み', '追加設定なしで即稼働'].map((feat, i) => (
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#04cb7815', color: '#04cb78' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -473,7 +465,7 @@ export default function MeetingsPageClient() {
                   {/* Thank you page mockup */}
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, marginBottom: 10, animation: 'chatPop .5s .3s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: '#04cb78', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
                       </div>
                       <div>
@@ -484,13 +476,13 @@ export default function MeetingsPageClient() {
                     <div style={{ fontSize: 10, color: 'var(--sub)', lineHeight: 1.6, marginBottom: 10, fontWeight: 600 }}>すぐにでもお話ししたい場合は、下記カレンダーから日程をお選びください。</div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6 }}>
                       {['月 10:00', '水 14:00', '金 11:00'].map((s, i) => (
-                        <div key={i} style={{ background: i === 2 ? '#e5f8f2' : 'var(--surface)', border: `1px solid ${i === 2 ? '#12a37d' : 'var(--border)'}`, borderRadius: 6, padding: '6px 4px', textAlign: 'center', fontSize: 9, fontWeight: 700, color: i === 2 ? '#12a37d' : 'var(--heading)' }}>{s}</div>
+                        <div key={i} style={{ background: i === 2 ? '#e5f8f2' : 'var(--surface)', border: `1px solid ${i === 2 ? '#04cb78' : 'var(--border)'}`, borderRadius: 6, padding: '6px 4px', textAlign: 'center', fontSize: 9, fontWeight: 700, color: i === 2 ? '#04cb78' : 'var(--heading)' }}>{s}</div>
                       ))}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, animation: 'slideIn .5s .8s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#12a37d' }}>コンバート瞬間を5秒で捕捉中...</span>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#04cb78', animation: 'pulse 1.5s infinite' }} />
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#04cb78' }}>コンバート瞬間を即時で捕捉中...</span>
                   </div>
                 </div>
               </div>
@@ -503,9 +495,9 @@ export default function MeetingsPageClient() {
             <div className="phase-text">
               <div className="phase-tag" style={{ color: '#3b6ff5' }}><span style={{ position: 'relative' }}>FEATURE 03</span></div>
               <div className="phase-h">Meeton Email でカレンダー URL を再提示</div>
-              <div className="phase-desc">即時予約に至らなかったリードにも、Meeton Email が文脈で動的判断しながら Meeton Calendar URL を再提示。再訪・反応のタイミングで再度 5 秒で発動します。</div>
+              <div className="phase-desc">即時予約に至らなかったリードにも、Meeton Email が文脈で動的判断しながら Meeton Calendar URL を再提示。再訪・反応のタイミングで再度 即時で発動します。</div>
               <div className="phase-features">
-                {['即時予約しなかったリードを Meeton Email が追跡', 'メール内に Meeton Calendar URL を文脈で自動挿入', 'AI が文脈で送信タイミングを動的判断', '再訪検知で再度5秒発動'].map((feat, i) => (
+                {['即時予約しなかったリードを Meeton Email が追跡', 'メール内に Meeton Calendar URL を文脈で自動挿入', 'AI が文脈で送信タイミングを動的判断', '再訪検知で再度即時発動'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#3b6ff515', color: '#3b6ff5' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
@@ -534,7 +526,7 @@ export default function MeetingsPageClient() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 10, opacity: 0, animation: 'slideIn .5s .8s cubic-bezier(.16,1,.3,1) forwards' }}>
-                    {[{ label: '再訪検知', active: true }, { label: 'クリック', active: false }, { label: '5秒発動', active: false }].map((d, i) => (
+                    {[{ label: '再訪検知', active: true }, { label: 'クリック', active: false }, { label: '即時発動', active: false }].map((d, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                         <div style={{ width: 6, height: 6, borderRadius: '50%', background: d.active ? '#3b6ff5' : 'var(--border2)' }} />
                         <span style={{ fontSize: 9, fontWeight: 700, color: d.active ? '#3b6ff5' : 'var(--sub)' }}>{d.label}</span>
@@ -582,7 +574,7 @@ export default function MeetingsPageClient() {
                       { cond: '従業員数 ≥ 500', then: 'エンタープライズチーム', color: '#7c5cfc' },
                       { cond: '業界 = SaaS', then: 'SaaS Team / 田中', color: '#3b6ff5' },
                       { cond: '営業時間外', then: '翌営業日 10:00 に再表示', color: '#0891b2' },
-                      { cond: 'それ以外', then: 'ラウンドロビン', color: '#12a37d' },
+                      { cond: 'それ以外', then: 'ラウンドロビン', color: '#04cb78' },
                     ].map((rule, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, padding: '6px 8px', background: '#fafaf7', borderRadius: 6, opacity: 0, animation: `slideIn .5s ${.5 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
                         <span style={{ fontFamily: 'var(--fm)', fontSize: 8, fontWeight: 800, color: 'var(--sub)', letterSpacing: 0.5 }}>IF</span>
@@ -605,7 +597,6 @@ export default function MeetingsPageClient() {
 
       {/* USE CASES */}
       <section className="section" style={{ background: 'var(--surface)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>USE CASES</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar の活用シーン</div>
@@ -635,7 +626,7 @@ export default function MeetingsPageClient() {
       {/* CTA — after USE CASES: demo */}
       <MidPageCta
         eyebrow="See it in action"
-        heading="リードコンバート瞬間の5秒発動・割り振りルール・Meeton Email 連携を、実機で 30 分で体験"
+        heading="リードコンバート瞬間の即時発動・割り振りルール・Meeton Email 連携を、実機で 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
         onClick={openMeetonCalendar}
@@ -643,12 +634,11 @@ export default function MeetingsPageClient() {
 
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Calendar なのか</div>
           <p className="ssub" style={{ textAlign: 'center', margin: '0 auto 44px' }}>
-            業界42時間の Speed to Lead を 5 秒に。営業組織のための AI SDR プラットフォームの中核。
+            業界42時間の Speed to Lead を 即時に。営業組織のための AI SDR プラットフォームの中核。
             商談数の天井に悩む方は{' '}
             <Link href="/for/cro/" style={{ color: 'var(--cta)', fontWeight: 700 }}>CRO 向けの解説</Link>
             、機会損失の可視化に課題のある IS チームは{' '}
@@ -673,7 +663,7 @@ export default function MeetingsPageClient() {
       {/* CTA — after WHY: doc (internal review) */}
       <MidPageCta
         eyebrow="For internal review"
-        heading="Meeton Calendar の仕様・5秒発動の仕組み・割り振りルール・連携先一覧をまとめた資料を社内検討用にお送りします"
+        heading="Meeton Calendar の仕様・即時発動の仕組み・割り振りルール・連携先一覧をまとめた資料を社内検討用にお送りします"
         ctaLabel="資料を請求する"
         variant="doc"
         onClick={openMeetonDownloadCenter}
@@ -701,12 +691,10 @@ export default function MeetingsPageClient() {
 
       {/* FINAL CTA */}
       <section className="final-cta">
-        <div className="dot-grid" style={{ opacity: .3 }} />
-        <div className="glow" style={{ background: 'rgba(8,145,178,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Calendar で、<br /><em>商談予約を即時起動</em></div>
-          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>業界42時間の Speed to Lead を 5 秒に。リードコンバート瞬間に発動し、コンバージョン直前の最後の100mを担います。</p>
+          <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>業界42時間の Speed to Lead を 即時に。リードコンバート瞬間に発動し、コンバージョン直前の最後の100mを担います。</p>
           <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
             <button className="btn-ghost" onClick={openMeetonCalendar}>

@@ -104,11 +104,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
    Solid CTA color (no gradient) since gradient buttons read AI-cliché. */
 .btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .22s cubic-bezier(.16,1,.3,1),background .18s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;letter-spacing:-.005em}
 .btn:focus-visible{outline:2px solid var(--cta);outline-offset:3px}
-.btn-cta{background:var(--cta);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 4px 14px var(--cta-glow);letter-spacing:-.005em}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;text-align:center;background:var(--cta);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 4px 14px var(--cta-glow);letter-spacing:-.005em;text-decoration:none}
 .btn-cta:hover{background:var(--cta-hover);transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 8px 22px var(--cta-glow)}
 .btn-cta:active{transform:translateY(0);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 2px 8px var(--cta-glow)}
 .btn-cta-lg{padding:16px 32px;font-size:16px;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 6px 22px var(--cta-glow)}
-.btn-ghost{background:transparent;color:var(--heading);border:1px solid var(--border2);padding:15px 30px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:border-color .18s,color .18s,background .18s,transform .18s cubic-bezier(.16,1,.3,1);min-height:44px;-webkit-tap-highlight-color:transparent}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;text-align:center;background:transparent;color:var(--heading);border:1px solid var(--border2);padding:15px 30px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:border-color .18s,color .18s,background .18s,transform .18s cubic-bezier(.16,1,.3,1);min-height:44px;-webkit-tap-highlight-color:transparent;text-decoration:none}
 .btn-ghost:hover{border-color:var(--heading);color:var(--heading);background:var(--surface);transform:translateY(-1px)}
 .btn-ghost:focus-visible{outline:2px solid var(--cta);outline-offset:3px}
 .btn-ghost:active{transform:translateY(0)}

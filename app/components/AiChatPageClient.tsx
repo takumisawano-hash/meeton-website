@@ -15,10 +15,10 @@ const css = `
   --bg:#ffffff;--surface:#f4f6fb;--surface2:#eaedfa;
   --border:#dfe3f0;--border2:#c8cedf;
   --text:#4a506e;--heading:#0f1128;--sub:#6e7494;
-  --cta:#12a37d;--cta-hover:#0fc19a;--cta-glow:rgba(18,163,125,.25);--cta-light:#e5f8f2;
+  --cta:#04cb78;--cta-hover:#0fc19a;--cta-glow:rgba(18,163,125,.25);--cta-light:#e5f8f2;
   --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.2);
   --blue:#3b6ff5;--blue-light:#eaf0fe;
-  --cyan:#0891b2;--green:#12a37d;--pink:#d03ea1;--red:#e0475b;
+  --cyan:#0891b2;--green:#04cb78;--pink:#d03ea1;--red:#e0475b;
   --fd:'Plus Jakarta Sans',var(--font-jakarta),sans-serif;--fb:'Noto Sans JP',var(--font-noto),'Plus Jakarta Sans',sans-serif;--fm:'JetBrains Mono',var(--font-mono),monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,11 +34,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(18,163,125,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
-
 .btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
 .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
 .btn-cta:active{transform:translateY(0)}
 .btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
@@ -49,24 +46,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .btn-ghost:hover svg{transform:translateX(3px)}
 
 .slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
-.slabel::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+
 .slabel-c{justify-content:center}
-.slabel-c::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+
 .section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
-.stitle em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stitle em{font-style:normal;color:var(--cta);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:680px}
 
 /* HERO - Split Layout */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f0ecfe 60%,#fff 100%)}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:#fff;border-bottom:1px solid var(--border)}
 .hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,72px);position:relative;z-index:2}
 .hero-text{flex:1.15;min-width:0}
 .hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(18,163,125,.4)}
 .hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;color:var(--heading);line-height:1.1;letter-spacing:-.025em;margin-bottom:22px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
+.hero h1 em{font-style:normal;color:var(--cta);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
 .hero-sub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:540px;margin-bottom:36px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
 .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,auto));gap:clamp(20px,4vw,48px);margin-top:clamp(32px,5vw,44px);padding-top:clamp(24px,4vw,32px);border-top:1px solid var(--border)}
@@ -132,7 +129,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 /* USE CASES */
 .usecase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
 .usecase-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:32px 28px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(15,17,40,.03)}
-.usecase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--uc-color,#12a37d);opacity:.9;transition:opacity .25s,height .25s}
+.usecase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--uc-color,#04cb78);opacity:.9;transition:opacity .25s,height .25s}
 .usecase-card:hover{transform:translateY(-4px);box-shadow:0 24px 56px -20px rgba(18,163,125,.18);border-color:transparent}
 .usecase-card:hover::before{height:4px}
 .usecase-num{position:absolute;top:24px;right:28px;font-family:var(--fm);font-size:12px;font-weight:800;color:var(--sub);letter-spacing:.1em;opacity:.6}
@@ -225,14 +222,14 @@ const faqData = [
 
 const whyData = [
   { title: '過去の全文脈を引き継いで対話', desc: '過去の閲覧履歴・DL 履歴・メール反応・CRM 上のメモまで全文脈として把握。営業担当者が把握しているコンテキストをそのまま会話に持ち込みます。', color: '#7c5cfc', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M21 12c0 4.97-4.03 9-9 9 M14 8l4 4-4 4 M3 12h15' },
-  { title: '再訪リードに AI SDR が即時応答', desc: 'CRM で識別済みの再訪リードに、AI SDR がリアルタイム対話。営業組織が追うべきリードに AI SDR のリソースを集中投下します。', color: '#12a37d', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 11l-3 3-2-2' },
+  { title: '再訪リードに AI SDR が即時応答', desc: 'CRM で識別済みの再訪リードに、AI SDR がリアルタイム対話。営業組織が追うべきリードに AI SDR のリソースを集中投下します。', color: '#04cb78', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 11l-3 3-2-2' },
   { title: '商談予約までその場で完結', desc: 'AI SDR との対話の流れの中で Meeton Calendar の予約 UI が起動。ページ遷移なしで商談確定まで導き、ラストワンマイルの会話を完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
   { title: 'シナリオ不要・5分で稼働', desc: 'JavaScript タグ 1 行と CRM 連携で AI SDR が稼働。ルール分岐やフロー設計は不要、開発リソース不要。', color: '#0891b2', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
 ];
 
 const flowSteps = [
   { num: '1', title: '識別済みリードが再訪', sub: 'Known lead returns', color: '#6e7494' },
-  { num: '2', title: '過去の全文脈を引継ぎ', sub: 'Pull full context', color: '#12a37d' },
+  { num: '2', title: '過去の全文脈を引継ぎ', sub: 'Pull full context', color: '#04cb78' },
   { num: '3', title: 'AI SDR が即時応答', sub: 'AI SDR engages', color: '#0fc19a' },
   { num: '4', title: '関心領域を深掘り', sub: 'Deepen interest', color: '#7c5cfc' },
   { num: '5', title: 'その場で商談予約', sub: 'Meeting booked', color: '#3b6ff5' },
@@ -247,7 +244,7 @@ const flowStepIcons = [
 ];
 
 const useCases = [
-  { title: '資料DL後の再訪リード', color: '#12a37d', desc: '資料DL したリードが料金ページに戻ってきたタイミングで起動。DL した資料の章まで把握した状態で AI SDR が対話を再開します。', msg: '田中様、お帰りなさい。先日ダウンロードいただいた料金最適化ガイドで気になる点はございましたか？' },
+  { title: '資料DL後の再訪リード', color: '#04cb78', desc: '資料DL したリードが料金ページに戻ってきたタイミングで起動。DL した資料の章まで把握した状態で AI SDR が対話を再開します。', msg: '田中様、お帰りなさい。先日ダウンロードいただいた料金最適化ガイドで気になる点はございましたか？' },
   { title: 'ターゲットアカウント', color: '#7c5cfc', desc: 'CRM 上の重点企業ステータスをそのまま把握。企業名・直近のメール反応・営業担当のメモまで踏まえて、AI SDR が会話を開始します。', msg: '{会社名}様、ウェビナー後に料金ページをご覧いただいている件、AI SDR としてご質問にお答えします。' },
   { title: 'メール反応からの再訪', color: '#3b6ff5', desc: 'AI Email や MA からのメールをクリックして再訪したリードを検知。クリックしたリンク先・関心領域を文脈として継続して対話します。', msg: '先ほどのメールでお送りした事例、ご興味の章を中心に詳細をご案内できます。' },
 ];
@@ -264,9 +261,7 @@ export default function AiChatPageClient() {
 
       {/* HERO - Split Layout */}
       <section className="hero">
-        <div className="dot-grid" />
-        <div className="glow" style={{ background: 'rgba(18,163,125,.2)', width: 600, height: 600, top: -200, right: -100 }} />
-        <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
+
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON LIVE</div>
@@ -288,13 +283,13 @@ export default function AiChatPageClient() {
           <div className="hero-visual anim d4">
             <div className="dash">
               <div className="dash-hdr">
-                <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 800 }}>
+                <div style={{ width: 32, height: 32, borderRadius: 10, background: '#04cb78', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 800 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
                 <div>
                   <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--heading)' }}>Meeton Live</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#12a37d', animation: 'dotBlink 1.5s infinite' }} />
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#04cb78', animation: 'dotBlink 1.5s infinite' }} />
                     <span style={{ fontSize: 10, color: 'var(--sub)', fontWeight: 600 }}>識別済みリード対話中</span>
                   </div>
                 </div>
@@ -302,7 +297,7 @@ export default function AiChatPageClient() {
               <div style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {/* AI message 1 */}
                 <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', opacity: 0, animation: 'chatPop .5s .6s cubic-bezier(.16,1,.3,1) forwards' }}>
-                  <div style={{ width: 24, height: 24, borderRadius: 8, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: 24, height: 24, borderRadius: 8, background: '#04cb78', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
                   <div style={{ background: '#e5f8f2', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
@@ -317,7 +312,7 @@ export default function AiChatPageClient() {
                 </div>
                 {/* AI message 2 */}
                 <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.4s cubic-bezier(.16,1,.3,1) forwards' }}>
-                  <div style={{ width: 24, height: 24, borderRadius: 8, background: 'linear-gradient(135deg,#12a37d,#0fc19a)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: 24, height: 24, borderRadius: 8, background: '#04cb78', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   </div>
                   <div style={{ background: '#e5f8f2', borderRadius: '12px 12px 12px 4px', padding: '10px 14px', maxWidth: '80%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
@@ -327,15 +322,15 @@ export default function AiChatPageClient() {
                 {/* Calendar confirmation badge */}
                 <div style={{ display: 'flex', justifyContent: 'center', opacity: 0, animation: 'chatPop .5s 1.8s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ background: 'linear-gradient(135deg,#e5f8f2,#ecfeff)', border: '1px solid rgba(18,163,125,.2)', borderRadius: 10, padding: '6px 14px', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    <span style={{ fontSize: 11, fontWeight: 800, color: '#12a37d' }}>14:00 で商談確定</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#04cb78" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span style={{ fontSize: 11, fontWeight: 800, color: '#04cb78' }}>14:00 で商談確定</span>
                   </div>
                 </div>
               </div>
               {/* Summary bar */}
               <div style={{ padding: '10px 16px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#04cb78', animation: 'pulse 1.5s infinite' }} />
                   <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>HubSpot 文脈引継ぎ済み</span>
                 </div>
                 <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--cta)', display: 'inline-flex', alignItems: 'center', gap: 3 }}>
@@ -350,7 +345,6 @@ export default function AiChatPageClient() {
 
       {/* 5-STEP FLOW */}
       <section className="flow-section">
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>パイプライン</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live の流れ</div>
@@ -378,7 +372,6 @@ export default function AiChatPageClient() {
 
       {/* FEATURE DETAILS */}
       <section className="section" style={{ position: 'relative', paddingBottom: 0 }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>機能詳細</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live の仕組みを深掘り</div>
@@ -388,16 +381,15 @@ export default function AiChatPageClient() {
 
       {/* Feature 1: Context-aware greeting */}
       <section style={{ padding: '0 clamp(16px,5vw,48px)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
-              <div className="phase-tag" style={{ color: '#12a37d' }}><span style={{ position: 'relative' }}>FEATURE 01</span></div>
+              <div className="phase-tag" style={{ color: '#04cb78' }}><span style={{ position: 'relative' }}>FEATURE 01</span></div>
               <div className="phase-h">再訪リードに、AI SDR が即時応答</div>
               <div className="phase-desc">HubSpot / Salesforce で識別済みのリードがサイトに戻ってきた瞬間、AI SDR が即座に対話を開始。営業組織が追っているリードへ、リアルタイムでラストワンマイルの会話を届けます。</div>
               <div className="phase-features">
                 {['CRM 連携で識別済みリードを即時判定', '再訪検知から AI SDR 起動まで自動', 'フォーム送信・メールクリック・サンクスページで識別済みに昇格', 'シナリオ設計・ルール分岐不要'].map((feat, i) => (
-                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#12a37d15', color: '#12a37d' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
+                  <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#04cb7815', color: '#04cb78' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
             </div>
@@ -405,11 +397,11 @@ export default function AiChatPageClient() {
               <div className="pvis vis0">
                 <div style={{ padding: 16 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, animation: 'chatPop .4s .2s cubic-bezier(.16,1,.3,1) forwards', opacity: 0 }}>
-                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#12a37d', animation: 'pulse 1.5s infinite' }} />
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#04cb78', animation: 'pulse 1.5s infinite' }} />
                     <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--sub)' }}>識別済みリードの再訪検知</span>
                   </div>
                   {[
-                    { page: 'HubSpot識別済', msg: '田中様の再訪を検知 → AI SDR 起動', icon: (<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>), bg: '#e5f8f2', border: '#12a37d' },
+                    { page: 'HubSpot識別済', msg: '田中様の再訪を検知 → AI SDR 起動', icon: (<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#04cb78" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>), bg: '#e5f8f2', border: '#04cb78' },
                     { page: 'メールクリック経由', msg: '事例メールから再訪 → 同テーマで深掘り', icon: (<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>), bg: '#f0ecfe', border: '#7c5cfc' },
                     { page: 'サンクスページ通過', msg: 'フォーム送信直後の再訪 → 即時対話', icon: (<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3b6ff5" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>), bg: '#eaf0fe', border: '#3b6ff5' },
                   ].map((item, i) => (
@@ -470,7 +462,7 @@ export default function AiChatPageClient() {
                     </div>
                     <div style={{ display: 'flex', gap: 6 }}>
                       <span style={{ fontSize: 9, fontWeight: 700, color: '#7c5cfc', background: '#f0ecfe', padding: '3px 8px', borderRadius: 6 }}>過去閲覧と関連</span>
-                      <span style={{ fontSize: 9, fontWeight: 700, color: '#12a37d', background: '#e5f8f2', padding: '3px 8px', borderRadius: 6 }}>同業界事例</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#04cb78', background: '#e5f8f2', padding: '3px 8px', borderRadius: 6 }}>同業界事例</span>
                     </div>
                   </div>
                 </div>
@@ -502,7 +494,7 @@ export default function AiChatPageClient() {
                   <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: 14, opacity: 0, animation: 'chatPop .5s .4s cubic-bezier(.16,1,.3,1) forwards' }}>
                     {[
                       { label: '会社名', value: 'ABC株式会社', color: '#3b6ff5' },
-                      { label: 'リード', value: '田中 太郎 (識別済)', color: '#12a37d' },
+                      { label: 'リード', value: '田中 太郎 (識別済)', color: '#04cb78' },
                       { label: '直近 DL', value: '料金最適化ガイド', color: '#7c5cfc' },
                       { label: 'メール反応', value: '事例リンク クリック', color: '#0891b2' },
                       { label: 'CRM 担当', value: '佐藤 SDR', color: '#3b6ff5' },
@@ -569,8 +561,8 @@ export default function AiChatPageClient() {
                   {/* Confirmation */}
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10, opacity: 0, animation: 'chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
                     <div style={{ background: 'linear-gradient(135deg,#e5f8f2,#ecfeff)', border: '1px solid rgba(18,163,125,.2)', borderRadius: 8, padding: '6px 14px', display: 'inline-flex', alignItems: 'center', gap: 6, animation: 'ringPulse 2s infinite' }}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#12a37d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span style={{ fontSize: 10, fontWeight: 800, color: '#12a37d' }}>14:00 で商談確定</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#04cb78" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span style={{ fontSize: 10, fontWeight: 800, color: '#04cb78' }}>14:00 で商談確定</span>
                     </div>
                   </div>
                 </div>
@@ -582,7 +574,6 @@ export default function AiChatPageClient() {
 
       {/* USE CASES */}
       <section className="section" style={{ background: 'var(--surface)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>USE CASES</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live の活用シーン</div>
@@ -622,7 +613,6 @@ export default function AiChatPageClient() {
 
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Live なのか</div>
@@ -684,8 +674,6 @@ export default function AiChatPageClient() {
 
       {/* FINAL CTA */}
       <section className="final-cta">
-        <div className="dot-grid" style={{ opacity: .3 }} />
-        <div className="glow" style={{ background: 'rgba(18,163,125,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Live で、<br /><em>識別済みリードを商談へ</em></div>

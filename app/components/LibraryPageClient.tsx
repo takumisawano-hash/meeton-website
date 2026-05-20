@@ -18,7 +18,7 @@ const css = `
   --cta:#d03ea1;--cta-hover:#e555b6;--cta-glow:rgba(208,62,161,.25);--cta-light:#fdeaf5;
   --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.2);
   --blue:#3b6ff5;--blue-light:#eaf0fe;
-  --cyan:#0891b2;--green:#12a37d;--pink:#d03ea1;--red:#e0475b;
+  --cyan:#0891b2;--green:#04cb78;--pink:#d03ea1;--red:#e0475b;
   --fd:'Plus Jakarta Sans',var(--font-jakarta),sans-serif;--fb:'Noto Sans JP',var(--font-noto),'Plus Jakarta Sans',sans-serif;--fm:'JetBrains Mono',var(--font-mono),monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,11 +34,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .anim-y{animation:slideUpOnly .6s cubic-bezier(.16,1,.3,1) forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.38s}.d4{animation-delay:.52s}.d5{animation-delay:.68s}
 
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(208,62,161,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.glow{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
-
 .btn{border:none;cursor:pointer;font-family:var(--fb);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s;font-weight:700;border-radius:10px;min-height:44px;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-cta{background:linear-gradient(135deg,var(--cta),#e555b6);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:linear-gradient(135deg,var(--cta),#e555b6);color:#fff;padding:14px 28px;font-size:15px;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset;letter-spacing:.01em}
 .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
 .btn-cta:active{transform:translateY(0)}
 .btn-cta-lg{padding:18px 40px;font-size:18px;box-shadow:0 8px 30px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
@@ -49,9 +46,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .btn-ghost:hover svg{transform:translateX(3px)}
 
 .slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
-.slabel::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+
 .slabel-c{justify-content:center}
-.slabel-c::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+
 .section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
 .stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
@@ -59,11 +56,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.8;color:var(--sub);max-width:680px}
 
 /* HERO - Split Layout */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#fdeaf5 0%,#fff 30%,#f0ecfe 60%,#fff 100%)}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:#fff;border-bottom:1px solid var(--border)}
 .hero-inner{max-width:1200px;width:100%;display:flex;align-items:center;gap:clamp(32px,5vw,72px);position:relative;z-index:2}
 .hero-text{flex:1.15;min-width:0}
 .hero-visual{flex:1;min-width:0;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(208,62,161,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cta-light),var(--accent-light));border:1px solid rgba(208,62,161,.18);padding:9px 22px;border-radius:24px;margin-bottom:28px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px);letter-spacing:.04em}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(208,62,161,.4)}
 .hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;color:var(--heading);line-height:1.1;letter-spacing:-.025em;margin-bottom:22px}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;display:inline-block}
@@ -263,9 +260,7 @@ export default function LibraryPageClient() {
 
       {/* HERO - Split Layout */}
       <section className="hero">
-        <div className="dot-grid" />
-        <div className="glow" style={{ background: 'rgba(208,62,161,.2)', width: 600, height: 600, top: -200, right: -100 }} />
-        <div className="glow" style={{ background: 'rgba(124,92,252,.1)', width: 500, height: 500, bottom: -150, left: -80 }} />
+
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON LIBRARY</div>
@@ -362,7 +357,6 @@ export default function LibraryPageClient() {
 
       {/* 5-STEP FLOW */}
       <section className="flow-section">
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1140, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>パイプライン</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の流れ</div>
@@ -390,7 +384,6 @@ export default function LibraryPageClient() {
 
       {/* FEATURE DETAILS */}
       <section className="section" style={{ position: 'relative', paddingBottom: 0 }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>機能詳細</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の仕組みを深掘り</div>
@@ -400,7 +393,6 @@ export default function LibraryPageClient() {
 
       {/* Feature 1: AI Recommendation */}
       <section style={{ padding: '0 clamp(16px,5vw,48px)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div className="phase-row">
             <div className="phase-text">
@@ -526,8 +518,8 @@ export default function LibraryPageClient() {
                       </div>
                     </div>
                     {[
-                      { name: '料金プラン_v3.pdf', size: '2.4 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
-                      { name: '導入事例集.pdf', size: '5.1 MB', status: 'インデックス完了', color: '#12a37d', icon: 'PDF' },
+                      { name: '料金プラン_v3.pdf', size: '2.4 MB', status: 'インデックス完了', color: '#04cb78', icon: 'PDF' },
+                      { name: '導入事例集.pdf', size: '5.1 MB', status: 'インデックス完了', color: '#04cb78', icon: 'PDF' },
                       { name: '稟議書テンプレ.pptx', size: '1.8 MB', status: '解析中 78%', color: '#d03ea1', icon: 'PPT' },
                     ].map((f, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0', borderBottom: i < 2 ? '1px solid var(--border)' : 'none', opacity: 0, animation: `slideIn .5s ${.6 + i * .2}s cubic-bezier(.16,1,.3,1) forwards` }}>
@@ -612,7 +604,6 @@ export default function LibraryPageClient() {
 
       {/* USE CASES */}
       <section className="section" style={{ background: 'var(--surface)', position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>USE CASES</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library の活用シーン</div>
@@ -650,7 +641,6 @@ export default function LibraryPageClient() {
 
       {/* WHY */}
       <section className="section" style={{ position: 'relative' }}>
-        <div className="dot-grid" style={{ opacity: .3 }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>選ばれる理由</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>なぜ Meeton Library なのか</div>
@@ -708,8 +698,6 @@ export default function LibraryPageClient() {
 
       {/* FINAL CTA */}
       <section className="final-cta">
-        <div className="dot-grid" style={{ opacity: .3 }} />
-        <div className="glow" style={{ background: 'rgba(208,62,161,.15)', width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div className="final-cta-inner">
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library で、<br /><em>既存リードの商談機会を再発火</em></div>
