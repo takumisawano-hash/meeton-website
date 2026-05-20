@@ -104,6 +104,7 @@ export default function Nav({
 
   const navLinks = [
     { href: "/ai-sdr/", label: "AI SDR とは" },
+    { href: "/compare/scheduling-vs-ai-sdr/", label: "比較" },
     { href: "/webinar/", label: "ウェビナー" },
     { href: "#download-center", label: "お役立ち資料", onClick: true },
     { href: "/case-studies/", label: "導入事例" },
