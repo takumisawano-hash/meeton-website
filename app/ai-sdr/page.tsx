@@ -361,11 +361,11 @@ export default function AiSdrPage() {
 .ai-sdr-hero h1 .accent{color:#04cb78}
 .ai-sdr-hero .hero-sub{font-size:clamp(15px,2vw,18px);line-height:1.85;color:rgba(255,255,255,.7);max-width:680px;margin:0 auto 36px}
 .ai-sdr-hero .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{display:inline-block;background:linear-gradient(135deg,#04cb78,#0fc19a);color:#fff;padding:16px 32px;border-radius:10px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 4px 18px rgba(4,203,120,.32);transition:transform .2s,box-shadow .25s}
+.btn-primary{display:inline-block;background:#04cb78;color:#fff;padding:16px 32px;border-radius:10px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 4px 18px rgba(4,203,120,.32);transition:transform .2s,box-shadow .25s}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(4,203,120,.4)}
 .btn-secondary{display:inline-block;background:transparent;color:rgba(255,255,255,.9);padding:16px 32px;border:1px solid rgba(255,255,255,.2);border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;transition:background .2s,border-color .2s}
 .btn-secondary:hover{background:rgba(255,255,255,.05);border-color:rgba(4,203,120,.45)}
-.btn-primary-on-dark{display:inline-block;background:linear-gradient(135deg,#04cb78,#0fc19a);color:#fff;padding:16px 32px;border-radius:10px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 4px 18px rgba(4,203,120,.32);transition:transform .2s}
+.btn-primary-on-dark{display:inline-block;background:#04cb78;color:#fff;padding:16px 32px;border-radius:10px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 4px 18px rgba(4,203,120,.32);transition:transform .2s}
 .btn-primary-on-dark:hover{transform:translateY(-2px)}
 
 .section{padding:clamp(64px,8vw,96px) clamp(16px,5vw,48px)}

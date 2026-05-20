@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import HomePageClient from '@/app/components/HomePageClient'
 
 export const metadata: Metadata = {
-  title: 'Webサイト訪問者を商談に変えるAI',
+  title: 'Webサイトに AI SDR を配属する AI SDR Platform｜Meeton ai',
   description:
-    'リードの検知から商談予約まで5秒で対応。Meeton aiはWebサイト訪問者を自動で商談に変えるAIセールスプラットフォームです。14日間無料トライアル。',
+    '訪問・問い合わせ・資料 DL・再訪問の瞬間に AI SDR が即時対応。会話・ヒアリング・資料提案・日程調整・追客までを自動化し、Web サイト経由のリードを商談につなげます。',
   robots: { index: false, follow: false },
   openGraph: {
-    title: 'Webサイト訪問者を商談に変えるAI',
+    title: 'Webサイトに AI SDR を配属する AI SDR Platform｜Meeton ai',
     description:
-      'リード対応5秒、商談転換率40%以上。AIが商談を自動で獲得する新時代のセールスプラットフォーム。',
+      'マーケ・IS が獲得したリードを、AI SDR が初動対応から商談予約・追客までつなぎます。Web サイトを商談を生み出す AI 営業チャネルへ。',
     url: 'https://dynameet.ai/lp/',
   },
 }

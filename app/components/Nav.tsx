@@ -102,14 +102,14 @@ export default function Nav({
     { href: "/features/ai-library/", label: "Meeton Library", sub: "既存リードナーチャ" },
   ];
 
+  // 2026-05-20: top nav 圧縮。ウェビナーと採用情報は Footer / リソース内に
+  // 退避し、B2B 獲得目的の "category → 比較 → 事例 → CTA" 動線を最短化。
   const navLinks = [
     { href: "/ai-sdr/", label: "AI SDR とは" },
     { href: "/compare/scheduling-vs-ai-sdr/", label: "比較" },
-    { href: "/webinar/", label: "ウェビナー" },
-    { href: "#download-center", label: "お役立ち資料", onClick: true },
     { href: "/case-studies/", label: "導入事例" },
     { href: "/blog/", label: "ブログ" },
-    { href: "/careers/", label: "採用情報" },
+    { href: "#download-center", label: "資料請求", onClick: true },
   ];
 
   const isProductActive = pathname === "/" || pathname.startsWith("/talent");

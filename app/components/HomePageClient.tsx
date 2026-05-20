@@ -1230,7 +1230,7 @@ export default function HomePageClient({
           </h1>
           <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
-              "Meeton ai は、Web サイトに AI SDR を配属し、訪問・問い合わせ・資料 DL・再訪問の瞬間に、会話・ヒアリング・資料提案・日程調整・追客までを自動化します。"}
+              "マーケ・IS が獲得したリードを、AI SDR が初動対応から商談予約・追客までつなぎます。訪問・問い合わせ・資料 DL・再訪問の瞬間に、会話・ヒアリング・資料提案・日程調整までを自動化。"}
           </p>
 
           {/* Mini How It Works — Hero 内 element、横並び 7 step
@@ -1292,6 +1292,62 @@ export default function HomePageClient({
           )}
         </div>
       </section>
+
+      {/* LP PROOF STRIP — 広告流入 LP 向け、Hero 直下に静的な実績証拠
+          (アニメーション無し、コンパクト)。Home では Vision → Problem の
+          流れがあるので不要、LP では Hero 直後に proof を出して離脱抑止。 */}
+      {isLp && (
+        <section className="lp-proof-strip" aria-label="導入実績">
+          <div className="lp-proof-inner">
+            <div className="lp-proof-stats">
+              <div className="lp-proof-stat">
+                <div className="lp-proof-num">20<span className="lp-proof-unit">倍+</span></div>
+                <div className="lp-proof-label">チャット経由リード</div>
+              </div>
+              <div className="lp-proof-divider" aria-hidden />
+              <div className="lp-proof-stat">
+                <div className="lp-proof-num">60<span className="lp-proof-unit">%+</span></div>
+                <div className="lp-proof-label">AI 経由 商談化率</div>
+              </div>
+              <div className="lp-proof-divider" aria-hidden />
+              <div className="lp-proof-stat">
+                <div className="lp-proof-num">2<span className="lp-proof-unit">件</span></div>
+                <div className="lp-proof-label">3 ヶ月で受注（BizteX 等）</div>
+              </div>
+            </div>
+            <div className="lp-proof-logos-label">先進企業に選ばれています</div>
+            <div className="lp-proof-logos">
+              {clients.slice(0, 7).map((c) => (
+                <div className="lp-proof-logo" key={c.name}>
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    width={108}
+                    height={32}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <style dangerouslySetInnerHTML={{ __html: `
+.lp-proof-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px clamp(16px,5vw,48px)}
+.lp-proof-inner{max-width:1080px;margin:0 auto}
+.lp-proof-stats{display:flex;align-items:center;justify-content:center;gap:clamp(16px,4vw,48px);margin-bottom:32px;flex-wrap:wrap}
+.lp-proof-stat{text-align:center;min-width:120px}
+.lp-proof-num{font-family:var(--fm);font-size:clamp(34px,5vw,44px);font-weight:800;color:var(--heading);line-height:1;letter-spacing:-.02em}
+.lp-proof-unit{font-size:.6em;font-weight:700;margin-left:2px;color:var(--cta)}
+.lp-proof-label{font-size:13px;color:var(--sub);font-weight:600;margin-top:8px;letter-spacing:-.005em}
+.lp-proof-divider{width:1px;height:36px;background:var(--border)}
+@media (max-width:680px){.lp-proof-divider{display:none}}
+.lp-proof-logos-label{font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--sub);text-align:center;text-transform:uppercase;margin-bottom:18px}
+.lp-proof-logos{display:flex;align-items:center;justify-content:center;gap:clamp(20px,4vw,40px);flex-wrap:wrap;opacity:.7}
+.lp-proof-logo img{display:block;height:28px;width:auto;object-fit:contain;filter:grayscale(1);transition:filter .2s}
+.lp-proof-logo:hover img{filter:none}
+` }} />
+        </section>
+      )}
 
       {/* CATEGORY / VISION — 「Meeton ai は、Web サイトに配属する AI SDR」
           ダーク背景で先進感、3 カードでコンパクトに */}
