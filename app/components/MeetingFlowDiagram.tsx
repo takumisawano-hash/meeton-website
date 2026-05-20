@@ -482,7 +482,7 @@ function DesktopFlow({
           node={N.calendar}
           tone="calendar"
           label="② MEETON CALENDAR"
-          title="初動5秒で商談化"
+          title="商談予約を即時起動"
           sub="リードコンバート瞬間に発動（業界42時間→5秒）/ 割り振りルール設定可能"
           icon="calendar"
           hub
@@ -867,7 +867,7 @@ function MobileFlow({
     { tone: "muted" as const, label: "STEP 0", title: "Website 訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
     { tone: "chat" as const, label: "① MEETON LIVE", title: "識別済み再訪リードへAI SDR対話", sub: "過去の閲覧・DL・メール反応を全文脈で引き継ぐ", icon: "chat" as const, meeton: true },
     { tone: "amber" as const, label: "THANKS PAGE", title: "サンクスページ", sub: "フォーム送信直後のリードコンバート瞬間", icon: "thanks" as const, branchNote: "Meeton Live 経由 / フォーム送信直後 どちらからも到達" },
-    { tone: "calendar" as const, label: "② MEETON CALENDAR", title: "初動5秒で商談化", sub: "業界42時間→5秒のSpeed to Lead / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
+    { tone: "calendar" as const, label: "② MEETON CALENDAR", title: "商談予約を即時起動", sub: "業界42時間→5秒のSpeed to Lead / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
     { tone: "win" as const, label: "OUTCOME", title: "✓ サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
     { tone: "email" as const, label: "③ MEETON EMAIL", title: "即時予約しなかったリードを1:1追跡", sub: "MAではなくAI SDR → Meeton Calendar に戻す", icon: "mail" as const, meeton: true },
   ];
