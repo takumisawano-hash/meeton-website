@@ -104,16 +104,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .slabel{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
 .section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px)}
 .section-inner{max-width:1140px;margin:0 auto}
-.stitle{font-size:clamp(28px,5vw,48px);font-weight:900;color:var(--heading);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
-.ssub{font-size:clamp(15px,2.5vw,19px);line-height:1.85;color:var(--sub);max-width:660px}
+.stitle{font-size:clamp(28px,5vw,46px);font-weight:900;color:var(--heading);line-height:1.25;letter-spacing:-.02em;margin-bottom:18px;text-wrap:balance}
+.ssub{font-size:clamp(15px,2.5vw,18px);line-height:1.85;color:var(--sub);max-width:660px;text-wrap:pretty}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 48px 90px;background:linear-gradient(165deg,#edfcf7 0%,#fff 30%,#f3f0ff 60%,#fff 100%)}
 .hero-content{max-width:860px;text-align:center;position:relative;z-index:2}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.15);padding:9px 22px;border-radius:24px;margin-bottom:36px;font-size:clamp(13px,3vw,15px);font-weight:700;color:var(--cta);backdrop-filter:blur(8px)}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,7vw,72px);font-weight:900;color:var(--heading);line-height:1.15;letter-spacing:-2.5px;margin-bottom:28px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1{font-size:clamp(30px,6vw,60px);font-weight:900;color:var(--heading);line-height:1.22;letter-spacing:-.025em;margin-bottom:28px;text-wrap:balance;max-width:18ch;margin-left:auto;margin-right:auto}
+.hero h1 em{font-style:normal;display:inline;color:var(--cta)}
+@media (min-width:780px){.hero-h1{max-width:24ch}}
 .hero-sub{font-size:clamp(16px,3vw,22px);line-height:1.8;color:var(--sub);max-width:640px;margin:0 auto 48px}
 .hero-webinar-band{display:inline-flex;align-items:center;gap:16px;margin-top:22px;padding:12px 18px;background:rgba(18,163,125,.06);border:1px solid rgba(18,163,125,.22);border-radius:14px;text-decoration:none;color:inherit;max-width:640px;transition:background .2s,border-color .2s,transform .2s;flex-wrap:wrap;justify-content:flex-start}
 .hero-webinar-band:hover{background:rgba(18,163,125,.10);border-color:rgba(18,163,125,.4);transform:translateY(-1px)}
@@ -133,7 +134,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 /* VISION SECTION — dark, AI SDR カテゴリ確立 */
 .vision-section{background:#050807;color:#fff;padding:clamp(72px,9vw,108px) clamp(16px,5vw,48px);border-top:1px solid #0d1411;border-bottom:1px solid #0d1411}
-.vision-heading{font-size:clamp(26px,4.2vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.3;color:#fff;text-align:center;max-width:880px;margin:0 auto 18px;font-family:var(--fb)}
+.vision-heading{font-size:clamp(26px,4.2vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.35;color:#fff;text-align:center;max-width:780px;margin:0 auto 18px;font-family:var(--fb);text-wrap:balance}
 .vision-accent{color:#04cb78}
 .vision-sub{font-size:clamp(15px,2vw,17px);line-height:1.85;color:rgba(255,255,255,.7);max-width:680px;margin:0 auto 56px;text-align:center}
 .vision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:980px;margin:0 auto}
@@ -1235,10 +1236,10 @@ export default function HomePageClient({
               ? "14日間無料トライアル"
               : "AI SDR Platform"}
           </div>
-          <h1 className="anim-y d2">
+          <h1 className="anim-y d2 hero-h1">
             {lpHeadline ?? (
               <>
-                問い合わせを待つ<wbr />Web サイトから、<br />
+                問い合わせを待つ Web サイトから、
                 <em>商談を生み出す AI 営業チャネルへ。</em>
               </>
             )}
@@ -1523,7 +1524,7 @@ export default function HomePageClient({
               New Funnel
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              フォーム送信を待つだけの Web サイトから、<br />
+              フォーム送信を待つだけの Web サイトから、{" "}
               <span style={{ color: "var(--cta)" }}>AI SDR が働く Web サイト</span>へ。
             </div>
             <p className="ssub" style={{ textAlign: "center", margin: "0 auto 48px", maxWidth: 720 }}>
@@ -1577,6 +1578,186 @@ export default function HomePageClient({
 .funnel-compare-arrow{color:var(--sub);font-size:13px;font-weight:600}
 .funnel-compare-note{font-size:13px;color:var(--sub);font-weight:600;margin:0}
 ` }} />
+          </div>
+        </section>
+      )}
+
+      {/* USE CASES — 具体的な3つの解決パターン */}
+      {!isLp && (
+        <section
+          className="section"
+          style={{ background: "#fff", paddingTop: 80, paddingBottom: 80 }}
+        >
+          <div className="section-inner" style={{ maxWidth: 1080 }}>
+            <div className="slabel" style={{ textAlign: "center" }}>
+              Use Cases
+            </div>
+            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
+              Meeton ai が <span style={{ color: "var(--cta)" }}>商談化する 4 つの瞬間</span>
+            </div>
+            <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
+              リードの状態に応じて、Meeton ai が自動で動き分けます。
+            </p>
+            <div className="usecases-grid">
+              {[
+                {
+                  title: "問い合わせ前の訪問者",
+                  subtitle: "フォーム送信せず離脱する",
+                  body: "B2B サイト訪問者の 97% はフォームを送らずに離脱。Meeton ai は訪問者の興味・行動を検知し、AI SDR が会話を開始。疑問を解消しながら商談機会へ導きます。",
+                  metric: "97%",
+                  metricLabel: "離脱する未コンバート訪問者",
+                  color: "#0891b2",
+                  gradient: "linear-gradient(135deg,#0891b2,#22d3ee)",
+                  bg: "linear-gradient(135deg,#ecfeff,#f0fdfa)",
+                  // chat
+                  iconPath: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+                },
+                {
+                  title: "資料 DL 直後のリード",
+                  subtitle: "温度が高いのに放置される",
+                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、温度の高いまま商談予約まで完結させます。",
+                  metric: "即時",
+                  metricLabel: "高温度時点で商談化",
+                  color: "#12a37d",
+                  gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                  bg: "linear-gradient(135deg,#e5f8f2,#f0fdf9)",
+                  iconPath: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
+                },
+                {
+                  title: "予約しなかったリード",
+                  subtitle: "その場で決めきれない",
+                  body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
+                  metric: "1:1",
+                  metricLabel: "MA メールはセグメント配信",
+                  color: "#7c5cfc",
+                  gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
+                  bg: "linear-gradient(135deg,#f0ecfe,#faf5ff)",
+                  iconPath: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
+                },
+                {
+                  title: "再訪問した既存リード",
+                  subtitle: "検討再開を見逃す",
+                  body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
+                  metric: "100%",
+                  metricLabel: "再訪リードに即対応",
+                  color: "#3b6ff5",
+                  gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
+                  bg: "linear-gradient(135deg,#eaf0fe,#f5f8ff)",
+                  iconPath: "M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
+                },
+              ].map((uc, i) => (
+                <div
+                  key={i}
+                  className="usecase-card"
+                  style={{
+                    padding: 30,
+                    background: "#fff",
+                    borderRadius: 16,
+                    border: "1px solid var(--border)",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .25s",
+                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: 13,
+                      background: uc.bg,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: 16,
+                    }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={uc.iconPath} />
+                    </svg>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: uc.color,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      marginBottom: 8,
+                      fontFamily: "var(--fm)",
+                    }}
+                  >
+                    {uc.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 17,
+                      fontWeight: 800,
+                      color: "var(--heading)",
+                      lineHeight: 1.45,
+                      marginBottom: 14,
+                      letterSpacing: "-0.005em",
+                    }}
+                  >
+                    {uc.subtitle}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 13.5,
+                      color: "var(--sub)",
+                      lineHeight: 1.8,
+                      marginBottom: 20,
+                      flex: 1,
+                    }}
+                  >
+                    {uc.body}
+                  </p>
+                  <div
+                    style={{
+                      paddingTop: 18,
+                      borderTop: "1px solid var(--border)",
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 12,
+                      marginTop: "auto",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 36,
+                        fontWeight: 900,
+                        background: uc.gradient,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                        fontFamily: "var(--fm)",
+                      }}
+                    >
+                      {uc.metric}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "var(--sub)",
+                        lineHeight: 1.4,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {uc.metricLabel}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <style dangerouslySetInnerHTML={{ __html: `
+              .usecases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+              @media (max-width:780px){.usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}}
+              .usecase-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:transparent}
+            ` }} />
           </div>
         </section>
       )}
@@ -1834,454 +2015,6 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* BUILT FOR SALES — 営業組織向け明示 */}
-      {!isLp && (
-        <section
-          className="section"
-          style={{
-            background: "linear-gradient(135deg, #1a1d3a 0%, #0f1128 100%)",
-            color: "#fff",
-            paddingTop: 80,
-            paddingBottom: 80,
-          }}
-        >
-          <div className="section-inner" style={{ maxWidth: 1080, textAlign: "center" }}>
-            <div
-              className="slabel"
-              style={{ textAlign: "center", color: "rgba(255,255,255,0.6)" }}
-            >
-              Who&rsquo;s it for
-            </div>
-            <div
-              className="stitle"
-              style={{ textAlign: "center", color: "#fff", marginBottom: 16 }}
-            >
-              Meeton ai は、<span style={{ color: "var(--cta-hover)" }}>こんな立場の方に効きます</span>
-            </div>
-            <p
-              style={{
-                fontSize: 16,
-                color: "rgba(255,255,255,0.7)",
-                lineHeight: 1.8,
-                maxWidth: 720,
-                margin: "0 auto 40px",
-              }}
-            >
-              営業・マーケ・IS・経営、それぞれの立場で「リードを商談に変える」課題に
-              向き合っている方に、Meeton ai が貢献できる価値をご紹介します。
-            </p>
-            <div
-              className="buyer-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: 20,
-                marginTop: 8,
-                textAlign: "left",
-              }}
-            >
-              {[
-                {
-                  role: "マーケティング責任者",
-                  subtitle: "CMO / マーケ部長",
-                  pain: "予算を使ってリード獲得しても商談化せず、CPL は下がっても商談獲得コストが上昇。",
-                  value: "AI SDR を含むテクノロジースタックの「設計者」として、ファネル全体を自分で握り、マーケの仕事を縮小ではなく拡張させる。",
-                  color: "#7c5cfc",
-                  href: "/for/cmo/",
-                  // megaphone
-                  iconPath: "M3 11l18-5v12L3 14v-3z M11.6 16.8a3 3 0 1 1-5.8-1.6",
-                },
-                {
-                  role: "営業責任者",
-                  subtitle: "CRO / VP Sales",
-                  pain: "SDR 採用・育成・離職のサイクル。商談化率の天井で営業組織がスケールしない。",
-                  value: "AI SDR が初動を担い、人 SDR は VIP 顧客対応など高付加価値業務にシフト。",
-                  color: "#12a37d",
-                  href: "/for/cro/",
-                  // trending up
-                  iconPath: "M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6",
-                },
-                {
-                  role: "インサイドセールス責任者",
-                  subtitle: "IS / SDR マネージャー",
-                  pain: "業務時間外のリード流出、月曜朝のバックログ、24h 対応シフトは人件費的に不可能。",
-                  value: "Meeton ai が 24/365 で初動応答、IS チームは深掘り対応に集中可能。",
-                  color: "#0891b2",
-                  href: "/for/inside-sales/",
-                  // headphones
-                  iconPath: "M3 18v-6a9 9 0 0 1 18 0v6 M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z",
-                },
-                {
-                  role: "経営層",
-                  subtitle: "CEO / COO / 事業責任者",
-                  pain: "営業組織のスケーラビリティと CAC 上昇。人を増やすだけでは収益が伸びない構造。",
-                  value: "リード→商談変換率の改善で、人を増やさず ARR を伸ばす AI SDR レイヤー。",
-                  color: "#d03ea1",
-                  href: undefined as string | undefined,
-                  // target
-                  iconPath: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
-                },
-              ].map((b, i) => (
-                <div
-                  key={i}
-                  className="buyer-card"
-                  style={{
-                    padding: "26px 24px",
-                    background: "rgba(255,255,255,0.04)",
-                    borderRadius: 14,
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 14,
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "transform .25s cubic-bezier(.16,1,.3,1), border-color .25s, background .25s",
-                  }}
-                >
-                  <div
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: 2,
-                      background: b.color,
-                      opacity: 0.7,
-                    }}
-                  />
-                  <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: 11,
-                        background: `${b.color}22`,
-                        border: `1px solid ${b.color}40`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={b.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d={b.iconPath} />
-                      </svg>
-                    </div>
-                    <div style={{ minWidth: 0, flex: 1 }}>
-                      <div
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 700,
-                          color: b.color,
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                          marginBottom: 4,
-                          fontFamily: "var(--fm)",
-                        }}
-                      >
-                        {b.subtitle}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 15,
-                          fontWeight: 800,
-                          color: "#fff",
-                          lineHeight: 1.35,
-                          letterSpacing: "-0.005em",
-                        }}
-                      >
-                        {b.role}
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      paddingTop: 14,
-                      borderTop: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        color: "rgba(255,255,255,0.5)",
-                        letterSpacing: "0.08em",
-                        marginBottom: 6,
-                        textTransform: "uppercase",
-                        fontFamily: "var(--fm)",
-                      }}
-                    >
-                      抱える課題
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 13,
-                        color: "rgba(255,255,255,0.78)",
-                        lineHeight: 1.75,
-                      }}
-                    >
-                      {b.pain}
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      paddingTop: 14,
-                      borderTop: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        color: b.color,
-                        letterSpacing: "0.08em",
-                        marginBottom: 6,
-                        textTransform: "uppercase",
-                        fontFamily: "var(--fm)",
-                      }}
-                    >
-                      Meeton ai が解く
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 13,
-                        color: "#fff",
-                        lineHeight: 1.75,
-                        fontWeight: 500,
-                      }}
-                    >
-                      {b.value}
-                    </div>
-                  </div>
-                  {b.href && (
-                    <Link
-                      href={b.href}
-                      style={{
-                        marginTop: 4,
-                        fontSize: 12,
-                        fontWeight: 800,
-                        color: b.color,
-                        textDecoration: "none",
-                        letterSpacing: "0.02em",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 6,
-                      }}
-                    >
-                      {b.subtitle} 向けの詳細を見る
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  )}
-                </div>
-              ))}
-              <style dangerouslySetInnerHTML={{ __html: `.buyer-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.18)}` }} />
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* USE CASES — 具体的な3つの解決パターン */}
-      {!isLp && (
-        <section
-          className="section"
-          style={{ background: "#fff", paddingTop: 80, paddingBottom: 80 }}
-        >
-          <div className="section-inner" style={{ maxWidth: 1080 }}>
-            <div className="slabel" style={{ textAlign: "center" }}>
-              Use Cases
-            </div>
-            <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              Meeton ai が <span style={{ color: "var(--cta)" }}>商談化する 4 つの瞬間</span>
-            </div>
-            <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
-              リードの状態に応じて、Meeton ai が自動で動き分けます。
-            </p>
-            <div className="usecases-grid">
-              {[
-                {
-                  title: "問い合わせ前の訪問者",
-                  subtitle: "フォーム送信せず離脱する",
-                  body: "B2B サイト訪問者の 97% はフォームを送らずに離脱。Meeton ai は訪問者の興味・行動を検知し、AI SDR が会話を開始。疑問を解消しながら商談機会へ導きます。",
-                  metric: "97%",
-                  metricLabel: "離脱する未コンバート訪問者",
-                  color: "#0891b2",
-                  gradient: "linear-gradient(135deg,#0891b2,#22d3ee)",
-                  bg: "linear-gradient(135deg,#ecfeff,#f0fdfa)",
-                  // chat
-                  iconPath: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-                },
-                {
-                  title: "資料 DL 直後のリード",
-                  subtitle: "温度が高いのに放置される",
-                  body: "資料 DL、お問い合わせ、デモリクエスト。その瞬間にリードの温度は最高潮。Meeton ai はその場で Meeton Calendar を起動、温度の高いまま商談予約まで完結させます。",
-                  metric: "即時",
-                  metricLabel: "高温度時点で商談化",
-                  color: "#12a37d",
-                  gradient: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                  bg: "linear-gradient(135deg,#e5f8f2,#f0fdf9)",
-                  iconPath: "M13 2L3 14h9l-1 8 10-12h-9l1-8",
-                },
-                {
-                  title: "予約しなかったリード",
-                  subtitle: "その場で決めきれない",
-                  body: "その場で予約しなかったリードも、まだ商談機会は残っている。Meeton Email が 1:1 でフォロー。リードの行動シグナル（サイト再訪、メール開封）に応じて AI が動的に内容を調整。返信があれば AI が対話を継続。",
-                  metric: "1:1",
-                  metricLabel: "MA メールはセグメント配信",
-                  color: "#7c5cfc",
-                  gradient: "linear-gradient(135deg,#7c5cfc,#a78bfa)",
-                  bg: "linear-gradient(135deg,#f0ecfe,#faf5ff)",
-                  iconPath: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
-                },
-                {
-                  title: "再訪問した既存リード",
-                  subtitle: "検討再開を見逃す",
-                  body: "過去にコンバートしたリードが再訪。それは検討再開の最強シグナル。Meeton Live が起動し、過去の全文脈を持って対話を開始。Meeton Library が関連資料を提案・解説。",
-                  metric: "100%",
-                  metricLabel: "再訪リードに即対応",
-                  color: "#3b6ff5",
-                  gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
-                  bg: "linear-gradient(135deg,#eaf0fe,#f5f8ff)",
-                  iconPath: "M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
-                },
-              ].map((uc, i) => (
-                <div
-                  key={i}
-                  className="usecase-card"
-                  style={{
-                    padding: 30,
-                    background: "#fff",
-                    borderRadius: 16,
-                    border: "1px solid var(--border)",
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .25s",
-                    boxShadow: "0 1px 2px rgba(15,17,40,.03)",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: 13,
-                      background: uc.bg,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: 16,
-                    }}
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={uc.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={uc.iconPath} />
-                    </svg>
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: uc.color,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      marginBottom: 8,
-                      fontFamily: "var(--fm)",
-                    }}
-                  >
-                    {uc.title}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 17,
-                      fontWeight: 800,
-                      color: "var(--heading)",
-                      lineHeight: 1.45,
-                      marginBottom: 14,
-                      letterSpacing: "-0.005em",
-                    }}
-                  >
-                    {uc.subtitle}
-                  </div>
-                  <p
-                    style={{
-                      fontSize: 13.5,
-                      color: "var(--sub)",
-                      lineHeight: 1.8,
-                      marginBottom: 20,
-                      flex: 1,
-                    }}
-                  >
-                    {uc.body}
-                  </p>
-                  <div
-                    style={{
-                      paddingTop: 18,
-                      borderTop: "1px solid var(--border)",
-                      display: "flex",
-                      alignItems: "baseline",
-                      gap: 12,
-                      marginTop: "auto",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: 36,
-                        fontWeight: 900,
-                        background: uc.gradient,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        lineHeight: 1,
-                        letterSpacing: "-0.02em",
-                        fontFamily: "var(--fm)",
-                      }}
-                    >
-                      {uc.metric}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 12,
-                        color: "var(--sub)",
-                        lineHeight: 1.4,
-                        fontWeight: 500,
-                      }}
-                    >
-                      {uc.metricLabel}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <style dangerouslySetInnerHTML={{ __html: `
-              .usecases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
-              @media (max-width:780px){.usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}}
-              .usecase-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:transparent}
-            ` }} />
-          </div>
-        </section>
-      )}
-
-      {/* CTA #1 — after 3 product cards: doc download (low-friction next step) */}
-      <MidPageCta
-        eyebrow="Resource"
-        heading="3 つの AI 機能の詳細・導入手順・料金プランを 1 つの資料にまとめました"
-        ctaLabel="資料を請求する"
-        variant="doc"
-        onClick={openMeetonDownloadCenter}
-      />
-
-      {/* COMPARISON — 詳細比較表 (人間SDR / MA・SFA / Meeton ai) */}
-      <ComparisonTable />
-
-      {/* CTA #2 — after comparison table: demo (high-intent moment after seeing differentiation) */}
-      <MidPageCta
-        eyebrow="Live Demo"
-        heading="比較表で見えた違いを、実際の管理画面で 30 分で体験してください"
-        ctaLabel="デモを予約する"
-        variant="demo"
-        onClick={openMeetonCalendar}
-      />
-
       {/* CASES */}
       <section className="section" style={{ background: "var(--surface)" }}>
         <div className="section-inner">
@@ -2313,16 +2046,6 @@ export default function HomePageClient({
           </div>
         </div>
       </section>
-
-      {/* CTA #3 — after cases: demo (social-proof momentum) */}
-      <MidPageCta
-        eyebrow="Try it on your site"
-        heading="同じ仕組みを自社サイトでも。30 分のデモで御社の業界に合わせた成果イメージをお伝えします"
-        ctaLabel="デモを予約する"
-        variant="demo"
-        tone="surface"
-        onClick={openMeetonCalendar}
-      />
 
       {/* INTEGRATIONS */}
       <section
@@ -2372,181 +2095,6 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* STEPS (skipped in LP — focus on conversion) */}
-      {!isLp && (
-      <section className="section">
-        <div className="section-inner">
-          <div className="slabel" style={{ textAlign: "center" }}>
-            導入ステップ
-          </div>
-          <div className="stitle" style={{ textAlign: "center" }}>
-            かんたん3ステップで<span style={{ color: "var(--cta)" }}>Meeton aiが稼働開始</span>
-          </div>
-          <p
-            className="ssub"
-            style={{ textAlign: "center", margin: "0 auto 44px" }}
-          >
-            開発リソース不要。最短当日からMeeton aiがあなたのAI SDRとして働き始めます。
-          </p>
-          <div className="steps-row">
-            {stepsData.map((s, i) => (
-              <div
-                key={i}
-                style={{ display: "flex", alignItems: "stretch", flex: 1 }}
-              >
-                <div
-                  className="step-card"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <div className="step-num">{s.num}</div>
-                  <div className="step-title">{s.title}</div>
-                  <div className="step-desc">{s.desc}</div>
-                  <div style={{ marginTop: "auto", paddingTop: 18 }}>
-                    {i === 0 && (
-                      <div
-                        style={{
-                          background: "var(--surface)",
-                          borderRadius: 10,
-                          padding: "12px 14px",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 10,
-                        }}
-                      >
-                        <div
-                          style={{
-                            fontSize: 10,
-                            fontFamily: "var(--fm)",
-                            color: "var(--sub)",
-                            background: "var(--bg)",
-                            border: "1px solid var(--border)",
-                            borderRadius: 6,
-                            padding: "6px 10px",
-                            whiteSpace: "nowrap",
-                            fontWeight: 600,
-                          }}
-                        >
-                          &lt;script src=&quot;meeton.js&quot;&gt;
-                        </div>
-                        <div
-                          style={{
-                            animation: "pulse 2s infinite",
-                          }}
-                        >
-                          <Ico name="check" size={18} color="var(--cta)" />
-                        </div>
-                      </div>
-                    )}
-                    {i === 1 && (
-                      <div
-                        style={{
-                          background: "var(--surface)",
-                          borderRadius: 10,
-                          padding: "12px 14px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 6,
-                        }}
-                      >
-                        {[
-                          { iconKey: "chat" as IconKey, label: "声かけ内容" },
-                          { iconKey: "calendar" as IconKey, label: "予約ルール" },
-                          { iconKey: "target" as IconKey, label: "見込み基準" },
-                        ].map((item, j) => (
-                          <div
-                            key={j}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 8,
-                              fontSize: 11,
-                              fontWeight: 700,
-                              color: "var(--heading)",
-                            }}
-                          >
-                            <span style={{display:"flex",alignItems:"center",gap:4}}><Ico name={item.iconKey} size={12} color="var(--cta)" />{item.label}</span>
-                            <div
-                              style={{
-                                flex: 1,
-                                height: 6,
-                                background: "var(--bg)",
-                                borderRadius: 3,
-                                overflow: "hidden",
-                                border: "1px solid var(--border)",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  height: "100%",
-                                  borderRadius: 3,
-                                  background:
-                                    "linear-gradient(90deg,var(--cta),var(--accent))",
-                                  width:
-                                    j === 0 ? "90%" : j === 1 ? "60%" : "40%",
-                                  transition: "width 1s",
-                                }}
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {i === 2 && (
-                      <div
-                        style={{
-                          background: "var(--surface)",
-                          borderRadius: 10,
-                          padding: "12px 14px",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 12,
-                        }}
-                      >
-                        <div style={{ display: "flex", gap: 4 }}>
-                          {(["mail", "target", "calendar"] as IconKey[]).map((iconName, j) => (
-                            <div
-                              key={j}
-                              style={{
-                                width: 32,
-                                height: 32,
-                                borderRadius: 8,
-                                background: "var(--bg)",
-                                border: "1px solid var(--border)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                animation: `nodeGrow .4s ${j * 0.2}s cubic-bezier(.16,1,.3,1) forwards`,
-                                opacity: 0,
-                                transform: "scale(0)",
-                              }}
-                            >
-                              <Ico name={iconName} size={14} color="var(--cta)" />
-                            </div>
-                          ))}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: 10,
-                            fontWeight: 700,
-                            color: "var(--cta)",
-                            lineHeight: 1.4,
-                          }}
-                        >
-                          商談獲得
-                          <br />
-                          自動で稼働開始
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {i < 2 && <div className="step-arrow">→</div>}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      )}
 
       {/* CTA #4 — after STEPS: doc download (post-implementation context, social-proof internal stakeholders) */}
       <MidPageCta
@@ -2591,34 +2139,6 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* CLIENTS */}
-      <section className="section" style={{ textAlign: "center" }}>
-        <div className="section-inner">
-          <div className="slabel">導入企業</div>
-          <div className="stitle">先進企業に選ばれています</div>
-          <div style={{ height: 36 }} />
-          <div className="logo-carousel">
-            <div className="logo-track">
-              {/* Double the logos for seamless infinite scroll */}
-              {[...clients, ...clients].map((c, i) => (
-                <div className="logo-item" key={`${c.name}-${i}`}>
-                  <img
-                    src={c.logo}
-                    alt={c.name}
-                    width={120}
-                    height={36}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginTop: 24, fontSize: 14, fontWeight: 700, color: "var(--sub)" }}>
-            ...ほか多数の企業様にご導入いただいています
-          </div>
-        </div>
-      </section>
 
       {/* FINAL CTA */}
       <section className="final-cta">
@@ -2682,8 +2202,7 @@ export default function HomePageClient({
               letterSpacing: "-0.025em",
             }}
           >
-            自社サイトで、
-            <br />
+            自社サイトで、{" "}
             <span
               style={{
                 background: "linear-gradient(135deg,var(--cta),var(--blue))",
