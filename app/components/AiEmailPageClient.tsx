@@ -215,6 +215,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 `;
 
 const faqData = [
+  { q: 'CRM に眠る休眠リード・過去 MQL・失注リードからも商談を作れますか？', a: 'はい。Meeton Intent が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧、ウェビナー参加等）を検知し、再検討タイミングの瞬間を捉えます。Meeton Email が文脈に沿って再アプローチし、返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton Email の特徴です。' },
   { q: 'Meeton Email は MA のメール配信と何が違いますか？', a: 'MA メールは「事前定義したシナリオ × テンプレート文面」を時間ベースで配信します。Meeton Email は「リードの最新行動 × AI 動的生成」をリアルタイムで判断し、送るタイミング・送る内容・送らない判断まで AI が文脈で都度決めます。商談予約獲得をゴールに据えた、もう一人の SDR として動きます。' },
   { q: 'Meeton Calendar で予約しなかったリードに、いつ送られますか？', a: '事前定義の「Day 1 / Day 3 / Day 5」のような固定シーケンスではありません。リードの再訪・メール反応・閲覧ページ・MA 上のスコア変化を AI が監視し、送るべきタイミングと内容を文脈で動的判断します。' },
   { q: 'メール文面は自分で作成する必要がありますか？', a: 'いいえ。AIがリードの行動履歴・CRM 上の文脈・ナレッジベースをもとに、メール文面を毎通動的に生成します。トーン・テンプレートのガードレール設定は可能です。' },
@@ -283,8 +284,8 @@ export default function AiEmailPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON EMAIL</div>
-            <h1 className="anim-y d2">MA メールではなく、<br /><em>もう一人の SDR</em></h1>
-            <p className="anim-y d3 hero-sub">Meeton Calendar で即時予約に至らなかったリードを、Meeton Email が 1:1 で諦めず追跡。送るタイミング・送る内容・送らない判断まで、AI が最新行動の文脈で動的判断します。テンプレート × 時間トリガーの MA メールとは異なる、商談予約獲得ゴールの SDR エージェントです。</p>
+            <h1 className="anim-y d2">未予約リード追客 +<br /><em>CRM に眠るリードの再商談化</em></h1>
+            <p className="anim-y d3 hero-sub">Meeton Email は、Meeton Calendar で予約に至らなかったリードを 1:1 で追跡するだけではありません。CRM に眠る過去 MQL・失注リード・休眠 contact の再検討シグナルを Meeton Intent が検知し、AI が文脈に沿って再アプローチ。商談予約をゴールに、Web 接点と CRM データの両方から商談機会を生み出します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
               <button className="btn-ghost" onClick={openMeetonCalendar}>
@@ -721,7 +722,7 @@ export default function AiEmailPageClient() {
       <section className="final-cta">
         <div className="final-cta-inner">
           <div style={{ textAlign: 'center', marginBottom: 16 }}><div className="slabel slabel-c" style={{ marginBottom: 0 }}>今すぐ始める</div></div>
-          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email で、<br /><em>MA の上にもう一人の SDR を</em></div>
+          <div className="stitle" style={{ textAlign: 'center' }}>Meeton Email で、{" "}<em>Web 接点と CRM の両方から商談を</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>Meeton Calendar で即時予約しなかったリードを、AI が文脈で動的判断しながら 1:1 で追跡。商談予約獲得を一本のゴールに据えた AI SDR エージェントです。</p>
           <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>

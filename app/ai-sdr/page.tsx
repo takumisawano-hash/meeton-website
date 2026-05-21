@@ -305,10 +305,12 @@ export default function AiSdrPage() {
               <div className="cap-card">
                 <div className="cap-job">追客する</div>
                 <div className="cap-feat">Meeton Email</div>
+                <div className="cap-sub">予約しなかったリードや CRM 内の既存リードに、文脈に沿って再アプローチ</div>
               </div>
               <div className="cap-card">
                 <div className="cap-job">判断する</div>
                 <div className="cap-feat">Meeton Intent</div>
+                <div className="cap-sub">Web 行動・企業情報・CRM シグナルをもとに、次に取るべきアクションを判断</div>
               </div>
             </div>
             <div className="cta-block">
@@ -316,6 +318,39 @@ export default function AiSdrPage() {
                 Meeton ai のデモを予約 →
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* CROSS LINK — Web side ⇄ CRM side */}
+        <section className="section section-light">
+          <div className="section-inner narrow">
+            <div className="section-label">06 — Beyond website</div>
+            <h2>AI SDR は、Web サイトだけで動くのではない。</h2>
+            <p className="body">
+              ここまで Web サイト上の AI SDR について解説してきました。Meeton ai の AI SDR は、Web 訪問者だけでなく、CRM に眠る過去 MQL・失注リード・休眠 contact の再商談化にも拡張できます。新規 Web リードと既存 CRM 資産の両方から商談機会を生み出します。
+            </p>
+            <div className="cross-link-cards">
+              <Link href="/lead-revival/" className="cross-card">
+                <div className="cross-card-label">CRM-to-Meeting</div>
+                <div className="cross-card-title">CRM に眠るリードの再商談化 →</div>
+                <p className="cross-card-desc">過去 MQL・失注・休眠 contact から AI SDR が商談を掘り起こす。</p>
+              </Link>
+              <Link href="/" className="cross-card">
+                <div className="cross-card-label">Platform 全体</div>
+                <div className="cross-card-title">Meeton ai トップ →</div>
+                <p className="cross-card-desc">Web と CRM の両ループを含む AI SDR Platform。</p>
+              </Link>
+            </div>
+            <style dangerouslySetInnerHTML={{ __html: `
+.cross-link-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px}
+@media (max-width:680px){.cross-link-cards{grid-template-columns:1fr}}
+.cross-card{display:block;padding:24px 24px;background:#fff;border:1px solid #E5EEE8;border-radius:12px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s}
+.cross-card:hover{transform:translateY(-2px);border-color:rgba(4,203,120,.35)}
+.cross-card-label{font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:.16em;color:#6C7B73;text-transform:uppercase;margin-bottom:8px}
+.cross-card-title{font-size:16px;font-weight:800;color:#0B1712;margin-bottom:8px}
+.cross-card-desc{font-size:13px;color:#4B5A52;line-height:1.7;margin:0}
+.cap-sub{font-size:11px;line-height:1.6;color:rgba(255,255,255,.55);margin-top:8px;text-align:left}
+` }} />
           </div>
         </section>
 

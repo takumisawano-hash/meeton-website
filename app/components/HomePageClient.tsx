@@ -1621,6 +1621,14 @@ export default function HomePageClient({
             <p className="loops-closing">
               Meeton ai は、この 2 つの機会を AI SDR が捉えて商談化する Platform。
             </p>
+            <div className="loops-cta-row">
+              <Link href="/ai-sdr/" className="loops-deeplink">
+                Website-to-Meeting を詳しく見る →
+              </Link>
+              <Link href="/lead-revival/" className="loops-deeplink">
+                CRM-to-Meeting を詳しく見る →
+              </Link>
+            </div>
 
             <style dangerouslySetInnerHTML={{ __html: `
 .loops-callouts{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:880px;margin:0 auto 56px}
@@ -1641,6 +1649,9 @@ export default function HomePageClient({
 .loop-step-goal{background:var(--cta-light);border-color:rgba(4,203,120,.35);color:var(--cta);font-weight:800}
 .loop-arrow{color:var(--sub);font-size:13px;font-weight:600}
 .loops-closing{font-size:clamp(15px,2vw,17px);font-weight:700;color:var(--heading);text-align:center;max-width:680px;margin:32px auto 0;line-height:1.75}
+.loops-cta-row{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:24px}
+.loops-deeplink{color:var(--cta);font-size:14px;font-weight:700;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s}
+.loops-deeplink:hover{border-color:var(--cta)}
 ` }} />
           </div>
         </section>
