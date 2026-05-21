@@ -158,7 +158,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
 .vision-card-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.01em}
 .vision-card-desc{font-size:14px;line-height:1.75;color:rgba(255,255,255,.65)}
 .hero-stats{display:flex;justify-content:center;gap:clamp(32px,8vw,72px);margin-top:clamp(40px,8vw,72px);padding-top:clamp(32px,6vw,48px);border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.stat-v{font-family:var(--fm);font-size:clamp(36px,6vw,52px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--accent));letter-spacing:-1px}
 .stat-l{font-size:clamp(13px,2vw,15px);color:var(--sub);margin-top:8px;font-weight:600}
 
 /* CATEGORY CARDS - 3 categories */
@@ -210,7 +210,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
 .steps-row{display:flex;gap:18px;align-items:stretch}
 .step-card{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 1px 2px rgba(15,17,40,.03);transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .25s;position:relative;overflow:hidden}
 .step-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px -16px rgba(15,17,40,.12);border-color:var(--border2)}
-.step-num{font-family:var(--fm);font-size:38px;font-weight:800;margin-bottom:14px;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em;line-height:1}
+.step-num{font-family:var(--fm);font-size:38px;font-weight:800;margin-bottom:14px;background:linear-gradient(135deg,var(--cta),var(--accent));letter-spacing:-.02em;line-height:1}
 .step-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.005em;line-height:1.4}
 .step-desc{font-size:14px;line-height:1.8;color:var(--sub)}
 .step-arrow{display:flex;align-items:center;font-family:var(--fm);font-size:20px;color:var(--border2);padding:0 4px;font-weight:300}
