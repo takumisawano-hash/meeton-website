@@ -1579,7 +1579,7 @@ export default function HomePageClient({
 
             {/* Main Loop — Website-to-Meeting (大、強調) */}
             <div className="loop-block loop-main">
-              <div className="loop-tag loop-tag-main">Main Loop · Website-to-Meeting</div>
+              <div className="loop-tag loop-tag-main">メインループ · Web から商談を作る</div>
               <div className="loop-flow">
                 <span className="loop-step">訪問</span>
                 <span className="loop-arrow">→</span>
@@ -1595,7 +1595,7 @@ export default function HomePageClient({
 
             {/* Expansion Loop — CRM-to-Meeting (小、サブ位置) */}
             <div className="loop-block loop-expansion">
-              <div className="loop-tag loop-tag-expansion">Expansion Loop · CRM-to-Meeting</div>
+              <div className="loop-tag loop-tag-expansion">拡張ループ · CRM から商談を掘り起こす</div>
               <div className="loop-flow">
                 <span className="loop-step">既存リード</span>
                 <span className="loop-arrow">→</span>
@@ -1631,9 +1631,9 @@ export default function HomePageClient({
 .loop-main{padding:32px clamp(20px,3vw,40px);background:#F7FFFB;border-color:rgba(4,203,120,.3);box-shadow:0 1px 2px rgba(4,203,120,.05)}
 .loop-expansion{padding:18px 26px;background:#FAFBFD;opacity:.95}
 .loop-tag{font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
-.loop-tag-main{color:var(--cta);font-size:12px}
-.loop-tag-expansion{color:var(--sub);font-size:10px}
-.loop-flow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.loop-tag-main{color:var(--cta);font-size:12px;text-align:center}
+.loop-tag-expansion{color:var(--sub);font-size:10px;text-align:center}
+.loop-flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:6px}
 .loop-step{padding:9px 16px;background:#fff;border:1px solid var(--border);border-radius:9px;font-size:14px;font-weight:700;color:var(--heading);font-family:var(--fb)}
 .loop-main .loop-step{padding:10px 18px;font-size:15px}
 .loop-expansion .loop-step{font-size:13px;padding:7px 12px}
