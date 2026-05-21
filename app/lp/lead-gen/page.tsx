@@ -3,9 +3,9 @@ import HomePageClient from '@/app/components/HomePageClient'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export const metadata: Metadata = {
-  title: 'リード獲得自動化AI｜BtoBリードを24時間獲得',
+  title: 'B2B リード獲得から商談化まで自動化｜AI SDR Platform',
   description:
-    'BtoBリード獲得を完全自動化。Webサイト訪問者からのリード獲得をAIが24時間代行。マーケティングオートメーションの次世代型。14日間無料。',
+    'BtoB リード獲得を完全自動化。Webサイト訪問者から CRM 休眠リードまで、AI SDR が会話・ヒアリング・資料提案・商談予約・追客を自動化。マーケが集めたリードを商談機会に変えます。',
   robots: { index: false, follow: false },
 }
 

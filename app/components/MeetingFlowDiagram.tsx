@@ -151,12 +151,81 @@ export default function MeetingFlowDiagram() {
           {/* Mobile vertical fallback */}
           <MobileFlow active={animActive} reduce={!!reduce} />
         </div>
+
+        {/* CRM Expansion Loop callout — Web フロー以外に CRM-to-Meeting も
+            別ループとして存在することを明示。詳細は /lead-revival/ で深掘り */}
+        <div className="mfd-crm-callout">
+          <div className="mfd-crm-callout-tag">+ 拡張ループ</div>
+          <div className="mfd-crm-callout-body">
+            <strong>CRM に眠る既存リードからも商談を作る</strong>
+            <span className="mfd-crm-callout-sub">
+              過去 MQL・失注・休眠 contact の再検討シグナルを Meeton Intent が検知し、Meeton Email が再アプローチ。
+            </span>
+          </div>
+          <a href="/lead-revival/" className="mfd-crm-callout-link">
+            CRM-to-Meeting を見る →
+          </a>
+        </div>
       </div>
 
       <style jsx>{`
         .mfd-stage {
           margin-top: clamp(40px, 6vw, 64px);
           position: relative;
+        }
+        .mfd-crm-callout {
+          margin: 48px auto 0;
+          max-width: 880px;
+          padding: 20px 24px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .mfd-crm-callout-tag {
+          font-family: var(--fm);
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          color: var(--cta);
+          background: var(--cta-light);
+          padding: 6px 12px;
+          border-radius: 999px;
+          flex-shrink: 0;
+        }
+        .mfd-crm-callout-body {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          flex: 1;
+          min-width: 240px;
+        }
+        .mfd-crm-callout-body strong {
+          font-size: 15px;
+          font-weight: 800;
+          color: var(--heading);
+          line-height: 1.5;
+        }
+        .mfd-crm-callout-sub {
+          font-size: 13px;
+          color: var(--sub);
+          line-height: 1.7;
+        }
+        .mfd-crm-callout-link {
+          color: var(--cta);
+          font-size: 13px;
+          font-weight: 800;
+          text-decoration: none;
+          border-bottom: 1px solid transparent;
+          padding-bottom: 2px;
+          transition: border-color 0.2s;
+          flex-shrink: 0;
+        }
+        .mfd-crm-callout-link:hover {
+          border-color: var(--cta);
         }
       `}</style>
     </section>

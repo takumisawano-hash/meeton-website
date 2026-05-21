@@ -3,9 +3,9 @@ import HomePageClient from '@/app/components/HomePageClient'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 
 export const metadata: Metadata = {
-  title: 'BtoB向けWeb接客ツール｜AIチャットボットで商談獲得｜Meeton ai',
+  title: 'BtoB Web 接客 AI｜訪問者を商談機会に変える AI SDR',
   description:
-    'BtoB特化のWeb接客ツール。AIチャットボットがサイト訪問者に自動対応し、商談予約まで完結。従来のチャットボットを超えるAI Web接客を14日間無料体験。',
+    'BtoB 特化の Web 接客 AI。匿名訪問者対応の単なるチャットボットではなく、識別済みリードを商談予約まで運ぶ AI SDR。会話・ヒアリング・資料提案・日程調整・追客を自動化。',
   robots: { index: false, follow: false },
 }
 
