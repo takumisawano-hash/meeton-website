@@ -1263,15 +1263,12 @@ export default function HomePageClient({
               </a>
             </div>
           )}
-          {/* HERO DEMO ANIMATION — skipped in LP mode for LCP */}
-          {!isLp && (
-            <div
-              className="anim d5"
-              style={{ marginTop: "clamp(40px,6vw,64px)" }}
-            >
-              <HeroDemoAnimation />
-            </div>
-          )}
+          {/* 2026-05-21: HeroDemoAnimation (HERO_STATS 3 カード) を Hero
+              から撤去。GPT review 指摘: Hero 直下に「20倍+ / 60%+ / 2件」
+              の数字を出すと、訪問者が "何のプロダクトか" 理解する前に
+              proof が出る + 後の Cases section と完全重複。同じ 3 社
+              (BizteX/EdulinX/Univis) の事例は Cases section で詳細
+              表示するため、Hero では撤去。 */}
         </div>
       </section>
 
