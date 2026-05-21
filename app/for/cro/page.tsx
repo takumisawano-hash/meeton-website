@@ -80,7 +80,7 @@ const config: PersonaConfig = {
     {
       key: 'email',
       reason:
-        'フォーム送信直後の自動返信 + Day 1/3/5 のフォローアップを AI が自動化。返信応答まで AI が担うため、SDR は商談に集中できます。',
+        'フォーム送信直後の自動返信 + Day 1/3/5 のフォローアップを AI が自動化。返信応答まで AI が担うため、SDR は商談に集中できます。 失注・休眠リードを CRM 上で待たせ続けるのではなく、Meeton Intent が再検討シグナルを検知し、Meeton Email が AI で再アプローチ。営業の手間ゼロでパイプラインを再生成できます。',
     },
     {
       key: 'library',
@@ -118,6 +118,11 @@ const config: PersonaConfig = {
       question: '失注リスクや AI の誤対応が心配です',
       answer:
         'Meeton ai はエスカレーション設計が標準。高難度の質問や明確な購買意向は人 SDR にハンドオフされます。会話ログは全件 CRM に記録され、品質モニタリングとファインチューニングが可能です。',
+    },
+      {
+      question: 'CRM に眠る失注リードや過去商談からも商談を再生成できますか？',
+      answer:
+        'はい。失注リードや過去 MQL の再検討シグナルを Meeton Intent が検知し、Meeton Email が失注理由を踏まえた文面で再アプローチします。再訪・返信があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで自動化。CRO 視点では、既存パイプラインから新規 ARR を生み出すレバーになります。',
     },
   ],
   accent: '#3b6ff5',
