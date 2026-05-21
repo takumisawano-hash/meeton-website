@@ -50,7 +50,7 @@ const faqSchema = {
       name: 'なぜ日程調整リンクだけでは商談が増えないのですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'B2B 訪問者の 97% はフォーム送信せずに離脱します。日程調整リンクは CV 後にしか機能しないため、未 CV の訪問者・予約しなかったリード・再訪問リードに対しては商談機会を逃します。',
+        text: '多くの B2B 訪問者はフォーム送信前に離脱します。日程調整リンクは CV 後にしか機能しないため、未 CV の訪問者・予約しなかったリード・再訪問リード・CRM 内の既存リードに対しては商談機会を捉えられません。',
       },
     },
   ],
@@ -91,11 +91,11 @@ export default function CompareSchedulingPage() {
           <div className="cmp-hero-inner">
             <div className="cmp-eyebrow">Compare</div>
             <h1>
-              日程調整リンクを出すだけでは、<br />
-              <span className="accent">商談は増えない。</span>
+              日程調整は必要。{" "}
+              <span className="accent">それだけでは届かない商談機会がある。</span>
             </h1>
             <p className="hero-sub">
-              日程調整ツールは予約導線を最適化します。AI SDR はその前段で、訪問者と会話し、課題を整理し、必要な情報を届けたうえで、商談予約や追客まで実行します。両者の役割と能力の違いを構造的に整理します。
+              日程調整ツールは、CV 後の予約導線を最適化する重要な役割を持ちます。一方で、フォーム送信前の訪問者、資料 DL 後・予約しなかったリード、再訪問リード、CRM に眠る既存リードまで含めると、商談機会の多くは予約導線の前後に存在します。Meeton ai はその全領域を AI SDR としてカバーします。
             </p>
             <div className="hero-ctas">
               <Link href="/" className="btn-primary">
@@ -112,9 +112,9 @@ export default function CompareSchedulingPage() {
         <section className="section section-light">
           <div className="section-inner">
             <div className="section-label">01 — Problem</div>
-            <h2>フォーム後だけの最適化では、訪問者の 97% を取りこぼす</h2>
+            <h2>フォーム後だけの最適化では、商談機会の多くを取りこぼす</h2>
             <p className="body">
-              B2B サイト訪問者の 97% はフォームを送らずに離脱します。日程調整ツールは「CV した訪問者」だけが対象。残り 97% の訪問者、予約しなかったリード、再訪問リードに対しては商談機会を逃しています。
+              多くの B2B サイト訪問者は、フォーム送信前に離脱します。日程調整ツールは「CV した訪問者」だけが対象。フォーム送信前の訪問者、予約しなかったリード、再訪問リード、CRM 内の既存リードに対しては商談機会を捉えられません。
             </p>
             <div className="problem-funnel">
               <div className="problem-funnel-row">
@@ -127,7 +127,7 @@ export default function CompareSchedulingPage() {
                 <span className="step">予約</span>
               </div>
               <p className="problem-caption">
-                ↑ 日程調整ツールはここしか動かない（97% は届かない）
+                ↑ 日程調整ツールはここしか動かない（その他の機会は届かない）
               </p>
             </div>
           </div>
@@ -189,7 +189,12 @@ export default function CompareSchedulingPage() {
                   <tr>
                     <td>訪問企業 ID + 行動シグナル</td>
                     <td className="no">×</td>
-                    <td className="yes">○ Intent で判断</td>
+                    <td className="yes">○ Web 行動 + CRM データを統合判断</td>
+                  </tr>
+                  <tr>
+                    <td>CRM 既存リードの再商談化</td>
+                    <td className="no">×</td>
+                    <td className="yes">○ Meeton Email がシグナル検知 + 再アプローチ</td>
                   </tr>
                   <tr>
                     <td>CRM 自動同期</td>
@@ -271,7 +276,7 @@ export default function CompareSchedulingPage() {
                 <h3 className="pick-title">こんな企業に向いています</h3>
                 <ul className="pick-list">
                   <li>リードは増えたが商談が増えていない</li>
-                  <li>CV 前訪問者の 97% を取りに行きたい</li>
+                  <li>フォーム送信前の訪問者からも商談を取りに行きたい</li>
                   <li>予約しなかったリードを 1:1 で追客したい</li>
                   <li>再訪問リードを取りこぼしている</li>
                   <li>CV 数ではなく商談数で KPI を見たい</li>

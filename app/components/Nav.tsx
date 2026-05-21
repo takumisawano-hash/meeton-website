@@ -102,11 +102,11 @@ export default function Nav({
     { href: "/features/ai-email/", label: "Meeton Email", sub: "未予約追客 + CRM 再商談化" },
   ];
 
-  // 2026-05-20: top nav 圧縮。ウェビナーと採用情報は Footer / リソース内に
-  // 退避し、B2B 獲得目的の "category → 比較 → 事例 → CTA" 動線を最短化。
+  // 2026-05-21: top nav から「比較」を削除 (competitor-shop に見えるリスク)。
+  // 比較ページは FAQ 内リンク + footer + 営業資料から誘導。トップ nav は
+  // category-defining 動線 (AI SDR とは / 事例 / ブログ / 資料 / デモ) のみ。
   const navLinks = [
     { href: "/ai-sdr/", label: "AI SDR とは" },
-    { href: "/compare/scheduling-vs-ai-sdr/", label: "比較" },
     { href: "/case-studies/", label: "導入事例" },
     { href: "/blog/", label: "ブログ" },
     { href: "#download-center", label: "資料請求", onClick: true },
