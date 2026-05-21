@@ -190,7 +190,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
   .dash{max-width:340px}
   .why-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
   .usecase-grid{grid-template-columns:1fr;max-width:480px;margin:44px auto 0}
-  .pvis{max-width:100%;aspect-ratio:1/1.2;min-height:380px}
+  .pvis{max-width:100%;aspect-ratio:auto;min-height:auto;height:auto;padding-bottom:24px}
   .final-cta{padding:60px 20px 80px}
   .btn-cta-lg{padding:14px 24px;font-size:16px;width:100%}
   .btn-ghost{padding:14px 24px;font-size:16px;width:100%}
@@ -205,7 +205,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 @media(max-width:480px){
   .hero{padding:80px 16px 40px}
   .dash{max-width:100%}
-  .pvis{aspect-ratio:1/1.4;min-height:400px}
+  .pvis{aspect-ratio:auto;min-height:auto;height:auto;padding-bottom:20px}
   .pvis>div{transform:scale(0.78);transform-origin:top center}
   .flow-step{flex:0 0 100%}
   .flow-num{width:50px;height:50px;font-size:18px}
