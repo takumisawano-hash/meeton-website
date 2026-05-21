@@ -216,7 +216,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 const faqData = [
   { q: 'CRM に眠る休眠リード・過去 MQL・失注リードからも商談を作れますか？', a: 'はい。Meeton Email が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧、ウェビナー参加等）を検知し、再検討タイミングの瞬間を捉えて文脈に沿って再アプローチし、返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton Email の特徴です。' },
-  { q: 'Meeton Email は MA のメール配信と何が違いますか？', a: 'MA メールは「事前定義したシナリオ × テンプレート文面」を時間ベースで配信します。Meeton Email は「リードの最新行動 × AI 動的生成」をリアルタイムで判断し、送るタイミング・送る内容・送らない判断まで AI が文脈で都度決めます。商談予約獲得をゴールに据えた、もう一人の SDR として動きます。' },
+  { q: 'Meeton Email は MA のメール配信と何が違いますか？', a: 'MA メールは「事前定義したシナリオ × テンプレート文面」を時間ベースで配信します。Meeton Email は「リードの最新行動 × AI 動的生成」をリアルタイムで判断し、送るタイミング・送る内容・送らない判断まで AI が文脈で都度決めます。リードの反応に応じて、商談につながる次の一手を AI が選び続ける、もう一人の SDR として動きます。' },
   { q: 'Meeton Calendar で予約しなかったリードに、いつ送られますか？', a: '事前定義の「Day 1 / Day 3 / Day 5」のような固定シーケンスではありません。リードの再訪・メール反応・閲覧ページ・MA 上のスコア変化を AI が監視し、送るべきタイミングと内容を文脈で動的判断します。' },
   { q: 'メール文面は自分で作成する必要がありますか？', a: 'いいえ。AIがリードの行動履歴・CRM 上の文脈・ナレッジベースをもとに、メール文面を毎通動的に生成します。トーン・テンプレートのガードレール設定は可能です。' },
   { q: '完全自動と承認モードはどう違いますか？', a: '完全自動モードは AI が生成から送信まですべて自動で行います。承認モードは AI が下書きを作成し、送信前に SDR / 営業担当が確認・編集してから送信できます。リード単位・チーム単位で切替可能です。' },
@@ -227,7 +227,7 @@ const faqData = [
 const whyData = [
   { title: 'MA メールではなく、もう一人の SDR', desc: 'テンプレート × 時間トリガーの一斉配信ではない。AI が文脈で判断する 1:1 のフォロー。', color: '#7c5cfc', iconPath: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
   { title: 'AI が文脈で動的判断', desc: '送るタイミング・送る内容・送らない判断まで、リードの最新行動から AI が都度決定。', color: '#3b6ff5', iconPath: 'M21 12a9 9 0 1 1-6.22-8.56 M14 8l4 4-4 4 M3 12h15' },
-  { title: '商談予約獲得がゴール', desc: 'スコアリングや育成のためではなく、Meeton Calendar への着地（商談確定）を目的に動く。', color: '#04cb78', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
+  { title: '次の有効アクションを選ぶ', desc: '高意向リードには商談予約、情報収集中なら資料・事例提示。文脈で次の一手を判断する。', color: '#04cb78', iconPath: 'M9 12l2 2 4-4 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.49 0 4.74 1.01 6.36 2.64' },
   { title: 'MA の上に乗る設計', desc: 'Marketo / HubSpot Marketing と並走可能。MA が取りこぼしたリードに 1:1 で追いつく。', color: '#0891b2', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
 ];
 
@@ -264,7 +264,7 @@ const useCaseData = [
     title: '休眠リードの再接触',
     color: '#04cb78',
     desc: '過去に接点があったが冷えてしまった CRM 上のリードへ、最新のサイト再訪をトリガーに AI が再アプローチを判断。',
-    example: '半年ぶりにサイトをご覧いただいたようなので、改めて 30 分のお時間をいただけませんか？',
+    example: '以前ご関心をお持ちいただいたテーマについて、最近近い企業様の事例が増えてきました。再検討のタイミングでしたら、要点だけお送りします。',
   },
 ];
 
@@ -294,7 +294,7 @@ export default function AiEmailPageClient() {
               </button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '1:1', l: 'AI SDR 追跡' }, { v: '動的判断', l: 'MAテンプレでない' }, { v: '商談予約', l: 'ゴール一本化' }].map((s, i) => (
+              {[{ v: '1:1', l: 'AI SDR 追跡' }, { v: '動的判断', l: 'MAテンプレでない' }, { v: '反応で選ぶ', l: '次の一手' }].map((s, i) => (
                 <div key={i} className="hero-stat"><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>
@@ -510,11 +510,11 @@ export default function AiEmailPageClient() {
           <div className="phase-row">
             <div className="phase-text">
               <div className="phase-tag" style={{ color: '#04cb78' }}><span style={{ position: 'relative' }}>FEATURE 03</span></div>
-              <div className="phase-h">商談予約獲得をゴールに、反応で次手を変える</div>
+              <div className="phase-h">リードの反応に応じて、次の一手を変える</div>
               <div className="phase-desc">スコアリングや育成のためのメールではありません。Meeton Calendar への着地（商談確定）を一本のゴールに据え、未反応なら別の切り口で、開封・クリックがあれば反応領域を深掘りで、AI が次の一手を都度動的判断します。</div>
               <div className="phase-features">
                 {[
-                  'すべての判断は商談予約獲得をゴールに収束',
+                  'すべての判断は、次の有効アクション (商談予約 / 資料 / 事例) に収束',
                   '開封・クリック・再訪で次手の方向性を AI が切替',
                   '最大送信数・最低間隔のガードレール設定可能',
                   'Meeton Calendar URL を文脈に応じて自動挿入',

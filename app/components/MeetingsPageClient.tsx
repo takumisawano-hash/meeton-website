@@ -284,8 +284,8 @@ export default function MeetingsPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON CALENDAR</div>
-            <h1 className="anim-y d2">商談予約を、<br /><em>即時に起動</em></h1>
-            <p className="anim-y d3 hero-sub">業界平均 42 時間の初動対応を、Meeton Calendar が AI SDR の商談予約機能として即時化。リードがコンバートした瞬間（フォーム送信・サンクスページ・メール経由）に、商談予約 UI が即座に発動します。</p>
+            <h1 className="anim-y d2">高意向リードを、<br /><em>AI SDR がその場で商談予約へつなぐ</em></h1>
+            <p className="anim-y d3 hero-sub">Meeton Calendar は、AI SDR が「温度が高まった瞬間」を判断して商談予約 UI を提示する出口機能。フォーム送信・資料 DL・会話文脈・再訪などのシグナルに応じて、適切な担当者の空き枠を即時提示し、商談予約まで自動化します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
               <button className="btn-ghost" onClick={openMeetonCalendar}>
@@ -294,7 +294,7 @@ export default function MeetingsPageClient() {
               </button>
             </div>
             <div className="anim d5 hero-stats">
-              {[{ v: '即時', l: 'Speed to Lead' }, { v: '42h→5s', l: 'BizteX 事例' }, { v: '自動', l: '担当者割り振り' }].map((s, i) => (
+              {[{ v: '即時', l: '温度判定の瞬間' }, { v: '自動', l: '担当者割り振り' }, { v: 'CRM', l: '同期 + 通知' }].map((s, i) => (
                 <div key={i} className="hero-stat"><div className="stat-v">{s.v}</div><div className="stat-l">{s.l}</div></div>
               ))}
             </div>

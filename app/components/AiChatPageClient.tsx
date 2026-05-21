@@ -245,6 +245,7 @@ const flowStepIcons = [
 ];
 
 const useCases = [
+  { title: '問い合わせ前の初回訪問者', color: '#0891b2', desc: '料金ページや比較ページで迷っている匿名訪問者に AI SDR が話しかけ、疑問に答えながら必要な情報・資料を案内。リード化までを自然な対話で導きます。', msg: '料金体系について気になる点はありますか？導入規模に応じた目安をご説明できます。' },
   { title: '資料DL後の再訪リード', color: '#04cb78', desc: '資料DL したリードが料金ページに戻ってきたタイミングで起動。DL した資料の章まで把握した状態で AI SDR が対話を再開します。', msg: '田中様、お帰りなさい。先日ダウンロードいただいた料金最適化ガイドで気になる点はございましたか？' },
   { title: 'ターゲットアカウント', color: '#7c5cfc', desc: 'CRM 上の重点企業ステータスをそのまま把握。企業名・直近のメール反応・営業担当のメモまで踏まえて、AI SDR が会話を開始します。', msg: '{会社名}様、ウェビナー後に料金ページをご覧いただいている件、AI SDR としてご質問にお答えします。' },
   { title: 'メール反応からの再訪', color: '#3b6ff5', desc: 'AI Email や MA からのメールをクリックして再訪したリードを検知。クリックしたリンク先・関心領域を文脈として継続して対話します。', msg: '先ほどのメールでお送りした事例、ご興味の章を中心に詳細をご案内できます。' },
@@ -266,8 +267,8 @@ export default function AiChatPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON LIVE</div>
-            <h1 className="anim-y d2">過去の全文脈を引き継いで、<br /><em>AI SDR がその場で商談化</em></h1>
-            <p className="anim-y d3 hero-sub">CRM で識別済みの再訪リードに、AI SDR が即時応答。過去の閲覧・DL・メール反応をすべて引き継いで対話を開始し、商談予約までその場で完結。ラストワンマイルの会話を AI SDR が走り、コンバージョン直前の意思決定を後押しします。</p>
+            <h1 className="anim-y d2">訪問者の文脈を理解し、<br /><em>AI SDR が会話から商談機会をつくる</em></h1>
+            <p className="anim-y d3 hero-sub">Meeton Live は、匿名訪問者の初回質問から、CRM で識別済みの再訪リードまで、文脈に応じて AI SDR が対話する機能です。閲覧ページ・資料 DL・メール反応・CRM 履歴をもとに、質問への回答、資料提案、ヒアリング、商談予約まで自然につなぎます。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
               <button className="btn-ghost" onClick={openMeetonCalendar}>

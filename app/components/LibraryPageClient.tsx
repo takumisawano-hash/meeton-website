@@ -209,7 +209,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 
 const faqData = [
   { q: 'CRM 履歴に基づく資料推薦はできますか？', a: 'はい。Meeton Library は会話文脈だけでなく、CRM 上の過去 DL 履歴・関心領域・業種・過去商談ステータスを統合判断し、最適な資料を自動選定します。新規 Web リードには初回向け資料、CRM 上の再訪リードには既読資料を除外して新規コンテンツを優先など、文脈に応じた切り分けが可能です。' },
-  { q: 'Meeton Library と通常の資料 DL ページの違いは何ですか？', a: '通常の資料 DL ページは Web 制作工数がかかり、PDF を一覧で並べるだけで「中身を読まないと判断できない」体験になります。Meeton Library は資料をアップロードするだけでポップアップ形式の AI チャット付きライブラリーが自動生成。デザイン・新規ページ追加は不要で、AI チャットが資料の中身を要約・解説するため、リードは資料全文を読まなくても要点を把握できます。' },
+  { q: 'Meeton Library と通常の資料 DL ページの違いは何ですか？', a: '通常の資料 DL ページは Web 制作工数がかかり、PDF を一覧で並べるだけで「中身を読まないと判断できない」体験になります。Meeton Library は資料をアップロードするだけでポップアップ形式の AI チャット付きライブラリーが自動生成。デザイン・新規ページ追加は不要で、AI チャットが訪問者の質問に応じて該当箇所を引用しながら案内するため、検討に必要な情報を素早く取得できます。' },
   { q: '既存リードに対してのみ動作するのですか？', a: 'はい。Meeton Library は HubSpot / Salesforce で識別済みの既存リード（過去にコンバートしたリード）の再訪に対して起動する、ナーチャリング専用機能です。新規リード獲得用ではなく、検討フェーズが進んだリードに適切な情報提供を行い、商談機会を再発火させる設計です。' },
   { q: '資料の更新は AI が自動で学習しますか？', a: 'はい。資料を Meeton Library にアップロードまたは連携すると、AI がコンテンツを自動でインデックス化します。資料の更新・差し替えがあれば、再学習も自動で行われ、常に最新の情報をベースに推薦・解説します。' },
   { q: 'Meeton Calendar との連携はどう動きますか？', a: 'AI が資料解説対話の中で「検討再開」のシグナル（具体的な料金質問・導入時期の言及・比較検討の発言など）を検知すると、Meeton Calendar の予約 UI を会話内に直接展開します。CRM 上の担当者ルールに従って自動割り振り、ページ遷移なしで商談確定まで導きます。' },
@@ -219,7 +219,7 @@ const faqData = [
 
 const whyData = [
   { title: '行動履歴から最適資料を AI 推薦', desc: 'CRM 上の閲覧ページ・DL 履歴・興味分野を AI が解析し、検討フェーズに合った最適な資料を能動的に提案。「資料を探す責任」をリードに負わせません。', color: '#d03ea1', iconPath: 'M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11' },
-  { title: 'AI チャット解説を内蔵', desc: '資料の中身を AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、章単位・項目単位の質問にもリアルタイムで回答します。', color: '#7c5cfc', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8' },
+  { title: 'AI チャット解説を内蔵', desc: '資料の読むべき箇所を AI が案内。章単位・項目単位の質問にも該当箇所を引用しながらリアルタイムで回答し、検討に必要な情報へ訪問者を導きます。', color: '#7c5cfc', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8' },
   { title: 'アップロードだけでライブラリー自動生成', desc: 'PDF・スライドをアップロードするだけで、AI チャット付きの資料ライブラリー（ポップアップ UI）が自動立ち上がり。デザイン作業も新規ページ追加も不要、JS タグ 1 行で既存サイトに即組み込みできます。', color: '#0891b2', iconPath: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M17 8l-5-5-5 5 M12 3v12' },
   { title: '検討再開を検知して商談化', desc: 'AI チャット解説の中で検討再開のシグナル（料金・導入時期・比較検討）を AI が検知。Meeton Calendar の予約 UI を会話内に直接展開し、商談予約までその場で完結します。', color: '#3b6ff5', iconPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
 ];
@@ -265,8 +265,8 @@ export default function LibraryPageClient() {
         <div className="hero-inner">
           <div className="hero-text">
             <div className="anim-y d1 hero-badge"><div className="hero-badge-dot" />MEETON LIBRARY</div>
-            <h1 className="anim-y d2">戻ってきたリードに、<br /><em>AI が資料でナーチャリング</em></h1>
-            <p className="anim-y d3 hero-sub">資料をアップロードするだけで、AI チャット付きの資料ライブラリー（資料一覧ポップアップ）が自動で立ち上がる。デザインを組んだり、新しいページをサイトに追加する必要はゼロ。検討再開した既存リードに、AI チャット解説付きの資料一覧をその場で届けられる、既存リードのナーチャリング専用機能。</p>
+            <h1 className="anim-y d2">資料を、<br /><em>AI が商談につながる会話に変える</em></h1>
+            <p className="anim-y d3 hero-sub">Meeton Library は、PDF やスライドをアップロードするだけで、AI チャット付きの資料ライブラリーを自動生成。訪問者の関心や CRM 履歴に応じて最適な資料を提案し、AI が読むべき箇所を案内します。初回訪問者のリード化から、既存リードの検討再開、稟議準備の支援まで対応。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonCalendar}>デモを予約</button>
               <button className="btn-ghost" onClick={openMeetonDownloadCenter}>
@@ -327,7 +327,7 @@ export default function LibraryPageClient() {
                 {/* Visitor message */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', opacity: 0, animation: 'chatPop .5s 1.6s cubic-bezier(.16,1,.3,1) forwards' }}>
                   <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px 4px 12px 12px', padding: '10px 14px', maxWidth: '75%', fontSize: 11, fontWeight: 600, color: 'var(--heading)', lineHeight: 1.6 }}>
-                    導入事例の章を要約して
+                    導入事例の章を教えて
                   </div>
                 </div>
                 {/* AI explanation */}
@@ -442,9 +442,9 @@ export default function LibraryPageClient() {
             <div className="phase-text">
               <div className="phase-tag" style={{ color: '#7c5cfc' }}><span style={{ position: 'relative' }}>FEATURE 02</span></div>
               <div className="phase-h">AI チャット解説 — 資料の中身を AI がその場で説明</div>
-              <div className="phase-desc">推薦した資料の中身を、AI が要約・解説。リードが資料全文を読まなくても要点を把握でき、「導入実績の章だけ要約して」「他社との違いは？」といった章単位の質問にもリアルタイムで回答します。</div>
+              <div className="phase-desc">推薦した資料の中身を、AI が引用しながら案内。「導入実績の章を教えて」「他社との違いは？」といった章単位の質問に該当箇所を引用してリアルタイムで回答し、検討に必要な情報へ導きます。</div>
               <div className="phase-features">
-                {['資料全文を AI が要約・章単位で解説', '質問に資料の根拠を引用して回答', '複数資料を横断した要点抽出', 'リードの理解度に合わせた説明トーン調整'].map((feat, i) => (
+                {['読むべき箇所を AI が引用しながら案内', '質問に資料の根拠を引用して回答', '複数資料を横断した該当箇所抽出', 'リードの理解度に合わせた案内トーン調整'].map((feat, i) => (
                   <div className="phase-feat" key={i}><div className="phase-feat-icon" style={{ background: '#7c5cfc15', color: '#7c5cfc' }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>{feat}</div>
                 ))}
               </div>
