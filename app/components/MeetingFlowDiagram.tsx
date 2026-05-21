@@ -152,19 +152,31 @@ export default function MeetingFlowDiagram() {
           <MobileFlow active={animActive} reduce={!!reduce} />
         </div>
 
-        {/* CRM Expansion Loop callout — Web フロー以外に CRM-to-Meeting も
-            別ループとして存在することを明示。詳細は /lead-revival/ で深掘り */}
-        <div className="mfd-crm-callout">
-          <div className="mfd-crm-callout-tag">+ 拡張ループ</div>
-          <div className="mfd-crm-callout-body">
-            <strong>CRM に眠る既存リードからも商談を作る</strong>
-            <span className="mfd-crm-callout-sub">
-              過去 MQL・失注・休眠 contact の再検討シグナルを Meeton Email が検知して再アプローチ。
-            </span>
+        {/* CRM Expansion Loop sub-flow — Web フロー以外に CRM-to-Meeting も
+            別ループとして存在することを明示。/lead-revival/ で深掘り。 */}
+        <div className="mfd-crm-subloop">
+          <div className="mfd-crm-subloop-header">
+            <span className="mfd-crm-subloop-tag">拡張ループ · CRM から商談を掘り起こす</span>
+            <a href="/lead-revival/" className="mfd-crm-subloop-link">
+              詳細を見る →
+            </a>
           </div>
-          <a href="/lead-revival/" className="mfd-crm-callout-link">
-            CRM-to-Meeting を見る →
-          </a>
+          <div className="mfd-crm-subloop-flow">
+            <span className="mfd-crm-step">CRM 既存リード</span>
+            <span className="mfd-crm-arrow">→</span>
+            <span className="mfd-crm-step">シグナル検知</span>
+            <span className="mfd-crm-arrow">→</span>
+            <span className="mfd-crm-step mfd-crm-step-email">Meeton Email</span>
+            <span className="mfd-crm-arrow">→</span>
+            <span className="mfd-crm-step">再訪 / 返信</span>
+            <span className="mfd-crm-arrow">→</span>
+            <span className="mfd-crm-step mfd-crm-step-calendar">Meeton Calendar</span>
+            <span className="mfd-crm-arrow">→</span>
+            <span className="mfd-crm-step mfd-crm-step-goal">商談</span>
+          </div>
+          <p className="mfd-crm-subloop-note">
+            過去 MQL・失注・休眠 contact の再検討シグナルを Meeton Email が検知し、文脈に沿って再アプローチ。
+          </p>
         </div>
       </div>
 
@@ -173,48 +185,30 @@ export default function MeetingFlowDiagram() {
           margin-top: clamp(40px, 6vw, 64px);
           position: relative;
         }
-        .mfd-crm-callout {
-          margin: 48px auto 0;
-          max-width: 880px;
-          padding: 20px 24px;
+        .mfd-crm-subloop {
+          margin: 56px auto 0;
+          max-width: 920px;
+          padding: 24px clamp(20px, 3vw, 32px);
           background: var(--surface);
           border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: 16px;
+        }
+        .mfd-crm-subloop-header {
           display: flex;
           align-items: center;
-          gap: 16px;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 18px;
           flex-wrap: wrap;
         }
-        .mfd-crm-callout-tag {
+        .mfd-crm-subloop-tag {
           font-family: var(--fm);
           font-size: 11px;
           font-weight: 800;
           letter-spacing: 0.12em;
           color: var(--cta);
-          background: var(--cta-light);
-          padding: 6px 12px;
-          border-radius: 999px;
-          flex-shrink: 0;
         }
-        .mfd-crm-callout-body {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-          flex: 1;
-          min-width: 240px;
-        }
-        .mfd-crm-callout-body strong {
-          font-size: 15px;
-          font-weight: 800;
-          color: var(--heading);
-          line-height: 1.5;
-        }
-        .mfd-crm-callout-sub {
-          font-size: 13px;
-          color: var(--sub);
-          line-height: 1.7;
-        }
-        .mfd-crm-callout-link {
+        .mfd-crm-subloop-link {
           color: var(--cta);
           font-size: 13px;
           font-weight: 800;
@@ -222,10 +216,62 @@ export default function MeetingFlowDiagram() {
           border-bottom: 1px solid transparent;
           padding-bottom: 2px;
           transition: border-color 0.2s;
-          flex-shrink: 0;
         }
-        .mfd-crm-callout-link:hover {
+        .mfd-crm-subloop-link:hover {
           border-color: var(--cta);
+        }
+        .mfd-crm-subloop-flow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 14px;
+        }
+        .mfd-crm-step {
+          padding: 7px 12px;
+          background: #fff;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--heading);
+          font-family: var(--fb);
+          white-space: nowrap;
+        }
+        .mfd-crm-step-email,
+        .mfd-crm-step-calendar {
+          background: var(--cta-light);
+          border-color: rgba(4, 203, 120, 0.3);
+          color: var(--cta);
+        }
+        .mfd-crm-step-goal {
+          background: var(--cta);
+          color: #fff;
+          border-color: var(--cta);
+          font-weight: 800;
+        }
+        .mfd-crm-arrow {
+          color: var(--sub);
+          font-size: 12px;
+          font-weight: 600;
+        }
+        .mfd-crm-subloop-note {
+          font-size: 13px;
+          color: var(--sub);
+          font-weight: 600;
+          line-height: 1.7;
+          text-align: center;
+          margin: 0;
+        }
+        @media (max-width: 680px) {
+          .mfd-crm-step {
+            font-size: 11px;
+            padding: 6px 10px;
+          }
+          .mfd-crm-arrow {
+            font-size: 10px;
+          }
         }
       `}</style>
     </section>
@@ -533,8 +579,8 @@ function DesktopFlow({
           node={N.chat}
           tone="chat"
           label="② MEETON LIVE"
-          title="識別済み再訪リードへ AI SDR が対話"
-          sub="過去の閲覧・DL・メール反応を全文脈で引き継ぐ"
+          title="訪問者の文脈を理解して AI SDR が対話"
+          sub="閲覧・DL・メール反応・CRM 履歴を引き継ぎ、資料提案・不安解消も実行"
           icon="chat"
           meeton
         />
@@ -550,8 +596,8 @@ function DesktopFlow({
           node={N.calendar}
           tone="calendar"
           label="④ MEETON CALENDAR"
-          title="商談予約を即時起動"
-          sub="リードコンバート瞬間に発動 / 割り振りルール設定可能"
+          title="温度が高まった瞬間に商談予約へ"
+          sub="AI SDR が判断 / 担当者ルール設定可能"
           icon="calendar"
           hub
           meeton
@@ -933,9 +979,9 @@ function MobileFlow({
 }) {
   const items = [
     { tone: "muted" as const, label: "① 入口", title: "Web サイト訪問者", sub: "あらゆる入口・あらゆる時間", icon: "user" as const },
-    { tone: "chat" as const, label: "② MEETON LIVE", title: "識別済み再訪リードへ AI SDR が対話", sub: "過去の閲覧・DL・メール反応を全文脈で引き継ぐ", icon: "chat" as const, meeton: true },
+    { tone: "chat" as const, label: "② MEETON LIVE", title: "訪問者の文脈を理解して AI SDR が対話", sub: "閲覧・DL・メール反応・CRM 履歴を引き継ぎ、資料提案・不安解消も実行", icon: "chat" as const, meeton: true },
     { tone: "amber" as const, label: "③ CV 直後", title: "フォーム送信・資料 DL 直後", sub: "リードの温度が最も高いタイミング", icon: "thanks" as const, branchNote: "Meeton Live 経由 / CV 直後どちらからも到達" },
-    { tone: "calendar" as const, label: "④ MEETON CALENDAR", title: "商談予約を即時起動", sub: "リードコンバート瞬間に発動 / 割り振りルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
+    { tone: "calendar" as const, label: "④ MEETON CALENDAR", title: "温度が高まった瞬間に商談予約へ", sub: "AI SDR が判断 / 担当者ルール設定可能", icon: "calendar" as const, hub: true, meeton: true },
     { tone: "win" as const, label: "⑤ 商談予約完了", title: "サイト内で商談獲得", sub: "予約完了でその場で確定", icon: "check" as const },
     { tone: "email" as const, label: "⑥ MEETON EMAIL", title: "未予約リードを 1:1 で追客", sub: "MA ではなく AI SDR → Meeton Calendar に戻す", icon: "mail" as const, meeton: true },
   ];

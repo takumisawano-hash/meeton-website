@@ -667,11 +667,10 @@ const integrations = [
   },
 ];
 
+// 2026-05-21: Home FAQ を 6 問に圧縮。比較系細かい質問 (Marketo / Drift /
+// Intercom / 多言語 / 14日トライアル) は各 compare ページ・/lp/trial/ に
+// 移動。トップは核心的な 6 問で構成。
 const faqData = [
-  {
-    q: "CRM に眠る休眠リードからも商談を作れますか？",
-    a: "はい。Meeton Email が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧など）を検知し、文脈に沿って 1:1 で再アプローチします。返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton ai の特徴です。",
-  },
   {
     q: "日程調整ツールとは何が違いますか？",
     a: "日程調整ツールは、予約の導線を最適化するものです。Meeton ai はその前段で、訪問者と会話し、課題を整理し、必要な資料を届けたうえで、商談予約や追客まで行う AI SDR です。CV 後だけでなく、CV 前から商談機会を創出する点が大きな違いです。詳細は『日程調整ツール vs AI SDR』比較ページで解説しています。",
@@ -681,32 +680,20 @@ const faqData = [
     a: "チャットボットは FAQ 応答が中心です。Meeton ai は AI SDR として、訪問者と会話し、課題を整理し、資料を提案し、商談予約や追客まで実行します。匿名訪問者全員に話しかけるのではなく、識別済みリードを商談に押し上げることに特化しています。",
   },
   {
-    q: "マーケティング部門でも使えますか？",
-    a: "Meeton ai は営業組織向けのツールです。マーケ部門が集めたリードの商談化に使うのが用途で、マーケキャンペーン管理や新規リード獲得が主目的の場合は適していません。マーケ向けの機能をお探しなら、Marketo / HubSpot 等の MA ツールをご検討ください。",
+    q: "CRM に眠る休眠リードからも商談を作れますか？",
+    a: "はい。Meeton Email が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧など）を検知し、文脈に沿って 1:1 で再アプローチします。返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton ai の特徴です。",
   },
   {
-    q: "Marketo / HubSpot Workflows との違いは？",
-    a: "MA メールは「リストへの一斉配信」「事前定義したシナリオ」が基本です。Meeton Email は「個別リードのリアルタイム行動シグナルに対する 1:1 の動的フォロー」で、AI が文面・タイミング・トーンを都度判断します。MA を置き換えるのではなく、その上で動く補完プロダクトです。",
+    q: "既存の MA / CRM と併用できますか？",
+    a: "はい。Salesforce、HubSpot とのネイティブ連携に対応。Marketo / Pardot とも連携可能です。MA を置き換えるのではなく、MA が引き渡したリードを商談に変えるラストワンマイルを担当します。詳細は『MA ツール vs AI SDR』比較ページをご覧ください。",
   },
   {
-    q: "Drift / Intercom などのチャットボットとの違いは？",
-    a: "Meeton ai はチャットボット製品ではなく AI SDR プラットフォームです。匿名訪問者全員に話しかけるのではなく、識別済みリードを商談に押し上げることに特化しています。Meeton Live は再訪した識別済みリードのみに起動し、過去の全文脈を引き継いで対話を開始します。",
+    q: "どれくらいで導入できますか？",
+    a: "JavaScript タグを 1 行設置するだけで稼働します。AI の事前学習を含めても、最短で当日中に運用開始できます。Meeton ai 側の設定もデモから 5 分です。",
   },
   {
-    q: "Meeton aiの導入にどのくらい時間がかかりますか？",
-    a: "JavaScriptタグの設置は5分です。Meeton aiの設定を含めても、最短で当日中に稼働開始できます。",
-  },
-  {
-    q: "既存のCRM（Salesforce / HubSpot）と連携できますか？",
-    a: "はい。Salesforce、HubSpotとのネイティブ連携に対応しています。Meeton aiが獲得した商談情報は自動でCRMに登録されます。Webhook経由で他のCRMにも接続可能です。",
-  },
-  {
-    q: "Meeton aiは何語に対応していますか？",
-    a: "日本語・英語・中国語・韓国語をはじめ、主要言語に対応しています。リードの言語を自動検知し、適切な言語で会話します。",
-  },
-  {
-    q: "無料トライアルはありますか？",
-    a: "14日間の無料トライアルをご用意しています。クレジットカード不要で、Meeton aiの全機能をお試しいただけます。",
+    q: "トライアルでは何を評価すべきですか？",
+    a: "「リード数」ではなく「商談数 / 商談化率」を評価してください。Meeton ai は CV 数を増やすツールではなく、Web 訪問者と CRM 既存リードを商談に変えるツールです。14 日間の無料トライアルで自社サイトでの商談化余地を可視化できます。",
   },
 ];
 
@@ -1452,7 +1439,7 @@ export default function HomePageClient({
         >
           <div className="section-inner" style={{ maxWidth: 920 }}>
             <div className="slabel" style={{ textAlign: "center" }}>
-              The Problem
+              課題
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
               リードは増えた。<span style={{ color: "var(--cta)" }}>でも、商談は増えていない。</span>
@@ -1556,7 +1543,7 @@ export default function HomePageClient({
         >
           <div className="section-inner" style={{ maxWidth: 1080 }}>
             <div className="slabel" style={{ textAlign: "center" }}>
-              Where the meetings are
+              商談機会の所在
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
               商談機会は、<span style={{ color: "var(--cta)" }}>Web と CRM の両方</span>に眠っている。
@@ -1656,7 +1643,7 @@ export default function HomePageClient({
         >
           <div className="section-inner" style={{ maxWidth: 1080 }}>
             <div className="slabel" style={{ textAlign: "center" }}>
-              Use Cases
+              活用シーン
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
               Meeton ai が <span style={{ color: "var(--cta)" }}>商談化する 5 つの瞬間</span>
@@ -1669,9 +1656,9 @@ export default function HomePageClient({
                 {
                   title: "問い合わせ前の訪問者",
                   subtitle: "フォーム送信せず離脱する",
-                  body: "B2B サイト訪問者の 97% はフォームを送らずに離脱。Meeton ai は訪問者の興味・行動を検知し、AI SDR が会話を開始。疑問を解消しながら商談機会へ導きます。",
-                  metric: "97%",
-                  metricLabel: "離脱する未コンバート訪問者",
+                  body: "多くの B2B サイト訪問者は、フォームを送信する前に離脱します。Meeton ai は訪問者の興味・行動を検知し、AI SDR が会話を開始。疑問を解消しながら商談機会へ導きます。",
+                  metric: "離脱",
+                  metricLabel: "フォーム送信前の訪問者",
                   color: "#0891b2",
                   gradient: "linear-gradient(135deg,#0891b2,#22d3ee)",
                   bg: "linear-gradient(135deg,#ecfeff,#f0fdfa)",
@@ -1861,7 +1848,7 @@ export default function HomePageClient({
           style={{ position: "relative", zIndex: 2 }}
         >
           <div className="slabel" style={{ textAlign: "center" }}>
-            Capabilities
+            機能
           </div>
           <div className="stitle" style={{ textAlign: "center" }}>
             AI SDR の仕事を、<span style={{ color: "var(--cta)" }}>機能で支える</span>
@@ -2174,7 +2161,7 @@ export default function HomePageClient({
 
       {/* CTA #4 — after STEPS: doc download (post-implementation context, social-proof internal stakeholders) */}
       <MidPageCta
-        eyebrow="For internal review"
+        eyebrow="社内検討用資料"
         heading="社内検討用の資料 (機能・導入事例・料金プラン入り) を無料でダウンロードできます"
         ctaLabel="資料を請求する"
         variant="doc"
@@ -2246,7 +2233,7 @@ export default function HomePageClient({
                 animation: "pulse 2s infinite",
               }}
             />
-            GET STARTED
+            はじめる
           </div>
           <div
             className="stitle"
