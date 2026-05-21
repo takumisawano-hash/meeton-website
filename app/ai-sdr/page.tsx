@@ -5,13 +5,13 @@ import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'AI SDR とは｜Web サイトに配属する AI 営業エージェントの全体像 ｜ Meeton ai',
+    absolute: 'AI SDR とは｜Web と CRM に眠る商談機会を動かす AI 営業エージェント ｜ Meeton ai',
   },
-  description: 'AI SDR とは何か。Web サイトに配属し、訪問者との会話・ヒアリング・資料提案・日程調整・追客まで自動化する AI 営業エージェント。人間 SDR・チャットボットとの違い、導入メリット、活用事例を解説。',
+  description: 'AI SDR とは、Web 行動と CRM データをもとに、見込み客への初動対応・資料提案・日程調整・追客を自動化する AI 営業エージェント。人間 SDR・チャットボット・日程調整ツールとの違い、Meeton ai の特徴と活用事例を解説。',
   alternates: { canonical: '/ai-sdr/' },
   openGraph: {
-    title: 'AI SDR とは｜Web サイトに配属する AI 営業エージェントの全体像',
-    description: 'AI SDR は、Web サイトに配属する AI 営業エージェント。訪問者と会話し、商談機会を生み出します。人間 SDR・チャットボット・日程調整ツールとの違い、Meeton ai の AI SDR としての特徴を解説。',
+    title: 'AI SDR とは？ Web と CRM に眠る商談機会を動かす AI 営業エージェント',
+    description: 'AI SDR は、Web 訪問者・資料 DL リード・再訪問者・CRM に蓄積された既存リードまで、会話・資料提案・日程調整・追客を自動化し、商談機会を創出する AI 営業エージェント。',
     url: 'https://dynameet.ai/ai-sdr/',
   },
 }
@@ -26,7 +26,7 @@ const faqSchema = {
       name: 'AI SDR とは何ですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'AI SDR（AI Sales Development Representative）とは、Web サイトに配属する AI 営業エージェントです。訪問者と会話し、課題をヒアリングし、資料を提案し、商談予約から追客までを自動で実行します。',
+        text: 'AI SDR（AI Sales Development Representative）とは、Web 行動と CRM データをもとに、見込み客への初動対応・会話・資料提案・日程調整・追客を自動化する AI 営業エージェントです。Web 訪問者・資料 DL リード・再訪問者から CRM に蓄積された既存リードまで対応し、商談機会を創出します。',
       },
     },
     {
@@ -34,7 +34,7 @@ const faqSchema = {
       name: 'AI SDR と AI チャットボットの違いは何ですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'AI チャットボットは FAQ 応答が中心で、匿名訪問者全員に対応します。AI SDR は識別済みリードを商談に押し上げることに特化し、会話・資料提案・日程調整・追客まで実行します。',
+        text: 'AI チャットボットは主に FAQ 応答や問い合わせ対応を担います。AI SDR は、訪問者の行動・会話・CRM 履歴をもとに、資料提案、日程調整、追客まで行い、商談機会を前に進めます。「質問に答える」のと「商談機会を前に進める」の違いです。',
       },
     },
     {
@@ -50,7 +50,7 @@ const faqSchema = {
       name: 'AI SDR を導入するには何が必要ですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Meeton ai の場合、JavaScript タグを 1 行 Web サイトに設置するだけで稼働します。HubSpot・Salesforce 等の CRM とネイティブ連携し、リード情報・会話ログ・スコアを自動同期します。',
+        text: 'Meeton ai の場合、JavaScript タグを 1 行 Web サイトに設置するだけで稼働します。HubSpot・Salesforce 等の主要 CRM と連携し、リード情報・会話ログ・スコアを自動同期できます。',
       },
     },
   ],
@@ -90,10 +90,11 @@ export default function AiSdrPage() {
           <div className="ai-sdr-hero-inner">
             <div className="ai-sdr-eyebrow">AI SDR Guide</div>
             <h1>
-              Web サイトに、<span className="accent">AI SDR を配属する時代</span>へ。
+              AI SDR とは？<br />
+              <span className="accent">Web と CRM に眠る商談機会を動かす AI 営業エージェント</span>
             </h1>
             <p className="hero-sub">
-              AI SDR は、Web サイトに配属する AI 営業エージェント。訪問者と会話し、課題をヒアリングし、資料を提案し、商談予約から追客までを自動で実行します。本ガイドでは、AI SDR の定義、人間 SDR・チャットボットとの違い、導入メリットを解説します。
+              AI SDR は、Web 行動と CRM データをもとに、見込み客への初動対応・会話・資料提案・日程調整・追客を自動化する AI 営業エージェントです。Web 訪問者・資料 DL リード・再訪問者から、CRM に蓄積された既存リードまで対応します。本ガイドでは、AI SDR の定義、人間 SDR・チャットボット・日程調整ツールとの違い、導入メリットを解説します。
             </p>
             <div className="hero-ctas">
               <Link href="/" className="btn-primary" data-cta="hero-demo">
@@ -112,17 +113,15 @@ export default function AiSdrPage() {
             <div className="section-label">01 — Definition</div>
             <h2>AI SDR とは何か</h2>
             <p className="body">
-              AI SDR（AI Sales Development Representative）とは、Web サイトに配属する AI 営業エージェントです。従来の SDR（営業開発担当）が人間として行っていた業務を、AI が 24 時間 365 日自動で実行します。
+              AI SDR（AI Sales Development Representative）とは、Web 行動と CRM データをもとに、見込み客への初動対応・資料提案・日程調整・追客を自動化する AI 営業エージェントです。従来の SDR（営業開発担当）が人間として行っていた業務を、AI が 24 時間 365 日自動で実行します。
             </p>
             <p className="body">
-              具体的には、訪問者の興味・行動を検知し、自然な会話で課題をヒアリングし、文脈に合った資料を提案し、温度感が高まったタイミングで商談予約へ導き、予約しなかったリードには 1:1 で追客するまでの一連の業務を自律的に行います。
+              対象は、新規 Web 訪問者だけではありません。資料 DL リード、再訪問者、予約しなかったリード、CRM に蓄積された過去 MQL ・失注リード・休眠 contact まで含めて、文脈に応じて会話・提案・予約・追客を実行します。
             </p>
             <div className="callout">
               <div className="callout-label">AI SDR の定義</div>
               <p>
-                <strong>「Web サイトに配属する AI 営業エージェント」</strong>
-                <br />
-                訪問・会話・ヒアリング・資料提案・商談予約・追客を自律的に実行する、AI 駆動の営業組織。
+                <strong>「Web と CRM の見込み客に対して、AI が初動対応・会話・資料提案・日程調整・追客を自律的に行う AI 営業エージェント」</strong>
               </p>
             </div>
           </div>
@@ -145,10 +144,10 @@ export default function AiSdrPage() {
                 </p>
               </div>
               <div className="why-card">
-                <div className="why-num">97%</div>
-                <div className="why-title">未コンバート訪問者</div>
+                <div className="why-num">大半</div>
+                <div className="why-title">未コンバートで離脱</div>
                 <p className="why-desc">
-                  B2B サイト訪問者の 97% はフォームを送らずに離脱。会話のきっかけがないため商談機会が失われます。
+                  多くの B2B サイト訪問者は、フォーム送信前に離脱します。会話のきっかけがないため商談機会が失われます。
                 </p>
               </div>
               <div className="why-card">
@@ -238,6 +237,20 @@ export default function AiSdrPage() {
                     <td className="yes">低</td>
                     <td className="yes">低</td>
                   </tr>
+                  <tr>
+                    <td>CRM 既存リードの再商談化</td>
+                    <td className="yes">○</td>
+                    <td className="part">手動</td>
+                    <td className="no">×</td>
+                    <td className="no">×</td>
+                  </tr>
+                  <tr>
+                    <td>Web 行動 + CRM シグナル判断</td>
+                    <td className="yes">○</td>
+                    <td className="part">部分的</td>
+                    <td className="no">×</td>
+                    <td className="no">×</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -248,7 +261,7 @@ export default function AiSdrPage() {
         <section className="section section-light alt">
           <div className="section-inner">
             <div className="section-label">04 — Use cases</div>
-            <h2>AI SDR が解決する 4 つの瞬間</h2>
+            <h2>AI SDR が商談化する 5 つの瞬間</h2>
             <p className="body">
               AI SDR は、リードの状態に応じて 4 つの場面で商談機会を創出します。
             </p>
@@ -277,6 +290,12 @@ export default function AiSdrPage() {
                 <p className="usecase-pain">課題: 検討再開を見逃す</p>
                 <p className="usecase-action">過去文脈を持って再接客、温度感に応じて商談化</p>
               </div>
+              <div className="usecase-card">
+                <div className="usecase-num">05</div>
+                <div className="usecase-title">CRM に眠る既存リード</div>
+                <p className="usecase-pain">課題: 過去 MQL ・失注リードの再検討シグナルを見逃す</p>
+                <p className="usecase-action">Web 行動・メール反応・CRM 履歴をもとに、AI が自然に再接触</p>
+              </div>
             </div>
           </div>
         </section>
@@ -287,7 +306,7 @@ export default function AiSdrPage() {
             <div className="section-label section-label-dark">05 — Meeton ai</div>
             <h2 className="dark">Meeton ai は、日本市場向けの AI SDR Platform です</h2>
             <p className="body-dark">
-              Meeton ai は、日本の B2B 企業向けに開発された AI SDR Platform です。日本語・英語・中国語・韓国語に対応し、HubSpot・Salesforce にネイティブ連携。JavaScript タグ 1 行で稼働開始します。
+              Meeton ai は、日本の B2B 企業向けに開発された AI SDR Platform です。日本語・英語・中国語・韓国語に対応し、HubSpot・Salesforce 等の主要 CRM と連携。JavaScript タグ 1 行で稼働開始します。
             </p>
             <div className="cap-grid">
               <div className="cap-card">
@@ -308,7 +327,7 @@ export default function AiSdrPage() {
                 <div className="cap-sub">未予約リード + CRM 既存リードのシグナルを検知し、文脈に沿って 1:1 で再アプローチ</div>
               </div>
             </div>
-            <div className="cta-block">
+            <div className="cta-block center">
               <Link href="/" className="btn-primary-on-dark">
                 Meeton ai のデモを予約 →
               </Link>
@@ -320,9 +339,9 @@ export default function AiSdrPage() {
         <section className="section section-light">
           <div className="section-inner narrow">
             <div className="section-label">06 — Beyond website</div>
-            <h2>AI SDR は、Web サイトだけで動くのではない。</h2>
+            <h2>AI SDR は、Web 接点と CRM 接点をつなぐ。</h2>
             <p className="body">
-              ここまで Web サイト上の AI SDR について解説してきました。Meeton ai の AI SDR は、Web 訪問者だけでなく、CRM に眠る過去 MQL・失注リード・休眠 contact の再商談化にも拡張できます。新規 Web リードと既存 CRM 資産の両方から商談機会を生み出します。
+              新規 Web 訪問者だけでなく、資料 DL 後に離脱したリード、過去に商談化しなかった MQL、失注後に再訪した既存リード、休眠 contact も AI SDR の対象です。Web 行動と CRM 履歴をつなぐことで、これまで見逃していた商談機会を再び動かせます。
             </p>
             <div className="cross-link-cards">
               <Link href="/lead-revival/" className="cross-card">
@@ -369,10 +388,10 @@ export default function AiSdrPage() {
         <section className="section section-dark final">
           <div className="section-inner narrow">
             <h2 className="dark center">
-              自社サイトに <span className="accent">AI SDR を配属</span>してみませんか？
+              Web と CRM に眠る商談機会を、<span className="accent">30 分で可視化しませんか？</span>
             </h2>
             <p className="body-dark center">
-              30 分のデモで、自社サイトの商談化余地を可視化します。タグ設置は最短 5 分。
+              Web 訪問者から CRM に残る過去 MQL・失注リードまで、Meeton ai で商談化できる余地を診断します。
             </p>
             <div className="cta-block center">
               <Link href="/" className="btn-primary-on-dark">
