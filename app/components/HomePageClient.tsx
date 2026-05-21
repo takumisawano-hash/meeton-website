@@ -677,6 +677,10 @@ const integrations = [
 
 const faqData = [
   {
+    q: "CRM に眠る休眠リードからも商談を作れますか？",
+    a: "はい。Meeton Intent が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧など）を検知し、Meeton Email が文脈に沿って再アプローチします。返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton ai の特徴です。",
+  },
+  {
     q: "日程調整ツールとは何が違いますか？",
     a: "日程調整ツールは、予約の導線を最適化するものです。Meeton ai はその前段で、訪問者と会話し、課題を整理し、必要な資料を届けたうえで、商談予約や追客まで行う AI SDR です。CV 後だけでなく、CV 前から商談機会を創出する点が大きな違いです。詳細は『日程調整ツール vs AI SDR』比較ページで解説しています。",
   },
@@ -1223,14 +1227,14 @@ export default function HomePageClient({
           <h1 className="anim-y d2 hero-h1">
             {lpHeadline ?? (
               <>
-                問い合わせを待つ Web サイトから、
-                <em>商談を生み出す AI 営業チャネルへ。</em>
+                Web と CRM に眠る商談機会を、
+                <em>AI SDR が商談へ変える。</em>
               </>
             )}
           </h1>
           <p className="anim-y d3 hero-sub">
             {lpSubheadline ??
-              "マーケ・IS が獲得したリードを、AI SDR が初動対応から商談予約・追客までつなぎます。訪問・問い合わせ・資料 DL・再訪問の瞬間に、会話・ヒアリング・資料提案・日程調整までを自動化。"}
+              "Meeton ai は、Web 訪問者・資料 DL リード・再訪問者から、CRM に眠る既存リードまで、AI SDR が会話・資料提案・日程調整・追客を行い、あらゆる接点から商談機会を生み出します。"}
           </p>
 
           {/* Mini How It Works — Hero 内 element、横並び 7 step
@@ -1349,21 +1353,21 @@ export default function HomePageClient({
         </section>
       )}
 
-      {/* CATEGORY / VISION — 「Meeton ai は、Web サイトに配属する AI SDR」
+      {/* CATEGORY / VISION — Meeton ai は Web 接点と CRM データから商談を生み出す AI SDR
           ダーク背景で先進感、3 カードでコンパクトに */}
       {!isLp && (
         <section
           className="vision-section"
-          aria-label="Meeton ai は Web サイトに配属する AI SDR"
+          aria-label="Meeton ai は Web 接点と CRM データから商談を生み出す AI SDR"
         >
           <div className="section-inner" style={{ maxWidth: 1080, margin: "0 auto" }}>
             <div className="vision-heading">
-              Meeton ai は、Web サイトに配属する <span className="vision-accent">AI SDR</span> です。
+              Meeton ai は、Web 接点と CRM データから商談を生み出す <span className="vision-accent">AI SDR</span> です。
             </div>
             <p className="vision-sub">
               チャットボットでも、単なる日程調整ツールでもありません。
-              訪問者を理解し、会話・提案・予約・追客まで、商談機会を生み出す
-              ために必要なアクションを実行します。
+              訪問者を理解し、CRM 履歴と紐付けて、会話・提案・予約・追客まで、
+              商談機会を生み出すために必要なアクションを実行します。
             </p>
             <div className="vision-grid">
               <div className="vision-card">
@@ -1553,70 +1557,90 @@ export default function HomePageClient({
         </section>
       )}
 
-      {/* NEW FUNNEL — フォーム送信を待つ Web サイトから、AI SDR が働く Web サイトへ */}
+      {/* TWO LOOPS — Web と CRM の 2 つの未活用商談機会、Main + Expansion 階層 */}
       {!isLp && (
         <section
           className="section"
-          style={{ background: "var(--bg)", paddingTop: 64, paddingBottom: 64 }}
+          style={{ background: "var(--bg)", paddingTop: 80, paddingBottom: 80 }}
         >
           <div className="section-inner" style={{ maxWidth: 1080 }}>
             <div className="slabel" style={{ textAlign: "center" }}>
-              New Funnel
+              Where the meetings are
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              フォーム送信を待つだけの Web サイトから、{" "}
-              <span style={{ color: "var(--cta)" }}>AI SDR が働く Web サイト</span>へ。
+              商談機会は、<span style={{ color: "var(--cta)" }}>Web と CRM の両方</span>に眠っている。
             </div>
             <p className="ssub" style={{ textAlign: "center", margin: "0 auto 48px", maxWidth: 720 }}>
-              従来の Web サイトは、訪問者がフォームを送るまで何も起きません。Meeton ai は、訪問者の興味や行動に合わせて会話を開始し、疑問に答え、必要な資料を提案し、温度感が高まったタイミングで商談予約へつなげます。
+              新規訪問者だけではなく、過去にコンバートしたリードや、CRM に眠ったまま再検討タイミングを迎えている既存リードまで、未活用な商談機会は両側に存在します。
             </p>
-            <div className="funnel-compare">
-              <div className="funnel-compare-side funnel-compare-before">
-                <div className="funnel-compare-label">Before — 待ちの Web サイト</div>
-                <div className="funnel-compare-flow">
-                  <span>フォーム送信</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>カレンダー表示</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>予約</span>
-                </div>
-                <p className="funnel-compare-note">3 step。会話・課題ヒアリングなし。</p>
+
+            {/* 2 callouts side-by-side */}
+            <div className="loops-callouts">
+              <div className="loops-callout">
+                <div className="loops-callout-label">Web 側</div>
+                <p className="loops-callout-text">多くの訪問者は、フォームを送信する前に離脱している。</p>
               </div>
-              <div className="funnel-compare-side funnel-compare-after">
-                <div className="funnel-compare-label">After — AI SDR が働く Web サイト</div>
-                <div className="funnel-compare-flow funnel-compare-flow-vertical">
-                  <span>訪問</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>会話</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>ヒアリング</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>資料提案</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>不安解消</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>カレンダー</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>予約</span>
-                  <span className="funnel-compare-arrow">→</span>
-                  <span>追客</span>
-                </div>
-                <p className="funnel-compare-note">8 step。AI SDR が文脈を持って商談化まで導く。</p>
+              <div className="loops-callout">
+                <div className="loops-callout-label">CRM 側</div>
+                <p className="loops-callout-text">CRM の MQL ・失注リードは、再検討の瞬間が来ても見逃される。</p>
               </div>
             </div>
+
+            {/* Main Loop — Website-to-Meeting (大、強調) */}
+            <div className="loop-block loop-main">
+              <div className="loop-tag loop-tag-main">Main Loop · Website-to-Meeting</div>
+              <div className="loop-flow">
+                <span className="loop-step">訪問</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step">会話</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step">資料提案</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step">日程調整</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step loop-step-goal">商談</span>
+              </div>
+            </div>
+
+            {/* Expansion Loop — CRM-to-Meeting (小、サブ位置) */}
+            <div className="loop-block loop-expansion">
+              <div className="loop-tag loop-tag-expansion">Expansion Loop · CRM-to-Meeting</div>
+              <div className="loop-flow">
+                <span className="loop-step">既存リード</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step">シグナル検知</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step">AI 追客</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step">再訪/返信</span>
+                <span className="loop-arrow">→</span>
+                <span className="loop-step loop-step-goal">商談</span>
+              </div>
+            </div>
+
+            <p className="loops-closing">
+              Meeton ai は、この 2 つの機会を AI SDR が捉えて商談化する Platform。
+            </p>
+
             <style dangerouslySetInnerHTML={{ __html: `
-.funnel-compare{display:grid;grid-template-columns:1fr 1.4fr;gap:24px;max-width:1000px;margin:0 auto}
-@media (max-width:880px){.funnel-compare{grid-template-columns:1fr}}
-.funnel-compare-side{padding:28px 24px;border-radius:16px;background:#fff;border:1px solid var(--border)}
-.funnel-compare-before{background:#fafafa}
-.funnel-compare-after{background:rgba(18,163,125,.04);border-color:rgba(18,163,125,.25)}
-.funnel-compare-label{font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--sub);margin-bottom:18px;text-transform:uppercase}
-.funnel-compare-after .funnel-compare-label{color:var(--cta)}
-.funnel-compare-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.funnel-compare-flow span:not(.funnel-compare-arrow){padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;color:var(--heading);font-family:var(--fb)}
-.funnel-compare-after .funnel-compare-flow span:not(.funnel-compare-arrow){background:#fff;border-color:rgba(18,163,125,.2)}
-.funnel-compare-arrow{color:var(--sub);font-size:13px;font-weight:600}
-.funnel-compare-note{font-size:13px;color:var(--sub);font-weight:600;margin:0}
+.loops-callouts{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:880px;margin:0 auto 56px}
+@media (max-width:680px){.loops-callouts{grid-template-columns:1fr}}
+.loops-callout{padding:24px 26px;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+.loops-callout-label{font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--sub);text-transform:uppercase;margin-bottom:10px}
+.loops-callout-text{font-size:15px;font-weight:700;color:var(--heading);line-height:1.65;margin:0}
+.loop-block{max-width:920px;margin:0 auto 24px;padding:24px 28px;border-radius:14px;border:1px solid var(--border);background:#fff}
+.loop-main{padding:32px clamp(20px,3vw,40px);background:#F7FFFB;border-color:rgba(4,203,120,.3);box-shadow:0 1px 2px rgba(4,203,120,.05)}
+.loop-expansion{padding:18px 26px;background:#FAFBFD;opacity:.95}
+.loop-tag{font-family:var(--fm);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.loop-tag-main{color:var(--cta);font-size:12px}
+.loop-tag-expansion{color:var(--sub);font-size:10px}
+.loop-flow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.loop-step{padding:9px 16px;background:#fff;border:1px solid var(--border);border-radius:9px;font-size:14px;font-weight:700;color:var(--heading);font-family:var(--fb)}
+.loop-main .loop-step{padding:10px 18px;font-size:15px}
+.loop-expansion .loop-step{font-size:13px;padding:7px 12px}
+.loop-step-goal{background:var(--cta-light);border-color:rgba(4,203,120,.35);color:var(--cta);font-weight:800}
+.loop-arrow{color:var(--sub);font-size:13px;font-weight:600}
+.loops-closing{font-size:clamp(15px,2vw,17px);font-weight:700;color:var(--heading);text-align:center;max-width:680px;margin:32px auto 0;line-height:1.75}
 ` }} />
           </div>
         </section>
@@ -1633,7 +1657,7 @@ export default function HomePageClient({
               Use Cases
             </div>
             <div className="stitle" style={{ textAlign: "center", marginBottom: 16 }}>
-              Meeton ai が <span style={{ color: "var(--cta)" }}>商談化する 4 つの瞬間</span>
+              Meeton ai が <span style={{ color: "var(--cta)" }}>商談化する 5 つの瞬間</span>
             </div>
             <p className="ssub" style={{ textAlign: "center", margin: "0 auto 0", maxWidth: 640 }}>
               リードの状態に応じて、Meeton ai が自動で動き分けます。
@@ -1684,6 +1708,17 @@ export default function HomePageClient({
                   gradient: "linear-gradient(135deg,#3b6ff5,#6690fa)",
                   bg: "linear-gradient(135deg,#eaf0fe,#f5f8ff)",
                   iconPath: "M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
+                },
+                {
+                  title: "CRM に眠る既存リード",
+                  subtitle: "過去 MQL ・失注リードが放置される",
+                  body: "過去 MQL・失注リード・休眠 contact は、再検討の瞬間が来ても見逃される。Meeton Intent が CRM データと行動シグナルから再検討タイミングを検知し、Meeton Email が文脈に沿って再アプローチ。再訪・返信があれば Meeton Live が会話を再開し、商談へ変える。",
+                  metric: "CRM",
+                  metricLabel: "休眠リードの再商談化",
+                  color: "#0891b2",
+                  gradient: "linear-gradient(135deg,#0891b2,#22d3ee)",
+                  bg: "linear-gradient(135deg,#ecfeff,#f0fdfa)",
+                  iconPath: "M3 3h18v18H3z M3 9h18 M9 21V9",
                 },
               ].map((uc, i) => (
                 <div
@@ -1852,17 +1887,17 @@ export default function HomePageClient({
                 <tr>
                   <td className="cap-job">資料を提案する</td>
                   <td className="cap-feat">Meeton Library</td>
-                  <td className="cap-role">会話文脈から最適な資料を自動選定</td>
+                  <td className="cap-role">会話文脈と CRM 履歴から最適な資料を自動選定</td>
                 </tr>
                 <tr>
                   <td className="cap-job">追客する</td>
                   <td className="cap-feat">Meeton Email</td>
-                  <td className="cap-role">予約しなかったリードに 1:1 で AI メール継続</td>
+                  <td className="cap-role">予約しなかったリードや CRM 内の既存リードに、文脈に沿って再アプローチ</td>
                 </tr>
                 <tr>
                   <td className="cap-job">判断する</td>
                   <td className="cap-feat">Meeton Intent</td>
-                  <td className="cap-role">訪問企業 ID + 行動シグナルから次のアクションを決定</td>
+                  <td className="cap-role">Web 行動・企業情報・CRM シグナルをもとに、次に取るべきアクションを判断</td>
                 </tr>
               </tbody>
             </table>
@@ -2219,16 +2254,9 @@ export default function HomePageClient({
               letterSpacing: "-0.025em",
             }}
           >
-            自社サイトで、{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg,var(--cta),var(--blue))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              どれだけ商談化できるか診断しませんか？
+            自社に眠る商談機会を、{" "}
+            <span style={{ color: "var(--cta)" }}>
+              30 分で可視化しませんか？
             </span>
           </div>
           <p
@@ -2240,7 +2268,7 @@ export default function HomePageClient({
               fontSize: "clamp(15px,2.2vw,17px)",
             }}
           >
-            30 分のデモで、自社サイトの商談化余地を可視化します。タグ設置は最短 5 分。AI SDR「Meeton ai」が 24 時間、訪問者と会話・商談予約・追客まで自律的に実行します。
+            Web サイト上の未 CV 訪問者から、CRM に眠る既存リードまで、Meeton ai で商談化できる余地を診断します。タグ設置は最短 5 分。
           </p>
           <div
             id="diagnose"

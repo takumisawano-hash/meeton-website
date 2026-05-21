@@ -64,7 +64,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       availableLanguage: ['Japanese', 'English'],
       url: 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true',
     },
-    description: 'DynaMeetが提供するAI SDRプラットフォーム「Meeton ai」。Web サイトに AI SDR を配属し、訪問・問い合わせ・資料 DL・再訪問の瞬間に、会話・ヒアリング・資料提案・日程調整・追客までを自動化。Meeton Live / Calendar / Email / Library / Intent で商談機会創出を加速します。',
+    description: 'DynaMeetが提供するAI SDR Platform「Meeton ai」。Web と CRM に眠る商談機会を AI SDR が商談へ変える。Web 訪問者・資料 DL リード・再訪問者から、CRM に眠る既存リードまで、会話・ヒアリング・資料提案・日程調整・追客を自動化。Meeton Live / Calendar / Email / Library / Intent で商談機会創出を加速します。',
     // AEO/GEO: 組織の専門分野
     knowsAbout: [
       'AI SDR',
@@ -98,7 +98,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
     name: 'Meeton AI',
     alternateName: 'DynaMeet',
     url: baseUrl,
-    description: 'Meeton AI は、Web サイトに AI SDR を配属し、訪問者を会話で商談機会に変える AI SDR プラットフォームです。',
+    description: 'Meeton AI は、Web と CRM に眠る商談機会を AI SDR が商談へ変える Platform。Web 訪問者から CRM 休眠リードまで、会話・資料提案・日程調整・追客を自動化します。',
     inLanguage: 'ja-JP',
     publisher: {
       '@id': `${baseUrl}/#organization`,
