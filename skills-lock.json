@@ -73,6 +73,12 @@
       "skillPath": "optimize/internal-linking-optimizer/SKILL.md",
       "computedHash": "fd3f558a5ec1410be74b81da36c51cdcf162322880d2725cad47bc1534969d59"
     },
+    "keyword-research": {
+      "source": "aaron-he-zhu/seo-geo-claude-skills",
+      "sourceType": "github",
+      "skillPath": "research/keyword-research/SKILL.md",
+      "computedHash": "2588fb61983e101ee407c02f3a18a421d586bbed31aebac017a341dc37b8a633"
+    },
     "landing-page-copywriter": {
       "source": "onewave-ai/claude-skills",
       "sourceType": "github",

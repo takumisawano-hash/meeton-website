@@ -100,7 +100,6 @@ export default function Nav({
     { href: "/features/meetings/", label: "Meeton Calendar", sub: "即時に商談予約" },
     { href: "/features/ai-library/", label: "Meeton Library", sub: "文脈に合う資料提案" },
     { href: "/features/ai-email/", label: "Meeton Email", sub: "未予約追客 + CRM 再商談化" },
-    { href: "/features/ai-intent/", label: "Meeton Intent", sub: "Web行動+CRMシグナル検知" },
   ];
 
   // 2026-05-20: top nav 圧縮。ウェビナーと採用情報は Footer / リソース内に

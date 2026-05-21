@@ -26,7 +26,7 @@ const faqSchema = {
       name: '休眠リードの掘り起こしとは何ですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'CRM 内に登録されている過去の MQL（マーケティングクオリファイドリード）、失注リード、長期間アクションのない contact から、再検討タイミングを捉えて商談機会を再創出することです。Meeton ai では Meeton Intent がシグナル検知、Meeton Email が再アプローチ、Meeton Live + Calendar が商談化を担います。',
+        text: 'CRM 内に登録されている過去の MQL（マーケティングクオリファイドリード）、失注リード、長期間アクションのない contact から、再検討タイミングを捉えて商談機会を再創出することです。Meeton ai では Meeton Email が CRM データと行動シグナルを検知して再アプローチし、Meeton Live + Calendar が商談化を担います。',
       },
     },
     {
@@ -144,7 +144,7 @@ export default function LeadRevivalPage() {
                 <div className="approach-num">Signal</div>
                 <div className="approach-title">シグナル検知</div>
                 <p className="approach-desc">
-                  サイト再訪、料金ページ閲覧、比較ページ閲覧、過去メール再開封、ウェビナー再エントリー、競合キーワード検索など、再検討意思を示す複数シグナルを Meeton Intent が捉えます。
+                  サイト再訪、料金ページ閲覧、比較ページ閲覧、過去メール再開封、ウェビナー再エントリーなど、再検討意思を示す複数シグナルを Meeton Email が捉え、文脈に沿って再アプローチします。
                 </p>
               </div>
               <div className="approach-card">
@@ -186,7 +186,7 @@ export default function LeadRevivalPage() {
                 <div className="how-step-num">02</div>
                 <div className="how-step-body">
                   <div className="how-step-title">シグナル検知</div>
-                  <p className="how-step-desc">Meeton Intent が複数の再検討シグナルを継続監視。</p>
+                  <p className="how-step-desc">Meeton Email が複数の再検討シグナルを継続監視。</p>
                 </div>
               </div>
               <div className="how-arrow" aria-hidden>→</div>
@@ -262,12 +262,8 @@ export default function LeadRevivalPage() {
             <h2 className="dark">CRM-to-Meeting を支える Meeton ai の機能</h2>
             <div className="cap-grid">
               <div className="cap-card">
-                <div className="cap-feat">Meeton Intent</div>
-                <div className="cap-desc">CRM データと行動シグナルから再検討タイミングを検知。次に取るべきアクションを判断。</div>
-              </div>
-              <div className="cap-card">
                 <div className="cap-feat">Meeton Email</div>
-                <div className="cap-desc">過去 MQL・失注・休眠 contact へ 1:1 で再アプローチ。AI が文脈・タイミング・内容を動的決定。</div>
+                <div className="cap-desc">CRM データと行動シグナルから再検討タイミングを検知し、過去 MQL・失注・休眠 contact へ 1:1 で再アプローチ。AI が文脈・タイミング・内容を動的決定。</div>
               </div>
               <div className="cap-card">
                 <div className="cap-feat">Meeton Live</div>

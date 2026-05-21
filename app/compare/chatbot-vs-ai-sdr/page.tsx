@@ -134,7 +134,7 @@ export default function CompareChatbotPage() {
                   <tr><td>未予約リード追客</td><td className="no">×</td><td className="yes">○ AI メールで 1:1 継続</td></tr>
                   <tr><td>再訪リードの文脈引き継ぎ</td><td className="no">×</td><td className="yes">○ 過去会話・履歴を全保持</td></tr>
                   <tr><td>CRM 連携</td><td className="part">問い合わせログ送信のみ</td><td className="yes">会話・スコア・興味・商談まで同期</td></tr>
-                  <tr><td>CRM 休眠リードの再商談化</td><td className="no">×</td><td className="yes">○ Meeton Intent + Email で実行</td></tr>
+                  <tr><td>CRM 休眠リードの再商談化</td><td className="no">×</td><td className="yes">○ Meeton Email で実行</td></tr>
                 </tbody>
               </table>
             </div>

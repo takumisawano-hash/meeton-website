@@ -670,7 +670,7 @@ const integrations = [
 const faqData = [
   {
     q: "CRM に眠る休眠リードからも商談を作れますか？",
-    a: "はい。Meeton Intent が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧など）を検知し、Meeton Email が文脈に沿って再アプローチします。返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton ai の特徴です。",
+    a: "はい。Meeton Email が CRM 上の過去 MQL・失注リード・休眠 contact の行動シグナル（サイト再訪、メール開封、料金ページ閲覧など）を検知し、文脈に沿って 1:1 で再アプローチします。返信や再訪があれば Meeton Live が会話を再開、Meeton Calendar が商談予約まで進めます。新規 Web リードだけでなく、既存 CRM データに眠る商談機会まで掘り起こせるのが Meeton ai の特徴です。",
   },
   {
     q: "日程調整ツールとは何が違いますか？",
@@ -1714,7 +1714,7 @@ export default function HomePageClient({
                 {
                   title: "CRM に眠る既存リード",
                   subtitle: "過去 MQL ・失注リードが放置される",
-                  body: "過去 MQL・失注リード・休眠 contact は、再検討の瞬間が来ても見逃される。Meeton Intent が CRM データと行動シグナルから再検討タイミングを検知し、Meeton Email が文脈に沿って再アプローチ。再訪・返信があれば Meeton Live が会話を再開し、商談へ変える。",
+                  body: "過去 MQL・失注リード・休眠 contact は、再検討の瞬間が来ても見逃される。Meeton Email が CRM データと行動シグナル（サイト再訪、料金ページ閲覧など）を検知し、文脈に沿って 1:1 で再アプローチ。返信や再訪があれば Meeton Live が会話を再開し、商談へ変える。",
                   metric: "CRM",
                   metricLabel: "休眠リードの再商談化",
                   color: "#0891b2",
@@ -1832,7 +1832,13 @@ export default function HomePageClient({
             </div>
             <style dangerouslySetInnerHTML={{ __html: `
               .usecases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
-              @media (max-width:780px){.usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}}
+              /* 5 番目が左単独に来るのを避けるため、奇数最後 (= 5番目) を
+                 全列 span + 50% 幅で中央配置。これで 2+2+1(中央) 配置 */
+              .usecases-grid > .usecase-card:nth-last-child(1):nth-child(odd){grid-column:1 / -1;max-width:calc(50% - 12px);margin-left:auto;margin-right:auto;width:100%}
+              @media (max-width:780px){
+                .usecases-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+                .usecases-grid > .usecase-card:nth-last-child(1):nth-child(odd){grid-column:auto;max-width:none;width:auto}
+              }
               .usecase-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:transparent}
             ` }} />
           </div>
@@ -1861,8 +1867,8 @@ export default function HomePageClient({
             AI SDR の仕事を、<span style={{ color: "var(--cta)" }}>機能で支える</span>
           </div>
           <p className="ssub" style={{ textAlign: "center", margin: "0 auto 40px" }}>
-            会話する・予約する・提案する・追客する・判断する。AI SDR の一連の仕事を、
-            5 つの機能が連動して 24 時間自動で実行します。
+            会話する・予約する・提案する・追客する。AI SDR の一連の仕事を、
+            4 つの機能が連動して 24 時間自動で実行します。
           </p>
 
           {/* Capabilities Matrix — AI SDR の仕事 → 対応機能 */}
@@ -1892,14 +1898,9 @@ export default function HomePageClient({
                   <td className="cap-role">会話文脈と CRM 履歴から最適な資料を自動選定</td>
                 </tr>
                 <tr>
-                  <td className="cap-job">追客する</td>
+                  <td className="cap-job">追客 + 休眠リード再商談化</td>
                   <td className="cap-feat">Meeton Email</td>
-                  <td className="cap-role">予約しなかったリードや CRM 内の既存リードに、文脈に沿って再アプローチ</td>
-                </tr>
-                <tr>
-                  <td className="cap-job">判断する</td>
-                  <td className="cap-feat">Meeton Intent</td>
-                  <td className="cap-role">Web 行動・企業情報・CRM シグナルをもとに、次に取るべきアクションを判断</td>
+                  <td className="cap-role">予約しなかったリード + CRM 内既存リードのシグナルを検知し、文脈に沿って再アプローチ</td>
                 </tr>
               </tbody>
             </table>

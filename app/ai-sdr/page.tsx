@@ -303,14 +303,9 @@ export default function AiSdrPage() {
                 <div className="cap-feat">Meeton Library</div>
               </div>
               <div className="cap-card">
-                <div className="cap-job">追客する</div>
+                <div className="cap-job">追客 + 休眠リード再商談化</div>
                 <div className="cap-feat">Meeton Email</div>
-                <div className="cap-sub">予約しなかったリードや CRM 内の既存リードに、文脈に沿って再アプローチ</div>
-              </div>
-              <div className="cap-card">
-                <div className="cap-job">判断する</div>
-                <div className="cap-feat">Meeton Intent</div>
-                <div className="cap-sub">Web 行動・企業情報・CRM シグナルをもとに、次に取るべきアクションを判断</div>
+                <div className="cap-sub">未予約リード + CRM 既存リードのシグナルを検知し、文脈に沿って 1:1 で再アプローチ</div>
               </div>
             </div>
             <div className="cta-block">

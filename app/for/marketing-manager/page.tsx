@@ -124,7 +124,7 @@ const config: PersonaConfig = {
       {
       question: 'CRM に蓄積した過去 MQL を再活性化できますか？',
       answer:
-        'はい。Meeton Intent が過去 MQL・休眠 contact の再検討シグナルを継続監視し、Meeton Email が AI で 1:1 再アプローチします。MA の事前定義シナリオでは拾えない個別文脈にも踏み込み、マーケが過去に獲得した CRM 資産から新しい商談機会を生み出します。',
+        'はい。Meeton Email が過去 MQL・休眠 contact の再検討シグナル（サイト再訪、料金閲覧、メール再開封等）を継続監視し、AI で 1:1 再アプローチします。MA の事前定義シナリオでは拾えない個別文脈にも踏み込み、マーケが過去に獲得した CRM 資産から新しい商談機会を生み出します。',
     },
   ],
   accent: '#7c5cfc',

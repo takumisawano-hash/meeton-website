@@ -47,10 +47,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'MA のスコアリングと Meeton Intent はどう違いますか？',
+      name: 'MA のスコアリングと Meeton ai のシグナル検知はどう違いますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'MA スコアリングは事前定義したルール（ページ閲覧 + N 点、資料 DL + M 点）に基づきます。Meeton Intent は Web 行動・企業情報・CRM データを統合判断し、次に取るべきアクションまで判定。スコアだけでなく実行指示まで出す点が違いです。',
+        text: 'MA スコアリングは事前定義したルール（ページ閲覧 + N 点、資料 DL + M 点）に基づきます。Meeton ai は Web 行動・企業情報・CRM データを統合判断し、次に取るべきアクションまで判定。スコアだけでなく実行指示まで出す点が違いです。',
       },
     },
   ],
@@ -151,13 +151,13 @@ export default function CompareMAPage() {
                 <tbody>
                   <tr><td>主目的</td><td className="part">マーケファネル管理</td><td className="yes">個別リードの商談化</td></tr>
                   <tr><td>リード集め</td><td className="yes">○ フォーム / キャンペーン</td><td className="no">×</td></tr>
-                  <tr><td>リードスコアリング</td><td className="yes">○ 事前定義ルール</td><td className="yes">○ AI 動的判断 (Intent)</td></tr>
+                  <tr><td>リードスコアリング</td><td className="yes">○ 事前定義ルール</td><td className="yes">○ AI 動的判断 (Email シグナル検知内蔵)</td></tr>
                   <tr><td>メール配信</td><td className="yes">○ 一斉配信 + シナリオ</td><td className="yes">○ 1:1 AI 動的生成 (Email)</td></tr>
                   <tr><td>Web 訪問者との会話</td><td className="no">×</td><td className="yes">○ AI SDR (Live)</td></tr>
                   <tr><td>課題ヒアリング</td><td className="no">×</td><td className="yes">○ AI が能動的に</td></tr>
                   <tr><td>商談予約まで誘導</td><td className="part">日程調整リンク提示のみ</td><td className="yes">○ 文脈で誘導 (Calendar)</td></tr>
                   <tr><td>未予約リード追客</td><td className="part">シナリオメール</td><td className="yes">○ AI 1:1 動的判断</td></tr>
-                  <tr><td>CRM 休眠リード再商談化</td><td className="part">再エントリーシナリオ</td><td className="yes">○ Intent + Email で再アプローチ</td></tr>
+                  <tr><td>CRM 休眠リード再商談化</td><td className="part">再エントリーシナリオ</td><td className="yes">○ Meeton Email がシグナル検知 + 再アプローチ</td></tr>
                   <tr><td>連携</td><td colSpan={2} className="yes" style={{ textAlign: 'center' }}>○ ネイティブ連携（HubSpot / Salesforce / Marketo）</td></tr>
                 </tbody>
               </table>

@@ -159,7 +159,7 @@ export default function MeetingFlowDiagram() {
           <div className="mfd-crm-callout-body">
             <strong>CRM に眠る既存リードからも商談を作る</strong>
             <span className="mfd-crm-callout-sub">
-              過去 MQL・失注・休眠 contact の再検討シグナルを Meeton Intent が検知し、Meeton Email が再アプローチ。
+              過去 MQL・失注・休眠 contact の再検討シグナルを Meeton Email が検知して再アプローチ。
             </span>
           </div>
           <a href="/lead-revival/" className="mfd-crm-callout-link">
