@@ -70,7 +70,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:18px
 .hero-stat{position:relative;padding-left:clamp(16px,2vw,20px)}
 .hero-stat:first-child{padding-left:0}
 .hero-stat:not(:first-child)::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border)}
-.stat-v{font-family:var(--fm);font-size:clamp(22px,3.4vw,32px);font-weight:700;color:var(--heading);background:linear-gradient(135deg,var(--heading),var(--cta));letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
+.stat-v{font-family:var(--fm);font-size:clamp(22px,3.4vw,32px);font-weight:700;color:var(--heading);letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
 .stat-l{font-size:clamp(11px,1.5vw,13px);color:var(--sub);margin-top:8px;font-weight:600;letter-spacing:.02em}
 
 /* Library Visual */
