@@ -168,11 +168,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
 .problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:32px}
 @media (max-width:1100px){.problem-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.problem-grid{grid-template-columns:1fr}}
-.buyer-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:20px}
-@media (max-width:1100px){.buyer-grid{grid-template-columns:repeat(2,1fr)!important}}
-@media (max-width:600px){.buyer-grid{grid-template-columns:1fr!important}}
-.philosophy-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:20px}
-@media (max-width:880px){.philosophy-grid{grid-template-columns:1fr!important;max-width:520px;margin-left:auto;margin-right:auto}}
+
+@media (max-width:1100px){}
+@media (max-width:600px){}
+
+@media (max-width:880px){}
 .cat-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:28px 26px;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .25s;box-shadow:0 1px 2px rgba(15,17,40,.03);position:relative;overflow:hidden;display:flex;flex-direction:column}
 .cat-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 24px 56px -20px rgba(15,17,40,.18)}
 .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cat-color, #12a37d);opacity:.9;transition:opacity .25s, height .25s}
@@ -187,14 +187,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
 .cat-link:hover{gap:10px;color:var(--cta-hover)}
 
 /* QUALITY FLOW DIAGRAM — horizontal */
-.qflow-hz{display:flex;align-items:stretch;gap:0;max-width:1100px;margin:0 auto;width:100%}
-.qflow-hz-step{flex:1;min-width:0;display:flex;flex-direction:column}
-.qflow-hz-arrow{display:flex;align-items:center;justify-content:center;width:48px;flex-shrink:0;color:#c8cedf;font-size:22px;font-weight:300}
-.qflow-hz-gate{display:flex;align-items:center;justify-content:center;width:auto;flex-shrink:0;padding:0 6px}
+
 
 /* QUALITY SECTION */
-.qual-title{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:10px}
-.qual-desc{font-size:15px;line-height:1.75;color:var(--sub)}
+
 
 /* FLOW DIAGRAM */
 .flow-wrap{margin-top:56px;position:relative;padding:40px 0}
@@ -365,10 +361,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:17px
 @media(max-width:1024px){
   .cat-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
   .phase-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto;gap:18px}
-  .qflow-hz{flex-direction:column;gap:0}
-  .qflow-hz-arrow{width:auto;height:36px;transform:rotate(90deg)}
-  .qflow-hz-gate{padding:8px 0}
-  .qflow-hz-gate>div{writing-mode:horizontal-tb!important;flex-direction:row!important;padding:10px 20px!important}
   .why-grid{grid-template-columns:1fr}
   .proof-stats-grid{grid-template-columns:repeat(2,1fr)!important}
   .hero-stats-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
@@ -730,7 +722,6 @@ const clients = [
     logo: "/clients/imprexc.png",
   },
 ];
-
 
 
 type CaseCarouselItem = {

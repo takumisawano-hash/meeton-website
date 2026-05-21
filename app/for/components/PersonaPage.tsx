@@ -61,7 +61,7 @@ export type PersonaConfig = {
   /** FAQ tailored to this persona (4-6 questions). */
   faq: FAQItem[]
   /** Hero accent color from brand palette. */
-  accent: '#12a37d' | '#7c5cfc' | '#0891b2' | '#3b6ff5'
+  accent: '#12a37d' | '#04cb78' | '#7c5cfc' | '#0891b2' | '#3b6ff5'
   /** UTM campaign tag for demo bookings from this page. */
   utmCampaign: string
 }

@@ -127,7 +127,7 @@ const config: PersonaConfig = {
         'はい。Meeton Intent が CRM 上の過去 MQL・失注リード・休眠 contact の再検討シグナル（サイト再訪、料金ページ閲覧、メール再開封など）を検知し、Meeton Email が AI 動的判断で個別に再アプローチします。マーケが過去に獲得したリード資産を、人手をかけずに再商談化できます。詳細は CRM-to-Meeting ページをご覧ください。',
     },
   ],
-  accent: '#12a37d',
+  accent: '#04cb78',
   utmCampaign: 'persona-cmo',
 }
 
