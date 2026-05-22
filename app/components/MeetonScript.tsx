@@ -82,8 +82,20 @@ export default function MeetonScript() {
     const loadMeetonScript = () => {
       if (loaded) return
       loaded = true
-      const win = window as Window & { DynaMeetConfig?: { teamId: string } }
-      win.DynaMeetConfig = { teamId }
+      // 2026-05-22: Forward attribution payload (utm/gclid/etc.) set by
+      // AttributionBootstrap into the chatbot widget config so the
+      // iframe can attach the same source fields to every HubSpot
+      // Contact / Deal it creates. Without this, chatbot bookings
+      // arrive as OFFLINE/INTEGRATION and Google Ads sees 0 CV.
+      // Spec: docs/measurement-spec.md §4.
+      const win = window as Window & {
+        DynaMeetConfig?: { teamId: string; attribution?: unknown }
+        __meetonAttribution?: unknown
+      }
+      win.DynaMeetConfig = {
+        teamId,
+        attribution: win.__meetonAttribution ?? null,
+      }
 
       removeManagedScript()
 

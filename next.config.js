@@ -387,6 +387,30 @@ const nextConfig = {
         destination: '/blog/',
         permanent: true,
       },
+      // 2026-05-22: ads 検証 pivot に伴いチャネル別 LP 撤去。
+      // /lp/ (google variant) と /lp/linkedin/ は新 LP (/solutions/*)
+      // で置き換える方針。残りの /lp/* は use-case 別なので保留、
+      // 順次 content rewrite で再活用。
+      {
+        source: '/lp',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/lp/',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/lp/linkedin',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/lp/linkedin/',
+        destination: '/',
+        permanent: true,
+      },
       // 2026-05-19: ROI Simulator 撤去。Calendar Starter pivot 後は
       // 「リードは来てるのに商談化しない」を学ぶ流れがメインで、
       // ROI 試算は逆に文脈ノイズに。ウェビナーへ統合誘導。

@@ -6,6 +6,7 @@ import DocoDocoTracker from './components/DocoDocoTracker'
 import HubSpotTracker from './components/HubSpotTracker'
 import MeetonScript from './components/MeetonScript'
 import DynamicLpController from './components/DynamicLpController'
+import AttributionBootstrap from './components/AttributionBootstrap'
 
 // Font budget review (2026-05-08):
 // - Plus_Jakarta_Sans: only weights actually used (700/800)
@@ -139,6 +140,7 @@ body{font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.
 ` }} />
       </head>
       <body>
+        <AttributionBootstrap />
         <GoogleAnalytics />
         <DocoDocoTracker />
         <HubSpotTracker />
