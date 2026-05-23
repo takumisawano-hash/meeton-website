@@ -15,6 +15,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: baseUrl, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/blog/`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
     { url: `${baseUrl}/case-studies/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    // 2026-05-23 ads relaunch: Phase 1 paid-traffic LPs
+    { url: `${baseUrl}/solutions/crm-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${baseUrl}/solutions/lead-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/features/ai-chat/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/features/ai-email/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/features/meetings/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },

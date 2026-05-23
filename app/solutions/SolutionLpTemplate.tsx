@@ -70,8 +70,13 @@ export type SolutionLpConfig = {
   faqs: { question: string; answer: string }[]
   /** Final-CTA copy. */
   finalCta: { heading: string; sub: string }
-  /** Accent color — use brand palette. */
-  accent: '#12a37d' | '#0891b2' | '#7c5cfc' | '#3b6ff5' | '#d03ea1'
+  /** Sub-accent color (eyebrow, pain numbers, step badges) — use
+   *  brand palette. */
+  accent: '#12a37d' | '#0891b2' | '#7c5cfc' | '#3b6ff5' | '#d03ea1' | '#04cb78'
+  /** Primary CTA color. Defaults to DynaMeet brand green so that CTA
+   *  color stays consistent sitewide even when accent rotates per LP.
+   *  Override only if a LP intentionally wants a different CTA hue. */
+  primaryCtaColor?: string
   /** UTM campaign tag prefix; the per-CTA utm appends the location. */
   utmCampaignBase: string
   /** Full canonical URL of this LP. */
@@ -109,15 +114,22 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
   useAttribution()
 
   return (
-    <div className="sl-root">
+    <div
+      className="sl-root"
+      style={{
+        ['--sl-accent' as string]: config.accent,
+        ['--sl-cta' as string]: config.primaryCtaColor ?? '#04cb78',
+      }}
+    >
       <FAQJsonLd
         items={config.faqs.map((f) => ({ question: f.question, answer: f.answer }))}
         pageUrl={config.pageUrl}
       />
       <Nav variant="light" />
 
-      {/* HERO */}
-      <section className="sl-hero" style={{ ['--sl-accent' as string]: config.accent }}>
+      {/* HERO. CSS vars (--sl-accent, --sl-cta) are set on .sl-root so
+          they cascade into every section, not just hero. */}
+      <section className="sl-hero">
         <div className="sl-hero-grid" aria-hidden />
         <div className="sl-hero-inner">
           <div className="sl-eyebrow">
@@ -360,12 +372,12 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           font-family: inherit; text-decoration: none; border: none;
         }
         .sl-btn-primary {
-          background: var(--sl-accent); color: #fff;
-          box-shadow: 0 8px 24px color-mix(in srgb, var(--sl-accent) 25%, transparent);
+          background: var(--sl-cta); color: #fff;
+          box-shadow: 0 8px 24px color-mix(in srgb, var(--sl-cta) 25%, transparent);
         }
         .sl-btn-primary:hover {
           transform: translateY(-2px);
-          box-shadow: 0 14px 32px color-mix(in srgb, var(--sl-accent) 35%, transparent);
+          box-shadow: 0 14px 32px color-mix(in srgb, var(--sl-cta) 35%, transparent);
         }
         .sl-btn-ghost {
           background: transparent; color: var(--heading);
