@@ -18,7 +18,7 @@ const HubSpotMeetingModal = dynamic(() => import("./HubSpotMeetingModal"), { ssr
 const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
 
 type NavProps = {
-  variant?: "light" | "dark";
+  variant?: "light" | "dark" | "minimal";
   langSwitchHref?: string;
   langSwitchLabel?: string;
 };
@@ -52,6 +52,11 @@ export default function Nav({
   const isMobile = useIsMobile();
 
   const isDark = variant === "dark";
+  // 2026-05-23 ads relaunch: minimal variant for paid-traffic LPs
+  // (/solutions/*). Strips the full primary nav + features dropdown +
+  // dual CTA, leaving Logo + 導入事例 + セキュリティ + 「30 分で相談する」
+  // only. Goal: don't dilute the LP's own checklist-DL / 30min CTA pair.
+  const isMinimal = variant === "minimal";
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -457,6 +462,101 @@ export default function Nav({
       </div>
     </>
   );
+
+  // 2026-05-23 minimal variant for /solutions/* paid LPs.
+  // Renders before the full Nav so all the dropdown / mobile-menu
+  // scaffolding above stays dead-code for this code path. Logo +
+  // 導入事例 + セキュリティ + 「30 分で相談する」 だけ。
+  if (isMinimal) {
+    return (
+      <>
+        <nav
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 100,
+            padding: isMobile ? "12px 16px" : "14px 32px",
+            background: "rgba(255,255,255,.95)",
+            backdropFilter: "blur(12px) saturate(180%)",
+            WebkitBackdropFilter: "blur(12px) saturate(180%)",
+            borderBottom: "1px solid rgba(223,227,240,.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            fontFamily: "var(--fb)",
+          }}
+        >
+          <Link href="/" aria-label="Meeton ai">
+            <Image
+              src="/logo-dark.svg"
+              alt="Meeton ai"
+              width={140}
+              height={30}
+              priority
+              style={{ height: 28, width: "auto", display: "block" }}
+            />
+          </Link>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: isMobile ? 12 : 24,
+            }}
+          >
+            {!isMobile && (
+              <>
+                <Link
+                  href="/case-studies/"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "#6e7494",
+                    textDecoration: "none",
+                  }}
+                >
+                  導入事例
+                </Link>
+                <Link
+                  href="/security-policy/"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "#6e7494",
+                    textDecoration: "none",
+                  }}
+                >
+                  セキュリティ
+                </Link>
+              </>
+            )}
+            <a
+              href="https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav-minimal&utm_campaign=meeton-ai"
+              style={{
+                background: "linear-gradient(135deg,#12a37d,#0fc19a)",
+                color: "#fff",
+                padding: isMobile ? "9px 16px" : "11px 22px",
+                borderRadius: 10,
+                fontSize: 14,
+                fontWeight: 800,
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+                boxShadow: "0 4px 14px rgba(18,163,125,0.25)",
+              }}
+            >
+              30 分で相談する
+            </a>
+          </div>
+        </nav>
+        {/* No spacer — the fixed nav overlaps the hero, and the LP
+            template's hero padding-top (96-140px) already clears it.
+            Adding a spacer would push hero too far down on mobile. */}
+      </>
+    )
+  }
 
   return (
     <>

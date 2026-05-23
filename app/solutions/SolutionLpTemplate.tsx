@@ -135,7 +135,10 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
         items={config.faqs.map((f) => ({ question: f.question, answer: f.answer }))}
         pageUrl={config.pageUrl}
       />
-      <Nav variant="light" />
+      {/* 2026-05-23: ads LP は minimal nav (Logo / 導入事例 / セキュリティ
+          / 30分で相談する のみ)。サイト全ナビを出すと checklist DL +
+          30分相談 の CV CTA が薄まる。 */}
+      <Nav variant="minimal" />
 
       {/* HERO. CSS vars (--sl-accent, --sl-cta) are set on .sl-root so
           they cascade into every section, not just hero. */}
