@@ -43,6 +43,10 @@ export type SolutionLpConfig = {
   heroSub: string
   /** Right-side stat row in the hero. Max 3. */
   heroProof: { value: string; unit?: string; label: string }[]
+  /** Heading for the Problem section.  GPT review 2026-05-23 flagged
+   *  the prior auto-derivation (heroH1[0] + "が直面する 3 つの構造")
+   *  produced broken Japanese — now require an explicit heading per LP. */
+  painsHeading: string
   /** Pain blocks. Exactly 3 — keep them concrete, not generic. */
   pains: {
     title: string
@@ -50,6 +54,9 @@ export type SolutionLpConfig = {
     /** Hint of evidence (directional, no fabricated stats). */
     signal: string
   }[]
+  /** Heading for the Proof section. Defaults to a generic line if not
+   *  set. */
+  proofHeading?: string
   /** Solution modules. Each maps a pain → a Meeton capability. */
   solutions: {
     badge: string
@@ -77,6 +84,9 @@ export type SolutionLpConfig = {
    *  color stays consistent sitewide even when accent rotates per LP.
    *  Override only if a LP intentionally wants a different CTA hue. */
   primaryCtaColor?: string
+  /** Primary CTA button label. Routes through openMeetonDownloadCenter
+   *  (Meeton Library popup) — the LP's軽 CV. Default: "チェックリストを受け取る". */
+  primaryCtaLabel?: string
   /** UTM campaign tag prefix; the per-CTA utm appends the location. */
   utmCampaignBase: string
   /** Full canonical URL of this LP. */
@@ -143,19 +153,22 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           </h1>
           <p className="sl-sub">{config.heroSub}</p>
 
+          {/* 2026-05-23: Primary CTA = checklist DL (軽 CV、specの本意)
+              Secondary = 30 分相談 (重 CV)。 GPT review で指摘された
+              「Spec と LP の CTA 不整合」 の修正。 */}
           <div className="sl-ctas">
-            <DemoBookingButton
-              className="sl-btn sl-btn-primary"
-              utmCampaign={`${config.utmCampaignBase}__hero_demo`}
-            >
-              30 分のデモを予約する
+            <DocRequestButton className="sl-btn sl-btn-primary">
+              {config.primaryCtaLabel ?? 'チェックリストを受け取る'}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M13 5l7 7-7 7" />
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
               </svg>
-            </DemoBookingButton>
-            <DocRequestButton className="sl-btn sl-btn-ghost">
-              資料請求
             </DocRequestButton>
+            <DemoBookingButton
+              className="sl-btn sl-btn-ghost"
+              utmCampaign={`${config.utmCampaignBase}__hero_consult`}
+            >
+              30 分で相談する →
+            </DemoBookingButton>
           </div>
 
           {config.heroProof.length > 0 && (
@@ -180,9 +193,9 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              The Problem
+              課題
             </div>
-            <h2 className="sl-h2">{config.heroH1[0].replace(/、$/, '')}が直面する 3 つの構造</h2>
+            <h2 className="sl-h2">{config.painsHeading}</h2>
           </div>
           <div className="sl-pain-grid">
             {config.pains.map((p, i) => (
@@ -206,7 +219,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              The Solution
+              解決策
             </div>
             <h2 className="sl-h2">
               Meeton ai は、<em>3 つの AI 機能</em>で解きます
@@ -232,9 +245,11 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
             <div className="sl-section-head">
               <div className="sl-section-eyebrow">
                 <span className="sl-eyebrow-dash" />
-                Proof
+                導入成果
               </div>
-              <h2 className="sl-h2">実際に成果が出ている 3 社の数字</h2>
+              <h2 className="sl-h2">
+                {config.proofHeading ?? 'Meeton ai による関連成果'}
+              </h2>
             </div>
             <div className="sl-case-grid">
               {config.cases.map((c) => (
@@ -256,7 +271,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              How it works
+              仕組み
             </div>
             <h2 className="sl-h2">導入から成果まで、4 ステップ</h2>
           </div>
@@ -280,7 +295,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              FAQ
+              よくある質問
             </div>
             <h2 className="sl-h2">よくある質問</h2>
           </div>
@@ -295,26 +310,38 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* FINAL CTA — Primary 同様 checklist DL、Secondary 30分相談で
+          spec と一致させる。ウェビナーは補助動線のみ。 */}
       <section className="sl-final">
         <div className="sl-final-inner">
           <h2 className="sl-final-h">{config.finalCta.heading}</h2>
           <p className="sl-final-sub">{config.finalCta.sub}</p>
           <div className="sl-ctas">
+            <DocRequestButton className="sl-btn sl-btn-primary">
+              {config.primaryCtaLabel ?? 'チェックリストを受け取る'}
+            </DocRequestButton>
             <DemoBookingButton
-              className="sl-btn sl-btn-primary"
-              utmCampaign={`${config.utmCampaignBase}__final_demo`}
+              className="sl-btn sl-btn-ghost"
+              utmCampaign={`${config.utmCampaignBase}__final_consult`}
             >
-              30 分のデモを予約する
+              30 分で相談する →
             </DemoBookingButton>
-            <Link href="/webinar/" className="sl-btn sl-btn-ghost">
-              無料ウェビナーで先に学ぶ
+          </div>
+          {/* 補助動線として小さくウェビナー誘導。Final CTA メインは
+              checklist DL + 30分相談 の 2 つに集中。 */}
+          <div style={{ marginTop: 24, fontSize: 13, color: 'var(--sub)' }}>
+            まずはじっくり学びたい方は{' '}
+            <Link
+              href="/webinar/"
+              style={{ color: 'var(--sl-cta)', textDecoration: 'underline', fontWeight: 700 }}
+            >
+              無料ウェビナー
             </Link>
           </div>
         </div>
       </section>
 
-      <Footer variant="light" />
+      <Footer variant="light" hideDiscoverGrid />
 
       <style>{`
         .sl-root { background: #fafaf7; color: #0a0e0c; min-height: 100vh; }

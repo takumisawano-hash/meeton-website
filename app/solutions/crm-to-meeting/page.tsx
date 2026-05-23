@@ -48,11 +48,16 @@ const config: SolutionLpConfig = {
   ],
   heroSub:
     '資料 DL 後に放置された MQL、過去の失注 contact、再訪する休眠リード。Meeton ai は CRM データと Web 行動を AI SDR が読み、文脈に沿った再アプローチで商談機会を生み出します。',
+  // 2026-05-23 GPT review: CRM-to-Meeting で「5秒」は core 訴求じゃない。
+  // CRM 文脈で意味のある signal に差し替え。
   heroProof: [
-    { value: '5', unit: '秒', label: 'リード再検知時の初動' },
-    { value: '24', unit: '/7', label: 'AI 稼働' },
-    { value: '3', unit: 'モジュール', label: 'Live / Calendar / Email' },
+    { value: 'HubSpot', label: 'Salesforce ネイティブ連携済み' },
+    { value: '24', unit: '/7', label: '検討再開シグナルを検知' },
+    { value: '送信前', unit: '承認 OK', label: 'AI 配信に承認フロー併用可' },
   ],
+  painsHeading: 'CRM リードが商談に戻らない、3 つの理由',
+  proofHeading: 'Meeton ai による関連成果',
+  primaryCtaLabel: 'CRM 商談化チェックリストを受け取る',
   pains: [
     {
       title: '資料 DL 後に温度が冷めた MQL',
@@ -62,7 +67,7 @@ const config: SolutionLpConfig = {
     {
       title: '「失注 = 永久に動かないリスト」化',
       body: '一度失注した contact は手動でフォローし直されることが少なく、CRM の山に埋もれていきます。',
-      signal: '失注後 6〜18 ヶ月で再検討する企業は一定割合存在しますが、検知できないと商談に戻りません',
+      signal: '失注後しばらくして再検討が始まるケースは少なくありませんが、検知できないと商談に戻りません',
     },
     {
       title: '休眠リードに最適な再接触ができない',
@@ -142,7 +147,7 @@ const config: SolutionLpConfig = {
     {
       question: 'どんなデータがあれば成果が出ますか？',
       answer:
-        '最低限、過去 MQL の Web 行動ログ (サイト訪問履歴) と email インタラクション (開封・クリック) があれば動作します。CRM contact 数 1,000 件以上を持つ企業で特に効果が出やすい設計です。',
+        '最低限、過去 MQL の Web 行動ログ (サイト訪問履歴) と email インタラクション (開封・クリック) があれば動作します。目安として、CRM contact が 1,000 件以上ある企業では、再活性化対象を見つけやすくなります。',
     },
     {
       question: '休眠リード再商談化の成果はどのくらい？',

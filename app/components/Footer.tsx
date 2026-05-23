@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 
 type FooterProps = {
   variant?: "light" | "dark";
+  /** Hide the sitewide "Discover" grid (role / industry / compare /
+   *  resources). Set true on paid-traffic LPs where the discovery
+   *  links read as noise and dilute the CV CTA. */
+  hideDiscoverGrid?: boolean;
 };
 
 function useIsMobile(breakpoint = 768) {
@@ -22,7 +26,7 @@ function useIsMobile(breakpoint = 768) {
   return isMobile;
 }
 
-export default function Footer({ variant = "light" }: FooterProps) {
+export default function Footer({ variant = "light", hideDiscoverGrid = false }: FooterProps) {
   const pathname = usePathname();
   const isDark = variant === "dark";
   const isTalent = pathname.startsWith("/talent");
@@ -149,7 +153,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
           background: "#12121e",
         }}
       >
-        <DiscoverGrid />
+        {!hideDiscoverGrid && <DiscoverGrid />}
         <div
           style={{
             display: "flex",
@@ -204,7 +208,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
         background: isTalent ? "#f8f9fc" : "#f4f6fb",
       }}
     >
-      <DiscoverGrid />
+      {!hideDiscoverGrid && <DiscoverGrid />}
       <div
         style={{
           display: "flex",
