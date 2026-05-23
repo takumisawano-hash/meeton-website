@@ -204,47 +204,143 @@ event-scoped custom dimension (Admin → Custom Definitions).
 
 ## 7. Win criteria
 
-A new LP is judged on 4 weeks of paid data.
+Two LPs (`/solutions/crm-to-meeting/`, `/solutions/lead-to-meeting/`)
+are validated on 4–6 weeks of paid data. **Phase 1 budget = ¥300,000 /
+month** (Google Search 70-80%, Google Retargeting 10-20%, Meta
+retargeting 0-10%, LinkedIn Ads 0). The budget shapes the qualified-
+meeting math, so all thresholds below assume ¥300k/mo.
+
+### 7.1 LP-level performance (any LP at any budget)
 
 | Metric | Stop / pivot threshold | Investment threshold |
 |--------|------------------------|----------------------|
-| LP CVR (any) | < 1.5% | ≥ 3% |
+| LP CVR (any form / chat / cal book) | < 1.5% | ≥ 3% |
 | LP CVR (calendar book) | < 0.5% | ≥ 1% |
-| Cost per qualified meeting | > ¥80,000 | ≤ ¥50,000 |
-| Qualified meetings / 4 weeks | < 2 | ≥ 5 |
 | Bounce rate | > 75% | < 55% |
 
+CVR < 1.5% after 4 weeks → rewrite H1 / proof / CTA before continuing.
+CVR ≥ 3% with poor CPA → keep iterating, the LP itself is fine.
+
+### 7.2 Cost per qualified meeting — budget-aware tiers
+
+| CPA range | Verdict | Action |
+|-----------|---------|--------|
+| ≤ ¥50,000 | **勝ち** | Increase budget, prep child LPs (Phase 2) |
+| ¥50,000 – ¥100,000 | 改善継続 | Iterate H1 / CTA / proof, keep running |
+| > ¥100,000 | 停止 or 大幅リライト | Pause spend, full rewrite or kill the LP |
+
 "Qualified meeting" = the meeting actually happens AND the rep marks it
-as "viable opportunity" (not a noshow, not a spammer, not a 競合 visitor).
-Qualified meeting attribution flows from `meeton_utm_campaign` on the Deal.
+"viable opportunity" (not noshow, not spammer, not 競合 recon). Attribution
+flows from `meeton_utm_campaign` on the Deal.
+
+### 7.3 Volume targets — for ¥300k / month budget
+
+| Period | Target | Pivot signal |
+|--------|--------|--------------|
+| 4 weeks | 3–5 qualified meetings | < 2 = something fundamental is off |
+| 6 weeks | 5+ qualified meetings | < 3 = budget too small OR LP/KW wrong |
+
+If budget changes (10万 / 50万), scale the volume targets ~linearly but
+keep CPA tiers constant. CPA is the deciding KPI; lead count is the
+sanity check.
 
 ---
 
 ## 8. Implementation verification checklist
 
-Before turning ads on, all of these MUST pass on production:
+This is the **pre-ads gate**. Every box must be checked on production
+(not preview) before Google Ads spend turns on. If any fails, ads stay
+off until fixed — repeating the prior "can't tell what worked" loop is
+not acceptable.
 
-- [ ] Visit `/solutions/crm-to-meeting/?utm_source=test&utm_campaign=verify&gclid=test_gclid`
-- [ ] Open DevTools → Application → Local Storage → confirm
-      `mlp_attribution` populated correctly
-- [ ] Open Application → Cookies → confirm `_meeton_attr` populated
-      with domain `.dynameet.ai`
-- [ ] GA4 DebugView shows `page_view` with `lp_slug=crm-to-meeting`,
-      `utm_source=test`, `gclid=test_gclid`
-- [ ] Open chatbot → confirm `window.DynaMeetConfig.attribution` shows
-      the test values
-- [ ] Submit any form on the LP → confirm GA4 `form_submit` fires
-      with utm/gclid params
-- [ ] In HubSpot, confirm the new Contact has `meeton_utm_source=test`,
-      `meeton_gclid=test_gclid`, `meeton_landing_path=/solutions/...`
-- [ ] Book a calendar slot → confirm Deal is created and inherits the
-      same attribution fields
-- [ ] Filter HubSpot view "True Inbound" → confirm the test Contact
-      appears (Google Ads category)
-- [ ] In Google Ads, confirm the test gclid registers a conversion
-      under the right campaign within ~24h
+Run with a single test URL (use both LPs once each):
+```
+https://dynameet.ai/solutions/crm-to-meeting/?utm_source=test&utm_medium=cpc&utm_campaign=verify_crm&utm_content=ad_test&utm_term=test_kw&gclid=test_gclid_001
+```
 
-If any of these fail, do not start ads. Fix first.
+### 8.1 Client-side persistence (browser)
+
+- [ ] **localStorage** `mlp_attribution` contains `firstTouch.utm_source=test`,
+      `firstTouch.gclid=test_gclid_001`, `landingPath=/solutions/...`,
+      `firstSeenAt` and `lastSeenAt` ISO timestamps
+- [ ] **cookie** `_meeton_attr` is present on `.dynameet.ai`, max-age ≥ 180d
+- [ ] `window.__meetonAttribution` returns the same payload as
+      `mlp_attribution` (sanity)
+- [ ] Re-visit the URL **without** params — `firstTouch` stays
+      unchanged, `lastSeenAt` updates
+- [ ] Re-visit with a **different** `utm_campaign=verify_lead` —
+      `firstTouch` preserved, `lastTouch` overwritten
+
+### 8.2 GA4 events
+
+In GA4 DebugView (Admin → DebugView, with `?debug_mode=1`):
+
+- [ ] `page_view` event fires with `lp_slug=crm-to-meeting` parameter
+- [ ] Custom dimension `lp_slug` is registered and populating
+- [ ] `chat_open` fires when user clicks chatbot launcher
+- [ ] `form_submit` fires on form completion with `form_type` parameter
+- [ ] `calendar_view` fires when Meeton calendar is displayed
+- [ ] `calendar_book` fires on confirmed booking with `value: 50000`,
+      `currency: 'JPY'`
+- [ ] `generate_lead` AND `conversion` (with `send_to: AW-18060590496/...`)
+      both fire alongside `form_submit` and `calendar_book`
+- [ ] All conversion events carry `utm_source`, `utm_medium`,
+      `utm_campaign`, `utm_content`, `utm_term`, `gclid`
+
+### 8.3 Chatbot widget (cross-subdomain)
+
+- [ ] In `app.dynameet.ai` iframe console: `window.DynaMeetConfig.attribution`
+      contains the test values from the parent page (proves cookie
+      / parent-window read works)
+- [ ] Open chatbot from the LP → in the conversation backend payload,
+      attribution payload is attached to the Contact created
+- [ ] Chatbot-booked meeting creates a HubSpot Deal that inherits
+      `meeton_utm_*` and `meeton_gclid` fields
+
+### 8.4 HubSpot mapping
+
+- [ ] **All 14 Contact custom properties** from §5.1 exist in HubSpot
+      Settings → Properties. Internal names exactly match.
+- [ ] Same 14 properties are mirrored on the **Deal** object
+- [ ] Workflow "Contact creates Deal → copy attribution" is active and
+      tested with a manual contact creation
+- [ ] Saved Contact view **"True Inbound"** exists with the filter set
+      from §5.3, and the test contact shows up in the "Google Ads"
+      bucket
+- [ ] HubSpot Deal stage progression keeps `meeton_*` fields populated
+      (i.e. no workflow blanks them out)
+
+### 8.5 Google Ads
+
+- [ ] Test gclid `test_gclid_001` registers a conversion in Google Ads
+      → Conversions → Recent activity within 24h
+- [ ] Conversion is attributed to the correct campaign (not "Other")
+- [ ] Enhanced Conversions toggle is ON for form_submit + calendar_book
+      conversion actions
+- [ ] Auto-tagging (gclid append) is ON in account settings
+
+### 8.6 LP-level sanity
+
+For both `/solutions/crm-to-meeting/` and `/solutions/lead-to-meeting/`:
+
+- [ ] `<body data-lp-slug="...">` attribute set correctly
+- [ ] Canonical URL matches the deployed path (no trailing-slash drift)
+- [ ] OG image renders correctly when shared
+- [ ] Mobile PageSpeed score ≥ 80 (target for ads landing pages)
+- [ ] No JS console errors in production browser
+- [ ] All CTAs route through `openMeetonCalendar` / `openMeetonDownloadCenter`
+      (no leftover HubSpot iframe modals from old patterns)
+
+### 8.7 End-to-end smoke test
+
+- [ ] Run the full path: open ad-test URL → scroll LP → click "デモを予約" →
+      book a calendar slot → check HubSpot Deal has utm/gclid set → check
+      GA4 has `calendar_book` event with same params → check Google Ads
+      conversion appears within 24h. Single trace, no missing hops.
+
+**Sign-off**: this checklist is signed off by takumi in a commit message
+referencing this section before the ads budget is moved from ¥0 to
+¥300k/mo.
 
 ---
 
