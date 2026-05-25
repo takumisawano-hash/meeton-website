@@ -80,18 +80,118 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 .slides-card-h{font-size:18px;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px;letter-spacing:-.005em}
 .slides-card-desc{font-size:13px;color:#c8cedf;line-height:1.7}
 
-/* LOSS (商談化ロス 5 つ) */
-.loss-section{padding:88px 24px;background:#fff}
-.loss-inner{max-width:1080px;margin:0 auto}
-.loss-title{text-align:center;font-size:30px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.01em}
-.loss-subtitle{text-align:center;color:var(--sub);font-size:15px;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
-.loss-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:880px;margin:0 auto}
-@media (max-width:880px){.loss-grid{grid-template-columns:1fr;max-width:520px}}
-.loss-item{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;background:#fef6f6;border:1.5px solid #f5d4d4;border-radius:14px;font-size:14px;color:var(--heading);line-height:1.7;font-weight:700}
-.loss-item-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#e0475b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900}
-.loss-item-text{flex:1}
-.loss-item-text strong{display:block;color:var(--heading);font-weight:800;font-size:15px;margin-bottom:4px}
-.loss-item-text span{font-weight:500;font-size:13px;color:var(--sub);line-height:1.7}
+/* PART LABEL — shared eyebrow for each major part */
+.part-label{display:inline-block;font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.16em;margin-bottom:14px}
+.part-label.center{display:block;text-align:center}
+.part-label.white{color:#a78bfa}
+
+/* PART 01 — PROBLEM intro */
+.part-section{padding:88px 24px;background:#fff;text-align:center}
+.part-inner{max-width:760px;margin:0 auto}
+.part-title{font-size:36px;font-weight:800;color:var(--heading);line-height:1.35;margin-bottom:20px;letter-spacing:-.012em}
+.part-lead{font-size:16px;color:var(--sub);line-height:1.95}
+.part-lead strong{color:var(--heading);font-weight:800}
+
+/* WALLS — 3 構造的な壁 */
+.walls-section{padding:88px 24px;background:var(--surface)}
+.walls-inner{max-width:1180px;margin:0 auto}
+.walls-title{text-align:center;font-size:30px;font-weight:800;color:var(--heading);margin-bottom:14px;letter-spacing:-.01em}
+.walls-subtitle{text-align:center;color:var(--sub);font-size:15px;margin-bottom:48px;line-height:1.85}
+.walls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:1024px){.walls-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}}
+.wall-card{padding:32px 26px;background:#fff;border:1px solid var(--border);border-radius:18px;display:flex;flex-direction:column;gap:10px;transition:all .25s}
+.wall-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(0,0,0,.12);border-color:var(--border2)}
+.wall-num{font-size:14px;font-weight:900;color:var(--accent);letter-spacing:.08em}
+.wall-eyebrow{font-size:11px;color:var(--sub);font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.wall-h{font-size:22px;font-weight:800;color:var(--heading);line-height:1.4;letter-spacing:-.005em;margin-bottom:8px}
+.wall-stat{display:flex;align-items:baseline;gap:12px;margin:8px 0;flex-wrap:wrap}
+.wall-stat-num{font-size:38px;font-weight:900;color:var(--heading);letter-spacing:-.02em;line-height:1}
+.wall-stat-num.green{color:var(--cta)}
+.wall-stat-num.red{color:#e0475b}
+.wall-stat-num.blue{color:var(--blue)}
+.wall-stat-arrow{font-size:18px;color:var(--sub);font-weight:700}
+.wall-p{font-size:14px;color:var(--text);line-height:1.85;flex:1}
+.wall-p strong{color:var(--heading);font-weight:800}
+.wall-source{font-size:11px;color:var(--sub);font-weight:600;letter-spacing:.04em;padding-top:14px;border-top:1px solid var(--border);margin-top:8px}
+
+/* GAP — 既存ツールの空白 */
+.gap-section{padding:88px 24px;background:#fff}
+.gap-inner{max-width:1180px;margin:0 auto;text-align:center}
+.gap-title{font-size:30px;font-weight:800;color:var(--heading);margin-bottom:40px;letter-spacing:-.01em}
+.gap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:left;margin-bottom:36px}
+@media (max-width:1024px){.gap-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.gap-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
+.gap-card{padding:24px 22px;background:var(--surface);border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;gap:8px}
+.gap-h{font-size:18px;font-weight:800;color:var(--heading);letter-spacing:-.005em}
+.gap-tools{font-size:11px;color:var(--sub);font-weight:700;letter-spacing:.04em}
+.gap-strength{font-size:13px;color:var(--text);font-weight:700;line-height:1.7;padding-top:10px;border-top:1px solid var(--border);margin-top:4px}
+.gap-limit{font-size:13px;color:#e0475b;font-weight:700;line-height:1.7}
+.gap-conclusion{font-size:17px;color:var(--heading);line-height:1.85;font-weight:600;max-width:680px;margin:0 auto}
+.gap-conclusion strong{color:var(--accent);font-weight:800}
+
+/* AI SDR (PART 02) — dark theme accent */
+.ai-sdr-section{padding:96px 24px;background:linear-gradient(135deg,#1a1d3a 0%,#0f1128 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.ai-sdr-section::before{content:'';position:absolute;top:-160px;right:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(124,92,252,.20) 0%,transparent 70%);pointer-events:none}
+.ai-sdr-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.ai-sdr-title{font-size:36px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:18px;letter-spacing:-.01em}
+.ai-sdr-lead{font-size:17px;color:#d4d8ea;line-height:1.9;max-width:760px;margin:0 auto 48px}
+.ai-sdr-lead strong{color:#fff;font-weight:800}
+.ai-sdr-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:880px;margin:0 auto 36px}
+@media (max-width:880px){.ai-sdr-pillars{grid-template-columns:repeat(2,1fr);max-width:520px}}
+.ai-sdr-pillar{padding:28px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;backdrop-filter:blur(12px)}
+.ai-sdr-pillar-num{font-size:36px;font-weight:900;line-height:1;letter-spacing:-.02em;background:linear-gradient(135deg,#7c5cfc,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ai-sdr-pillar-label{font-size:13px;color:#c8cedf;font-weight:700;letter-spacing:.03em;line-height:1.55}
+.ai-sdr-note{font-size:13px;color:#a4a9c4;font-style:italic;max-width:680px;margin:0 auto;line-height:1.7}
+
+/* KPI + 落とし穴 */
+.kpi-section{padding:88px 24px;background:var(--surface)}
+.kpi-inner{max-width:1080px;margin:0 auto;text-align:center}
+.kpi-title{font-size:30px;font-weight:800;color:var(--heading);margin-bottom:40px;letter-spacing:-.01em}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;text-align:left;max-width:920px;margin:0 auto}
+@media (max-width:880px){.kpi-grid{grid-template-columns:1fr;max-width:520px}}
+.kpi-card{padding:32px 28px;background:#fff;border:1px solid var(--border);border-radius:16px}
+.kpi-h{font-size:18px;font-weight:800;color:var(--heading);margin-bottom:18px;letter-spacing:-.005em}
+.kpi-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px}
+.kpi-list li{font-size:14px;color:var(--text);font-weight:700;line-height:1.65;padding-left:22px;position:relative}
+.kpi-list li::before{content:'✓';position:absolute;left:0;top:0;color:var(--cta);font-weight:900}
+.kpi-note{display:block;font-size:12px;color:var(--sub);font-weight:500;margin-top:4px;line-height:1.6}
+
+/* FUTURE — PART 04 */
+.future-section{padding:96px 24px;background:linear-gradient(180deg,#1a1d3a 0%,#0f1128 100%);color:#fff;position:relative;overflow:hidden}
+.future-section::before{content:'';position:absolute;bottom:-180px;left:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(18,163,125,.18) 0%,transparent 70%);pointer-events:none}
+.future-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.future-title{font-size:32px;font-weight:800;color:#fff;text-align:center;line-height:1.35;margin-bottom:14px;letter-spacing:-.01em}
+.future-lead{font-size:15px;color:#c8cedf;text-align:center;line-height:1.85;margin-bottom:48px;max-width:680px;margin-left:auto;margin-right:auto}
+.future-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:920px;margin:0 auto 48px}
+@media (max-width:880px){.future-grid{grid-template-columns:1fr;max-width:520px}}
+.future-card{padding:32px 28px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+.future-card.ai{border-color:rgba(124,92,252,.32);background:rgba(124,92,252,.06)}
+.future-card.human{border-color:rgba(18,163,125,.32);background:rgba(18,163,125,.06)}
+.future-card-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
+.future-card.ai .future-card-label{color:#a78bfa}
+.future-card.human .future-card-label{color:#0fc19a}
+.future-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.future-list li{font-size:14px;color:#e2e6f3;font-weight:600;line-height:1.7;padding-left:20px;position:relative}
+.future-list li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%}
+.future-card.ai .future-list li::before{background:#a78bfa}
+.future-card.human .future-list li::before{background:#0fc19a}
+
+/* MARKETER SHIFT */
+.marketer-shift{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;max-width:920px;margin:0 auto 32px}
+@media (max-width:880px){.marketer-shift{grid-template-columns:1fr}}
+.marketer-shift-before,.marketer-shift-after{padding:24px 22px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+.marketer-shift-after{background:rgba(124,92,252,.10);border-color:rgba(124,92,252,.32)}
+.marketer-shift-label{font-size:11px;font-weight:800;letter-spacing:.16em;color:#a4a9c4;margin-bottom:10px}
+.marketer-shift-after .marketer-shift-label{color:#a78bfa}
+.marketer-shift-body{font-size:14px;color:#e2e6f3;line-height:1.75}
+.marketer-shift-body strong{display:block;color:#fff;font-weight:800;font-size:16px;margin-bottom:6px}
+.marketer-shift-arrow{display:flex;align-items:center;justify-content:center;color:#a4a9c4;font-size:24px;font-weight:700}
+@media (max-width:880px){.marketer-shift-arrow{transform:rotate(90deg);padding:8px 0}}
+.marketer-conclusion{text-align:center;font-size:16px;color:#e2e6f3;line-height:1.9;max-width:680px;margin:0 auto;font-weight:600}
+.marketer-conclusion strong{color:#0fc19a;font-weight:800}
+
+/* FEATURE axis tag */
+.feature-axis-tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 10px;background:var(--feat-bg);color:var(--feat-color);border-radius:100px;width:fit-content;margin-bottom:-2px}
 
 /* RECAP (Session 3 points) */
 .recap-section{padding:88px 24px;background:var(--surface)}
@@ -163,7 +263,7 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 @media (max-width:880px){
   .event-h1{font-size:34px;line-height:1.3}
   .event-sub{font-size:16px}
-  .slides-title,.recap-title,.loss-title,.features-title,.cases-title{font-size:26px}
+  .slides-title,.part-title,.walls-title,.gap-title,.ai-sdr-title,.features-title,.cases-title,.kpi-title,.future-title{font-size:24px}
   .cta-h{font-size:28px}
   .event-meta{gap:14px;font-size:12px}
   .event-meta-divider{display:none}
@@ -173,7 +273,7 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 @media (max-width:560px){
   .event-hero{padding:72px 20px 56px}
   .event-h1{font-size:28px}
-  .loss-item{padding:16px 18px}
+  .wall-card{padding:26px 22px}
   .feature-card{padding:26px 22px}
 }
 `;
@@ -230,9 +330,10 @@ const IconArrowRight = ({ size = 16 }: { size?: number }) => (
 const FEATURES = [
   {
     key: "calendar",
-    name: "日程調整までスムーズにつなげる",
     productName: "Meeton Calendar",
-    sub: "コンバージョン直後 5 秒で商談予約を提示。資料請求後の初動対応の遅れを解消する。",
+    axis: "スピード",
+    name: "即時商談化",
+    sub: "コンバート瞬間に商談予約。初動スピードの壁を解く。",
     bullets: ["フォーム送信直後の即時提示", "サンクスページ埋め込み", "営業日程の自動最適化"],
     color: "#0891b2",
     bg: "rgba(8,145,178,.10)",
@@ -240,9 +341,10 @@ const FEATURES = [
   },
   {
     key: "email",
-    name: "CRM や営業活動に引き継ぐ",
     productName: "Meeton Email",
-    sub: "即時予約しなかったリード・CRM に眠るリードを 1:1 で追跡。AI が動的にナーチャリング。",
+    axis: "粘り強さ",
+    name: "粘り強いフォロー",
+    sub: "1:1 自律フォローで諦めず追跡。CRM に眠るリードまで再活性化。",
     bullets: ["1:1 動的シーケンス", "返信内容に応じた分岐", "商談化までナーチャリング"],
     color: "#7c5cfc",
     bg: "rgba(124,92,252,.10)",
@@ -250,9 +352,10 @@ const FEATURES = [
   },
   {
     key: "live",
-    name: "その場で会話・質問対応する",
     productName: "Meeton Live",
-    sub: "再訪した識別済みリードに過去全文脈を引き継いで AI SDR が即時応答。問い合わせ前の高意欲ユーザーを逃さない。",
+    axis: "文脈",
+    name: "再訪時の即時応答",
+    sub: "再訪リードに過去全文脈を引き継いで即対応。文脈の壁を解く。",
     bullets: ["訪問者を即時識別", "過去会話の継続対応", "ラストワンマイル対話"],
     color: "#12a37d",
     bg: "rgba(18,163,125,.10)",
@@ -260,9 +363,10 @@ const FEATURES = [
   },
   {
     key: "library",
-    name: "Web 上の高意欲ユーザーを見つける",
     productName: "Meeton Library",
-    sub: "価格・事例ページ閲覧者など、フォーム前の高温度サインを識別。AI が文脈に応じた資料を提案。",
+    axis: "文脈",
+    name: "資料で育成",
+    sub: "相手の関心に合う資料を AI が自動提案・解説。閲覧から商談に引き上げる。",
     bullets: ["文脈に応じた資料提案", "AI による解説対応", "Calendar への自動引継ぎ"],
     color: "#d03ea1",
     bg: "rgba(208,62,161,.10)",
@@ -322,12 +426,11 @@ export default function MarkezineDayClient({ cases }: Props) {
             <span>MarkeZine Day 2026 登壇内容まとめ</span>
           </div>
           <h1 className="event-h1">
-            「リードは来ているのに、<br />
-            商談にならない」を<strong>分解する</strong>
+            <strong>AI SDR</strong> が変える<br />
+            BtoB 営業の新常識
           </h1>
           <p className="event-sub">
-            MarkeZine Day 2026 Online「AI SDR が変える BtoB 営業の新常識」での
-            DynaMeet 登壇内容を、ページにまとめました。
+            MarkeZine Day 2026 Online 登壇内容まとめ ─ 商談獲得を自動化する実践アプローチ
           </p>
 
           <div className="event-banner-wrap">
@@ -411,97 +514,133 @@ export default function MarkezineDayClient({ cases }: Props) {
         </div>
       </section>
 
-      {/* Session Recap — 商談化ロス文脈に書き換え */}
-      <section className="recap-section">
-        <div className="recap-inner">
-          <h2 className="recap-title">当日の要点 3 つ</h2>
-          <p className="recap-subtitle">
-            「リードは来ているのに、商談にならない」を分解する 3 つの視点。
+      {/* PART 01 — 課題提起 */}
+      <section className="part-section part-problem">
+        <div className="part-inner">
+          <div className="part-label">PART 01 / THE PROBLEM</div>
+          <h2 className="part-title">リードはあるのに、商談にならない</h2>
+          <p className="part-lead">
+            MA でリードは集まる。CRM にも溜まる。<br />
+            でも、その大半は商談にならずに消えていく。<br />
+            <strong>この原因は BtoB 営業に潜む構造的な課題です。</strong>
           </p>
-          <div className="recap-grid">
-            <div className="recap-card">
-              <div className="recap-num">1</div>
-              <h3 className="recap-h">リード対応の遅れが、商談化率を下げる</h3>
-              <p className="recap-p">
-                資料請求・問い合わせ・チャット — リードが「興味を持った瞬間」を逃すと、
-                温度は急速に下がる。商談化の歩留まりは、最初の数分で 8 割決まる。
+        </div>
+      </section>
+
+      {/* PART 01 — 3 つの壁 */}
+      <section className="walls-section">
+        <div className="walls-inner">
+          <div className="part-label center">PART 01 / 3 STRUCTURAL CHALLENGES</div>
+          <h2 className="walls-title">商談化を阻む 3 つの構造的な壁</h2>
+          <p className="walls-subtitle">
+            どれも、人間 SDR には構造的に解けない課題。<br />
+            マーケと営業の境界線で起きている現実。
+          </p>
+          <div className="walls-grid">
+            <div className="wall-card">
+              <div className="wall-num">01</div>
+              <div className="wall-eyebrow">Speed</div>
+              <h3 className="wall-h">初動スピード</h3>
+              <div className="wall-stat"><span className="wall-stat-num">42h</span><span className="wall-stat-arrow">→</span><span className="wall-stat-num green">5m</span></div>
+              <p className="wall-p">
+                BtoB 営業の平均レスポンス時間。<br />
+                <strong>5 分以内 vs 30 分後でコンタクト率 100 倍。</strong>
               </p>
+              <div className="wall-source">HBR 2011 / MIT 2007</div>
             </div>
-            <div className="recap-card">
-              <div className="recap-num">2</div>
-              <h3 className="recap-h">AI SDR は、問い合わせ前後の "空白時間" を埋める</h3>
-              <p className="recap-p">
-                24 時間 365 日、リードが現れたその瞬間に、AI が会話・ヒアリング・
-                資料提案・日程調整までシームレスに完結。人だけで全リードに即時対応する負担を消す。
+            <div className="wall-card">
+              <div className="wall-num">02</div>
+              <div className="wall-eyebrow">Persistence</div>
+              <h3 className="wall-h">フォローの粘り強さ</h3>
+              <div className="wall-stat"><span className="wall-stat-num">80%</span><span className="wall-stat-arrow">vs</span><span className="wall-stat-num red">44%</span></div>
+              <p className="wall-p">
+                の商談は 5 回以上のフォロー後に成約。<br />
+                <strong>しかし営業の 44% が 1 回で諦める。</strong>
               </p>
+              <div className="wall-source">RAIN Group 2024 / InsideSales</div>
             </div>
-            <div className="recap-card">
-              <div className="recap-num">3</div>
-              <h3 className="recap-h">人間 SDR は、より高温度な商談に集中できる</h3>
-              <p className="recap-p">
-                AI が温度高いリードだけを商談まで引き上げ、人が向き合うのは "勝てる商談" だけ。
-                AI に置き換える話ではなく、人がより高付加価値な仕事に集中できる構造への移行。
+            <div className="wall-card">
+              <div className="wall-num">03</div>
+              <div className="wall-eyebrow">Context</div>
+              <h3 className="wall-h">再訪時の文脈</h3>
+              <div className="wall-stat"><span className="wall-stat-num">70%</span><span className="wall-stat-arrow">+</span><span className="wall-stat-num blue">81%</span></div>
+              <p className="wall-p">
+                の購買プロセスを買い手は営業接触前に独力で進める。<br />
+                <strong>81% は接触前に第一候補ベンダーを決定済み。</strong>
               </p>
+              <div className="wall-source">Gartner / 6sense</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* よくある商談化ロス 5 つ */}
-      <section className="loss-section">
-        <div className="loss-inner">
-          <h2 className="loss-title">よくある商談化ロス 5 つ</h2>
-          <p className="loss-subtitle">
-            BtoB サイトでリードを取れているのに商談化しない企業に、共通して見られる 5 つのロス。
-            自社で当てはまるものがないか、チェックしてみてください。
-          </p>
-          <div className="loss-grid">
-            <div className="loss-item">
-              <div className="loss-item-icon">1</div>
-              <div className="loss-item-text">
-                <strong>資料請求後の初動対応が遅い</strong>
-                <span>1 時間以内に接触できないリードは、商談化率が 1/10 まで下がる。</span>
-              </div>
+      {/* PART 01 — 既存ツールの空白 */}
+      <section className="gap-section">
+        <div className="gap-inner">
+          <div className="part-label center">PART 01 / THE GAP</div>
+          <h2 className="gap-title">既存ツールでは、この 3 つの壁は埋まらない</h2>
+          <div className="gap-grid">
+            <div className="gap-card">
+              <h3 className="gap-h">MA</h3>
+              <div className="gap-tools">Marketo / HubSpot / Pardot</div>
+              <p className="gap-strength">リスト戦・一斉配信</p>
+              <p className="gap-limit">→ 個別リードの瞬間に動けない</p>
             </div>
-            <div className="loss-item">
-              <div className="loss-item-icon">2</div>
-              <div className="loss-item-text">
-                <strong>価格・事例ページ閲覧者を追えていない</strong>
-                <span>高温度サインを出している匿名訪問者を識別・接触する仕組みがない。</span>
-              </div>
+            <div className="gap-card">
+              <h3 className="gap-h">SFA</h3>
+              <div className="gap-tools">Salesforce / kintone</div>
+              <p className="gap-strength">活動の記録ツール</p>
+              <p className="gap-limit">→ 対応するのは結局人間</p>
             </div>
-            <div className="loss-item">
-              <div className="loss-item-icon">3</div>
-              <div className="loss-item-text">
-                <strong>CRM に溜まったリードが放置されている</strong>
-                <span>過去問合せ・名刺交換・ウェビナー登録の数千件が眠ったまま動かない。</span>
-              </div>
+            <div className="gap-card">
+              <h3 className="gap-h">Chatbot</h3>
+              <div className="gap-tools">Drift / Intercom / Karakuri</div>
+              <p className="gap-strength">全訪問者対象の対話</p>
+              <p className="gap-limit">→ 商談化に最適化されていない</p>
             </div>
-            <div className="loss-item">
-              <div className="loss-item-icon">4</div>
-              <div className="loss-item-text">
-                <strong>問い合わせ前の高意欲ユーザーに接触できていない</strong>
-                <span>「問い合わせ」する前に競合に流れている。フォーム前の接点がない。</span>
-              </div>
-            </div>
-            <div className="loss-item">
-              <div className="loss-item-icon">5</div>
-              <div className="loss-item-text">
-                <strong>営業が Hot リードを優先できていない</strong>
-                <span>温度判定の仕組みがなく、全リードを均等に追って勝てる商談を逃す。</span>
-              </div>
+            <div className="gap-card">
+              <h3 className="gap-h">人間 SDR</h3>
+              <div className="gap-tools">採用・育成・配置</div>
+              <p className="gap-strength">個別判断と対応</p>
+              <p className="gap-limit">→ 24h 稼働 & 全リード対応は不可能</p>
             </div>
           </div>
+          <p className="gap-conclusion">
+            これは、マーケでも営業でもない ─ <strong>組織構造の空白</strong>。<br />
+            <strong>AI だけが、ここを埋められる。</strong>
+          </p>
         </div>
       </section>
 
-      {/* 商談化ロスを減らすために必要な 4 つの仕組み (旧: Meeton ai 4 機能) */}
+      {/* PART 02 — AI SDR 定義 */}
+      <section className="ai-sdr-section">
+        <div className="ai-sdr-inner">
+          <div className="part-label center white">PART 02 / WHAT IS AI SDR</div>
+          <h2 className="ai-sdr-title">AI SDR とは何か</h2>
+          <p className="ai-sdr-lead">
+            SDR の仕事を AI エージェントが代替するアプローチ。<br />
+            <strong>スピード・粘り強さ・文脈 の 3 軸すべてを、AI が自律的に実行する。</strong>
+          </p>
+          <div className="ai-sdr-pillars">
+            <div className="ai-sdr-pillar"><div className="ai-sdr-pillar-num">24h</div><div className="ai-sdr-pillar-label">24 時間 365 日 稼働</div></div>
+            <div className="ai-sdr-pillar"><div className="ai-sdr-pillar-num">AI</div><div className="ai-sdr-pillar-label">自律的に判断・行動</div></div>
+            <div className="ai-sdr-pillar"><div className="ai-sdr-pillar-num">1:1</div><div className="ai-sdr-pillar-label">全リードへの個別対応</div></div>
+            <div className="ai-sdr-pillar"><div className="ai-sdr-pillar-num">✓</div><div className="ai-sdr-pillar-label">商談予約まで完結</div></div>
+          </div>
+          <p className="ai-sdr-note">
+            ※ AI SDR ≠ チャットボット / MA メール / SFA ─ これらの間にあった「空白」を埋める新カテゴリ
+          </p>
+        </div>
+      </section>
+
+      {/* PART 03 — Meeton ai 4 モジュール */}
       <section className="features-section">
         <div className="features-inner">
-          <h2 className="features-title">商談化ロスを減らすために必要な 4 つの仕組み</h2>
+          <div className="part-label center">PART 03 / MEETON AI</div>
+          <h2 className="features-title">スピード・粘り強さ・文脈を解く 4 つの AI モジュール</h2>
           <p className="features-subtitle">
-            Web 上の高意欲ユーザーを見つける → 会話・質問対応 → 日程調整 → 営業引継ぎ。
-            Meeton ai では、これらを AI SDR の仕組みとして提供しています。
+            ウェブサイトでコンバートしたリードを、商談に変える。<br />
+            集客領域は既存ツールに任せ、Meeton ai は「ラストワンマイル」を解きます。
           </p>
           <div className="features-grid">
             {FEATURES.map((f) => (
@@ -511,6 +650,7 @@ export default function MarkezineDayClient({ cases }: Props) {
                 style={{ ["--feat-color" as string]: f.color, ["--feat-bg" as string]: f.bg } as React.CSSProperties}
               >
                 <div className="feature-icon">{f.icon}</div>
+                <div className="feature-axis-tag">3 軸：{f.axis}</div>
                 <div className="feature-product-name">{f.productName}</div>
                 <h3 className="feature-name">{f.name}</h3>
                 <p className="feature-sub">{f.sub}</p>
@@ -532,9 +672,11 @@ export default function MarkezineDayClient({ cases }: Props) {
       {cases.length > 0 && (
         <section className="cases-section">
           <div className="cases-inner">
-            <h2 className="cases-title">主な導入事例</h2>
+            <div className="part-label center">PART 03 / CASE STUDIES</div>
+            <h2 className="cases-title">登壇で紹介した事例</h2>
             <p className="cases-subtitle">
-              セッション内で紹介した事例を含む、Meeton ai 導入企業様の成果。
+              EdulinX 様で商談化率 60%+ (業界平均 20% / 同社全体 23% の約 3 倍)。<br />
+              Univis Group 様で 3 ヶ月 2 件受注 + 商談数約 2 倍。
             </p>
             <div className="cases-grid">
               {cases.map((c) => (
@@ -572,17 +714,94 @@ export default function MarkezineDayClient({ cases }: Props) {
         </section>
       )}
 
-      {/* Closing CTA — 30 分診断のみ */}
+      {/* PART 03 — KPI + 落とし穴 */}
+      <section className="kpi-section">
+        <div className="kpi-inner">
+          <div className="part-label center">PART 03 / IMPLEMENTATION</div>
+          <h2 className="kpi-title">成果指標と導入時の押さえどころ</h2>
+          <div className="kpi-grid">
+            <div className="kpi-card">
+              <h3 className="kpi-h">計測すべき 5 つの KPI</h3>
+              <ul className="kpi-list">
+                <li>リードへの対応速度 (5 分以内)</li>
+                <li>リードからの商談化率</li>
+                <li>インサイドセールス業務の削減工数</li>
+                <li>有効商談への転換率</li>
+                <li>商談獲得コスト</li>
+              </ul>
+            </div>
+            <div className="kpi-card">
+              <h3 className="kpi-h">導入時の落とし穴</h3>
+              <ul className="kpi-list">
+                <li>ウェブサイトへのある程度の集客が前提<br /><span className="kpi-note">ウェブサイトへの集客を増やすツールではない</span></li>
+                <li>マーケ・営業チームの連携設計が要<br /><span className="kpi-note">リード受け取りフローを最初に決める</span></li>
+                <li>KPI を最初に決める<br /><span className="kpi-note">計測しないと改善が進まない</span></li>
+                <li>商談数を増やすことがゴール<br /><span className="kpi-note">新規リードを増やすことがゴールではない</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PART 04 — AI 時代の役割分担 */}
+      <section className="future-section">
+        <div className="future-inner">
+          <div className="part-label center white">PART 04 / THE FUTURE</div>
+          <h2 className="future-title">AI 時代の営業組織と、マーケターの新しい役割</h2>
+          <p className="future-lead">
+            人と AI を対立させるのではなく、役割分担で組織全体の成果を最大化する。
+          </p>
+          <div className="future-grid">
+            <div className="future-card ai">
+              <div className="future-card-label">AI が担う領域</div>
+              <ul className="future-list">
+                <li>リードへの即時レスポンス</li>
+                <li>1:1 パーソナライズドフォロー</li>
+                <li>再訪リードへの文脈持った対応</li>
+                <li>商談予約までのコンバージョン</li>
+                <li>データ集約と次のアクション提案</li>
+              </ul>
+            </div>
+            <div className="future-card human">
+              <div className="future-card-label">人間が集中する領域</div>
+              <ul className="future-list">
+                <li>商談実施・クロージング</li>
+                <li>顧客との長期関係構築</li>
+                <li>戦略提案・コンサルティング</li>
+                <li>AI が出すデータの解釈と判断</li>
+                <li>営業組織と AI の設計・改善</li>
+              </ul>
+            </div>
+          </div>
+          <div className="marketer-shift">
+            <div className="marketer-shift-before">
+              <div className="marketer-shift-label">BEFORE</div>
+              <div className="marketer-shift-body"><strong>リードを集める</strong><br />MA、広告、コンテンツの最適化</div>
+            </div>
+            <div className="marketer-shift-arrow">→</div>
+            <div className="marketer-shift-after">
+              <div className="marketer-shift-label">AFTER</div>
+              <div className="marketer-shift-body"><strong>リードが商談化される全工程を設計する</strong><br />営業との連携、AI を含むテクノロジースタックの設計、ファネル全体の KPI 設計</div>
+            </div>
+          </div>
+          <p className="marketer-conclusion">
+            AI SDR を含むテクノロジースタックの「<strong>設計者</strong>」になる。<br />
+            それが、AI 時代のマーケターの新しい競争優位の源泉です。
+          </p>
+        </div>
+      </section>
+
+      {/* Closing CTA — 30 分 AI SDR 活用診断 */}
       <section className="cta-section">
         <div className="cta-inner">
-          <h2 className="cta-h">貴社サイトの商談化ロスを、30 分で診断します。</h2>
+          <h2 className="cta-h">貴社で AI SDR を活用できる余地を、30 分で診断します。</h2>
           <p className="cta-p">
-            貴社サイトやリード対応フローに当てはめて、どこで商談化ロスが起きているかを 30 分で整理します。
-            導入前提ではなく、改善余地の確認だけでも歓迎です。
+            貴社のウェブサイト・リード対応フロー・CRM 運用をもとに、AI SDR で改善できる領域を 30 分で整理します。
+            導入前提ではなく、まずは商談化プロセスの改善余地を確認する場としてご利用ください。
           </p>
           <div className="cta-buttons">
             <button className="btn btn-primary" onClick={openConsultation}>
-              30 分 商談化ロス診断を予約する <IconArrowRight />
+              30 分 AI SDR 活用診断を予約する <IconArrowRight />
             </button>
           </div>
         </div>

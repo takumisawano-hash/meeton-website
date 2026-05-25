@@ -3,13 +3,13 @@ import { getAllCaseStudies } from '@/app/lib/case-studies'
 import MarkezineDayClient from './MarkezineDayClient'
 
 export const metadata: Metadata = {
-  title: 'MarkeZine Day 2026 登壇内容まとめ｜BtoBサイトの商談化ロス診断｜Meeton ai',
+  title: 'AI SDR が変える BtoB 営業の新常識｜MarkeZine Day 2026 登壇内容まとめ｜Meeton ai',
   description:
-    'MarkeZine Day 2026 Online「AI SDRが変えるBtoB営業の新常識」の登壇内容まとめページ。録画共有がない形式のため、当日の要点・登壇スライド・自社で確認すべき商談化ロスのポイントをまとめました。',
+    'MarkeZine Day 2026 Online「AI SDR が変える BtoB 営業の新常識 ─ 商談獲得を自動化する実践アプローチ」の登壇内容まとめページ。リードを商談に変える 3 つの壁、AI SDR の定義、Meeton ai の 4 モジュールと事例まで、当日の要点と登壇スライドをまとめています。',
   alternates: { canonical: '/event/markezine-day-2026/' },
   openGraph: {
-    title: 'MarkeZine Day 2026 登壇内容まとめ',
-    description: '録画なし形式のため、当日の要点・登壇スライド・商談化ロス診断をまとめました',
+    title: 'AI SDR が変える BtoB 営業の新常識｜MarkeZine Day 2026 登壇内容まとめ',
+    description: '商談獲得を自動化する実践アプローチ ─ 録画なし形式のため、当日の要点と登壇スライドをまとめました',
     url: 'https://dynameet.ai/event/markezine-day-2026/',
     siteName: 'Meeton ai',
     locale: 'ja_JP',
