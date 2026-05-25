@@ -163,19 +163,17 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 @media (max-width:880px){
   .event-h1{font-size:34px;line-height:1.3}
   .event-sub{font-size:16px}
-  .offers-title,.recap-title,.features-title,.cases-title{font-size:26px}
+  .slides-title,.recap-title,.loss-title,.features-title,.cases-title{font-size:26px}
   .cta-h{font-size:28px}
-  .hero-stats{gap:12px}
-  .hero-stat{padding:18px 10px}
-  .hero-stat-num{font-size:32px}
   .event-meta{gap:14px;font-size:12px}
   .event-meta-divider{display:none}
+  .no-recording-callout{font-size:13px;padding:16px 18px}
+  .slides-card{padding:24px 20px;gap:16px}
 }
 @media (max-width:560px){
   .event-hero{padding:72px 20px 56px}
   .event-h1{font-size:28px}
-  .hero-stat-num{font-size:28px}
-  .offer-card{padding:28px 24px}
+  .loss-item{padding:16px 18px}
   .feature-card{padding:26px 22px}
 }
 `;
