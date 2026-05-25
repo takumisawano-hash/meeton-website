@@ -25,7 +25,7 @@ export default function AboutPage() {
     { label: '創立年月日', value: '2024年10月3日' },
     { label: '事業内容', value: '営業支援AI「Meeton ai」の開発・運用' },
     {
-      label: '所在地',
+      label: '登記住所',
       value: (
         <>
           〒150-0033
@@ -132,21 +132,23 @@ export default function AboutPage() {
           .ab-info-value{padding:6px 18px 16px;font-size:14px}
         }
 
-        /* LOCATION CARD */
-        .ab-location-card{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px);align-items:center;background:linear-gradient(135deg,var(--cta-light) 0%,var(--accent-light) 100%);border:1px solid rgba(18,163,125,.15);border-radius:20px;padding:clamp(28px,4vw,40px);margin-top:clamp(28px,4vw,40px);position:relative;overflow:hidden}
-        @media (max-width:720px){.ab-location-card{grid-template-columns:1fr;gap:20px}}
-        .ab-location-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,252,.18),transparent 70%);pointer-events:none}
-        .ab-location-left{position:relative;z-index:2}
-        .ab-location-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:11px;font-weight:700;color:var(--cta);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
-        .ab-location-title{font-size:clamp(20px,2.8vw,24px);font-weight:800;color:var(--heading);margin:0 0 12px;letter-spacing:-.015em;line-height:1.35}
-        .ab-location-addr{font-size:clamp(14px,1.9vw,16px);line-height:1.85;color:var(--text);font-weight:600;margin:0}
-        .ab-map-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:var(--fb);font-size:14px;font-weight:800;color:var(--cta);text-decoration:none;padding:11px 20px;background:var(--bg);border:1px solid rgba(18,163,125,.25);border-radius:100px;transition:all .25s;min-height:44px;box-sizing:border-box}
+        /* OFFICE CARDS */
+        .ab-offices-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);margin-top:clamp(28px,4vw,40px)}
+        @media (max-width:720px){.ab-offices-grid{grid-template-columns:1fr}}
+        .ab-office-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:clamp(22px,3.5vw,34px);display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 2px rgba(15,17,40,.03);transition:box-shadow .25s,border-color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
+        .ab-office-card:hover{transform:translateY(-3px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:var(--border2)}
+        .ab-office-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .ab-office-badge{display:inline-flex;align-items:center;padding:4px 12px;border-radius:100px;font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+        .ab-badge-registered{background:var(--surface);color:var(--muted);border:1px solid var(--border)}
+        .ab-badge-operating{background:rgba(18,163,125,.10);color:var(--cta);border:1px solid rgba(18,163,125,.22)}
+        .ab-iso-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:1px;background:rgba(8,145,178,.10);color:#0891b2;border:1px solid rgba(8,145,178,.22)}
+        .ab-office-title{font-size:clamp(16px,2vw,19px);font-weight:800;color:var(--heading);line-height:1.3;margin:0;letter-spacing:-.01em}
+        .ab-office-addr{font-size:clamp(13px,1.8vw,15px);line-height:1.85;color:var(--text);font-weight:600;margin:0}
+        .ab-office-note{font-size:12.5px;line-height:1.65;color:var(--muted);margin:0;font-weight:500;padding:9px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border)}
+        .ab-map-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;font-family:var(--fb);font-size:13px;font-weight:800;color:var(--cta);text-decoration:none;padding:10px 18px;background:var(--bg);border:1px solid rgba(18,163,125,.25);border-radius:100px;transition:all .25s;min-height:42px;box-sizing:border-box;align-self:flex-start}
         .ab-map-link:hover{background:var(--cta);color:#fff;transform:translateY(-1px);box-shadow:0 8px 22px var(--cta-glow);border-color:var(--cta)}
         .ab-map-arrow{transition:transform .25s}
         .ab-map-link:hover .ab-map-arrow{transform:translateX(3px)}
-        .ab-location-right{position:relative;z-index:2;display:flex;justify-content:center;align-items:center}
-        .ab-map-pin{width:140px;height:140px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 40px -8px rgba(18,163,125,.25),0 2px 6px rgba(15,17,40,.06);position:relative}
-        .ab-map-pin svg{width:64px;height:64px}
 
         /* CTA */
         .ab-cta-section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px);text-align:center;position:relative;overflow:hidden;background:linear-gradient(165deg,#edfcf7 0%,#fff 40%,#f3f0ff 80%,#eaf0fe 100%)}
@@ -282,20 +284,20 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {/* LOCATION CARD */}
-            <div className="ab-location-card">
-              <div className="ab-location-left">
-                <div className="ab-location-eyebrow">
-                  <span>Headquarters</span>
+            {/* OFFICE CARDS */}
+            <div className="ab-offices-grid">
+              {/* Registered address */}
+              <div className="ab-office-card">
+                <div className="ab-office-header">
+                  <span className="ab-office-badge ab-badge-registered">登記住所</span>
                 </div>
-                <h3 className="ab-location-title">代官山オフィス</h3>
-                <p className="ab-location-addr">
-                  〒150-0033
-                  <br />
-                  東京都渋谷区猿楽町17-10
-                  <br />
+                <h3 className="ab-office-title">代官山オフィス</h3>
+                <p className="ab-office-addr">
+                  〒150-0033<br />
+                  東京都渋谷区猿楽町17-10<br />
                   代官山アートヴィレッジ2C
                 </p>
+                <p className="ab-office-note">法人登記上の所在地です。公式書類・請求書・郵便物の送付先としてご利用ください。</p>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
                   target="_blank"
@@ -306,22 +308,28 @@ export default function AboutPage() {
                   <span className="ab-map-arrow" aria-hidden="true">→</span>
                 </a>
               </div>
-              <div className="ab-location-right">
-                <div className="ab-map-pin" aria-hidden="true">
-                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M32 6C22 6 14 14 14 24c0 13 18 34 18 34s18-21 18-34c0-10-8-18-18-18z"
-                      fill="url(#pinGrad)"
-                    />
-                    <circle cx="32" cy="24" r="7" fill="#fff" />
-                    <defs>
-                      <linearGradient id="pinGrad" x1="14" y1="6" x2="50" y2="58" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#12a37d" />
-                        <stop offset="1" stopColor="#7c5cfc" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+
+              {/* Operating office */}
+              <div className="ab-office-card">
+                <div className="ab-office-header">
+                  <span className="ab-office-badge ab-badge-operating">事業所</span>
                 </div>
+                <h3 className="ab-office-title">渋谷オフィス</h3>
+                <p className="ab-office-addr">
+                  〒150-0002<br />
+                  東京都渋谷区渋谷2-12-4<br />
+                  ネクストサイト渋谷ビル
+                </p>
+                <p className="ab-office-note">日常業務・開発の拠点です。お打ち合わせ等はこちらのオフィスで行っています。</p>
+                <a
+                  href="https://maps.app.goo.gl/rcynVB51VzSwQpDb8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ab-map-link"
+                >
+                  <span>Googleマップで見る</span>
+                  <span className="ab-map-arrow" aria-hidden="true">→</span>
+                </a>
               </div>
             </div>
           </div>
