@@ -50,6 +50,8 @@ const nextConfig = {
       { pathname: '/webinars/**' },
       // Allow public/team/* (speaker headshots)
       { pathname: '/team/**' },
+      // Allow public/event/* (MarkeZine etc. event banners)
+      { pathname: '/event/**' },
     ],
   },
   async redirects() {

@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Footer from "@/app/components/Footer";
 const HubSpotMeetingModal = dynamic(() => import("@/app/components/HubSpotMeetingModal"), { ssr: false });
-const HubSpotModal = dynamic(() => import("@/app/components/HubSpotModal"), { ssr: false });
 
 type CaseCard = {
   slug: string;
@@ -50,13 +49,17 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 .event-meta-item strong{color:var(--heading);font-weight:700}
 .event-meta-divider{width:1px;height:14px;background:var(--border)}
 
-/* HERO STATS */
-.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:680px;margin:48px auto 0}
-.hero-stat{padding:24px 16px;background:rgba(255,255,255,.85);border:1px solid var(--border);border-radius:16px;text-align:center;backdrop-filter:blur(12px)}
-.hero-stat-num{font-size:44px;font-weight:900;line-height:1;letter-spacing:-.02em;background:linear-gradient(135deg,var(--cta),#0fc19a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-.hero-stat-num.alt{background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-stat-num.alt2{background:linear-gradient(135deg,var(--blue),#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-stat-label{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:.04em}
+/* EVENT BANNER — 澤野登壇の証拠 + Tier 2 思い出し補助 */
+.event-banner-wrap{max-width:760px;margin:0 auto 32px;border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 16px 40px -20px rgba(15,17,40,.18);background:#fff}
+.event-banner-img{display:block;width:100%;height:auto;object-fit:cover}
+
+/* NO RECORDING CALLOUT — hero 直下、最重要文脈 */
+.no-recording-callout{display:flex;gap:16px;align-items:flex-start;max-width:680px;margin:0 auto 32px;padding:20px 24px;background:#fff7e6;border:1.5px solid #f5d486;border-radius:14px;text-align:left;font-size:14px;line-height:1.75;color:#5b4419}
+.no-recording-callout strong{color:#7a5a14;display:block;margin-bottom:4px;font-size:15px;font-weight:800}
+.no-recording-icon{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#f5d486;color:#7a5a14;display:flex;align-items:center;justify-content:center}
+
+/* HERO CTA — スライドDLのみ、診断 CTA はここに出さない */
+.event-hero-cta{display:flex;justify-content:center;margin:0 auto 40px}
 
 /* CTA buttons (shared) */
 .btn{padding:14px 24px;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;line-height:1}
@@ -66,26 +69,29 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 .btn-outline:hover{background:var(--cta-light)}
 .btn-arrow{font-size:18px;line-height:1}
 
-/* OFFERS */
-.offers-section{padding:80px 24px;background:#fff}
-.offers-inner{max-width:1080px;margin:0 auto}
-.offers-title{text-align:center;font-size:30px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.01em}
-.offers-subtitle{text-align:center;color:var(--sub);font-size:15px;margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
-.offers-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;max-width:880px;margin:0 auto}
-@media (max-width:880px){.offers-grid{grid-template-columns:1fr;max-width:520px}}
-.offer-card{padding:36px 32px;background:#fff;border:1.5px solid var(--border);border-radius:18px;display:flex;flex-direction:column;gap:18px;transition:all .25s;position:relative;overflow:hidden}
-.offer-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 20px 40px -12px rgba(124,92,252,.12)}
-.offer-card.primary{background:linear-gradient(135deg,#1a1d3a 0%,#0f1128 100%);color:#fff;border-color:#0f1128}
-.offer-card.primary:hover{border-color:var(--cta-hover);box-shadow:0 24px 48px -12px rgba(18,163,125,.25)}
-.offer-card.primary .offer-h{color:#fff}
-.offer-card.primary .offer-desc{color:#c8cedf}
-.offer-icon-wrap{width:52px;height:52px;border-radius:13px;background:var(--cta-light);color:var(--cta);display:flex;align-items:center;justify-content:center}
-.offer-card.primary .offer-icon-wrap{background:rgba(18,163,125,.18);color:#0fc19a}
-.offer-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--cta);color:#fff;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.06em;width:fit-content}
-.offer-h{font-size:22px;font-weight:800;color:var(--heading);line-height:1.4;letter-spacing:-.005em}
-.offer-desc{font-size:14px;color:var(--sub);line-height:1.8;flex:1}
-.offer-card.primary .offer-cta{background:var(--cta);color:#fff}
-.offer-card.primary .offer-cta:hover{background:var(--cta-hover)}
+/* SLIDES (anchor target) */
+.slides-section{padding:80px 24px;background:#fff}
+.slides-inner{max-width:880px;margin:0 auto}
+.slides-title{text-align:center;font-size:30px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.01em}
+.slides-subtitle{text-align:center;color:var(--sub);font-size:15px;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
+.slides-card{display:flex;gap:24px;align-items:center;padding:32px 32px;background:linear-gradient(135deg,#1a1d3a 0%,#0f1128 100%);color:#fff;border-radius:18px;flex-wrap:wrap}
+.slides-card-icon{width:64px;height:64px;border-radius:14px;background:rgba(18,163,125,.18);color:#0fc19a;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.slides-card-body{flex:1;min-width:200px}
+.slides-card-h{font-size:18px;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px;letter-spacing:-.005em}
+.slides-card-desc{font-size:13px;color:#c8cedf;line-height:1.7}
+
+/* LOSS (商談化ロス 5 つ) */
+.loss-section{padding:88px 24px;background:#fff}
+.loss-inner{max-width:1080px;margin:0 auto}
+.loss-title{text-align:center;font-size:30px;font-weight:800;color:var(--heading);margin-bottom:10px;letter-spacing:-.01em}
+.loss-subtitle{text-align:center;color:var(--sub);font-size:15px;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
+.loss-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:880px;margin:0 auto}
+@media (max-width:880px){.loss-grid{grid-template-columns:1fr;max-width:520px}}
+.loss-item{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;background:#fef6f6;border:1.5px solid #f5d4d4;border-radius:14px;font-size:14px;color:var(--heading);line-height:1.7;font-weight:700}
+.loss-item-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#e0475b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900}
+.loss-item-text{flex:1}
+.loss-item-text strong{display:block;color:var(--heading);font-weight:800;font-size:15px;margin-bottom:4px}
+.loss-item-text span{font-weight:500;font-size:13px;color:var(--sub);line-height:1.7}
 
 /* RECAP (Session 3 points) */
 .recap-section{padding:88px 24px;background:var(--surface)}
@@ -113,7 +119,8 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 .feature-card:hover{transform:translateY(-4px);border-color:transparent;box-shadow:0 18px 40px -16px rgba(0,0,0,.12)}
 .feature-card:hover::before{opacity:1}
 .feature-icon{width:48px;height:48px;border-radius:12px;background:var(--feat-bg);color:var(--feat-color);display:flex;align-items:center;justify-content:center}
-.feature-name{font-size:17px;font-weight:800;color:var(--heading);line-height:1.3;letter-spacing:-.005em}
+.feature-product-name{font-size:11px;color:var(--feat-color);font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:-6px}
+.feature-name{font-size:17px;font-weight:800;color:var(--heading);line-height:1.4;letter-spacing:-.005em}
 .feature-sub{font-size:13px;color:var(--sub);line-height:1.7;flex:1}
 .feature-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--border)}
 .feature-list li{font-size:12px;color:var(--text);font-weight:600;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
@@ -180,15 +187,6 @@ const IconSparkle = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
-const IconRocket = ({ size = 22 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
-    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-  </svg>
-);
-
 const IconChat = ({ size = 22 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -234,8 +232,9 @@ const IconArrowRight = ({ size = 16 }: { size?: number }) => (
 const FEATURES = [
   {
     key: "calendar",
-    name: "Meeton Calendar",
-    sub: "コンバージョン直後 5 秒で商談予約を提示。フォーム送信・サンクスページ・メール経由で発動。",
+    name: "日程調整までスムーズにつなげる",
+    productName: "Meeton Calendar",
+    sub: "コンバージョン直後 5 秒で商談予約を提示。資料請求後の初動対応の遅れを解消する。",
     bullets: ["フォーム送信直後の即時提示", "サンクスページ埋め込み", "営業日程の自動最適化"],
     color: "#0891b2",
     bg: "rgba(8,145,178,.10)",
@@ -243,8 +242,9 @@ const FEATURES = [
   },
   {
     key: "email",
-    name: "Meeton Email",
-    sub: "即時予約しなかったリードを 1:1 で追跡。AI が動的に内容・タイミングを判断するもう一人の SDR。",
+    name: "CRM や営業活動に引き継ぐ",
+    productName: "Meeton Email",
+    sub: "即時予約しなかったリード・CRM に眠るリードを 1:1 で追跡。AI が動的にナーチャリング。",
     bullets: ["1:1 動的シーケンス", "返信内容に応じた分岐", "商談化までナーチャリング"],
     color: "#7c5cfc",
     bg: "rgba(124,92,252,.10)",
@@ -252,8 +252,9 @@ const FEATURES = [
   },
   {
     key: "live",
-    name: "Meeton Live",
-    sub: "再訪した識別済みリードに過去全文脈を引き継いで AI SDR が即時応答。その場で商談予約まで完結。",
+    name: "その場で会話・質問対応する",
+    productName: "Meeton Live",
+    sub: "再訪した識別済みリードに過去全文脈を引き継いで AI SDR が即時応答。問い合わせ前の高意欲ユーザーを逃さない。",
     bullets: ["訪問者を即時識別", "過去会話の継続対応", "ラストワンマイル対話"],
     color: "#12a37d",
     bg: "rgba(18,163,125,.10)",
@@ -261,8 +262,9 @@ const FEATURES = [
   },
   {
     key: "library",
-    name: "Meeton Library",
-    sub: "既存リードに AI が文脈に応じた資料を提案・解説。検討再開タイミングで Meeton Calendar に引き渡し。",
+    name: "Web 上の高意欲ユーザーを見つける",
+    productName: "Meeton Library",
+    sub: "価格・事例ページ閲覧者など、フォーム前の高温度サインを識別。AI が文脈に応じた資料を提案。",
     bullets: ["文脈に応じた資料提案", "AI による解説対応", "Calendar への自動引継ぎ"],
     color: "#d03ea1",
     bg: "rgba(208,62,161,.10)",
@@ -270,19 +272,10 @@ const FEATURES = [
   },
 ];
 
-const _utm = (content: string) =>
-  `?utm_source=markezine&utm_medium=event&utm_campaign=markezine_day_2026&utm_content=${content}`;
-
 export default function MarkezineDayClient({ cases }: Props) {
   const [meetingOpen, setMeetingOpen] = useState(false);
-  const [formOpen, setFormOpen] = useState(false);
-  const [formCampaign, setFormCampaign] = useState("markezine_day_2026");
 
   const openConsultation = () => setMeetingOpen(true);
-  const openTrial = () => {
-    setFormCampaign("markezine_day_2026_trial");
-    setFormOpen(true);
-  };
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
@@ -319,7 +312,7 @@ export default function MarkezineDayClient({ cases }: Props) {
             letterSpacing: "0.06em",
           }}
         >
-          MarkeZine Day 2026
+          MarkeZine Day 2026 登壇内容まとめ
         </div>
       </header>
 
@@ -328,31 +321,47 @@ export default function MarkezineDayClient({ cases }: Props) {
         <div className="event-hero-inner">
           <div className="event-eyebrow">
             <IconSparkle />
-            <span>MarkeZine Day 2026 視聴者限定特典</span>
+            <span>MarkeZine Day 2026 登壇内容まとめ</span>
           </div>
           <h1 className="event-h1">
-            ウェブサイトのリードを、<br />
-            <strong>5 秒で商談に変える</strong>
+            「リードは来ているのに、<br />
+            商談にならない」を<strong>分解する</strong>
           </h1>
           <p className="event-sub">
-            「AI SDR が変える BtoB 営業の新常識」へのご関心ありがとうございました。
-            登壇内容を実際の自社サイトで試せる環境を、
-            ご登録者の皆様に <strong style={{ color: "var(--heading)" }}>30 日間無料</strong> でご提供します。
+            MarkeZine Day 2026 Online「AI SDR が変える BtoB 営業の新常識」での
+            DynaMeet 登壇内容を、ページにまとめました。
           </p>
 
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <div className="hero-stat-num">5秒</div>
-              <div className="hero-stat-label">Speed to Lead</div>
+          <div className="event-banner-wrap">
+            <Image
+              src="/event/markezine-day-2026/event-banner.webp"
+              alt="MarkeZine Day 2026 Online｜AI SDR が変える BtoB 営業の新常識 — DynaMeet 澤野登壇 告知画像"
+              width={1950}
+              height={989}
+              priority
+              sizes="(max-width: 880px) 100vw, 760px"
+              className="event-banner-img"
+            />
+          </div>
+
+          <div className="no-recording-callout">
+            <div className="no-recording-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
             </div>
-            <div className="hero-stat">
-              <div className="hero-stat-num alt">1:1</div>
-              <div className="hero-stat-label">AI ナーチャリング</div>
+            <div>
+              <strong>本セッションは録画共有がない形式です。</strong>
+              当日お話しした要点と登壇スライド、自社サイトで確認すべき商談化ロスのポイントをこちらにまとめました。
             </div>
-            <div className="hero-stat">
-              <div className="hero-stat-num alt2">30日</div>
-              <div className="hero-stat-label">無料トライアル</div>
-            </div>
+          </div>
+
+          <div className="event-hero-cta">
+            <a className="btn btn-primary" href="#slides">
+              登壇スライドをダウンロード <IconArrowRight />
+            </a>
           </div>
 
           <div className="event-meta">
@@ -374,92 +383,127 @@ export default function MarkezineDayClient({ cases }: Props) {
         </div>
       </section>
 
-      {/* Offers */}
-      <section className="offers-section">
-        <div className="offers-inner">
-          <h2 className="offers-title">視聴者限定オファー</h2>
-          <p className="offers-subtitle">
-            「まず実運用で試す」が最短ルート。判断に迷う場合は個別相談もご用意しています。
+      {/* Slides DL section (anchor target) */}
+      <section className="slides-section" id="slides">
+        <div className="slides-inner">
+          <h2 className="slides-title">登壇スライド</h2>
+          <p className="slides-subtitle">
+            当日お話しした内容のスライドを PDF でご覧いただけます。
           </p>
-          <div className="offers-grid">
-            {/* Primary: 30日トライアル */}
-            <div className="offer-card primary">
-              <div className="offer-icon-wrap">
-                <IconRocket />
-              </div>
-              <span className="offer-tag">通常 14 日 → 30 日に延長</span>
-              <h3 className="offer-h">30 日間 無料トライアル</h3>
-              <p className="offer-desc">
-                カード情報不要、全機能利用可能、初期設定の無料サポート付。
-                Meeton Calendar / Email / Live / Library を実運用で体感してください。
-              </p>
-              <button className="btn btn-primary offer-cta" onClick={openTrial}>
-                無料で始める <IconArrowRight />
-              </button>
+          <div className="slides-card">
+            <div className="slides-card-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
             </div>
-
-            {/* Secondary: 30分相談 */}
-            <div className="offer-card">
-              <div className="offer-icon-wrap">
-                <IconChat />
-              </div>
-              <h3 className="offer-h">まずは相談したい方へ</h3>
-              <p className="offer-desc">
-                30 分 AI SDR 戦略相談（無料）。
-                澤野が直接、貴社の営業課題に合わせた導入ステップをご提案します。
-                ご質問だけでも歓迎です。
+            <div className="slides-card-body">
+              <h3 className="slides-card-h">AI SDR が変える BtoB 営業の新常識</h3>
+              <p className="slides-card-desc">
+                MarkeZine Day 2026 Online｜DynaMeet 澤野登壇スライド (PDF)
               </p>
-              <button className="btn btn-outline" onClick={openConsultation}>
-                相談を予約する <IconArrowRight />
-              </button>
             </div>
+            <a className="btn btn-primary" href="/downloads/markezine-day-2026-slides.pdf" target="_blank" rel="noopener">
+              スライドをダウンロード <IconArrowRight />
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Session Recap */}
+      {/* Session Recap — 商談化ロス文脈に書き換え */}
       <section className="recap-section">
         <div className="recap-inner">
-          <h2 className="recap-title">セッションでお伝えした 3 つのポイント</h2>
+          <h2 className="recap-title">当日の要点 3 つ</h2>
           <p className="recap-subtitle">
-            登壇内容のエッセンスを、すぐに自社で実装に移せる粒度で整理しました。
+            「リードは来ているのに、商談にならない」を分解する 3 つの視点。
           </p>
           <div className="recap-grid">
             <div className="recap-card">
               <div className="recap-num">1</div>
-              <h3 className="recap-h">AI SDR とは何か</h3>
+              <h3 className="recap-h">リード対応の遅れが、商談化率を下げる</h3>
               <p className="recap-p">
-                従来の SDR 業務（リード対応・初期接触・商談設定）を AI エージェントが
-                24 時間 365 日、Speed to Lead の業界標準 5 分の 1/60 — 5 秒で処理する仕組み。
+                資料請求・問い合わせ・チャット — リードが「興味を持った瞬間」を逃すと、
+                温度は急速に下がる。商談化の歩留まりは、最初の数分で 8 割決まる。
               </p>
             </div>
             <div className="recap-card">
               <div className="recap-num">2</div>
-              <h3 className="recap-h">AI SDR 導入の実践知見</h3>
+              <h3 className="recap-h">AI SDR は、問い合わせ前後の "空白時間" を埋める</h3>
               <p className="recap-p">
-                EdulinX 様で商談化率 60% を達成。設計のコツは「AI に任せる範囲」と
-                「人が介在する場面」の境界線設計。
+                24 時間 365 日、リードが現れたその瞬間に、AI が会話・ヒアリング・
+                資料提案・日程調整までシームレスに完結。人だけで全リードに即時対応する負担を消す。
               </p>
             </div>
             <div className="recap-card">
               <div className="recap-num">3</div>
-              <h3 className="recap-h">AI 時代の営業組織</h3>
+              <h3 className="recap-h">人間 SDR は、より高温度な商談に集中できる</h3>
               <p className="recap-p">
-                人間 SDR を AI に置き換える話ではなく、人がより高付加価値な仕事に
-                集中できる構造への移行。
+                AI が温度高いリードだけを商談まで引き上げ、人が向き合うのは "勝てる商談" だけ。
+                AI に置き換える話ではなく、人がより高付加価値な仕事に集中できる構造への移行。
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2026-05-19: 全サイト整合で 4 機能 → 3 主要機能 + Library 補助に修正 */}
+      {/* よくある商談化ロス 5 つ */}
+      <section className="loss-section">
+        <div className="loss-inner">
+          <h2 className="loss-title">よくある商談化ロス 5 つ</h2>
+          <p className="loss-subtitle">
+            BtoB サイトでリードを取れているのに商談化しない企業に、共通して見られる 5 つのロス。
+            自社で当てはまるものがないか、チェックしてみてください。
+          </p>
+          <div className="loss-grid">
+            <div className="loss-item">
+              <div className="loss-item-icon">1</div>
+              <div className="loss-item-text">
+                <strong>資料請求後の初動対応が遅い</strong>
+                <span>1 時間以内に接触できないリードは、商談化率が 1/10 まで下がる。</span>
+              </div>
+            </div>
+            <div className="loss-item">
+              <div className="loss-item-icon">2</div>
+              <div className="loss-item-text">
+                <strong>価格・事例ページ閲覧者を追えていない</strong>
+                <span>高温度サインを出している匿名訪問者を識別・接触する仕組みがない。</span>
+              </div>
+            </div>
+            <div className="loss-item">
+              <div className="loss-item-icon">3</div>
+              <div className="loss-item-text">
+                <strong>CRM に溜まったリードが放置されている</strong>
+                <span>過去問合せ・名刺交換・ウェビナー登録の数千件が眠ったまま動かない。</span>
+              </div>
+            </div>
+            <div className="loss-item">
+              <div className="loss-item-icon">4</div>
+              <div className="loss-item-text">
+                <strong>問い合わせ前の高意欲ユーザーに接触できていない</strong>
+                <span>「問い合わせ」する前に競合に流れている。フォーム前の接点がない。</span>
+              </div>
+            </div>
+            <div className="loss-item">
+              <div className="loss-item-icon">5</div>
+              <div className="loss-item-text">
+                <strong>営業が Hot リードを優先できていない</strong>
+                <span>温度判定の仕組みがなく、全リードを均等に追って勝てる商談を逃す。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 商談化ロスを減らすために必要な 4 つの仕組み (旧: Meeton ai 4 機能) */}
       <section className="features-section">
         <div className="features-inner">
-          <h2 className="features-title">Meeton ai の 3 つの AI 機能</h2>
+          <h2 className="features-title">商談化ロスを減らすために必要な 4 つの仕組み</h2>
           <p className="features-subtitle">
-            話しかける → 商談を取る → 追いかける。3 つの AI が連動して
-            24 時間自動で実行します。
+            Web 上の高意欲ユーザーを見つける → 会話・質問対応 → 日程調整 → 営業引継ぎ。
+            Meeton ai では、これらを AI SDR の仕組みとして提供しています。
           </p>
           <div className="features-grid">
             {FEATURES.map((f) => (
@@ -469,6 +513,7 @@ export default function MarkezineDayClient({ cases }: Props) {
                 style={{ ["--feat-color" as string]: f.color, ["--feat-bg" as string]: f.bg } as React.CSSProperties}
               >
                 <div className="feature-icon">{f.icon}</div>
+                <div className="feature-product-name">{f.productName}</div>
                 <h3 className="feature-name">{f.name}</h3>
                 <p className="feature-sub">{f.sub}</p>
                 <ul className="feature-list">
@@ -529,20 +574,17 @@ export default function MarkezineDayClient({ cases }: Props) {
         </section>
       )}
 
-      {/* Closing CTA */}
+      {/* Closing CTA — 30 分診断のみ */}
       <section className="cta-section">
         <div className="cta-inner">
-          <h2 className="cta-h">AI SDR の導入を、最短最速で。</h2>
+          <h2 className="cta-h">貴社サイトの商談化ロスを、30 分で診断します。</h2>
           <p className="cta-p">
-            ご視聴後の次の一歩として、ぜひ視聴者特典をご活用ください。
-            ご質問・ご相談は澤野が直接対応いたします。
+            貴社サイトやリード対応フローに当てはめて、どこで商談化ロスが起きているかを 30 分で整理します。
+            導入前提ではなく、改善余地の確認だけでも歓迎です。
           </p>
           <div className="cta-buttons">
-            <button className="btn btn-primary" onClick={openTrial}>
-              30 日間 無料トライアル <IconArrowRight />
-            </button>
-            <button className="btn btn-outline" onClick={openConsultation}>
-              30 分 相談を予約する <IconArrowRight />
+            <button className="btn btn-primary" onClick={openConsultation}>
+              30 分 商談化ロス診断を予約する <IconArrowRight />
             </button>
           </div>
         </div>
@@ -554,11 +596,6 @@ export default function MarkezineDayClient({ cases }: Props) {
         isOpen={meetingOpen}
         onClose={() => setMeetingOpen(false)}
         utmCampaign="markezine_day_2026"
-      />
-      <HubSpotModal
-        isOpen={formOpen}
-        onClose={() => setFormOpen(false)}
-        utmCampaign={formCampaign}
       />
     </div>
   );
