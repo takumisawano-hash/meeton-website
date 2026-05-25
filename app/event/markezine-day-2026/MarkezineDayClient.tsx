@@ -190,6 +190,21 @@ body{background:var(--bg);color:var(--text);font-family:'Hiragino Sans','Yu Goth
 .marketer-conclusion{text-align:center;font-size:16px;color:#e2e6f3;line-height:1.9;max-width:680px;margin:0 auto;font-weight:600}
 .marketer-conclusion strong{color:#0fc19a;font-weight:800}
 
+/* CASE HIGHLIGHTS bar — 信頼補強の数字を一目で */
+.case-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin:0 auto 40px}
+@media (max-width:880px){.case-highlights{grid-template-columns:1fr;max-width:480px}}
+.case-highlight{padding:22px 20px;background:#fff;border:1.5px solid var(--cta);border-radius:14px;display:flex;flex-direction:column;gap:6px;text-align:center}
+.case-highlight-num{font-size:34px;font-weight:900;color:var(--cta);line-height:1;letter-spacing:-.02em}
+.case-highlight-label{font-size:13px;color:var(--text);font-weight:600;line-height:1.55}
+.case-highlight-label strong{color:var(--heading);font-weight:800;display:inline}
+
+/* CTA CHECKLIST — 「30 分診断で確認すること」 */
+.cta-checklist{max-width:560px;margin:0 auto 36px;padding:24px 28px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:14px;backdrop-filter:blur(12px);text-align:left}
+.cta-checklist-title{font-size:12px;font-weight:800;letter-spacing:.14em;color:#0fc19a;text-transform:uppercase;margin-bottom:14px}
+.cta-checklist-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.cta-checklist-list li{font-size:14px;color:#e2e6f3;font-weight:600;line-height:1.65;padding-left:24px;position:relative}
+.cta-checklist-list li::before{content:'✓';position:absolute;left:0;top:0;color:#0fc19a;font-weight:900}
+
 /* FEATURE axis tag */
 .feature-axis-tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 10px;background:var(--feat-bg);color:var(--feat-color);border-radius:100px;width:fit-content;margin-bottom:-2px}
 
@@ -675,9 +690,22 @@ export default function MarkezineDayClient({ cases }: Props) {
             <div className="part-label center">PART 03 / CASE STUDIES</div>
             <h2 className="cases-title">登壇で紹介した事例</h2>
             <p className="cases-subtitle">
-              EdulinX 様で商談化率 60%+ (業界平均 20% / 同社全体 23% の約 3 倍)。<br />
-              Univis Group 様で 3 ヶ月 2 件受注 + 商談数約 2 倍。
+              実績は一目で。詳細は各事例カードからご覧いただけます。
             </p>
+            <div className="case-highlights">
+              <div className="case-highlight">
+                <div className="case-highlight-num">60%+</div>
+                <div className="case-highlight-label"><strong>EdulinX</strong>｜Meeton ai 経由 商談化率</div>
+              </div>
+              <div className="case-highlight">
+                <div className="case-highlight-num">約 2×</div>
+                <div className="case-highlight-label"><strong>Univis</strong>｜商談数 増加 (3 ヶ月で 2 件受注)</div>
+              </div>
+              <div className="case-highlight">
+                <div className="case-highlight-num">20×+</div>
+                <div className="case-highlight-label"><strong>BizteX</strong>｜チャット経由リード</div>
+              </div>
+            </div>
             <div className="cases-grid">
               {cases.map((c) => (
                 <Link key={c.slug} href={`/case-studies/${c.slug}/`} className="case-card">
@@ -799,6 +827,14 @@ export default function MarkezineDayClient({ cases }: Props) {
             貴社のウェブサイト・リード対応フロー・CRM 運用をもとに、AI SDR で改善できる領域を 30 分で整理します。
             導入前提ではなく、まずは商談化プロセスの改善余地を確認する場としてご利用ください。
           </p>
+          <div className="cta-checklist">
+            <div className="cta-checklist-title">30 分診断で確認すること</div>
+            <ul className="cta-checklist-list">
+              <li>現在のリード対応フローで、どこに商談化ロスがあるか</li>
+              <li>AI SDR で自動化できる領域と、人間が担うべき領域</li>
+              <li>Meeton ai を使う場合の導入優先順位</li>
+            </ul>
+          </div>
           <div className="cta-buttons">
             <button className="btn btn-primary" onClick={openConsultation}>
               30 分 AI SDR 活用診断を予約する <IconArrowRight />
@@ -807,7 +843,7 @@ export default function MarkezineDayClient({ cases }: Props) {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideDiscoverGrid />
 
       <HubSpotMeetingModal
         isOpen={meetingOpen}
