@@ -28,7 +28,7 @@ const HIGH_INTENT_PATTERNS: RegExp[] = [/^\/case-studies\/[^/]+/]
 // showing it on the same page is both confusing and self-defeating.
 // 2026-05-19: /roi-simulator/ 撤去後はその除外も不要だが、historical
 // 301 redirect 経由のセッションでも overlay 出さないため残しておく。
-const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/', '/roi-simulator', '/webinar']
+const EXCLUDED_PREFIXES = ['/integrations', '/talent', '/careers', '/lp', '/blog/category', '/blog/tag', '/ja/', '/roi-simulator', '/webinar', '/event']
 
 const SCROLL_THRESHOLD = 0.3
 const TIME_THRESHOLD_MS = 30_000
