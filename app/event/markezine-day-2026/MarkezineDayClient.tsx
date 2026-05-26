@@ -849,6 +849,8 @@ export default function MarkezineDayClient({ cases }: Props) {
         isOpen={meetingOpen}
         onClose={() => setMeetingOpen(false)}
         utmCampaign="markezine_day_2026"
+        title="DynaMeet 30 分診断"
+        subtitle="MarkeZine ご参加ありがとうございます。30 分で貴社のリード商談化のロスを整理します"
       />
     </div>
   );

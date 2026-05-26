@@ -7,6 +7,8 @@ type HubSpotMeetingModalProps = {
   isOpen: boolean
   onClose: () => void
   utmCampaign?: string
+  title?: string
+  subtitle?: string
 }
 
 // Link hints (preconnect + prefetch) are only added once the modal is
@@ -26,7 +28,13 @@ function addHubSpotMeetingHints() {
   document.head.appendChild(preconnect)
 }
 
-export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: HubSpotMeetingModalProps) {
+export default function HubSpotMeetingModal({
+  isOpen,
+  onClose,
+  utmCampaign,
+  title = 'デモを予約',
+  subtitle = 'ご都合の良い日時をお選びください',
+}: HubSpotMeetingModalProps) {
   const baseUrl = 'https://meetings-na2.hubspot.com/takumi-sawano'
   const utmParams = utmCampaign
     ? `utm_source=website&utm_medium=cta&utm_campaign=${utmCampaign}`
@@ -152,10 +160,10 @@ export default function HubSpotMeetingModal({ isOpen, onClose, utmCampaign }: Hu
               marginBottom: 4,
             }}
           >
-            デモを予約
+            {title}
           </h2>
           <p style={{ fontSize: 14, color: '#6e7494' }}>
-            ご都合の良い日時をお選びください
+            {subtitle}
           </p>
         </div>
         {booked ? (
