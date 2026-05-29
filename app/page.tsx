@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
   },
   description:
-    'Meeton ai は、Webサイトに配属する AI SDR Platform。会話・資料提案・予約・追客を自律でこなし、問い合わせ前から追客まであらゆる瞬間を商談に変えます。無料で開始（クレジットカード不要）。',
+    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層に会話で踏み込み、資料提案・予約・追客まで自律でこなして、獲得から商談化まであらゆる瞬間を商談に変えます。無料で開始（クレジットカード不要）。',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
     description:
-      '会話・資料提案・予約・追客を自律でこなす4つのAIモジュール。問い合わせを待つWebサイトを、商談を生み出すAI営業チャネルへ。無料で開始。',
+      '訪問者は去り、リードは商談にならない。「待つ」Webサイトを、商談を生み出すAI営業チャネルへ。潜在層の獲得から追客までを自律でこなす AI SDR。無料で開始。',
     url: 'https://dynameet.ai',
     type: 'website',
   },

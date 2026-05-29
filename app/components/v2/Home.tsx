@@ -39,7 +39,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
       <Section tone="navy" py={0} style={{ paddingTop: 128, paddingBottom: 40 }}>
         <div style={{ maxWidth: 880 }}>
           <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--cta)" }}>
-            リードは増えた。でも、商談は増えていない。
+            訪問者は去り、リードは商談にならない。
           </p>
           <h1
             style={{
@@ -52,12 +52,12 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
               margin: "16px 0 0",
             }}
           >
-            問い合わせを待つWebサイトから、<br />
+            「待つ」Webサイトから、<br />
             <span style={{ color: "var(--cta)" }}>商談を生み出す</span>AI営業チャネルへ。
           </h1>
           <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 720 }}>
-            Meeton ai は、Webサイトに配属する AI SDR。会話・資料提案・予約・追客を自律でこなし、
-            問い合わせ前から追客まで、あらゆる瞬間を商談に変えます。
+            Meeton ai は、Webサイトに配属する AI SDR。問い合わせ前の潜在層に会話で踏み込み、
+            資料提案・予約・追客まで自律でこなして、あらゆる瞬間を商談に変えます。
           </p>
           <CTAButtons source="home-hero" tone="onNavy" size="lg" />
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 20, fontSize: 13, color: "var(--on-navy-sub)" }}>
@@ -92,21 +92,38 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </div>
       </Section>
 
-      {/* 3. Why — problem truth */}
+      {/* 3. Why — two-stage problem truth (acquisition gap + conversion gap) */}
       <Section tone="white">
         <SectionHead
-          eyebrow="なぜ商談にならないのか"
-          title="商談は、接触前から始まっている。"
-          lede="B2Bの買い手は、購買プロセスの約70%を営業に接触する前に独力で進めます（Gartner/6sense）。なのに大半の企業は、その間ずっと「待っている」だけ。リードが商談にならないのは、数の問題ではありません。"
+          eyebrow="なぜ商談機会を逃すのか"
+          title="機会は、入口でも出口でも漏れている。"
+          lede="B2Bの買い手は購買プロセスの約70%を、営業に接触する前に独力で進めます（Gartner/6sense）。多くの企業はその間ずっと「待っている」だけ——獲得の前で大半が去り、獲得した後も大半が商談にならない。"
         />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           {[
-            { t: "初動が遅い", d: "リード発生から接触まで数時間〜数日。最も熱い瞬間を逃している。" },
-            { t: "一度で諦める", d: "すぐ予約しなかったリードを、そのまま冷ましている。追う粘りがない。" },
-            { t: "文脈がない", d: "過去の閲覧・会話・行動を引き継がず、毎回ゼロから。的を外す。" },
+            {
+              tag: "入口 — 獲得の穴",
+              stat: "99%",
+              t: "訪問者の大半は、リードにすらならず去る。",
+              d: "フォームに辿り着くのは1%未満。残りは匿名のまま、何も残さず黙って離脱していく。",
+            },
+            {
+              tag: "出口 — 商談化の穴",
+              stat: "—",
+              t: "集めたリードも、商談にならない。",
+              d: "初動の遅さ・追客の粘りのなさ・文脈の欠如で、せっかく獲得したリードが冷えていく。",
+            },
           ].map((p) => (
-            <Card key={p.t}>
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{p.t}</h3>
+            <Card key={p.tag} style={{ padding: 28 }}>
+              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, letterSpacing: ".06em", color: "var(--cta-ink)", marginBottom: 14 }}>
+                {p.tag}
+              </div>
+              {p.stat !== "—" && (
+                <div style={{ fontFamily: "var(--fd)", fontSize: 52, fontWeight: 800, color: "var(--heading)", lineHeight: 1, marginBottom: 12 }}>
+                  {p.stat}
+                </div>
+              )}
+              <h3 style={{ fontSize: 19, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{p.t}</h3>
               <p style={{ fontSize: 15, lineHeight: 1.8, color: "var(--text)", margin: 0 }}>{p.d}</p>
             </Card>
           ))}
