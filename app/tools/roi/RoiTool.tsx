@@ -66,8 +66,9 @@ export default function RoiTool() {
     };
   }, [visits, cvr, meetingRate]);
 
-  // result-tailored CTA: 大規模流入 → デモ寄り、それ以外 → 無料登録寄り
-  const enterpriseScale = visits >= 100000 || r.extraMeetings >= 50;
+  // result-tailored CTA: 大規模流入のみデモ寄り（席数/要件が絡むため）。
+  // 規模はトラフィックで判定（試算商談数で判定すると小規模でも誤発火する）。
+  const enterpriseScale = visits >= 50000;
 
   const onCta = (kind: "signup" | "demo") => {
     track("roi_complete", {
