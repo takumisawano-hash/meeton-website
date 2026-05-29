@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Home from './components/v2/Home'
 import { getAllCaseStudies } from './lib/case-studies'
+import { FEATURED_CASES } from './lib/featured-cases'
 
 export const revalidate = 3600
 
@@ -130,6 +131,10 @@ export default async function Page() {
   } catch {
     featured = []
   }
+  // Fallback to the static public cases when Notion returns nothing (e.g.
+  // preview deploys without the case-studies DB env) so the homepage proof
+  // section always renders.
+  if (featured.length === 0) featured = FEATURED_CASES
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }} />
