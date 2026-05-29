@@ -28,10 +28,10 @@ type NavProps = {
 type Item = { href: string; label: string; sub?: string };
 
 const PRODUCT_ITEMS: Item[] = [
-  { href: "/calendar", label: "Meeton Calendar", sub: "即フォローで商談化" },
-  { href: "/chat", label: "Meeton Chat", sub: "訪問者と対話し疑問解消" },
-  { href: "/library", label: "Meeton Library", sub: "資料共有 + 開封トラッキング" },
-  { href: "/email", label: "Meeton Email", sub: "1:1 自律フォロー" },
+  { href: "/calendar/", label: "Meeton Calendar", sub: "即フォローで商談化" },
+  { href: "/chat/", label: "Meeton Chat", sub: "訪問者と対話し疑問解消" },
+  { href: "/library/", label: "Meeton Library", sub: "資料共有 + 開封トラッキング" },
+  { href: "/email/", label: "Meeton Email", sub: "1:1 自律フォロー" },
 ];
 const PLATFORM_ITEM: Item = {
   href: "/",
@@ -39,22 +39,22 @@ const PLATFORM_ITEM: Item = {
   sub: "つなぐと一気通貫の AI SDR",
 };
 const SOLUTION_ROLES: Item[] = [
-  { href: "/solutions/cmo", label: "CMO / マーケ責任者" },
-  { href: "/solutions/cro", label: "CRO / 営業責任者" },
-  { href: "/solutions/sdr", label: "IS / SDR 責任者" },
-  { href: "/solutions/ceo", label: "経営者" },
+  { href: "/solutions/cmo/", label: "CMO / マーケ責任者" },
+  { href: "/solutions/cro/", label: "CRO / 営業責任者" },
+  { href: "/solutions/sdr/", label: "IS / SDR 責任者" },
+  { href: "/solutions/ceo/", label: "経営者" },
 ];
 const USE_MOMENTS: Item[] = [
-  { href: "/use-cases/pre-inquiry", label: "問い合わせ前" },
-  { href: "/use-cases/post-download", label: "資料 DL 後" },
-  { href: "/use-cases/revisit", label: "再訪問" },
-  { href: "/use-cases/nurture", label: "追客" },
+  { href: "/use-cases/pre-inquiry/", label: "問い合わせ前" },
+  { href: "/use-cases/post-download/", label: "資料 DL 後" },
+  { href: "/use-cases/revisit/", label: "再訪問" },
+  { href: "/use-cases/nurture/", label: "追客" },
 ];
 const RESOURCE_ITEMS: Item[] = [
   { href: "/blog/", label: "ブログ", sub: "獲得・商談化の実践知" },
-  { href: "/glossary/ai-sdr", label: "用語集", sub: "AI SDR とは ほか" },
-  { href: "/cases", label: "導入事例", sub: "成果が出たアカウント" },
-  { href: "/tools/roi", label: "ROI 診断", sub: "商談化の余地を試算" },
+  { href: "/glossary/ai-sdr/", label: "用語集", sub: "AI SDR とは ほか" },
+  { href: "/cases/", label: "導入事例", sub: "成果が出たアカウント" },
+  { href: "/tools/roi/", label: "ROI 診断", sub: "商談化の余地を試算" },
 ];
 
 function useIsMobile(breakpoint = 980) {
@@ -284,10 +284,10 @@ export default function Nav({
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
               <DesktopDropdownTrigger id="product" label="製品" />
               <DesktopDropdownTrigger id="usage" label="活用" />
-              <Link href="/cases" style={topLink(isActive("/cases"), linkColor)}>
+              <Link href="/cases/" style={topLink(isActive("/cases"), linkColor)}>
                 事例
               </Link>
-              <Link href="/pricing" style={topLink(isActive("/pricing"), linkColor)}>
+              <Link href="/pricing/" style={topLink(isActive("/pricing"), linkColor)}>
                 料金
               </Link>
               <DesktopDropdownTrigger id="resources" label="リソース" />
@@ -433,7 +433,7 @@ export default function Nav({
               ))}
             </MobileGroup>
             <MobileGroup title="リソース">
-              {[{ href: "/cases", label: "導入事例" }, { href: "/pricing", label: "料金" }, ...RESOURCE_ITEMS].map((it) => (
+              {[{ href: "/cases/", label: "導入事例" }, { href: "/pricing/", label: "料金" }, ...RESOURCE_ITEMS].map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}
             </MobileGroup>

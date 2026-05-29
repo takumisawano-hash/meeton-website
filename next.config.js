@@ -371,12 +371,12 @@ const nextConfig = {
       },
       {
         source: '/ai-sdr-sales-automation',
-        destination: '/features/ai-chat/',
+        destination: '/chat/',
         permanent: true,
       },
       {
         source: '/ai-sdr-sales-automation/',
-        destination: '/features/ai-chat/',
+        destination: '/chat/',
         permanent: true,
       },
       {
@@ -455,89 +455,35 @@ const nextConfig = {
         permanent: true,
       },
       ...blogRedirects,
-      // Old phase URLs → new product URLs
-      {
-        source: '/features/detect',
-        destination: '/features/ai-chat/',
-        permanent: true,
-      },
-      {
-        source: '/features/detect/',
-        destination: '/features/ai-chat/',
-        permanent: true,
-      },
-      {
-        source: '/features/engage',
-        destination: '/features/ai-chat/',
-        permanent: true,
-      },
-      {
-        source: '/features/engage/',
-        destination: '/features/ai-chat/',
-        permanent: true,
-      },
-      {
-        source: '/features/nurture',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/features/nurture/',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/features/convert',
-        destination: '/features/meetings/',
-        permanent: true,
-      },
-      {
-        source: '/features/convert/',
-        destination: '/features/meetings/',
-        permanent: true,
-      },
-      // Legacy URLs → new product URLs
-      {
-        source: '/features/chatbot',
-        destination: '/features/ai-chat/',
-        permanent: true,
-      },
-      {
-        source: '/features/chatbot/',
-        destination: '/features/ai-chat/',
-        permanent: true,
-      },
-      {
-        source: '/features/onsite',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/features/onsite/',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/features/offsite',
-        destination: '/features/meetings/',
-        permanent: true,
-      },
-      {
-        source: '/features/offsite/',
-        destination: '/features/meetings/',
-        permanent: true,
-      },
-      // 2026-05-08: AI Offer 廃止に伴うリダイレクト
-      {
-        source: '/features/offers',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/features/offers/',
-        destination: '/',
-        permanent: true,
-      },
+      // ── v2 restructure (2026-05-29): /features/* → root product LPs ──
+      // Direct 1:1 301s (no chains) preserve the 2yr authority on moved URLs.
+      { source: '/features/meetings', destination: '/calendar/', permanent: true },
+      { source: '/features/meetings/', destination: '/calendar/', permanent: true },
+      { source: '/features/ai-chat', destination: '/chat/', permanent: true },
+      { source: '/features/ai-chat/', destination: '/chat/', permanent: true },
+      { source: '/features/ai-library', destination: '/library/', permanent: true },
+      { source: '/features/ai-library/', destination: '/library/', permanent: true },
+      { source: '/features/ai-email', destination: '/email/', permanent: true },
+      { source: '/features/ai-email/', destination: '/email/', permanent: true },
+      { source: '/features', destination: '/', permanent: true },
+      { source: '/features/', destination: '/', permanent: true },
+      // legacy phase/alias paths → point straight at the final new URL
+      { source: '/features/detect', destination: '/chat/', permanent: true },
+      { source: '/features/detect/', destination: '/chat/', permanent: true },
+      { source: '/features/engage', destination: '/chat/', permanent: true },
+      { source: '/features/engage/', destination: '/chat/', permanent: true },
+      { source: '/features/chatbot', destination: '/chat/', permanent: true },
+      { source: '/features/chatbot/', destination: '/chat/', permanent: true },
+      { source: '/features/onsite', destination: '/chat/', permanent: true },
+      { source: '/features/onsite/', destination: '/chat/', permanent: true },
+      { source: '/features/nurture', destination: '/email/', permanent: true },
+      { source: '/features/nurture/', destination: '/email/', permanent: true },
+      { source: '/features/convert', destination: '/calendar/', permanent: true },
+      { source: '/features/convert/', destination: '/calendar/', permanent: true },
+      { source: '/features/offsite', destination: '/calendar/', permanent: true },
+      { source: '/features/offsite/', destination: '/calendar/', permanent: true },
+      { source: '/features/offers', destination: '/', permanent: true },
+      { source: '/features/offers/', destination: '/', permanent: true },
     ]
   },
 }

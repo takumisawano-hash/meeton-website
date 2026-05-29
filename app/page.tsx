@@ -1,29 +1,28 @@
 import type { Metadata } from 'next'
-import HomePageClient from './components/HomePageClient'
+import Home from './components/v2/Home'
 import { getAllCaseStudies } from './lib/case-studies'
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  // absolute: bypass the layout's '%s｜Meeton ai' template so the
-  // homepage title isn't appended with a second "Meeton ai".
   title: {
-    absolute: 'Meeton ai｜Web と CRM に眠る商談機会を、AI SDR が商談へ変える',
+    absolute: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
   },
-  description: 'Meeton ai は、Web 訪問者・資料 DL リード・再訪問者から、CRM に眠る既存リードまで、AI SDR が会話・資料提案・日程調整・追客を行い、あらゆる接点から商談機会を生み出す AI SDR Platform です。',
+  description:
+    'Meeton ai は、Webサイトに配属する AI SDR Platform。会話・資料提案・予約・追客を自律でこなし、問い合わせ前から追客まであらゆる瞬間を商談に変えます。無料で開始（クレジットカード不要）。',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Meeton ai｜Web と CRM に眠る商談機会を、AI SDR が商談へ変える',
-    description: 'Web 訪問者・資料 DL リード・再訪問者から、CRM に眠る既存リードまで、AI SDR が会話・資料提案・日程調整・追客を自動化。あらゆる接点から商談機会を生み出します。',
+    title: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
+    description:
+      '会話・資料提案・予約・追客を自律でこなす4つのAIモジュール。問い合わせを待つWebサイトを、商談を生み出すAI営業チャネルへ。無料で開始。',
     url: 'https://dynameet.ai',
     type: 'website',
   },
-  other: { "zoom-domain-verification": "ZOOM_verify_276c56f29d0b4de99f5f218f163582a7" },
+  other: { 'zoom-domain-verification': 'ZOOM_verify_276c56f29d0b4de99f5f218f163582a7' },
 }
 
-// FAQPage schema — primary target queries: "AI SDR とは", "AI SDR 比較",
-// "チャットボット vs AI SDR", "Inside Sales 自動化". Designed for AI search
-// engines (ChatGPT/Perplexity/Google AI Overviews) to extract as citations.
+// FAQPage schema — AEO target queries. Self-contained answers so
+// ChatGPT/Perplexity/AI Overviews can extract as citations (§4.12).
 const homepageFaqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -34,31 +33,31 @@ const homepageFaqSchema = {
       name: 'AI SDR とは何ですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'AI SDR（AI Sales Development Representative）とは、従来人間のSDRが担っていたリード獲得・初期ヒアリング・商談予約を自動化するAIシステムです。ウェブサイト訪問者と即時に会話し、温度感を判定し、適切なタイミングで商談を提案します。Meeton aiは日本のB2B市場向けに設計されたAI SDRプラットフォームです。',
+        text: 'AI SDR（AI Sales Development Representative）とは、従来人間のSDRが担っていた初期接触・ヒアリング・資料提案・商談予約・追客をAIが自律的に行うシステムです。Meeton ai は、Webサイトに配属する AI SDR Platform で、会話・資料提案・予約・追客の4つの仕事をこなし、問い合わせ前から追客まであらゆる瞬間を商談に変えます。',
       },
     },
     {
       '@type': 'Question',
-      name: 'Meeton ai は既存のチャットボットと何が違いますか？',
+      name: 'Meeton ai の4つのモジュールはそれぞれ何をしますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '従来のシナリオ型チャットボットは想定外の質問に対応できず、フォロー先も人間SDR頼みでした。Meeton aiは生成AIが文脈を理解し、過去の閲覧・ダウンロード・メール履歴を引き継いで自律的に会話。商談予約まで会話内で完結します。シナリオ設計は不要で、設置後5分から稼働します。',
+        text: 'Meeton Calendar はリードが動いた瞬間に商談予約まで運びます。Meeton Chat（Live）は接触前の検討の土台に立ち訪問者と対話して商談化します。Meeton Library は資料を共有しAIが解説して開封をトラッキングします。Meeton Email は予約しなかったリードを行動シグナルに基づき1:1で自律追客します。1製品から無料で始め、つなぐほど一気通貫のAI SDRになります。',
       },
     },
     {
       '@type': 'Question',
-      name: 'Speed to Lead（初動速度）がなぜ重要ですか？',
+      name: 'なぜ「接触前」が重要なのですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '業界一般に、リード発生から最初の接触まで数時間〜数日かかることが多く、その間に競合への移行や温度感低下が起きます。Meeton aiはリード発生の瞬間に5秒以内で応答し、商談予約を提示。初動速度の改善は商談化率に直接影響します。',
+        text: 'B2Bの買い手は購買プロセスの約70%を営業に接触する前に独力で進めるとされています（Gartner/6sense）。多くの企業はその間「待っている」だけで、初動の遅さ・追客の粘りのなさ・文脈の欠如により商談機会を逃しています。Meeton ai はこの接触前から動き、Speed（初動）・Persistence（粘り）・Context（文脈）で商談化を高めます。',
       },
     },
     {
       '@type': 'Question',
-      name: 'どのような企業に向いていますか？',
+      name: '無料で使えますか？料金体系は？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'SaaS・製造・専門サービス・フィンテック領域の日本のB2B企業（従業員100〜2000名規模）を主な対象としています。CMO・CRO・インサイドセールスマネージャーが、マーケティング起点の商談化率を改善したい場合に特に有効です。',
+        text: 'はい。Chat・Calendar・Library には無料ティアがあり、クレジットカード不要で始められます。単体Proは Chat ¥3万 / Library ¥3万 / Calendar ¥4万 / Email ¥5万（月・税抜）。全4機能込みのバンドルは Growth ¥12万 / Scale ¥20万 / Enterprise 要相談。4つ別々（合計¥15万）よりGrowthが¥3万お得です。',
       },
     },
     {
@@ -66,28 +65,21 @@ const homepageFaqSchema = {
       name: '既存のCRM・MAツールと連携できますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'HubSpot・SalesforceとネイティブCRM連携。Google Calendar・Zoomとカレンダー連携、Slack・Microsoft Teams・Google Chatに通知が届きます。Webhookによる他ツール連携も可能です。',
+        text: 'HubSpot・Salesforce とネイティブ連携し、会話ログや予約を自動登録します。Google Calendar・Outlook・Zoom とのカレンダー連携、Slack・Microsoft Teams・Google Chat への通知、Webhook による他ツール連携にも対応します。',
       },
     },
     {
       '@type': 'Question',
-      name: 'Meeton ai の 3 つの AI 機能はそれぞれ何をしますか？',
+      name: 'どのような企業に向いていますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Meeton Live はサイト訪問者と即時に会話して商談予約まで完結する AI チャット (話しかける役割)。Meeton Calendar はコンバート直後の最も関心の高い瞬間に商談予約を提示 (商談を取る役割)。Meeton Email は即時予約しなかったリードに 1:1 の AI が動的に追跡 (追いかける役割)。検討再開時の資料推薦は追加機能 Meeton Library が担います。',
+        text: 'SaaS・IT・製造・専門サービス・フィンテック領域の日本のB2B企業を主な対象としています。CMO・CRO・インサイドセールス/SDR責任者が、マーケティング起点の商談化率（Speed to Lead）を改善したい場合に特に有効です。無料ティアからセルフサーブで始められます。',
       },
     },
   ],
 }
 
-// SoftwareApplication schema — Meeton ai プラットフォーム全体。
-//
-// 2026-05-13: 以前は `@type: Product` で `offers` に `priceCurrency` のみ
-// 設定していたが、GSC が「販売者のリスティング」「商品スニペット」両方で
-// 重大エラーを出していた (Product/Offer は `price` 必須)。Meeton ai は
-// 公開価格を持たない B2B SaaS なので Product schema は誤適用だった。
-// SoftwareApplication なら `price` が任意でも合法、AI 検索向けの
-// citation 効果も保たれる。
+// SoftwareApplication schema — Meeton ai platform (price allowed optional).
 const homepageProductSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -98,70 +90,51 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    '日本のB2B企業向けAI SDRプラットフォーム。ウェブサイト訪問者・メール受信者・既存リードに対しAIが自律的に対話し、商談予約まで完結。Live (AIチャット) / Calendar (AI商談予約) / Email (AIフォロー) の3つのAI機能で構成。検討再開時の資料推薦は追加機能 Meeton Library。',
-  brand: {
-    '@type': 'Brand',
-    name: 'Meeton ai',
-  },
-  publisher: {
-    '@id': 'https://dynameet.ai/#organization',
-  },
+    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、会話・資料提案・予約・追客を自律化。Meeton Calendar / Chat / Library / Email の4モジュールで構成され、無料ティアから導入できる。',
+  brand: { '@type': 'Brand', name: 'Meeton ai' },
+  publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/',
   image: 'https://dynameet.ai/logo-dark.svg',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'JPY',
+    description: '無料ティアあり（クレジットカード不要）。単体Pro ¥3万〜、全機能バンドル Growth ¥12万/月（税抜）。',
+  },
   additionalProperty: [
-    {
-      '@type': 'PropertyValue',
-      name: '対応言語',
-      value: '日本語・英語・中国語・韓国語',
-    },
-    {
-      '@type': 'PropertyValue',
-      name: 'CRM連携',
-      value: 'HubSpot・Salesforce ネイティブ連携',
-    },
-    {
-      '@type': 'PropertyValue',
-      name: '設定時間',
-      value: 'JavaScriptタグ設置 約5分、シナリオ設計不要',
-    },
-    {
-      '@type': 'PropertyValue',
-      name: '対応市場',
-      value: '日本のB2B企業（従業員100〜2000名規模）',
-    },
-    {
-      '@type': 'PropertyValue',
-      name: 'モジュール構成',
-      value:
-        'Meeton Live（AIチャット）/ Meeton Email（AIメール）/ Meeton Calendar（AI商談予約）/ Meeton Library（AIコンテンツ）',
-    },
+    { '@type': 'PropertyValue', name: 'CRM連携', value: 'HubSpot・Salesforce ネイティブ連携' },
+    { '@type': 'PropertyValue', name: '設定時間', value: 'ノーコード（スニペット/アップロード/OAuth）' },
+    { '@type': 'PropertyValue', name: 'モジュール構成', value: 'Meeton Calendar / Chat / Library / Email' },
   ],
 }
 
 export default async function Page() {
-  const cases = await getAllCaseStudies()
-  const featured = cases.slice(0, 3).map((c) => ({
-    slug: c.slug,
-    name: c.company,
-    industry: c.industry,
-    quote: c.quote || c.description,
-    quotePerson: c.quotePerson,
-    heroMetric: c.heroMetric,
-    heroMetricLabel: c.heroMetricLabel,
-    heroImage: c.heroImage,
-    stats: c.stats.slice(0, 3),
-  }))
+  let featured: Array<{
+    slug: string
+    name: string
+    industry?: string
+    quote?: string
+    heroMetric?: string
+    heroMetricLabel?: string
+  }> = []
+  try {
+    const cases = await getAllCaseStudies()
+    featured = cases.slice(0, 3).map((c) => ({
+      slug: c.slug,
+      name: c.company,
+      industry: c.industry,
+      quote: c.quote || c.description,
+      heroMetric: c.heroMetric,
+      heroMetricLabel: c.heroMetricLabel,
+    }))
+  } catch {
+    featured = []
+  }
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageProductSchema) }}
-      />
-      <HomePageClient caseStudies={featured} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageProductSchema) }} />
+      <Home caseStudies={featured} />
     </>
   )
 }
