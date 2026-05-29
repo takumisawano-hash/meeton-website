@@ -4,12 +4,14 @@ import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@/app/components/v2/ui";
 import type { ProductLPData } from "@/app/lib/product-lp-data";
+import { COMPARE } from "@/app/lib/compare-data";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
 
 export default function ProductLP({ data }: { data: ProductLPData }) {
   const src = data.slug;
+  const compares = Object.values(COMPARE).filter((c) => c.product === data.slug);
   return (
     <>
       <Nav />
@@ -77,6 +79,24 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
           ))}
         </div>
       </Section>
+
+      {/* 3.5 Compare links (cluster internal linking §4.8) */}
+      {compares.length > 0 && (
+        <Section tone="white" py={48}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "var(--sub)" }}>比較で見る:</span>
+            {compares.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/compare/${c.slug}/`}
+                style={{ fontSize: 14, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none", background: "var(--cta-light)", border: "1px solid #cdeede", borderRadius: 999, padding: "8px 16px" }}
+              >
+                vs {c.competitorName} →
+              </Link>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* 4. Proof (navy band, green metric) */}
       <Section tone="navy">

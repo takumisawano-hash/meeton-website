@@ -3,6 +3,7 @@ import { getAllPosts } from '@/app/lib/notion'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 import { integrations } from '@/lib/integrations-data'
 import { getUpcomingWebinars } from '@/app/lib/webinars-schedule'
+import { allCompareSlugs, alternativeSlugs } from '@/app/lib/compare-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dynameet.ai'
@@ -125,8 +126,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion 未接続時は空で返す
   }
 
+  // v2 compare/alternatives BOFU pages (high commercial intent).
+  const comparePages: MetadataRoute.Sitemap = allCompareSlugs().map((slug) => ({
+    url: `${baseUrl}/compare/${slug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.85,
+  }))
+  const alternativePages: MetadataRoute.Sitemap = alternativeSlugs().map((slug) => ({
+    url: `${baseUrl}/alternatives/${slug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
   return [
     ...staticPages,
+    ...comparePages,
+    ...alternativePages,
     ...webinarPages,
     ...integrationPages,
     ...blogPosts,
