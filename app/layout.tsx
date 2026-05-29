@@ -51,10 +51,10 @@ const NOTO_SYSTEM_STACK =
 
 export const metadata: Metadata = {
   title: {
-    default: 'Meeton ai｜ウェブサイトのリードを商談に変える AI SDR Platform',
+    default: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
     template: '%s｜Meeton ai',
   },
-  description: 'Web と CRM に眠る商談機会を、AI SDR が商談へ変える Platform。Web 訪問者・資料 DL リード・再訪問者から、CRM に眠る既存リードまで、会話・ヒアリング・資料提案・日程調整・追客を自動化。',
+  description: 'Meeton ai は、会話・資料提案・予約・追客を自律でこなす AI SDR Platform。Webサイトに配属するだけで、問い合わせを待つサイトが商談を生み出す営業チャネルに変わります。無料で開始（クレカ不要）。',
   metadataBase: new URL('https://dynameet.ai'),
   // No site-wide canonical: setting one in the root layout makes EVERY
   // page render <link rel=canonical href=/> which collapses every URL
@@ -83,17 +83,25 @@ export const metadata: Metadata = {
       ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
       : undefined,
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  // Index only on the production deployment. Preview deploys (the v2
+  // rebuild branch) and local dev return VERCEL_ENV !== 'production',
+  // so they emit <meta robots=noindex,nofollow> — Google never indexes
+  // the half-migrated branch, avoiding duplicate-content vs the live
+  // site during the URL restructure (§ migration plan).
+  robots:
+    process.env.VERCEL_ENV === 'production'
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
+        }
+      : { index: false, follow: false, nocache: true },
   authors: [{ name: 'DynaMeet Inc.' }],
   creator: 'DynaMeet Inc.',
   publisher: 'DynaMeet Inc.',
@@ -125,13 +133,35 @@ export default function RootLayout({
             etc.) rely on --fb / --fd / --fm / --cta tokens defined here. */}
         <style dangerouslySetInnerHTML={{ __html: `
 :root{
-  --bg:#ffffff;--surface:#F7FAF8;--surface2:#EFF4F1;
-  --border:#E5EEE8;--border2:#D8E4DD;
-  --text:#4B5A52;--heading:#0B1712;--sub:#6C7B73;
-  --cta:#04cb78;--cta-hover:#0fc19a;--cta-glow:rgba(4,203,120,.22);--cta-light:#E8FBF1;
-  --accent:#7c5cfc;--accent-light:#f0ecfe;--accent-glow:rgba(124,92,252,.18);
-  --blue:#3b6ff5;--blue-light:#eaf0fe;
-  --cyan:#0891b2;--pink:#d03ea1;--red:#e0475b;
+  /* ===== Meeton ai v2 design tokens (2026-05-29 re-skin) =====
+     §3.8: navy = frame (header/hero/bands/footer/CTA),
+     white = canvas (content/cards/tables/long-form),
+     green = the ONLY accent. purple removed.
+     Brand hex extracted from logo: navy #0F1128, green #07CB79. */
+
+  /* Canvas — white side, where reading & deciding happens */
+  --bg:#ffffff;--surface:#F6F8FB;--surface2:#EDF1F8;
+  --border:#E4E8F2;--border2:#D2D8E6;
+  --text:#3F4763;--heading:#0F1128;--sub:#6B7390;
+
+  /* Navy — frame side, authority/trust surfaces */
+  --navy:#0F1128;--navy-2:#171A36;--navy-3:#22264B;--navy-deep:#0A0B1E;
+  --on-navy:#FFFFFF;--on-navy-sub:#AEB4D6;--on-navy-border:rgba(255,255,255,.12);
+  --on-navy-surface:rgba(255,255,255,.05);
+
+  /* Green — the single accent: action / links / success / energy */
+  --cta:#07CB79;--cta-hover:#0BD986;--cta-press:#06B86D;
+  --cta-ink:#067A48;          /* darker green for small text/links on white (WCAG) */
+  --cta-light:#E7FBF1;--cta-wash:#F2FCF7;
+  --cta-glow:rgba(7,203,121,.28);
+
+  /* accent kept for back-compat, repointed to navy (purple removed) */
+  --accent:#0F1128;--accent-light:#EDF1F8;--accent-glow:rgba(15,17,40,.12);
+
+  /* legacy product hues — DEPRECATED, only on pages pending rebuild/301.
+     do not use in v2 work; differentiate products via navy/green + icon. */
+  --blue:#3b6ff5;--blue-light:#eaf0fe;--cyan:#0891b2;--pink:#d03ea1;
+  --red:#e0475b;              /* retained: hot-lead / urgency indicators */
   --fd:'Inter',var(--font-inter),'Plus Jakarta Sans',var(--font-jakarta),${"'" + NOTO_SYSTEM_STACK.split(',')[0].trim() + "'"},${NOTO_SYSTEM_STACK},sans-serif;
   --fb:'Inter',var(--font-inter),${NOTO_SYSTEM_STACK},sans-serif;
   --fm:'JetBrains Mono',var(--font-mono),monospace;

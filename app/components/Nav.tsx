@@ -2,20 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { openMeetonDownloadCenter } from "@/app/lib/meeton-cta";
 
-// Modal bodies are 200+ lines each and the embed scripts they pull in
-// dwarf the rest of the Nav bundle. Hydration deserialization runs on
-// first paint of every page that renders <Nav />, so static imports
-// here forced the modal code into the critical-path chunk for /, /lp/,
-// /case-studies/, /blog/, /features/* — basically the whole site.
-// ssr:false avoids a hydration mismatch since the modals render to
-// document.body via createPortal and depend on `window`.
-const HubSpotMeetingModal = dynamic(() => import("./HubSpotMeetingModal"), { ssr: false });
-const HubSpotModal = dynamic(() => import("./HubSpotModal"), { ssr: false });
+// ── Meeton ai v2 global navigation (2026-05-29 rebuild) ──────────────
+// Spec §1.2 IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [無料で始める][デモを予約]
+// Spec §3.8 design: navy = frame → the header bar itself is navy with a
+// white wordmark; dropdown panels are white (reading/decision surface).
+// green (#07CB79 / --cta) is the single accent → primary CTA + hovers.
+// Dual CTA is permanent on every page (§1.2): never collapse to one.
+
+const SIGNUP_URL =
+  "https://app.dynameet.ai/signup?utm_source=website&utm_medium=nav&utm_campaign=free-signup";
+const DEMO_URL =
+  "https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav&utm_campaign=demo";
+const CAREERS_APPLY_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSe57dBjNsS3pG0QYZAVRFJk4wPKOv6GX7WBF-1tisAslnq5OQ/viewform?usp=dialog";
 
 type NavProps = {
   variant?: "light" | "dark" | "minimal";
@@ -23,16 +25,46 @@ type NavProps = {
   langSwitchLabel?: string;
 };
 
-function useIsMobile(breakpoint = 768) {
+type Item = { href: string; label: string; sub?: string };
+
+const PRODUCT_ITEMS: Item[] = [
+  { href: "/calendar", label: "Meeton Calendar", sub: "即フォローで商談化" },
+  { href: "/chat", label: "Meeton Chat", sub: "訪問者と対話し疑問解消" },
+  { href: "/library", label: "Meeton Library", sub: "資料共有 + 開封トラッキング" },
+  { href: "/email", label: "Meeton Email", sub: "1:1 自律フォロー" },
+];
+const PLATFORM_ITEM: Item = {
+  href: "/",
+  label: "Meeton ai（4機能の統合）",
+  sub: "つなぐと一気通貫の AI SDR",
+};
+const SOLUTION_ROLES: Item[] = [
+  { href: "/solutions/cmo", label: "CMO / マーケ責任者" },
+  { href: "/solutions/cro", label: "CRO / 営業責任者" },
+  { href: "/solutions/sdr", label: "IS / SDR 責任者" },
+  { href: "/solutions/ceo", label: "経営者" },
+];
+const USE_MOMENTS: Item[] = [
+  { href: "/use-cases/pre-inquiry", label: "問い合わせ前" },
+  { href: "/use-cases/post-download", label: "資料 DL 後" },
+  { href: "/use-cases/revisit", label: "再訪問" },
+  { href: "/use-cases/nurture", label: "追客" },
+];
+const RESOURCE_ITEMS: Item[] = [
+  { href: "/blog/", label: "ブログ", sub: "獲得・商談化の実践知" },
+  { href: "/glossary/ai-sdr", label: "用語集", sub: "AI SDR とは ほか" },
+  { href: "/cases", label: "導入事例", sub: "成果が出たアカウント" },
+  { href: "/tools/roi", label: "ROI 診断", sub: "商談化の余地を試算" },
+];
+
+function useIsMobile(breakpoint = 980) {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < breakpoint);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, [breakpoint]);
-
   return isMobile;
 }
 
@@ -42,524 +74,88 @@ export default function Nav({
   langSwitchLabel,
 }: NavProps) {
   const pathname = usePathname();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isFeaturesDropdownOpen, setIsFeaturesDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const featuresDropdownRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-
   const isDark = variant === "dark";
-  // 2026-05-23 ads relaunch: minimal variant for paid-traffic LPs
-  // (/solutions/*). Strips the full primary nav + features dropdown +
-  // dual CTA, leaving Logo + 導入事例 + セキュリティ + 「30 分で相談する」
-  // only. Goal: don't dilute the LP's own checklist-DL / 30min CTA pair.
   const isMinimal = variant === "minimal";
 
-  // Close dropdown when clicking outside
+  // which dropdown is open (desktop): 'product' | 'usage' | 'resources' | null
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-      if (
-        featuresDropdownRef.current &&
-        !featuresDropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsFeaturesDropdownOpen(false);
+    const onClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenMenu(null);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMobileMenuOpen]);
+  }, [mobileOpen]);
 
-  // Close mobile menu on route change
   useEffect(() => {
-    setIsMobileMenuOpen(false);
+    setMobileOpen(false);
+    setOpenMenu(null);
   }, [pathname]);
 
-  const dropdownItems = [
-    { href: "/", label: "AI for 営業・マーケ" },
-    // { href: "/talent/", label: "AI for 採用" }, // Meeton Talent: temporarily hidden
-  ];
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  const featuresDropdownItems = [
-    { href: "/features/ai-chat/", label: "Meeton Live", sub: "再訪リード対話" },
-    { href: "/features/meetings/", label: "Meeton Calendar", sub: "即時に商談予約" },
-    { href: "/features/ai-library/", label: "Meeton Library", sub: "文脈に合う資料提案" },
-    { href: "/features/ai-email/", label: "Meeton Email", sub: "未予約追客 + CRM 再商談化" },
-  ];
-
-  // 2026-05-21: top nav から「比較」を削除 (competitor-shop に見えるリスク)。
-  // 比較ページは FAQ 内リンク + footer + 営業資料から誘導。トップ nav は
-  // category-defining 動線 (AI SDR とは / 事例 / ブログ / 資料 / デモ) のみ。
-  const navLinks = [
-    { href: "/ai-sdr/", label: "AI SDR とは" },
-    { href: "/case-studies/", label: "導入事例" },
-    { href: "/blog/", label: "ブログ" },
-    { href: "#download-center", label: "資料請求", onClick: true },
-  ];
-
-  const isProductActive = pathname === "/" || pathname.startsWith("/talent");
-  const isFeaturesActive = pathname.startsWith("/features");
-
-  // Light variant colors
-  const isTalent = pathname.startsWith("/talent");
-  const ctaColor = isTalent ? "#2563eb" : "#12a37d";
-  const ctaGradient = isTalent
-    ? "linear-gradient(135deg,#2563eb,#3b82f6)"
-    : "linear-gradient(135deg,#12a37d,#0fc19a)";
-  const ctaGlow = isTalent ? "rgba(37,99,235,.22)" : "rgba(18,163,125,.25)";
-  const utmCampaign = isDark
-    ? "meeton-careers"
-    : isTalent
-      ? "meeton-talent"
-      : "meeton-ai";
-
-  // Colors based on variant
-  const colors = isDark
-    ? {
-        bg: "rgba(10,10,18,.95)",
-        border: "rgba(42,42,68,.5)",
-        text: "#7878a0",
-        textActive: "#12a37d",
-        btnBorder: "#3a3a58",
-        btnText: "#a8a8c8",
-        dropdownBg: "#1a1a2e",
-        dropdownBorder: "#2a2a44",
-        logo: "/logo.svg",
-      }
-    : {
-        bg: "rgba(255,255,255,.95)",
-        border: "rgba(223,227,240,.6)",
-        text: "#6e7494",
-        textActive: ctaColor,
-        btnBorder: "#c8cedf",
-        btnText: "#6e7494",
-        dropdownBg: "#fff",
-        dropdownBorder: "#e5e7eb",
-        logo: "/logo-dark.svg",
-      };
-
-  const HamburgerIcon = () => (
-    <button
-      onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      aria-label="メニュー"
-      style={{
-        background: "none",
-        border: "none",
-        cursor: "pointer",
-        padding: 8,
-        display: "flex",
-        flexDirection: "column",
-        gap: 5,
-        zIndex: 200,
-      }}
-    >
-      <span
-        style={{
-          display: "block",
-          width: 24,
-          height: 2,
-          background: isDark ? "#a8a8c8" : "#6e7494",
-          borderRadius: 2,
-          transition: "all .3s",
-          transform: isMobileMenuOpen
-            ? "rotate(45deg) translate(5px, 5px)"
-            : "none",
-        }}
-      />
-      <span
-        style={{
-          display: "block",
-          width: 24,
-          height: 2,
-          background: isDark ? "#a8a8c8" : "#6e7494",
-          borderRadius: 2,
-          transition: "all .3s",
-          opacity: isMobileMenuOpen ? 0 : 1,
-        }}
-      />
-      <span
-        style={{
-          display: "block",
-          width: 24,
-          height: 2,
-          background: isDark ? "#a8a8c8" : "#6e7494",
-          borderRadius: 2,
-          transition: "all .3s",
-          transform: isMobileMenuOpen
-            ? "rotate(-45deg) translate(5px, -5px)"
-            : "none",
-        }}
-      />
-    </button>
-  );
-
-  const MobileMenu = () => (
-    <>
-      {/* Overlay */}
-      <div
-        onClick={() => setIsMobileMenuOpen(false)}
-        style={{
-          position: "fixed",
-          inset: 0,
-          background: "rgba(0,0,0,.5)",
-          zIndex: 150,
-          opacity: isMobileMenuOpen ? 1 : 0,
-          pointerEvents: isMobileMenuOpen ? "auto" : "none",
-          transition: "opacity .3s",
-        }}
-      />
-      {/* Menu Panel */}
-      <div
+  // ── minimal variant: paid-traffic LPs. Logo + dual CTA only. ──────
+  if (isMinimal) {
+    return (
+      <nav
         style={{
           position: "fixed",
           top: 0,
+          left: 0,
           right: 0,
-          bottom: 0,
-          width: "80%",
-          maxWidth: 320,
-          background: isDark ? "#0a0a12" : "#fff",
-          zIndex: 160,
-          transform: isMobileMenuOpen ? "translateX(0)" : "translateX(100%)",
-          transition: "transform .3s ease-out",
+          zIndex: 100,
+          padding: isMobile ? "12px 16px" : "14px 32px",
+          background: "rgba(15,17,40,.92)",
+          backdropFilter: "blur(14px) saturate(160%)",
+          WebkitBackdropFilter: "blur(14px) saturate(160%)",
+          borderBottom: "1px solid var(--on-navy-border)",
           display: "flex",
-          flexDirection: "column",
-          padding: "80px 24px 32px",
-          overflowY: "auto",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 16,
+          fontFamily: "var(--fb)",
         }}
       >
-        {/* Product Links */}
-        <div style={{ marginBottom: 24 }}>
-          <p
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: isDark ? "#5a5a7a" : "#9ca3af",
-              marginBottom: 12,
-              textTransform: "uppercase",
-              letterSpacing: 1,
-            }}
-          >
-            Products
-          </p>
-          {dropdownItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                display: "block",
-                padding: "14px 0",
-                fontSize: 16,
-                fontWeight: 600,
-                color:
-                  pathname === item.href ||
-                  (item.href === "/talent/" && pathname.startsWith("/talent"))
-                    ? colors.textActive
-                    : colors.text,
-                textDecoration: "none",
-                borderBottom: `1px solid ${isDark ? "#1a1a2e" : "#f1f5f9"}`,
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <Link href="/" aria-label="Meeton ai">
+          <Image
+            src="/logo.svg"
+            alt="Meeton ai"
+            width={140}
+            height={30}
+            priority
+            style={{ height: 28, width: "auto", display: "block" }}
+          />
+        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+          <a href={DEMO_URL} style={ghostBtn(isMobile)}>
+            デモを予約
+          </a>
+          <a href={SIGNUP_URL} style={primaryBtn(isMobile)}>
+            無料で始める
+          </a>
         </div>
-
-        {/* Features Links */}
-        <div style={{ marginBottom: 24 }}>
-          <p
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: isDark ? "#5a5a7a" : "#9ca3af",
-              marginBottom: 12,
-              textTransform: "uppercase",
-              letterSpacing: 1,
-            }}
-          >
-            Features
-          </p>
-          {featuresDropdownItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                display: "block",
-                padding: "14px 0",
-                textDecoration: "none",
-                borderBottom: `1px solid ${isDark ? "#1a1a2e" : "#f1f5f9"}`,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color:
-                    pathname === item.href ? colors.textActive : colors.text,
-                }}
-              >
-                {item.label}
-              </span>
-              <span
-                style={{
-                  fontSize: 12,
-                  color: isDark ? "#5a5a7a" : "#9ca3af",
-                  fontWeight: 500,
-                  display: "block",
-                  marginTop: 2,
-                }}
-              >
-                {item.sub}
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        {/* Nav Links */}
-        <div style={{ marginBottom: 32 }}>
-          {navLinks.map((item) =>
-            item.onClick ? (
-              <button
-                key={item.href}
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  (window as any).Meeton &&
-                    (window as any).Meeton.openDownloadCenter();
-                }}
-                style={{
-                  display: "block",
-                  width: "100%",
-                  textAlign: "left",
-                  background: "none",
-                  border: "none",
-                  padding: "14px 0",
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: colors.text,
-                  cursor: "pointer",
-                  borderBottom: `1px solid ${isDark ? "#1a1a2e" : "#f1f5f9"}`,
-                }}
-              >
-                {item.label}
-              </button>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={{
-                  display: "block",
-                  padding: "14px 0",
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: pathname.startsWith(item.href.replace(/\/$/, ""))
-                    ? colors.textActive
-                    : colors.text,
-                  textDecoration: "none",
-                  borderBottom: `1px solid ${isDark ? "#1a1a2e" : "#f1f5f9"}`,
-                }}
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
-        </div>
-
-        {/* CTA Buttons */}
-        <div
-          style={{
-            marginTop: "auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-          }}
-        >
-          {isDark ? (
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSe57dBjNsS3pG0QYZAVRFJk4wPKOv6GX7WBF-1tisAslnq5OQ/viewform?usp=dialog"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMobileMenuOpen(false)}
-              style={{
-                width: "100%",
-                padding: "14px 24px",
-                fontSize: 15,
-                fontWeight: 700,
-                background: "linear-gradient(135deg,#12a37d,#3b6ff5)",
-                border: "none",
-                color: "#fff",
-                borderRadius: 10,
-                cursor: "pointer",
-                boxShadow: "0 4px 20px rgba(18,163,125,.25)",
-                textDecoration: "none",
-                textAlign: "center",
-              }}
-            >
-              応募する
-            </a>
-          ) : (
-            <>
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  openMeetonDownloadCenter();
-                }}
-                style={{
-                  width: "100%",
-                  padding: "14px 24px",
-                  fontSize: 15,
-                  fontWeight: 700,
-                  background: "transparent",
-                  border: `2px solid ${colors.btnBorder}`,
-                  color: colors.btnText,
-                  borderRadius: 10,
-                  cursor: "pointer",
-                }}
-              >
-                資料請求
-              </button>
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  window.location.href = 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav-mobile&utm_campaign=meeting';
-                }}
-                style={{
-                  width: "100%",
-                  padding: "14px 24px",
-                  fontSize: 15,
-                  fontWeight: 700,
-                  background: ctaGradient,
-                  border: "none",
-                  color: "#fff",
-                  borderRadius: 10,
-                  cursor: "pointer",
-                  boxShadow: `0 4px 16px ${ctaGlow}`,
-                }}
-              >
-                デモを予約
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-    </>
-  );
-
-  // 2026-05-23 minimal variant for /solutions/* paid LPs.
-  // Renders before the full Nav so all the dropdown / mobile-menu
-  // scaffolding above stays dead-code for this code path. Logo +
-  // 導入事例 + セキュリティ + 「30 分で相談する」 だけ。
-  if (isMinimal) {
-    return (
-      <>
-        <nav
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 100,
-            padding: isMobile ? "12px 16px" : "14px 32px",
-            background: "rgba(255,255,255,.95)",
-            backdropFilter: "blur(12px) saturate(180%)",
-            WebkitBackdropFilter: "blur(12px) saturate(180%)",
-            borderBottom: "1px solid rgba(223,227,240,.6)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 16,
-            fontFamily: "var(--fb)",
-          }}
-        >
-          <Link href="/" aria-label="Meeton ai">
-            <Image
-              src="/logo-dark.svg"
-              alt="Meeton ai"
-              width={140}
-              height={30}
-              priority
-              style={{ height: 28, width: "auto", display: "block" }}
-            />
-          </Link>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: isMobile ? 12 : 24,
-            }}
-          >
-            {!isMobile && (
-              <>
-                <Link
-                  href="/case-studies/"
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: "#6e7494",
-                    textDecoration: "none",
-                  }}
-                >
-                  導入事例
-                </Link>
-                <Link
-                  href="/security-policy/"
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: "#6e7494",
-                    textDecoration: "none",
-                  }}
-                >
-                  セキュリティ
-                </Link>
-              </>
-            )}
-            <a
-              href="https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav-minimal&utm_campaign=meeton-ai"
-              style={{
-                background: "linear-gradient(135deg,#12a37d,#0fc19a)",
-                color: "#fff",
-                padding: isMobile ? "9px 16px" : "11px 22px",
-                borderRadius: 10,
-                fontSize: 14,
-                fontWeight: 800,
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-                boxShadow: "0 4px 14px rgba(18,163,125,0.25)",
-              }}
-            >
-              30 分で相談する
-            </a>
-          </div>
-        </nav>
-        {/* No spacer — the fixed nav overlaps the hero, and the LP
-            template's hero padding-top (96-140px) already clears it.
-            Adding a spacer would push hero too far down on mobile. */}
-      </>
-    )
+      </nav>
+    );
   }
 
-  return (
-    <>
+  // ── dark variant: careers ────────────────────────────────────────
+  // Kept lean; brand green unified to --cta. Single "応募する" CTA.
+  if (isDark) {
+    return (
       <nav
         style={{
           position: "fixed",
@@ -568,317 +164,454 @@ export default function Nav({
           right: 0,
           zIndex: 100,
           padding: isMobile ? "12px 16px" : "14px 48px",
+          background: "rgba(10,11,30,.95)",
+          backdropFilter: "blur(20px) saturate(1.4)",
+          borderBottom: "1px solid var(--on-navy-border)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: colors.bg,
-          backdropFilter: "blur(24px) saturate(1.4)",
-          borderBottom: `1px solid ${colors.border}`,
+          fontFamily: "var(--fb)",
         }}
       >
-        {/* Logo */}
         <Link
           href="/"
-          style={{
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-          }}
+          style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}
         >
+          <Image src="/logo.svg" alt="DynaMeet" width={140} height={30} style={{ height: isMobile ? 24 : 28, width: "auto" }} />
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              padding: "4px 10px",
+              borderRadius: 6,
+              background: "var(--navy-3)",
+              border: "1px solid var(--on-navy-border)",
+              color: "var(--on-navy-sub)",
+            }}
+          >
+            Careers
+          </span>
+        </Link>
+        <a href={CAREERS_APPLY_URL} target="_blank" rel="noopener noreferrer" style={primaryBtn(isMobile)}>
+          応募する
+        </a>
+      </nav>
+    );
+  }
+
+  // ── light (default) variant: full navy frame + new IA ─────────────
+  const linkColor = "var(--on-navy-sub)";
+
+  const DesktopDropdownTrigger = ({
+    id,
+    label,
+  }: {
+    id: string;
+    label: string;
+  }) => (
+    <button
+      onClick={() => setOpenMenu(openMenu === id ? null : id)}
+      onMouseEnter={() => setOpenMenu(id)}
+      style={{
+        background: "none",
+        border: "none",
+        fontSize: 15,
+        color: openMenu === id ? "#fff" : linkColor,
+        fontWeight: 600,
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+        padding: "8px 0",
+        fontFamily: "var(--fb)",
+        transition: "color .18s",
+      }}
+    >
+      {label}
+      <svg
+        width="10"
+        height="6"
+        viewBox="0 0 10 6"
+        fill="none"
+        style={{
+          transform: openMenu === id ? "rotate(180deg)" : "none",
+          transition: "transform .2s",
+        }}
+      >
+        <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+
+  return (
+    <>
+      <nav
+        ref={navRef}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: isMobile ? "12px 16px" : "14px 40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 24,
+          background: "rgba(15,17,40,.85)",
+          backdropFilter: "blur(20px) saturate(1.5)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.5)",
+          borderBottom: "1px solid var(--on-navy-border)",
+          fontFamily: "var(--fb)",
+        }}
+        onMouseLeave={() => setOpenMenu(null)}
+      >
+        {/* Logo (white wordmark on navy) */}
+        <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
           <Image
-            src={colors.logo}
-            alt="DynaMeet"
+            src="/logo.svg"
+            alt="Meeton ai"
             width={140}
             height={30}
+            priority
             style={{ height: isMobile ? 24 : 28, width: "auto" }}
           />
-          {isDark && (
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                padding: "4px 10px",
-                borderRadius: 6,
-                background: "#1a1a2e",
-                border: "1px solid #2a2a44",
-                color: "#7878a0",
-              }}
-            >
-              Careers
-            </span>
-          )}
         </Link>
 
-        {/* Desktop Navigation */}
         {!isMobile && (
           <>
+            {/* Center nav */}
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-              {/* Meeton ai (single product link, dropdown removed since Meeton Talent is hidden) */}
-              <Link
-                href="/"
-                style={{
-                  fontSize: 15,
-                  color: isProductActive ? colors.textActive : colors.text,
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  transition: "color .2s",
-                }}
-              >
-                Meeton ai
+              <DesktopDropdownTrigger id="product" label="製品" />
+              <DesktopDropdownTrigger id="usage" label="活用" />
+              <Link href="/cases" style={topLink(isActive("/cases"), linkColor)}>
+                事例
               </Link>
-              {/* Features Dropdown */}
-              <div
-                ref={featuresDropdownRef}
-                style={{ position: "relative" }}
-                onMouseEnter={() => setIsFeaturesDropdownOpen(true)}
-                onMouseLeave={() => setIsFeaturesDropdownOpen(false)}
-              >
-                <button
-                  onClick={() =>
-                    setIsFeaturesDropdownOpen(!isFeaturesDropdownOpen)
-                  }
-                  style={{
-                    background: "none",
-                    border: "none",
-                    fontSize: 15,
-                    color: isFeaturesActive ? colors.textActive : colors.text,
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    padding: 0,
-                    transition: "color .2s",
-                  }}
-                >
-                  機能
-                  <svg
-                    width="10"
-                    height="6"
-                    viewBox="0 0 10 6"
-                    fill="none"
-                    style={{
-                      transform: isFeaturesDropdownOpen
-                        ? "rotate(180deg)"
-                        : "rotate(0deg)",
-                      transition: "transform .2s",
-                    }}
-                  >
-                    <path
-                      d="M1 1L5 5L9 1"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                {isFeaturesDropdownOpen && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "100%",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      paddingTop: 12,
-                      zIndex: 200,
-                    }}
-                  >
-                    <div
-                      style={{
-                        background: colors.dropdownBg,
-                        border: `1px solid ${colors.dropdownBorder}`,
-                        borderRadius: 12,
-                        padding: "8px 0",
-                        minWidth: 220,
-                        boxShadow: isDark
-                          ? "0 8px 32px rgba(0,0,0,.4)"
-                          : "0 8px 32px rgba(0,0,0,.12)",
-                      }}
-                    >
-                      {featuresDropdownItems.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={() => setIsFeaturesDropdownOpen(false)}
-                          style={{
-                            display: "block",
-                            padding: "10px 20px",
-                            textDecoration: "none",
-                            transition: "all .2s",
-                          }}
-                        >
-                          <div
-                            style={{
-                              fontSize: 14,
-                              color:
-                                pathname === item.href
-                                  ? colors.textActive
-                                  : isDark
-                                    ? "#a8a8c8"
-                                    : "#0f1128",
-                              fontWeight: 700,
-                              marginBottom: 2,
-                            }}
-                          >
-                            {item.label}
-                          </div>
-                          <div
-                            style={{
-                              fontSize: 11,
-                              color: isDark ? "#5a5a7a" : "#6e7494",
-                              fontWeight: 500,
-                            }}
-                          >
-                            {item.sub}
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-              {navLinks.map((item) =>
-                item.onClick ? (
-                  <a
-                    key={item.href}
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      (window as any).Meeton &&
-                        (window as any).Meeton.openDownloadCenter();
-                    }}
-                    style={{
-                      fontSize: 15,
-                      color: colors.text,
-                      textDecoration: "none",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                      transition: "color .2s",
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    style={{
-                      fontSize: 15,
-                      color: pathname.startsWith(item.href.replace(/\/$/, ""))
-                        ? colors.textActive
-                        : colors.text,
-                      textDecoration: "none",
-                      fontWeight: 600,
-                      transition: "color .2s",
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
+              <Link href="/pricing" style={topLink(isActive("/pricing"), linkColor)}>
+                料金
+              </Link>
+              <DesktopDropdownTrigger id="resources" label="リソース" />
               {langSwitchHref && langSwitchLabel && (
                 <Link
                   href={langSwitchHref}
                   style={{
                     fontSize: 13,
                     fontWeight: 700,
-                    color: colors.text,
+                    color: linkColor,
                     textDecoration: "none",
-                    border: `1.5px solid ${colors.btnBorder}`,
+                    border: "1.5px solid var(--on-navy-border)",
                     borderRadius: 8,
                     padding: "5px 14px",
-                    transition: "all .2s",
                   }}
                 >
                   {langSwitchLabel}
                 </Link>
               )}
             </div>
-            <div style={{ display: "flex", gap: 10 }}>
-              {isDark ? (
-                <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSe57dBjNsS3pG0QYZAVRFJk4wPKOv6GX7WBF-1tisAslnq5OQ/viewform?usp=dialog"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    border: "none",
-                    cursor: "pointer",
-                    fontWeight: 700,
-                    borderRadius: 10,
-                    background: "linear-gradient(135deg,#12a37d,#3b6ff5)",
-                    color: "#fff",
-                    padding: "12px 26px",
-                    fontSize: 15,
-                    boxShadow: "0 4px 20px rgba(18,163,125,.25)",
-                    transition: "all .25s",
-                    textDecoration: "none",
-                  }}
-                >
-                  応募する
-                </a>
-              ) : (
-                <>
-                  <button
-                    onClick={openMeetonDownloadCenter}
-                    style={{
-                      background: "transparent",
-                      border: `2px solid ${colors.btnBorder}`,
-                      color: colors.btnText,
-                      padding: "12px 26px",
-                      borderRadius: 10,
-                      fontSize: 15,
-                      cursor: "pointer",
-                      fontWeight: 700,
-                      transition: "all .25s",
-                    }}
-                  >
-                    資料請求
-                  </button>
-                  <button
-                    onClick={() => {
-                      window.location.href = 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav-desktop&utm_campaign=meeting';
-                    }}
-                    style={{
-                      border: "none",
-                      cursor: "pointer",
-                      fontWeight: 700,
-                      borderRadius: 10,
-                      background: ctaGradient,
-                      color: "#fff",
-                      padding: "12px 26px",
-                      fontSize: 15,
-                      boxShadow: `0 4px 16px ${ctaGlow}`,
-                      transition: "all .25s",
-                    }}
-                  >
-                    デモを予約
-                  </button>
-                </>
-              )}
+
+            {/* Dual CTA — permanent */}
+            <div style={{ display: "flex", gap: 10, flexShrink: 0 }}>
+              <a href={DEMO_URL} style={ghostBtn(false)}>
+                デモを予約
+              </a>
+              <a href={SIGNUP_URL} style={primaryBtn(false)}>
+                無料で始める
+              </a>
             </div>
+
+            {/* Dropdown panels (white reading surface) */}
+            {openMenu === "product" && (
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={200} width={560}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+                  {PRODUCT_ITEMS.map((it) => (
+                    <PanelItem key={it.href} item={it} active={isActive(it.href)} />
+                  ))}
+                </div>
+                <div style={{ borderTop: "1px solid var(--border)", marginTop: 8, paddingTop: 8 }}>
+                  <PanelItem item={PLATFORM_ITEM} active={pathname === "/"} accent />
+                </div>
+              </DropdownPanel>
+            )}
+            {openMenu === "usage" && (
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={260} width={520}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+                  <div>
+                    <PanelHeading>役割別</PanelHeading>
+                    {SOLUTION_ROLES.map((it) => (
+                      <PanelItem key={it.href} item={it} active={isActive(it.href)} compact />
+                    ))}
+                  </div>
+                  <div>
+                    <PanelHeading>瞬間別（4 moments）</PanelHeading>
+                    {USE_MOMENTS.map((it) => (
+                      <PanelItem key={it.href} item={it} active={isActive(it.href)} compact />
+                    ))}
+                  </div>
+                </div>
+              </DropdownPanel>
+            )}
+            {openMenu === "resources" && (
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={420} width={300}>
+                {RESOURCE_ITEMS.map((it) => (
+                  <PanelItem key={it.href} item={it} active={isActive(it.href)} />
+                ))}
+              </DropdownPanel>
+            )}
           </>
         )}
 
-        {/* Mobile Hamburger */}
-        {isMobile && <HamburgerIcon />}
+        {isMobile && (
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="メニュー"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5, zIndex: 200 }}
+          >
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                style={{
+                  display: "block",
+                  width: 24,
+                  height: 2,
+                  background: "#fff",
+                  borderRadius: 2,
+                  transition: "all .3s",
+                  transform: mobileOpen
+                    ? i === 0
+                      ? "rotate(45deg) translate(5px,5px)"
+                      : i === 2
+                        ? "rotate(-45deg) translate(5px,-5px)"
+                        : "none"
+                    : "none",
+                  opacity: mobileOpen && i === 1 ? 0 : 1,
+                }}
+              />
+            ))}
+          </button>
+        )}
       </nav>
 
-      {/* Mobile Menu */}
-      {isMobile && <MobileMenu />}
-
-      {/* Modals */}
-      <HubSpotModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        utmCampaign={utmCampaign}
-      />
-      <HubSpotMeetingModal
-        isOpen={isMeetingModalOpen}
-        onClose={() => setIsMeetingModalOpen(false)}
-        utmCampaign={utmCampaign}
-      />
+      {/* Mobile menu */}
+      {isMobile && (
+        <>
+          <div
+            onClick={() => setMobileOpen(false)}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", zIndex: 150, opacity: mobileOpen ? 1 : 0, pointerEvents: mobileOpen ? "auto" : "none", transition: "opacity .3s" }}
+          />
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: "86%",
+              maxWidth: 360,
+              background: "var(--navy)",
+              zIndex: 160,
+              transform: mobileOpen ? "translateX(0)" : "translateX(100%)",
+              transition: "transform .3s ease-out",
+              display: "flex",
+              flexDirection: "column",
+              padding: "80px 24px 28px",
+              overflowY: "auto",
+              fontFamily: "var(--fb)",
+            }}
+          >
+            <MobileGroup title="製品">
+              {[...PRODUCT_ITEMS, PLATFORM_ITEM].map((it) => (
+                <MobileLink key={it.href} item={it} active={isActive(it.href)} />
+              ))}
+            </MobileGroup>
+            <MobileGroup title="活用 — 役割別">
+              {SOLUTION_ROLES.map((it) => (
+                <MobileLink key={it.href} item={it} active={isActive(it.href)} />
+              ))}
+            </MobileGroup>
+            <MobileGroup title="活用 — 瞬間別">
+              {USE_MOMENTS.map((it) => (
+                <MobileLink key={it.href} item={it} active={isActive(it.href)} />
+              ))}
+            </MobileGroup>
+            <MobileGroup title="リソース">
+              {[{ href: "/cases", label: "導入事例" }, { href: "/pricing", label: "料金" }, ...RESOURCE_ITEMS].map((it) => (
+                <MobileLink key={it.href} item={it} active={isActive(it.href)} />
+              ))}
+            </MobileGroup>
+            <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 16 }}>
+              <a href={DEMO_URL} style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                デモを予約
+              </a>
+              <a href={SIGNUP_URL} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                無料で始める
+              </a>
+            </div>
+          </div>
+        </>
+      )}
     </>
+  );
+}
+
+// ── shared style helpers ────────────────────────────────────────────
+function primaryBtn(isMobile: boolean): React.CSSProperties {
+  return {
+    background: "var(--cta)",
+    color: "#04231a",
+    padding: isMobile ? "9px 16px" : "11px 22px",
+    borderRadius: 10,
+    fontSize: isMobile ? 14 : 15,
+    fontWeight: 800,
+    textDecoration: "none",
+    whiteSpace: "nowrap",
+    border: "none",
+    cursor: "pointer",
+    boxShadow: "0 4px 16px var(--cta-glow)",
+    fontFamily: "var(--fb)",
+  };
+}
+function ghostBtn(isMobile: boolean): React.CSSProperties {
+  return {
+    background: "transparent",
+    color: "#fff",
+    padding: isMobile ? "9px 14px" : "11px 20px",
+    borderRadius: 10,
+    fontSize: isMobile ? 14 : 15,
+    fontWeight: 700,
+    textDecoration: "none",
+    whiteSpace: "nowrap",
+    border: "1.5px solid var(--on-navy-border)",
+    cursor: "pointer",
+    fontFamily: "var(--fb)",
+  };
+}
+function topLink(active: boolean, color: string): React.CSSProperties {
+  return {
+    fontSize: 15,
+    color: active ? "#fff" : color,
+    textDecoration: "none",
+    fontWeight: 600,
+    padding: "8px 0",
+    transition: "color .18s",
+  };
+}
+
+// ── desktop dropdown panel (white) ──────────────────────────────────
+function DropdownPanel({
+  children,
+  left,
+  width,
+}: {
+  children: React.ReactNode;
+  onClose: () => void;
+  left: number;
+  width: number;
+}) {
+  return (
+    <div style={{ position: "absolute", top: "100%", left, zIndex: 200, paddingTop: 10 }}>
+      <div
+        style={{
+          background: "#fff",
+          border: "1px solid var(--border)",
+          borderRadius: 16,
+          padding: 12,
+          width,
+          boxShadow: "0 16px 48px rgba(15,17,40,.18)",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+function PanelHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        fontSize: 11,
+        fontWeight: 800,
+        color: "var(--sub)",
+        letterSpacing: ".06em",
+        textTransform: "uppercase",
+        padding: "4px 12px 8px",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+function PanelItem({
+  item,
+  active,
+  accent,
+  compact,
+}: {
+  item: Item;
+  active: boolean;
+  accent?: boolean;
+  compact?: boolean;
+}) {
+  return (
+    <Link
+      href={item.href}
+      style={{
+        display: "block",
+        padding: compact ? "8px 12px" : "10px 12px",
+        borderRadius: 10,
+        textDecoration: "none",
+        background: active ? "var(--cta-wash)" : "transparent",
+      }}
+    >
+      <div
+        style={{
+          fontSize: 14,
+          fontWeight: 700,
+          color: accent ? "var(--cta-ink)" : "var(--heading)",
+          marginBottom: item.sub ? 2 : 0,
+        }}
+      >
+        {item.label}
+      </div>
+      {item.sub && <div style={{ fontSize: 12, color: "var(--sub)", fontWeight: 500 }}>{item.sub}</div>}
+    </Link>
+  );
+}
+
+// ── mobile menu helpers ─────────────────────────────────────────────
+function MobileGroup({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 22 }}>
+      <p
+        style={{
+          fontSize: 11,
+          fontWeight: 700,
+          color: "var(--on-navy-sub)",
+          marginBottom: 8,
+          textTransform: "uppercase",
+          letterSpacing: ".08em",
+          opacity: 0.7,
+        }}
+      >
+        {title}
+      </p>
+      {children}
+    </div>
+  );
+}
+function MobileLink({ item, active }: { item: Item; active: boolean }) {
+  return (
+    <Link
+      href={item.href}
+      style={{
+        display: "block",
+        padding: "12px 0",
+        fontSize: 16,
+        fontWeight: 600,
+        color: active ? "var(--cta)" : "#fff",
+        textDecoration: "none",
+        borderBottom: "1px solid var(--on-navy-border)",
+      }}
+    >
+      {item.label}
+    </Link>
   );
 }

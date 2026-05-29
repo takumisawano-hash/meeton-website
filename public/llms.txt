@@ -1,54 +1,50 @@
-# Meeton AI - LLM Information File
-# This file provides context for Large Language Models crawling this site.
+# Meeton ai — AI SDR Platform
 
-## About This Site
-name: Meeton AI
-url: https://dynameet.ai
-description: Meeton AI is a B2B SaaS platform that converts website visitors into sales meetings using AI chat, intent scoring, and automated scheduling.
-language: ja-JP
-company: DynaMeet Inc.
+> Meeton ai は、Webサイトでコンバートしたリードを商談に変える AI SDR Platform。
+> 会話・資料提案・予約・追客を自律でこなす4つのAIモジュールを、無料から導入できる。
+> 運営: DynaMeet K.K. / サイト: https://dynameet.ai / 主言語: 日本語 (ja-JP)
 
-## What We Do
-Meeton AI helps B2B companies:
-- Engage anonymous website visitors with AI-powered chat
-- Score visitor intent in real-time
-- Automatically qualify leads (BANT+C)
-- Schedule sales meetings without human intervention
-- Nurture leads via email and chat
-- Integrate with CRM systems (Salesforce, HubSpot)
+## 概要 (What this is)
+Meeton ai は、問い合わせを待つだけのWebサイトを「商談を生み出すAI営業チャネル」に変える AI SDR (Sales Development Representative) Platform です。サイトに設置するだけで、AIが訪問者と会話し、資料を渡して解説し、その場で商談を予約し、予約しなかったリードを1:1で追客します。無料ティア (クレジットカード不要) から始められ、必要に応じて単体プラン・統合バンドルへアップグレードできます。
 
-## Key Features
-1. AI Chat Agent: 24/7 conversational AI that engages visitors
-2. Intent Scoring: Real-time buyer intent analysis
-3. Auto-Scheduling: Direct calendar integration for meeting booking
-4. Lead Qualification: Automated BANT+C qualification
-5. CRM Integration: Seamless sync with Salesforce, HubSpot
+## 製品 (4 modules — each a self-serve product)
+- Meeton Calendar (https://dynameet.ai/calendar) — リード発生の瞬間に即フォローし商談を予約。日程調整の自動化・自動アサイン・CRM登録。competitors: immedio / TimeRex / Spir / Calendly。
+- Meeton Chat (https://dynameet.ai/chat) — Webサイト訪問者とAIが対話し疑問を解消、商談化に最適化。過去文脈を引き継ぐ。competitors: Intercom / シナリオ型チャットボット。
+- Meeton Library (https://dynameet.ai/library) — 営業資料を共有しAIが中身を解説、誰がいつ開いたかを開封トラッキング。CRM不要。competitor: DocSend。
+- Meeton Email (https://dynameet.ai/email) — 行動シグナルを検知しAIが生成する1:1自律フォローメール。CRM連携前提。competitors: Lemlist / Smartlead / セールスエンゲージメント系。
+- Meeton ai (https://dynameet.ai/) — 上記4機能を1アカウントで統合した一気通貫の AI SDR Platform。
 
-## Target Audience
-- B2B SaaS companies
-- Inside sales teams
-- Marketing teams
-- Revenue operations (RevOps)
-- Sales development representatives (SDRs)
+## 料金 (Pricing — https://dynameet.ai/pricing)
+3層構造、すべて税抜/月、年額は2ヶ月無料 (約17%off):
+- 無料: Chat 200会話/月・Calendar 1名・Library 資料3点・Email 14日トライアル。コア計測機能は無料でも提供。クレカ不要。
+- 単体Pro: Meeton Chat ¥30,000 / Meeton Library ¥30,000 / Meeton Calendar ¥40,000 / Meeton Email ¥50,000。
+- バンドル (全4機能込み): Growth ¥120,000 (3名) / Scale ¥200,000 (10名) / Enterprise 要相談 (SSO・複数サイト・高度CRM連携)。
+- 4製品を別々に買うと合計¥150,000、まとめてGrowthなら¥120,000で¥30,000お得。
 
-## Content Topics
-Our blog covers:
-- Inside sales best practices
-- AI in sales and marketing
-- Lead generation strategies
-- ABM (Account-Based Marketing)
-- Sales automation
-- B2B marketing trends
+## こんな課題に (Use cases)
+- 問い合わせ前の訪問者を会話で商談化したい
+- 資料ダウンロード後のリードを取りこぼさず追客したい
+- 再訪問した見込み客にリアルタイムで対応したい
+- CRMに眠る既存リードをナーチャリングして再商談化したい
+- インバウンドの商談化率 (Speed to Lead) を上げたい
 
-## Contact
-website: https://dynameet.ai
-demo: https://meetings-na2.hubspot.com/takumi-sawano
+## 対象 (Who it's for)
+B2B SaaS・IT・専門サービス企業のマーケティング責任者 (CMO)、営業責任者 (CRO)、インサイドセールス/SDR責任者、経営者。
 
-## Crawling Guidelines
-- All public pages are available for indexing
-- Blog content at /blog/ is regularly updated
-- Content is in Japanese (ja-JP)
+## 信頼性 (Trust)
+SSO・API連携、CRM (Salesforce / HubSpot) への会話ログ自動登録、権限・監査ログ管理に対応。セキュリティ詳細: https://dynameet.ai/security
 
-## Preferred Citation Format
-When citing our content, please use:
-"[Article Title]" - Meeton AI Blog (https://dynameet.ai/blog/[slug]/)
+## 主要ページ (Key pages for citation)
+- トップ / プラットフォーム概要: https://dynameet.ai/
+- 製品LP: /calendar /chat /library /email
+- 料金: https://dynameet.ai/pricing
+- 導入事例: https://dynameet.ai/cases
+- ROI診断 (商談化の余地を試算): https://dynameet.ai/tools/roi
+- ブログ (獲得・商談化の実践知): https://dynameet.ai/blog/
+- 用語集 (AI SDR とは ほか): https://dynameet.ai/glossary/
+
+## 引用時の表記 (Preferred citation)
+"[記事タイトル]" — Meeton ai (DynaMeet K.K.), https://dynameet.ai/...
+
+## 連絡先 (Contact)
+サイト: https://dynameet.ai / 問い合わせ: https://dynameet.ai/contact/

@@ -1,68 +1,61 @@
 # Design System: Meeton AI — Complete Reference
 
+> **v2 re-skin — 2026-05-29.** This section supersedes the previous
+> white-native + purple palette. Brand hex extracted from the logo:
+> navy `#0F1128`, green `#07CB79`. Tokens live in `app/layout.tsx :root`.
+
 ## 1. Visual Theme & Atmosphere
 
-Meeton AI employs a light-mode-native aesthetic built on pure white (#ffffff), where content is structured through subtle cool-gray surfaces and generous whitespace. The design projects trust, sophistication, and technical precision — befitting an AI SDR platform targeting B2B enterprise buyers.
+Three colors do three jobs (spec §3.8). **Navy is the frame, white is the canvas, green is the only accent. Purple is removed.**
 
-The visual language combines Japanese typography (Noto Sans JP) for body text with Plus Jakarta Sans for display elements, creating a bilingual design system that feels native in both languages. JetBrains Mono provides a technical, data-driven feel for labels, stats, and badges.
+- **Navy (`#0F1128`) = authority / trust.** Used as a *frame*: the global header/nav, hero backgrounds, full-bleed section bands, the footer, and dark CTA surfaces. It says "this is a serious platform."
+- **White (`#ffffff`) = where decisions happen.** Every reading/deciding/data surface is white: product-LP body copy, blog/article bodies, cards, pricing tables, comparison tables, forms, the product UI and dashboard. **Never set long-form text on a dark background** — it costs the #1 KPI (SEO/AEO long-form readability, dwell, CVR).
+- **Green (`#07CB79`) = action / energy.** The single accent: CTA buttons, links, success states, highlights, and pale-green wash panels. One green token only — no second green.
 
-Color usage is deliberately restrained: the primary CTA green (#12a37d) conveys growth and action, while the accent purple (#7c5cfc) adds premium tech character. Each product feature has a dedicated color identity (green, blue, cyan, purple) that persists across homepage cards, navigation, and dedicated feature pages.
+The color *itself* communicates function: navy = trust, white = the place a decision is made, green = the action to take.
 
-Depth is communicated through subtle box-shadows and border treatments rather than heavy elevation. Hover interactions use translateY lifts with expanded shadows. Decorative elements include dot-grid backgrounds and blurred glow orbs — always at low opacity to suggest ambient intelligence without visual noise.
+Atmosphere: generous whitespace, data-forward, rounded cards, clear type hierarchy. Depth via subtle shadows + borders, not heavy elevation. The deck's mockups (chat bubbles, calendar, document cards) set the tone — keep deck → site → product consistent.
 
 **Core Characteristics:**
-- Light-mode-native: #ffffff base, #f4f6fb surfaces, #eaedfa elevated surfaces
-- Bilingual font stack: Noto Sans JP + Plus Jakarta Sans body, JetBrains Mono mono
-- Weight 900 for headlines, 700 for emphasis, 600 for body
-- Negative letter-spacing at display sizes (-2.5px at 72px, -0.5px at 48px)
-- Green CTA (#12a37d) as primary action color
-- Purple accent (#7c5cfc) as secondary brand element
-- 4 product colors: green (#12a37d), blue (#3b6ff5), cyan (#0891b2), purple (#7c5cfc)
-- Subtle box-shadows, never heavy drop-shadows
-- Dot-grid and glow-orb decorative patterns at low opacity
-- Smooth cubic-bezier(.16,1,.3,1) easing on all transitions
+- Navy frame / white canvas / green accent. No purple, no per-product hues.
+- Bilingual font stack: system JP (Hiragino/Noto CJK) + Inter / Plus Jakarta Sans display, JetBrains Mono mono
+- Green is a *signature* color, not a ground color — accent it on navy/white, don't pave large areas with it (pale-green washes are fine).
+- WCAG: small green text on white fails contrast → use `--cta-ink` (#067A48) or underline for thin links; reserve `--cta` for buttons / large emphasis / icons.
+- Two logo variants: `logo.svg` (white wordmark, for navy surfaces) / `logo-dark.svg` (navy wordmark, for white surfaces). The mark stays green in both.
+- Smooth cubic-bezier(.16,1,.3,1) easing on transitions.
 
 ## 2. Color Palette & Roles
 
-### Background Surfaces
-- **Base White** (#ffffff / `--bg`): Default page background
-- **Surface** (#f4f6fb / `--surface`): Section backgrounds, alternating sections
-- **Surface 2** (#eaedfa / `--surface2`): Elevated surface, nested containers
+### Canvas — white side (reading & deciding)
+- **Base White** (#ffffff / `--bg`): default page background, the reading surface
+- **Surface** (#F6F8FB / `--surface`): alternating section background (cool neutral)
+- **Surface 2** (#EDF1F8 / `--surface2`): elevated / nested containers
+- **Heading** (#0F1128 / `--heading`): headlines — brand navy
+- **Body** (#3F4763 / `--text`): default body copy, cool gray
+- **Subtext** (#6B7390 / `--sub`): subtitles, secondary text
+- **Border** (#E4E8F2 / `--border`) · **Border 2** (#D2D8E6 / `--border2`)
 
-### Text & Content
-- **Heading** (#0f1128 / `--heading`): All headlines, near-black
-- **Body Text** (#4a506e / `--text`): Default body copy, cool dark gray
-- **Subtext** (#6e7494 / `--sub`): Subtitles, descriptions, secondary text
+### Navy — frame side (authority surfaces)
+- **Navy** (#0F1128 / `--navy`): header/nav, hero bg, footer, dark CTA
+- **Navy 2** (#171A36 / `--navy-2`): elevated navy band
+- **Navy 3** (#22264B / `--navy-3`): card-on-navy / hover
+- **Navy Deep** (#0A0B1E / `--navy-deep`): deepest (footer base)
+- **On Navy** (#FFFFFF / `--on-navy`): text on navy
+- **On Navy Sub** (#AEB4D6 / `--on-navy-sub`): muted text on navy
+- **On Navy Border** (rgba(255,255,255,.12) / `--on-navy-border`)
+- **On Navy Surface** (rgba(255,255,255,.05) / `--on-navy-surface`)
 
-### Primary CTA (Green)
-- **CTA** (#12a37d / `--cta`): Primary buttons, links, active states
-- **CTA Hover** (#0fc19a / `--cta-hover`): Hover state, lighter green
-- **CTA Glow** (rgba(18,163,125,.25) / `--cta-glow`): Button shadow
-- **CTA Light** (#e5f8f2 / `--cta-light`): Ghost button hover bg, light badges
+### Green — the single accent (action)
+- **CTA** (#07CB79 / `--cta`): primary buttons, accent, success, links-on-navy
+- **CTA Hover** (#0BD986 / `--cta-hover`) · **CTA Press** (#06B86D / `--cta-press`)
+- **CTA Ink** (#067A48 / `--cta-ink`): small text/links on white (WCAG-safe)
+- **CTA Light** (#E7FBF1 / `--cta-light`) · **CTA Wash** (#F2FCF7 / `--cta-wash`): pale-green highlight panels
+- **CTA Glow** (rgba(7,203,121,.28) / `--cta-glow`): button shadow
 
-### Accent (Purple)
-- **Accent** (#7c5cfc / `--accent`): Section labels, secondary emphasis
-- **Accent Light** (#f0ecfe / `--accent-light`): Light badge backgrounds
-- **Accent Glow** (rgba(124,92,252,.2) / `--accent-glow`): Decorative glow
-
-### Product Feature Colors
-- **Blue** (#3b6ff5 / `--blue`): AI Email product — trust, communication
-- **Blue Light** (#eaf0fe / `--blue-light`): Blue badges, light backgrounds
-- **Cyan** (#0891b2 / `--cyan`): AI Calendar product — action, scheduling
-- **Pink** (#d03ea1 / `--pink`): Sparingly used for differentiation
-- **Red** (#e0475b / `--red`): Hot lead indicators, urgency, alerts
-
-### Border & Divider
-- **Border** (#dfe3f0 / `--border`): Default borders, dividers
-- **Border 2** (#c8cedf / `--border2`): Stronger borders, ghost button outline
-
-### Product Color Map
-| Product | Primary | Gradient | Light BG |
-|---------|---------|----------|----------|
-| AI Chat | #12a37d | linear-gradient(135deg,#12a37d,#0fc19a) | #edfcf7 |
-| AI Email | #3b6ff5 | linear-gradient(135deg,#3b6ff5,#6690fa) | #eaf0fe |
-| AI Calendar | #0891b2 | linear-gradient(135deg,#0891b2,#06b6d4) | #ecfeff |
-| AI Offer | #7c5cfc | linear-gradient(135deg,#7c5cfc,#a78bfa) | #f0ecfe |
+### Compat / legacy (do not use in v2 work)
+- `--accent` / `--accent-light` / `--accent-glow`: repointed from purple to **navy** for back-compat on un-migrated pages.
+- `--blue` `--cyan` `--pink`: DEPRECATED legacy product hues, only on pages pending rebuild/301. Differentiate products via navy/green + icon, not hue.
+- **Red** (#e0475b / `--red`): retained for hot-lead / urgency indicators only.
 
 ## 3. Typography Rules
 

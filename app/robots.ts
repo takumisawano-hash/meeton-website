@@ -51,15 +51,24 @@ const NAMED_CRAWLERS = [
   'OAI-SearchBot',   // ChatGPT search
   'PerplexityBot',   // Perplexity
   'Perplexity-User', // Perplexity browse
-  'ClaudeBot',       // Claude / Anthropic
-  'anthropic-ai',    // Anthropic crawler
-  'Google-Extended', // Google Gemini / AI Overviews opt-in
-  'CCBot',           // Common Crawl (training data)
-  'cohere-ai',       // Cohere
-  'Bytespider',      // ByteDance / Doubao
+  'ClaudeBot',         // Claude / Anthropic crawler
+  'Claude-User',       // Claude browsing on a user's behalf
+  'anthropic-ai',      // legacy Anthropic crawler UA
+  'Google-Extended',   // Google Gemini / AI Overviews opt-in
+  'Applebot-Extended', // Apple Intelligence opt-in
+  'CCBot',             // Common Crawl (training data)
+  'cohere-ai',         // Cohere
+  'Bytespider',        // ByteDance / Doubao
 ]
 
 export default function robots(): MetadataRoute.Robots {
+  // Preview / non-production deploys (the v2 rebuild branch) must NOT be
+  // crawlable — disallow everything so the half-migrated branch on its
+  // *.vercel.app URL never competes with the live site. Production only
+  // gets the real allow/disallow rules below.
+  if (process.env.VERCEL_ENV !== 'production') {
+    return { rules: [{ userAgent: '*', disallow: '/' }] }
+  }
   return {
     rules: [
       { userAgent: '*', allow: ALLOW_PATHS, disallow: DISALLOW_PATHS },
