@@ -319,24 +319,15 @@ const nextConfig = {
         permanent: true,
       },
       // Individual legacy paths
-      {
-        source: '/pricing',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/pricing/',
-        destination: '/',
-        permanent: true,
-      },
+      // /pricing now serves a real page (v2) — redirect removed 2026-05-29.
       {
         source: '/plan',
-        destination: '/',
+        destination: '/pricing/',
         permanent: true,
       },
       {
         source: '/plan/',
-        destination: '/',
+        destination: '/pricing/',
         permanent: true,
       },
       {
@@ -413,22 +404,21 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
-      // 2026-05-19: ROI Simulator 撤去。Calendar Starter pivot 後は
-      // 「リードは来てるのに商談化しない」を学ぶ流れがメインで、
-      // ROI 試算は逆に文脈ノイズに。ウェビナーへ統合誘導。
+      // 2026-05-29: ROI 診断を v2 で /tools/roi として復活。旧 /roi-simulator は
+      // 新ツールへ 301（権威継承）。
       {
         source: '/roi-simulator',
-        destination: '/webinar/',
+        destination: '/tools/roi/',
         permanent: true,
       },
       {
         source: '/roi-simulator/',
-        destination: '/webinar/',
+        destination: '/tools/roi/',
         permanent: true,
       },
       {
         source: '/roi-simulator/:path*',
-        destination: '/webinar/',
+        destination: '/tools/roi/',
         permanent: true,
       },
       // 2026-05-11: GSC index diagnostic で「クロール済み未登録」と判定された
