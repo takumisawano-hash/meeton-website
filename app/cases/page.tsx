@@ -20,7 +20,7 @@ export default async function Page() {
   let cases: { slug: string; name: string; industry?: string; quote?: string; heroMetric?: string; heroMetricLabel?: string }[] = [];
   try {
     const items = await getAllCaseStudies();
-    cases = items.filter((c) => !c.noindex).map((c) => ({ slug: c.slug, name: c.company, industry: c.industry, quote: c.quote || c.description, heroMetric: c.heroMetric, heroMetricLabel: c.heroMetricLabel }));
+    cases = items.filter((c) => !c.noIndex).map((c) => ({ slug: c.slug, name: c.company, industry: c.industry, quote: c.quote || c.description, heroMetric: c.heroMetric, heroMetricLabel: c.heroMetricLabel }));
   } catch { cases = []; }
   if (cases.length === 0) cases = FEATURED_CASES;
 

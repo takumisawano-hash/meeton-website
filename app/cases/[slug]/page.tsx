@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: { absolute: title.slice(0, 70) },
     description: (c.description || c.quote || "").slice(0, 158),
     alternates: { canonical: `/cases/${slug}/` },
-    robots: c.noindex ? { index: false, follow: true } : undefined,
+    robots: c.noIndex ? { index: false, follow: true } : undefined,
     openGraph: { title, description: (c.description || c.quote || "").slice(0, 158), url: `https://dynameet.ai/cases/${slug}/`, type: "article", images: c.heroImage ? [c.heroImage] : undefined },
   };
 }
@@ -89,12 +89,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               {c.quotePerson && <div style={{ fontSize: 13, color: "var(--sub)", marginTop: 10 }}>— {c.quotePerson}</div>}
             </blockquote>
           )}
-          {c.body?.map((b, i) => (
-            <div key={i} style={{ marginBottom: 24 }}>
-              {b.heading && <h2 style={{ fontSize: 20, fontWeight: 800, color: "var(--heading)", margin: "0 0 10px" }}>{b.heading}</h2>}
-              {b.text && <p style={{ fontSize: 16, lineHeight: 1.95, color: "var(--text)", margin: 0 }}>{b.text}</p>}
-            </div>
-          ))}
+          {c.description && (
+            <p style={{ fontSize: 16, lineHeight: 1.95, color: "var(--text)", margin: 0 }}>{c.description}</p>
+          )}
+          <p style={{ marginTop: 28 }}>
+            <Link href="/cases/" style={{ fontSize: 14, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>← 他の導入事例を見る</Link>
+          </p>
         </div>
       </Section>
 
