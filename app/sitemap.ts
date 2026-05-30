@@ -4,6 +4,7 @@ import { getAllCaseStudies } from '@/app/lib/case-studies'
 import { integrations } from '@/lib/integrations-data'
 import { getUpcomingWebinars } from '@/app/lib/webinars-schedule'
 import { allCompareSlugs, alternativeSlugs } from '@/app/lib/compare-data'
+import { allTermSlugs } from '@/app/lib/glossary-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dynameet.ai'
@@ -140,10 +141,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  // Glossary (用語集) — definition pages for AEO.
+  const glossaryPages: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/glossary/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    ...allTermSlugs().map((s) => ({
+      url: `${baseUrl}/glossary/${s}/`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+  ]
+
   return [
     ...staticPages,
     ...comparePages,
     ...alternativePages,
+    ...glossaryPages,
     ...webinarPages,
     ...integrationPages,
     ...blogPosts,

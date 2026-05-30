@@ -8,6 +8,7 @@ import BlogJsonLd from '@/app/components/BlogJsonLd'
 import BreadcrumbJsonLd from '@/app/components/BreadcrumbJsonLd'
 import RelatedPosts from '@/app/components/RelatedPosts'
 import BlogCTA, { BlogInlineCTA } from '@/app/components/BlogCTA'
+import BlogClusterCTA from '@/app/components/v2/BlogClusterCTA'
 import FAQJsonLd, { extractFAQFromContent } from '@/app/components/FAQJsonLd'
 import HowToJsonLd, { extractHowToFromContent } from '@/app/components/HowToJsonLd'
 
@@ -340,6 +341,9 @@ export default async function BlogPostPage({ params }: Props) {
           blocks={blocks}
           inlineCTA={<BlogInlineCTA category={post.category} slug={post.slug} />}
         />
+
+        {/* Cluster internal-link block (§4.8): article → pillar LP + compares */}
+        <BlogClusterCTA category={post.category} tags={post.tags} focusKeyword={post.focusKeyword} title={post.title} />
 
         {/* CTA Section */}
         <BlogCTA category={post.category} slug={post.slug} />
