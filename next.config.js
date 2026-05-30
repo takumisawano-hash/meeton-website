@@ -445,6 +445,22 @@ const nextConfig = {
         permanent: true,
       },
       ...blogRedirects,
+      // ── v2 Phase 6 (2026-05-30): role LPs → /solutions/*, cases → /cases ──
+      { source: '/for/cmo', destination: '/solutions/cmo/', permanent: true },
+      { source: '/for/cmo/', destination: '/solutions/cmo/', permanent: true },
+      { source: '/for/marketing-manager', destination: '/solutions/cmo/', permanent: true },
+      { source: '/for/marketing-manager/', destination: '/solutions/cmo/', permanent: true },
+      { source: '/for/cro', destination: '/solutions/cro/', permanent: true },
+      { source: '/for/cro/', destination: '/solutions/cro/', permanent: true },
+      { source: '/for/inside-sales', destination: '/solutions/sdr/', permanent: true },
+      { source: '/for/inside-sales/', destination: '/solutions/sdr/', permanent: true },
+      { source: '/for', destination: '/solutions/cmo/', permanent: true },
+      { source: '/for/', destination: '/solutions/cmo/', permanent: true },
+      // case studies → /cases (1:1 slug preserved)
+      { source: '/case-studies', destination: '/cases/', permanent: true },
+      { source: '/case-studies/', destination: '/cases/', permanent: true },
+      { source: '/case-studies/:slug', destination: '/cases/:slug/', permanent: true },
+      { source: '/case-studies/:slug/', destination: '/cases/:slug/', permanent: true },
       // ── v2 restructure (2026-05-29): /features/* → root product LPs ──
       // Direct 1:1 301s (no chains) preserve the 2yr authority on moved URLs.
       { source: '/features/meetings', destination: '/calendar/', permanent: true },

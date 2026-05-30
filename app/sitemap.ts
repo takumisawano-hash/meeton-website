@@ -16,7 +16,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/blog/`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${baseUrl}/case-studies/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/cases/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    // Solutions (役割別) + use-cases (瞬間別) + enterprise — MOFU/trust.
+    { url: `${baseUrl}/solutions/cmo/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/solutions/cro/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/solutions/sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/solutions/ceo/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/pre-inquiry/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/post-download/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/revisit/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/nurture/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/enterprise/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     // 2026-05-23 ads relaunch: Phase 1 paid-traffic LPs
     { url: `${baseUrl}/solutions/crm-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/solutions/lead-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
@@ -114,7 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const items = await getAllCaseStudies()
     caseStudies = items.map((c) => ({
-      url: `${baseUrl}/case-studies/${c.slug}/`,
+      url: `${baseUrl}/cases/${c.slug}/`,
       lastModified: c.modifiedDate
         ? new Date(c.modifiedDate)
         : c.publishedDate

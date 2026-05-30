@@ -6,6 +6,7 @@ import { Section, SectionHead, Eyebrow, Card } from "@/app/components/v2/ui";
 import { CLUSTERS } from "@/app/lib/content-clusters";
 import type { GlossaryTerm } from "@/app/lib/glossary-data";
 import { getTerm } from "@/app/lib/glossary-data";
+import { AUTHOR, authorPersonSchema } from "@/app/lib/author";
 
 // Definition-first glossary page (§4.12). The shortDef is a self-contained
 // answer placed first for AEO passage extraction; DefinedTerm + FAQ schema.
@@ -26,6 +27,9 @@ export default function GlossaryLP({ data }: { data: GlossaryTerm }) {
           {/* 結論先出し — AEO snippable answer */}
           <div style={{ background: "var(--navy-2)", border: "1px solid var(--on-navy-border)", borderRadius: 14, padding: "18px 20px", marginTop: 22 }}>
             <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy)", margin: 0 }}>{data.shortDef}</p>
+          </div>
+          <div style={{ marginTop: 16, fontSize: 13, color: "var(--on-navy-sub)" }}>
+            監修: {AUTHOR.name}（{AUTHOR.jobTitle}）
           </div>
         </div>
       </Section>
@@ -100,6 +104,7 @@ export function glossarySchema(data: GlossaryTerm) {
     description: data.shortDef,
     inDefinedTermSet: "https://dynameet.ai/glossary/",
     url: `https://dynameet.ai/glossary/${data.slug}/`,
+    author: authorPersonSchema(),
   };
   const faq =
     data.faq.length > 0
