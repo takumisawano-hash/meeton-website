@@ -1,0 +1,821 @@
+[
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "home",
+    "issue": "Home.tsx は画像を1枚も描画していない（grep で Image/img =0）。実在する顧客ロゴ7点（public/clients/{ggen,edulinx,univis,biztex,domo.svg,ginza-sakuraya,imprexc}）が一切使われず、信頼の核であるロゴウォールが存在しない。同じロゴ群は app/lp/components/LPClient.tsx(37-43行) で既にロゴウォールとして使われており、新homeだけ欠落。Hero直下のproof barは数値3つのみで、ブランド名の社会的証明がゼロ。",
+    "fix": "Hero/Proof bar(Section 2)の直後、または『導入事例』セクションの上に navy 額縁 or white の薄いロゴストリップを新設。LPClient.tsx の clients 配列をそのまま流用し next/image でグレースケール→hoverでカラーのロゴウォールを置く（『◯◯社をはじめ多くのB2B企業が導入』の見出し付き）。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "home",
+    "issue": "連携ロゴ（public/integrations/01_Salesforce〜10_Oracle_Eloqua.png, TimeRex.jpeg）が home に無い。旧 HomePageClient.tsx(619-664行) は実ロゴを描画していたのに、v2 Home はテキストすら無し。ProductLP.tsx(122-138行) でさえ連携を pill テキストで見せているのに、統合プラットフォームを名乗る home に『今のスタックに挿さる』証明が皆無で、CRM/MA連携という主要購買要因が不可視。",
+    "fix": "『どう解くか』(Section 6, navy) の後ろに新セクション『今のスタックに、そのまま挿さる』を追加し、public/integrations の実ロゴ（Salesforce/HubSpot/Slack/Teams/Google Calendar/Zoom/Marketo/Eloqua/TimeRex）を next/image でロゴ列として描画。navy帯なら白背景の角丸チップにロゴを載せる。リンク先は /integrations/。"
+  },
+  {
+    "severity": "high",
+    "category": "a11y",
+    "page": "home",
+    "issue": "Coverage matrix(Section 5, 180-191行)が情報を色だけに依存。strong=緑●(var(--cta))、support=灰○(var(--border2))、空=灰·(var(--border)) で、スクリーンリーダーは『●』『○』『·』としか読まず意味が伝わらない。色弱ユーザーは緑●と灰○の区別が困難。th も scope 属性なし、各セルに代替テキスト/aria-label なし。",
+    "fix": "各データセルに視覚的記号＋スクリーンリーダー専用テキストを併記（例 <span aria-hidden>●</span><span class=sr-only>主に担う</span>）。th に scope=\"col\"/\"row\" を付与。caption 要素でテーブルの目的を明示。色に加え記号サイズ/塗りで強弱を二重符号化済みだが、テキストラベル併記が必須。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "home",
+    "issue": "サーバーコンポーネント＋全inline styleのため、product cards(141行 transition:'border-color .2s')やcase cards、soft-routerカード、本文リンクに :hover/:focus が一切効かない。141行の transition は変化先の hover ルールが無く完全に死んでいる。CTA も token に --cta-hover/--cta-press(#0BD986/#06B86D) があるのに CTAButtons.tsx は background:var(--cta) 固定で hover/active のフィードバックなし。クリック可能要素が静的でアフォーダンス不足。",
+    "fix": "globals/layout の :root CSS に v2 用ホバークラス（例 .v2-card:hover{border-color:var(--cta);box-shadow:...}, .v2-cta:hover{background:var(--cta-hover)}）を追加し、Card/Link/CTAButtons に className を付与。インラインの死 transition は削除。最低限 CTA の :hover/:active と card の border 強調を実装。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "home",
+    "issue": "ページに <main> ランドマークが無い（Home.tsx は <><Nav/>...各 Section...<Footer/></> 構造、各 Section は <section> のみ）。スクリーンリーダー利用者が本文へスキップできず、ランドマークナビが機能しない。Nav にスキップリンクも無い。",
+    "fix": "Home の各コンテンツ Section 群を <main id=\"main\"> でラップ（Hero〜Final CTA を内包、Nav/Footer は外）。併せて Nav 冒頭に視覚的に隠した『本文へスキップ』リンク（href=#main, focus 時のみ表示）を追加。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "home",
+    "issue": "導入事例カード(Section 7, 226-240行)が heroMetric/quote/name のテキストのみで、case-studies.ts に存在する companyLogo / heroImage / quoteAvatar を使っていない。原因は page.tsx(123-130行) の map がこれらフィールドを CaseCard に渡していないこと。結果カードが文字だけで視覚的説得力が弱く、実在ロゴによる信頼補強の機会を逃している。",
+    "fix": "page.tsx の featured マッピングに companyLogo/heroImage を追加し、Home.tsx の CaseCard 型と Card 内で next/image による企業ロゴ（または heroImage サムネ）を描画。Notion 空時の FEATURED_CASES にも logo パス（/clients/biztex.png 等）を持たせ常に視覚要素が出るようにする。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "home",
+    "issue": "創業者写真 public/team/sawano.png が存在し webinar ページ(app/webinar/[slug]/page.tsx:281)で使われているが、home には創業者の顔・声・ビジョンを示す要素が皆無。B2B SaaS LP で『誰が作っているか』の信頼要素（founder note）が欠け、コンバージョンの裏付けが弱い。",
+    "fix": "Final CTA 手前に小さな founder note セクションを追加（navy or white）。/team/sawano.png を next/image で円形表示し、創業者の一言＋氏名/役職を添える。データフォワード規範に合わせ過度に装飾せず、1段落＋写真の構成に。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "home",
+    "issue": "Coverage matrix(163行)は minWidth:560 + overflowX:auto なのでモバイルで横スクロールになるが、スクロール可能であることの視覚的手掛かりが無く、行ヘッダ『瞬間＼機能』が固定されないため何の表か途中で見失う。狭幅では表が最重要セクションなのに体験が劣化。タップ領域も中央寄せ記号のみでセル自体に意味的リンクが無い。",
+    "fix": "テーブルコンテナに右端フェード/影でスクロール可能を示唆、または md 未満では表を『瞬間ごとのカード（各 moment に効く機能を緑タグで列挙）』に切り替えるレスポンシブ分岐を入れる。最低でも1列目セルに position:sticky;left:0;background を付け行ラベルを固定。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "home",
+    "issue": "規範(§3.8 トークン使用)からの逸脱が複数。ui.tsx Eyebrow(70行)で border 色を '#cdeede' とハードコード（トークン化されていない緑系）。CTAButtons.tsx で primary 文字色 '#04231a'(45-46行)・ghost の '#fff'(58行)、Nav.tsx primaryBtn の '#04231a'(459行) など navy/green トークンに無い生hex が散在。再スキン時に追従漏れリスク。",
+    "fix": "緑系の薄border/濃文字を token 化（例 --cta-border:#cdeede, --on-cta:#04231a を :root に追加）し、Eyebrow/CTAButtons/Nav の生hexを var() に置換。少なくとも Home が依存する Eyebrow と CTAButtons の hex を撲滅し、green アクセントの一元管理を徹底。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "home",
+    "issue": "情報のチェックマーク『✓』が Hero の保証行(64-66行)でテキスト文字として直書き。装飾記号がスクリーンリーダーに『チェックマーク』等と読み上げられノイズになる一方、視覚と意味の対応が脆弱。ui.tsx には専用の <Check/> SVG コンポーネントがあるのに未使用で一貫性も欠く。",
+    "fix": "Hero の3つの保証項目を <Check/>(ui.tsx, var(--cta)) ＋テキストの並びに置換し、装飾SVGには aria-hidden を付与。Proof bar 同様トークン緑を使い、絵文字✓の直書きを廃止。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "home",
+    "issue": "緑アクセント #07CB79(var(--cta)) を navy #0F1128 上の大文字(Hero強調 56行 clamp最小34px / Proof数値 88行 40px / PILLARS の k ラベル 213行 12px)に使用。大見出しは大文字扱いで概ね可だが、PILLARS の Speed/Persistence/Context ラベル(12px, 213行)は #07CB79 on navy で小文字サイズのため WCAG AA(4.5:1) を満たさない可能性が高い（コントラスト約4:1）。",
+    "fix": "navy 上の小サイズ緑テキスト（PILLARS k ラベル等）は --cta より明るい緑（例 --cta-hover #0BD986）か白系に変更、もしくはフォントサイズ/太さを上げて large text 基準に乗せる。Proof の40px数値は large text基準で許容だが、12px以下の緑は要見直し。"
+  },
+  {
+    "severity": "low",
+    "category": "conversion",
+    "page": "home",
+    "issue": "『AI SDR の4つの仕事』(Section 4, 137-151行)と『どの仕事から始める？』(Section 8, 254-268行)が実質同じ4プロダクトへのリンク集で重複感が強く、間に挟まる Coverage matrix/How/Cases を跨いで二度同じ選択を迫る。soft-router(Section 8)は質問文リンクだが Section 4 と差別化が弱く、スクロール後半でCV意欲を散らす。",
+    "fix": "Section 8 を『プロダクト一覧の再掲』ではなく『課題ベースの1問診断→最適プロダクト誘導』に振り切る（Section 4 はプロダクト紹介、Section 8 は課題起点と役割を明確化）。または Section 8 を削り Final CTA を前倒しして導線を一本化。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "ProductLP / 全4製品 (calendar・chat・library・email)",
+    "issue": "セクション5「スタック連携」(ProductLP.tsx L120-140) が integrations をテキストのみの pill (<span>Salesforce</span> 等) でレンダリングしている。実ロゴ /public/integrations/{01_Salesforce,02_HubSpot,03_Slack,04_Microsoft_Teams,05_Google_Calendar,06_Google_Chat,07_Zoom,08_Marketo,10_Oracle_Eloqua}.png, TimeRex.jpeg が存在し、HomePageClient.tsx (L619-664, L2136) では既に next/image でロゴwallとして使われている。data.integrations の名称 (Salesforce/HubSpot/Slack/Microsoft Teams/Google Calendar/Google Chat/Zoom 等) はこれら実アセットに1:1で対応するのに、製品LPだけ文字。データフォワード規範(§3.8)・信頼感の両面で弱い。",
+    "fix": "integrations の各名称を実ロゴ画像にマップして表示する。product-lp-data.ts の integrations を {name, logo} 構造に拡張するか、ProductLP側に name→/integrations/*.png のマップを持たせ、next/image で homepage の .logo-item パターン (height 36px, grayscale(.2)→hover 0, border + radius12) を流用。ロゴが無い名称(Outlook/Gmail/Webhook)はテキスト pill にフォールバック。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "ProductLP / proof セクション (全4製品)",
+    "issue": "セクション4 proof (ProductLP.tsx L102-117) は data.proof.source に実名顧客 (calendar=研修業界リーダー, chat=「BizteX 株式会社」, library=「Univis Group」) を載せているのに、対応する顧客ロゴ /public/clients/biztex.png・univis.png が存在するのに使われず、テキストの「— source」のみ。引用の信頼性が大幅に弱い。創業者写真 /public/team/sawano.png も LP 全体で未使用。",
+    "fix": "proof データに logo フィールド(任意)を追加し、quote 横/下に顧客ロゴ(<img height~32, alt=社名)を表示。chat→/clients/biztex.png、library→/clients/univis.png をマップ。匿名ケース(calendar/email)はロゴ無しのままで可。case-studies.ts の companyLogo/heroImage を slug 紐付けで引く設計も検討。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "ProductLP / 全4製品（顧客ロゴwall欠落）",
+    "issue": "製品LPに顧客ロゴwallが一切存在しない。HomePageClient.tsx には .client-logos/.logo-carousel で7社ロゴ(/clients/ggen,edulinx,univis,ginza-sakuraya,biztex,domo.svg,imprexc)を出す確立済みパターンがあるのに、購買検討の山場である製品LPでは社会的証明がproofの引用1件のみ。B2B SaaS の CV 導線として信頼要素が不足。",
+    "fix": "hero 直下 もしくは proof セクション付近に「先進企業に選ばれています」ロゴwallを追加。homepage の CLIENTS 配列(7社, /clients/*.png)を共通化して再利用し、grayscale(1)→hover none・flex-wrap・gap clamp で配置。製品関連の強い社をフィルタ表示も可。"
+  },
+  {
+    "severity": "high",
+    "category": "responsive",
+    "page": "ProductLP / proof セクション (全4製品)",
+    "issue": "proof のグリッド (ProductLP.tsx L103) が gridTemplateColumns: 'auto 1fr' を固定し、ブレークポイント無し。他のグリッド(L54/L70/L150)は全て auto-fit+minmax で折返すのに、ここだけ固定2カラム。メトリックは clamp(48px,8vw,84px) と巨大なため、モバイル幅では auto 列が広く取られ 1fr の引用文が極端に細い縦長カラムに潰れて可読性崩壊。",
+    "fix": "auto-fit/minmax か、もしくはメディアクエリ相当で狭幅時に1カラム積み上げへ。inline style では BP が書けないので、ui.tsx に responsive 対応の2カラムprimitive を用意するか className 化。最低限 gridTemplateColumns を 'minmax(0, auto) 1fr' にして 1fr に min-width:0 を効かせ、狭幅では縦積みにするラッパを足す。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "ProductLP / セクション7 拡張ティーザー (全4製品)",
+    "issue": "セクション7 (ProductLP.tsx L179-194) は <Eyebrow>これは Meeton ai の一部</Eyebrow> の後、視覚的に最も目立つ crossSell 文を <p clamp(20-28px) fontWeight700> で出すだけで見出し要素が無い。このセクションには h2/h3 が存在せず、見出し階層が欠落。スクリーンリーダーのセクションナビゲーションから内容が辿れない。",
+    "fix": "crossSell を <h2>(navy上なので tone dark)に変更するか、SectionHead を使って見出し化。視覚デザインは維持しつつ semantic に h2 を与える。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "ProductLP / hero 信頼バッジ (全4製品)",
+    "issue": "hero の信頼バッジ (ProductLP.tsx L43-47) が '✓ 無料で開始…' など Unicode の✓グリフをテキストで使用。料金セクションでは同じ意味で <Check> SVG(var(--cta)色, aria無)を使っており不統一。✓ テキストは色/グリフのみで意味を伝え、フォント依存で表示が割れる。",
+    "fix": "hero バッジも <Check size=14> SVG + テキストの組合せに統一(green アクセントが効きトークン準拠)。装飾アイコンには aria-hidden を付与。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "ProductLP / 全CTA・リンク (全4製品)",
+    "issue": "ProductLP 内のリンク類(比較 pill L89-96, 料金リンク L172, クロスセル/料金リンク L186-191, FAQカード等)に hover/active/focus スタイルが一切無い(grep で 0件)。CTAButtons.tsx 自体も hover/active/focus-visible が未定義で、押下/フォーカス時の視覚フィードバックが無い。キーボードフォーカスの可視性(WCAG 2.4.7)も欠如。",
+    "fix": "CTAButtons に :hover(背景 var(--cta-hover))/ :active(var(--cta-press))/ :focus-visible(2px outline var(--cta) + offset) を付与。pill・テキストリンクにも hover で色/下線/背景の変化と focus-visible リングを。inline style では擬似クラス不可なので該当要素を className 化し共通 CSS で定義。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "ProductLP / FAQ セクション (全4製品)",
+    "issue": "FAQ (ProductLP.tsx L197-207) が <h3>質問</h3> + <p>回答</p> の静的カードで、開閉(disclosure)UIではない。AEO目的で全文HTML露出は妥当だが、質問数が増えると縦長で走査性が落ちる。色だけ・装飾だけの問題は無いが、インタラクション規約として展開UIが望ましい。",
+    "fix": "<details>/<summary> ベースの accordion にして全文は DOM 内に保持(AEO 維持)しつつ視覚的に折畳む。summary に focus-visible リングと開閉アイコン(chevron)を。サーバーレンダリングのまま JS 不要で実装可。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "ProductLP / 比較・料金・クロスセルリンク (全4製品)",
+    "issue": "リンクラベルが矢印込みの文字列「vs immedio →」「4機能まとめて…→」等で、'→' がテキストとして読み上げられる(L94, L173-174, L187, L190)。装飾矢印の意味付けが無く、また CTAButtons の secondary 'デモを予約' は <a> だがボタン的見た目で、リンク/ボタンの role 区別が曖昧。",
+    "fix": "矢印は <span aria-hidden>→</span> に分離。リンクテキストは行き先が文脈無しでも分かる文言に(例: 'immedio との比較を見る')。アクション系 <a> には適切な aria-label を補い、視覚と semantic を一致させる。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "ProductLP / 差別化カード・比較pill (全4製品)",
+    "issue": "トークン未使用のハードコードが2箇所。差別化カード L72 で background:'#fff'(--bg トークンがあるのに直値)、比較 pill L92 で border:'1px solid #cdeede'(Eyebrow と同じ legacy 直値で、--border 系トークン化されていない)。規範はトークン使用。",
+    "fix": "'#fff'→var(--bg)。'#cdeede' は --cta-light の縁取り用として例えば --cta-border などのトークンを layout.tsx :root に定義し置換(Eyebrow ui.tsx L70 の同値も同時にトークン化)。"
+  },
+  {
+    "severity": "low",
+    "category": "conversion",
+    "page": "ProductLP / proof メトリック ラベル (calendar・library)",
+    "issue": "proof.label が長文(calendar='Meeton ai 経由の商談化率（業界平均20%の約3倍／人材・研修）', library='3ヶ月で受注（Univis Group）。誰が見ているかが分かり提案の質も向上') だが、表示側 L108 で maxWidth:220 固定。巨大メトリックの下で 220px 幅に長文が押し込まれ4〜5行に折返し、視認バランスが崩れる。色だけ依存ではないが情報密度が高すぎ。",
+    "fix": "label を短い主ラベル+補足の2階層に分けるか、maxWidth を緩め(280-320)つつ font-size/line-height を調整。または補足部分を quote 側の出典行に寄せる。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/pricing",
+    "issue": "ページ全体に信頼要素(顧客ロゴ/事例/創業者)が一切ない。public/clients/ に7社のロゴ(ggen, edulinx, univis, ginza-sakuraya, biztex, domo.svg, imprexc)が揃っており、HomePageClient.tsx(L700-711)に clients[] 配列と .client-logos/.client-logo の完成済みロゴウォールCSS(L258-261)があるのに、料金ページは価格表とFAQだけで終わる。料金は最もコンバージョン直前のページで社会的証明が効く面なのに空欄。",
+    "fix": "Hero直下またはバンドルセクションの直後に navy または surface の帯を1つ追加し、homepageの clients[] と .client-logos パターンを流用して『〇〇社が導入』のロゴウォールを置く。next/image で /clients/*.png を height:40 / object-fit:contain、alt に社名(例 alt='G-gen')を付与。グレースケール→hoverでカラーの .logo-item フィルタ(L348-349)を再利用すると規範(green唯一アクセント)を崩さず馴染む。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/pricing",
+    "issue": "支払い・請求まわりのFAQ(L78-79)で『SSO・セキュリティ要件』『CRM連携』『適格請求書』を文字だけで説明しているが、public/integrations/ に Salesforce/HubSpot/Slack/Teams/Google Calendar/Zoom/Marketo 等の連携ロゴが10点あるのに一つも使われていない。Enterprise/Scaleバンドルの『高度CRM連携』(L59)も箇条書きテキストのみで、対応スタックが視覚的に伝わらない。",
+    "fix": "ProductLP.tsx(L119-140)のスタック連携セクションを参考に、バンドル表の下に小さな連携ロゴ列(/integrations/*.png をグレースケールの小サイズ並べ)を追加。各 img に alt(例 alt='HubSpot 連携')を付ける。ProductLPは現状ピル(テキスト)表示なので、料金ページでは実ロゴ画像版にするとより説得力が出る。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "/pricing",
+    "issue": "バンドルカードのCTA(L234-245)・無料CTA(L171-173)・単体Proの『始める →』リンク(L190)はすべてサーバーレンダーのインラインstyleで、:hover/:active/:focus-visible が一切ない。CTAButtonsコンポーネント(client island)も同様にhover無し。価格ページの主要購入導線にホバー/押下フィードバックが無く、クリック可能性とアフォーダンスが弱い。",
+    "fix": "これらのCTAに共通の className を付け、layout.tsx の :root <style> もしくはページ内 <style> に :hover{background:var(--cta-hover)} / :active{background:var(--cta-press)} / :focus-visible{outline:2px solid var(--cta);outline-offset:2px} を定義(--cta-hover #0BD986, --cta-press #06B86D は既にトークン化済み L153)。ghostボタンは hover で border-color:var(--cta) に。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "/pricing",
+    "issue": "おすすめバッジ(L220-221)が緑背景の『おすすめ』テキストのみで、Growthが推奨であることが色(green枠 L219)とバッジ位置だけに依存。さらにバンドルカードの価格『要相談』とそれ以外で表示差を付けているが、スクリーンリーダー利用者にカード間の優劣・推奨が構造的に伝わりにくい。",
+    "fix": "おすすめバッジに aria-label または視覚非依存の語を担保(現状テキストありなので可だが)、Growthカードのコンテナに aria-label='おすすめプラン Growth' を付与。緑枠(highlight)はあくまで装飾とし、推奨は必ずテキスト(『おすすめ』)で担保されている状態を維持する。色覚特性ユーザー向けに枠だけでなくバッジテキストが既にある点は良いが、ghostボタンとの差を text でも明示。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "/pricing",
+    "issue": "FAQが <Card> 内の <h3>+<p> の静的羅列(L258-263)で、開閉アクセシビリティ以前にFAQPage構造化データ(L87-92)とDOMは一致しているものの、全質問が常時展開で長い。また各CardのCheckアイコン(バンドル箇条書き L231)は装飾SVGなのに aria-hidden が無く、SRが意味のない読み上げをする可能性。Hero見出しの緑強調 span(L129 必要な分だけ)も色のみの強調で問題ないが、Checkアイコンの扱いは要対応。",
+    "fix": "ui.tsx の Check コンポーネントの <svg> に aria-hidden=\"true\" focusable=\"false\" を追加(ProductIconも同様)。装飾アイコンをアクセシビリティツリーから除外する。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "/pricing",
+    "issue": "単体Pro表(L181)は minWidth:640、無料表(L161)は minWidth:520 を overflowX:auto でラップしているため、モバイルでは横スクロールが発生する。スクロール可能であることのヒント(影/グラデーション/スクロールバー明示)が無く、狭幅で右側の『含む』『始める →』列(L188-191)が隠れていることに気付きにくい。タップ領域も『始める →』が underline テキストリンクのみで小さい。",
+    "fix": "横スクロールするテーブルにスクロール可能を示すフェード(右端の linear-gradient オーバーレイ)を付けるか、モバイル(<=640px)ではテーブルをカード型(1製品=1カード、価格を大きく、CTAをボタン化)に切り替える。最低限『始める →』のタップ領域を padding で 44x44px 相当に拡大。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "/pricing",
+    "issue": "savings device の帯(L207-216)で border に '1px solid #cdeede'(L210)というハードコードhexを使用。これは Eyebrow(ui.tsx L70)でも使われている緑系の薄ボーダーだが、トークン化されておらずページ/コンポーネント間で重複したマジックナンバー。同様に CTAボタンの文字色 '#04231a'(L172, L221, L239 およびCTAButtons L47)もトークン未定義のハードコード。規範『トークンは layout.tsx :root』からの逸脱。",
+    "fix": "layout.tsx :root に --cta-border:#cdeede(緑系薄ボーダー)と --cta-on:#04231a(緑ボタン上の濃テキスト)を追加し、#cdeede / #04231a の全箇所をトークン参照に置換。これで pricing/Eyebrow/CTAButtons の色が一元管理される。"
+  },
+  {
+    "severity": "low",
+    "category": "asset",
+    "page": "/pricing",
+    "issue": "Enterprise/相談系CTA(L60 demoUrl pricing-enterprise)とFinal CTAの周辺に、創業者(澤野)の顔写真 /team/sawano.png や事例の一言引用が無い。demo予約は人(CRO)に会う行為なので、誰に相談するのかが見えると enterprise問い合わせの心理的ハードルが下がる。webinar/[slug]/page.tsx(L281)で既に /team/sawano.png を使う実績がある。",
+    "fix": "Final CTA(L273-281)またはEnterprise相談導線の近くに、sawano.png + 肩書(『共同創業者 兼 CRO 澤野 拓実』)の小さな顔写真+一言を添える。alt='澤野 拓実(DynaMeet 共同創業者 兼 CRO)'。navy帯の上なのでwhite丸フレームで配置すると規範に合う。"
+  },
+  {
+    "severity": "low",
+    "category": "layout",
+    "page": "/pricing",
+    "issue": "バンドルカードのおすすめバッジ(L220-221)が position:absolute, top:-12, left:24 でカード上端からはみ出す配置。グリッドが auto-fit minmax(260px,1fr)(L217)で1列に折り返した最上段カードや、上のsavings帯(marginBottom 36px L209)との間隔次第ではバッジが詰まって見える可能性。また3層説明のCard内 var(--cta-ink) のラベル(L149)と単体Pro『始める →』が同じ緑トーンで、リンクと非リンクの区別が色だけ。",
+    "fix": "おすすめバッジの親Cardに十分な上マージン(セクション側で marginTop を確保)を保証。第1層ラベル等の非リンク緑テキスト(L149)はリンクでないことを明確にするためフォント/サイズで差別化済みだが、リンク(『始める →』L190)側は underline を維持しテキスト色だけに依存しない区別を保つ。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "app/tools/roi/page.tsx",
+    "issue": "ROI診断ページに実アセット（顧客ロゴwall・創業者写真・EdulinX 60%実績）が一切なく、信頼要素ゼロ。RoiToolは BENCH_MEETING_RATE=60% を試算の上限ベンチに使い、page.tsxの計算説明でも『利用企業ベンチ（最大60%）』と明言しているのに、その根拠であるEdulinXロゴも実績バッジも表示しない。public/clients/ に7社ロゴ（ggen/edulinx/univis/ginza-sakuraya/biztex/domo.svg/imprexc）があり、HomePageClient/LPClientは既に .logo-item / .lp-proof-logo パターンで logo wall を実装済み。診断ツールは『計算根拠を信じてもらう』ページなのに社会的証明が空欄。",
+    "fix": "RoiTool結果カード直下またはFAQ手前（白面）に導入企業 logo wall を追加。LPClientの CLIENTS 配列（/clients/*.png）を流用し、next/image または既存 .logo-item CSS（width:120px;height:36px;object-fit:contain;filter:grayscale(.2)→hover 0）で7社を横並び＋『60%の根拠: EdulinX 経由商談化率』の実績バッジを green アクセントで添える。aria-label=\"導入企業ロゴ\" を付与。"
+  },
+  {
+    "severity": "high",
+    "category": "a11y",
+    "page": "app/tools/roi/RoiTool.tsx",
+    "issue": "全7 input にラベル紐付けが無い。<label>(3つ, L88/93/98) は htmlFor 無しでinputを囲ってもいないただの兄弟要素なので、number入力3つはプログラム的に関連付けされていない。range slider 3本（L90/95/100）と email input（L137-143）には可視ラベルもaria-labelも無く、スクリーンリーダーでは『編集テキスト』『スライダー』としか読まれず何を入力するか不明。range の現在値も読み上げられない。",
+    "fix": "各 number input に id を振り、対応 <label> に htmlFor を付与。range slider 3本には aria-label（例 '月間サイト訪問数 スライダー'）と aria-valuetext で現在値（例 '10,000 件/月'）を付与。email input には id+htmlFor の visually-hidden ラベル、または aria-label='メールアドレス（任意）' を付与。number と range が同じ値を操作するペアであることが伝わるよう aria-describedby でグルーピングするのが望ましい。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "app/tools/roi/RoiTool.tsx",
+    "issue": "結果カード内の主CTA『無料で始める』『デモを予約』(L145-158) と email input(L137) が全てインライン style のみで、:hover / :active / :focus-visible が一切無い。layout.tsx には --cta-hover(#0BD986)/--cta-press(#06B86D) トークンが定義済みなのに未使用。クリック可能性のフィードバックが無く、キーボードフォーカスリングも既定依存で navy 背景上では視認困難。CTAButtons コンポーネント自体も同様にインラインのみだが、診断ツールの『結果→行動』導線はサイト最重要のCV地点。",
+    "fix": "CTA を inline style ではなく className 化し、layout.tsx のグローバルCSSに .roi-cta-primary:hover{background:var(--cta-hover);transform:translateY(-1px)} / :active{background:var(--cta-press)} と、両CTA共通の :focus-visible{outline:2px solid var(--cta);outline-offset:2px} を追加。transition も付ける。CTAButtonsにも同方針を横展開すると一貫する。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "app/tools/roi/RoiTool.tsx",
+    "issue": "試算結果（+N 商談/月, 現状→Meeton ai 値, ①②内訳）が visits/cvr/meetingRate 入力に応じてリアルタイム更新されるのに、結果コンテナ(L108)に aria-live が無い。スクリーンリーダー利用者はスライダー操作後に結果が変わったことを知れず、診断ツールの核心価値（動的フィードバック）が伝わらない。",
+    "fix": "結果カードの数値領域（少なくとも L110 の『+N 商談/月』ブロックと L113-116 のサマリ）を aria-live=\"polite\" の region で囲む。値だけ更新する子要素に付けるとノイズが少ない。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "app/tools/roi/RoiTool.tsx",
+    "issue": "narrow 判定が window.innerWidth<860 の useState+resize リスナー（L40-46）に依存。初回SSR/ハイドレーション時は narrow=false 固定なので、モバイル初回描画で2カラムグリッド(minmax(0,1fr) minmax(0,1.1fr))が一瞬出てから1カラムへ崩れるレイアウトシフト(CLS)が起きうる。また JS 無効環境では常に2カラムのまま。サイトの他セクションは CSS の minmax(260px,1fr) auto-fit でブレークポイントレスに組まれているのと不整合。",
+    "fix": "JS state での切替を廃し、外側グリッドを gridTemplateColumns:'repeat(auto-fit, minmax(320px, 1fr))' などCSS駆動にする（またはコンテナに className を当て layout.tsx の @media(max-width:860px) で 1fr 化）。useEffect/resize リスナーは削除でき、CLS と JS依存も解消。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "app/tools/roi/page.tsx",
+    "issue": "FAQ回答(L29)とCard②(L91)で『利用企業ベンチ（最大60%／業界平均は約20%）』と数値主張するが、出典となる実顧客（EdulinX）の名前・ロゴ・creator/heroImage を一切出さず抽象的。app/lib/case-studies.ts に各社の companyLogo/heroImage があり、HomePageClientは STATS で『60%+ AI経由商談化率 / EdulinX 実績』とソース付き表示している。診断ページだけ匿名ベンチで根拠が弱い。",
+    "fix": "『計算の考え方』セクションの②カードに、EdulinX の companyLogo + 『Meeton ai 経由で商談化率 約60%（EdulinX 実績）』の出典明記を追加し、case-studies へのリンク（/case-studies/edulinx 等）を張る。数値主張と実顧客を紐付けて信頼度を上げる。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "app/tools/roi/RoiTool.tsx",
+    "issue": "結果カードの primary CTA で color:'#04231a'（L148）が直書き。CTAButtons.tsx も同じ #04231a を使うがトークン化されていない。footer CTA の secondary は color:'#fff' 直書き(L155)。緑面上テキスト色のハードコードが分散しており、規範『トークン未使用のハードコード』に抵触。navy/green 規範自体からの逸脱や purple混入は無く配色は健全だが、緑CTA上のインク色だけ未トークン化。",
+    "fix": "layout.tsx :root に --cta-ink-on-green:#04231a（緑ボタン上の濃緑テキスト用）を追加し、RoiTool L148 と CTAButtons の #04231a を var() 参照に統一。"
+  },
+  {
+    "severity": "low",
+    "category": "layout",
+    "page": "app/tools/roi/RoiTool.tsx",
+    "issue": "①②内訳カード(L123-130)が justifyContent:'space-between' で左テキストブロックと右の値(whiteSpace:'nowrap')を両端寄せ。狭幅（モバイル1カラム時、カード幅が縮む）で左の説明文『去る訪問者を会話で掴む → +N リード相当』が長く、右の nowrap 値とぶつかって左テキストが過度に折返し・窮屈になりうる。明示的な min-width 制御や折返し方針が無い。",
+    "fix": "narrow 時は内訳カードを flexDirection:'column'（または gap 確保のうえ右値を下段へ）に切替えるか、左ブロックに minWidth:0 と適切な flex を与え、値は別行に落とせるようにする。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "比較LP全体で実アセット(顧客ロゴ/創業者写真/連携ロゴ/事例画像)を一切使っていない。public/clients/{ggen,edulinx,univis,ginza-sakuraya,biztex,domo,imprexc} のロゴwall、public/team/sawano.png、public/integrations/* が存在するのに、ファイル内に next/image も <img> も無し(grepで0件)。BOFU(比較検討の最終段階)ページなのに視覚的な信頼要素=社会的証明が完全に欠落している。",
+    "fix": "使い分けセクション(L71)とCTAセクション(L97)の間に tone=white の『導入企業』ロゴwallセクションを追加。next/image で public/clients/*.png をグレースケール+横並び(grid auto-fit minmax(120px,1fr)、各ロゴ alt=企業名、height統一)で配置。CRM連携を訴求する行(data.rows の CRM連携)があるので、整合的に public/integrations/{01_Salesforce,02_HubSpot}.png も小さなロゴ列で添えると比較表の主張を視覚補強できる。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "比較→自社優位を主張する文脈で、第三者の裏付け(実顧客の声/事例/創業者)が無い。data.faq/sources はテキストのみで『competitorのほうが実績豊富』と自ら認めている(例 immedio: 上場SaaS導入実績/ISMS、TimeRex: 登録45万人)。対して Meeton 側は実績の可視化ゼロ。比較ページで相手の実績だけが目に入り、自社の信頼担保が弱い。",
+    "fix": "使い分けセクション直後に、案件に関連する case-study(app/lib/case-studies.ts の companyLogo/heroMetric/quote)を1-2件カード表示(Home.tsx L222-247 の導入事例カードを流用)。または創業者の一言+sawano.png を添えた小さな信頼バーを CTA 帯付近に。Home/ProductLP は proof(metric/quote/source)を持つのに CompareLP だけ欠落しているので、最低でも data に proof を1件足して表示する。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "比較表でMeeton列の優位が色だけに依存している。(1) ヘッダ th でMeeton列を color:var(--cta-ink) の緑文字に(L49)、(2) 勝ち行のセルは background:var(--cta-wash)+太字のみ(L57)で、テキスト/アイコンの勝ち印が無い。色覚特性ユーザーや白黒印刷で『どちらが優れているか』が伝わらない(色のみ依存=WCAG 1.4.1違反)。",
+    "fix": "勝ち行のMeetonセルに視覚記号を併記する。例: meetonWins の時セル先頭に <Check size={14}/> か『✓』テキストを置き、aria 的にも『最適』等の visually-hidden ラベルを付与。ヘッダのMeeton列も緑文字+太字だけでなく『◎ おすすめ』のようなテキストバッジを添える。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "横スクロールする比較表(div overflowX:auto, table minWidth:640 L44-45)に、スクロール可能であること/表のキャプションを伝える手段が無い。<table> に <caption>(または aria-label)が無く、スクロールコンテナにも role/tabindex/aria-label が無い。モバイルで表が見切れていることに気づけず、キーボードでスクロールもできない。",
+    "fix": "<table> に視覚的には隠す <caption>(例 `${productName} と ${competitorName} の機能比較`)を追加。overflowX コンテナに role=\"region\" aria-label=\"比較表(横スクロール可)\" tabIndex={0} を付与しキーボードスクロールを許可。モバイル向けに『← 横にスクロール →』のヒントを小さく表示すると親切。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "compare/[slug] (CTAButtons.tsx 経由)",
+    "issue": "全CTA(hero/mid/footer)がインラインstyleの <a> で、:hover / :active / :focus-visible の状態変化が一切無い(CTAButtons.tsx L45-69)。primaryに静的 boxShadow はあるが押下感・ホバー昇格が無く、ghostボタンもホバー不変。クリック可能性のフィードバックが弱く、フォーカスリングも明示されていない(キーボード操作性低下)。",
+    "fix": "CTAButtons をCSS(:hover で background:var(--cta-hover)、:active で var(--cta-press)、translateY、:focus-visible で outline)を当てられる形に。トークンは既に layout.tsx に --cta-hover/--cta-press が定義済みなので未使用を解消。インラインstyleでは擬似クラスが書けないので className + globals.css か CSS Modules へ。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "可視のパンくず(breadcrumb)がUIに無い。route(page.tsx L35)で compareBreadcrumb の JSON-LD は出すが、画面上にナビゲーション用パンくずが描画されない。比較ページは検索流入(BOFU)が多くサイト内回遊の起点になりにくいため、製品LPやホームへの導線が hero 直下に無いのは離脱要因。",
+    "fix": "Nav 直下(hero内 Eyebrow 付近)に visible breadcrumb(ホーム / 比較 / 当ページ)を <nav aria-label=\"パンくず\"> で追加。JSON-LD と内容を一致させる。リンクは --on-navy-sub 系で navy hero に馴染ませる。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "出典(参考・出典)が fontSize:12 / color:var(--sub)(#6B7390)で surface 背景(#F6F8FB)上に表示(L131-136)。本文よりかなり薄く、引用元というEEAT上重要な要素なのにコントラストが弱い(小文字サイズ×低彩度でWCAG AAギリギリ〜不足の懸念)。出典URLが文字列なのにリンクになっておらず検証導線が無い。",
+    "fix": "出典の色を var(--text) に上げ、source 部分は <a href> でリンク化(target/rel付き)。最低 fontSize:13 に。クレームと出典の視認性を上げて citability を担保する。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "使い分けの2カードの枠線が非対称。Meetonカードは border:2px solid var(--cta)(L75)、competitorカードは Card 既定の 1px var(--border)(L83)。意図的な強調だが、横並び auto-fit grid で2pxと1pxが隣接すると高さ・内側パディングがわずかにズレて整列が崩れて見える。",
+    "fix": "competitor カードも border幅を2px(色は var(--border2))に揃えるか、Meeton側を box-shadow/背景(var(--cta-wash))での強調に変えてボーダー幅を1pxで統一し、グリッド整列を保つ。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "compare/[slug] (CompareLP.tsx)",
+    "issue": "th/td のスタイルがコンポーネント外のモジュールスコープ定数(L12-13)でハードコードされ、padding(13px 16px)など他の v2 primitive と粒度が揃っていない。トークンは色のみ var() で値は概ね良いが、テーブル専用スタイルが ui.tsx の共有プリミティブに無いため再利用・一貫性が担保されない。",
+    "fix": "テーブルの th/td スタイルを ui.tsx に共有プリミティブ(例 Table/Th/Td もしくは tableStyles エクスポート)として切り出し、他の比較系ページ(app/compare/* の旧ページ群)と統一。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/solutions/[slug]/, /use-cases/[slug]/ (PlaybookLP, 全9ページ)",
+    "issue": "PlaybookLP.tsx には画像が一切無い（grep: img/Image/logo すべて NONE）。実在する顧客ロゴ7点（public/clients/{ggen,edulinx,univis,ginza-sakuraya,biztex,domo.svg,imprexc}）が未使用で、proof セクションの社会的証明が heroMetric とテキスト名のみ。ホームページ（HomePageClient.tsx L1297-1311 の .lp-proof-logos「先進企業に選ばれています」）には既に完成したロゴウォール実装があるのに、MOFU の本ページ群には信頼バッジ帯が存在しない。",
+    "fix": "proof セクション下、または最終CTA直前に navy 帯のロゴウォールを追加。HomePageClient の .lp-proof-logos パターン（clients 配列 + <img src={c.logo} alt={c.name} width=108 height=32 loading=lazy>）を流用し、`先進企業に選ばれています` ラベル付きで7社ロゴを表示。playbook-data に clients 一覧を import して再利用する。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "proof セクション (PlaybookLP.tsx L75-89)",
+    "issue": "proof の発話者は `— {proof.name}（{proof.industry}）` のテキストのみ。FEATURED_CASES（featured-cases.ts）に companyLogo フィールドが無いため社名ロゴが出せず、引用の権威性が弱い。case-studies.ts には companyLogo/heroImage（L211-212）が存在し、実ロゴ（biztex.png 等）も public/clients にあるのに活用していない。",
+    "fix": "FeaturedCase 型に logo?: string を追加し、edulinx→/clients/edulinx.png、biztex→/clients/biztex.png、univis→/clients/univis.png を設定。proof 内に <img src={proof.logo} alt={proof.name} height={28}> を引用ブロック先頭に配置して引用の出所を視覚的に裏付ける。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "proof / 最終CTA (PlaybookLP.tsx)",
+    "issue": "創業者写真 public/team/sawano.png が未使用。役割別ソリューション（cmo/cro/sdr/ceo）など信頼が重要な MOFU ページで、創業者の声や一言を顔写真付きで添えると説得力が上がるのに、人の要素がゼロ。連携ロゴ（public/integrations の Salesforce/HubSpot/Slack 等）も未掲載で、FAQ で『Salesforce・HubSpot と連携』と書いているのにロゴ証跡が無い。",
+    "fix": "FAQ で連携を謳う本ページには、連携ロゴ帯（HomePageClient L619-664 の integrations 配列パターン）を1行追加して『主要CRM/MAと連携』を視覚化。任意で sawano.png を使った創業者コメント（小さな丸トリミング写真+一言）を proof 近辺に検討。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "proof セクション (PlaybookLP.tsx L77)",
+    "issue": "gridTemplateColumns: 'auto 1fr' が固定で、メディアクエリが一切無い（grep @media → NONE）。モバイルでも巨大な heroMetric（clamp 40-72px）と引用が横並びのまま残り、右カラムの引用文（clamp 17-22px）が狭幅に潰れて折返しが乱れる。inline style のためブレークポイントを当てる手段が無い。",
+    "fix": "proof のグリッドをモバイルで1カラムに落とす。auto-fit/minmax か、Section 直下に className を与えて style タグ + @media (max-width:640px){grid-template-columns:1fr} を当てる（ui.tsx の他セクションは minmax で auto 折返し済みなので同方式が一貫）。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "全 Link CTA (PlaybookLP.tsx L64-66, L85)",
+    "issue": "play の pillar リンク（c.pillarName →）と proof の『他の事例を見る →』が inline style 直書きで、hover/focus/active 状態が皆無（grep :hover/:focus/onMouse → NONE）。クリック可能であることのアフォーダンスが弱く、キーボードフォーカス時の視覚フィードバックも無い。CTAButtons（primary/ghost）も同様に :hover 不在（--cta-hover トークンは定義済みなのに未使用）。",
+    "fix": "テキストリンクは下線 or hover で色変化（--cta-ink→--cta）+ :focus-visible のアウトラインを付与。inline style では不可なので className 化して <style> で .pb-link:hover/:focus-visible を定義。CTAButtons は --cta-hover/--cta-press トークンを使った hover/active を追加（現状 box-shadow のみで状態変化なし）。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "proof セクション (PlaybookLP.tsx L76-89)",
+    "issue": "proof セクションだけ SectionHead（h2）が無く、見出し階層が欠落。他セクション（課題/解決/FAQ）は h2→h3 だが proof は見出しゼロのまま大きな数値と引用が並ぶため、スクリーンリーダーのアウトライン上で文脈不明のセクションになる。また顧客の声が <p> で『「…」』と全角括弧直書きされており、引用のセマンティクス（blockquote/cite）が無い。",
+    "fix": "proof に視覚的に控えめでも良いので h2（例『導入企業の成果』）を追加するか、aria-label を section に付与。引用は <blockquote> + <cite>{proof.name}</cite> に変更し、リテラルの「」は CSS quotes か装飾に寄せて読み上げの重複を避ける。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "ProductIcon 利用箇所 (PlaybookLP.tsx L56-60)",
+    "issue": "解決カードの ProductIcon（SVG）に aria-hidden や role が無く、装飾アイコンとして明示されていない。ui.tsx の ProductIcon は title/aria を持たないため、支援技術が空の svg を読み上げる可能性。色（--cta グリーン）だけで製品種別を示す副次情報にもなっている（pillarName テキストが併記されるので致命ではない）。",
+    "fix": "ProductIcon を囲む div か svg に aria-hidden=\"true\" focusable=\"false\" を付与。製品識別はテキスト（pillarName）で担保されているのでアイコンは純装飾扱いで十分。"
+  },
+  {
+    "severity": "low",
+    "category": "layout",
+    "page": "hero / proof のテキスト幅 (PlaybookLP.tsx L24, L80)",
+    "issue": "proof 左カラムの heroMetricLabel が maxWidth:220 固定。heroMetricLabel 文言は『Meeton ai 経由の商談化率（業界平均20%の約3倍）』と長く、220px 幅では狭い行で多段折返しになり、隣の heroMetric（最大72px）と縦アンバランス。auto カラム幅も内容で伸縮するため整列が読みにくい。",
+    "fix": "左カラムの固定 220px をやめ、グリッドを1カラム化（上記 responsive 修正）した上でラベル幅を緩める、または heroMetricLabel を短縮しデータフォワードに。メトリクスとラベルの行高・余白を揃える。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "解決カード (PlaybookLP.tsx L55)",
+    "issue": "Card に style={{ background:'#fff' }} とハードコードで白を上書きしている。Card 既定が既に background:'#fff'（ui.tsx L157）なので冗長で、かつ tone='surface' 上で白カードを出す意図ならトークン（--bg）を使うべき。規範§3.8 のトークン運用から外れた生 hex。",
+    "fix": "background:'#fff' の上書きを削除（Card 既定で白）。意図的に surface 上で白カードを際立たせたい場合は background:'var(--bg)' に置換してトークン統一。"
+  },
+  {
+    "severity": "low",
+    "category": "conversion",
+    "page": "解決カード CTA (PlaybookLP.tsx L63-67)",
+    "issue": "pillar リンクは pl.product がある play にだけ表示され、product 未設定の play（pre-inquiry 等で全 play に product 有るが将来追加分で空き得る）はリンク無しカードになる。また hero と footer の CTAButtons 以外に中間 CTA が無く、長いページ（課題3+解決3+proof+FAQ）の中盤に予約導線が一切ない。",
+    "fix": "proof セクション内の『他の事例を見る』に加えて、解決セクション末尾か proof 帯に中間 CTA（CTAButtons size=md）を1つ追加し、スクロール中盤の離脱を拾う。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "app/cases/[slug]/page.tsx",
+    "issue": "v2 詳細ページが Notion 本文ブロック (getCaseStudyBlocks) を一切レンダリングしていない。表示されるのは1段落の description のみ。旧 app/case-studies/[slug]/page.tsx は getCaseStudyBlocks で本文全体を描画していたため、v2 化で事例の中身（課題→導入→成果のストーリー）が丸ごと欠落している。CaseStudy.companyNote / employeeSize / usedProducts / integrations も全フィールド未使用で、唯一参照されるのは OG 画像の heroImage のみ。",
+    "fix": "旧 page と同様に `const blocks = await getCaseStudyBlocks(c.id)` を呼び、本文セクションで Notion ブロックレンダラ（旧ページの renderBlock 相当）を white 面に描画する。あわせて companyNote/employeeSize/usedProducts/integrations をメタ chip 群として hero 直下に出す。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "app/cases/[slug]/page.tsx",
+    "issue": "顧客ロゴ (companyLogo)・事例写真 (heroImage)・話者写真 (quoteAvatar) が視覚的に一切使われていない。これらは Notion から取得済み (case-studies.ts:210-212) で旧ページでは next/image 表示していた。最も信頼を生むビジュアル資産がテキストだけのページに置き換わっている。",
+    "fix": "hero(navy 額縁)に companyLogo を白背景チップで配置、white 面に heroImage を角丸16の図版として掲載、blockquote の quotePerson 横に quoteAvatar を円形アバターで添える。next/image を使い alt は `${c.company} ロゴ`/`${c.company} 導入事例`/quotePerson 名。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "app/cases/page.tsx",
+    "issue": "一覧ページに顧客ロゴが全く出ない。各カードは数字+引用+社名テキストのみで、public/clients/{ggen,edulinx,univis,ginza-sakuraya,biztex,domo,imprexc}.png が存在しホームページ (HomePageClient.tsx:701-709) ではロゴウォール化されているのに、事例一覧という最も社会的証明が効く場所でロゴ未活用。",
+    "fix": "各 Card 上部に c.companyLogo（無ければ slug→/clients/*.png のマッピング）を grayscale(.2)→hover で grayscale(0) で表示。さらに hero 帯の下に全顧客ロゴのロゴウォール（HomePageClient の .logo-item パターン流用）を 1 本入れて信頼を底上げする。"
+  },
+  {
+    "severity": "high",
+    "category": "a11y",
+    "page": "app/cases/page.tsx",
+    "issue": "カード全体が <Link> でラップされているが内部にアクセシブルネームの起点となる見出し要素 (h2/h3) が無く、社名は単なる <div>。スクリーンリーダーでは「60%+ Meeton ai 経由の商談化率…研修業界リーダー 人材・研修」と全テキストが連結読みされ、見出しナビゲーションでも社名に飛べない。h1(hero)→次がカード内 div で見出し階層も欠落。",
+    "fix": "社名 div を <h2>（または h3）に変更し、カードの主要ラベルにする。リンクに aria-label={`${c.name} の導入事例を読む`} を付け、装飾的な数字 div は読み上げ重複を避けるため見出しの後に配置。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "app/cases/page.tsx",
+    "issue": "カードグリッドが minmax(300px,1fr)。iPhone SE 等の幅360px・左右パディング24px×2=48px を引くと利用幅312pxで辛うじて1列だが、heroMetricLabel が長文（例『Meeton ai 経由の商談化率（業界平均20%の約3倍）』28字超）で fontSize:13 のまま折返し3行になりカード高さがバラつく。300px は本文ホームの 250px より大きく狭幅端末で余白が窮屈。",
+    "fix": "minmax を 260px 程度に下げて狭幅でのフィットを改善。heroMetricLabel は2行クランプ (display:-webkit-box; -webkit-line-clamp:2) で高さを揃えるか、ラベルを短縮。height:100% は維持しているので line-clamp 併用でカード高さが安定する。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "app/cases/page.tsx",
+    "issue": "カードに hover/focus のアフォーダンスが無い。Link で textDecoration:none、Card は box-shadow 固定・transition 無し。クリック可能要素であることが視覚的に伝わらず（ホームの Home.tsx:141 は transition:'border-color .2s' を付与）、キーボードフォーカス時のリングも default 依存。カード内に『詳しく見る →』のような明示的アクション文言も無い。",
+    "fix": "Card に transition と hover で borderColor:var(--cta)/boxShadow 強調を付ける（client 化が必要なら CSS class で対応）。カード下部に『この事例を読む →』を var(--cta-ink) で追加。:focus-visible で outline:2px solid var(--cta) を当てる。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "app/cases/[slug]/page.tsx",
+    "issue": "stats カードと末尾の戻りリンクで色のみ/階層の問題。stats を <Card> に並べるが各 Card に見出し要素が無く value/label とも div。また CaseStudyStat.context フィールドが型に存在する (case-studies.ts:88-92) のに描画されず、数値の根拠（母数・期間）が出ない＝データフォワード規範に反する。",
+    "fix": "stats の value を <dt>/<dl> もしくは見出し化し、s.context があれば label 下に小さく注記表示。数字に単位・期間が伝わるようにして信頼性を担保する。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "app/cases/[slug]/page.tsx",
+    "issue": "hero の戻りリンク『← 導入事例』(line 57) は color:var(--on-navy-sub)・装飾なしで、本文末の『← 他の導入事例を見る』(line 96) は cta-ink+underline。同義のナビゲーションで見た目が不統一。さらに hero リンクは on-navy-sub(#AEB4D6) のみで下線も無くリンクと判別しづらい（色依存）。",
+    "fix": "両戻りリンクのスタイルを統一。hero 側に下線か矢印アイコン+hover 下線を付け、リンクであることを色以外でも示す。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "app/cases/page.tsx",
+    "issue": "industry/heroMetricLabel に使う var(--sub)=#6B7390 を白(#fff)カード上に置くと一覧の 12〜13px 小文字でコントラスト比が約4.0:1。WCAG AA 通常テキスト4.5:1 をわずかに下回る（大文字扱いにはサイズ不足）。",
+    "fix": "小さい補助テキストは --text(#3F4763, 約7.8:1) を使うか、--sub を使うならサイズを 14px 以上にする。industry は --text 推奨。"
+  },
+  {
+    "severity": "low",
+    "category": "perf",
+    "page": "app/cases/page.tsx",
+    "issue": "一覧/詳細とも次の事例画像やロゴを <img> ではなく未使用。今後ロゴ/写真を入れる際、生 <img> だと CLS・最適化漏れになる。ホームと旧 case-studies は next/image を採用済み。",
+    "fix": "ロゴ/heroImage 追加時は next/image を使い width/height か fill+sizes を指定、loading=lazy、object-fit:contain で統一する。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/enterprise",
+    "issue": "ページ全体に信頼アセットが一切なく、テキストのみ。エンプラ層が最も重視する『他のエンタープライズが導入済みか』を示す顧客ロゴwall(public/clients/{ggen,edulinx,univis,ginza-sakuraya,biztex,domo,imprexc})が存在するのに未使用。home(app/components/HomePageClient.tsx)やuse-casesでは同じロゴが使われており、enterpriseだけ空。",
+    "fix": "hero帯直後の white セクションに、HomePageClient.tsx:1299 と同等の顧客ロゴwall(.client-logos/.client-logo パターン、各 img に alt=社名、hover translateY、768pxで縮小)を移植して『◯社が導入』のソーシャルプルーフを置く。clients 配列(HomePageClient.tsx:700-711)を共通化して import するのが望ましい。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/enterprise",
+    "issue": "REQS の『CRMへの会話ログ自動登録』『高度なCRM連携』は Salesforce/HubSpot を文中で名指ししているのに、用意済みの連携ロゴ(public/integrations/01_Salesforce.png, 02_HubSpot.png, 03_Slack.png, 04_Microsoft_Teams.png, 08_Marketo.png, 10_Oracle_Eloqua.png 等)を一切表示していない。use-cases/saas/page.tsx:96-118 は同ロゴを使用済み。",
+    "fix": "エンタープライズ要件カード群の下に連携ロゴ列(Salesforce/HubSpot/Marketo/Eloqua/Teams/Slack)を img+alt付きで配置。UseCasePageClient.tsx:266-271 の uc-int-card 表示パターン(grayscale→hoverで解除)を流用し、/integrations/ へリンク。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "/enterprise",
+    "issue": "hero(L48)とfooter(L79)のCTAが生の<a>+inline styleで、:hover/:active/フォーカスリングが一切無い。共通の CTAButtons(app/components/v2/CTAButtons.tsx)はGA4/dataLayer conversion発火・dualCTA・whiteSpace nowrap等を備えるのに未使用。手書きCTAはクリックがコンバージョン計測されず、エンプラ導線のCV可視化が落ちる(MEMORY: CV Tracking Broken の懸念領域)。",
+    "fix": "両CTAを <CTAButtons source=\"enterprise-hero\" /> / source=\"enterprise-footer\" tone=\"onNavy\" に置換。少なくとも生<a>のままなら :hover で background var(--cta-hover)、:active で var(--cta-press)、:focus-visible で outline を付与。CTAButtonsへ寄せるのが正。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "/enterprise",
+    "issue": "hero CTA(L48)が単一の『要件を相談する』のみ。§1.2 の常設デュアルCTA(primary=無料で始める/secondary=デモを予約)パターンから逸脱。エンプラでも『まず資料/まず試す』の二択が無いと離脱を取りこぼす。footer も『デモを予約』単独(L78-80 で flexWrap/gap だけ用意され実質1ボタン)。",
+    "fix": "CTAButtons を使い primary(無料で始める or 資料請求)+secondary(デモを予約/要件相談)の2系統にする。最低でも hero に secondary リンク(/security/ や /pricing/ への導線でなく明確なCTA)を追加。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "/enterprise",
+    "issue": "創業者写真(public/team/sawano.png)と事例(app/lib/case-studies.ts の companyLogo/heroImage)が未使用。エンプラ稟議では『誰が作っているか』『近い規模の導入事例』が信頼を左右するが、本ページには人物・事例の顔が一切無い。",
+    "fix": "footer CTA帯の手前に、sawano.png を使った『営業が伴走』を裏付ける創業者/担当者カード、または case-studies.ts から関連事例1-2件(heroImage+企業ロゴ+主要指標)を引いたミニ事例ブロックを追加。Card プリミティブで navy 外/white 面に置く。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "/enterprise",
+    "issue": "要件カードの装飾用 Check アイコン(L60, ui.tsx:224 Check)に aria-hidden が無く、SVGがアクセシブルツリーに露出。さらに『色だけ(green)で完了/対応を示す』表現で、スクリーンリーダー/モノクロでは意味が伝わらない。",
+    "fix": "Check の svg に aria-hidden=\"true\" focusable=\"false\" を付与(ui.tsx の Check 本体に追加)。要件カードは『対応』というテキストラベルや見出しで状態を補い、緑チェック単独の意味依存をなくす。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "/enterprise",
+    "issue": "本文リンク(L70 セキュリティ/連携一覧/料金)は underline+var(--cta-ink)で区別されるが、hero/footer の主要CTA(L48,L79)はボタン見た目なのに <a> でフォーカス可視スタイルが無く、キーボード操作時にどこにフォーカスがあるか不可視。",
+    "fix": "グローバルCSSに :focus-visible のアウトライン(例: outline 2px solid var(--cta) / offset 2px)が無ければCTAに付与。CTAButtons へ移行すれば既存のフォーカス挙動に乗れる。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "/enterprise",
+    "issue": "CTAの文字色が #04231a としてハードコード(L48,L79)。デザイントークン(app/layout.tsx :root)に揃わない素のhex。CTAButtons も同値を持つが、ページ側で個別に書くとトークン未使用の重複ハードコードが増える。",
+    "fix": "CTAButtons に集約して #04231a の重複を排除。直書きを残す場合は --cta-ink-on-green 等のトークン化を検討し、:root へ追加して参照する。"
+  },
+  {
+    "severity": "low",
+    "category": "layout",
+    "page": "/enterprise",
+    "issue": "footer CTA帯(L78-80)は flexWrap+gap+justifyContent center を用意しているがボタンが1個しかなく、レイアウトの意図(複数CTA)と実体が不一致。中央の単独ボタンは視覚的に弱く、navyDeep 帯の余白に対してCTAが小さく見える。",
+    "fix": "secondary CTA(資料請求/料金へ)を追加して2ボタン構成にするか、単独なら size を大きめ(CTAButtons size=\"lg\")にして帯の存在感に見合う重みを持たせる。"
+  },
+  {
+    "severity": "low",
+    "category": "copy",
+    "page": "/enterprise",
+    "issue": "FAQ用 faqSchema(L25-32)に請求書払い・SSO・セキュリティのQ&Aがあるが、これは構造化データ(JSON-LD)としてのみ存在し、ページ本文には対応するFAQ可視ブロックが無い。クローラ向けには出るが、人間の閲覧者には表示されず、Googleのリッチリザルト要件(可視コンテンツと一致)にも反する恐れ。",
+    "fix": "faqSchema と同内容を可視FAQセクション(white面のアコーディオン or Card列)としてページ末尾に描画し、構造化データと表示内容を一致させる。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/glossary/<term> (GlossaryLP.tsx)",
+    "issue": "監修バイラインが「監修: 澤野 拓実（DynaMeet 共同創業者 / CRO）」のプレーンテキストのみ（GlossaryLP.tsx 31-33行）。実アセット public/team/sawano.png が存在し、webinar ページでは 128px のアバター付きスピーカーカード+LinkedIn リンクで表示されている（app/webinar/[slug]/page.tsx 280-298行）のに、E-E-A-T を明示的に狙う用語集（コメント §4.13）で顔写真が一切使われていない。AEO/E-E-A-T の Experience シグナルが視覚的に弱い。",
+    "fix": "GlossaryLP.tsx の監修 div を、next/image の sawano.png（円形 40-48px, alt=AUTHOR.name）+ 氏名/肩書 + AUTHOR.url(/about/) へのリンクを持つ著者カードに置換。webinar の wb-speaker-card と同じ avatar+name+link パターンを流用し、トークン（var(--on-navy-sub) 文字 / var(--on-navy-border) 枠）で navy hero 上に配置。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "/glossary (page.tsx)",
+    "issue": "用語集インデックスページに CTA が一切ない。hero（36-46行）と用語カードグリッド（48-70行）と Footer のみで、CTAButtons の import すらなく、訪問者の次アクション（無料登録/デモ予約/関連ピラー）への導線がゼロ。SEO 流入の受け皿として完全なデッドエンド。",
+    "fix": "末尾の Section tone=\"white\" の後に、GlossaryLP.tsx 84-92行と同じ navyDeep CTA セクション（CTAButtons source=\"glossary-index\" tone=\"onNavy\"）を追加。あわせて hero 下に主要ピラー（Meeton Calendar/Library 等）への内部リンク行を置くと回遊も改善。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "/glossary + /glossary/<term>",
+    "issue": "顧客ロゴwall/社会的証明が両ページとも皆無。public/clients/{ggen,edulinx,univis,ginza-sakuraya,biztex,domo.svg,imprexc} の導入企業ロゴ資産があるのに、用語の定義と CTA の間に信頼要素が一つもなく、CV 直前の説得力が不足。",
+    "fix": "GlossaryLP.tsx の navyDeep CTA セクション直前（または CTA 内）に、グレースケール顧客ロゴの横並び row（next/image, alt 各社名, 高さ揃え 28-32px, flex-wrap, gap）を「導入企業」eyebrow 付きで追加。インデックスページの新規 CTA セクションにも同様に。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "/glossary (page.tsx) + /glossary/<term>",
+    "issue": "クリック可能な Card にホバー/フォーカスの視覚フィードバックが無い。インデックスの用語カード（page.tsx 58-63行）と GlossaryLP の関連プロダクト/関連用語ピル（62-78行）はすべて Link でラップした静的 Card/pill で、hover/active/focus-visible のスタイル変化（border 強調・shadow・translate）が定義されていない。Card は use client でないため :hover も付与できず、キーボード操作時の現在位置も分かりにくい。",
+    "fix": "インデックス用語カードとピルにホバー/フォーカス用の小さな client ラッパ（または :focus-visible を効かせる CSS クラス）を導入し、hover で border を var(--cta) 寄りに・boxShadow を強化、focus-visible で outline: 2px solid var(--cta); outline-offset:2px を付与。最低限グローバル CSS に a:focus-visible のアウトラインを保証する。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "/glossary/<term> (GlossaryLP.tsx) + ui.tsx",
+    "issue": "トークン化されていないハードコード値が残存。GlossaryLP.tsx 62行 background:\"#fff\"（var(--bg) を使うべき）、75行 border:\"1px solid #cdeede\"（緑系の生 hex で §3.8 のトークン外）。同じ #cdeede は ui.tsx の Eyebrow にも存在し、緑アクセントの薄ボーダー用トークンが未定義のまま各所にコピーされている。",
+    "fix": "layout.tsx :root に薄緑ボーダー用トークン（例 --cta-border:#CDEEDE）を追加し、GlossaryLP.tsx の #cdeede と ui.tsx Eyebrow の #cdeede を var(--cta-border) に置換。62行の #fff は var(--bg) に。これで navy/white/green 規範のトークン一元化を維持。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "/glossary/<term> (GlossaryLP.tsx)",
+    "issue": "navy hero 内の「結論先出し」カード（28-30行）と本文・FAQ がすべて固定 px padding/font-size のインライン style で、ブレークポイントが無い。hero の padding:\"18px 20px\" や本文 maxWidth:760 は許容範囲だが、見出し h2 fontSize:22（45行）・FAQ h3 16px などはモバイルでも同一で、特に hero h1 の clamp(30px,4.8vw,46px) に対し結論カードの 17px 本文が相対的に詰まって見える。color 依存ではないが、狭幅でのリズムが粗い。",
+    "fix": "本文・FAQ ブロックの主要 font-size/余白を clamp() 化（例 h2 を clamp(19px,3.4vw,22px)）するか、ui.tsx に共通の本文/小見出しスタイルヘルパを切り出して全 v2 ページで再利用。最低限 hero 結論カードの padding を clamp(16px,4vw,20px) にしモバイルの窮屈さを緩和。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "/glossary (page.tsx)",
+    "issue": "インデックスの用語カードは shortDef を -webkit-line-clamp:3 で 3 行に切り詰めている（61行）が、カード全体が Link でありながら term 見出しと省略本文以外にアフォーダンス（矢印アイコンや「詳しく見る」等）が無く、リンクであることが色だけ/構造だけに依存。クリック領域は確保されているが視覚的なリンク手掛かりが弱い。",
+    "fix": "各カードに小さな緑の矢印（→）アイコンまたは hover で現れる「詳しく」ラベルを追加し、リンクである手掛かりを色以外でも提示。あわせて Link に aria-label={`${t.term} の解説を見る`} を付与してスクリーンリーダーの文脈を補強。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "/glossary (page.tsx) + /glossary/<term> (GlossaryLP.tsx)",
+    "issue": "両ファイルとも import に SectionHead が含まれる（page.tsx 5行 / GlossaryLP.tsx 5行）が、どちらも実際には使用しておらず手書きの h1/h2 をインライン style で組んでいる。未使用 import であると同時に、他 v2 ページが SectionHead を使う中で見出しスタイルが二重定義になり一貫性が崩れる。",
+    "fix": "未使用の SectionHead import を削除するか、インデックスのクラスタ見出し（page.tsx 55行）と GlossaryLP の「よくある質問」見出し（45行）を SectionHead/共通見出しコンポーネントに寄せて、フォント・余白・letterSpacing を他ページと統一する。"
+  },
+  {
+    "severity": "high",
+    "category": "conversion",
+    "page": "/blog (BlogClusterStrip.tsx)",
+    "issue": "BlogClusterStrip は repo 全体で一度も import されていない dead code。実際のブログハブ UI は app/blog/page.tsx → app/components/BlogPageClient.tsx が描画しており、どちらも BlogClusterStrip を呼んでいない（grep で定義箇所のみヒット）。結果、§4.8 が意図する『ハブ→各クラスタ pillar(マネーページ)への内部リンク』『トピック別ナビ』がブログハブに存在せず、内部リンク資産とユーザー導線を丸ごと取りこぼしている。",
+    "fix": "app/components/BlogPageClient.tsx のヒーロー直下（記事グリッドの上）に <BlogClusterStrip /> を実際に描画する。サーバー描画を保ちたいなら app/blog/page.tsx で BlogPageClient の前後に挿入。配置後、5つの pillar リンクが HTML に出ているかを確認。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "/blog (BlogClusterStrip.tsx) / hub 全体",
+    "issue": "ブログハブには顧客ロゴ wall も創業者写真も信頼要素が一切ない。public/clients/{ggen,edulinx,univis,ginza-sakuraya,biztex,domo.svg,imprexc} のロゴは HomePageClient で grayscale ロゴ列として既に使われている（.logo-item img width120 height36 grayscale(.2)→hover0）のに、ブログ側では未活用。読者が記事から離脱する前に社会的証明を見せる機会を失っている。",
+    "fix": "BlogClusterStrip の下、または BlogClusterCTA 内に既存の clients ロゴ wall コンポーネント（HomePageClient の .logo-item パターンを共通化）を再利用して『導入企業』バンドを設置。next/image か <img loading=lazy decoding=async> で grayscale(1)→hover0、height 28-36px、flex-wrap、各 <img alt='{企業名}'>。"
+  },
+  {
+    "severity": "high",
+    "category": "consistency",
+    "page": "BlogClusterCTA.tsx / BlogClusterStrip.tsx",
+    "issue": "色のハードコードが多数あり §3.8 のトークン主義から逸脱。CTA: border '1px solid #cdeede'（2箇所）, ボタン color '#04231a', チップ background '#fff'。Strip: カード background '#fff'。#cdeede/#04231a は :root（app/layout.tsx）に対応トークンが無い裸の hex で、ui.tsx の Eyebrow も同じ #cdeede を裸書きしておりトークン未定義のまま増殖している。将来のブランド調整時に取りこぼす。",
+    "fix": "app/layout.tsx :root に --cta-border:#cdeede と --cta-ink-strong:#04231a を追加し、両ファイルとカード背景の '#fff' を var(--bg) に置換。最低でも #cdeede→新トークン、#04231a→新トークンへ統一。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "BlogClusterCTA.tsx",
+    "issue": "compare チップ（vs immedio / vs DocSend 等）が競合名テキストのみ。記事末の BOFU 比較リンクはロゴ付きの方が認知・クリック率が上がるが、compare-data.ts の CompareData 型には competitorLogo フィールドが無く、TimeRex(public/integrations/TimeRex.jpeg) など実アセットがあるのに紐付けられていない。pillar リンクも ProductIcon すら無くテキストボタン1個のみで視覚的弱い。",
+    "fix": "短期: pillar の主 CTA に ProductIcon(ICON[cid]) を左付与して Strip と視覚統一。中期: CompareData に competitorLogo?:string を追加し、ロゴがある競合（TimeRex 等）はチップ左に 16px の <img alt='{competitorName}'> を表示。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "BlogClusterStrip.tsx",
+    "issue": "見出し階層が崩れている。セクション最上部の『トピック別に読む』が <h2> 等の見出しではなく単なる <div> で、その下のカード見出し（c.label）も <span style block fontWeight800> で実装されている。スクリーンリーダーにとってブログハブのこの主要ナビ群が見出し構造を持たず、ランドマーク/見出しジャンプで辿れない。",
+    "fix": "section に aria-labelledby を付け、『トピック別に読む』を <h2 id> 化。各カードの c.label を見た目を保ったまま <h3>（または役割上は不要なら見出しにせず、section に role/aria-label を付与）にする。最低限セクション見出しを本物の見出し要素にする。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "BlogClusterStrip.tsx / BlogClusterCTA.tsx",
+    "issue": "全リンク/ボタンに hover・active・focus-visible のスタイルが一切ない（inline style のみ、:hover 不可）。Strip のカードも CTA の緑ボタン・チップも、マウスオーバー/フォーカス時の視覚フィードバックが無く、インタラクティブ要素に見えない。HomePageClient はロゴに hover トランジションを付けているのと非対称。キーボード操作時のフォーカスリングも未定義。",
+    "fix": "inline style では擬似クラスを書けないため、これらをトークン化した className（CSS Module か layout.tsx のグローバル CSS）に移し、:hover で border-color: var(--cta) / box-shadow、:focus-visible で outline: 2px solid var(--cta) を付与。緑ボタンは --cta-hover/--cta-press を使う。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "BlogClusterStrip.tsx / BlogClusterCTA.tsx",
+    "issue": "方向性が矢印グリフ『→』テキストのみで伝えられている（Strip の pillarName、CTA の『…を見る →』『c.pillarName →』）。装飾矢印がリンクテキストの一部として読み上げられ、かつ ProductIcon の <svg> には role/aria-hidden が無く、見出しアイコンが意味のある画像として誤読される可能性。色だけ（緑リンク）でリンクと地の文を区別している箇所もある。",
+    "fix": "装飾矢印は aria-hidden な <span> に分離、ProductIcon の svg に aria-hidden='true' を付与（ui.tsx 側）。リンクは色だけでなく下線 or アイコンで識別可能にする。"
+  },
+  {
+    "severity": "low",
+    "category": "responsive",
+    "page": "BlogClusterStrip.tsx",
+    "issue": "グリッドが gridTemplateColumns: repeat(auto-fit, minmax(190px, 1fr))。375px ビューポートでは padding 24px×2 を引くと利用幅 ≈327px となり 190px minmax で 1 列に落ちるので破綻はしないが、5枚のクラスタカードが縦 1 列で間延びする。タップ領域は padding 14/16 で高さ ~50px と最低限。固定 minmax(190px) はモバイルでやや広め。",
+    "fix": "minmax をモバイルで狭める（例 clamp や CSS で 480px 以下は minmax(150px,1fr)）。カードに min-height を与えタップ領域を 48px 以上で安定させる。"
+  },
+  {
+    "severity": "low",
+    "category": "layout",
+    "page": "BlogClusterStrip.tsx",
+    "issue": "ラベル長のばらつきで整列が崩れる。pillarName 行（『Meeton Library →』等）は alignItems: flex-start のためアイコンと2行目テキストの縦位置がカード間で不揃いになりやすく、c.label が2行に折り返すカードだけ高さが増えてグリッド行内で凸凹する。auto-fit 1fr で幅は揃うが高さが揃わない。",
+    "fix": "Link に display:flex; flex-direction を保ちつつ、テキスト側の span を flex:1 にして 2 行目（pillarName）を margin-top:auto で下端揃え、もしくはカードに固定 min-height を与え縦整列を安定させる。"
+  },
+  {
+    "severity": "low",
+    "category": "perf",
+    "page": "BlogClusterStrip.tsx top padding",
+    "issue": "section の padding が '84px 24px 28px' と上だけ 84px の固定値。これはヘッダ高さを当て込んだ magic number で、ブログハブの実レイアウト次第では上方に過剰な余白、モバイルでスクロール初動の無駄が出る。下 28px との非対称も意図不明（§3.8『余白広め』だが上下バランスが崩れている）。",
+    "fix": "上 padding を clamp(48px, 8vw, 84px) 等のレスポンシブ値にし、ヘッダ高はトークン/CSS 変数で吸収。下 padding も同程度に引き上げてバランスを取る。"
+  },
+  {
+    "severity": "high",
+    "category": "a11y",
+    "page": "Nav.tsx (light variant)",
+    "issue": "ドロップダウン開閉ボタン DesktopDropdownTrigger (L212-244) と hamburger ボタン (L364-391) に aria-expanded / aria-haspopup / aria-controls が一切ない。openMenu state は視覚的にしか反映されず、スクリーンリーダー利用者は『製品/活用/リソース』が展開メニューであることも開閉状態も認識できない。トップリンク (topLink) にも aria-current がなく現在地が色のみ（#fff）依存で色だけに依存した情報になっている。",
+    "fix": "DesktopDropdownTrigger に aria-haspopup=\"true\"、aria-expanded={openMenu===id}、aria-controls={`menu-${id}`} を付与し DropdownPanel 側に id と role=\"menu\" を持たせる。hamburger に aria-expanded={mobileOpen} と aria-controls を付与。現在地リンク (topLink/PanelItem/MobileLink) に aria-current={active ? \"page\" : undefined} を追加。"
+  },
+  {
+    "severity": "high",
+    "category": "a11y",
+    "page": "Nav.tsx + Footer.tsx (全variant)",
+    "issue": "全プロジェクトに :focus-visible / outline 定義が存在しない（app/layout.tsx の :root にもCSSファイルにも無し、grep 0件）。Nav/Footer のリンク・ボタン・CTA はすべて inline style で、キーボード操作時のフォーカスリングがブラウザ既定のまま、あるいは navy 背景上で視認困難。キーボードのみの利用者がどこにフォーカスがあるか追えない（WCAG 2.4.7 不適合）。",
+    "fix": "app/layout.tsx の <style> に navy面/white面双方で視認できる :focus-visible リングを追加（例: a:focus-visible,button:focus-visible{outline:2px solid var(--cta);outline-offset:2px;border-radius:8px}）。navy上CTA向けには outline色を #fff か box-shadow リングにするユーティリティclassを用意し各CTAへ付与。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "Footer.tsx",
+    "issue": "実在する連携ロゴ (public/integrations/ に Salesforce/HubSpot/Slack/Teams/Google Calendar/Zoom/Marketo/Eloqua/TimeRex 10点) と顧客ロゴ (public/clients/ に ggen/edulinx/univis/biztex/domo/imprexc/ginza-sakuraya 7点) が存在するのに、footer は『連携一覧』をテキストリンク1本で済ませ、信頼要素(顧客ロゴ/連携ロゴ)を一切表示していない。footer は全ページ共通の信頼ダメ押し位置なのに視覚的trust要素ゼロ。",
+    "fix": "footer の discover grid 下に、連携ロゴの細い帯（grayscale→hoverでcolor、各 next/image 24-28px、alt=サービス名）を1行追加。または『◯◯社が導入』の顧客ロゴ小帯。トークンは on-navy 面なので白背景チップ or opacity調整でnavy上に載せる。LogoWall/IntegrationLogos 共通コンポーネント化（既存タスク UX-1 と整合）。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "Nav.tsx (light desktop dropdown)",
+    "issue": "DropdownPanel が固定 left(200/260/420px) と固定 width(560/520/300px) のハードコード絶対配置 (L324,336,354 と L510)。nav は position:fixed の全幅バーで左右 padding が 40px(desktop) と可変なため、トリガーボタンの実位置と left 定数がズレる。特に 980-1200px の中間幅では『リソース』パネル(left:420,width:300)が画面右端からはみ出す/トリガー直下に来ない。",
+    "fix": "パネルをトリガー <button> を position:relative の wrapper で包み、パネルを left:0 か絶対値ではなく親基準の相対配置にする。または開いたトリガーの getBoundingClientRect を計測して left を算出。最低限 right はみ出しガードとして max-width:calc(100vw - 32px) と right:auto/left clamp を追加。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "Nav.tsx + Footer.tsx (CTA/リンク全般)",
+    "issue": "primaryBtn/ghostBtn/footerリンク に hover・active の状態変化が一切無い。トークンに --cta-hover(#0BD986)/--cta-press(#06B86D) が定義済みなのに primaryBtn は --cta 固定。inline style では :hover が書けず、L227/494 の transition:color も発火するトリガー(:hover)が無いためデッドコード。CTA がクリック可能に見えるフィードバックを欠き、footer リンクも下線/色変化なしで触れるか判別しにくい。",
+    "fix": "CTA とリンクを styled-jsx か layout.tsx のグローバルCSS class（.btn-primary:hover{background:var(--cta-hover)} .btn-primary:active{background:var(--cta-press)} footer a:hover{color:#fff;text-decoration:underline}）へ移行し、inline の transition もそのclassに移す。最低限 CTA に :hover で背景=--cta-hover、:active で --cta-press を付与。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "Nav.tsx + Footer.tsx (useIsMobile)",
+    "issue": "レスポンシブを全面的に JS の useIsMobile(初期値 false) で分岐。SSR/初回描画は常にデスクトップ版を出力し、マウント後に window.innerWidth で再判定→モバイル版に切替わるため、モバイル端末で一瞬デスクトップnav(センターメニュー)が見えてからハンバーガーに化けるレイアウトシフト(CLS)とちらつきが起きる。CSSブレークポイントが皆無。",
+    "fix": "表示分岐を CSS media query 主導に変更（両レイアウトをマークアップ出力し display で出し分け、または container/media query）。少なくとも初期値を SSR で誤らないようにし、JS分岐継続なら初回は両対応のニュートラルレイアウト or visibility 制御で fallback ちらつきを抑止。"
+  },
+  {
+    "severity": "medium",
+    "category": "asset",
+    "page": "Nav.tsx (dark / careers variant)",
+    "issue": "careers nav のロゴ alt が alt=\"DynaMeet\" (L180) で、他の全インスタンス(light/minimal/footer) の alt=\"Meeton ai\" と不一致。同一 /logo.svg に対しブランド名表記が割れており、a11y上の一貫性とブランド表記(Meeton ai 厳守)に反する。",
+    "fix": "L180 の alt を alt=\"Meeton ai\" に統一（Careers バッジは別 span なのでブランド名はMeeton aiで問題なし）。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "Nav.tsx (mobile hamburger icon)",
+    "issue": "ハンバーガーアイコンが3本の <span> で構成され装飾要素だが、ボタン自体の aria-label=\"メニュー\" は開閉どちらでも固定文言。開いている状態でも『メニュー』のままで、閉じる操作だと伝わらない。L386 の opacity 変化も視覚のみ。",
+    "fix": "aria-label を {mobileOpen ? \"メニューを閉じる\" : \"メニューを開く\"} に動的化し、前述の aria-expanded と併用。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "Nav.tsx (primaryBtn / topLink / linkColor)",
+    "issue": "規範トークンは整備済みだがハードコード値が混在。primaryBtn の color:\"#04231a\" (L459)、ghostBtn/mobileの color:\"#fff\"、topLink active の \"#fff\"、DesktopDropdownTrigger の openMenu時 color:\"#fff\" (L219) がトークン化されていない。--on-navy(#FFFFFF) 等の既存トークンがあるのに直値で、テーマ変更耐性とレビュー容易性を損なう。purple や legacy hue の混入は無し(規範color逸脱は無し)。",
+    "fix": "#fff → var(--on-navy)、CTA前景の #04231a は『navy上の濃緑インク』用トークン(例 --cta-ink あるいは新規 --on-cta)へ寄せる。最低限コメントで意図を明示し直値の散在を一元化。"
+  },
+  {
+    "severity": "low",
+    "category": "asset",
+    "page": "Footer.tsx (会社情報領域)",
+    "issue": "創業者写真 public/team/sawano.png が存在するが footer/nav では未使用。footer 下部はロゴ+legalリンク+コピーライトのみで、運営主体の顔が見える信頼要素(代表者写真や代表メッセージ動線)が無い。B2B SaaS の footer としては『誰が作っているか』の trust シグナルが薄い。",
+    "fix": "必須ではないが、footer の会社概要リンク近傍 or /about への導線に代表者サムネ(小)を添える、もしくは about ページで sawano.png を活用（footer自体は最小維持でも可）。footer に入れるなら on-navy 面で円形サムネ+『代表 澤野』程度に留める。"
+  },
+  {
+    "severity": "high",
+    "category": "asset",
+    "page": "app/components/v2/ui.tsx (UI kit) — affects home/pricing/enterprise/cases",
+    "issue": "実アセットが v2 UI kit に一切組み込まれていない。grep の結果 app/components/v2/ 配下に <img / next/image が0件、/clients/ /team/ /integrations/ への参照も0件。public/clients に 7 社の顧客ロゴ(ggen/edulinx/univis/ginza-sakuraya/biztex/domo/imprexc)、public/integrations に 10 連携ロゴ、public/team/sawano.png が存在し、旧 LPClient.tsx / HomePageClient.tsx は使っているのに、新 v2 では完全に未使用。社会的証明(ロゴウォール)も連携ロゴ帯も創業者写真もなく、信頼要素がテキスト統計のみで弱い。",
+    "fix": "ui.tsx に再利用可能な LogoWall コンポーネント(next/image でグレースケール→hover でカラー、固定px禁止で grid auto-fit minmax)と IntegrationLogos コンポーネントを追加。Home.tsx の hero 直下(proof bar 付近)に顧客ロゴウォール、How セクション付近に連携ロゴ帯を配置。pricing/enterprise/cases にも LogoWall を流用。各 <img> に alt='G-gen ロゴ' 等の社名 alt を付与。"
+  },
+  {
+    "severity": "high",
+    "category": "a11y",
+    "page": "app/components/v2/CTAButtons.tsx + app/components/v2/ui.tsx",
+    "issue": "全スタイルが inline で、プロジェクト全体に CSS ファイルも :focus-visible / :hover / :active ルールも存在しない(grep で 0 件確認)。結果、Primary/Secondary CTA(<a>)にフォーカスリングが一切なく、キーボード操作で現在位置が見えない(WCAG 2.4.7 違反)。hover/active も無いためポインタ操作のフィードバックもゼロ。Card の Home.tsx 側 'transition: border-color .2s' も :hover セレクタが無いため死んでいる。",
+    "fix": "layout.tsx の <style> ブロックに a:focus-visible{outline:2px solid var(--cta);outline-offset:2px} など最小限のグローバル focus-visible / hover ルールを追加するか、CTAButtons をクラス付与方式にして CSS で :hover(背景 var(--cta-hover))/ :active(var(--cta-press))/ :focus-visible を定義。ghost ボタンも :hover で border-color とわずかな背景変化を付与。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "app/components/v2/CTAButtons.tsx",
+    "issue": "トークン未使用のハードコード色が混入。primary の color:'#04231a'(暗緑インク)、ghost の onLight 時 color が var(--heading) なのに onNavy 時は生の '#fff'(var(--on-navy) 不使用)。:root には --cta-hover / --cta-press / --cta-ink 等の緑トークンが定義済みなのに CTAButtons は静的状態のみで使っていない。§3.8 のトークン規範から逸脱。",
+    "fix": "'#04231a' を新トークン(例 --cta-ink-on-green)化するか var(--navy-deep) 系で代替、'#fff' を var(--on-navy) に置換。hover/press は var(--cta-hover)/var(--cta-press) を使用。"
+  },
+  {
+    "severity": "medium",
+    "category": "consistency",
+    "page": "app/components/v2/ui.tsx (Eyebrow)",
+    "issue": "Eyebrow の light tone の border が '1px solid #cdeede' と生 hex ハードコード。同コンポーネントの他色は全て var(--cta-light)/var(--cta-ink) 等トークン参照なので一貫性が崩れている。#cdeede はトークン未定義の緑系で、将来トークン変更時に追従しない。",
+    "fix": "#cdeede を :root に --cta-border 等として追加するか、既存の var(--border) もしくは var(--cta-light) を境界に流用してトークン統一。"
+  },
+  {
+    "severity": "medium",
+    "category": "responsive",
+    "page": "app/components/v2/ui.tsx (Section)",
+    "issue": "Section の縦パディングが py(既定80)で固定px、左右は常に '24px' 固定。モバイルでも上下80pxが効き、小画面で間延びする一方、clamp/レスポンシブ調整が無い。inline style のためメディアクエリで縮められない。hero(Home)は paddingTop:128 を直接指定しておりさらに固定。",
+    "fix": "Section の縦パディングを clamp(48px, 8vw, 80px) 等に、左右を clamp(16px, 5vw, 24px) に変更。固定 py を渡す箇所も clamp ベースのトークン(--space-section 等)へ寄せる。"
+  },
+  {
+    "severity": "medium",
+    "category": "a11y",
+    "page": "app/components/v2/ui.tsx (ProductIcon / Check)",
+    "issue": "装飾的 SVG(ProductIcon, Check)に aria-hidden / role 指定が無い。Check は本文の達成/含有を示す装飾だがラベルが無く、スクリーンリーダーが空 graphic として読み上げる可能性。Home の Coverage マトリクスは ●/○/· の記号(色 var(--cta)/var(--border2)/var(--border))だけで強弱を表現しており、色とグリフのみに依存し凡例テキストはあるが th/td に scope/aria が無く非視覚ユーザに伝わりにくい。",
+    "fix": "ProductIcon と Check の <svg> に aria-hidden='true' focusable='false' を付与。意味を持つ Check 用途では隣接テキストで担保。Coverage table の th に scope='col'/scope='row' を付け、●/○ セルに aria-label='主に担う'/'補完する' を付与。"
+  },
+  {
+    "severity": "medium",
+    "category": "conversion",
+    "page": "app/components/v2/ui.tsx (Card) consumed by Home.tsx 4 jobs / cases / soft-router",
+    "issue": "Card が <Link> で全面クリック可能な箇所(Home の製品4カード、cases、soft router)で、Card 自体にカーソルやフォーカス時の視覚変化が無い(hover/active/focus-visible 無し、前述の通り :hover も効かない)。クリック可能であることがマウスでもキーボードでも分かりづらく、CTA カードの誘導力が落ちる。",
+    "fix": "Card にインタラクティブ variant(クラス化 + CSS :hover で border-color:var(--cta)/ box-shadow 強化 / translateY)を追加し、ラップ Link 側に :focus-visible リングを付与。"
+  },
+  {
+    "severity": "low",
+    "category": "layout",
+    "page": "app/components/v2/CTAButtons.tsx",
+    "issue": "両 CTA に whiteSpace:'nowrap' が付き、primaryLabel を長い文言で上書きした場合(例 '今すぐ無料で始める' 以上)に狭幅画面で改行できずはみ出し・横スクロールの恐れ。flexWrap:'wrap' はボタン間の折返しのみでラベル内改行は救えない。",
+    "fix": "nowrap は短ラベル前提なので、長ラベル時のみ解除できるよう size/label に応じて条件分岐するか、min-width 0 とテキスト省略を許容。少なくとも primaryLabel が一定長を超えたら nowrap を外すガードを入れる。"
+  },
+  {
+    "severity": "low",
+    "category": "a11y",
+    "page": "app/components/v2/ui.tsx (SectionHead)",
+    "issue": "SectionHead は常に <h2> を出力。ページ内で見出し階層を制御する手段が無く、複数セクションや入れ子で h2 が連続/不適切なレベルになるリスク。Home の Card 内見出しは <h3> 手書きで、SectionHead(h2)→Card(h3) の前提に依存しており、SectionHead を別レベルで使いたい場面で硬直。",
+    "fix": "SectionHead に as/level プロップ(h2|h3)を追加し、見出しレベルを呼び出し側で制御可能にする。"
+  },
+  {
+    "severity": "low",
+    "category": "consistency",
+    "page": "app/layout.tsx :root (UI kit トークン)",
+    "issue": "§3.8 で purple 禁止だが :root に legacy 製品色(--blue #3b6ff5 / --cyan #0891b2 / --pink #d03ea1 / --red)が残存。コメントで DEPRECATED と明記され v2 では未使用だが、トークンが生きている限り誤用リスクがあり、CLAUDE.md の旧4製品カラー(#7c5cfc purple 含む OffersPageClient)とも併存。v2 UI kit 自体は純守だが供給トークン側に逸脱源が残る。",
+    "fix": "legacy hue を v2 で参照していないことを確認の上、301/リビルド完了後に :root から削除。当面は誤用防止のため lint/コメントで v2 ファイルでの参照を禁止し、--pink(purple系)を最優先で除去候補に。"
+  }
+]

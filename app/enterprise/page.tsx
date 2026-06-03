@@ -4,7 +4,9 @@ import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/ui";
-import { demoUrl } from "@/app/lib/cta-urls";
+import LogoWall from "@/app/components/v2/LogoWall";
+import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
+import FounderNote from "@/app/components/v2/FounderNote";
 
 export const metadata: Metadata = {
   title: { absolute: "エンタープライズ｜Meeton ai — SSO・CRM連携・セキュリティ" },
@@ -45,11 +47,12 @@ export default function Page() {
           <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "18px 0 28px" }}>
             SSO・CRM連携・権限/監査ログ・複数サイト・データ取扱——エンプラ導入の前提を整え、営業が伴走して導入します。
           </p>
-          <a href={demoUrl("enterprise-hero")} style={{ background: "var(--cta)", color: "#04231a", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" }}>
-            要件を相談する
-          </a>
+          <CTAButtons source="enterprise-hero" tone="onNavy" size="lg" />
         </div>
       </Section>
+
+      {/* Customer logo wall — "他のエンタープライズも導入済み" social proof */}
+      <LogoWall tone="surface" heading="エンタープライズを含む各社が導入しています" />
 
       <Section tone="white">
         <SectionHead eyebrow="エンタープライズ要件" title="統制・連携・セキュリティに対応。" />
@@ -67,16 +70,38 @@ export default function Page() {
           ))}
         </div>
         <p style={{ fontSize: 14, color: "var(--sub)", marginTop: 20 }}>
-          セキュリティの詳細は <Link href="/security/" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>セキュリティ</Link>、連携は <Link href="/integrations/" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>連携一覧</Link>、料金は <Link href="/pricing/" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>料金</Link> をご覧ください。
+          セキュリティの詳細は <Link href="/security/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>セキュリティ</Link>、連携は <Link href="/integrations/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>連携一覧</Link>、料金は <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>料金</Link> をご覧ください。
         </p>
+      </Section>
+
+      {/* Integration logos — make the supported stack visible */}
+      <Section tone="surface" py={56}>
+        <SectionHead eyebrow="主要スタックと連携" title="既存のCRM・MA・通知基盤に挿さる。" align="center" />
+        <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Oracle Eloqua", "Microsoft Teams", "Slack"])} />
+      </Section>
+
+      {/* Visible FAQ (matches faqSchema — JSON-LD must mirror visible content) */}
+      <Section tone="white">
+        <SectionHead eyebrow="よくある質問" title="エンタープライズFAQ" align="center" />
+        <div style={{ maxWidth: 800, margin: "0 auto 32px", display: "grid", gap: 14 }}>
+          {faqSchema.mainEntity.map((q) => (
+            <Card key={q.name}>
+              <h3 style={{ fontSize: 16, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{q.name}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.85, color: "var(--text)", margin: 0 }}>{q.acceptedAnswer.text}</p>
+            </Card>
+          ))}
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <FounderNote note="エンタープライズ導入は、私たちが要件確認から伴走します。商談化の現場を経験したチームが、貴社のスタックに合わせて設計します。" />
+        </div>
       </Section>
 
       <Section tone="navyDeep" py={68}>
         <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>要件に合うか、まず相談。</h2>
           <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>30分のデモで、自社要件への適合を具体的に確認できます。</p>
-          <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-            <a href={demoUrl("enterprise-footer")} style={{ background: "var(--cta)", color: "#04231a", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" }}>デモを予約</a>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <CTAButtons source="enterprise-footer" tone="onNavy" size="lg" align="center" />
           </div>
         </div>
       </Section>

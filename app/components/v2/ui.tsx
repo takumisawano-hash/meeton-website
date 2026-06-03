@@ -67,7 +67,7 @@ export function Eyebrow({
         border:
           tone === "dark"
             ? "1px solid var(--on-navy-border)"
-            : "1px solid #cdeede",
+            : "1px solid var(--cta-border)",
         padding: "6px 14px",
         borderRadius: 999,
       }}
@@ -147,12 +147,15 @@ export function SectionHead({
 export function Card({
   children,
   style,
+  className,
 }: {
   children: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }) {
   return (
     <div
+      className={className}
       style={{
         background: "#fff",
         border: "1px solid var(--border)",
@@ -178,6 +181,8 @@ export function ProductIcon({ kind, size = 22 }: { kind: string; size?: number }
     strokeWidth: 1.8,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    focusable: false,
   };
   switch (kind) {
     case "calendar":
@@ -232,6 +237,8 @@ export function Check({ size = 18 }: { size?: number }) {
       strokeWidth="2.4"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
       style={{ flexShrink: 0 }}
     >
       <path d="M20 6 9 17l-5-5" />

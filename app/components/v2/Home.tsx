@@ -4,6 +4,9 @@ import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@/app/components/v2/ui";
 import { PRODUCTS, PRODUCT_ORDER } from "@/app/lib/product-lp-data";
+import LogoWall from "@/app/components/v2/LogoWall";
+import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
+import FounderNote from "@/app/components/v2/FounderNote";
 
 type CaseCard = {
   slug: string;
@@ -33,7 +36,9 @@ const PILLARS = [
 export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] }) {
   return (
     <>
+      <a href="#main" className="v2-skip">本文へスキップ</a>
       <Nav />
+      <main id="main">
 
       {/* 1. Hero (navy) */}
       <Section tone="navy" py={0} style={{ paddingTop: 128, paddingBottom: 40 }}>
@@ -92,6 +97,9 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </div>
       </Section>
 
+      {/* 2.5 Customer logo wall — social proof near first view */}
+      <LogoWall tone="white" />
+
       {/* 3. Why — two-stage problem truth (acquisition gap + conversion gap) */}
       <Section tone="white">
         <SectionHead
@@ -137,8 +145,8 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           {PRODUCT_ORDER.map((slug) => {
             const p = PRODUCTS[slug];
             return (
-              <Link key={slug} href={`/${slug}/`} style={{ textDecoration: "none" }}>
-                <Card style={{ height: "100%", transition: "border-color .2s" }}>
+              <Link key={slug} href={`/${slug}/`} aria-label={`${p.productName} の詳細を見る`} style={{ textDecoration: "none" }}>
+                <Card className="v2-card-link" style={{ height: "100%" }}>
                   <div style={{ color: "var(--cta)", marginBottom: 14 }}>
                     <ProductIcon kind={p.icon} size={26} />
                   </div>
@@ -161,13 +169,14 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         />
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 560, fontSize: 14 }}>
+            <caption className="sr-only">買い手の旅の各瞬間に、Meeton ai の各機能がどう効くか（◎主に担う／◯補完する）の対応表</caption>
             <thead>
               <tr>
-                <th style={{ textAlign: "left", padding: "12px 14px", color: "var(--sub)", fontWeight: 700, borderBottom: "2px solid var(--border)" }}>
+                <th scope="col" style={{ textAlign: "left", padding: "12px 14px", color: "var(--sub)", fontWeight: 700, borderBottom: "2px solid var(--border)" }}>
                   瞬間 ＼ 機能
                 </th>
                 {PRODUCT_ORDER.map((slug) => (
-                  <th key={slug} style={{ padding: "12px 10px", color: "var(--heading)", fontWeight: 800, borderBottom: "2px solid var(--border)", whiteSpace: "nowrap" }}>
+                  <th key={slug} scope="col" style={{ padding: "12px 10px", color: "var(--heading)", fontWeight: 800, borderBottom: "2px solid var(--border)", whiteSpace: "nowrap" }}>
                     {PRODUCTS[slug].productName.replace("Meeton ", "")}
                   </th>
                 ))}
@@ -176,15 +185,15 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
             <tbody>
               {MOMENTS.map((m) => (
                 <tr key={m}>
-                  <td style={{ padding: "12px 14px", fontWeight: 700, color: "var(--heading)", borderBottom: "1px solid var(--border)" }}>{m}</td>
+                  <th scope="row" style={{ textAlign: "left", padding: "12px 14px", fontWeight: 700, color: "var(--heading)", borderBottom: "1px solid var(--border)" }}>{m}</th>
                   {COVERAGE[m].map((c, i) => (
                     <td key={i} style={{ textAlign: "center", padding: "12px 10px", borderBottom: "1px solid var(--border)" }}>
                       {c === "strong" ? (
-                        <span style={{ color: "var(--cta)", fontSize: 18, fontWeight: 800 }}>●</span>
+                        <><span aria-hidden style={{ color: "var(--cta)", fontSize: 18, fontWeight: 800 }}>◎</span><span className="sr-only">主に担う</span></>
                       ) : c === "support" ? (
-                        <span style={{ color: "var(--border2)", fontSize: 16 }}>○</span>
+                        <><span aria-hidden style={{ color: "var(--border2)", fontSize: 16 }}>◯</span><span className="sr-only">補完する</span></>
                       ) : (
-                        <span style={{ color: "var(--border)" }}>·</span>
+                        <><span aria-hidden style={{ color: "var(--border)" }}>·</span><span className="sr-only">対象外</span></>
                       )}
                     </td>
                   ))}
@@ -194,8 +203,8 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           </table>
         </div>
         <p style={{ fontSize: 13, color: "var(--sub)", marginTop: 14 }}>
-          ● 主に担う ／ ○ 補完する。瞬間ごとの詳細は{" "}
-          <Link href="/use-cases/pre-inquiry/" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>活用シーン</Link> へ。
+          ◎ 主に担う ／ ◯ 補完する。瞬間ごとの詳細は{" "}
+          <Link href="/use-cases/pre-inquiry/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>活用シーン</Link> へ。
         </p>
       </Section>
 
@@ -218,22 +227,28 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </div>
       </Section>
 
+      {/* 6.5 Integration logos — "今のスタックに挿さる" proof */}
+      <Section tone="white" py={56}>
+        <SectionHead eyebrow="スタック連携" title="今のスタックに、そのまま挿さる。" align="center" />
+        <IntegrationLogos />
+      </Section>
+
       {/* 7. Cases */}
       {caseStudies.length > 0 && (
         <Section tone="white">
           <SectionHead eyebrow="導入事例" title="成果が、データで出ている。" align="center" />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
             {caseStudies.map((c) => (
-              <Link key={c.slug} href={`/cases/${c.slug}/`} style={{ textDecoration: "none" }}>
-                <Card style={{ height: "100%" }}>
+              <Link key={c.slug} href={`/cases/${c.slug}/`} aria-label={`${c.name} の導入事例を読む`} style={{ textDecoration: "none" }}>
+                <Card className="v2-card-link" style={{ height: "100%" }}>
                   {c.heroMetric && (
                     <div style={{ fontFamily: "var(--fd)", fontSize: 36, fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>
                       {c.heroMetric}
                     </div>
                   )}
-                  {c.heroMetricLabel && <div style={{ fontSize: 13, color: "var(--sub)", margin: "6px 0 14px" }}>{c.heroMetricLabel}</div>}
+                  {c.heroMetricLabel && <div style={{ fontSize: 13, color: "var(--text)", margin: "6px 0 14px" }}>{c.heroMetricLabel}</div>}
                   {c.quote && <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--text)", margin: "0 0 14px" }}>「{c.quote}」</p>}
-                  <div style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)" }}>{c.name}</div>
+                  <h3 style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)", margin: 0 }}>{c.name}</h3>
                   {c.industry && <div style={{ fontSize: 12, color: "var(--sub)" }}>{c.industry}</div>}
                 </Card>
               </Link>
@@ -258,7 +273,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
             { slug: "email", q: "既存リードを追客で再商談化したい" },
           ].map((r) => (
             <Link key={r.slug} href={`/${r.slug}/`} style={{ textDecoration: "none" }}>
-              <Card style={{ display: "flex", gap: 12, alignItems: "center", height: "100%" }}>
+              <Card className="v2-card-link" style={{ display: "flex", gap: 12, alignItems: "center", height: "100%" }}>
                 <span style={{ color: "var(--cta)" }}>
                   <ProductIcon kind={PRODUCTS[r.slug as keyof typeof PRODUCTS].icon} size={22} />
                 </span>
@@ -266,6 +281,13 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
               </Card>
             </Link>
           ))}
+        </div>
+      </Section>
+
+      {/* 8.5 Founder note — who builds this */}
+      <Section tone="white" py={56}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <FounderNote />
         </div>
       </Section>
 
@@ -283,6 +305,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           </div>
         </div>
       </Section>
+      </main>
 
       <Footer />
     </>

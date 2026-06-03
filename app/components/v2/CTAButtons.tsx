@@ -44,7 +44,7 @@ export default function CTAButtons({
 
   const primary: React.CSSProperties = {
     background: "var(--cta)",
-    color: "#04231a",
+    color: "var(--on-cta)",
     padding: pad,
     borderRadius: 12,
     fontSize,
@@ -80,6 +80,7 @@ export default function CTAButtons({
     >
       <a
         href={signupUrl(source)}
+        className="v2-cta-primary"
         style={primary}
         onClick={() => track("free_signup_click", source)}
       >
@@ -87,6 +88,7 @@ export default function CTAButtons({
       </a>
       <a
         href={demoUrl(source)}
+        className="v2-cta-ghost"
         style={ghost}
         onClick={() => track("demo_click", source)}
       >

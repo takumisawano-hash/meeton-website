@@ -152,7 +152,8 @@ export default function RootLayout({
   /* Green — the single accent: action / links / success / energy */
   --cta:#07CB79;--cta-hover:#0BD986;--cta-press:#06B86D;
   --cta-ink:#067A48;          /* darker green for small text/links on white (WCAG) */
-  --cta-light:#E7FBF1;--cta-wash:#F2FCF7;
+  --cta-light:#E7FBF1;--cta-wash:#F2FCF7;--cta-border:#cdeede;
+  --on-cta:#04231a;           /* dark text that sits on a green button */
   --cta-glow:rgba(7,203,121,.28);
 
   /* accent kept for back-compat, repointed to navy (purple removed) */
@@ -168,6 +169,26 @@ export default function RootLayout({
 }
 html{font-feature-settings:'cv02','cv03','cv04','cv11','calt';font-variant-ligatures:contextual;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 body{font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.65}
+/* ===== v2 global interaction states (audit 2026-06-03) ===== */
+/* keyboard focus ring everywhere (none defined before) */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cta);outline-offset:2px;border-radius:6px}
+/* primary green CTA hover/active feedback */
+.v2-cta-primary{transition:background .18s,box-shadow .18s,transform .12s}
+.v2-cta-primary:hover{background:var(--cta-hover)}
+.v2-cta-primary:active{background:var(--cta-press);transform:translateY(1px)}
+/* ghost / secondary CTA */
+.v2-cta-ghost{transition:border-color .18s,background .18s}
+.v2-cta-ghost:hover{border-color:var(--cta)}
+/* clickable card lift */
+.v2-card-link{transition:border-color .2s,box-shadow .2s,transform .2s}
+.v2-card-link:hover{border-color:var(--cta);box-shadow:0 8px 28px rgba(15,17,40,.10);transform:translateY(-2px)}
+/* text link underline-on-hover */
+.v2-link{transition:color .15s}
+.v2-link:hover{color:var(--cta-ink);text-decoration:underline}
+/* screen-reader-only + skip link */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.v2-skip{position:fixed;top:-60px;left:8px;z-index:300;background:var(--cta);color:var(--on-cta);padding:10px 16px;border-radius:10px;font-weight:800;transition:top .2s}
+.v2-skip:focus{top:8px}
 ` }} />
       </head>
       <body>

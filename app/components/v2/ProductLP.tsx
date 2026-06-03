@@ -5,6 +5,7 @@ import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@/app/components/v2/ui";
 import type { ProductLPData } from "@/app/lib/product-lp-data";
 import { COMPARE } from "@/app/lib/compare-data";
+import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
@@ -116,27 +117,10 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
         </div>
       </Section>
 
-      {/* 5. Stack integrations */}
+      {/* 5. Stack integrations (real logos) */}
       <Section tone="white" py={64}>
         <SectionHead eyebrow="スタック連携" title="今のスタックに、そのまま挿さる。" align="center" />
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
-          {data.integrations.map((name) => (
-            <span
-              key={name}
-              style={{
-                fontSize: 14,
-                fontWeight: 700,
-                color: "var(--heading)",
-                background: "var(--surface)",
-                border: "1px solid var(--border)",
-                borderRadius: 999,
-                padding: "10px 18px",
-              }}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
+        <IntegrationLogos items={pickIntegrations(data.integrations)} />
       </Section>
 
       {/* 6. Pricing (this product only) */}

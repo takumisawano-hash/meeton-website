@@ -4,6 +4,9 @@ import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/ui";
+import LogoWall from "@/app/components/v2/LogoWall";
+import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
+import FounderNote from "@/app/components/v2/FounderNote";
 import { signupUrl, demoUrl } from "@/app/lib/cta-urls";
 
 export const metadata: Metadata = {
@@ -136,6 +139,9 @@ export default function Page() {
         </div>
       </Section>
 
+      {/* Customer logo wall — social proof before the price decision */}
+      <LogoWall tone="surface" />
+
       {/* 3-layer explanation */}
       <Section tone="white">
         <SectionHead eyebrow="3層構造" title="無料 → 単体Pro → バンドル。" lede="量を生む無料、最初の課金の単体、目的地のバンドル。崖でなく、段階で上がる設計です。" />
@@ -168,7 +174,7 @@ export default function Page() {
           </table>
         </div>
         <div style={{ marginTop: 20 }}>
-          <a href={signupUrl("pricing-free")} style={{ background: "var(--cta)", color: "#04231a", padding: "13px 26px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" }}>
+          <a href={signupUrl("pricing-free")} className="v2-cta-primary" style={{ background: "var(--cta)", color: "var(--on-cta)", padding: "13px 26px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" }}>
             無料で始める（クレカ不要）
           </a>
         </div>
@@ -187,7 +193,7 @@ export default function Page() {
                   <td style={{ ...td, fontWeight: 800, color: "var(--heading)", whiteSpace: "nowrap" }}>{r.price}</td>
                   <td style={td}>{r.inc}</td>
                   <td style={{ ...td, whiteSpace: "nowrap" }}>
-                    <a href={signupUrl(`pricing-pro-${r.slug}`)} style={{ color: "var(--cta-ink)", fontWeight: 700, textDecoration: "underline" }}>始める →</a>
+                    <a href={signupUrl(`pricing-pro-${r.slug}`)} className="v2-link" style={{ display: "inline-block", color: "var(--cta-ink)", fontWeight: 700, textDecoration: "underline", padding: "10px 4px" }}>始める →</a>
                   </td>
                 </tr>
               ))}
@@ -233,10 +239,11 @@ export default function Page() {
               </ul>
               <a
                 href={b.cta.href}
+                className={b.highlight ? "v2-cta-primary" : "v2-cta-ghost"}
                 style={{
                   marginTop: "auto", textAlign: "center", padding: "12px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none",
                   background: b.highlight ? "var(--cta)" : "transparent",
-                  color: b.highlight ? "#04231a" : "var(--heading)",
+                  color: b.highlight ? "var(--on-cta)" : "var(--heading)",
                   border: b.highlight ? "none" : "1.5px solid var(--border2)",
                   boxShadow: b.highlight ? "0 6px 22px var(--cta-glow)" : "none",
                 }}
@@ -251,6 +258,12 @@ export default function Page() {
         </p>
       </Section>
 
+      {/* Integration logos — show the stack the plans connect to */}
+      <Section tone="white" py={56}>
+        <SectionHead eyebrow="連携" title="主要なCRM・MA・通知基盤とつながります。" align="center" />
+        <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Google Calendar", "Slack", "Microsoft Teams", "Zoom"])} />
+      </Section>
+
       {/* FAQ */}
       <Section tone="white">
         <SectionHead eyebrow="よくある質問" title="料金のFAQ" align="center" />
@@ -263,10 +276,13 @@ export default function Page() {
           ))}
         </div>
         <p style={{ textAlign: "center", marginTop: 24, fontSize: 14 }}>
-          <Link href="/tools/roi/" style={{ color: "var(--cta-ink)", fontWeight: 700, textDecoration: "underline" }}>
+          <Link href="/tools/roi/" className="v2-link" style={{ color: "var(--cta-ink)", fontWeight: 700, textDecoration: "underline" }}>
             まず商談化の余地を試算する（ROI診断）→
           </Link>
         </p>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 28 }}>
+          <FounderNote compact />
+        </div>
       </Section>
 
       {/* Final CTA */}
