@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
 
 // ── Meeton ai v2 global navigation (2026-05-29 rebuild) ──────────────
 // IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [料金を見る][デモを予約]
@@ -29,16 +30,23 @@ type NavProps = {
 
 type Item = { href: string; label: string; sub?: string };
 
-const PRODUCT_ITEMS: Item[] = [
-  { href: "/calendar/", label: "Meeton Calendar", sub: "即フォローで商談化" },
-  { href: "/chat/", label: "Meeton Chat", sub: "訪問者と対話し疑問解消" },
-  { href: "/library/", label: "Meeton Library", sub: "資料共有 + 開封トラッキング" },
-  { href: "/email/", label: "Meeton Email", sub: "1:1 自律フォロー" },
-];
+// Product dropdown grouped by the 3 stages (deck p7 / stages.ts), so the
+// header mirrors the homepage flow: ①掴む・育てる → ②商談化する → ③追客する.
+const STAGE_NAV: { stage: string; transform: string; products: Item[] }[] = STAGES.map((s) => ({
+  stage: `${s.num} ${s.title}`,
+  transform: s.transform,
+  products: s.products.map((p) => ({
+    href: `/${p}/`,
+    label: PRODUCT_IN_STAGE[p].name,
+    sub: PRODUCT_IN_STAGE[p].line,
+  })),
+}));
+// flat list (mobile + back-compat)
+const PRODUCT_ITEMS: Item[] = STAGE_NAV.flatMap((g) => g.products);
 const PLATFORM_ITEM: Item = {
   href: "/",
-  label: "Meeton ai（4機能の統合）",
-  sub: "つなぐと一気通貫の AI SDR",
+  label: "Meeton ai（3ステージの統合）",
+  sub: "掴む→商談化→追客で一気通貫の AI SDR",
 };
 const SOLUTION_ROLES: Item[] = [
   { href: "/solutions/cmo/", label: "CMO / マーケ責任者" },
@@ -47,10 +55,10 @@ const SOLUTION_ROLES: Item[] = [
   { href: "/solutions/ceo/", label: "経営者" },
 ];
 const USE_MOMENTS: Item[] = [
-  { href: "/use-cases/pre-inquiry/", label: "問い合わせ前" },
-  { href: "/use-cases/post-download/", label: "資料 DL 後" },
-  { href: "/use-cases/revisit/", label: "再訪問" },
-  { href: "/use-cases/nurture/", label: "追客" },
+  { href: "/use-cases/pre-inquiry/", label: "問い合わせ前", sub: "① 掴む" },
+  { href: "/use-cases/post-download/", label: "資料 DL 後", sub: "①→② 商談化" },
+  { href: "/use-cases/revisit/", label: "再訪問", sub: "② 商談化 / ③ 追客" },
+  { href: "/use-cases/nurture/", label: "追客", sub: "③ 追客" },
 ];
 const RESOURCE_ITEMS: Item[] = [
   { href: "/blog/", label: "ブログ", sub: "獲得・商談化の実践知" },
@@ -323,10 +331,18 @@ export default function Nav({
 
             {/* Dropdown panels (white reading surface) */}
             {openMenu === "product" && (
-              <DropdownPanel onClose={() => setOpenMenu(null)} left={200} width={560}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
-                  {PRODUCT_ITEMS.map((it) => (
-                    <PanelItem key={it.href} item={it} active={isActive(it.href)} />
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={160} width={760}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+                  {STAGE_NAV.map((g) => (
+                    <div key={g.stage}>
+                      <div style={{ padding: "4px 12px 8px" }}>
+                        <div style={{ fontSize: 13, fontWeight: 800, color: "var(--heading)" }}>{g.stage}</div>
+                        <div style={{ fontFamily: "var(--fm)", fontSize: 11, fontWeight: 700, color: "var(--cta-ink)", marginTop: 2 }}>{g.transform}</div>
+                      </div>
+                      {g.products.map((it) => (
+                        <PanelItem key={it.href} item={it} active={isActive(it.href)} compact />
+                      ))}
+                    </div>
                   ))}
                 </div>
                 <div style={{ borderTop: "1px solid var(--border)", marginTop: 8, paddingTop: 8 }}>
@@ -419,10 +435,15 @@ export default function Nav({
               fontFamily: "var(--fb)",
             }}
           >
-            <MobileGroup title="製品">
-              {[...PRODUCT_ITEMS, PLATFORM_ITEM].map((it) => (
-                <MobileLink key={it.href} item={it} active={isActive(it.href)} />
-              ))}
+            {STAGE_NAV.map((g) => (
+              <MobileGroup key={g.stage} title={`製品 — ${g.stage}（${g.transform}）`}>
+                {g.products.map((it) => (
+                  <MobileLink key={it.href} item={it} active={isActive(it.href)} />
+                ))}
+              </MobileGroup>
+            ))}
+            <MobileGroup title="統合プラットフォーム">
+              <MobileLink item={PLATFORM_ITEM} active={pathname === "/"} />
             </MobileGroup>
             <MobileGroup title="活用 — 役割別">
               {SOLUTION_ROLES.map((it) => (
