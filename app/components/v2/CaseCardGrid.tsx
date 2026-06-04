@@ -33,7 +33,13 @@ export default function CaseCardGrid({ cases }: { cases: CaseCardData[] }) {
               {c.heroImage ? (
                 <Image src={c.heroImage} alt={`${c.name} 導入事例`} fill sizes="(max-width:760px) 100vw, 560px" style={{ objectFit: "cover" }} />
               ) : (
-                <div className="v2-cs-media-fallback" />
+                <div className="v2-cs-media-fallback">
+                  {logo ? (
+                    <Image src={logo} alt={`${c.name} ロゴ`} width={180} height={56} style={{ height: 48, width: "auto", maxWidth: "62%", objectFit: "contain" }} />
+                  ) : (
+                    <span className="v2-cs-fallback-name">{c.name}</span>
+                  )}
+                </div>
               )}
               {c.industry && <span className="v2-cs-tag">{c.industry}</span>}
             </div>
@@ -58,22 +64,26 @@ export default function CaseCardGrid({ cases }: { cases: CaseCardData[] }) {
         );
       })}
       <style>{`
-        .v2-cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
-        .v2-cs-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;text-decoration:none;color:var(--text);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .35s;box-shadow:0 1px 2px rgba(15,17,40,.04)}
-        .v2-cs-card:hover{transform:translateY(-3px);border-color:var(--cta);box-shadow:0 24px 48px -24px rgba(7,203,121,.28)}
-        .v2-cs-media{position:relative;width:100%;aspect-ratio:16/10;background:linear-gradient(135deg,#eef1fb,#e3e8f5);overflow:hidden}
+        /* bigger cards (Takemi: 4件と少ないので旧サイト風に大きく) — 2 columns,
+           larger media + type, so a small set still has presence */
+        .v2-cs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:1080px;margin:0 auto}
+        .v2-cs-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:24px;overflow:hidden;text-decoration:none;color:var(--text);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .35s;box-shadow:0 1px 2px rgba(15,17,40,.04)}
+        .v2-cs-card:hover{transform:translateY(-4px);border-color:var(--cta);box-shadow:0 28px 56px -24px rgba(7,203,121,.30)}
+        .v2-cs-media{position:relative;width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#eef1fb,#e3e8f5);overflow:hidden}
         .v2-cs-media img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
         .v2-cs-card:hover .v2-cs-media img{transform:scale(1.05)}
-        .v2-cs-media-fallback{position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(7,203,121,.16),transparent 50%),radial-gradient(circle at 72% 72%,rgba(15,17,40,.10),transparent 50%),#f3f6fb}
-        .v2-cs-tag{position:absolute;top:14px;left:14px;padding:5px 12px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-radius:999px;font-family:var(--fm);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--sub);box-shadow:0 2px 8px rgba(15,17,40,.06)}
-        .v2-cs-body{padding:22px;display:flex;flex-direction:column;flex:1}
-        .v2-cs-head{min-height:26px;display:flex;align-items:center;margin-bottom:12px}
-        .v2-cs-company{font-size:15px;font-weight:800;color:var(--heading)}
-        .v2-cs-metric-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-        .v2-cs-metric{font-family:var(--fd);font-size:34px;font-weight:800;color:var(--cta);line-height:1}
-        .v2-cs-metric-label{font-size:12.5px;color:var(--text);line-height:1.5}
-        .v2-cs-quote{font-size:14px;line-height:1.75;color:var(--text);margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-        .v2-cs-more{margin-top:auto;font-size:13px;font-weight:700;color:var(--cta-ink)}
+        .v2-cs-media-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,rgba(7,203,121,.14),transparent 55%),radial-gradient(circle at 72% 72%,rgba(15,17,40,.08),transparent 55%),#fff}
+        .v2-cs-fallback-name{font-size:22px;font-weight:800;color:var(--heading)}
+        .v2-cs-tag{position:absolute;top:16px;left:16px;padding:6px 14px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-radius:999px;font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--sub);box-shadow:0 2px 8px rgba(15,17,40,.06)}
+        .v2-cs-body{padding:28px clamp(22px,2.4vw,32px);display:flex;flex-direction:column;flex:1}
+        .v2-cs-head{min-height:30px;display:flex;align-items:center;margin-bottom:14px}
+        .v2-cs-company{font-size:17px;font-weight:800;color:var(--heading)}
+        .v2-cs-metric-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+        .v2-cs-metric{font-family:var(--fd);font-size:clamp(40px,4vw,52px);font-weight:800;color:var(--cta);line-height:1}
+        .v2-cs-metric-label{font-size:14px;color:var(--text);line-height:1.55}
+        .v2-cs-quote{font-size:15px;line-height:1.85;color:var(--text);margin:0 0 16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+        .v2-cs-more{margin-top:auto;font-size:14px;font-weight:700;color:var(--cta-ink)}
+        @media(max-width:680px){.v2-cs-grid{grid-template-columns:1fr}}
       `}</style>
     </div>
   );

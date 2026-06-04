@@ -122,7 +122,7 @@ export default async function Page() {
   }> = []
   try {
     const cases = await getAllCaseStudies()
-    featured = cases.slice(0, 3).map((c) => ({
+    featured = cases.slice(0, 4).map((c) => ({
       slug: c.slug,
       name: c.company,
       industry: c.industry,
