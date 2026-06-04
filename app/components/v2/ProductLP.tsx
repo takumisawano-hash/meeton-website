@@ -6,7 +6,7 @@ import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@
 import type { ProductLPData } from "@/app/lib/product-lp-data";
 import { COMPARE } from "@/app/lib/compare-data";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
-import { stageOf } from "@/app/lib/stages";
+import { stageOf, entryPlanFor, PLANS } from "@/app/lib/stages";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
@@ -15,6 +15,7 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
   const src = data.slug;
   const compares = Object.values(COMPARE).filter((c) => c.product === data.slug);
   const stage = stageOf(data.slug);
+  const entryPlan = entryPlanFor(data.slug);
   return (
     <>
       <Nav />
@@ -49,9 +50,9 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
           </p>
           <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" />
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 22, fontSize: 13, color: "var(--on-navy-sub)" }}>
-            <span>✓ 無料で開始・クレジットカード不要</span>
-            <span>✓ Google / Microsoft ワンクリック</span>
-            <span>✓ ノーコード設置</span>
+            <span>✓ ノーコード設置・既存スタックに連携</span>
+            <span>✓ 30分のデモで自社への効き方を確認</span>
+            <span>✓ 適格請求書（インボイス）対応</span>
           </div>
         </div>
       </Section>
@@ -130,38 +131,31 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
         <IntegrationLogos items={pickIntegrations(data.integrations)} />
       </Section>
 
-      {/* 6. Pricing (this product only) */}
+      {/* 6. Pricing — which plan includes this product (deck p19) */}
       <Section tone="surface">
         <SectionHead
           eyebrow="料金"
-          title={`${data.productName} の料金`}
-          lede="まず無料で。必要になったら単体Proへ。"
+          title={`${data.productName} は「${entryPlan.name}」から`}
+          lede={`${stage.num} ${stage.title}（${stage.transform}）の仕事は ${entryPlan.name}（${entryPlan.price}/月・税抜）から使えます。上位プランにもすべて含まれます。`}
           align="center"
         />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20, maxWidth: 720, margin: "0 auto" }}>
-          <Card>
-            <div style={{ fontFamily: "var(--fm)", fontSize: 13, fontWeight: 700, color: "var(--sub)" }}>無料</div>
-            <div style={{ fontSize: 30, fontWeight: 800, color: "var(--heading)", margin: "6px 0 12px" }}>¥0</div>
-            <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--text)", margin: 0 }}>{data.freeTier}</p>
-          </Card>
-          <Card style={{ border: "2px solid var(--cta)" }}>
-            <div style={{ fontFamily: "var(--fm)", fontSize: 13, fontWeight: 700, color: "var(--cta-ink)" }}>単体Pro</div>
-            <div style={{ fontSize: 30, fontWeight: 800, color: "var(--heading)", margin: "6px 0 12px" }}>
-              {data.proPrice}
-              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--sub)" }}> / 月（税抜）</span>
-            </div>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 8 }}>
-              {data.proIncludes.map((it) => (
-                <li key={it} style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 14, color: "var(--text)" }}>
-                  <Check size={17} /> {it}
-                </li>
-              ))}
-            </ul>
-          </Card>
+        <div style={{ maxWidth: 760, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px,1fr))", gap: 14 }}>
+          {PLANS.map((pl) => {
+            const included = pl.stages.includes(stage.id);
+            return (
+              <Card key={pl.name} style={{ textAlign: "center", border: pl.highlight ? "2px solid var(--cta)" : "1px solid var(--border)", opacity: included ? 1 : 0.5 }}>
+                <div style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)" }}>{pl.name}</div>
+                <div style={{ fontFamily: "var(--fd)", fontSize: 24, fontWeight: 800, color: "var(--heading)", margin: "6px 0 8px" }}>{pl.price}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: included ? "var(--cta-ink)" : "var(--sub)" }}>
+                  {included ? `✓ ${data.productName} を含む` : "—"}
+                </div>
+              </Card>
+            );
+          })}
         </div>
         <div style={{ textAlign: "center", marginTop: 24 }}>
-          <Link href="/pricing" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
-            4機能まとめて Meeton ai で（バンドルなら別々より¥3万お得）→
+          <Link href="/pricing/" className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
+            料金の詳細・トラフィック別の料金を見る →
           </Link>
         </div>
       </Section>
@@ -174,10 +168,10 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
             {data.crossSell}
           </p>
           <div style={{ marginTop: 22, display: "flex", gap: 18, flexWrap: "wrap" }}>
-            <Link href="/" style={{ color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>
-              Meeton ai（4機能の統合）を見る →
+            <Link href="/#stages" style={{ color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>
+              AI SDR の3つの仕事を見る →
             </Link>
-            <Link href="/pricing" style={{ color: "var(--on-navy-sub)", fontWeight: 700, textDecoration: "none" }}>
+            <Link href="/pricing/" style={{ color: "var(--on-navy-sub)", fontWeight: 700, textDecoration: "none" }}>
               料金を見る →
             </Link>
           </div>
@@ -201,10 +195,10 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
       <Section tone="navyDeep" py={72}>
         <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            {data.productName} を、無料で試す。
+            {data.productName} を、デモで体験する。
           </h2>
           <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>
-            クレジットカード不要・ノーコード。今日から動き出します。
+            30分のデモで、自社サイトでの効き方を具体的に確認できます。
           </p>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" />
@@ -246,11 +240,16 @@ export function productAppSchema(data: ProductLPData) {
     publisher: { "@id": "https://dynameet.ai/#organization" },
     offers: {
       "@type": "Offer",
-      price: "0",
+      price: entryPlanPrice(data.slug),
       priceCurrency: "JPY",
-      description: "無料ティアあり（クレジットカード不要）。単体Proは" + data.proPrice + "/月（税抜）。",
+      description: `${entryPlanFor(data.slug).name}（${entryPlanFor(data.slug).price}/月・税抜）から利用可能。`,
     },
   };
+}
+
+const PLAN_PRICE_NUM: Record<string, string> = { capture: "120000", convert: "180000", follow: "240000" };
+function entryPlanPrice(slug: ProductLPData["slug"]): string {
+  return PLAN_PRICE_NUM[stageOf(slug).id];
 }
 
 const PRODUCT_PATH = (slug: string) => `https://dynameet.ai/${slug}`;

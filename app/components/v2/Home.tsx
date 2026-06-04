@@ -57,7 +57,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           </p>
           <CTAButtons source="home-hero" tone="onNavy" size="lg" />
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 20, fontSize: 13, color: "var(--on-navy-sub)" }}>
-            <span>✓ 無料で開始・クレジットカード不要</span>
+            <span>✓ 30分のデモで自社への効き方を確認</span>
             <span>✓ Google / Microsoft ワンクリック</span>
             <span>✓ ノーコード設置</span>
           </div>
@@ -233,7 +233,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
             待つWebサイトを、卒業する。
           </h2>
           <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>
-            無料・クレジットカード不要。今日から AI SDR が動き出します。
+            30分のデモで、自社サイトにAI SDRを配属する具体策が見えます。
           </p>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <CTAButtons source="home-footer" tone="onNavy" size="lg" align="center" />

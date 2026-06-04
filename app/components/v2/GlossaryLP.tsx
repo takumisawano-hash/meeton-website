@@ -91,7 +91,7 @@ export default function GlossaryLP({ data }: { data: GlossaryTerm }) {
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
             {data.term} を、実際に動かす。
           </h2>
-          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>Meeton ai なら無料・クレジットカード不要で today から。</p>
+          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>30分のデモで、Meeton ai の効き方を具体的に確認できます。</p>
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`glossary-${data.slug}`} tone="onNavy" size="lg" align="center" /></div>
         </div>
       </Section>

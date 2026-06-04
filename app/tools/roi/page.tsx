@@ -115,7 +115,7 @@ export default function Page() {
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
             余地を、実際に動かす。
           </h2>
-          <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>無料・クレジットカード不要。今日から試算を現実に。</p>
+          <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>30分のデモで、試算を現実の商談化プランに。</p>
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source="roi-footer" tone="onNavy" size="lg" align="center" /></div>
         </div>
       </Section>

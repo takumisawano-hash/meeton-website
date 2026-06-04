@@ -105,9 +105,9 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
       <Section tone="navyDeep" py={68}>
         <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            まずは無料で、試す。
+            まずは、デモで確かめる。
           </h2>
-          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>クレジットカード不要。今日から商談化を動かせます。</p>
+          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>30分のデモで、自社の商談化の進め方が具体的に見えます。</p>
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" /></div>
         </div>
       </Section>

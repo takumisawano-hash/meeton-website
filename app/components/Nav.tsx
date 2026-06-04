@@ -6,14 +6,16 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 // ── Meeton ai v2 global navigation (2026-05-29 rebuild) ──────────────
-// Spec §1.2 IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [無料で始める][デモを予約]
+// IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [料金を見る][デモを予約]
+// (2026-06-04 sales-led pivot: free tier removed, demo is the primary CTA)
 // Spec §3.8 design: navy = frame → the header bar itself is navy with a
 // white wordmark; dropdown panels are white (reading/decision surface).
 // green (#07CB79 / --cta) is the single accent → primary CTA + hovers.
 // Dual CTA is permanent on every page (§1.2): never collapse to one.
 
-const SIGNUP_URL =
-  "https://app.dynameet.ai/signup?utm_source=website&utm_medium=nav&utm_campaign=free-signup";
+// 2026-06-04 sales-led pivot (deck p19, free tier removed): primary CTA is
+// demo booking, secondary is the pricing page.
+const PRICING_URL = "/pricing/";
 const DEMO_URL =
   "https://dynameet.ai/?calendarId=takumi-sawano&showChat=true&utm_source=website&utm_medium=nav&utm_campaign=demo";
 const CAREERS_APPLY_URL =
@@ -141,11 +143,11 @@ export default function Nav({
           />
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
-          <a href={DEMO_URL} style={ghostBtn(isMobile)}>
-            デモを予約
+          <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(isMobile)}>
+            料金を見る
           </a>
-          <a href={SIGNUP_URL} style={primaryBtn(isMobile)}>
-            無料で始める
+          <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(isMobile)}>
+            デモを予約
           </a>
         </div>
       </nav>
@@ -311,11 +313,11 @@ export default function Nav({
 
             {/* Dual CTA — permanent */}
             <div style={{ display: "flex", gap: 10, flexShrink: 0 }}>
-              <a href={DEMO_URL} style={ghostBtn(false)}>
-                デモを予約
+              <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(false)}>
+                料金を見る
               </a>
-              <a href={SIGNUP_URL} style={primaryBtn(false)}>
-                無料で始める
+              <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(false)}>
+                デモを予約
               </a>
             </div>
 
@@ -438,11 +440,11 @@ export default function Nav({
               ))}
             </MobileGroup>
             <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 16 }}>
-              <a href={DEMO_URL} style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                デモを予約
+              <a href={PRICING_URL} className="v2-cta-ghost" style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                料金を見る
               </a>
-              <a href={SIGNUP_URL} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                無料で始める
+              <a href={DEMO_URL} className="v2-cta-primary" style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                デモを予約
               </a>
             </div>
           </div>

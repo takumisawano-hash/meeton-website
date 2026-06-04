@@ -98,7 +98,7 @@ export default function CompareLP({ data, mode = "compare" }: { data: CompareDat
         <div style={{ maxWidth: 720 }}>
           <Eyebrow tone="dark">{data.productName}</Eyebrow>
           <p style={{ fontSize: "clamp(20px,3vw,28px)", lineHeight: 1.6, color: "var(--on-navy)", fontWeight: 700, margin: "16px 0 20px" }}>
-            まずは無料で、{data.productName} を試す。
+            {data.productName} を、デモで体験する。
           </p>
           <div style={{ display: "flex", gap: 18, flexWrap: "wrap", alignItems: "center" }}>
             <CTAButtons source={`${src}-mid`} tone="onNavy" size="md" />
@@ -143,9 +143,9 @@ export default function CompareLP({ data, mode = "compare" }: { data: CompareDat
       <Section tone="navyDeep" py={68}>
         <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            迷ったら、無料で両方の手触りを。
+            迷ったら、デモで両方の使い勝手を。
           </h2>
-          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>クレジットカード不要。{data.productName} は今日から動きます。</p>
+          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>30分のデモで、{data.productName} の効き方を具体的に確認できます。</p>
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" /></div>
         </div>
       </Section>

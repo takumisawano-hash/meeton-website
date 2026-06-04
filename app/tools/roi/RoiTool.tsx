@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { signupUrl, demoUrl } from "@/app/lib/cta-urls";
+import { demoUrl, pricingUrl } from "@/app/lib/cta-urls";
 
 // Client-side ROI / 商談化の余地 calculator (§2.6). Two-stage model:
 //   ① 獲得の余地  = いま黙って去る訪問者を会話で掴む分
@@ -36,7 +36,6 @@ export default function RoiTool() {
   const [visits, setVisits] = useState(10000);
   const [cvr, setCvr] = useState(1); // 現状の問い合わせ/フォームCV率 %
   const [meetingRate, setMeetingRate] = useState(20); // 現状の商談化率 %
-  const [email, setEmail] = useState("");
   const [narrow, setNarrow] = useState(false);
   useEffect(() => {
     const check = () => setNarrow(window.innerWidth < 860);
@@ -70,13 +69,12 @@ export default function RoiTool() {
   // 規模はトラフィックで判定（試算商談数で判定すると小規模でも誤発火する）。
   const enterpriseScale = visits >= 50000;
 
-  const onCta = (kind: "signup" | "demo") => {
+  const onCta = (kind: "demo" | "pricing") => {
     track("roi_complete", {
       source: "tools-roi",
       cta: kind,
       visits, cvr, meeting_rate: meetingRate,
       extra_meetings: Math.round(r.extraMeetings),
-      has_email: email.length > 3,
     });
   };
 
@@ -132,29 +130,24 @@ export default function RoiTool() {
 
         <div style={{ borderTop: "1px solid var(--on-navy-border)", paddingTop: 18 }}>
           <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 10 }}>
-            {enterpriseScale ? "規模が大きいので、設計から相談がおすすめ。" : "この余地を、無料で動かし始める。"}
+            {enterpriseScale ? "規模が大きいので、設計から相談がおすすめ。" : "この余地を、デモで具体化する。"}
           </div>
-          <input
-            style={{ ...inputS, marginBottom: 10 }}
-            type="email"
-            placeholder="メールアドレス（任意・結果の控えに）"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <a
-              href={signupUrl("tools-roi") + (email ? `&email=${encodeURIComponent(email)}` : "")}
-              onClick={() => onCta("signup")}
-              style={{ flex: "1 1 auto", textAlign: "center", background: "var(--cta)", color: "#04231a", padding: "13px 22px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" }}
-            >
-              無料で始める
-            </a>
             <a
               href={demoUrl("tools-roi")}
               onClick={() => onCta("demo")}
-              style={{ flex: "1 1 auto", textAlign: "center", background: "transparent", color: "#fff", padding: "13px 22px", borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: "none", border: "1.5px solid var(--on-navy-border)" }}
+              className="v2-cta-primary"
+              style={{ flex: "1 1 auto", textAlign: "center", background: "var(--cta)", color: "var(--on-cta)", padding: "13px 22px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" }}
             >
               デモを予約
+            </a>
+            <a
+              href={pricingUrl()}
+              onClick={() => onCta("pricing")}
+              className="v2-cta-ghost"
+              style={{ flex: "1 1 auto", textAlign: "center", background: "transparent", color: "#fff", padding: "13px 22px", borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: "none", border: "1.5px solid var(--on-navy-border)" }}
+            >
+              料金を見る
             </a>
           </div>
         </div>

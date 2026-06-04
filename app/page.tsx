@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
   },
   description:
-    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層に会話で踏み込み、資料提案・予約・追客まで自律でこなして、獲得から商談化まであらゆる瞬間を商談に変えます。無料で開始（クレジットカード不要）。',
+    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層を掴み（Chat・Library）、商談化し（Calendar）、逃したリードを追客（Email）。掴む→商談化→追客の3ステージで、あらゆる瞬間を商談に変えます。',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
     description:
-      '訪問者は去り、リードは商談にならない。「待つ」Webサイトを、商談を生み出すAI営業チャネルへ。潜在層の獲得から追客までを自律でこなす AI SDR。無料で開始。',
+      '訪問者は去り、リードは商談にならない。「待つ」Webサイトを、商談を生み出すAI営業チャネルへ。掴む→商談化→追客の3ステージを自律でこなす AI SDR。',
     url: 'https://dynameet.ai',
     type: 'website',
   },
@@ -39,10 +39,10 @@ const homepageFaqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Meeton ai の4つのモジュールはそれぞれ何をしますか？',
+      name: 'Meeton ai の3つのステージはそれぞれ何をしますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Meeton Calendar はリードが動いた瞬間に商談予約まで運びます。Meeton Chat（Live）は接触前の検討の土台に立ち訪問者と対話して商談化します。Meeton Library は資料を共有しAIが解説して開封をトラッキングします。Meeton Email は予約しなかったリードを行動シグナルに基づき1:1で自律追客します。1製品から無料で始め、つなぐほど一気通貫のAI SDRになります。',
+        text: 'Meeton ai は3つのステージで構成されます。①掴む・育てる（Meeton Chat が会話で訪問者を掴み、Meeton Library が資料で検討を育ててリードにする）、②商談化する（Meeton Calendar が温度の高まった瞬間に商談予約まで運ぶ）、③追客する（Meeton Email が予約しなかったリードを行動シグナル起点で1:1追客し再商談化へ戻す）。',
       },
     },
     {
@@ -55,10 +55,10 @@ const homepageFaqSchema = {
     },
     {
       '@type': 'Question',
-      name: '無料で使えますか？料金体系は？',
+      name: '料金体系は？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'はい。Chat・Calendar・Library には無料ティアがあり、クレジットカード不要で始められます。単体Proは Chat ¥3万 / Library ¥3万 / Calendar ¥4万 / Email ¥5万（月・税抜）。全4機能込みのバンドルは Growth ¥12万 / Scale ¥20万 / Enterprise 要相談。4つ別々（合計¥15万）よりGrowthが¥3万お得です。',
+        text: '3つのステージに対応した3プランです。リード獲得プラン ¥12万〜（掴む・育てる＝Chat+Library）、商談獲得プラン ¥18万〜（＋商談化＝Calendar・最も選ばれる構成）、オールインワンプラン ¥24万〜（＋追客＝Email・一気通貫）。すべて税抜/月で、上位プランは下位の機能をすべて含みます。規模は月間トラフィックで決まり、適格請求書（インボイス）に対応します。',
       },
     },
     {
@@ -74,7 +74,7 @@ const homepageFaqSchema = {
       name: 'どのような企業に向いていますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'SaaS・IT・製造・専門サービス・フィンテック領域の日本のB2B企業を主な対象としています。CMO・CRO・インサイドセールス/SDR責任者が、マーケティング起点の商談化率（Speed to Lead）を改善したい場合に特に有効です。無料ティアからセルフサーブで始められます。',
+        text: 'SaaS・IT・製造・専門サービス・フィンテック領域の日本のB2B企業を主な対象としています。CMO・CRO・インサイドセールス/SDR責任者が、マーケティング起点の商談化率（Speed to Lead）を改善したい場合に特に有効です。まず30分のデモで自社サイトでの効き方を確認できます。',
       },
     },
   ],
@@ -91,16 +91,16 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、会話・資料提案・予約・追客を自律化。Meeton Calendar / Chat / Library / Email の4モジュールで構成され、無料ティアから導入できる。',
+    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Library）→商談化（Calendar）→追客（Email）の3ステージを自律化。リード獲得¥12万〜・商談獲得¥18万〜・オールインワン¥24万〜の3プラン。',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/',
   image: 'https://dynameet.ai/logo-dark.svg',
   offers: {
     '@type': 'Offer',
-    price: '0',
+    price: '120000',
     priceCurrency: 'JPY',
-    description: '無料ティアあり（クレジットカード不要）。単体Pro ¥3万〜、全機能バンドル Growth ¥12万/月（税抜）。',
+    description: '3プラン: リード獲得¥12万〜 / 商談獲得¥18万〜 / オールインワン¥24万〜（月・税抜）。規模は月間トラフィックで決定。',
   },
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'CRM連携', value: 'HubSpot・Salesforce ネイティブ連携' },
