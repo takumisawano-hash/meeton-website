@@ -175,24 +175,31 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         <SectionHead eyebrow="どの仕事から始める？" title="迷ったら、いちばん効く一手から。" align="center" />
         <div className="v2-router-grid">
           {[
-            { slug: "chat", q: "訪問者を会話で掴んでリードにしたい" },
-            { slug: "library", q: "送った資料の反応を可視化したい" },
-            { slug: "calendar", q: "問い合わせの取りこぼしを止めたい" },
-            { slug: "email", q: "既存リードを追客で再商談化したい" },
+            { slug: "chat", q: "訪問者を会話で掴んでリードにしたい", a: "Meeton Chat" },
+            { slug: "library", q: "送った資料の反応を可視化したい", a: "Meeton Library" },
+            { slug: "calendar", q: "問い合わせの取りこぼしを止めたい", a: "Meeton Calendar" },
+            { slug: "email", q: "既存リードを追客で再商談化したい", a: "Meeton Email" },
           ].map((r) => (
-            <Link key={r.slug} href={`/${r.slug}/`} style={{ textDecoration: "none" }}>
-              <Card className="v2-card-link" style={{ display: "flex", gap: 12, alignItems: "center", height: "100%" }}>
-                <span style={{ color: "var(--cta)", flexShrink: 0 }}>
-                  <ProductIcon kind={PRODUCTS[r.slug as keyof typeof PRODUCTS].icon} size={22} />
-                </span>
-                <span style={{ fontSize: 14, fontWeight: 700, color: "var(--heading)" }}>{r.q}</span>
-              </Card>
+            <Link key={r.slug} href={`/${r.slug}/`} className="v2-router-card">
+              <span className="v2-router-icon">
+                <ProductIcon kind={PRODUCTS[r.slug as keyof typeof PRODUCTS].icon} size={22} />
+              </span>
+              <span className="v2-router-text">
+                <span className="v2-router-q">{r.q}</span>
+                <span className="v2-router-a">{r.a} →</span>
+              </span>
             </Link>
           ))}
         </div>
         <style>{`
-          .v2-router-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
-          @media(max-width:560px){.v2-router-grid{grid-template-columns:1fr}}
+          .v2-router-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:820px;margin:0 auto}
+          .v2-router-card{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px 24px;text-decoration:none;box-shadow:0 1px 2px rgba(15,17,40,.04);transition:transform .2s,border-color .2s,box-shadow .2s}
+          .v2-router-card:hover{transform:translateY(-2px);border-color:var(--cta);box-shadow:0 12px 28px rgba(15,17,40,.10)}
+          .v2-router-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:var(--cta-light);color:var(--cta-ink)}
+          .v2-router-text{display:flex;flex-direction:column;gap:4px}
+          .v2-router-q{font-size:15px;font-weight:700;color:var(--heading);line-height:1.5}
+          .v2-router-a{font-size:13px;font-weight:700;color:var(--cta-ink)}
+          @media(max-width:560px){.v2-router-grid{grid-template-columns:1fr;gap:14px}}
         `}</style>
       </Section>
 
