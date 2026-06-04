@@ -6,6 +6,7 @@ import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@
 import type { ProductLPData } from "@/app/lib/product-lp-data";
 import { COMPARE } from "@/app/lib/compare-data";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
+import { stageOf } from "@/app/lib/stages";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
@@ -13,6 +14,7 @@ import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/Integrat
 export default function ProductLP({ data }: { data: ProductLPData }) {
   const src = data.slug;
   const compares = Object.values(COMPARE).filter((c) => c.product === data.slug);
+  const stage = stageOf(data.slug);
   return (
     <>
       <Nav />
@@ -20,7 +22,12 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
       {/* 1. Hero (navy frame) */}
       <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 76 }}>
         <div style={{ maxWidth: 820 }}>
-          <Eyebrow tone="dark">{data.eyebrow}</Eyebrow>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", marginBottom: 4 }}>
+            <Eyebrow tone="dark">{data.eyebrow}</Eyebrow>
+            <Link href="/#stages" style={{ fontSize: 12, fontWeight: 700, color: "var(--cta)", textDecoration: "none", background: "var(--on-navy-surface)", border: "1px solid var(--on-navy-border)", borderRadius: 999, padding: "5px 12px" }}>
+              {stage.num} {stage.title}ステージ（{stage.transform}）
+            </Link>
+          </div>
           <p style={{ marginTop: 22, marginBottom: 10, fontSize: 16, color: "var(--cta)", fontWeight: 700 }}>
             {data.problemLine}
           </p>

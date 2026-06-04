@@ -7,6 +7,7 @@ import { PRODUCTS, PRODUCT_ORDER } from "@/app/lib/product-lp-data";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
 import FounderNote from "@/app/components/v2/FounderNote";
+import StageFlow from "@/app/components/v2/StageFlow";
 
 type CaseCard = {
   slug: string;
@@ -15,16 +16,6 @@ type CaseCard = {
   quote?: string;
   heroMetric?: string;
   heroMetricLabel?: string;
-};
-
-const MOMENTS = ["問い合わせ前", "資料DL後", "再訪問", "追客"] as const;
-// coverage: which product works in which moment (● strong / ○ supports)
-const COVERAGE: Record<string, ("strong" | "support" | "")[]> = {
-  //              calendar    chat        library     email
-  問い合わせ前: ["", "strong", "support", ""],
-  資料DL後: ["strong", "", "strong", "strong"],
-  再訪問: ["support", "strong", "support", "strong"],
-  追客: ["", "support", "support", "strong"],
 };
 
 const PILLARS = [
@@ -138,73 +129,17 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </div>
       </Section>
 
-      {/* 4. The 4 jobs (product cards) */}
-      <Section tone="surface">
-        <SectionHead eyebrow="AI SDR の4つの仕事" title="会話し、資料を渡し、予約し、追う。" lede="段階で割らず、仕事で捉える。1つから無料で始め、つなぐほど一気通貫の AI SDR になります。" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
-          {PRODUCT_ORDER.map((slug) => {
-            const p = PRODUCTS[slug];
-            return (
-              <Link key={slug} href={`/${slug}/`} aria-label={`${p.productName} の詳細を見る`} style={{ textDecoration: "none" }}>
-                <Card className="v2-card-link" style={{ height: "100%" }}>
-                  <div style={{ color: "var(--cta)", marginBottom: 14 }}>
-                    <ProductIcon kind={p.icon} size={26} />
-                  </div>
-                  <h3 style={{ fontSize: 18, fontWeight: 800, color: "var(--heading)", margin: "0 0 6px" }}>{p.productName}</h3>
-                  <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--text)", margin: "0 0 14px" }}>{p.h1}</p>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: "var(--cta-ink)" }}>詳しく見る →</span>
-                </Card>
-              </Link>
-            );
-          })}
-        </div>
-      </Section>
-
-      {/* 5. Coverage matrix (product × moment) */}
-      <Section tone="white">
+      {/* 4. The 3 stages (deck p7) — 掴む → 商談化 → 追客 */}
+      <Section tone="surface" id="stages">
         <SectionHead
-          eyebrow="買い手の旅 × AI SDR"
-          title="あらゆる瞬間を、ひとつのAI SDRでカバー。"
-          lede="瞬間と機能は1対1ではありません。チャットも資料も、複数の瞬間にまたがって効きます。その広さが Meeton ai の強みです。"
+          eyebrow="AI SDR の3つの仕事"
+          title="掴んで育て、商談化し、逃さず追う。"
+          lede="潜在層を掴み育ててリードにし（Live・Library）、温度が高まれば商談化し（Calendar）、逃したリードは諦めず追客する（Email）。"
         />
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 560, fontSize: 14 }}>
-            <caption className="sr-only">買い手の旅の各瞬間に、Meeton ai の各機能がどう効くか（◎主に担う／◯補完する）の対応表</caption>
-            <thead>
-              <tr>
-                <th scope="col" style={{ textAlign: "left", padding: "12px 14px", color: "var(--sub)", fontWeight: 700, borderBottom: "2px solid var(--border)" }}>
-                  瞬間 ＼ 機能
-                </th>
-                {PRODUCT_ORDER.map((slug) => (
-                  <th key={slug} scope="col" style={{ padding: "12px 10px", color: "var(--heading)", fontWeight: 800, borderBottom: "2px solid var(--border)", whiteSpace: "nowrap" }}>
-                    {PRODUCTS[slug].productName.replace("Meeton ", "")}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {MOMENTS.map((m) => (
-                <tr key={m}>
-                  <th scope="row" style={{ textAlign: "left", padding: "12px 14px", fontWeight: 700, color: "var(--heading)", borderBottom: "1px solid var(--border)" }}>{m}</th>
-                  {COVERAGE[m].map((c, i) => (
-                    <td key={i} style={{ textAlign: "center", padding: "12px 10px", borderBottom: "1px solid var(--border)" }}>
-                      {c === "strong" ? (
-                        <><span aria-hidden style={{ color: "var(--cta)", fontSize: 18, fontWeight: 800 }}>◎</span><span className="sr-only">主に担う</span></>
-                      ) : c === "support" ? (
-                        <><span aria-hidden style={{ color: "var(--border2)", fontSize: 16 }}>◯</span><span className="sr-only">補完する</span></>
-                      ) : (
-                        <><span aria-hidden style={{ color: "var(--border)" }}>·</span><span className="sr-only">対象外</span></>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p style={{ fontSize: 13, color: "var(--sub)", marginTop: 14 }}>
-          ◎ 主に担う ／ ◯ 補完する。瞬間ごとの詳細は{" "}
-          <Link href="/use-cases/pre-inquiry/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>活用シーン</Link> へ。
+        <StageFlow />
+        <p style={{ fontSize: 13, color: "var(--sub)", marginTop: 18, textAlign: "center" }}>
+          1つの仕事から無料で始め、つなぐほど一気通貫の AI SDR に。{" "}
+          <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>料金を見る</Link>
         </p>
       </Section>
 
