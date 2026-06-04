@@ -48,9 +48,9 @@ export default function IntegrationLogos({ items, size = 38 }: { items?: Integra
         </div>
       ))}
       <style>{`
-        .v2-intlogos{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
-        .v2-intlogo{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:8px 14px;filter:grayscale(.5);opacity:.85;transition:filter .2s,opacity .2s}
-        .v2-intlogo:hover{filter:grayscale(0);opacity:1}
+        .v2-intlogos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:920px;margin:0 auto}
+        .v2-intlogo{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:9px 16px;transition:border-color .2s,box-shadow .2s}
+        .v2-intlogo:hover{border-color:var(--cta);box-shadow:0 4px 14px rgba(15,17,40,.06)}
         .v2-intlogo span{font-size:13px;font-weight:700;color:var(--heading)}
       `}</style>
     </div>

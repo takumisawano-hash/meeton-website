@@ -117,6 +117,8 @@ export default async function Page() {
     quote?: string
     heroMetric?: string
     heroMetricLabel?: string
+    heroImage?: string | null
+    companyLogo?: string | null
   }> = []
   try {
     const cases = await getAllCaseStudies()
@@ -127,6 +129,8 @@ export default async function Page() {
       quote: c.quote || c.description,
       heroMetric: c.heroMetric,
       heroMetricLabel: c.heroMetricLabel,
+      heroImage: c.heroImage,
+      companyLogo: c.companyLogo,
     }))
   } catch {
     featured = []

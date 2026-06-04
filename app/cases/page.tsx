@@ -3,18 +3,11 @@ import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
-import Image from "next/image";
-import { Section, SectionHead, Eyebrow, Card } from "@/app/components/v2/ui";
+import { Section, Eyebrow } from "@/app/components/v2/ui";
 import { getAllCaseStudies } from "@/app/lib/case-studies";
 import { FEATURED_CASES } from "@/app/lib/featured-cases";
 import LogoWall from "@/app/components/v2/LogoWall";
-
-// fallback logo by known case slug (when Notion companyLogo missing)
-const SLUG_LOGO: Record<string, string> = {
-  "biztex-chat-leads-10x": "/clients/biztex.png",
-  "edulinx-ai-chat-40-percent": "/clients/edulinx.png",
-  "univis-multi-service-3month-2deals": "/clients/univis.png",
-};
+import CaseCardGrid from "@/app/components/v2/CaseCardGrid";
 
 export const revalidate = 3600;
 
@@ -26,10 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  let cases: { slug: string; name: string; industry?: string; quote?: string; heroMetric?: string; heroMetricLabel?: string; companyLogo?: string | null }[] = [];
+  let cases: { slug: string; name: string; industry?: string; quote?: string; heroMetric?: string; heroMetricLabel?: string; companyLogo?: string | null; heroImage?: string | null }[] = [];
   try {
     const items = await getAllCaseStudies();
-    cases = items.filter((c) => !c.noIndex).map((c) => ({ slug: c.slug, name: c.company, industry: c.industry, quote: c.quote || c.description, heroMetric: c.heroMetric, heroMetricLabel: c.heroMetricLabel, companyLogo: c.companyLogo }));
+    cases = items.filter((c) => !c.noIndex).map((c) => ({ slug: c.slug, name: c.company, industry: c.industry, quote: c.quote || c.description, heroMetric: c.heroMetric, heroMetricLabel: c.heroMetricLabel, companyLogo: c.companyLogo, heroImage: c.heroImage }));
   } catch { cases = []; }
   if (cases.length === 0) cases = FEATURED_CASES;
 
@@ -55,27 +48,7 @@ export default async function Page() {
       </Section>
       <LogoWall tone="surface" />
       <Section tone="white">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
-          {cases.map((c) => {
-            const logo = c.companyLogo || SLUG_LOGO[c.slug];
-            return (
-            <Link key={c.slug} href={`/cases/${c.slug}/`} aria-label={`${c.name} の導入事例を読む`} style={{ textDecoration: "none" }}>
-              <Card className="v2-card-link" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                {c.heroMetric && <div style={{ fontFamily: "var(--fd)", fontSize: 40, fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{c.heroMetric}</div>}
-                {c.heroMetricLabel && <div style={{ fontSize: 13, color: "var(--text)", margin: "6px 0 14px", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", minHeight: 36 }}>{c.heroMetricLabel}</div>}
-                {c.quote && <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--text)", margin: "0 0 14px" }}>「{c.quote}」</p>}
-                <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: 10 }}>
-                  {logo && <Image src={logo} alt={`${c.name} ロゴ`} width={96} height={28} style={{ height: 24, width: "auto", objectFit: "contain" }} />}
-                  <div>
-                    <h3 style={{ fontSize: 15, fontWeight: 800, color: "var(--heading)", margin: 0 }}>{c.name}</h3>
-                    {c.industry && <div style={{ fontSize: 12, color: "var(--sub)" }}>{c.industry}</div>}
-                  </div>
-                </div>
-                <span style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", marginTop: 12 }}>この事例を読む →</span>
-              </Card>
-            </Link>
-          );})}
-        </div>
+        <CaseCardGrid cases={cases} />
       </Section>
       <Section tone="navyDeep" py={68}>
         <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>

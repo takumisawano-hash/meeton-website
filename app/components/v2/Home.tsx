@@ -8,15 +8,9 @@ import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
 import FounderNote from "@/app/components/v2/FounderNote";
 import StageFlow from "@/app/components/v2/StageFlow";
+import CaseCardGrid, { type CaseCardData } from "@/app/components/v2/CaseCardGrid";
 
-type CaseCard = {
-  slug: string;
-  name: string;
-  industry?: string;
-  quote?: string;
-  heroMetric?: string;
-  heroMetricLabel?: string;
-};
+type CaseCard = CaseCardData;
 
 const PILLARS = [
   { k: "Speed", t: "初動", d: "リードが動いた瞬間に動く。待たせない。", icon: "spark" },
@@ -162,54 +156,33 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </div>
       </Section>
 
-      {/* 6.5 Integration logos — "今のスタックに挿さる" proof */}
-      <Section tone="white" py={56}>
-        <SectionHead eyebrow="スタック連携" title="今のスタックに、そのまま挿さる。" align="center" />
-        <IntegrationLogos />
-      </Section>
 
       {/* 7. Cases */}
       {caseStudies.length > 0 && (
         <Section tone="white">
           <SectionHead eyebrow="導入事例" title="成果が、データで出ている。" align="center" />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
-            {caseStudies.map((c) => (
-              <Link key={c.slug} href={`/cases/${c.slug}/`} aria-label={`${c.name} の導入事例を読む`} style={{ textDecoration: "none" }}>
-                <Card className="v2-card-link" style={{ height: "100%" }}>
-                  {c.heroMetric && (
-                    <div style={{ fontFamily: "var(--fd)", fontSize: 36, fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>
-                      {c.heroMetric}
-                    </div>
-                  )}
-                  {c.heroMetricLabel && <div style={{ fontSize: 13, color: "var(--text)", margin: "6px 0 14px" }}>{c.heroMetricLabel}</div>}
-                  {c.quote && <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--text)", margin: "0 0 14px" }}>「{c.quote}」</p>}
-                  <h3 style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)", margin: 0 }}>{c.name}</h3>
-                  {c.industry && <div style={{ fontSize: 12, color: "var(--sub)" }}>{c.industry}</div>}
-                </Card>
-              </Link>
-            ))}
-          </div>
+          <CaseCardGrid cases={caseStudies} />
           <div style={{ textAlign: "center", marginTop: 28 }}>
-            <Link href="/cases/" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
+            <Link href="/cases/" className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
               すべての事例を見る →
             </Link>
           </div>
         </Section>
       )}
 
-      {/* 8. Soft router */}
+      {/* 8. Soft router — 2×2 grid (even boxes) */}
       <Section tone="surface" py={64}>
         <SectionHead eyebrow="どの仕事から始める？" title="迷ったら、いちばん効く一手から。" align="center" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, maxWidth: 920, margin: "0 auto" }}>
+        <div className="v2-router-grid">
           {[
-            { slug: "calendar", q: "問い合わせの取りこぼしを止めたい" },
-            { slug: "chat", q: "訪問者を会話で商談に繋げたい" },
+            { slug: "chat", q: "訪問者を会話で掴んでリードにしたい" },
             { slug: "library", q: "送った資料の反応を可視化したい" },
+            { slug: "calendar", q: "問い合わせの取りこぼしを止めたい" },
             { slug: "email", q: "既存リードを追客で再商談化したい" },
           ].map((r) => (
             <Link key={r.slug} href={`/${r.slug}/`} style={{ textDecoration: "none" }}>
               <Card className="v2-card-link" style={{ display: "flex", gap: 12, alignItems: "center", height: "100%" }}>
-                <span style={{ color: "var(--cta)" }}>
+                <span style={{ color: "var(--cta)", flexShrink: 0 }}>
                   <ProductIcon kind={PRODUCTS[r.slug as keyof typeof PRODUCTS].icon} size={22} />
                 </span>
                 <span style={{ fontSize: 14, fontWeight: 700, color: "var(--heading)" }}>{r.q}</span>
@@ -217,6 +190,10 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
             </Link>
           ))}
         </div>
+        <style>{`
+          .v2-router-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
+          @media(max-width:560px){.v2-router-grid{grid-template-columns:1fr}}
+        `}</style>
       </Section>
 
       {/* 8.5 Founder note — who builds this */}
