@@ -14,6 +14,8 @@ export type Stage = {
   transform: string; // 潜在層 → リード
   lede: string;
   products: StageProduct[]; // products that do this stage's job
+  /** primary landing page for this stage (the single nav link) */
+  href: string;
 };
 
 export const STAGES: Stage[] = [
@@ -24,6 +26,7 @@ export const STAGES: Stage[] = [
     transform: "潜在層 → リード",
     lede: "問い合わせ前の潜在層を、会話と資料で掴んでリードに変え、検討を前に進める。",
     products: ["chat", "library"],
+    href: "/capture/",
   },
   {
     num: "②",
@@ -32,6 +35,7 @@ export const STAGES: Stage[] = [
     transform: "リード → 商談",
     lede: "温度が高まった瞬間に、その場で商談予約まで運ぶ。離脱前に完結。",
     products: ["calendar"],
+    href: "/calendar/",
   },
   {
     num: "③",
@@ -40,6 +44,7 @@ export const STAGES: Stage[] = [
     transform: "逃したリードを回収",
     lede: "予約しなかったリードを諦めず、AIが1:1で追い、再びホットになれば商談化へ戻す。",
     products: ["email"],
+    href: "/email/",
   },
 ];
 

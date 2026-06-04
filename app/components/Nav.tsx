@@ -30,18 +30,21 @@ type NavProps = {
 
 type Item = { href: string; label: string; sub?: string };
 
-// Product dropdown grouped by the 3 stages (deck p7 / stages.ts), so the
-// header mirrors the homepage flow: ①掴む・育てる → ②商談化する → ③追客する.
-const STAGE_NAV: { stage: string; transform: string; products: Item[] }[] = STAGES.map((s) => ({
+// Product dropdown grouped by the 3 stages (deck p7 / stages.ts). The header
+// is job-led: each stage is ONE primary link to its stage/landing page
+// (capture→/capture, convert→/calendar, follow→/email). Product names are
+// listed small underneath as the means (2026-06-04: 仕事主役・製品名は脇役).
+const STAGE_NAV: { stage: string; transform: string; href: string; products: Item[] }[] = STAGES.map((s) => ({
   stage: `${s.num} ${s.title}`,
   transform: s.transform,
+  href: s.href,
   products: s.products.map((p) => ({
     href: `/${p}/`,
     label: PRODUCT_IN_STAGE[p].name,
     sub: PRODUCT_IN_STAGE[p].line,
   })),
 }));
-// flat list (mobile + back-compat)
+// flat list (mobile fallback): stage links + their product detail links
 const PRODUCT_ITEMS: Item[] = STAGE_NAV.flatMap((g) => g.products);
 const PLATFORM_ITEM: Item = {
   href: "/",
@@ -335,13 +338,23 @@ export default function Nav({
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
                   {STAGE_NAV.map((g) => (
                     <div key={g.stage}>
-                      <div style={{ padding: "4px 12px 8px" }}>
-                        <div style={{ fontSize: 13, fontWeight: 800, color: "var(--heading)" }}>{g.stage}</div>
+                      {/* stage header = the single job-led link */}
+                      <Link
+                        href={g.href}
+                        onClick={() => setOpenMenu(null)}
+                        style={{ display: "block", padding: "8px 12px", borderRadius: 10, textDecoration: "none", background: isActive(g.href) ? "var(--cta-wash)" : "transparent" }}
+                      >
+                        <div style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)" }}>{g.stage} →</div>
                         <div style={{ fontFamily: "var(--fm)", fontSize: 11, fontWeight: 700, color: "var(--cta-ink)", marginTop: 2 }}>{g.transform}</div>
+                      </Link>
+                      {/* product names as the means, small */}
+                      <div style={{ padding: "6px 12px 0" }}>
+                        {g.products.map((it) => (
+                          <Link key={it.href} href={it.href} onClick={() => setOpenMenu(null)} style={{ display: "block", fontSize: 12, fontWeight: 600, color: isActive(it.href) ? "var(--cta-ink)" : "var(--sub)", textDecoration: "none", lineHeight: 2 }}>
+                            {it.label}
+                          </Link>
+                        ))}
                       </div>
-                      {g.products.map((it) => (
-                        <PanelItem key={it.href} item={it} active={isActive(it.href)} compact />
-                      ))}
                     </div>
                   ))}
                 </div>
@@ -436,7 +449,8 @@ export default function Nav({
             }}
           >
             {STAGE_NAV.map((g) => (
-              <MobileGroup key={g.stage} title={`製品 — ${g.stage}（${g.transform}）`}>
+              <MobileGroup key={g.stage} title={`${g.stage}（${g.transform}）`}>
+                <MobileLink item={{ href: g.href, label: g.stage.replace(/^[①②③]\s*/, "") }} active={isActive(g.href)} />
                 {g.products.map((it) => (
                   <MobileLink key={it.href} item={it} active={isActive(it.href)} />
                 ))}

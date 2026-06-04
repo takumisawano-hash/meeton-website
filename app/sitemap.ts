@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/solutions/crm-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/solutions/lead-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     // v2 product LPs (money pages / pillars) — highest priority after home.
+    { url: `${baseUrl}/capture/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/calendar/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/chat/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/library/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },

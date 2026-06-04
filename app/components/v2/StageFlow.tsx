@@ -20,13 +20,15 @@ export default function StageFlow() {
                 border: dark ? "1px solid var(--navy-3)" : "1px solid var(--border)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                <span style={{ fontFamily: "var(--fd)", fontSize: 20, fontWeight: 800, color: "var(--cta)" }}>{s.num}</span>
-                <h3 style={{ fontSize: 19, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{s.title}</h3>
-              </div>
-              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta-ink)", margin: "8px 0 14px", letterSpacing: ".02em" }}>
-                {s.transform}
-              </div>
+              <Link href={s.href} className="v2-stage-head" style={{ textDecoration: "none", display: "block" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                  <span style={{ fontFamily: "var(--fd)", fontSize: 20, fontWeight: 800, color: "var(--cta)" }}>{s.num}</span>
+                  <h3 style={{ fontSize: 19, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{s.title} →</h3>
+                </div>
+                <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta-ink)", margin: "8px 0 14px", letterSpacing: ".02em" }}>
+                  {s.transform}
+                </div>
+              </Link>
               <div style={{ display: "grid", gap: 10 }}>
                 {s.products.map((p) => {
                   const info = PRODUCT_IN_STAGE[p];
@@ -60,6 +62,8 @@ export default function StageFlow() {
         .v2-stageflow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0}
         .v2-stage-wrap{display:contents}
         .v2-stage{border-radius:18px;padding:24px;height:100%;box-sizing:border-box}
+        .v2-stage-head h3{transition:color .15s}
+        .v2-stage-head:hover h3{color:var(--cta-ink)}
         .v2-stage-arrow{align-self:center;color:var(--border2);font-size:24px;padding:0 14px}
         .v2-stage-prod{display:flex;gap:10px;align-items:flex-start;border-radius:12px;padding:12px 14px;text-decoration:none;transition:border-color .2s,transform .2s}
         .v2-stage-prod:hover{border-color:var(--cta)!important;transform:translateY(-1px)}
