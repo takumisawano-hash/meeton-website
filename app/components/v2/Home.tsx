@@ -7,15 +7,11 @@ import { PRODUCTS, PRODUCT_ORDER } from "@/app/lib/product-lp-data";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
 import StageFlow from "@/app/components/v2/StageFlow";
+import StageMedia from "@/app/components/v2/StageMedia";
 import CaseCardGrid, { type CaseCardData } from "@/app/components/v2/CaseCardGrid";
 
 type CaseCard = CaseCardData;
 
-const PILLARS = [
-  { k: "Speed", t: "初動", d: "リードが動いた瞬間に動く。待たせない。", icon: "spark" },
-  { k: "Persistence", t: "粘り", d: "一度で諦めず、シグナルを見て追い続ける。", icon: "spark" },
-  { k: "Context", t: "文脈", d: "過去の閲覧・会話・行動を引き継いで対話する。", icon: "spark" },
-];
 
 export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] }) {
   return (
@@ -134,25 +130,8 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </p>
       </Section>
 
-      {/* 6. How — AI SDR answer (navy) */}
-      <Section tone="navy">
-        <SectionHead
-          eyebrow="どう解くか"
-          title={<span style={{ color: "var(--on-navy)" }}>WebサイトにAI SDRを配属する。</span>}
-          lede={<span style={{ color: "var(--on-navy-sub)" }}>待つのをやめ、あらゆる瞬間で自動で動かす。鍵は3つ。</span>}
-          tone="dark"
-        />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-          {PILLARS.map((p) => (
-            <div key={p.k} style={{ background: "var(--navy-2)", border: "1px solid var(--on-navy-border)", borderRadius: 16, padding: 24 }}>
-              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta)", letterSpacing: ".08em" }}>{p.k}</div>
-              <h3 style={{ fontSize: 20, fontWeight: 800, color: "var(--on-navy)", margin: "8px 0 8px" }}>{p.t}</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--on-navy-sub)", margin: 0 }}>{p.d}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
+      {/* 6. Per-job media walkthrough (screenshots/video → LP) */}
+      <StageMedia />
 
       {/* 7. Cases */}
       {caseStudies.length > 0 && (
