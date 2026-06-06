@@ -6,7 +6,6 @@ import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/ui";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
-import FounderNote from "@/app/components/v2/FounderNote";
 
 export const metadata: Metadata = {
   title: { absolute: "エンタープライズ｜Meeton ai — SSO・CRM連携・セキュリティ" },
@@ -91,9 +90,9 @@ export default function Page() {
             </Card>
           ))}
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <FounderNote note="エンタープライズ導入は、私たちが要件確認から伴走します。商談化の現場を経験したチームが、貴社のスタックに合わせて設計します。" />
-        </div>
+        <p style={{ textAlign: "center", fontSize: 14, color: "var(--sub)", marginTop: 8 }}>
+          エンタープライズ導入は、要件確認から運用設計まで専任チームが伴走します。
+        </p>
       </Section>
 
       <Section tone="navyDeep" py={68}>

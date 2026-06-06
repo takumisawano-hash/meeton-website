@@ -51,7 +51,7 @@ export const STAGES: Stage[] = [
 // Per-product short line shown inside the stage card (deck wording).
 export const PRODUCT_IN_STAGE: Record<StageProduct, { name: string; line: string; icon: string }> = {
   chat: { name: "Meeton Chat", line: "会話で訪問者を掴み、リードに変える。", icon: "chat" },
-  library: { name: "Meeton Library", line: "資料で検討を育て、前に進める。", icon: "library" },
+  library: { name: "Meeton Library", line: "資料で見込み客を自動ナーチャリングし、検討を育てる。", icon: "library" },
   calendar: { name: "Meeton Calendar", line: "温度が高まった瞬間に、その場で商談予約まで完結。", icon: "calendar" },
   email: { name: "Meeton Email", line: "予約しなかったリードを諦めず1:1で追い、再商談化へ戻す。", icon: "email" },
 };

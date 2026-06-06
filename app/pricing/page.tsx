@@ -6,7 +6,6 @@ import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/ui";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
-import FounderNote from "@/app/components/v2/FounderNote";
 import { demoUrl } from "@/app/lib/cta-urls";
 
 export const metadata: Metadata = {
@@ -229,9 +228,6 @@ export default function Page() {
             まず商談化の余地を試算する（ROI診断）→
           </Link>
         </p>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: 28 }}>
-          <FounderNote compact />
-        </div>
       </Section>
 
       {/* Final CTA */}

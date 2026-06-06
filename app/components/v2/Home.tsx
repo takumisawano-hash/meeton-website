@@ -6,7 +6,6 @@ import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@
 import { PRODUCTS, PRODUCT_ORDER } from "@/app/lib/product-lp-data";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
-import FounderNote from "@/app/components/v2/FounderNote";
 import StageFlow from "@/app/components/v2/StageFlow";
 import CaseCardGrid, { type CaseCardData } from "@/app/components/v2/CaseCardGrid";
 
@@ -102,20 +101,18 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
             },
             {
               tag: "出口 — 商談化の穴",
-              stat: "—",
+              stat: "85%",
               t: "集めたリードも、商談にならない。",
-              d: "初動の遅さ・追客の粘りのなさ・文脈の欠如で、せっかく獲得したリードが冷えていく。",
+              d: "獲得したリードの約85%は商談に至らず終わる。初動の遅さ・追客の粘りのなさ・文脈の欠如で、せっかくのリードが冷えていく。",
             },
           ].map((p) => (
             <Card key={p.tag} style={{ padding: 28 }}>
               <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, letterSpacing: ".06em", color: "var(--cta-ink)", marginBottom: 14 }}>
                 {p.tag}
               </div>
-              {p.stat !== "—" && (
-                <div style={{ fontFamily: "var(--fd)", fontSize: 52, fontWeight: 800, color: "var(--heading)", lineHeight: 1, marginBottom: 12 }}>
-                  {p.stat}
-                </div>
-              )}
+              <div style={{ fontFamily: "var(--fd)", fontSize: 52, fontWeight: 800, color: "var(--heading)", lineHeight: 1, marginBottom: 12 }}>
+                {p.stat}
+              </div>
               <h3 style={{ fontSize: 19, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{p.t}</h3>
               <p style={{ fontSize: 15, lineHeight: 1.8, color: "var(--text)", margin: 0 }}>{p.d}</p>
             </Card>
@@ -176,7 +173,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         <div className="v2-router-grid">
           {[
             { slug: "chat", q: "訪問者を会話で掴んでリードにしたい", a: "Meeton Chat" },
-            { slug: "library", q: "送った資料の反応を可視化したい", a: "Meeton Library" },
+            { slug: "library", q: "資料で見込み客を育てたい", a: "Meeton Library" },
             { slug: "calendar", q: "問い合わせの取りこぼしを止めたい", a: "Meeton Calendar" },
             { slug: "email", q: "既存リードを追客で再商談化したい", a: "Meeton Email" },
           ].map((r) => (
@@ -201,13 +198,6 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           .v2-router-a{font-size:13px;font-weight:700;color:var(--cta-ink)}
           @media(max-width:560px){.v2-router-grid{grid-template-columns:1fr;gap:14px}}
         `}</style>
-      </Section>
-
-      {/* 8.5 Founder note — who builds this */}
-      <Section tone="white" py={56}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <FounderNote />
-        </div>
       </Section>
 
       {/* 9. Final CTA */}

@@ -7,7 +7,6 @@ import { CLUSTERS } from "@/app/lib/content-clusters";
 import type { GlossaryTerm } from "@/app/lib/glossary-data";
 import { getTerm } from "@/app/lib/glossary-data";
 import { AUTHOR, authorPersonSchema } from "@/app/lib/author";
-import FounderNote from "@/app/components/v2/FounderNote";
 
 // Definition-first glossary page (§4.12). The shortDef is a self-contained
 // answer placed first for AEO passage extraction; DefinedTerm + FAQ schema.
@@ -54,10 +53,6 @@ export default function GlossaryLP({ data }: { data: GlossaryTerm }) {
               </div>
             </div>
           )}
-
-          <div style={{ marginTop: 36 }}>
-            <FounderNote compact note="" />
-          </div>
         </div>
       </Section>
 
