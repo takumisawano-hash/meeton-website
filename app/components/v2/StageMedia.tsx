@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Section, SectionHead, ProductIcon } from "@/app/components/v2/ui";
+import { productMedia } from "@/app/lib/product-media";
 
 // Per-job media walkthrough: 4 alternating rows (掴む / 育てる / 商談化 / 追客),
 // each = product screenshot/video on one side, brief copy + 詳しく→LP on the
@@ -16,9 +17,6 @@ type Row = {
   points: string[];
   href: string;
   icon: string;
-  /** optional real media; if absent → labeled placeholder box */
-  image?: string;
-  video?: string;
 };
 
 const ROWS: Row[] = [
@@ -61,12 +59,13 @@ const ROWS: Row[] = [
 ];
 
 function Media({ row }: { row: Row }) {
+  const m = productMedia(row.key);
   return (
     <div className="v2-sm-media">
-      {row.video ? (
-        <video src={row.video} autoPlay muted loop playsInline poster={row.image} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-      ) : row.image ? (
-        <Image src={row.image} alt={`${row.title} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
+      {m?.kind === "video" ? (
+        <video src={m.src} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : m?.kind === "image" ? (
+        <Image src={m.src} alt={`${row.title} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
       ) : (
         <div className="v2-sm-placeholder">
           <span className="v2-sm-ph-icon"><ProductIcon kind={row.icon} size={40} /></span>

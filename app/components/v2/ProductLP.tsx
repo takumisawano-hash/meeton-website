@@ -6,6 +6,7 @@ import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@
 import type { ProductLPData } from "@/app/lib/product-lp-data";
 import { COMPARE } from "@/app/lib/compare-data";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
+import ProductMedia from "@/app/components/v2/ProductMedia";
 import { stageOf, entryPlanFor, PLANS } from "@/app/lib/stages";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
@@ -55,6 +56,11 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
             <span>✓ 適格請求書（インボイス）対応</span>
           </div>
         </div>
+      </Section>
+
+      {/* 1.5 Big product media (the demo they came to see) */}
+      <Section tone="navy" py={0} style={{ paddingBottom: 72, marginTop: -16 }}>
+        <ProductMedia slug={data.slug} icon={data.icon} alt={data.productName} />
       </Section>
 
       {/* 2. How it works */}
