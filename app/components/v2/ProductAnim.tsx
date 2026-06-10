@@ -54,7 +54,7 @@ function ChatScene() {
         </div>
         <div className="cs-row bot ap" style={{ animationDelay: "2.6s" }}>
           <span className="cs-av">M</span>
-          <span className="cs-b">それなら<b>商談獲得プラン</b>が中心になります。実際に商談化率が60%超になった事例もお見せできます。<b>5分で見られるデモ</b>、今すぐ予約しますか？</span>
+          <span className="cs-b">それなら<b>商談獲得プラン</b>が中心になります。実際に商談化率が60%超になった事例もお見せできます。<b>30分のデモ</b>、今すぐ予約しますか？</span>
         </div>
         <div className="cs-foot ap" style={{ animationDelay: "3.5s" }}>
           <span className="tag"><span className="dot" />リード化 — 興味・規模・課題を取得</span>
@@ -137,7 +137,7 @@ function CalendarScene() {
       <div className="win-body cl-body">
         <div className="cl-row bot ap" style={{ animationDelay: ".2s" }}>
           <span className="cl-av">M</span>
-          <span className="cl-b">では<b>5分デモ</b>を。直近で空いている枠です。ご都合の良い時間を選んでください。</span>
+          <span className="cl-b">では<b>30分デモ</b>を。直近で空いている枠です。ご都合の良い時間を選んでください。</span>
         </div>
         <div className="cl-cal ap" style={{ animationDelay: "1.0s" }}>
           <div className="cl-mon">2026年 6月</div>
@@ -150,7 +150,7 @@ function CalendarScene() {
           </div>
           <div className="cl-times">
             {times.map((t, i) => (
-              <span key={t} className={`cl-t ${i === 2 ? "pick" : ""}`}>{t}{i === 2 && <em> ← AI提案</em>}</span>
+              <span key={t} className={`cl-t ${i === 2 ? "pick" : ""}`}>{t}</span>
             ))}
           </div>
         </div>
@@ -203,11 +203,11 @@ function EmailScene() {
         {/* generated email */}
         <div className="em-mail ap" style={{ animationDelay: "1.4s" }}>
           <div className="em-meta"><span className="em-to">To: 田中様</span><span className="em-badge">AI生成 1:1</span></div>
-          <div className="em-sub">件名：製造業での「初動の自動化」、P8の続きを5分で</div>
+          <div className="em-sub">件名：製造業での「初動の自動化」、P8の続きを30分で</div>
           <p className="em-body-txt">
             田中様<br />
             先日は料金ページと製造業の事例をご覧いただきありがとうございます。<br />
-            <span className="hl">セキュリティ（ISMS）</span>を気にされていたかと思いますので、要件表と、製造業A社が<span className="hl">商談化を2倍</span>にした初動設計を、5分のデモでお見せします。
+            <span className="hl">セキュリティ（ISMS）</span>を気にされていたかと思いますので、要件表と、製造業A社が<span className="hl">商談化を2倍</span>にした初動設計を、30分のデモでお見せします。
           </p>
         </div>
         <div className="em-foot ap" style={{ animationDelay: "2.6s" }}>
