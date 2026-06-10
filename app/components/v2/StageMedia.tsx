@@ -105,7 +105,7 @@ export default function StageMedia() {
         .v2-sm-rows{display:flex;flex-direction:column;gap:clamp(40px,6vw,72px)}
         .v2-sm-row{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
         .v2-sm-row.rev .v2-sm-media{order:2}
-        .v2-sm-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:0 12px 40px -24px rgba(15,17,40,.30)}
+        .v2-sm-media{position:relative;width:100%;min-height:clamp(320px,30vw,400px);border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:0 12px 40px -24px rgba(15,17,40,.30)}
         .v2-sm-stage{font-family:var(--fm);font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--cta-ink)}
         .v2-sm-title{font-family:var(--fd);font-size:clamp(22px,2.6vw,30px);font-weight:800;color:var(--heading);letter-spacing:-.02em;margin:10px 0 12px;line-height:1.3}
         .v2-sm-desc{font-size:16px;line-height:1.85;color:var(--text);margin:0 0 16px}
