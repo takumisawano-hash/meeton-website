@@ -170,6 +170,19 @@ function fileUrl(page: PageObjectResponse, property: string): string | null {
   return null
 }
 
+// Page cover image (shown on the detail page hero). Used as a fallback for card
+// thumbnails when the explicit 'HeroImage' property is empty, so list/featured
+// cards show the real photo instead of a logo placeholder.
+function coverUrl(page: PageObjectResponse): string | null {
+  if (!page.cover) return null
+  if (page.cover.type === 'external') return page.cover.external.url
+  if (page.cover.type === 'file') {
+    const v = Date.parse(page.last_edited_time || '') || 0
+    return `/api/notion-image/?pageId=${page.id}&v=${v}`
+  }
+  return null
+}
+
 function parseStats(raw: string | null): CaseStudyStat[] {
   if (!raw) return []
   try {
@@ -209,7 +222,7 @@ function pageToCaseStudy(page: PageObjectResponse): CaseStudy {
     quotePerson: (readProp(p, 'QuotePerson') as string) || null,
     quoteAvatar: fileUrl(page, 'QuoteAvatar'),
     companyLogo: fileUrl(page, 'CompanyLogo'),
-    heroImage: fileUrl(page, 'HeroImage'),
+    heroImage: fileUrl(page, 'HeroImage') ?? coverUrl(page),
     publishedDate,
     modifiedDate,
     focusKeyword: (readProp(p, 'FocusKeyword') as string) || null,
