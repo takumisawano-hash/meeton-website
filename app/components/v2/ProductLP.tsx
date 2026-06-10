@@ -7,7 +7,7 @@ import type { ProductLPData } from "@/app/lib/product-lp-data";
 import { COMPARE } from "@/app/lib/compare-data";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
 import ProductMedia from "@/app/components/v2/ProductMedia";
-import { stageOf, entryPlanFor, PLANS } from "@/app/lib/stages";
+import { stageOf } from "@/app/lib/stages";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
@@ -16,7 +16,6 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
   const src = data.slug;
   const compares = Object.values(COMPARE).filter((c) => c.product === data.slug);
   const stage = stageOf(data.slug);
-  const entryPlan = entryPlanFor(data.slug);
   return (
     <>
       <Nav />
@@ -137,31 +136,12 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
         <IntegrationLogos items={pickIntegrations(data.integrations)} />
       </Section>
 
-      {/* 6. Pricing — which plan includes this product (deck p19) */}
+      {/* 6. Pricing — single anchor (月額12万円〜, varies by scale/usage) */}
       <Section tone="surface">
-        <SectionHead
-          eyebrow="料金"
-          title={`${data.productName} は「${entryPlan.name}」から`}
-          lede={`${stage.num} ${stage.title}（${stage.transform}）の仕事は ${entryPlan.name}（${entryPlan.price}/月・税抜）から使えます。上位プランにもすべて含まれます。`}
-          align="center"
-        />
-        <div style={{ maxWidth: 760, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px,1fr))", gap: 14 }}>
-          {PLANS.map((pl) => {
-            const included = pl.stages.includes(stage.id);
-            return (
-              <Card key={pl.name} style={{ textAlign: "center", border: pl.highlight ? "2px solid var(--cta)" : "1px solid var(--border)", opacity: included ? 1 : 0.5 }}>
-                <div style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)" }}>{pl.name}</div>
-                <div style={{ fontFamily: "var(--fd)", fontSize: 24, fontWeight: 800, color: "var(--heading)", margin: "6px 0 8px" }}>{pl.price}</div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: included ? "var(--cta-ink)" : "var(--sub)" }}>
-                  {included ? `✓ ${data.productName} を含む` : "—"}
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-        <div style={{ textAlign: "center", marginTop: 24 }}>
+        <SectionHead eyebrow="料金" title="月額12万円〜。必要な分だけ。" align="center" lede="料金は月間リード数・サイト流入数・連携CRM・利用機能・運用支援範囲により変動します。Starter / Growth / Enterprise の3プラン。" />
+        <div style={{ textAlign: "center" }}>
           <Link href="/pricing/" className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
-            料金の詳細・トラフィック別の料金を見る →
+            料金の詳細を見る →
           </Link>
         </div>
       </Section>
@@ -246,16 +226,11 @@ export function productAppSchema(data: ProductLPData) {
     publisher: { "@id": "https://dynameet.ai/#organization" },
     offers: {
       "@type": "Offer",
-      price: entryPlanPrice(data.slug),
+      price: "120000",
       priceCurrency: "JPY",
-      description: `${entryPlanFor(data.slug).name}（${entryPlanFor(data.slug).price}/月・税抜）から利用可能。`,
+      description: "月額12万円〜。規模・利用機能・運用支援範囲により変動。",
     },
   };
-}
-
-const PLAN_PRICE_NUM: Record<string, string> = { capture: "120000", convert: "180000", follow: "240000" };
-function entryPlanPrice(slug: ProductLPData["slug"]): string {
-  return PLAN_PRICE_NUM[stageOf(slug).id];
 }
 
 const PRODUCT_PATH = (slug: string) => `https://dynameet.ai/${slug}`;

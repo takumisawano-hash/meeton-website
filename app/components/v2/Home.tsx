@@ -8,7 +8,8 @@ import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
 import StageFlow from "@/app/components/v2/StageFlow";
 import StageMedia from "@/app/components/v2/StageMedia";
-import CaseCardGrid, { type CaseCardData } from "@/app/components/v2/CaseCardGrid";
+import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
+import FeaturedCase from "@/app/components/v2/FeaturedCase";
 
 type CaseCard = CaseCardData;
 
@@ -99,13 +100,13 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
       {/* 6. Per-job media walkthrough (screenshots/video → LP) */}
       <StageMedia />
 
-      {/* 7. Cases */}
+      {/* 7. Cases — one featured story + link to all */}
       {caseStudies.length > 0 && (
         <Section tone="white">
           <SectionHead eyebrow="導入事例" title="成果が、データで出ている。" align="center" />
-          <CaseCardGrid cases={caseStudies} />
-          <div style={{ textAlign: "center", marginTop: 28 }}>
-            <Link href="/cases/" className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
+          <FeaturedCase c={caseStudies.find((x) => x.slug === "g-gen-inside-sales-sql-2x") ?? caseStudies[0]} />
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link href="/cases/" className="v2-link" style={{ fontSize: 15, fontWeight: 800, color: "var(--cta-ink)", textDecoration: "none", border: "1.5px solid var(--border2)", borderRadius: 12, padding: "13px 28px", display: "inline-block" }}>
               すべての事例を見る →
             </Link>
           </div>

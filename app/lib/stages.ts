@@ -60,17 +60,3 @@ export const PRODUCT_IN_STAGE: Record<StageProduct, { name: string; line: string
 export function stageOf(product: StageProduct): Stage {
   return STAGES.find((s) => s.products.includes(product))!;
 }
-
-// Plans (deck p19). Each plan includes everything below it.
-export type Plan = { name: string; price: string; stages: Stage["id"][]; highlight?: boolean };
-export const PLANS: Plan[] = [
-  { name: "リード獲得プラン", price: "¥12万〜", stages: ["capture"] },
-  { name: "商談獲得プラン", price: "¥18万〜", stages: ["capture", "convert"], highlight: true },
-  { name: "オールインワンプラン", price: "¥24万〜", stages: ["capture", "convert", "follow"] },
-];
-
-/** The cheapest plan that includes a given product's stage. */
-export function entryPlanFor(product: StageProduct): Plan {
-  const stageId = stageOf(product).id;
-  return PLANS.find((p) => p.stages.includes(stageId))!;
-}

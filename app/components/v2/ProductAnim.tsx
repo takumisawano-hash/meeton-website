@@ -54,7 +54,7 @@ function ChatScene() {
         </div>
         <div className="cs-row bot ap" style={{ animationDelay: "2.6s" }}>
           <span className="cs-av">M</span>
-          <span className="cs-b">それなら<b>商談獲得プラン</b>が中心になります。実際に商談化率が60%超になった事例もお見せできます。<b>30分のデモ</b>、今すぐ予約しますか？</span>
+          <span className="cs-b">それなら<b>商談化の自動化</b>が中心になります。実際に商談化率が60%超になった事例もお見せできます。<b>30分のデモ</b>、今すぐ予約しますか？</span>
         </div>
         <div className="cs-foot ap" style={{ animationDelay: "3.5s" }}>
           <span className="tag"><span className="dot" />リード化 — 興味・規模・課題を取得</span>
