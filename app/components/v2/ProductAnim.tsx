@@ -13,9 +13,12 @@ export default function ProductAnim({ kind }: { kind: string }) {
       {kind === "calendar" && <CalendarScene />}
       {kind === "email" && <EmailScene />}
       <style>{`
-        .v2a{position:absolute;inset:0;overflow:auto;
+        /* in-flow (not absolute) so the frame grows to the scene's height —
+           prevents the scene being clipped top/bottom on narrow screens where
+           it's taller than the frame's min-height. */
+        .v2a{position:relative;width:100%;min-height:100%;
           background:radial-gradient(circle at 26% 20%,rgba(7,203,121,.16),transparent 52%),radial-gradient(circle at 80% 84%,rgba(7,203,121,.07),transparent 55%),var(--navy-2);
-          display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vw,32px)}
+          display:flex;align-items:center;justify-content:center;padding:clamp(16px,3.5vw,32px)}
         .v2a *{box-sizing:border-box}
         /* shared app window chrome */
         .v2a .win{width:min(94%,560px);background:rgba(255,255,255,.035);border:1px solid var(--on-navy-border);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(0,0,0,.6)}

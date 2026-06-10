@@ -24,7 +24,7 @@ export default function ProductMedia({ slug, icon, alt }: { slug: string; icon: 
       <style>{`
         .v2-pm{max-width:980px;margin:0 auto}
         .v2-pm-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--on-navy-border);background:var(--navy-2);box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
-        .v2-pm-frame.anim{aspect-ratio:auto;min-height:clamp(360px,42vw,460px)}
+        .v2-pm-frame.anim{aspect-ratio:auto;min-height:clamp(360px,42vw,460px);display:flex}
       `}</style>
     </div>
   );
