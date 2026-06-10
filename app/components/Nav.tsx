@@ -236,6 +236,7 @@ export default function Nav({
         alignItems: "center",
         gap: 6,
         padding: "8px 0",
+        lineHeight: 1,
         fontFamily: "var(--fb)",
         transition: "color .18s",
       }}
@@ -527,6 +528,12 @@ function topLink(active: boolean, color: string): React.CSSProperties {
     color: active ? "#fff" : color,
     textDecoration: "none",
     fontWeight: 600,
+    // match the dropdown-trigger <button> box exactly so plain links and
+    // dropdowns sit on the same vertical center (buttons reset line-height to
+    // `normal`; anchors would otherwise inherit the body line-height → offset).
+    display: "inline-flex",
+    alignItems: "center",
+    lineHeight: 1,
     padding: "8px 0",
     transition: "color .18s",
   };
