@@ -53,68 +53,34 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         </div>
       </Section>
 
-      {/* 2. Proof bar (navy, continuous with hero) */}
-      <Section tone="navy" py={0} style={{ paddingTop: 8, paddingBottom: 56 }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: 16,
-            borderTop: "1px solid var(--on-navy-border)",
-            paddingTop: 32,
-          }}
-        >
+      {/* 2. Proof stats — promoted to big cards (navy, continuous with hero) */}
+      <Section tone="navy" py={0} style={{ paddingTop: 12, paddingBottom: 64 }}>
+        <div className="v2-proof" style={{ borderTop: "1px solid var(--on-navy-border)", paddingTop: 40 }}>
           {[
-            { m: "60%+", l: "即予約フロー経由の商談化率" },
-            { m: "20x", l: "チャット経由の商談機会（導入前比）" },
-            { m: "約2倍", l: "提案・資料提示の件数" },
+            { m: "80%", suf: "超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
+            { m: "+100%", suf: "", l: "有効リード数（導入前比）", sub: "実質 2倍に" },
+            { m: "30", suf: "h+/月", l: "削減できた営業工数", sub: "初動・追客の自動化で" },
           ].map((s) => (
-            <div key={s.l}>
-              <div style={{ fontFamily: "var(--fd)", fontSize: 40, fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{s.m}</div>
-              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8 }}>{s.l}</div>
+            <div key={s.l} className="v2-proof-card">
+              <div className="v2-proof-num">{s.m}<span className="v2-proof-suf">{s.suf}</span></div>
+              <div className="v2-proof-label">{s.l}</div>
+              <div className="v2-proof-sub">{s.sub}</div>
             </div>
           ))}
         </div>
+        <style>{`
+          .v2-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px)}
+          .v2-proof-card{background:var(--navy-2);border:1px solid var(--on-navy-border);border-radius:18px;padding:clamp(22px,3vw,32px);text-align:center}
+          .v2-proof-num{font-family:var(--fd);font-size:clamp(44px,7vw,72px);font-weight:800;color:var(--cta);line-height:1;letter-spacing:-.02em}
+          .v2-proof-suf{font-size:.42em;font-weight:800;margin-left:4px;color:var(--cta)}
+          .v2-proof-label{font-size:clamp(14px,1.6vw,16px);font-weight:800;color:var(--on-navy);margin-top:14px}
+          .v2-proof-sub{font-size:12px;color:var(--on-navy-sub);margin-top:6px}
+          @media(max-width:720px){.v2-proof{grid-template-columns:1fr;gap:14px}.v2-proof-card{display:flex;align-items:baseline;gap:14px;text-align:left;padding:18px 22px}.v2-proof-num{font-size:40px}.v2-proof-label{margin-top:0}.v2-proof-sub{display:none}}
+        `}</style>
       </Section>
 
       {/* 2.5 Customer logo wall — social proof near first view */}
       <LogoWall tone="white" />
-
-      {/* 3. Why — two-stage problem truth (acquisition gap + conversion gap) */}
-      <Section tone="white">
-        <SectionHead
-          eyebrow="なぜ商談機会を逃すのか"
-          title="機会は、入口でも出口でも漏れている。"
-          lede="B2Bの買い手は購買プロセスの約70%を、営業に接触する前に独力で進めます（Gartner/6sense）。多くの企業はその間ずっと「待っている」だけ——獲得の前で大半が去り、獲得した後も大半が商談にならない。"
-        />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
-          {[
-            {
-              tag: "入口 — 獲得の穴",
-              stat: "99%",
-              t: "訪問者の大半は、リードにすらならず去る。",
-              d: "フォームに辿り着くのは1%未満。残りは匿名のまま、何も残さず黙って離脱していく。",
-            },
-            {
-              tag: "出口 — 商談化の穴",
-              stat: "85%",
-              t: "集めたリードも、商談にならない。",
-              d: "獲得したリードの約85%は商談に至らず終わる。初動の遅さ・追客の粘りのなさ・文脈の欠如で、せっかくのリードが冷えていく。",
-            },
-          ].map((p) => (
-            <Card key={p.tag} style={{ padding: 28 }}>
-              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, letterSpacing: ".06em", color: "var(--cta-ink)", marginBottom: 14 }}>
-                {p.tag}
-              </div>
-              <div style={{ fontFamily: "var(--fd)", fontSize: 52, fontWeight: 800, color: "var(--heading)", lineHeight: 1, marginBottom: 12 }}>
-                {p.stat}
-              </div>
-              <h3 style={{ fontSize: 19, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{p.t}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.8, color: "var(--text)", margin: 0 }}>{p.d}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
 
       {/* 4. The 3 stages (deck p7) — 掴む → 商談化 → 追客 */}
       <Section tone="surface" id="stages">
