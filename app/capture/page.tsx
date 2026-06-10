@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
@@ -7,6 +8,8 @@ import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check } from "@/app/c
 import LogoWall from "@/app/components/v2/LogoWall";
 import { FEATURED_CASES } from "@/app/lib/featured-cases";
 import { PRODUCTS } from "@/app/lib/product-lp-data";
+import { productMedia } from "@/app/lib/product-media";
+import ProductAnim from "@/app/components/v2/ProductAnim";
 
 // Stage page for ①掴む・育てる — merges Chat (会話で掴む) + Library (資料で育てる)
 // into ONE job-led page (2026-06-04, Takumi: 製品名は誰も興味ない). Product
@@ -50,6 +53,7 @@ const faqSchema = {
 
 const SUBS = [
   {
+    key: "chat", // productMedia slug + ProductAnim kind (ChatScene)
     job: "会話で、掴む",
     transform: "匿名の訪問者 → リード",
     product: chat,
@@ -58,6 +62,7 @@ const SUBS = [
     points: ["シナリオ設計不要・設置5分", "過去の閲覧/会話の文脈を引き継ぐ", "温まったら予約へ繋ぐ"],
   },
   {
+    key: "library", // productMedia slug + ProductAnim kind (LibraryScene)
     job: "資料で、育てる",
     transform: "まだ早い見込み客 → 温まったリード",
     product: library,
@@ -66,6 +71,16 @@ const SUBS = [
     points: ["関心に合った資料を自動で届ける", "AIが資料の疑問に答え理解を進める", "反応を見て育成し、温まったら次の仕事へ"],
   },
 ];
+
+// Animation/media for a sub-job — resolves public/product/<slug>.(mp4|png) and
+// falls back to the detailed mock animation (ChatScene / LibraryScene), same as
+// the product LPs and home StageMedia.
+function CaptureMedia({ slug }: { slug: string }) {
+  const m = productMedia(slug);
+  if (m?.kind === "video") return <video src={m.src} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />;
+  if (m?.kind === "image") return <Image src={m.src} alt={`${slug} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />;
+  return <ProductAnim kind={slug} />;
+}
 
 export default function Page() {
   const proof = FEATURED_CASES.find((c) => c.slug === "biztex-chat-leads-10x");
@@ -96,30 +111,47 @@ export default function Page() {
 
       <LogoWall tone="surface" />
 
-      {/* Two jobs: 会話で掴む / 資料で育てる (product names small) */}
+      {/* Two jobs: 会話で掴む / 資料で育てる — text + animated demo, alternating */}
       <Section tone="white">
         <SectionHead eyebrow="この仕事は、2つの動きでできている" title="会話で掴み、資料で育てる。" align="center" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
-          {SUBS.map((s) => (
-            <Card key={s.job} style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ color: "var(--cta)", marginBottom: 12 }}>
-                <ProductIcon kind={s.product.icon} size={26} />
+        <div className="cap-rows">
+          {SUBS.map((s, i) => (
+            <div key={s.job} className={`cap-row ${i % 2 === 1 ? "rev" : ""}`}>
+              <div className="cap-media"><CaptureMedia slug={s.key} /></div>
+              <div className="cap-body">
+                <div style={{ color: "var(--cta)", marginBottom: 10 }}>
+                  <ProductIcon kind={s.product.icon} size={26} />
+                </div>
+                <h3 className="cap-title">{s.job}</h3>
+                <div className="cap-transform">{s.transform}</div>
+                <p className="cap-desc">{s.desc}</p>
+                <ul className="cap-points">
+                  {s.points.map((p) => (
+                    <li key={p} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}><Check size={16} /> {p}</li>
+                  ))}
+                </ul>
+                {/* product name as the means — small, linking to the SEO landing page */}
+                <Link href={s.href} className="v2-link" style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none" }}>
+                  この動きを担う {s.product.productName} の詳細 →
+                </Link>
               </div>
-              <h3 style={{ fontSize: 22, fontWeight: 800, color: "var(--heading)", margin: "0 0 4px" }}>{s.job}</h3>
-              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta-ink)", marginBottom: 12 }}>{s.transform}</div>
-              <p style={{ fontSize: 15, lineHeight: 1.8, color: "var(--text)", margin: "0 0 14px" }}>{s.desc}</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 18px", display: "grid", gap: 8 }}>
-                {s.points.map((p) => (
-                  <li key={p} style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 14, color: "var(--text)" }}><Check size={16} /> {p}</li>
-                ))}
-              </ul>
-              {/* product name as the means — small, linking to the SEO landing page */}
-              <Link href={s.href} className="v2-link" style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none" }}>
-                この動きを担う {s.product.productName} の詳細 →
-              </Link>
-            </Card>
+            </div>
           ))}
         </div>
+        <style>{`
+          .cap-rows{display:flex;flex-direction:column;gap:clamp(40px,6vw,72px)}
+          .cap-row{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+          .cap-row.rev .cap-media{order:2}
+          .cap-media{position:relative;width:100%;min-height:clamp(360px,34vw,440px);border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:0 12px 40px -24px rgba(15,17,40,.30)}
+          .cap-title{font-family:var(--fd);font-size:clamp(22px,2.6vw,30px);font-weight:800;color:var(--heading);letter-spacing:-.02em;margin:0 0 6px;line-height:1.3}
+          .cap-transform{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta-ink);margin-bottom:14px}
+          .cap-desc{font-size:16px;line-height:1.85;color:var(--text);margin:0 0 16px}
+          .cap-points{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:9px;font-size:14px;line-height:1.7;color:var(--text)}
+          @media(max-width:900px){
+            .cap-row,.cap-row.rev{grid-template-columns:1fr;gap:20px}
+            .cap-row.rev .cap-media{order:0}
+          }
+        `}</style>
       </Section>
 
       {/* Proof */}
