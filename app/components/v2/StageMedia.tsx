@@ -79,8 +79,8 @@ export default function StageMedia() {
     <Section tone="white">
       <SectionHead
         eyebrow="動きで見る AI SDR"
-        title="それぞれの仕事を、実際の画面で。"
-        lede="掴む・育てる・商談化する・追客する——各仕事がどう動くかを、製品の画面で。"
+        title="それぞれの仕事が、どう動くか。"
+        lede="掴む・育てる・商談化する・追客する——AI SDR が現場で何をするのかを、動きのイメージで。"
         align="center"
       />
       <div className="v2-sm-rows">
