@@ -22,7 +22,7 @@ export const GROUNDING: Fact[] = [
   { claim: "Speed to Lead（初動レスポンス）の業界一般値", value: "数時間〜数日かかることが多い", source: "業界一般（要出典明記での使用）", clusters: ["calendar", "ai-sdr"] },
   // ── Product facts (no fabrication needed) ──
   { claim: "Meeton ai の構成", value: "Calendar / Chat / Library / Email の4モジュール（1アカウント統合）", source: "Meeton ai 製品仕様", clusters: ["library", "calendar", "email", "chat", "ai-sdr"] },
-  { claim: "料金プラン", value: "月額12万円〜。Starter（問い合わせ・資料DL後の商談化）/ Growth（CRM連携・ホットリード判定・担当者振り分け）/ Enterprise（複数事業部・大規模・Salesforce/HubSpot高度連携）。料金は月間リード数・流入数・連携CRM・利用機能・運用支援範囲で変動", source: "Meeton ai 料金", clusters: ["ai-sdr"] },
+  { claim: "料金プラン", value: "月額12万円〜の3プラン。リード獲得プラン（掴む・育てる／¥12万〜）/ 商談獲得プラン（+商談化）/ オールインワンプラン（+追客）。上位2プランはお問い合わせ。料金は月間トラフィックと機能で変動", source: "Meeton ai 料金", clusters: ["ai-sdr"] },
 ];
 
 // First-party expertise to inject as an E-E-A-T / Experience signal (§4.13).

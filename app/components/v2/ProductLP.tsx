@@ -138,7 +138,7 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
 
       {/* 6. Pricing — single anchor (月額12万円〜, varies by scale/usage) */}
       <Section tone="surface">
-        <SectionHead eyebrow="料金" title="月額12万円〜。必要な分だけ。" align="center" lede="料金は月間リード数・サイト流入数・連携CRM・利用機能・運用支援範囲により変動します。Starter / Growth / Enterprise の3プラン。" />
+        <SectionHead eyebrow="料金" title="月額12万円〜。必要な分だけ。" align="center" lede="料金は月間トラフィックと機能で変動します。リード獲得 / 商談獲得 / オールインワン の3プラン。" />
         <div style={{ textAlign: "center" }}>
           <Link href="/pricing/" className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
             料金の詳細を見る →

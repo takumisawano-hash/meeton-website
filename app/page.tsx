@@ -58,7 +58,7 @@ const homepageFaqSchema = {
       name: '料金体系は？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '月額12万円〜です。Starter（問い合わせ・資料DL後の商談化を自動化）、Growth（CRM連携・ホットリード判定・担当者振り分け）、Enterprise（複数事業部・大規模サイト・Salesforce/HubSpot高度連携）の3プラン。料金は月間リード数・サイト流入数・連携CRM・利用機能・運用支援範囲により変動し、適格請求書（インボイス）に対応します。',
+        text: '月額12万円〜です。掴む・育てるの『リード獲得プラン（¥12万〜）』、商談化まで含む『商談獲得プラン』、追客まで一気通貫の『オールインワンプラン』の3プラン。上位2プランはお問い合わせ。料金は月間トラフィックと機能で変動し、適格請求書（インボイス）に対応します。',
       },
     },
     {
@@ -91,7 +91,7 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Library）→商談化（Calendar）→追客（Email）の3ステージを自律化。月額12万円〜、Starter / Growth / Enterprise の3プラン。',
+    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Library）→商談化（Calendar）→追客（Email）の3ステージを自律化。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/',
@@ -100,7 +100,7 @@ const homepageProductSchema = {
     '@type': 'Offer',
     price: '120000',
     priceCurrency: 'JPY',
-    description: '月額12万円〜。Starter / Growth / Enterprise の3プラン。規模・利用機能・運用支援範囲により変動。',
+    description: '月額12万円〜。リード獲得 / 商談獲得 / オールインワン の3プラン。規模・機能により変動。',
   },
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'CRM連携', value: 'HubSpot・Salesforce ネイティブ連携' },

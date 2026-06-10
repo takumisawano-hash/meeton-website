@@ -9,68 +9,76 @@ import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/Integrat
 import { demoUrl } from "@/app/lib/cta-urls";
 
 export const metadata: Metadata = {
-  title: { absolute: "料金｜Meeton ai — 月額12万円〜のAI営業エージェント" },
+  title: { absolute: "料金｜Meeton ai — 3つのプランで、掴む→商談化→追客" },
   description:
-    "Meeton ai の料金。月額12万円〜。Webサイトのリード対応・商談化・CRM連携を自動化するAI営業エージェント。料金は月間リード数・サイト流入数・連携CRM・利用機能・運用支援範囲により変動。Starter / Growth / Enterprise の3プラン。",
+    "Meeton ai の料金。リード獲得プラン¥12万〜（掴む・育てる）。商談獲得プラン（+商談化）・オールインワンプラン（+追客）はお問い合わせ。規模は月間トラフィックで決まり、機能で3段階。すべて税抜/月・適格請求書対応。",
   alternates: { canonical: "/pricing/" },
   openGraph: {
-    title: "料金｜Meeton ai — 月額12万円〜",
+    title: "料金｜Meeton ai — 掴む→商談化→追客の3プラン",
     description:
-      "Webサイトのリード対応・商談化・CRM連携を自動化するAI営業エージェント。月額12万円〜、規模と機能で変動。",
+      "リード獲得¥12万〜 / 商談獲得・オールインワンはお問い合わせ。規模は月間トラフィック、機能で3段階。",
     url: "https://dynameet.ai/pricing/",
     type: "website",
   },
 };
 
+// Deck p19. Plans map 1:1 to the 3 stages (stages.ts): ① capture → ② convert
+// → ③ follow. Price scales by monthly traffic; the plan defines which stages
+// (products) are included.
 const PLANS = [
   {
-    name: "Starter",
-    price: "月額12万円〜",
+    name: "リード獲得プラン",
+    stage: "① 掴む・育てる",
+    includes: "Live + Library",
+    price: "¥12万",
     highlight: false,
-    target: "まずは問い合わせ・資料DL後の商談化を自動化したい企業",
-    items: ["会話で訪問者を掴む（チャット）", "資料で見込み客を育てる", "コンバート直後の商談予約", "基本のCRM連携・通知"],
-    cta: { label: "このプランで相談する", href: demoUrl("pricing-starter") },
+    blurb: "潜在層を掴み、育てて、リードにする。Calendar が不要な企業の入口に。",
+    items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Library（資料で検討を育てる）", "CRM 連携", "開封・行動トラッキング"],
   },
   {
-    name: "Growth",
+    name: "商談獲得プラン",
+    stage: "① + ② 商談化まで",
+    includes: "+ Calendar",
     price: "お問い合わせ",
     highlight: true,
     badge: "おすすめ",
-    target: "CRM連携、ホットリード判定、担当者振り分けまで行いたい企業",
-    items: ["Starterの全機能", "高度なCRM連携・会話ログ自動登録", "ホットリード判定（PQLシグナル）", "担当者の自動振り分け・追客自動化"],
-    cta: { label: "相談する", href: demoUrl("pricing-growth") },
+    blurb: "掴んだリードを、商談（予約）まで運ぶ。最も選ばれる構成。",
+    items: ["リード獲得プランの全機能", "Meeton Calendar 連携（無制限）", "AIコンシェルジュ・自動アサイン", "商談予約の自動化"],
   },
   {
-    name: "Enterprise",
+    name: "オールインワンプラン",
+    stage: "① + ② + ③ 一気通貫",
+    includes: "+ Email",
     price: "お問い合わせ",
     highlight: false,
-    target: "複数事業部、大規模サイト、Salesforce / HubSpot 高度連携",
-    items: ["Growthの全機能", "複数事業部・複数サイト運用", "Salesforce / HubSpot 高度連携", "SSO・セキュリティ要件・専任サポート"],
-    cta: { label: "相談する", href: demoUrl("pricing-enterprise") },
+    blurb: "逃したリードも追客で回収。掴む→商談化→追客まで一気通貫で最大化。",
+    items: ["商談獲得プランの全機能", "Meeton Email 機能（無制限）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
   },
 ];
 
-// What the price varies by (replaces the old fixed traffic table).
-const FACTORS = [
-  { k: "月間リード数", d: "対応するリード・問い合わせの量" },
-  { k: "サイト流入数", d: "月間セッション規模" },
-  { k: "連携CRM", d: "Salesforce / HubSpot 等の連携範囲" },
-  { k: "利用機能", d: "掴む・育てる・商談化・追客のどこまで使うか" },
-  { k: "運用支援範囲", d: "設計・運用にどこまで伴走するか" },
+const TRAFFIC = [
+  { tier: "〜3万セッション/月", add: "基本料金に込み" },
+  { tier: "〜10万セッション/月", add: "+¥6万" },
+  { tier: "〜30万セッション/月", add: "+¥12万" },
+  { tier: "30万超", add: "要相談" },
 ];
 
 const FAQ = [
   {
+    q: "プランはどう選べばいいですか？",
+    a: "AI SDR の3つの仕事に対応します。潜在層を掴んでリードにするだけなら『リード獲得プラン（¥12万〜）』、掴んだリードを商談まで運ぶなら『商談獲得プラン（お問い合わせ・最も選ばれる構成）』、逃したリードの追客まで一気通貫なら『オールインワンプラン（お問い合わせ）』です。上位プランは下位の機能をすべて含みます。",
+  },
+  {
     q: "料金は何で決まりますか？",
-    a: "月間リード数・サイト流入数・連携するCRM・利用する機能（掴む/育てる/商談化/追客）・運用支援の範囲によって変動します。Starter は月額12万円〜で、御社の規模と必要な機能に合わせてお見積りします。",
+    a: "プラン（機能の範囲）と、月間トラフィック（セッション数）の2軸で決まります。基本料金に3万セッション/月まで込み、〜10万で+¥6万、〜30万で+¥12万、30万超は要相談です。Calendar 連携は全プランで無制限です。",
   },
   {
-    q: "Starter ではどこまでできますか？",
-    a: "問い合わせ・資料DL後の商談化の自動化が中心です。会話で訪問者を掴み、資料で育て、コンバート直後に商談予約まで運びます。基本的なCRM連携・通知も含みます。",
+    q: "上位プランへの変更はできますか？",
+    a: "できます。リード獲得→商談獲得→オールインワンへ、事業の成長に合わせて段階的にアップグレードできます。商談化（Calendar）や追客（Email）を後から足す形です。",
   },
   {
-    q: "Growth と Enterprise の違いは？",
-    a: "Growth は CRM連携・ホットリード判定（PQLシグナル）・担当者の自動振り分け・追客自動化まで行いたい企業向けです。Enterprise は複数事業部・大規模サイト・Salesforce/HubSpot の高度連携・SSO・セキュリティ要件・専任サポートが必要な企業向けです。いずれもお問い合わせください。",
+    q: "複数サイト・高度な要件は？",
+    a: "複数サイト運用・高度なCRM連携・SSO・セキュリティ要件などは Enterprise（要相談）で対応します。詳細は エンタープライズ ページをご覧ください。",
   },
   {
     q: "支払い方法と請求書（インボイス）は？",
@@ -94,17 +102,15 @@ const productSchema = {
   operatingSystem: "Web",
   url: "https://dynameet.ai/pricing/",
   publisher: { "@id": "https://dynameet.ai/#organization" },
-  offers: {
-    "@type": "Offer",
-    name: "Starter",
-    price: "120000",
-    priceCurrency: "JPY",
-    description: "月額12万円〜。Growth / Enterprise は要問い合わせ。",
-  },
+  offers: [
+    { "@type": "Offer", name: "リード獲得プラン", price: "120000", priceCurrency: "JPY" },
+    { "@type": "Offer", name: "商談獲得プラン" },
+    { "@type": "Offer", name: "オールインワンプラン" },
+  ],
 };
 
-const th: React.CSSProperties = { textAlign: "left", padding: "14px 16px", fontWeight: 800, color: "var(--heading)", borderBottom: "2px solid var(--border)", fontSize: 14 };
-const td: React.CSSProperties = { padding: "14px 16px", color: "var(--text)", borderBottom: "1px solid var(--border)", fontSize: 14, lineHeight: 1.7, verticalAlign: "top" };
+const th: React.CSSProperties = { textAlign: "left", padding: "14px 16px", fontWeight: 800, color: "var(--heading)", borderBottom: "2px solid var(--border)" };
+const td: React.CSSProperties = { padding: "14px 16px", color: "var(--text)", borderBottom: "1px solid var(--border)", fontSize: 14, lineHeight: 1.7 };
 
 export default function Page() {
   return (
@@ -113,18 +119,15 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Nav />
 
-      {/* Hero — single price anchor */}
-      <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 56 }}>
-        <div style={{ maxWidth: 780 }}>
-          <Eyebrow tone="dark">料金</Eyebrow>
-          <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,6.5vw,68px)", lineHeight: 1.1, fontWeight: 800, letterSpacing: "-0.03em", color: "var(--on-navy)", margin: "20px 0 0" }}>
-            月額<span style={{ color: "var(--cta)" }}>12万円</span>〜
-          </div>
-          <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 8px", maxWidth: 640 }}>
-            Webサイトのリード対応、商談化、CRM連携を自動化するAI営業エージェントです。
-          </p>
-          <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--on-navy-sub)", margin: "0 0 28px", maxWidth: 640 }}>
-            料金は、月間リード数・サイト流入数・連携CRM・利用機能・運用支援範囲により変動します。
+      {/* Hero */}
+      <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 64 }}>
+        <div style={{ maxWidth: 760 }}>
+          <Eyebrow tone="dark">料金プラン</Eyebrow>
+          <h1 style={{ fontFamily: "var(--fd)", fontSize: "clamp(32px,5vw,52px)", lineHeight: 1.18, fontWeight: 800, letterSpacing: "-0.025em", color: "var(--on-navy)", margin: "20px 0 0" }}>
+            掴む → <span style={{ color: "var(--cta)" }}>商談化</span> → 追客。<br />必要な段階から。
+          </h1>
+          <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 28px" }}>
+            規模は月間トラフィックで決まり、機能で3段階に分かれます。すべて税抜/月。
           </p>
           <CTAButtons source="pricing-hero" tone="onNavy" size="lg" secondaryLabel="導入事例を見る" secondaryHref="/cases/" />
         </div>
@@ -132,9 +135,9 @@ export default function Page() {
 
       <LogoWall tone="surface" />
 
-      {/* 3 plans */}
+      {/* 3 plans (deck p19) */}
       <Section tone="white">
-        <SectionHead eyebrow="プラン" title="規模と、自動化したい範囲で選ぶ。" align="center" />
+        <SectionHead eyebrow="3つのプラン" title="AI SDR の3つの仕事に、そのまま対応。" lede="上位プランは下位の機能をすべて含みます。商談化（Calendar）・追客（Email）を、事業の成長に合わせて足していけます。" align="center" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, alignItems: "stretch" }}>
           {PLANS.map((p) => (
             <Card
@@ -150,48 +153,63 @@ export default function Page() {
               {p.badge && (
                 <div style={{ position: "absolute", top: -12, left: 24, background: "var(--cta)", color: "var(--on-cta)", fontSize: 12, fontWeight: 800, padding: "4px 12px", borderRadius: 999 }}>{p.badge}</div>
               )}
-              <div style={{ fontSize: 19, fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)" }}>{p.name}</div>
-              <div style={{ fontFamily: "var(--fd)", fontSize: 30, fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: "10px 0 12px" }}>{p.price}</div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.7, color: p.highlight ? "var(--on-navy-sub)" : "var(--text)", margin: "0 0 16px" }}>{p.target}</p>
+              <div style={{ fontSize: 18, fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)" }}>{p.name}</div>
+              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta)", margin: "6px 0 2px" }}>{p.stage}</div>
+              <div style={{ fontSize: 13, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{p.includes}</div>
+              <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: "12px 0 2px" }}>
+                {p.price.startsWith("¥") ? (
+                  <>
+                    <span style={{ fontSize: 42 }}>{p.price}</span>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}> 〜 / 月（税抜）</span>
+                  </>
+                ) : (
+                  <span style={{ fontSize: 28 }}>{p.price}</span>
+                )}
+              </div>
+              <p style={{ fontSize: 13.5, lineHeight: 1.7, color: p.highlight ? "var(--on-navy-sub)" : "var(--text)", margin: "10px 0 16px" }}>{p.blurb}</p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px", display: "grid", gap: 9 }}>
                 {p.items.map((it) => (
                   <li key={it} style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 13.5, color: p.highlight ? "var(--on-navy)" : "var(--text)" }}><Check size={16} /> {it}</li>
                 ))}
               </ul>
               <a
-                href={p.cta.href}
+                href={demoUrl(`pricing-${p.highlight ? "convert" : "plan"}`)}
                 className={p.highlight ? "v2-cta-primary" : "v2-cta-ghost"}
                 style={{
                   marginTop: "auto", textAlign: "center", padding: "12px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none",
                   background: p.highlight ? "var(--cta)" : "transparent",
-                  color: p.highlight ? "var(--on-cta)" : "var(--heading)",
+                  color: p.highlight ? "var(--on-cta)" : p.highlight ? "var(--on-navy)" : "var(--heading)",
                   border: p.highlight ? "none" : "1.5px solid var(--border2)",
                   boxShadow: p.highlight ? "0 6px 22px var(--cta-glow)" : "none",
                 }}
               >
-                {p.cta.label}
+                このプランで相談する
               </a>
             </Card>
           ))}
         </div>
+        <p style={{ textAlign: "center", marginTop: 18, fontSize: 13, color: "var(--sub)" }}>
+          ステージの考え方は{" "}
+          <Link href="/#stages" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>AI SDR の3つの仕事</Link> をご覧ください。
+        </p>
       </Section>
 
-      {/* What price varies by */}
+      {/* Traffic add-on */}
       <Section tone="surface">
-        <SectionHead eyebrow="料金の決まり方" title="御社の規模と使い方に、合わせて。" lede="一律ではなく、必要な分だけ。以下の要素でお見積りします。" align="center" />
-        <div style={{ maxWidth: 760, margin: "0 auto", overflowX: "auto", background: "#fff", border: "1px solid var(--border)", borderRadius: 16 }}>
+        <SectionHead eyebrow="トラフィック追加（全プラン共通）" title="規模は、月間トラフィックで。" align="center" />
+        <div style={{ overflowX: "auto", maxWidth: 720, margin: "0 auto", background: "#fff", border: "1px solid var(--border)", borderRadius: 16 }}>
           <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 420 }}>
-            <thead><tr><th style={th}>変動要素</th><th style={th}>内容</th></tr></thead>
+            <thead><tr><th style={th}>月間トラフィック</th><th style={th}>追加料金</th></tr></thead>
             <tbody>
-              {FACTORS.map((f) => (
-                <tr key={f.k}><td style={{ ...td, fontWeight: 700, color: "var(--heading)", whiteSpace: "nowrap" }}>{f.k}</td><td style={td}>{f.d}</td></tr>
+              {TRAFFIC.map((t) => (
+                <tr key={t.tier}><td style={{ ...td, fontWeight: 700, color: "var(--heading)" }}>{t.tier}</td><td style={td}>{t.add}</td></tr>
               ))}
             </tbody>
           </table>
         </div>
         <p style={{ textAlign: "center", marginTop: 16, fontSize: 13, color: "var(--sub)" }}>
-          適格請求書（インボイス制度対応）を発行します。最適な構成は{" "}
-          <a href={demoUrl("pricing-factors")} className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>30分のデモ</a> でご提案します。
+          カレンダー連携は全プラン無制限。複数サイト・高度な連携は{" "}
+          <Link href="/enterprise/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Enterprise（要相談）</Link>。年額前払いは2ヶ月無料（約17%オフ）。適格請求書（インボイス制度対応）を発行します。
         </p>
       </Section>
 
@@ -223,9 +241,9 @@ export default function Page() {
       <Section tone="navyDeep" py={72}>
         <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            自社に合う構成を、まず相談。
+            どのプランが合うか、まず相談。
           </h2>
-          <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>30分のデモで、規模と必要な機能に合わせた料金を具体的にご提案します。</p>
+          <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>30分のデモで、自社の規模と段階に合う構成を具体的に提案します。</p>
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source="pricing-footer" tone="onNavy" size="lg" align="center" secondaryLabel="導入事例を見る" secondaryHref="/cases/" /></div>
         </div>
       </Section>
