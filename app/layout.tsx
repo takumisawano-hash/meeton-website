@@ -25,15 +25,19 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ['700', '800'],
   variable: '--font-jakarta',
   display: 'swap',
+  // Not preloaded: PJS is only a fallback in --fd (Inter loads first in
+  // practice), so preloading it on every page wasted ~12KB of critical path.
+  preload: false,
 })
 
 // Inter — premium B2B SaaS body/display font (Linear, Stripe, etc.).
 // Variable axis so 400-800 weight all served from one woff2 file.
+// (opsz axis removed 2026-06-12: +13KB for an optical-size range we
+// never exercise — headings already use weight/letter-spacing, not opsz.)
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  axes: ['opsz'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -54,7 +58,7 @@ export const metadata: Metadata = {
     default: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
     template: '%s｜Meeton ai',
   },
-  description: 'Meeton ai は、会話・資料提案・予約・追客を自律でこなす AI SDR Platform。Webサイトに配属するだけで、問い合わせを待つサイトが商談を生み出す営業チャネルに変わります。無料で開始（クレカ不要）。',
+  description: 'Meeton ai は、会話・資料提案・予約・追客を自律でこなす AI SDR Platform。Webサイトに配属するだけで、問い合わせを待つサイトが商談を生み出す営業チャネルに変わります。',
   metadataBase: new URL('https://dynameet.ai'),
   // No site-wide canonical: setting one in the root layout makes EVERY
   // page render <link rel=canonical href=/> which collapses every URL
@@ -128,6 +132,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://js-na2.hsforms.net" />
         <link rel="dns-prefetch" href="https://forms.hsforms.com" />
         <link rel="dns-prefetch" href="https://forms-na2.hsforms.com" />
+        {/* Meeton widget + GTM/GA — both load on every page and sit on the
+            conversion path (chat → calendar booking, CV beacons). */}
+        <link rel="preconnect" href="https://app.dynameet.ai" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://app.dynameet.ai" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {/* Global CSS variables — design tokens accessible site-wide
             (not just on home page). Other pages (/ai-sdr/, /compare/*,
             etc.) rely on --fb / --fd / --fm / --cta tokens defined here. */}
@@ -142,7 +152,9 @@ export default function RootLayout({
   /* Canvas — white side, where reading & deciding happens */
   --bg:#ffffff;--surface:#F6F8FB;--surface2:#EDF1F8;
   --border:#E4E8F2;--border2:#D2D8E6;
-  --text:#3F4763;--heading:#0F1128;--sub:#6B7390;
+  /* --sub darkened 2026-06-12: #6B7390 was 4.41:1 on --surface (AA fail
+     for 14px meta text); #656D8A clears 4.5:1 on both white and surface. */
+  --text:#3F4763;--heading:#0F1128;--sub:#656D8A;
 
   /* Navy — frame side, authority/trust surfaces */
   --navy:#0F1128;--navy-2:#171A36;--navy-3:#22264B;--navy-deep:#0A0B1E;
@@ -166,16 +178,22 @@ export default function RootLayout({
   --fd:'Inter',var(--font-inter),'Plus Jakarta Sans',var(--font-jakarta),${"'" + NOTO_SYSTEM_STACK.split(',')[0].trim() + "'"},${NOTO_SYSTEM_STACK},sans-serif;
   --fb:'Inter',var(--font-inter),${NOTO_SYSTEM_STACK},sans-serif;
   --fm:'JetBrains Mono',var(--font-mono),monospace;
+
+  /* Radius scale (2026-06-12) — use these instead of ad-hoc px values:
+     --r-btn buttons/pills, --r-card cards/tables, --r-feature hero media */
+  --r-btn:12px;--r-card:16px;--r-feature:20px;
 }
 html{font-feature-settings:'cv02','cv03','cv04','cv11','calt';font-variant-ligatures:contextual;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 body{font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.65}
 /* ===== v2 global interaction states (audit 2026-06-03) ===== */
-/* keyboard focus ring everywhere (none defined before) */
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cta);outline-offset:2px;border-radius:6px}
-/* primary green CTA hover/active feedback */
+/* keyboard focus ring everywhere — cta-ink ring (3:1+ on white) with a
+   soft green halo; bare --cta was 2.14:1 and vanished on white canvas */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cta-ink);outline-offset:2px;border-radius:6px;box-shadow:0 0 0 5px var(--cta-glow)}
+/* primary green CTA hover/active feedback — subtle lift + tight 2-layer
+   shadow (replaces hue-only feedback; no neon glow) */
 .v2-cta-primary{transition:background .18s,box-shadow .18s,transform .12s}
-.v2-cta-primary:hover{background:var(--cta-hover)}
-.v2-cta-primary:active{background:var(--cta-press);transform:translateY(1px)}
+.v2-cta-primary:hover{background:var(--cta-hover);transform:translateY(-1px);box-shadow:0 2px 6px rgba(15,17,40,.14),0 8px 20px -8px rgba(6,184,109,.45)}
+.v2-cta-primary:active{background:var(--cta-press);transform:translateY(1px);box-shadow:0 1px 3px rgba(15,17,40,.12)}
 /* ghost / secondary CTA */
 .v2-cta-ghost{transition:border-color .18s,background .18s}
 .v2-cta-ghost:hover{border-color:var(--cta)}
@@ -189,6 +207,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .v2-skip{position:fixed;top:-60px;left:8px;z-index:300;background:var(--cta);color:var(--on-cta);padding:10px 16px;border-radius:10px;font-weight:800;transition:top .2s}
 .v2-skip:focus{top:8px}
+/* respect OS-level reduced-motion: freeze decorative animation site-wide
+   (covers ProductAnim scenes, .ap reveals, hover transforms) */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 ` }} />
       </head>
       <body>
