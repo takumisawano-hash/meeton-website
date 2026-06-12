@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
+import { openDemoCalendarInPlace } from "@/app/lib/cta-urls";
 
 // ── Meeton ai v2 global navigation (2026-05-29 rebuild) ──────────────
 // IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [料金を見る][デモを予約]
@@ -118,8 +119,31 @@ export default function Nav({
     setOpenMenu(null);
   }, [pathname]);
 
+  // a11y: Escape closes the mobile drawer / any open desktop dropdown.
+  useEffect(() => {
+    if (!mobileOpen && !openMenu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        setOpenMenu(null);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen, openMenu]);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  // In-place demo calendar: open the Meeton widget without leaving the page
+  // when it's loaded; otherwise the default href navigation proceeds
+  // (SEO / no-JS fallback). See window.meetonOpenCalendar in MeetonScript.
+  const onDemoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (openDemoCalendarInPlace()) {
+      e.preventDefault();
+      setMobileOpen(false);
+    }
+  };
 
   // ── minimal variant: paid-traffic LPs. Logo + dual CTA only. ──────
   if (isMinimal) {
@@ -157,7 +181,7 @@ export default function Nav({
           <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(isMobile)}>
             料金を見る
           </a>
-          <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(isMobile)}>
+          <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(isMobile)} onClick={onDemoClick}>
             デモを予約
           </a>
         </div>
@@ -205,7 +229,7 @@ export default function Nav({
             Careers
           </span>
         </Link>
-        <a href={CAREERS_APPLY_URL} target="_blank" rel="noopener noreferrer" style={primaryBtn(isMobile)}>
+        <a href={CAREERS_APPLY_URL} target="_blank" rel="noopener noreferrer" className="v2-cta-primary" style={primaryBtn(isMobile)}>
           応募する
         </a>
       </nav>
@@ -328,7 +352,7 @@ export default function Nav({
               <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(false)}>
                 料金を見る
               </a>
-              <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(false)}>
+              <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(false)} onClick={onDemoClick}>
                 デモを予約
               </a>
             </div>
@@ -343,7 +367,8 @@ export default function Nav({
                       <Link
                         href={g.href}
                         onClick={() => setOpenMenu(null)}
-                        style={{ display: "block", padding: "8px 12px", borderRadius: 10, textDecoration: "none", background: isActive(g.href) ? "var(--cta-wash)" : "transparent" }}
+                        className="v2-nav-panel-item"
+                        style={{ display: "block", padding: "8px 12px", borderRadius: 10, textDecoration: "none", background: isActive(g.href) ? "var(--cta-wash)" : undefined }}
                       >
                         <div style={{ fontSize: 14, fontWeight: 800, color: "var(--heading)" }}>{g.stage} →</div>
                         <div style={{ fontFamily: "var(--fm)", fontSize: 11, fontWeight: 700, color: "var(--cta-ink)", marginTop: 2 }}>{g.transform}</div>
@@ -393,33 +418,46 @@ export default function Nav({
         )}
 
         {isMobile && (
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="メニュー"
-            style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5, zIndex: 200 }}
-          >
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                style={{
-                  display: "block",
-                  width: 24,
-                  height: 2,
-                  background: "#fff",
-                  borderRadius: 2,
-                  transition: "all .3s",
-                  transform: mobileOpen
-                    ? i === 0
-                      ? "rotate(45deg) translate(5px,5px)"
-                      : i === 2
-                        ? "rotate(-45deg) translate(5px,-5px)"
-                        : "none"
-                    : "none",
-                  opacity: mobileOpen && i === 1 ? 0 : 1,
-                }}
-              />
-            ))}
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            {/* compact demo CTA — mobile always has a visible CTA without
+                opening the drawer */}
+            <a
+              href={DEMO_URL}
+              className="v2-cta-primary"
+              onClick={onDemoClick}
+              style={{ ...primaryBtn(true), padding: "9px 14px", fontSize: 13 }}
+            >
+              デモを予約
+            </a>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "メニューを閉じる" : "メニューを開く"}
+              aria-expanded={mobileOpen}
+              style={{ background: "none", border: "none", cursor: "pointer", width: 44, height: 44, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 5, zIndex: 200 }}
+            >
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  style={{
+                    display: "block",
+                    width: 24,
+                    height: 2,
+                    background: "#fff",
+                    borderRadius: 2,
+                    transition: "all .3s",
+                    transform: mobileOpen
+                      ? i === 0
+                        ? "rotate(45deg) translate(5px,5px)"
+                        : i === 2
+                          ? "rotate(-45deg) translate(5px,-5px)"
+                          : "none"
+                      : "none",
+                    opacity: mobileOpen && i === 1 ? 0 : 1,
+                  }}
+                />
+              ))}
+            </button>
+          </div>
         )}
       </nav>
 
@@ -431,6 +469,9 @@ export default function Nav({
             style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", zIndex: 150, opacity: mobileOpen ? 1 : 0, pointerEvents: mobileOpen ? "auto" : "none", transition: "opacity .3s" }}
           />
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="メニュー"
             style={{
               position: "fixed",
               top: 0,
@@ -444,11 +485,25 @@ export default function Nav({
               transition: "transform .3s ease-out",
               display: "flex",
               flexDirection: "column",
-              padding: "80px 24px 28px",
-              overflowY: "auto",
               fontFamily: "var(--fb)",
             }}
           >
+            {/* drawer header: dedicated 44x44 close button. The nav-bar X
+                sits under this panel (nav z-index 100 < drawer 160), so the
+                drawer must carry its own close affordance. */}
+            <div style={{ display: "flex", justifyContent: "flex-end", padding: "10px 12px 0", flexShrink: 0, zIndex: 1 }}>
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="メニューを閉じる"
+                style={{ width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", cursor: "pointer", color: "#fff" }}
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            {/* scrollable links */}
+            <div style={{ flex: 1, overflowY: "auto", padding: "8px 24px 20px" }}>
             {STAGE_NAV.map((g) => (
               <MobileGroup key={g.stage} title={`${g.stage}（${g.transform}）`}>
                 <MobileLink item={{ href: g.href, label: g.stage.replace(/^[①②③]\s*/, "") }} active={isActive(g.href)} />
@@ -475,11 +530,14 @@ export default function Nav({
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}
             </MobileGroup>
-            <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 16 }}>
+            </div>
+            {/* sticky dual CTA — always visible while the drawer is open
+                (§1.2), instead of sitting below ~20 scrollable links */}
+            <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 10, padding: "14px 24px calc(14px + env(safe-area-inset-bottom))", borderTop: "1px solid var(--on-navy-border)", background: "var(--navy)" }}>
               <a href={PRICING_URL} className="v2-cta-ghost" style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
                 料金を見る
               </a>
-              <a href={DEMO_URL} className="v2-cta-primary" style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+              <a href={DEMO_URL} className="v2-cta-primary" onClick={onDemoClick} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
                 デモを予約
               </a>
             </div>
@@ -491,6 +549,8 @@ export default function Nav({
 }
 
 // ── shared style helpers ────────────────────────────────────────────
+// No inline box-shadow on the primary: an inline shadow would override the
+// global .v2-cta-primary hover/active shadows (inline beats class :hover).
 function primaryBtn(isMobile: boolean): React.CSSProperties {
   return {
     background: "var(--cta)",
@@ -503,7 +563,6 @@ function primaryBtn(isMobile: boolean): React.CSSProperties {
     whiteSpace: "nowrap",
     border: "none",
     cursor: "pointer",
-    boxShadow: "0 4px 16px var(--cta-glow)",
     fontFamily: "var(--fb)",
   };
 }
@@ -552,6 +611,13 @@ function DropdownPanel({
 }) {
   return (
     <div style={{ position: "absolute", top: "100%", left, zIndex: 200, paddingTop: 10 }}>
+      {/* subtle .14s fade/slide on open; the global prefers-reduced-motion
+          guard collapses the animation for users who opt out */}
+      <style>{`
+        @keyframes v2NavDropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+        .v2-nav-panel-item{transition:background .14s}
+        .v2-nav-panel-item:hover{background:var(--surface)}
+      `}</style>
       <div
         style={{
           background: "#fff",
@@ -560,6 +626,7 @@ function DropdownPanel({
           padding: 12,
           width,
           boxShadow: "0 16px 48px rgba(15,17,40,.18)",
+          animation: "v2NavDropIn .14s ease-out",
         }}
       >
         {children}
@@ -597,12 +664,15 @@ function PanelItem({
   return (
     <Link
       href={item.href}
+      className="v2-nav-panel-item"
       style={{
         display: "block",
         padding: compact ? "8px 12px" : "10px 12px",
         borderRadius: 10,
         textDecoration: "none",
-        background: active ? "var(--cta-wash)" : "transparent",
+        // no inline background when inactive — it would override the
+        // .v2-nav-panel-item:hover surface (inline beats class :hover)
+        background: active ? "var(--cta-wash)" : undefined,
       }}
     >
       <div

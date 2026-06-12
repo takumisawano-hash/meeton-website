@@ -7,6 +7,7 @@ const DEFAULT_TEAM_ID = '70801bb6-9b39-4989-8be9-7d93076424c1'
 const CAREERS_TEAM_ID = '21e1d2a4-07cd-4123-8a41-d3f5afd29525'
 const MEETON_SCRIPT_SRC = 'https://app.dynameet.ai/meeton.js'
 const MEETON_SCRIPT_SELECTOR = 'script[data-dynameet-meeton-script="true"]'
+const DEMO_CALENDAR_ID = 'takumi-sawano'
 
 // Defer the chatbot widget until the user interacts. The widget loads
 // a ~1MB iframe.js plus a 1.5MB demo image inside the iframe — total
@@ -54,6 +55,36 @@ export default function MeetonScript() {
   const eagerLoad = isThanksPath
 
   useEffect(() => {
+    // In-place demo calendar (2026-06-12): demo CTAs call
+    // window.meetonOpenCalendar() first and fall back to href navigation
+    // when it returns false (widget not loaded yet — e.g. the CTA click is
+    // the user's first gesture, or an LP page where the widget is skipped).
+    // The widget exposes window.Meeton.openCalendar / openChat once
+    // meeton.js boots.
+    const ctaWin = window as Window & {
+      meetonOpenCalendar?: () => boolean
+      Meeton?: {
+        openCalendar?: (opts: { calendarId: string }) => void
+        openChat?: (opts?: { showCalendar?: boolean; calendarId?: string }) => void
+      }
+    }
+    ctaWin.meetonOpenCalendar = () => {
+      try {
+        const api = ctaWin.Meeton
+        if (api?.openCalendar) {
+          api.openCalendar({ calendarId: DEMO_CALENDAR_ID })
+          return true
+        }
+        if (api?.openChat) {
+          api.openChat({ showCalendar: true, calendarId: DEMO_CALENDAR_ID })
+          return true
+        }
+      } catch {
+        // widget in a broken state — treat as not ready, caller falls back
+      }
+      return false
+    }
+
     const removeManagedScript = () => {
       const existingScript = document.querySelector(MEETON_SCRIPT_SELECTOR)
       existingScript?.remove()

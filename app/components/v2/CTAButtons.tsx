@@ -1,6 +1,6 @@
 "use client";
 
-import { demoUrl, pricingUrl } from "@/app/lib/cta-urls";
+import { demoUrl, pricingUrl, openDemoCalendarInPlace } from "@/app/lib/cta-urls";
 
 // Permanent dual CTA (§1.2). 2026-06-04 sales-led pivot (deck p19, free tier
 // removed): primary = デモを予約 (green), secondary = 料金を見る (ghost → /pricing).
@@ -18,6 +18,10 @@ type Props = {
   /** override secondary CTA (default 料金を見る → /pricing/) */
   secondaryLabel?: string;
   secondaryHref?: string;
+  /** optional short reassurance lines rendered "✓ …" under the buttons.
+   *  Reuse existing copy (e.g. "30分のデモで自社への効き方を確認",
+   *  "ノーコード設置"); omitted → nothing renders. */
+  assurances?: string[];
 };
 
 function track(event: string, source: string) {
@@ -36,10 +40,13 @@ export default function CTAButtons({
   primaryLabel = "デモを予約",
   secondaryLabel = "料金を見る",
   secondaryHref,
+  assurances,
 }: Props) {
   const pad = size === "lg" ? "15px 30px" : "12px 24px";
   const fontSize = size === "lg" ? 16 : 15;
 
+  // No inline box-shadow: an inline shadow would override the global
+  // .v2-cta-primary hover/active shadows (inline beats class :hover).
   const primary: React.CSSProperties = {
     background: "var(--cta)",
     color: "var(--on-cta)",
@@ -48,7 +55,6 @@ export default function CTAButtons({
     fontSize,
     fontWeight: 800,
     textDecoration: "none",
-    boxShadow: "0 6px 22px var(--cta-glow)",
     whiteSpace: "nowrap",
   };
   const ghost: React.CSSProperties = {
@@ -77,7 +83,13 @@ export default function CTAButtons({
         href={demoUrl(source)}
         className="v2-cta-primary"
         style={primary}
-        onClick={() => track("demo_click", source)}
+        onClick={(e) => {
+          track("demo_click", source);
+          // In-place calendar: open the Meeton widget without leaving the
+          // page when it's loaded; otherwise the default href navigation
+          // proceeds (SEO / no-JS fallback).
+          if (openDemoCalendarInPlace()) e.preventDefault();
+        }}
       >
         {primaryLabel}
       </a>
@@ -89,6 +101,24 @@ export default function CTAButtons({
       >
         {secondaryLabel}
       </a>
+      {assurances && assurances.length > 0 && (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "4px 18px",
+            justifyContent: align === "center" ? "center" : "flex-start",
+            fontSize: 13,
+            fontWeight: 500,
+            color: tone === "onNavy" ? "var(--on-navy-sub)" : "var(--sub)",
+          }}
+        >
+          {assurances.map((line) => (
+            <span key={line}>✓ {line}</span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
