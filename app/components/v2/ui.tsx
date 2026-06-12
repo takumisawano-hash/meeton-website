@@ -92,12 +92,15 @@ export function SectionHead({
   lede,
   tone = "light",
   align = "left",
+  size = "md",
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   lede?: React.ReactNode;
   tone?: "light" | "dark";
   align?: "left" | "center";
+  /** h2 scale — "md" (default, up to 38px) or "sm" (up to 30px) */
+  size?: "md" | "sm";
 }) {
   const dark = tone === "dark";
   return (
@@ -117,12 +120,15 @@ export function SectionHead({
       <h2
         style={{
           fontFamily: "var(--fd)",
-          fontSize: "clamp(26px, 4vw, 38px)",
+          fontSize: size === "sm" ? "clamp(22px, 3.2vw, 30px)" : "clamp(26px, 4vw, 38px)",
           lineHeight: 1.25,
           fontWeight: 800,
           letterSpacing: "-0.02em",
           color: dark ? "var(--on-navy)" : "var(--heading)",
           margin: 0,
+          // balance + auto-phrase: keep JP titles from orphaning particles
+          textWrap: "balance",
+          wordBreak: "auto-phrase",
         }}
       >
         {title}

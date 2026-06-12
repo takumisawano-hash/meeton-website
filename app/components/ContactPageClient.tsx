@@ -7,7 +7,9 @@ import DemoBookingButton from './DemoBookingButton'
 
 export default function ContactPageClient() {
   const formRef = useRef<HTMLDivElement>(null)
-  const [formLoaded, setFormLoaded] = useState(false)
+  // 'loading' = skeleton, 'ready' = HubSpot form rendered, 'failed' =
+  // embed never signaled ready (slow network / ad blocker) → fallback CTA
+  const [formStatus, setFormStatus] = useState<'loading' | 'ready' | 'failed'>('loading')
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
@@ -17,16 +19,27 @@ export default function ContactPageClient() {
       else {
         document.getElementById('hubspot-script')?.addEventListener('load', renderForm)
       }
-      return
+    } else {
+      const script = document.createElement('script')
+      script.id = 'hubspot-script'
+      script.src = '//js-na2.hsforms.net/forms/embed/v2.js'
+      script.charset = 'utf-8'
+      script.async = true
+      script.onload = renderForm
+      document.head.appendChild(script)
     }
 
-    const script = document.createElement('script')
-    script.id = 'hubspot-script'
-    script.src = '//js-na2.hsforms.net/forms/embed/v2.js'
-    script.charset = 'utf-8'
-    script.async = true
-    script.onload = renderForm
-    document.head.appendChild(script)
+    // Failsafe (audit 2026-06-12): if the embed hasn't rendered after ~6s
+    // (script blocked or very slow), swap the skeleton for real alternatives
+    // instead of an empty dead-end card. onFormReady still flips the state
+    // back to 'ready' if the form arrives late.
+    const fallbackTimer = window.setTimeout(() => {
+      setFormStatus((s) => {
+        if (s !== 'loading') return s
+        return formRef.current?.querySelector('form, iframe') ? 'ready' : 'failed'
+      })
+    }, 6000)
+    return () => window.clearTimeout(fallbackTimer)
   }, [])
 
   function renderForm() {
@@ -37,6 +50,9 @@ export default function ContactPageClient() {
       formId: '08dc0777-eba7-419f-befe-70ae7bc44f02',
       region: 'na2',
       target: '#contact-hubspot-form',
+      // create() returning is NOT the same as the form being in the DOM —
+      // keep the skeleton until the embed actually signals ready.
+      onFormReady: () => setFormStatus('ready'),
       onFormSubmitted: () => {
         setSubmitted(true)
         const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
@@ -47,39 +63,41 @@ export default function ContactPageClient() {
         gtag?.('event', 'generate_lead', { form_type: 'contact' })
       },
     })
-    setFormLoaded(true)
   }
 
   return (
     <>
       <Nav />
 
-      {/* Page-scoped styles: dot grid, glows, hairlines, form polish */}
+      {/* Page-scoped styles: dot grid, glows, hairlines, form polish.
+          Re-skinned to v2 tokens (audit 2026-06-12): navy frame, white
+          canvas, green --cta as the single accent — purple/legacy-green
+          hues removed. */}
       <style>{`
-        .ct-dotgrid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(18,163,125,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+        .ct-dotgrid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(7,203,121,.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
         .ct-glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
-        .ct-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',var(--font-mono),monospace;font-size:12px;font-weight:700;color:#0f8a68;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
-        .ct-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,#12a37d)}
-        .ct-eyebrow::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,#12a37d,transparent)}
-        .ct-h1{font-size:clamp(32px,5.4vw,52px);font-weight:900;color:#0b1e1a;line-height:1.14;letter-spacing:-.025em;margin-bottom:18px}
-        .ct-h1 em{font-style:normal;background:linear-gradient(135deg,#12a37d,#7c5cfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .ct-sub{font-size:clamp(15px,2vw,18px);line-height:1.8;color:#5b6478;max-width:640px;margin:0 auto}
+        .ct-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta-ink);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
+        .ct-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cta))}
+        .ct-eyebrow::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cta),transparent)}
+        .ct-h1{font-family:var(--fd);font-size:clamp(32px,5.4vw,52px);font-weight:900;color:var(--heading);line-height:1.14;letter-spacing:-.025em;margin-bottom:18px}
+        .ct-h1 em{font-style:normal;color:var(--cta-ink)}
+        .ct-sub{font-size:clamp(15px,2vw,18px);line-height:1.8;color:var(--sub);max-width:640px;margin:0 auto}
 
         .ct-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(20px,3vw,32px);align-items:start}
         @media (max-width:900px){.ct-grid{grid-template-columns:1fr}}
 
-        .ct-card{background:#fff;border-radius:20px;border:1.5px solid rgba(11,30,26,.08);box-shadow:0 12px 40px rgba(11,30,26,.05),0 1px 2px rgba(11,30,26,.03);overflow:hidden}
-        .ct-card-h{padding:clamp(20px,3vw,28px) clamp(20px,3vw,32px);border-bottom:1px solid rgba(11,30,26,.06);display:flex;align-items:center;gap:14px}
-        .ct-card-h-num{font-family:'JetBrains Mono',var(--font-mono),monospace;font-size:11px;font-weight:700;color:#12a37d;letter-spacing:2px;padding:5px 9px;border-radius:6px;background:rgba(18,163,125,.08);border:1px solid rgba(18,163,125,.16)}
-        .ct-card-h-title{font-size:15px;font-weight:800;color:#0b1e1a;letter-spacing:-.01em}
-        .ct-card-h-sub{font-size:12.5px;color:#6e7494;margin-top:2px}
+        .ct-card{background:#fff;border-radius:var(--r-feature);border:1.5px solid var(--border);box-shadow:0 12px 40px rgba(15,17,40,.05),0 1px 2px rgba(15,17,40,.03);overflow:hidden}
+        .ct-card-h{padding:clamp(20px,3vw,28px) clamp(20px,3vw,32px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+        .ct-card-h-num{font-family:var(--fm);font-size:11px;font-weight:700;color:var(--cta-ink);letter-spacing:2px;padding:5px 9px;border-radius:6px;background:var(--cta-light);border:1px solid var(--cta-border)}
+        .ct-card-h-title{font-size:15px;font-weight:800;color:var(--heading);letter-spacing:-.01em}
+        .ct-card-h-sub{font-size:12.5px;color:var(--sub);margin-top:2px}
         .ct-card-body{padding:clamp(20px,3vw,32px)}
 
         /* HubSpot form overrides — preserve native structure */
         #contact-hubspot-form .hs-form-field{margin-bottom:18px}
-        #contact-hubspot-form .hs-form-field > label{display:block;font-size:13px;font-weight:700;color:#0b1e1a;margin-bottom:8px;letter-spacing:.005em}
+        #contact-hubspot-form .hs-form-field > label{display:block;font-size:13px;font-weight:700;color:var(--heading);margin-bottom:8px;letter-spacing:.005em}
         #contact-hubspot-form .hs-form-field > label .hs-form-required{color:#dc2626;margin-left:4px}
-        #contact-hubspot-form .hs-field-desc{font-size:12px;color:#6e7494;margin-bottom:6px}
+        #contact-hubspot-form .hs-field-desc{font-size:12px;color:var(--sub);margin-bottom:6px}
         #contact-hubspot-form input[type="text"],
         #contact-hubspot-form input[type="email"],
         #contact-hubspot-form input[type="tel"],
@@ -92,9 +110,9 @@ export default function ContactPageClient() {
           padding:12px 14px;
           font-size:15px;
           font-family:inherit;
-          color:#0b1e1a;
-          background:#fbfcfd;
-          border:1.5px solid rgba(11,30,26,.1);
+          color:var(--heading);
+          background:var(--surface);
+          border:1.5px solid var(--border2);
           border-radius:10px;
           transition:border-color .18s, box-shadow .18s, background .18s;
           -webkit-appearance:none;
@@ -102,10 +120,10 @@ export default function ContactPageClient() {
           box-sizing:border-box;
         }
         #contact-hubspot-form textarea{min-height:120px;line-height:1.6;resize:vertical}
-        #contact-hubspot-form select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236e7494' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+        #contact-hubspot-form select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23656D8A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
         #contact-hubspot-form input:focus,
         #contact-hubspot-form select:focus,
-        #contact-hubspot-form textarea:focus{outline:none;border-color:#12a37d;background:#fff;box-shadow:0 0 0 4px rgba(18,163,125,.14)}
+        #contact-hubspot-form textarea:focus{outline:none;border-color:var(--cta);background:#fff;box-shadow:0 0 0 4px rgba(7,203,121,.16)}
         #contact-hubspot-form input::placeholder,
         #contact-hubspot-form textarea::placeholder{color:#9ca3af}
         #contact-hubspot-form .hs-error-msgs{list-style:none;padding:0;margin:6px 0 0;font-size:12.5px;color:#dc2626}
@@ -115,11 +133,11 @@ export default function ContactPageClient() {
         #contact-hubspot-form textarea.invalid{border-color:#dc2626;background:#fff5f5}
         #contact-hubspot-form .hs-form-booleancheckbox label,
         #contact-hubspot-form .hs-form-checkbox label,
-        #contact-hubspot-form .hs-form-radio label{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#3a4156;line-height:1.6;cursor:pointer;font-weight:500}
+        #contact-hubspot-form .hs-form-radio label{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text);line-height:1.6;cursor:pointer;font-weight:500}
         #contact-hubspot-form .hs-form-booleancheckbox input,
         #contact-hubspot-form .hs-form-checkbox input,
-        #contact-hubspot-form .hs-form-radio input{margin-top:3px;accent-color:#12a37d}
-        #contact-hubspot-form .legal-consent-container{margin-top:8px;padding:14px;border-radius:10px;background:#f7faf9;border:1px solid rgba(11,30,26,.06);font-size:12.5px;line-height:1.65;color:#5b6478}
+        #contact-hubspot-form .hs-form-radio input{margin-top:3px;accent-color:var(--cta)}
+        #contact-hubspot-form .legal-consent-container{margin-top:8px;padding:14px;border-radius:10px;background:var(--surface);border:1px solid var(--border);font-size:12.5px;line-height:1.65;color:var(--sub)}
         #contact-hubspot-form .legal-consent-container p{margin:0 0 4px}
         #contact-hubspot-form .hs-fieldtype-intl-phone .input{display:flex;gap:8px}
         #contact-hubspot-form .hs-fieldtype-intl-phone select{flex:0 0 100px}
@@ -131,20 +149,21 @@ export default function ContactPageClient() {
           padding:14px 28px;
           font-size:16px;
           font-weight:800;
-          color:#fff;
+          color:var(--on-cta);
           font-family:inherit;
-          background:linear-gradient(135deg,#12a37d,#0d8a6a);
+          background:var(--cta);
           border:none;
-          border-radius:12px;
+          border-radius:var(--r-btn);
           cursor:pointer;
           letter-spacing:.01em;
-          box-shadow:0 6px 20px rgba(18,163,125,.28),0 1px 0 rgba(255,255,255,.18) inset;
-          transition:transform .2s cubic-bezier(.16,1,.3,1), box-shadow .25s, background .2s;
+          box-shadow:0 6px 22px var(--cta-glow);
+          transition:background .18s, box-shadow .18s, transform .12s;
         }
-        #contact-hubspot-form .hs-button:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(18,163,125,.36),0 1px 0 rgba(255,255,255,.22) inset}
-        #contact-hubspot-form .hs-button:active{transform:translateY(0)}
-        #contact-hubspot-form .hs-button:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:0 4px 12px rgba(18,163,125,.18)}
-        #contact-hubspot-form .submitted-message{padding:16px 0;color:#0b1e1a;font-size:15px;line-height:1.7}
+        /* mirror .v2-cta-primary states (class can't be added to HubSpot's injected button) */
+        #contact-hubspot-form .hs-button:hover{background:var(--cta-hover);transform:translateY(-1px);box-shadow:0 2px 6px rgba(15,17,40,.14),0 8px 20px -8px rgba(6,184,109,.45)}
+        #contact-hubspot-form .hs-button:active{background:var(--cta-press);transform:translateY(1px);box-shadow:0 1px 3px rgba(15,17,40,.12)}
+        #contact-hubspot-form .hs-button:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:0 3px 10px rgba(7,203,121,.16)}
+        #contact-hubspot-form .submitted-message{padding:16px 0;color:var(--text);font-size:15px;line-height:1.7}
         #contact-hubspot-form fieldset{max-width:none !important;border:none;padding:0;margin:0}
         #contact-hubspot-form fieldset.form-columns-2 .hs-form-field{width:100% !important;padding-right:0 !important}
         @media (min-width:600px){
@@ -153,38 +172,37 @@ export default function ContactPageClient() {
         #contact-hubspot-form fieldset .input{margin-right:0 !important}
 
         .ct-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-        .ct-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(18,163,125,.06);border:1px solid rgba(18,163,125,.16);font-size:12.5px;font-weight:600;color:#0b3d2f;letter-spacing:.01em}
-        .ct-pill svg{flex-shrink:0;color:#12a37d}
+        .ct-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--cta-wash);border:1px solid var(--cta-border);font-size:12.5px;font-weight:600;color:var(--cta-ink);letter-spacing:.01em}
+        .ct-pill svg{flex-shrink:0;color:var(--cta-ink)}
 
-        .ct-info-card{background:linear-gradient(180deg,rgba(255,255,255,.85) 0%,rgba(247,250,249,.92) 100%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:20px;border:1.5px solid rgba(11,30,26,.08);box-shadow:0 12px 40px rgba(11,30,26,.05);padding:clamp(22px,3vw,28px);position:sticky;top:96px}
+        .ct-info-card{background:linear-gradient(180deg,rgba(255,255,255,.85) 0%,rgba(246,248,251,.92) 100%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:var(--r-feature);border:1.5px solid var(--border);box-shadow:0 12px 40px rgba(15,17,40,.05);padding:clamp(22px,3vw,28px);position:sticky;top:96px}
         @media (max-width:900px){.ct-info-card{position:static}}
-        .ct-info-section{padding:18px 0;border-bottom:1px solid rgba(11,30,26,.06)}
+        .ct-info-section{padding:18px 0;border-bottom:1px solid var(--border)}
         .ct-info-section:first-child{padding-top:0}
         .ct-info-section:last-child{border-bottom:none;padding-bottom:0}
-        .ct-info-label{font-family:'JetBrains Mono',var(--font-mono),monospace;font-size:10.5px;font-weight:700;color:#0f8a68;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
-        .ct-info-title{font-size:15px;font-weight:800;color:#0b1e1a;margin-bottom:4px;letter-spacing:-.005em}
-        .ct-info-body{font-size:13.5px;color:#5b6478;line-height:1.7}
+        .ct-info-label{font-family:var(--fm);font-size:10.5px;font-weight:700;color:var(--cta-ink);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+        .ct-info-title{font-size:15px;font-weight:800;color:var(--heading);margin-bottom:4px;letter-spacing:-.005em}
+        .ct-info-body{font-size:13.5px;color:var(--sub);line-height:1.7}
 
-        .ct-alt-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;background:#fff;border:1.5px solid rgba(18,163,125,.22);border-radius:12px;color:#0b3d2f;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;text-align:left;letter-spacing:.005em}
-        .ct-alt-btn:hover{transform:translateY(-1px);border-color:#12a37d;box-shadow:0 8px 20px rgba(18,163,125,.14)}
-        .ct-alt-btn-arrow{color:#12a37d;flex-shrink:0;transition:transform .2s}
+        .ct-alt-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;background:#fff;border:1.5px solid var(--cta-border);border-radius:var(--r-btn);color:var(--heading);font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;text-align:left;letter-spacing:.005em;text-decoration:none}
+        .ct-alt-btn:hover{transform:translateY(-1px);border-color:var(--cta);box-shadow:0 8px 20px rgba(7,203,121,.14)}
+        .ct-alt-btn-arrow{color:var(--cta-ink);flex-shrink:0;transition:transform .2s}
         .ct-alt-btn:hover .ct-alt-btn-arrow{transform:translateX(2px)}
-        .ct-alt-link{display:inline-flex;align-items:center;gap:6px;color:#0f8a68;font-size:13px;font-weight:700;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
-        .ct-alt-link:hover{border-bottom-color:#0f8a68}
+        .ct-alt-link{display:inline-flex;align-items:center;gap:6px;color:var(--cta-ink);font-size:13px;font-weight:700;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+        .ct-alt-link:hover{border-bottom-color:var(--cta-ink)}
 
         .ct-success{text-align:center;padding:clamp(40px,6vw,56px) clamp(22px,4vw,40px)}
-        .ct-success-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#12a37d,#7c5cfc);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 14px 36px rgba(18,163,125,.28)}
-        .ct-success h2{font-size:clamp(22px,3.6vw,28px);font-weight:900;color:#0b1e1a;margin-bottom:14px;letter-spacing:-.018em}
-        .ct-success p{font-size:clamp(14px,2vw,15.5px);color:#5b6478;line-height:1.8;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
-        .ct-success-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:linear-gradient(135deg,#12a37d,#0d8a6a);color:#fff;border-radius:12px;font-weight:800;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 20px rgba(18,163,125,.28)}
-        .ct-success-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(18,163,125,.36)}
+        .ct-success-icon{width:72px;height:72px;border-radius:50%;background:var(--cta);color:var(--on-cta);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 14px 36px var(--cta-glow)}
+        .ct-success h2{font-size:clamp(22px,3.6vw,28px);font-weight:900;color:var(--heading);margin-bottom:14px;letter-spacing:-.018em}
+        .ct-success p{font-size:clamp(14px,2vw,15.5px);color:var(--sub);line-height:1.8;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+        .ct-success-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--cta);color:var(--on-cta);border-radius:var(--r-btn);font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 6px 22px var(--cta-glow)}
       `}</style>
 
       <main style={{
         paddingTop: 'clamp(72px, 11vw, 100px)',
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #f3f8f7 0%, #fbfdfc 28%, #ffffff 100%)',
-        color: '#0b1e1a',
+        background: 'linear-gradient(180deg, var(--surface) 0%, var(--bg) 32%)',
+        color: 'var(--text)',
       }}>
         {/* HERO HEADER */}
         <section style={{
@@ -196,12 +214,12 @@ export default function ContactPageClient() {
           <div className="ct-glow" style={{
             top: '-6%', left: '4%',
             width: 'min(46vw, 440px)', height: 'min(46vw, 440px)',
-            background: 'radial-gradient(circle, rgba(18,163,125,0.22) 0%, rgba(18,163,125,0) 70%)',
+            background: 'radial-gradient(circle, rgba(7,203,121,0.18) 0%, rgba(7,203,121,0) 70%)',
           }} />
           <div className="ct-glow" style={{
             top: '8%', right: '4%',
             width: 'min(40vw, 360px)', height: 'min(40vw, 360px)',
-            background: 'radial-gradient(circle, rgba(124,92,252,0.18) 0%, rgba(124,92,252,0) 70%)',
+            background: 'radial-gradient(circle, rgba(15,17,40,0.07) 0%, rgba(15,17,40,0) 70%)',
           }} />
 
           <div style={{
@@ -232,26 +250,27 @@ export default function ContactPageClient() {
                 gap: 14,
                 background: 'rgba(255,255,255,0.7)',
                 backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(18,163,125,0.25)',
+                border: '1px solid var(--cta-border)',
                 borderRadius: 999,
                 fontSize: 14,
                 fontWeight: 600,
-                color: '#0a0e0c',
+                color: 'var(--heading)',
                 flexWrap: 'wrap',
                 justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(18,163,125,0.08)',
+                boxShadow: '0 8px 24px rgba(15,17,40,0.06)',
               }}
             >
               <span>お急ぎの方は</span>
               <DemoBookingButton
                 utmCampaign="contact-hero"
+                className="v2-cta-primary"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 6,
                   padding: '7px 16px',
-                  background: 'linear-gradient(135deg,#12a37d,#0fc19a)',
-                  color: '#fff',
+                  background: 'var(--cta)',
+                  color: 'var(--on-cta)',
                   borderRadius: 999,
                   fontWeight: 800,
                   fontSize: 13,
@@ -282,7 +301,7 @@ export default function ContactPageClient() {
                 <div className="ct-card">
                   <div className="ct-success">
                     <div className="ct-success-icon">
-                      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
@@ -291,7 +310,7 @@ export default function ContactPageClient() {
                       内容を確認のうえ、担当者より営業時間内に順次ご連絡いたします。<br />
                       お急ぎの場合は、デモのご予約も承っております。
                     </p>
-                    <a href="/" className="ct-success-cta">
+                    <a href="/" className="ct-success-cta v2-cta-primary">
                       トップページに戻る
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -310,14 +329,69 @@ export default function ContactPageClient() {
                     </div>
                   </div>
                   <div className="ct-card-body">
-                    {!formLoaded && (
-                      <div style={{
+                    {formStatus === 'loading' && (
+                      <div role="status" style={{
                         textAlign: 'center',
                         padding: '40px 0',
-                        color: '#9ca3af',
+                        color: 'var(--sub)',
                         fontSize: 14,
                       }}>
                         フォームを読み込み中...
+                      </div>
+                    )}
+                    {formStatus === 'failed' && (
+                      <div role="alert" style={{ textAlign: 'center', padding: '32px 8px' }}>
+                        <p style={{ fontSize: 15, fontWeight: 800, color: 'var(--heading)', margin: '0 0 8px' }}>
+                          フォームを読み込めませんでした
+                        </p>
+                        <p style={{ fontSize: 13.5, lineHeight: 1.8, color: 'var(--sub)', margin: '0 0 20px' }}>
+                          通信環境や広告ブロッカーの影響で表示できない場合があります。<br />
+                          再読み込みするか、カレンダーから直接デモをご予約ください。
+                        </p>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginBottom: 16 }}>
+                          <DemoBookingButton
+                            utmCampaign="contact-form-fallback"
+                            className="v2-cta-primary"
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 8,
+                              padding: '12px 22px',
+                              background: 'var(--cta)',
+                              color: 'var(--on-cta)',
+                              borderRadius: 'var(--r-btn)',
+                              fontWeight: 800,
+                              fontSize: 14,
+                              textDecoration: 'none',
+                            }}
+                          >
+                            30分デモを予約する
+                          </DemoBookingButton>
+                          <button
+                            type="button"
+                            className="v2-cta-ghost"
+                            onClick={() => window.location.reload()}
+                            style={{
+                              padding: '12px 22px',
+                              background: '#fff',
+                              border: '1.5px solid var(--border2)',
+                              borderRadius: 'var(--r-btn)',
+                              color: 'var(--heading)',
+                              fontWeight: 700,
+                              fontSize: 14,
+                              fontFamily: 'inherit',
+                              cursor: 'pointer',
+                            }}
+                          >
+                            再読み込み
+                          </button>
+                        </div>
+                        <p style={{ fontSize: 12.5, color: 'var(--sub)', margin: 0 }}>
+                          メールでのお問い合わせ:{' '}
+                          <a href="mailto:contact@dynameet.ai" className="v2-link" style={{ color: 'var(--cta-ink)', fontWeight: 700, textDecoration: 'none' }}>
+                            contact@dynameet.ai
+                          </a>
+                        </p>
                       </div>
                     )}
                     <div id="contact-hubspot-form" ref={formRef} />
@@ -361,7 +435,7 @@ export default function ContactPageClient() {
                   <div className="ct-info-body" style={{ marginBottom: 14 }}>
                     フォームを介さず、カレンダーから直接デモのご予約が可能です。
                   </div>
-                  <DemoBookingButton utmCampaign="contact-sidebar">
+                  <DemoBookingButton utmCampaign="contact-sidebar" className="ct-alt-btn">
                     <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, width: '100%' }}>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

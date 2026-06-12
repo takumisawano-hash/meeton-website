@@ -31,6 +31,7 @@ const PLANS = [
     stage: "① 掴む・育てる",
     includes: "Live + Library",
     price: "¥12万",
+    source: "pricing-lead",
     highlight: false,
     blurb: "潜在層を掴み、育てて、リードにする。Calendar が不要な企業の入口に。",
     items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Library（資料で検討を育てる）", "CRM 連携", "開封・行動トラッキング"],
@@ -40,6 +41,7 @@ const PLANS = [
     stage: "① + ② 商談化まで",
     includes: "+ Calendar",
     price: "お問い合わせ",
+    source: "pricing-convert",
     highlight: true,
     badge: "おすすめ",
     blurb: "掴んだリードを、商談（予約）まで運ぶ。最も選ばれる構成。",
@@ -50,6 +52,7 @@ const PLANS = [
     stage: "① + ② + ③ 一気通貫",
     includes: "+ Email",
     price: "お問い合わせ",
+    source: "pricing-allinone",
     highlight: false,
     blurb: "逃したリードも追客で回収。掴む→商談化→追客まで一気通貫で最大化。",
     items: ["商談獲得プランの全機能", "Meeton Email 機能（無制限）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
@@ -109,8 +112,12 @@ const productSchema = {
   ],
 };
 
+// SectionHead owns its <h2>, so balance line breaks (no orphaned 「す。」) via a
+// block-level span passed through the title prop.
+const balanced = (text: string) => <span style={{ display: "block", textWrap: "balance", wordBreak: "auto-phrase" }}>{text}</span>;
+
 const th: React.CSSProperties = { textAlign: "left", padding: "14px 16px", fontWeight: 800, color: "var(--heading)", borderBottom: "2px solid var(--border)" };
-const td: React.CSSProperties = { padding: "14px 16px", color: "var(--text)", borderBottom: "1px solid var(--border)", fontSize: 14, lineHeight: 1.7 };
+const td: React.CSSProperties = { padding: "14px 16px", color: "var(--text)", borderBottom: "1px solid var(--border)", fontSize: 14, lineHeight: 1.7, fontVariantNumeric: "tabular-nums" };
 
 export default function Page() {
   return (
@@ -123,7 +130,7 @@ export default function Page() {
       <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 64 }}>
         <div style={{ maxWidth: 760 }}>
           <Eyebrow tone="dark">料金プラン</Eyebrow>
-          <h1 style={{ fontFamily: "var(--fd)", fontSize: "clamp(32px,5vw,52px)", lineHeight: 1.18, fontWeight: 800, letterSpacing: "-0.025em", color: "var(--on-navy)", margin: "20px 0 0" }}>
+          <h1 style={{ fontFamily: "var(--fd)", fontSize: "clamp(32px,5vw,52px)", lineHeight: 1.18, fontWeight: 800, letterSpacing: "-0.025em", color: "var(--on-navy)", margin: "20px 0 0", textWrap: "balance", wordBreak: "auto-phrase" }}>
             掴む → <span style={{ color: "var(--cta)" }}>商談化</span> → 追客。<br />必要な段階から。
           </h1>
           <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 28px" }}>
@@ -137,7 +144,7 @@ export default function Page() {
 
       {/* 3 plans (deck p19) */}
       <Section tone="white">
-        <SectionHead eyebrow="3つのプラン" title="AI SDR の3つの仕事に、そのまま対応。" lede="上位プランは下位の機能をすべて含みます。商談化（Calendar）・追客（Email）を、事業の成長に合わせて足していけます。" align="center" />
+        <SectionHead eyebrow="3つのプラン" title={balanced("AI SDR の3つの仕事に、そのまま対応。")} lede="上位プランは下位の機能をすべて含みます。商談化（Calendar）・追客（Email）を、事業の成長に合わせて足していけます。" align="center" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, alignItems: "stretch" }}>
           {PLANS.map((p) => (
             <Card
@@ -153,17 +160,19 @@ export default function Page() {
               {p.badge && (
                 <div style={{ position: "absolute", top: -12, left: 24, background: "var(--cta)", color: "var(--on-cta)", fontSize: 12, fontWeight: 800, padding: "4px 12px", borderRadius: 999 }}>{p.badge}</div>
               )}
-              <div style={{ fontSize: 18, fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)" }}>{p.name}</div>
-              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta)", margin: "6px 0 2px" }}>{p.stage}</div>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{p.name}</h3>
+              {/* --cta fails contrast as small text on white; keep it only on the navy card */}
+              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: p.highlight ? "var(--cta)" : "var(--cta-ink)", margin: "6px 0 2px" }}>{p.stage}</div>
               <div style={{ fontSize: 13, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{p.includes}</div>
-              <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: "12px 0 2px" }}>
+              {/* minHeight matches the 42px price line (42 * 1.65) so all card tops align */}
+              <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: "12px 0 2px", minHeight: 70, fontVariantNumeric: "tabular-nums" }}>
                 {p.price.startsWith("¥") ? (
                   <>
                     <span style={{ fontSize: 42 }}>{p.price}</span>
                     <span style={{ fontSize: 14, fontWeight: 600, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}> 〜 / 月（税抜）</span>
                   </>
                 ) : (
-                  <span style={{ fontSize: 28 }}>{p.price}</span>
+                  <span style={{ fontSize: 34 }}>{p.price}</span>
                 )}
               </div>
               <p style={{ fontSize: 13.5, lineHeight: 1.7, color: p.highlight ? "var(--on-navy-sub)" : "var(--text)", margin: "10px 0 16px" }}>{p.blurb}</p>
@@ -173,7 +182,7 @@ export default function Page() {
                 ))}
               </ul>
               <a
-                href={demoUrl(`pricing-${p.highlight ? "convert" : "plan"}`)}
+                href={demoUrl(p.source)}
                 className={p.highlight ? "v2-cta-primary" : "v2-cta-ghost"}
                 style={{
                   marginTop: "auto", textAlign: "center", padding: "12px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none",
@@ -196,13 +205,13 @@ export default function Page() {
 
       {/* Traffic add-on */}
       <Section tone="surface">
-        <SectionHead eyebrow="トラフィック追加（全プラン共通）" title="規模は、月間トラフィックで。" align="center" />
+        <SectionHead eyebrow="トラフィック追加（全プラン共通）" title={balanced("規模は、月間トラフィックで。")} align="center" />
         <div style={{ overflowX: "auto", maxWidth: 720, margin: "0 auto", background: "#fff", border: "1px solid var(--border)", borderRadius: 16 }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 420 }}>
-            <thead><tr><th style={th}>月間トラフィック</th><th style={th}>追加料金</th></tr></thead>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead><tr><th scope="col" style={th}>月間トラフィック</th><th scope="col" style={th}>追加料金</th></tr></thead>
             <tbody>
               {TRAFFIC.map((t) => (
-                <tr key={t.tier}><td style={{ ...td, fontWeight: 700, color: "var(--heading)" }}>{t.tier}</td><td style={td}>{t.add}</td></tr>
+                <tr key={t.tier}><th scope="row" style={{ ...td, textAlign: "left", fontWeight: 700, color: "var(--heading)" }}>{t.tier}</th><td style={td}>{t.add}</td></tr>
               ))}
             </tbody>
           </table>
@@ -215,13 +224,13 @@ export default function Page() {
 
       {/* Integration logos */}
       <Section tone="white" py={56}>
-        <SectionHead eyebrow="連携" title="主要なCRM・MA・通知基盤とつながります。" align="center" />
+        <SectionHead eyebrow="連携" title={balanced("主要なCRM・MA・通知基盤とつながります。")} align="center" />
         <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Google Calendar", "Slack", "Microsoft Teams", "Zoom"])} />
       </Section>
 
       {/* FAQ */}
       <Section tone="white">
-        <SectionHead eyebrow="よくある質問" title="料金のFAQ" align="center" />
+        <SectionHead eyebrow="よくある質問" title={balanced("料金のFAQ")} align="center" />
         <div style={{ maxWidth: 800, margin: "0 auto", display: "grid", gap: 14 }}>
           {FAQ.map((f) => (
             <Card key={f.q}>
@@ -240,7 +249,7 @@ export default function Page() {
       {/* Final CTA */}
       <Section tone="navyDeep" py={72}>
         <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
+          <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em", textWrap: "balance", wordBreak: "auto-phrase" }}>
             どのプランが合うか、まず相談。
           </h2>
           <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>30分のデモで、自社の規模と段階に合う構成を具体的に提案します。</p>

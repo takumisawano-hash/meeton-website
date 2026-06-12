@@ -12,13 +12,27 @@ import { stageOf } from "@/app/lib/stages";
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
 
+// Compound Latin terms (product names, KPI phrases) that must never break
+// mid-phrase on narrow screens; consumed by nowrapTerms() in the hero.
+const NOWRAP_TERMS = /(Meeton (?:ai|Calendar|Chat|Library|Email)|Speed to Lead|AI SDR)/g;
+
+/** Wrap compound terms in nowrap spans so hero copy avoids orphan breaks. */
+function nowrapTerms(text: string) {
+  // split() with a capturing group alternates plain / captured parts
+  return text.split(NOWRAP_TERMS).map((part, i) =>
+    i % 2 === 1 ? <span key={i} style={{ whiteSpace: "nowrap" }}>{part}</span> : part,
+  );
+}
+
 export default function ProductLP({ data }: { data: ProductLPData }) {
   const src = data.slug;
   const compares = Object.values(COMPARE).filter((c) => c.product === data.slug);
   const stage = stageOf(data.slug);
   return (
     <>
+      <a href="#main" className="v2-skip">本文へスキップ</a>
       <Nav />
+      <main id="main">
 
       {/* 1. Hero (navy frame) */}
       <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 76 }}>
@@ -41,12 +55,14 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
               letterSpacing: "-0.025em",
               color: "var(--on-navy)",
               margin: 0,
+              textWrap: "balance",
+              wordBreak: "auto-phrase",
             }}
           >
-            {data.h1}
+            {nowrapTerms(data.h1)}
           </h1>
-          <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 680 }}>
-            {data.heroSub}
+          <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 680, wordBreak: "auto-phrase" }}>
+            {nowrapTerms(data.heroSub)}
           </p>
           <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" />
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 22, fontSize: 13, color: "var(--on-navy-sub)" }}>
@@ -112,9 +128,9 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
         </Section>
       )}
 
-      {/* 4. Proof (navy band, green metric) */}
+      {/* 4. Proof (navy band, green metric) — stacks to 1 column on mobile */}
       <Section tone="navy">
-        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+        <div className="plp-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
           <div>
             <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(48px,8vw,84px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>
               {data.proof.metric}
@@ -128,6 +144,7 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
             <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {data.proof.source}</div>
           </div>
         </div>
+        <style>{`@media(max-width:720px){.plp-proof{grid-template-columns:1fr;gap:24px}}`}</style>
       </Section>
 
       {/* 5. Stack integrations (real logos) */}
@@ -191,6 +208,7 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
           </div>
         </div>
       </Section>
+      </main>
 
       <Footer />
     </>

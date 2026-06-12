@@ -1,364 +1,322 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Nav from '@/app/components/Nav'
 import Footer from '@/app/components/Footer'
-import DemoBookingButton from '@/app/components/DemoBookingButton'
+import CTAButtons from '@/app/components/v2/CTAButtons'
+import { Section, SectionHead, Eyebrow, Card } from '@/app/components/v2/ui'
+import { STAGES, PRODUCT_IN_STAGE } from '@/app/lib/stages'
+
+// /about/ — v2 re-skin (navy frame / white canvas / green accent).
+// Pre-booking trust checkpoint: mission in v2 vocabulary, founders,
+// and the registry facts (会社概要) kept verbatim.
 
 export const metadata: Metadata = {
   title: '会社概要',
-  description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton ai」を開発・運用しています。',
+  description:
+    'DynaMeet株式会社の会社概要。Webサイトを商談を生む営業チャネルに変える AI SDR Platform「Meeton ai」を開発・運用しています。',
   alternates: {
     canonical: '/about/',
   },
   openGraph: {
     title: '会社概要',
-    description: 'DynaMeet株式会社の会社概要。営業支援AI「Meeton ai」を開発・運用しています。',
+    description:
+      'DynaMeet株式会社の会社概要。Webサイトを商談を生む営業チャネルに変える AI SDR Platform「Meeton ai」を開発・運用しています。',
     url: 'https://dynameet.ai/about/',
   },
 }
 
+// Registry facts — do not edit values without checking the corporate registry.
+const COMPANY_INFO: { label: string; value: React.ReactNode }[] = [
+  { label: '会社名', value: 'DynaMeet株式会社' },
+  { label: '共同創業者 兼 CTO', value: 'Ray Ayan' },
+  { label: '共同創業者 兼 CRO', value: '澤野 拓実' },
+  { label: '創立年月日', value: '2024年10月3日' },
+  { label: '事業内容', value: '営業支援AI「Meeton ai」の開発・運用' },
+  {
+    label: '登記住所',
+    value: (
+      <>
+        〒150-0033
+        <br />
+        東京都渋谷区猿楽町17-10
+        <br />
+        代官山アートヴィレッジ2C
+      </>
+    ),
+  },
+  { label: '適格請求書番号', value: 'T9011001165145' },
+]
+
+const FOUNDERS = [
+  {
+    name: 'Ray Ayan',
+    titleEn: 'Co-founder & CTO',
+    titleJa: '共同創業者 兼 CTO',
+    initial: 'R',
+    photo: null as string | null,
+    line: 'Meeton ai のプロダクト開発を統括。',
+  },
+  {
+    name: '澤野 拓実',
+    titleEn: 'Co-founder & CRO',
+    titleJa: '共同創業者 兼 CRO',
+    initial: '澤',
+    photo: '/team/sawano.png',
+    line: 'エンタープライズ領域のSDR / AEとして商談化の現場を経験。ビジネスを統括。',
+  },
+]
+
 export default function AboutPage() {
-  const companyInfo = [
-    { label: '会社名', value: 'DynaMeet株式会社' },
-    { label: '共同創業者 兼 CTO', value: 'Ray Ayan' },
-    { label: '共同創業者 兼 CRO', value: '澤野 拓実' },
-    { label: '創立年月日', value: '2024年10月3日' },
-    { label: '事業内容', value: '営業支援AI「Meeton ai」の開発・運用' },
-    {
-      label: '登記住所',
-      value: (
-        <>
-          〒150-0033
-          <br />
-          東京都渋谷区猿楽町17-10
-          <br />
-          代官山アートヴィレッジ2C
-        </>
-      ),
-    },
-    { label: '適格請求書番号', value: 'T9011001165145' },
-  ]
-
-  const founders = [
-    {
-      name: 'Ray Ayan',
-      title: 'Co-founder & CTO',
-      titleJa: '共同創業者 兼 CTO',
-      initial: 'R',
-      color: '#7c5cfc',
-      bg: 'linear-gradient(135deg,#7c5cfc 0%,#5b3fd1 100%)',
-    },
-    {
-      name: '澤野 拓実',
-      title: 'Co-founder & CRO',
-      titleJa: '共同創業者 兼 CRO',
-      initial: '澤',
-      color: '#12a37d',
-      bg: 'linear-gradient(135deg,#12a37d 0%,#0891b2 100%)',
-    },
-  ]
-
   const mapsQuery = encodeURIComponent('東京都渋谷区猿楽町17-10 代官山アートヴィレッジ2C')
 
   return (
     <>
       <Nav />
-      <style>{`
-        :root{--cta:#12a37d;--cta-dark:#065f46;--cta-light:#eafff7;--cta-glow:rgba(18,163,125,.28);--accent:#7c5cfc;--accent-light:#f3f0ff;--blue:#0891b2;--heading:#0f1128;--text:#1f2340;--sub:#5b6080;--muted:#6e7494;--border:#e8eaf2;--border2:#d0d4e0;--bg:#fff;--surface:#f8fafc;--surface2:#f3f5fa;--fb:'Inter',system-ui,-apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic UI',sans-serif;--fm:'JetBrains Mono','SF Mono',Menlo,monospace}
-
-        .about-main{min-height:100vh;background:#fff;font-family:var(--fb);color:var(--text);padding-top:clamp(70px,12vw,100px)}
-
-        /* HERO */
-        .ab-hero{position:relative;overflow:hidden;padding:clamp(48px,8vw,96px) clamp(16px,5vw,48px) clamp(56px,10vw,112px);background:linear-gradient(165deg,#edfcf7 0%,#fff 35%,#f3f0ff 75%,#fff 100%)}
-        .ab-hero-inner{max-width:980px;margin:0 auto;position:relative;z-index:2;text-align:center}
-        .ab-dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,92,252,.10) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%)}
-        .ab-glow{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;opacity:.55}
-        .ab-glow-1{top:-120px;left:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(18,163,125,.32),transparent 70%)}
-        .ab-glow-2{bottom:-160px;right:-100px;width:420px;height:420px;background:radial-gradient(circle,rgba(124,92,252,.28),transparent 70%)}
-
-        .ab-breadcrumb{display:flex;justify-content:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:clamp(20px,3vw,28px);font-family:var(--fm);letter-spacing:.02em}
-        .ab-breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s}
-        .ab-breadcrumb a:hover{color:var(--cta)}
-
-        .ab-eyebrow{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cta-light),var(--accent-light));border:1px solid rgba(18,163,125,.18);padding:8px 18px;border-radius:24px;margin-bottom:28px;font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:2.4px;text-transform:uppercase}
-        .ab-eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--cta);box-shadow:0 0 0 4px rgba(18,163,125,.18)}
-
-        .ab-h1{font-size:clamp(32px,6vw,60px);font-weight:900;color:var(--heading);line-height:1.16;letter-spacing:-.025em;margin:0 0 24px;max-width:820px;margin-left:auto;margin-right:auto}
-        .ab-h1 em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .ab-hero-sub{font-size:clamp(15px,2.2vw,19px);line-height:1.85;color:var(--sub);max-width:640px;margin:0 auto;font-weight:500}
-
-        /* SECTIONS */
-        .ab-section{padding:clamp(56px,9vw,96px) clamp(16px,5vw,48px);position:relative}
-        .ab-section-inner{max-width:1080px;margin:0 auto;position:relative;z-index:2}
-        .ab-section-alt{background:linear-gradient(180deg,#fff 0%,var(--surface) 100%)}
-
-        .ab-slabel{font-family:var(--fm);font-size:11px;font-weight:700;color:var(--cta);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:block}
-        .ab-stitle{font-size:clamp(26px,4.5vw,40px);font-weight:900;color:var(--heading);line-height:1.22;letter-spacing:-.02em;margin:0 0 16px}
-        .ab-ssub{font-size:clamp(15px,2vw,17px);line-height:1.85;color:var(--sub);max-width:620px;margin:0}
-
-        /* MISSION */
-        .ab-mission-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(28px,5vw,56px);align-items:start;margin-top:clamp(32px,5vw,48px)}
-        @media (max-width:820px){.ab-mission-grid{grid-template-columns:1fr;gap:24px}}
-        .ab-mission-left{position:sticky;top:120px}
-        .ab-mission-statement{font-size:clamp(22px,3.4vw,32px);font-weight:800;color:var(--heading);line-height:1.45;letter-spacing:-.02em;margin:0}
-        .ab-mission-statement em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .ab-mission-right{display:flex;flex-direction:column;gap:20px}
-        .ab-mission-p{font-size:clamp(15px,1.9vw,16px);line-height:1.95;color:var(--text);margin:0}
-        .ab-mission-bullets{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:14px}
-        .ab-mission-bullet{display:flex;align-items:flex-start;gap:14px;font-size:15px;line-height:1.7;color:var(--text);font-weight:500}
-        .ab-mission-bullet-dot{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--cta-light);color:var(--cta);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:11px;font-weight:800;margin-top:1px}
-
-        /* FOUNDERS */
-        .ab-founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,24px);margin-top:clamp(32px,5vw,48px)}
-        @media (max-width:720px){.ab-founder-grid{grid-template-columns:1fr}}
-        .ab-founder-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:clamp(24px,4vw,36px);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .25s;display:flex;flex-direction:column;align-items:flex-start;gap:18px;box-shadow:0 1px 2px rgba(15,17,40,.03)}
-        .ab-founder-card:hover{transform:translateY(-4px);box-shadow:0 24px 56px -20px rgba(15,17,40,.16);border-color:var(--border2)}
-        .ab-founder-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:32px;letter-spacing:-.01em;box-shadow:0 8px 24px rgba(15,17,40,.12);font-family:var(--fb)}
-        .ab-founder-name{font-size:clamp(20px,2.6vw,24px);font-weight:800;color:var(--heading);letter-spacing:-.015em;line-height:1.3;margin:0}
-        .ab-founder-title-en{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta);letter-spacing:1.8px;text-transform:uppercase;margin-top:6px}
-        .ab-founder-title-ja{font-size:14px;color:var(--sub);margin-top:4px;font-weight:600}
-        .ab-founder-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:700;color:var(--text);font-family:var(--fm);letter-spacing:.04em;margin-top:6px}
-
-        /* COMPANY INFO TABLE - showpiece */
-        .ab-info-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 1px 2px rgba(15,17,40,.03),0 24px 60px -32px rgba(15,17,40,.10);margin-top:clamp(32px,5vw,48px)}
-        .ab-info-row{display:grid;grid-template-columns:240px 1fr;border-bottom:1px solid var(--border);transition:background .2s}
-        .ab-info-row:last-child{border-bottom:none}
-        .ab-info-row:hover{background:var(--surface)}
-        .ab-info-label{padding:clamp(18px,3vw,22px) clamp(20px,3vw,28px);font-family:var(--fm);font-size:11px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;background:var(--surface);border-right:1px solid var(--border);display:flex;align-items:center}
-        .ab-info-value{padding:clamp(18px,3vw,22px) clamp(20px,3vw,28px);font-size:clamp(14px,1.9vw,16px);font-weight:600;color:var(--heading);line-height:1.75;display:flex;align-items:center}
-        @media (max-width:680px){
-          .ab-info-row{grid-template-columns:1fr}
-          .ab-info-label{padding:14px 18px 6px;border-right:none;background:var(--surface);font-size:10px;letter-spacing:1.6px}
-          .ab-info-value{padding:6px 18px 16px;font-size:14px}
-        }
-
-        /* OFFICE CARDS */
-        .ab-offices-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);margin-top:clamp(28px,4vw,40px)}
-        @media (max-width:720px){.ab-offices-grid{grid-template-columns:1fr}}
-        .ab-office-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:clamp(22px,3.5vw,34px);display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 2px rgba(15,17,40,.03);transition:box-shadow .25s,border-color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
-        .ab-office-card:hover{transform:translateY(-3px);box-shadow:0 20px 48px -16px rgba(15,17,40,.14);border-color:var(--border2)}
-        .ab-office-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-        .ab-office-badge{display:inline-flex;align-items:center;padding:4px 12px;border-radius:100px;font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
-        .ab-badge-registered{background:var(--surface);color:var(--muted);border:1px solid var(--border)}
-        .ab-badge-operating{background:rgba(18,163,125,.10);color:var(--cta);border:1px solid rgba(18,163,125,.22)}
-        .ab-iso-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:1px;background:rgba(8,145,178,.10);color:#0891b2;border:1px solid rgba(8,145,178,.22)}
-        .ab-office-title{font-size:clamp(16px,2vw,19px);font-weight:800;color:var(--heading);line-height:1.3;margin:0;letter-spacing:-.01em}
-        .ab-office-addr{font-size:clamp(13px,1.8vw,15px);line-height:1.85;color:var(--text);font-weight:600;margin:0}
-        .ab-office-note{font-size:12.5px;line-height:1.65;color:var(--muted);margin:0;font-weight:500;padding:9px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border)}
-        .ab-map-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;font-family:var(--fb);font-size:13px;font-weight:800;color:var(--cta);text-decoration:none;padding:10px 18px;background:var(--bg);border:1px solid rgba(18,163,125,.25);border-radius:100px;transition:all .25s;min-height:42px;box-sizing:border-box;align-self:flex-start}
-        .ab-map-link:hover{background:var(--cta);color:#fff;transform:translateY(-1px);box-shadow:0 8px 22px var(--cta-glow);border-color:var(--cta)}
-        .ab-map-arrow{transition:transform .25s}
-        .ab-map-link:hover .ab-map-arrow{transform:translateX(3px)}
-
-        /* CTA */
-        .ab-cta-section{padding:clamp(64px,10vw,112px) clamp(16px,5vw,48px);text-align:center;position:relative;overflow:hidden;background:linear-gradient(165deg,#edfcf7 0%,#fff 40%,#f3f0ff 80%,#eaf0fe 100%)}
-        .ab-cta-inner{max-width:680px;margin:0 auto;position:relative;z-index:2}
-        .ab-cta-title{font-size:clamp(26px,4.5vw,42px);font-weight:900;color:var(--heading);line-height:1.22;letter-spacing:-.02em;margin:0 0 18px}
-        .ab-cta-title em{font-style:normal;background:linear-gradient(135deg,var(--cta),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .ab-cta-sub{font-size:clamp(15px,2vw,17px);line-height:1.85;color:var(--sub);margin:0 0 36px;font-weight:500}
-        .ab-cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-        .ab-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-weight:800;border-radius:12px;min-height:52px;padding:14px 30px;font-size:15px;text-decoration:none;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s,border-color .2s;letter-spacing:.01em;border:none;box-sizing:border-box}
-        .ab-btn-primary{background:linear-gradient(135deg,var(--cta),#0fc19a);color:#fff;box-shadow:0 4px 16px var(--cta-glow),0 1px 0 rgba(255,255,255,.18) inset}
-        .ab-btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--cta-glow),0 1px 0 rgba(255,255,255,.22) inset}
-        .ab-btn-ghost{background:var(--bg);color:var(--heading);border:2px solid var(--border2)}
-        .ab-btn-ghost:hover{border-color:var(--cta);color:var(--cta);background:var(--cta-light);transform:translateY(-1px)}
-
-        @media (max-width:720px){
-          .ab-mission-left{position:static}
-          .ab-info-card{border-radius:16px}
-        }
-      `}</style>
-
-      <main className="about-main">
-        {/* HERO */}
-        <section className="ab-hero">
-          <div className="ab-dot-grid" />
-          <div className="ab-glow ab-glow-1" />
-          <div className="ab-glow ab-glow-2" />
-
-          <div className="ab-hero-inner">
-            <nav aria-label="パンくずリスト" className="ab-breadcrumb">
-              <Link href="/">HOME</Link>
-              <span aria-hidden="true">/</span>
-              <span style={{ color: '#0f1128' }}>ABOUT</span>
-            </nav>
-
-            <div className="ab-eyebrow">
-              <span className="ab-eyebrow-dot" />
-              <span>会社情報 / About DynaMeet</span>
-            </div>
-
-            <h1 className="ab-h1">
-              営業の<em>ラストワンマイル</em>を、<br />
-              AIで解く。
+      <main>
+        {/* Hero (navy) — who we are, in the site's own words */}
+        <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 64 }}>
+          <div style={{ maxWidth: 760 }}>
+            <Eyebrow tone="dark">会社情報 / About DynaMeet</Eyebrow>
+            <h1
+              style={{
+                fontFamily: 'var(--fd)',
+                fontSize: 'clamp(32px, 5.4vw, 54px)',
+                lineHeight: 1.2,
+                fontWeight: 800,
+                letterSpacing: '-0.025em',
+                color: 'var(--on-navy)',
+                margin: '18px 0 0',
+              }}
+            >
+              「待つ営業」を、<span style={{ color: 'var(--cta)' }}>終わらせる</span>。
             </h1>
-
-            <p className="ab-hero-sub">
-              DynaMeet株式会社は、商談化までのプロセスをAIで自動化する営業支援プラットフォーム「Meeton ai」を開発・運用しています。
+            <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--on-navy-sub)', margin: '20px 0 0', maxWidth: 680 }}>
+              DynaMeet株式会社は、Webサイトを商談を生み出す営業チャネルに変える
+              AI SDR Platform「Meeton ai」を開発・運用しています。
             </p>
           </div>
-        </section>
+        </Section>
 
-        {/* MISSION */}
-        <section className="ab-section">
-          <div className="ab-section-inner">
-            <span className="ab-slabel">Mission</span>
-            <h2 className="ab-stitle">私たちのミッション</h2>
-
-            <div className="ab-mission-grid">
-              <div className="ab-mission-left">
-                <p className="ab-mission-statement">
-                  営業現場の<em>属人化と取りこぼし</em>をなくし、すべての見込み顧客に<em>最適な接点</em>を届ける。
-                </p>
-              </div>
-
-              <div className="ab-mission-right">
-                <p className="ab-mission-p">
-                  営業組織のボトルネックは、リストでもツールでもなく「接点の作り方」にあります。Meeton aiは、Webサイト・メール・カレンダー・オファーという4つの接点を統合し、生成AIで一人ひとりに最適化したコミュニケーションを自動で実行します。
-                </p>
-                <p className="ab-mission-p">
-                  これにより、これまで人手では追いきれなかった見込み顧客にも、温度感に合わせた最適なタイミングでアプローチできるようになります。
-                </p>
-
-                <ul className="ab-mission-bullets">
-                  <li className="ab-mission-bullet">
-                    <span className="ab-mission-bullet-dot">01</span>
-                    <span>AIによる商談化プロセスの完全自動化を実現する</span>
-                  </li>
-                  <li className="ab-mission-bullet">
-                    <span className="ab-mission-bullet-dot">02</span>
-                    <span>すべての企業が、エンタープライズ級の営業基盤を持てる世界をつくる</span>
-                  </li>
-                  <li className="ab-mission-bullet">
-                    <span className="ab-mission-bullet-dot">03</span>
-                    <span>日本のBtoBセールスを、世界水準のスピードと品質に引き上げる</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+        {/* Mission (white) — v2 narrative + the 3 stages from stages.ts */}
+        <Section tone="white">
+          <SectionHead
+            eyebrow="ミッション"
+            title={
+              <>
+                Webサイトを、
+                <br />
+                商談を生む営業チャネルに。
+              </>
+            }
+            lede="問い合わせを待つだけのWebサイトでは、訪問者の多くが名前を残さず去り、せっかくのリードも初動の遅れや追客切れで商談になりません。Meeton ai は、Webサイトに配属する AI SDR としてこの取りこぼしをなくし、あらゆる瞬間を商談に変えます。"
+          />
+          <h3
+            style={{
+              fontFamily: 'var(--fm)',
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: '.08em',
+              textTransform: 'uppercase',
+              color: 'var(--cta-ink)',
+              margin: '0 0 16px',
+            }}
+          >
+            AI SDR の3つの仕事
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+            {STAGES.map((s) => (
+              <Link
+                key={s.id}
+                href={s.href}
+                className="v2-card-link"
+                style={{
+                  display: 'block',
+                  background: '#fff',
+                  border: '1px solid var(--border)',
+                  borderRadius: 'var(--r-card)',
+                  padding: 24,
+                  textDecoration: 'none',
+                  boxShadow: '0 1px 2px rgba(15,17,40,.04)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                  <span style={{ fontFamily: 'var(--fm)', fontSize: 15, fontWeight: 700, color: 'var(--cta-ink)' }}>{s.num}</span>
+                  <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--heading)' }}>{s.title}</span>
+                </div>
+                <div style={{ fontFamily: 'var(--fm)', fontSize: 12, color: 'var(--sub)', marginTop: 8 }}>{s.transform}</div>
+                <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--text)', margin: '10px 0 0' }}>{s.lede}</p>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--cta-ink)', marginTop: 14 }}>
+                  {s.products.map((p) => PRODUCT_IN_STAGE[p].name).join('・')} →
+                </div>
+              </Link>
+            ))}
           </div>
-        </section>
+        </Section>
 
-        {/* FOUNDERS */}
-        <section className="ab-section ab-section-alt">
-          <div className="ab-section-inner">
-            <span className="ab-slabel">Founders</span>
-            <h2 className="ab-stitle">共同創業者</h2>
-            <p className="ab-ssub">
-              プロダクト（CTO）とビジネス（CRO）、両輪の責任者がMeeton aiを開発・運用しています。
-            </p>
-
-            <div className="ab-founder-grid">
-              {founders.map((f) => (
-                <div key={f.name} className="ab-founder-card">
-                  <div className="ab-founder-avatar" style={{ background: f.bg }}>
+        {/* Founders (surface) */}
+        <Section tone="surface">
+          <SectionHead
+            eyebrow="共同創業者"
+            title="プロダクトとビジネス、両輪で。"
+            lede="プロダクト（CTO）とビジネス（CRO）、それぞれの責任者が Meeton ai を開発・運用しています。"
+          />
+          <div className="ab2-founders">
+            {FOUNDERS.map((f) => (
+              <Card key={f.name} style={{ display: 'flex', gap: 20, alignItems: 'center', padding: '26px 28px' }}>
+                {f.photo ? (
+                  <Image
+                    src={f.photo}
+                    alt={`${f.name}（${f.titleJa}）`}
+                    width={72}
+                    height={72}
+                    style={{ width: 72, height: 72, borderRadius: 999, objectFit: 'cover', flexShrink: 0, border: '2px solid var(--cta-light)' }}
+                  />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    style={{
+                      width: 72,
+                      height: 72,
+                      borderRadius: 999,
+                      flexShrink: 0,
+                      background: 'var(--navy)',
+                      color: 'var(--on-navy)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontFamily: 'var(--fd)',
+                      fontSize: 28,
+                      fontWeight: 800,
+                    }}
+                  >
                     {f.initial}
                   </div>
-                  <div>
-                    <h3 className="ab-founder-name">{f.name}</h3>
-                    <div className="ab-founder-title-en">{f.title}</div>
-                    <div className="ab-founder-title-ja">{f.titleJa}</div>
+                )}
+                <div>
+                  <h3 style={{ fontSize: 19, fontWeight: 800, color: 'var(--heading)', margin: 0, letterSpacing: '-0.01em' }}>{f.name}</h3>
+                  <div style={{ fontFamily: 'var(--fm)', fontSize: 12, fontWeight: 700, color: 'var(--cta-ink)', letterSpacing: '.06em', textTransform: 'uppercase', marginTop: 6 }}>
+                    {f.titleEn}
                   </div>
-                  <span className="ab-founder-tag">共同創業者</span>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--sub)', marginTop: 2 }}>{f.titleJa}</div>
+                  <p style={{ fontSize: 13.5, lineHeight: 1.7, color: 'var(--text)', margin: '8px 0 0' }}>{f.line}</p>
                 </div>
-              ))}
-            </div>
+              </Card>
+            ))}
           </div>
-        </section>
+          <style>{`
+            .ab2-founders{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+            @media(max-width:720px){.ab2-founders{grid-template-columns:1fr;gap:14px}}
+          `}</style>
+        </Section>
 
-        {/* COMPANY INFO TABLE */}
-        <section className="ab-section">
-          <div className="ab-section-inner">
-            <span className="ab-slabel">Company Profile</span>
-            <h2 className="ab-stitle">会社概要</h2>
-            <p className="ab-ssub">
-              DynaMeet株式会社の登記情報をご案内します。
-            </p>
+        {/* Company profile (white) — registry table + offices */}
+        <Section tone="white">
+          <SectionHead eyebrow="会社概要" title="DynaMeet株式会社" lede="登記情報とオフィスのご案内です。" />
 
-            <div className="ab-info-card">
-              {companyInfo.map((item) => (
-                <div key={item.label} className="ab-info-row">
-                  <div className="ab-info-label">{item.label}</div>
-                  <div className="ab-info-value">{item.value}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* OFFICE CARDS */}
-            <div className="ab-offices-grid">
-              {/* Registered address */}
-              <div className="ab-office-card">
-                <div className="ab-office-header">
-                  <span className="ab-office-badge ab-badge-registered">登記住所</span>
-                </div>
-                <h3 className="ab-office-title">代官山オフィス</h3>
-                <p className="ab-office-addr">
-                  〒150-0033<br />
-                  東京都渋谷区猿楽町17-10<br />
-                  代官山アートヴィレッジ2C
-                </p>
-                <p className="ab-office-note">法人登記上の所在地です。公式書類・請求書・郵便物の送付先としてご利用ください。</p>
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ab-map-link"
-                >
-                  <span>Googleマップで見る</span>
-                  <span className="ab-map-arrow" aria-hidden="true">→</span>
-                </a>
+          <div className="ab2-info">
+            {COMPANY_INFO.map((item) => (
+              <div key={item.label} className="ab2-info-row">
+                <div className="ab2-info-label">{item.label}</div>
+                <div className="ab2-info-value">{item.value}</div>
               </div>
-
-              {/* Operating office */}
-              <div className="ab-office-card">
-                <div className="ab-office-header">
-                  <span className="ab-office-badge ab-badge-operating">事業所</span>
-                </div>
-                <h3 className="ab-office-title">渋谷オフィス</h3>
-                <p className="ab-office-addr">
-                  〒150-0002<br />
-                  東京都渋谷区渋谷2-12-4<br />
-                  ネクストサイト渋谷ビル
-                </p>
-                <p className="ab-office-note">日常業務・開発の拠点です。お打ち合わせ等はこちらのオフィスで行っています。</p>
-                <a
-                  href="https://maps.app.goo.gl/rcynVB51VzSwQpDb8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ab-map-link"
-                >
-                  <span>Googleマップで見る</span>
-                  <span className="ab-map-arrow" aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
 
-        {/* CLOSING CTA */}
-        <section className="ab-cta-section">
-          <div className="ab-dot-grid" style={{ opacity: 0.4 }} />
-          <div className="ab-glow ab-glow-1" style={{ opacity: 0.4 }} />
-          <div className="ab-glow ab-glow-2" style={{ opacity: 0.4 }} />
+          <div className="ab2-offices">
+            {/* Registered address */}
+            <Card style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 28 }}>
+              <div>
+                <span className="ab2-badge ab2-badge-reg">登記住所</span>
+              </div>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', margin: 0, letterSpacing: '-0.01em' }}>代官山オフィス</h3>
+              <p style={{ fontSize: 14.5, lineHeight: 1.85, color: 'var(--text)', fontWeight: 600, margin: 0 }}>
+                〒150-0033
+                <br />
+                東京都渋谷区猿楽町17-10
+                <br />
+                代官山アートヴィレッジ2C
+              </p>
+              <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--sub)', margin: 0 }}>
+                法人登記上の所在地です。公式書類・請求書・郵便物の送付先としてご利用ください。
+              </p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ab2-map"
+              >
+                Googleマップで見る →
+              </a>
+            </Card>
 
-          <div className="ab-cta-inner">
-            <h2 className="ab-cta-title">
-              一緒に、<em>営業の未来</em>を作りませんか？
+            {/* Operating office */}
+            <Card style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 28 }}>
+              <div>
+                <span className="ab2-badge ab2-badge-op">事業所</span>
+              </div>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', margin: 0, letterSpacing: '-0.01em' }}>渋谷オフィス</h3>
+              <p style={{ fontSize: 14.5, lineHeight: 1.85, color: 'var(--text)', fontWeight: 600, margin: 0 }}>
+                〒150-0002
+                <br />
+                東京都渋谷区渋谷2-12-4
+                <br />
+                ネクストサイト渋谷ビル
+              </p>
+              <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--sub)', margin: 0 }}>
+                日常業務・開発の拠点です。お打ち合わせ等はこちらのオフィスで行っています。
+              </p>
+              <a
+                href="https://maps.app.goo.gl/rcynVB51VzSwQpDb8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ab2-map"
+              >
+                Googleマップで見る →
+              </a>
+            </Card>
+          </div>
+
+          <style>{`
+            .ab2-info{background:#fff;border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden;box-shadow:0 1px 2px rgba(15,17,40,.04)}
+            .ab2-info-row{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--border)}
+            .ab2-info-row:last-child{border-bottom:none}
+            .ab2-info-label{padding:18px 24px;font-size:13px;font-weight:700;color:var(--sub);background:var(--surface);border-right:1px solid var(--border);display:flex;align-items:center}
+            .ab2-info-value{padding:18px 24px;font-size:15px;font-weight:600;color:var(--heading);line-height:1.75}
+            .ab2-offices{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+            .ab2-badge{display:inline-flex;align-items:center;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em}
+            .ab2-badge-reg{background:var(--surface2);color:var(--sub);border:1px solid var(--border2)}
+            .ab2-badge-op{background:var(--cta-light);color:var(--cta-ink);border:1px solid var(--cta-border)}
+            .ab2-map{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:auto;font-size:13px;font-weight:700;color:var(--cta-ink);text-decoration:none;border:1.5px solid var(--border2);border-radius:999px;padding:9px 18px;transition:border-color .2s,background .2s}
+            .ab2-map:hover{border-color:var(--cta);background:var(--cta-wash)}
+            @media(max-width:640px){
+              .ab2-info-row{grid-template-columns:1fr}
+              .ab2-info-label{padding:12px 18px 4px;border-right:none;font-size:12px}
+              .ab2-info-value{padding:4px 18px 14px;font-size:14px}
+              .ab2-offices{grid-template-columns:1fr;gap:14px}
+            }
+          `}</style>
+        </Section>
+
+        {/* Closing CTA (navy deep) — modest, demo primary / contact secondary */}
+        <Section tone="navyDeep" py={72}>
+          <div style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto' }}>
+            <h2 style={{ fontFamily: 'var(--fd)', fontSize: 'clamp(24px,3.6vw,34px)', fontWeight: 800, color: 'var(--on-navy)', margin: '0 0 14px', letterSpacing: '-0.02em' }}>
+              まずは、30分のデモから。
             </h2>
-            <p className="ab-cta-sub">
-              プロダクトのデモも、キャリアの相談も、まずは気軽にお問い合わせください。
+            <p style={{ fontSize: 15, lineHeight: 1.85, color: 'var(--on-navy-sub)', margin: '0 0 26px' }}>
+              自社サイトにAI SDRを配属する具体策をご覧いただけます。そのほかのご相談はお問い合わせからどうぞ。
             </p>
-            <div className="ab-cta-buttons">
-              <DemoBookingButton className="ab-btn ab-btn-primary" utmCampaign="about">
-                デモを予約する
-                <span aria-hidden="true">→</span>
-              </DemoBookingButton>
-              <Link href="/careers/" className="ab-btn ab-btn-ghost">
-                採用情報を見る
-              </Link>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <CTAButtons source="about-footer" tone="onNavy" size="lg" align="center" secondaryLabel="お問い合わせ" secondaryHref="/contact/" />
             </div>
+            <p style={{ fontSize: 13, margin: '22px 0 0' }}>
+              <Link href="/careers/" className="v2-link" style={{ color: 'var(--on-navy-sub)', textDecoration: 'underline' }}>
+                採用情報を見る →
+              </Link>
+            </p>
           </div>
-        </section>
+        </Section>
       </main>
       <Footer />
 
@@ -398,7 +356,7 @@ export default function AboutPage() {
             },
             vatID: 'T9011001165145',
             description:
-              '営業支援AI「Meeton ai」の開発・運用を行うB2B SaaSスタートアップ。',
+              'AI SDR Platform「Meeton ai」の開発・運用を行うB2B SaaSスタートアップ。',
           }),
         }}
       />

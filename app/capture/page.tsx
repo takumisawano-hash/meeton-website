@@ -88,7 +88,9 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <a href="#main" className="v2-skip">本文へスキップ</a>
       <Nav />
+      <main id="main">
 
       {/* Hero — JOB is the headline, products are means */}
       <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 64 }}>
@@ -151,13 +153,14 @@ export default function Page() {
             .cap-row,.cap-row.rev{grid-template-columns:1fr;gap:20px}
             .cap-row.rev .cap-media{order:0}
           }
+          @media(max-width:720px){.cap-proof{grid-template-columns:1fr;gap:24px}}
         `}</style>
       </Section>
 
-      {/* Proof */}
+      {/* Proof — stacks to 1 column on mobile (.cap-proof rule above) */}
       {proof && (
         <Section tone="navy">
-          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+          <div className="cap-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proof.heroMetric}</div>
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{proof.heroMetricLabel}</div>
@@ -206,6 +209,7 @@ export default function Page() {
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source="capture-footer" tone="onNavy" size="lg" align="center" /></div>
         </div>
       </Section>
+      </main>
 
       <Footer />
     </>

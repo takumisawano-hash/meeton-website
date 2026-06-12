@@ -13,13 +13,28 @@ const SLUG_LOGO: Record<string, string> = {
   "univis-multi-service-3month-2deals": "/clients/univis.png",
 };
 
+// Notion stock covers (Unsplash) ship w=3840 (~440KB). Clamp the width param
+// to 1200 — plenty for the ~560px media column at 2x DPR.
+function clampHeroWidth(src: string): string {
+  try {
+    const u = new URL(src);
+    if (Number(u.searchParams.get("w")) > 1200) {
+      u.searchParams.set("w", "1200");
+      return u.toString();
+    }
+  } catch {
+    // relative URL (e.g. /api/notion-image/) — leave as-is
+  }
+  return src;
+}
+
 export default function FeaturedCase({ c }: { c: CaseCardData }) {
   const logo = c.companyLogo || SLUG_LOGO[c.slug];
   return (
     <Link href={`/cases/${c.slug}/`} aria-label={`${c.name} の導入事例を読む`} className="v2-fc">
       <div className="v2-fc-media">
         {c.heroImage ? (
-          <Image src={c.heroImage} alt={`${c.name} 導入事例`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
+          <Image src={clampHeroWidth(c.heroImage)} alt={`${c.name} 導入事例`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
         ) : (
           <div className="v2-fc-fallback">
             {logo && <Image src={logo} alt={`${c.name} ロゴ`} width={220} height={64} style={{ height: 56, width: "auto", maxWidth: "64%", objectFit: "contain" }} />}
@@ -48,7 +63,7 @@ export default function FeaturedCase({ c }: { c: CaseCardData }) {
         .v2-fc-tag{position:absolute;top:18px;left:18px;padding:6px 14px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-radius:999px;font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--sub);box-shadow:0 2px 8px rgba(15,17,40,.06)}
         .v2-fc-body{padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
         .v2-fc-metric-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:16px}
-        .v2-fc-metric{font-family:var(--fd);font-size:clamp(48px,6vw,68px);font-weight:800;color:var(--cta);line-height:1}
+        .v2-fc-metric{font-family:var(--fd);font-size:clamp(48px,6vw,68px);font-weight:800;color:var(--cta-ink);line-height:1;font-variant-numeric:tabular-nums}
         .v2-fc-metric-label{font-size:15px;color:var(--text);line-height:1.55;font-weight:600}
         .v2-fc-quote{font-size:16px;line-height:1.9;color:var(--text);margin:0 0 18px}
         .v2-fc-more{font-size:15px;font-weight:800;color:var(--cta-ink)}

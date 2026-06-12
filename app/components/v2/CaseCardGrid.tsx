@@ -79,7 +79,7 @@ export default function CaseCardGrid({ cases }: { cases: CaseCardData[] }) {
         .v2-cs-head{min-height:30px;display:flex;align-items:center;margin-bottom:14px}
         .v2-cs-company{font-size:17px;font-weight:800;color:var(--heading)}
         .v2-cs-metric-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-        .v2-cs-metric{font-family:var(--fd);font-size:clamp(40px,4vw,52px);font-weight:800;color:var(--cta);line-height:1}
+        .v2-cs-metric{font-family:var(--fd);font-size:clamp(40px,4vw,52px);font-weight:800;color:var(--cta-ink);line-height:1;font-variant-numeric:tabular-nums}
         .v2-cs-metric-label{font-size:14px;color:var(--text);line-height:1.55}
         .v2-cs-quote{font-size:15px;line-height:1.85;color:var(--text);margin:0 0 16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
         .v2-cs-more{margin-top:auto;font-size:14px;font-weight:700;color:var(--cta-ink)}

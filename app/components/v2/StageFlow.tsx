@@ -2,19 +2,20 @@ import Link from "next/link";
 import { ProductIcon } from "@/app/components/v2/ui";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
 
-// Deck p7 "AI SDR の3つの仕事" — 3-stage flow (掴む→商談化→追客). The 3rd
-// stage (follow) is rendered on navy to echo the deck's dark accent card.
-// Server-rendered; product cards link to their LP.
+// Deck p7 "AI SDR の3つの仕事" — 3-stage flow (掴む→商談化→追客). Stage ②
+// (convert/商談化) is rendered on navy — the business emphasis, matching the
+// pricing page's highlighted 商談獲得プラン. Server-rendered; product cards
+// link to their LP.
 
 export default function StageFlow() {
   return (
     <div className="v2-stageflow">
       {STAGES.map((s, i) => {
-        const dark = s.id === "follow";
+        const dark = s.id === "convert";
         return (
           <div key={s.id} className="v2-stage-wrap">
             <div
-              className="v2-stage"
+              className={dark ? "v2-stage v2-stage-dark" : "v2-stage"}
               style={{
                 background: dark ? "var(--navy)" : "#fff",
                 border: dark ? "1px solid var(--navy-3)" : "1px solid var(--border)",
@@ -22,10 +23,11 @@ export default function StageFlow() {
             >
               <Link href={s.href} className="v2-stage-head" style={{ textDecoration: "none", display: "block" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                  <span style={{ fontFamily: "var(--fd)", fontSize: 20, fontWeight: 800, color: "var(--cta)" }}>{s.num}</span>
+                  {/* 20px < 24px large-text threshold → --cta fails on white; use --cta-ink there */}
+                  <span style={{ fontFamily: "var(--fd)", fontSize: 20, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: dark ? "var(--cta)" : "var(--cta-ink)" }}>{s.num}</span>
                   <h3 style={{ fontSize: 19, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{s.title} →</h3>
                 </div>
-                <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta-ink)", margin: "8px 0 14px", letterSpacing: ".02em" }}>
+                <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: dark ? "var(--cta)" : "var(--cta-ink)", margin: "8px 0 14px", letterSpacing: ".02em" }}>
                   {s.transform}
                 </div>
               </Link>
@@ -64,6 +66,7 @@ export default function StageFlow() {
         .v2-stage{border-radius:18px;padding:24px;height:100%;box-sizing:border-box}
         .v2-stage-head h3{transition:color .15s}
         .v2-stage-head:hover h3{color:var(--cta-ink)}
+        .v2-stage-dark .v2-stage-head:hover h3{color:var(--cta)}
         .v2-stage-arrow{align-self:center;color:var(--border2);font-size:24px;padding:0 14px}
         .v2-stage-prod{display:flex;gap:10px;align-items:flex-start;border-radius:12px;padding:12px 14px;text-decoration:none;transition:border-color .2s,transform .2s}
         .v2-stage-prod:hover{border-color:var(--cta)!important;transform:translateY(-1px)}

@@ -41,9 +41,10 @@ export default async function Page() {
           <h1 style={{ fontFamily: "var(--fd)", fontSize: "clamp(30px,4.8vw,48px)", lineHeight: 1.2, fontWeight: 800, letterSpacing: "-0.025em", color: "var(--on-navy)", margin: "20px 0 0" }}>
             成果は、<span style={{ color: "var(--cta)" }}>数字</span>で出ている。
           </h1>
-          <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "18px 0 0" }}>
+          <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "18px 0 28px" }}>
             商談化率・初動・リード獲得——Meeton ai を導入した企業で実際に起きた変化を、業種別に。
           </p>
+          <CTAButtons source="cases-hero" tone="onNavy" size="lg" />
         </div>
       </Section>
       <LogoWall tone="surface" />

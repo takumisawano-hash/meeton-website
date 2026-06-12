@@ -18,7 +18,9 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
   const proof = data.proofRef ? FEATURED_CASES.find((c) => c.slug === PROOF_SLUG[data.proofRef!]) : undefined;
   return (
     <>
+      <a href="#main" className="v2-skip">本文へスキップ</a>
       <Nav />
+      <main id="main">
 
       <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 60 }}>
         <div style={{ maxWidth: 820 }}>
@@ -71,10 +73,10 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
         </div>
       </Section>
 
-      {/* proof */}
+      {/* proof — stacks to 1 column on mobile */}
       {proof && (
         <Section tone="navy">
-          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+          <div className="pb-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proof.heroMetric}</div>
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{proof.heroMetricLabel}</div>
@@ -85,6 +87,7 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
               <Link href="/cases/" style={{ display: "inline-block", marginTop: 14, color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>他の事例を見る →</Link>
             </div>
           </div>
+          <style>{`@media(max-width:720px){.pb-proof{grid-template-columns:1fr;gap:24px}}`}</style>
         </Section>
       )}
 
@@ -111,6 +114,7 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
           <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" /></div>
         </div>
       </Section>
+      </main>
 
       <Footer />
     </>
