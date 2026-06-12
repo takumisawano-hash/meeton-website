@@ -1,18 +1,33 @@
 // Detailed product mock-animations — stand-ins for real screenshots/video.
 // 2026-06-10 (Takumi: これらのサンプルはかなり大事): each scene is a concrete
 // sales story, not abstract boxes. NO flicker — elements fade/slide in ONCE
-// (animation-fill-mode:forwards) and STAY (no loop reset). prefers-reduced-
-// motion → everything visible immediately. Navy + green theme, rendered inside
-// the navy media frame.
+// (animation-fill-mode:forwards) and STAY (no loop reset). Wrapped in AnimGate
+// so the sequence starts on first visibility, not at page load. no-JS /
+// crawlers / prefers-reduced-motion → finished scene visible immediately.
+// Navy + green theme, rendered inside the navy media frame.
+
+import AnimGate from "@/app/components/v2/AnimGate";
+
+// Screen-reader summary per scene — the mock dialog itself is decorative
+// (aria-hidden on each .win) so it is never read as a real conversation.
+const SCENE_LABEL: Record<string, string> = {
+  chat: "Meeton ai のAIチャットが訪問者に話しかけ、リード化するデモ",
+  library: "Meeton ai が会話に合わせて資料を提案・解説するデモ",
+  calendar: "Meeton ai がチャット内で商談日程を確定するデモ",
+  email: "Meeton ai が行動シグナルから追客メールを生成するデモ",
+};
 
 export default function ProductAnim({ kind }: { kind: string }) {
   return (
-    <div className="v2a">
-      {kind === "chat" && <ChatScene />}
-      {kind === "library" && <LibraryScene />}
-      {kind === "calendar" && <CalendarScene />}
-      {kind === "email" && <EmailScene />}
-      <style>{`
+    <AnimGate>
+      <div className="v2a" role="img" aria-label={SCENE_LABEL[kind] ?? "Meeton ai のプロダクトデモ"}>
+        {kind === "chat" && <ChatScene />}
+        {kind === "library" && <LibraryScene />}
+        {kind === "calendar" && <CalendarScene />}
+        {kind === "email" && <EmailScene />}
+        <style>{`
+        /* gate wrapper (AnimGate) — fills the media frame like .v2a did */
+        .v2ag{display:flex;width:100%;min-height:100%}
         /* in-flow (not absolute) so the frame grows to the scene's height —
            prevents the scene being clipped top/bottom on narrow screens where
            it's taller than the frame's min-height. */
@@ -23,18 +38,25 @@ export default function ProductAnim({ kind }: { kind: string }) {
         /* shared app window chrome */
         .v2a .win{width:min(94%,560px);background:rgba(255,255,255,.035);border:1px solid var(--on-navy-border);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(0,0,0,.6)}
         .v2a .win-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--on-navy-border);background:rgba(255,255,255,.03)}
+        /* neutral window dots — full-saturation macOS traffic lights were the
+           only non-brand colors on the page */
         .v2a .win-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18)}
-        .v2a .win-bar i:nth-child(1){background:#ff5f57}.v2a .win-bar i:nth-child(2){background:#febc2e}.v2a .win-bar i:nth-child(3){background:#28c840}
         .v2a .win-url{margin-left:8px;font-family:var(--fm);font-size:10px;color:var(--on-navy-sub);background:rgba(255,255,255,.05);border-radius:6px;padding:3px 10px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .v2a .win-body{padding:16px}
         .v2a .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--cta);background:rgba(7,203,121,.14);border:1px solid rgba(7,203,121,.42);border-radius:999px;padding:5px 12px}
         .v2a .dot{width:7px;height:7px;border-radius:50%;background:var(--cta)}
-        /* appear-once helpers */
-        .ap{opacity:0;animation:apIn .55s cubic-bezier(.16,1,.3,1) forwards}
+        /* appear-once helpers — gated by AnimGate. Default = final visible
+           state (no-JS / crawlers read the finished scene); .armed (added
+           pre-paint when JS runs) hides + pauses at frame 0; .play (first
+           visibility) runs the sequence once. */
+        .ap{opacity:1}
+        .v2ag.armed .ap{opacity:0;animation:apIn .55s cubic-bezier(.16,1,.3,1) forwards;animation-play-state:paused}
+        .v2ag.armed.play .ap{animation-play-state:running}
         @keyframes apIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
         @media(prefers-reduced-motion:reduce){.v2a .ap{opacity:1!important;transform:none!important;animation:none!important}.v2a [class*="-fill"]{animation:none!important}}
       `}</style>
-    </div>
+      </div>
+    </AnimGate>
   );
 }
 
@@ -42,7 +64,7 @@ export default function ProductAnim({ kind }: { kind: string }) {
    context-aware hook, pulls them in, qualifies → リード化 ───────── */
 function ChatScene() {
   return (
-    <div className="win cs">
+    <div className="win cs" aria-hidden="true">
       <div className="win-bar"><i /><i /><i /><span className="win-url">あなたのサイト ／ 料金ページを閲覧中</span></div>
       <div className="win-body cs-body">
         <div className="cs-context ap" style={{ animationDelay: ".15s" }}>
@@ -55,13 +77,24 @@ function ChatScene() {
         <div className="cs-row me ap" style={{ animationDelay: "1.7s" }}>
           <span className="cs-b me-b">営業5名で、まず商談化を増やしたい</span>
         </div>
-        <div className="cs-row bot ap" style={{ animationDelay: "2.6s" }}>
-          <span className="cs-av">M</span>
-          <span className="cs-b">それなら<b>商談化の自動化</b>が中心になります。実際に商談化率が60%超になった事例もお見せできます。<b>30分のデモ</b>、今すぐ予約しますか？</span>
+        {/* typing dots overlay the reply slot, then the reply fades in */}
+        <div className="cs-row bot">
+          <span className="cs-av ap" style={{ animationDelay: "2.1s" }}>M</span>
+          <span className="cs-bw">
+            <span className="cs-typing"><i /><i /><i /></span>
+            <span className="cs-b ap" style={{ animationDelay: "2.9s" }}>それなら<b>商談化の自動化</b>が中心になります。実際に商談化率が60%超になった事例もお見せできます。<b>30分のデモ</b>、今すぐ予約しますか？</span>
+          </span>
         </div>
-        <div className="cs-foot ap" style={{ animationDelay: "3.5s" }}>
+        <div className="cs-foot ap" style={{ animationDelay: "3.8s" }}>
           <span className="tag"><span className="dot" />リード化 — 興味・規模・課題を取得</span>
         </div>
+      </div>
+      {/* static composer — window chrome, always visible */}
+      <div className="cs-comp">
+        <span className="cs-comp-in">メッセージを入力…</span>
+        <span className="cs-comp-send">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4z" /></svg>
+        </span>
       </div>
       <style>{`
         .cs-body{display:flex;flex-direction:column;gap:10px}
@@ -73,6 +106,25 @@ function ChatScene() {
         .cs-b b{color:var(--cta);font-weight:800}
         .me-b{background:var(--cta);color:#04231a;font-weight:700;border-top-left-radius:13px;border-top-right-radius:4px}
         .cs-foot{margin-top:2px}
+        /* typing indicator — fades in, pulses, fades out before the reply.
+           Final state is hidden (opacity:0 base), so no-JS / reduced-motion
+           never show it. */
+        .cs-bw{position:relative;display:block}
+        .cs-bw .cs-b{display:block}
+        .cs-typing{position:absolute;top:0;left:0;display:flex;align-items:center;gap:4px;padding:13px 14px;border-radius:13px;border-top-left-radius:4px;background:rgba(255,255,255,.08);opacity:0}
+        .v2ag.armed .cs-typing{animation:csType .8s linear forwards;animation-delay:2.1s;animation-play-state:paused}
+        .v2ag.armed.play .cs-typing{animation-play-state:running}
+        .cs-typing i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.6)}
+        .v2ag.play .cs-typing i{animation:csDot .9s ease-in-out infinite}
+        .v2ag.play .cs-typing i:nth-child(2){animation-delay:.12s}
+        .v2ag.play .cs-typing i:nth-child(3){animation-delay:.24s}
+        @keyframes csType{0%{opacity:0}18%{opacity:1}80%{opacity:1}100%{opacity:0}}
+        @keyframes csDot{0%,60%,100%{transform:none;opacity:.55}30%{transform:translateY(-3px);opacity:1}}
+        @media(prefers-reduced-motion:reduce){.v2a .cs-typing{opacity:0!important;animation:none!important}}
+        /* static composer row */
+        .cs-comp{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--on-navy-border)}
+        .cs-comp-in{flex:1;font-size:11.5px;color:var(--on-navy-sub);background:rgba(255,255,255,.05);border:1px solid var(--on-navy-border);border-radius:999px;padding:7px 13px}
+        .cs-comp-send{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--cta);color:#04231a;display:flex;align-items:center;justify-content:center}
       `}</style>
     </div>
   );
@@ -82,7 +134,7 @@ function ChatScene() {
    what the visitor just said, then explains it ───────── */
 function LibraryScene() {
   return (
-    <div className="win lb">
+    <div className="win lb" aria-hidden="true">
       <div className="win-bar"><i /><i /><i /><span className="win-url">チャット内 ／ 資料を提案・解説</span></div>
       <div className="win-body lb-body">
         <div className="lb-row me ap" style={{ animationDelay: ".2s" }}>
@@ -94,7 +146,9 @@ function LibraryScene() {
         </div>
         {/* proposed doc card */}
         <div className="lb-card ap" style={{ animationDelay: "1.7s" }}>
-          <span className="lb-ic">📄</span>
+          <span className="lb-ic">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><path d="M9 13h6" /><path d="M9 17h4" /></svg>
+          </span>
           <span className="lb-meta">
             <span className="lb-name">製造業向け 導入事例集.pdf</span>
             <span className="lb-match"><span className="dot" />会話内容にマッチ — 提案理由: 「製造業」「導入効果」</span>
@@ -118,7 +172,7 @@ function LibraryScene() {
         .lb-b b{color:var(--cta);font-weight:800}
         .lb-b.me-b{background:var(--cta);color:#04231a;font-weight:700;border-top-left-radius:13px;border-top-right-radius:4px}
         .lb-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(7,203,121,.08);border:1px solid rgba(7,203,121,.35);border-radius:12px}
-        .lb-ic{font-size:22px}
+        .lb-ic{flex-shrink:0;width:34px;height:34px;border-radius:9px;background:rgba(7,203,121,.14);color:var(--cta);display:flex;align-items:center;justify-content:center}
         .lb-meta{display:flex;flex-direction:column;gap:3px}
         .lb-name{font-size:13px;font-weight:800;color:#fff}
         .lb-match{font-size:11px;color:var(--cta);font-weight:600;display:flex;align-items:center;gap:6px}
@@ -135,7 +189,7 @@ function CalendarScene() {
   ];
   const times = ["10:00", "11:30", "14:00", "15:30"];
   return (
-    <div className="win cl">
+    <div className="win cl" aria-hidden="true">
       <div className="win-bar"><i /><i /><i /><span className="win-url">チャット内 ／ その場で日程調整</span></div>
       <div className="win-body cl-body">
         <div className="cl-row bot ap" style={{ animationDelay: ".2s" }}>
@@ -191,7 +245,7 @@ function CalendarScene() {
    on-site behavior ───────── */
 function EmailScene() {
   return (
-    <div className="win em">
+    <div className="win em" aria-hidden="true">
       <div className="win-bar"><i /><i /><i /><span className="win-url">Meeton Email ／ 行動シグナルから1:1生成</span></div>
       <div className="win-body em-body">
         {/* detected behavior */}

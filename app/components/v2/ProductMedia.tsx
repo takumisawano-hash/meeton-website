@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { productMedia } from "@/app/lib/product-media";
 import ProductAnim from "@/app/components/v2/ProductAnim";
+import { MotionSafeVideo } from "@/app/components/v2/AnimGate";
 
 // Large product media for a product LP — the demo the visitor came to see
 // after clicking 詳しく見る. Auto-resolves public/product/<slug>.(mp4|png|...).
@@ -14,7 +15,7 @@ export default function ProductMedia({ slug, icon, alt }: { slug: string; icon: 
     <div className="v2-pm">
       <div className={`v2-pm-frame ${isAnim ? "anim" : ""}`}>
         {media?.kind === "video" ? (
-          <video src={media.src} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <MotionSafeVideo src={media.src} />
         ) : media?.kind === "image" ? (
           <Image src={media.src} alt={`${alt} のデモ`} fill sizes="(max-width:1040px) 100vw, 980px" style={{ objectFit: "cover" }} priority />
         ) : (

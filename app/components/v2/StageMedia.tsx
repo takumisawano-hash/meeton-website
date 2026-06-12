@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Section, SectionHead } from "@/app/components/v2/ui";
 import { productMedia } from "@/app/lib/product-media";
 import ProductAnim from "@/app/components/v2/ProductAnim";
+import { MotionSafeVideo } from "@/app/components/v2/AnimGate";
 
 // Per-job media walkthrough: 4 alternating rows (掴む / 育てる / 商談化 / 追客),
 // each = product screenshot/video on one side, brief copy + 詳しく→LP on the
@@ -64,7 +65,7 @@ function Media({ row }: { row: Row }) {
   return (
     <div className="v2-sm-media">
       {m?.kind === "video" ? (
-        <video src={m.src} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <MotionSafeVideo src={m.src} />
       ) : m?.kind === "image" ? (
         <Image src={m.src} alt={`${row.title} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
       ) : (
