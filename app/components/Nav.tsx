@@ -94,8 +94,37 @@ export default function Nav({
 
   // which dropdown is open (desktop): 'product' | 'usage' | 'resources' | null
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  // panel x-position, measured from the hovered trigger (centered under it,
+  // clamped to the viewport) — fixed offsets drifted away from the trigger
+  // at other viewport widths, so a diagonal mouse path to the panel left the
+  // nav and instantly closed it.
+  const [panelLeft, setPanelLeft] = useState(160);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  // grace period before hover-close so brief mouse excursions don't kill the menu
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 180);
+  };
+  useEffect(() => cancelClose, []);
+
+  const PANEL_W: Record<string, number> = { product: 760, usage: 520, resources: 300 };
+  const openMenuAt = (id: string, el: HTMLElement) => {
+    const r = el.getBoundingClientRect();
+    const w = PANEL_W[id] ?? 400;
+    const vw = window.innerWidth;
+    const left = Math.min(Math.max(r.left + r.width / 2 - w / 2, 16), vw - w - 16);
+    setPanelLeft(left);
+    setOpenMenu(id);
+  };
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -247,8 +276,13 @@ export default function Nav({
     label: string;
   }) => (
     <button
-      onClick={() => setOpenMenu(openMenu === id ? null : id)}
-      onMouseEnter={() => setOpenMenu(id)}
+      onClick={(e) => (openMenu === id ? setOpenMenu(null) : openMenuAt(id, e.currentTarget))}
+      onMouseEnter={(e) => {
+        cancelClose();
+        openMenuAt(id, e.currentTarget);
+      }}
+      aria-expanded={openMenu === id}
+      aria-haspopup="true"
       style={{
         background: "none",
         border: "none",
@@ -302,7 +336,8 @@ export default function Nav({
           borderBottom: "1px solid var(--on-navy-border)",
           fontFamily: "var(--fb)",
         }}
-        onMouseLeave={() => setOpenMenu(null)}
+        onMouseEnter={cancelClose}
+        onMouseLeave={scheduleClose}
       >
         {/* Logo (white wordmark on navy) */}
         <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
@@ -359,7 +394,7 @@ export default function Nav({
 
             {/* Dropdown panels (white reading surface) */}
             {openMenu === "product" && (
-              <DropdownPanel onClose={() => setOpenMenu(null)} left={160} width={760}>
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={760}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
                   {STAGE_NAV.map((g) => (
                     <div key={g.stage}>
@@ -390,7 +425,7 @@ export default function Nav({
               </DropdownPanel>
             )}
             {openMenu === "usage" && (
-              <DropdownPanel onClose={() => setOpenMenu(null)} left={260} width={520}>
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={520}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
                   <div>
                     <PanelHeading>役割別</PanelHeading>
@@ -408,7 +443,7 @@ export default function Nav({
               </DropdownPanel>
             )}
             {openMenu === "resources" && (
-              <DropdownPanel onClose={() => setOpenMenu(null)} left={420} width={300}>
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={300}>
                 {RESOURCE_ITEMS.map((it) => (
                   <PanelItem key={it.href} item={it} active={isActive(it.href)} />
                 ))}
