@@ -8,6 +8,8 @@ import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
 import StageFlow from "@/app/components/v2/StageFlow";
 import StageMedia from "@/app/components/v2/StageMedia";
+import ProductAnim from "@/app/components/v2/ProductAnim";
+import CountUp from "@/app/components/v2/CountUp";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
 import FeaturedCase from "@/app/components/v2/FeaturedCase";
 
@@ -21,49 +23,66 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
       <Nav />
       <main id="main">
 
-      {/* 1. Hero (navy) */}
+      {/* 1. Hero (navy) — 2 columns ≥1024px: copy left, product window right.
+          Mobile: single column, media renders AFTER the CTA block so the CTA
+          stays above the fold at 390px. */}
       <Section tone="navy" py={0} style={{ paddingTop: 128, paddingBottom: 40 }}>
-        <div style={{ maxWidth: 880 }}>
-          <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--cta)" }}>
-            訪問者は去り、リードは商談にならない。
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--fd)",
-              fontSize: "clamp(34px, 6vw, 60px)",
-              lineHeight: 1.16,
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              color: "var(--on-navy)",
-              margin: "16px 0 0",
-            }}
-          >
-            「待つ」Webサイトから、<br />
-            <span style={{ color: "var(--cta)" }}>商談を生み出す</span>AI営業チャネルへ。
-          </h1>
-          <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 720 }}>
-            Meeton ai は、Webサイトに配属する AI SDR。問い合わせ前の潜在層に会話で踏み込み、
-            資料提案・予約・追客まで自律でこなして、あらゆる瞬間を商談に変えます。
-          </p>
-          <CTAButtons source="home-hero" tone="onNavy" size="lg" />
-          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 20, fontSize: 13, color: "var(--on-navy-sub)" }}>
-            <span>✓ 30分のデモで自社への効き方を確認</span>
-            <span>✓ Google / Microsoft ワンクリック</span>
-            <span>✓ ノーコード設置</span>
+        <div className="v2-hero">
+          <div>
+            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--cta)" }}>
+              訪問者は去り、リードは商談にならない。
+            </p>
+            <h1
+              className="v2-hero-h1"
+              style={{
+                fontFamily: "var(--fd)",
+                fontSize: "clamp(34px, 4.8vw, 48px)",
+                lineHeight: 1.18,
+                fontWeight: 800,
+                letterSpacing: "-0.03em",
+                color: "var(--on-navy)",
+                margin: "16px 0 0",
+              }}
+            >
+              「待つ」Webサイトから、<span className="v2-hero-brk"><br /></span>
+              <span style={{ color: "var(--cta)", whiteSpace: "nowrap" }}>商談を生み出す</span>
+              <span style={{ whiteSpace: "nowrap" }}>AI SDRへ。</span>
+            </h1>
+            <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 720 }}>
+              Meeton ai は、Webサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、
+              あらゆる瞬間を商談に変えます。
+            </p>
+            <CTAButtons source="home-hero" tone="onNavy" size="lg" />
+            <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 20, fontSize: 13, color: "var(--on-navy-sub)" }}>
+              <span>✓ 30分のデモで自社への効き方を確認</span>
+              <span>✓ シナリオ設計不要</span>
+              <span>✓ ノーコード・設置5分</span>
+            </div>
+          </div>
+          {/* product window: the chat scene framed like a real app on navy */}
+          <div className="v2-hero-media" aria-hidden>
+            <ProductAnim kind="chat" />
           </div>
         </div>
+        <style>{`
+          .v2-hero{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+          .v2-hero-h1{text-wrap:balance;word-break:auto-phrase}
+          .v2-hero-media{display:flex;border-radius:var(--r-feature);border:1px solid var(--on-navy-border);background:var(--navy-2);overflow:hidden;box-shadow:0 44px 88px -48px rgba(0,0,0,.65)}
+          @media(min-width:1024px){.v2-hero{grid-template-columns:1fr .9fr;gap:clamp(36px,4.5vw,64px)}}
+          @media(max-width:719px){.v2-hero-brk{display:none}}
+        `}</style>
       </Section>
 
       {/* 2. Proof stats — promoted to big cards (navy, continuous with hero) */}
       <Section tone="navy" py={0} style={{ paddingTop: 12, paddingBottom: 64 }}>
         <div className="v2-proof" style={{ borderTop: "1px solid var(--on-navy-border)", paddingTop: 40 }}>
           {[
-            { m: "80%", suf: "超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
-            { m: "+100%", suf: "", l: "有効リード数（導入前比）", sub: "実質 2倍に" },
-            { m: "30", suf: "h+/月", l: "削減できた営業工数", sub: "初動・追客の自動化で" },
+            { n: 60, suf: "%超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
+            { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
+            { n: 30, suf: "時間以上/月", l: "削減できた営業工数", sub: "初動・追客の自動化で" },
           ].map((s) => (
             <div key={s.l} className="v2-proof-card">
-              <div className="v2-proof-num">{s.m}<span className="v2-proof-suf">{s.suf}</span></div>
+              <div className="v2-proof-num"><CountUp to={s.n} /><span className="v2-proof-suf">{s.suf}</span></div>
               <div className="v2-proof-label">{s.l}</div>
               <div className="v2-proof-sub">{s.sub}</div>
             </div>
@@ -72,7 +91,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         <style>{`
           .v2-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px)}
           .v2-proof-card{background:var(--navy-2);border:1px solid var(--on-navy-border);border-radius:18px;padding:clamp(22px,3vw,32px);text-align:center}
-          .v2-proof-num{font-family:var(--fd);font-size:clamp(44px,7vw,72px);font-weight:800;color:var(--cta);line-height:1;letter-spacing:-.02em}
+          .v2-proof-num{font-family:var(--fd);font-size:clamp(44px,7vw,72px);font-weight:800;color:var(--cta);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
           .v2-proof-suf{font-size:.42em;font-weight:800;margin-left:4px;color:var(--cta)}
           .v2-proof-label{font-size:clamp(14px,1.6vw,16px);font-weight:800;color:var(--on-navy);margin-top:14px}
           .v2-proof-sub{font-size:12px;color:var(--on-navy-sub);margin-top:6px}
@@ -88,11 +107,11 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         <SectionHead
           eyebrow="AI SDR の3つの仕事"
           title="掴んで育て、商談化し、逃さず追う。"
-          lede="潜在層を掴み育ててリードにし（Live・Library）、温度が高まれば商談化し（Calendar）、逃したリードは諦めず追客する（Email）。"
+          lede="潜在層の獲得から追客まで、4つのプロダクトがひとつの AI SDR として連携します。"
         />
         <StageFlow />
         <p style={{ fontSize: 13, color: "var(--sub)", marginTop: 18, textAlign: "center" }}>
-          1つの仕事から無料で始め、つなぐほど一気通貫の AI SDR に。{" "}
+          料金は3プラン・月額12万円〜。30分のデモで、自社に合うプランをご案内します。{" "}
           <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>料金を見る</Link>
         </p>
       </Section>
@@ -112,6 +131,20 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           </div>
         </Section>
       )}
+
+      {/* 7.5 Slim CTA strip — the walkthrough + case stretch is long with no
+          conversion point until the footer; give scrollers an exit here. */}
+      <Section tone="navy" py={56}>
+        <div className="v2-ctastrip">
+          <p className="v2-ctastrip-line">同じ仕組みを、30分のデモで。</p>
+          <CTAButtons source="home-mid" tone="onNavy" size="md" />
+        </div>
+        <style>{`
+          .v2-ctastrip{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+          .v2-ctastrip-line{font-family:var(--fd);font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.02em;color:var(--on-navy);margin:0}
+          @media(max-width:720px){.v2-ctastrip{flex-direction:column;align-items:flex-start;gap:18px}}
+        `}</style>
+      </Section>
 
       {/* 8. Soft router — 2×2 grid (even boxes) */}
       <Section tone="surface" py={64}>
