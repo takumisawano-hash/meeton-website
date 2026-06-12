@@ -29,10 +29,6 @@ export type ProductLPData = {
   proof: { metric: string; label: string; quote: string; source: string };
   // integrations
   integrations: string[];
-  // pricing (this product only)
-  freeTier: string;
-  proPrice: string;
-  proIncludes: string[];
   // expansion teaser cross-sell line
   crossSell: string;
   faq: FAQ[];
@@ -45,13 +41,13 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     icon: "calendar",
     metaTitle: "Meeton Calendar｜即フォローで商談化する日程調整・商談予約",
     metaDescription:
-      "リードが発生した瞬間に商談予約まで運ぶ AI 日程調整。フォーム送信・資料DLの直後に AI が予約を提示し、自動アサイン・CRM登録まで自律化。immedio / TimeRex / Calendly との違いも解説。無料で開始（クレカ不要）。",
+      "リードが発生した瞬間に商談予約まで運ぶ AI 日程調整。フォーム送信・資料DLの直後に AI が予約を提示し、自動アサイン・CRM登録まで自律化。immedio / TimeRex / Calendly との違いも解説。30分のデモで体験。",
     keyword: "日程調整 自動化 / 商談予約 / インバウンド 商談化",
     eyebrow: "AI 商談予約 / 日程調整",
     problemLine: "リードが動いた“その瞬間”を、待たせている。",
     h1: "リードが動いた瞬間に、商談を予約する。",
     heroSub:
-      "Speed to Lead の業界標準は数時間〜数日。Meeton Calendar は、フォーム送信・資料DLの直後にAIが商談予約を提示し、自動アサイン・CRM登録まで一気に走らせます。最も関心が高い瞬間を、商談に変える。",
+      "初動レスポンス（Speed to Lead）の業界標準は数時間〜数日。Meeton Calendar は、フォーム送信・資料DLの直後にAIが商談予約を提示し、自動アサイン・CRM登録まで一気に走らせます。最も関心が高い瞬間を、商談に変える。",
     steps: [
       { title: "コンバートを検知", desc: "フォーム送信・資料DL・チャット完了など、関心が最高潮の瞬間をトリガーに。" },
       { title: "その場で予約を提示", desc: "AIコンシェルジュが空き枠を提示。担当者を自動アサインし、最短の枠へ誘導。" },
@@ -65,19 +61,16 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
       { title: "アサインとCRM登録まで自律", desc: "ラウンドロビン/条件アサイン・CRM登録・通知を自動化。営業は商談だけに集中できる。" },
     ],
     proof: {
-      metric: "60%+",
+      metric: "60%以上",
       label: "Meeton ai 経由の商談化率（業界平均20%の約3倍／人材・研修）",
       quote: "Meeton ai を経由したお客様は、明らかにナーチャリングされた状態で問い合わせてくださる。商談化の部分で非常に有効だと感じています。",
       source: "研修業界リーダー（人材, Meeton ai 導入）",
     },
     integrations: ["Salesforce", "HubSpot", "Google Calendar", "Outlook", "Zoom", "Slack", "Microsoft Teams"],
-    freeTier: "1名・基本予約（AIコンシェルジュは制限）。クレカ不要で今すぐ。",
-    proPrice: "¥4万",
-    proIncludes: ["AIコンシェルジュ", "自動アサイン/ルーティング", "CRM自動登録", "3名まで"],
     crossSell: "予約の前にチャットで温度を上げ、予約しなかった人はメールで追う——4つの仕事がつながると一気通貫のAI SDRに。",
     faq: [
       { q: "Calendly や TimeRex と何が違いますか？", a: "予約URLを渡すだけのツールと異なり、Meeton Calendar はコンバート直後にAIが会話で疑問を解消し、温度を上げてから予約枠へ誘導します。さらに担当者の自動アサイン・CRM登録・通知まで自律化するため、初動の速さと取りこぼし防止の両方を同時に解決します。" },
-      { q: "無料でどこまで使えますか？", a: "無料ティアで1名・基本予約が使え、クレジットカード不要で登録できます。AIコンシェルジュや自動アサイン・CRM登録などは単体Pro（¥4万/月）で開放されます。" },
+      { q: "料金はいくらですか？", a: "Meeton ai は月額12万円〜の3プラン（リード獲得 / 商談獲得 / オールインワン）で、月間トラフィックと利用機能で変動します。詳細は料金ページをご覧ください。まず30分のデモで自社への効き方を確認できます。" },
       { q: "導入にどれくらいかかりますか？", a: "ノーコードです。カレンダーをOAuth接続し、予約URLを発行すれば数分で稼働します。設定はすべてアプリ内でユーザー自身が完結でき、開発は不要です。" },
     ],
   },
@@ -86,11 +79,11 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "chat",
     productName: "Meeton Chat",
     icon: "chat",
-    metaTitle: "Meeton Chat（Live）｜接触前の検討に効く商談化AIチャット",
+    metaTitle: "Meeton Chat｜接触前の検討に効く商談化AIチャット",
     metaDescription:
-      "買い手は購買の約70%を営業接触前に独力で進める。Meeton Chat は、その“接触前の検討”の土台に立ち、Webでは出せない答えをその場で渡して商談化する AI チャット。Intercom / シナリオ型チャットボットとの違いも解説。無料で開始。",
+      "買い手は購買の約70%を営業接触前に独力で進める。Meeton Chat は、その“接触前の検討”の土台に立ち、Webでは出せない答えをその場で渡して商談化する AI チャット。Intercom / シナリオ型チャットボットとの違いも解説。30分のデモで体験。",
     keyword: "Web接客 ツール / チャットボット 商談化 / サイト離脱 防止",
-    eyebrow: "AI チャット（Live）",
+    eyebrow: "AI チャット",
     problemLine: "買い手は、問い合わせる前にもう決めはじめている。",
     h1: "接触前の検討の“土台”に立つ、商談化AIチャット。",
     heroSub:
@@ -108,20 +101,17 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
       { title: "シナリオ設計不要", desc: "想定問答を組まなくても生成AIが文脈で回答。設置5分、メンテも最小。" },
     ],
     proof: {
-      metric: "20x+",
+      metric: "20倍以上",
       label: "チャット経由のリード獲得数（対 従来のシナリオ型チャット）",
       quote: "従来のチャットは月1〜2件あればいい方だった。Meeton ai にしてからは月20件以上——20倍以上のリードがチャットから生まれている。",
       source: "BizteX 株式会社（SaaS, Meeton ai 導入）",
     },
     integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Google Chat", "Webhook"],
-    freeTier: "200会話/月・1サイト・Meetonブランド表示。クレカ不要で今すぐ。",
-    proPrice: "¥3万",
-    proIncludes: ["会話上限を大幅増（実質無制限）", "過去文脈の引き継ぎ", "1サイト", "詳細な会話ログ"],
     crossSell: "盛り上がった会話はCalendarで予約に、資料が欲しい人にはLibraryを——つなぐと一気通貫のAI SDRに。",
     faq: [
       { q: "普通のチャットボットと何が違いますか？", a: "シナリオ型チャットボットは想定問答に沿った応答しかできず、商談化は人頼みでした。Meeton Chat は生成AIが文脈を理解し、過去の閲覧・DL・会話履歴を引き継いで自律的に対話し、温度が上がった瞬間に商談予約まで会話内で完結します。" },
       { q: "なぜ「接触前」が重要なのですか？", a: "B2Bの買い手は購買プロセスの約70%を営業に接触する前に独力で進めるとされています（Gartner/6sense）。この時間にWebでは出せない答えを渡せるかどうかが、問い合わせ確率と最終的な商談化率を左右します。Meeton Chat はこの“接触前の検討”に効くよう設計されています。" },
-      { q: "設置は難しいですか？", a: "1行のスニペットを貼るだけで、シナリオ設計は不要です。設置後すぐにAIが訪問者に話しかけ始めます。無料ティア（200会話/月・1サイト）はクレジットカード不要で開始できます。" },
+      { q: "設置は難しいですか？", a: "1行のスニペットを貼るだけで、シナリオ設計は不要です。設置後すぐにAIが訪問者に話しかけ始めます。設定はノーコードで完結します。" },
     ],
   },
 
@@ -157,13 +147,10 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
       source: "Univis Group（コンサルティング／上田 翔太 氏）",
     },
     integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Webhook"],
-    freeTier: "資料3点・基本開封トラッキング・AIチャット制限。クレカ不要で今すぐ。",
-    proPrice: "¥3万",
-    proIncludes: ["資料無制限", "AI解説（フル）", "リアルタイム通知", "詳細トラッキング"],
     crossSell: "資料で育てて温まった見込み客は、Calendarで予約に、まだの人はEmailで追客——つなぐと一気通貫のAI SDRに。",
     faq: [
       { q: "DocSend と何が違いますか？", a: "DocSend が資料の配布・開封トラッキングに特化するのに対し、Meeton Library はそこにAIチャットによる資料解説を加え、受け手の質問にその場で答えます。さらにCRM不要で始められ、開封シグナルをEmail/Calendarへ橋渡しして追客まで繋げられます。" },
-      { q: "無料でも開封トラッキングは使えますか？", a: "はい。無料ティアでも資料3点まで基本の開封トラッキングが使えます。コア計測機能（誰がいつ見たか）は無料でも絞りません——それが追客とアップセル判定の燃料だからです。資料無制限やAIフル解説は単体Pro（¥3万/月）で開放されます。" },
+      { q: "開封トラッキングではどこまで分かりますか？", a: "誰がいつ、どの資料をどこまで見たかを可視化できます。開封・閲覧の行動シグナルを捉え、温まった見込み客を逃さず商談化・追客へ繋げます。" },
       { q: "受け手に専用アプリは必要ですか？", a: "不要です。共有URLを開くだけで閲覧でき、AIチャットで質問できます。送り手はアップロードしてURLを発行するだけ、すべてノーコードで完結します。" },
     ],
   },
@@ -200,13 +187,10 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
       source: "Meeton ai 利用企業（追客運用）",
     },
     integrations: ["Salesforce", "HubSpot", "Gmail", "Outlook", "Slack", "Webhook"],
-    freeTier: "14日トライアル（CRM連携が前提のため常設無料はなし）。",
-    proPrice: "¥5万",
-    proIncludes: ["AI生成1:1フォロー", "行動シグナル検知", "チャット連携", "CRM連携"],
     crossSell: "チャットや資料で温まった人をEmailが追い、返信したらCalendarで予約——つなぐと一気通貫のAI SDRに。",
     faq: [
       { q: "Lemlist や Smartlead と何が違いますか？", a: "これらのツールがテンプレートの変数差し替えによる一斉送信を主とするのに対し、Meeton Email は相手の行動文脈に合わせてAIが1通ずつ文面を生成します。送信スケジュールではなく再訪・開封などの行動シグナルを起点に動き、返信・商談予約というゴールまで自律的に追い続けます。" },
-      { q: "なぜ常設の無料プランがないのですか？", a: "Meeton Email はCRM連携を前提に行動シグナルを検知して動くため、価値を出すにはCRM接続が必須です。そのため常設無料ではなく14日間のトライアルを用意しています。他の3製品（Chat/Calendar/Library）には無料ティアがあります。" },
+      { q: "CRM がなくても使えますか？", a: "Meeton Email はCRM連携を前提に行動シグナルを検知して動くため、Salesforce / HubSpot などのCRM接続が必要です。既存リードと行動データを取り込み、追うべき相手とタイミングをAIが判断します。" },
       { q: "送りすぎてしまう心配はありませんか？", a: "Meeton Email はスケジュール一斉送信ではなく、行動シグナルに基づいて“追うべき相手・タイミング”をAIが判断します。目的（返信・予約）に達したら止まるため、無関係な大量送信になりません。" },
     ],
   },
