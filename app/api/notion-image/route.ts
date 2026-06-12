@@ -101,10 +101,19 @@ export async function GET(request: NextRequest) {
 
     const buffer = await imageResponse.arrayBuffer();
 
+    // Versioned URLs (?v=<last_edited_time>, see notion.ts / case-studies.ts)
+    // change whenever the source file is replaced in Notion, so the response
+    // can be cached for a year as immutable instead of re-fetching ~1.4MB
+    // payloads every 24h. Unversioned URLs (e.g. in-article block images)
+    // keep the 24h TTL so edits still propagate.
+    const isVersioned = request.nextUrl.searchParams.has("v");
+
     return new NextResponse(buffer, {
       headers: {
         "Content-Type": contentType,
-        "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
+        "Cache-Control": isVersioned
+          ? "public, max-age=31536000, s-maxage=31536000, immutable"
+          : "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
       },
     });
   } catch (error) {

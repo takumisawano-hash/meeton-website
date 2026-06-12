@@ -6,13 +6,18 @@ import type {
   RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints'
 
-// Bypass Next.js' default fetch cache so revalidatePath() actually
-// re-fetches Notion. Without this, edits to article titles/descriptions
-// in Notion never reach production until the next deploy.
+// Cache Notion responses in Next's Data Cache with a 1h TTL + 'notion' tag.
+// The previous cache:'no-store' (added when the default indefinite fetch
+// cache kept stale titles until the next deploy) forced every ISR render to
+// hit the Notion API, pushing blog/pillar TTFB to 1.2-3.0s. A bounded 1h
+// revalidate keeps pages fast while guaranteeing edits land within an hour.
+// On-demand freshness still works: /api/revalidate?path=… calls
+// revalidatePath(), which purges the Data Cache for that route, and the
+// 'notion' tag lets revalidateTag('notion') bust every Notion fetch at once.
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
   fetch: ((url: RequestInfo | URL, init?: RequestInit) =>
-    fetch(url, { ...init, cache: 'no-store' })) as typeof fetch,
+    fetch(url, { ...init, next: { revalidate: 3600, tags: ['notion'] } })) as typeof fetch,
 })
 
 // Notion API 2025-09-03+ の dataSources エンドポイント（SDK型定義未対応）
@@ -180,10 +185,14 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
     return getThumbnailUrl(page)
   }
 
+  // Include last_edited_time as a version param so the URL changes when the
+  // image is replaced in Notion — lets the proxy serve immutable cache headers.
+  const v = Date.parse(page.last_edited_time || '') || 0
+
   const file = prop.files[0]
   if (file.type === 'file') {
     // Notion S3ファイル → プロキシ経由
-    return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage`
+    return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage&v=${v}`
   }
 
   const url = file.type === 'external' ? file.external.url : ''
@@ -200,7 +209,7 @@ function getFeaturedImageUrl(page: PageObjectResponse): string | null {
   }
 
   // その他外部URL → プロキシ経由
-  return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage`
+  return `/api/notion-image/?pageId=${page.id}&type=page-property&property=FeaturedImage&v=${v}`
 }
 
 function pageToPost(page: PageObjectResponse): BlogPost {
