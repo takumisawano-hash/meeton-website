@@ -162,7 +162,7 @@ const config: SolutionLpConfig = {
     {
       question: 'セキュリティはどうなっていますか？',
       answer:
-        'ISMS 認証は審査合格済み・認証発行待ちの段階です。顧客データは AES-256 で保管、社内アクセスは最小権限。HubSpot / Salesforce との連携も official OAuth scope のみ。セキュリティチェックシート対応、NDA 締結、アクセス権限管理にも個別対応可能。詳細は情報セキュリティポリシーを参照してください。',
+        'ISMS（ISO/IEC 27001・27017）認証を取得済みです。顧客データは AES-256 で保管、社内アクセスは最小権限。HubSpot / Salesforce との連携も official OAuth scope のみ。セキュリティチェックシート対応、NDA 締結、アクセス権限管理にも個別対応可能。詳細は情報セキュリティポリシーを参照してください。',
     },
   ],
   finalCta: {

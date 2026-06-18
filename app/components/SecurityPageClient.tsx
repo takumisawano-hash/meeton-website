@@ -1,14 +1,50 @@
 'use client'
 
+import Image from 'next/image'
 import Footer from './Footer'
 import Nav from './Nav'
+
+// ── 第三者認証（ISO/IEC 27001・27017）マーク ───────────────────────
+// SGS から提供された公式マークデータ（RGB / Web 用 JPG）をそのまま使用。
+// SGS「システム認証マーク使用規程」/ ISMS-AC 認定シンボル使用規程に基づき:
+//   - 画像の改変・比率変更・単色化・トリミングは不可（unoptimized で原本配信）
+//   - 認定シンボル単体使用は不可（SGS 認証マークと一体の公式ロックアップを使用）
+//   - 必ず白系の単色背景に配置（写真・グラデーション背景の上は不可）
+//   - 認証範囲（登録範囲）を併記する
+//
+// ▼ 公開前に「証明書の記載」と一致しているか確認してください（要確定）:
+//   - scope（認証範囲）/ acquired（取得時期）/ 規格バージョン
+const CERT_MARKS = [
+  {
+    src: '/certifications/sgs-iso-27001-isms-ac.jpg',
+    alt: 'SGS ISO/IEC 27001 認証マーク（ISMS-AC 認定 ISR021）',
+    width: 1261,
+    height: 736,
+  },
+  {
+    src: '/certifications/sgs-iso-27017-isms-ac.jpg',
+    alt: 'SGS ISO/IEC 27017 認証マーク（ISMS-AC 認定 ISR021）',
+    width: 605,
+    height: 369,
+  },
+]
+
+const CERT_FACTS = [
+  { label: '認証規格', value: 'ISO/IEC 27001:2022 ／ ISO/IEC 27017:2015' },
+  { label: '認証取得組織', value: 'DynaMeet株式会社' },
+  { label: '審査・認証機関', value: 'SGSジャパン株式会社' },
+  { label: '認定機関 / 認定番号', value: '情報マネジメントシステム認定センター（ISMS-AC）／ ISR021' },
+  // TODO(cert): 証明書記載の登録範囲（認証範囲）に一致させてください。
+  { label: '認証範囲', value: 'クラウドサービス「Meeton ai」の企画・開発・運用および提供' },
+  { label: '認証取得', value: '2026年6月' },
+]
 
 const securityFeatures = [
   {
     eyebrow: 'Compliance',
-    title: 'ISO/IEC 27001・27017 認証推薦取得',
+    title: 'ISO/IEC 27001・27017 認証取得',
     description:
-      'SGSジャパン株式会社によるステージ2審査を完了し、「認証推薦」の判定を受けました。現在、認証登録の手続きを進めており、2026年6月頃の証明書発行を見込んでいます。',
+      'SGSジャパン株式会社の審査を経て、情報セキュリティマネジメントシステムの国際規格 ISO/IEC 27001、およびクラウドサービスのセキュリティ規格 ISO/IEC 27017 の認証を取得しています（ISMS-AC 認定、認定番号 ISR021）。',
   },
   {
     eyebrow: 'Infrastructure',
@@ -142,7 +178,7 @@ export default function SecurityPageClient() {
                 }}
               >
                 {[
-                  'ISO/IEC 27001・27017 ステージ2審査完了・認証推奨（2026年6月証明書発行見込み）',
+                  'ISO/IEC 27001・27017 認証取得（ISMS-AC 認定 ISR021）',
                   '国内リージョンでのデータ保管',
                   'TLS 1.2+ / AES-256 対応',
                 ].map((item) => (
@@ -238,6 +274,89 @@ export default function SecurityPageClient() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Third-party certification marks. Placed on solid white per SGS rules;
+            official lockup (SGS mark + ISMS-AC symbol) used unaltered; scope shown. */}
+        <section style={{ padding: 'clamp(28px, 5vw, 44px) clamp(16px, 4vw, 28px) 0' }}>
+          <div
+            style={{
+              maxWidth: 1180,
+              margin: '0 auto',
+              background: '#ffffff',
+              borderRadius: 28,
+              border: '1px solid #e2efea',
+              boxShadow: '0 18px 48px rgba(16,35,30,0.06)',
+              padding: 'clamp(24px, 4vw, 40px)',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 'clamp(24px, 4vw, 44px)',
+              alignItems: 'center',
+            }}
+          >
+            <div>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 800,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: '#0f766e',
+                  marginBottom: 18,
+                }}
+              >
+                Certifications
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center' }}>
+                {CERT_MARKS.map((m) => (
+                  <Image
+                    key={m.src}
+                    src={m.src}
+                    alt={m.alt}
+                    width={m.width}
+                    height={m.height}
+                    unoptimized
+                    style={{ height: 116, width: 'auto', display: 'block' }}
+                  />
+                ))}
+              </div>
+              <p
+                style={{
+                  fontSize: 13,
+                  lineHeight: 1.75,
+                  color: '#6a8178',
+                  margin: '18px 0 0',
+                  maxWidth: 520,
+                }}
+              >
+                情報セキュリティマネジメントシステム（ISMS）に対する第三者認証です。SGSジャパン株式会社が審査・認証し、情報マネジメントシステム認定センター（ISMS-AC）が認定しています。
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gap: 10 }}>
+              {CERT_FACTS.map((f) => (
+                <div
+                  key={f.label}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '132px 1fr',
+                    gap: 14,
+                    padding: '12px 14px',
+                    borderRadius: 14,
+                    background: '#f7fbfa',
+                    border: '1px solid #e6f0ec',
+                  }}
+                >
+                  <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.04em', color: '#6a8178', lineHeight: 1.6 }}>
+                    {f.label}
+                  </span>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: '#16332b', lineHeight: 1.6 }}>
+                    {f.value}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
