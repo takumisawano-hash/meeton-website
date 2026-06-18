@@ -5,15 +5,14 @@ import Footer from './Footer'
 import Nav from './Nav'
 
 // ── 第三者認証（ISO/IEC 27001・27017）マーク ───────────────────────
-// SGS から提供された公式マークデータ（RGB / Web 用 JPG）をそのまま使用。
-// SGS「システム認証マーク使用規程」/ ISMS-AC 認定シンボル使用規程に基づき:
-//   - 画像の改変・比率変更・単色化・トリミングは不可（unoptimized で原本配信）
-//   - 認定シンボル単体使用は不可（SGS 認証マークと一体の公式ロックアップを使用）
-//   - 必ず白系の単色背景に配置（写真・グラデーション背景の上は不可）
+// SGS 提供の公式マークデータ（RGB / Web 用 JPG）をそのまま使用。
+// SGS「システム認証マーク使用規程」/ ISMS-AC 認定シンボル使用規程:
+//   - 画像の改変・比率変更・単色化・トリミング不可（unoptimized で原本配信）
+//   - 認定シンボル単体使用不可（SGS 認証マーク一体の公式ロックアップを使用）
+//   - 白系の単色背景に配置（写真・グラデーション背景不可）
 //   - 認証範囲（登録範囲）を併記する
-//
-// ▼ 公開前に「証明書の記載」と一致しているか確認してください（要確定）:
-//   - scope（認証範囲）/ acquired（取得時期）/ 規格バージョン
+// 規格名・SGS・ISMS-AC・認定番号(ISR021)はマーク画像内に含まれるため、
+// 本文では重複表記を避け、画像にない情報（範囲・取得時期）のみ簡潔に補う。
 const CERT_MARKS = [
   {
     src: '/certifications/sgs-iso-27001-isms-ac.jpg',
@@ -29,41 +28,21 @@ const CERT_MARKS = [
   },
 ]
 
-const CERT_FACTS = [
-  { label: '認証規格', value: 'ISO/IEC 27001:2022 ／ ISO/IEC 27017:2015' },
-  { label: '認証取得組織', value: 'DynaMeet株式会社' },
-  { label: '審査・認証機関', value: 'SGSジャパン株式会社' },
-  { label: '認定機関 / 認定番号', value: '情報マネジメントシステム認定センター（ISMS-AC）／ ISR021' },
+// ▼ 公開前に「証明書の記載」と一致しているか確認してください（要確定）
+const CERT = {
+  org: 'DynaMeet株式会社',
   // TODO(cert): 証明書記載の登録範囲（認証範囲）に一致させてください。
-  { label: '認証範囲', value: 'クラウドサービス「Meeton ai」の企画・開発・運用および提供' },
-  { label: '認証取得', value: '2026年6月' },
-]
+  scope: 'クラウドサービス「Meeton ai」の企画・開発・運用および提供',
+  standards: 'ISO/IEC 27001:2022・ISO/IEC 27017:2015',
+  acquired: '2026年6月', // TODO(cert): 証明書の発行日に合わせる
+}
 
-const securityFeatures = [
-  {
-    eyebrow: 'Compliance',
-    title: 'ISO/IEC 27001・27017 認証取得',
-    description:
-      'SGSジャパン株式会社の審査を経て、情報セキュリティマネジメントシステムの国際規格 ISO/IEC 27001、およびクラウドサービスのセキュリティ規格 ISO/IEC 27017 の認証を取得しています（ISMS-AC 認定、認定番号 ISR021）。',
-  },
-  {
-    eyebrow: 'Infrastructure',
-    title: '堅牢なインフラ',
-    description:
-      'AWSのセキュアな基盤を利用し、データはすべて日本国内のデータセンターに保管されます。',
-  },
-  {
-    eyebrow: 'Encryption',
-    title: '通信とデータの暗号化',
-    description:
-      'すべての通信はTLS 1.2以上で、保存データはAES-256等により強力に暗号化されています。',
-  },
-  {
-    eyebrow: 'AI Governance',
-    title: 'セキュアなAI運用',
-    description:
-      'LLMの利用において、プロンプトインジェクション対策等のシステムレベルの保護を適用し、顧客データがAIの学習に無断で利用されることはありません。',
-  },
+// 詳細はホワイトペーパーに委ね、ページ上では要点のみを提示する（ティザー）。
+const controls = [
+  { label: 'データ保管', value: '国内リージョン（AWS 東京）' },
+  { label: '暗号化', value: '通信 TLS 1.2+ ／ 保存 AES-256' },
+  { label: 'アクセス制御', value: '最小権限・監査ログ' },
+  { label: 'AI 運用', value: '学習データへの無断利用なし' },
 ]
 
 export default function SecurityPageClient() {
@@ -78,6 +57,9 @@ export default function SecurityPageClient() {
           color: '#10231e',
         }}
       >
+        {/* ── Hero: the certification is the centerpiece ──────────────
+            Definitive claim on the left, official SGS marks on the right
+            (white background per SGS rules). One cohesive cert moment. */}
         <section
           style={{
             position: 'relative',
@@ -128,11 +110,15 @@ export default function SecurityPageClient() {
                 color: '#f4fffc',
                 boxShadow: '0 28px 80px rgba(16,35,30,0.16)',
                 border: '1px solid rgba(255,255,255,0.08)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
               }}
             >
               <div
                 style={{
                   display: 'inline-flex',
+                  alignSelf: 'flex-start',
                   alignItems: 'center',
                   gap: 10,
                   padding: '8px 14px',
@@ -162,141 +148,29 @@ export default function SecurityPageClient() {
               <p
                 style={{
                   fontSize: 'clamp(16px, 2vw, 20px)',
-                  lineHeight: 1.8,
+                  lineHeight: 1.85,
                   color: 'rgba(244,255,252,0.84)',
-                  maxWidth: 700,
-                  marginBottom: 30,
+                  maxWidth: 640,
+                  margin: 0,
                 }}
               >
-                Meeton AIはお客様のデータを安全に保護するため、国際水準の情報セキュリティ体制を構築しています。
+                Meeton ai はお客様のデータを安全に保護するため、ISO/IEC 27001・27017 認証のもと、国際規格に基づく情報セキュリティマネジメントシステムを構築・運用しています。
               </p>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                  gap: 14,
-                }}
-              >
-                {[
-                  'ISO/IEC 27001・27017 認証取得（ISMS-AC 認定 ISR021）',
-                  '国内リージョンでのデータ保管',
-                  'TLS 1.2+ / AES-256 対応',
-                ].map((item) => (
-                  <div
-                    key={item}
-                    style={{
-                      padding: '16px 18px',
-                      borderRadius: 18,
-                      background: 'rgba(255,255,255,0.08)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      fontSize: 14,
-                      fontWeight: 600,
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div
               style={{
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(245,252,250,0.98) 100%)',
+                background: '#ffffff',
                 borderRadius: 28,
-                padding: 'clamp(24px, 4vw, 34px)',
+                padding: 'clamp(26px, 4vw, 38px)',
                 border: '1px solid rgba(16,35,30,0.08)',
                 boxShadow: '0 24px 60px rgba(16,35,30,0.08)',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                gap: 22,
+                justifyContent: 'center',
+                gap: 20,
               }}
             >
-              <div>
-                <div
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 800,
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    color: '#0f766e',
-                    marginBottom: 14,
-                  }}
-                >
-                  Security Snapshot
-                </div>
-                <h2
-                  style={{
-                    fontSize: 'clamp(22px, 3vw, 30px)',
-                    lineHeight: 1.25,
-                    fontWeight: 850,
-                    color: '#132822',
-                    marginBottom: 12,
-                  }}
-                >
-                  インフラ、AI利用、運用統制を一体で設計しています。
-                </h2>
-                <p
-                  style={{
-                    fontSize: 15,
-                    lineHeight: 1.8,
-                    color: '#4d645d',
-                  }}
-                >
-                  情報保護の原則をプロダクト運用に組み込み、データの保管場所、通信経路、利用制御まで一貫して管理しています。
-                </p>
-              </div>
-              <div style={{ display: 'grid', gap: 12 }}>
-                {[
-                  { label: 'Hosting', value: 'AWS / Japan Region' },
-                  { label: 'In Transit', value: 'TLS 1.2 or higher' },
-                  { label: 'At Rest', value: 'AES-256 class encryption' },
-                  { label: 'AI Data Policy', value: 'No unauthorized model training' },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      gap: 16,
-                      padding: '14px 16px',
-                      borderRadius: 16,
-                      background: '#ffffff',
-                      border: '1px solid #d7e6e1',
-                    }}
-                  >
-                    <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6a8178' }}>
-                      {item.label}
-                    </span>
-                    <span style={{ fontSize: 14, fontWeight: 700, color: '#16332b', textAlign: 'right' }}>{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Third-party certification marks. Placed on solid white per SGS rules;
-            official lockup (SGS mark + ISMS-AC symbol) used unaltered; scope shown. */}
-        <section style={{ padding: 'clamp(28px, 5vw, 44px) clamp(16px, 4vw, 28px) 0' }}>
-          <div
-            style={{
-              maxWidth: 1180,
-              margin: '0 auto',
-              background: '#ffffff',
-              borderRadius: 28,
-              border: '1px solid #e2efea',
-              boxShadow: '0 18px 48px rgba(16,35,30,0.06)',
-              padding: 'clamp(24px, 4vw, 40px)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: 'clamp(24px, 4vw, 44px)',
-              alignItems: 'center',
-            }}
-          >
-            <div>
               <div
                 style={{
                   fontSize: 12,
@@ -304,12 +178,11 @@ export default function SecurityPageClient() {
                   letterSpacing: '0.16em',
                   textTransform: 'uppercase',
                   color: '#0f766e',
-                  marginBottom: 18,
                 }}
               >
                 Certifications
               </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center' }}>
                 {CERT_MARKS.map((m) => (
                   <Image
                     key={m.src}
@@ -318,52 +191,22 @@ export default function SecurityPageClient() {
                     width={m.width}
                     height={m.height}
                     unoptimized
-                    style={{ height: 116, width: 'auto', display: 'block' }}
+                    style={{ height: 108, width: 'auto', display: 'block' }}
                   />
                 ))}
               </div>
-              <p
-                style={{
-                  fontSize: 13,
-                  lineHeight: 1.75,
-                  color: '#6a8178',
-                  margin: '18px 0 0',
-                  maxWidth: 520,
-                }}
-              >
-                情報セキュリティマネジメントシステム（ISMS）に対する第三者認証です。SGSジャパン株式会社が審査・認証し、情報マネジメントシステム認定センター（ISMS-AC）が認定しています。
+              <p style={{ fontSize: 13.5, lineHeight: 1.8, color: '#4d645d', margin: 0 }}>
+                {CERT.org}は、{CERT.scope}について {CERT.standards} の認証を取得しています（審査・認証: SGSジャパン株式会社、{CERT.acquired}取得）。
               </p>
-            </div>
-
-            <div style={{ display: 'grid', gap: 10 }}>
-              {CERT_FACTS.map((f) => (
-                <div
-                  key={f.label}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '132px 1fr',
-                    gap: 14,
-                    padding: '12px 14px',
-                    borderRadius: 14,
-                    background: '#f7fbfa',
-                    border: '1px solid #e6f0ec',
-                  }}
-                >
-                  <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.04em', color: '#6a8178', lineHeight: 1.6 }}>
-                    {f.label}
-                  </span>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: '#16332b', lineHeight: 1.6 }}>
-                    {f.value}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
         </section>
 
+        {/* ── Controls teaser. Headline points read at a glance; the full
+            spec lives in the whitepaper below. ─────────────────────── */}
         <section style={{ padding: 'clamp(40px, 6vw, 72px) clamp(16px, 4vw, 28px)' }}>
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-            <div style={{ marginBottom: 28 }}>
+            <div style={{ marginBottom: 24, maxWidth: 760 }}>
               <div
                 style={{
                   fontSize: 12,
@@ -378,73 +221,60 @@ export default function SecurityPageClient() {
               </div>
               <h2
                 style={{
-                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontSize: 'clamp(26px, 4vw, 38px)',
                   fontWeight: 900,
                   letterSpacing: '-0.03em',
                   color: '#132822',
                   marginBottom: 10,
                 }}
               >
-                Meeton AI の情報セキュリティ体制
+                認証を支える情報セキュリティ運用
               </h2>
-              <p style={{ fontSize: 16, lineHeight: 1.8, color: '#567168', maxWidth: 760 }}>
-                対外的な信頼性と実運用上の安全性の両方を担保するため、認証・インフラ・暗号化・AI運用を分離せずに設計しています。
+              <p style={{ fontSize: 16, lineHeight: 1.8, color: '#567168' }}>
+                データの保管場所から通信経路、アクセス制御、AI 運用まで一貫して管理しています。各項目の詳細は情報セキュリティホワイトペーパーで公開しています。
               </p>
             </div>
 
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: 18,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: 14,
               }}
             >
-              {securityFeatures.map((feature, index) => (
-                <article
-                  key={feature.title}
+              {controls.map((c) => (
+                <div
+                  key={c.label}
                   style={{
-                    padding: '24px 22px 22px',
-                    borderRadius: 24,
-                    background: index % 2 === 0 ? '#ffffff' : '#f7fbfa',
+                    padding: '20px',
+                    borderRadius: 20,
+                    background: '#ffffff',
                     border: '1px solid #deebe7',
                     boxShadow: '0 12px 34px rgba(16,35,30,0.05)',
-                    minHeight: 240,
                   }}
                 >
                   <div
                     style={{
-                      display: 'inline-flex',
-                      padding: '7px 12px',
-                      borderRadius: 999,
-                      background: 'rgba(18,163,125,0.1)',
-                      color: '#0f766e',
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: 800,
+                      letterSpacing: '0.1em',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.14em',
-                      marginBottom: 18,
+                      color: '#6a8178',
+                      marginBottom: 10,
                     }}
                   >
-                    {feature.eyebrow}
+                    {c.label}
                   </div>
-                  <h3
-                    style={{
-                      fontSize: 22,
-                      lineHeight: 1.35,
-                      fontWeight: 850,
-                      color: '#17352d',
-                      marginBottom: 12,
-                    }}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.85, color: '#5a7168' }}>{feature.description}</p>
-                </article>
+                  <div style={{ fontSize: 16, fontWeight: 800, lineHeight: 1.5, color: '#16332b' }}>
+                    {c.value}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* ── Whitepaper download — lead magnet; full spec lives here ── */}
         <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(64px, 9vw, 112px)' }}>
           <div
             style={{
