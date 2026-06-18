@@ -31,21 +31,22 @@ const CERT_MARKS = [
 ]
 
 // プロダクト対策 / 組織的・人的対策（Immedio の二軸構成を踏襲）。
-// ※ 以下は一般的な ISMS 運用に基づく想定項目。公開前に自社の実運用と一致するか要確認。
+// カテゴリのみを提示し、詳細はホワイトペーパーに委ねる（ティザー）。
+// ※ 一般的な ISMS 運用に基づく想定項目。公開前に自社の実運用と一致するか要確認。
 const PRODUCT_MEASURES = [
-  { title: '通信・保存データの暗号化', desc: '通信は TLS 1.2 以上、保存データは AES-256 クラスで暗号化。' },
-  { title: 'アクセス制御', desc: 'IP 制限・最小権限の付与・監査ログによる継続的な統制。' },
-  { title: '国内リージョン・高可用性', desc: 'データは日本国内（AWS 東京リージョン）に保管し、冗長構成で運用。' },
-  { title: 'クラウドセキュリティ（ISO/IEC 27017）', desc: 'クラウド固有の管理策に準拠し、責任分界に沿って構成・運用。' },
-  { title: 'セキュアな AI 運用', desc: 'プロンプトインジェクション対策等を適用。顧客データを学習に無断利用しません。' },
+  '通信・保存データの暗号化',
+  'アクセス制御・監査ログ',
+  '国内リージョンでの保管・高可用性',
+  'クラウドセキュリティ（ISO/IEC 27017）',
+  'セキュアな AI 運用',
 ]
 
 const ORG_MEASURES = [
-  { title: '第三者認証の取得・維持', desc: 'ISO/IEC 27001・27017 を取得し、継続的な維持審査を受けています。' },
-  { title: '情報セキュリティ方針の運用', desc: '基本方針を定め、全社で情報資産を管理する体制を整備。' },
-  { title: '従業員へのセキュリティ研修', desc: '全従業員に定期的な教育を実施し、リスク意識を維持。' },
-  { title: '脆弱性診断・管理', desc: '脆弱性を継続的に把握・対応し、リスクを低減。' },
-  { title: 'アクセス権限管理・NDA', desc: '権限管理・NDA 締結・セキュリティチェックシートにも個別対応。' },
+  '第三者認証の取得・維持',
+  '情報セキュリティ方針の運用',
+  '従業員へのセキュリティ研修',
+  '脆弱性診断・管理',
+  'アクセス権限管理・NDA 締結',
 ]
 
 function Check() {
@@ -109,34 +110,11 @@ export default function Security2PageClient() {
                 lineHeight: 1.9,
                 color: '#4d645d',
                 maxWidth: 660,
-                margin: '0 0 24px',
+                margin: 0,
               }}
             >
               ISO/IEC 27001（情報セキュリティ）・ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、DynaMeet はお客様のデータ保護に継続的に取り組んでいます。
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              {CERT_MARKS.map((m) => (
-                <span
-                  key={m.standard}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '9px 15px',
-                    borderRadius: 999,
-                    background: '#ffffff',
-                    border: '1px solid #cfe6dd',
-                    boxShadow: '0 6px 18px rgba(16,35,30,0.05)',
-                    fontSize: 14,
-                    fontWeight: 800,
-                    color: '#16332b',
-                  }}
-                >
-                  <Check />
-                  {m.standard} 認証取得
-                </span>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -184,20 +162,6 @@ export default function Security2PageClient() {
                       <div style={{ fontSize: 19, fontWeight: 850, color: '#16332b', lineHeight: 1.2 }}>{m.standard}</div>
                       <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginTop: 4 }}>{m.kind}</div>
                     </div>
-                  </div>
-                  <div style={{ borderTop: '1px solid #eef4f1', marginTop: 20, paddingTop: 18 }}>
-                    <div
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 800,
-                        letterSpacing: '0.06em',
-                        color: '#6a8178',
-                        marginBottom: 6,
-                      }}
-                    >
-                      認証範囲
-                    </div>
-                    <p style={{ fontSize: 13.5, lineHeight: 1.75, color: '#4d645d', margin: 0, whiteSpace: 'pre-line' }}>{m.scope}</p>
                   </div>
                 </div>
               ))}
@@ -312,7 +276,7 @@ function MeasureCard({
   eyebrow: string
   title: string
   sub: string
-  items: { title: string; desc: string }[]
+  items: string[]
 }) {
   return (
     <div
@@ -327,14 +291,11 @@ function MeasureCard({
       <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: accent, marginBottom: 10 }}>{eyebrow}</div>
       <h3 style={{ fontSize: 'clamp(20px, 2.4vw, 24px)', fontWeight: 850, color: '#15332b', margin: '0 0 6px' }}>{title}</h3>
       <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6a8178', margin: '0 0 20px' }}>{sub}</p>
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 16 }}>
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 14 }}>
         {items.map((it) => (
-          <li key={it.title} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+          <li key={it} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
             <Check />
-            <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: 15, fontWeight: 800, color: '#16332b', marginBottom: 2 }}>{it.title}</div>
-              <div style={{ fontSize: 13.5, lineHeight: 1.7, color: '#5a7168' }}>{it.desc}</div>
-            </div>
+            <span style={{ fontSize: 15, fontWeight: 700, color: '#16332b', lineHeight: 1.5 }}>{it}</span>
           </li>
         ))}
       </ul>
