@@ -9,10 +9,10 @@ import Nav from './Nav'
 // SGS「システム認証マーク使用規程」/ ISMS-AC 認定シンボル使用規程:
 //   - 画像の改変・比率変更・単色化・トリミング不可（unoptimized で原本配信）
 //   - 認定シンボル単体使用不可（SGS 認証マーク一体の公式ロックアップを使用）
-//   - 白系の単色背景に配置（写真・グラデーション背景不可）
-//   - 認証範囲（登録範囲）を併記する
+//   - 白系の単色背景に配置（写真・グラデーション背景不可）→ 濃色ヒーロー上では
+//     各マークを白チップで台座し、アートワークが白地に乗るようにする
 // 規格名・SGS・ISMS-AC・認定番号(ISR021)はマーク画像内に含まれるため、
-// 本文では重複表記を避け、画像にない情報（範囲・取得時期）のみ簡潔に補う。
+// 本文では重複表記を避け、画像にない情報（審査機関・取得時期）のみ簡潔に補う。
 const CERT_MARKS = [
   {
     src: '/certifications/sgs-iso-27001-isms-ac.jpg',
@@ -59,9 +59,9 @@ export default function SecurityPageClient() {
           color: '#10231e',
         }}
       >
-        {/* ── Hero: the certification is the centerpiece ──────────────
-            Definitive claim on the left, official SGS marks on the right
-            (white background per SGS rules). One cohesive cert moment. */}
+        {/* ── Hero: certification is the centerpiece. One card — the claim
+            and the official SGS marks together. Each mark sits on its own
+            white chip so the artwork stays on solid white (SGS rule). ── */}
         <section
           style={{
             position: 'relative',
@@ -98,29 +98,22 @@ export default function SecurityPageClient() {
               position: 'relative',
               maxWidth: 1180,
               margin: '0 auto',
+              background: 'linear-gradient(135deg, rgba(9,40,34,0.96) 0%, rgba(10,54,48,0.94) 46%, rgba(7,87,103,0.92) 100%)',
+              borderRadius: 28,
+              padding: 'clamp(28px, 5vw, 52px)',
+              color: '#f4fffc',
+              boxShadow: '0 28px 80px rgba(16,35,30,0.16)',
+              border: '1px solid rgba(255,255,255,0.08)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: 'clamp(24px, 4vw, 40px)',
-              alignItems: 'stretch',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 'clamp(28px, 4vw, 48px)',
+              alignItems: 'center',
             }}
           >
-            <div
-              style={{
-                background: 'linear-gradient(135deg, rgba(9,40,34,0.96) 0%, rgba(10,54,48,0.94) 46%, rgba(7,87,103,0.92) 100%)',
-                borderRadius: 28,
-                padding: 'clamp(28px, 5vw, 52px)',
-                color: '#f4fffc',
-                boxShadow: '0 28px 80px rgba(16,35,30,0.16)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              }}
-            >
+            <div>
               <div
                 style={{
                   display: 'inline-flex',
-                  alignSelf: 'flex-start',
                   alignItems: 'center',
                   gap: 10,
                   padding: '8px 14px',
@@ -152,7 +145,7 @@ export default function SecurityPageClient() {
                   fontSize: 'clamp(16px, 2vw, 20px)',
                   lineHeight: 1.85,
                   color: 'rgba(244,255,252,0.84)',
-                  maxWidth: 640,
+                  maxWidth: 560,
                   margin: 0,
                 }}
               >
@@ -160,48 +153,34 @@ export default function SecurityPageClient() {
               </p>
             </div>
 
-            <div
-              style={{
-                background: '#ffffff',
-                borderRadius: 28,
-                padding: 'clamp(26px, 4vw, 38px)',
-                border: '1px solid rgba(16,35,30,0.08)',
-                boxShadow: '0 24px 60px rgba(16,35,30,0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                gap: 20,
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 800,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: '#0f766e',
-                }}
-              >
-                Certifications
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
                 {CERT_MARKS.map((m) => (
-                  <Image
+                  <div
                     key={m.src}
-                    src={m.src}
-                    alt={m.alt}
-                    width={m.width}
-                    height={m.height}
-                    unoptimized
-                    style={{ height: 108, width: 'auto', display: 'block' }}
-                  />
+                    style={{
+                      background: '#ffffff',
+                      borderRadius: 14,
+                      padding: 12,
+                      boxShadow: '0 12px 32px rgba(8,21,18,0.22)',
+                    }}
+                  >
+                    <Image
+                      src={m.src}
+                      alt={m.alt}
+                      width={m.width}
+                      height={m.height}
+                      unoptimized
+                      style={{ height: 92, width: 'auto', display: 'block' }}
+                    />
+                  </div>
                 ))}
               </div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.8, color: '#4d645d', margin: 0 }}>
-                {CERT.org}は、情報セキュリティマネジメントシステムの国際規格 ISO/IEC 27001、およびクラウドサービスのセキュリティ規格 ISO/IEC 27017 の認証を取得しています（審査・認証: SGSジャパン株式会社、{CERT.acquired}取得）。
+              <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(244,255,252,0.72)', margin: 0 }}>
+                審査・認証: SGSジャパン株式会社（{CERT.acquired}取得）
               </p>
               {CERT.scope ? (
-                <p style={{ fontSize: 12.5, lineHeight: 1.75, color: '#6a8178', margin: 0 }}>
+                <p style={{ fontSize: 12.5, lineHeight: 1.7, color: 'rgba(244,255,252,0.6)', margin: 0 }}>
                   認証範囲: {CERT.scope}
                 </p>
               ) : null}
