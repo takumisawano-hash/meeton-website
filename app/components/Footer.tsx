@@ -92,7 +92,7 @@ const DISCOVER = [
 
 const LEGAL = [
   { href: "/about/", label: "会社概要" },
-  { href: "/security/", label: "セキュリティ" },
+  { href: "/security/", label: "情報セキュリティ" },
   { href: "/integrations/", label: "連携一覧" },
   { href: "/careers/", label: "採用情報" },
   { href: "/contact/", label: "お問い合わせ" },

@@ -54,6 +54,8 @@ const nextConfig = {
       { pathname: '/team/**' },
       // Allow public/event/* (MarkeZine etc. event banners)
       { pathname: '/event/**' },
+      // Allow public/certifications/* (SGS ISO/IEC 27001 & 27017 marks)
+      { pathname: '/certifications/**' },
     ],
   },
   async redirects() {

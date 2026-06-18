@@ -3,7 +3,7 @@ import SecurityPageClient from '@/app/components/SecurityPageClient'
 
 export const metadata: Metadata = {
   title: '情報セキュリティ対策について',
-  description: 'Meeton AIの情報セキュリティ体制、ISMS認証取得に向けた取り組み、インフラ設計、暗号化方針をまとめた情報セキュリティページです。',
+  description: 'DynaMeet は ISO/IEC 27001（情報セキュリティ）と ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、プロダクト対策と組織的・人的対策の両輪で情報セキュリティを徹底しています。',
   alternates: {
     canonical: '/security/',
     languages: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '情報セキュリティ対策について｜Meeton AI',
-    description: 'Meeton AIの情報セキュリティ体制、ISMS認証取得に向けた取り組み、インフラ設計、暗号化方針をご紹介します。',
+    description: 'ISO/IEC 27001・27017 の第三者認証のもと、プロダクト対策と組織的・人的対策の両輪で情報セキュリティを徹底しています。',
     url: 'https://dynameet.ai/security/',
     type: 'website',
     siteName: 'Meeton AI',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '情報セキュリティ対策について｜Meeton AI',
-    description: 'Meeton AIの情報セキュリティ体制、ISMS認証取得に向けた取り組み、インフラ設計、暗号化方針をご紹介します。',
+    description: 'ISO/IEC 27001・27017 の第三者認証のもと、プロダクト対策と組織的・人的対策の両輪で情報セキュリティを徹底しています。',
   },
 }
 
