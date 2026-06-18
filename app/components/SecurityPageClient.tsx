@@ -16,7 +16,8 @@ const CERT_MARKS = [
     width: 1261,
     height: 736,
     standard: 'ISO/IEC 27001:2022',
-    scope: '', // TODO(cert): 27001 証明書の登録範囲を verbatim で
+    // 証明書記載の登録範囲（verbatim）
+    scope: '法人向け業務支援システムの開発・運用・保守',
   },
   {
     src: '/certifications/sgs-iso-27017-isms-ac.jpg',
@@ -24,7 +25,9 @@ const CERT_MARKS = [
     width: 605,
     height: 369,
     standard: 'ISO/IEC 27017:2015',
-    scope: '', // TODO(cert): 27017 証明書の登録範囲を verbatim で
+    // 証明書記載の登録範囲（verbatim、CSP / CSC の 2 区分）
+    scope:
+      'クラウドサービスプロバイダ:\n業務支援プラットフォーム「DynaMeet Platform」(Meeton ai 等を含む)の提供\n\nクラウドサービスカスタマ:\n業務支援プラットフォーム「DynaMeet Platform」(Meeton ai 等を含む)の提供における AWS の利用',
   },
 ]
 
@@ -233,16 +236,23 @@ export default function SecurityPageClient() {
                       <div style={{ fontSize: 14, fontWeight: 800, color: '#16332b', marginBottom: 4 }}>
                         {m.standard}
                       </div>
-                      <p
-                        style={{
-                          fontSize: 12.5,
-                          lineHeight: 1.6,
-                          color: m.scope ? '#4d645d' : '#9aa8a2',
-                          margin: 0,
-                        }}
-                      >
-                        認証範囲: {m.scope || '〔証明書記載の登録範囲をそのまま記載〕'}
-                      </p>
+                      <div style={{ fontSize: 12.5, lineHeight: 1.65, color: '#4d645d' }}>
+                        <span
+                          style={{
+                            display: 'block',
+                            fontSize: 11,
+                            fontWeight: 800,
+                            letterSpacing: '0.04em',
+                            color: '#6a8178',
+                            marginBottom: 3,
+                          }}
+                        >
+                          認証範囲
+                        </span>
+                        <span style={{ whiteSpace: 'pre-line' }}>
+                          {m.scope || '〔証明書記載の登録範囲をそのまま記載〕'}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))}
