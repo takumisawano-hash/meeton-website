@@ -31,10 +31,12 @@ const CERT_MARKS = [
 // ▼ 公開前に「証明書の記載」と一致しているか確認してください（要確定）
 const CERT = {
   org: 'DynaMeet株式会社',
-  // TODO(cert): 証明書記載の登録範囲（認証範囲）に一致させてください。
-  scope: 'クラウドサービス「Meeton ai」の企画・開発・運用および提供',
-  standards: 'ISO/IEC 27001:2022・ISO/IEC 27017:2015',
   acquired: '2026年6月', // TODO(cert): 証明書の発行日に合わせる
+  // 認証範囲（登録範囲）は任意。規格名・SGS・ISMS-AC・認定番号はマーク画像に
+  // 表示されるため必須ではなく、最小構成では省略する（同じ SGS 認証の immedio も
+  // 範囲非掲載）。掲載する場合は、証明書の「登録範囲／適用範囲」を一字一句
+  // そのまま（verbatim）貼り付けること。言い換え・要約は不可。空文字なら非表示。
+  scope: '', // TODO(cert): 載せるなら証明書の登録範囲を verbatim で（空＝非表示）
 }
 
 // 詳細はホワイトペーパーに委ね、ページ上では要点のみを提示する（ティザー）。
@@ -196,8 +198,13 @@ export default function SecurityPageClient() {
                 ))}
               </div>
               <p style={{ fontSize: 13.5, lineHeight: 1.8, color: '#4d645d', margin: 0 }}>
-                {CERT.org}は、{CERT.scope}について {CERT.standards} の認証を取得しています（審査・認証: SGSジャパン株式会社、{CERT.acquired}取得）。
+                {CERT.org}は、情報セキュリティマネジメントシステムの国際規格 ISO/IEC 27001、およびクラウドサービスのセキュリティ規格 ISO/IEC 27017 の認証を取得しています（審査・認証: SGSジャパン株式会社、{CERT.acquired}取得）。
               </p>
+              {CERT.scope ? (
+                <p style={{ fontSize: 12.5, lineHeight: 1.75, color: '#6a8178', margin: 0 }}>
+                  認証範囲: {CERT.scope}
+                </p>
+              ) : null}
             </div>
           </div>
         </section>
