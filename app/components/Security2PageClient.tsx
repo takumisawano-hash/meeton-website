@@ -93,28 +93,26 @@ export default function Security2PageClient() {
             </div>
             <h1
               style={{
-                fontSize: 'clamp(28px, 4.6vw, 46px)',
-                lineHeight: 1.28,
+                fontSize: 'clamp(30px, 5vw, 50px)',
+                lineHeight: 1.22,
                 fontWeight: 900,
                 letterSpacing: '-0.03em',
                 color: '#0e231d',
-                margin: '0 0 20px',
+                margin: '0 0 18px',
               }}
             >
-              「プロダクト対策」と「組織的・人的対策」の両輪で、
-              <span style={{ color: '#12a37d' }}>情報セキュリティ</span>
-              を徹底しています。
+              プロダクトと組織の<span style={{ color: '#12a37d' }}>両輪</span>で、お客様のデータを守る。
             </h1>
             <p
               style={{
                 fontSize: 'clamp(15px, 1.7vw, 18px)',
                 lineHeight: 1.9,
                 color: '#4d645d',
-                maxWidth: 720,
+                maxWidth: 660,
                 margin: '0 0 24px',
               }}
             >
-              DynaMeet は、ISO/IEC 27001（情報セキュリティ）と ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、プロダクトと組織の両面からお客様のデータを保護します。
+              ISO/IEC 27001（情報セキュリティ）・ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、DynaMeet はお客様のデータ保護に継続的に取り組んでいます。
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
               {CERT_MARKS.map((m) => (
@@ -153,9 +151,10 @@ export default function Security2PageClient() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
                 gap: 18,
                 marginTop: 24,
+                alignItems: 'start',
               }}
             >
               {CERT_MARKS.map((m) => (
@@ -165,36 +164,41 @@ export default function Security2PageClient() {
                     background: '#ffffff',
                     border: '1px solid #e2efea',
                     borderRadius: 22,
-                    padding: 'clamp(20px, 2.6vw, 28px)',
+                    padding: 'clamp(22px, 2.6vw, 30px)',
                     boxShadow: '0 14px 40px rgba(16,35,30,0.05)',
                   }}
                 >
-                  <div
-                    style={{
-                      background: '#ffffff',
-                      border: '1px solid #eef4f1',
-                      borderRadius: 12,
-                      padding: 12,
-                      display: 'inline-flex',
-                      marginBottom: 16,
-                    }}
-                  >
-                    <Image src={m.src} alt={m.alt} width={m.width} height={m.height} unoptimized style={{ height: 74, width: 'auto', display: 'block' }} />
+                  <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
+                    <div
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid #eef4f1',
+                        borderRadius: 14,
+                        padding: 12,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Image src={m.src} alt={m.alt} width={m.width} height={m.height} unoptimized style={{ height: 92, width: 'auto', display: 'block' }} />
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontSize: 19, fontWeight: 850, color: '#16332b', lineHeight: 1.2 }}>{m.standard}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginTop: 4 }}>{m.kind}</div>
+                    </div>
                   </div>
-                  <div style={{ fontSize: 17, fontWeight: 850, color: '#16332b' }}>{m.standard}</div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginBottom: 14 }}>{m.kind}</div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 800,
-                      letterSpacing: '0.06em',
-                      color: '#6a8178',
-                      marginBottom: 4,
-                    }}
-                  >
-                    認証範囲
+                  <div style={{ borderTop: '1px solid #eef4f1', marginTop: 20, paddingTop: 18 }}>
+                    <div
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 800,
+                        letterSpacing: '0.06em',
+                        color: '#6a8178',
+                        marginBottom: 6,
+                      }}
+                    >
+                      認証範囲
+                    </div>
+                    <p style={{ fontSize: 13.5, lineHeight: 1.75, color: '#4d645d', margin: 0, whiteSpace: 'pre-line' }}>{m.scope}</p>
                   </div>
-                  <p style={{ fontSize: 13, lineHeight: 1.7, color: '#4d645d', margin: 0, whiteSpace: 'pre-line' }}>{m.scope}</p>
                 </div>
               ))}
             </div>
