@@ -79,7 +79,7 @@ export default function Security2PageClient() {
             padding: 'clamp(40px, 7vw, 84px) clamp(16px, 4vw, 28px) clamp(36px, 5vw, 56px)',
           }}
         >
-          <div style={{ ...SHELL, maxWidth: 880 }}>
+          <div style={SHELL}>
             <div
               style={{
                 fontSize: 12,
@@ -99,6 +99,7 @@ export default function Security2PageClient() {
                 fontWeight: 900,
                 letterSpacing: '-0.03em',
                 color: '#0e231d',
+                maxWidth: 820,
                 margin: '0 0 18px',
               }}
             >
