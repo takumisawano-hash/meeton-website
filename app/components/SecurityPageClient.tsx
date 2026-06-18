@@ -1,14 +1,13 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import Footer from './Footer'
 import Nav from './Nav'
 
-// ── 第三者認証（ISO/IEC 27001・27017）マーク + 認証範囲（per cert）─────
+// ── 第三者認証（ISO/IEC 27001・27017）─────────────────────────────
 // SGS 公式マークを unoptimized で原本配信（改変・比率変更・トリミング不可）。
-// 認定シンボル単体使用不可（SGS 認証マーク一体のロックアップを使用）。白地に配置。
-// scope は証明書の「登録範囲／適用範囲」を一字一句（verbatim）で記載すること。
-// 空の場合はプレースホルダを表示（公開前に必ず証明書の記載で差し替える）。
+// 白地に配置。scope は証明書記載の登録範囲（verbatim）。
 const CERT_MARKS = [
   {
     src: '/certifications/sgs-iso-27001-isms-ac.jpg',
@@ -16,7 +15,7 @@ const CERT_MARKS = [
     width: 1261,
     height: 736,
     standard: 'ISO/IEC 27001:2022',
-    // 証明書記載の登録範囲（verbatim）
+    kind: '情報セキュリティ',
     scope: '法人向け業務支援システムの開発・運用・保守',
   },
   {
@@ -25,32 +24,41 @@ const CERT_MARKS = [
     width: 605,
     height: 369,
     standard: 'ISO/IEC 27017:2015',
-    // 証明書記載の登録範囲（verbatim、CSP / CSC の 2 区分）
+    kind: 'クラウドセキュリティ',
     scope:
       'クラウドサービスプロバイダ:\n業務支援プラットフォーム「DynaMeet Platform」(Meeton ai 等を含む)の提供\n\nクラウドサービスカスタマ:\n業務支援プラットフォーム「DynaMeet Platform」(Meeton ai 等を含む)の提供における AWS の利用',
   },
 ]
 
-const securityFeatures = [
-  {
-    eyebrow: 'Infrastructure',
-    title: '堅牢なインフラ',
-    description:
-      'AWSのセキュアな基盤を利用し、データはすべて日本国内のデータセンターに保管されます。',
-  },
-  {
-    eyebrow: 'Encryption',
-    title: '通信とデータの暗号化',
-    description:
-      'すべての通信はTLS 1.2以上で、保存データはAES-256等により強力に暗号化されています。',
-  },
-  {
-    eyebrow: 'AI Governance',
-    title: 'セキュアなAI運用',
-    description:
-      'LLMの利用において、プロンプトインジェクション対策等のシステムレベルの保護を適用し、顧客データがAIの学習に無断で利用されることはありません。',
-  },
+// プロダクト対策 / 組織的・人的対策（Immedio の二軸構成を踏襲）。
+// カテゴリのみを提示し、詳細はホワイトペーパーに委ねる（ティザー）。
+// ※ 一般的な ISMS 運用に基づく想定項目。公開前に自社の実運用と一致するか要確認。
+const PRODUCT_MEASURES = [
+  '通信・保存データの暗号化',
+  'アクセス制御・監査ログ',
+  '国内リージョンでの保管・高可用性',
+  'クラウドセキュリティ（ISO/IEC 27017）',
+  'セキュアな AI 運用',
 ]
+
+const ORG_MEASURES = [
+  '第三者認証の取得・維持',
+  '情報セキュリティ方針の運用',
+  '従業員へのセキュリティ研修',
+  '脆弱性診断・管理',
+  'アクセス権限管理・NDA 締結',
+]
+
+function Check() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }}>
+      <circle cx="12" cy="12" r="11" fill="#12a37d" />
+      <path d="M7 12.4l3.1 3.1L17 8.8" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+const SHELL = { maxWidth: 1120, margin: '0 auto' } as const
 
 export default function SecurityPageClient() {
   return (
@@ -60,417 +68,243 @@ export default function SecurityPageClient() {
         style={{
           paddingTop: 'clamp(72px, 11vw, 96px)',
           minHeight: '100vh',
-          background: 'linear-gradient(180deg, #f3f8f7 0%, #fbfdfc 24%, #ffffff 100%)',
-          color: '#10231e',
+          background: '#ffffff',
+          color: '#102b24',
         }}
       >
+        {/* ── Hero ─────────────────────────────────────────────────── */}
         <section
           style={{
-            position: 'relative',
-            overflow: 'hidden',
-            padding: 'clamp(28px, 5vw, 48px) clamp(16px, 4vw, 28px) 0',
+            background: 'linear-gradient(180deg, #eef7f4 0%, #f7fcfa 60%, #ffffff 100%)',
+            padding: 'clamp(40px, 7vw, 84px) clamp(16px, 4vw, 28px) clamp(20px, 3vw, 32px)',
           }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              inset: 'auto auto 10% 8%',
-              width: 'min(44vw, 420px)',
-              height: 'min(44vw, 420px)',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(18,163,125,0.16) 0%, rgba(18,163,125,0) 72%)',
-              pointerEvents: 'none',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              top: 24,
-              right: '6%',
-              width: 'min(38vw, 320px)',
-              height: 'min(38vw, 320px)',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(8,145,178,0.14) 0%, rgba(8,145,178,0) 70%)',
-              pointerEvents: 'none',
-            }}
-          />
-
-          <div
-            style={{
-              position: 'relative',
-              maxWidth: 1180,
-              margin: '0 auto',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: 'clamp(24px, 4vw, 40px)',
-              alignItems: 'stretch',
-            }}
-          >
+          <div style={SHELL}>
             <div
               style={{
-                background: 'linear-gradient(135deg, rgba(9,40,34,0.96) 0%, rgba(10,54,48,0.94) 46%, rgba(7,87,103,0.92) 100%)',
-                borderRadius: 28,
-                padding: 'clamp(28px, 5vw, 52px)',
-                color: '#f4fffc',
-                boxShadow: '0 28px 80px rgba(16,35,30,0.16)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: '#0f766e',
+                marginBottom: 18,
               }}
             >
-              <h1
-                style={{
-                  fontSize: 'clamp(32px, 6vw, 56px)',
-                  lineHeight: 1.08,
-                  fontWeight: 900,
-                  marginBottom: 18,
-                  letterSpacing: '-0.04em',
-                }}
-              >
-                情報セキュリティ対策について
-              </h1>
-              <p
-                style={{
-                  fontSize: 'clamp(16px, 2vw, 20px)',
-                  lineHeight: 1.8,
-                  color: 'rgba(244,255,252,0.84)',
-                  maxWidth: 700,
-                  margin: 0,
-                }}
-              >
-                DynaMeetはお客様のデータを安全に保護するため、国際水準の情報セキュリティ体制を構築しています。
-              </p>
+              Information Security
             </div>
-
-            {/* Certifications — placed where the snapshot was; white card keeps
-                the marks on solid white (SGS rule). Scope shown per cert. */}
-            <div
+            <h1
               style={{
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(245,252,250,0.98) 100%)',
-                borderRadius: 28,
-                padding: 'clamp(24px, 4vw, 34px)',
-                border: '1px solid rgba(16,35,30,0.08)',
-                boxShadow: '0 24px 60px rgba(16,35,30,0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 20,
+                fontSize: 'clamp(24px, 5vw, 50px)',
+                lineHeight: 1.25,
+                fontWeight: 900,
+                letterSpacing: '-0.03em',
+                color: '#0e231d',
+                maxWidth: 760,
+                margin: '0 0 18px',
               }}
             >
-              <div>
-                <div
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 800,
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    color: '#0f766e',
-                    marginBottom: 12,
-                  }}
-                >
-                  Certifications
-                </div>
-                <h2
-                  style={{
-                    fontSize: 'clamp(20px, 2.6vw, 26px)',
-                    lineHeight: 1.3,
-                    fontWeight: 850,
-                    color: '#132822',
-                    margin: 0,
-                  }}
-                >
-                  ISO/IEC 27001・27017 認証取得
-                </h2>
-              </div>
-
-              <div style={{ display: 'grid', gap: 16 }}>
-                {CERT_MARKS.map((m, i) => (
-                  <div
-                    key={m.src}
-                    style={{
-                      display: 'flex',
-                      gap: 14,
-                      alignItems: 'flex-start',
-                      paddingTop: i === 0 ? 0 : 16,
-                      borderTop: i === 0 ? 'none' : '1px solid #e2efea',
-                    }}
-                  >
-                    <div
-                      style={{
-                        background: '#ffffff',
-                        border: '1px solid #e6f0ec',
-                        borderRadius: 10,
-                        padding: 8,
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Image
-                        src={m.src}
-                        alt={m.alt}
-                        width={m.width}
-                        height={m.height}
-                        unoptimized
-                        style={{ height: 58, width: 'auto', display: 'block' }}
-                      />
-                    </div>
-                    <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: 14, fontWeight: 800, color: '#16332b', marginBottom: 4 }}>
-                        {m.standard}
-                      </div>
-                      <div style={{ fontSize: 12.5, lineHeight: 1.65, color: '#4d645d' }}>
-                        <span
-                          style={{
-                            display: 'block',
-                            fontSize: 11,
-                            fontWeight: 800,
-                            letterSpacing: '0.04em',
-                            color: '#6a8178',
-                            marginBottom: 3,
-                          }}
-                        >
-                          認証範囲
-                        </span>
-                        <span style={{ whiteSpace: 'pre-line' }}>
-                          {m.scope || '〔証明書記載の登録範囲をそのまま記載〕'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <p style={{ fontSize: 12, lineHeight: 1.7, color: '#6a8178', margin: 0 }}>
-                審査・認証: SGSジャパン株式会社 ／ 認定: 情報マネジメントシステム認定センター（ISMS-AC, ISR021） ／ 2026年6月取得
-              </p>
-            </div>
+              <span style={{ display: 'inline-block' }}>
+                プロダクトと組織の<span style={{ color: '#12a37d' }}>両輪</span>で、
+              </span>
+              <wbr />
+              <span style={{ display: 'inline-block' }}>お客様のデータを守る。</span>
+            </h1>
+            <p
+              style={{
+                fontSize: 'clamp(15px, 1.7vw, 18px)',
+                lineHeight: 1.9,
+                color: '#4d645d',
+                maxWidth: 600,
+                textWrap: 'pretty',
+                margin: 0,
+              }}
+            >
+              ISO/IEC 27001（情報セキュリティ）・ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、DynaMeet はお客様のデータ保護に継続的に取り組んでいます。
+            </p>
           </div>
         </section>
 
+        {/* ── Certifications (marks + verbatim scope per cert) ──────── */}
         <section style={{ padding: 'clamp(40px, 6vw, 72px) clamp(16px, 4vw, 28px)' }}>
-          <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <div style={SHELL}>
+            <SectionHead
+              eyebrow="Certifications"
+              title="第三者認証 — ISO/IEC 27001・27017"
+              lead="基本となる情報セキュリティ（ISO/IEC 27001）に加え、クラウドサービス固有の管理策（ISO/IEC 27017）まで第三者認証を取得しています。"
+            />
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
                 gap: 18,
+                marginTop: 24,
+                alignItems: 'start',
               }}
             >
-              {securityFeatures.map((feature, index) => (
-                <article
-                  key={feature.title}
+              {CERT_MARKS.map((m) => (
+                <div
+                  key={m.src}
                   style={{
-                    padding: '24px 22px 22px',
-                    borderRadius: 24,
-                    background: index % 2 === 0 ? '#ffffff' : '#f7fbfa',
-                    border: '1px solid #deebe7',
-                    boxShadow: '0 12px 34px rgba(16,35,30,0.05)',
-                    minHeight: 240,
+                    background: '#ffffff',
+                    border: '1px solid #e2efea',
+                    borderRadius: 22,
+                    padding: 'clamp(22px, 2.6vw, 30px)',
+                    boxShadow: '0 14px 40px rgba(16,35,30,0.05)',
                   }}
                 >
-                  <div
-                    style={{
-                      display: 'inline-flex',
-                      padding: '7px 12px',
-                      borderRadius: 999,
-                      background: 'rgba(18,163,125,0.1)',
-                      color: '#0f766e',
-                      fontSize: 11,
-                      fontWeight: 800,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.14em',
-                      marginBottom: 18,
-                    }}
-                  >
-                    {feature.eyebrow}
+                  <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
+                    <div
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid #eef4f1',
+                        borderRadius: 14,
+                        padding: 12,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Image src={m.src} alt={m.alt} width={m.width} height={m.height} unoptimized style={{ height: 92, width: 'auto', display: 'block' }} />
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontSize: 19, fontWeight: 850, color: '#16332b', lineHeight: 1.2 }}>{m.standard}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginTop: 4 }}>{m.kind}</div>
+                    </div>
                   </div>
-                  <h3
-                    style={{
-                      fontSize: 22,
-                      lineHeight: 1.35,
-                      fontWeight: 850,
-                      color: '#17352d',
-                      marginBottom: 12,
-                    }}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.85, color: '#5a7168' }}>{feature.description}</p>
-                </article>
+                </div>
               ))}
+            </div>
+            <p style={{ fontSize: 13, lineHeight: 1.7, color: '#6a8178', margin: '18px 0 0' }}>
+              審査・認証: SGSジャパン株式会社 ／ 認定: 情報マネジメントシステム認定センター（ISMS-AC, ISR021） ／ 2026年6月取得
+            </p>
+          </div>
+        </section>
+
+        {/* ── Dual axis: product + organizational/human ────────────── */}
+        <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(40px, 6vw, 72px)' }}>
+          <div style={SHELL}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+              <MeasureCard accent="#12a37d" eyebrow="Product Security" title="プロダクトセキュリティ対策" sub="サービスとインフラの技術的な対策。" items={PRODUCT_MEASURES} />
+              <MeasureCard accent="#0891b2" eyebrow="Organizational & Human" title="組織的・人的セキュリティ対策" sub="体制と人による継続的な対策。" items={ORG_MEASURES} />
             </div>
           </div>
         </section>
 
-        <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(64px, 9vw, 112px)' }}>
+        {/* ── CTA ──────────────────────────────────────────────────── */}
+        <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(56px, 9vw, 104px)' }}>
           <div
             style={{
-              maxWidth: 1180,
-              margin: '0 auto',
-              background: 'linear-gradient(180deg, #0f201c 0%, #112824 100%)',
-              borderRadius: 30,
-              padding: 'clamp(24px, 5vw, 42px)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: 'clamp(24px, 4vw, 38px)',
+              ...SHELL,
+              background: 'linear-gradient(120deg, #0f201c 0%, #112824 58%, #0c3038 100%)',
+              borderRadius: 28,
+              padding: 'clamp(28px, 4vw, 48px)',
               color: '#ecfaf6',
-              boxShadow: '0 32px 90px rgba(8, 21, 18, 0.24)',
+              boxShadow: '0 28px 80px rgba(8,21,18,0.22)',
+              textAlign: 'center',
             }}
           >
-            <div>
-              <div
+            <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 900, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
+              さらに詳しい情報セキュリティ仕様を公開しています
+            </h2>
+            <p style={{ fontSize: 15, lineHeight: 1.85, color: 'rgba(236,250,246,0.8)', maxWidth: 620, margin: '0 auto 26px' }}>
+              インフラ構成・データ保護方針・バックアップ体制などをまとめたホワイトペーパーをご用意しています。導入前のセキュリティ確認にもご活用ください。
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
+              <button
+                onClick={() =>
+                  (window as any).Meeton?.openDownloadCenter({
+                    docId: '54a7d40d-e99d-40f2-bed2-80d64a400093',
+                    pageNumber: 1,
+                  })
+                }
                 style={{
-                  fontSize: 12,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '15px 28px',
+                  borderRadius: 999,
+                  background: '#12a37d',
+                  color: '#ffffff',
+                  fontSize: 15,
                   fontWeight: 800,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: '#7fe4c4',
-                  marginBottom: 12,
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 14px 32px rgba(18,163,125,0.32)',
                 }}
               >
-                Whitepaper Download
-              </div>
-              <h2
+                ホワイトペーパーを見る
+              </button>
+              <Link
+                href="/contact/"
                 style={{
-                  fontSize: 'clamp(28px, 4vw, 42px)',
-                  lineHeight: 1.15,
-                  fontWeight: 900,
-                  letterSpacing: '-0.03em',
-                  marginBottom: 16,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '15px 28px',
+                  borderRadius: 999,
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.18)',
+                  color: '#ecfaf6',
+                  fontSize: 15,
+                  fontWeight: 800,
+                  textDecoration: 'none',
                 }}
               >
-                情報セキュリティホワイトペーパー
-              </h2>
-              <p
-                style={{
-                  fontSize: 16,
-                  lineHeight: 1.9,
-                  color: 'rgba(236,250,246,0.82)',
-                  marginBottom: 26,
-                  maxWidth: 560,
-                }}
-              >
-                インフラ構成、データ保護方針、バックアップ体制など、より詳細な情報セキュリティ仕様をまとめたホワイトペーパーをご用意しています。
-              </p>
-              <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
-                {[
-                  'インフラ構成とデータ保管方針',
-                  '暗号化・アクセス制御・運用統制の考え方',
-                  'バックアップ体制と継続運用の前提',
-                ].map((item) => (
-                  <div
-                    key={item}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 12,
-                      padding: '14px 16px',
-                      borderRadius: 16,
-                      background: 'rgba(255,255,255,0.06)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 10,
-                        height: 10,
-                        borderRadius: '50%',
-                        background: '#7fe4c4',
-                        flexShrink: 0,
-                      }}
-                    />
-                    <span style={{ fontSize: 15, lineHeight: 1.7, color: '#ecfaf6' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              style={{
-                background: '#ffffff',
-                borderRadius: 24,
-                padding: 'clamp(22px, 4vw, 30px)',
-                color: '#17352d',
-              }}
-            >
-              <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontSize: 24, fontWeight: 850, marginBottom: 8 }}>ホワイトペーパーをご確認ください</h3>
-                <p style={{ fontSize: 14, lineHeight: 1.75, color: '#5b7169' }}>
-                  より詳細な情報セキュリティ仕様は、専用のホワイトペーパーから確認できます。以下のリンクからダウンロードページへ進んでください。
-                </p>
-              </div>
-              <div
-                style={{
-                  borderRadius: 20,
-                  background: 'linear-gradient(180deg, #f1fbf7 0%, #ffffff 100%)',
-                  border: '1px solid #d8ebe4',
-                  padding: '28px 22px',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'grid',
-                    gap: 12,
-                    marginBottom: 18,
-                  }}
-                >
-                  {[
-                    'インフラ構成とデータ保護方針を収録',
-                    'バックアップ体制と運用統制の概要を掲載',
-                    '専用ダウンロードページからすぐ確認可能',
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 12,
-                        padding: '12px 14px',
-                        borderRadius: 14,
-                        background: '#ffffff',
-                        border: '1px solid #e2efea',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 9,
-                          height: 9,
-                          borderRadius: '50%',
-                          background: '#12a37d',
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span style={{ fontSize: 14, lineHeight: 1.7, color: '#365149' }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
-                <button
-                  onClick={() =>
-                    (window as any).Meeton?.openDownloadCenter({
-                      docId: '54a7d40d-e99d-40f2-bed2-80d64a400093',
-                      pageNumber: 1,
-                    })
-                  }
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '13px 20px',
-                    borderRadius: 999,
-                    background: '#132822',
-                    color: '#fff',
-                    fontWeight: 700,
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  ホワイトペーパーを見る
-                </button>
-              </div>
+                セキュリティについて問い合わせる
+              </Link>
             </div>
           </div>
         </section>
       </main>
       <Footer />
     </>
+  )
+}
+
+function SectionHead({ eyebrow, title, lead }: { eyebrow: string; title: string; lead: string }) {
+  return (
+    <div style={{ maxWidth: 760 }}>
+      <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#0f766e', marginBottom: 12 }}>
+        {eyebrow}
+      </div>
+      <h2 style={{ fontSize: 'clamp(24px, 3.4vw, 34px)', fontWeight: 900, letterSpacing: '-0.03em', color: '#0e231d', margin: '0 0 10px' }}>{title}</h2>
+      <p style={{ fontSize: 16, lineHeight: 1.85, color: '#567168', margin: 0 }}>{lead}</p>
+    </div>
+  )
+}
+
+function MeasureCard({
+  accent,
+  eyebrow,
+  title,
+  sub,
+  items,
+}: {
+  accent: string
+  eyebrow: string
+  title: string
+  sub: string
+  items: string[]
+}) {
+  return (
+    <div
+      style={{
+        background: '#ffffff',
+        border: '1px solid #e2efea',
+        borderRadius: 24,
+        padding: 'clamp(24px, 3vw, 32px)',
+        boxShadow: '0 14px 40px rgba(16,35,30,0.05)',
+      }}
+    >
+      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: accent, marginBottom: 10 }}>{eyebrow}</div>
+      <h3 style={{ fontSize: 'clamp(20px, 2.4vw, 24px)', fontWeight: 850, color: '#15332b', margin: '0 0 6px' }}>{title}</h3>
+      <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6a8178', margin: '0 0 20px' }}>{sub}</p>
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 14 }}>
+        {items.map((it) => (
+          <li key={it} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Check />
+            <span style={{ fontSize: 15, fontWeight: 700, color: '#16332b', lineHeight: 1.5 }}>{it}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
