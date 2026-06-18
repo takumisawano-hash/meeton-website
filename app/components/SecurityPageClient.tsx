@@ -155,7 +155,7 @@ export default function SecurityPageClient() {
                   margin: 0,
                 }}
               >
-                Meeton AIはお客様のデータを安全に保護するため、国際水準の情報セキュリティ体制を構築しています。
+                DynaMeetはお客様のデータを安全に保護するため、国際水準の情報セキュリティ体制を構築しています。
               </p>
             </div>
 
