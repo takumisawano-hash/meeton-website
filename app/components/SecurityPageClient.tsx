@@ -119,25 +119,6 @@ export default function SecurityPageClient() {
                 justifyContent: 'center',
               }}
             >
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignSelf: 'flex-start',
-                  alignItems: 'center',
-                  gap: 10,
-                  padding: '8px 14px',
-                  borderRadius: 999,
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  marginBottom: 24,
-                }}
-              >
-                Trust Center
-              </div>
               <h1
                 style={{
                   fontSize: 'clamp(32px, 6vw, 56px)',
@@ -267,35 +248,6 @@ export default function SecurityPageClient() {
 
         <section style={{ padding: 'clamp(40px, 6vw, 72px) clamp(16px, 4vw, 28px)' }}>
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-            <div style={{ marginBottom: 28 }}>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 800,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: '#0f766e',
-                  marginBottom: 12,
-                }}
-              >
-                Core Controls
-              </div>
-              <h2
-                style={{
-                  fontSize: 'clamp(28px, 4vw, 40px)',
-                  fontWeight: 900,
-                  letterSpacing: '-0.03em',
-                  color: '#132822',
-                  marginBottom: 10,
-                }}
-              >
-                Meeton AI の情報セキュリティ体制
-              </h2>
-              <p style={{ fontSize: 16, lineHeight: 1.8, color: '#567168', maxWidth: 760 }}>
-                対外的な信頼性と実運用上の安全性の両方を担保するため、認証・インフラ・暗号化・AI運用を分離せずに設計しています。
-              </p>
-            </div>
-
             <div
               style={{
                 display: 'grid',
