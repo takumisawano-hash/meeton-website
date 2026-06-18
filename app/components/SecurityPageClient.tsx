@@ -47,6 +47,8 @@ const controls = [
   { label: 'AI 運用', value: '学習データへの無断利用なし' },
 ]
 
+const whitepaperTags = ['インフラ構成', 'データ保護・暗号化', 'アクセス制御・運用統制', 'バックアップ体制']
+
 export default function SecurityPageClient() {
   return (
     <>
@@ -100,13 +102,13 @@ export default function SecurityPageClient() {
               margin: '0 auto',
               background: 'linear-gradient(135deg, rgba(9,40,34,0.96) 0%, rgba(10,54,48,0.94) 46%, rgba(7,87,103,0.92) 100%)',
               borderRadius: 28,
-              padding: 'clamp(28px, 5vw, 52px)',
+              padding: 'clamp(26px, 4vw, 44px)',
               color: '#f4fffc',
               boxShadow: '0 28px 80px rgba(16,35,30,0.16)',
               border: '1px solid rgba(255,255,255,0.08)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: 'clamp(28px, 4vw, 48px)',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+              gap: 'clamp(24px, 4vw, 44px)',
               alignItems: 'center',
             }}
           >
@@ -124,17 +126,17 @@ export default function SecurityPageClient() {
                   fontWeight: 700,
                   letterSpacing: '0.16em',
                   textTransform: 'uppercase',
-                  marginBottom: 24,
+                  marginBottom: 22,
                 }}
               >
                 Trust Center
               </div>
               <h1
                 style={{
-                  fontSize: 'clamp(32px, 6vw, 56px)',
-                  lineHeight: 1.08,
+                  fontSize: 'clamp(30px, 5vw, 46px)',
+                  lineHeight: 1.12,
                   fontWeight: 900,
-                  marginBottom: 18,
+                  marginBottom: 16,
                   letterSpacing: '-0.04em',
                 }}
               >
@@ -142,10 +144,10 @@ export default function SecurityPageClient() {
               </h1>
               <p
                 style={{
-                  fontSize: 'clamp(16px, 2vw, 20px)',
+                  fontSize: 'clamp(15px, 1.7vw, 18px)',
                   lineHeight: 1.85,
-                  color: 'rgba(244,255,252,0.84)',
-                  maxWidth: 560,
+                  color: 'rgba(244,255,252,0.82)',
+                  maxWidth: 480,
                   margin: 0,
                 }}
               >
@@ -153,16 +155,41 @@ export default function SecurityPageClient() {
               </p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
+            {/* Marks — matted on white chips so each lockup stays on solid
+                white over the dark hero (SGS background rule). */}
+            <div
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 20,
+                padding: 'clamp(18px, 2.4vw, 24px)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 16,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 800,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: '#7fe4c4',
+                }}
+              >
+                Certifications
+              </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
                 {CERT_MARKS.map((m) => (
                   <div
                     key={m.src}
                     style={{
                       background: '#ffffff',
-                      borderRadius: 14,
-                      padding: 12,
-                      boxShadow: '0 12px 32px rgba(8,21,18,0.22)',
+                      borderRadius: 12,
+                      padding: 10,
+                      flex: '1 1 180px',
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
                   >
                     <Image
@@ -171,16 +198,16 @@ export default function SecurityPageClient() {
                       width={m.width}
                       height={m.height}
                       unoptimized
-                      style={{ height: 92, width: 'auto', display: 'block' }}
+                      style={{ height: 104, width: 'auto', display: 'block' }}
                     />
                   </div>
                 ))}
               </div>
-              <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(244,255,252,0.72)', margin: 0 }}>
+              <p style={{ fontSize: 12.5, lineHeight: 1.7, color: 'rgba(244,255,252,0.66)', margin: 0 }}>
                 審査・認証: SGSジャパン株式会社（{CERT.acquired}取得）
               </p>
               {CERT.scope ? (
-                <p style={{ fontSize: 12.5, lineHeight: 1.7, color: 'rgba(244,255,252,0.6)', margin: 0 }}>
+                <p style={{ fontSize: 12, lineHeight: 1.7, color: 'rgba(244,255,252,0.56)', margin: 0 }}>
                   認証範囲: {CERT.scope}
                 </p>
               ) : null}
@@ -190,7 +217,7 @@ export default function SecurityPageClient() {
 
         {/* ── Controls teaser. Headline points read at a glance; the full
             spec lives in the whitepaper below. ─────────────────────── */}
-        <section style={{ padding: 'clamp(40px, 6vw, 72px) clamp(16px, 4vw, 28px)' }}>
+        <section style={{ padding: 'clamp(36px, 5vw, 60px) clamp(16px, 4vw, 28px)' }}>
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>
             <div style={{ marginBottom: 24, maxWidth: 760 }}>
               <div
@@ -260,23 +287,25 @@ export default function SecurityPageClient() {
           </div>
         </section>
 
-        {/* ── Whitepaper download — lead magnet; full spec lives here ── */}
-        <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(64px, 9vw, 112px)' }}>
+        {/* ── Whitepaper download — compact CTA band (lead magnet). ──── */}
+        <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(56px, 8vw, 96px)' }}>
           <div
             style={{
               maxWidth: 1180,
               margin: '0 auto',
-              background: 'linear-gradient(180deg, #0f201c 0%, #112824 100%)',
-              borderRadius: 30,
-              padding: 'clamp(24px, 5vw, 42px)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: 'clamp(24px, 4vw, 38px)',
+              background: 'linear-gradient(120deg, #0f201c 0%, #112824 60%, #0c3038 100%)',
+              borderRadius: 26,
+              padding: 'clamp(24px, 3.4vw, 38px)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 'clamp(20px, 3vw, 36px)',
               color: '#ecfaf6',
-              boxShadow: '0 32px 90px rgba(8, 21, 18, 0.24)',
+              boxShadow: '0 28px 80px rgba(8, 21, 18, 0.22)',
             }}
           >
-            <div>
+            <div style={{ flex: '1 1 460px', minWidth: 0 }}>
               <div
                 style={{
                   fontSize: 12,
@@ -287,146 +316,76 @@ export default function SecurityPageClient() {
                   marginBottom: 12,
                 }}
               >
-                Whitepaper Download
+                Whitepaper
               </div>
               <h2
                 style={{
-                  fontSize: 'clamp(28px, 4vw, 42px)',
-                  lineHeight: 1.15,
+                  fontSize: 'clamp(22px, 3vw, 30px)',
+                  lineHeight: 1.25,
                   fontWeight: 900,
                   letterSpacing: '-0.03em',
-                  marginBottom: 16,
+                  marginBottom: 12,
                 }}
               >
                 情報セキュリティホワイトペーパー
               </h2>
               <p
                 style={{
-                  fontSize: 16,
-                  lineHeight: 1.9,
-                  color: 'rgba(236,250,246,0.82)',
-                  marginBottom: 26,
-                  maxWidth: 560,
+                  fontSize: 15,
+                  lineHeight: 1.8,
+                  color: 'rgba(236,250,246,0.78)',
+                  margin: '0 0 16px',
+                  maxWidth: 600,
                 }}
               >
-                インフラ構成、データ保護方針、バックアップ体制など、より詳細な情報セキュリティ仕様をまとめたホワイトペーパーをご用意しています。
+                インフラ構成・データ保護方針・バックアップ体制まで、より詳細な情報セキュリティ仕様をまとめています。
               </p>
-              <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
-                {[
-                  'インフラ構成とデータ保管方針',
-                  '暗号化・アクセス制御・運用統制の考え方',
-                  'バックアップ体制と継続運用の前提',
-                ].map((item) => (
-                  <div
-                    key={item}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {whitepaperTags.map((tag) => (
+                  <span
+                    key={tag}
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 12,
-                      padding: '14px 16px',
-                      borderRadius: 16,
-                      background: 'rgba(255,255,255,0.06)',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      fontSize: 12.5,
+                      fontWeight: 600,
+                      color: 'rgba(236,250,246,0.9)',
+                      background: 'rgba(255,255,255,0.07)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: 999,
+                      padding: '6px 12px',
                     }}
                   >
-                    <div
-                      style={{
-                        width: 10,
-                        height: 10,
-                        borderRadius: '50%',
-                        background: '#7fe4c4',
-                        flexShrink: 0,
-                      }}
-                    />
-                    <span style={{ fontSize: 15, lineHeight: 1.7, color: '#ecfaf6' }}>{item}</span>
-                  </div>
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
 
-            <div
+            <button
+              onClick={() =>
+                (window as any).Meeton?.openDownloadCenter({
+                  docId: '54a7d40d-e99d-40f2-bed2-80d64a400093',
+                  pageNumber: 1,
+                })
+              }
               style={{
-                background: '#ffffff',
-                borderRadius: 24,
-                padding: 'clamp(22px, 4vw, 30px)',
-                color: '#17352d',
+                flexShrink: 0,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                padding: '15px 26px',
+                borderRadius: 999,
+                background: '#12a37d',
+                color: '#ffffff',
+                fontSize: 15,
+                fontWeight: 800,
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 14px 32px rgba(18,163,125,0.32)',
               }}
             >
-              <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontSize: 24, fontWeight: 850, marginBottom: 8 }}>ホワイトペーパーをご確認ください</h3>
-                <p style={{ fontSize: 14, lineHeight: 1.75, color: '#5b7169' }}>
-                  より詳細な情報セキュリティ仕様は、専用のホワイトペーパーから確認できます。以下のリンクからダウンロードページへ進んでください。
-                </p>
-              </div>
-              <div
-                style={{
-                  borderRadius: 20,
-                  background: 'linear-gradient(180deg, #f1fbf7 0%, #ffffff 100%)',
-                  border: '1px solid #d8ebe4',
-                  padding: '28px 22px',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'grid',
-                    gap: 12,
-                    marginBottom: 18,
-                  }}
-                >
-                  {[
-                    'インフラ構成とデータ保護方針を収録',
-                    'バックアップ体制と運用統制の概要を掲載',
-                    '専用ダウンロードページからすぐ確認可能',
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 12,
-                        padding: '12px 14px',
-                        borderRadius: 14,
-                        background: '#ffffff',
-                        border: '1px solid #e2efea',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 9,
-                          height: 9,
-                          borderRadius: '50%',
-                          background: '#12a37d',
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span style={{ fontSize: 14, lineHeight: 1.7, color: '#365149' }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
-                <button
-                  onClick={() =>
-                    (window as any).Meeton?.openDownloadCenter({
-                      docId: '54a7d40d-e99d-40f2-bed2-80d64a400093',
-                      pageNumber: 1,
-                    })
-                  }
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '13px 20px',
-                    borderRadius: 999,
-                    background: '#132822',
-                    color: '#fff',
-                    fontWeight: 700,
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  ホワイトペーパーを見る
-                </button>
-              </div>
-            </div>
+              ホワイトペーパーを見る
+            </button>
           </div>
         </section>
       </main>
