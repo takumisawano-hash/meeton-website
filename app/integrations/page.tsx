@@ -7,8 +7,11 @@ export const metadata: Metadata = {
     "Connect Meeton ai to Slack, Zoom, Salesforce, HubSpot, Google Calendar, Microsoft Teams, and more.",
   alternates: {
     canonical: "/integrations/",
+    // Full hreflang cluster (self + alternate + x-default → JA, JP-primary site).
     languages: {
+      en: "/integrations/",
       ja: "/ja/integrations/",
+      "x-default": "/ja/integrations/",
     },
   },
   openGraph: {

@@ -7,8 +7,11 @@ export const metadata: Metadata = {
     "Meeton aiをSlack、Zoom、Salesforce、HubSpot、Googleカレンダー、Microsoft Teamsなどと連携できます。",
   alternates: {
     canonical: "/ja/integrations/",
+    // Full hreflang cluster (self + alternate + x-default → JA, JP-primary site).
     languages: {
       en: "/integrations/",
+      ja: "/ja/integrations/",
+      "x-default": "/ja/integrations/",
     },
   },
   openGraph: {

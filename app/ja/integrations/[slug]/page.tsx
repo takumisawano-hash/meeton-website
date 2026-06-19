@@ -21,8 +21,12 @@ export async function generateMetadata({
     description: integration.ja.description,
     alternates: {
       canonical: `/ja/integrations/${slug}/`,
+      // Full hreflang cluster (self + alternate + x-default). x-default → JA
+      // since the site is Japanese-primary.
       languages: {
         en: `/integrations/${slug}/`,
+        ja: `/ja/integrations/${slug}/`,
+        "x-default": `/ja/integrations/${slug}/`,
       },
     },
     openGraph: {
