@@ -589,6 +589,25 @@ export default async function BlogPage() {
           transform: translateY(-1px);
           box-shadow: 0 4px 12px rgba(18,163,125,.14);
         }
+        /* Full flat post index (crawl + internal-link path to every post) */
+        .blog-allposts{
+          margin-top: 24px;
+          padding: 28px 24px;
+          background: #fafbfc;
+          border: 1px solid #eef2f6;
+          border-radius: 18px;
+        }
+        .blog-allposts-list{
+          list-style: none; margin: 0; padding: 0;
+          columns: 2; column-gap: 32px;
+        }
+        .blog-allposts-list li{ break-inside: avoid; margin: 0 0 10px; }
+        .blog-allposts-link{
+          font-size: 13.5px; line-height: 1.5; color: #3f5160;
+          text-decoration: none; letter-spacing: -0.003em;
+        }
+        .blog-allposts-link:hover{ color: #12a37d; text-decoration: underline; }
+        @media (max-width: 640px){ .blog-allposts-list{ columns: 1; } }
 
         /* ===== Empty state ===== */
         .blog-empty{
@@ -813,6 +832,25 @@ export default async function BlogPage() {
                   ))}
                 </div>
               </div>
+            )}
+
+            {/* Full flat post index — server-rendered direct links to EVERY
+                post (incl. uncategorized ones that no category archive lists).
+                Cheap (<a>s only, no client JSON) and gives Google a one-hop
+                crawl path + internal link to each post from the hub. */}
+            {remaining > 0 && (
+              <nav className="blog-allposts" aria-label="記事一覧">
+                <p className="blog-archive-sub">記事一覧（全{posts.length}本）</p>
+                <ul className="blog-allposts-list">
+                  {posts.slice(1 + INITIAL_GRID).map((post) => (
+                    <li key={post.slug}>
+                      <Link href={`/blog/${post.slug}/`} className="blog-allposts-link">
+                        {post.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             )}
           </>
         )}
