@@ -28,7 +28,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const c = await getCaseStudyBySlug(slug).catch(() => null);
+  const c = await getCaseStudyBySlug(slug);
   if (!c) return {};
   const title = `${c.company} 導入事例｜${c.heroMetric} ${c.heroMetricLabel}｜Meeton ai`;
   return {
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const c = await getCaseStudyBySlug(slug).catch(() => null);
+  const c = await getCaseStudyBySlug(slug);
   if (!c) notFound();
   const blocks = await getCaseStudyBlocks(c.id).catch(() => []);
   const logo = c.companyLogo || SLUG_LOGO[slug];

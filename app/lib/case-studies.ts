@@ -279,8 +279,13 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
     const page = response.results[0]
     if (!page || !('properties' in page) || page.object !== 'page') return null
     return pageToCaseStudy(page as PageObjectResponse)
-  } catch {
-    return null
+  } catch (err) {
+    // Re-throw real errors (see notion.ts getPostBySlug): null = genuinely
+    // not found → notFound(); a transient fetch failure must NOT be cached as
+    // a 404 for a live case study, so let it throw and ISR serves the stale
+    // render. Call sites previously did .catch(() => null) which masked this —
+    // those were removed in app/cases/[slug]/page.tsx.
+    throw err
   }
 }
 

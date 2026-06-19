@@ -307,8 +307,14 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     const page = response.results[0]
     if (!page || !('properties' in page) || page.object !== 'page') return null
     return pageToPost(page as PageObjectResponse)
-  } catch {
-    return null
+  } catch (err) {
+    // Re-throw real fetch/API errors (after withRetry already exhausted its
+    // retries) instead of returning null. null means "genuinely not found" and
+    // the route redirects to /blog/; if a transient Notion failure also mapped
+    // to null, that redirect for a LIVE indexed article would be cached by ISR
+    // for up to an hour, risking deindexing. Throwing makes ISR serve the last
+    // good render (or a 500) instead of caching a bad redirect.
+    throw err
   }
 }
 
