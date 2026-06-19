@@ -211,7 +211,7 @@ export default function SecurityPageClient() {
               <button
                 onClick={() =>
                   (window as any).Meeton?.openDownloadCenter({
-                    docId: '9b5b215d-f0bc-41b6-a885-f4732bda4824',
+                    docId: '8ef0ccfb-da0f-4683-b1f8-ebfa290c5ee7',
                     pageNumber: 1,
                   })
                 }
