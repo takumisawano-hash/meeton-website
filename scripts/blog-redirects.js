@@ -349,7 +349,7 @@ const blogRedirects = [
   },
   {
     "source": "/15-common-turn-offs-to-objecitons-in-business-meetings",
-    "destination": "/blog/15-common-turn-offs-to-objecitons-in-business-meetings/",
+    "destination": "/blog/",
     "permanent": true
   },
   {

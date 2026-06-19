@@ -149,7 +149,7 @@ const nextConfig = {
       // Old nested blog paths that were never migrated (Japanese slugs or old sub-categories)
       {
         source: '/blog/case-studies/:slug*',
-        destination: '/case-studies/',
+        destination: '/cases/',
         permanent: true,
       },
       {
@@ -460,11 +460,23 @@ const nextConfig = {
       { source: '/for/inside-sales/', destination: '/solutions/sdr/', permanent: true },
       { source: '/for', destination: '/solutions/cmo/', permanent: true },
       { source: '/for/', destination: '/solutions/cmo/', permanent: true },
-      // case studies → /cases (1:1 slug preserved)
+      // case studies → /cases. Slugs were RENAMED in the v2 cases rebuild
+      // (short → long descriptive), so the old 1:1 passthrough 308'd legacy
+      // URLs to /cases/<oldslug>/ which 404s — killing the inbound equity on
+      // the flagship case studies. Map each old slug to its real new slug,
+      // and send any other legacy case slug to the /cases/ index (200), never 404.
       { source: '/case-studies', destination: '/cases/', permanent: true },
       { source: '/case-studies/', destination: '/cases/', permanent: true },
-      { source: '/case-studies/:slug', destination: '/cases/:slug/', permanent: true },
-      { source: '/case-studies/:slug/', destination: '/cases/:slug/', permanent: true },
+      { source: '/case-studies/edulinx', destination: '/cases/edulinx-ai-chat-40-percent/', permanent: true },
+      { source: '/case-studies/edulinx/', destination: '/cases/edulinx-ai-chat-40-percent/', permanent: true },
+      { source: '/case-studies/biztex', destination: '/cases/biztex-chat-leads-10x/', permanent: true },
+      { source: '/case-studies/biztex/', destination: '/cases/biztex-chat-leads-10x/', permanent: true },
+      { source: '/case-studies/g-gen', destination: '/cases/g-gen-inside-sales-sql-2x/', permanent: true },
+      { source: '/case-studies/g-gen/', destination: '/cases/g-gen-inside-sales-sql-2x/', permanent: true },
+      { source: '/case-studies/univis', destination: '/cases/univis-multi-service-3month-2deals/', permanent: true },
+      { source: '/case-studies/univis/', destination: '/cases/univis-multi-service-3month-2deals/', permanent: true },
+      { source: '/case-studies/:slug', destination: '/cases/', permanent: true },
+      { source: '/case-studies/:slug/', destination: '/cases/', permanent: true },
       // ── v2 restructure (2026-05-29): /features/* → root product LPs ──
       // Direct 1:1 301s (no chains) preserve the 2yr authority on moved URLs.
       { source: '/features/meetings', destination: '/calendar/', permanent: true },
