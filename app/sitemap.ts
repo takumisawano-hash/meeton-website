@@ -9,12 +9,17 @@ import { allTermSlugs } from '@/app/lib/glossary-data'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dynameet.ai'
 
-  const now = new Date()
+  // Stable lastmod for static/data-driven pages. Using new Date() here made
+  // EVERY url report lastmod = the moment Google fetched the sitemap, which
+  // teaches Google the signal is noise and it stops trusting lastmod (incl.
+  // the accurate per-post blog/cases dates below). Bump this when static
+  // pages get a material content change. Blog/cases keep their real dates.
+  const now = new Date('2026-06-19T00:00:00Z')
 
   // Static pages. /features/offers/ removed — it 301-redirects to /.
   // /talent/ removed — intentionally hidden from Nav.
   const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: now, changeFrequency: 'weekly', priority: 1 },
+    { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/blog/`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
     { url: `${baseUrl}/cases/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     // Solutions (役割別) + use-cases (瞬間別) + enterprise — MOFU/trust.
@@ -40,11 +45,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/tools/roi/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/integrations/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/ja/integrations/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    // Persona LPs — high-intent role-targeted landing pages.
-    { url: `${baseUrl}/for/cmo/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/for/cro/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/for/inside-sales/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/for/marketing-manager/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // NOTE: old /for/* persona URLs were REMOVED from the sitemap — they
+    // 308-redirect to /solutions/* (already listed above), and a sitemap must
+    // contain only canonical 200 URLs. The redirects stay live in next.config.
     // Industry use-case LPs — vertical-specific high-intent landing pages.
     { url: `${baseUrl}/use-cases/saas/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/use-cases/manufacturing/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
@@ -56,6 +59,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/compare/meeton-vs-karte/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${baseUrl}/compare/meeton-vs-chatplus/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${baseUrl}/compare/meeton-vs-anybot/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    // Category-comparison LPs (real static pages under app/compare/).
+    { url: `${baseUrl}/compare/chatbot-vs-ai-sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/compare/ma-vs-ai-sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/compare/scheduling-vs-ai-sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     // Pillar pages — SEO hub-and-spoke. Consolidate authority for
     // head-term queries ("B2B リードジェネレーション", "クッキーレス マーケティング")
     // and internal-link to 20+ cluster blog posts each.
