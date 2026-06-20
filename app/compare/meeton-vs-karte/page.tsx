@@ -13,7 +13,7 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'KARTE とAI代替を比較｜Web接客・CX の乗り換えガイド｜Meeton ai',
+  title: 'KARTE とAI代替を比較｜Web接客・CX の乗り換えガイド',
   description:
     'KARTE (Plaid の CX プラットフォーム) と Meeton ai (AI SDR) を、Web 接客・商談予約・Inside Sales 連携の観点で公正に並べて比較。乗り換え / 併用の判断に必要な情報を整理しました。',
   alternates: {

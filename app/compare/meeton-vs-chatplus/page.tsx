@@ -13,7 +13,7 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'ChatPlus とAI代替を比較｜チャットボットの乗り換えガイド｜Meeton ai',
+  title: 'ChatPlus とAI代替を比較｜チャットボットの乗り換えガイド',
   description:
     'ChatPlus (AI 対応 chatbot、低価格帯) と Meeton ai (B2B 営業特化 AI SDR) を、機能・商談予約・CRM 連携・商談化価値で公正に並べて比較。乗り換え判断に必要な情報を整理しました。',
   alternates: {

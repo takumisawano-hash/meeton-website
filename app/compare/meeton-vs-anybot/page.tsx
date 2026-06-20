@@ -13,7 +13,7 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'anybot とAI代替を比較｜チャットボットの乗り換えガイド｜Meeton ai',
+  title: 'anybot とAI代替を比較｜チャットボットの乗り換えガイド',
   description:
     'anybot (LINE 連携が強み、toC 寄り chatbot) と Meeton ai (B2B 専用 AI SDR、HubSpot / Salesforce ネイティブ) を、用途・機能ごとに公正に並べて比較しました。',
   alternates: {
