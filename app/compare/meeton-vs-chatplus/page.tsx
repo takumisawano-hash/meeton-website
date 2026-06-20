@@ -13,14 +13,14 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'ChatPlus と Meeton ai を比較 | AI チャット vs AI SDR',
+  title: 'ChatPlus とAI代替を比較｜チャットボットの乗り換えガイド｜Meeton ai',
   description:
     'ChatPlus (AI 対応 chatbot、低価格帯) と Meeton ai (B2B 営業特化 AI SDR) を、機能・商談予約・CRM 連携・商談化価値で公正に並べて比較。乗り換え判断に必要な情報を整理しました。',
   alternates: {
     canonical: '/compare/meeton-vs-chatplus/',
   },
   openGraph: {
-    title: 'ChatPlus と Meeton ai を比較 | AI チャット vs AI SDR',
+    title: 'ChatPlus とAI代替を比較｜チャットボットの乗り換えガイド｜Meeton ai',
     description:
       'ChatPlus と Meeton ai を機能ごとに公正比較。シナリオ + AI 併用 vs LLM ネイティブ AI SDR。',
     url: 'https://dynameet.ai/compare/meeton-vs-chatplus/',

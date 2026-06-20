@@ -13,14 +13,14 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'KARTE と Meeton ai を比較 | CX プラットフォーム vs AI SDR',
+  title: 'KARTE とAI代替を比較｜Web接客・CX の乗り換えガイド｜Meeton ai',
   description:
     'KARTE (Plaid の CX プラットフォーム) と Meeton ai (AI SDR) を、Web 接客・商談予約・Inside Sales 連携の観点で公正に並べて比較。乗り換え / 併用の判断に必要な情報を整理しました。',
   alternates: {
     canonical: '/compare/meeton-vs-karte/',
   },
   openGraph: {
-    title: 'KARTE と Meeton ai を比較 | CX プラットフォーム vs AI SDR',
+    title: 'KARTE とAI代替を比較｜Web接客・CX の乗り換えガイド｜Meeton ai',
     description:
       '行動データ分析 + Web 接客の KARTE と、商談予約完結の AI SDR Meeton ai。買い手目線で機能を並べました。',
     url: 'https://dynameet.ai/compare/meeton-vs-karte/',

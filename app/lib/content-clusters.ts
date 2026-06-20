@@ -69,7 +69,7 @@ export const CLUSTERS: Record<ClusterId, Cluster> = {
     pillarName: "Meeton ai",
     blurb: "AI SDR とは何か、商談化率をどう上げるか——カテゴリの定義と実践知。",
     weight: "low",
-    keywords: ["AI SDR とは", "商談化率 改善", "リードが商談にならない", "インサイドセールス スケール", "BtoB 商談化"],
+    keywords: ["AI SDR とは", "商談化率 改善", "リードが商談にならない", "インサイドセールス スケール", "BtoB 商談化", "abmツール 比較", "abmツール 中小企業", "abmツール 大企業", "ABM とは"],
     aliases: ["ai-sdr", "sales", "marketing", "revops", "abm", "戦略", "general"],
   },
 };

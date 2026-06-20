@@ -13,14 +13,14 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'sinclo と Meeton ai を比較 | AI SDR への乗り換え評価ガイド',
+  title: 'sinclo（シンクロ）とAI代替を比較｜Web接客チャットの乗り換えガイド｜Meeton ai',
   description:
     'sinclo (シナリオ型 Web 接客 chatbot) と Meeton ai (AI SDR) を、機能・運用負荷・商談予約完結度で並べて比較。乗り換えに向く企業 / 向かない企業を公正に整理しました。',
   alternates: {
     canonical: '/compare/meeton-vs-sinclo/',
   },
   openGraph: {
-    title: 'sinclo と Meeton ai を比較 | AI SDR への乗り換え評価ガイド',
+    title: 'sinclo（シンクロ）とAI代替を比較｜Web接客チャットの乗り換えガイド｜Meeton ai',
     description:
       'シナリオ型 chatbot から AI SDR へ。sinclo と Meeton ai を機能ごとに公正比較。',
     url: 'https://dynameet.ai/compare/meeton-vs-sinclo/',

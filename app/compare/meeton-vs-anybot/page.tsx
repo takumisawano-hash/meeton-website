@@ -13,14 +13,14 @@ import ComparePage, { type CompareConfig } from '../components/ComparePage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'anybot と Meeton ai を比較 | LINE 連携 vs B2B AI SDR',
+  title: 'anybot とAI代替を比較｜チャットボットの乗り換えガイド｜Meeton ai',
   description:
     'anybot (LINE 連携が強み、toC 寄り chatbot) と Meeton ai (B2B 専用 AI SDR、HubSpot / Salesforce ネイティブ) を、用途・機能ごとに公正に並べて比較しました。',
   alternates: {
     canonical: '/compare/meeton-vs-anybot/',
   },
   openGraph: {
-    title: 'anybot と Meeton ai を比較 | LINE 連携 vs B2B AI SDR',
+    title: 'anybot とAI代替を比較｜チャットボットの乗り換えガイド｜Meeton ai',
     description:
       'toC 寄り chatbot anybot と B2B 専用 AI SDR Meeton ai。買い手目線で機能を並べました。',
     url: 'https://dynameet.ai/compare/meeton-vs-anybot/',

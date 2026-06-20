@@ -42,7 +42,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "calendar",
     productName: "Meeton Calendar",
     category: "インバウンド商談化",
-    metaTitle: "Meeton Calendar と immedio の違い｜インバウンド商談化の比較",
+    metaTitle: "immedio の料金・違いとAI代替｜インバウンド商談化で比較｜Meeton",
     metaDescription:
       "immedio はサンクスページ商談化に特化した実績ある国産SaaS。Meeton Calendar は会話・資料・予約・追客まで一気通貫のAI SDRである点が違い。用途別の使い分けを比較表で解説。",
     verdict:
@@ -83,7 +83,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "calendar",
     productName: "Meeton Calendar",
     category: "日程調整自動化",
-    metaTitle: "Meeton Calendar と TimeRex の違い｜日程調整 vs 商談化",
+    metaTitle: "TimeRex の料金・違いとAI代替｜日程調整→商談化で比較｜Meeton Calendar",
     metaDescription:
       "TimeRex は無料から使えるコスパの高い国産日程調整ツール。Meeton Calendar は日程調整に加え、予約前のAI会話・即フォロー・商談化に最適化したAI SDR。純粋な日程調整か、商談化までかで使い分け。",
     verdict:
@@ -121,7 +121,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "calendar",
     productName: "Meeton Calendar",
     category: "日程調整自動化",
-    metaTitle: "Meeton Calendar と Spir の違い｜日程調整 vs 商談化AI",
+    metaTitle: "Spir の料金・違いとAI代替｜日程調整→商談化で比較｜Meeton Calendar",
     metaDescription:
       "Spir は複数カレンダー統合とグローバル対応に強い国産日程調整SaaS。Meeton Calendar は予約前のAI会話・即フォロー・商談化に最適化。スケジューリングの質か、商談化までかで使い分け。",
     verdict:
@@ -159,7 +159,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "calendar",
     productName: "Meeton Calendar",
     category: "日程調整自動化",
-    metaTitle: "Meeton Calendar と Calendly の違い｜日本語×商談化で比較",
+    metaTitle: "Calendly 日本語の料金・違い｜AI代替・商談化で比較｜Meeton Calendar",
     metaDescription:
       "Calendly は世界最大手の日程調整ツールで連携エコシステムが豊富。Meeton Calendar は日本語ネイティブで、予約前のAI会話・即フォロー・商談化に最適化。グローバル汎用か、日本のインバウンド商談化かで使い分け。",
     verdict:
@@ -200,7 +200,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "library",
     productName: "Meeton Library",
     category: "資料共有・トラッキング",
-    metaTitle: "Meeton Library と DocSend の違い｜AI解説×CRM不要で比較",
+    metaTitle: "DocSend 代替・日本語｜資料共有のAI解説・違いで比較｜Meeton Library",
     metaDescription:
       "DocSend はページ単位の精密な資料トラッキングとVDRに強いDropbox傘下の定番。Meeton Library はAIチャットが資料を解説し、CRM不要・日本語で開封を可視化、追客まで繋ぐ。精密追跡/VDRか、AI解説×商談化かで使い分け。",
     verdict:
@@ -241,7 +241,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "chat",
     productName: "Meeton Chat",
     category: "チャット / メッセージング",
-    metaTitle: "Meeton Chat と Intercom の違い｜サポート vs 商談化AI",
+    metaTitle: "Intercom 代替の料金・違い｜AI商談化チャットで比較｜Meeton Chat",
     metaDescription:
       "Intercom（Fin）は既存顧客のカスタマーサポート自動化に強い世界的プラットフォーム。Meeton Chat は新規・潜在リードの商談化に特化し、接触前の検討の土台に立つAIチャット。サポート削減か、商談獲得かで使い分け。",
     verdict:
@@ -282,7 +282,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "email",
     productName: "Meeton Email",
     category: "メール / 営業エンゲージメント",
-    metaTitle: "Meeton Email と lemlist の違い｜コールド配信 vs 行動追客AI",
+    metaTitle: "lemlist 代替の料金・違い｜行動追客AIで比較｜Meeton Email",
     metaDescription:
       "lemlist は新規開拓のコールドメール/マルチチャネル配信に強い海外SaaS。Meeton Email は既存・未予約リードを行動シグナル起点にAIが1:1で追客するインバウンド追客特化。新規開拓か、温まったリードの追客かで使い分け。",
     verdict:
@@ -320,7 +320,7 @@ export const COMPARE: Record<string, CompareData> = {
     product: "email",
     productName: "Meeton Email",
     category: "メール / コールド配信",
-    metaTitle: "Meeton Email と Smartlead の違い｜大量配信 vs 行動追客AI",
+    metaTitle: "Smartlead 代替の料金・違い｜行動追客AIで比較｜Meeton Email",
     metaDescription:
       "Smartlead は無制限メールボックスと自動ウォームアップで大量コールド配信・到達率に強い海外SaaS。Meeton Email は既存・未予約リードを行動シグナル起点にAIが1:1追客。大量アウトバウンドか、温まったリードの追客かで使い分け。",
     verdict:
