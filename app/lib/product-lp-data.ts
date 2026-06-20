@@ -39,7 +39,7 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "calendar",
     productName: "Meeton Calendar",
     icon: "calendar",
-    metaTitle: "Meeton Calendar｜即フォローで商談化する日程調整・商談予約",
+    metaTitle: "日程調整ツール（商談化特化）｜Calendly代替のAI即予約｜Meeton Calendar",
     metaDescription:
       "リードが発生した瞬間に商談予約まで運ぶ AI 日程調整。フォーム送信・資料DLの直後に AI が予約を提示し、自動アサイン・CRM登録まで自律化。immedio / TimeRex / Calendly との違いも解説。30分のデモで体験。",
     keyword: "日程調整 自動化 / 商談予約 / インバウンド 商談化",
@@ -79,11 +79,11 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "chat",
     productName: "Meeton Chat",
     icon: "chat",
-    metaTitle: "Meeton Chat｜接触前の検討に効く商談化AIチャット",
+    metaTitle: "Web接客×AIチャットボット｜BtoB訪問者を商談化｜Meeton Chat",
     metaDescription:
-      "買い手は購買の約70%を営業接触前に独力で進める。Meeton Chat は、その“接触前の検討”の土台に立ち、Webでは出せない答えをその場で渡して商談化する AI チャット。Intercom / シナリオ型チャットボットとの違いも解説。30分のデモで体験。",
+      "買い手は購買の約70%を営業接触前に独力で進める。Meeton Chat は、その“接触前の検討”の土台に立ち、Webでは出せない答えをその場で渡して商談化する Web接客 AIチャット（チャットボット）。Intercom / シナリオ型チャットボットとの違いも解説。30分のデモで体験。",
     keyword: "Web接客 ツール / チャットボット 商談化 / サイト離脱 防止",
-    eyebrow: "AI チャット",
+    eyebrow: "Web接客 AIチャット",
     problemLine: "買い手は、問い合わせる前にもう決めはじめている。",
     h1: "接触前の検討の“土台”に立つ、商談化AIチャット。",
     heroSub:
@@ -119,7 +119,7 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "library",
     productName: "Meeton Library",
     icon: "library",
-    metaTitle: "Meeton Library｜資料で見込み客を自動ナーチャリングするAI",
+    metaTitle: "営業資料の共有・育成ツール｜DocSend代替のAIナーチャリング｜Meeton Library",
     metaDescription:
       "まだ商談に早い見込み客を、資料で自動ナーチャリング。関心に合った資料を届け、AIが内容を解説し、反応を見て検討を育てる。開封・行動も可視化。資料を使ったリード育成を自動化。DocSend 代替。",
     keyword: "リード ナーチャリング 資料 / 資料 自動育成 / 営業資料 共有 ツール / DocSend 代替",
@@ -159,11 +159,11 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "email",
     productName: "Meeton Email",
     icon: "email",
-    metaTitle: "Meeton Email｜予約しなかったリードを諦めず追うAI 1:1フォロー",
+    metaTitle: "追客自動化・ナーチャリングメール｜AI 1:1フォロー｜Meeton Email",
     metaDescription:
       "即予約しなかったリードを、AIが行動シグナルを見て1:1で自律フォロー。テンプレ置換ではなくAI生成、チャット連携、目的達成まで自律。Lemlist / Smartlead / セールスエンゲージメント系との違いも解説。CRM連携前提。",
     keyword: "リードナーチャリング メール / 追客 自動化 / セールスエンゲージメント",
-    eyebrow: "AI 1:1 自律フォロー",
+    eyebrow: "追客自動化・AI 1:1フォロー",
     problemLine: "予約しなかったリードを、そのまま冷ましている。",
     h1: "予約しなかったリードを、諦めず追う。",
     heroSub:

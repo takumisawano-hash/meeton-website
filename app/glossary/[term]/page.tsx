@@ -27,10 +27,20 @@ export default async function Page({ params }: { params: Promise<{ term: string 
   const data = getTerm(term);
   if (!data) notFound();
   const { defined, faq } = glossarySchema(data);
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "ホーム", item: "https://dynameet.ai/" },
+      { "@type": "ListItem", position: 2, name: "用語集", item: "https://dynameet.ai/glossary/" },
+      { "@type": "ListItem", position: 3, name: data.term, item: `https://dynameet.ai/glossary/${term}/` },
+    ],
+  };
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(defined) }} />
       {faq && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <GlossaryLP data={data} />
     </>
   );

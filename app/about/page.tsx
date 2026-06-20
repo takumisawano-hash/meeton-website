@@ -330,7 +330,7 @@ export default function AboutPage() {
             '@id': 'https://dynameet.ai/#organization',
             name: 'DynaMeet株式会社',
             legalName: 'DynaMeet株式会社',
-            alternateName: ['Meeton AI', 'DynaMeet', 'ダイナミート'],
+            alternateName: ['Meeton ai', 'Meeton AI', 'Meeton', 'ミートン', 'DynaMeet', 'DynaMeet株式会社', 'ダイナミート'],
             url: 'https://dynameet.ai',
             logo: 'https://dynameet.ai/logo-dark.svg',
             foundingDate: '2024-10-03',

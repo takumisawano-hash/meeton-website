@@ -113,7 +113,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const posts = await getAllPosts()
-    blogPosts = posts.map((post) => ({
+    // Exclude noindex posts — listing a noindex URL in the sitemap is a
+    // self-contradictory signal (Notion noIndex flag → page emits robots
+    // noindex, yet the sitemap says "index me").
+    blogPosts = posts.filter((post) => !post.noIndex).map((post) => ({
       url: `${baseUrl}/blog/${post.slug}/`,
       lastModified: post.modifiedDate
         ? new Date(post.modifiedDate)
@@ -131,7 +134,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const items = await getAllCaseStudies()
-    caseStudies = items.map((c) => ({
+    caseStudies = items.filter((c) => !c.noIndex).map((c) => ({
       url: `${baseUrl}/cases/${c.slug}/`,
       lastModified: c.modifiedDate
         ? new Date(c.modifiedDate)

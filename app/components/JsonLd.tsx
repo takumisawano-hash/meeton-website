@@ -14,7 +14,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
     '@id': `${baseUrl}/#organization`,
     name: 'DynaMeet Inc.',
     legalName: 'DynaMeet株式会社',
-    alternateName: ['Meeton AI', 'Meeton ai', 'DynaMeet', 'ダイナミート'],
+    alternateName: ['Meeton ai', 'Meeton AI', 'Meeton', 'ミートン', 'DynaMeet', 'DynaMeet株式会社', 'ダイナミート'],
     url: baseUrl,
     logo: {
       '@type': 'ImageObject',
