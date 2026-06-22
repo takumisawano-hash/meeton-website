@@ -67,7 +67,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         <style>{`
           .v2-hero{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
           .v2-hero-h1{text-wrap:balance;word-break:auto-phrase}
-          .v2-hero-media{border-radius:var(--r-feature);border:1px solid var(--on-navy-border);background:var(--navy-2);overflow:hidden;box-shadow:0 44px 88px -48px rgba(0,0,0,.65)}
+          .v2-hero-media{display:flex;flex-direction:column;justify-content:center;border-radius:var(--r-feature);border:1px solid var(--on-navy-border);background:var(--navy-2);overflow:hidden;box-shadow:0 44px 88px -48px rgba(0,0,0,.65)}
           @media(min-width:1024px){.v2-hero{grid-template-columns:1fr .9fr;gap:clamp(36px,4.5vw,64px)}}
           @media(max-width:719px){.v2-hero-brk{display:none}}
         `}</style>

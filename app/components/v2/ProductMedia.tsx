@@ -30,7 +30,7 @@ export default function ProductMedia({ slug, icon, alt }: { slug: string; icon: 
         .v2-pm-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--on-navy-border);background:var(--navy-2);box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
         .v2-pm-frame.anim{aspect-ratio:auto;min-height:clamp(360px,42vw,460px);display:flex}
         /* HTML demo auto-sizes to real content height (DemoFrame measures it) */
-        .v2-pm-frame.demo{aspect-ratio:auto;min-height:0;display:block}
+        .v2-pm-frame.demo{aspect-ratio:auto;min-height:0;display:flex;flex-direction:column;justify-content:center}
       `}</style>
     </div>
   );

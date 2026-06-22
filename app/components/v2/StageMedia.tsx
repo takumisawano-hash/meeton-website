@@ -115,7 +115,7 @@ export default function StageMedia() {
         .v2-sm-media{position:relative;width:100%;min-height:clamp(320px,30vw,400px);display:flex;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:0 12px 40px -24px rgba(15,17,40,.30)}
         /* HTML demo frame auto-sizes to the demo's real content height
            (DemoFrame measures it) — no fixed aspect, no clip, no 余白 */
-        .v2-sm-media.demo{display:block;min-height:0;background:var(--navy-2)}
+        .v2-sm-media.demo{display:flex;flex-direction:column;justify-content:center;min-height:0;background:var(--navy-2)}
         .v2-sm-stage{font-family:var(--fm);font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--cta-ink)}
         .v2-sm-title{font-family:var(--fd);font-size:clamp(22px,2.6vw,30px);font-weight:800;color:var(--heading);letter-spacing:-.02em;margin:10px 0 12px;line-height:1.3}
         .v2-sm-desc{font-size:16px;line-height:1.85;color:var(--text);margin:0 0 16px}
