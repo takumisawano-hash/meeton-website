@@ -1078,6 +1078,202 @@ const blogRedirects = [
     "source": "/blog/objection-handling-b2b-sales-conversion-framework",
     "destination": "/blog/how-to-respond-objection-handling-tips/",
     "permanent": true
+  },
+  // 2026-06-22 title/content dedup: 39 redundant posts → canonical twin (24 sets)
+  {
+    "source": "/blog/inbound-sales-guide-ai-conversion-2026",
+    "destination": "/blog/inbound-sales-ai-conversion-strategy-3x-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-comparison-tool-selection-guide-2026",
+    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-enterprise-selection-guide",
+    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/analysis-of-5-major-abm-tools",
+    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tools-complete-guide-2025-how-to-choose-and-implement",
+    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-free-vs-paid-comparison-2026",
+    "destination": "/blog/abm-tool-free-selection-guide-2026-upgrade-timing/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/smbs-abm-focus-growth",
+    "destination": "/blog/abm-tool-sme-selection-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/ai-chatbot-lead-qualification-automation-guide",
+    "destination": "/blog/ai-chatbot-builder-lead-qualification-automation-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/80-percent-lead-ai-qualification-frontier",
+    "destination": "/blog/80-percent-lead-ai-nurturing-conversion/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/objection-analysis-sales",
+    "destination": "/blog/how-to-respond-objection-handling-tips/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/turn-objections-into-sales",
+    "destination": "/blog/how-to-respond-objection-handling-tips/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/digital-sales-suitable-person-5-traits-ai-era",
+    "destination": "/blog/inside-sales-suitable-person-5-traits-ai-era/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/how-to-identify-the-10-characteristics-of-successful-inside-sales",
+    "destination": "/blog/inside-sales-suitable-person-5-traits-ai-era/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/ai-sdr-24-7-lead-generation",
+    "destination": "/blog/what-is-ai-sdr-vs-traditional-sdr/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/developing-a-winning-inside-sales-process",
+    "destination": "/blog/inside-sales-complete-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/inside-sales-process-design-guide-2026",
+    "destination": "/blog/inside-sales-complete-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/kpi-for-inside-sales",
+    "destination": "/blog/inside-sales-kpi-improvement-guide/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/sales-marketing-ai",
+    "destination": "/blog/revops-ai-sales-marketing-alignment/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/2025-ai-revops-sales-marketing-integration-guide",
+    "destination": "/blog/revops-ai-sales-marketing-alignment/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/ai-pipeline-forecast-accuracy-method",
+    "destination": "/blog/ai-pipeline-forecast-accuracy/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/jp-mlutgtmq-7hss",
+    "destination": "/blog/ai-sdr-organization-design-human-role-kpi/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/jp-mlutgq9p-3f9v",
+    "destination": "/blog/ai-sdr-organization-design-human-role-kpi/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/jp-mlutg1dm-rgkb",
+    "destination": "/blog/ai-sdr-organization-design-human-role-kpi/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/jp-mlutg7bj-fj0o",
+    "destination": "/blog/lead-count-decrease-ai-sdr-meeting-conversion/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/websitebounce",
+    "destination": "/blog/websitevisitor-99-anonymousvisitor-ai/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/websitebounce-meeting-ai",
+    "destination": "/blog/websitevisitor-99-anonymousvisitor-ai/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/website-meeting-391-aistrategy",
+    "destination": "/blog/websitevisitor-99-anonymousvisitor-ai/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/jp-mlutgykn-n8r4",
+    "destination": "/blog/b2b-buyer-regret-sensemaking-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/2026-cookieless-meeting",
+    "destination": "/blog/cookieless-b2b-marketing-complete-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/btob-web-engagement-tool-comparison-2026",
+    "destination": "/blog/cookieless-btobmarketing-ai/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/scenario-chatbot-ai",
+    "destination": "/blog/cookieless-btobmarketing-ai/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/btob-chatbot-comparison-2026-ai-scenario-meeting-conversion",
+    "destination": "/blog/cookieless-btobmarketing-ai/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/2026-leadform-ai",
+    "destination": "/blog/2026-signal-based-selling-instant-meeting/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/speed-to-lead-5min-8x-conversion-b2b",
+    "destination": "/blog/inbound-lead-response-time-conversion-rate/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/btob-sales-ai-conversion-rate",
+    "destination": "/blog/ai-sales-automation-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/data-driven-outbound-sales",
+    "destination": "/blog/outbound-sales-strategy/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/outbound-sales-strategy-email-phone-sns",
+    "destination": "/blog/outbound-sales-strategy/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/inside-sales-ai-automation-strategy",
+    "destination": "/blog/inside-sales-complete-guide-2026/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/buying-committee-72",
+    "destination": "/blog/ai-meeting-2026-drift-intercom/",
+    "permanent": true
   }
 ];
 

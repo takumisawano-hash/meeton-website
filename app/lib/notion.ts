@@ -1,5 +1,6 @@
 import { Client, APIErrorCode, isNotionClientError } from '@notionhq/client'
 import { cache } from 'react'
+import { DEDUPED_BLOG_SLUGS } from '@/app/lib/deduped-blog-slugs'
 import type {
   PageObjectResponse,
   BlockObjectResponse,
@@ -271,7 +272,10 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
       cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined
     } while (cursor)
 
-    return results.map(pageToPost)
+    // Drop posts that were 301-consolidated into a canonical twin (2026-06-22
+    // title/content dedup) so they leave the sitemap, hub, category pages and
+    // internal links — the 301 in scripts/blog-redirects.js carries their equity.
+    return results.map(pageToPost).filter((p) => !DEDUPED_BLOG_SLUGS.has(p.slug))
   } catch {
     return []
   }
