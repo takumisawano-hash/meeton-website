@@ -51,8 +51,16 @@ export default function DemoFrame({ src, title }: { src: string; title: string }
     const measure = () => {
       try {
         const doc = ifr.contentDocument || ifr.contentWindow?.document;
-        if (!doc) return;
-        const ch = Math.max(doc.documentElement?.scrollHeight || 0, doc.body?.scrollHeight || 0);
+        if (!doc?.body) return;
+        // Measure the demo's STAGE element (body's first child), not body/
+        // documentElement scrollHeight: the demo body uses min-height:100vh so
+        // its scrollHeight just echoes the iframe height (circular lock → stuck
+        // at the fallback). The stage child is content-sized, giving the real
+        // reflowed height at the current width → frame fits exactly, no gap.
+        const stage = doc.body.firstElementChild as HTMLElement | null;
+        const ch = stage
+          ? Math.ceil(stage.getBoundingClientRect().height)
+          : Math.max(doc.documentElement?.scrollHeight || 0, doc.body.scrollHeight || 0);
         if (ch > 0) setH(ch);
       } catch {
         /* cross-origin guard — shouldn't happen with allow-same-origin */
@@ -62,9 +70,10 @@ export default function DemoFrame({ src, title }: { src: string; title: string }
       measure();
       try {
         const doc = ifr.contentDocument;
-        if (doc?.body && typeof ResizeObserver !== "undefined") {
+        const stage = (doc?.body?.firstElementChild as HTMLElement | null) || doc?.body;
+        if (stage && typeof ResizeObserver !== "undefined") {
           ro = new ResizeObserver(measure);
-          ro.observe(doc.body);
+          ro.observe(stage);
         }
       } catch {
         /* ignore */
