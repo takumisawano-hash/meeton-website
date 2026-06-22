@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
+import type { Lang } from "@/app/lib/i18n";
 
 // One large featured case (home) — big media + headline metric + quote, like
 // the existing Meeton site's featured story. 2026-06-10 per Takumi: with only
@@ -28,30 +29,50 @@ function clampHeroWidth(src: string): string {
   return src;
 }
 
-export default function FeaturedCase({ c }: { c: CaseCardData }) {
+// Chrome strings only — case CONTENT (company names, quotes, numbers) comes
+// from Notion (JA) and stays as-is; only the surrounding labels translate.
+const STR = {
+  ja: {
+    aria: (name: string) => `${name} の導入事例を読む`,
+    caseAlt: (name: string) => `${name} 導入事例`,
+    logoAlt: (name: string) => `${name} ロゴ`,
+    more: "この事例を読む →",
+    quote: (q: string) => `「${q}」`,
+  },
+  en: {
+    aria: (name: string) => `Read the ${name} customer story`,
+    caseAlt: (name: string) => `${name} customer story`,
+    logoAlt: (name: string) => `${name} logo`,
+    more: "Read this story →",
+    quote: (q: string) => `“${q}”`,
+  },
+} as const;
+
+export default function FeaturedCase({ c, lang = "ja" }: { c: CaseCardData; lang?: Lang }) {
   const logo = c.companyLogo || SLUG_LOGO[c.slug];
+  const s = STR[lang];
   return (
-    <Link href={`/cases/${c.slug}/`} aria-label={`${c.name} の導入事例を読む`} className="v2-fc">
+    <Link href={`/cases/${c.slug}/`} aria-label={s.aria(c.name)} className="v2-fc">
       <div className="v2-fc-media">
         {c.heroImage ? (
-          <Image src={clampHeroWidth(c.heroImage)} alt={`${c.name} 導入事例`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
+          <Image src={clampHeroWidth(c.heroImage)} alt={s.caseAlt(c.name)} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
         ) : (
           <div className="v2-fc-fallback">
-            {logo && <Image src={logo} alt={`${c.name} ロゴ`} width={220} height={64} style={{ height: 56, width: "auto", maxWidth: "64%", objectFit: "contain" }} />}
+            {logo && <Image src={logo} alt={s.logoAlt(c.name)} width={220} height={64} style={{ height: 56, width: "auto", maxWidth: "64%", objectFit: "contain" }} />}
           </div>
         )}
         {c.industry && <span className="v2-fc-tag">{c.industry}</span>}
       </div>
       <div className="v2-fc-body">
-        {logo && <Image src={logo} alt={`${c.name} ロゴ`} width={120} height={30} style={{ height: 26, width: "auto", objectFit: "contain", marginBottom: 14 }} />}
+        {logo && <Image src={logo} alt={s.logoAlt(c.name)} width={120} height={30} style={{ height: 26, width: "auto", objectFit: "contain", marginBottom: 14 }} />}
         {c.heroMetric && (
           <div className="v2-fc-metric-row">
             <span className="v2-fc-metric">{c.heroMetric}</span>
             {c.heroMetricLabel && <span className="v2-fc-metric-label">{c.heroMetricLabel}</span>}
           </div>
         )}
-        {c.quote && <p className="v2-fc-quote">「{c.quote}」</p>}
-        <span className="v2-fc-more">この事例を読む →</span>
+        {c.quote && <p className="v2-fc-quote">{s.quote(c.quote)}</p>}
+        <span className="v2-fc-more">{s.more}</span>
       </div>
       <style>{`
         .v2-fc{display:grid;grid-template-columns:1.1fr 1fr;gap:0;max-width:1080px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:24px;overflow:hidden;text-decoration:none;color:var(--text);box-shadow:0 1px 2px rgba(15,17,40,.04);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .35s}

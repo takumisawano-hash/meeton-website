@@ -5,6 +5,7 @@ import { productMedia } from "@/app/lib/product-media";
 import ProductAnim from "@/app/components/v2/ProductAnim";
 import { MotionSafeVideo } from "@/app/components/v2/AnimGate";
 import DemoFrame from "@/app/components/v2/DemoFrame";
+import type { Lang } from "@/app/lib/i18n";
 
 // Per-job media walkthrough: 4 alternating rows (掴む / 育てる / 商談化 / 追客),
 // each = product screenshot/video on one side, brief copy + 詳しく→LP on the
@@ -64,6 +65,62 @@ const ROWS: Row[] = [
   },
 ];
 
+// English copy for the walkthrough rows (consumed only when lang="en").
+// Same media/href/icon as JA; only the text changes.
+const ROWS_EN: Row[] = [
+  {
+    key: "chat",
+    stage: "① Capture",
+    title: "Capture visitors in conversation.",
+    desc: "Don't wait for the inquiry — the AI chat speaks to visitors first. It meets them on the pre-inquiry consideration ground, answers questions on the spot, and turns them into leads.",
+    points: ["No scenario design, install in 5 minutes", "Carries context from past browsing and chats"],
+    href: "/chat/",
+    icon: "chat",
+  },
+  {
+    key: "library",
+    stage: "① Nurture",
+    title: "Nurture prospects with content.",
+    desc: "Auto-nurture not-yet-ready prospects with content. It delivers materials matched to their interest, the AI explains them, and reads reactions to warm up the consideration.",
+    points: ["Auto-delivers content matched to each interest", "Nurtures by reaction, hands off once warm"],
+    href: "/library/",
+    icon: "library",
+  },
+  {
+    key: "calendar",
+    stage: "② Convert",
+    title: "Book the meeting on the spot.",
+    desc: "The moment intent peaks, the AI concierge carries them all the way to a booked meeting. Auto-assignment and CRM logging, all done before they leave.",
+    points: ["Instant booking path right after conversion", "Auto-assignment and automatic CRM logging"],
+    href: "/calendar/",
+    icon: "calendar",
+  },
+  {
+    key: "email",
+    stage: "③ Win back",
+    title: "Chase them down and bring them back.",
+    desc: "Never give up on leads who didn't book — the AI watches behavioral signals and follows up 1:1. When they turn hot again, it brings them back to a meeting.",
+    points: ["Follows up on signals like return visits and opens", "AI writes each message, autonomous until the goal is met"],
+    href: "/email/",
+    icon: "email",
+  },
+];
+
+const STR = {
+  ja: {
+    eyebrow: "動きで見る AI SDR",
+    title: "それぞれの仕事が、どう動くか。",
+    lede: "掴む・育てる・商談化する・追客する——AI SDR が現場で何をするのかを、動きのイメージで。",
+    more: "詳しく見る →",
+  },
+  en: {
+    eyebrow: "The AI SDR in motion",
+    title: "How each job actually works.",
+    lede: "Capture, nurture, convert, win back — see what the AI SDR does on the ground, brought to life.",
+    more: "Learn more →",
+  },
+} as const;
+
 function Media({ row }: { row: Row }) {
   const m = productMedia(row.key);
   return (
@@ -81,17 +138,19 @@ function Media({ row }: { row: Row }) {
   );
 }
 
-export default function StageMedia() {
+export default function StageMedia({ lang = "ja" }: { lang?: Lang }) {
+  const s = STR[lang];
+  const rows = lang === "en" ? ROWS_EN : ROWS;
   return (
     <Section tone="white">
       <SectionHead
-        eyebrow="動きで見る AI SDR"
-        title="それぞれの仕事が、どう動くか。"
-        lede="掴む・育てる・商談化する・追客する——AI SDR が現場で何をするのかを、動きのイメージで。"
+        eyebrow={s.eyebrow}
+        title={s.title}
+        lede={s.lede}
         align="center"
       />
       <div className="v2-sm-rows">
-        {ROWS.map((row, i) => (
+        {rows.map((row, i) => (
           <div key={row.key} className={`v2-sm-row ${i % 2 === 1 ? "rev" : ""}`}>
             <Media row={row} />
             <div className="v2-sm-body">
@@ -103,7 +162,7 @@ export default function StageMedia() {
                   <li key={p}>{p}</li>
                 ))}
               </ul>
-              <Link href={row.href} className="v2-sm-link">詳しく見る →</Link>
+              <Link href={row.href} className="v2-sm-link">{s.more}</Link>
             </div>
           </div>
         ))}

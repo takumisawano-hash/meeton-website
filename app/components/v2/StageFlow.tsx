@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { ProductIcon } from "@/app/components/v2/ui";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
+import type { Lang } from "@/app/lib/i18n";
 
 // Deck p7 "AI SDR の3つの仕事" — 3-stage flow (掴む→商談化→追客). Stage ②
 // (convert/商談化) is rendered on navy — the business emphasis, matching the
 // pricing page's highlighted 商談獲得プラン. Server-rendered; product cards
 // link to their LP.
+// Bilingual: `lang` (JA default) swaps stage/product labels via the *En fields
+// in stages.ts. JA omits the prop → byte-identical output.
 
-export default function StageFlow() {
+export default function StageFlow({ lang = "ja" }: { lang?: Lang }) {
+  const en = lang === "en";
   return (
     <div className="v2-stageflow">
       {STAGES.map((s, i) => {
@@ -25,10 +29,10 @@ export default function StageFlow() {
                 <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
                   {/* 20px < 24px large-text threshold → --cta fails on white; use --cta-ink there */}
                   <span style={{ fontFamily: "var(--fd)", fontSize: 20, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: dark ? "var(--cta)" : "var(--cta-ink)" }}>{s.num}</span>
-                  <h3 style={{ fontSize: 19, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{s.title} →</h3>
+                  <h3 style={{ fontSize: 19, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{en ? s.titleEn : s.title} →</h3>
                 </div>
                 <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: dark ? "var(--cta)" : "var(--cta-ink)", margin: "8px 0 14px", letterSpacing: ".02em" }}>
-                  {s.transform}
+                  {en ? s.transformEn : s.transform}
                 </div>
               </Link>
               <div style={{ display: "grid", gap: 10 }}>
@@ -48,8 +52,8 @@ export default function StageFlow() {
                         <ProductIcon kind={info.icon} size={20} />
                       </span>
                       <span>
-                        <span style={{ display: "block", fontSize: 14, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)" }}>{info.name}</span>
-                        <span style={{ display: "block", fontSize: 12.5, lineHeight: 1.6, color: dark ? "var(--on-navy-sub)" : "var(--text)", marginTop: 2 }}>{info.line}</span>
+                        <span style={{ display: "block", fontSize: 14, fontWeight: 800, color: dark ? "var(--on-navy)" : "var(--heading)" }}>{en ? info.nameEn : info.name}</span>
+                        <span style={{ display: "block", fontSize: 12.5, lineHeight: 1.6, color: dark ? "var(--on-navy-sub)" : "var(--text)", marginTop: 2 }}>{en ? info.lineEn : info.line}</span>
                       </span>
                     </Link>
                   );

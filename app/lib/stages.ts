@@ -11,8 +11,11 @@ export type Stage = {
   num: "①" | "②" | "③";
   id: "capture" | "convert" | "follow";
   title: string; // 掴む・育てる
+  titleEn: string; // English stage title (consumed only when lang="en")
   transform: string; // 潜在層 → リード
+  transformEn: string; // English transform line
   lede: string;
+  ledeEn: string;
   products: StageProduct[]; // products that do this stage's job
   /** primary landing page for this stage (the single nav link) */
   href: string;
@@ -23,8 +26,11 @@ export const STAGES: Stage[] = [
     num: "①",
     id: "capture",
     title: "掴む・育てる",
+    titleEn: "Capture & nurture",
     transform: "潜在層 → リード",
+    transformEn: "Prospects → Leads",
     lede: "問い合わせ前の潜在層を、会話と資料で掴んでリードに変え、検討を前に進める。",
+    ledeEn: "Engage pre-inquiry prospects with conversation and content, turn them into leads, and move the deal forward.",
     products: ["chat", "library"],
     href: "/capture/",
   },
@@ -32,8 +38,11 @@ export const STAGES: Stage[] = [
     num: "②",
     id: "convert",
     title: "商談化する",
+    titleEn: "Convert to meetings",
     transform: "リード → 商談",
+    transformEn: "Leads → Meetings",
     lede: "温度が高まった瞬間に、その場で商談予約まで運ぶ。離脱前に完結。",
+    ledeEn: "The moment intent peaks, book the meeting on the spot — done before they leave.",
     products: ["calendar"],
     href: "/calendar/",
   },
@@ -41,19 +50,51 @@ export const STAGES: Stage[] = [
     num: "③",
     id: "follow",
     title: "追客する",
+    titleEn: "Win back",
     transform: "逃したリードを回収",
+    transformEn: "Recover lost leads",
     lede: "予約しなかったリードを諦めず、AIが1:1で追い、再びホットになれば商談化へ戻す。",
+    ledeEn: "Don't give up on leads who didn't book — the AI follows up 1:1 and brings them back when they turn hot again.",
     products: ["email"],
     href: "/email/",
   },
 ];
 
 // Per-product short line shown inside the stage card (deck wording).
-export const PRODUCT_IN_STAGE: Record<StageProduct, { name: string; line: string; icon: string }> = {
-  chat: { name: "Meeton Chat", line: "会話で訪問者を掴み、リードに変える。", icon: "chat" },
-  library: { name: "Meeton Library", line: "資料で見込み客を自動ナーチャリングし、検討を育てる。", icon: "library" },
-  calendar: { name: "Meeton Calendar", line: "温度が高まった瞬間に、その場で商談予約まで完結。", icon: "calendar" },
-  email: { name: "Meeton Email", line: "予約しなかったリードを諦めず1:1で追い、再商談化へ戻す。", icon: "email" },
+// `nameEn` is the same brand name (English); `lineEn` is the English copy,
+// read only when lang="en". JA `name`/`line` stay intact.
+export const PRODUCT_IN_STAGE: Record<
+  StageProduct,
+  { name: string; nameEn: string; line: string; lineEn: string; icon: string }
+> = {
+  chat: {
+    name: "Meeton Chat",
+    nameEn: "Meeton Chat",
+    line: "会話で訪問者を掴み、リードに変える。",
+    lineEn: "Engages visitors in conversation and turns them into leads.",
+    icon: "chat",
+  },
+  library: {
+    name: "Meeton Library",
+    nameEn: "Meeton Library",
+    line: "資料で見込み客を自動ナーチャリングし、検討を育てる。",
+    lineEn: "Auto-nurtures prospects with content and grows their consideration.",
+    icon: "library",
+  },
+  calendar: {
+    name: "Meeton Calendar",
+    nameEn: "Meeton Calendar",
+    line: "温度が高まった瞬間に、その場で商談予約まで完結。",
+    lineEn: "Books the meeting on the spot the moment intent peaks.",
+    icon: "calendar",
+  },
+  email: {
+    name: "Meeton Email",
+    nameEn: "Meeton Email",
+    line: "予約しなかったリードを諦めず1:1で追い、再商談化へ戻す。",
+    lineEn: "Pursues no-show leads 1:1 and brings them back to a meeting.",
+    icon: "email",
+  },
 };
 
 /** Which stage a product belongs to (for stage badges on LPs). */

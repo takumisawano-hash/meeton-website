@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Lang } from "@/app/lib/i18n";
 
 // Photo-card case format matching the existing Meeton site (cs-card): media
 // on top (heroImage or gradient fallback) + industry tag, body with company
@@ -22,20 +23,39 @@ const SLUG_LOGO: Record<string, string> = {
   "univis-multi-service-3month-2deals": "/clients/univis.png",
 };
 
-export default function CaseCardGrid({ cases }: { cases: CaseCardData[] }) {
+// Chrome strings only — case CONTENT (Notion JA) is unchanged.
+const STR = {
+  ja: {
+    aria: (name: string) => `${name} の導入事例を読む`,
+    caseAlt: (name: string) => `${name} 導入事例`,
+    logoAlt: (name: string) => `${name} ロゴ`,
+    more: "この事例を読む →",
+    quote: (q: string) => `「${q}」`,
+  },
+  en: {
+    aria: (name: string) => `Read the ${name} customer story`,
+    caseAlt: (name: string) => `${name} customer story`,
+    logoAlt: (name: string) => `${name} logo`,
+    more: "Read this story →",
+    quote: (q: string) => `“${q}”`,
+  },
+} as const;
+
+export default function CaseCardGrid({ cases, lang = "ja" }: { cases: CaseCardData[]; lang?: Lang }) {
+  const s = STR[lang];
   return (
     <div className="v2-cs-grid">
       {cases.map((c) => {
         const logo = c.companyLogo || SLUG_LOGO[c.slug];
         return (
-          <Link key={c.slug} href={`/cases/${c.slug}/`} aria-label={`${c.name} の導入事例を読む`} className="v2-cs-card">
+          <Link key={c.slug} href={`/cases/${c.slug}/`} aria-label={s.aria(c.name)} className="v2-cs-card">
             <div className="v2-cs-media">
               {c.heroImage ? (
-                <Image src={c.heroImage} alt={`${c.name} 導入事例`} fill sizes="(max-width:760px) 100vw, 560px" style={{ objectFit: "cover" }} />
+                <Image src={c.heroImage} alt={s.caseAlt(c.name)} fill sizes="(max-width:760px) 100vw, 560px" style={{ objectFit: "cover" }} />
               ) : (
                 <div className="v2-cs-media-fallback">
                   {logo ? (
-                    <Image src={logo} alt={`${c.name} ロゴ`} width={180} height={56} style={{ height: 48, width: "auto", maxWidth: "62%", objectFit: "contain" }} />
+                    <Image src={logo} alt={s.logoAlt(c.name)} width={180} height={56} style={{ height: 48, width: "auto", maxWidth: "62%", objectFit: "contain" }} />
                   ) : (
                     <span className="v2-cs-fallback-name">{c.name}</span>
                   )}
@@ -46,7 +66,7 @@ export default function CaseCardGrid({ cases }: { cases: CaseCardData[] }) {
             <div className="v2-cs-body">
               <div className="v2-cs-head">
                 {logo ? (
-                  <Image src={logo} alt={`${c.name} ロゴ`} width={104} height={28} style={{ height: 24, width: "auto", objectFit: "contain" }} />
+                  <Image src={logo} alt={s.logoAlt(c.name)} width={104} height={28} style={{ height: 24, width: "auto", objectFit: "contain" }} />
                 ) : (
                   <span className="v2-cs-company">{c.name}</span>
                 )}
@@ -57,8 +77,8 @@ export default function CaseCardGrid({ cases }: { cases: CaseCardData[] }) {
                   {c.heroMetricLabel && <span className="v2-cs-metric-label">{c.heroMetricLabel}</span>}
                 </div>
               )}
-              {c.quote && <p className="v2-cs-quote">「{c.quote}」</p>}
-              <span className="v2-cs-more">この事例を読む →</span>
+              {c.quote && <p className="v2-cs-quote">{s.quote(c.quote)}</p>}
+              <span className="v2-cs-more">{s.more}</span>
             </div>
           </Link>
         );

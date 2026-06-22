@@ -417,12 +417,400 @@ export const GLOSSARY: Record<string, GlossaryTerm> = {
   }
 } as Record<string, GlossaryTerm>;
 
+// ─────────────────────────────────────────────────────────────────────
+// English mirror (GLOSSARY_EN). Same slugs/cluster/related as GLOSSARY,
+// faithful translation — no new claims/numbers; figures and brand names
+// (Meeton ai, DynaMeet, etc.) kept exact. Rendered by GlossaryLP when
+// lang="en" via /en/glossary/* + /en/glossary.
+// ─────────────────────────────────────────────────────────────────────
+
+export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
+  "ai-sdr": {
+    slug: "ai-sdr",
+    term: "AI SDR",
+    cluster: "ai-sdr",
+    shortDef:
+      "AI SDR (AI Sales Development Representative) is an umbrella term for software in which an AI agent autonomously performs, 24/7, the work that human inside-sales reps (SDRs) used to do—\"initial inquiry handling, lead qualification, content recommendation, meeting setting, and follow-up.\" Unlike a mere scripted chatbot, its biggest characteristic is that it interprets conversational context and buying intent and chooses the right action at the right time.",
+    body: [
+      "An SDR (Sales Development Representative) is a role dedicated to the initial handling and qualification of prospects, and is generally widespread in Western B2B sales organizations. AI has become able to autonomously handle the repetitive tasks an SDR does daily—instant replies to inquiries, lead scoring, meeting booking via calendar integration, and follow-up email sending. This \"AI that functions as an SDR\" is collectively called an AI SDR.",
+      "In B2B purchasing, \"contact timing\" is directly tied to the meeting-conversion rate. According to a joint study by InsideSales.com and the MIT Sloan School of Management (Lead Response Management Study), the contact success rate differs by up to 8x between replying to an inbound lead within 5 minutes versus more than 5 minutes. Meanwhile, Forrester research reports that 57–70% of B2B buyers have already completed their own research before they first contact a sales rep, so a mechanism that does not miss the moment a prospect searches and visits on their own has become a competitive advantage. The AI SDR is attracting attention as something that fills this gap.",
+      "AI SDRs are broadly classified into \"outbound\" and \"inbound\" types. The outbound type auto-generates and sends email / LinkedIn outreach to a target list and continues the conversation based on replies. The inbound type detects in real time prospects who visit a website or form and handles conversation, content recommendation, and scheduling end to end. In both, the current mainstream is a hybrid model where \"AI handles a large volume of repetitive work and human reps focus on closing and complex negotiation.\"",
+      "Meeton ai, developed by DynaMeet, is positioned as an inbound-focused AI SDR Platform. Four modules placed on the website (Meeton Calendar / Chat / Library / Email) work together to autonomously execute, end to end, conversation with visitors, recommendation of relevant content, automatic booking of meeting slots, and follow-up toward meeting conversion. Refer to it as one example of a product approach to the challenge of \"not missing meeting opportunities even when sales reps are unavailable.\"",
+    ],
+    faq: [
+      {
+        q: "What's the difference between an AI SDR and a chatbot?",
+        a: "A traditional chatbot only replies along pre-defined scenarios, whereas an AI SDR combines a large language model (LLM) with buying-intent analysis to autonomously choose the best next action (content recommendation, scheduling, escalation) based on conversational context, the visitor's behavior history, and the content on hand—this is the fundamental difference.",
+      },
+      {
+        q: "Will AI SDRs replace human SDRs?",
+        a: "At present, a \"role split\" rather than \"complete replacement\" is the realistic view. The mainstream as of 2026 is a hybrid model where AI handles high-volume repetitive processing (initial handling, scoring, follow-up) and human reps handle complex negotiation, trust building, and closing.",
+      },
+      {
+        q: "Does how you use an AI SDR change between inbound and outbound?",
+        a: "Yes. An outbound AI SDR automates outreach and reply handling to a target list, aiming to execute new prospecting at scale. An inbound AI SDR specializes in immediately handling, qualifying, and guiding to booking the prospects who—already interested in your service—visit your website or inquiry form, so the purpose and design philosophy differ.",
+      },
+    ],
+    related: ["shodanka-ritsu", "mql-sql", "inbound-sales"],
+    metaTitle: "What is an AI SDR? Definition, how it works, and the difference from a traditional SDR｜Meeton ai Glossary",
+    metaDescription:
+      "An AI SDR (AI Sales Development Representative) is an AI agent that autonomously performs lead handling, content recommendation, meeting booking, and follow-up. We clearly explain its definition, how it works, and the benefits of adoption in B2B sales.",
+  },
+  "speed-to-lead": {
+    slug: "speed-to-lead",
+    term: "Speed to Lead",
+    cluster: "calendar",
+    shortDef:
+      "Speed to Lead is the time it takes from the moment a prospect shows interest—via a form submission, inquiry, etc.—to when a sales rep makes first contact. This speed is a critical sales metric directly tied to the lead meeting-conversion rate.",
+    body: [
+      "Speed to Lead refers to the time from when an inbound lead arises to when the first sales contact is made. In B2B sales, a lead's \"heat\" cools rapidly over time. A joint study by InsideSales.com (now XANT) and the Kellogg School of Management (MIT) showed that contacting within 5 minutes of a lead's creation makes the probability of successful lead qualification 21x higher than contacting 30 minutes later. The same study also reports that a first contact within 5 minutes makes the probability of establishing a meaningful conversation 100x higher than contacting 30 minutes later.",
+      "The industry-average initial response time remains long, and multiple surveys show the average response time of B2B companies is on the order of tens of hours. A Harvard Business Review study reports that companies responding within 1 hour of a form submission were 7x more likely to have a meaningful conversation with a key person than companies that took 2 hours or more. Meanwhile, after 24 hours, the probability of qualification reportedly drops to less than one-sixtieth. According to HubSpot's 2024 State of Marketing Report, 82% of consumers expect an \"immediate response\" to an inquiry, and that benchmark is shifting from minutes to seconds.",
+      "Behind why Speed to Lead is especially emphasized is the change in modern buying behavior. A CEB (now Gartner) study finds that B2B buyers have already completed about 57% of the buying process by the time they first contact a sales rep. Forrester Research also reports that 68% of B2B buyers prefer to gather information themselves on the web over interacting directly with a sales rep. In other words, the very moment a buyer voluntarily makes contact is the \"golden window\" of highest buying intent, and building a system that does not miss that moment becomes the source of a competitive edge.",
+      "Effective means to shorten Speed to Lead include automatic email / SMS sending right after a form submission, immediate conversation start via chatbot, real-time routing to a rep by AI, and a mechanism that guides the prospect straight into a meeting booking during the conversation. Meeton ai, as an AI SDR Platform that autonomously handles conversation, content recommendation, booking, and follow-up the moment a lead arises on the website, can be used in the context of automating the shortening of Speed to Lead.",
+    ],
+    faq: [
+      {
+        q: "What is the target value (benchmark) for Speed to Lead in minutes?",
+        a: "Based on the joint study by InsideSales.com and the Kellogg School of Management, \"within 5 minutes\" is widely used as a benchmark in the industry. A growing number of leading companies aim for within 60 seconds using chatbots and AI, but it is important to set a realistic target that fits your own industry and customer characteristics.",
+      },
+      {
+        q: "How does Speed to Lead relate to SEO and marketing?",
+        a: "The faster acquired leads are converted into meetings, the higher the ROI of ad spend and content investment. If the initial response to a hard-won lead is delayed, competitors may get ahead or buying intent may cool, so marketing results are eroded at the sales stage. Speed to Lead also functions as an alignment metric between marketing and sales.",
+      },
+      {
+        q: "Is it hard for Japanese B2B companies to shorten Speed to Lead?",
+        a: "In Japan, the culture of inserting a thank-you page after an inquiry and the prevalence of flows where reps manually assign leads tend to delay the initial response. However, by starting with measures that can be introduced without greatly changing cultural practices—such as auto-replies after a form submission or instant chatbot activation—you can shorten it step by step.",
+      },
+    ],
+    related: ["inside-sales", "ai-sdr", "shodanka-ritsu"],
+    metaTitle: "What is Speed to Lead? The importance of response speed that determines meeting-conversion rate｜Meeton ai Glossary",
+    metaDescription:
+      "Speed to Lead is the time from a lead's creation to the first sales contact. Studies show responding within 5 minutes makes the qualification rate 21x higher, making it a critical metric that determines B2B sales success.",
+  },
+  "shodanka-ritsu": {
+    slug: "shodanka-ritsu",
+    term: "Meeting-conversion rate",
+    cluster: "ai-sdr",
+    shortDef:
+      "Meeting-conversion rate is a sales KPI indicating the proportion of leads (prospects) acquired in a given period that actually advanced to a meeting. It is calculated as \"meeting-conversion rate (%) = number of converted meetings ÷ total leads × 100\" and is widely used as a basic metric for measuring pipeline efficiency from marketing to sales.",
+    body: [
+      "The meeting-conversion rate visualizes not the \"quantity\" of lead acquisition but its \"quality\" and \"conversion efficiency.\" For example, if 20 of 100 monthly leads advance to a meeting, the meeting-conversion rate is 20%. In typical B2B companies it is often cited as around 10–15% for outbound (cold calls / emails) and around 35–40% for inbound (web inquiries / content downloads), but because it varies greatly by industry, deal price, and channel mix, it is important to use your own past results as a baseline.",
+      "One of the biggest factors affecting the meeting-conversion rate is \"contact speed.\" According to a Harvard Business Review study, there is a large difference in connect (conversation-established) probability between calling back within 5 minutes of an inquiry and calling back 30 minutes later. Velocify research also reports that responding within 1 minute significantly improves the meeting-conversion rate. In reality, however, a study (2026 Blazeo survey) shows the average B2B company's lead response time exceeds 42 hours, so improving speed tends to be an immediate lever for raising the meeting-conversion rate.",
+      "When the meeting-conversion rate is low, the causes can be broadly classified into three. First, a \"lead-quality problem\"—many off-target leads are flowing in. Second, \"insufficient nurturing\"—continuous information provision to early-stage leads is lacking, and they drop off before their interest rises. Third, \"delayed or missed follow-up\"—relying on reps' manual handling creates inconsistency. Effective improvement approaches include certainty screening via pre-information gathering such as BANT, staged nurturing using MA tools, and systematizing inside sales to automate contact timing.",
+      "Note that in research on B2B buying behavior (Gartner / Forrester studies), buyers are said to complete most of the buyer journey through self-research before contacting a sales rep, so the self-service experience on the website tends to be directly tied to the meeting-conversion rate. Meeton ai, provided by DynaMeet, has four modules (Meeton Calendar / Chat / Library / Email) that, as an AI SDR resident on the website, autonomously handle conversation with visitors, content recommendation, meeting booking, and follow-up, and is used to simultaneously improve both speed and zero-misses from inquiry to meeting conversion.",
+    ],
+    faq: [
+      {
+        q: "Please tell me the formula for the meeting-conversion rate.",
+        a: "Meeting-conversion rate (%) = number of converted meetings ÷ total leads × 100. Standardizing the definition of \"lead\" used as the denominator (all inquiries, or MQL only, etc.) internally is a prerequisite for accurate measurement.",
+      },
+      {
+        q: "What is the industry average meeting-conversion rate?",
+        a: "It varies widely by industry, channel, and product, so it cannot be stated uniformly, but benchmarks often cited in Japan's B2B space are around 35–40% for inbound leads and around 10–15% for outbound cold leads. The most practical approach is to run a PDCA cycle based on your own past results.",
+      },
+      {
+        q: "How does the meeting-conversion rate differ from the win (close) rate?",
+        a: "The meeting-conversion rate shows the conversion efficiency of \"lead → meeting,\" while the win rate (close rate) shows the conversion efficiency of \"meeting → contract.\" The former is often used to evaluate marketing / inside sales and the latter to evaluate field sales, and combining both lets you judge the overall health of the pipeline.",
+      },
+    ],
+    related: ["ai-sdr", "mql-sql", "inbound-sales"],
+    metaTitle: "What is the meeting-conversion rate? Definition, formula, averages, and how to improve｜Meeton ai Glossary",
+    metaDescription:
+      "The meeting-conversion rate is a sales KPI showing the proportion of acquired leads that actually advanced to a meeting. We clearly explain the formula, industry averages, the inbound vs. outbound difference, and its relationship with Speed to Lead—essentials for B2B sales and marketing.",
+  },
+  "inside-sales": {
+    slug: "inside-sales",
+    term: "Inside sales",
+    cluster: "calendar",
+    shortDef:
+      "Inside sales is a sales method (and a specialized function) that uses non-face-to-face channels such as phone, email, and online meetings to handle everything from nurturing prospects to creating meetings. Divided in labor from field sales, it nurtures the leads marketing acquires into high-certainty opportunities and hands them off to closers in a state where the win probability has been raised.",
+    body: [
+      "Inside sales is a method of conducting sales activities non-face-to-face from an office, home, or elsewhere, also called \"in-house sales.\" In Japan it was initially often perceived as an extension of telemarketing, but it is now positioned as a strategic function within \"The Model\"–type divided organizations. It receives the leads generated by marketing, nurtures the relationship while confirming the prospect's issues, budget, and decision-making process non-face-to-face, and hands them off to field sales or a contract owner once the likelihood of meeting conversion rises. Because it needs no visit cost, its biggest productivity advantage is that the number of leads one person can handle is far higher than in field sales.",
+      "The area inside sales covers is often divided into \"SDR (Sales Development Representative)\" and \"BDR (Business Development Representative)\" by the lead's inflow route. SDRs receive inbound leads such as web forms and content downloads and aim for meeting conversion mainly targeting SMBs—the \"response type.\" BDRs proactively approach based on targeting lists and create new touchpoints with large enterprises—the \"new-prospecting type.\" Because both presuppose high-frequency contact without face-to-face travel, integration with CRM and sales-engagement tools is a practical prerequisite.",
+      "Behind the attention to inside sales is the change in buying behavior. It is widely known from a CEB (now Gartner) study that B2B buyers first contact a sales rep at a stage where the buying process is about 57–70% complete, and subsequent studies show the trend that \"time spent in direct interaction with sales is only 17% of the entire purchase\" (Gartner) is strengthening. Therefore, the role of inside sales—continuing to maintain touchpoints via email and content while the buyer self-learns—is emphasized as directly tied to the win rate. Also, a large-scale study by the MIT Sloan School of Management and InsideSales.com (2007, published in HBR 2011) reports that contacting an inbound lead within 5 minutes makes the contact rate about 100x and the meeting-conversion rate about 21x higher than contacting 30 minutes later, making \"Speed to Lead\" one of the most important KPIs in inside sales.",
+      "With the spread of AI and automation, the practice of inside sales is changing rapidly from 2024 to 2026. Instant lead notification, automatic follow-up emails, and automated meeting coordination are becoming standardized, and the area inside-sales reps should focus on is shifting to \"quality of discovery\" and \"timing optimization.\" Meeton ai is an AI SDR Platform that runs on the website, and through four modules—chat handling (Meeton Chat), content recommendation (Meeton Library), meeting booking (Meeton Calendar), and continuous follow-up (Meeton Email)—it is used to automate the initial-contact phase of inside sales 24/7/365.",
+    ],
+    faq: [
+      {
+        q: "What's the difference between inside sales and telemarketing?",
+        a: "Telemarketing is a single-function activity whose main purpose is to win appointments via calls, whereas inside sales is a strategic function that handles multiple processes such as lead nurturing, issue discovery, meeting conversion, and information provision. Also, while telemarketing emphasizes \"quantity\" by churning through numbers, inside sales emphasizes optimizing \"quality\" and \"timing\" based on CRM data and behavior history.",
+      },
+      {
+        q: "How should I divide roles with field sales?",
+        a: "A common division pattern is for inside sales to handle \"lead nurturing through the meeting-conversion (SQL) decision\" and for field sales to handle \"proposal through closing.\" Quantifying the handoff criteria (budget, issue, decision timing, certainty) with a framework such as \"BANT\" stabilizes the quality and speed of the handoff.",
+      },
+      {
+        q: "What are the main KPIs for inside sales?",
+        a: "Commonly set KPIs include contact rate (connect rate), meeting-conversion rate (SQL conversion rate), lead time to first contact (Speed to Lead), monthly meetings per rep, and nurturing continuation rate. To balance the volume of lead inflow and the quality of meeting conversion, it is common to set a combination of volume metrics and quality metrics.",
+      },
+    ],
+    related: ["speed-to-lead", "ai-sdr", "shodanka-ritsu"],
+    metaTitle: "What is inside sales? Definition, role, and the difference from field sales｜Meeton ai Glossary",
+    metaDescription:
+      "Inside sales is a sales method that uses non-face-to-face channels such as phone, email, and web meetings to handle everything from nurturing prospects to creating meetings. We clearly explain the SDR/BDR difference, Speed to Lead, and changes in the buying process—essentials for B2B sales professionals.",
+  },
+  "lead-nurturing": {
+    slug: "lead-nurturing",
+    term: "Lead nurturing",
+    cluster: "email",
+    shortDef:
+      "Lead nurturing is a marketing activity that continuously provides information and communicates with acquired prospects (leads) until their buying intent rises, nurturing them toward meeting conversion and closing. Derived from \"nurture,\" its purpose is to not abandon latent prospects who do not buy immediately, but to maintain the relationship and hand them off to sales at the right time.",
+    body: [
+      "In B2B buying behavior, prospects are said to have already self-completed 57–70% of the buying process before they first contact a sales rep (Forrester/CEB studies). In other words, leads a company judges \"too early\" are advancing comparison and consideration beneath the surface, and abandoning them risks losing them to competitors. Lead nurturing fills this gap—a mechanism that keeps delivering value even during the period when leads are \"researching on their own.\"",
+      "Representative measures span a wide range: email sequences (step emails), webinars, white-paper offers, case-study article distribution, retargeting ads, and more. The common point is \"content design matched to the buying stage\"—staging it gradually, such as issue-raising content in the awareness phase, comparison / ROI appeals in the consideration phase, and case studies / trial guidance in the decision phase. There is data that companies that design nurturing appropriately can increase meeting-converted leads by 50%+ while reducing acquisition cost by about 33% compared with companies that do not (Forrester Research).",
+      "As a premise for nurturing to work, \"Speed to Lead (initial response speed)\" cannot be overlooked either. An MIT/InsideSales.com study shows that responding within 5 minutes of an inquiry versus 30 minutes later can produce up to a 100x difference in contact success rate. Nurturing is often discussed in the context of \"long-term cultivation,\" but immediate response to hot leads and mid-to-long-term follow-up are two wheels of the same cart—results are hard to achieve if either is missing.",
+      "Meeton ai (an AI SDR Platform) autonomously handles conversation with website visitors, content recommendation, meeting booking, and follow-up emails across four modules (Meeton Calendar / Chat / Library / Email). By having AI handle the initial follow-up and continuous nurturing that traditionally relied on people, 24/7, it is designed to cover both the Speed-to-Lead challenge and lead abandonment. After understanding lead nurturing as a term, use this as a reference when considering how to automate its implementation.",
+    ],
+    faq: [
+      {
+        q: "What's the difference between lead nurturing and lead generation?",
+        a: "Lead generation is the \"activity of newly acquiring prospects\"—ads, SEO, trade shows, etc. Lead nurturing is the downstream process, the \"activity of warming up acquired leads and raising their buying intent.\" The two are not independent measures but are generally designed as a continuous process within overall demand generation.",
+      },
+      {
+        q: "What types of content are best for nurturing?",
+        a: "It differs by buying stage. Blog articles, videos, and webinars are effective for the awareness / issue-understanding phase; white papers, case-study materials, and ROI calculation tools tend to function well in the comparison / consideration phase. In the decision phase, free trials, demo guidance, and customer-story interviews push meeting conversion forward. As a channel, email remains the mainstay—there is a report that the average CTR of nurturing emails is about 2.7x that of general emails (Sender.net survey).",
+      },
+      {
+        q: "Can you start lead nurturing without an MA tool?",
+        a: "At a small scale, yes. You can achieve basic nurturing just by managing leads by stage in a CRM, building a content calendar in a spreadsheet, and setting up sequences with an email tool (such as Mailchimp or HubSpot's free plan). However, as the number of leads grows, scoring and behavior-triggered delivery can no longer keep up manually, so once you exceed a certain scale, consider introducing an MA tool or an AI agent.",
+      },
+    ],
+    related: ["sales-engagement", "ai-sdr", "shodanka-ritsu"],
+    metaTitle: "What is lead nurturing? Meaning, methods, and tips for success, clearly explained｜Meeton ai Glossary",
+    metaDescription:
+      "Lead nurturing is a cultivation activity that provides continuous information to acquired prospects to raise their buying intent. 57–70% of B2B buyers decide through self-research, and abandoning them lets them flow to competitors. We explain methods, FAQ, and tool-selection points.",
+  },
+  "mql-sql": {
+    slug: "mql-sql",
+    term: "MQL / SQL",
+    cluster: "ai-sdr",
+    shortDef:
+      "An MQL (Marketing Qualified Lead) is a prospect the marketing team has judged \"worth handing off to sales,\" and an SQL (Sales Qualified Lead) is a lead the sales team has further judged \"can be converted into a meeting.\" The two are \"stages\" where the same lead's label changes as it advances through the buying process, and they function as a shared definition for articulating the collaboration criteria between marketing and sales.",
+    body: [
+      "An MQL (Marketing Qualified Lead) refers to a prospect that meets the scoring criteria set by the marketing team. Typical judgment materials are a combination of behavior data—viewing specific pages, downloading content, attending webinars, email open rates—plus attribute information such as industry, company size, and job title. Many companies adopt a staged funnel where a lead starting as a MAL (Marketing Accepted Lead) is promoted to MQL through nurturing. What matters is that the definition of MQL is something each company designs to fit its own product, sales cycle, and organizational structure—there is no industry-wide fixed value.",
+      "An SQL (Sales Qualified Lead) refers to a lead that the sales team (or inside sales) receiving the MQL has scrutinized with criteria such as BANT (Budget / Authority / Need / Timeline) and judged \"can advance to an appointment / meeting.\" In Japanese B2B organizations, there are cases that set four stages—MAL → MQL → SAL (Sales Accepted Lead) → SQL—and cases that omit SAL and manage in two stages, MQL → SQL. Setting an SAL lets you separate the \"marketing send-off criteria\" from the \"inside-sales acceptance criteria,\" preventing the back-and-forth pushing of low-quality leads and making cross-team consensus easier.",
+      "The biggest value the MQL/SQL distinction brings to an organization is the \"clarification of handoff criteria\" that lets marketing and sales speak the same language. If this definition is operated while ambiguous, sales become dissatisfied that \"the leads marketing sends are low quality\" and marketing feels that \"sales don't follow up properly\"—the typical siloing occurs. Also, according to studies such as Forrester, 57–70% of B2B buyers have already finished gathering information before contacting a sales rep, so incorporating lead signals at that stage as MQL criteria has become indispensable in modern inbound marketing.",
+      "The MQL-to-SQL conversion rate varies greatly by industry and channel, but around 12–21% is widely cited as a reference value for B2B SaaS (First Page Sage, 2026). The speed of first contact with a lead is also directly tied to the conversion rate. According to multiple studies such as the MIT Lead Response Management Study, there is a large difference in contact success rate between responding within 5 minutes of an inquiry and responding 30 minutes or later. Meeton ai's AI SDR modules (Meeton Chat / Calendar) are designed as one response to this \"Speed to Lead\" challenge, and are used to automate conversation, content recommendation, and meeting booking the moment an MQL is detected on the website.",
+    ],
+    faq: [
+      {
+        q: "Who decides MQL and SQL?",
+        a: "MQL is judged by the marketing team based on the scoring and behavior criteria it sets, and SQL is judged by the sales team (or inside sales) from the perspective of BANT and meeting feasibility. What matters is documenting a definition both teams have agreed on and reviewing it periodically, which prevents misalignment between organizations.",
+      },
+      {
+        q: "How should I set the MQL / SQL criteria?",
+        a: "The starting point is to analyze your own past deal data and extract the behavior patterns and attributes common to leads that closed. In a scoring model, it is common to assign points to page views, form submissions, content downloads, etc., and define leads exceeding a threshold as MQLs. The initial values can be provisional; an agile operation that adjusts quarterly based on actual data is recommended.",
+      },
+      {
+        q: "How do I promote an MQL to an SQL?",
+        a: "A combination of lead nurturing (continuous information provision via email and content) and outreach by inside sales at the right timing is effective. In particular, the speed of first contact right after an inquiry or behavior signal occurs is said to affect the contact rate and meeting-conversion rate, so building a system to approach \"while the lead's heat is high\" is the key to improving the conversion rate.",
+      },
+    ],
+    related: ["ai-sdr", "shodanka-ritsu", "inbound-sales"],
+    metaTitle: "What are MQL / SQL? Definitions, differences, and how to set them, clearly explained｜Meeton ai Glossary",
+    metaDescription:
+      "An MQL (Marketing Qualified Lead) is a lead marketing judged \"worth handing to sales,\" and an SQL (Sales Qualified Lead) is a lead sales judged \"can be converted into a meeting.\" We explain the differences, judgment criteria, and conversion-rate benchmarks from a B2B practitioner's perspective.",
+  },
+  "inbound-sales": {
+    slug: "inbound-sales",
+    term: "Inbound sales",
+    cluster: "ai-sdr",
+    shortDef:
+      "Inbound sales is a sales method that designs a flow in which prospects contact and inquire with a company on their own through content or ads, and then connects that interest to meetings and deals. It is a concept paired with outbound sales—where the company unilaterally approaches via telemarketing or cold visits—and, against the backdrop of growing self-learning behavior by customers due to digitalization, its adoption is advancing in Japan's B2B market as well.",
+    body: [
+      "The biggest difference between inbound sales and outbound sales is \"who moves first.\" Outbound sales is a proactive approach where reps call and email a target list, whereas inbound sales is where the prospect contacts the company through searches, content downloads, webinar attendance, and so on. In B2B purchasing, as shown by studies indicating buyers self-complete about 57–70% of the buying process before they first contact a sales rep (CEB/Gartner research reports 57%, Forrester research reports 70%), customers talk to sales after already finishing a considerable amount of information gathering. Inbound sales aims to raise the warmth at the first contact by maintaining a presence with quality content during this \"self-learning phase before contact.\"",
+      "The main measures of inbound sales are broadly divided into two stages: \"inflow acquisition\" and \"lead nurturing / conversion.\" For inflow acquisition, representative measures are SEO-conscious owned-media articles, white papers, webinars, social posting, and press releases. In the lead nurturing / conversion stage, the keys are email sequences and lead scoring using MA tools, and rapid follow-up after an inquiry. A Harvard Business Review study (2011) reports that companies responding to a web inquiry within 1 hour were about 7x more likely to convert the lead into a meeting than companies responding after 1 hour (so-called \"Speed to Lead\"). Alongside enriching inflow measures, organizing the response speed and response quality after an inquiry is directly tied to results.",
+      "It is also worth organizing the merits and demerits of inbound sales compared with outbound sales. Merits include: (1) leads that voluntarily show interest tend to have higher win rates, (2) content assets keep generating inflow over the long term, so mid-to-long-term cost efficiency is high, and (3) it is less likely to give customers the impression of being \"sold to.\" On the other hand, you must keep in mind demerits: (1) it takes an investment period on the order of several months until search inflow and white-paper downloads stabilize, (2) it is hard to narrow down to specific companies / targets you want to appeal to, and (3) an overly passive design risks missing harvesting opportunities. In practice, many companies adopt a hybrid strategy that combines outbound-style follow-up for leads nurtured via inbound.",
+      "In the context of strengthening the inbound flow on a website, the use of chatbots and conversational AI has been attracting attention in recent years. By setting up a mechanism that not only has an inquiry form but also answers questions in real time according to the visitor's interest, recommends content, and completes meeting booking, you can expect effects such as \"not missing nighttime / holiday inflow\" and \"completing initial discovery even during hours when no sales rep is present.\" Meeton ai (DynaMeet) is an AI SDR platform designed to automate this inbound flow, and its four modules—conversation, content recommendation, scheduling, and follow-up (Meeton Calendar / Chat / Library / Email)—can be embedded into a website. Returning to the perspective of a term explanation, it is important to understand that inbound sales is not merely \"waiting sales\" but a systematic sales model that demands the combined strength of content investment, flow design, response speed, and nurturing logic.",
+    ],
+    faq: [
+      {
+        q: "What's the difference between inbound sales and inbound marketing?",
+        a: "Inbound marketing refers to the overall \"inflow acquisition\" activities that attract prospects to your company through SEO, content, social, and so on. Inbound sales refers to the \"sales process\" that converts the leads generated by that inflow into meetings and deals. A common division has marketing create leads and sales handle closing, but at SMBs they are often operated together.",
+      },
+      {
+        q: "Can inbound sales alone complete new prospecting?",
+        a: "It depends on industry and phase, but in many situations it is difficult to complete all new prospecting with inbound alone. During the startup period until content assets mature, inflow is low, and in cases requiring an approach narrowed to specific companies you want to appeal to, outbound is effective. In practice, a hybrid operation—acquiring high-warmth leads via inbound while running proactive outbound approaches to specific targets in parallel—has become mainstream.",
+      },
+      {
+        q: "Where should I start to begin inbound sales?",
+        a: "The standard approach is to first organize the persona and issues—\"whose what problem do you solve\"—and from there decide the priority of content such as SEO articles and white papers. At the same time, it is important to prepare the post-inflow CTA (content download / inquiry form / chat) and the post-inquiry response flow (auto-reply / rep assignment / follow-up email); even if you only increase inflow, the meeting-conversion rate will not rise if response speed or quality is low.",
+      },
+    ],
+    related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
+    metaTitle: "What is inbound sales? The difference from outbound and its methods｜Meeton ai Glossary",
+    metaDescription:
+      "Inbound sales is a sales method that designs a flow in which prospects inquire and request materials on their own, then connects this to meetings. We clearly explain the difference from outbound, representative measures, and Speed-to-Lead statistics for B2B professionals.",
+  },
+  "sales-engagement": {
+    slug: "sales-engagement",
+    term: "Sales engagement",
+    cluster: "email",
+    shortDef:
+      "Sales engagement is an umbrella term for the sales strategy and process that systematically manages and optimizes all the communication sales reps conduct with prospects and existing customers across multiple channels—email, phone, social, chat, etc.—simultaneously achieving trust building and improved win certainty. In recent years it often also refers to the software that automates and analyzes this (a sales engagement platform).",
+    body: [
+      "The biggest reason sales engagement is attracting attention is the change in B2B buying behavior. According to Forrester research, about 70% of B2B buyers have already completed most of the buying process by the time they first contact a sales rep. In other words, customers narrow down candidates via owned media, word of mouth, and comparison sites before sales reach out. In such an environment, \"waiting sales\" lose opportunities, and proactive engagement that delivers valuable information through the right channel at the right time becomes the key to differentiation.",
+      "The practical core of sales engagement lies in \"sequences (automation of contact procedures)\" and \"interaction measurement.\" By designing in advance the order and timing of email / phone / social approaches per prospect and tracking reactions (opens, clicks, replies) in real time, you optimize the next action. Also, a joint study by Harvard Business Review and MIT showed that the meeting-conversion rate when making first contact within 5 minutes of an inquiry is up to 21x that when contacting 30 minutes later, making it clear that Speed to Lead (initial speed) greatly affects engagement quality.",
+      "It is also worth grasping the difference from CRM / SFA. A CRM's main purpose is accumulating and managing customer information, and SFA specializes in visualizing and managing the progress of the sales process. By contrast, sales engagement focuses on \"actual communication execution and effect measurement\" and generally functions complementarily in coordination with CRM / SFA. It is also easily confused with sales enablement, but whereas enablement is \"developing reps / strengthening organizational capability (internal-facing),\" sales engagement is an \"activity that raises the quality and quantity of the touchpoints with customers themselves (external-facing).\"",
+      "With the evolution of AI, sales engagement is evolving from the traditional \"bulk email + CRM logging\" to an AI-agent type that autonomously executes conversation, content recommendation, booking, and follow-up. Meeton ai is an AI SDR platform that plays this role on the website, designed so that four modules—Meeton Chat (conversation), Calendar (meeting booking), Library (content recommendation), and Email (follow-up)—work together to execute sales engagement 24/7 unattended.",
+    ],
+    faq: [
+      {
+        q: "What's the difference between sales engagement and sales enablement?",
+        a: "Sales engagement is an \"external-facing activity that raises the quality and quantity of touchpoints with customers,\" and sales enablement is an \"internal-facing activity that develops reps' skills, knowledge, and tools.\" The former centers on communication execution, the latter on organization building, and the two are complementary.",
+      },
+      {
+        q: "How does a sales engagement platform differ from a CRM?",
+        a: "A CRM's main purpose is recording and managing customer information, whereas a sales engagement platform specializes in actual communication execution across email, phone, and social, and in reaction measurement (open rate, reply rate, etc.). In many cases, the two are used in coordination.",
+      },
+      {
+        q: "What improves when you introduce sales engagement?",
+        a: "There are three main improvements: (1) preventing missed follow-ups via sequence automation, (2) optimizing messages and timing based on reaction data, and (3) improving the initial response speed (Speed to Lead) to inquiries. When these combine, they tend to lead to improvements in the meeting-conversion rate and the win rate.",
+      },
+    ],
+    related: ["lead-nurturing", "ai-sdr", "shodanka-ritsu"],
+    metaTitle: "What is sales engagement? Definition, the difference from CRM/SFA, and how to use it｜Meeton ai Glossary",
+    metaDescription:
+      "Sales engagement is an umbrella term for a sales strategy that systematically manages and optimizes customer communication across multiple channels—email, phone, social, etc. We clearly explain the differences from CRM, SFA, and sales enablement, and how to use it in B2B sales.",
+  },
+  "web-sekkyaku": {
+    slug: "web-sekkyaku",
+    term: "Web engagement (online customer service)",
+    cluster: "chat",
+    shortDef:
+      "Web engagement is an umbrella term for measures that, through chatbots, popups, live chat, and the like, interact with and guide users who visit a website—either in real time or autonomously—to raise conversions and customer satisfaction. It is easy to grasp as recreating physical-store customer service online, and in recent years, with the rise of AI, it has rapidly spread in the B2B domain as well.",
+    body: [
+      "Web engagement is an umbrella term for measures that proactively act on a website according to user behavior—providing information, hearing out issues, and guiding to the next action. The main means are classified into three types: popup type (showing appeal banners linked to browsing behavior), chat type (a bot or human operator responding to questions), and composite type (a hybrid combining the two). Adoption preceded in B2C, but it is now advancing on B2B sites too.",
+      "Behind why web engagement is valued in B2B is the change in buying behavior. According to a Gartner survey of 646 B2B buyers conducted in August–September 2025 (published March 2026), 67% of B2B buyers responded that they prefer a buying experience without a sales rep. In other words, many prospects nearly complete information gathering and comparison on the website before contacting sales. Whether you can answer questions in real time at this stage and present appropriate content or meeting slots becomes a point that determines the meeting-conversion rate.",
+      "The effects you can expect from web engagement are mainly improved CVR (conversion rate), churn prevention, and reduced sales workload. With a chatbot responding 24/7, you can accept and not miss inquiries even outside business hours. On the other hand, note that effects tend to plateau if you neglect the post-introduction operational design (scenario improvement, A/B testing, PDCA). When selecting a tool, it is recommended to check whether it has effect-measurement functions and whether it can integrate with CRM / MA.",
+      "With the evolution of AI, web engagement is shifting from \"scenario-type chatbots\" to \"autonomous AI agents.\" Traditional scenario types could only respond within the range of pre-assumed questions, but autonomous types using generative AI have become able to understand context and respond flexibly, consistently automating content recommendation, meeting booking, and follow-up. Meeton ai is an AI SDR platform that realizes such autonomous web engagement for B2B sites, composed of four modules—conversation, content recommendation, booking, and follow-up (Meeton Calendar / Chat / Library / Email).",
+    ],
+    faq: [
+      {
+        q: "What's the difference between a web engagement tool and a chatbot?",
+        a: "A chatbot is one kind of web engagement tool. A web engagement tool is a broad concept including popups, live chat, recommendations, and more, while a chatbot refers to the function within it specialized in conversational auto-response. In recent years chatbots often play the central role in web engagement, but forms that use only popups are also included in web engagement.",
+      },
+      {
+        q: "Is web engagement really effective in B2B?",
+        a: "According to Gartner (published March 2026), 67% of B2B buyers prefer an experience without a sales rep, so touchpoints on the website have become decisively important in B2B too. Case studies at manufacturing, HR, and IT SaaS companies report effects such as increased inquiries and reduced sales workload. However, the magnitude of the effect varies greatly with the site's traffic volume, scenario design quality, and continuous improvement.",
+      },
+      {
+        q: "What are the main criteria when choosing a web engagement tool?",
+        a: "The main criteria are five points: (1) response format (popup / chat / composite), (2) AI / scenario flexibility, (3) whether it can integrate with CRM / MA, (4) whether it has effect-measurement / A/B-testing functions, and (5) operating cost (initial fee / monthly / internal labor). For B2B sites, whether human handling is available and integration with meeting-booking functions are also important selection points.",
+      },
+    ],
+    related: ["ai-sdr", "shodanka-ritsu", "speed-to-lead"],
+    metaTitle: "What is web engagement? Types, B2B effects, and the frontier of AI use｜Meeton ai Glossary",
+    metaDescription:
+      "Web engagement is an umbrella term for measures—chatbots, popups, etc.—that act on website visitors in real time to raise CVR and the meeting-conversion rate. We clearly explain the background of B2B use, types and selection of tools, and the latest trend toward autonomous AI.",
+  },
+  "document-open-rate": {
+    slug: "document-open-rate",
+    term: "Document open rate",
+    cluster: "library",
+    shortDef:
+      "Document open rate is a metric indicating the proportion of documents—such as proposals and service materials—sent by a sales rep or campaign that recipients actually opened. Distinguished from email open rate, by visualizing \"whether they touched the content,\" it is used as a basis for judging a prospect's degree of buying interest and the appropriate timing for follow-up.",
+    body: [
+      "Document open rate is a metric that grasps numerically \"whether a sent document was viewed.\" The formula is expressed as \"number of documents opened ÷ number of documents sent × 100,\" measured by the document-tracking functions adopted by sales-enablement tools such as DocSend, HubSpot Sales, and Highspot. Whereas email open rate measures whether an email was opened, document open rate differs in that it measures \"whether the attached or linked document itself was viewed.\" Because you can also obtain incidental data such as viewing time, viewed pages, and viewing device, deeper engagement analysis than a simple open/no-open is possible.",
+      "Behind why document open rate is valued is the change in B2B buying behavior. A CEB (now Gartner) study reports that about 57% of the buying process is self-completed by the time B2B buyers first contact a sales rep, and a Forrester study (2019) presents the view that this proportion reaches 70%. In other words, prospects finish a considerable amount of information gathering and comparison before dialogue with sales begins. In this situation, grasping \"when, up to which page, and for how long\" a sent document was viewed becomes a clue to estimating the prospect's interest phase and discerning the optimal contact timing.",
+      "Document open rate is used on both fronts of hot-lead judgment and follow-up speed. Approaching right after detecting a viewing signal after sending a document overlaps with the concept of Speed to Lead mentioned by Harvard Business Review. That study reports that contacting a lead within 5 minutes of its creation makes the connect probability 100x and the qualification probability 21x higher than contacting 30 minutes later. By designing a mechanism that \"contacts right after a document is opened,\" starting from document open rate, you can implement this effect on the sales floor. Integrating with MA tools and CRM also makes it possible to automate it as one element of scoring.",
+      "Meeton ai's Meeton Library module is designed so that an AI agent placed on the website recommends content matched to the visitor's interest and, based on its viewing signals, automatically hands off to the subsequent conversation / booking / follow-up flow. By incorporating engagement data such as open rate into pipeline management—rather than ending with \"sent the document and done\"—it aims for meeting conversion that does not miss the timing.",
+    ],
+    faq: [
+      {
+        q: "What's the difference between document open rate and email open rate?",
+        a: "Email open rate measures whether the email body was opened, while document open rate measures whether the document—proposal, service material, etc.—attached to or linked in the email was actually viewed. Document open rate more directly indicates \"contact with the content,\" so it is considered to more accurately reflect the degree of buying interest.",
+      },
+      {
+        q: "What is a guideline (average) for document open rate?",
+        a: "A cross-industry standard benchmark for document open rate is not yet established. As a reference, however, a report from DocSend analyzing 34M+ content interactions yields data such as the average completion rate of proposals and time-of-day patterns. Because it is a different metric from the actual state of domestic B2B email open rates (an IDEATECH survey finds 11–30% is most common), it is practical to target relative improvement based on your own past sending results.",
+      },
+      {
+        q: "How can I raise the document open rate?",
+        a: "There are three main approaches. (1) Sending timing: send when interest is high, such as right after a meeting or inquiry. (2) The document itself: state the value clearly on the opening page and reduce drop-off by limiting the number of pages. (3) Notification settings: use a tracking tool that lets you receive viewing signals instantly, and follow up right after an open to raise the conversion rate to the next touchpoint.",
+      },
+    ],
+    related: ["ai-sdr", "shodanka-ritsu", "speed-to-lead"],
+    metaTitle: "What is document open rate? Definition, how to use it, and the difference from email open rate｜Meeton ai Glossary",
+    metaDescription:
+      "Document open rate is a B2B sales metric showing the proportion of sent proposals and sales materials that were actually viewed. It is used to judge hot leads and optimize follow-up timing, and is treated separately from email open rate. We explain the definition, formula, and how to use it.",
+  },
+  "bant": {
+    slug: "bant",
+    term: "BANT",
+    cluster: "ai-sdr",
+    shortDef:
+      "BANT is a discovery framework for judging whether a lead can be converted into a meeting in B2B sales, combining the initials of four elements: Budget, Authority, Need, and Timeline. Said to have been systematized by IBM in the 1950s, it has taken hold as a basic qualification requirement used widely from inside sales to field sales.",
+    body: [
+      "BANT refers to four elements: \"Budget,\" \"Authority,\" \"Need,\" and \"Timeline.\" Budget is the scale of budget that can be allocated to your product / service; Authority is the degree of access to the person with final contract decision authority; Need is the fit between the customer's issues and your solution; Timeline is the target timing for introduction / starting consideration. The common operation is to prioritize for meeting conversion the leads in which all four elements are present, treating them as \"promising opportunities that meet the BANT conditions.\"",
+      "While BANT is simple, it is sometimes pointed out to diverge from modern B2B buying behavior. Studies by Forrester, 6sense, and others report that by the time B2B buyers first contact a sales rep, 57–70% of the buying consideration is already complete. In other words, by the time the opportunity to ask BANT questions arrives, much of the customer's decision-making is often already self-completed. For this reason, a growing number of companies use BANT not as a \"question list to extract everything at once in conversation\" but as a checklist for gathering information gradually across multiple touchpoints.",
+      "How quickly and accurately you can grasp BANT information is also an important competitive factor. A study cited by Harvard Business Review finds that companies responding within 1 hour of an inquiry were 7x more likely to have a meaningful conversation with a decision-maker than companies that waited more than 1 hour (Lead Response Management Study). In that response speed determines the very opportunity to confirm BANT, \"Speed to Lead\" can be called a prerequisite for using BANT.",
+      "In Meeton ai (an AI SDR Platform), a chatbot placed on the website (Meeton Chat) collects, in real time through conversation with visitors, information corresponding to Budget, Need, and Timeline; Meeton Calendar instantly presents meeting slots to promising leads; and Meeton Email automates subsequent follow-up. By having the tool gradually supplement each BANT element, it aims to create an environment where sales reps can focus on the leads truly worth converting into meetings.",
+    ],
+    faq: [
+      {
+        q: "How does BANT differ from CHAMP or MEDDIC?",
+        a: "While BANT centers on budget, authority, need, and timing, CHAMP is a customer-perspective variant that prioritizes Challenges, and MEDDIC is an enterprise-oriented extension that adds quantitative economic impact (Metrics) and identification of the decision process. It is common to use them differently depending on the complexity of your product and the length of the sales cycle.",
+      },
+      {
+        q: "Is it more effective to confirm BANT by phone or email?",
+        a: "There is no fixed right answer; it varies with deal price and depth of relationship. A hybrid operation is often adopted in practice—grasping the general situation in a first call or a follow-up email after a webinar, and supplementing Budget and Timeline with a pre-meeting survey or a form at content download.",
+      },
+      {
+        q: "Is it OK to convert to a meeting even if not all four BANT elements are present?",
+        a: "It is entirely possible to judge that you should convert even if some elements are missing. In particular, when Need is clear and Timeline is short, budget and the decision route can be built up through the meeting. BANT is not a rule of \"don't move unless all items are present\" but is realistically used as judgment material for deciding priority and the next action.",
+      },
+    ],
+    related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
+    metaTitle: "What is BANT? Meaning, how to use it, and its limits and use in modern sales｜Meeton ai Glossary",
+    metaDescription:
+      "BANT is a standard B2B sales framework that evaluates leads with four elements: Budget, Authority, Need, and Timeline. We clearly explain the meaning, how to use it, and the limits and use points in modern B2B of the method IBM systematized.",
+  },
+  "plg": {
+    slug: "plg",
+    term: "PLG (Product-Led Growth)",
+    cluster: "ai-sdr",
+    shortDef:
+      "PLG (Product-Led Growth) is a go-to-market strategy that makes the product itself the main engine of user acquisition, conversion, and expansion—letting users experience value first via a free plan or free trial, with convinced users voluntarily moving to paid. Contrasted with the traditional sales-led (SLG) approach, it is rapidly spreading in the SaaS / B2B software domain.",
+    body: [
+      "PLG (Product-Led Growth) is a go-to-market strategy that makes \"trying the product\" itself the starting point of customer acquisition. In traditional SLG (sales-led growth), a sales rep conveys the value via demos and proposals before the customer first proceeds to a trial, but in PLG the order is reversed. First, you let users experience the product via a free plan, free trial, or interactive demo, and based on that experience value you prompt upgrades. The fact that not only decision-makers but also front-line users can try it themselves aligns with the change in IT-tool buying behavior. A Forrester study (2019) and a 6sense study (of 900+ B2B buyers) report that about 70% of B2B buyers complete most of the buying process through self-research before contacting sales, and PLG has a high affinity with this \"want to research first\" mindset.",
+      "An important concept in realizing PLG is the PQL (Product Qualified Lead). Unlike an MQL (a lead via marketing) or an SQL (a sales-evaluated lead), a PQL evaluates a lead by \"the product-usage behavior itself.\" For example, a user who used a specific feature multiple times during a free trial, or a user who invited team members, qualifies. According to a ProductLed study, companies leveraging PQLs tend to have about a 3x free-to-paid conversion rate compared with those that do not, and the median visitor conversion rate in a freemium model is reported to be about 12% (ProductLed Benchmarks). However, the numbers vary greatly with product complexity and ACV (annual contract value), so it is essential to validate in the context of your own product.",
+      "PLG is not suitable for every B2B product. It tends to work especially for products with a relatively low price where the end user can decide on adoption themselves (under $10K ACV is often cited as a guideline). On the other hand, high-priced products requiring agreement among multiple stakeholders, or products that require specialized onboarding, may fit SLG better in some cases. Attracting attention in recent years is the hybrid model called \"PLS (Product-Led Sales),\" a strategy that concentrates sales resources only on accounts with a high likelihood of going enterprise among the users efficiently acquired and screened via PLG. McKinsey analysis also reports that many SaaS companies with over $10M ARR are advancing this shift to PLS.",
+      "Interest in PLG is rapidly rising in Japan's B2B market as well. Centered on domestic SaaS companies, the provision of free plans and the development of in-product onboarding are advancing. On the other hand, there are scenes where Japanese business customs (ringi, multiple approvers, vendor-evaluation processes) do not necessarily mesh with PLG's \"try it first\" flow, and it is said that a PLS hybrid often fits the reality better than pure PLG. A design that combines self-experience on the website with rapid sales follow-up for hot leads becomes a realistic approach to practicing PLG in the Japanese market. Note that an AI SDR Platform like Meeton ai is also used in contexts such as autonomously approaching website visitors and automating immediate follow-up for PQLs acquired via PLG.",
+    ],
+    faq: [
+      {
+        q: "What's the difference between PLG and SLG?",
+        a: "Whereas SLG (sales-led growth) has the order where a sales rep conveys value and then lets the customer trial the product, PLG is the reverse model where you let them experience the product first and then prompt a paid conversion. PLG tends to keep customer acquisition cost (CAC) low, while SLG suits high-priced, complex products. In recent years, a \"PLS (Product-Led Sales)\" hybrid combining the two is becoming mainstream.",
+      },
+      {
+        q: "What is a PQL (Product Qualified Lead)?",
+        a: "A PQL is a lead judged to have a high likelihood of paid conversion after actually experiencing the product's value through a free plan or free trial. Its characteristic is scoring based on \"product-usage behavior\" rather than MQL (marketing behavior) or SQL (sales evaluation), making it a central metric in a PLG strategy.",
+      },
+      {
+        q: "Does PLG work in Japanese B2B too?",
+        a: "It tends to work for products with a relatively low price that end users can adopt at their own discretion, but pure PLG does not fit well with high-priced products requiring ringi or multiple approvals. Realistically, a \"PLS hybrid\"—drawing interest with a free trial, identifying PQLs, and then having sales intervene—is considered an effective approach in the Japanese market.",
+      },
+    ],
+    related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
+    metaTitle: "What is PLG (Product-Led Growth)? The difference from SLG and the meaning of PQL, explained｜Meeton ai Glossary",
+    metaDescription:
+      "PLG (Product-Led Growth) is a go-to-market strategy that makes the product experience itself the main engine of customer acquisition and conversion. Users experience value first via a free plan or free trial and voluntarily move to paid. We clearly explain the difference from SLG, PQL, and how to practice it in Japanese B2B.",
+  },
+} as Record<string, GlossaryTerm>;
+
 export function getTerm(slug: string): GlossaryTerm | undefined {
   return GLOSSARY[slug];
+}
+export function getTermEn(slug: string): GlossaryTerm | undefined {
+  return GLOSSARY_EN[slug];
 }
 export function allTermSlugs(): string[] {
   return Object.keys(GLOSSARY);
 }
 export function allTerms(): GlossaryTerm[] {
   return Object.values(GLOSSARY);
+}
+export function allTermsEn(): GlossaryTerm[] {
+  return Object.values(GLOSSARY_EN);
 }

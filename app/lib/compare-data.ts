@@ -353,8 +353,336 @@ export const COMPARE: Record<string, CompareData> = {
   },
 };
 
+// ─────────────────────────────────────────────────────────────────────
+// English mirror (COMPARE_EN). Same slugs/structure as COMPARE, faithful
+// translation — no new claims/numbers, competitor names and figures exact.
+// Rendered by CompareLP when lang="en" via /en/compare/* + /en/alternatives/*.
+// ─────────────────────────────────────────────────────────────────────
+
+export const COMPARE_EN: Record<string, CompareData> = {
+  // ───────────── Calendar cluster ─────────────
+  immedio: {
+    slug: "immedio",
+    competitorName: "immedio",
+    product: "calendar",
+    productName: "Meeton Calendar",
+    category: "Inbound meeting conversion",
+    metaTitle: "immedio pricing, differences & AI alternative｜Inbound meeting conversion｜Meeton",
+    metaDescription:
+      "immedio is a proven Japanese SaaS specialized in thank-you-page meeting conversion. Meeton Calendar is an AI SDR that handles conversation, content, booking, and follow-up end to end. A comparison table breaks down which fits which use case.",
+    verdict:
+      "If you want to solidly nail instant meeting conversion on the thank-you page \"only,\" the specialized and battle-tested immedio is a strong option. If you want to warm up leads through conversation and handle content recommendations and follow-up in one AI SDR end to end, Meeton Calendar fits better.",
+    competitorStrength:
+      "immedio is a Japanese SaaS specialized in converting meetings at the highest-intent moment—right after a form submission. With a strong track record including listed SaaS companies and ISMS certification, it is a solid choice. The completeness of its single-purpose focus is a clear strength.",
+    rows: [
+      C("Primary purpose", "Meeting conversion across conversation → booking → content → follow-up (AI SDR)", "Instant meeting conversion on the thank-you page", true),
+      C("AI conversation before booking", "AI talks to warm up the lead before booking", "Shows a booking popup after the form", true),
+      C("Coverage", "4 functions: booking + chat + content sharing + follow-up", "Meeting conversion (3 flows: thank-you page / content / business card)"),
+      C("Pricing", "3 plans from ¥120,000/mo (published)", "Not disclosed (contact required)", true),
+      C("CRM integration", "Auto-registers to Salesforce / HubSpot", "Salesforce / HubSpot integration & auto-routing"),
+      C("Provided by", "Made in Japan, Japanese-native", "Made in Japan, Japanese-native"),
+    ],
+    chooseMeeton: [
+      "You want to complete not just booking but conversation, content recommendation, and follow-up in one AI SDR",
+      "You want to move forward with a published pricing structure (from ¥120,000/mo)",
+      "You want to engage even pre-inquiry prospects via chat",
+    ],
+    chooseCompetitor: [
+      "You want to solidly deploy with a use case narrowed to thank-you-page meeting conversion",
+      "Your main goal is meeting conversion for 3 specific flows such as trade-show business cards",
+    ],
+    faq: [
+      { q: "Which is stronger at meeting conversion, immedio or Meeton Calendar?", a: "Both are Japanese SaaS strong at inbound meeting conversion. immedio has a rich track record as a specialist in thank-you-page meeting conversion. Meeton Calendar differs in that, before booking, the AI warms up the lead through conversation, and chat, content sharing, and follow-up all connect on the same platform. If your use case is booking-focused, immedio fits; if you want everything from conversation to follow-up end to end, Meeton fits." },
+      { q: "How does pricing work?", a: "Meeton ai has 3 plans from ¥120,000/mo (Lead Generation / Meeting Generation / All-in-One) and discloses its pricing. immedio has no public pricing and requires an inquiry (as of 2026)." },
+    ],
+    sources: [
+      { claim: "immedio converts meetings with a one-line tag on the thank-you page; the product comprises immedio / Box / Forms. It publicly reports outcomes such as a 60% reduction in meeting-processing hours at Sansan", source: "immedio.io/function, immedio.io/case" },
+      { claim: "Raised ¥350M Series A in May 2024; obtained ISMS (ISO/IEC 27001) in October 2023. Pricing is undisclosed (contact required)", source: "corp.immedio.io" },
+    ],
+    alternative: true,
+  },
+
+  timerex: {
+    slug: "timerex",
+    competitorName: "TimeRex",
+    product: "calendar",
+    productName: "Meeton Calendar",
+    category: "Scheduling automation",
+    metaTitle: "TimeRex pricing, differences & AI alternative｜Scheduling → meeting conversion｜Meeton Calendar",
+    metaDescription:
+      "TimeRex is a cost-effective, free-to-start Japanese scheduling tool. Meeton Calendar is an AI SDR optimized for pre-booking AI conversation, instant follow-up, and meeting conversion on top of scheduling. Choose by pure scheduling vs. meeting conversion.",
+    verdict:
+      "If you want to streamline pure scheduling at low cost, the free-to-start and highly polished TimeRex is ideal. If you want to warm up leads through conversation when they arise and carry the booking all the way to \"meeting conversion,\" Meeton Calendar fits. The two serve different purposes.",
+    competitorStrength:
+      "TimeRex is a cost-effective, free-to-start Japanese scheduling tool with 450,000 registered users, a track record at large enterprises, and ISMS certification. With diverse scheduling patterns and 3,000+ external integrations, it is a highly polished option for pure scheduling.",
+    rows: [
+      C("Primary purpose", "Meeting conversion of leads (conversation → booking → follow-up)", "Automatic coordination of open slots (scheduling)", true),
+      C("AI conversation before booking", "AI talks to warm up the lead", "None (specialized in slot coordination)", true),
+      C("Auto-trigger right after conversion", "Booking flow right after a form / content download", "Shares a booking URL for the other party to choose"),
+      C("Pricing feel", "3 plans from ¥120,000/mo (excl. tax, published)", "Free to Premium, around ¥1,500/mo (excl. tax, per user)"),
+      C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (meeting-room booking, reminders, etc.)"),
+    ],
+    chooseMeeton: [
+      "You want to carry not just scheduling but the booking all the way to meeting conversion",
+      "You want to warm up leads through conversation before they book when a lead arises",
+      "You want to run booking, conversation, content, and follow-up on one account",
+    ],
+    chooseCompetitor: [
+      "Your use case is pure scheduling and you prioritize cost above all",
+      "You want to automate scheduling only for an individual or small team",
+    ],
+    faq: [
+      { q: "What's the difference between TimeRex and Meeton Calendar?", a: "TimeRex is a Japanese tool specialized in automatic slot coordination (scheduling), with the strength of being free to start and highly cost-effective. Meeton Calendar is optimized for \"meeting conversion\"—on top of scheduling, the AI warms up the lead through conversation before booking and connects to CRM auto-registration and follow-up. If your purpose is scheduling, TimeRex fits; if it is meeting conversion, Meeton fits." },
+      { q: "Which is cheaper?", a: "For pure scheduling, the unit price of TimeRex (free to about ¥1,500/mo per user) is lower. Meeton ai has 3 plans from ¥120,000/mo (excl. tax), including meeting-conversion features such as conversation, auto-assignment, and CRM registration. It is appropriate to compare based on \"what problem you want to solve.\"" },
+    ],
+    sources: [
+      { claim: "TimeRex has 450,000 registered users, 4 tiers from Free to Enterprise, ISO 27001 certification, and claims up to 95% reduction in hours", source: "timerex.net/plan, timerex.net/feature" },
+    ],
+  },
+
+  spir: {
+    slug: "spir",
+    competitorName: "Spir",
+    product: "calendar",
+    productName: "Meeton Calendar",
+    category: "Scheduling automation",
+    metaTitle: "Spir pricing, differences & AI alternative｜Scheduling → meeting conversion｜Meeton Calendar",
+    metaDescription:
+      "Spir is a Japanese scheduling SaaS strong at multi-calendar integration and global support. Meeton Calendar is optimized for pre-booking AI conversation, instant follow-up, and meeting conversion. Choose by scheduling quality vs. meeting conversion.",
+    verdict:
+      "If you want to carefully handle multi-calendar integration and scheduling with overseas partners, Spir fits. If you want to \"convert\" bookings into meetings through conversation and instant follow-up when a lead arises, Meeton Calendar fits. The two solve different problems.",
+    competitorStrength:
+      "Spir is strong in the experience and depth of integration in scheduling—such as simultaneously connecting multiple calendars and time-zone support—and, with ISMS certification and a PLG model, is a Japanese SaaS with a broad reach from individuals to large enterprises.",
+    rows: [
+      C("Primary purpose", "Meeting conversion of leads (conversation → booking → follow-up)", "Scheduling with multi-calendar integration", true),
+      C("AI conversation before booking", "AI talks to warm up the lead", "None", true),
+      C("Global / time zones", "Supported", "Strength in multi-time-zone support"),
+      C("Pricing", "3 plans from ¥120,000/mo (published)", "Free (up to 3 people) to Team plans"),
+      C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (calendar integration)"),
+      C("Provided by", "Made in Japan, Japanese", "Made in Japan, Japanese"),
+    ],
+    chooseMeeton: [
+      "You want to connect scheduling all the way to meeting conversion",
+      "You want to raise prospect intent through AI conversation before booking",
+      "You want to run conversation, content, and follow-up end to end",
+    ],
+    chooseCompetitor: [
+      "You value the quality of pure scheduling such as multi-calendar integration and overseas coordination",
+      "You want to set up scheduling only at an individual to mid-size scale",
+    ],
+    faq: [
+      { q: "How do Spir and Meeton Calendar differ?", a: "Spir is a Japanese SaaS strong in scheduling experience such as multi-calendar integration and time-zone support. Meeton Calendar is optimized for meeting conversion—before booking, the AI warms up the lead through conversation and connects to CRM registration and follow-up. If you want scheduling quality, Spir fits; if you want meeting conversion as well, Meeton fits." },
+    ],
+    sources: [
+      { claim: "Spir has 400,000+ registered users, Free (3 people) to Team plans, ISMS certification, and multi-calendar / time-zone support", source: "spirinc.com" },
+    ],
+  },
+
+  calendly: {
+    slug: "calendly",
+    competitorName: "Calendly",
+    product: "calendar",
+    productName: "Meeton Calendar",
+    category: "Scheduling automation",
+    metaTitle: "Calendly in Japanese: pricing & differences｜AI alternative & meeting conversion｜Meeton Calendar",
+    metaDescription:
+      "Calendly is the world's largest scheduling tool with a rich integration ecosystem. Meeton Calendar is Japanese-native and optimized for pre-booking AI conversation, instant follow-up, and meeting conversion. Choose by global general-purpose use vs. Japanese inbound meeting conversion.",
+    verdict:
+      "If you want world-standard scheduling and a rich integration ecosystem, Calendly is the classic choice. If you want Japanese-native UI and support and to carry bookings from conversation all the way to meeting conversion, Meeton Calendar fits.",
+    competitorStrength:
+      "Calendly is the world's largest by market share, adopted by many of the Fortune 500, with strengths in 100+ integrations and low-friction PLG. Its completeness as a global scheduling standard is outstanding.",
+    rows: [
+      C("Primary purpose", "Japanese inbound meeting conversion", "General-purpose scheduling (global)"),
+      C("AI conversation before booking", "AI talks to warm up the lead", "None", true),
+      C("Japanese UI & support", "Japanese-native", "No official Japanese UI (translation only)", true),
+      C("Integration ecosystem", "Supports major CRMs / calendars / notifications", "Widest with 100+ integrations"),
+      C("Pricing", "3 plans from ¥120,000/mo (published)", "Free (1 event type) to paid plans"),
+      C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (routing for teams)"),
+    ],
+    chooseMeeton: [
+      "You need Japanese-native UI and support",
+      "You want to connect bookings through conversation and follow-up into meeting conversion",
+      "Your main goal is Japanese inbound meeting conversion",
+    ],
+    chooseCompetitor: [
+      "You want standard global scheduling and the widest integrations",
+      "You want to unify scheduling for individuals to large enterprises, mainly in English-speaking markets",
+    ],
+    faq: [
+      { q: "What about Calendly's Japanese support?", a: "Calendly has no official Japanese UI; it is used via browser translation, and there is no Japanese-language support desk (as of 2026). If you value Japanese-native operation and support, the Japanese-made Meeton Calendar fits." },
+      { q: "What's the difference between Calendly and Meeton Calendar?", a: "Calendly is the world's largest general-purpose scheduling tool with rich integrations. Meeton Calendar is Japanese-native and optimized for \"meeting conversion\"—before booking, the AI talks to warm up the lead and connects to CRM registration and follow-up." },
+    ],
+    sources: [
+      { claim: "Calendly is used by 100,000+ companies worldwide and 86% of the Fortune 500, with 100+ integrations. There is no official Japanese UI", source: "calendly.com, businesschatmaster.com" },
+    ],
+    alternative: true,
+  },
+
+  // ───────────── Library cluster ─────────────
+  docsend: {
+    slug: "docsend",
+    competitorName: "DocSend",
+    product: "library",
+    productName: "Meeton Library",
+    category: "Content sharing & tracking",
+    metaTitle: "DocSend alternative in Japanese｜AI content explainer & differences｜Meeton Library",
+    metaDescription:
+      "DocSend, a Dropbox-owned standard, is strong at precise page-level content tracking and VDR. Meeton Library has an AI chat explain content, visualizes opens in Japanese with no CRM required, and connects to follow-up. Choose by precise tracking/VDR vs. AI explanation × meeting conversion.",
+    verdict:
+      "If your main goal is page-level precise tracking of pitch decks or a data room (VDR), the standard DocSend is solid. If you want an AI to explain content, connect opens to meeting conversion and follow-up, and start in Japanese with no CRM, Meeton Library fits.",
+    competitorStrength:
+      "DocSend is a Dropbox-owned standard whose strengths are precise engagement analytics—tracking \"who read which page for how many seconds\" at the page level—and a VDR usable for fundraising and M&A. Its tracking precision is among the best in the industry.",
+    rows: [
+      C("Primary purpose", "Content recommendation → AI explanation → open visibility → follow-up", "Content sharing, precise tracking, VDR"),
+      C("AI content explanation", "An AI chat explains the content and answers questions", "None (centered on viewing tracking)", true),
+      C("Open tracking", "Visualizes who viewed when and how far", "Strength in page-level precise tracking"),
+      C("Connection to follow-up", "Auto-bridges to Email / Calendar", "Salesforce integration (paid add-on), etc."),
+      C("CRM required / onboarding", "No CRM required, start right away", "No free plan (14-day trial)", true),
+      C("Provided by", "Japanese-native", "English-centric (Japanese UI to be confirmed)", true),
+    ],
+    chooseMeeton: [
+      "You want an AI to explain content and help the recipient understand and move forward",
+      "You want to start open tracking without a CRM",
+      "You want to connect open signals to follow-up (Email / Calendar)",
+    ],
+    chooseCompetitor: [
+      "Your main goal is page-level precise tracking of pitch decks",
+      "You need a data room (VDR) for fundraising or M&A",
+    ],
+    faq: [
+      { q: "What's the difference between DocSend and Meeton Library?", a: "DocSend is a Dropbox-owned standard strong at page-level precise content tracking and VDR. Meeton Library adds AI-chat content explanation on top, can start with no CRM in Japanese, and differs by connecting open signals to Email / Calendar to automate follow-up." },
+      { q: "How does pricing work?", a: "Meeton ai has 3 plans from ¥120,000/mo (Lead Generation / Meeting Generation / All-in-One) and discloses its pricing. DocSend has no permanent free plan and offers a 14-day trial (as of 2026)." },
+    ],
+    sources: [
+      { claim: "DocSend was acquired by Dropbox for about $165M in 2021. Page-level tracking and VDR. No free plan / 14-day trial; Salesforce integration is a paid add-on", source: "dropbox.gcs-web.com, docsend.com" },
+    ],
+    alternative: true,
+  },
+
+  // ───────────── Chat cluster ─────────────
+  intercom: {
+    slug: "intercom",
+    competitorName: "Intercom",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "Chat / messaging",
+    metaTitle: "Intercom alternative: pricing & differences｜AI meeting-conversion chat｜Meeton Chat",
+    metaDescription:
+      "Intercom (Fin) is a global platform strong at automating customer support for existing customers. Meeton Chat specializes in meeting conversion for new and latent leads, an AI chat that stands on the consideration foundation before contact. Choose by support reduction vs. meeting acquisition.",
+    verdict:
+      "If you want to automate inquiry handling and support for existing customers, Intercom—with Fin's high resolution rate—is the classic choice. If you want to capture new and latent visitors to your website through conversation and \"convert\" them into meetings, Meeton Chat fits. The two solve different problems (support vs. meeting acquisition).",
+    competitorStrength:
+      "Intercom is a global customer-support-focused platform whose AI agent Fin has a high inquiry resolution rate (claimed 67%, 40M+ cumulative). Omnichannel integration and support for enterprise security requirements are also strengths.",
+    rows: [
+      C("Primary purpose", "Meeting conversion of new and latent leads (AI SDR)", "Automating customer support for existing customers"),
+      C("Optimization for meeting conversion", "Designed to warm up and carry to booking", "Centered on inquiry resolution", true),
+      C("Pre-contact latent prospects", "Stands on the consideration foundation before inquiry", "Mainly existing / inquiring customers", true),
+      C("Carrying over past context", "Carries over browsing, download, and conversation history", "Strong at managing support context"),
+      C("Pricing feel", "3 plans from ¥120,000/mo (excl. tax, published)", "Seat fee + Fin $0.99/resolution usage-based"),
+      C("Provided by", "Japanese-native, meeting-conversion-focused", "English-centric, support-focused"),
+    ],
+    chooseMeeton: [
+      "You want to capture new and latent leads through conversation and convert them to meetings",
+      "You want to engage at the consideration stage before an inquiry",
+      "You want to start specialized in meeting conversion in Japanese",
+    ],
+    chooseCompetitor: [
+      "You want to auto-resolve a large volume of support inquiries from existing customers",
+      "You need an omnichannel customer-service foundation",
+    ],
+    faq: [
+      { q: "Which is better, Intercom or Meeton Chat?", a: "They solve different problems. Intercom (Fin) is strong at automating customer support for existing customers, with a high inquiry resolution rate as its hallmark. Meeton Chat specializes in \"meeting conversion\" of new and latent leads—standing on the consideration foundation before contact to talk, and carrying to booking once intent rises. For support reduction, Intercom fits; for meeting acquisition, Meeton fits." },
+      { q: "How does pricing differ?", a: "Intercom charges a seat fee ($29–132/seat/mo) plus usage-based Fin AI at $0.99/resolution. Meeton ai has 3 plans from ¥120,000/mo (excl. tax), a simple structure that varies by monthly traffic and features. Because the use cases and billing models differ, it is appropriate to choose based on your purpose." },
+    ],
+    sources: [
+      { claim: "Intercom's customer-support AI \"Fin\" has a 67% resolution rate and 40M+ cumulative. Seat fee $29–132/mo + usage-based Fin at $0.99/resolution", source: "intercom.com/pricing, sacra.com/c/intercom" },
+    ],
+    alternative: true,
+  },
+
+  // ───────────── Email cluster ─────────────
+  lemlist: {
+    slug: "lemlist",
+    competitorName: "lemlist",
+    product: "email",
+    productName: "Meeton Email",
+    category: "Email / sales engagement",
+    metaTitle: "lemlist alternative: pricing & differences｜Behavior-based follow-up AI｜Meeton Email",
+    metaDescription:
+      "lemlist is an overseas SaaS strong at cold email / multichannel outreach for new prospecting. Meeton Email specializes in inbound follow-up where AI follows up 1:1 with existing, unbooked leads triggered by behavior signals. Choose by new prospecting vs. follow-up of warmed leads.",
+    verdict:
+      "If you want to run large-scale cold email and multichannel outreach to new lists, lemlist is powerful. If you want an AI to follow up 1:1 with already-contacted (unbooked, dormant) leads triggered by behavior signals, Meeton Email fits. It splits by whether the purpose is new prospecting or follow-up.",
+    competitorStrength:
+      "lemlist is strong in multichannel outreach spanning email, LinkedIn, and phone, a lead DB of 650M+, hyper-personalization, and deliverability improvement (lemwarm), and is a well-rated option for overseas outbound (G2 4.6).",
+    rows: [
+      C("Primary purpose", "Inbound follow-up of existing, unbooked leads", "Cold outreach to new lists"),
+      C("Trigger", "Behavior signals (re-visit / open / view)", "Sending sequence / list", true),
+      C("Copy generation", "AI generates each message for the recipient's context", "Templates + dynamic personalization", true),
+      C("CRM premise", "Premised on CRM integration (leveraging existing leads)", "Built-in lead DB, strong at extracting new prospects"),
+      C("Channels", "Email (integrated with chat / booking)", "Multi: email / LinkedIn / phone / SMS, etc."),
+      C("Goal", "Autonomous through reply and meeting booking", "Sequence delivery and reply acquisition"),
+    ],
+    chooseMeeton: [
+      "You want to mine unbooked, dormant leads in your existing CRM",
+      "You want an AI to watch behavior signals and follow up at the optimal moment",
+      "You want to connect with chat and booking all the way to meeting conversion",
+    ],
+    chooseCompetitor: [
+      "You want to run a large volume of cold email to new lists",
+      "You want outreach that spans channels beyond email (e.g., LinkedIn)",
+    ],
+    faq: [
+      { q: "What's the difference between lemlist and Meeton Email?", a: "lemlist is an overseas SaaS strong at cold email / multichannel outreach to new lists, featuring a built-in lead DB and personalization. Meeton Email specializes in inbound follow-up where, triggered by behavior signals (re-visit, open, view), an AI follows up 1:1 with already-contacted (unbooked, dormant) leads. For new prospecting, lemlist fits; for follow-up, Meeton fits." },
+    ],
+    sources: [
+      { claim: "lemlist offers multichannel outreach across email/LinkedIn/phone, a lead DB of 650M+, and deliverability improvement with lemwarm. Email from $31/mo, Multichannel from $87/mo", source: "lemlist.com/pricing" },
+    ],
+  },
+
+  smartlead: {
+    slug: "smartlead",
+    competitorName: "Smartlead",
+    product: "email",
+    productName: "Meeton Email",
+    category: "Email / cold sending",
+    metaTitle: "Smartlead alternative: pricing & differences｜Behavior-based follow-up AI｜Meeton Email",
+    metaDescription:
+      "Smartlead is an overseas SaaS strong at large-volume cold sending and deliverability with unlimited mailboxes and auto-warmup. Meeton Email follows up 1:1 with existing, unbooked leads triggered by behavior signals. Choose by large-volume outbound vs. follow-up of warmed leads.",
+    verdict:
+      "If you want to keep sending a large volume of cold email at high deliverability (especially for agency / outsourced use cases), Smartlead is powerful. If you want an AI to follow up 1:1 with existing, unbooked leads triggered by behavior signals and connect to meeting conversion, Meeton Email fits.",
+    competitorStrength:
+      "Smartlead is an overseas SaaS strong at deliverability management via unlimited mailbox connections and auto-warmup, and at agency-oriented design (white label) that lets you manage multiple clients in one place (G2 4.6).",
+    rows: [
+      C("Primary purpose", "Inbound follow-up of existing, unbooked leads", "Large-volume cold email sending and deliverability management"),
+      C("Trigger", "Behavior signals (re-visit / open / view)", "Sending campaign / list", true),
+      C("Copy generation", "AI generates each message for the recipient's context", "Templates + merge fields, mostly", true),
+      C("Deliverability / warmup", "— (premised on inbound)", "Strength in unlimited mailboxes and auto-warmup"),
+      C("CRM premise", "Premised on CRM integration (leveraging existing leads)", "Premised on outbound sending"),
+      C("Goal", "Autonomous through reply and meeting booking", "Delivery and reply acquisition at high volume"),
+    ],
+    chooseMeeton: [
+      "You want to convert unbooked, dormant leads in your existing CRM into meetings",
+      "You want to be followed by behavior signals rather than a sending schedule",
+      "You want to integrate with chat and booking end to end",
+    ],
+    chooseCompetitor: [
+      "You want to send a large volume of cold email at high deliverability",
+      "You want to centrally manage multiple clients for outsourcing / agency work",
+    ],
+    faq: [
+      { q: "What's the difference between Smartlead and Meeton Email?", a: "Smartlead is an overseas SaaS specialized in sending a large volume of cold email at high deliverability with unlimited mailboxes and auto-warmup. Meeton Email specializes in inbound follow-up where, triggered by behavior signals, an AI follows up 1:1 with existing, unbooked leads. For large-volume outbound, Smartlead fits; for follow-up of warmed leads, Meeton fits." },
+    ],
+    sources: [
+      { claim: "Smartlead is strong at unlimited mailboxes, auto-warmup, and agency-oriented centralized management. Basic from $39/mo to Unlimited $174/mo", source: "smartlead.ai/pricing, g2.com" },
+    ],
+  },
+};
+
 export function getCompare(slug: string): CompareData | undefined {
   return COMPARE[slug];
+}
+export function getCompareEn(slug: string): CompareData | undefined {
+  return COMPARE_EN[slug];
 }
 export function allCompareSlugs(): string[] {
   return Object.keys(COMPARE);

@@ -178,11 +178,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ]
 
+  // EN twins of the data-driven pages (home is in staticPages, products too).
+  const enPages: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/en/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    ...allCompareSlugs().map((slug) => ({ url: `${baseUrl}/en/compare/${slug}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 })),
+    ...alternativeSlugs().map((slug) => ({ url: `${baseUrl}/en/alternatives/${slug}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.65 })),
+    { url: `${baseUrl}/en/glossary/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 },
+    ...allTermSlugs().map((s) => ({ url: `${baseUrl}/en/glossary/${s}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 })),
+  ]
+
   return [
     ...staticPages,
     ...comparePages,
     ...alternativePages,
     ...glossaryPages,
+    ...enPages,
     ...webinarPages,
     ...integrationPages,
     ...blogPosts,

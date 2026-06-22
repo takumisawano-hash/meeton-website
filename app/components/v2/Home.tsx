@@ -12,15 +12,92 @@ import CountUp from "@/app/components/v2/CountUp";
 import DemoFrame from "@/app/components/v2/DemoFrame";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
 import FeaturedCase from "@/app/components/v2/FeaturedCase";
+import type { Lang } from "@/app/lib/i18n";
 
 type CaseCard = CaseCardData;
 
+// All hardcoded UI copy for the homepage, keyed off `lang` (JA default → the
+// Japanese site renders byte-identically when the prop is omitted). Stats are
+// kept EXACT across locales (60%超→"60%+", 2倍→"2x", 30時間以上/月→"30+ hrs/mo").
+const STR = {
+  ja: {
+    skip: "本文へスキップ",
+    heroEyebrow: "訪問者は去り、リードは商談にならない。",
+    heroH1a: "「待つ」Webサイトから、",
+    heroH1b: "商談を生み出す",
+    heroH1c: "AI SDRへ。",
+    heroSub:
+      "Meeton ai は、Webサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、あらゆる瞬間を商談に変えます。",
+    demoTitle: "Meeton Chat のデモ",
+    heroAssurances: ["30分のデモで自社への効き方を確認", "シナリオ設計不要", "ノーコード・設置5分"],
+    proof: [
+      { n: 60, suf: "%超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
+      { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
+      { n: 30, suf: "時間以上/月", l: "削減できた営業工数", sub: "初動・追客の自動化で" },
+    ],
+    stagesEyebrow: "AI SDR の3つの仕事",
+    stagesTitle: "掴んで育て、商談化し、逃さず追う。",
+    stagesLede: "潜在層の獲得から追客まで、4つのプロダクトがひとつの AI SDR として連携します。",
+    stagesPriceA: "料金は3プラン・月額12万円〜。30分のデモで、自社に合うプランをご案内します。 ",
+    stagesPriceLink: "料金を見る",
+    casesEyebrow: "導入事例",
+    casesTitle: "成果が、データで出ている。",
+    casesAll: "すべての事例を見る →",
+    ctaStripLine: "同じ仕組みを、30分のデモで。",
+    routerEyebrow: "どの仕事から始める？",
+    routerTitle: "迷ったら、いちばん効く一手から。",
+    router: [
+      { slug: "chat", q: "訪問者を会話で掴んでリードにしたい", a: "Meeton Chat" },
+      { slug: "library", q: "資料で見込み客を育てたい", a: "Meeton Library" },
+      { slug: "calendar", q: "問い合わせの取りこぼしを止めたい", a: "Meeton Calendar" },
+      { slug: "email", q: "既存リードを追客で再商談化したい", a: "Meeton Email" },
+    ],
+    finalTitle: "待つWebサイトを、卒業する。",
+    finalSub: "30分のデモで、自社サイトにAI SDRを配属する具体策が見えます。",
+  },
+  en: {
+    skip: "Skip to content",
+    heroEyebrow: "Visitors leave, and leads never become meetings.",
+    heroH1a: "From a Website that waits, ",
+    heroH1b: "to an AI SDR that",
+    heroH1c: "generates meetings.",
+    heroSub:
+      "Meeton ai is an AI SDR deployed on your website. It doesn't wait for inquiries — it engages prospects in conversation and turns every moment into a meeting.",
+    demoTitle: "Meeton Chat demo",
+    heroAssurances: ["See how it works for you in a 30-min demo", "No scenario design", "No-code, install in 5 minutes"],
+    proof: [
+      { n: 60, suf: "%+", l: "Meeting conversion via Meeton ai", sub: "Industry average ~20%" },
+      { n: 2, suf: "x", l: "Qualified leads", sub: "+100% vs. before deployment" },
+      { n: 30, suf: "+ hrs/mo", l: "Sales hours saved", sub: "By automating speed-to-lead and follow-up" },
+    ],
+    stagesEyebrow: "The 3 jobs of the AI SDR",
+    stagesTitle: "Capture and nurture, convert, and chase down every lead.",
+    stagesLede: "From acquiring prospects to winning them back, four products work together as a single AI SDR.",
+    stagesPriceA: "Three plans, from ¥120,000/mo. A 30-minute demo helps you find the right one. ",
+    stagesPriceLink: "See pricing",
+    casesEyebrow: "Customer stories",
+    casesTitle: "The results show up in the data.",
+    casesAll: "See all customers →",
+    ctaStripLine: "See the same playbook in a 30-minute demo.",
+    routerEyebrow: "Where do you start?",
+    routerTitle: "Not sure? Start with the move that pays off most.",
+    router: [
+      { slug: "chat", q: "Capture visitors in conversation and turn them into leads", a: "Meeton Chat" },
+      { slug: "library", q: "Nurture prospects with content", a: "Meeton Library" },
+      { slug: "calendar", q: "Stop losing inbound inquiries", a: "Meeton Calendar" },
+      { slug: "email", q: "Win back existing leads with follow-up", a: "Meeton Email" },
+    ],
+    finalTitle: "Graduate from a Website that waits.",
+    finalSub: "A 30-minute demo shows exactly how to deploy an AI SDR on your own site.",
+  },
+} as const;
 
-export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] }) {
+export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: CaseCard[]; lang?: Lang }) {
+  const s = STR[lang];
   return (
     <>
-      <a href="#main" className="v2-skip">本文へスキップ</a>
-      <Nav />
+      <a href="#main" className="v2-skip">{s.skip}</a>
+      <Nav lang={lang} />
       <main id="main">
 
       {/* 1. Hero (navy) — 2 columns ≥1024px: copy left, product window right.
@@ -30,7 +107,7 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
         <div className="v2-hero">
           <div>
             <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--cta)" }}>
-              訪問者は去り、リードは商談にならない。
+              {s.heroEyebrow}
             </p>
             <h1
               className="v2-hero-h1"
@@ -44,24 +121,23 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
                 margin: "16px 0 0",
               }}
             >
-              「待つ」Webサイトから、<span className="v2-hero-brk"><br /></span>
-              <span style={{ color: "var(--cta)", whiteSpace: "nowrap" }}>商談を生み出す</span>
-              <span style={{ whiteSpace: "nowrap" }}>AI SDRへ。</span>
+              {s.heroH1a}<span className="v2-hero-brk"><br /></span>
+              <span style={{ color: "var(--cta)", whiteSpace: "nowrap" }}>{s.heroH1b}</span>{lang === "en" ? " " : ""}
+              <span style={{ whiteSpace: "nowrap" }}>{s.heroH1c}</span>
             </h1>
             <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 720 }}>
-              Meeton ai は、Webサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、
-              あらゆる瞬間を商談に変えます。
+              {s.heroSub}
             </p>
-            <CTAButtons source="home-hero" tone="onNavy" size="lg" />
+            <CTAButtons source="home-hero" tone="onNavy" size="lg" lang={lang} />
             <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 20, fontSize: 13, color: "var(--on-navy-sub)" }}>
-              <span>✓ 30分のデモで自社への効き方を確認</span>
-              <span>✓ シナリオ設計不要</span>
-              <span>✓ ノーコード・設置5分</span>
+              {s.heroAssurances.map((a) => (
+                <span key={a}>✓ {a}</span>
+              ))}
             </div>
           </div>
           {/* product window: the REAL Meeton Chat demo, framed like an app on navy */}
           <div className="v2-hero-media">
-            <DemoFrame src="/product/chat.html" title="Meeton Chat のデモ" />
+            <DemoFrame src="/product/chat.html" title={s.demoTitle} />
           </div>
         </div>
         <style>{`
@@ -76,15 +152,11 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
       {/* 2. Proof stats — promoted to big cards (navy, continuous with hero) */}
       <Section tone="navy" py={0} style={{ paddingTop: 12, paddingBottom: 64 }}>
         <div className="v2-proof" style={{ borderTop: "1px solid var(--on-navy-border)", paddingTop: 40 }}>
-          {[
-            { n: 60, suf: "%超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
-            { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
-            { n: 30, suf: "時間以上/月", l: "削減できた営業工数", sub: "初動・追客の自動化で" },
-          ].map((s) => (
-            <div key={s.l} className="v2-proof-card">
-              <div className="v2-proof-num"><CountUp to={s.n} /><span className="v2-proof-suf">{s.suf}</span></div>
-              <div className="v2-proof-label">{s.l}</div>
-              <div className="v2-proof-sub">{s.sub}</div>
+          {s.proof.map((p) => (
+            <div key={p.l} className="v2-proof-card">
+              <div className="v2-proof-num"><CountUp to={p.n} /><span className="v2-proof-suf">{p.suf}</span></div>
+              <div className="v2-proof-label">{p.l}</div>
+              <div className="v2-proof-sub">{p.sub}</div>
             </div>
           ))}
         </div>
@@ -100,33 +172,33 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
       </Section>
 
       {/* 2.5 Customer logo wall — social proof near first view */}
-      <LogoWall tone="white" />
+      <LogoWall tone="white" {...(lang === "en" ? { heading: "Chosen on the front lines of meeting generation, across every industry" } : {})} />
 
       {/* 4. The 3 stages (deck p7) — 掴む → 商談化 → 追客 */}
       <Section tone="surface" id="stages">
         <SectionHead
-          eyebrow="AI SDR の3つの仕事"
-          title="掴んで育て、商談化し、逃さず追う。"
-          lede="潜在層の獲得から追客まで、4つのプロダクトがひとつの AI SDR として連携します。"
+          eyebrow={s.stagesEyebrow}
+          title={s.stagesTitle}
+          lede={s.stagesLede}
         />
-        <StageFlow />
+        <StageFlow lang={lang} />
         <p style={{ fontSize: 13, color: "var(--sub)", marginTop: 18, textAlign: "center" }}>
-          料金は3プラン・月額12万円〜。30分のデモで、自社に合うプランをご案内します。{" "}
-          <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>料金を見る</Link>
+          {s.stagesPriceA}
+          <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>{s.stagesPriceLink}</Link>
         </p>
       </Section>
 
       {/* 6. Per-job media walkthrough (screenshots/video → LP) */}
-      <StageMedia />
+      <StageMedia lang={lang} />
 
       {/* 7. Cases — one featured story + link to all */}
       {caseStudies.length > 0 && (
         <Section tone="white">
-          <SectionHead eyebrow="導入事例" title="成果が、データで出ている。" align="center" />
-          <FeaturedCase c={caseStudies.find((x) => x.slug === "g-gen-inside-sales-sql-2x") ?? caseStudies[0]} />
+          <SectionHead eyebrow={s.casesEyebrow} title={s.casesTitle} align="center" />
+          <FeaturedCase c={caseStudies.find((x) => x.slug === "g-gen-inside-sales-sql-2x") ?? caseStudies[0]} lang={lang} />
           <div style={{ textAlign: "center", marginTop: 32 }}>
             <Link href="/cases/" className="v2-link" style={{ fontSize: 15, fontWeight: 800, color: "var(--cta-ink)", textDecoration: "none", border: "1.5px solid var(--border2)", borderRadius: 12, padding: "13px 28px", display: "inline-block" }}>
-              すべての事例を見る →
+              {s.casesAll}
             </Link>
           </div>
         </Section>
@@ -136,8 +208,8 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
           conversion point until the footer; give scrollers an exit here. */}
       <Section tone="navy" py={56}>
         <div className="v2-ctastrip">
-          <p className="v2-ctastrip-line">同じ仕組みを、30分のデモで。</p>
-          <CTAButtons source="home-mid" tone="onNavy" size="md" />
+          <p className="v2-ctastrip-line">{s.ctaStripLine}</p>
+          <CTAButtons source="home-mid" tone="onNavy" size="md" lang={lang} />
         </div>
         <style>{`
           .v2-ctastrip{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -148,14 +220,9 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
 
       {/* 8. Soft router — 2×2 grid (even boxes) */}
       <Section tone="surface" py={64}>
-        <SectionHead eyebrow="どの仕事から始める？" title="迷ったら、いちばん効く一手から。" align="center" />
+        <SectionHead eyebrow={s.routerEyebrow} title={s.routerTitle} align="center" />
         <div className="v2-router-grid">
-          {[
-            { slug: "chat", q: "訪問者を会話で掴んでリードにしたい", a: "Meeton Chat" },
-            { slug: "library", q: "資料で見込み客を育てたい", a: "Meeton Library" },
-            { slug: "calendar", q: "問い合わせの取りこぼしを止めたい", a: "Meeton Calendar" },
-            { slug: "email", q: "既存リードを追客で再商談化したい", a: "Meeton Email" },
-          ].map((r) => (
+          {s.router.map((r) => (
             <Link key={r.slug} href={`/${r.slug}/`} className="v2-router-card">
               <span className="v2-router-icon">
                 <ProductIcon kind={PRODUCTS[r.slug as keyof typeof PRODUCTS].icon} size={22} />
@@ -183,19 +250,19 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
       <Section tone="navyDeep" py={76}>
         <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(28px,4.4vw,42px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            待つWebサイトを、卒業する。
+            {s.finalTitle}
           </h2>
           <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>
-            30分のデモで、自社サイトにAI SDRを配属する具体策が見えます。
+            {s.finalSub}
           </p>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <CTAButtons source="home-footer" tone="onNavy" size="lg" align="center" />
+            <CTAButtons source="home-footer" tone="onNavy" size="lg" align="center" lang={lang} />
           </div>
         </div>
       </Section>
       </main>
 
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 }
