@@ -3,28 +3,27 @@
 import { useEffect, useRef, useState } from "react";
 
 // Embeds a real product-UI demo (self-contained HTML in /public/product/<slug>.html)
-// as an <iframe>, absolutely filling its (position:relative) parent media frame.
+// as an <iframe> that auto-sizes to its content height — the demos are responsive
+// and their natural height varies with width, so a fixed aspect-ratio frame
+// clipped the bottom. We read the (same-origin) content height and set the iframe
+// height to it, re-measuring on load / resize / content mutation. No clip, no
+// letterbox: the frame is exactly as tall as the demo at the current width.
 //
-// - Lazy: the iframe src is only set once the frame scrolls into view, so the
-//   HTML (and its CSS entrance animation) loads exactly when visible — the demo
-//   "builds up" in front of the viewer, matching the old ProductAnim behaviour
-//   but with the real UI.
-// - prefers-reduced-motion: still loads (the final state is the readable UI);
-//   the entrance is a one-shot CSS animation the global reduce-motion guard
-//   collapses inside the iframe document is out of our scope, but the frames are
-//   self-contained and end on the complete UI either way.
-// - sandbox "allow-scripts allow-same-origin": the demos are first-party,
-//   self-contained (inline data-URI images, one inline script, no network).
-//   allow-same-origin is REQUIRED so the iframe keeps the dynameet.ai origin —
-//   without it the frame gets an opaque origin and X-Frame-Options:SAMEORIGIN /
-//   CSP frame-ancestors 'self' reject it ("refused to connect"). top-nav, form
-//   submission and popups stay blocked.
+// - Lazy: src is set only once the frame scrolls into view, so the HTML + its CSS
+//   entrance animation load (and "build up") right when the visitor sees it.
+// - sandbox "allow-scripts allow-same-origin": first-party content; allow-same-origin
+//   is required both so the framing policy accepts it (X-Frame-Options SAMEORIGIN /
+//   CSP frame-ancestors 'self') and so we can read contentDocument height. top-nav,
+//   forms and popups stay sandboxed.
 export default function DemoFrame({ src, title }: { src: string; title: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const [show, setShow] = useState(false);
+  const [h, setH] = useState<number | null>(null);
 
+  // load when scrolled into view
   useEffect(() => {
-    const el = ref.current;
+    const el = wrapRef.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
       setShow(true);
@@ -37,23 +36,65 @@ export default function DemoFrame({ src, title }: { src: string; title: string }
           io.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
+  // measure content height (same-origin) and keep it synced
+  useEffect(() => {
+    if (!show) return;
+    const ifr = frameRef.current;
+    if (!ifr) return;
+    let ro: ResizeObserver | undefined;
+    const measure = () => {
+      try {
+        const doc = ifr.contentDocument || ifr.contentWindow?.document;
+        if (!doc) return;
+        const ch = Math.max(doc.documentElement?.scrollHeight || 0, doc.body?.scrollHeight || 0);
+        if (ch > 0) setH(ch);
+      } catch {
+        /* cross-origin guard — shouldn't happen with allow-same-origin */
+      }
+    };
+    const onLoad = () => {
+      measure();
+      try {
+        const doc = ifr.contentDocument;
+        if (doc?.body && typeof ResizeObserver !== "undefined") {
+          ro = new ResizeObserver(measure);
+          ro.observe(doc.body);
+        }
+      } catch {
+        /* ignore */
+      }
+      // re-measure after fonts / entrance animation settle
+      setTimeout(measure, 300);
+      setTimeout(measure, 1200);
+    };
+    ifr.addEventListener("load", onLoad);
+    if (ifr.contentDocument?.readyState === "complete") onLoad();
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
+    return () => {
+      ifr.removeEventListener("load", onLoad);
+      window.removeEventListener("resize", onResize);
+      ro?.disconnect();
+    };
+  }, [show]);
+
   return (
-    <div ref={ref} style={{ position: "absolute", inset: 0 }} aria-label={title} role="img">
+    <div ref={wrapRef} style={{ width: "100%" }} role="img" aria-label={title}>
       {show && (
         <iframe
+          ref={frameRef}
           src={src}
           title={title}
-          loading="lazy"
           scrolling="no"
           sandbox="allow-scripts allow-same-origin"
           tabIndex={-1}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, display: "block" }}
+          style={{ display: "block", width: "100%", height: h ? `${h}px` : "460px", border: 0 }}
         />
       )}
     </div>

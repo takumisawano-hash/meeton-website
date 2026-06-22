@@ -147,7 +147,7 @@ export default function Page() {
           .cap-row{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
           .cap-row.rev .cap-media{order:2}
           .cap-media{position:relative;width:100%;min-height:clamp(360px,34vw,440px);display:flex;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:0 12px 40px -24px rgba(15,17,40,.30)}
-          .cap-media.demo{min-height:0;aspect-ratio:1440/675;background:var(--navy-2)}
+          .cap-media.demo{display:block;min-height:0;background:var(--navy-2)}
           .cap-title{font-family:var(--fd);font-size:clamp(22px,2.6vw,30px);font-weight:800;color:var(--heading);letter-spacing:-.02em;margin:0 0 6px;line-height:1.3}
           .cap-transform{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--cta-ink);margin-bottom:14px}
           .cap-desc{font-size:16px;line-height:1.85;color:var(--text);margin:0 0 16px}
