@@ -316,9 +316,12 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
-      // Old English subdir (if it no longer exists)
+      // Old English subdir → home, EXCEPT the live EN product LPs
+      // (/en/chat /en/calendar /en/library /en/email and their sub-paths).
+      // The negative lookahead keeps those real pages reachable while still
+      // catching any genuinely-stale /en/* URL.
       {
-        source: '/en/:slug*',
+        source: '/en/:slug((?!chat/|calendar/|library/|email/|chat$|calendar$|library$|email$).*)',
         destination: '/',
         permanent: true,
       },

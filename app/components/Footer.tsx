@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { t, type Lang } from "@/app/lib/i18n";
 
 // ── Meeton ai v2 footer (2026-05-29 rebuild) ────────────────────────
 // §3.8: footer is a navy frame surface. Discover grid feeds sitewide
@@ -16,6 +17,10 @@ type FooterProps = {
   variant?: "light" | "dark";
   /** Hide the discover grid on paid-traffic LPs where it dilutes the CV CTA. */
   hideDiscoverGrid?: boolean;
+  /** locale (JA default). EN swaps headings/labels/tagline; the 4 product
+   *  links go to /en/<slug>/, everything else points at root (JA) URLs until
+   *  translated. JA omits the prop → byte-identical output. */
+  lang?: Lang;
 };
 
 function useIsMobile(breakpoint = 768) {
@@ -100,8 +105,67 @@ const LEGAL = [
   { href: "/terms/", label: "利用規約" },
 ];
 
-export default function Footer({ hideDiscoverGrid = false }: FooterProps) {
+// ── English footer (lang="en") ──────────────────────────────────────
+// Only the 4 product LPs exist under /en/* today; every other destination is
+// JA-only, so links point at the ROOT (JA) URL (interim, no dead /en links).
+const TAGLINE_EN = "Turn your “waiting” website into an AI sales channel that creates meetings.";
+const C_EN = t("en"); // EN chrome strings (headings/legal labels) from i18n
+const DISCOVER_EN = [
+  {
+    heading: C_EN.footerProduct,
+    items: [
+      { href: "/capture/", label: "① Capture & Nurture" },
+      { href: "/en/chat/", label: "Meeton Chat" },
+      { href: "/en/library/", label: "Meeton Library" },
+      { href: "/en/calendar/", label: "Meeton Calendar" },
+      { href: "/en/email/", label: "Meeton Email" },
+      { href: "/pricing/", label: "Pricing" },
+    ],
+  },
+  {
+    heading: C_EN.footerSolutions,
+    items: [
+      { href: "/solutions/cmo/", label: "CMO / Head of Marketing" },
+      { href: "/solutions/cro/", label: "CRO / Head of Sales" },
+      { href: "/solutions/sdr/", label: "Head of IS / SDR" },
+      { href: "/solutions/ceo/", label: "Founders & CEOs" },
+    ],
+  },
+  {
+    heading: C_EN.footerUseCases,
+    items: [
+      { href: "/use-cases/pre-inquiry/", label: "Before the inquiry" },
+      { href: "/use-cases/post-download/", label: "After a download" },
+      { href: "/use-cases/revisit/", label: "Return visit" },
+      { href: "/use-cases/nurture/", label: "Follow-up" },
+    ],
+  },
+  {
+    heading: C_EN.footerResources,
+    items: [
+      { href: "/blog/", label: "Blog" },
+      { href: "/glossary/ai-sdr/", label: "Glossary" },
+      { href: "/cases/", label: "Customers" },
+      { href: "/tools/roi/", label: "ROI calculator" },
+    ],
+  },
+];
+const LEGAL_EN = [
+  { href: "/about/", label: "About" },
+  { href: "/security/", label: C_EN.footerLegalSecurity },
+  { href: "/integrations/", label: "Integrations" },
+  { href: "/careers/", label: "Careers" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/privacy-policy/", label: C_EN.footerLegalPrivacy },
+  { href: "/terms/", label: C_EN.footerLegalTerms },
+];
+
+export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: FooterProps) {
   const isMobile = useIsMobile();
+  const en = lang === "en";
+  const tagline = en ? TAGLINE_EN : TAGLINE;
+  const discover = en ? DISCOVER_EN : DISCOVER;
+  const legal = en ? LEGAL_EN : LEGAL;
 
   return (
     <footer
@@ -147,7 +211,7 @@ export default function Footer({ hideDiscoverGrid = false }: FooterProps) {
               lineHeight: 1.7,
             }}
           >
-            {TAGLINE}
+            {tagline}
           </p>
         </div>
         {!hideDiscoverGrid && (
@@ -192,7 +256,7 @@ export default function Footer({ hideDiscoverGrid = false }: FooterProps) {
             borderBottom: "1px solid var(--on-navy-border)",
           }}
         >
-          {DISCOVER.map((col) => (
+          {discover.map((col) => (
             <div key={col.heading}>
               <div
                 style={{
@@ -237,7 +301,7 @@ export default function Footer({ hideDiscoverGrid = false }: FooterProps) {
           margin: "0 auto",
         }}
       >
-        {LEGAL.map((l) => (
+        {legal.map((l) => (
           <Link
             key={l.href}
             href={l.href}

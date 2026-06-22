@@ -8,9 +8,72 @@ import { COMPARE } from "@/app/lib/compare-data";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
 import ProductMedia from "@/app/components/v2/ProductMedia";
 import { stageOf } from "@/app/lib/stages";
+import type { Lang } from "@/app/lib/i18n";
 
 // 8-section product-LP template (spec §2.2). Server-rendered so all copy is
 // in the HTML for AEO (§4.16). CTAs are client islands for tracking.
+// Bilingual: product copy comes from the localized `data` prop; only the
+// surrounding chrome strings live here, keyed off `lang` (JA default → the
+// Japanese site renders byte-identically when the prop is omitted).
+
+// Chrome / template strings, per locale. English stage labels live here
+// (stages.ts is JA-only and must not be restructured). The product copy
+// itself is NOT here — it is supplied by the localized `data` prop.
+const STR = {
+  ja: {
+    skip: "本文へスキップ",
+    stageBadge: (num: string, title: string, transform: string) => `${num} ${title}ステージ（${transform}）`,
+    heroAssurances: ["ノーコード設置・既存スタックに連携", "30分のデモで自社への効き方を確認", "適格請求書（インボイス）対応"],
+    howEyebrow: "30秒で分かる仕組み",
+    howTitle: (p: string) => `${p} の動き方`,
+    step: "STEP",
+    compareLabel: "比較で見る:",
+    compareLink: (name: string) => `vs ${name} →`,
+    integrationsEyebrow: "スタック連携",
+    integrationsTitle: "今のスタックに、そのまま挿さる。",
+    pricingEyebrow: "料金",
+    pricingTitle: "月額12万円〜。必要な分だけ。",
+    pricingLede: "料金は月間トラフィックと機能で変動します。リード獲得 / 商談獲得 / オールインワン の3プラン。",
+    pricingLink: "料金の詳細を見る →",
+    expansionEyebrow: "これは Meeton ai の一部",
+    expansionStages: "AI SDR の3つの仕事を見る →",
+    expansionPricing: "料金を見る →",
+    faqEyebrow: "よくある質問",
+    faqTitle: (p: string) => `${p} のFAQ`,
+    finalTitle: (p: string) => `${p} を、デモで体験する。`,
+    finalSub: "30分のデモで、自社サイトでの効き方を具体的に確認できます。",
+  },
+  en: {
+    skip: "Skip to content",
+    stageBadge: (num: string, _title: string, label: string) => `${num} ${label}`,
+    heroAssurances: ["No-code install, connects to your existing stack", "See how it works for you in a 30-min demo", "Qualified-invoice (Japan) compliant"],
+    howEyebrow: "How it works, in 30 seconds",
+    howTitle: (p: string) => `How ${p} works`,
+    step: "STEP",
+    compareLabel: "Compare:",
+    compareLink: (name: string) => `vs ${name} →`,
+    integrationsEyebrow: "Stack integrations",
+    integrationsTitle: "Slots straight into your current stack.",
+    pricingEyebrow: "Pricing",
+    pricingTitle: "From ¥120,000/mo. Only what you need.",
+    pricingLede: "Pricing varies by monthly traffic and features. Three plans: Lead Generation / Meeting Generation / All-in-One.",
+    pricingLink: "See pricing details →",
+    expansionEyebrow: "This is part of Meeton ai",
+    expansionStages: "See the 3 jobs of the AI SDR →",
+    expansionPricing: "See pricing →",
+    faqEyebrow: "FAQ",
+    faqTitle: (p: string) => `${p} FAQ`,
+    finalTitle: (p: string) => `Experience ${p} in a demo.`,
+    finalSub: "A 30-minute demo shows exactly how it works on your own site.",
+  },
+} as const;
+
+// English label for each AI SDR stage (stages.ts stores JA only).
+const STAGE_LABEL_EN: Record<"capture" | "convert" | "follow", string> = {
+  capture: "Capture & Nurture stage (Prospects → Leads)",
+  convert: "Convert stage (Leads → Meetings)",
+  follow: "Win-back stage (Recover lost leads)",
+};
 
 // Compound Latin terms (product names, KPI phrases) that must never break
 // mid-phrase on narrow screens; consumed by nowrapTerms() in the hero.
@@ -24,14 +87,27 @@ function nowrapTerms(text: string) {
   );
 }
 
-export default function ProductLP({ data }: { data: ProductLPData }) {
+export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; lang?: Lang }) {
   const src = data.slug;
-  const compares = Object.values(COMPARE).filter((c) => c.product === data.slug);
+  const s = STR[lang];
+  const en = lang === "en";
+  // Cross-cluster compare links: EN compare pages don't exist yet, so we omit
+  // the compare row on EN rather than create dead /en links (or link to JA
+  // compare pages from an EN page). On JA, unchanged.
+  const compares = en ? [] : Object.values(COMPARE).filter((c) => c.product === data.slug);
   const stage = stageOf(data.slug);
+  // Internal links: on EN, the 3-stage anchor (homepage) + pricing live on JA
+  // pages that aren't translated yet, so they point at their root (JA) URLs
+  // (acceptable interim — no dead /en links). On JA, unchanged.
+  const stagesHref = "/#stages";
+  const pricingHref = "/pricing/";
+  const stageBadge = en
+    ? s.stageBadge(stage.num, stage.title, STAGE_LABEL_EN[stage.id])
+    : s.stageBadge(stage.num, stage.title, stage.transform);
   return (
     <>
-      <a href="#main" className="v2-skip">本文へスキップ</a>
-      <Nav />
+      <a href="#main" className="v2-skip">{s.skip}</a>
+      <Nav lang={lang} />
       <main id="main">
 
       {/* 1. Hero (navy frame) */}
@@ -39,8 +115,8 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
         <div style={{ maxWidth: 820 }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", marginBottom: 4 }}>
             <Eyebrow tone="dark">{data.eyebrow}</Eyebrow>
-            <Link href="/#stages" style={{ fontSize: 12, fontWeight: 700, color: "var(--cta)", textDecoration: "none", background: "var(--on-navy-surface)", border: "1px solid var(--on-navy-border)", borderRadius: 999, padding: "5px 12px" }}>
-              {stage.num} {stage.title}ステージ（{stage.transform}）
+            <Link href={stagesHref} style={{ fontSize: 12, fontWeight: 700, color: "var(--cta)", textDecoration: "none", background: "var(--on-navy-surface)", border: "1px solid var(--on-navy-border)", borderRadius: 999, padding: "5px 12px" }}>
+              {stageBadge}
             </Link>
           </div>
           <p style={{ marginTop: 22, marginBottom: 10, fontSize: 16, color: "var(--cta)", fontWeight: 700 }}>
@@ -64,11 +140,11 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
           <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "22px 0 30px", maxWidth: 680, wordBreak: "auto-phrase" }}>
             {nowrapTerms(data.heroSub)}
           </p>
-          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" />
+          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" lang={lang} />
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 22, fontSize: 13, color: "var(--on-navy-sub)" }}>
-            <span>✓ ノーコード設置・既存スタックに連携</span>
-            <span>✓ 30分のデモで自社への効き方を確認</span>
-            <span>✓ 適格請求書（インボイス）対応</span>
+            {s.heroAssurances.map((line) => (
+              <span key={line}>✓ {line}</span>
+            ))}
           </div>
         </div>
       </Section>
@@ -80,15 +156,15 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
 
       {/* 2. How it works */}
       <Section tone="white">
-        <SectionHead eyebrow="30秒で分かる仕組み" title={`${data.productName} の動き方`} />
+        <SectionHead eyebrow={s.howEyebrow} title={s.howTitle(data.productName)} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
-          {data.steps.map((s, i) => (
+          {data.steps.map((step, i) => (
             <Card key={i}>
               <div style={{ fontFamily: "var(--fm)", fontSize: 13, fontWeight: 700, color: "var(--cta-ink)" }}>
-                STEP {i + 1}
+                {s.step} {i + 1}
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: "var(--heading)", margin: "10px 0 8px" }}>{s.title}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.8, color: "var(--text)", margin: 0 }}>{s.desc}</p>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: "var(--heading)", margin: "10px 0 8px" }}>{step.title}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.8, color: "var(--text)", margin: 0 }}>{step.desc}</p>
             </Card>
           ))}
         </div>
@@ -114,14 +190,14 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
       {compares.length > 0 && (
         <Section tone="white" py={48}>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: "var(--sub)" }}>比較で見る:</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "var(--sub)" }}>{s.compareLabel}</span>
             {compares.map((c) => (
               <Link
                 key={c.slug}
                 href={`/compare/${c.slug}/`}
                 style={{ fontSize: 14, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none", background: "var(--cta-light)", border: "1px solid #cdeede", borderRadius: 999, padding: "8px 16px" }}
               >
-                vs {c.competitorName} →
+                {s.compareLink(c.competitorName)}
               </Link>
             ))}
           </div>
@@ -139,7 +215,7 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
           </div>
           <div>
             <p style={{ fontSize: "clamp(18px,2.4vw,24px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>
-              「{data.proof.quote}」
+              {en ? `“${data.proof.quote}”` : `「${data.proof.quote}」`}
             </p>
             <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {data.proof.source}</div>
           </div>
@@ -149,16 +225,16 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
 
       {/* 5. Stack integrations (real logos) */}
       <Section tone="white" py={64}>
-        <SectionHead eyebrow="スタック連携" title="今のスタックに、そのまま挿さる。" align="center" />
+        <SectionHead eyebrow={s.integrationsEyebrow} title={s.integrationsTitle} align="center" />
         <IntegrationLogos items={pickIntegrations(data.integrations)} />
       </Section>
 
       {/* 6. Pricing — single anchor (月額12万円〜, varies by scale/usage) */}
       <Section tone="surface">
-        <SectionHead eyebrow="料金" title="月額12万円〜。必要な分だけ。" align="center" lede="料金は月間トラフィックと機能で変動します。リード獲得 / 商談獲得 / オールインワン の3プラン。" />
+        <SectionHead eyebrow={s.pricingEyebrow} title={s.pricingTitle} align="center" lede={s.pricingLede} />
         <div style={{ textAlign: "center" }}>
-          <Link href="/pricing/" className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
-            料金の詳細を見る →
+          <Link href={pricingHref} className="v2-link" style={{ fontSize: 15, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
+            {s.pricingLink}
           </Link>
         </div>
       </Section>
@@ -166,16 +242,16 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
       {/* 7. Expansion teaser (navy) */}
       <Section tone="navy" py={64}>
         <div style={{ maxWidth: 760 }}>
-          <Eyebrow tone="dark">これは Meeton ai の一部</Eyebrow>
+          <Eyebrow tone="dark">{s.expansionEyebrow}</Eyebrow>
           <p style={{ fontSize: "clamp(20px,3vw,28px)", lineHeight: 1.6, color: "var(--on-navy)", fontWeight: 700, margin: "18px 0 0" }}>
             {data.crossSell}
           </p>
           <div style={{ marginTop: 22, display: "flex", gap: 18, flexWrap: "wrap" }}>
-            <Link href="/#stages" style={{ color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>
-              AI SDR の3つの仕事を見る →
+            <Link href={stagesHref} style={{ color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>
+              {s.expansionStages}
             </Link>
-            <Link href="/pricing/" style={{ color: "var(--on-navy-sub)", fontWeight: 700, textDecoration: "none" }}>
-              料金を見る →
+            <Link href={pricingHref} style={{ color: "var(--on-navy-sub)", fontWeight: 700, textDecoration: "none" }}>
+              {s.expansionPricing}
             </Link>
           </div>
         </div>
@@ -183,7 +259,7 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
 
       {/* FAQ (AEO — answers self-contained; schema emitted in route) */}
       <Section tone="white">
-        <SectionHead eyebrow="よくある質問" title={`${data.productName} のFAQ`} align="center" />
+        <SectionHead eyebrow={s.faqEyebrow} title={s.faqTitle(data.productName)} align="center" />
         <div style={{ maxWidth: 800, margin: "0 auto", display: "grid", gap: 14 }}>
           {data.faq.map((f, i) => (
             <Card key={i}>
@@ -198,29 +274,33 @@ export default function ProductLP({ data }: { data: ProductLPData }) {
       <Section tone="navyDeep" py={72}>
         <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(26px,4vw,38px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            {data.productName} を、デモで体験する。
+            {s.finalTitle(data.productName)}
           </h2>
           <p style={{ fontSize: 16, color: "var(--on-navy-sub)", margin: "0 0 28px" }}>
-            30分のデモで、自社サイトでの効き方を具体的に確認できます。
+            {s.finalSub}
           </p>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" />
+            <CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" lang={lang} />
           </div>
         </div>
       </Section>
       </main>
 
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 }
 
+// Canonical URL for a product LP, locale-aware (JA at root, EN under /en/*).
+const lpUrl = (slug: string, lang: Lang) =>
+  lang === "en" ? `https://dynameet.ai/en/${slug}/` : `https://dynameet.ai/${slug}`;
+
 /** FAQPage JSON-LD for a product LP — call from the route's server page. */
-export function productFaqSchema(data: ProductLPData) {
+export function productFaqSchema(data: ProductLPData, lang: Lang = "ja") {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    url: `https://dynameet.ai/${data.slug}`,
+    url: lpUrl(data.slug, lang),
     mainEntity: data.faq.map((f) => ({
       "@type": "Question",
       name: f.q,
@@ -230,23 +310,27 @@ export function productFaqSchema(data: ProductLPData) {
 }
 
 /** SoftwareApplication JSON-LD for a product LP. */
-export function productAppSchema(data: ProductLPData) {
+export function productAppSchema(data: ProductLPData, lang: Lang = "ja") {
+  const url = lpUrl(data.slug, lang);
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": `https://dynameet.ai/${data.slug}#product`,
+    "@id": `${url}#product`,
     name: data.productName,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description: data.metaDescription,
-    url: `https://dynameet.ai/${data.slug}`,
+    url,
     image: "https://dynameet.ai/logo-dark.svg",
     publisher: { "@id": "https://dynameet.ai/#organization" },
     offers: {
       "@type": "Offer",
       price: "120000",
       priceCurrency: "JPY",
-      description: "月額12万円〜。規模・利用機能・運用支援範囲により変動。",
+      description:
+        lang === "en"
+          ? "From ¥120,000/mo. Varies by scale, features used, and level of operational support."
+          : "月額12万円〜。規模・利用機能・運用支援範囲により変動。",
     },
   };
 }

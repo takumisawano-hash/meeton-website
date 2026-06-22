@@ -1,11 +1,15 @@
 "use client";
 
 import { demoUrl, pricingUrl, openDemoCalendarInPlace } from "@/app/lib/cta-urls";
+import { t, type Lang } from "@/app/lib/i18n";
 
 // Permanent dual CTA (§1.2). 2026-06-04 sales-led pivot (deck p19, free tier
 // removed): primary = デモを予約 (green), secondary = 料金を見る (ghost → /pricing).
 // Client island ONLY so the click fires a GA4/dataLayer conversion event
 // (§6.2); surrounding page copy stays server-rendered for AEO.
+// Bilingual: `lang` (JA default) only switches the default CTA labels via
+// CHROME; explicit primaryLabel/secondaryLabel still win. JA omits the prop →
+// byte-identical output.
 
 type Props = {
   /** funnel source label, becomes utm_medium + event param (e.g. "calendar-hero") */
@@ -13,9 +17,11 @@ type Props = {
   tone?: "onNavy" | "onLight";
   size?: "lg" | "md";
   align?: "left" | "center";
-  /** override primary CTA label (default デモを予約) */
+  /** locale for default CTA labels (JA default). */
+  lang?: Lang;
+  /** override primary CTA label (default デモを予約 / Book a demo) */
   primaryLabel?: string;
-  /** override secondary CTA (default 料金を見る → /pricing/) */
+  /** override secondary CTA (default 料金を見る / See pricing → /pricing/) */
   secondaryLabel?: string;
   secondaryHref?: string;
   /** optional short reassurance lines rendered "✓ …" under the buttons.
@@ -37,11 +43,16 @@ export default function CTAButtons({
   tone = "onNavy",
   size = "lg",
   align = "left",
-  primaryLabel = "デモを予約",
-  secondaryLabel = "料金を見る",
+  lang = "ja",
+  primaryLabel,
+  secondaryLabel,
   secondaryHref,
   assurances,
 }: Props) {
+  const chrome = t(lang);
+  // Explicit overrides win; otherwise default to the locale CTA labels.
+  const primaryText = primaryLabel ?? chrome.ctaBookDemo;
+  const secondaryText = secondaryLabel ?? chrome.ctaSeePricing;
   const pad = size === "lg" ? "15px 30px" : "12px 24px";
   const fontSize = size === "lg" ? 16 : 15;
 
@@ -91,7 +102,7 @@ export default function CTAButtons({
           if (openDemoCalendarInPlace()) e.preventDefault();
         }}
       >
-        {primaryLabel}
+        {primaryText}
       </a>
       <a
         href={secondaryHref ?? pricingUrl()}
@@ -99,7 +110,7 @@ export default function CTAButtons({
         style={ghost}
         onClick={() => track("pricing_click", source)}
       >
-        {secondaryLabel}
+        {secondaryText}
       </a>
       {assurances && assurances.length > 0 && (
         <div

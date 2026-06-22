@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
 import { openDemoCalendarInPlace } from "@/app/lib/cta-urls";
+import { t, type Lang } from "@/app/lib/i18n";
 
 // ── Meeton ai v2 global navigation (2026-05-29 rebuild) ──────────────
 // IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [料金を見る][デモを予約]
@@ -27,6 +28,10 @@ type NavProps = {
   variant?: "light" | "dark" | "minimal";
   langSwitchHref?: string;
   langSwitchLabel?: string;
+  /** locale (JA default). EN swaps labels + the IA below to /en/* where pages
+   *  exist; untranslated sections point at their root (JA) URL (interim, no
+   *  dead links). JA omits the prop → byte-identical output. */
+  lang?: Lang;
 };
 
 type Item = { href: string; label: string; sub?: string };
@@ -71,6 +76,56 @@ const RESOURCE_ITEMS: Item[] = [
   { href: "/tools/roi/", label: "ROI 診断", sub: "商談化の余地を試算" },
 ];
 
+// ── English IA (lang="en") ──────────────────────────────────────────
+// Only the 4 product LPs exist under /en/* today. Stage landing pages
+// (capture/calendar/email = stage.href) and every other section are JA-only,
+// so their nav links point at the ROOT (JA) URL — interim, never a dead /en
+// link. The 4 products get /en/<slug>/.
+const EN_PRODUCT_NAME: Record<string, { name: string; line: string }> = {
+  chat: { name: "Meeton Chat", line: "Convert visitors into leads in conversation." },
+  library: { name: "Meeton Library", line: "Auto-nurture prospects with content." },
+  calendar: { name: "Meeton Calendar", line: "Book the meeting the instant intent peaks." },
+  email: { name: "Meeton Email", line: "Pursue unbooked leads 1:1 and re-convert." },
+};
+const EN_STAGE: Record<string, { stage: string; transform: string }> = {
+  capture: { stage: "① Capture & Nurture", transform: "Prospects → Leads" },
+  convert: { stage: "② Convert", transform: "Leads → Meetings" },
+  follow: { stage: "③ Win back", transform: "Recover lost leads" },
+};
+const STAGE_NAV_EN: { stage: string; transform: string; href: string; products: Item[] }[] = STAGES.map((s) => ({
+  stage: EN_STAGE[s.id].stage,
+  transform: EN_STAGE[s.id].transform,
+  href: s.href, // JA stage landing page (no EN twin yet)
+  products: s.products.map((p) => ({
+    href: `/en/${p}/`, // the 4 product LPs DO exist under /en/*
+    label: EN_PRODUCT_NAME[p].name,
+    sub: EN_PRODUCT_NAME[p].line,
+  })),
+}));
+const PLATFORM_ITEM_EN: Item = {
+  href: "/",
+  label: "Meeton ai (3 stages, unified)",
+  sub: "Capture → Convert → Win back, one end-to-end AI SDR",
+};
+const SOLUTION_ROLES_EN: Item[] = [
+  { href: "/solutions/cmo/", label: "CMO / Head of Marketing" },
+  { href: "/solutions/cro/", label: "CRO / Head of Sales" },
+  { href: "/solutions/sdr/", label: "Head of IS / SDR" },
+  { href: "/solutions/ceo/", label: "Founders & CEOs" },
+];
+const USE_MOMENTS_EN: Item[] = [
+  { href: "/use-cases/pre-inquiry/", label: "Before the inquiry", sub: "① Capture" },
+  { href: "/use-cases/post-download/", label: "After a download", sub: "①→② Convert" },
+  { href: "/use-cases/revisit/", label: "Return visit", sub: "② Convert / ③ Win back" },
+  { href: "/use-cases/nurture/", label: "Follow-up", sub: "③ Win back" },
+];
+const RESOURCE_ITEMS_EN: Item[] = [
+  { href: "/blog/", label: "Blog", sub: "Playbooks for capture & conversion" },
+  { href: "/glossary/ai-sdr/", label: "Glossary", sub: "What is an AI SDR, and more" },
+  { href: "/cases/", label: "Customers", sub: "Accounts that saw results" },
+  { href: "/tools/roi/", label: "ROI calculator", sub: "Estimate your conversion upside" },
+];
+
 function useIsMobile(breakpoint = 980) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -86,11 +141,29 @@ export default function Nav({
   variant = "light",
   langSwitchHref,
   langSwitchLabel,
+  lang = "ja",
 }: NavProps) {
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const isDark = variant === "dark";
   const isMinimal = variant === "minimal";
+  const en = lang === "en";
+  const chrome = t(lang);
+
+  // Locale-selected IA. JA uses the original constants (unchanged); EN swaps in
+  // the /en-aware structures defined above.
+  const stageNav = en ? STAGE_NAV_EN : STAGE_NAV;
+  const platformItem = en ? PLATFORM_ITEM_EN : PLATFORM_ITEM;
+  const solutionRoles = en ? SOLUTION_ROLES_EN : SOLUTION_ROLES;
+  const useMoments = en ? USE_MOMENTS_EN : USE_MOMENTS;
+  const resourceItems = en ? RESOURCE_ITEMS_EN : RESOURCE_ITEMS;
+
+  // Lang switch: EN pages link back to the JA root of the current page
+  // (strip the /en prefix). Explicit props still win (back-compat). The label
+  // comes from CHROME (日本語 on EN, EN on JA — though JA pages only show the
+  // switch when the caller passes the props).
+  const resolvedLangHref = langSwitchHref ?? (en ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : undefined);
+  const resolvedLangLabel = langSwitchLabel ?? (en ? chrome.langSwitch : undefined);
 
   // which dropdown is open (desktop): 'product' | 'usage' | 'resources' | null
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -355,18 +428,18 @@ export default function Nav({
           <>
             {/* Center nav */}
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-              <DesktopDropdownTrigger id="product" label="製品" />
-              <DesktopDropdownTrigger id="usage" label="活用" />
+              <DesktopDropdownTrigger id="product" label={chrome.navProduct} />
+              <DesktopDropdownTrigger id="usage" label={chrome.navUsage} />
               <Link href="/cases/" style={topLink(isActive("/cases"), linkColor)}>
-                事例
+                {chrome.navCases}
               </Link>
               <Link href="/pricing/" style={topLink(isActive("/pricing"), linkColor)}>
-                料金
+                {chrome.navPricing}
               </Link>
-              <DesktopDropdownTrigger id="resources" label="リソース" />
-              {langSwitchHref && langSwitchLabel && (
+              <DesktopDropdownTrigger id="resources" label={chrome.navResources} />
+              {resolvedLangHref && resolvedLangLabel && (
                 <Link
-                  href={langSwitchHref}
+                  href={resolvedLangHref}
                   style={{
                     fontSize: 13,
                     fontWeight: 700,
@@ -377,7 +450,7 @@ export default function Nav({
                     padding: "5px 14px",
                   }}
                 >
-                  {langSwitchLabel}
+                  {resolvedLangLabel}
                 </Link>
               )}
             </div>
@@ -385,10 +458,10 @@ export default function Nav({
             {/* Dual CTA — permanent */}
             <div style={{ display: "flex", gap: 10, flexShrink: 0 }}>
               <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(false)}>
-                料金を見る
+                {chrome.ctaSeePricing}
               </a>
               <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(false)} onClick={onDemoClick}>
-                デモを予約
+                {chrome.ctaBookDemo}
               </a>
             </div>
 
@@ -396,7 +469,7 @@ export default function Nav({
             {openMenu === "product" && (
               <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={760}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
-                  {STAGE_NAV.map((g) => (
+                  {stageNav.map((g) => (
                     <div key={g.stage}>
                       {/* stage header = the single job-led link */}
                       <Link
@@ -420,7 +493,7 @@ export default function Nav({
                   ))}
                 </div>
                 <div style={{ borderTop: "1px solid var(--border)", marginTop: 8, paddingTop: 8 }}>
-                  <PanelItem item={PLATFORM_ITEM} active={pathname === "/"} accent />
+                  <PanelItem item={platformItem} active={pathname === "/"} accent />
                 </div>
               </DropdownPanel>
             )}
@@ -428,14 +501,14 @@ export default function Nav({
               <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={520}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
                   <div>
-                    <PanelHeading>役割別</PanelHeading>
-                    {SOLUTION_ROLES.map((it) => (
+                    <PanelHeading>{en ? "By role" : "役割別"}</PanelHeading>
+                    {solutionRoles.map((it) => (
                       <PanelItem key={it.href} item={it} active={isActive(it.href)} compact />
                     ))}
                   </div>
                   <div>
-                    <PanelHeading>瞬間別（4 moments）</PanelHeading>
-                    {USE_MOMENTS.map((it) => (
+                    <PanelHeading>{en ? "By moment (4 moments)" : "瞬間別（4 moments）"}</PanelHeading>
+                    {useMoments.map((it) => (
                       <PanelItem key={it.href} item={it} active={isActive(it.href)} compact />
                     ))}
                   </div>
@@ -444,7 +517,7 @@ export default function Nav({
             )}
             {openMenu === "resources" && (
               <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={300}>
-                {RESOURCE_ITEMS.map((it) => (
+                {resourceItems.map((it) => (
                   <PanelItem key={it.href} item={it} active={isActive(it.href)} />
                 ))}
               </DropdownPanel>
@@ -462,11 +535,11 @@ export default function Nav({
               onClick={onDemoClick}
               style={{ ...primaryBtn(true), padding: "9px 14px", fontSize: 13 }}
             >
-              デモを予約
+              {chrome.ctaBookDemo}
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "メニューを閉じる" : "メニューを開く"}
+              aria-label={mobileOpen ? (en ? "Close menu" : "メニューを閉じる") : en ? "Open menu" : "メニューを開く"}
               aria-expanded={mobileOpen}
               style={{ background: "none", border: "none", cursor: "pointer", width: 44, height: 44, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 5, zIndex: 200 }}
             >
@@ -506,7 +579,7 @@ export default function Nav({
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="メニュー"
+            aria-label={en ? "Menu" : "メニュー"}
             style={{
               position: "fixed",
               top: 0,
@@ -529,7 +602,7 @@ export default function Nav({
             <div style={{ display: "flex", justifyContent: "flex-end", padding: "10px 12px 0", flexShrink: 0, zIndex: 1 }}>
               <button
                 onClick={() => setMobileOpen(false)}
-                aria-label="メニューを閉じる"
+                aria-label={en ? "Close menu" : "メニューを閉じる"}
                 style={{ width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", cursor: "pointer", color: "#fff" }}
               >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -539,29 +612,33 @@ export default function Nav({
             </div>
             {/* scrollable links */}
             <div style={{ flex: 1, overflowY: "auto", padding: "8px 24px 20px" }}>
-            {STAGE_NAV.map((g) => (
-              <MobileGroup key={g.stage} title={`${g.stage}（${g.transform}）`}>
+            {stageNav.map((g) => (
+              <MobileGroup key={g.stage} title={en ? `${g.stage} (${g.transform})` : `${g.stage}（${g.transform}）`}>
                 <MobileLink item={{ href: g.href, label: g.stage.replace(/^[①②③]\s*/, "") }} active={isActive(g.href)} />
                 {g.products.map((it) => (
                   <MobileLink key={it.href} item={it} active={isActive(it.href)} />
                 ))}
               </MobileGroup>
             ))}
-            <MobileGroup title="統合プラットフォーム">
-              <MobileLink item={PLATFORM_ITEM} active={pathname === "/"} />
+            <MobileGroup title={en ? "Unified platform" : "統合プラットフォーム"}>
+              <MobileLink item={platformItem} active={pathname === "/"} />
             </MobileGroup>
-            <MobileGroup title="活用 — 役割別">
-              {SOLUTION_ROLES.map((it) => (
+            <MobileGroup title={en ? "Use cases — by role" : "活用 — 役割別"}>
+              {solutionRoles.map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}
             </MobileGroup>
-            <MobileGroup title="活用 — 瞬間別">
-              {USE_MOMENTS.map((it) => (
+            <MobileGroup title={en ? "Use cases — by moment" : "活用 — 瞬間別"}>
+              {useMoments.map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}
             </MobileGroup>
-            <MobileGroup title="リソース">
-              {[{ href: "/cases/", label: "導入事例" }, { href: "/pricing/", label: "料金" }, ...RESOURCE_ITEMS].map((it) => (
+            <MobileGroup title={en ? "Resources" : "リソース"}>
+              {[
+                { href: "/cases/", label: en ? "Customers" : "導入事例" },
+                { href: "/pricing/", label: en ? "Pricing" : "料金" },
+                ...resourceItems,
+              ].map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}
             </MobileGroup>
@@ -570,10 +647,10 @@ export default function Nav({
                 (§1.2), instead of sitting below ~20 scrollable links */}
             <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 10, padding: "14px 24px calc(14px + env(safe-area-inset-bottom))", borderTop: "1px solid var(--on-navy-border)", background: "var(--navy)" }}>
               <a href={PRICING_URL} className="v2-cta-ghost" style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                料金を見る
+                {chrome.ctaSeePricing}
               </a>
               <a href={DEMO_URL} className="v2-cta-primary" onClick={onDemoClick} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                デモを予約
+                {chrome.ctaBookDemo}
               </a>
             </div>
           </div>
