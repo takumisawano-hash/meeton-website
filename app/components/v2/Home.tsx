@@ -8,8 +8,8 @@ import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos from "@/app/components/v2/IntegrationLogos";
 import StageFlow from "@/app/components/v2/StageFlow";
 import StageMedia from "@/app/components/v2/StageMedia";
-import ProductAnim from "@/app/components/v2/ProductAnim";
 import CountUp from "@/app/components/v2/CountUp";
+import DemoFrame from "@/app/components/v2/DemoFrame";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
 import FeaturedCase from "@/app/components/v2/FeaturedCase";
 
@@ -59,15 +59,15 @@ export default function Home({ caseStudies = [] }: { caseStudies?: CaseCard[] })
               <span>✓ ノーコード・設置5分</span>
             </div>
           </div>
-          {/* product window: the chat scene framed like a real app on navy */}
-          <div className="v2-hero-media" aria-hidden>
-            <ProductAnim kind="chat" />
+          {/* product window: the REAL Meeton Chat demo, framed like an app on navy */}
+          <div className="v2-hero-media">
+            <DemoFrame src="/product/chat.html" title="Meeton Chat のデモ" />
           </div>
         </div>
         <style>{`
           .v2-hero{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
           .v2-hero-h1{text-wrap:balance;word-break:auto-phrase}
-          .v2-hero-media{display:flex;border-radius:var(--r-feature);border:1px solid var(--on-navy-border);background:var(--navy-2);overflow:hidden;box-shadow:0 44px 88px -48px rgba(0,0,0,.65)}
+          .v2-hero-media{position:relative;aspect-ratio:1440/675;border-radius:var(--r-feature);border:1px solid var(--on-navy-border);background:var(--navy-2);overflow:hidden;box-shadow:0 44px 88px -48px rgba(0,0,0,.65)}
           @media(min-width:1024px){.v2-hero{grid-template-columns:1fr .9fr;gap:clamp(36px,4.5vw,64px)}}
           @media(max-width:719px){.v2-hero-brk{display:none}}
         `}</style>

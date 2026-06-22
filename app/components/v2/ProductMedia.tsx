@@ -14,7 +14,7 @@ export default function ProductMedia({ slug, icon, alt }: { slug: string; icon: 
   const isAnim = !media;
   return (
     <div className="v2-pm">
-      <div className={`v2-pm-frame ${isAnim ? "anim" : ""}`}>
+      <div className={`v2-pm-frame ${isAnim ? "anim" : ""} ${media?.kind === "html" ? "demo" : ""}`}>
         {media?.kind === "html" ? (
           <DemoFrame src={media.src} title={`${alt} のデモ`} />
         ) : media?.kind === "video" ? (
@@ -29,6 +29,8 @@ export default function ProductMedia({ slug, icon, alt }: { slug: string; icon: 
         .v2-pm{max-width:980px;margin:0 auto}
         .v2-pm-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--on-navy-border);background:var(--navy-2);box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
         .v2-pm-frame.anim{aspect-ratio:auto;min-height:clamp(360px,42vw,460px);display:flex}
+        /* HTML demo: match the 1440x675 design ratio (no letterbox) */
+        .v2-pm-frame.demo{aspect-ratio:1440/675}
       `}</style>
     </div>
   );
