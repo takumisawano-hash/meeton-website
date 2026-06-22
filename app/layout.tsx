@@ -5,6 +5,7 @@ import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
 import HubSpotTracker from './components/HubSpotTracker'
 import MeetonScript from './components/MeetonScript'
+import GeoLangSuggest from './components/GeoLangSuggest'
 import AttributionBootstrap from './components/AttributionBootstrap'
 import AdsDebugPanel from './components/AdsDebugPanel'
 
@@ -221,6 +222,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <JsonLd type="website" />
         {children}
         <MeetonScript />
+        <GeoLangSuggest />
       </body>
     </html>
   )
