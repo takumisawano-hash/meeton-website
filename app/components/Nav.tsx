@@ -269,7 +269,7 @@ export default function Nav({
           fontFamily: "var(--fb)",
         }}
       >
-        <Link href="/" aria-label="Meeton ai">
+        <Link href={lang === "en" ? "/en/" : "/"} aria-label="Meeton ai">
           <Image
             src="/logo.svg"
             alt="Meeton ai"
@@ -280,11 +280,11 @@ export default function Nav({
           />
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
-          <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(isMobile)}>
-            料金を見る
+          <a href={lang === "en" ? "/en/pricing/" : PRICING_URL} className="v2-cta-ghost" style={ghostBtn(isMobile)}>
+            {chrome.ctaSeePricing}
           </a>
           <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(isMobile)} onClick={onDemoClick}>
-            デモを予約
+            {chrome.ctaBookDemo}
           </a>
         </div>
       </nav>

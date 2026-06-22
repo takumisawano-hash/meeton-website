@@ -4,8 +4,95 @@ import { useEffect, useRef, useState } from 'react'
 import Nav from './Nav'
 import Footer from './Footer'
 import DemoBookingButton from './DemoBookingButton'
+import type { Lang } from '@/app/lib/i18n'
 
-export default function ContactPageClient() {
+// Lang-aware contact UI chrome. JA is the default → the existing /contact/
+// page renders byte-identically. The HubSpot form embed itself is unchanged.
+const CONTACT_STR = {
+  ja: {
+    eyebrow: 'Contact · お問い合わせ',
+    h1a: 'お気軽に',
+    h1em: 'ご相談ください',
+    h1b: '',
+    subLine1: '製品に関するご質問、デモのご依頼、導入のご相談など、',
+    subLine2: '下記フォームよりお寄せください。営業時間内に順次ご返信いたします。',
+    hurryPrefix: 'お急ぎの方は',
+    hurryCta: 'カレンダーから直接デモを予約',
+    successH2: '送信ありがとうございます',
+    successP1: '内容を確認のうえ、担当者より営業時間内に順次ご連絡いたします。',
+    successP2: 'お急ぎの場合は、デモのご予約も承っております。',
+    successCta: 'トップページに戻る',
+    successHref: '/',
+    cardNum: '01',
+    cardTitle: 'お問い合わせフォーム',
+    cardSub: '必要事項をご記入のうえ送信してください',
+    loading: 'フォームを読み込み中...',
+    failedTitle: 'フォームを読み込めませんでした',
+    failedBody1: '通信環境や広告ブロッカーの影響で表示できない場合があります。',
+    failedBody2: '再読み込みするか、カレンダーから直接デモをご予約ください。',
+    failedDemoCta: '30分デモを予約する',
+    failedReload: '再読み込み',
+    emailLabel: 'メールでのお問い合わせ:',
+    pills: ['営業時間内に順次ご返信', '平日 9:00–18:00 (JST)', '情報セキュリティ管理体制構築済み'],
+    infoResponseLabel: 'Response',
+    infoResponseTitle: 'ご返信のタイミング',
+    infoResponseBody: '営業時間内（平日 9:00–18:00 JST）に順次ご返信いたします。土日祝・年末年始は翌営業日以降の対応となります。',
+    infoDemoLabel: 'Quick Demo',
+    infoDemoTitle: 'すぐにデモをご覧になりたい方',
+    infoDemoBody: 'フォームを介さず、カレンダーから直接デモのご予約が可能です。',
+    infoDemoBtn: 'デモを直接予約する',
+    infoResourcesLabel: 'Resources',
+    infoResourcesTitle: 'その他の窓口',
+    resBlog: 'ブログを読む',
+    resSecurity: '情報セキュリティについて',
+    resLibrary: '導入事例・資料を見る',
+    infoPrivacyLabel: 'Privacy',
+    infoPrivacyBody: 'ご入力いただいた情報は、お問い合わせへの対応および当社サービスのご案内に限り利用いたします。',
+  },
+  en: {
+    eyebrow: 'Contact',
+    h1a: 'Feel free to ',
+    h1em: 'reach out',
+    h1b: ' to us',
+    subLine1: 'For product questions, demo requests, or rollout consultations,',
+    subLine2: 'please use the form below. We reply during business hours.',
+    hurryPrefix: 'In a hurry?',
+    hurryCta: 'Book a demo directly from the calendar',
+    successH2: 'Thank you for reaching out',
+    successP1: 'We will review your message and a representative will contact you during business hours.',
+    successP2: 'If you are in a hurry, you can also book a demo.',
+    successCta: 'Back to home',
+    successHref: '/en/',
+    cardNum: '01',
+    cardTitle: 'Contact form',
+    cardSub: 'Please fill in the required fields and submit',
+    loading: 'Loading form...',
+    failedTitle: 'We could not load the form',
+    failedBody1: 'Network conditions or an ad blocker may prevent it from displaying.',
+    failedBody2: 'Please reload, or book a demo directly from the calendar.',
+    failedDemoCta: 'Book a 30-min demo',
+    failedReload: 'Reload',
+    emailLabel: 'Contact by email:',
+    pills: ['Replies during business hours', 'Weekdays 9:00–18:00 (JST)', 'Information-security management in place'],
+    infoResponseLabel: 'Response',
+    infoResponseTitle: 'When we reply',
+    infoResponseBody: 'We reply during business hours (weekdays 9:00–18:00 JST). Weekends, holidays, and the year-end/New Year period are handled on the next business day.',
+    infoDemoLabel: 'Quick Demo',
+    infoDemoTitle: 'Want to see a demo right away?',
+    infoDemoBody: 'You can book a demo directly from the calendar, without going through the form.',
+    infoDemoBtn: 'Book a demo directly',
+    infoResourcesLabel: 'Resources',
+    infoResourcesTitle: 'Other channels',
+    resBlog: 'Read the blog',
+    resSecurity: 'About information security',
+    resLibrary: 'See customer stories & materials',
+    infoPrivacyLabel: 'Privacy',
+    infoPrivacyBody: 'The information you provide will be used only to respond to your inquiry and to inform you about our services.',
+  },
+} as const
+
+export default function ContactPageClient({ lang = 'ja' }: { lang?: Lang }) {
+  const c = CONTACT_STR[lang]
   const formRef = useRef<HTMLDivElement>(null)
   // 'loading' = skeleton, 'ready' = HubSpot form rendered, 'failed' =
   // embed never signaled ready (slow network / ad blocker) → fallback CTA
@@ -67,7 +154,7 @@ export default function ContactPageClient() {
 
   return (
     <>
-      <Nav />
+      <Nav lang={lang} />
 
       {/* Page-scoped styles: dot grid, glows, hairlines, form polish.
           Re-skinned to v2 tokens (audit 2026-06-12): navy frame, white
@@ -228,13 +315,13 @@ export default function ContactPageClient() {
             margin: '0 auto',
             textAlign: 'center',
           }}>
-            <div className="ct-eyebrow">Contact · お問い合わせ</div>
+            <div className="ct-eyebrow">{c.eyebrow}</div>
             <h1 className="ct-h1">
-              お気軽に<em>ご相談ください</em>
+              {c.h1a}<em>{c.h1em}</em>{c.h1b}
             </h1>
             <p className="ct-sub">
-              製品に関するご質問、デモのご依頼、導入のご相談など、<br />
-              下記フォームよりお寄せください。営業時間内に順次ご返信いたします。
+              {c.subLine1}<br />
+              {c.subLine2}
             </p>
 
             {/* 2026-05-19: お急ぎ向けの即時デモ予約導線を hero 内に昇格
@@ -260,7 +347,7 @@ export default function ContactPageClient() {
                 boxShadow: '0 8px 24px rgba(15,17,40,0.06)',
               }}
             >
-              <span>お急ぎの方は</span>
+              <span>{c.hurryPrefix}</span>
               <DemoBookingButton
                 utmCampaign="contact-hero"
                 className="v2-cta-primary"
@@ -277,7 +364,7 @@ export default function ContactPageClient() {
                   textDecoration: 'none',
                 }}
               >
-                カレンダーから直接デモを予約
+                {c.hurryCta}
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
@@ -305,13 +392,13 @@ export default function ContactPageClient() {
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
-                    <h2>送信ありがとうございます</h2>
+                    <h2>{c.successH2}</h2>
                     <p>
-                      内容を確認のうえ、担当者より営業時間内に順次ご連絡いたします。<br />
-                      お急ぎの場合は、デモのご予約も承っております。
+                      {c.successP1}<br />
+                      {c.successP2}
                     </p>
-                    <a href="/" className="ct-success-cta v2-cta-primary">
-                      トップページに戻る
+                    <a href={c.successHref} className="ct-success-cta v2-cta-primary">
+                      {c.successCta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
@@ -322,10 +409,10 @@ export default function ContactPageClient() {
               ) : (
                 <div className="ct-card">
                   <div className="ct-card-h">
-                    <span className="ct-card-h-num">01</span>
+                    <span className="ct-card-h-num">{c.cardNum}</span>
                     <div>
-                      <div className="ct-card-h-title">お問い合わせフォーム</div>
-                      <div className="ct-card-h-sub">必要事項をご記入のうえ送信してください</div>
+                      <div className="ct-card-h-title">{c.cardTitle}</div>
+                      <div className="ct-card-h-sub">{c.cardSub}</div>
                     </div>
                   </div>
                   <div className="ct-card-body">
@@ -336,17 +423,17 @@ export default function ContactPageClient() {
                         color: 'var(--sub)',
                         fontSize: 14,
                       }}>
-                        フォームを読み込み中...
+                        {c.loading}
                       </div>
                     )}
                     {formStatus === 'failed' && (
                       <div role="alert" style={{ textAlign: 'center', padding: '32px 8px' }}>
                         <p style={{ fontSize: 15, fontWeight: 800, color: 'var(--heading)', margin: '0 0 8px' }}>
-                          フォームを読み込めませんでした
+                          {c.failedTitle}
                         </p>
                         <p style={{ fontSize: 13.5, lineHeight: 1.8, color: 'var(--sub)', margin: '0 0 20px' }}>
-                          通信環境や広告ブロッカーの影響で表示できない場合があります。<br />
-                          再読み込みするか、カレンダーから直接デモをご予約ください。
+                          {c.failedBody1}<br />
+                          {c.failedBody2}
                         </p>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginBottom: 16 }}>
                           <DemoBookingButton
@@ -365,7 +452,7 @@ export default function ContactPageClient() {
                               textDecoration: 'none',
                             }}
                           >
-                            30分デモを予約する
+                            {c.failedDemoCta}
                           </DemoBookingButton>
                           <button
                             type="button"
@@ -383,11 +470,11 @@ export default function ContactPageClient() {
                               cursor: 'pointer',
                             }}
                           >
-                            再読み込み
+                            {c.failedReload}
                           </button>
                         </div>
                         <p style={{ fontSize: 12.5, color: 'var(--sub)', margin: 0 }}>
-                          メールでのお問い合わせ:{' '}
+                          {c.emailLabel}{' '}
                           <a href="mailto:contact@dynameet.ai" className="v2-link" style={{ color: 'var(--cta-ink)', fontWeight: 700, textDecoration: 'none' }}>
                             contact@dynameet.ai
                           </a>
@@ -402,11 +489,7 @@ export default function ContactPageClient() {
               {/* TRUST PILLS */}
               {!submitted && (
                 <div className="ct-pills">
-                  {[
-                    '営業時間内に順次ご返信',
-                    '平日 9:00–18:00 (JST)',
-                    '情報セキュリティ管理体制構築済み',
-                  ].map((label) => (
+                  {c.pills.map((label) => (
                     <span key={label} className="ct-pill">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
@@ -422,18 +505,18 @@ export default function ContactPageClient() {
             <aside>
               <div className="ct-info-card">
                 <div className="ct-info-section">
-                  <div className="ct-info-label">Response</div>
-                  <div className="ct-info-title">ご返信のタイミング</div>
+                  <div className="ct-info-label">{c.infoResponseLabel}</div>
+                  <div className="ct-info-title">{c.infoResponseTitle}</div>
                   <div className="ct-info-body">
-                    営業時間内（平日 9:00–18:00 JST）に順次ご返信いたします。土日祝・年末年始は翌営業日以降の対応となります。
+                    {c.infoResponseBody}
                   </div>
                 </div>
 
                 <div className="ct-info-section">
-                  <div className="ct-info-label">Quick Demo</div>
-                  <div className="ct-info-title" style={{ marginBottom: 10 }}>すぐにデモをご覧になりたい方</div>
+                  <div className="ct-info-label">{c.infoDemoLabel}</div>
+                  <div className="ct-info-title" style={{ marginBottom: 10 }}>{c.infoDemoTitle}</div>
                   <div className="ct-info-body" style={{ marginBottom: 14 }}>
-                    フォームを介さず、カレンダーから直接デモのご予約が可能です。
+                    {c.infoDemoBody}
                   </div>
                   <DemoBookingButton utmCampaign="contact-sidebar" className="ct-alt-btn">
                     <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, width: '100%' }}>
@@ -444,7 +527,7 @@ export default function ContactPageClient() {
                           <line x1="8" y1="2" x2="8" y2="6" />
                           <line x1="3" y1="10" x2="21" y2="10" />
                         </svg>
-                        デモを直接予約する
+                        {c.infoDemoBtn}
                       </span>
                       <svg className="ct-alt-btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -455,25 +538,25 @@ export default function ContactPageClient() {
                 </div>
 
                 <div className="ct-info-section">
-                  <div className="ct-info-label">Resources</div>
-                  <div className="ct-info-title" style={{ marginBottom: 12 }}>その他の窓口</div>
+                  <div className="ct-info-label">{c.infoResourcesLabel}</div>
+                  <div className="ct-info-title" style={{ marginBottom: 12 }}>{c.infoResourcesTitle}</div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     <a href="/blog/" className="ct-alt-link">
-                      ブログを読む
+                      {c.resBlog}
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
                       </svg>
                     </a>
                     <a href="/security/" className="ct-alt-link">
-                      情報セキュリティについて
+                      {c.resSecurity}
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
                       </svg>
                     </a>
-                    <a href="/library/" className="ct-alt-link">
-                      導入事例・資料を見る
+                    <a href={lang === 'en' ? '/en/library/' : '/library/'} className="ct-alt-link">
+                      {c.resLibrary}
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
@@ -483,9 +566,9 @@ export default function ContactPageClient() {
                 </div>
 
                 <div className="ct-info-section">
-                  <div className="ct-info-label">Privacy</div>
+                  <div className="ct-info-label">{c.infoPrivacyLabel}</div>
                   <div className="ct-info-body" style={{ fontSize: 12.5, lineHeight: 1.7 }}>
-                    ご入力いただいた情報は、お問い合わせへの対応および当社サービスのご案内に限り利用いたします。
+                    {c.infoPrivacyBody}
                   </div>
                 </div>
               </div>
@@ -493,7 +576,7 @@ export default function ContactPageClient() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer lang={lang} />
     </>
   )
 }

@@ -323,7 +323,7 @@ const nextConfig = {
       // reachable; `.+` (not `.*`) lets the bare /en/ root fall through to the
       // EN homepage while still catching any genuinely-stale /en/* URL.
       {
-        source: '/en/:slug((?!chat/|calendar/|library/|email/|compare/|alternatives/|glossary/|chat$|calendar$|library$|email$|compare$|alternatives$|glossary$).+)',
+        source: '/en/:slug((?!chat/|calendar/|library/|email/|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|solutions/|chat$|calendar$|library$|email$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|solutions$).+)',
         destination: '/',
         permanent: true,
       },

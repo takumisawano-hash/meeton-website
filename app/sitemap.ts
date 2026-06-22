@@ -181,6 +181,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // EN twins of the data-driven pages (home is in staticPages, products too).
   const enPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/en/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: `${baseUrl}/en/pricing/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/en/about/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/en/contact/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/en/capture/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/en/solutions/crm-to-meeting/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/en/solutions/lead-to-meeting/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     ...allCompareSlugs().map((slug) => ({ url: `${baseUrl}/en/compare/${slug}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 })),
     ...alternativeSlugs().map((slug) => ({ url: `${baseUrl}/en/alternatives/${slug}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.65 })),
     { url: `${baseUrl}/en/glossary/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 },

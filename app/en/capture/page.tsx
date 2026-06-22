@@ -1,33 +1,31 @@
 import type { Metadata } from "next";
 import CaptureContent, { CAPTURE_STR, captureBreadcrumb, captureFaqSchema } from "@/app/components/v2/CaptureContent";
+import { altLanguages, ogLocale } from "@/app/lib/i18n";
 
-// Stage page for ①掴む・育てる — merges Chat (会話で掴む) + Library (資料で育てる)
-// into ONE job-led page. Product names appear small as the means; the JOB is
-// the headline. /chat and /library stay as SEO landing pages, linked from here.
-
-const s = CAPTURE_STR.ja;
+const s = CAPTURE_STR.en;
 
 export const metadata: Metadata = {
   title: { absolute: s.metaTitleAbsolute },
   description: s.metaDescription,
-  alternates: { canonical: "/capture/" },
+  alternates: altLanguages("/capture/", "en"),
   openGraph: {
     title: s.ogTitle,
     description: s.ogDescription,
-    url: "https://dynameet.ai/capture/",
+    url: "https://dynameet.ai/en/capture/",
     type: "website",
+    locale: ogLocale("en"),
   },
 };
 
-const breadcrumb = captureBreadcrumb("ja");
-const faqSchema = captureFaqSchema("ja");
+const breadcrumb = captureBreadcrumb("en");
+const faqSchema = captureFaqSchema("en");
 
 export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <CaptureContent lang="ja" />
+      <CaptureContent lang="en" />
     </>
   );
 }

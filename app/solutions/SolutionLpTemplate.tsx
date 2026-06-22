@@ -7,6 +7,52 @@ import Footer from '../components/Footer'
 import FAQJsonLd from '../components/FAQJsonLd'
 import DemoBookingButton from '../components/DemoBookingButton'
 import DocRequestButton from '../components/DocRequestButton'
+import type { Lang } from '../lib/i18n'
+
+// Section chrome strings (eyebrows + fixed headings + CTA defaults). JA is the
+// default → existing call sites omit `lang` and render byte-identically.
+const SL_CHROME = {
+  ja: {
+    painEyebrow: '課題',
+    solutionEyebrow: '解決策',
+    solutionH2a: 'Meeton ai は、',
+    solutionH2em: '3 つの AI 機能',
+    solutionH2b: 'で解きます',
+    proofEyebrow: '導入成果',
+    proofDefault: 'Meeton ai による関連成果',
+    howEyebrow: '仕組み',
+    howH2: '導入から成果まで、4 ステップ',
+    faqEyebrow: 'よくある質問',
+    faqH2: 'よくある質問',
+    solCta: '詳しく見る →',
+    caseCta: '事例を読む →',
+    primaryDefault: 'チェックリストを受け取る',
+    heroConsult: '30 分で相談する →',
+    finalConsult: '30 分で相談する →',
+    webinarLead: 'まずはじっくり学びたい方は',
+    webinar: '無料ウェビナー',
+  },
+  en: {
+    painEyebrow: 'Challenges',
+    solutionEyebrow: 'Solution',
+    solutionH2a: 'Meeton ai solves it with ',
+    solutionH2em: 'three AI capabilities',
+    solutionH2b: '',
+    proofEyebrow: 'Results',
+    proofDefault: 'Related results with Meeton ai',
+    howEyebrow: 'How it works',
+    howH2: 'From setup to results, in 4 steps',
+    faqEyebrow: 'FAQ',
+    faqH2: 'Frequently asked questions',
+    solCta: 'Learn more →',
+    caseCta: 'Read the story →',
+    primaryDefault: 'Get the checklist',
+    heroConsult: 'Book a 30-min consult →',
+    finalConsult: 'Book a 30-min consult →',
+    webinarLead: 'Prefer to learn first?',
+    webinar: 'Free webinar',
+  },
+} as const
 
 /**
  * SolutionLpTemplate — shared LP shell for the 2026 ads relaunch.
@@ -108,7 +154,8 @@ function useAttribution() {
   return attr
 }
 
-export default function SolutionLpTemplate({ config }: { config: SolutionLpConfig }) {
+export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: SolutionLpConfig; lang?: Lang }) {
+  const c = SL_CHROME[lang]
   // Side-effect: tag body with data-lp-slug so GA4 page_view custom
   // dimension picks it up. Avoid mutating from render — useEffect.
   useEffect(() => {
@@ -138,7 +185,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
       {/* 2026-05-23: ads LP は minimal nav (Logo / 導入事例 / セキュリティ
           / 30分で相談する のみ)。サイト全ナビを出すと checklist DL +
           30分相談 の CV CTA が薄まる。 */}
-      <Nav variant="minimal" />
+      <Nav variant="minimal" lang={lang} />
 
       {/* HERO. CSS vars (--sl-accent, --sl-cta) are set on .sl-root so
           they cascade into every section, not just hero. */}
@@ -161,7 +208,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
               「Spec と LP の CTA 不整合」 の修正。 */}
           <div className="sl-ctas">
             <DocRequestButton className="sl-btn sl-btn-primary">
-              {config.primaryCtaLabel ?? 'チェックリストを受け取る'}
+              {config.primaryCtaLabel ?? c.primaryDefault}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
               </svg>
@@ -170,7 +217,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
               className="sl-btn sl-btn-ghost"
               utmCampaign={`${config.utmCampaignBase}__hero_consult`}
             >
-              30 分で相談する →
+              {c.heroConsult}
             </DemoBookingButton>
           </div>
 
@@ -196,7 +243,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              課題
+              {c.painEyebrow}
             </div>
             <h2 className="sl-h2">{config.painsHeading}</h2>
           </div>
@@ -222,10 +269,10 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              解決策
+              {c.solutionEyebrow}
             </div>
             <h2 className="sl-h2">
-              Meeton ai は、<em>3 つの AI 機能</em>で解きます
+              {c.solutionH2a}<em>{c.solutionH2em}</em>{c.solutionH2b}
             </h2>
           </div>
           <div className="sl-sol-grid">
@@ -234,7 +281,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
                 <div className="sl-sol-badge">{s.badge}</div>
                 <div className="sl-sol-title">{s.title}</div>
                 <p className="sl-sol-body">{s.body}</p>
-                <div className="sl-sol-cta">詳しく見る →</div>
+                <div className="sl-sol-cta">{c.solCta}</div>
               </a>
             ))}
           </div>
@@ -248,10 +295,10 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
             <div className="sl-section-head">
               <div className="sl-section-eyebrow">
                 <span className="sl-eyebrow-dash" />
-                導入成果
+                {c.proofEyebrow}
               </div>
               <h2 className="sl-h2">
-                {config.proofHeading ?? 'Meeton ai による関連成果'}
+                {config.proofHeading ?? c.proofDefault}
               </h2>
             </div>
             <div className="sl-case-grid">
@@ -260,7 +307,7 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
                   <div className="sl-case-co">{c.company}</div>
                   <div className="sl-case-m">{c.metric}</div>
                   <div className="sl-case-l">{c.metricLabel}</div>
-                  <div className="sl-case-cta">事例を読む →</div>
+                  <div className="sl-case-cta">{SL_CHROME[lang].caseCta}</div>
                 </Link>
               ))}
             </div>
@@ -274,9 +321,9 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              仕組み
+              {c.howEyebrow}
             </div>
-            <h2 className="sl-h2">導入から成果まで、4 ステップ</h2>
+            <h2 className="sl-h2">{c.howH2}</h2>
           </div>
           <ol className="sl-steps">
             {config.steps.map((s, i) => (
@@ -298,9 +345,9 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <div className="sl-section-head">
             <div className="sl-section-eyebrow">
               <span className="sl-eyebrow-dash" />
-              よくある質問
+              {c.faqEyebrow}
             </div>
-            <h2 className="sl-h2">よくある質問</h2>
+            <h2 className="sl-h2">{c.faqH2}</h2>
           </div>
           <dl className="sl-faq">
             {config.faqs.map((f, i) => (
@@ -321,30 +368,30 @@ export default function SolutionLpTemplate({ config }: { config: SolutionLpConfi
           <p className="sl-final-sub">{config.finalCta.sub}</p>
           <div className="sl-ctas">
             <DocRequestButton className="sl-btn sl-btn-primary">
-              {config.primaryCtaLabel ?? 'チェックリストを受け取る'}
+              {config.primaryCtaLabel ?? c.primaryDefault}
             </DocRequestButton>
             <DemoBookingButton
               className="sl-btn sl-btn-ghost"
               utmCampaign={`${config.utmCampaignBase}__final_consult`}
             >
-              30 分で相談する →
+              {c.finalConsult}
             </DemoBookingButton>
           </div>
           {/* 補助動線として小さくウェビナー誘導。Final CTA メインは
               checklist DL + 30分相談 の 2 つに集中。 */}
           <div style={{ marginTop: 24, fontSize: 13, color: 'var(--sub)' }}>
-            まずはじっくり学びたい方は{' '}
+            {c.webinarLead}{' '}
             <Link
               href="/webinar/"
               style={{ color: 'var(--sl-cta)', textDecoration: 'underline', fontWeight: 700 }}
             >
-              無料ウェビナー
+              {c.webinar}
             </Link>
           </div>
         </div>
       </section>
 
-      <Footer variant="light" hideDiscoverGrid />
+      <Footer variant="light" hideDiscoverGrid lang={lang} />
 
       <style>{`
         .sl-root { background: #fafaf7; color: #0a0e0c; min-height: 100vh; }
