@@ -22,9 +22,19 @@ type Row = {
   icon: string;
 };
 
-// NOTE: the 掴む (chat) step is shown as the hero demo on the home page, so it
-// is intentionally NOT repeated here — this walkthrough covers 育てる→商談化→追客.
+// Full 4-step walkthrough: 掴む→育てる→商談化→追客. The chat (掴む) demo also
+// appears in the hero; intentional overlap (per request) — the hero is the
+// headline visual, this is the step-by-step walkthrough.
 const ROWS: Row[] = [
+  {
+    key: "chat",
+    stage: "① 掴む",
+    title: "会話で、訪問者を掴む。",
+    desc: "問い合わせを待たず、AIチャットが訪問者に話しかける。接触前の検討の土台に立ち、その場で疑問に答えてリードに変える。",
+    points: ["シナリオ設計不要・設置5分", "過去の閲覧/会話の文脈を引き継ぐ"],
+    href: "/chat/",
+    icon: "chat",
+  },
   {
     key: "library",
     stage: "① 育てる",
