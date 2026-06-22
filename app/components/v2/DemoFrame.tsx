@@ -13,8 +13,12 @@ import { useEffect, useRef, useState } from "react";
 //   the entrance is a one-shot CSS animation the global reduce-motion guard
 //   collapses inside the iframe document is out of our scope, but the frames are
 //   self-contained and end on the complete UI either way.
-// - sandbox allow-scripts: the demos are self-contained (inline data-URI images,
-//   one inline script, no network) so this is safe and blocks any same-origin access.
+// - sandbox "allow-scripts allow-same-origin": the demos are first-party,
+//   self-contained (inline data-URI images, one inline script, no network).
+//   allow-same-origin is REQUIRED so the iframe keeps the dynameet.ai origin —
+//   without it the frame gets an opaque origin and X-Frame-Options:SAMEORIGIN /
+//   CSP frame-ancestors 'self' reject it ("refused to connect"). top-nav, form
+//   submission and popups stay blocked.
 export default function DemoFrame({ src, title }: { src: string; title: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
@@ -47,7 +51,7 @@ export default function DemoFrame({ src, title }: { src: string; title: string }
           title={title}
           loading="lazy"
           scrolling="no"
-          sandbox="allow-scripts"
+          sandbox="allow-scripts allow-same-origin"
           tabIndex={-1}
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, display: "block" }}
         />
