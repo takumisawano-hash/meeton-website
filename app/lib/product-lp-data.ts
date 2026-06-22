@@ -196,4 +196,166 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
   },
 };
 
+export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
+  calendar: {
+    slug: "calendar",
+    productName: "Meeton Calendar",
+    icon: "calendar",
+    metaTitle: "Meeting Scheduling for Sales | Calendly Alternative | Meeton Calendar",
+    metaDescription:
+      "AI scheduling that turns a fresh lead into a booked meeting the moment intent peaks. The instant a form is submitted or a doc is downloaded, AI offers a slot, auto-assigns the rep, and logs it to your CRM. See how it compares to immedio / TimeRex / Calendly. Try it in a 30-minute demo.",
+    keyword: "meeting scheduling / sales booking automation / Calendly alternative / inbound conversion",
+    eyebrow: "AI Meeting Booking / Scheduling",
+    problemLine: "The moment a lead acts is the moment you make them wait.",
+    h1: "Book the meeting the moment the lead acts.",
+    heroSub:
+      "The industry-standard speed to lead is hours to days. Meeton Calendar offers a meeting slot the instant a form is submitted or a doc is downloaded, then runs auto-assignment and CRM logging end to end. Turn the moment of peak interest into a booked meeting.",
+    steps: [
+      { title: "Detect the conversion", desc: "A form submission, a doc download, a finished chat—trigger on the moment interest is at its peak." },
+      { title: "Offer a slot on the spot", desc: "An AI concierge presents open slots, auto-assigns the right rep, and steers the lead to the earliest available time." },
+      { title: "Land in CRM and notifications", desc: "Bookings sync automatically to Salesforce/HubSpot and ping Slack/Teams instantly. Zero leads slip through." },
+    ],
+    competitorsLabel: "vs immedio / TimeRex / Spir / Calendly",
+    diffTitle: "Not just another scheduling tool.",
+    diffPoints: [
+      { title: "A conversation before the booking", desc: "Unlike tools that just hand over a URL, AI answers questions and raises intent before guiding the lead to a slot." },
+      { title: "Auto-fires the instant they convert", desc: "Faster than a human could write an email, the booking path appears within seconds of peak interest—and that first move decides whether it becomes a meeting." },
+      { title: "Autonomous assignment and CRM logging", desc: "Round-robin/rule-based assignment, CRM logging, and notifications are automated. Reps focus only on the meeting itself." },
+    ],
+    proof: {
+      metric: "60%+",
+      label: "Meeting conversion rate via Meeton ai (about 3x the 20% industry average / HR & training)",
+      quote: "Customers who come through Meeton ai are clearly already nurtured when they reach out. We find it highly effective for converting to meetings.",
+      source: "Corporate-training industry leader (HR sector, Meeton ai customer)",
+    },
+    integrations: ["Salesforce", "HubSpot", "Google Calendar", "Outlook", "Zoom", "Slack", "Microsoft Teams"],
+    crossSell: "Raise intent with chat before the booking, and follow up by email with everyone who didn't book—when the four jobs connect, you get an end-to-end AI SDR.",
+    faq: [
+      { q: "How is this different from Calendly or TimeRex?", a: "Unlike tools that simply hand over a booking URL, Meeton Calendar has AI answer questions in conversation the instant a lead converts, raising intent before guiding them to a slot. It then automates rep assignment, CRM logging, and notifications—solving both speed to lead and lead leakage at the same time." },
+      { q: "How much does it cost?", a: "Meeton ai offers three plans starting from ¥120,000/mo (Lead Generation / Meeting Generation / All-in-One), priced by monthly traffic and the features you use. See the pricing page for details. Start with a 30-minute demo to see how it works for your team." },
+      { q: "How long does it take to get started?", a: "It's no-code. Connect your calendar via OAuth, issue a booking URL, and you're live in minutes. Every setting is configured by users themselves inside the app—no development required." },
+    ],
+  },
+
+  chat: {
+    slug: "chat",
+    productName: "Meeton Chat",
+    icon: "chat",
+    metaTitle: "Web Chat & AI Chatbot for B2B | Convert Visitors | Meeton Chat",
+    metaDescription:
+      "Buyers complete roughly 70% of the purchase journey before ever talking to sales. Meeton Chat meets them on that pre-sales ground, delivering answers your website can't and turning visitors into meetings—a web-engagement AI chat (chatbot). See how it compares to Intercom / scripted chatbots. Try it in a 30-minute demo.",
+    keyword: "web engagement tool / chatbot for conversion / website exit prevention",
+    eyebrow: "Web-Engagement AI Chat",
+    problemLine: "Buyers have already started deciding before they ever reach out.",
+    h1: "The conversion AI chat that meets buyers in their pre-sales research.",
+    heroSub:
+      "Buyers complete roughly 70% of the purchase journey before they ever contact sales (Gartner/6sense). Meeton Chat talks with visitors during that window, delivers answers a website can't, and lifts the very probability that they reach out.",
+    steps: [
+      { title: "Drop in the snippet", desc: "Just paste a single line of code. No scenario design—AI starts talking to visitors the moment it's installed." },
+      { title: "Converse with full context", desc: "Carrying over past browsing, downloads, and conversation history, generative AI answers questions precisely—optimized for converting to meetings." },
+      { title: "Move to a booking on the spot", desc: "The instant intent rises, it hands off to Calendar and closes the meeting booking right inside the conversation." },
+    ],
+    competitorsLabel: "vs Intercom / scripted chatbots",
+    diffTitle: "Being able to “chat” alone won't grow your pipeline.",
+    diffPoints: [
+      { title: "Moves the pre-sales research forward", desc: "Instead of waiting for an inquiry, it delivers answers during the pre-sales window where 70% of the decision happens—and pushes it forward." },
+      { title: "Optimized for conversion", desc: "Not an FAQ-answering bot, but designed to raise intent and carry visitors to a booking—carrying over past context." },
+      { title: "No scenario design required", desc: "No need to script Q&A flows; generative AI answers from context. Five-minute install, minimal maintenance." },
+    ],
+    proof: {
+      metric: "20x+",
+      label: "Leads generated via chat (vs. a conventional scripted chatbot)",
+      quote: "Our old chat was lucky to bring in one or two leads a month. Since switching to Meeton ai it's 20+ a month—over 20x more leads coming from chat.",
+      source: "BizteX Inc. (SaaS, Meeton ai customer)",
+    },
+    integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Google Chat", "Webhook"],
+    crossSell: "Hand off heated-up conversations to Calendar for a booking, and point people who want materials to Library—connect them and you get an end-to-end AI SDR.",
+    faq: [
+      { q: "How is this different from an ordinary chatbot?", a: "Scripted chatbots can only respond along pre-built Q&A flows, leaving conversion up to humans. Meeton Chat uses generative AI that understands context, carries over past browsing, downloads, and conversation history to converse autonomously, and closes the meeting booking inside the conversation the instant intent rises." },
+      { q: "Why does “pre-sales” matter so much?", a: "B2B buyers are said to complete roughly 70% of the purchase journey before ever contacting sales (Gartner/6sense). Whether you can deliver answers your website can't during this window determines both the probability of an inquiry and the final meeting conversion rate. Meeton Chat is designed to be effective in exactly this pre-sales research phase." },
+      { q: "Is it hard to install?", a: "Just paste a single-line snippet—no scenario design required. AI starts talking to visitors the moment it's installed. Setup is entirely no-code." },
+    ],
+  },
+
+  library: {
+    slug: "library",
+    productName: "Meeton Library",
+    icon: "library",
+    metaTitle: "Sales Document Sharing & Nurturing | DocSend Alternative | Meeton Library",
+    metaDescription:
+      "Nurture prospects who aren't ready for a meeting yet—automatically, with content. Deliver materials matched to their interest, let AI explain the content, and grow the deal by reading their reactions. Opens and activity are fully visible. Automate content-driven lead nurturing. A DocSend alternative.",
+    keyword: "lead nurturing with content / automated content nurturing / sales document sharing tool / DocSend alternative",
+    eyebrow: "Automated Nurturing, Through Content",
+    problemLine: "You're letting not-yet-ready prospects go cold by ignoring them.",
+    h1: "Nurture prospects with your content.",
+    heroSub:
+      "Nurture prospects who aren't ready for a meeting yet—automatically, with content. Deliver materials matched to their interest, let AI explain what's inside, and make the next move based on their reactions. Instead of leaving them to cool, keep nurturing until they become meeting-ready leads.",
+    steps: [
+      { title: "Prepare and share materials", desc: "Upload a PDF/deck and deliver it via a share URL. No CRM setup required." },
+      { title: "AI explains and nurtures", desc: "AI answers the recipient's questions in the context of the material, moving their understanding and consideration forward." },
+      { title: "Read reactions, make the next move", desc: "See who viewed what and how far. Carry warmed-up prospects into a meeting or a follow-up." },
+    ],
+    competitorsLabel: "vs DocSend",
+    diffTitle: "Turn “send and forget” into “nurture.”",
+    diffPoints: [
+      { title: "Content that nurtures", desc: "Beyond distribution and tracking, AI explains the content and actively pushes not-yet-ready prospects' consideration forward." },
+      { title: "Act on every reaction", desc: "Capture behavioral signals from opens and views, and carry warmed-up prospects into a meeting or follow-up without missing them." },
+      { title: "Start without a CRM", desc: "No heavy initial setup—start content-driven lead nurturing right away." },
+    ],
+    proof: {
+      metric: "2 deals won",
+      label: "Closed in three months (Univis Group). Knowing who's viewing also raised proposal quality",
+      quote: "Even when it doesn't turn into a meeting, we instantly see which companies are viewing our content. Our proposal volume went up, and the quality of our market and competitive analysis improved too.",
+      source: "Univis Group (consulting / Shota Ueda)",
+    },
+    integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Webhook"],
+    crossSell: "Prospects nurtured and warmed up by content go to Calendar for a booking, and those not yet there get followed up by Email—connect them and you get an end-to-end AI SDR.",
+    faq: [
+      { q: "How is this different from DocSend?", a: "Where DocSend specializes in distributing and tracking opens, Meeton Library adds AI chat that explains the material and answers the recipient's questions on the spot. It also starts without a CRM and bridges open signals to Email/Calendar to carry follow-up all the way through." },
+      { q: "What can open tracking tell me?", a: "You can see who viewed which material, when, and how far. By capturing behavioral signals from opens and views, you carry warmed-up prospects into a meeting or follow-up without losing them." },
+      { q: "Does the recipient need a dedicated app?", a: "No. They can view simply by opening the share URL and ask questions via AI chat. The sender just uploads and issues a URL—all entirely no-code." },
+    ],
+  },
+
+  email: {
+    slug: "email",
+    productName: "Meeton Email",
+    icon: "email",
+    metaTitle: "Follow-Up Automation & Lead Nurturing Email | AI 1:1 | Meeton Email",
+    metaDescription:
+      "Leads who didn't book on the spot get autonomous 1:1 follow-up from AI, driven by behavioral signals. Not template swaps but AI-generated copy, with chat integration, working autonomously until the goal is met. Compare it to Lemlist / Smartlead / sales-engagement tools. Requires a CRM connection.",
+    keyword: "lead nurturing email / follow-up automation / sales engagement",
+    eyebrow: "Follow-Up Automation / AI 1:1 Outreach",
+    problemLine: "You're letting the leads who didn't book go cold, untouched.",
+    h1: "Don't give up on the leads who didn't book—pursue them.",
+    heroSub:
+      "The leads who didn't book on the spot are exactly where your pipeline upside lives. Meeton Email detects behavioral signals—return visits, opens, document views—and has AI generate 1:1 copy to follow up. Not template swaps, but autonomous follow-up until the goal is met.",
+    steps: [
+      { title: "Connect your CRM", desc: "Connect Salesforce/HubSpot via OAuth. We pull in your existing leads and their behavioral data." },
+      { title: "Detect the signals", desc: "AI detects behaviors like return visits, opens, and document views, and decides the right moment to follow up." },
+      { title: "AI follows up 1:1", desc: "AI generates copy tailored to each person's context and sends it, carrying them autonomously toward a reply or a booking." },
+    ],
+    competitorsLabel: "vs Lemlist / Smartlead / sales-engagement tools",
+    diffTitle: "Not a tool for blasting templates.",
+    diffPoints: [
+      { title: "AI-generated, not template swaps", desc: "Not mass sends with variable swaps—AI generates each message individually, matched to the recipient's behavioral context." },
+      { title: "Driven by behavioral signals", desc: "Not a send schedule—it triggers on signals like return visits and opens to follow up at the optimal moment." },
+      { title: "Autonomous until the goal is met", desc: "Toward the goal of a reply or a meeting booking, it keeps pursuing autonomously while coordinating with chat." },
+    ],
+    proof: {
+      metric: "Re-converted to meetings",
+      label: "Continuously creating meeting opportunities from dormant and unbooked leads (customer follow-up operations)",
+      quote: "We now generate meeting opportunities steadily every month from existing leads we used to let slip through.",
+      source: "Meeton ai customer (follow-up operations)",
+    },
+    integrations: ["Salesforce", "HubSpot", "Gmail", "Outlook", "Slack", "Webhook"],
+    crossSell: "Email pursues the people warmed up by chat or content, and when they reply, Calendar books the meeting—connect them and you get an end-to-end AI SDR.",
+    faq: [
+      { q: "How is this different from Lemlist or Smartlead?", a: "Where those tools center on mass sends via template variable swaps, Meeton Email has AI generate each message individually, matched to the recipient's behavioral context. It triggers on behavioral signals like return visits and opens rather than a send schedule, and keeps pursuing autonomously toward the goal of a reply or a meeting booking." },
+      { q: "Can I use it without a CRM?", a: "Meeton Email works by detecting behavioral signals on the assumption of CRM integration, so it requires a CRM connection such as Salesforce or HubSpot. It pulls in your existing leads and behavioral data, and AI decides whom to pursue and when." },
+      { q: "Will it over-send?", a: "Meeton Email doesn't blast on a schedule—AI decides “whom and when to pursue” based on behavioral signals. It stops once the goal (a reply or a booking) is reached, so it never becomes irrelevant mass sending." },
+    ],
+  },
+};
+
 export const PRODUCT_ORDER: ProductLPData["slug"][] = ["calendar", "chat", "library", "email"];
