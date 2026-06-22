@@ -1071,6 +1071,13 @@ const blogRedirects = [
     "source": "/ウェブサイト離脱を商談に変える：aiチャットが実",
     "destination": "/blog/websitebounce-meeting-ai/",
     "permanent": true
+  },
+  // 2026-06-22 cannibalization merge: weaker objection-handling article
+  // (pos 8.1) → stronger twin (pos 3.8, more imp+clicks). Same query オブジェクションハンドリング.
+  {
+    "source": "/blog/objection-handling-b2b-sales-conversion-framework",
+    "destination": "/blog/how-to-respond-objection-handling-tips/",
+    "permanent": true
   }
 ];
 

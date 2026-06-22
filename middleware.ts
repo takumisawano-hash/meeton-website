@@ -33,6 +33,21 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(legacyArticleMap[decoded], req.url), 308)
   }
 
+  // Prefix-based recovery for legacy Japanese-slug articles whose full slug GSC
+  // truncates (so an exact key is unreliable). These currently strip to a
+  // non-existent slug and fall through to /blog/ — recovering ~500 imp/90d of
+  // misdirected equity to the correct live English twin. (2026-06-22 audit.)
+  const legacyArticlePrefixes: [string, string][] = [
+    ['/blog/sales/クッキーレス時代のbtobマーケティング', '/blog/cookieless-btobmarketing-ai/'],
+    ['/blog/aixコンテンツマーケティング', '/blog/ai-content-marketing-sales-alignment-guide/'],
+    ['/blog/80のリードをムダにしない', '/blog/ai-chatbot-builder-lead-qualification-automation-2026/'],
+  ]
+  for (const [prefix, dest] of legacyArticlePrefixes) {
+    if (decoded.startsWith(prefix)) {
+      return NextResponse.redirect(new URL(dest, req.url), 308)
+    }
+  }
+
   // Strip legacy category prefix from blog URLs (replaces broader
   // next.config.js rules that path-to-regexp couldn't reliably match
   // because non-ASCII slugs preceded by category were intercepted
