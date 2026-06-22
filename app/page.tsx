@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Home from './components/v2/Home'
 import { getAllCaseStudies } from './lib/case-studies'
 import { FEATURED_CASES } from './lib/featured-cases'
+import { altLanguages } from './lib/i18n'
 
 export const revalidate = 3600
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   },
   description:
     'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層を掴み（Chat・Library）、商談化し（Calendar）、逃したリードを追客（Email）。掴む→商談化→追客の3ステージで、あらゆる瞬間を商談に変えます。',
-  alternates: { canonical: '/' },
+  alternates: altLanguages('/', 'ja'),
   openGraph: {
     title: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
     description:

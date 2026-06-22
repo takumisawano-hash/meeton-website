@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import AboutContent, { ABOUT_STR } from '@/app/components/v2/AboutContent'
 
 // /about/ — v2 re-skin (navy frame / white canvas / green accent).
@@ -10,9 +11,7 @@ const s = ABOUT_STR.ja
 export const metadata: Metadata = {
   title: s.metaTitle,
   description: s.metaDescription,
-  alternates: {
-    canonical: '/about/',
-  },
+  alternates: altLanguages("/about/", 'ja'),
   openGraph: {
     title: s.metaTitle,
     description: s.metaDescription,

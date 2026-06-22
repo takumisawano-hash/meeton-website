@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import SolutionLpTemplate, { type SolutionLpConfig } from '../SolutionLpTemplate'
 
 /**
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: 'リードは増えた。でも、商談が増えていない。AI SDR Meeton ai',
   description:
     '広告・SEO・ウェビナーで集めたリードが、CRM の山に積み上がるだけになっていませんか？Meeton ai は問い合わせ・資料 DL・再訪問のタイミングで AI SDR が会話・資料提案・日程調整・追客を行い、リードを商談へ進めます。',
-  alternates: { canonical: '/solutions/lead-to-meeting/' },
+  alternates: altLanguages("/solutions/lead-to-meeting/", 'ja'),
   openGraph: {
     title: 'リードは増えた。でも、商談が増えていない。',
     description:

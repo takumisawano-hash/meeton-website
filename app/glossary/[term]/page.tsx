@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GlossaryLP, { glossarySchema } from "@/app/components/v2/GlossaryLP";
 import { getTerm, allTermSlugs } from "@/app/lib/glossary-data";
+import { altLanguages } from "@/app/lib/i18n";
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ term: str
   return {
     title: { absolute: data.metaTitle },
     description: data.metaDescription,
-    alternates: { canonical: `/glossary/${term}/` },
+    alternates: altLanguages(`/glossary/${term}/`, "ja"),
     openGraph: { title: data.metaTitle, description: data.metaDescription, url: `https://dynameet.ai/glossary/${term}/`, type: "article" },
   };
 }

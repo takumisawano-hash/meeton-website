@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import CaptureContent, { CAPTURE_STR, captureBreadcrumb, captureFaqSchema } from "@/app/components/v2/CaptureContent";
 
 // Stage page for ①掴む・育てる — merges Chat (会話で掴む) + Library (資料で育てる)
@@ -10,7 +11,7 @@ const s = CAPTURE_STR.ja;
 export const metadata: Metadata = {
   title: { absolute: s.metaTitleAbsolute },
   description: s.metaDescription,
-  alternates: { canonical: "/capture/" },
+  alternates: altLanguages("/capture/", 'ja'),
   openGraph: {
     title: s.ogTitle,
     description: s.ogDescription,

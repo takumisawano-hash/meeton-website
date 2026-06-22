@@ -1,15 +1,11 @@
 import type { Metadata } from 'next'
 import ContactPageClient from '@/app/components/ContactPageClient'
+import { altLanguages } from '@/app/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'お問い合わせ',
   description: 'Meeton aiへのお問い合わせはこちらから。製品に関するご質問、デモのご依頼、導入のご相談など、お気軽にお問い合わせください。',
-  alternates: {
-    canonical: '/contact/',
-    languages: {
-      'ja-JP': '/contact/',
-    },
-  },
+  alternates: altLanguages('/contact/', 'ja'),
   openGraph: {
     title: 'お問い合わせ',
     description: '製品に関するご質問、デモのご依頼、導入のご相談など、お気軽にお問い合わせください。',

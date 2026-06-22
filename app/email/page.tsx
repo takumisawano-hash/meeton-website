@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import ProductLP, { productFaqSchema, productAppSchema } from "@/app/components/v2/ProductLP";
 import { PRODUCTS } from "@/app/lib/product-lp-data";
 
@@ -8,7 +9,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: { absolute: data.metaTitle },
   description: data.metaDescription,
-  alternates: { canonical: "/email/" },
+  alternates: altLanguages("/email/", 'ja'),
   openGraph: { title: data.metaTitle, description: data.metaDescription, url: "https://dynameet.ai/email/", type: "website" },
 };
 

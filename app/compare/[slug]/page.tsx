@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CompareLP, { compareFaqSchema, compareBreadcrumb } from "@/app/components/v2/CompareLP";
 import { getCompare, allCompareSlugs } from "@/app/lib/compare-data";
+import { altLanguages } from "@/app/lib/i18n";
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: { absolute: data.metaTitle },
     description: data.metaDescription,
-    alternates: { canonical: `/compare/${slug}/` },
+    alternates: altLanguages(`/compare/${slug}/`, "ja"),
     openGraph: { title: data.metaTitle, description: data.metaDescription, url, type: "website" },
   };
 }

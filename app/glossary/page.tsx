@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: { absolute: "用語集｜Meeton ai — AI SDR・商談化の用語解説" },
   description:
     "AI SDR・インサイドセールス・商談化に関する用語を、結論先出しで解説。AI SDR とは / Speed to Lead とは / 商談化率とは など、Meeton ai が現場の定義でまとめた用語集。",
-  alternates: { canonical: "/glossary/" },
+  alternates: altLanguages("/glossary/", 'ja'),
   openGraph: { title: "用語集｜Meeton ai", description: "AI SDR・商談化の用語を結論先出しで解説。", url: "https://dynameet.ai/glossary/", type: "website" },
 };
 

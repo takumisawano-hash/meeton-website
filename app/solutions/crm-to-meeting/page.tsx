@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import SolutionLpTemplate, { type SolutionLpConfig } from '../SolutionLpTemplate'
 
 /**
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: 'CRM に眠る商談機会を、AI SDR がもう一度動かす｜Meeton ai',
   description:
     '資料 DL 後に放置された MQL、過去の失注 contact、再訪する休眠リード。Meeton ai は CRM データと Web 行動を AI SDR が読み、文脈に沿った再アプローチで商談機会を生み出します。HubSpot / Salesforce ネイティブ連携。',
-  alternates: { canonical: '/solutions/crm-to-meeting/' },
+  alternates: altLanguages("/solutions/crm-to-meeting/", 'ja'),
   openGraph: {
     title: 'CRM に眠る商談機会を、AI SDR がもう一度動かす',
     description:
