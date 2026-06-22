@@ -10,6 +10,7 @@ import { FEATURED_CASES } from "@/app/lib/featured-cases";
 import { PRODUCTS } from "@/app/lib/product-lp-data";
 import { productMedia } from "@/app/lib/product-media";
 import ProductAnim from "@/app/components/v2/ProductAnim";
+import DemoFrame from "@/app/components/v2/DemoFrame";
 
 // Stage page for ①掴む・育てる — merges Chat (会話で掴む) + Library (資料で育てる)
 // into ONE job-led page (2026-06-04, Takumi: 製品名は誰も興味ない). Product
@@ -77,6 +78,7 @@ const SUBS = [
 // the product LPs and home StageMedia.
 function CaptureMedia({ slug }: { slug: string }) {
   const m = productMedia(slug);
+  if (m?.kind === "html") return <DemoFrame src={m.src} title={`${slug} のデモ`} />;
   if (m?.kind === "video") return <video src={m.src} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />;
   if (m?.kind === "image") return <Image src={m.src} alt={`${slug} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />;
   return <ProductAnim kind={slug} />;

@@ -7,9 +7,12 @@ import { join } from "node:path";
 
 const PUBLIC = join(process.cwd(), "public", "product");
 
-export type Media = { src: string; kind: "video" | "image" } | null;
+export type Media = { src: string; kind: "video" | "image" | "html" } | null;
 
 export function productMedia(slug: string): Media {
+  // Interactive HTML demo (real product UI, self-contained, plays its own CSS
+  // entrance animation) takes priority — embedded via <iframe> by DemoFrame.
+  if (existsSync(join(PUBLIC, `${slug}.html`))) return { src: `/product/${slug}.html`, kind: "html" };
   for (const ext of ["mp4", "webm"]) {
     if (existsSync(join(PUBLIC, `${slug}.${ext}`))) return { src: `/product/${slug}.${ext}`, kind: "video" };
   }
