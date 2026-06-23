@@ -316,15 +316,15 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
-      // Old English subdir → home, EXCEPT the live EN pages: the EN homepage
-      // (/en/ itself) and product LPs (/en/chat /en/calendar /en/library
-      // /en/email) plus the EN compare / alternatives / glossary sections (and
-      // their sub-paths). The negative lookahead keeps those real pages
-      // reachable; `.+` (not `.*`) lets the bare /en/ root fall through to the
-      // EN homepage while still catching any genuinely-stale /en/* URL.
+      // Not-yet-translated /en/* → their JA twin (NOT home), so an English
+      // visitor who lands on an untranslated EN URL gets the real JA content
+      // instead of being dumped on the homepage. The negative lookahead keeps
+      // the LIVE EN pages reachable; everything else maps /en/<x> → /<x>.
+      // solutions allowlist is the 2 existing EN solution LPs only — other
+      // /en/solutions/* (cmo/cro/sdr/ceo) fall through to the JA twin.
       {
-        source: '/en/:slug((?!chat/|calendar/|library/|email/|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|solutions/|chat$|calendar$|library$|email$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|solutions$).+)',
-        destination: '/',
+        source: '/en/:slug((?!chat/|calendar/|library/|email/|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|solutions/crm-to-meeting|solutions/lead-to-meeting|chat$|calendar$|library$|email$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$).+)',
+        destination: '/:slug',
         permanent: true,
       },
       // Individual legacy paths
