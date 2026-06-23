@@ -43,12 +43,13 @@ const STR = {
 
 export default function CaseCardGrid({ cases, lang = "ja" }: { cases: CaseCardData[]; lang?: Lang }) {
   const s = STR[lang];
+  const base = lang === "en" ? "/en/cases" : "/cases";
   return (
     <div className="v2-cs-grid">
       {cases.map((c) => {
         const logo = c.companyLogo || SLUG_LOGO[c.slug];
         return (
-          <Link key={c.slug} href={`/cases/${c.slug}/`} aria-label={s.aria(c.name)} className="v2-cs-card">
+          <Link key={c.slug} href={`${base}/${c.slug}/`} aria-label={s.aria(c.name)} className="v2-cs-card">
             <div className="v2-cs-media">
               {c.heroImage ? (
                 <Image src={c.heroImage} alt={s.caseAlt(c.name)} fill sizes="(max-width:760px) 100vw, 560px" style={{ objectFit: "cover" }} />

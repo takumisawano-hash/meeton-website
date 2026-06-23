@@ -4,10 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Footer from './Footer'
 import Nav from './Nav'
+import type { Lang } from '../lib/i18n'
 
 // ── 第三者認証（ISO/IEC 27001・27017）─────────────────────────────
 // SGS 公式マークを unoptimized で原本配信（改変・比率変更・トリミング不可）。
-// 白地に配置。scope は証明書記載の登録範囲（verbatim）。
+// 白地に配置。cert standards/IDs are verbatim facts; `kind` label is localised.
 const CERT_MARKS = [
   {
     src: '/certifications/sgs-iso-27001-isms-ac.jpg',
@@ -15,8 +16,7 @@ const CERT_MARKS = [
     width: 1261,
     height: 736,
     standard: 'ISO/IEC 27001:2022',
-    kind: '情報セキュリティ',
-    scope: '法人向け業務支援システムの開発・運用・保守',
+    kind: { ja: '情報セキュリティ', en: 'Information Security' },
   },
   {
     src: '/certifications/sgs-iso-27017-isms-ac.jpg',
@@ -24,30 +24,95 @@ const CERT_MARKS = [
     width: 605,
     height: 369,
     standard: 'ISO/IEC 27017:2015',
-    kind: 'クラウドセキュリティ',
-    scope:
-      'クラウドサービスプロバイダ:\n業務支援プラットフォーム「DynaMeet Platform」(Meeton ai 等を含む)の提供\n\nクラウドサービスカスタマ:\n業務支援プラットフォーム「DynaMeet Platform」(Meeton ai 等を含む)の提供における AWS の利用',
+    kind: { ja: 'クラウドセキュリティ', en: 'Cloud Security' },
   },
 ]
 
 // プロダクト対策 / 組織的・人的対策（Immedio の二軸構成を踏襲）。
 // カテゴリのみを提示し、詳細はホワイトペーパーに委ねる（ティザー）。
 // ※ 一般的な ISMS 運用に基づく想定項目。公開前に自社の実運用と一致するか要確認。
-const PRODUCT_MEASURES = [
-  '通信・保存データの暗号化',
-  'アクセス制御・監査ログ',
-  '国内リージョンでの保管・高可用性',
-  'クラウドセキュリティ（ISO/IEC 27017）',
-  'セキュアな AI 運用',
-]
+const PRODUCT_MEASURES = {
+  ja: [
+    '通信・保存データの暗号化',
+    'アクセス制御・監査ログ',
+    '国内リージョンでの保管・高可用性',
+    'クラウドセキュリティ（ISO/IEC 27017）',
+    'セキュアな AI 運用',
+  ],
+  en: [
+    'Encryption of data in transit and at rest',
+    'Access control and audit logs',
+    'Domestic-region storage and high availability',
+    'Cloud security (ISO/IEC 27017)',
+    'Secure AI operation',
+  ],
+}
 
-const ORG_MEASURES = [
-  '第三者認証の取得・維持',
-  '情報セキュリティ方針の運用',
-  '従業員へのセキュリティ研修',
-  '脆弱性診断・管理',
-  'アクセス権限管理・NDA 締結',
-]
+const ORG_MEASURES = {
+  ja: [
+    '第三者認証の取得・維持',
+    '情報セキュリティ方針の運用',
+    '従業員へのセキュリティ研修',
+    '脆弱性診断・管理',
+    'アクセス権限管理・NDA 締結',
+  ],
+  en: [
+    'Obtaining and maintaining third-party certification',
+    'Operating an information-security policy',
+    'Security training for employees',
+    'Vulnerability assessment and management',
+    'Access-permission management and NDA execution',
+  ],
+}
+
+// Localised page chrome. JA is the default → existing call sites omit `lang`
+// and render byte-identically.
+const SEC_STR = {
+  ja: {
+    heroEyebrow: 'Information Security',
+    heroH1a: 'プロダクトと組織の',
+    heroH1em: '両輪',
+    heroH1b: 'で、',
+    heroH1c: 'お客様のデータを守る。',
+    heroSub: 'ISO/IEC 27001（情報セキュリティ）・ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、DynaMeet はお客様のデータ保護に継続的に取り組んでいます。',
+    certEyebrow: 'Certifications',
+    certTitle: '第三者認証 — ISO/IEC 27001・27017',
+    certLead: '基本となる情報セキュリティ（ISO/IEC 27001）に加え、クラウドサービス固有の管理策（ISO/IEC 27017）まで第三者認証を取得しています。',
+    certAttribution: '審査・認証: SGSジャパン株式会社 ／ 認定: 情報マネジメントシステム認定センター（ISMS-AC, ISR021） ／ 2026年6月取得',
+    prodEyebrow: 'Product Security',
+    prodTitle: 'プロダクトセキュリティ対策',
+    prodSub: 'サービスとインフラの技術的な対策。',
+    orgEyebrow: 'Organizational & Human',
+    orgTitle: '組織的・人的セキュリティ対策',
+    orgSub: '体制と人による継続的な対策。',
+    ctaH2: 'さらに詳しい情報セキュリティ仕様を公開しています',
+    ctaSub: 'インフラ構成・データ保護方針・バックアップ体制などをまとめたホワイトペーパーをご用意しています。導入前のセキュリティ確認にもご活用ください。',
+    ctaPrimary: 'ホワイトペーパーを見る',
+    ctaGhost: 'セキュリティについて問い合わせる',
+  },
+  en: {
+    heroEyebrow: 'Information Security',
+    heroH1a: 'Protecting your data with',
+    heroH1em: 'both',
+    heroH1b: ' ',
+    heroH1c: 'product and organization.',
+    heroSub: 'Under third-party certification for ISO/IEC 27001 (information security) and ISO/IEC 27017 (cloud security), DynaMeet works continuously to protect your data.',
+    certEyebrow: 'Certifications',
+    certTitle: 'Third-party certification — ISO/IEC 27001 & 27017',
+    certLead: 'In addition to foundational information security (ISO/IEC 27001), we hold third-party certification covering cloud-service-specific controls (ISO/IEC 27017).',
+    certAttribution: 'Audit & certification: SGS Japan Inc. / Accreditation: Information Management System Accreditation Center (ISMS-AC, ISR021) / Obtained June 2026',
+    prodEyebrow: 'Product Security',
+    prodTitle: 'Product security measures',
+    prodSub: 'Technical measures for the service and infrastructure.',
+    orgEyebrow: 'Organizational & Human',
+    orgTitle: 'Organizational & human security measures',
+    orgSub: 'Continuous measures by structure and people.',
+    ctaH2: 'We publish more detailed information-security specifications',
+    ctaSub: 'We have a whitepaper covering infrastructure configuration, data-protection policy, backup setup, and more. Use it for your pre-deployment security review.',
+    ctaPrimary: 'View the whitepaper',
+    ctaGhost: 'Contact us about security',
+  },
+} as const
 
 function Check() {
   return (
@@ -60,10 +125,11 @@ function Check() {
 
 const SHELL = { maxWidth: 1120, margin: '0 auto' } as const
 
-export default function SecurityPageClient() {
+export default function SecurityPageClient({ lang = 'ja' }: { lang?: Lang }) {
+  const s = SEC_STR[lang]
   return (
     <>
-      <Nav />
+      <Nav lang={lang} />
       <main
         style={{
           paddingTop: 'clamp(72px, 11vw, 96px)',
@@ -90,7 +156,7 @@ export default function SecurityPageClient() {
                 marginBottom: 18,
               }}
             >
-              Information Security
+              {s.heroEyebrow}
             </div>
             <h1
               style={{
@@ -104,10 +170,10 @@ export default function SecurityPageClient() {
               }}
             >
               <span style={{ display: 'inline-block' }}>
-                プロダクトと組織の<span style={{ color: '#12a37d' }}>両輪</span>で、
+                {s.heroH1a}<span style={{ color: '#12a37d' }}>{s.heroH1em}</span>{s.heroH1b}
               </span>
               <wbr />
-              <span style={{ display: 'inline-block' }}>お客様のデータを守る。</span>
+              <span style={{ display: 'inline-block' }}>{s.heroH1c}</span>
             </h1>
             <p
               style={{
@@ -119,7 +185,7 @@ export default function SecurityPageClient() {
                 margin: 0,
               }}
             >
-              ISO/IEC 27001（情報セキュリティ）・ISO/IEC 27017（クラウドセキュリティ）の第三者認証のもと、DynaMeet はお客様のデータ保護に継続的に取り組んでいます。
+              {s.heroSub}
             </p>
           </div>
         </section>
@@ -128,9 +194,9 @@ export default function SecurityPageClient() {
         <section style={{ padding: 'clamp(40px, 6vw, 72px) clamp(16px, 4vw, 28px)' }}>
           <div style={SHELL}>
             <SectionHead
-              eyebrow="Certifications"
-              title="第三者認証 — ISO/IEC 27001・27017"
-              lead="基本となる情報セキュリティ（ISO/IEC 27001）に加え、クラウドサービス固有の管理策（ISO/IEC 27017）まで第三者認証を取得しています。"
+              eyebrow={s.certEyebrow}
+              title={s.certTitle}
+              lead={s.certLead}
             />
             <div
               style={{
@@ -166,14 +232,14 @@ export default function SecurityPageClient() {
                     </div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontSize: 19, fontWeight: 850, color: '#16332b', lineHeight: 1.2 }}>{m.standard}</div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginTop: 4 }}>{m.kind}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginTop: 4 }}>{m.kind[lang]}</div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
             <p style={{ fontSize: 13, lineHeight: 1.7, color: '#6a8178', margin: '18px 0 0' }}>
-              審査・認証: SGSジャパン株式会社 ／ 認定: 情報マネジメントシステム認定センター（ISMS-AC, ISR021） ／ 2026年6月取得
+              {s.certAttribution}
             </p>
           </div>
         </section>
@@ -182,8 +248,8 @@ export default function SecurityPageClient() {
         <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(40px, 6vw, 72px)' }}>
           <div style={SHELL}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
-              <MeasureCard accent="#12a37d" eyebrow="Product Security" title="プロダクトセキュリティ対策" sub="サービスとインフラの技術的な対策。" items={PRODUCT_MEASURES} />
-              <MeasureCard accent="#0891b2" eyebrow="Organizational & Human" title="組織的・人的セキュリティ対策" sub="体制と人による継続的な対策。" items={ORG_MEASURES} />
+              <MeasureCard accent="#12a37d" eyebrow={s.prodEyebrow} title={s.prodTitle} sub={s.prodSub} items={PRODUCT_MEASURES[lang]} />
+              <MeasureCard accent="#0891b2" eyebrow={s.orgEyebrow} title={s.orgTitle} sub={s.orgSub} items={ORG_MEASURES[lang]} />
             </div>
           </div>
         </section>
@@ -202,10 +268,10 @@ export default function SecurityPageClient() {
             }}
           >
             <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 900, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
-              さらに詳しい情報セキュリティ仕様を公開しています
+              {s.ctaH2}
             </h2>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: 'rgba(236,250,246,0.8)', maxWidth: 620, margin: '0 auto 26px' }}>
-              インフラ構成・データ保護方針・バックアップ体制などをまとめたホワイトペーパーをご用意しています。導入前のセキュリティ確認にもご活用ください。
+              {s.ctaSub}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
               <button
@@ -230,7 +296,7 @@ export default function SecurityPageClient() {
                   boxShadow: '0 14px 32px rgba(18,163,125,0.32)',
                 }}
               >
-                ホワイトペーパーを見る
+                {s.ctaPrimary}
               </button>
               <Link
                 href="/contact/"
@@ -248,13 +314,13 @@ export default function SecurityPageClient() {
                   textDecoration: 'none',
                 }}
               >
-                セキュリティについて問い合わせる
+                {s.ctaGhost}
               </Link>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer lang={lang} />
     </>
   )
 }

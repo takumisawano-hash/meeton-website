@@ -191,6 +191,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...alternativeSlugs().map((slug) => ({ url: `${baseUrl}/en/alternatives/${slug}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.65 })),
     { url: `${baseUrl}/en/glossary/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 },
     ...allTermSlugs().map((s) => ({ url: `${baseUrl}/en/glossary/${s}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 })),
+    // role solutions + use-cases + enterprise/security/cases (2026-06-23)
+    ...['cmo', 'cro', 'sdr', 'ceo'].map((r) => ({ url: `${baseUrl}/en/solutions/${r}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 })),
+    ...['pre-inquiry', 'post-download', 'revisit', 'nurture', 'saas', 'manufacturing', 'professional-services', 'fintech'].map((u) => ({ url: `${baseUrl}/en/use-cases/${u}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 })),
+    { url: `${baseUrl}/en/enterprise/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: `${baseUrl}/en/security/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.4 },
+    { url: `${baseUrl}/en/cases/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.6 },
+    ...caseStudies.map((c) => ({ url: c.url.replace(`${baseUrl}/cases/`, `${baseUrl}/en/cases/`), lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 })),
   ]
 
   return [

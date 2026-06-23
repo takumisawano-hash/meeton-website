@@ -5,6 +5,63 @@ import Footer from '../components/Footer'
 import FAQJsonLd from '../components/FAQJsonLd'
 import DemoBookingButton from '../components/DemoBookingButton'
 import { getAllCaseStudies, type CaseStudy } from '../lib/case-studies'
+import type { Lang } from '../lib/i18n'
+
+// Fixed section chrome. JA is the default → existing call sites omit `lang`
+// and render byte-identically. `industry` is the per-page industry label
+// (industryJa for JA, industryEn for EN).
+const UC_CHROME = {
+  ja: {
+    heroDemoCta: '業界別デモを30分で見る',
+    heroCasesCta: '事例を見る',
+    painsEyebrow: (industry: string) => `${industry}における課題`,
+    modulesEyebrow: 'Meeton ai の AI 機能群',
+    modulesH2lead: (industry: string) => `${industry} の営業課題を、`,
+    modulesH2em: 'AI SDR が連動して解く。',
+    moduleAngleLabel: (industry: string) => `${industry}向け`,
+    moduleLink: '詳しく見る',
+    caseEyebrow: (industry: string) => `${industry}の導入事例`,
+    caseH2: '数字で語る、現場の成果。',
+    caseCta: '事例を読む',
+    intEyebrow: (industry: string) => `${industry}で多い連携先`,
+    intH2lead: '既存のセールススタックを',
+    intH2em: '置き換えずに、強化する。',
+    faqEyebrow: 'よくある質問',
+    faqH2lead: (industry: string) => `${industry}担当者からの`,
+    faqH2em: (_industry: string) => '頻出質問',
+    ctaEyebrow: 'Next Step',
+    ctaH2lead: (industry: string) => `${industry}のリードを、`,
+    ctaH2em: (_industry: string) => '商談化するAI SDR を見る。',
+    ctaP: ['30分のデモで、貴社の業界特有のリード行動に対して', 'Meeton ai が具体的にどう応答・予約するかをご覧いただけます。'],
+    ctaPrimary: '30分デモを予約する',
+    ctaGhost: '資料請求',
+  },
+  en: {
+    heroDemoCta: 'See an industry demo in 30 min',
+    heroCasesCta: 'See customer stories',
+    painsEyebrow: (industry: string) => `Challenges in ${industry}`,
+    modulesEyebrow: "Meeton ai's AI capabilities",
+    modulesH2lead: (industry: string) => `Solving ${industry} sales challenges,`,
+    modulesH2em: 'with an AI SDR working in concert.',
+    moduleAngleLabel: (industry: string) => `For ${industry}`,
+    moduleLink: 'Learn more',
+    caseEyebrow: (industry: string) => `${industry} customer story`,
+    caseH2: 'Results from the field, told in numbers.',
+    caseCta: 'Read the story',
+    intEyebrow: (industry: string) => `Common integrations in ${industry}`,
+    intH2lead: 'Strengthen your existing sales stack',
+    intH2em: 'without replacing it.',
+    faqEyebrow: 'FAQ',
+    faqH2lead: (_industry: string) => `Frequent questions from `,
+    faqH2em: (industry: string) => `${industry} teams`,
+    ctaEyebrow: 'Next Step',
+    ctaH2lead: (_industry: string) => `See the AI SDR that turns `,
+    ctaH2em: (industry: string) => `${industry} leads into meetings.`,
+    ctaP: ['In a 30-minute demo, see concretely how Meeton ai responds to', "and books your industry's specific lead behavior."],
+    ctaPrimary: 'Book a 30-min demo',
+    ctaGhost: 'Request materials',
+  },
+} as const
 
 // ──────────────────────────────────────────────────────────────────
 // Industry-specific landing page component
@@ -61,11 +118,19 @@ export type UseCasePageProps = {
   caseStudyMatcher: (cs: CaseStudy) => boolean
   pageUrl: string
   utmCampaign: string
+  /** locale (JA default). EN swaps the fixed section chrome + Nav/Footer; the
+   *  per-industry props above are passed pre-translated by the /en wrapper. */
+  lang?: Lang
 }
 
 export default async function UseCasePageClient(props: UseCasePageProps) {
   const all = await getAllCaseStudies().catch(() => [] as CaseStudy[])
   const matched = all.find(props.caseStudyMatcher) ?? null
+  const lang: Lang = props.lang ?? 'ja'
+  const t = UC_CHROME[lang]
+  // The industry label used inside chrome strings: EN pages use industryEn,
+  // JA pages use industryJa (preserves byte-identical JA output).
+  const industryLabel = lang === 'en' ? props.industryEn : props.industryJa
 
   return (
     <div className="uc-root" style={{
@@ -76,7 +141,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
       ['--uc-accent-glow' as string]: props.accentGlow,
     }}>
       <FAQJsonLd items={props.faqs} pageUrl={props.pageUrl} />
-      <Nav variant="light" />
+      <Nav variant="light" lang={lang} />
 
       {/* ────── HERO ────── */}
       <section className="uc-hero">
@@ -102,13 +167,13 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
               className="uc-btn uc-btn-primary"
               utmCampaign={props.utmCampaign}
             >
-              業界別デモを30分で見る
+              {t.heroDemoCta}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </DemoBookingButton>
             <Link href="/case-studies/" className="uc-btn uc-btn-ghost">
-              事例を見る
+              {t.heroCasesCta}
             </Link>
           </div>
         </div>
@@ -120,7 +185,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           <div className="uc-section-head">
             <div className="uc-section-eyebrow">
               <span className="uc-eyebrow-dash" />
-              {props.industryJa}における課題
+              {t.painsEyebrow(industryLabel)}
             </div>
             <h2 className="uc-section-h2">{props.painsLead}</h2>
           </div>
@@ -150,11 +215,11 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           <div className="uc-section-head">
             <div className="uc-section-eyebrow">
               <span className="uc-eyebrow-dash" />
-              Meeton ai の AI 機能群
+              {t.modulesEyebrow}
             </div>
             <h2 className="uc-section-h2">
-              {props.industryJa} の営業課題を、<br />
-              <em>AI SDR が連動して解く。</em>
+              {t.modulesH2lead(industryLabel)}<br />
+              <em>{t.modulesH2em}</em>
             </h2>
           </div>
           <div className="uc-mod-grid">
@@ -164,11 +229,11 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                 <h3 className="uc-mod-name">{mod.name}</h3>
                 <p className="uc-mod-desc">{mod.description}</p>
                 <div className="uc-mod-angle">
-                  <div className="uc-mod-angle-label">{props.industryJa}向け</div>
+                  <div className="uc-mod-angle-label">{t.moduleAngleLabel(industryLabel)}</div>
                   <p>{mod.industryAngle}</p>
                 </div>
                 <span className="uc-mod-link">
-                  詳しく見る
+                  {t.moduleLink}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
@@ -186,9 +251,9 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
             <div className="uc-section-head">
               <div className="uc-section-eyebrow">
                 <span className="uc-eyebrow-dash" />
-                {props.industryJa}の導入事例
+                {t.caseEyebrow(industryLabel)}
               </div>
-              <h2 className="uc-section-h2">数字で語る、現場の成果。</h2>
+              <h2 className="uc-section-h2">{t.caseH2}</h2>
             </div>
             <Link href={`/case-studies/${matched.slug}/`} className="uc-cs-card">
               <div className="uc-cs-media">
@@ -203,7 +268,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                 ) : (
                   <div className="uc-cs-media-fallback" />
                 )}
-                <span className="uc-cs-media-badge">{matched.industry || props.industryJa}</span>
+                <span className="uc-cs-media-badge">{matched.industry || industryLabel}</span>
               </div>
               <div className="uc-cs-body">
                 <div className="uc-cs-company">
@@ -238,7 +303,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                   </blockquote>
                 )}
                 <span className="uc-cs-cta">
-                  事例を読む
+                  {t.caseCta}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
@@ -255,11 +320,11 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           <div className="uc-section-head">
             <div className="uc-section-eyebrow">
               <span className="uc-eyebrow-dash" />
-              {props.industryJa}で多い連携先
+              {t.intEyebrow(industryLabel)}
             </div>
             <h2 className="uc-section-h2">
-              既存のセールススタックを<br />
-              <em>置き換えずに、強化する。</em>
+              {t.intH2lead}<br />
+              <em>{t.intH2em}</em>
             </h2>
           </div>
           <div className="uc-int-grid">
@@ -293,9 +358,9 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           <div className="uc-section-head">
             <div className="uc-section-eyebrow">
               <span className="uc-eyebrow-dash" />
-              よくある質問
+              {t.faqEyebrow}
             </div>
-            <h2 className="uc-section-h2">{props.industryJa}担当者からの<em>頻出質問</em></h2>
+            <h2 className="uc-section-h2">{t.faqH2lead(industryLabel)}<em>{t.faqH2em(industryLabel)}</em></h2>
           </div>
           <div className="uc-faq-list">
             {props.faqs.map((faq, idx) => (
@@ -321,34 +386,34 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
         <div className="uc-cta-inner">
           <div className="uc-section-eyebrow uc-cta-eyebrow">
             <span className="uc-eyebrow-dash" />
-            Next Step
+            {t.ctaEyebrow}
           </div>
           <h2 className="uc-cta-h">
-            {props.industryJa}のリードを、<br />
-            <em>商談化するAI SDR を見る。</em>
+            {t.ctaH2lead(industryLabel)}<br />
+            <em>{t.ctaH2em(industryLabel)}</em>
           </h2>
           <p className="uc-cta-p">
-            30分のデモで、貴社の業界特有のリード行動に対して<br />
-            Meeton ai が具体的にどう応答・予約するかをご覧いただけます。
+            {t.ctaP[0]}<br />
+            {t.ctaP[1]}
           </p>
           <div className="uc-cta-buttons">
             <DemoBookingButton
               className="uc-btn uc-btn-primary uc-btn-lg"
               utmCampaign={props.utmCampaign}
             >
-              30分デモを予約する
+              {t.ctaPrimary}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </DemoBookingButton>
             <Link href="/contact/" className="uc-btn uc-btn-ghost uc-btn-lg">
-              資料請求
+              {t.ctaGhost}
             </Link>
           </div>
         </div>
       </section>
 
-      <Footer variant="light" />
+      <Footer variant="light" lang={lang} />
 
       <style>{`
         .uc-root {

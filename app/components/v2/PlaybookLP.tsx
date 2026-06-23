@@ -6,6 +6,7 @@ import { Section, SectionHead, Eyebrow, Card, ProductIcon } from "@/app/componen
 import { CLUSTERS } from "@/app/lib/content-clusters";
 import { FEATURED_CASES } from "@/app/lib/featured-cases";
 import type { PlaybookEntry } from "@/app/lib/playbook-data";
+import type { Lang } from "@/app/lib/i18n";
 
 const PROOF_SLUG: Record<string, string> = {
   edulinx: "edulinx-ai-chat-40-percent",
@@ -13,32 +14,97 @@ const PROOF_SLUG: Record<string, string> = {
   univis: "univis-multi-service-3month-2deals",
 };
 
-export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
+// Fixed section chrome. JA is the default → existing call sites omit `lang`
+// and render byte-identically.
+const PB_CHROME = {
+  ja: {
+    skip: "本文へスキップ",
+    painEyebrow: "課題",
+    painTitle: "こんな状態になっていませんか？",
+    solEyebrow: "解決",
+    solTitle: "Meeton ai は、こう効く。",
+    solLede: "該当する仕事を、AI SDR が担います。",
+    proofMore: "他の事例を見る →",
+    faqEyebrow: "よくある質問",
+    faqTitle: "FAQ",
+    ctaTitle: "まずは、デモで確かめる。",
+    ctaSub: "30分のデモで、自社の商談化の進め方が具体的に見えます。",
+    home: "ホーム",
+  },
+  en: {
+    skip: "Skip to content",
+    painEyebrow: "Challenges",
+    painTitle: "Does this sound like you?",
+    solEyebrow: "Solution",
+    solTitle: "Here's how Meeton ai helps.",
+    solLede: "The AI SDR takes on the relevant work.",
+    proofMore: "See more customer stories →",
+    faqEyebrow: "FAQ",
+    faqTitle: "FAQ",
+    ctaTitle: "Start by seeing it in a demo.",
+    ctaSub: "In a 30-minute demo, you'll see concretely how to drive meeting conversion at your company.",
+    home: "Home",
+  },
+} as const;
+
+// EN proof overrides keyed by proofRef. The case CONTENT (Notion JA) is not
+// translated yet; on the EN playbook LPs we render an English metric label +
+// quote so the proof block reads English. Numbers/company kept exact.
+const PB_PROOF_EN: Record<string, { metricLabel: string; quote: string; name: string; industry: string }> = {
+  edulinx: {
+    metricLabel: "Meeting-conversion rate via Meeton ai (about 3x the ~20% industry average)",
+    quote:
+      "Customers who came through Meeton ai inquire in a clearly nurtured state. It's highly effective for meeting conversion.",
+    name: "Training-industry leader",
+    industry: "HR & training",
+  },
+  biztex: {
+    metricLabel: "Chat-sourced leads (vs. legacy chat)",
+    quote:
+      "It used to be 1–2 a month. Since switching to Meeton ai, 20+ a month — over 20x the leads now come from chat.",
+    name: "BizteX, Inc.",
+    industry: "SaaS",
+  },
+  univis: {
+    metricLabel: "M&A and consulting wins closed in 3 months",
+    quote:
+      "Even when it doesn't turn into a meeting, you instantly see which companies are viewing your content. The number of proposals went up, too.",
+    name: "Univis Group",
+    industry: "Consulting",
+  },
+};
+
+export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry; lang?: Lang }) {
+  const en = lang === "en";
+  const c = PB_CHROME[lang];
+  // Use the EN twin copy when present; otherwise fall back to JA fields.
+  const t = en && data.en ? data.en : data;
   const src = `${data.kind}-${data.slug}`;
-  const proof = data.proofRef ? FEATURED_CASES.find((c) => c.slug === PROOF_SLUG[data.proofRef!]) : undefined;
+  const proof = data.proofRef ? FEATURED_CASES.find((cs) => cs.slug === PROOF_SLUG[data.proofRef!]) : undefined;
+  const proofEn = en && data.proofRef ? PB_PROOF_EN[data.proofRef] : undefined;
   return (
     <>
-      <a href="#main" className="v2-skip">本文へスキップ</a>
-      <Nav />
+      <a href="#main" className="v2-skip">{c.skip}</a>
+      <Nav lang={lang} />
       <main id="main">
 
       <Section tone="navy" py={0} style={{ paddingTop: 124, paddingBottom: 60 }}>
         <div style={{ maxWidth: 820 }}>
-          <Eyebrow tone="dark">{data.badge}</Eyebrow>
-          <p style={{ margin: "22px 0 10px", fontSize: 16, fontWeight: 700, color: "var(--cta)" }}>{data.problemLine}</p>
+          <Eyebrow tone="dark">{t.badge}</Eyebrow>
+          <p style={{ margin: "22px 0 10px", fontSize: 16, fontWeight: 700, color: "var(--cta)" }}>{t.problemLine}</p>
           <h1 style={{ fontFamily: "var(--fd)", fontSize: "clamp(30px,4.8vw,48px)", lineHeight: 1.2, fontWeight: 800, letterSpacing: "-0.025em", color: "var(--on-navy)", margin: 0 }}>
-            {data.h1}
+            {t.h1}
           </h1>
-          <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 28px", maxWidth: 680 }}>{data.sub}</p>
-          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" />
+          <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 28px", maxWidth: 680 }}>{t.sub}</p>
+          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" lang={lang} />
         </div>
       </Section>
 
-      {/* 課題 */}
+      {/* 課題 / Challenges */}
       <Section tone="white">
-        <SectionHead eyebrow="課題" title="こんな状態になっていませんか？" />
+        <SectionHead eyebrow={c.painEyebrow} title={c.painTitle} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
-          {data.pains.map((p) => (
+          {t.pains.map((p) => (
             <Card key={p.title}>
               <h3 style={{ fontSize: 17, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{p.title}</h3>
               <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text)", margin: 0 }}>{p.desc}</p>
@@ -47,24 +113,27 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
         </div>
       </Section>
 
-      {/* 解決 */}
+      {/* 解決 / Solution */}
       <Section tone="surface">
-        <SectionHead eyebrow="解決" title="Meeton ai は、こう効く。" lede="該当する仕事を、AI SDR が担います。" />
+        <SectionHead eyebrow={c.solEyebrow} title={c.solTitle} lede={c.solLede} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
-          {data.plays.map((pl, i) => {
-            const c = pl.product ? CLUSTERS[pl.product] : null;
+          {t.plays.map((pl, i) => {
+            // product mapping is language-agnostic → read it from the JA entry
+            // by index so the cluster pillar link still resolves on EN.
+            const product = data.plays[i]?.product;
+            const cl = product ? CLUSTERS[product] : null;
             return (
               <Card key={i} style={{ background: "#fff" }}>
-                {c && (
+                {cl && (
                   <div style={{ color: "var(--cta)", marginBottom: 12 }}>
-                    <ProductIcon kind={pl.product as string} size={22} />
+                    <ProductIcon kind={product as string} size={22} />
                   </div>
                 )}
                 <h3 style={{ fontSize: 17, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{pl.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text)", margin: "0 0 12px" }}>{pl.desc}</p>
-                {c && (
-                  <Link href={c.pillar} style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none" }}>
-                    {c.pillarName} →
+                {cl && (
+                  <Link href={cl.pillar} style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none" }}>
+                    {cl.pillarName} →
                   </Link>
                 )}
               </Card>
@@ -79,23 +148,27 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
           <div className="pb-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proof.heroMetric}</div>
-              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{proof.heroMetricLabel}</div>
+              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 240 }}>{proofEn?.metricLabel ?? proof.heroMetricLabel}</div>
             </div>
             <div>
-              <p style={{ fontSize: "clamp(17px,2.2vw,22px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>「{proof.quote}」</p>
-              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {proof.name}（{proof.industry}）</div>
-              <Link href="/cases/" style={{ display: "inline-block", marginTop: 14, color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>他の事例を見る →</Link>
+              <p style={{ fontSize: "clamp(17px,2.2vw,22px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>
+                {en ? `“${proofEn?.quote ?? proof.quote}”` : `「${proof.quote}」`}
+              </p>
+              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>
+                — {proofEn?.name ?? proof.name}{en ? ` (${proofEn?.industry ?? proof.industry})` : `（${proof.industry}）`}
+              </div>
+              <Link href="/cases/" style={{ display: "inline-block", marginTop: 14, color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>{c.proofMore}</Link>
             </div>
           </div>
           <style>{`@media(max-width:720px){.pb-proof{grid-template-columns:1fr;gap:24px}}`}</style>
         </Section>
       )}
 
-      {data.faq.length > 0 && (
+      {t.faq.length > 0 && (
         <Section tone="white">
-          <SectionHead eyebrow="よくある質問" title="FAQ" align="center" />
+          <SectionHead eyebrow={c.faqEyebrow} title={c.faqTitle} align="center" />
           <div style={{ maxWidth: 800, margin: "0 auto", display: "grid", gap: 14 }}>
-            {data.faq.map((f) => (
+            {t.faq.map((f) => (
               <Card key={f.q}>
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{f.q}</h3>
                 <p style={{ fontSize: 15, lineHeight: 1.85, color: "var(--text)", margin: 0 }}>{f.a}</p>
@@ -108,29 +181,31 @@ export default function PlaybookLP({ data }: { data: PlaybookEntry }) {
       <Section tone="navyDeep" py={68}>
         <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>
-            まずは、デモで確かめる。
+            {c.ctaTitle}
           </h2>
-          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>30分のデモで、自社の商談化の進め方が具体的に見えます。</p>
-          <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" /></div>
+          <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>{c.ctaSub}</p>
+          <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" lang={lang} /></div>
         </div>
       </Section>
       </main>
 
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 }
 
-export function playbookSchema(data: PlaybookEntry, path: string) {
-  const faq = data.faq.length > 0 ? {
+export function playbookSchema(data: PlaybookEntry, path: string, lang: Lang = "ja") {
+  const en = lang === "en";
+  const t = en && data.en ? data.en : data;
+  const faq = t.faq.length > 0 ? {
     "@context": "https://schema.org", "@type": "FAQPage", url: `https://dynameet.ai${path}`,
-    mainEntity: data.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    mainEntity: t.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   } : null;
   const breadcrumb = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "ホーム", item: "https://dynameet.ai/" },
-      { "@type": "ListItem", position: 2, name: data.h1, item: `https://dynameet.ai${path}` },
+      { "@type": "ListItem", position: 1, name: en ? "Home" : "ホーム", item: "https://dynameet.ai/" },
+      { "@type": "ListItem", position: 2, name: t.h1, item: `https://dynameet.ai${path}` },
     ],
   };
   return { faq, breadcrumb };

@@ -323,7 +323,7 @@ const nextConfig = {
       // solutions allowlist is the 2 existing EN solution LPs only — other
       // /en/solutions/* (cmo/cro/sdr/ceo) fall through to the JA twin.
       {
-        source: '/en/:slug((?!chat/|calendar/|library/|email/|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|solutions/crm-to-meeting|solutions/lead-to-meeting|chat$|calendar$|library$|email$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$).+)',
+        source: '/en/:slug((?!chat/|calendar/|library/|email/|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|enterprise|security|cases|use-cases/|solutions/crm-to-meeting|solutions/lead-to-meeting|solutions/cmo|solutions/cro|solutions/sdr|solutions/ceo|chat$|calendar$|library$|email$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|enterprise$|security$|cases$).+)',
         destination: '/:slug',
         permanent: true,
       },
