@@ -17,6 +17,7 @@ const CERT_MARKS = [
     height: 736,
     standard: 'ISO/IEC 27001:2022',
     kind: { ja: '情報セキュリティ', en: 'Information Security' },
+    regNo: 'JP26/00000205',
   },
   {
     src: '/certifications/sgs-iso-27017-isms-ac.jpg',
@@ -25,6 +26,7 @@ const CERT_MARKS = [
     height: 369,
     standard: 'ISO/IEC 27017:2015',
     kind: { ja: 'クラウドセキュリティ', en: 'Cloud Security' },
+    regNo: 'JP26/00000206',
   },
 ]
 
@@ -78,6 +80,7 @@ const SEC_STR = {
     certEyebrow: 'Certifications',
     certTitle: '第三者認証 — ISO/IEC 27001・27017',
     certLead: '基本となる情報セキュリティ（ISO/IEC 27001）に加え、クラウドサービス固有の管理策（ISO/IEC 27017）まで第三者認証を取得しています。',
+    certRegLabel: '登録番号',
     certAttribution: '審査・認証: SGSジャパン株式会社 ／ 認定: 情報マネジメントシステム認定センター（ISMS-AC, ISR021） ／ 2026年6月取得',
     prodEyebrow: 'Product Security',
     prodTitle: 'プロダクトセキュリティ対策',
@@ -100,6 +103,7 @@ const SEC_STR = {
     certEyebrow: 'Certifications',
     certTitle: 'Third-party certification — ISO/IEC 27001 & 27017',
     certLead: 'In addition to foundational information security (ISO/IEC 27001), we hold third-party certification covering cloud-service-specific controls (ISO/IEC 27017).',
+    certRegLabel: 'Registration No.',
     certAttribution: 'Audit & certification: SGS Japan Inc. / Accreditation: Information Management System Accreditation Center (ISMS-AC, ISR021) / Obtained June 2026',
     prodEyebrow: 'Product Security',
     prodTitle: 'Product security measures',
@@ -233,6 +237,14 @@ export default function SecurityPageClient({ lang = 'ja' }: { lang?: Lang }) {
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontSize: 19, fontWeight: 850, color: '#16332b', lineHeight: 1.2 }}>{m.standard}</div>
                       <div style={{ fontSize: 13, fontWeight: 700, color: '#0f766e', marginTop: 4 }}>{m.kind[lang]}</div>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 10, flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#94a8a0' }}>
+                          {s.certRegLabel}
+                        </span>
+                        <span style={{ fontSize: 14, fontWeight: 800, letterSpacing: '0.02em', color: '#16332b', fontVariantNumeric: 'tabular-nums' }}>
+                          {m.regNo}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
