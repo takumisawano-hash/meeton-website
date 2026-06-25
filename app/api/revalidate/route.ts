@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   // from the hub/category/tag lists until the TTL lapses. Passing &tag=notion
   // busts every Notion fetch at once so list surfaces update immediately.
   const tag = request.nextUrl.searchParams.get("tag");
-  if (tag) revalidateTag(tag);
+  if (tag) revalidateTag(tag, "max"); // Next 16 requires a cache-life profile
 
   // IndexNow: notify search engines of the published/updated URL so it gets
   // recrawled fast (§4.15). Best-effort — never block revalidation. Skip with
