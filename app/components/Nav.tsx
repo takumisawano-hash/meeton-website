@@ -8,6 +8,16 @@ import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
 import { openDemoCalendarInPlace } from "@/app/lib/cta-urls";
 import { t, type Lang } from "@/app/lib/i18n";
 
+// Persist a manual language choice so the geo middleware (middleware.ts) stops
+// auto-redirecting and respects the visitor's pick. 1-year cookie, site-wide.
+function setLangPref(lang: Lang) {
+  try {
+    document.cookie = `pref_lang=${lang}; path=/; max-age=31536000; samesite=lax`;
+  } catch {
+    /* SSR / cookies disabled — navigation still proceeds */
+  }
+}
+
 // ── Meeton ai v2 global navigation (2026-05-29 rebuild) ──────────────
 // IA: 製品 ▾ | 活用 ▾ | 事例 | 料金 | リソース ▾ | [料金を見る][デモを予約]
 // (2026-06-04 sales-led pivot: free tier removed, demo is the primary CTA)
@@ -440,6 +450,7 @@ export default function Nav({
               {resolvedLangHref && resolvedLangLabel && (
                 <Link
                   href={resolvedLangHref}
+                  onClick={() => setLangPref(en ? "ja" : "en")}
                   style={{
                     fontSize: 13,
                     fontWeight: 700,
