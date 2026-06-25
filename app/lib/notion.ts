@@ -1,6 +1,7 @@
 import { Client, APIErrorCode, isNotionClientError } from '@notionhq/client'
 import { cache } from 'react'
 import { DEDUPED_BLOG_SLUGS } from '@/app/lib/deduped-blog-slugs'
+import type { Lang } from '@/app/lib/i18n'
 import type {
   PageObjectResponse,
   BlockObjectResponse,
@@ -120,6 +121,8 @@ export type BlogPost = {
   focusKeyword: string | null  // 主要キーワード（SEO用）
   noIndex: boolean             // 検索除外フラグ
   views: number                // ビュー数（注目記事の選定用）
+  lang: 'ja' | 'en'            // 記事の言語（Notion Lang select、未設定は 'ja'）
+  translationOf: string | null // EN記事が翻訳元とするJA slug（Notion TranslationOf）
 }
 
 export type NotionBlock = BlockObjectResponse & { children?: NotionBlock[] }
@@ -220,6 +223,11 @@ function pageToPost(page: PageObjectResponse): BlogPost {
   const modifiedDate = (getPropertyValue(props, 'ModifiedDate') as string) ||
     (page.last_edited_time ? page.last_edited_time.split('T')[0] : null)
 
+  // Lang select: missing/null ⇒ 'ja' (the entire existing corpus is JA and has
+  // no Lang value). Only an explicit 'en' marks an English post.
+  const langRaw = (getPropertyValue(props, 'Lang') as string | null) || 'ja'
+  const lang: 'ja' | 'en' = langRaw === 'en' ? 'en' : 'ja'
+
   return {
     id: page.id,
     slug: (getPropertyValue(props, 'Slug') as string) || '',
@@ -233,12 +241,21 @@ function pageToPost(page: PageObjectResponse): BlogPost {
     focusKeyword: (getPropertyValue(props, 'FocusKeyword') as string) || null,
     noIndex: (getPropertyValue(props, 'NoIndex') as boolean) || false,
     views: (getPropertyValue(props, 'Views') as number) || 0,
+    lang,
+    translationOf: (getPropertyValue(props, 'TranslationOf') as string) || null,
   }
 }
 
 // Cached across the entire build / single request, so category/tag pages that
 // depend on the full post list don't hit Notion API repeatedly (rate-limit-safe).
-export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
+//
+// lang defaults to 'ja': the entire existing corpus is Japanese and most rows
+// have no Lang value (treated as 'ja'). EVERY no-arg caller — JA hub/category/
+// tag pages, sitemap, getRelatedPosts, getAllPostSlugs, etc. — therefore keeps
+// getting exactly the JA posts it got before. EN rows (Lang='en') are only
+// returned when a caller explicitly passes 'en'. React.cache keys on the arg,
+// so getAllPosts('ja') and getAllPosts('en') are cached independently.
+export const getAllPosts = cache(async (lang: Lang = 'ja'): Promise<BlogPost[]> => {
   if (!isConfigured()) return []
 
   try {
@@ -275,7 +292,12 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
     // Drop posts that were 301-consolidated into a canonical twin (2026-06-22
     // title/content dedup) so they leave the sitemap, hub, category pages and
     // internal links — the 301 in scripts/blog-redirects.js carries their equity.
-    return results.map(pageToPost).filter((p) => !DEDUPED_BLOG_SLUGS.has(p.slug))
+    // Then keep only the requested language (missing Lang ⇒ 'ja'), so EN rows
+    // never leak into JA listings and vice-versa.
+    return results
+      .map(pageToPost)
+      .filter((p) => !DEDUPED_BLOG_SLUGS.has(p.slug))
+      .filter((p) => (p.lang || 'ja') === lang)
   } catch {
     return []
   }
@@ -374,8 +396,8 @@ export async function getPostBlocks(pageId: string): Promise<NotionBlock[]> {
   }
 }
 
-export async function getAllPostSlugs(): Promise<string[]> {
-  const posts = await getAllPosts()
+export async function getAllPostSlugs(lang: Lang = 'ja'): Promise<string[]> {
+  const posts = await getAllPosts(lang)
   return posts.map((post) => post.slug)
 }
 
@@ -405,8 +427,8 @@ export function slugToTag(slug: string): string {
 }
 
 // Return unique categories that have at least `minPosts` published posts.
-export async function getCategoriesWithCounts(minPosts: number = 3): Promise<{ name: string; slug: string; count: number }[]> {
-  const posts = await getAllPosts()
+export async function getCategoriesWithCounts(minPosts: number = 3, lang: Lang = 'ja'): Promise<{ name: string; slug: string; count: number }[]> {
+  const posts = await getAllPosts(lang)
   const counts = new Map<string, number>()
   for (const p of posts) {
     if (!p.category || p.category.toLowerCase() === 'uncategorized') continue
@@ -419,8 +441,8 @@ export async function getCategoriesWithCounts(minPosts: number = 3): Promise<{ n
 }
 
 // Return unique tags that have at least `minPosts` published posts.
-export async function getTagsWithCounts(minPosts: number = 5): Promise<{ name: string; slug: string; count: number }[]> {
-  const posts = await getAllPosts()
+export async function getTagsWithCounts(minPosts: number = 5, lang: Lang = 'ja'): Promise<{ name: string; slug: string; count: number }[]> {
+  const posts = await getAllPosts(lang)
   const counts = new Map<string, number>()
   for (const p of posts) {
     for (const tag of p.tags) {
@@ -434,19 +456,19 @@ export async function getTagsWithCounts(minPosts: number = 5): Promise<{ name: s
     .sort((a, b) => b.count - a.count)
 }
 
-export async function getPostsByCategory(categoryName: string): Promise<BlogPost[]> {
-  const posts = await getAllPosts()
+export async function getPostsByCategory(categoryName: string, lang: Lang = 'ja'): Promise<BlogPost[]> {
+  const posts = await getAllPosts(lang)
   const lower = categoryName.toLowerCase().trim()
   return posts.filter((p) => p.category.toLowerCase().trim() === lower)
 }
 
-export async function getPostsByTag(tagName: string): Promise<BlogPost[]> {
-  const posts = await getAllPosts()
+export async function getPostsByTag(tagName: string, lang: Lang = 'ja'): Promise<BlogPost[]> {
+  const posts = await getAllPosts(lang)
   const lower = tagName.toLowerCase().trim()
   return posts.filter((p) => p.tags.some((t) => t.toLowerCase().trim() === lower))
 }
 
-export async function getRelatedPosts(category: string, currentSlug: string, limit: number = 4): Promise<BlogPost[]> {
+export async function getRelatedPosts(category: string, currentSlug: string, limit: number = 4, lang: Lang = 'ja'): Promise<BlogPost[]> {
   // Original "most recent N in same category" concentrated all incoming
   // related-post links on the 4 newest articles per category. 59 of 154
   // site URLs ended up with only 1 incoming link total — poor for crawl
@@ -458,7 +480,7 @@ export async function getRelatedPosts(category: string, currentSlug: string, lim
   // work — which spreads incoming links across the long tail.
   if (!isConfigured()) return []
   try {
-    const allPosts = await getAllPosts()
+    const allPosts = await getAllPosts(lang)
     const current = allPosts.find((p) => p.slug === currentSlug)
     if (!current) return []
     const currentTags = new Set((current.tags || []).map((t) => t.toLowerCase().trim()))

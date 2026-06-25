@@ -151,7 +151,7 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
 
       {/* 1.5 Big product media (the demo they came to see) */}
       <Section tone="navy" py={0} style={{ paddingBottom: 72, marginTop: -16 }}>
-        <ProductMedia slug={data.slug} icon={data.icon} alt={data.productName} />
+        <ProductMedia slug={data.slug} icon={data.icon} alt={data.productName} lang={lang} />
       </Section>
 
       {/* 2. How it works */}

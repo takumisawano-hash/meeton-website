@@ -121,16 +121,17 @@ const STR = {
   },
 } as const;
 
-function Media({ row }: { row: Row }) {
-  const m = productMedia(row.key);
+function Media({ row, lang = "ja" }: { row: Row; lang?: Lang }) {
+  const m = productMedia(row.key, lang);
+  const demoTitle = lang === "en" ? `${row.title} demo` : `${row.title} のデモ`;
   return (
     <div className={`v2-sm-media${m?.kind === "html" ? " demo" : ""}`}>
       {m?.kind === "html" ? (
-        <DemoFrame src={m.src} title={`${row.title} のデモ`} />
+        <DemoFrame src={m.src} title={demoTitle} />
       ) : m?.kind === "video" ? (
         <MotionSafeVideo src={m.src} />
       ) : m?.kind === "image" ? (
-        <Image src={m.src} alt={`${row.title} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
+        <Image src={m.src} alt={demoTitle} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />
       ) : (
         <ProductAnim kind={row.icon} />
       )}
@@ -152,7 +153,7 @@ export default function StageMedia({ lang = "ja" }: { lang?: Lang }) {
       <div className="v2-sm-rows">
         {rows.map((row, i) => (
           <div key={row.key} className={`v2-sm-row ${i % 2 === 1 ? "rev" : ""}`}>
-            <Media row={row} />
+            <Media row={row} lang={lang} />
             <div className="v2-sm-body">
               <div className="v2-sm-stage">{row.stage}</div>
               <h3 className="v2-sm-title">{row.title}</h3>

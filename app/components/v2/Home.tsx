@@ -10,6 +10,7 @@ import StageFlow from "@/app/components/v2/StageFlow";
 import StageMedia from "@/app/components/v2/StageMedia";
 import CountUp from "@/app/components/v2/CountUp";
 import DemoFrame from "@/app/components/v2/DemoFrame";
+import { productMedia } from "@/app/lib/product-media";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
 import FeaturedCase from "@/app/components/v2/FeaturedCase";
 import type { Lang } from "@/app/lib/i18n";
@@ -137,7 +138,7 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
           </div>
           {/* product window: the REAL Meeton Chat demo, framed like an app on navy */}
           <div className="v2-hero-media">
-            <DemoFrame src="/product/chat.html" title={s.demoTitle} />
+            <DemoFrame src={productMedia("chat", lang)?.src ?? "/product/chat.html"} title={s.demoTitle} />
           </div>
         </div>
         <style>{`

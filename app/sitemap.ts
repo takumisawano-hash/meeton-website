@@ -135,6 +135,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion API接続前やエラー時は空配列
   }
 
+  // EN blog posts (Lang='en'). getAllPosts('en') only returns English rows;
+  // JA blogPosts above use getAllPosts() (ja-default) so EN rows never leak
+  // into the JA /blog/<slug>/ URLs. Zero EN posts today ⇒ empty array.
+  let enBlogPosts: MetadataRoute.Sitemap = []
+
+  try {
+    const posts = await getAllPosts('en')
+    enBlogPosts = posts.filter((post) => !post.noIndex).map((post) => ({
+      url: `${baseUrl}/en/blog/${post.slug}/`,
+      lastModified: post.modifiedDate
+        ? new Date(post.modifiedDate)
+        : post.publishedDate
+          ? new Date(post.publishedDate)
+          : new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
+  } catch {
+    // Notion 未接続時は空で返す
+  }
+
   let caseStudies: MetadataRoute.Sitemap = []
 
   try {
@@ -198,6 +219,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/en/security/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.4 },
     { url: `${baseUrl}/en/cases/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.6 },
     ...caseStudies.map((c) => ({ url: c.url.replace(`${baseUrl}/cases/`, `${baseUrl}/en/cases/`), lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 })),
+    // EN blog hub. Per-post EN URLs are appended via enBlogPosts in the return.
+    { url: `${baseUrl}/en/blog/`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.6 },
   ]
 
   return [
@@ -209,6 +232,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...webinarPages,
     ...integrationPages,
     ...blogPosts,
+    ...enBlogPosts,
     ...caseStudies,
   ]
 }

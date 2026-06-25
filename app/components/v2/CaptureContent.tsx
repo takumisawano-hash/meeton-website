@@ -219,11 +219,12 @@ export const captureFaqSchema = (lang: Lang) => ({
 
 // Animation/media for a sub-job — resolves public/product/<slug>.(mp4|png) and
 // falls back to the detailed mock animation. Demo HTML stays Japanese.
-function CaptureMedia({ slug }: { slug: string }) {
-  const m = productMedia(slug);
-  if (m?.kind === "html") return <DemoFrame src={m.src} title={`${slug} のデモ`} />;
+function CaptureMedia({ slug, lang = "ja" }: { slug: string; lang?: Lang }) {
+  const m = productMedia(slug, lang);
+  const demoTitle = lang === "en" ? `${slug} demo` : `${slug} のデモ`;
+  if (m?.kind === "html") return <DemoFrame src={m.src} title={demoTitle} />;
   if (m?.kind === "video") return <video src={m.src} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />;
-  if (m?.kind === "image") return <Image src={m.src} alt={`${slug} のデモ`} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />;
+  if (m?.kind === "image") return <Image src={m.src} alt={demoTitle} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />;
   return <ProductAnim kind={slug} />;
 }
 
@@ -265,7 +266,7 @@ export default function CaptureContent({ lang = "ja" }: { lang?: Lang }) {
         <div className="cap-rows">
           {s.subs.map((sub, i) => (
             <div key={sub.job} className={`cap-row ${i % 2 === 1 ? "rev" : ""}`}>
-              <div className={`cap-media${productMedia(sub.key)?.kind === "html" ? " demo" : ""}`}><CaptureMedia slug={sub.key} /></div>
+              <div className={`cap-media${productMedia(sub.key, lang)?.kind === "html" ? " demo" : ""}`}><CaptureMedia slug={sub.key} lang={lang} /></div>
               <div className="cap-body">
                 <div style={{ color: "var(--cta)", marginBottom: 10 }}>
                   <ProductIcon kind={sub.product.icon} size={26} />

@@ -40,10 +40,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: description,
     authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
+    // Bidirectional hreflang: canonical → this JA page, ja/x-default → JA,
+    // en → the EN twin slug (`<ja-slug>-en`). When no EN twin exists yet,
+    // Google simply drops the dead en alternate (acceptable, low-risk). A
+    // cheap per-slug existence check would need an extra Notion query, so we
+    // always emit the deterministic `-en` URL instead.
     alternates: {
       canonical: `/blog/${post.slug}/`,
       languages: {
-        'ja-JP': `/blog/${post.slug}/`,
+        ja: `/blog/${post.slug}/`,
+        en: `/en/blog/${post.slug}-en/`,
+        'x-default': `/blog/${post.slug}/`,
       },
     },
     openGraph: {
