@@ -2,31 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { enPath } from "@/app/lib/i18n";
+import { enTwinFor } from "@/app/lib/i18n";
 
 // Soft, dismissible "View in English" suggestion shown to non-JP visitors on
-// JA pages. SEO-safe per Google guidance: NO IP redirect. Bots (no JS) never
-// see it and crawl freely; hreflang signals the alternates. An explicit choice
-// (dismiss, or having a pref_lang cookie) suppresses it.
+// JA pages (the geo middleware already hard-redirects 1:1 pages, so in practice
+// this catches blog articles and any non-allowlisted JA path). SEO-safe per
+// Google guidance: NO IP redirect here. Bots (no JS) never see it and crawl
+// freely; hreflang signals the alternates. An explicit choice (dismiss, or a
+// pref_lang cookie) suppresses it.
 //
 // Country comes from /api/geo (Vercel x-vercel-ip-country) via a client fetch,
-// so JA pages stay statically rendered.
-
-// JA paths that have a live /en/* twin (else suggest the EN homepage).
-const EN_TWIN_PREFIXES = [
-  "/chat", "/calendar", "/library", "/email", "/capture", "/pricing",
-  "/about", "/contact", "/glossary", "/compare", "/alternatives",
-  "/solutions/crm-to-meeting", "/solutions/lead-to-meeting",
-];
-
-function enTwinFor(path: string): string {
-  const clean = path.replace(/\/+$/, "") || "/";
-  if (clean === "/") return "/en/";
-  if (EN_TWIN_PREFIXES.some((p) => clean === p || clean.startsWith(p + "/"))) {
-    return enPath(path);
-  }
-  return "/en/"; // no page-level twin yet → send to EN home
-}
+// so JA pages stay statically rendered. Twin resolution is shared with the Nav
+// switch + geo middleware via enTwinFor().
 
 export default function GeoLangSuggest() {
   const pathname = usePathname();

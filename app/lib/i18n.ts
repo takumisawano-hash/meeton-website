@@ -38,6 +38,42 @@ export function altLanguages(jaRootPath: string, lang: Lang): NonNullable<Metada
 
 export const ogLocale = (lang: Lang) => (lang === "en" ? "en_US" : "ja_JP");
 
+// JA paths with a guaranteed 1:1 English page (mirrors the next.config.js /en
+// allowlist + the geo middleware). Used to point the language switch at the
+// correct EN twin instead of always dumping the visitor on the EN homepage.
+export const EN_TWIN_PREFIXES = [
+  "chat", "calendar", "library", "email", "capture",
+  "pricing", "about", "contact", "enterprise", "security", "glossary",
+  "cases", "compare", "alternatives", "use-cases",
+  "solutions/crm-to-meeting", "solutions/lead-to-meeting",
+  "solutions/cmo", "solutions/cro", "solutions/sdr", "solutions/ceo",
+];
+
+/**
+ * Best-effort English twin for a JA path, for the language switcher.
+ * - "/"                      → "/en/"
+ * - 1:1 static pages         → exact /en/<path>
+ * - blog hub/category/tag    → exact /en/<path>
+ * - a blog article /blog/x   → /en/blog/x-en/ (the EN slug convention; if no
+ *                              twin exists yet the EN route gracefully falls
+ *                              back to the EN blog hub, never a hard 404)
+ * - anything else            → "/en/" (EN homepage)
+ */
+export function enTwinFor(jaPath: string): string {
+  const clean = jaPath.replace(/[?#].*$/, "").replace(/\/+$/, "") || "/";
+  if (clean === "/") return "/en/";
+  const seg = clean.slice(1); // drop leading "/"
+  if (seg === "blog" || seg.startsWith("blog/category/") || seg.startsWith("blog/tag/")) {
+    return enPath(clean) + "/";
+  }
+  const blogArticle = clean.match(/^\/blog\/([^/]+)$/);
+  if (blogArticle) return `/en/blog/${blogArticle[1]}-en/`;
+  if (EN_TWIN_PREFIXES.some((p) => seg === p || seg.startsWith(p + "/"))) {
+    return enPath(clean) + "/";
+  }
+  return "/en/";
+}
+
 // ── Shared chrome strings (Nav / Footer / common CTAs) ──────────────
 // Centralised so Nav.tsx / Footer.tsx can do `t(lang).<key>` instead of
 // hardcoding Japanese. Add keys as pages are localised.

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
 import { openDemoCalendarInPlace } from "@/app/lib/cta-urls";
-import { t, type Lang } from "@/app/lib/i18n";
+import { t, enTwinFor, type Lang } from "@/app/lib/i18n";
 
 // Persist a manual language choice so the geo middleware (middleware.ts) stops
 // auto-redirecting and respects the visitor's pick. 1-year cookie, site-wide.
@@ -168,12 +168,13 @@ export default function Nav({
   const useMoments = en ? USE_MOMENTS_EN : USE_MOMENTS;
   const resourceItems = en ? RESOURCE_ITEMS_EN : RESOURCE_ITEMS;
 
-  // Lang switch: EN pages link back to the JA root of the current page
-  // (strip the /en prefix). Explicit props still win (back-compat). The label
-  // comes from CHROME (日本語 on EN, EN on JA — though JA pages only show the
-  // switch when the caller passes the props).
-  const resolvedLangHref = langSwitchHref ?? (en ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : undefined);
-  const resolvedLangLabel = langSwitchLabel ?? (en ? chrome.langSwitch : undefined);
+  // Lang switch: EN pages link back to the JA root of the current page (strip
+  // the /en prefix); JA pages link to the best-effort EN twin. Explicit props
+  // still win (back-compat). Label comes from CHROME (日本語 on EN, EN on JA).
+  // The onClick sets a pref_lang cookie so the geo middleware respects the choice.
+  const resolvedLangHref =
+    langSwitchHref ?? (en ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : enTwinFor(pathname || "/"));
+  const resolvedLangLabel = langSwitchLabel ?? chrome.langSwitch;
 
   // which dropdown is open (desktop): 'product' | 'usage' | 'resources' | null
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -663,6 +664,26 @@ export default function Nav({
               <a href={DEMO_URL} className="v2-cta-primary" onClick={onDemoClick} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
                 {chrome.ctaBookDemo}
               </a>
+              {resolvedLangHref && resolvedLangLabel && (
+                <Link
+                  href={resolvedLangHref}
+                  onClick={() => { setLangPref(en ? "ja" : "en"); setMobileOpen(false); }}
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    boxSizing: "border-box",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: "var(--on-navy-sub, #AEB4D6)",
+                    textDecoration: "none",
+                    border: "1.5px solid var(--on-navy-border)",
+                    borderRadius: 10,
+                    padding: "9px 16px",
+                  }}
+                >
+                  {resolvedLangLabel}
+                </Link>
+              )}
             </div>
           </div>
         </>
