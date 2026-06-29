@@ -449,7 +449,13 @@ export default function Nav({
               </Link>
               <DesktopDropdownTrigger id="resources" label={chrome.navResources} />
               {resolvedLangHref && resolvedLangLabel && (
-                <Link
+                // Plain <a> (NOT next/link): a soft-nav <Link> prefetches the
+                // target WITHOUT the pref_lang cookie, so the geo middleware
+                // 302s the prefetch back to the current language and the click
+                // reuses that cached redirect (→ never switches). A full-page <a>
+                // nav fires after the onClick cookie write, so middleware sees
+                // pref_lang and serves the chosen language.
+                <a
                   href={resolvedLangHref}
                   onClick={() => setLangPref(en ? "ja" : "en")}
                   style={{
@@ -463,7 +469,7 @@ export default function Nav({
                   }}
                 >
                   {resolvedLangLabel}
-                </Link>
+                </a>
               )}
             </div>
 
@@ -665,7 +671,8 @@ export default function Nav({
                 {chrome.ctaBookDemo}
               </a>
               {resolvedLangHref && resolvedLangLabel && (
-                <Link
+                // Plain <a> (full nav, no prefetch) — see desktop switch note.
+                <a
                   href={resolvedLangHref}
                   onClick={() => { setLangPref(en ? "ja" : "en"); setMobileOpen(false); }}
                   style={{
@@ -682,7 +689,7 @@ export default function Nav({
                   }}
                 >
                   {resolvedLangLabel}
-                </Link>
+                </a>
               )}
             </div>
           </div>
