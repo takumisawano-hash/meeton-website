@@ -184,7 +184,7 @@ export default function RootLayout({
   --r-btn:12px;--r-card:16px;--r-feature:20px;
 }
 html{font-feature-settings:'cv02','cv03','cv04','cv11','calt';font-variant-ligatures:contextual;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
-body{font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.65}
+body{margin:0;font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.65}
 /* ===== v2 global interaction states (audit 2026-06-03) ===== */
 /* keyboard focus ring everywhere — cta-ink ring (3:1+ on white) with a
    soft green halo; bare --cta was 2.14:1 and vanished on white canvas */
