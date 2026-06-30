@@ -9,58 +9,29 @@ const MEETON_SCRIPT_SRC = 'https://app.dynameet.ai/meeton.js'
 const MEETON_SCRIPT_SELECTOR = 'script[data-dynameet-meeton-script="true"]'
 const DEMO_CALENDAR_ID = 'takumi-sawano'
 
-// Defer the chatbot widget until the user interacts. The widget loads
-// a ~1MB iframe.js plus a 1.5MB demo image inside the iframe — total
-// ~2.5MB, so any "fire it during page load" strategy ends up inside
-// PageSpeed's measurement window and torpedoes scores.
+// Load the chatbot widget promptly, the same way every customer site does
+// (a plain async <script>). The widget loads in ~1s in the field; the heavy
+// iframe bundle lives in a separate browsing context and the widget defers it
+// itself, so it does not block this page's main thread.
 //
-// We tried a 12s setTimeout backstop, but Lighthouse waits for network
-// idle before finalizing metrics, so once meeton.js fires it pulls in
-// the iframe bundle + demo image and Lighthouse keeps measuring. The
-// only reliable defense is to skip the widget entirely when the
-// requesting client is Lighthouse / headless Chrome — they're synthetic,
-// no real user is waiting for the chatbot. Real users still get the
-// widget on first gesture or after the 12s backstop.
-//
-// Trigger sources, in order of preference:
-//   1. Real user gestures: pointerdown, keydown, touchstart, click,
-//      focus. Lighthouse does NOT synthesize these during initial
-//      page-load measurement.
-//   2. (Removed) scroll / mousemove — Lighthouse may simulate these.
-//   3. requestIdleCallback timeout 12s.
-//   4. setTimeout 12s backstop for browsers without rIC.
+// History: this file previously gated the widget behind a user gesture with a
+// 20s backstop, plus a "skip for Lighthouse/headless" cloak, purely to protect
+// a synthetic PageSpeed score. That made the widget appear 2–20s late for real
+// visitors on THIS site only — every customer using the plain snippet got it in
+// ~1s. The lab-score concern never matched real-user latency, so we removed the
+// deferral. If we later need to keep the widget out of the LCP window for PSI,
+// prefer a short requestIdleCallback defer over re-introducing a gesture gate.
 
-// PSI/Lighthouse spoofs a real mobile UA, so the UA regex alone misses
-// most synthetic clients. navigator.webdriver is the reliable signal —
-// Chrome sets it to true under --enable-automation, which Lighthouse
-// always uses. Headless Chrome also keeps it true. UA regex stays as
-// a secondary catch for older bots that don't set webdriver.
-const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i
-function isSyntheticClient(): boolean {
-  if (typeof navigator === 'undefined') return false
-  if ((navigator as Navigator & { webdriver?: boolean }).webdriver === true) return true
-  return SYNTHETIC_UA_RE.test(navigator.userAgent)
-}
 export default function MeetonScript() {
   const pathname = usePathname()
   const teamId = pathname?.startsWith('/careers') ? CAREERS_TEAM_ID : DEFAULT_TEAM_ID
   const skipOnLp = pathname?.startsWith('/lp')
-  // Eager-load triggers — widget is the primary content, gesture-gating
-  // creates "loads slowly" complaint:
-  // 1. /thanks/* and */thanks/* — post-conversion pages
-  // 2. ?showChat=true / ?calendarId=... — explicit URLs from email/CTA
-  //    that intend to open the widget popup immediately
-  const isThanksPath = !!pathname && /(^|\/)thanks(\/|$)/.test(pathname)
-  // Query-param check runs client-side only (pathname doesn't include search)
-  const eagerLoad = isThanksPath
 
   useEffect(() => {
-    // In-place demo calendar (2026-06-12): demo CTAs call
-    // window.meetonOpenCalendar() first and fall back to href navigation
-    // when it returns false (widget not loaded yet — e.g. the CTA click is
-    // the user's first gesture, or an LP page where the widget is skipped).
-    // The widget exposes window.Meeton.openCalendar / openChat once
-    // meeton.js boots.
+    // In-place demo calendar: demo CTAs call window.meetonOpenCalendar() first
+    // and fall back to href navigation when it returns false (widget not loaded
+    // yet, or an LP page where the widget is skipped). The widget exposes
+    // window.Meeton.openCalendar / openChat once meeton.js boots.
     const ctaWin = window as Window & {
       meetonOpenCalendar?: () => boolean
       Meeton?: {
@@ -90,110 +61,36 @@ export default function MeetonScript() {
       existingScript?.remove()
     }
 
+    // /lp landing pages intentionally run without the widget.
     if (skipOnLp) {
       removeManagedScript()
       return
     }
 
-    // Synthetic-client guard: PSI / Lighthouse / headless Chrome never
-    // need the chatbot widget. Returning here gives them a clean
-    // network profile and stable Core Web Vitals scores without
-    // affecting any real visitor.
-    if (isSyntheticClient()) return
-
-    // Query-param eager-load: ?showChat=true or ?calendarId=...
-    // — explicit intent to open widget immediately (from emails, CTAs,
-    // direct calendar URLs). Overrides backstop and gesture-gating.
-    const params = new URLSearchParams(window.location.search)
-    const queryEager =
-      params.get('showChat') === 'true' || params.has('calendarId')
-
-    let loaded = false
-
-    const loadMeetonScript = () => {
-      if (loaded) return
-      loaded = true
-      // 2026-05-22: Forward attribution payload (utm/gclid/etc.) set by
-      // AttributionBootstrap into the chatbot widget config so the
-      // iframe can attach the same source fields to every HubSpot
-      // Contact / Deal it creates. Without this, chatbot bookings
-      // arrive as OFFLINE/INTEGRATION and Google Ads sees 0 CV.
-      // Spec: docs/measurement-spec.md §4.
-      const win = window as Window & {
-        DynaMeetConfig?: { teamId: string; attribution?: unknown }
-        __meetonAttribution?: unknown
-      }
-      win.DynaMeetConfig = {
-        teamId,
-        attribution: win.__meetonAttribution ?? null,
-      }
-
-      removeManagedScript()
-
-      const script = document.createElement('script')
-      script.src = MEETON_SCRIPT_SRC
-      script.async = true
-      script.setAttribute('data-dynameet-meeton-script', 'true')
-      document.body.appendChild(script)
+    // Forward attribution payload (utm/gclid/etc.) set by AttributionBootstrap
+    // into the chatbot widget config so the iframe attaches the same source
+    // fields to every HubSpot Contact / Deal it creates. Without this, chatbot
+    // bookings arrive as OFFLINE/INTEGRATION and Google Ads sees 0 CV.
+    // Spec: docs/measurement-spec.md §4.
+    const win = window as Window & {
+      DynaMeetConfig?: { teamId: string; attribution?: unknown }
+      __meetonAttribution?: unknown
+    }
+    win.DynaMeetConfig = {
+      teamId,
+      attribution: win.__meetonAttribution ?? null,
     }
 
-    // Thanks pages: load immediately. The user has just converted —
-    // they're waiting for the calendar popup to appear. Delaying for a
-    // gesture creates the "popup loads slowly" complaint we got from
-    // the user. These pages are noindex so no PSI/Lighthouse hit.
-    if (eagerLoad || queryEager) {
-      // Defer to next tick so React commit completes first, but no
-      // gesture wait. Use requestIdleCallback if available for
-      // marginally better perceived performance on slower devices.
-      const rIC =
-        (window as Window & { requestIdleCallback?: (cb: IdleRequestCallback) => number })
-          .requestIdleCallback
-      if (typeof rIC === 'function') {
-        rIC(loadMeetonScript)
-      } else {
-        setTimeout(loadMeetonScript, 0)
-      }
-      return () => removeManagedScript()
-    }
+    removeManagedScript()
 
-    // Hybrid loading: gesture triggers fire instantly, OR a 20-second
-    // backstop fires for users who scroll/read without clicking. Without
-    // the backstop, ~70-80% of real visitors (mobile readers, desktop
-    // bouncers who scroll-only) never see the widget. That tracks with
-    // the observed near-zero widget-attributed leads in HubSpot.
-    //
-    // 20s is past Lighthouse/PSI measurement window (~12s typical, 20-30s
-    // in pessimistic 3G+4xCPU simulation). Real visitor experience: they
-    // read for some seconds, widget appears as a friendly nudge.
-    // Synthetic clients are already blocked by isSyntheticClient() above.
-    const events = ['pointerdown', 'keydown', 'touchstart', 'click', 'focus'] as const
-    let backstopTimer: ReturnType<typeof setTimeout> | null = null
+    const script = document.createElement('script')
+    script.src = MEETON_SCRIPT_SRC
+    script.async = true
+    script.setAttribute('data-dynameet-meeton-script', 'true')
+    document.body.appendChild(script)
 
-    const trigger = () => {
-      events.forEach((e) => window.removeEventListener(e, trigger))
-      if (backstopTimer) {
-        clearTimeout(backstopTimer)
-        backstopTimer = null
-      }
-      loadMeetonScript()
-    }
-
-    events.forEach((e) =>
-      window.addEventListener(e, trigger, { passive: true, once: true })
-    )
-
-    // 20s backstop — only for users who haven't interacted yet.
-    backstopTimer = setTimeout(() => {
-      backstopTimer = null
-      trigger()
-    }, 20000)
-
-    return () => {
-      events.forEach((e) => window.removeEventListener(e, trigger))
-      if (backstopTimer) clearTimeout(backstopTimer)
-      removeManagedScript()
-    }
-  }, [teamId, skipOnLp, eagerLoad])
+    return () => removeManagedScript()
+  }, [teamId, skipOnLp])
 
   return null
 }
