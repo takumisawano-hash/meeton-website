@@ -106,9 +106,9 @@ export const metadata: Metadata = {
           },
         }
       : { index: false, follow: false, nocache: true },
-  authors: [{ name: 'DynaMeet Inc.' }],
-  creator: 'DynaMeet Inc.',
-  publisher: 'DynaMeet Inc.',
+  authors: [{ name: 'DynaMeet株式会社' }],
+  creator: 'DynaMeet株式会社',
+  publisher: 'DynaMeet株式会社',
 }
 
 export default function RootLayout({

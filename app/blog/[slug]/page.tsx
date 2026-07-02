@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: description,
-    authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
+    authors: [{ name: 'DynaMeet株式会社', url: 'https://dynameet.ai' }],
     // Bidirectional hreflang: en alternate is emitted ONLY when the EN twin
     // actually exists (getAllPosts('en') is a cached fetch, so this is one
     // shared lookup — not a per-post Notion query). Dead alternates on 100+
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: post.publishedDate,
       modifiedTime: post.modifiedDate || post.publishedDate,
-      authors: ['DynaMeet Inc.'],
+      authors: ['DynaMeet株式会社'],
       section: post.category || 'セールス',
       tags: post.tags,
       url: `https://dynameet.ai/blog/${post.slug}/`,

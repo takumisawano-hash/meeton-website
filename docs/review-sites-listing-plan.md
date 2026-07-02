@@ -67,7 +67,7 @@
 **Meeton ai**
 
 ### 提供会社
-DynaMeet, Inc. (株式会社DynaMeet)
+DynaMeet株式会社（英文表記: DynaMeet K.K.）
 
 ### キャッチコピー (一言)
 **Webサイト訪問者を、商談に変える AI セールスプラットフォーム**
@@ -160,7 +160,7 @@ Meeton ai は、Webサイト訪問者を商談に自動転換する日本発の 
 
 —
 澤野 拓実
-DynaMeet, Inc.
+DynaMeet株式会社
 ```
 
 ---
@@ -188,7 +188,7 @@ Meeton aiの製品ページを開設しました。
 
 —
 澤野 拓実
-DynaMeet, Inc.
+DynaMeet株式会社
 ```
 
 ---
@@ -219,7 +219,7 @@ ITreviewでMeeton aiの掲載ページを開設しました。
 
 —
 澤野 拓実
-DynaMeet, Inc.
+DynaMeet株式会社
 ```
 
 ---
@@ -248,7 +248,7 @@ DynaMeet, Inc.
 
 —
 澤野 拓実
-DynaMeet, Inc.
+DynaMeet株式会社
 ```
 
 ---

@@ -488,7 +488,7 @@ export default function MarkezineDayClient({ cases }: Props) {
             <div className="event-meta-divider" />
             <div className="event-meta-item">
               <span>提供</span>
-              <strong>DynaMeet 株式会社</strong>
+              <strong>DynaMeet株式会社</strong>
             </div>
             <div className="event-meta-divider" />
             <div className="event-meta-item">

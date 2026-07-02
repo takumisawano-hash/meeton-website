@@ -33,6 +33,7 @@ const STR = {
       "Meeton ai は、Webサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、あらゆる瞬間を商談に変えます。",
     demoTitle: "Meeton Chat のデモ",
     heroAssurances: ["30分のデモで自社への効き方を確認", "シナリオ設計不要", "ノーコード・設置5分"],
+    heroOperator: "Meeton ai は、DynaMeet株式会社が運営するサービスです。",
     proof: [
       { n: 60, suf: "%超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
       { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
@@ -81,6 +82,7 @@ const STR = {
       "Meeton ai is an AI SDR deployed on your website. It doesn't wait for inquiries — it engages prospects in conversation and turns every moment into a meeting.",
     demoTitle: "Meeton Chat demo",
     heroAssurances: ["See how it works for you in a 30-min demo", "No scenario design", "No-code, install in 5 minutes"],
+    heroOperator: "Meeton ai is a service operated by DynaMeet K.K.",
     proof: [
       { n: 60, suf: "%+", l: "Meeting conversion via Meeton ai", sub: "Industry average ~20%" },
       { n: 2, suf: "x", l: "Qualified leads", sub: "+100% vs. before deployment" },
@@ -163,6 +165,9 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
                 <span key={a}>✓ {a}</span>
               ))}
             </div>
+            <p style={{ margin: "14px 0 0", fontSize: 13, color: "var(--on-navy-sub)", opacity: 0.85 }}>
+              {s.heroOperator}
+            </p>
           </div>
           {/* product window: the REAL Meeton Chat demo, framed like an app on navy */}
           <div className="v2-hero-media">

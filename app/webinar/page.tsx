@@ -380,7 +380,7 @@ export default function WebinarIndexPage() {
               letterSpacing: 0.02,
             }}
           >
-            主催: Meeton ai (DynaMeet 株式会社)
+            主催: Meeton ai (DynaMeet株式会社)
           </p>
         </div>
       </section>

@@ -46,7 +46,7 @@ export type WebinarSchedule = {
 
 const DEFAULT_SPEAKER = {
   name: '澤野 拓実',
-  title: 'DynaMeet 株式会社 共同創業者 兼 CRO',
+  title: 'DynaMeet株式会社 共同創業者 兼 CRO',
   bio:
     '前職で BtoB SaaS のグローバル展開を担当。インサイドセールス・パイプライン構築・AI 営業オペレーションの実装支援に従事。Meeton ai を共同創業し、日本の B2B 企業向け AI SDR プラットフォームを設計・推進している。',
 }

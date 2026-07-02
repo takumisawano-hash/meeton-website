@@ -683,7 +683,7 @@ export default function LPClient({ variant = 'google' }: LPClientProps) {
 
       {/* ── FOOTER (legal only) ── */}
       <footer className="lp-footer">
-        <span>© {new Date().getFullYear()} DynaMeet Inc.</span>
+        <span>© {new Date().getFullYear()} DynaMeet株式会社</span>
         <div className="lp-footer-links">
           <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
           <a href="/terms/" target="_blank" rel="noopener noreferrer">利用規約</a>
