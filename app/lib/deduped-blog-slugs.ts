@@ -26,7 +26,7 @@ export const DEDUPED_BLOG_SLUGS = new Set<string>([
   "jp-mlutgtmq-7hss",
   "jp-mlutgq9p-3f9v",
   "jp-mlutg1dm-rgkb",
-  "jp-mlutg7bj-fj0o",
+  "lead-decline-causes-solutions",
   "websitebounce",
   "websitebounce-meeting-ai",
   "website-meeting-391-aistrategy",

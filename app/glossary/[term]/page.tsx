@@ -18,7 +18,10 @@ export async function generateMetadata({ params }: { params: Promise<{ term: str
   return {
     title: { absolute: data.metaTitle },
     description: data.metaDescription,
-    alternates: altLanguages(`/glossary/${term}/`, "ja"),
+    // "ai-sdr" cannibalization fix (GSC 2026-07): both this term page and the
+    // /ai-sdr/ pillar ranked for "ai sdr" (pos ~10.6 vs ~8.4), splitting the
+    // query. Consolidate signals into the pillar via cross-page canonical.
+    alternates: term === "ai-sdr" ? { canonical: "/ai-sdr/" } : altLanguages(`/glossary/${term}/`, "ja"),
     openGraph: { title: data.metaTitle, description: data.metaDescription, url: `https://dynameet.ai/glossary/${term}/`, type: "article" },
   };
 }

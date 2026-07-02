@@ -66,13 +66,13 @@ const nextConfig = {
       // doesn't exist, so Google searchers land on /blog/ index.
       {
         source: '/blog/sales/オーガニックリード47減の危機！aiで変革する次世/',
-        destination: '/blog/jp-mlutg7bj-fj0o/',
+        destination: '/blog/lead-decline-causes-solutions/',
         permanent: true,
         locale: false,
       },
       {
         source: '/blog/sales/オーガニックリード47減の危機！aiで変革する次世',
-        destination: '/blog/jp-mlutg7bj-fj0o/',
+        destination: '/blog/lead-decline-causes-solutions/',
         permanent: true,
         locale: false,
       },
@@ -327,6 +327,11 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
+      // 2026-07-02 slug rescue: legacy auto-slug ranked pos4 for リード数減少
+      { source: '/blog/jp-mlutg7bj-fj0o', destination: '/blog/lead-decline-causes-solutions/', permanent: true },
+      { source: '/blog/jp-mlutg7bj-fj0o/', destination: '/blog/lead-decline-causes-solutions/', permanent: true },
+      { source: '/en/blog/jp-mlutg7bj-fj0o-en', destination: '/en/blog/lead-decline-causes-solutions-en/', permanent: true },
+      { source: '/en/blog/jp-mlutg7bj-fj0o-en/', destination: '/en/blog/lead-decline-causes-solutions-en/', permanent: true },
       // /en section indexes that have no page (mirror: JA /use-cases/ and
       // /solutions/ 404 too) — send to the EN home instead of a JA 404.
       { source: '/en/use-cases', destination: '/en/', permanent: false },

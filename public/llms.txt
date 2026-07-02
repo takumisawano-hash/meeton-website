@@ -1,51 +1,59 @@
 # Meeton ai — AI SDR Platform
 
-> Meeton ai は、Webサイトでコンバートしたリードを商談に変える AI SDR Platform。
-> 会話・資料提案・予約・追客を自律でこなす4つのAIモジュールを、無料から導入できる。
-> 運営: DynaMeet K.K. / サイト: https://dynameet.ai / 主言語: 日本語 (ja-JP)
+> Meeton ai は「待つ」Webサイトを、商談を生み出すAI営業チャネルに変える AI SDR Platform。
+> 掴む→育てる→商談化→追客の4ステージを、5つのAIプロダクトが自律でこなす。
+> 運営: DynaMeet K.K. / サイト: https://dynameet.ai / 主言語: 日本語 (ja-JP)、英語版: https://dynameet.ai/en/
 
 ## 概要 (What this is)
-Meeton ai は、問い合わせを待つだけのWebサイトを「商談を生み出すAI営業チャネル」に変える AI SDR (Sales Development Representative) Platform です。掴む→商談化→追客の3ステージで、AIが訪問者と会話して掴み(Chat・Library)、その場で商談を予約し(Calendar)、予約しなかったリードを1:1で追客します(Email)。リード獲得¥12万〜・商談獲得¥18万〜・オールインワン¥24万〜の3プランで、必要な段階から導入できます。
+Meeton ai は、問い合わせを待つだけのWebサイトを「商談を生み出すAI営業チャネル」に変える AI SDR (Sales Development Representative) Platform です。AI SDR の4つの仕事 — ①掴む（会話とサイト内広告で潜在層をリード化: Chat・Ads）→ ②育てる（AIが解説する資料で自動ナーチャリング: Library）→ ③商談化する（温度が上がった瞬間にその場で商談予約: Calendar）→ ④追客する（予約しなかったリードを行動シグナル起点で1:1フォロー: Email）— を自律実行します。JSタグ1行・約5分で設置、初動対応は5秒、24時間365日稼働。
 
-## 製品 (4 modules — each a self-serve product)
-- Meeton Calendar (https://dynameet.ai/calendar) — リード発生の瞬間に即フォローし商談を予約。日程調整の自動化・自動アサイン・CRM登録。competitors: immedio / TimeRex / Spir / Calendly。
-- Meeton Chat (https://dynameet.ai/chat) — Webサイト訪問者とAIが対話し疑問を解消、商談化に最適化。過去文脈を引き継ぐ。competitors: Intercom / シナリオ型チャットボット。
-- Meeton Library (https://dynameet.ai/library) — 営業資料を共有しAIが中身を解説、誰がいつ開いたかを開封トラッキング。CRM不要。competitor: DocSend。
-- Meeton Email (https://dynameet.ai/email) — 行動シグナルを検知しAIが生成する1:1自律フォローメール。CRM連携前提。competitors: Lemlist / Smartlead / セールスエンゲージメント系。
-- Meeton ai (https://dynameet.ai/) — 上記4機能を1アカウントで統合した一気通貫の AI SDR Platform。
+## 製品 (5 products)
+- Meeton Chat (https://dynameet.ai/chat/) — ①掴む。Webサイト訪問者とAIが対話し疑問を解消、商談化に最適化。シナリオ設計不要、過去文脈を引き継ぐ。competitors: Intercom / シナリオ型チャットボット。
+- Meeton Ads (https://dynameet.ai/ads/) — ①掴む。サイト内広告（On-Site Ads）。AIが訪問者ごと（ページ・流入元・業種）に最適なオファーを1枠だけ出し分け、クリック・リード獲得を報酬に自動最適化（contextual bandit）。広告はAIが自社コンテンツから下書きし、承認したものだけ配信。competitors: ポップアップ/Web接客ツール。
+- Meeton Library (https://dynameet.ai/library/) — ②育てる。営業資料を共有しAIが中身を解説、誰がいつ開いたかを開封トラッキング。CRM不要で開始可。competitor: DocSend。
+- Meeton Calendar (https://dynameet.ai/calendar/) — ③商談化。リード発生の瞬間に即フォローし商談を予約。自動アサイン・CRM登録。competitors: immedio / TimeRex / Spir / Calendly。
+- Meeton Email (https://dynameet.ai/email/) — ④追客。行動シグナルを検知しAIが生成する1:1自律フォローメール。CRM連携前提。competitors: Lemlist / Smartlead / セールスエンゲージメント系。
 
-## 料金 (Pricing — https://dynameet.ai/pricing)
-3ステージに対応した3プラン。すべて税抜/月。規模は月間トラフィック(セッション数)で決定。年額前払いは2ヶ月無料(約17%off)、適格請求書(インボイス制度)対応。
-- リード獲得プラン ¥120,000〜: ①掴む・育てる (Meeton Chat + Library)。潜在層を掴みリード化。
-- 商談獲得プラン ¥180,000〜 (最も選ばれる構成): ①+② (+ Meeton Calendar)。掴んだリードを商談予約まで。
-- オールインワンプラン ¥240,000〜: ①+②+③ (+ Meeton Email)。逃したリードを追客で回収、一気通貫。
-- 上位プランは下位の機能をすべて含む。Calendar連携は全プラン無制限。複数サイト・高度CRM連携・SSOは Enterprise (要相談)。
-- トラフィック追加: 〜3万セッション/月込み、〜10万 +¥60,000、〜30万 +¥120,000、30万超 要相談。
+## 料金 (Pricing — https://dynameet.ai/pricing/)
+基本プラン＋アドオン制。すべて税抜/月。規模は月間トラフィック(セッション数)で決定。年額前払いは2ヶ月無料(約17%off)、適格請求書(インボイス制度)対応。
+- 基本プラン「リード獲得」 ¥150,000〜: ①掴む・②育てる（Chat + Ads + Library）。CRM連携込み。マーケチームだけで導入可能。
+- 商談化アドオン +¥50,000/月: Meeton Calendar。掴んだリードを予約まで運ぶ。カレンダー連携人数 無制限。
+- 追客アドオン +¥50,000/月: Meeton Email。逃したリードを1:1で回収し再商談化へ。
+- 人気の構成: 基本＋商談化 ¥200,000〜（おすすめ）/ フル構成（＋追客） ¥250,000〜。アドオンはいつでも追加・変更可能。
+- トラフィック追加: 〜3万セッション/月込み、〜10万 +¥60,000、〜30万 +¥120,000、30万超 要相談。複数サイト・高度CRM連携・SSOは Enterprise（要相談）。
+- 英語圏向け: 1ヶ月無料トライアル（クレジットカード不要）あり — https://dynameet.ai/en/trial/
 
 ## こんな課題に (Use cases)
 - 問い合わせ前の訪問者を会話で商談化したい
+- 広告費をかけずにサイトのリード獲得を増やしたい（サイト内広告）
 - 資料ダウンロード後のリードを取りこぼさず追客したい
-- 再訪問した見込み客にリアルタイムで対応したい
 - CRMに眠る既存リードをナーチャリングして再商談化したい
 - インバウンドの商談化率 (Speed to Lead) を上げたい
 
+## 導入実績 (Proof — https://dynameet.ai/cases/)
+- EdulinX（人材・研修）: Meeton ai 経由の商談化率 60%+（業界平均約20%の約3倍）
+- BizteX（SaaS）: チャット経由リード獲得数 20倍+（対 従来のシナリオ型チャット）
+- G-gen（クラウド）: 月間SQL 2倍（約20件 → 41〜48件）
+- Univis Group（コンサル）: 3ヶ月で受注2件
+
 ## 対象 (Who it's for)
-B2B SaaS・IT・専門サービス企業のマーケティング責任者 (CMO)、営業責任者 (CRO)、インサイドセールス/SDR責任者、経営者。
+B2B SaaS・IT・製造・専門サービス・フィンテック企業のマーケティング責任者 (CMO)、営業責任者 (CRO)、インサイドセールス/SDR責任者、経営者。
 
 ## 信頼性 (Trust)
-SSO・API連携、CRM (Salesforce / HubSpot) への会話ログ自動登録、権限・監査ログ管理に対応。セキュリティ詳細: https://dynameet.ai/security
+ISO/IEC 27001・27017 認証。SSO・API連携、CRM (Salesforce / HubSpot) への会話ログ自動登録、権限・監査ログ管理に対応。セキュリティ詳細: https://dynameet.ai/security/
 
 ## 主要ページ (Key pages for citation)
-- トップ / プラットフォーム概要: https://dynameet.ai/
-- 製品LP: /calendar /chat /library /email
-- 料金: https://dynameet.ai/pricing
-- 導入事例: https://dynameet.ai/cases
-- ROI診断 (商談化の余地を試算): https://dynameet.ai/tools/roi
-- ブログ (獲得・商談化の実践知): https://dynameet.ai/blog/
-- 用語集 (AI SDR とは ほか): https://dynameet.ai/glossary/
+- トップ / プラットフォーム概要: https://dynameet.ai/ （EN: https://dynameet.ai/en/）
+- 製品LP: /chat/ /ads/ /library/ /calendar/ /email/ （EN: /en/chat/ など）
+- 料金: https://dynameet.ai/pricing/ （EN: https://dynameet.ai/en/pricing/）
+- 無料トライアル (EN): https://dynameet.ai/en/trial/
+- 導入事例: https://dynameet.ai/cases/
+- ROI診断 (商談化の余地を試算): https://dynameet.ai/tools/roi/ （EN: /en/tools/roi/）
+- ブログ (獲得・商談化の実践知): https://dynameet.ai/blog/ （EN: https://dynameet.ai/en/blog/）
+- 用語集 (AI SDR とは ほか): https://dynameet.ai/glossary/ （EN: /en/glossary/）
 
 ## 引用時の表記 (Preferred citation)
 "[記事タイトル]" — Meeton ai (DynaMeet K.K.), https://dynameet.ai/...
 
 ## 連絡先 (Contact)
-サイト: https://dynameet.ai / 問い合わせ: https://dynameet.ai/contact/
+サイト: https://dynameet.ai / 問い合わせ: https://dynameet.ai/contact/ （EN: https://dynameet.ai/en/contact/）

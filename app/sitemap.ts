@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // teaches Google the signal is noise and it stops trusting lastmod (incl.
   // the accurate per-post blog/cases dates below). Bump this when static
   // pages get a material content change. Blog/cases keep their real dates.
-  const now = new Date('2026-06-19T00:00:00Z')
+  const now = new Date('2026-07-02T00:00:00Z')
 
   // Static pages. /features/offers/ removed — it 301-redirects to /.
   // /talent/ removed — intentionally hidden from Nav.
@@ -231,7 +231,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/en/blog/`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.6 },
   ]
 
-  return [
+  const entries = [
     ...staticPages,
     ...comparePages,
     ...alternativePages,
@@ -243,4 +243,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...enBlogPosts,
     ...caseStudies,
   ]
+
+  // hreflang in the sitemap: attach alternates to every JA/EN twin pair that
+  // actually exists in this map (page-level <link rel=alternate> tags are the
+  // primary signal; the sitemap copy accelerates discovery). Blog twins use
+  // the `<ja-slug>-en` convention.
+  const urlSet = new Set(entries.map((e) => e.url))
+  const twinOf = (url: string): string | null => {
+    if (url.startsWith(`${baseUrl}/en/blog/`) && url.endsWith('-en/')) {
+      const ja = url.replace(`${baseUrl}/en/blog/`, `${baseUrl}/blog/`).replace(/-en\/$/, '/')
+      return urlSet.has(ja) ? ja : null
+    }
+    if (url.startsWith(`${baseUrl}/en/`) || url === `${baseUrl}/en/`) {
+      const ja = url === `${baseUrl}/en/` ? `${baseUrl}/` : url.replace(`${baseUrl}/en`, baseUrl)
+      return urlSet.has(ja) ? ja : null
+    }
+    if (url.startsWith(`${baseUrl}/blog/`)) {
+      const en = url.replace(`${baseUrl}/blog/`, `${baseUrl}/en/blog/`).replace(/\/$/, '-en/')
+      return urlSet.has(en) ? en : null
+    }
+    const en = url === `${baseUrl}/` ? `${baseUrl}/en/` : url.replace(baseUrl, `${baseUrl}/en`)
+    return urlSet.has(en) ? en : null
+  }
+  return entries.map((e) => {
+    const twin = twinOf(e.url)
+    if (!twin) return e
+    const isEn = e.url.startsWith(`${baseUrl}/en`)
+    return {
+      ...e,
+      alternates: { languages: { ja: isEn ? twin : e.url, en: isEn ? e.url : twin } },
+    }
+  })
 }

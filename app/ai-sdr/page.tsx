@@ -5,12 +5,12 @@ import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'AI SDR とは｜Web と CRM に眠る商談機会を動かす AI 営業エージェント ｜ Meeton ai',
+    absolute: 'AI SDRとは？仕組み・従来SDRとの違い・導入効果を解説｜Meeton ai',
   },
   description: 'AI SDR とは、Web 行動と CRM データをもとに、見込み客への初動対応・資料提案・日程調整・追客を自動化する AI 営業エージェント。人間 SDR・チャットボット・日程調整ツールとの違い、Meeton ai の特徴と活用事例を解説。',
   alternates: { canonical: '/ai-sdr/' },
   openGraph: {
-    title: 'AI SDR とは？ Web と CRM に眠る商談機会を動かす AI 営業エージェント',
+    title: 'AI SDRとは？仕組み・従来SDRとの違い・導入効果を解説',
     description: 'AI SDR は、Web 訪問者・資料 DL リード・再訪問者・CRM に蓄積された既存リードまで、会話・資料提案・日程調整・追客を自動化し、商談機会を創出する AI 営業エージェント。',
     url: 'https://dynameet.ai/ai-sdr/',
   },

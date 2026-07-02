@@ -392,6 +392,9 @@ export const COMPARE_EN: Record<string, CompareData> = {
       "Your main goal is meeting conversion for 3 specific flows such as trade-show business cards",
     ],
     faq: [
+      { q: "What is immedio?", a: "immedio is a Japanese AI inside-sales SaaS specialized in converting inbound leads into booked meetings at the highest-intent moment — right after a form submission (thank-you-page conversion). Its product line consists of immedio, immedio Box, and immedio Forms, and the company holds ISMS (ISO/IEC 27001) certification." },
+      { q: "How much funding has immedio raised?", a: "immedio announced a ¥350 million Series A in May 2024 (per announcements on corp.immedio.io). It remains a privately held company as of 2026." },
+      { q: "Does immedio have a blog?", a: "As of July 2026, immedio's site centers on product, function, and case-study pages — there is no blog published at immedio.io/blog. If you're researching how immedio compares to an end-to-end AI SDR, the comparison on this page covers features, pricing disclosure, and use-case fit." },
       { q: "Which is stronger at meeting conversion, immedio or Meeton Calendar?", a: "Both are Japanese SaaS strong at inbound meeting conversion. immedio has a rich track record as a specialist in thank-you-page meeting conversion. Meeton Calendar differs in that, before booking, the AI warms up the lead through conversation, and chat, content sharing, and follow-up all connect on the same platform. If your use case is booking-focused, immedio fits; if you want everything from conversation to follow-up end to end, Meeton fits." },
       { q: "How does pricing work?", a: "Meeton ai has a base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each) and discloses its pricing. immedio has no public pricing and requires an inquiry (as of 2026)." },
     ],

@@ -15,6 +15,7 @@ import {
 } from '@/app/lib/notion'
 import BlogContent from '@/app/components/BlogContent'
 import { altLanguages, ogLocale } from '@/app/lib/i18n'
+import { classifyCluster, CLUSTERS } from '@/app/lib/content-clusters'
 
 // /en/blog/[slug]/ — English twin of /blog/[slug]/. EN post slug = `<ja-slug>-en`
 // and is globally unique, so getPostBySlug(slug) resolves it directly. The page
@@ -36,6 +37,16 @@ type Props = {
 export async function generateStaticParams() {
   const posts = await getAllPosts('en')
   return posts.map((post) => ({ slug: post.slug }))
+}
+
+// EN pillar targets for the cluster cross-link (JA cluster data + /en twins).
+const EN_PILLAR: Record<string, { href: string; name: string; line: string }> = {
+  chat: { href: '/en/chat/', name: 'Meeton Chat', line: 'Capture visitors in conversation and turn them into leads.' },
+  ads: { href: '/en/ads/', name: 'Meeton Ads', line: 'AI-optimized on-site ads that capture more leads from the traffic you already have.' },
+  library: { href: '/en/library/', name: 'Meeton Library', line: 'Nurture not-yet-ready prospects with AI-explained content.' },
+  calendar: { href: '/en/calendar/', name: 'Meeton Calendar', line: 'Book the meeting the moment intent peaks.' },
+  email: { href: '/en/email/', name: 'Meeton Email', line: 'Win back missed leads with 1:1 autonomous follow-up.' },
+  'ai-sdr': { href: '/en/', name: 'Meeton ai', line: 'The AI SDR platform: capture, nurture, convert, win back.' },
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -173,6 +184,8 @@ export default async function BlogPostPageEn({ params }: Props) {
         day: 'numeric',
       })
     : ''
+
+  const pillar = EN_PILLAR[classifyCluster({ category: post.category, tags: post.tags, title: post.title })] ?? EN_PILLAR['ai-sdr']
 
   const articleUrl = `https://dynameet.ai/en/blog/${post.slug}/`
 
@@ -385,6 +398,17 @@ export default async function BlogPostPageEn({ params }: Props) {
           <BlogContent blocks={blocks} />
 
           {/* CTA Section (English, localized) */}
+          <aside style={{ marginTop: 48, background: '#f6f8fb', border: '1px solid #e5e7eb', borderRadius: 16, padding: '22px 26px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 18, flexWrap: 'wrap' }}>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 800, color: '#0c9b6e', letterSpacing: '.05em', textTransform: 'uppercase' }}>Related product</div>
+              <div style={{ fontSize: 17, fontWeight: 800, color: '#0f1128', margin: '6px 0 4px' }}>{pillar.name}</div>
+              <p style={{ fontSize: 13.5, lineHeight: 1.7, color: '#3d4551', margin: 0 }}>{pillar.line}</p>
+            </div>
+            <Link href={pillar.href} style={{ whiteSpace: 'nowrap', fontSize: 14, fontWeight: 800, color: '#0c9b6e', textDecoration: 'none', border: '1.5px solid #bdeddd', borderRadius: 10, padding: '10px 18px' }}>
+              Learn more →
+            </Link>
+          </aside>
+
           <section
             style={{
               marginTop: 'clamp(40px, 8vw, 64px)',

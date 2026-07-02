@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound, redirect } from 'next/navigation'
-import { getPostBySlug, getPostBlocks, getAllPostSlugs, getRelatedPosts, calculateReadingTime, categoryToSlug, tagToSlug } from '@/app/lib/notion'
+import { getPostBySlug, getPostBlocks, getAllPostSlugs, getAllPosts, getRelatedPosts, calculateReadingTime, categoryToSlug, tagToSlug } from '@/app/lib/notion'
 import BlogContent from '@/app/components/BlogContent'
 import BlogJsonLd from '@/app/components/BlogJsonLd'
 import BreadcrumbJsonLd from '@/app/components/BreadcrumbJsonLd'
@@ -36,20 +36,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // description がない場合のフォールバック
   const description = post.description || `${post.title}についての詳細記事。Meeton aiブログでAI営業の最新情報をお届けします。`
 
+  const enPosts = await getAllPosts('en')
+  const hasEnTwin = enPosts.some((p) => p.slug === `${post.slug}-en`)
+
   return {
     title: post.title,
     description: description,
     authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
-    // Bidirectional hreflang: canonical → this JA page, ja/x-default → JA,
-    // en → the EN twin slug (`<ja-slug>-en`). When no EN twin exists yet,
-    // Google simply drops the dead en alternate (acceptable, low-risk). A
-    // cheap per-slug existence check would need an extra Notion query, so we
-    // always emit the deterministic `-en` URL instead.
+    // Bidirectional hreflang: en alternate is emitted ONLY when the EN twin
+    // actually exists (getAllPosts('en') is a cached fetch, so this is one
+    // shared lookup — not a per-post Notion query). Dead alternates on 100+
+    // posts read as sloppy hreflang to crawlers.
     alternates: {
       canonical: `/blog/${post.slug}/`,
       languages: {
         ja: `/blog/${post.slug}/`,
-        en: `/en/blog/${post.slug}-en/`,
+        ...(hasEnTwin ? { en: `/en/blog/${post.slug}-en/` } : {}),
         'x-default': `/blog/${post.slug}/`,
       },
     },

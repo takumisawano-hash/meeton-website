@@ -21,7 +21,7 @@ export const GROUNDING: Fact[] = [
   { claim: "Webサイト訪問者のうちフォームに到達する割合", value: "1%未満（大半は匿名のまま離脱）", source: "DynaMeet v8 デッキ（THE NEW FUNNEL）", clusters: ["chat", "ai-sdr"] },
   { claim: "Speed to Lead（初動レスポンス）の業界一般値", value: "数時間〜数日かかることが多い", source: "業界一般（要出典明記での使用）", clusters: ["calendar", "ai-sdr"] },
   // ── Product facts (no fabrication needed) ──
-  { claim: "Meeton ai の構成", value: "Calendar / Chat / Library / Email の4モジュール（1アカウント統合）", source: "Meeton ai 製品仕様", clusters: ["library", "calendar", "email", "chat", "ai-sdr"] },
+  { claim: "Meeton ai の構成", value: "Chat / Ads / Library / Calendar / Email の5プロダクト（掴む→育てる→商談化→追客の4ステージ、1アカウント統合）", source: "Meeton ai 製品仕様", clusters: ["library", "calendar", "email", "chat", "ads", "ai-sdr"] },
   { claim: "料金プラン", value: "基本プラン『リード獲得』15万円〜/月（Chat + Ads + Library）＋商談化アドオン（Calendar +5万円）・追客アドオン（Email +5万円）。人気の基本＋商談化は20万円〜、フル構成25万円〜。規模は月間トラフィックで変動", source: "Meeton ai 料金", clusters: ["ai-sdr"] },
 ];
 
