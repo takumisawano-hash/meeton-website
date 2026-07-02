@@ -255,7 +255,17 @@ export default function CaptureContent({ lang = "ja" }: { lang?: Lang }) {
           <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 30px", maxWidth: 700 }}>
             {s.heroSub}
           </p>
-          <CTAButtons source="capture-hero" tone="onNavy" size="lg" lang={lang} />
+          <CTAButtons
+            source="capture-hero"
+            tone="onNavy"
+            size="lg"
+            lang={lang}
+            assurances={
+              lang === "en"
+                ? ["1-month free trial — no credit card", "One JS tag, install in 5 minutes", "No scenario design"]
+                : ["JSタグ1行・約5分で設置", "シナリオ設計不要", "30分のデモで自社への効き方を確認"]
+            }
+          />
         </div>
       </Section>
 
@@ -315,8 +325,11 @@ export default function CaptureContent({ lang = "ja" }: { lang?: Lang }) {
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{s.proofMetricLabel}</div>
             </div>
             <div>
-              <p style={{ fontSize: "clamp(17px,2.2vw,22px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>「{s.proofQuote}」</p>
-              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {s.proofName}（{s.proofIndustry}）</div>
+              <p style={{ fontSize: "clamp(17px,2.2vw,22px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>{lang === "en" ? `“${s.proofQuote}”` : `「${s.proofQuote}」`}</p>
+              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>{lang === "en" ? `— ${s.proofName} (${s.proofIndustry})` : `— ${s.proofName}（${s.proofIndustry}）`}</div>
+              <Link href={lang === "en" ? "/en/cases/" : "/cases/"} style={{ display: "inline-block", marginTop: 16, fontSize: 14, fontWeight: 800, color: "var(--cta)", textDecoration: "none" }}>
+                {lang === "en" ? "See more customer stories →" : "導入事例をもっと見る →"}
+              </Link>
             </div>
           </div>
         </Section>

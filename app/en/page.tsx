@@ -49,10 +49,10 @@ const homepageFaqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Why does the pre-contact stage matter?',
+      name: 'How hard is it to set up?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'B2B buyers are said to complete about 70% of the purchase process on their own before ever contacting sales (Gartner/6sense). Most companies simply "wait" during that window and lose opportunities to slow first response, weak follow-up, and missing context. Meeton ai acts from this pre-contact stage, lifting conversion through Speed (first response), Persistence (follow-up), and Context.',
+        text: 'One line of JS — about 5 minutes to install. No scenario design or engineering resources needed; everything is configured no-code, and calendars/CRMs connect via OAuth. On the free trial, we help you go live within 1 business day.',
       },
     },
     {
@@ -60,7 +60,7 @@ const homepageFaqSchema = {
       name: 'How is it priced?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'From ¥120,000/month. Three plans: the Lead Generation plan (from ¥120,000) for capture & nurture, the Meeting Generation plan that adds conversion, and the All-in-One plan that covers follow-up end to end. The top two plans are quote-based. Pricing varies by monthly traffic and features, and Japan qualified-invoice billing is supported.',
+        text: 'Three plans from ¥120,000/mo: Lead Acquisition (capture & nurture), Meeting Acquisition (adds conversion — recommended for most teams), and All-in-One (adds win-back). Pricing scales with monthly traffic, and every plan starts with a 1-month free trial — no credit card required.',
       },
     },
     {

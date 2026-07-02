@@ -11,6 +11,7 @@ import StageMedia from "@/app/components/v2/StageMedia";
 import CountUp from "@/app/components/v2/CountUp";
 import DemoFrame from "@/app/components/v2/DemoFrame";
 import { productMedia } from "@/app/lib/product-media";
+import { demoUrl } from "@/app/lib/cta-urls";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
 import FeaturedCase from "@/app/components/v2/FeaturedCase";
 import type { Lang } from "@/app/lib/i18n";
@@ -49,9 +50,22 @@ const STR = {
     routerTitle: "迷ったら、いちばん効く一手から。",
     router: [
       { slug: "chat", q: "訪問者を会話で掴んでリードにしたい", a: "Meeton Chat" },
+      { slug: "ads", q: "広告費をかけずにサイトのリード獲得を増やしたい", a: "Meeton Ads" },
       { slug: "library", q: "資料で見込み客を育てたい", a: "Meeton Library" },
       { slug: "calendar", q: "問い合わせの取りこぼしを止めたい", a: "Meeton Calendar" },
       { slug: "email", q: "既存リードを追客で再商談化したい", a: "Meeton Email" },
+    ],
+    routerDemoQ: "どれが合うか、まだ分からない",
+    routerDemoA: "30分のデモで相談する",
+    faqEyebrow: "よくある質問",
+    faqTitle: "導入前によくある質問",
+    faq: [
+      { q: "AI SDR とは何ですか？", a: "AI SDR（AI Sales Development Representative）とは、従来人間のSDRが担っていた初期接触・ヒアリング・資料提案・商談予約・追客をAIが自律的に行うシステムです。Meeton ai は、Webサイトに配属する AI SDR Platform で、掴む・育てる・商談化・追客の4つの仕事をこなし、問い合わせ前から追客まであらゆる瞬間を商談に変えます。" },
+      { q: "Meeton ai の4つのステージはそれぞれ何をしますか？", a: "①掴む（Meeton Chat が会話で訪問者を掴み、Meeton Ads がサイト内広告で残りを逃さない）、②育てる（Meeton Library が資料で検討を育ててリードにする）、③商談化する（Meeton Calendar が温度の高まった瞬間に商談予約まで運ぶ）、④追客する（Meeton Email が予約しなかったリードを行動シグナル起点で1:1追客し再商談化へ戻す）。" },
+      { q: "導入は大変ですか？", a: "JSタグ1行を貼るだけで、約5分で設置できます。シナリオ設計や開発リソースは不要で、設定はすべてノーコードで完結します。カレンダーやCRMはOAuthで接続します。" },
+      { q: "料金体系は？", a: "月額12万円〜の3プランです。掴む・育てるの『リード獲得プラン（¥12万〜）』、商談化まで含む『商談獲得プラン』、追客まで一気通貫の『オールインワンプラン』。料金は月間トラフィックと機能で変動し、適格請求書（インボイス）に対応します。" },
+      { q: "既存のCRM・MAツールと連携できますか？", a: "HubSpot・Salesforce とネイティブ連携し、会話ログや予約を自動登録します。Google Calendar・Outlook・Zoom とのカレンダー連携、Slack・Microsoft Teams・Google Chat への通知、Webhook による他ツール連携にも対応します。" },
+      { q: "どのような企業に向いていますか？", a: "SaaS・IT・製造・専門サービス・フィンテック領域の日本のB2B企業を主な対象としています。CMO・CRO・インサイドセールス/SDR責任者が、マーケティング起点の商談化率（Speed to Lead）を改善したい場合に特に有効です。" },
     ],
     finalTitle: "待つWebサイトを、卒業する。",
     finalSub: "30分のデモで、自社サイトにAI SDRを配属する具体策が見えます。",
@@ -84,9 +98,22 @@ const STR = {
     routerTitle: "Not sure? Start with the move that pays off most.",
     router: [
       { slug: "chat", q: "Capture visitors in conversation and turn them into leads", a: "Meeton Chat" },
+      { slug: "ads", q: "Capture more leads without spending more on ads", a: "Meeton Ads" },
       { slug: "library", q: "Nurture prospects with content", a: "Meeton Library" },
       { slug: "calendar", q: "Stop losing inbound inquiries", a: "Meeton Calendar" },
       { slug: "email", q: "Win back existing leads with follow-up", a: "Meeton Email" },
+    ],
+    routerDemoQ: "Not sure which fits yet",
+    routerDemoA: "Talk it through in a 30-min demo",
+    faqEyebrow: "FAQ",
+    faqTitle: "Questions teams ask before starting",
+    faq: [
+      { q: "What is an AI SDR?", a: "An AI SDR (AI Sales Development Representative) is a system in which AI autonomously handles the work human SDRs used to do: first contact, discovery, content suggestions, meeting booking, and follow-up. Meeton ai is an AI SDR Platform deployed on your website — it runs the four jobs of capture, nurture, convert, and win back, turning every moment from pre-inquiry to follow-up into meetings." },
+      { q: "What do the four stages of Meeton ai do?", a: "(1) Capture — Meeton Chat engages visitors in conversation, and Meeton Ads catches the rest with AI-optimized on-site ads. (2) Nurture — Meeton Library grows consideration with AI-explained content. (3) Convert — Meeton Calendar books the meeting the moment intent peaks. (4) Win back — Meeton Email follows up 1:1 on leads who didn't book, triggered by behavioral signals." },
+      { q: "How hard is it to set up?", a: "One line of JS — about 5 minutes to install. No scenario design or engineering resources needed; everything is configured no-code, and calendars/CRMs connect via OAuth. On the free trial, we help you go live within 1 business day." },
+      { q: "How does pricing work?", a: "Three plans from ¥120,000/mo: Lead Acquisition (capture & nurture), Meeting Acquisition (adds conversion — recommended for most teams), and All-in-One (adds win-back). Pricing scales with monthly traffic, and every plan starts with a 1-month free trial — no credit card required." },
+      { q: "Does it integrate with our CRM and MA tools?", a: "Native HubSpot and Salesforce integrations log conversations and bookings automatically. Calendar integrations cover Google Calendar, Outlook, and Zoom; notifications go to Slack, Microsoft Teams, and Google Chat; webhooks connect everything else." },
+      { q: "Who is it for?", a: "B2B companies in SaaS, IT, manufacturing, professional services, and fintech. It's especially effective when a CMO, CRO, or inside-sales/SDR leader wants to improve marketing-sourced meeting conversion (speed to lead)." },
     ],
     finalTitle: "Graduate from a Website that waits.",
     finalSub: "A 30-minute demo shows exactly how to deploy an AI SDR on your own site.",
@@ -219,12 +246,13 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
         `}</style>
       </Section>
 
-      {/* 8. Soft router — 2×2 grid (even boxes) */}
+      {/* 8. Soft router — 2×3 grid: 5 products + a "not sure → demo" catch-all
+          so undecided visitors convert instead of bouncing. */}
       <Section tone="surface" py={64}>
         <SectionHead eyebrow={s.routerEyebrow} title={s.routerTitle} align="center" />
         <div className="v2-router-grid">
           {s.router.map((r) => (
-            <Link key={r.slug} href={`/${r.slug}/`} className="v2-router-card">
+            <Link key={r.slug} href={lang === "en" ? `/en/${r.slug}/` : `/${r.slug}/`} className="v2-router-card">
               <span className="v2-router-icon">
                 <ProductIcon kind={PRODUCTS[r.slug as keyof typeof PRODUCTS].icon} size={22} />
               </span>
@@ -234,6 +262,15 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
               </span>
             </Link>
           ))}
+          <a key="demo" href={demoUrl("home-router")} className="v2-router-card v2-router-demo">
+            <span className="v2-router-icon" style={{ background: "var(--cta)", color: "var(--on-cta)" }}>
+              <ProductIcon kind="spark" size={22} />
+            </span>
+            <span className="v2-router-text">
+              <span className="v2-router-q">{s.routerDemoQ}</span>
+              <span className="v2-router-a">{s.routerDemoA} →</span>
+            </span>
+          </a>
         </div>
         <style>{`
           .v2-router-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:820px;margin:0 auto}
@@ -245,6 +282,20 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
           .v2-router-a{font-size:13px;font-weight:700;color:var(--cta-ink)}
           @media(max-width:560px){.v2-router-grid{grid-template-columns:1fr;gap:14px}}
         `}</style>
+      </Section>
+
+      {/* 8.5 FAQ — visible twin of the homepage FAQPage JSON-LD (page.tsx).
+          Handles the classic pre-inquiry objections right before the final CTA. */}
+      <Section tone="white" py={72}>
+        <SectionHead eyebrow={s.faqEyebrow} title={s.faqTitle} align="center" />
+        <div style={{ maxWidth: 800, margin: "0 auto", display: "grid", gap: 14 }}>
+          {s.faq.map((f) => (
+            <Card key={f.q}>
+              <h3 style={{ fontSize: 16, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{f.q}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.85, color: "var(--text)", margin: 0 }}>{f.a}</p>
+            </Card>
+          ))}
+        </div>
       </Section>
 
       {/* 9. Final CTA */}

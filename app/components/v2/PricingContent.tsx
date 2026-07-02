@@ -126,6 +126,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
         price: "¥12万",
         source: "pricing-lead",
         highlight: false,
+        whoFor: "まず訪問者をリードに変えたい企業に。",
         blurb: "潜在層を掴み、育てて、リードにする。Calendar が不要な企業の入口に。",
         items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Library（資料で検討を育てる）", "Meeton Ads（サイト内広告・AI自動最適化）", "CRM 連携", "開封・行動トラッキング"],
       },
@@ -137,6 +138,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
         source: "pricing-convert",
         highlight: true,
         badge: "おすすめ",
+        whoFor: "リードを確実に商談まで運びたい企業に。",
         blurb: "掴んだリードを、商談（予約）まで運ぶ。最も選ばれる構成。",
         items: ["リード獲得プランの全機能", "Meeton Calendar 連携（無制限）", "AIコンシェルジュ・自動アサイン", "商談予約の自動化"],
       },
@@ -147,6 +149,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
         price: "お問い合わせ",
         source: "pricing-allinone",
         highlight: false,
+        whoFor: "取りこぼしゼロまで自動化したい企業に。",
         blurb: "逃したリードも追客で回収。掴む→育てる→商談化→追客まで一気通貫で最大化。",
         items: ["商談獲得プランの全機能", "Meeton Email 機能（無制限）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
       },
@@ -368,7 +371,19 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
           <p style={{ fontSize: 18, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 28px" }}>
             {s.heroSub}
           </p>
-          <CTAButtons source="pricing-hero" tone="onNavy" size="lg" lang={lang} secondaryLabel={s.heroSecondaryLabel} secondaryHref={casesHref} />
+          <CTAButtons
+            source="pricing-hero"
+            tone="onNavy"
+            size="lg"
+            lang={lang}
+            secondaryLabel={s.heroSecondaryLabel}
+            secondaryHref={casesHref}
+            assurances={
+              lang === "en"
+                ? ["No credit card required to start", "Cancel anytime during the trial", "Live within 1 business day"]
+                : ["30分のデモ・オンライン", "年額前払いは2ヶ月無料", "適格請求書（インボイス）対応"]
+            }
+          />
         </div>
       </Section>
 

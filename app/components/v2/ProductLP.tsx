@@ -23,7 +23,7 @@ const STR = {
   ja: {
     skip: "本文へスキップ",
     stageBadge: (num: string, title: string, transform: string) => `${num} ${title}ステージ（${transform}）`,
-    heroAssurances: ["ノーコード設置・既存スタックに連携", "30分のデモで自社への効き方を確認", "適格請求書（インボイス）対応"],
+    heroAssurances: ["ノーコード設置・既存スタックに連携", "30分のデモで自社への効き方を確認", "24時間365日、深夜・週末のリードも逃さない"],
     howEyebrow: "30秒で分かる仕組み",
     howTitle: (p: string) => `${p} の動き方`,
     step: "STEP",
@@ -31,6 +31,8 @@ const STR = {
     compareLink: (name: string) => `vs ${name} →`,
     integrationsEyebrow: "スタック連携",
     integrationsTitle: "今のスタックに、そのまま挿さる。",
+    proofMore: "導入事例をもっと見る →",
+    midCtaLine: (p: string) => `${p} の効き方を、30分のデモで。`,
     pricingEyebrow: "料金",
     pricingTitle: "月額12万円〜。必要な分だけ。",
     pricingLede: "料金は月間トラフィックと機能で変動します。リード獲得 / 商談獲得 / オールインワン の3プラン。",
@@ -54,6 +56,8 @@ const STR = {
     compareLink: (name: string) => `vs ${name} →`,
     integrationsEyebrow: "Stack integrations",
     integrationsTitle: "Slots straight into your current stack.",
+    proofMore: "See more customer stories →",
+    midCtaLine: (p: string) => `Try ${p} free for 1 month — or see it in a 30-minute demo.`,
     pricingEyebrow: "Pricing",
     pricingTitle: "From ¥120,000/mo. Only what you need.",
     pricingLede: "Pricing varies by monthly traffic and features. Three plans: Lead Acquisition / Meeting Acquisition / All-in-One — every plan starts with a 1-month free trial.",
@@ -219,6 +223,9 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
                 {en ? `“${data.proof.quote}”` : `「${data.proof.quote}」`}
               </p>
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {data.proof.source}</div>
+              <Link href={en ? "/en/cases/" : "/cases/"} style={{ display: "inline-block", marginTop: 16, fontSize: 14, fontWeight: 800, color: "var(--cta)", textDecoration: "none" }}>
+                {s.proofMore}
+              </Link>
             </div>
           </div>
           <style>{`@media(max-width:720px){.plp-proof{grid-template-columns:1fr;gap:24px}}`}</style>
@@ -229,6 +236,20 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
       <Section tone="white" py={64}>
         <SectionHead eyebrow={s.integrationsEyebrow} title={s.integrationsTitle} align="center" />
         <IntegrationLogos items={pickIntegrations(data.integrations)} lang={lang} />
+      </Section>
+
+      {/* 5.5 Mid-page CTA strip — the hero CTA is 4+ sections above by now;
+          give committed scrollers a conversion point before pricing/FAQ. */}
+      <Section tone="navy" py={56}>
+        <div className="plp-ctastrip">
+          <p className="plp-ctastrip-line">{s.midCtaLine(data.productName)}</p>
+          <CTAButtons source={`${src}-mid`} tone="onNavy" size="md" lang={lang} />
+        </div>
+        <style>{`
+          .plp-ctastrip{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+          .plp-ctastrip-line{font-family:var(--fd);font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.02em;color:var(--on-navy);margin:0}
+          @media(max-width:720px){.plp-ctastrip{flex-direction:column;align-items:flex-start;gap:18px}}
+        `}</style>
       </Section>
 
       {/* 6. Pricing — single anchor (月額12万円〜, varies by scale/usage) */}
