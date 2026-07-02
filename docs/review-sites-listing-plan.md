@@ -67,7 +67,7 @@
 **Meeton ai**
 
 ### 提供会社
-DynaMeet株式会社（英文表記: DynaMeet K.K.）
+DynaMeet株式会社（英文表記: DynaMeet, Inc.）
 
 ### キャッチコピー (一言)
 **Webサイト訪問者を、商談に変える AI セールスプラットフォーム**

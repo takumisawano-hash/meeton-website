@@ -333,7 +333,7 @@ export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: Footer
           opacity: 0.7,
         }}
       >
-        © {new Date().getFullYear()} {en ? "DynaMeet K.K." : "DynaMeet株式会社"} All rights reserved.
+        © {new Date().getFullYear()} {en ? "DynaMeet, Inc." : "DynaMeet株式会社"} All rights reserved.
       </div>
 
       <style>{`

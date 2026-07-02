@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Commercial Disclosure",
   description:
-    "Disclosure under the Specified Commercial Transactions Act of Japan for services operated by DynaMeet K.K.",
+    "Disclosure under the Specified Commercial Transactions Act of Japan for services operated by DynaMeet, Inc.",
   // TODO(legal): noindex while draft. Flip to indexable in the same commit that
   // lands the final copy, and restore the app/sitemap.ts entry alongside it.
   robots: { index: false, follow: true },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Commercial Disclosure｜Meeton ai",
     description:
-      "Disclosure under the Specified Commercial Transactions Act of Japan for services operated by DynaMeet K.K.",
+      "Disclosure under the Specified Commercial Transactions Act of Japan for services operated by DynaMeet, Inc.",
     url: "https://dynameet.ai/en/legal/mail-order-sales/",
   },
 };
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const ITEMS: { label: string; value: React.ReactNode }[] = [
   {
     label: "Business name",
-    value: <Todo hint="legal entity name (e.g. DynaMeet K.K.)" />,
+    value: <Todo hint="legal entity name (e.g. DynaMeet, Inc.)" />,
   },
   {
     label: "Business address",

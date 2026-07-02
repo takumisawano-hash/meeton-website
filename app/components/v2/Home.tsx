@@ -82,7 +82,7 @@ const STR = {
       "Meeton ai is an AI SDR deployed on your website. It doesn't wait for inquiries — it engages prospects in conversation and turns every moment into a meeting.",
     demoTitle: "Meeton Chat demo",
     heroAssurances: ["See how it works for you in a 30-min demo", "No scenario design", "No-code, install in 5 minutes"],
-    heroOperator: "Meeton ai is a service operated by DynaMeet K.K.",
+    heroOperator: "Meeton ai is a service operated by DynaMeet, Inc.",
     proof: [
       { n: 60, suf: "%+", l: "Meeting conversion via Meeton ai", sub: "Industry average ~20%" },
       { n: 2, suf: "x", l: "Qualified leads", sub: "+100% vs. before deployment" },

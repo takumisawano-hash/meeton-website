@@ -1,7 +1,7 @@
 # Meeton ai — Product Marketing Context
 
 ## Product
-**Meeton ai** is a Japanese B2B AI SDR (Sales Development Representative) platform that converts website leads into booked sales meetings. Built by **DynaMeet K.K.** (Tokyo, founded 2024-10-03).
+**Meeton ai** is a Japanese B2B AI SDR (Sales Development Representative) platform that converts website leads into booked sales meetings. Built by **DynaMeet, Inc.** (Tokyo, founded 2024-10-03). EN legal name; JA legal name is DynaMeet株式会社.
 
 ### 4 Modules
 1. **Meeton Live** — AI chat that converses with website visitors in real time and books meetings (replaces scenario-based chatbots)
