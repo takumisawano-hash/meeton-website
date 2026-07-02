@@ -35,8 +35,8 @@ const STR = {
     proofMore: "導入事例をもっと見る →",
     midCtaLine: (p: string) => `${p} の効き方を、30分のデモで。`,
     pricingEyebrow: "料金",
-    pricingTitle: "月額12万円〜。必要な分だけ。",
-    pricingLede: "料金は月間トラフィックと機能で変動します。リード獲得 / 商談獲得 / オールインワン の3プラン。",
+    pricingTitle: "基本プラン15万円〜。あとはアドオンで必要な分だけ。",
+    pricingLede: "基本プラン「リード獲得」（Chat + Ads + Library）に、商談化・追客のアドオンを必要な分だけ。規模は月間トラフィックで変動します。",
     pricingLink: "料金の詳細を見る →",
     expansionEyebrow: "これは Meeton ai の一部",
     expansionStages: "AI SDR の4つの仕事を見る →",
@@ -60,8 +60,8 @@ const STR = {
     proofMore: "See more customer stories →",
     midCtaLine: (p: string) => `Try ${p} free for 1 month — or see it in a 30-minute demo.`,
     pricingEyebrow: "Pricing",
-    pricingTitle: "From ¥120,000/mo. Only what you need.",
-    pricingLede: "Pricing varies by monthly traffic and features. Three plans: Lead Acquisition / Meeting Acquisition / All-in-One — every plan starts with a 1-month free trial.",
+    pricingTitle: "Base plan from ¥150,000/mo. Add only what you need.",
+    pricingLede: "One base plan (Chat + Ads + Library), plus meeting-booking and win-back add-ons at ¥50,000/mo each. Every setup starts with a 1-month free trial.",
     pricingLink: "See pricing details →",
     expansionEyebrow: "This is part of Meeton ai",
     expansionStages: "See the 4 jobs of the AI SDR →",
@@ -253,7 +253,7 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
         `}</style>
       </Section>
 
-      {/* 6. Pricing — single anchor (月額12万円〜, varies by scale/usage) */}
+      {/* 6. Pricing — single anchor (基本プラン15万円〜+アドオン) */}
       <Section tone="surface">
         <SectionHead eyebrow={s.pricingEyebrow} title={s.pricingTitle} align="center" lede={s.pricingLede} />
         <div style={{ textAlign: "center" }}>
@@ -354,8 +354,8 @@ export function productAppSchema(data: ProductLPData, lang: Lang = "ja") {
       priceCurrency: "JPY",
       description:
         lang === "en"
-          ? "From ¥120,000/mo. Varies by scale, features used, and level of operational support."
-          : "月額12万円〜。規模・利用機能・運用支援範囲により変動。",
+          ? "Base plan from ¥150,000/mo plus add-ons. Varies by traffic and setup."
+          : "基本プラン15万円〜＋アドオン。規模・構成により変動。",
     },
   };
 }

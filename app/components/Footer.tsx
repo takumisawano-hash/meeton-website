@@ -157,11 +157,11 @@ const DISCOVER_EN = [
 const LEGAL_EN = [
   { href: "/en/about/", label: "About" },
   { href: "/en/security/", label: C_EN.footerLegalSecurity },
-  { href: "/integrations/", label: "Integrations" },
+  { href: "/en/integrations/", label: "Integrations" },
   { href: "/careers/", label: "Careers" },
   { href: "/en/contact/", label: "Contact" },
-  { href: "/privacy-policy/", label: C_EN.footerLegalPrivacy },
-  { href: "/terms/", label: C_EN.footerLegalTerms },
+  { href: "/en/privacy-policy/", label: C_EN.footerLegalPrivacy },
+  { href: "/en/terms/", label: C_EN.footerLegalTerms },
 ];
 
 export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: FooterProps) {

@@ -11,9 +11,10 @@ import type { Lang } from "@/app/lib/i18n";
 
 // Lang-aware pricing body. JA is the default → the existing /pricing/ page
 // renders byte-identically (all EN-only sections hang off optional fields).
-// 2026-07-02 EN self-serve pivot (founder-approved): the EN page publishes all
-// three plan prices (From ¥120,000 / ¥180,000 / ¥240,000) with a 1-month
-// free-trial CTA → /en/trial/. JA keeps ¥12万〜 + お問い合わせ.
+// 2026-07-02 pricing model v3 (founder deck p20): ONE base plan (リード獲得
+// ¥15万〜 = Chat + Ads + Library) + add-ons (商談化/Calendar +¥5万,
+// 追客/Email +¥5万). Popular setups: base+convert ¥20万〜 (recommended),
+// full ¥25万〜. EN mirrors with From-pricing and trial-first CTAs.
 
 type Plan = {
   name: string;
@@ -79,26 +80,26 @@ type PricingStrings = {
 
 export const PRICING_STR: Record<Lang, PricingStrings> = {
   ja: {
-    metaTitleAbsolute: "料金｜Meeton ai — 3つのプランで、掴む→育てる→商談化→追客",
+    metaTitleAbsolute: "料金｜Meeton ai — 基本プラン15万円〜＋必要な分だけアドオン",
     metaDescription:
-      "Meeton ai の料金。リード獲得プラン¥12万〜（掴む・育てる）。商談獲得プラン（+商談化）・オールインワンプラン（+追客）はお問い合わせ。規模は月間トラフィックで決まり、機能で3段階。すべて税抜/月・適格請求書対応。",
-    ogTitle: "料金｜Meeton ai — 掴む→育てる→商談化→追客の3プラン",
+      "Meeton ai の料金。基本プラン「リード獲得」15万円〜（Chat + Ads + Library）に、商談化アドオン（Calendar +5万円）・追客アドオン（Email +5万円）を必要な分だけ。人気の「基本＋商談化」は20万円〜。規模は月間トラフィックで決まります。すべて税抜/月・適格請求書対応。",
+    ogTitle: "料金｜Meeton ai — 基本15万円〜＋アドオンで必要な分だけ",
     ogDescription:
-      "リード獲得¥12万〜 / 商談獲得・オールインワンはお問い合わせ。規模は月間トラフィック、機能で3段階。",
+      "基本プラン15万円〜（掴む・育てる）＋商談化・追客アドオン各5万円。人気の基本＋商談化は20万円〜。",
     heroEyebrow: "料金プラン",
     heroH1a: (
       <>
         掴む → 育てる → <span style={{ color: "var(--cta)" }}>商談化</span> → 追客。<br />必要な段階から。
       </>
     ),
-    heroSub: "規模は月間トラフィックで決まり、機能で3段階に分かれます。すべて税抜/月。",
+    heroSub: "マーケの課題「掴む・育てる」を基本プランに。商談化と追客は、必要な分だけアドオンで。規模は月間トラフィックで決まります。すべて税抜/月。",
     heroSecondaryLabel: "導入事例を見る",
-    plansEyebrow: "3つのプラン",
-    plansTitle: "AI SDR の4つの仕事に、そのまま対応。",
+    plansEyebrow: "基本プラン＋アドオン",
+    plansTitle: "基本は「リード獲得」。あとは必要な分だけ。",
     plansLede:
-      "上位プランは下位の機能をすべて含みます。商談化（Calendar）・追客（Email）を、事業の成長に合わせて足していけます。",
+      "基本プランに、商談化（Calendar）・追客（Email）のアドオンを自由に追加。事業の成長に合わせて、いつでも足せます。",
     priceUnit: " 〜 / 月（税抜）",
-    planCta: "このプランで相談する",
+    planCta: "この構成で相談する",
     stagesLinkPre: "ステージの考え方は",
     stagesLinkText: "AI SDR の4つの仕事",
     trafficEyebrow: "トラフィック追加（全プラン共通）",
@@ -121,40 +122,42 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     casesLabel: "導入事例を見る",
     plans: [
       {
-        name: "リード獲得プラン",
+        name: "リード獲得（基本プラン）",
         stage: "①+② 掴む・育てる",
-        includes: "Chat + Library + Ads",
-        price: "¥12万",
+        includes: "Chat + Ads + Library",
+        price: "¥15万",
         source: "pricing-lead",
         highlight: false,
         whoFor: "まず訪問者をリードに変えたい企業に。",
-        blurb: "潜在層を掴み、育てて、リードにする。Calendar が不要な企業の入口に。",
-        items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Library（資料で検討を育てる）", "Meeton Ads（サイト内広告・AI自動最適化）", "CRM 連携", "開封・行動トラッキング"],
+        blurb: "会話と広告で潜在層を掴み、資料で育ててリードにする。マーケチームだけで導入できます。",
+        items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Ads（サイト内広告・AI自動最適化）", "Meeton Library（資料で検討を育てる）", "CRM 連携込み", "開封・行動トラッキング"],
       },
       {
-        name: "商談獲得プラン",
+        name: "基本＋商談化アドオン",
         stage: "①〜③ 商談化まで",
-        includes: "+ Calendar",
-        price: "お問い合わせ",
+        includes: "基本 + Calendar",
+        price: "¥20万",
         source: "pricing-convert",
         highlight: true,
-        badge: "おすすめ",
+        badge: "人気の構成・おすすめ",
         whoFor: "リードを確実に商談まで運びたい企業に。",
-        blurb: "掴んだリードを、商談（予約）まで運ぶ。最も選ばれる構成。",
-        items: ["リード獲得プランの全機能", "Meeton Calendar 連携（無制限）", "AIコンシェルジュ・自動アサイン", "商談予約の自動化"],
+        blurb: "掴んだリードを、その場で商談予約まで運ぶ。最も選ばれる構成。",
+        items: ["基本プランの全機能", "商談化アドオン：Meeton Calendar（+5万円/月）", "AIコンシェルジュ・自動アサイン", "カレンダー連携人数 無制限"],
       },
       {
-        name: "オールインワンプラン",
+        name: "フル構成（＋追客）",
         stage: "①〜④ 一気通貫",
-        includes: "+ Email",
-        price: "お問い合わせ",
+        includes: "基本 + Calendar + Email",
+        price: "¥25万",
         source: "pricing-allinone",
         highlight: false,
         whoFor: "取りこぼしゼロまで自動化したい企業に。",
         blurb: "逃したリードも追客で回収。掴む→育てる→商談化→追客まで一気通貫で最大化。",
-        items: ["商談獲得プランの全機能", "Meeton Email 機能（無制限）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
+        items: ["基本＋商談化の全機能", "追客アドオン：Meeton Email（+5万円/月）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
       },
     ],
+    plansFine:
+      "アドオンは基本プランに自由に追加できます（商談化・追客 各+5万円/月）。構成はいつでも変更可能。",
     traffic: [
       { tier: "〜3万セッション/月", add: "基本料金に込み" },
       { tier: "〜10万セッション/月", add: "+¥6万" },
@@ -164,15 +167,15 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     faq: [
       {
         q: "プランはどう選べばいいですか？",
-        a: "AI SDR の4つの仕事に対応します。潜在層を掴んでリードにするだけなら『リード獲得プラン（¥12万〜）』、掴んだリードを商談まで運ぶなら『商談獲得プラン（お問い合わせ・最も選ばれる構成）』、逃したリードの追客まで一気通貫なら『オールインワンプラン（お問い合わせ）』です。上位プランは下位の機能をすべて含みます。",
+        a: "基本プラン『リード獲得』（15万円〜、Chat + Ads + Library）がすべての土台です。掴んだリードを商談まで運ぶなら商談化アドオン（Calendar +5万円/月）、逃したリードの回収まで自動化するなら追客アドオン（Email +5万円/月）を追加します。最も選ばれるのは基本＋商談化の構成（20万円〜）、フル構成は25万円〜です。",
       },
       {
         q: "料金は何で決まりますか？",
-        a: "プラン（機能の範囲）と、月間トラフィック（セッション数）の2軸で決まります。基本料金に3万セッション/月まで込み、〜10万で+¥6万、〜30万で+¥12万、30万超は要相談です。Calendar 連携は全プランで無制限です。",
+        a: "構成（基本プラン＋追加したアドオン）と、月間トラフィック（セッション数）の2軸で決まります。基本料金に3万セッション/月まで込み、〜10万で+¥6万、〜30万で+¥12万、30万超は要相談です。商談化アドオンのカレンダー連携人数は無制限です。",
       },
       {
-        q: "上位プランへの変更はできますか？",
-        a: "できます。リード獲得→商談獲得→オールインワンへ、事業の成長に合わせて段階的にアップグレードできます。商談化（Calendar）や追客（Email）を後から足す形です。",
+        q: "アドオンは後から追加できますか？",
+        a: "できます。基本プランで始めて、商談化（Calendar）や追客（Email）のアドオンを事業の成長に合わせて後から自由に追加・変更できます。",
       },
       {
         q: "複数サイト・高度な要件は？",
@@ -187,22 +190,22 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
   en: {
     metaTitleAbsolute: "Pricing｜Meeton ai — start with a 1-month free trial",
     metaDescription:
-      "Meeton ai pricing. Lead Acquisition from ¥120,000/mo, Meeting Acquisition from ¥180,000/mo, All-in-One from ¥240,000/mo — every plan starts with a 1-month free trial, no credit card required. All plans include up to 30,000 website sessions/mo with transparent traffic add-ons.",
+      "Meeton ai pricing. Base plan (Lead Acquisition: Chat + Ads + Library) from ¥150,000/mo, then add only what you need — Meeting Booking add-on (Calendar) +¥50,000, Win-back add-on (Email) +¥50,000. Most-popular setup from ¥200,000/mo. Every setup starts with a 1-month free trial, no credit card required.",
     ogTitle: "Pricing｜Meeton ai — start with a 1-month free trial",
     ogDescription:
-      "Lead Acquisition from ¥120,000/mo · Meeting Acquisition from ¥180,000/mo · All-in-One from ¥240,000/mo. 1-month free trial, no credit card required.",
+      "Base plan from ¥150,000/mo · add-ons ¥50,000 each (meeting booking / win-back). Most-popular setup from ¥200,000/mo. 1-month free trial, no credit card required.",
     heroEyebrow: "Pricing",
     heroH1a: (
       <>
         Start with a <span style={{ color: "var(--cta)" }}>1-month free trial</span>.
       </>
     ),
-    heroSub: "Choose the workflow that matches your sales motion — capture visitors, book meetings, win back missed leads. No credit card required to start. All prices are tax-exclusive / month.",
+    heroSub: "One base plan for capture & nurture, then add only what you need — meeting booking and win-back are simple add-ons. No credit card required to start. All prices are tax-exclusive / month.",
     heroSecondaryLabel: "See customer stories",
-    plansEyebrow: "Three plans",
-    plansTitle: "Choose your AI SDR workflow.",
+    plansEyebrow: "Base plan + add-ons",
+    plansTitle: "Start with the base. Add only what you need.",
     plansLede:
-      "Every plan starts with a 1-month free trial. Higher plans include everything in the lower ones — add meeting booking (Calendar) and win-back (Email) as you grow.",
+      "Every setup starts with a 1-month free trial. Add meeting booking (Calendar) and win-back (Email) to the base plan whenever you're ready — ¥50,000/mo each.",
     priceUnit: " / mo (excl. tax)",
     planCta: "Start 1-month free trial",
     stagesLinkPre: "For how the stages work, see",
@@ -228,7 +231,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     finalSub: "Install with a single JS tag, connect your calendar and CRM, and see your first AI-qualified conversations this week. Prefer a walkthrough first? Book a 30-minute demo.",
     casesLabel: "See customer stories",
     plansFine:
-      "✓ 1-month free trial on every plan · ✓ No credit card required to start · ✓ Cancel anytime during the trial — you approve before any paid plan begins",
+      "✓ Add-ons are ¥50,000/mo each and can be added to the base plan anytime · ✓ 1-month free trial on every setup · ✓ No credit card required · ✓ You approve before any paid plan begins",
     enterprise: {
       name: "Enterprise",
       desc: "Multiple sites, advanced CRM integrations, SSO, and security reviews — custom traffic and terms.",
@@ -238,43 +241,43 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     },
     plans: [
       {
-        name: "Lead Acquisition",
+        name: "Lead Acquisition (base plan)",
         stage: "①+② Capture & nurture",
-        includes: "Chat + Library + Ads",
-        price: "¥120,000",
+        includes: "Chat + Ads + Library",
+        price: "¥150,000",
         pricePrefix: "From ",
         source: "pricing-lead",
         highlight: false,
         whoFor: "For teams that want to identify and nurture website visitors.",
-        blurb: "Capture latent prospects in conversation, nurture them with content, and turn them into qualified leads.",
-        items: ["Meeton Chat (capture visitors in conversation)", "Meeton Library (nurture consideration with content)", "Meeton Ads (on-site ads, AI auto-optimized)", "CRM integration", "Open & behavior tracking"],
+        blurb: "Capture latent prospects with conversation and on-site ads, nurture them with content — your marketing team can run it alone.",
+        items: ["Meeton Chat (capture visitors in conversation)", "Meeton Ads (on-site ads, AI auto-optimized)", "Meeton Library (nurture consideration with content)", "CRM integration included", "Open & behavior tracking"],
         ctaHref: "/en/trial/?src=pricing&plan=lead",
       },
       {
-        name: "Meeting Acquisition",
+        name: "Base + Meeting Booking",
         stage: "①–③ through to convert",
-        includes: "+ Calendar",
-        price: "¥180,000",
+        includes: "Base + Calendar",
+        price: "¥200,000",
         pricePrefix: "From ",
         source: "pricing-convert",
         highlight: true,
-        badge: "Recommended for most teams",
+        badge: "Most popular setup",
         whoFor: "For teams that want qualified visitors converted into booked meetings.",
-        blurb: "Everything in Lead Acquisition, plus automated meeting booking the moment intent peaks.",
-        items: ["Everything in Lead Acquisition", "Meeton Calendar integration (unlimited)", "AI concierge & auto-assignment", "Automated meeting booking"],
+        blurb: "Everything in the base plan, plus automated meeting booking the moment intent peaks.",
+        items: ["Everything in the base plan", "Meeting Booking add-on: Meeton Calendar (+¥50,000/mo)", "AI concierge & auto-assignment", "Unlimited calendar seats"],
         ctaHref: "/en/trial/?src=pricing&plan=meeting",
       },
       {
-        name: "All-in-One",
+        name: "Full stack (+ win-back)",
         stage: "①–④ end to end",
-        includes: "+ Email",
-        price: "¥240,000",
+        includes: "Base + Calendar + Email",
+        price: "¥250,000",
         pricePrefix: "From ",
         source: "pricing-allinone",
         highlight: false,
         whoFor: "For teams that want automated follow-up after missed conversions.",
-        blurb: "Everything in Meeting Acquisition, plus 1:1 autonomous follow-up that recovers the leads you'd otherwise lose.",
-        items: ["Everything in Meeting Acquisition", "Meeton Email features (unlimited)", "Behavior-signal-triggered 1:1 autonomous follow-up", "Re-conversion flow"],
+        blurb: "Everything in Base + Meeting Booking, plus 1:1 autonomous follow-up that recovers the leads you'd otherwise lose.",
+        items: ["Everything in Base + Meeting Booking", "Win-back add-on: Meeton Email (+¥50,000/mo)", "Behavior-signal-triggered 1:1 autonomous follow-up", "Re-conversion flow"],
         ctaHref: "/en/trial/?src=pricing&plan=all-in-one",
         cta2Label: "Book a demo",
         cta2Href: "/en/contact/",
@@ -292,16 +295,16 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
         a: "Request a trial, and we'll reach out within 1 business day to get you live — a single JS tag on your site, plus calendar and CRM connections. You then get full access to your plan's features for one month, free. No credit card is required to start, and you won't be billed automatically: paid service begins only after you confirm your plan at the end of the trial.",
       },
       {
-        q: "How should I choose a plan?",
-        a: "The plans map to the four jobs of an AI SDR. To identify and nurture website visitors, choose Lead Acquisition (from ¥120,000/mo). To convert qualified visitors into booked meetings, choose Meeting Acquisition (from ¥180,000/mo — recommended for most teams). To also recover missed leads with automated follow-up, choose All-in-One (from ¥240,000/mo). Higher plans include everything in the lower ones, and you can start any of them with a free trial.",
+        q: "How should I choose a setup?",
+        a: "The base plan — Lead Acquisition (from ¥150,000/mo: Chat + Ads + Library) — is the foundation. Add the Meeting Booking add-on (Meeton Calendar, +¥50,000/mo) to convert leads into booked meetings, and the Win-back add-on (Meeton Email, +¥50,000/mo) to recover missed leads automatically. The most popular setup is Base + Meeting Booking (from ¥200,000/mo); the full stack is from ¥250,000/mo. Every setup starts with a free trial.",
       },
       {
         q: "What determines the final price?",
-        a: "Two axes: the plan (range of features) and your monthly website traffic. Every plan includes up to 30,000 sessions/mo; 30,000–100,000 is +¥60,000/mo, 100,000–300,000 is +¥120,000/mo, and over 300,000 is quote-based. If you're not sure about your traffic, start with the base plan — we'll notify you before any traffic-based change. Calendar integration is unlimited on all plans.",
+        a: "Two axes: your setup (base plan + the add-ons you choose, ¥50,000/mo each) and your monthly website traffic. Every setup includes up to 30,000 sessions/mo; 30,000–100,000 is +¥60,000/mo, 100,000–300,000 is +¥120,000/mo, and over 300,000 is quote-based. If you're not sure about your traffic, start with the base plan — we'll notify you before any traffic-based change. Calendar seats are unlimited on the Meeting Booking add-on.",
       },
       {
-        q: "Can I upgrade to a higher plan later?",
-        a: "Yes. You can upgrade step by step as your business grows — Lead Acquisition → Meeting Acquisition → All-in-One — adding meeting booking (Calendar) and win-back (Email) when you need them.",
+        q: "Can I add or remove add-ons later?",
+        a: "Yes. Start with the base plan and add meeting booking (Calendar) or win-back (Email) whenever you're ready — each is a simple ¥50,000/mo add-on, and you can change your setup as your business grows.",
       },
       {
         q: "What about multiple sites or advanced requirements?",
@@ -333,18 +336,11 @@ export const pricingProductSchema = (lang: Lang, url: string) => {
     operatingSystem: "Web",
     url,
     publisher: { "@id": "https://dynameet.ai/#organization" },
-    offers:
-      lang === "en"
-        ? [
-            { "@type": "Offer", name: plans[0].name, price: "120000", priceCurrency: "JPY" },
-            { "@type": "Offer", name: plans[1].name, price: "180000", priceCurrency: "JPY" },
-            { "@type": "Offer", name: plans[2].name, price: "240000", priceCurrency: "JPY" },
-          ]
-        : [
-            { "@type": "Offer", name: plans[0].name, price: "120000", priceCurrency: "JPY" },
-            { "@type": "Offer", name: plans[1].name },
-            { "@type": "Offer", name: plans[2].name },
-          ],
+    offers: [
+      { "@type": "Offer", name: plans[0].name, price: "150000", priceCurrency: "JPY" },
+      { "@type": "Offer", name: plans[1].name, price: "200000", priceCurrency: "JPY" },
+      { "@type": "Offer", name: plans[2].name, price: "250000", priceCurrency: "JPY" },
+    ],
   };
 };
 

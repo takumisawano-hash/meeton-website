@@ -33,9 +33,9 @@ const LABEL_MAP: Record<string, string> = {
 }
 
 const PLANS = [
-  { id: 'lead', label: 'Lead Acquisition', price: 'From ¥120,000/mo' },
-  { id: 'meeting', label: 'Meeting Acquisition', price: 'From ¥180,000/mo', recommended: true },
-  { id: 'all-in-one', label: 'All-in-One', price: 'From ¥240,000/mo' },
+  { id: 'lead', label: 'Lead Acquisition (base)', price: 'From ¥150,000/mo' },
+  { id: 'meeting', label: 'Base + Meeting Booking', price: 'From ¥200,000/mo', recommended: true },
+  { id: 'all-in-one', label: 'Full stack (+ win-back)', price: 'From ¥250,000/mo' },
   { id: 'unsure', label: 'Not sure yet', price: "We'll recommend one" },
 ]
 

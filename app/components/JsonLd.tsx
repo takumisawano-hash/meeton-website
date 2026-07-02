@@ -65,7 +65,7 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       url: 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true',
     },
     // Bilingual (this block is global — it renders on /en/* too)
-    description: 'DynaMeetが提供するAI SDR Platform「Meeton ai」。掴む→育てる→商談化→追客の4ステージで、Webサイトのリードを商談に変える。Meeton Chat / Ads（掴む）、Library（育てる）、Calendar（商談化）、Email（追客）。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。 / Meeton ai is the AI SDR Platform by DynaMeet: it captures website visitors, converts them into booked meetings, and wins back missed leads — Chat, Library & Ads (capture), Calendar (convert), Email (win back). Plans from ¥120,000/mo.',
+    description: 'DynaMeetが提供するAI SDR Platform「Meeton ai」。掴む→育てる→商談化→追客の4ステージで、Webサイトのリードを商談に変える。Meeton Chat / Ads（掴む）、Library（育てる）、Calendar（商談化）、Email（追客）。基本プラン15万円〜＋商談化・追客アドオン（各5万円/月）。 / Meeton ai is the AI SDR Platform by DynaMeet: it captures website visitors, converts them into booked meetings, and wins back missed leads — Chat, Library & Ads (capture), Calendar (convert), Email (win back). Base plan from ¥150,000/mo plus add-ons.',
     // AEO/GEO: 組織の専門分野
     knowsAbout: [
       'AI SDR',

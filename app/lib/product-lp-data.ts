@@ -71,7 +71,7 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     crossSell: "予約の前にチャットで温度を上げ、予約しなかった人はメールで追う——4つの仕事がつながると一気通貫のAI SDRに。",
     faq: [
       { q: "Calendly や TimeRex と何が違いますか？", a: "予約URLを渡すだけのツールと異なり、Meeton Calendar はコンバート直後にAIが会話で疑問を解消し、温度を上げてから予約枠へ誘導します。さらに担当者の自動アサイン・CRM登録・通知まで自律化するため、初動の速さと取りこぼし防止の両方を同時に解決します。" },
-      { q: "料金はいくらですか？", a: "Meeton ai は月額12万円〜の3プラン（リード獲得 / 商談獲得 / オールインワン）で、月間トラフィックと利用機能で変動します。詳細は料金ページをご覧ください。まず30分のデモで自社への効き方を確認できます。" },
+      { q: "料金はいくらですか？", a: "基本プラン「リード獲得」（15万円〜/月）に、商談化アドオン（Calendar +5万円）・追客アドオン（Email +5万円）を必要な分だけ追加する体系です。規模は月間トラフィックで変動します。詳細は料金ページをご覧ください。まず30分のデモで自社への効き方を確認できます。" },
       { q: "導入にどれくらいかかりますか？", a: "ノーコードです。カレンダーをOAuth接続し、予約URLを発行すれば数分で稼働します。設定はすべてアプリ内でユーザー自身が完結でき、開発は不要です。" },
     ],
   },
@@ -268,7 +268,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     crossSell: "Raise intent with chat before the booking, and follow up by email with everyone who didn't book—when the four jobs connect, you get an end-to-end AI SDR.",
     faq: [
       { q: "How is this different from Calendly or TimeRex?", a: "Unlike tools that simply hand over a booking URL, Meeton Calendar has AI answer questions in conversation the instant a lead converts, raising intent before guiding them to a slot. It then automates rep assignment, CRM logging, and notifications—solving both speed to lead and lead leakage at the same time." },
-      { q: "How much does it cost?", a: "Meeton ai offers three plans starting from ¥120,000/mo (Lead Generation / Meeting Generation / All-in-One), priced by monthly traffic and the features you use. See the pricing page for details. Start with a 30-minute demo to see how it works for your team." },
+      { q: "How much does it cost?", a: "One base plan from ¥150,000/mo (Chat + Ads + Library), plus meeting-booking and win-back add-ons at ¥50,000/mo each — priced by monthly traffic. See the pricing page for details, and start with a 1-month free trial or a 30-minute demo." },
       { q: "How long does it take to get started?", a: "It's no-code. Connect your calendar via OAuth, issue a booking URL, and you're live in minutes. Every setting is configured by users themselves inside the app—no development required." },
     ],
   },

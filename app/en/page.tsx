@@ -60,7 +60,7 @@ const homepageFaqSchema = {
       name: 'How is it priced?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Three plans from ¥120,000/mo: Lead Acquisition (capture & nurture), Meeting Acquisition (adds conversion — recommended for most teams), and All-in-One (adds win-back). Pricing scales with monthly traffic, and every plan starts with a 1-month free trial — no credit card required.',
+        text: 'A base plan plus add-ons: Lead Acquisition (base, from ¥150,000/mo: Chat + Ads + Library), then add Meeting Booking (Calendar, +¥50,000/mo) and Win-back (Email, +¥50,000/mo) as needed. The most popular setup is from ¥200,000/mo. Pricing scales with monthly traffic, and every setup starts with a 1-month free trial — no credit card required.',
       },
     },
     {
@@ -93,16 +93,16 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    'AI SDR Platform for Japanese B2B companies. Deployed on your website, it autonomously runs four stages: capture (Chat & Ads) → nurture (Library) → convert (Calendar) → win back (Email). From ¥120,000/mo, with three plans: Lead Acquisition / Meeting Acquisition / All-in-One.',
+    'AI SDR Platform for Japanese B2B companies. Deployed on your website, it autonomously runs four stages: capture (Chat & Ads) → nurture (Library) → convert (Calendar) → win back (Email). Base plan from ¥150,000/mo, plus meeting-booking and win-back add-ons (¥50,000/mo each).',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/en/',
   image: 'https://dynameet.ai/logo-dark.svg',
   offers: {
     '@type': 'Offer',
-    price: '120000',
+    price: '150000',
     priceCurrency: 'JPY',
-    description: 'From ¥120,000/mo. Three plans: Lead Generation / Meeting Generation / All-in-One. Varies by scale and features.',
+    description: 'Base plan from ¥150,000/mo plus add-ons (¥50,000/mo each). Varies by traffic and setup.',
   },
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'CRM integration', value: 'Native HubSpot & Salesforce integration' },

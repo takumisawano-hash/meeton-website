@@ -29,6 +29,7 @@ import type { NextRequest } from 'next/server'
 // "/chat/..." both redirect but "/chatfoo" does not.
 const EN_TWIN_PREFIXES = [
   'chat', 'calendar', 'library', 'email', 'ads', 'capture', 'tools/roi',
+  'privacy-policy', 'terms',
   'pricing', 'about', 'contact', 'enterprise', 'security', 'glossary',
   'cases', 'compare', 'alternatives', 'use-cases',
   'solutions/crm-to-meeting', 'solutions/lead-to-meeting',

@@ -53,13 +53,13 @@ export const COMPARE: Record<string, CompareData> = {
       C("主目的", "会話→予約→資料→追客の商談化（AI SDR）", "サンクスページでの即時商談化", true),
       C("予約前のAI会話", "AIが対話し温度を上げてから予約へ", "フォーム後にポップアップで予約提示", true),
       C("カバー範囲", "予約＋チャット＋資料共有＋追客の4機能", "商談化（サンクスページ/資料/名刺の3導線）"),
-      C("料金", "月額12万円〜の3プラン（公開）", "非公開（要問い合わせ）", true),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "非公開（要問い合わせ）", true),
       C("CRM連携", "Salesforce / HubSpot 自動登録", "Salesforce / HubSpot 連携・自動差配"),
       C("提供", "国産・日本語ネイティブ", "国産・日本語ネイティブ"),
     ],
     chooseMeeton: [
       "予約だけでなく会話・資料提案・追客まで1つのAI SDRで完結させたい",
-      "公開された料金体系（月額12万円〜）で検討を進めたい",
+      "公開された料金体系（基本プラン15万円〜）で検討を進めたい",
       "問い合わせ前の潜在層にもチャットで踏み込みたい",
     ],
     chooseCompetitor: [
@@ -68,7 +68,7 @@ export const COMPARE: Record<string, CompareData> = {
     ],
     faq: [
       { q: "immedio と Meeton Calendar はどちらが商談化に強いですか？", a: "どちらもインバウンドの商談化に強い国産SaaSです。immedio はサンクスページ商談化の専業として実績が豊富です。Meeton Calendar は、予約の前にAIが会話で温度を上げ、さらにチャット・資料共有・追客まで同じプラットフォームで繋がる点が異なります。用途が予約特化なら immedio、会話から追客まで一気通貫にしたいなら Meeton が向きます。" },
-      { q: "料金はどうなっていますか？", a: "Meeton ai は月額12万円〜の3プラン（リード獲得 / 商談獲得 / オールインワン）で、料金を公開しています。immedio は公開価格がなく要問い合わせです（2026年時点）。" },
+      { q: "料金はどうなっていますか？", a: "Meeton ai は基本プラン15万円〜＋アドオン（商談化・追客 各5万円/月）で、料金を公開しています。immedio は公開価格がなく要問い合わせです（2026年時点）。" },
     ],
     sources: [
       { claim: "immedio はサンクスページに1行タグで商談化、製品は immedio / Box / Forms の3構成。Sansanで商談処理工数60%削減等を公表", source: "immedio.io/function, immedio.io/case" },
@@ -94,7 +94,7 @@ export const COMPARE: Record<string, CompareData> = {
       C("主目的", "リードの商談化（会話→予約→追客）", "空き時間の自動調整（スケジューリング）", true),
       C("予約前のAI会話", "AIが対話し温度を上げる", "なし（空き調整に特化）", true),
       C("コンバート直後の自動起動", "フォーム/資料DL直後に予約導線", "予約URLを共有して相手が選択"),
-      C("料金感", "月額12万円〜の3プラン（税抜・公開）", "無料〜プレミアム ¥1,500/月程度（税抜・ユーザー）"),
+      C("料金感", "基本プラン15万円〜＋アドオン（税抜・公開）", "無料〜プレミアム ¥1,500/月程度（税抜・ユーザー）"),
       C("カバー範囲", "予約＋チャット＋資料＋追客の4機能", "日程調整（会議室予約・リマインド等）"),
     ],
     chooseMeeton: [
@@ -108,7 +108,7 @@ export const COMPARE: Record<string, CompareData> = {
     ],
     faq: [
       { q: "TimeRex と Meeton Calendar の違いは？", a: "TimeRex は空き時間の自動調整（スケジューリング）に特化した国産ツールで、無料から使えコストパフォーマンスが高いのが強みです。Meeton Calendar は日程調整に加え、予約の前にAIが会話で温度を上げ、CRM自動登録や追客まで繋ぐ「商談化」に最適化されています。目的が日程調整なら TimeRex、商談化なら Meeton が向きます。" },
-      { q: "料金はどちらが安いですか？", a: "純粋な日程調整の単価は TimeRex（無料〜月¥1,500程度/ユーザー）の方が安価です。Meeton ai は月額12万円〜の3プラン（税抜）で、会話・自動アサイン・CRM登録など商談化機能まで含みます。比較は『何を解きたいか』で行うのが適切です。" },
+      { q: "料金はどちらが安いですか？", a: "純粋な日程調整の単価は TimeRex（無料〜月¥1,500程度/ユーザー）の方が安価です。Meeton ai は基本プラン15万円〜＋アドオン（税抜）で、会話・自動アサイン・CRM登録など商談化機能まで含みます。比較は『何を解きたいか』で行うのが適切です。" },
     ],
     sources: [
       { claim: "TimeRex は登録者45万人、フリー〜エンタープライズの4段階、ISO27001取得、最大95%工数削減を公称", source: "timerex.net/plan, timerex.net/feature" },
@@ -132,7 +132,7 @@ export const COMPARE: Record<string, CompareData> = {
       C("主目的", "リードの商談化（会話→予約→追客）", "複数カレンダー統合のスケジューリング", true),
       C("予約前のAI会話", "AIが対話し温度を上げる", "なし", true),
       C("グローバル/タイムゾーン", "対応", "複数タイムゾーン対応に強み"),
-      C("料金", "月額12万円〜の3プラン（公開）", "無料（3名まで）〜チームプラン"),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "無料（3名まで）〜チームプラン"),
       C("カバー範囲", "予約＋チャット＋資料＋追客の4機能", "日程調整（カレンダー統合）"),
       C("提供", "国産・日本語", "国産・日本語"),
     ],
@@ -171,7 +171,7 @@ export const COMPARE: Record<string, CompareData> = {
       C("予約前のAI会話", "AIが対話し温度を上げる", "なし", true),
       C("日本語UI・サポート", "日本語ネイティブ", "公式日本語UI非対応（翻訳のみ）", true),
       C("連携エコシステム", "主要CRM/カレンダー/通知に対応", "100以上の連携で最広"),
-      C("料金", "月額12万円〜の3プラン（公開）", "無料（1イベントタイプ）〜有料プラン"),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "無料（1イベントタイプ）〜有料プラン"),
       C("カバー範囲", "予約＋チャット＋資料＋追客の4機能", "日程調整（チームはルーティング）"),
     ],
     chooseMeeton: [
@@ -226,7 +226,7 @@ export const COMPARE: Record<string, CompareData> = {
     ],
     faq: [
       { q: "DocSend と Meeton Library の違いは？", a: "DocSend はページ単位の精密な資料トラッキングとVDRに強いDropbox傘下の定番です。Meeton Library はそこにAIチャットによる資料解説を加え、CRM不要・日本語で始められ、開封シグナルをEmail/Calendarへ繋いで追客まで自動化する点が異なります。" },
-      { q: "料金はどうなっていますか？", a: "Meeton ai は月額12万円〜の3プラン（リード獲得 / 商談獲得 / オールインワン）で、料金を公開しています。DocSend は常設無料プランがなく、14日間トライアルが提供されています（2026年時点）。" },
+      { q: "料金はどうなっていますか？", a: "Meeton ai は基本プラン15万円〜＋アドオン（商談化・追客 各5万円/月）で、料金を公開しています。DocSend は常設無料プランがなく、14日間トライアルが提供されています（2026年時点）。" },
     ],
     sources: [
       { claim: "DocSendは2021年Dropboxが約1.65億ドルで買収。ページ単位トラッキング・VDR。無料プランなし/14日トライアル、Salesforce連携は有料アドオン", source: "dropbox.gcs-web.com, docsend.com" },
@@ -253,7 +253,7 @@ export const COMPARE: Record<string, CompareData> = {
       C("商談化への最適化", "温度を上げ予約まで運ぶ設計", "問い合わせ解決が中心", true),
       C("接触前の潜在層", "問い合わせ前の検討の土台に立つ", "主に既存/問い合わせ顧客", true),
       C("過去文脈の引き継ぎ", "閲覧・DL・会話履歴を引き継ぐ", "サポート文脈の管理に強い"),
-      C("料金感", "月額12万円〜の3プラン（税抜・公開）", "席料 + Fin $0.99/解決の従量"),
+      C("料金感", "基本プラン15万円〜＋アドオン（税抜・公開）", "席料 + Fin $0.99/解決の従量"),
       C("提供", "日本語ネイティブ・商談化特化", "英語中心・サポート特化"),
     ],
     chooseMeeton: [
@@ -267,7 +267,7 @@ export const COMPARE: Record<string, CompareData> = {
     ],
     faq: [
       { q: "Intercom と Meeton Chat はどちらが良いですか？", a: "解きたい課題が異なります。Intercom（Fin）は既存顧客のカスタマーサポート自動化に強く、問い合わせ解決率の高さが特長です。Meeton Chat は新規・潜在リードの『商談化』に特化し、接触前の検討の土台に立って会話し、温度が上がれば予約まで運びます。サポート削減なら Intercom、商談獲得なら Meeton が向きます。" },
-      { q: "料金はどう違いますか？", a: "Intercom は席料（$29〜132/seat/月）に加え Fin AI が $0.99/解決件の従量課金です。Meeton ai は月額12万円〜の3プラン（税抜）で、月間トラフィックと機能で変動するシンプルな体系です。用途と課金体系が異なるため、目的に沿って選ぶのが適切です。" },
+      { q: "料金はどう違いますか？", a: "Intercom は席料（$29〜132/seat/月）に加え Fin AI が $0.99/解決件の従量課金です。Meeton ai は基本プラン15万円〜＋アドオン（税抜）で、月間トラフィックと機能で変動するシンプルな体系です。用途と課金体系が異なるため、目的に沿って選ぶのが適切です。" },
     ],
     sources: [
       { claim: "IntercomはカスタマーサポートAI「Fin」が解決率67%・累計4,000万件超。席料$29〜132/月 + Fin $0.99/解決の従量", source: "intercom.com/pricing, sacra.com/c/intercom" },
@@ -378,13 +378,13 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion across conversation → booking → content → follow-up (AI SDR)", "Instant meeting conversion on the thank-you page", true),
       C("AI conversation before booking", "AI talks to warm up the lead before booking", "Shows a booking popup after the form", true),
       C("Coverage", "4 functions: booking + chat + content sharing + follow-up", "Meeting conversion (3 flows: thank-you page / content / business card)"),
-      C("Pricing", "3 plans from ¥120,000/mo (published)", "Not disclosed (contact required)", true),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Not disclosed (contact required)", true),
       C("CRM integration", "Auto-registers to Salesforce / HubSpot", "Salesforce / HubSpot integration & auto-routing"),
       C("Provided by", "Made in Japan, Japanese-native", "Made in Japan, Japanese-native"),
     ],
     chooseMeeton: [
       "You want to complete not just booking but conversation, content recommendation, and follow-up in one AI SDR",
-      "You want to move forward with a published pricing structure (from ¥120,000/mo)",
+      "You want to move forward with a published pricing structure (base plan from ¥150,000/mo)",
       "You want to engage even pre-inquiry prospects via chat",
     ],
     chooseCompetitor: [
@@ -393,7 +393,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "Which is stronger at meeting conversion, immedio or Meeton Calendar?", a: "Both are Japanese SaaS strong at inbound meeting conversion. immedio has a rich track record as a specialist in thank-you-page meeting conversion. Meeton Calendar differs in that, before booking, the AI warms up the lead through conversation, and chat, content sharing, and follow-up all connect on the same platform. If your use case is booking-focused, immedio fits; if you want everything from conversation to follow-up end to end, Meeton fits." },
-      { q: "How does pricing work?", a: "Meeton ai has 3 plans from ¥120,000/mo (Lead Generation / Meeting Generation / All-in-One) and discloses its pricing. immedio has no public pricing and requires an inquiry (as of 2026)." },
+      { q: "How does pricing work?", a: "Meeton ai has a base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each) and discloses its pricing. immedio has no public pricing and requires an inquiry (as of 2026)." },
     ],
     sources: [
       { claim: "immedio converts meetings with a one-line tag on the thank-you page; the product comprises immedio / Box / Forms. It publicly reports outcomes such as a 60% reduction in meeting-processing hours at Sansan", source: "immedio.io/function, immedio.io/case" },
@@ -419,7 +419,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion of leads (conversation → booking → follow-up)", "Automatic coordination of open slots (scheduling)", true),
       C("AI conversation before booking", "AI talks to warm up the lead", "None (specialized in slot coordination)", true),
       C("Auto-trigger right after conversion", "Booking flow right after a form / content download", "Shares a booking URL for the other party to choose"),
-      C("Pricing feel", "3 plans from ¥120,000/mo (excl. tax, published)", "Free to Premium, around ¥1,500/mo (excl. tax, per user)"),
+      C("Pricing feel", "Base plan from ¥150,000/mo + add-ons (excl. tax, published)", "Free to Premium, around ¥1,500/mo (excl. tax, per user)"),
       C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (meeting-room booking, reminders, etc.)"),
     ],
     chooseMeeton: [
@@ -433,7 +433,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What's the difference between TimeRex and Meeton Calendar?", a: "TimeRex is a Japanese tool specialized in automatic slot coordination (scheduling), with the strength of being free to start and highly cost-effective. Meeton Calendar is optimized for \"meeting conversion\"—on top of scheduling, the AI warms up the lead through conversation before booking and connects to CRM auto-registration and follow-up. If your purpose is scheduling, TimeRex fits; if it is meeting conversion, Meeton fits." },
-      { q: "Which is cheaper?", a: "For pure scheduling, the unit price of TimeRex (free to about ¥1,500/mo per user) is lower. Meeton ai has 3 plans from ¥120,000/mo (excl. tax), including meeting-conversion features such as conversation, auto-assignment, and CRM registration. It is appropriate to compare based on \"what problem you want to solve.\"" },
+      { q: "Which is cheaper?", a: "For pure scheduling, the unit price of TimeRex (free to about ¥1,500/mo per user) is lower. Meeton ai has a base plan from ¥150,000/mo plus add-ons (excl. tax), including meeting-conversion features such as conversation, auto-assignment, and CRM registration. It is appropriate to compare based on \"what problem you want to solve.\"" },
     ],
     sources: [
       { claim: "TimeRex has 450,000 registered users, 4 tiers from Free to Enterprise, ISO 27001 certification, and claims up to 95% reduction in hours", source: "timerex.net/plan, timerex.net/feature" },
@@ -457,7 +457,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion of leads (conversation → booking → follow-up)", "Scheduling with multi-calendar integration", true),
       C("AI conversation before booking", "AI talks to warm up the lead", "None", true),
       C("Global / time zones", "Supported", "Strength in multi-time-zone support"),
-      C("Pricing", "3 plans from ¥120,000/mo (published)", "Free (up to 3 people) to Team plans"),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free (up to 3 people) to Team plans"),
       C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (calendar integration)"),
       C("Provided by", "Made in Japan, Japanese", "Made in Japan, Japanese"),
     ],
@@ -496,7 +496,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("AI conversation before booking", "AI talks to warm up the lead", "None", true),
       C("Japanese UI & support", "Japanese-native", "No official Japanese UI (translation only)", true),
       C("Integration ecosystem", "Supports major CRMs / calendars / notifications", "Widest with 100+ integrations"),
-      C("Pricing", "3 plans from ¥120,000/mo (published)", "Free (1 event type) to paid plans"),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free (1 event type) to paid plans"),
       C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (routing for teams)"),
     ],
     chooseMeeton: [
@@ -551,7 +551,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What's the difference between DocSend and Meeton Library?", a: "DocSend is a Dropbox-owned standard strong at page-level precise content tracking and VDR. Meeton Library adds AI-chat content explanation on top, can start with no CRM in Japanese, and differs by connecting open signals to Email / Calendar to automate follow-up." },
-      { q: "How does pricing work?", a: "Meeton ai has 3 plans from ¥120,000/mo (Lead Generation / Meeting Generation / All-in-One) and discloses its pricing. DocSend has no permanent free plan and offers a 14-day trial (as of 2026)." },
+      { q: "How does pricing work?", a: "Meeton ai has a base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each) and discloses its pricing. DocSend has no permanent free plan and offers a 14-day trial (as of 2026)." },
     ],
     sources: [
       { claim: "DocSend was acquired by Dropbox for about $165M in 2021. Page-level tracking and VDR. No free plan / 14-day trial; Salesforce integration is a paid add-on", source: "dropbox.gcs-web.com, docsend.com" },
@@ -578,7 +578,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Optimization for meeting conversion", "Designed to warm up and carry to booking", "Centered on inquiry resolution", true),
       C("Pre-contact latent prospects", "Stands on the consideration foundation before inquiry", "Mainly existing / inquiring customers", true),
       C("Carrying over past context", "Carries over browsing, download, and conversation history", "Strong at managing support context"),
-      C("Pricing feel", "3 plans from ¥120,000/mo (excl. tax, published)", "Seat fee + Fin $0.99/resolution usage-based"),
+      C("Pricing feel", "Base plan from ¥150,000/mo + add-ons (excl. tax, published)", "Seat fee + Fin $0.99/resolution usage-based"),
       C("Provided by", "Japanese-native, meeting-conversion-focused", "English-centric, support-focused"),
     ],
     chooseMeeton: [
@@ -592,7 +592,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "Which is better, Intercom or Meeton Chat?", a: "They solve different problems. Intercom (Fin) is strong at automating customer support for existing customers, with a high inquiry resolution rate as its hallmark. Meeton Chat specializes in \"meeting conversion\" of new and latent leads—standing on the consideration foundation before contact to talk, and carrying to booking once intent rises. For support reduction, Intercom fits; for meeting acquisition, Meeton fits." },
-      { q: "How does pricing differ?", a: "Intercom charges a seat fee ($29–132/seat/mo) plus usage-based Fin AI at $0.99/resolution. Meeton ai has 3 plans from ¥120,000/mo (excl. tax), a simple structure that varies by monthly traffic and features. Because the use cases and billing models differ, it is appropriate to choose based on your purpose." },
+      { q: "How does pricing differ?", a: "Intercom charges a seat fee ($29–132/seat/mo) plus usage-based Fin AI at $0.99/resolution. Meeton ai has a base plan from ¥150,000/mo plus add-ons (excl. tax), a simple structure that varies by monthly traffic and features. Because the use cases and billing models differ, it is appropriate to choose based on your purpose." },
     ],
     sources: [
       { claim: "Intercom's customer-support AI \"Fin\" has a 67% resolution rate and 40M+ cumulative. Seat fee $29–132/mo + usage-based Fin at $0.99/resolution", source: "intercom.com/pricing, sacra.com/c/intercom" },

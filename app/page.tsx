@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
   },
   description:
-    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層を掴み（Chat・Ads）、資料で育て（Library）、商談化し（Calendar）、逃したリードを追客（Email）。掴む→育てる→商談化→追客の4ステージで、あらゆる瞬間を商談に変えます。',
+    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層を掴み（Chat・Ads）、資料で育て（Library）、商談化し（Calendar）、逃したリードを追客（Email）。掴む→育てる→商談化→追客の4ステージで、あらゆる瞬間を商談に変えます。基本プラン15万円〜。',
   alternates: altLanguages('/', 'ja'),
   openGraph: {
     title: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
@@ -59,7 +59,7 @@ const homepageFaqSchema = {
       name: '料金体系は？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '月額12万円〜の3プランです。掴む・育てるの『リード獲得プラン（¥12万〜）』、商談化まで含む『商談獲得プラン』、追客まで一気通貫の『オールインワンプラン』。料金は月間トラフィックと機能で変動し、適格請求書（インボイス）に対応します。',
+        text: '基本プラン『リード獲得』（15万円〜、Chat + Ads + Library）に、商談化アドオン（Calendar +5万円/月）・追客アドオン（Email +5万円/月）を必要な分だけ追加する体系です。人気の基本＋商談化は20万円〜、フル構成は25万円〜。規模は月間トラフィックで変動し、適格請求書（インボイス）に対応します。',
       },
     },
     {
@@ -92,16 +92,16 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Ads）→育てる（Library）→商談化（Calendar）→追客（Email）の4ステージを自律化。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。',
+    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Ads）→育てる（Library）→商談化（Calendar）→追客（Email）の4ステージを自律化。基本プラン15万円〜＋商談化・追客アドオン（各5万円/月）。',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/',
   image: 'https://dynameet.ai/logo-dark.svg',
   offers: {
     '@type': 'Offer',
-    price: '120000',
+    price: '150000',
     priceCurrency: 'JPY',
-    description: '月額12万円〜。リード獲得 / 商談獲得 / オールインワン の3プラン。規模・機能により変動。',
+    description: '基本プラン15万円〜＋商談化・追客アドオン（各5万円/月）。規模・構成により変動。',
   },
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'CRM連携', value: 'HubSpot・Salesforce ネイティブ連携' },
