@@ -173,7 +173,7 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
       </Section>
 
       {/* 2.5 Customer logo wall — social proof near first view */}
-      <LogoWall tone="white" {...(lang === "en" ? { heading: "Chosen on the front lines of meeting generation, across every industry" } : {})} />
+      <LogoWall tone="white" {...(lang === "en" ? { lang: "en" as const, heading: "Chosen on the front lines of meeting generation, across every industry" } : {})} />
 
       {/* 4. The 3 stages (deck p7) — 掴む → 商談化 → 追客 */}
       <Section tone="surface" id="stages">
@@ -185,7 +185,7 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
         <StageFlow lang={lang} />
         <p style={{ fontSize: 13, color: "var(--sub)", marginTop: 18, textAlign: "center" }}>
           {s.stagesPriceA}
-          <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>{s.stagesPriceLink}</Link>
+          <Link href={lang === "en" ? "/en/pricing/" : "/pricing/"} className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>{s.stagesPriceLink}</Link>
         </p>
       </Section>
 
@@ -198,7 +198,7 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
           <SectionHead eyebrow={s.casesEyebrow} title={s.casesTitle} align="center" />
           <FeaturedCase c={caseStudies.find((x) => x.slug === "g-gen-inside-sales-sql-2x") ?? caseStudies[0]} lang={lang} />
           <div style={{ textAlign: "center", marginTop: 32 }}>
-            <Link href="/cases/" className="v2-link" style={{ fontSize: 15, fontWeight: 800, color: "var(--cta-ink)", textDecoration: "none", border: "1.5px solid var(--border2)", borderRadius: 12, padding: "13px 28px", display: "inline-block" }}>
+            <Link href={lang === "en" ? "/en/cases/" : "/cases/"} className="v2-link" style={{ fontSize: 15, fontWeight: 800, color: "var(--cta-ink)", textDecoration: "none", border: "1.5px solid var(--border2)", borderRadius: 12, padding: "13px 28px", display: "inline-block" }}>
               {s.casesAll}
             </Link>
           </div>

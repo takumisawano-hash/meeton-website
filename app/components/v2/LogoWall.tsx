@@ -6,25 +6,33 @@ import { Section } from "@/app/components/v2/ui";
 // Meeton site, and an auto-scrolling marquee so a finite set reads as "many".
 // The track is duplicated once for a seamless CSS loop; paused on hover.
 
-export type ClientLogo = { name: string; logo: string };
+export type ClientLogo = { name: string; logo: string; nameEn?: string };
 
 export const CLIENTS: ClientLogo[] = [
   { name: "G-gen", logo: "/clients/ggen.png" },
   { name: "EduLinx", logo: "/clients/edulinx.png" },
   { name: "Univis Group", logo: "/clients/univis.png" },
-  { name: "銀座桜屋", logo: "/clients/ginza-sakuraya.png" },
+  { name: "銀座桜屋", logo: "/clients/ginza-sakuraya.png", nameEn: "Ginza Sakuraya" },
   { name: "BizteX", logo: "/clients/biztex.png" },
   { name: "Domo", logo: "/clients/domo.svg" },
-  { name: "インプレックスアンドカンパニー", logo: "/clients/imprexc.png" },
+  { name: "インプレックスアンドカンパニー", logo: "/clients/imprexc.png", nameEn: "Imprex and Company" },
 ];
 
 export default function LogoWall({
   tone = "surface",
-  heading = "業種を問わず、商談化の現場で選ばれています",
+  heading,
+  lang = "ja",
 }: {
   tone?: "surface" | "white" | "navy";
   heading?: string;
+  /** default-heading locale; explicit heading always wins */
+  lang?: "ja" | "en";
 }) {
+  const resolvedHeading =
+    heading ??
+    (lang === "en"
+      ? "Chosen on the front lines of meeting generation, across every industry"
+      : "業種を問わず、商談化の現場で選ばれています");
   const dark = tone === "navy";
   const loop = [...CLIENTS, ...CLIENTS]; // duplicate for seamless marquee
   return (
@@ -41,15 +49,18 @@ export default function LogoWall({
           margin: "0 0 24px",
         }}
       >
-        {heading}
+        {resolvedHeading}
       </p>
       <div className="v2-marquee">
         <div className="v2-marquee-track">
-          {loop.map((c, i) => (
-            <div key={`${c.name}-${i}`} className="v2-logo-card" title={c.name} aria-hidden={i >= CLIENTS.length}>
-              <Image src={c.logo} alt={i < CLIENTS.length ? c.name : ""} width={140} height={44} style={{ height: 40, width: "auto", maxWidth: 150, objectFit: "contain" }} />
-            </div>
-          ))}
+          {loop.map((c, i) => {
+            const label = lang === "en" ? (c.nameEn ?? c.name) : c.name;
+            return (
+              <div key={`${c.name}-${i}`} className="v2-logo-card" title={label} aria-hidden={i >= CLIENTS.length}>
+                <Image src={c.logo} alt={i < CLIENTS.length ? label : ""} width={140} height={44} style={{ height: 40, width: "auto", maxWidth: 150, objectFit: "contain" }} />
+              </div>
+            );
+          })}
         </div>
       </div>
       <style>{`

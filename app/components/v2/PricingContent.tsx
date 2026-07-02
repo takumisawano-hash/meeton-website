@@ -9,8 +9,10 @@ import { demoUrl } from "@/app/lib/cta-urls";
 import type { Lang } from "@/app/lib/i18n";
 
 // Lang-aware pricing body. JA is the default → the existing /pricing/ page
-// renders byte-identically. The 3-plan structure and amounts (¥120,000〜 /
-// Contact us) are founder-fixed; EN only translates labels/copy, never numbers.
+// renders byte-identically (all EN-only sections hang off optional fields).
+// 2026-07-02 EN self-serve pivot (founder-approved): the EN page publishes all
+// three plan prices (From ¥120,000 / ¥180,000 / ¥240,000) with a 1-month
+// free-trial CTA → /en/trial/. JA keeps ¥12万〜 + お問い合わせ.
 
 type Plan = {
   name: string;
@@ -22,6 +24,16 @@ type Plan = {
   badge?: string;
   blurb: string;
   items: string[];
+  /** rendered small before the ¥ amount (EN "From ") */
+  pricePrefix?: string;
+  /** one-line audience statement above the blurb (EN self-serve) */
+  whoFor?: string;
+  /** CTA override; default = demo booking */
+  ctaLabel?: string;
+  ctaHref?: string;
+  /** optional second (ghost) CTA under the primary */
+  cta2Label?: string;
+  cta2Href?: string;
 };
 
 type PricingStrings = {
@@ -56,6 +68,12 @@ type PricingStrings = {
   plans: Plan[];
   traffic: { tier: string; add: string }[];
   faq: { q: string; a: string }[];
+  /** EN-only: reassurance line under the plan grid (trial terms) */
+  plansFine?: string;
+  /** EN-only: slim Enterprise banner under the plan grid */
+  enterprise?: { name: string; desc: string; price: string; ctaLabel: string; ctaHref: string };
+  /** EN-only: extra reassurance under the traffic table ("not sure?") */
+  trafficReassure?: string;
 };
 
 export const PRICING_STR: Record<Lang, PricingStrings> = {
@@ -163,101 +181,127 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     ],
   },
   en: {
-    metaTitleAbsolute: "Pricing｜Meeton ai — three plans: capture → convert → win back",
+    metaTitleAbsolute: "Pricing｜Meeton ai — start with a 1-month free trial",
     metaDescription:
-      "Meeton ai pricing. Lead Acquisition plan from ¥120,000/mo (capture & nurture). Meeting Acquisition plan (+convert) and All-in-One plan (+win back) are quote-based. Scale is set by monthly traffic, features in three tiers. All prices are tax-exclusive / month, with Japan qualified-invoice support.",
-    ogTitle: "Pricing｜Meeton ai — three plans: capture → convert → win back",
+      "Meeton ai pricing. Lead Acquisition from ¥120,000/mo, Meeting Acquisition from ¥180,000/mo, All-in-One from ¥240,000/mo — every plan starts with a 1-month free trial, no credit card required. All plans include up to 30,000 website sessions/mo with transparent traffic add-ons.",
+    ogTitle: "Pricing｜Meeton ai — start with a 1-month free trial",
     ogDescription:
-      "Lead Acquisition from ¥120,000/mo / Meeting Acquisition & All-in-One are quote-based. Scale by monthly traffic, features in three tiers.",
-    heroEyebrow: "Pricing plans",
+      "Lead Acquisition from ¥120,000/mo · Meeting Acquisition from ¥180,000/mo · All-in-One from ¥240,000/mo. 1-month free trial, no credit card required.",
+    heroEyebrow: "Pricing",
     heroH1a: (
       <>
-        Capture → <span style={{ color: "var(--cta)" }}>convert</span> → win back.<br />Start from the stage you need.
+        Start with a <span style={{ color: "var(--cta)" }}>1-month free trial</span>.
       </>
     ),
-    heroSub: "Scale is set by monthly traffic, and features split into three tiers. All prices are tax-exclusive / month.",
+    heroSub: "Choose the workflow that matches your sales motion — capture visitors, book meetings, win back missed leads. No credit card required to start. All prices are tax-exclusive / month.",
     heroSecondaryLabel: "See customer stories",
     plansEyebrow: "Three plans",
-    plansTitle: "Mapped directly to the three jobs of an AI SDR.",
+    plansTitle: "Choose your AI SDR workflow.",
     plansLede:
-      "Higher plans include all the features of the lower ones. Add convert (Calendar) and win back (Email) as your business grows.",
-    priceUnit: " 〜 / mo (excl. tax)",
-    planCta: "Talk to us about this plan",
+      "Every plan starts with a 1-month free trial. Higher plans include everything in the lower ones — add meeting booking (Calendar) and win-back (Email) as you grow.",
+    priceUnit: " / mo (excl. tax)",
+    planCta: "Start 1-month free trial",
     stagesLinkPre: "For how the stages work, see",
     stagesLinkText: "the three jobs of an AI SDR",
-    trafficEyebrow: "Traffic add-on (all plans)",
-    trafficTitle: "Scale is set by monthly traffic.",
-    trafficColTier: "Monthly traffic",
-    trafficColAdd: "Add-on fee",
+    trafficEyebrow: "Included traffic (all plans)",
+    trafficTitle: "Every plan includes up to 30,000 sessions / month.",
+    trafficColTier: "Monthly website sessions",
+    trafficColAdd: "Add-on",
     trafficNote: (
       <>
-        Calendar integration is unlimited on every plan. For multiple sites and advanced integrations, see{" "}
-        <Link href="/enterprise/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Enterprise (contact us)</Link>. Annual prepay is 2 months free (about 17% off). We issue Japan qualified invoices (invoice-system compliant).
+        Calendar integration is unlimited on every plan. Annual prepay is 2 months free (about 17% off). For multiple sites and advanced integrations, see{" "}
+        <Link href="/en/enterprise/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Enterprise</Link>.
       </>
     ),
+    trafficReassure:
+      "Not sure about your traffic? Start with the base plan — we'll notify you before any traffic-based change to your plan. No surprise charges.",
     integEyebrow: "Integrations",
     integTitle: "Connects with major CRM, MA, and notification platforms.",
     faqEyebrow: "FAQ",
     faqTitle: "Pricing FAQ",
     roiLink: "First, estimate your meeting-conversion upside (ROI diagnosis) →",
-    finalTitle: "Let's find the plan that fits — start with a talk.",
-    finalSub: "In a 30-minute demo, we propose a concrete setup matched to your scale and stage.",
+    finalTitle: "Start your 1-month free trial today.",
+    finalSub: "Install with a single JS tag, connect your calendar and CRM, and see your first AI-qualified conversations this week. Prefer a walkthrough first? Book a 30-minute demo.",
     casesLabel: "See customer stories",
+    plansFine:
+      "✓ 1-month free trial on every plan · ✓ No credit card required to start · ✓ Cancel anytime during the trial — you approve before any paid plan begins",
+    enterprise: {
+      name: "Enterprise",
+      desc: "Multiple sites, advanced CRM integrations, SSO, and security reviews — custom traffic and terms.",
+      price: "Custom",
+      ctaLabel: "Book a demo",
+      ctaHref: "/en/contact/",
+    },
     plans: [
       {
-        name: "Lead Acquisition plan",
+        name: "Lead Acquisition",
         stage: "① Capture & nurture",
         includes: "Live + Library",
         price: "¥120,000",
+        pricePrefix: "From ",
         source: "pricing-lead",
         highlight: false,
-        blurb: "Capture latent prospects, nurture them, and turn them into leads. An entry point for companies that don't yet need Calendar.",
+        whoFor: "For teams that want to identify and nurture website visitors.",
+        blurb: "Capture latent prospects in conversation, nurture them with content, and turn them into qualified leads.",
         items: ["Meeton Chat (capture visitors in conversation)", "Meeton Library (nurture consideration with content)", "CRM integration", "Open & behavior tracking"],
+        ctaHref: "/en/trial/?src=pricing&plan=lead",
       },
       {
-        name: "Meeting Acquisition plan",
+        name: "Meeting Acquisition",
         stage: "① + ② through to convert",
         includes: "+ Calendar",
-        price: "Contact us",
+        price: "¥180,000",
+        pricePrefix: "From ",
         source: "pricing-convert",
         highlight: true,
-        badge: "Recommended",
-        blurb: "Carry captured leads all the way to a booked meeting. The most-chosen setup.",
-        items: ["Everything in the Lead Acquisition plan", "Meeton Calendar integration (unlimited)", "AI concierge & auto-assignment", "Automated meeting booking"],
+        badge: "Recommended for most teams",
+        whoFor: "For teams that want qualified visitors converted into booked meetings.",
+        blurb: "Everything in Lead Acquisition, plus automated meeting booking the moment intent peaks.",
+        items: ["Everything in Lead Acquisition", "Meeton Calendar integration (unlimited)", "AI concierge & auto-assignment", "Automated meeting booking"],
+        ctaHref: "/en/trial/?src=pricing&plan=meeting",
       },
       {
-        name: "All-in-One plan",
+        name: "All-in-One",
         stage: "① + ② + ③ end to end",
         includes: "+ Email",
-        price: "Contact us",
+        price: "¥240,000",
+        pricePrefix: "From ",
         source: "pricing-allinone",
         highlight: false,
-        blurb: "Recover missed leads with follow-up too. Maximize capture → convert → win back, end to end.",
-        items: ["Everything in the Meeting Acquisition plan", "Meeton Email features (unlimited)", "Behavior-signal-triggered 1:1 autonomous follow-up", "Re-conversion flow"],
+        whoFor: "For teams that want automated follow-up after missed conversions.",
+        blurb: "Everything in Meeting Acquisition, plus 1:1 autonomous follow-up that recovers the leads you'd otherwise lose.",
+        items: ["Everything in Meeting Acquisition", "Meeton Email features (unlimited)", "Behavior-signal-triggered 1:1 autonomous follow-up", "Re-conversion flow"],
+        ctaHref: "/en/trial/?src=pricing&plan=all-in-one",
+        cta2Label: "Book a demo",
+        cta2Href: "/en/contact/",
       },
     ],
     traffic: [
-      { tier: "Up to 30k sessions/mo", add: "Included in the base fee" },
-      { tier: "Up to 100k sessions/mo", add: "+¥60,000" },
-      { tier: "Up to 300k sessions/mo", add: "+¥120,000" },
-      { tier: "Over 300k", add: "Contact us" },
+      { tier: "Up to 30,000 sessions / mo", add: "Included in every plan" },
+      { tier: "30,000 – 100,000 sessions / mo", add: "+¥60,000 / mo" },
+      { tier: "100,000 – 300,000 sessions / mo", add: "+¥120,000 / mo" },
+      { tier: "Over 300,000 sessions / mo", add: "Contact us" },
     ],
     faq: [
       {
+        q: "How does the 1-month free trial work?",
+        a: "Request a trial, and we'll reach out within 1 business day to get you live — a single JS tag on your site, plus calendar and CRM connections. You then get full access to your plan's features for one month, free. No credit card is required to start, and you won't be billed automatically: paid service begins only after you confirm your plan at the end of the trial.",
+      },
+      {
         q: "How should I choose a plan?",
-        a: "The plans map to the three jobs of an AI SDR. If you only need to capture latent prospects and turn them into leads, choose the Lead Acquisition plan (from ¥120,000). To carry captured leads through to a meeting, choose the Meeting Acquisition plan (contact us — the most-chosen setup). For end-to-end follow-up of missed leads as well, choose the All-in-One plan (contact us). Higher plans include all the features of the lower ones.",
+        a: "The plans map to the three jobs of an AI SDR. To identify and nurture website visitors, choose Lead Acquisition (from ¥120,000/mo). To convert qualified visitors into booked meetings, choose Meeting Acquisition (from ¥180,000/mo — recommended for most teams). To also recover missed leads with automated follow-up, choose All-in-One (from ¥240,000/mo). Higher plans include everything in the lower ones, and you can start any of them with a free trial.",
       },
       {
-        q: "What determines the price?",
-        a: "Two axes: the plan (range of features) and monthly traffic (number of sessions). The base fee includes up to 30k sessions/mo; up to 100k is +¥60,000, up to 300k is +¥120,000, and over 300k is quote-based. Calendar integration is unlimited on all plans.",
+        q: "What determines the final price?",
+        a: "Two axes: the plan (range of features) and your monthly website traffic. Every plan includes up to 30,000 sessions/mo; 30,000–100,000 is +¥60,000/mo, 100,000–300,000 is +¥120,000/mo, and over 300,000 is quote-based. If you're not sure about your traffic, start with the base plan — we'll notify you before any traffic-based change. Calendar integration is unlimited on all plans.",
       },
       {
-        q: "Can I upgrade to a higher plan?",
-        a: "Yes. You can upgrade step by step as your business grows — Lead Acquisition → Meeting Acquisition → All-in-One — adding convert (Calendar) and win back (Email) later.",
+        q: "Can I upgrade to a higher plan later?",
+        a: "Yes. You can upgrade step by step as your business grows — Lead Acquisition → Meeting Acquisition → All-in-One — adding meeting booking (Calendar) and win-back (Email) when you need them.",
       },
       {
         q: "What about multiple sites or advanced requirements?",
-        a: "Multiple-site operation, advanced CRM integration, SSO, and security requirements are handled with Enterprise (contact us). See the Enterprise page for details.",
+        a: "Multiple-site operation, advanced CRM integration, SSO, and security requirements are handled with Enterprise (custom pricing). See the Enterprise page or book a demo to discuss your setup.",
       },
       {
         q: "What payment methods and invoices do you support?",
@@ -285,11 +329,18 @@ export const pricingProductSchema = (lang: Lang, url: string) => {
     operatingSystem: "Web",
     url,
     publisher: { "@id": "https://dynameet.ai/#organization" },
-    offers: [
-      { "@type": "Offer", name: plans[0].name, price: "120000", priceCurrency: "JPY" },
-      { "@type": "Offer", name: plans[1].name },
-      { "@type": "Offer", name: plans[2].name },
-    ],
+    offers:
+      lang === "en"
+        ? [
+            { "@type": "Offer", name: plans[0].name, price: "120000", priceCurrency: "JPY" },
+            { "@type": "Offer", name: plans[1].name, price: "180000", priceCurrency: "JPY" },
+            { "@type": "Offer", name: plans[2].name, price: "240000", priceCurrency: "JPY" },
+          ]
+        : [
+            { "@type": "Offer", name: plans[0].name, price: "120000", priceCurrency: "JPY" },
+            { "@type": "Offer", name: plans[1].name },
+            { "@type": "Offer", name: plans[2].name },
+          ],
   };
 };
 
@@ -321,7 +372,7 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
         </div>
       </Section>
 
-      <LogoWall tone="surface" />
+      <LogoWall tone="surface" lang={lang} />
 
       {/* 3 plans (deck p19) */}
       <Section tone="white">
@@ -347,6 +398,7 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
               <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: "12px 0 2px", minHeight: 70, fontVariantNumeric: "tabular-nums" }}>
                 {p.price.startsWith("¥") ? (
                   <>
+                    {p.pricePrefix && <span style={{ fontSize: 20, fontWeight: 700, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{p.pricePrefix}</span>}
                     <span style={{ fontSize: 42 }}>{p.price}</span>
                     <span style={{ fontSize: 14, fontWeight: 600, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{s.priceUnit}</span>
                   </>
@@ -354,6 +406,9 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
                   <span style={{ fontSize: 34 }}>{p.price}</span>
                 )}
               </div>
+              {p.whoFor && (
+                <p style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.6, color: p.highlight ? "var(--cta)" : "var(--cta-ink)", margin: "8px 0 0" }}>{p.whoFor}</p>
+              )}
               <p style={{ fontSize: 13.5, lineHeight: 1.7, color: p.highlight ? "var(--on-navy-sub)" : "var(--text)", margin: "10px 0 16px" }}>{p.blurb}</p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px", display: "grid", gap: 9 }}>
                 {p.items.map((it) => (
@@ -361,7 +416,7 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
                 ))}
               </ul>
               <a
-                href={demoUrl(p.source)}
+                href={p.ctaHref ?? demoUrl(p.source)}
                 className={p.highlight ? "v2-cta-primary" : "v2-cta-ghost"}
                 style={{
                   marginTop: "auto", textAlign: "center", padding: "12px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none",
@@ -371,11 +426,42 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
                   boxShadow: p.highlight ? "0 6px 22px var(--cta-glow)" : "none",
                 }}
               >
-                {s.planCta}
+                {p.ctaLabel ?? s.planCta}
               </a>
+              {p.cta2Label && p.cta2Href && (
+                <a
+                  href={p.cta2Href}
+                  className="v2-cta-ghost"
+                  style={{
+                    marginTop: 10, textAlign: "center", padding: "10px 20px", borderRadius: 12, fontSize: 14, fontWeight: 700, textDecoration: "none",
+                    background: "transparent",
+                    color: p.highlight ? "var(--on-navy)" : "var(--heading)",
+                    border: "1.5px solid var(--border2)",
+                  }}
+                >
+                  {p.cta2Label}
+                </a>
+              )}
             </Card>
           ))}
         </div>
+        {s.plansFine && (
+          <p style={{ textAlign: "center", marginTop: 20, fontSize: 13.5, fontWeight: 600, color: "var(--cta-ink)", lineHeight: 1.8 }}>
+            {s.plansFine}
+          </p>
+        )}
+        {s.enterprise && (
+          <div style={{ maxWidth: 900, margin: "24px auto 0", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 16, padding: "20px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 16, justifyContent: "space-between" }}>
+            <div style={{ minWidth: 240, flex: "1 1 320px" }}>
+              <span style={{ fontSize: 16, fontWeight: 800, color: "var(--heading)", marginRight: 10 }}>{s.enterprise.name}</span>
+              <span style={{ fontFamily: "var(--fd)", fontSize: 15, fontWeight: 800, color: "var(--heading)" }}>{s.enterprise.price}</span>
+              <p style={{ fontSize: 13.5, lineHeight: 1.7, color: "var(--text)", margin: "6px 0 0" }}>{s.enterprise.desc}</p>
+            </div>
+            <a href={s.enterprise.ctaHref} className="v2-cta-ghost" style={{ padding: "11px 22px", borderRadius: 12, fontSize: 14, fontWeight: 800, textDecoration: "none", color: "var(--heading)", border: "1.5px solid var(--border2)", whiteSpace: "nowrap" }}>
+              {s.enterprise.ctaLabel}
+            </a>
+          </div>
+        )}
         <p style={{ textAlign: "center", marginTop: 18, fontSize: 13, color: "var(--sub)" }}>
           {s.stagesLinkPre}{" "}
           <Link href={stagesHref} className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>{s.stagesLinkText}</Link>
@@ -396,6 +482,11 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
             </tbody>
           </table>
         </div>
+        {s.trafficReassure && (
+          <p style={{ textAlign: "center", marginTop: 16, fontSize: 14, fontWeight: 700, color: "var(--cta-ink)", maxWidth: 640, marginLeft: "auto", marginRight: "auto", lineHeight: 1.7 }}>
+            {s.trafficReassure}
+          </p>
+        )}
         <p style={{ textAlign: "center", marginTop: 16, fontSize: 13, color: "var(--sub)" }}>
           {s.trafficNote}
         </p>
@@ -404,7 +495,7 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
       {/* Integration logos */}
       <Section tone="white" py={56}>
         <SectionHead eyebrow={s.integEyebrow} title={balanced(s.integTitle)} align="center" />
-        <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Google Calendar", "Slack", "Microsoft Teams", "Zoom"])} />
+        <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Google Calendar", "Slack", "Microsoft Teams", "Zoom"])} lang={lang} />
       </Section>
 
       {/* FAQ */}

@@ -52,12 +52,13 @@ export default function EnterprisePageEn() {
           <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "18px 0 28px" }}>
             SSO, CRM integration, permission / audit logs, multiple sites, data handling — we set the foundations for enterprise deployment, with sales accompanying you through rollout.
           </p>
-          <CTAButtons source="enterprise-hero" tone="onNavy" size="lg" lang="en" />
+          {/* Enterprise stays demo-led (self-serve trial is for the 3 standard plans) */}
+          <CTAButtons source="enterprise-hero" tone="onNavy" size="lg" lang="en" primaryLabel="Book a demo" />
         </div>
       </Section>
 
       {/* Customer logo wall — "other enterprises have adopted us" social proof */}
-      <LogoWall tone="surface" heading="Companies including enterprises have adopted us" />
+      <LogoWall tone="surface" lang="en" heading="Companies including enterprises have adopted us" />
 
       <Section tone="white">
         <SectionHead eyebrow="Enterprise requirements" title="Built for governance, integration, and security." />
@@ -75,14 +76,14 @@ export default function EnterprisePageEn() {
           ))}
         </div>
         <p style={{ fontSize: 14, color: "var(--sub)", marginTop: 20 }}>
-          For security details see <Link href="/security/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Security</Link>, for integrations see the <Link href="/integrations/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>integrations list</Link>, and for pricing see <Link href="/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Pricing</Link>.
+          For security details see <Link href="/en/security/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Security</Link>, for integrations see the <Link href="/integrations/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>integrations list</Link>, and for pricing see <Link href="/en/pricing/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Pricing</Link>.
         </p>
       </Section>
 
       {/* Integration logos — make the supported stack visible */}
       <Section tone="surface" py={56}>
         <SectionHead eyebrow="Integrates with your core stack" title="Plugs into your existing CRM, MA, and notification infrastructure." align="center" />
-        <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Oracle Eloqua", "Microsoft Teams", "Slack"])} />
+        <IntegrationLogos items={pickIntegrations(["Salesforce", "HubSpot", "Marketo", "Oracle Eloqua", "Microsoft Teams", "Slack"])} lang="en" />
       </Section>
 
       {/* Visible FAQ (matches faqSchema — JSON-LD must mirror visible content) */}
@@ -106,7 +107,7 @@ export default function EnterprisePageEn() {
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>Let&apos;s check if it fits your requirements.</h2>
           <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>In a 30-minute demo, you can concretely confirm the fit with your requirements.</p>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <CTAButtons source="enterprise-footer" tone="onNavy" size="lg" align="center" lang="en" />
+            <CTAButtons source="enterprise-footer" tone="onNavy" size="lg" align="center" lang="en" primaryLabel="Book a demo" />
           </div>
         </div>
       </Section>

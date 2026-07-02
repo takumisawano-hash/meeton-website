@@ -152,7 +152,7 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     nextEyebrow: "The next job",
     nextLine: (
       <>
-        Leads you capture and nurture next move to <Link href="/calendar/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>convert</Link>, and if missed, to <Link href="/email/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>win back</Link>.
+        Leads you capture and nurture next move to <Link href="/en/calendar/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>convert</Link>, and if missed, to <Link href="/en/email/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>win back</Link>.
       </>
     ),
     nextLink: "See the three jobs of an AI SDR →",
@@ -258,7 +258,7 @@ export default function CaptureContent({ lang = "ja" }: { lang?: Lang }) {
         </div>
       </Section>
 
-      <LogoWall tone="surface" />
+      <LogoWall tone="surface" lang={lang} />
 
       {/* Two jobs: capture / nurture — text + animated demo, alternating */}
       <Section tone="white">

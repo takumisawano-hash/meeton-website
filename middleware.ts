@@ -35,6 +35,16 @@ const EN_TWIN_PREFIXES = [
   'solutions/cmo', 'solutions/cro', 'solutions/sdr', 'solutions/ceo',
 ]
 
+// EN-only pages with NO JA twin (self-serve funnel, e.g. /en/trial/). The
+// JA-desired branch must never strip these — /trial/ does not exist.
+// Mirrors EN_ONLY_PREFIXES in app/lib/i18n.ts.
+const EN_ONLY_PREFIXES = ['trial']
+
+function isEnOnly(pathname: string): boolean {
+  const seg = pathname.replace(/^\/en\/?/, '').replace(/\/+$/, '')
+  return EN_ONLY_PREFIXES.some((p) => seg === p || seg.startsWith(p + '/'))
+}
+
 // Blog: only the hub + category/tag listings are 1:1-safe to redirect. Individual
 // /blog/<slug> articles have partial EN coverage, so they stay JA (banner/hreflang).
 function jaHasEnTwin(pathname: string): boolean {
@@ -98,6 +108,8 @@ function geoRedirect(req: NextRequest): NextResponse | null {
   }
 
   if (desired === 'ja' && current === 'en') {
+    // EN-only pages (no JA twin) are never stripped.
+    if (isEnOnly(pathname)) return null
     // Strip the /en prefix — the JA original always exists.
     const url = req.nextUrl.clone()
     let stripped = pathname.replace(/^\/en(?=\/|$)/, '')

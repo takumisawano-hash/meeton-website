@@ -37,13 +37,13 @@ export function pickIntegrations(names?: string[]): IntegrationLogo[] {
   return out.length ? out : INTEGRATIONS;
 }
 
-export default function IntegrationLogos({ items, size = 38 }: { items?: IntegrationLogo[]; size?: number }) {
+export default function IntegrationLogos({ items, size = 38, lang = "ja" }: { items?: IntegrationLogo[]; size?: number; lang?: "ja" | "en" }) {
   const list = items ?? INTEGRATIONS;
   return (
     <div className="v2-intlogos">
       {list.map((it) => (
         <div key={it.name} className="v2-intlogo" title={it.name}>
-          <Image src={it.file} alt={`${it.name} 連携`} width={size} height={size} style={{ height: size, width: size, objectFit: "contain" }} />
+          <Image src={it.file} alt={lang === "en" ? `${it.name} integration` : `${it.name} 連携`} width={size} height={size} style={{ height: size, width: size, objectFit: "contain" }} />
           <span>{it.name}</span>
         </div>
       ))}

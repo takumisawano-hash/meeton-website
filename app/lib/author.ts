@@ -11,6 +11,13 @@ export const AUTHOR = {
   sameAs: "https://x.com/Founder_Meeton",
 } as const;
 
+// English byline for the /en/* surfaces (JSON-LD keeps the JA canonical name
+// with alternateName covering the romanized form).
+export const AUTHOR_EN = {
+  name: "Takumi Sawano",
+  jobTitle: "Co-founder & CRO, DynaMeet",
+} as const;
+
 export function authorPersonSchema() {
   return {
     "@type": "Person",

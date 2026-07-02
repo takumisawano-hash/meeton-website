@@ -52,7 +52,7 @@ export default function FeaturedCase({ c, lang = "ja" }: { c: CaseCardData; lang
   const logo = c.companyLogo || SLUG_LOGO[c.slug];
   const s = STR[lang];
   return (
-    <Link href={`/cases/${c.slug}/`} aria-label={s.aria(c.name)} className="v2-fc">
+    <Link href={lang === "en" ? `/en/cases/${c.slug}/` : `/cases/${c.slug}/`} aria-label={s.aria(c.name)} className="v2-fc">
       <div className="v2-fc-media">
         {c.heroImage ? (
           <Image src={clampHeroWidth(c.heroImage)} alt={s.caseAlt(c.name)} fill sizes="(max-width:900px) 100vw, 560px" style={{ objectFit: "cover" }} />

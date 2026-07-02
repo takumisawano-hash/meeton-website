@@ -42,7 +42,7 @@ type AboutStrings = {
   founders: { name: string; titleEn: string; titleJa: string; initial: string; photo: string | null; line: string }[];
 };
 
-// Address blocks (kept verbatim in both locales).
+// Address blocks — JA verbatim; EN romanized (postal-valid either way).
 const regAddress = (
   <>
     〒150-0033
@@ -59,6 +59,24 @@ const opAddress = (
     東京都渋谷区渋谷2-12-4
     <br />
     ネクストサイト渋谷ビル
+  </>
+);
+const regAddressEn = (
+  <>
+    Daikanyama Art Village 2C
+    <br />
+    17-10 Sarugakucho, Shibuya-ku
+    <br />
+    Tokyo 150-0033, Japan
+  </>
+);
+const opAddressEn = (
+  <>
+    Next Site Shibuya Bldg.
+    <br />
+    2-12-4 Shibuya, Shibuya-ku
+    <br />
+    Tokyo 150-0002, Japan
   </>
 );
 
@@ -172,12 +190,12 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
     finalSecondaryLabel: 'Contact us',
     careersLink: 'See careers →',
     companyInfo: [
-      { label: 'Company name', value: 'DynaMeet株式会社' },
+      { label: 'Company name', value: 'DynaMeet, Inc. (DynaMeet株式会社)' },
       { label: 'Co-founder & CTO', value: 'Ray Ayan' },
-      { label: 'Co-founder & CRO', value: '澤野 拓実 (Takumi Sawano)' },
+      { label: 'Co-founder & CRO', value: 'Takumi Sawano' },
       { label: 'Founded', value: 'October 3, 2024' },
       { label: 'Business', value: 'Development and operation of the sales AI "Meeton ai"' },
-      { label: 'Registered address', value: regAddress },
+      { label: 'Registered address', value: regAddressEn },
       { label: 'Qualified invoice number', value: 'T9011001165145' },
     ],
     founders: [
@@ -190,10 +208,10 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
         line: 'Leads product development of Meeton ai.',
       },
       {
-        name: '澤野 拓実 (Takumi Sawano)',
+        name: 'Takumi Sawano',
         titleEn: 'Co-founder & CRO',
         titleJa: 'Co-founder & CRO',
-        initial: '澤',
+        initial: 'T',
         photo: '/team/sawano.png',
         line: 'Experienced meeting conversion firsthand as an enterprise SDR / AE. Leads the business.',
       },
@@ -279,7 +297,7 @@ export default function AboutContent({ lang = 'ja' }: { lang?: Lang }) {
             {STAGES.map((st) => (
               <Link
                 key={st.id}
-                href={st.href}
+                href={lang === 'en' ? `/en${st.href}` : st.href}
                 className="v2-card-link"
                 style={{
                   display: 'block',
@@ -293,12 +311,12 @@ export default function AboutContent({ lang = 'ja' }: { lang?: Lang }) {
               >
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
                   <span style={{ fontFamily: 'var(--fm)', fontSize: 15, fontWeight: 700, color: 'var(--cta-ink)' }}>{st.num}</span>
-                  <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--heading)' }}>{st.title}</span>
+                  <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--heading)' }}>{lang === 'en' ? st.titleEn : st.title}</span>
                 </div>
-                <div style={{ fontFamily: 'var(--fm)', fontSize: 12, color: 'var(--sub)', marginTop: 8 }}>{st.transform}</div>
-                <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--text)', margin: '10px 0 0' }}>{st.lede}</p>
+                <div style={{ fontFamily: 'var(--fm)', fontSize: 12, color: 'var(--sub)', marginTop: 8 }}>{lang === 'en' ? st.transformEn : st.transform}</div>
+                <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--text)', margin: '10px 0 0' }}>{lang === 'en' ? st.ledeEn : st.lede}</p>
                 <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--cta-ink)', marginTop: 14 }}>
-                  {st.products.map((p) => PRODUCT_IN_STAGE[p].name).join('・')} →
+                  {st.products.map((p) => PRODUCT_IN_STAGE[p].name).join(lang === 'en' ? ' · ' : '・')} →
                 </div>
               </Link>
             ))}
@@ -314,7 +332,7 @@ export default function AboutContent({ lang = 'ja' }: { lang?: Lang }) {
                 {f.photo ? (
                   <Image
                     src={f.photo}
-                    alt={`${f.name}（${f.titleJa}）`}
+                    alt={lang === 'en' ? `${f.name} (${f.titleEn})` : `${f.name}（${f.titleJa}）`}
                     width={72}
                     height={72}
                     style={{ width: 72, height: 72, borderRadius: 999, objectFit: 'cover', flexShrink: 0, border: '2px solid var(--cta-light)' }}
@@ -378,7 +396,7 @@ export default function AboutContent({ lang = 'ja' }: { lang?: Lang }) {
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', margin: 0, letterSpacing: '-0.01em' }}>{s.regOfficeName}</h3>
               <p style={{ fontSize: 14.5, lineHeight: 1.85, color: 'var(--text)', fontWeight: 600, margin: 0 }}>
-                {regAddress}
+                {lang === 'en' ? regAddressEn : regAddress}
               </p>
               <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--sub)', margin: 0 }}>
                 {s.regOfficeNote}
@@ -400,7 +418,7 @@ export default function AboutContent({ lang = 'ja' }: { lang?: Lang }) {
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 800, color: 'var(--heading)', margin: 0, letterSpacing: '-0.01em' }}>{s.opOfficeName}</h3>
               <p style={{ fontSize: 14.5, lineHeight: 1.85, color: 'var(--text)', fontWeight: 600, margin: 0 }}>
-                {opAddress}
+                {lang === 'en' ? opAddressEn : opAddress}
               </p>
               <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--sub)', margin: 0 }}>
                 {s.opOfficeNote}

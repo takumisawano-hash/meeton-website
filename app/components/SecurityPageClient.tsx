@@ -12,7 +12,7 @@ import type { Lang } from '../lib/i18n'
 const CERT_MARKS = [
   {
     src: '/certifications/sgs-iso-27001-isms-ac.jpg',
-    alt: 'SGS ISO/IEC 27001 認証マーク（ISMS-AC 認定 ISR021）',
+    alt: { ja: 'SGS ISO/IEC 27001 認証マーク（ISMS-AC 認定 ISR021）', en: 'SGS ISO/IEC 27001 certification mark (ISMS-AC accredited, ISR021)' },
     width: 1261,
     height: 736,
     standard: 'ISO/IEC 27001:2022',
@@ -21,7 +21,7 @@ const CERT_MARKS = [
   },
   {
     src: '/certifications/sgs-iso-27017-isms-ac.jpg',
-    alt: 'SGS ISO/IEC 27017 認証マーク（ISMS-AC 認定 ISR021）',
+    alt: { ja: 'SGS ISO/IEC 27017 認証マーク（ISMS-AC 認定 ISR021）', en: 'SGS ISO/IEC 27017 certification mark (ISMS-AC accredited, ISR021)' },
     width: 605,
     height: 369,
     standard: 'ISO/IEC 27017:2015',
@@ -232,7 +232,7 @@ export default function SecurityPageClient({ lang = 'ja' }: { lang?: Lang }) {
                         flexShrink: 0,
                       }}
                     >
-                      <Image src={m.src} alt={m.alt} width={m.width} height={m.height} unoptimized style={{ height: 92, width: 'auto', display: 'block' }} />
+                      <Image src={m.src} alt={m.alt[lang]} width={m.width} height={m.height} unoptimized style={{ height: 92, width: 'auto', display: 'block' }} />
                     </div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontSize: 19, fontWeight: 850, color: '#16332b', lineHeight: 1.2 }}>{m.standard}</div>
@@ -311,7 +311,7 @@ export default function SecurityPageClient({ lang = 'ja' }: { lang?: Lang }) {
                 {s.ctaPrimary}
               </button>
               <Link
-                href="/contact/"
+                href={lang === 'en' ? '/en/contact/' : '/contact/'}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

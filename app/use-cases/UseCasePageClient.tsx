@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import FAQJsonLd from '../components/FAQJsonLd'
 import DemoBookingButton from '../components/DemoBookingButton'
 import { getAllCaseStudies, type CaseStudy } from '../lib/case-studies'
+import { FEATURED_CASE_EN } from '../lib/featured-cases'
 import type { Lang } from '../lib/i18n'
 
 // Fixed section chrome. JA is the default → existing call sites omit `lang`
@@ -125,8 +126,23 @@ export type UseCasePageProps = {
 
 export default async function UseCasePageClient(props: UseCasePageProps) {
   const all = await getAllCaseStudies().catch(() => [] as CaseStudy[])
-  const matched = all.find(props.caseStudyMatcher) ?? null
+  const matchedRaw = all.find(props.caseStudyMatcher) ?? null
   const lang: Lang = props.lang ?? 'ja'
+  // EN pages: overlay the (Japanese, Notion-sourced) matched case with the
+  // translated fields from featured-cases.ts; drop the JA quote attribution.
+  const matchedEn = matchedRaw && lang === 'en' ? FEATURED_CASE_EN[matchedRaw.slug] : undefined
+  const matched = matchedRaw && matchedEn
+    ? {
+        ...matchedRaw,
+        company: matchedEn.name ?? matchedRaw.company,
+        industry: matchedEn.industry ?? matchedRaw.industry,
+        title: matchedEn.title ?? matchedRaw.title,
+        heroMetric: matchedEn.heroMetric ?? matchedRaw.heroMetric,
+        heroMetricLabel: matchedEn.heroMetricLabel ?? matchedRaw.heroMetricLabel,
+        quote: matchedEn.quote ?? matchedRaw.quote,
+        quotePerson: undefined,
+      }
+    : matchedRaw
   const t = UC_CHROME[lang]
   // The industry label used inside chrome strings: EN pages use industryEn,
   // JA pages use industryJa (preserves byte-identical JA output).
@@ -255,7 +271,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
               </div>
               <h2 className="uc-section-h2">{t.caseH2}</h2>
             </div>
-            <Link href={`/case-studies/${matched.slug}/`} className="uc-cs-card">
+            <Link href={lang === 'en' ? `/en/cases/${matched.slug}/` : `/case-studies/${matched.slug}/`} className="uc-cs-card">
               <div className="uc-cs-media">
                 {matched.heroImage ? (
                   <Image

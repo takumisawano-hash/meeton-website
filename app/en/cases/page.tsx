@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, Eyebrow } from "@/app/components/v2/ui";
 import { getAllCaseStudies } from "@/app/lib/case-studies";
-import { FEATURED_CASES } from "@/app/lib/featured-cases";
+import { FEATURED_CASES, localizeFeaturedCase } from "@/app/lib/featured-cases";
 import LogoWall from "@/app/components/v2/LogoWall";
 import CaseCardGrid from "@/app/components/v2/CaseCardGrid";
 import { altLanguages, ogLocale } from "@/app/lib/i18n";
@@ -26,13 +26,15 @@ export default async function CasesPageEn() {
   let cases: { slug: string; name: string; industry?: string; quote?: string; heroMetric?: string; heroMetricLabel?: string; companyLogo?: string | null; heroImage?: string | null }[] = [];
   try {
     const items = await getAllCaseStudies();
-    cases = items.filter((c) => !c.noIndex).map((c) => ({ slug: c.slug, name: c.company, industry: c.industry, quote: c.quote || c.description, heroMetric: c.heroMetric, heroMetricLabel: c.heroMetricLabel, companyLogo: c.companyLogo, heroImage: c.heroImage }));
+    // EN overlay: translated name/quote/metric labels for the 4 public cases
+    // (Notion data is Japanese). Unknown slugs pass through unchanged.
+    cases = items.filter((c) => !c.noIndex).map((c) => localizeFeaturedCase({ slug: c.slug, name: c.company, industry: c.industry, quote: c.quote || c.description, heroMetric: c.heroMetric, heroMetricLabel: c.heroMetricLabel, companyLogo: c.companyLogo, heroImage: c.heroImage }));
   } catch { cases = []; }
-  if (cases.length === 0) cases = FEATURED_CASES;
+  if (cases.length === 0) cases = FEATURED_CASES.map(localizeFeaturedCase);
 
   const schema = {
     "@context": "https://schema.org", "@type": "ItemList", url: "https://dynameet.ai/en/cases/",
-    itemListElement: cases.map((c, i) => ({ "@type": "ListItem", position: i + 1, url: `https://dynameet.ai/cases/${c.slug}/`, name: c.name })),
+    itemListElement: cases.map((c, i) => ({ "@type": "ListItem", position: i + 1, url: `https://dynameet.ai/en/cases/${c.slug}/`, name: c.name })),
   };
 
   return (
@@ -51,7 +53,7 @@ export default async function CasesPageEn() {
           <CTAButtons source="cases-hero" tone="onNavy" size="lg" lang="en" />
         </div>
       </Section>
-      <LogoWall tone="surface" heading="Chosen on the meeting-conversion front line, across industries" />
+      <LogoWall tone="surface" lang="en" heading="Chosen on the meeting-conversion front line, across industries" />
       <Section tone="white">
         <CaseCardGrid cases={cases} lang="en" />
       </Section>

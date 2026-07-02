@@ -46,7 +46,7 @@ const STR = {
   en: {
     skip: "Skip to content",
     stageBadge: (num: string, _title: string, label: string) => `${num} ${label}`,
-    heroAssurances: ["No-code install, connects to your existing stack", "See how it works for you in a 30-min demo", "Qualified-invoice (Japan) compliant"],
+    heroAssurances: ["1-month free trial — no credit card required", "No-code install, connects to your existing stack", "Live within 1 business day"],
     howEyebrow: "How it works, in 30 seconds",
     howTitle: (p: string) => `How ${p} works`,
     step: "STEP",
@@ -56,15 +56,15 @@ const STR = {
     integrationsTitle: "Slots straight into your current stack.",
     pricingEyebrow: "Pricing",
     pricingTitle: "From ¥120,000/mo. Only what you need.",
-    pricingLede: "Pricing varies by monthly traffic and features. Three plans: Lead Generation / Meeting Generation / All-in-One.",
+    pricingLede: "Pricing varies by monthly traffic and features. Three plans: Lead Acquisition / Meeting Acquisition / All-in-One — every plan starts with a 1-month free trial.",
     pricingLink: "See pricing details →",
     expansionEyebrow: "This is part of Meeton ai",
     expansionStages: "See the 3 jobs of the AI SDR →",
     expansionPricing: "See pricing →",
     faqEyebrow: "FAQ",
     faqTitle: (p: string) => `${p} FAQ`,
-    finalTitle: (p: string) => `Experience ${p} in a demo.`,
-    finalSub: "A 30-minute demo shows exactly how it works on your own site.",
+    finalTitle: (p: string) => `Try ${p} free for 1 month.`,
+    finalSub: "Live within 1 business day — one JS tag, no credit card. Prefer a walkthrough? A 30-minute demo shows exactly how it works on your own site.",
   },
 } as const;
 
@@ -96,11 +96,9 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
   // compare pages from an EN page). On JA, unchanged.
   const compares = en ? [] : Object.values(COMPARE).filter((c) => c.product === data.slug);
   const stage = stageOf(data.slug);
-  // Internal links: on EN, the 3-stage anchor (homepage) + pricing live on JA
-  // pages that aren't translated yet, so they point at their root (JA) URLs
-  // (acceptable interim — no dead /en links). On JA, unchanged.
-  const stagesHref = "/#stages";
-  const pricingHref = "/pricing/";
+  // Internal links: both trees exist now — EN points at the /en twins.
+  const stagesHref = en ? "/en/#stages" : "/#stages";
+  const pricingHref = en ? "/en/pricing/" : "/pricing/";
   const stageBadge = en
     ? s.stageBadge(stage.num, stage.title, STAGE_LABEL_EN[stage.id])
     : s.stageBadge(stage.num, stage.title, stage.transform);
@@ -226,7 +224,7 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
       {/* 5. Stack integrations (real logos) */}
       <Section tone="white" py={64}>
         <SectionHead eyebrow={s.integrationsEyebrow} title={s.integrationsTitle} align="center" />
-        <IntegrationLogos items={pickIntegrations(data.integrations)} />
+        <IntegrationLogos items={pickIntegrations(data.integrations)} lang={lang} />
       </Section>
 
       {/* 6. Pricing — single anchor (月額12万円〜, varies by scale/usage) */}

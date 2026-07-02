@@ -50,7 +50,7 @@ const PB_CHROME = {
 // EN proof overrides keyed by proofRef. The case CONTENT (Notion JA) is not
 // translated yet; on the EN playbook LPs we render an English metric label +
 // quote so the proof block reads English. Numbers/company kept exact.
-const PB_PROOF_EN: Record<string, { metricLabel: string; quote: string; name: string; industry: string }> = {
+const PB_PROOF_EN: Record<string, { metricLabel: string; quote: string; name: string; industry: string; heroMetric?: string }> = {
   edulinx: {
     metricLabel: "Meeting-conversion rate via Meeton ai (about 3x the ~20% industry average)",
     quote:
@@ -66,6 +66,7 @@ const PB_PROOF_EN: Record<string, { metricLabel: string; quote: string; name: st
     industry: "SaaS",
   },
   univis: {
+    heroMetric: "2 deals won",
     metricLabel: "M&A and consulting wins closed in 3 months",
     quote:
       "Even when it doesn't turn into a meeting, you instantly see which companies are viewing your content. The number of proposals went up, too.",
@@ -147,7 +148,7 @@ export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry;
         <Section tone="navy">
           <div className="pb-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
             <div>
-              <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proof.heroMetric}</div>
+              <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proofEn?.heroMetric ?? proof.heroMetric}</div>
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 240 }}>{proofEn?.metricLabel ?? proof.heroMetricLabel}</div>
             </div>
             <div>
@@ -157,7 +158,7 @@ export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry;
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>
                 — {proofEn?.name ?? proof.name}{en ? ` (${proofEn?.industry ?? proof.industry})` : `（${proof.industry}）`}
               </div>
-              <Link href="/cases/" style={{ display: "inline-block", marginTop: 14, color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>{c.proofMore}</Link>
+              <Link href={en ? "/en/cases/" : "/cases/"} style={{ display: "inline-block", marginTop: 14, color: "var(--cta)", fontWeight: 700, textDecoration: "none" }}>{c.proofMore}</Link>
             </div>
           </div>
           <style>{`@media(max-width:720px){.pb-proof{grid-template-columns:1fr;gap:24px}}`}</style>

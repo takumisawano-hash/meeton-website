@@ -6,7 +6,7 @@ import { Section, SectionHead, Eyebrow, Card } from "@/app/components/v2/ui";
 import { CLUSTERS, type ClusterId } from "@/app/lib/content-clusters";
 import type { GlossaryTerm } from "@/app/lib/glossary-data";
 import { getTerm, getTermEn } from "@/app/lib/glossary-data";
-import { AUTHOR, authorPersonSchema } from "@/app/lib/author";
+import { AUTHOR, AUTHOR_EN, authorPersonSchema } from "@/app/lib/author";
 import type { Lang } from "@/app/lib/i18n";
 
 // Definition-first glossary page (§4.12). The shortDef is a self-contained
@@ -75,7 +75,7 @@ export default function GlossaryLP({ data, lang = "ja" }: { data: GlossaryTerm; 
             <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy)", margin: 0 }}>{data.shortDef}</p>
           </div>
           <div style={{ marginTop: 16, fontSize: 13, color: "var(--on-navy-sub)" }}>
-            {s.supervisor(AUTHOR.name, AUTHOR.jobTitle)}
+            {en ? s.supervisor(AUTHOR_EN.name, AUTHOR_EN.jobTitle) : s.supervisor(AUTHOR.name, AUTHOR.jobTitle)}
           </div>
         </div>
       </Section>

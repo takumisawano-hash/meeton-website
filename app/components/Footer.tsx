@@ -106,56 +106,58 @@ const LEGAL = [
 ];
 
 // ── English footer (lang="en") ──────────────────────────────────────
-// Only the 4 product LPs exist under /en/* today; every other destination is
-// JA-only, so links point at the ROOT (JA) URL (interim, no dead /en links).
+// 2026-07-02: the full EN tree exists — every footer link points at its /en/*
+// twin. Only /tools/roi/, /integrations/, /careers/, /privacy-policy/ and
+// /terms/ remain JA-only (no EN twin yet).
 const TAGLINE_EN = "Turn your “waiting” website into an AI sales channel that creates meetings.";
 const C_EN = t("en"); // EN chrome strings (headings/legal labels) from i18n
 const DISCOVER_EN = [
   {
     heading: C_EN.footerProduct,
     items: [
-      { href: "/capture/", label: "① Capture & Nurture" },
+      { href: "/en/capture/", label: "① Capture & Nurture" },
       { href: "/en/chat/", label: "Meeton Chat" },
       { href: "/en/library/", label: "Meeton Library" },
       { href: "/en/calendar/", label: "Meeton Calendar" },
       { href: "/en/email/", label: "Meeton Email" },
-      { href: "/pricing/", label: "Pricing" },
+      { href: "/en/pricing/", label: "Pricing" },
+      { href: "/en/trial/", label: "Start free trial" },
     ],
   },
   {
     heading: C_EN.footerSolutions,
     items: [
-      { href: "/solutions/cmo/", label: "CMO / Head of Marketing" },
-      { href: "/solutions/cro/", label: "CRO / Head of Sales" },
-      { href: "/solutions/sdr/", label: "Head of IS / SDR" },
-      { href: "/solutions/ceo/", label: "Founders & CEOs" },
+      { href: "/en/solutions/cmo/", label: "CMO / Head of Marketing" },
+      { href: "/en/solutions/cro/", label: "CRO / Head of Sales" },
+      { href: "/en/solutions/sdr/", label: "Head of IS / SDR" },
+      { href: "/en/solutions/ceo/", label: "Founders & CEOs" },
     ],
   },
   {
     heading: C_EN.footerUseCases,
     items: [
-      { href: "/use-cases/pre-inquiry/", label: "Before the inquiry" },
-      { href: "/use-cases/post-download/", label: "After a download" },
-      { href: "/use-cases/revisit/", label: "Return visit" },
-      { href: "/use-cases/nurture/", label: "Follow-up" },
+      { href: "/en/use-cases/pre-inquiry/", label: "Before the inquiry" },
+      { href: "/en/use-cases/post-download/", label: "After a download" },
+      { href: "/en/use-cases/revisit/", label: "Return visit" },
+      { href: "/en/use-cases/nurture/", label: "Follow-up" },
     ],
   },
   {
     heading: C_EN.footerResources,
     items: [
-      { href: "/blog/", label: "Blog" },
-      { href: "/glossary/ai-sdr/", label: "Glossary" },
-      { href: "/cases/", label: "Customers" },
+      { href: "/en/blog/", label: "Blog" },
+      { href: "/en/glossary/ai-sdr/", label: "Glossary" },
+      { href: "/en/cases/", label: "Customers" },
       { href: "/tools/roi/", label: "ROI calculator" },
     ],
   },
 ];
 const LEGAL_EN = [
-  { href: "/about/", label: "About" },
-  { href: "/security/", label: C_EN.footerLegalSecurity },
+  { href: "/en/about/", label: "About" },
+  { href: "/en/security/", label: C_EN.footerLegalSecurity },
   { href: "/integrations/", label: "Integrations" },
   { href: "/careers/", label: "Careers" },
-  { href: "/contact/", label: "Contact" },
+  { href: "/en/contact/", label: "Contact" },
   { href: "/privacy-policy/", label: C_EN.footerLegalPrivacy },
   { href: "/terms/", label: C_EN.footerLegalTerms },
 ];
@@ -193,7 +195,7 @@ export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: Footer
         }}
       >
         <div>
-          <Link href="/" aria-label="Meeton ai" style={{ display: "inline-block" }}>
+          <Link href={en ? "/en/" : "/"} aria-label="Meeton ai" style={{ display: "inline-block" }}>
             <Image
               src="/logo.svg"
               alt="Meeton ai — DynaMeet"

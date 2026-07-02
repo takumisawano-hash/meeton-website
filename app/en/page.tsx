@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Home from '../components/v2/Home'
 import { getAllCaseStudies } from '../lib/case-studies'
-import { FEATURED_CASES } from '../lib/featured-cases'
+import { FEATURED_CASES, localizeFeaturedCase } from '../lib/featured-cases'
 import { altLanguages, ogLocale } from '../lib/i18n'
 
 export const revalidate = 3600
@@ -123,7 +123,9 @@ export default async function Page() {
   }> = []
   try {
     const cases = await getAllCaseStudies()
-    featured = cases.slice(0, 4).map((c) => ({
+    // Notion case data is Japanese — apply the EN overlay (translated
+    // name/quote/metric labels per slug) so no JA leaks onto the EN homepage.
+    featured = cases.slice(0, 4).map((c) => localizeFeaturedCase({
       slug: c.slug,
       name: c.company,
       industry: c.industry,
@@ -136,7 +138,7 @@ export default async function Page() {
   } catch {
     featured = []
   }
-  if (featured.length === 0) featured = FEATURED_CASES
+  if (featured.length === 0) featured = FEATURED_CASES.map(localizeFeaturedCase)
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }} />

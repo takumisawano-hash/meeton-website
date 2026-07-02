@@ -23,6 +23,16 @@ export function pricingUrl(): string {
 }
 
 /**
+ * EN self-serve trial request page — primary CTA on the English site
+ * (2026-07-02 self-serve pivot). `plan` preselects a plan on the form.
+ */
+export function trialUrl(source = "website", plan?: string): string {
+  const p = new URLSearchParams({ src: source });
+  if (plan) p.set("plan", plan);
+  return `/en/trial/?${p.toString()}`;
+}
+
+/**
  * Try to open the Meeton widget calendar in place (no page navigation).
  * window.meetonOpenCalendar is registered by MeetonScript once the page
  * mounts; it returns true only when the loaded widget handled the open.

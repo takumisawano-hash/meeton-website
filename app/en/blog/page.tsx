@@ -871,7 +871,7 @@ export default async function BlogPageEn() {
                             {formatDate(post.publishedDate)}
                           </time>
                           <span className="blog-card-arrow">
-                            Read <span>→</span>
+                            Read post <span>→</span>
                           </span>
                         </div>
                       </div>

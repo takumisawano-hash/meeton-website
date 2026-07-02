@@ -59,6 +59,30 @@ export const EN_TWIN_PREFIXES = [
  *                              back to the EN blog hub, never a hard 404)
  * - anything else            → "/en/" (EN homepage)
  */
+// EN-only pages with NO JA twin (self-serve funnel). The geo middleware must
+// not strip these to a (non-existent) JA path, and the language switch sends
+// visitors to the JA homepage instead of a 404.
+export const EN_ONLY_PREFIXES = ["trial"];
+
+export function isEnOnlyPath(enPathStr: string): boolean {
+  const seg = enPathStr.replace(/^\/en\/?/, "").replace(/\/+$/, "");
+  return EN_ONLY_PREFIXES.some((p) => seg === p || seg.startsWith(p + "/"));
+}
+
+/**
+ * Best-effort Japanese twin for an EN path, for the language switcher.
+ * - strips the /en prefix (every /en page mirrors a JA page)…
+ * - …except EN-only pages (e.g. /en/trial/) → JA homepage
+ * - EN blog articles use the "<ja-slug>-en" convention → recover the JA slug
+ *   (otherwise /blog/<slug>-en would serve the EN article inside the JA tree)
+ */
+export function jaTwinFor(enPathStr: string): string {
+  if (isEnOnlyPath(enPathStr)) return "/";
+  let p = enPathStr.replace(/^\/en(?=\/|$)/, "") || "/";
+  p = p.replace(/^(\/blog\/[^/]+?)-en(\/?)$/, "$1$2");
+  return p;
+}
+
 export function enTwinFor(jaPath: string): string {
   const clean = jaPath.replace(/[?#].*$/, "").replace(/\/+$/, "") || "/";
   if (clean === "/") return "/en/";
@@ -86,6 +110,7 @@ export const CHROME = {
     navResources: "リソース",
     ctaSeePricing: "料金を見る",
     ctaBookDemo: "デモを予約",
+    ctaStartTrial: "無料トライアル",
     langSwitch: "EN",
     footerProduct: "製品",
     footerSolutions: "ソリューション",
@@ -104,6 +129,7 @@ export const CHROME = {
     navResources: "Resources",
     ctaSeePricing: "See pricing",
     ctaBookDemo: "Book a demo",
+    ctaStartTrial: "Start free trial",
     langSwitch: "日本語",
     footerProduct: "Product",
     footerSolutions: "Solutions",

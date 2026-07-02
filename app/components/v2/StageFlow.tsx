@@ -25,7 +25,7 @@ export default function StageFlow({ lang = "ja" }: { lang?: Lang }) {
                 border: dark ? "1px solid var(--navy-3)" : "1px solid var(--border)",
               }}
             >
-              <Link href={s.href} className="v2-stage-head" style={{ textDecoration: "none", display: "block" }}>
+              <Link href={en ? `/en${s.href}` : s.href} className="v2-stage-head" style={{ textDecoration: "none", display: "block" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
                   {/* 20px < 24px large-text threshold → --cta fails on white; use --cta-ink there */}
                   <span style={{ fontFamily: "var(--fd)", fontSize: 20, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: dark ? "var(--cta)" : "var(--cta-ink)" }}>{s.num}</span>
@@ -41,7 +41,7 @@ export default function StageFlow({ lang = "ja" }: { lang?: Lang }) {
                   return (
                     <Link
                       key={p}
-                      href={`/${p}/`}
+                      href={en ? `/en/${p}/` : `/${p}/`}
                       className="v2-stage-prod"
                       style={{
                         background: dark ? "var(--navy-2)" : "var(--surface)",

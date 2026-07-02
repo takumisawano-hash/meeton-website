@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
-import { openDemoCalendarInPlace } from "@/app/lib/cta-urls";
-import { t, enTwinFor, type Lang } from "@/app/lib/i18n";
+import { openDemoCalendarInPlace, trialUrl } from "@/app/lib/cta-urls";
+import { t, enTwinFor, jaTwinFor, type Lang } from "@/app/lib/i18n";
 
 // Persist a manual language choice so the geo middleware (middleware.ts) stops
 // auto-redirecting and respects the visitor's pick. 1-year cookie, site-wide.
@@ -87,10 +87,9 @@ const RESOURCE_ITEMS: Item[] = [
 ];
 
 // ── English IA (lang="en") ──────────────────────────────────────────
-// Only the 4 product LPs exist under /en/* today. Stage landing pages
-// (capture/calendar/email = stage.href) and every other section are JA-only,
-// so their nav links point at the ROOT (JA) URL — interim, never a dead /en
-// link. The 4 products get /en/<slug>/.
+// 2026-07-02: the full EN tree now exists (stage landings, solutions,
+// use-cases, cases, glossary, pricing, blog) — every EN nav link points at
+// its /en/* twin. Only /tools/roi/ remains JA-only.
 const EN_PRODUCT_NAME: Record<string, { name: string; line: string }> = {
   chat: { name: "Meeton Chat", line: "Convert visitors into leads in conversation." },
   library: { name: "Meeton Library", line: "Auto-nurture prospects with content." },
@@ -105,34 +104,34 @@ const EN_STAGE: Record<string, { stage: string; transform: string }> = {
 const STAGE_NAV_EN: { stage: string; transform: string; href: string; products: Item[] }[] = STAGES.map((s) => ({
   stage: EN_STAGE[s.id].stage,
   transform: EN_STAGE[s.id].transform,
-  href: s.href, // JA stage landing page (no EN twin yet)
+  href: `/en${s.href}`,
   products: s.products.map((p) => ({
-    href: `/en/${p}/`, // the 4 product LPs DO exist under /en/*
+    href: `/en/${p}/`,
     label: EN_PRODUCT_NAME[p].name,
     sub: EN_PRODUCT_NAME[p].line,
   })),
 }));
 const PLATFORM_ITEM_EN: Item = {
-  href: "/",
+  href: "/en/",
   label: "Meeton ai (3 stages, unified)",
   sub: "Capture → Convert → Win back, one end-to-end AI SDR",
 };
 const SOLUTION_ROLES_EN: Item[] = [
-  { href: "/solutions/cmo/", label: "CMO / Head of Marketing" },
-  { href: "/solutions/cro/", label: "CRO / Head of Sales" },
-  { href: "/solutions/sdr/", label: "Head of IS / SDR" },
-  { href: "/solutions/ceo/", label: "Founders & CEOs" },
+  { href: "/en/solutions/cmo/", label: "CMO / Head of Marketing" },
+  { href: "/en/solutions/cro/", label: "CRO / Head of Sales" },
+  { href: "/en/solutions/sdr/", label: "Head of IS / SDR" },
+  { href: "/en/solutions/ceo/", label: "Founders & CEOs" },
 ];
 const USE_MOMENTS_EN: Item[] = [
-  { href: "/use-cases/pre-inquiry/", label: "Before the inquiry", sub: "① Capture" },
-  { href: "/use-cases/post-download/", label: "After a download", sub: "①→② Convert" },
-  { href: "/use-cases/revisit/", label: "Return visit", sub: "② Convert / ③ Win back" },
-  { href: "/use-cases/nurture/", label: "Follow-up", sub: "③ Win back" },
+  { href: "/en/use-cases/pre-inquiry/", label: "Before the inquiry", sub: "① Capture" },
+  { href: "/en/use-cases/post-download/", label: "After a download", sub: "①→② Convert" },
+  { href: "/en/use-cases/revisit/", label: "Return visit", sub: "② Convert / ③ Win back" },
+  { href: "/en/use-cases/nurture/", label: "Follow-up", sub: "③ Win back" },
 ];
 const RESOURCE_ITEMS_EN: Item[] = [
-  { href: "/blog/", label: "Blog", sub: "Playbooks for capture & conversion" },
-  { href: "/glossary/ai-sdr/", label: "Glossary", sub: "What is an AI SDR, and more" },
-  { href: "/cases/", label: "Customers", sub: "Accounts that saw results" },
+  { href: "/en/blog/", label: "Blog", sub: "Playbooks for capture & conversion" },
+  { href: "/en/glossary/ai-sdr/", label: "Glossary", sub: "What is an AI SDR, and more" },
+  { href: "/en/cases/", label: "Customers", sub: "Accounts that saw results" },
   { href: "/tools/roi/", label: "ROI calculator", sub: "Estimate your conversion upside" },
 ];
 
@@ -173,8 +172,13 @@ export default function Nav({
   // still win (back-compat). Label comes from CHROME (日本語 on EN, EN on JA).
   // The onClick sets a pref_lang cookie so the geo middleware respects the choice.
   const resolvedLangHref =
-    langSwitchHref ?? (en ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : enTwinFor(pathname || "/"));
+    langSwitchHref ?? (en ? jaTwinFor(pathname || "/") : enTwinFor(pathname || "/"));
   const resolvedLangLabel = langSwitchLabel ?? chrome.langSwitch;
+
+  // EN self-serve pivot (2026-07-02): on EN pages the primary nav CTA is the
+  // 1-month free-trial request; demo booking becomes the ghost CTA. JA keeps
+  // the original See-pricing / Book-demo pair.
+  const navTrialUrl = trialUrl("nav");
 
   // which dropdown is open (desktop): 'product' | 'usage' | 'resources' | null
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -424,7 +428,7 @@ export default function Nav({
         onMouseLeave={scheduleClose}
       >
         {/* Logo (white wordmark on navy) */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
+        <Link href={en ? "/en/" : "/"} style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
           <Image
             src="/logo.svg"
             alt="Meeton ai"
@@ -441,10 +445,10 @@ export default function Nav({
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
               <DesktopDropdownTrigger id="product" label={chrome.navProduct} />
               <DesktopDropdownTrigger id="usage" label={chrome.navUsage} />
-              <Link href="/cases/" style={topLink(isActive("/cases"), linkColor)}>
+              <Link href={en ? "/en/cases/" : "/cases/"} style={topLink(isActive(en ? "/en/cases" : "/cases"), linkColor)}>
                 {chrome.navCases}
               </Link>
-              <Link href="/pricing/" style={topLink(isActive("/pricing"), linkColor)}>
+              <Link href={en ? "/en/pricing/" : "/pricing/"} style={topLink(isActive(en ? "/en/pricing" : "/pricing"), linkColor)}>
                 {chrome.navPricing}
               </Link>
               <DesktopDropdownTrigger id="resources" label={chrome.navResources} />
@@ -475,12 +479,25 @@ export default function Nav({
 
             {/* Dual CTA — permanent */}
             <div style={{ display: "flex", gap: 10, flexShrink: 0 }}>
-              <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(false)}>
-                {chrome.ctaSeePricing}
-              </a>
-              <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(false)} onClick={onDemoClick}>
-                {chrome.ctaBookDemo}
-              </a>
+              {en ? (
+                <>
+                  <a href={DEMO_URL} className="v2-cta-ghost" style={ghostBtn(false)} onClick={onDemoClick}>
+                    {chrome.ctaBookDemo}
+                  </a>
+                  <a href={navTrialUrl} className="v2-cta-primary" style={primaryBtn(false)}>
+                    {chrome.ctaStartTrial}
+                  </a>
+                </>
+              ) : (
+                <>
+                  <a href={PRICING_URL} className="v2-cta-ghost" style={ghostBtn(false)}>
+                    {chrome.ctaSeePricing}
+                  </a>
+                  <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(false)} onClick={onDemoClick}>
+                    {chrome.ctaBookDemo}
+                  </a>
+                </>
+              )}
             </div>
 
             {/* Dropdown panels (white reading surface) */}
@@ -545,15 +562,15 @@ export default function Nav({
 
         {isMobile && (
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-            {/* compact demo CTA — mobile always has a visible CTA without
-                opening the drawer */}
+            {/* compact primary CTA — mobile always has a visible CTA without
+                opening the drawer (EN: trial request, JA: demo booking) */}
             <a
-              href={DEMO_URL}
+              href={en ? navTrialUrl : DEMO_URL}
               className="v2-cta-primary"
-              onClick={onDemoClick}
+              onClick={en ? undefined : onDemoClick}
               style={{ ...primaryBtn(true), padding: "9px 14px", fontSize: 13 }}
             >
-              {chrome.ctaBookDemo}
+              {en ? chrome.ctaStartTrial : chrome.ctaBookDemo}
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -653,8 +670,8 @@ export default function Nav({
             </MobileGroup>
             <MobileGroup title={en ? "Resources" : "リソース"}>
               {[
-                { href: "/cases/", label: en ? "Customers" : "導入事例" },
-                { href: "/pricing/", label: en ? "Pricing" : "料金" },
+                { href: en ? "/en/cases/" : "/cases/", label: en ? "Customers" : "導入事例" },
+                { href: en ? "/en/pricing/" : "/pricing/", label: en ? "Pricing" : "料金" },
                 ...resourceItems,
               ].map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
@@ -664,12 +681,25 @@ export default function Nav({
             {/* sticky dual CTA — always visible while the drawer is open
                 (§1.2), instead of sitting below ~20 scrollable links */}
             <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 10, padding: "14px 24px calc(14px + env(safe-area-inset-bottom))", borderTop: "1px solid var(--on-navy-border)", background: "var(--navy)" }}>
-              <a href={PRICING_URL} className="v2-cta-ghost" style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                {chrome.ctaSeePricing}
-              </a>
-              <a href={DEMO_URL} className="v2-cta-primary" onClick={onDemoClick} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                {chrome.ctaBookDemo}
-              </a>
+              {en ? (
+                <>
+                  <a href={DEMO_URL} className="v2-cta-ghost" onClick={onDemoClick} style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                    {chrome.ctaBookDemo}
+                  </a>
+                  <a href={navTrialUrl} className="v2-cta-primary" onClick={() => setMobileOpen(false)} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                    {chrome.ctaStartTrial}
+                  </a>
+                </>
+              ) : (
+                <>
+                  <a href={PRICING_URL} className="v2-cta-ghost" style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                    {chrome.ctaSeePricing}
+                  </a>
+                  <a href={DEMO_URL} className="v2-cta-primary" onClick={onDemoClick} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                    {chrome.ctaBookDemo}
+                  </a>
+                </>
+              )}
               {resolvedLangHref && resolvedLangLabel && (
                 // Plain <a> (full nav, no prefetch) — see desktop switch note.
                 <a

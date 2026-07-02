@@ -91,6 +91,39 @@ const CONTACT_STR = {
   },
 } as const
 
+// The HubSpot form's field labels are defined in Japanese in HubSpot. On the
+// EN page we relabel them in the DOM (onFormReady + MutationObserver for
+// validation re-renders) — the Forms Submission API can't be used instead
+// because the form has captcha enabled.
+const EN_LABEL_MAP: Record<string, string> = {
+  姓: 'Last name',
+  名: 'First name',
+  Eメール: 'Work email',
+  会社名: 'Company',
+  お問い合せ内容: 'How can we help?',
+  お問い合わせ内容: 'How can we help?',
+  送信する: 'Send message',
+}
+
+function relabelEn(root: HTMLElement) {
+  root.querySelectorAll('label, .hs-button, input[type="submit"]').forEach((el) => {
+    const node = el as HTMLElement
+    if (node instanceof HTMLInputElement) {
+      if (EN_LABEL_MAP[node.value]) node.value = EN_LABEL_MAP[node.value]
+      return
+    }
+    node.childNodes.forEach((cn) => {
+      if (cn.nodeType === Node.TEXT_NODE && cn.textContent) {
+        const trimmed = cn.textContent.trim()
+        if (EN_LABEL_MAP[trimmed]) cn.textContent = EN_LABEL_MAP[trimmed]
+      }
+    })
+    if (node.tagName === 'BUTTON' && EN_LABEL_MAP[node.textContent?.trim() ?? '']) {
+      node.textContent = EN_LABEL_MAP[node.textContent!.trim()]
+    }
+  })
+}
+
 export default function ContactPageClient({ lang = 'ja' }: { lang?: Lang }) {
   const c = CONTACT_STR[lang]
   const formRef = useRef<HTMLDivElement>(null)
@@ -132,14 +165,36 @@ export default function ContactPageClient({ lang = 'ja' }: { lang?: Lang }) {
   function renderForm() {
     if (!formRef.current || !window.hbspt) return
     formRef.current.innerHTML = ''
-    window.hbspt.forms.create({
+    // cast: the shared global type doesn't know locale/translations (EN)
+    const create = window.hbspt.forms.create as unknown as (opts: Record<string, unknown>) => void
+    create({
       portalId: '45872857',
       formId: '08dc0777-eba7-419f-befe-70ae7bc44f02',
       region: 'na2',
       target: '#contact-hubspot-form',
+      ...(lang === 'en'
+        ? {
+            locale: 'en',
+            translations: {
+              en: {
+                required: 'Please complete this required field.',
+                invalidEmail: 'Please enter a valid email address.',
+                submitText: 'Send message',
+              },
+            },
+          }
+        : {}),
       // create() returning is NOT the same as the form being in the DOM —
       // keep the skeleton until the embed actually signals ready.
-      onFormReady: () => setFormStatus('ready'),
+      onFormReady: () => {
+        setFormStatus('ready')
+        if (lang === 'en' && formRef.current) {
+          const root = formRef.current
+          relabelEn(root)
+          const mo = new MutationObserver(() => relabelEn(root))
+          mo.observe(root, { childList: true, subtree: true })
+        }
+      },
       onFormSubmitted: () => {
         setSubmitted(true)
         const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
@@ -541,14 +596,14 @@ export default function ContactPageClient({ lang = 'ja' }: { lang?: Lang }) {
                   <div className="ct-info-label">{c.infoResourcesLabel}</div>
                   <div className="ct-info-title" style={{ marginBottom: 12 }}>{c.infoResourcesTitle}</div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <a href="/blog/" className="ct-alt-link">
+                    <a href={lang === 'en' ? '/en/blog/' : '/blog/'} className="ct-alt-link">
                       {c.resBlog}
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
                       </svg>
                     </a>
-                    <a href="/security/" className="ct-alt-link">
+                    <a href={lang === 'en' ? '/en/security/' : '/security/'} className="ct-alt-link">
                       {c.resSecurity}
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12" />
