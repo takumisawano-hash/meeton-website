@@ -386,20 +386,24 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
             ))}
           </div>
 
-          {/* popular setups (deck-right, navy) */}
-          <div className="pv3-popular">
-            <div style={{ fontSize: 14, fontWeight: 800, color: "var(--cta)" }}>{s.popularHeading}</div>
+        </div>
+
+        {/* popular setups — full-width navy band below (roomier than the
+            deck's side column at web widths) */}
+        <div className="pv3-popular">
+          <div style={{ fontSize: 14, fontWeight: 800, color: "var(--cta)" }}>{s.popularHeading}</div>
+          <div className="pv3-combos">
             {s.popular.map((c, i) => (
               <div key={c.title} className="pv3-combo" style={{ borderLeft: i === 0 ? "3px solid var(--cta)" : "3px solid transparent" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: 15, fontWeight: 800, color: "var(--on-navy)" }}>{c.title}</span>
+                  <span style={{ fontSize: 16, fontWeight: 800, color: "var(--on-navy)" }}>{c.title}</span>
                   {c.badge && <span style={{ background: "var(--cta)", color: "var(--on-cta)", fontSize: 11, fontWeight: 800, padding: "3px 10px", borderRadius: 999 }}>{c.badge}</span>}
                 </div>
-                <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: "var(--cta)", margin: "8px 0 10px", fontVariantNumeric: "tabular-nums" }}>
-                  {c.pricePrefix && <span style={{ fontSize: 15, color: "var(--on-navy-sub)" }}>{c.pricePrefix}</span>}
-                  <span style={{ fontSize: 32 }}>{c.price}</span>
+                <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: "var(--cta)", margin: "10px 0 12px", fontVariantNumeric: "tabular-nums" }}>
+                  {c.pricePrefix && <span style={{ fontSize: 16, color: "var(--on-navy-sub)" }}>{c.pricePrefix}</span>}
+                  <span style={{ fontSize: 38 }}>{c.price}</span>
                 </div>
-                <a href={c.ctaHref ?? demoUrl(i === 0 ? "pricing-convert" : "pricing-allinone")} className="v2-cta-ghost" style={{ display: "inline-block", fontSize: 13, fontWeight: 800, color: "var(--on-navy)", textDecoration: "none", border: "1.5px solid var(--on-navy-border)", borderRadius: 10, padding: "9px 16px" }}>
+                <a href={c.ctaHref ?? demoUrl(i === 0 ? "pricing-convert" : "pricing-allinone")} className={i === 0 ? "v2-cta-primary" : "v2-cta-ghost"} style={i === 0 ? { display: "inline-block", fontSize: 14, fontWeight: 800, color: "var(--on-cta)", textDecoration: "none", background: "var(--cta)", borderRadius: 10, padding: "10px 20px", boxShadow: "0 6px 22px var(--cta-glow)" } : { display: "inline-block", fontSize: 14, fontWeight: 800, color: "var(--on-navy)", textDecoration: "none", border: "1.5px solid var(--on-navy-border)", borderRadius: 10, padding: "10px 20px" }}>
                   {c.ctaLabel}
                 </a>
               </div>
@@ -407,13 +411,15 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
           </div>
         </div>
         <style>{`
-          .pv3{display:grid;grid-template-columns:1.15fr auto 1fr 1.05fr;gap:clamp(14px,2vw,24px);align-items:stretch}
+          .pv3{display:grid;grid-template-columns:1.1fr auto 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch;max-width:980px;margin:0 auto}
           .pv3-base{position:relative;background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px 26px 24px;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(15,17,40,.06)}
           .pv3-bar{position:absolute;top:0;left:0;right:0;height:5px;border-radius:18px 18px 0 0;background:var(--cta)}
           .pv3-plus{align-self:center;font-size:34px;font-weight:800;color:var(--sub)}
           .pv3-addons{display:flex;flex-direction:column;gap:14px;justify-content:center}
           .pv3-addon{background:#fff;border:1.6px solid var(--cta-border);border-radius:16px;padding:18px 20px}
-          .pv3-popular{background:var(--navy);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+          .pv3-popular{background:var(--navy);border-radius:18px;padding:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:16px;max-width:980px;margin:24px auto 0}
+          .pv3-combos{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+          @media(max-width:720px){.pv3-combos{grid-template-columns:1fr}}
           .pv3-combo{background:var(--navy-2);border-radius:12px;padding:16px 18px}
           @media(max-width:1023px){.pv3{grid-template-columns:1fr}.pv3-plus{padding:0;text-align:center}}
         `}</style>
