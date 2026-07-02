@@ -202,24 +202,27 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
         </Section>
       )}
 
-      {/* 4. Proof (navy band, green metric) — stacks to 1 column on mobile */}
-      <Section tone="navy">
-        <div className="plp-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
-          <div>
-            <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(48px,8vw,84px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>
-              {data.proof.metric}
+      {/* 4. Proof (navy band, green metric) — stacks to 1 column on mobile.
+          Optional: products without approved customer numbers omit it. */}
+      {data.proof && (
+        <Section tone="navy">
+          <div className="plp-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+            <div>
+              <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(48px,8vw,84px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>
+                {data.proof.metric}
+              </div>
+              <div style={{ fontSize: 14, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{data.proof.label}</div>
             </div>
-            <div style={{ fontSize: 14, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{data.proof.label}</div>
+            <div>
+              <p style={{ fontSize: "clamp(18px,2.4vw,24px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>
+                {en ? `“${data.proof.quote}”` : `「${data.proof.quote}」`}
+              </p>
+              <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {data.proof.source}</div>
+            </div>
           </div>
-          <div>
-            <p style={{ fontSize: "clamp(18px,2.4vw,24px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>
-              {en ? `“${data.proof.quote}”` : `「${data.proof.quote}」`}
-            </p>
-            <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 14 }}>— {data.proof.source}</div>
-          </div>
-        </div>
-        <style>{`@media(max-width:720px){.plp-proof{grid-template-columns:1fr;gap:24px}}`}</style>
-      </Section>
+          <style>{`@media(max-width:720px){.plp-proof{grid-template-columns:1fr;gap:24px}}`}</style>
+        </Section>
+      )}
 
       {/* 5. Stack integrations (real logos) */}
       <Section tone="white" py={64}>

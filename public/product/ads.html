@@ -1,0 +1,315 @@
+<!--
+  Meeton ai — Meeton Ads（サイト内広告）プロダクトデモ（埋め込み用）
+  ・録画ではなくコードで動くアニメーション（Retinaで常にくっきり・軽量／外部アセットなし）
+  ・B2B SaaSブログ記事 → AIが最適な広告を選択 → 隅のカードで獲得 → 学習で勝率上昇 → 別訪問者にはモーダルで別広告
+  ・埋め込み:
+      <iframe src="ads.html" style="width:100%;max-width:1280px;border:0;aspect-ratio:1280/720" loading="lazy"></iframe>
+-->
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{ --primary:#10B981; --primary-d:#0c9b6e; --ink:#0f172a; }
+  .ms{ position:relative; width:100%; max-width:1280px; margin:0 auto; aspect-ratio:1280/720;
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI",sans-serif; }
+  .stage{ position:absolute; inset:0; width:1280px; height:720px; transform-origin:top left; overflow:hidden; border-radius:18px; transition:opacity .5s ease; }
+  .zoom{ position:absolute; inset:0; }
+
+  /* ===== 背景：B2B SaaS ブログ記事ページ ===== */
+  .site{ position:absolute; inset:0; background:#fbfcfd; color:#1f2937; }
+  .nav{ display:flex; align-items:center; gap:22px; padding:15px 44px; background:#fff; border-bottom:1px solid #eef1f0; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:900; font-size:18px; color:#1f2937; }
+  .brand .lg{ width:26px; height:26px; }
+  .menu{ display:flex; gap:24px; margin-left:26px; color:#7b8a86; font-size:14px; font-weight:700; }
+  .menu .act{ color:#1f2937; }
+  .navr{ margin-left:auto; display:flex; gap:12px; align-items:center; }
+  .n-ghost{ color:#4b5563; font-size:13.5px; font-weight:700; }
+  .n-solid{ background:#10B981; color:#fff; padding:9px 17px; border-radius:9px; font-size:13px; font-weight:800; }
+  .art{ max-width:780px; margin:0 auto; padding:40px 40px 0; }
+  .cat{ display:inline-block; font-size:12px; font-weight:900; letter-spacing:.08em; color:#0c9b6e; }
+  .h1{ font-size:40px; line-height:1.28; font-weight:900; letter-spacing:-.5px; color:#111827; margin:12px 0 0; }
+  .ameta{ display:flex; align-items:center; gap:11px; margin:20px 0 26px; font-size:13.5px; font-weight:700; color:#8a948f; }
+  .av2{ width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#d9e6e1,#b9cec6); flex:none; }
+  .hero{ height:200px; border-radius:16px; background:linear-gradient(120deg,#eef4f2,#dfeae6 60%,#e7f2ee); display:flex; align-items:center; justify-content:center; }
+  .hero svg{ width:52px; height:52px; color:#b4c6bf; }
+  .bd{ margin-top:26px; display:flex; flex-direction:column; gap:14px; }
+  .ln{ height:12px; border-radius:6px; background:#eef1f0; }
+  .ln.s{ width:58%; }
+
+  /* ===== 汎用ディム ===== */
+  .dim{ position:absolute; inset:0; z-index:20; background:rgba(6,12,10,0); transition:background .55s ease; pointer-events:none; }
+  .dim.on{ background:rgba(6,12,10,.5); }
+
+  /* ===== AI選択パネル（中央） ===== */
+  .ai{ position:absolute; left:50%; top:50%; width:648px; z-index:25; background:#fff; border-radius:22px; padding:26px 28px 20px;
+    box-shadow:0 44px 100px -30px rgba(0,0,0,.55); opacity:0; transform:translate(-50%,-50%) scale(.92);
+    transition:opacity .45s ease, transform .55s cubic-bezier(.3,1.12,.4,1); }
+  .ai.open{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  .ai-hd{ display:flex; align-items:center; gap:13px; }
+  .ai-badge{ display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,#12b98b,#0c9b6e); color:#fff; font-size:13px; font-weight:900; padding:7px 13px; border-radius:999px; box-shadow:0 8px 18px -8px rgba(16,185,129,.7); }
+  .ai-badge svg{ width:14px; height:14px; }
+  .ai-t{ font-size:19px; font-weight:900; color:var(--ink); letter-spacing:-.3px; }
+  .ai-s{ font-size:12.5px; font-weight:700; color:#9aa6a2; margin-top:2px; }
+  .ctx{ display:flex; gap:9px; margin:17px 0 17px; }
+  .chip{ display:flex; flex-direction:column; gap:2px; padding:8px 14px; border-radius:11px; background:#f4f7f6; border:1px solid #e8edeb; }
+  .chip .k{ font-size:10.5px; font-weight:800; color:#9aa6a2; letter-spacing:.02em; }
+  .chip .v{ font-size:13px; font-weight:900; color:#28312f; }
+  .cands{ display:flex; flex-direction:column; gap:10px; }
+  .cand{ display:flex; align-items:center; gap:15px; padding:13px 15px; border:1.6px solid #eef1f0; border-radius:13px; background:#fff; position:relative; transition:border-color .4s ease, background .4s ease, box-shadow .4s ease; }
+  .c-nm{ width:158px; flex:none; font-size:14px; font-weight:800; color:#28312f; }
+  .bar{ flex:1; height:9px; border-radius:999px; background:#eef1f0; overflow:hidden; }
+  .fill{ display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,#4bd7ac,#10B981); transition:width 1.05s cubic-bezier(.4,.02,.2,1); }
+  .sc{ width:42px; flex:none; text-align:right; font-size:13.5px; font-weight:900; color:#aeb8b4; font-variant-numeric:tabular-nums; transition:color .4s ease; }
+  .ai.go .cand:nth-child(1) .fill{ width:88%; }
+  .ai.go .cand:nth-child(2) .fill{ width:54%; }
+  .ai.go .cand:nth-child(3) .fill{ width:41%; }
+  .cand.win{ border-color:#10B981; background:#f2fdf8; box-shadow:0 14px 30px -16px rgba(16,185,129,.6); }
+  .cand.win .sc{ color:#0c9b6e; }
+  .pick{ position:absolute; right:-8px; top:-12px; display:flex; align-items:center; gap:4px; background:#10B981; color:#fff; font-size:11px; font-weight:900; padding:4px 11px; border-radius:999px;
+    opacity:0; transform:scale(.5); transition:opacity .3s ease, transform .4s cubic-bezier(.34,1.5,.5,1); box-shadow:0 8px 16px -6px rgba(16,185,129,.7); }
+  .pick svg{ width:12px; height:12px; }
+  .cand.win .pick{ opacity:1; transform:none; }
+  .ai-ft{ display:flex; align-items:center; gap:7px; margin-top:16px; padding-top:14px; border-top:1px solid #f0f2f1; font-size:12px; font-weight:700; color:#8a948f; }
+  .ai-ft svg{ width:14px; height:14px; color:#10B981; }
+
+  /* ===== 隅のカード（左下） ===== */
+  .corner{ position:absolute; left:30px; bottom:30px; width:308px; z-index:22; background:#fff; border-radius:18px; padding:15px; text-align:left;
+    box-shadow:0 3px 8px rgba(0,0,0,.10), 0 26px 54px -20px rgba(0,0,0,.42); opacity:0; transform:translateY(22px) scale(.97);
+    transition:opacity .35s ease, transform .55s cubic-bezier(.2,.85,.2,1); }
+  .corner.show{ opacity:1; transform:none; }
+  .cx{ position:absolute; right:14px; top:12px; color:#c2ccc8; font-size:14px; }
+  .ad-tag{ display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:800; color:#9aa6a2; letter-spacing:.02em; }
+  .ad-tag .lg{ width:13px; height:13px; }
+  .co-img{ height:112px; margin:9px 0 12px; border-radius:12px; background:linear-gradient(120deg,#0e6b52,#12b98b); display:flex; align-items:center; justify-content:center; }
+  .co-img svg{ width:40px; height:40px; color:rgba(255,255,255,.85); }
+  .co-h{ font-size:16.5px; font-weight:900; color:#1f2937; line-height:1.4; }
+  .co-s{ font-size:12.5px; font-weight:600; color:#8a948f; margin:5px 0 13px; }
+  .co-cta{ display:block; width:100%; border:0; background:#10B981; color:#fff; font-family:inherit; font-size:14px; font-weight:900; padding:12px; border-radius:11px; cursor:pointer; transition:background .25s ease, transform .12s ease; }
+  .co-cta.press{ transform:scale(.96); background:#0c9b6e; }
+  .co-form{ display:flex; gap:8px; align-items:center; max-height:0; opacity:0; overflow:hidden; transition:max-height .45s ease, opacity .35s ease; }
+  .corner.form .co-cta{ display:none; }
+  .corner.form .co-form{ max-height:60px; opacity:1; }
+  .fld{ flex:1; border:1.5px solid #e3e7e6; border-radius:10px; padding:11px 13px; font-size:13px; font-weight:700; color:#28312f; white-space:nowrap; overflow:hidden; }
+  .fld.ph{ color:#aeb8b4; font-weight:600; }
+  .co-send{ width:44px; flex:none; border:0; background:#10B981; color:#fff; border-radius:10px; padding:11px 0; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform .12s ease, background .25s ease; }
+  .co-send svg{ width:17px; height:17px; }
+  .co-send.press{ transform:scale(.92); background:#0c9b6e; }
+  .co-done{ display:flex; align-items:center; gap:8px; margin-top:2px; padding:11px 13px; border-radius:11px; background:#f2fdf8; border:1.5px solid #bdeddd; color:#0c9b6e; font-size:14px; font-weight:900;
+    max-height:0; opacity:0; overflow:hidden; transition:max-height .4s ease, opacity .3s ease; }
+  .co-done svg{ width:17px; height:17px; }
+  .corner.done .co-form{ display:none; }
+  .corner.done .co-done{ max-height:60px; opacity:1; }
+
+  /* ===== 学習パネル（左下・カードの上に出現） ===== */
+  .learn{ position:absolute; left:30px; bottom:30px; width:308px; z-index:23; background:#fff; border-radius:18px; padding:16px;
+    box-shadow:0 3px 8px rgba(0,0,0,.10), 0 26px 54px -20px rgba(0,0,0,.42); opacity:0; transform:translateY(22px) scale(.97);
+    transition:opacity .35s ease, transform .55s cubic-bezier(.2,.85,.2,1); }
+  .learn.show{ opacity:1; transform:none; }
+  .reward{ display:inline-flex; align-items:center; gap:7px; background:#f2fdf8; border:1.5px solid #c7efdf; color:#0c9b6e; font-size:12.5px; font-weight:900; padding:7px 12px; border-radius:999px; }
+  .reward svg{ width:13px; height:13px; }
+  .wr-h{ font-size:12px; font-weight:800; color:#8a948f; margin:15px 0 9px; }
+  .wchart{ display:flex; align-items:flex-end; gap:8px; height:78px; padding:0 2px; }
+  .wb{ flex:1; height:8%; border-radius:5px 5px 3px 3px; background:#e4eae8; transition:height .7s cubic-bezier(.3,1,.4,1); }
+  .learn.go .wb:nth-child(1){ height:30%; } .learn.go .wb:nth-child(2){ height:41%; }
+  .learn.go .wb:nth-child(3){ height:37%; } .learn.go .wb:nth-child(4){ height:54%; }
+  .learn.go .wb:nth-child(5){ height:66%; } .learn.go .wb:nth-child(6){ height:88%; background:linear-gradient(180deg,#12b98b,#0c9b6e); }
+  .wr-pct{ display:flex; align-items:baseline; gap:9px; margin-top:11px; }
+  .wr-pct b{ font-size:24px; font-weight:900; color:#0c9b6e; font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
+  .wr-up{ font-size:11.5px; font-weight:800; color:#10B981; }
+
+  /* ===== 訪問者切替ラベル ===== */
+  .vswitch{ position:absolute; left:50%; top:64px; transform:translateX(-50%) translateY(-8px); z-index:30; display:flex; align-items:center; gap:10px;
+    opacity:0; transition:opacity .4s ease, transform .5s cubic-bezier(.2,.85,.2,1); }
+  .vswitch.on{ opacity:1; transform:translateX(-50%); }
+  .vsw-lbl{ background:rgba(15,23,42,.9); color:#fff; font-size:13px; font-weight:800; padding:9px 16px; border-radius:999px; backdrop-filter:blur(6px); }
+  .vchips{ display:flex; gap:7px; }
+  .chip2{ background:#fff; border:1px solid #e2e8e5; color:#28312f; font-size:12px; font-weight:800; padding:8px 13px; border-radius:999px; box-shadow:0 8px 20px -10px rgba(0,0,0,.3); }
+
+  /* ===== フルスクリーンモーダル（別広告） ===== */
+  .modal{ position:absolute; inset:0; z-index:40; display:flex; align-items:center; justify-content:center; background:rgba(6,12,10,0); opacity:0; pointer-events:none;
+    transition:background .45s ease, opacity .4s ease; }
+  .modal.on{ background:rgba(6,12,10,.62); opacity:1; }
+  .mo-card{ position:relative; width:432px; background:#fff; border-radius:22px; padding:30px 30px 26px; text-align:center;
+    box-shadow:0 50px 110px -30px rgba(0,0,0,.6); transform:scale(.85) translateY(14px); transition:transform .5s cubic-bezier(.3,1.12,.4,1); }
+  .modal.on .mo-card{ transform:none; }
+  .mo-x{ position:absolute; right:18px; top:15px; color:#c2ccc8; font-size:17px; }
+  .mo-card .ad-tag{ position:absolute; left:20px; top:16px; }
+  .mo-ic{ width:66px; height:66px; margin:14px auto 16px; border-radius:18px; background:linear-gradient(135deg,#0e6b52,#12b98b); display:flex; align-items:center; justify-content:center; }
+  .mo-ic svg{ width:32px; height:32px; color:#fff; }
+  .mo-h{ font-size:23px; font-weight:900; color:#1f2937; letter-spacing:-.4px; line-height:1.4; }
+  .mo-s{ font-size:13.5px; font-weight:600; color:#8a948f; margin:11px 0 20px; line-height:1.6; }
+  .mo-cta{ display:block; width:100%; border:0; background:#10B981; color:#fff; font-family:inherit; font-size:15px; font-weight:900; padding:14px; border-radius:12px; box-shadow:0 14px 30px -12px rgba(16,185,129,.7); }
+
+  /* ===== カーソル ===== */
+  .cursor{ position:absolute; top:0; left:0; z-index:60; width:26px; height:26px; transform:translate(720px,560px);
+    transition:transform .75s cubic-bezier(.45,.05,.2,1); filter:drop-shadow(0 3px 5px rgba(15,23,42,.35)); pointer-events:none; }
+  .cursor svg{ width:26px; height:26px; }
+  .ripple{ position:absolute; z-index:59; width:16px; height:16px; margin:-8px 0 0 -8px; border-radius:50%; background:rgba(16,185,129,.5); pointer-events:none; animation:ripple .6s ease-out forwards; }
+  @keyframes ripple{ from{ transform:scale(.4); opacity:.75; } to{ transform:scale(4.5); opacity:0; } }
+
+  .replay{ position:absolute; right:14px; bottom:14px; z-index:70; background:rgba(15,23,42,.55); color:#fff; border:0; border-radius:999px;
+    font-size:12px; padding:7px 13px; cursor:pointer; backdrop-filter:blur(6px); font-family:inherit; opacity:0; transition:opacity .3s; }
+  .ms:hover .replay{ opacity:1; }
+</style>
+
+<div class="ms" id="embed">
+  <div class="stage" id="stage">
+    <div class="zoom" id="zoom">
+
+      <!-- 背景：ACME Cloud ブログ記事 -->
+      <div class="site">
+        <div class="nav">
+          <div class="brand"><svg class="lg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#10B981"/><path d="M8 16.5a2.6 2.6 0 0 1 .3-5.2 3.5 3.5 0 0 1 6.7-.9 2.6 2.6 0 0 1 .7 6.1z" fill="#fff"/></svg> ACME Cloud</div>
+          <div class="menu"><span>製品</span><span>ソリューション</span><span class="act">ブログ</span><span>ドキュメント</span><span>料金</span></div>
+          <div class="navr"><span class="n-ghost">ログイン</span><span class="n-solid">無料で始める</span></div>
+        </div>
+        <div class="art">
+          <div class="cat">エンジニアリング</div>
+          <div class="h1">分散システムのスケーリング実践ガイド</div>
+          <div class="ameta"><span class="av2"></span> ACME Cloud チーム · 8分で読了</div>
+          <div class="hero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg></div>
+          <div class="bd"><div class="ln"></div><div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="ln"></div><div class="ln s"></div></div>
+        </div>
+      </div>
+
+      <div class="dim" id="dim"></div>
+
+      <!-- AI選択パネル -->
+      <div class="ai" id="ai">
+        <div class="ai-hd">
+          <span class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.5L19 9l-5.1 1.5L12 16l-1.9-5.5L5 9l5.1-1.5z"/></svg> AI</span>
+          <div><div class="ai-t">AIが最適な1本を選択</div><div class="ai-s">訪問者の文脈をリアルタイムに評価</div></div>
+        </div>
+        <div class="ctx" id="ctx">
+          <div class="chip"><span class="k">ページ</span><span class="v">技術ブログ</span></div>
+          <div class="chip"><span class="k">流入元</span><span class="v">検索</span></div>
+          <div class="chip"><span class="k">業種</span><span class="v">SaaS</span></div>
+        </div>
+        <div class="cands">
+          <div class="cand"><div class="c-nm">導入事例集をDL</div><div class="bar"><span class="fill"></span></div><div class="sc">0.88</div>
+            <div class="pick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 選択</div></div>
+          <div class="cand"><div class="c-nm">ROI診断</div><div class="bar"><span class="fill"></span></div><div class="sc">0.54</div></div>
+          <div class="cand"><div class="c-nm">ウェビナー案内</div><div class="bar"><span class="fill"></span></div><div class="sc">0.41</div></div>
+        </div>
+        <div class="ai-ft"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> 承認済みの広告のみ配信</div>
+      </div>
+
+      <!-- 隅の広告カード -->
+      <div class="corner" id="corner">
+        <span class="cx">&#10005;</span>
+        <div class="ad-tag"><svg class="lg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#10B981"/><path d="M12 6l1.5 4.5L18 12l-4.5 1.5L12 18l-1.5-4.5L6 12l4.5-1.5z" fill="#fff"/></svg> 広告 · Meeton Ads</div>
+        <div class="co-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 15.5h7M9 8.5h3"/></svg></div>
+        <div class="co-h">実践者向け導入事例集</div>
+        <div class="co-s">10社の実データを1冊に。</div>
+        <button class="co-cta" id="coCta">資料を受け取る</button>
+        <div class="co-form" id="coForm">
+          <div class="fld ph" id="coEmail">メールアドレス</div>
+          <button class="co-send" id="coSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="co-done" id="coDone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> リード獲得</div>
+      </div>
+
+      <!-- 学習パネル -->
+      <div class="learn" id="learn">
+        <div class="reward"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg> クリック +1 · AIが学習</div>
+        <div class="wr-h">このページでの勝率</div>
+        <div class="wchart" id="wchart"><span class="wb"></span><span class="wb"></span><span class="wb"></span><span class="wb"></span><span class="wb"></span><span class="wb"></span></div>
+        <div class="wr-pct"><b id="wrPct">62%</b><span class="wr-up">&#9650; 学習で上昇</span></div>
+      </div>
+
+      <!-- 訪問者切替 -->
+      <div class="vswitch" id="vswitch">
+        <span class="vsw-lbl">別の訪問者には…</span>
+        <div class="vchips"><span class="chip2">業種 · 製造</span><span class="chip2">流入元 · 広告</span></div>
+      </div>
+
+      <!-- フルスクリーンモーダル（別広告） -->
+      <div class="modal" id="modal">
+        <div class="mo-card">
+          <span class="mo-x">&#10005;</span>
+          <div class="ad-tag"><svg class="lg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#10B981"/><path d="M12 6l1.5 4.5L18 12l-4.5 1.5L12 18l-1.5-4.5L6 12l4.5-1.5z" fill="#fff"/></svg> 広告 · Meeton Ads</div>
+          <div class="mo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h4M8 15h2M12 15h4"/></svg></div>
+          <div class="mo-h">御社のROIを60秒で試算</div>
+          <div class="mo-s">3つの質問に答えるだけ。導入効果をその場で。</div>
+          <button class="mo-cta">無料で診断する</button>
+        </div>
+      </div>
+
+      <!-- カーソル -->
+      <div class="cursor" id="cursor"><svg viewBox="0 0 24 24" fill="#fff" stroke="#0f172a" stroke-width="1.4" stroke-linejoin="round"><path d="M4 3l15 8-6 1.6L10.5 20 4 3z"/></svg></div>
+
+    </div>
+  </div>
+  <button class="replay" id="replay">&#8635; もう一度</button>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const embed=$('embed'),stage=$('stage'),zoom=$('zoom'),dim=$('dim'),ai=$('ai'),corner=$('corner'),coCta=$('coCta'),coForm=$('coForm'),coEmail=$('coEmail'),coSend=$('coSend'),coDone=$('coDone'),learn=$('learn'),wrPct=$('wrPct'),vswitch=$('vswitch'),modal=$('modal'),cursor=$('cursor'),replay=$('replay');
+  const cands=[...document.querySelectorAll('.cand')];
+  const DW=1280,DH=720; let running=false;
+  function resize(){ stage.style.transform='scale('+(embed.clientWidth/DW)+')'; }
+  new ResizeObserver(resize).observe(embed); resize();
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+  let cx=720,cy=560;
+  function coord(el){ let x=0,y=0,n=el; while(n&&n!==zoom){ x+=n.offsetLeft; y+=n.offsetTop; n=n.offsetParent; } return {x:x+el.offsetWidth/2,y:y+el.offsetHeight/2}; }
+  function moveTo(el,dx,dy){ const c=coord(el); cx=c.x+(dx||0); cy=c.y+(dy||0); cursor.style.transform='translate('+cx+'px,'+cy+'px)'; }
+  function ripple(){ const r=document.createElement('div'); r.className='ripple'; r.style.left=cx+'px'; r.style.top=cy+'px'; zoom.appendChild(r); setTimeout(()=>r.remove(),650); }
+  async function typeInto(el,text){ el.classList.remove('ph'); el.textContent=''; for(let i=0;i<text.length;i++){ el.textContent=text.slice(0,i+1); await sleep(52+Math.random()*55); } }
+
+  function reset(){
+    dim.classList.remove('on'); ai.classList.remove('open','go');
+    cands.forEach(c=>c.classList.remove('win'));
+    corner.classList.remove('show','form','done');
+    coEmail.textContent='メールアドレス'; coEmail.classList.add('ph');
+    learn.classList.remove('show','go'); wrPct.textContent='62%';
+    vswitch.classList.remove('on'); modal.classList.remove('on');
+    cx=720; cy=560; cursor.style.transform='translate(720px,560px)'; stage.style.opacity='1';
+  }
+
+  async function countPct(from,to){ const steps=to-from; for(let i=1;i<=steps;i++){ wrPct.textContent=(from+i)+'%'; await sleep(70); } }
+
+  async function run(){
+    if(running) return; running=true; replay.style.opacity='0';
+    reset(); await sleep(750);
+
+    /* ① AIが文脈を評価し、最適な広告を選択 */
+    dim.classList.add('on'); ai.classList.add('open'); await sleep(650);
+    ai.classList.add('go'); await sleep(1250);
+    cands[0].classList.add('win'); await sleep(1900);
+
+    /* ② 勝った広告が左下の隅カードとして出現 */
+    ai.classList.remove('open'); dim.classList.remove('on'); await sleep(520);
+    corner.classList.add('show'); await sleep(950);
+
+    /* ③ カーソルがCTAをクリック → メール入力フォーム */
+    moveTo(coCta,0,-4); await sleep(950);
+    coCta.classList.add('press'); ripple(); await sleep(180); coCta.classList.remove('press');
+    corner.classList.add('form'); await sleep(520);
+    moveTo(coEmail); await sleep(400);
+    await typeInto(coEmail,'sato@acme.co'); await sleep(360);
+
+    /* ④ 送信 → リード獲得 */
+    moveTo(coSend); await sleep(520);
+    coSend.classList.add('press'); ripple(); await sleep(200); coSend.classList.remove('press');
+    corner.classList.add('done'); await sleep(1500);
+
+    /* ⑤ 報酬シグナルでAIが学習・勝率上昇 */
+    corner.classList.remove('show'); await sleep(450);
+    learn.classList.add('show'); await sleep(500);
+    learn.classList.add('go'); await countPct(62,71); await sleep(1900);
+
+    /* ⑥ 別訪問者：文脈が変わり別広告がモーダルで勝つ */
+    learn.classList.remove('show'); await sleep(400);
+    vswitch.classList.add('on'); await sleep(1700);
+    vswitch.classList.remove('on'); modal.classList.add('on'); await sleep(2900);
+    modal.classList.remove('on'); await sleep(700);
+
+    stage.style.opacity='0'; await sleep(560);
+    running=false; replay.style.opacity='';
+    setTimeout(run,400);
+  }
+  replay.addEventListener('click',()=>{ if(!running) run(); });
+  new IntersectionObserver((es,ob)=>{ if(es[0].isIntersecting){ run(); ob.disconnect(); } },{threshold:.3}).observe(embed);
+})();
+</script>

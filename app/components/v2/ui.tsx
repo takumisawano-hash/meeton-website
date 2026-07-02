@@ -227,6 +227,14 @@ export function ProductIcon({ kind, size = 22 }: { kind: string; size?: number }
           <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" />
         </svg>
       );
+    case "ads":
+      // megaphone — Meeton Ads (on-site ads)
+      return (
+        <svg {...common}>
+          <path d="M3 10v4a1 1 0 0 0 1 1h2l4 4V5L6 9H4a1 1 0 0 0-1 1Z" />
+          <path d="M14 8.5a4 4 0 0 1 0 7M17.5 6a8 8 0 0 1 0 12" />
+        </svg>
+      );
     default:
       return null;
   }

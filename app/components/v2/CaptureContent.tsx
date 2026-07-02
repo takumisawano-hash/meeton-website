@@ -18,6 +18,7 @@ import type { Lang } from "@/app/lib/i18n";
 
 const chat = PRODUCTS.chat;
 const library = PRODUCTS.library;
+const ads = PRODUCTS.ads;
 
 type Sub = {
   key: string;
@@ -75,8 +76,8 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     ),
     heroSub:
       "買い手は購買の約70%を、営業に接触する前に独力で進めます（Gartner/6sense）。その時間に会話で掴み、資料で育てて——問い合わせ前の潜在層を、商談につながるリードに変えます。",
-    jobsEyebrow: "この仕事は、2つの動きでできている",
-    jobsTitle: "会話で掴み、資料で育てる。",
+    jobsEyebrow: "この仕事は、3つの動きでできている",
+    jobsTitle: "会話で掴み、資料で育て、広告で逃さない。",
     proofName: "BizteX 株式会社",
     proofIndustry: "SaaS",
     proofQuote: "従来は月1〜2件。Meeton ai にしてから月20件以上——20倍以上のリードがチャットから生まれている。",
@@ -115,6 +116,17 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
         detailA: "この動きを担う ",
         detailB: " の詳細 →",
       },
+      {
+        key: "ads",
+        job: "広告で、逃さない",
+        transform: "帰りかけた訪問者 → リード",
+        product: ads,
+        href: "/ads/",
+        desc: "会話に乗らない訪問者も、サイト内広告で掴む。AIが訪問者ごとに最適なオファー（資料・ウェビナー・商談予約）を選んで表示し、クリック・リード獲得を報酬に配信を自動で最適化し続ける。",
+        points: ["AIが自社コンテンツから広告を下書き、承認だけで配信", "ページ・流入元・業種で訪問者ごとに出し分け", "勝てる広告と勝てるページに自動で集中"],
+        detailA: "この動きを担う ",
+        detailB: " の詳細 →",
+      },
     ],
     faq: [
       {
@@ -143,8 +155,8 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     ),
     heroSub:
       "B2B buyers complete about 70% of the purchase process on their own before contacting sales (Gartner/6sense). During that window, capture them in conversation and nurture them with content — turning pre-inquiry prospects into leads that lead to meetings.",
-    jobsEyebrow: "This job is made of two moves",
-    jobsTitle: "Capture in conversation, nurture with content.",
+    jobsEyebrow: "This job is made of three moves",
+    jobsTitle: "Capture in conversation, nurture with content, catch the rest with ads.",
     proofName: "BizteX, Inc.",
     proofIndustry: "SaaS",
     proofQuote: "Previously 1–2 a month. Since switching to Meeton ai, 20+ a month — more than 20x the leads are born from chat.",
@@ -180,6 +192,17 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
         href: "/library/",
         desc: "Automatically nurture prospects who aren't ready for a meeting yet with content. Deliver materials matched to their interests, have AI explain the content, and make the next move based on their response. Keep nurturing — not neglecting — until consideration warms up.",
         points: ["Auto-delivers content matched to interest", "AI answers questions about the materials to deepen understanding", "Nurtures by response, then moves to the next job once warm"],
+        detailA: "Details on ",
+        detailB: ", which handles this move →",
+      },
+      {
+        key: "ads",
+        job: "Catch the rest, with on-site ads",
+        transform: "Leaving visitors → leads",
+        product: ads,
+        href: "/en/ads/",
+        desc: "Visitors who never open the chat still get captured — by on-site ads. AI picks the single best offer (a guide, a webinar, a meeting) for each visitor and keeps optimizing delivery with clicks and captured leads as the reward.",
+        points: ["AI drafts ads from your own content; you just approve", "Matched per visitor by page, traffic source, and industry", "Delivery concentrates on winning ads and winning pages"],
         detailA: "Details on ",
         detailB: ", which handles this move →",
       },

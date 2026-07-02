@@ -95,6 +95,7 @@ const EN_PRODUCT_NAME: Record<string, { name: string; line: string }> = {
   library: { name: "Meeton Library", line: "Auto-nurture prospects with content." },
   calendar: { name: "Meeton Calendar", line: "Book the meeting the instant intent peaks." },
   email: { name: "Meeton Email", line: "Pursue unbooked leads 1:1 and re-convert." },
+  ads: { name: "Meeton Ads", line: "AI-optimized on-site ads that capture more leads." },
 };
 const EN_STAGE: Record<string, { stage: string; transform: string }> = {
   capture: { stage: "① Capture & Nurture", transform: "Prospects → Leads" },

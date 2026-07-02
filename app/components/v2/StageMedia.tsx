@@ -46,6 +46,15 @@ const ROWS: Row[] = [
     icon: "library",
   },
   {
+    key: "ads",
+    stage: "① 掴む（サイト内広告）",
+    title: "サイトの余白で、リードを掴む。",
+    desc: "訪問者ごとにAIが最適なオファーを選んで表示するサイト内広告。ページ・流入元・業種で出し分け、クリックのたびに賢くなる。",
+    points: ["AIが広告を下書き、承認だけで配信", "勝てる広告・勝てるページに自動集中"],
+    href: "/ads/",
+    icon: "ads",
+  },
+  {
     key: "calendar",
     stage: "② 商談化する",
     title: "その場で、商談を予約する。",
@@ -66,7 +75,7 @@ const ROWS: Row[] = [
 ];
 
 // English copy for the walkthrough rows (consumed only when lang="en").
-// Same media/href/icon as JA; only the text changes.
+// Same media/icon as JA; text changes and hrefs point at the /en twins.
 const ROWS_EN: Row[] = [
   {
     key: "chat",
@@ -74,7 +83,7 @@ const ROWS_EN: Row[] = [
     title: "Capture visitors in conversation.",
     desc: "Don't wait for the inquiry — the AI chat speaks to visitors first. It meets them on the pre-inquiry consideration ground, answers questions on the spot, and turns them into leads.",
     points: ["No scenario design, install in 5 minutes", "Carries context from past browsing and chats"],
-    href: "/chat/",
+    href: "/en/chat/",
     icon: "chat",
   },
   {
@@ -83,8 +92,17 @@ const ROWS_EN: Row[] = [
     title: "Nurture prospects with content.",
     desc: "Auto-nurture not-yet-ready prospects with content. It delivers materials matched to their interest, the AI explains them, and reads reactions to warm up the consideration.",
     points: ["Auto-delivers content matched to each interest", "Nurtures by reaction, hands off once warm"],
-    href: "/library/",
+    href: "/en/library/",
     icon: "library",
+  },
+  {
+    key: "ads",
+    stage: "① Capture (on-site ads)",
+    title: "Capture leads with your site's unused space.",
+    desc: "On-site ads picked by AI for each visitor — matched to their page, traffic source, and industry, and getting smarter with every click.",
+    points: ["AI drafts the ads; you just approve", "Delivery concentrates on winning ads and pages"],
+    href: "/en/ads/",
+    icon: "ads",
   },
   {
     key: "calendar",
@@ -92,7 +110,7 @@ const ROWS_EN: Row[] = [
     title: "Book the meeting on the spot.",
     desc: "The moment intent peaks, the AI concierge carries them all the way to a booked meeting. Auto-assignment and CRM logging, all done before they leave.",
     points: ["Instant booking path right after conversion", "Auto-assignment and automatic CRM logging"],
-    href: "/calendar/",
+    href: "/en/calendar/",
     icon: "calendar",
   },
   {
@@ -101,7 +119,7 @@ const ROWS_EN: Row[] = [
     title: "Chase them down and bring them back.",
     desc: "Never give up on leads who didn't book — the AI watches behavioral signals and follows up 1:1. When they turn hot again, it brings them back to a meeting.",
     points: ["Follows up on signals like return visits and opens", "AI writes each message, autonomous until the goal is met"],
-    href: "/email/",
+    href: "/en/email/",
     icon: "email",
   },
 ];

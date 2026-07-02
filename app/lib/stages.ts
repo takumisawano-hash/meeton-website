@@ -5,7 +5,9 @@
 
 import type { ClusterId } from "@/app/lib/content-clusters";
 
-export type StageProduct = Exclude<ClusterId, "ai-sdr">; // calendar | chat | library | email
+// "ads" (Meeton Ads, 2026-07-02) is a product without a blog cluster yet, so
+// it extends the cluster-derived union rather than ClusterId itself.
+export type StageProduct = Exclude<ClusterId, "ai-sdr"> | "ads"; // calendar | chat | library | email | ads
 
 export type Stage = {
   num: "①" | "②" | "③";
@@ -31,7 +33,7 @@ export const STAGES: Stage[] = [
     transformEn: "Prospects → Leads",
     lede: "問い合わせ前の潜在層を、会話と資料で掴んでリードに変え、検討を前に進める。",
     ledeEn: "Engage pre-inquiry prospects with conversation and content, turn them into leads, and move the deal forward.",
-    products: ["chat", "library"],
+    products: ["chat", "library", "ads"],
     href: "/capture/",
   },
   {
@@ -94,6 +96,13 @@ export const PRODUCT_IN_STAGE: Record<
     line: "予約しなかったリードを諦めず1:1で追い、再商談化へ戻す。",
     lineEn: "Pursues no-show leads 1:1 and brings them back to a meeting.",
     icon: "email",
+  },
+  ads: {
+    name: "Meeton Ads",
+    nameEn: "Meeton Ads",
+    line: "サイト内広告をAIが訪問者ごとに出し分け、リード獲得を最大化。",
+    lineEn: "AI-optimized on-site ads, matched to each visitor, that maximize lead capture.",
+    icon: "ads",
   },
 };
 

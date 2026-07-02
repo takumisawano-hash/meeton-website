@@ -122,12 +122,12 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       {
         name: "リード獲得プラン",
         stage: "① 掴む・育てる",
-        includes: "Live + Library",
+        includes: "Chat + Library + Ads",
         price: "¥12万",
         source: "pricing-lead",
         highlight: false,
         blurb: "潜在層を掴み、育てて、リードにする。Calendar が不要な企業の入口に。",
-        items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Library（資料で検討を育てる）", "CRM 連携", "開封・行動トラッキング"],
+        items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Library（資料で検討を育てる）", "Meeton Ads（サイト内広告・AI自動最適化）", "CRM 連携", "開封・行動トラッキング"],
       },
       {
         name: "商談獲得プラン",
@@ -236,14 +236,14 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       {
         name: "Lead Acquisition",
         stage: "① Capture & nurture",
-        includes: "Live + Library",
+        includes: "Chat + Library + Ads",
         price: "¥120,000",
         pricePrefix: "From ",
         source: "pricing-lead",
         highlight: false,
         whoFor: "For teams that want to identify and nurture website visitors.",
         blurb: "Capture latent prospects in conversation, nurture them with content, and turn them into qualified leads.",
-        items: ["Meeton Chat (capture visitors in conversation)", "Meeton Library (nurture consideration with content)", "CRM integration", "Open & behavior tracking"],
+        items: ["Meeton Chat (capture visitors in conversation)", "Meeton Library (nurture consideration with content)", "Meeton Ads (on-site ads, AI auto-optimized)", "CRM integration", "Open & behavior tracking"],
         ctaHref: "/en/trial/?src=pricing&plan=lead",
       },
       {

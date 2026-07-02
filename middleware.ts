@@ -28,7 +28,7 @@ import type { NextRequest } from 'next/server'
 // allowlist. Matched as exact or as a prefix followed by "/" so "/chat" and
 // "/chat/..." both redirect but "/chatfoo" does not.
 const EN_TWIN_PREFIXES = [
-  'chat', 'calendar', 'library', 'email', 'capture',
+  'chat', 'calendar', 'library', 'email', 'ads', 'capture',
   'pricing', 'about', 'contact', 'enterprise', 'security', 'glossary',
   'cases', 'compare', 'alternatives', 'use-cases',
   'solutions/crm-to-meeting', 'solutions/lead-to-meeting',

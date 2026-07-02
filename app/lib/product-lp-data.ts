@@ -8,9 +8,9 @@ export type Diff = { title: string; desc: string };
 export type FAQ = { q: string; a: string };
 
 export type ProductLPData = {
-  slug: "calendar" | "chat" | "library" | "email";
+  slug: "calendar" | "chat" | "library" | "email" | "ads";
   productName: string;
-  icon: "calendar" | "chat" | "library" | "email";
+  icon: "calendar" | "chat" | "library" | "email" | "ads";
   metaTitle: string;
   metaDescription: string;
   keyword: string;
@@ -25,8 +25,9 @@ export type ProductLPData = {
   competitorsLabel: string;
   diffTitle: string;
   diffPoints: Diff[];
-  // proof
-  proof: { metric: string; label: string; quote: string; source: string };
+  // proof — optional: products with no approved customer numbers yet (e.g.
+  // the newly released Meeton Ads) omit the section instead of inventing one
+  proof?: { metric: string; label: string; quote: string; source: string };
   // integrations
   integrations: string[];
   // expansion teaser cross-sell line
@@ -194,6 +195,41 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
       { q: "送りすぎてしまう心配はありませんか？", a: "Meeton Email はスケジュール一斉送信ではなく、行動シグナルに基づいて“追うべき相手・タイミング”をAIが判断します。目的（返信・予約）に達したら止まるため、無関係な大量送信になりません。" },
     ],
   },
+
+  ads: {
+    slug: "ads",
+    productName: "Meeton Ads",
+    icon: "ads",
+    metaTitle: "サイト内広告×AI自動最適化｜自社サイトを広告枠に｜Meeton Ads",
+    metaDescription:
+      "自社サイトの空きスペースを、AIが運用する広告枠に。訪問者のページ・流入元・業種を見て最適なオファーを1本だけ出し分け、クリック・リード獲得を報酬に自動で学習。広告はAIが自社コンテンツから下書きし、承認したものだけ配信。広告予算ゼロ・Cookie不要でCVRを引き上げるサイト内広告。",
+    keyword: "サイト内広告 / Web接客 ポップアップ / オンサイトマーケティング / CVR改善",
+    eyebrow: "サイト内広告 × AI自動最適化",
+    problemLine: "集めた訪問者に、サイトは“待つ”だけ。",
+    h1: "自社サイトを、最強の広告枠に変える。",
+    heroSub:
+      "広告費をかけて集めた訪問者の大半は、何も残さず帰っていく。Meeton Ads は、訪問者ごとにAIが最適なオファー（資料・ウェビナー・商談予約）を選んで表示するサイト内広告。ページ・流入元・業種まで見て出し分け、クリックのたびに賢くなります。",
+    steps: [
+      { title: "AIが広告を下書き", desc: "自社の資料・コンテンツからAIが広告案を自動生成。あなたは承認キューでレビューして通すだけ。" },
+      { title: "訪問者ごとに出し分け", desc: "ページ・デバイス・流入元・業種で毎回スコアリングし、1ページ1枠で最良の1本だけを表示。" },
+      { title: "学習して伸ばす", desc: "クリックやリード獲得を報酬に自動で学習。勝てる広告と勝てるページに、配信が自然と集中します。" },
+    ],
+    competitorsLabel: "vs ポップアップツール / Web接客ツール",
+    diffTitle: "“全員に同じポップアップ”は、もう効かない。",
+    diffPoints: [
+      { title: "訪問者ごとに最適化", desc: "ルールの手動設定ではなく、AIが文脈ごとに選ぶ。料金ページで勝つ広告とブログで勝つ広告は違う——それを自動で学ぶ。" },
+      { title: "配置ページも自動", desc: "どのページに出すかを人が決めない。ページ毎の実際の勝率を学習し、効く場所に自動で集中する。" },
+      { title: "人の承認で、安心して任せる", desc: "AI生成の広告は承認したものだけ配信。常時表示（固定枠）、表示回数の上限、離脱直前トリガーなどの手動制御も。" },
+    ],
+    integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Webhook"],
+    crossSell: "広告で掴んだリードは Calendar で予約へ、資料が欲しい人には Library を、逃したら Email が追う——掴む→商談化→追客がつながると一気通貫のAI SDRに。",
+    faq: [
+      { q: "ポップアップツールやWeb接客ツールと何が違いますか？", a: "従来のツールは「どのページに・誰に・何を出すか」をすべて人がルール設定し、全員に同じものを表示します。Meeton Ads はAIが訪問者ごとの文脈（ページ・デバイス・流入元・業種）でオファーをスコアリングして最良の1本だけを表示し、クリック・リード獲得を報酬に配信を自動で最適化し続けます。" },
+      { q: "広告は自分で作る必要がありますか？", a: "AIが自社の資料やコンテンツから広告案を自動生成し、承認キューに並べます。あなたはレビューして承認するだけで配信が始まります。もちろん自分で作成することも、特定の広告を常時表示（固定枠）にすることも可能です。" },
+      { q: "表示しすぎて訪問者の体験を損ないませんか？", a: "1ページに表示されるのは常に1枠だけです。セッション・累計の表示回数上限、即時／滞在時間／スクロール深度／離脱直前などのトリガー制御があり、すぐ閉じられた広告はペナルティとして学習されるため、うるさい広告は自然と減っていきます。" },
+      { q: "効果はどう確認できますか？", a: "広告ごとのインプレッション・クリック・獲得リードを計測し、ベンチマークと比較できます。どのページでどの広告が勝っているかも可視化されます。" },
+    ],
+  },
 };
 
 export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
@@ -356,6 +392,41 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
       { q: "Will it over-send?", a: "Meeton Email doesn't blast on a schedule—AI decides “whom and when to pursue” based on behavioral signals. It stops once the goal (a reply or a booking) is reached, so it never becomes irrelevant mass sending." },
     ],
   },
+
+  ads: {
+    slug: "ads",
+    productName: "Meeton Ads",
+    icon: "ads",
+    metaTitle: "On-Site Ads with AI Auto-Optimization | Meeton Ads",
+    metaDescription:
+      "Turn your website's unused space into an ad channel run by AI. It scores every visitor's context—page, traffic source, industry—shows the single best offer, and keeps learning from every click and captured lead. AI drafts the ads from your own content; only what you approve goes live. Lift conversion with zero ad budget and no cookies.",
+    keyword: "on-site ads / website popup alternative / on-site marketing / conversion rate optimization",
+    eyebrow: "On-Site Ads × AI Auto-Optimization",
+    problemLine: "You paid to bring visitors in — and your site just waits.",
+    h1: "Turn your website into your best ad channel.",
+    heroSub:
+      "Most of the visitors you paid to acquire leave without a trace. Meeton Ads shows each visitor the single best offer—a guide, a webinar, a meeting—selected by AI from their context: page, traffic source, even industry. And it gets smarter with every click.",
+    steps: [
+      { title: "AI drafts your ads", desc: "AI generates ad candidates from your own content and materials. You just review and approve them in the queue." },
+      { title: "One best offer per visitor", desc: "Every impression is scored on page, device, traffic source, and industry — one slot per page, only the single best offer shows." },
+      { title: "Learns and compounds", desc: "Clicks and captured leads are the reward signal. Winning ads and winning pages automatically get more of the traffic." },
+    ],
+    competitorsLabel: "vs popup tools / web-engagement tools",
+    diffTitle: "The same popup for everyone doesn't work anymore.",
+    diffPoints: [
+      { title: "Optimized per visitor", desc: "No hand-written rules — the AI chooses per context. The ad that wins on your pricing page isn't the one that wins on your blog, and it learns that automatically." },
+      { title: "Auto page placement", desc: "You never pick where an ad runs. It learns each page's real win rate and concentrates delivery where it converts." },
+      { title: "You approve, it runs", desc: "Only ads you approve go live. Manual controls too: pinned always-on ads, per-session and lifetime frequency caps, exit-intent triggers." },
+    ],
+    integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Webhook"],
+    crossSell: "Leads captured by an ad go to Calendar for a booking, content-seekers go to Library, and Email pursues the ones who slip away — connect capture → convert → win back and you get an end-to-end AI SDR.",
+    faq: [
+      { q: "How is this different from popup or web-engagement tools?", a: "Traditional tools make humans configure every rule — which page, which audience, which creative — and then show everyone the same thing. Meeton Ads scores offers per visitor context (page, device, traffic source, industry), shows only the single best one, and keeps optimizing delivery automatically with clicks and captured leads as the reward signal." },
+      { q: "Do I have to create the ads myself?", a: "AI drafts ad candidates from your own content and materials and queues them for review — you approve, and they go live. You can also author ads yourself, and pin specific ads to run always-on." },
+      { q: "Won't it hurt the visitor experience?", a: "Only one slot ever shows per page. You get per-session and lifetime frequency caps plus trigger controls (immediate, time on page, scroll depth, exit intent), and an ad that gets dismissed quickly is penalized in the learning loop — annoying ads phase themselves out." },
+      { q: "How do I measure the impact?", a: "Impressions, clicks, and captured leads are tracked per ad and compared against benchmarks — and you can see which ads are winning on which pages." },
+    ],
+  },
 };
 
-export const PRODUCT_ORDER: ProductLPData["slug"][] = ["calendar", "chat", "library", "email"];
+export const PRODUCT_ORDER: ProductLPData["slug"][] = ["calendar", "chat", "library", "email", "ads"];
