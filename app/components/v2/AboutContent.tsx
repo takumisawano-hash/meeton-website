@@ -134,7 +134,7 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
   en: {
     metaTitle: 'About',
     metaDescription:
-      'About DynaMeet, Inc. We build and operate Meeton ai, the AI SDR Platform that turns your website into a sales channel that generates meetings.',
+      'About DynaMeet K.K. We build and operate Meeton ai, the AI SDR Platform that turns your website into a sales channel that generates meetings.',
     heroEyebrow: 'Company / About DynaMeet',
     heroH1: (
       <>
@@ -142,7 +142,7 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
       </>
     ),
     heroSub:
-      'DynaMeet, Inc. builds and operates Meeton ai, the AI SDR Platform that turns your website into a sales channel that generates meetings.',
+      'DynaMeet K.K. builds and operates Meeton ai, the AI SDR Platform that turns your website into a sales channel that generates meetings.',
     missionEyebrow: 'Mission',
     missionTitle: (
       <>
@@ -158,7 +158,7 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
     foundersTitle: 'Product and business, working in tandem.',
     foundersLede: 'The leaders of product (CTO) and business (CRO) build and operate Meeton ai together.',
     profileEyebrow: 'Company profile',
-    profileTitle: 'DynaMeet, Inc.',
+    profileTitle: 'DynaMeet K.K.',
     profileLede: 'Registry information and our offices.',
     badgeReg: 'Registered address',
     badgeOp: 'Office',
@@ -207,7 +207,7 @@ export const aboutOrgSchema = {
   '@id': 'https://dynameet.ai/#organization',
   name: 'DynaMeet株式会社',
   legalName: 'DynaMeet株式会社',
-  alternateName: ['Meeton ai', 'Meeton AI', 'Meeton', 'ミートン', 'DynaMeet', 'DynaMeet株式会社', 'ダイナミート'],
+  alternateName: ['Meeton ai', 'Meeton AI', 'Meeton', 'ミートン', 'DynaMeet', 'DynaMeet K.K.', 'ダイナミート'],
   url: 'https://dynameet.ai',
   logo: 'https://dynameet.ai/logo-dark.svg',
   foundingDate: '2024-10-03',

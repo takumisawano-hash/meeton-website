@@ -2501,7 +2501,7 @@ function LpFooter() {
         margin: "0 auto",
       }}
     >
-      <span>© {new Date().getFullYear()} DynaMeet K.K.</span>
+      <span>© {new Date().getFullYear()} DynaMeet株式会社</span>
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
         <a
           href="/privacy-policy/"

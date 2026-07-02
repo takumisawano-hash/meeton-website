@@ -19,7 +19,7 @@ export default function BlogListJsonLd({ posts }: BlogListJsonLdProps) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet株式会社',
       url: 'https://dynameet.ai',
       logo: {
         '@type': 'ImageObject',

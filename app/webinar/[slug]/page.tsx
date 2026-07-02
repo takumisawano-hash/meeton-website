@@ -149,14 +149,14 @@ function buildEventJsonLd(
     ],
     organizer: {
       '@type': 'Organization',
-      name: 'Meeton ai (DynaMeet 株式会社)',
+      name: 'Meeton ai (DynaMeet株式会社)',
       url: 'https://dynameet.ai/',
     },
     performer: {
       '@type': 'Person',
       name: webinar.speaker?.name || '澤野 拓実',
       jobTitle:
-        webinar.speaker?.title || 'DynaMeet 株式会社 共同創業者 兼 CRO',
+        webinar.speaker?.title || 'DynaMeet株式会社 共同創業者 兼 CRO',
     },
     offers: {
       '@type': 'Offer',

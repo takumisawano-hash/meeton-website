@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: description,
-    authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
+    authors: [{ name: 'DynaMeet株式会社', url: 'https://dynameet.ai' }],
     // Bidirectional hreflang: canonical → this JA page, ja/x-default → JA,
     // en → the EN twin slug (`<ja-slug>-en`). When no EN twin exists yet,
     // Google simply drops the dead en alternate (acceptable, low-risk). A
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: post.publishedDate,
       modifiedTime: post.modifiedDate || post.publishedDate,
-      authors: ['DynaMeet Inc.'],
+      authors: ['DynaMeet株式会社'],
       section: post.category || 'セールス',
       tags: post.tags,
       url: `https://dynameet.ai/blog/${post.slug}/`,

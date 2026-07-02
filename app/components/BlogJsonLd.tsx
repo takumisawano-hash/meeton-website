@@ -23,7 +23,7 @@ export default function BlogJsonLd({ post, wordCount, readingTime, headings }: B
     author: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet株式会社',
       url: 'https://dynameet.ai',
       logo: {
         '@type': 'ImageObject',
@@ -33,7 +33,7 @@ export default function BlogJsonLd({ post, wordCount, readingTime, headings }: B
     publisher: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet株式会社',
       url: 'https://dynameet.ai',
       logo: {
         '@type': 'ImageObject',

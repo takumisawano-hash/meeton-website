@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description,
-    authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
+    authors: [{ name: 'DynaMeet K.K.', url: 'https://dynameet.ai' }],
     alternates: altLanguages(`/blog/${jaSlug}/`, 'en'),
     openGraph: {
       title: post.title,
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: post.publishedDate,
       modifiedTime: post.modifiedDate || post.publishedDate,
-      authors: ['DynaMeet Inc.'],
+      authors: ['DynaMeet K.K.'],
       section: post.category || 'Sales',
       tags: post.tags,
       url: `https://dynameet.ai/en/blog/${post.slug}/`,
@@ -178,13 +178,13 @@ export default async function BlogPostPageEn({ params }: Props) {
     author: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet K.K.',
       url: 'https://dynameet.ai',
     },
     publisher: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet K.K.',
       url: 'https://dynameet.ai',
       logo: { '@type': 'ImageObject', url: 'https://dynameet.ai/logo-dark.svg' },
     },
