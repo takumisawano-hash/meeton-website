@@ -65,32 +65,39 @@ export default function ManufacturingUseCasePage() {
       ]}
       modules={[
         {
-          badge: 'AI Chat',
-          name: 'Meeton Live',
-          href: '/features/ai-chat/',
+          badge: 'Chat',
+          name: 'Meeton Chat',
+          href: '/chat/',
           description: 'WebサイトのチャットでAIがリアルタイムに対話。製品仕様・カタログ情報・標準スペックを学習し、技術問い合わせの一次切り分けを担います。',
           industryAngle: '製品カタログ・技術データシート・規格対応表を学習データとし、「この材質で対応可能か」「温度範囲は」など基礎技術質問は AI が即答。要件が固まったリードのみを技術IS に引き継ぐため、担当者の工数を3割削減できます。',
         },
         {
-          badge: 'AI Email',
+          badge: 'Email',
           name: 'Meeton Email',
-          href: '/features/ai-email/',
+          href: '/email/',
           description: '問い合わせメール（見積依頼・サンプル請求・技術質問）に AI が返信。商談化見込みを判定し、有望案件のみアラート通知。',
           industryAngle: '海外・地方の時差問い合わせ、深夜のサンプル依頼にも AI が24/7 で一次回答。「いつ・どんな量を・どんな用途で」必要かを AI がメール内で聞き出し、見積に必要な要件を揃えてから営業に引き渡します。',
         },
         {
-          badge: 'AI Calendar',
+          badge: 'Calendar',
           name: 'Meeton Calendar',
-          href: '/features/meetings/',
+          href: '/calendar/',
           description: 'Google Calendar / MS Teams / Zoom 連携の自動スケジューリング。技術IS・営業・客先の3者調整も自動化。',
           industryAngle: '技術相談には「営業＋技術IS＋客先技術者」の3者打ち合わせが多発します。Meeton Calendar は複数カレンダーを横断して最適枠を提案し、客先での工場訪問・サンプル送付スケジュールまで管理可能です。',
         },
         {
-          badge: 'AI Offer',
+          badge: 'Library',
           name: 'Meeton Library',
-          href: '/features/ai-library/',
+          href: '/library/',
           description: '訪問者の関心セグメント（業界・用途・素材）に応じた技術資料・事例・カタログをパーソナライズ配信。',
           industryAngle: '半年〜2年の長い検討サイクル中、AI が顧客の業界・用途に合わせた事例・技術資料を継続的に提示。「忘れられない仕組み」として、再訪リードに今読むべき1本を届け続けます。',
+        },
+        {
+          badge: 'Ads',
+          name: 'Meeton Ads',
+          href: '/ads/',
+          description: 'サイト訪問者ごとに、閲覧ページ・流入元・業種に合わせて最適なオファーを AI が出し分けるオンサイト広告。クリック・リード獲得から継続的に学習します。',
+          industryAngle: '技術資料やカタログを閲覧する訪問者に、用途・業種・流入元に応じた最適オファー（サンプル依頼 / 技術相談 / 見積）を AI が提示。チャットを開かない引合もオンサイト広告でリード化します。広告文は AI が下書きし、承認したものだけを配信します。',
         },
       ]}
       integrations={[
@@ -130,7 +137,7 @@ export default function ManufacturingUseCasePage() {
         },
         {
           question: '海外からの英語問い合わせにも対応できますか？',
-          answer: 'Meeton Live / Meeton Email は多言語対応しており、英語・中国語などの問い合わせにも AI が自動で言語を判定して返信します。海外・地方の時差問い合わせを取り逃す課題を解決できます。',
+          answer: 'Meeton Chat / Meeton Email は多言語対応しており、英語・中国語などの問い合わせにも AI が自動で言語を判定して返信します。海外・地方の時差問い合わせを取り逃す課題を解決できます。',
         },
         {
           question: '見積依頼・サンプル依頼など、フォーム連携はどうなりますか？',

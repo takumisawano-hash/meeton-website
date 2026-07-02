@@ -188,9 +188,17 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </DemoBookingButton>
-            <Link href="/case-studies/" className="uc-btn uc-btn-ghost">
+            <Link href={lang === 'en' ? '/en/cases/' : '/cases/'} className="uc-btn uc-btn-ghost">
               {t.heroCasesCta}
             </Link>
+          </div>
+          <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', marginTop: 18, fontSize: 13, color: 'var(--uc-sub)' }}>
+            {(lang === 'en'
+              ? ['1-month free trial — no credit card', 'One JS tag, install in 5 minutes', 'No scenario design']
+              : ['JSタグ1行・約5分で設置', 'シナリオ設計不要', '30分のデモで自社への効き方を確認']
+            ).map((a) => (
+              <span key={a}>✓ {a}</span>
+            ))}
           </div>
         </div>
       </section>
@@ -271,7 +279,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
               </div>
               <h2 className="uc-section-h2">{t.caseH2}</h2>
             </div>
-            <Link href={lang === 'en' ? `/en/cases/${matched.slug}/` : `/case-studies/${matched.slug}/`} className="uc-cs-card">
+            <Link href={lang === 'en' ? `/en/cases/${matched.slug}/` : `/cases/${matched.slug}/`} className="uc-cs-card">
               <div className="uc-cs-media">
                 {matched.heroImage ? (
                   <Image
@@ -330,6 +338,18 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
         </section>
       )}
 
+      {/* ────── MID CTA (hero CTA is far above by here) ────── */}
+      <section className="uc-section" style={{ padding: '28px 24px' }}>
+        <div className="uc-section-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap', background: '#0f1128', borderRadius: 18, padding: '26px 30px' }}>
+          <p style={{ margin: 0, fontSize: 'clamp(17px,2.2vw,22px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.01em' }}>
+            {lang === 'en' ? 'See the same playbook on your own site — 30-minute demo.' : '同じ仕組みを、自社サイトで。30分のデモで確認。'}
+          </p>
+          <DemoBookingButton className="uc-btn uc-btn-primary" utmCampaign={`${props.utmCampaign}__mid`}>
+            {t.heroDemoCta}
+          </DemoBookingButton>
+        </div>
+      </section>
+
       {/* ────── INTEGRATIONS ────── */}
       <section className="uc-section uc-section-alt">
         <div className="uc-section-inner">
@@ -345,6 +365,18 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           </div>
           <div className="uc-int-grid">
             {props.integrations.map((it) => (
+              // /integrations/* has no EN twin — chips stay unlinked on EN
+              lang === 'en' ? (
+                <div key={it.slug} className="uc-int-card" style={{ cursor: 'default' }}>
+                  <div className="uc-int-logo">
+                    <Image src={it.logo} alt={it.name} width={48} height={48} style={{ objectFit: 'contain' }} />
+                  </div>
+                  <div className="uc-int-body">
+                    <h3 className="uc-int-name">{it.name}</h3>
+                    <p className="uc-int-reason">{it.reason}</p>
+                  </div>
+                </div>
+              ) : (
               <Link key={it.slug} href={`/integrations/${it.slug}/`} className="uc-int-card">
                 <div className="uc-int-logo">
                   <Image
@@ -363,6 +395,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                   <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </Link>
+              )
             ))}
           </div>
         </div>
@@ -422,10 +455,15 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </DemoBookingButton>
-            <Link href="/contact/" className="uc-btn uc-btn-ghost uc-btn-lg">
+            <Link href={lang === 'en' ? '/en/contact/' : '/contact/'} className="uc-btn uc-btn-ghost uc-btn-lg">
               {t.ctaGhost}
             </Link>
           </div>
+          <p style={{ marginTop: 20, fontSize: 14 }}>
+            <Link href={lang === 'en' ? '/en/pricing/' : '/pricing/'} style={{ color: 'var(--uc-mute)', fontWeight: 700, textDecoration: 'underline' }}>
+              {lang === 'en' ? 'See pricing (from ¥120,000/mo, 1-month free trial) →' : '料金を見る（月額12万円〜）→'}
+            </Link>
+          </p>
         </div>
       </section>
 

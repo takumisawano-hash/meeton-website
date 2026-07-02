@@ -4,7 +4,7 @@
 // blog hub organization, and the content pipeline's dedup / cannibalization
 // guard (one KW → one URL).
 
-export type ClusterId = "library" | "calendar" | "email" | "chat" | "ai-sdr";
+export type ClusterId = "library" | "calendar" | "email" | "chat" | "ads" | "ai-sdr";
 
 export type Cluster = {
   id: ClusterId;
@@ -22,6 +22,16 @@ export type Cluster = {
 };
 
 export const CLUSTERS: Record<ClusterId, Cluster> = {
+  ads: {
+    id: "ads",
+    label: "サイト内広告・CVR改善",
+    pillar: "/ads/",
+    pillarName: "Meeton Ads",
+    blurb: "AIが訪問者ごとに最適なオファーを出し分けるサイト内広告で、リード獲得を最大化する。",
+    weight: "high",
+    keywords: ["サイト内広告", "Web接客 ポップアップ", "オンサイトマーケティング", "CVR改善 施策", "ポップアップ 最適化"],
+    aliases: ["ads", "広告", "ポップアップ", "オンサイト", "on-site-ads", "web接客"],
+  },
   library: {
     id: "library",
     label: "資料共有・トラッキング",
@@ -95,6 +105,7 @@ export function classifyCluster(input: { category?: string; tags?: string[]; tar
 /** Compare-page slugs relevant to each cluster (for related BOFU links §4.8). */
 export const CLUSTER_COMPARES: Record<ClusterId, string[]> = {
   library: ["docsend"],
+  ads: [],
   calendar: ["immedio", "timerex", "spir", "calendly"],
   email: ["lemlist", "smartlead"],
   chat: ["intercom"],

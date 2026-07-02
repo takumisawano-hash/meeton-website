@@ -73,19 +73,19 @@ const config: SolutionLpConfig = {
       badge: 'AI follow-up',
       title: 'Meeton Email',
       body: 'Detects renewed-interest signals (web revisits, pricing-page views, email opens) from past MQLs and lost-deal contacts in your CRM, and helps automate context-aware 1:1 re-engagement. You can also run a pre-send approval flow.',
-      href: '/features/ai-email/',
+      href: '/en/email/',
     },
     {
       badge: 'AI chat',
-      title: 'Meeton Live',
+      title: 'Meeton Chat',
       body: 'When an identified lead returns, an AI SDR that carries over their past views, downloads, and email responses replies instantly. It enables a natural restart in conversation, like "How is the project you were considering earlier progressing?"',
-      href: '/features/ai-chat/',
+      href: '/en/chat/',
     },
     {
       badge: 'AI meeting booking',
       title: 'Meeton Calendar',
       body: 'The moment interest peaks, the AI completes the meeting booking. It auto-assigns reps based on CRM owner / industry / company size and syncs automatically to Salesforce / HubSpot.',
-      href: '/features/meetings/',
+      href: '/en/calendar/',
     },
   ],
   cases: [
@@ -119,7 +119,7 @@ const config: SolutionLpConfig = {
     },
     {
       title: 'Re-engage in context',
-      body: 'Meeton Email re-engages 1:1, and Meeton Live converses on revisit. The AI decides the "when, to whom, and what."',
+      body: 'Meeton Email re-engages 1:1, and Meeton Chat converses on revisit. The AI decides the "when, to whom, and what."',
     },
     {
       title: 'Close with a booked meeting',

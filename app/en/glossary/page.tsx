@@ -3,6 +3,7 @@ import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import { Section, Eyebrow, Card } from "@/app/components/v2/ui";
+import CTAButtons from "@/app/components/v2/CTAButtons";
 import { CLUSTER_ORDER, type ClusterId } from "@/app/lib/content-clusters";
 import { allTermsEn } from "@/app/lib/glossary-data";
 import { altLanguages, ogLocale } from "@/app/lib/i18n";
@@ -23,12 +24,13 @@ const CLUSTER_LABEL_EN: Record<ClusterId, string> = {
   calendar: "Scheduling & meeting conversion",
   email: "Follow-up & nurturing",
   chat: "Web engagement & chat meeting conversion",
+  ads: "On-site ads & conversion optimization",
   "ai-sdr": "AI SDR / category",
 };
 
 export default function Page() {
   const terms = allTermsEn();
-  const byCluster: Record<ClusterId, typeof terms> = { library: [], calendar: [], email: [], chat: [], "ai-sdr": [] };
+  const byCluster: Record<ClusterId, typeof terms> = { library: [], calendar: [], email: [], chat: [], ads: [], "ai-sdr": [] };
   for (const t of terms) byCluster[t.cluster].push(t);
 
   const schema = {
@@ -77,6 +79,15 @@ export default function Page() {
             )
           )
         )}
+      </Section>
+      <Section tone="navy" py={56}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
+          <div>
+            <p style={{ margin: 0, fontSize: "clamp(20px,2.6vw,26px)", fontWeight: 800, color: "var(--on-navy)", letterSpacing: "-0.02em" }}>See the meeting conversion behind the vocabulary.</p>
+            <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--on-navy-sub)" }}>A 30-minute demo shows how the AI SDR works on your own site — or start a free trial today.</p>
+          </div>
+          <CTAButtons source="glossary-hub" tone="onNavy" size="md" lang="en" />
+        </div>
       </Section>
       <Footer lang="en" />
     </>

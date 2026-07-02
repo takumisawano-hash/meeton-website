@@ -46,7 +46,7 @@ const config: SolutionLpConfig = {
   heroProof: [
     { value: '5', unit: 'sec', label: 'First response when a lead appears' },
     { value: '24', unit: '/7', label: 'AI in operation' },
-    { value: '3', unit: 'modules', label: 'Live / Calendar / Email' },
+    { value: '3', unit: 'modules', label: 'Chat / Calendar / Email' },
   ],
   painsHeading: 'Three structures that keep leads from becoming meetings',
   proofHeading: 'Meeting-creation results with Meeton ai',
@@ -71,21 +71,27 @@ const config: SolutionLpConfig = {
   solutions: [
     {
       badge: 'AI chat',
-      title: 'Meeton Live',
+      title: 'Meeton Chat',
       body: 'An AI SDR converses in real time at the moment of form submission, thank-you page, or site revisit. It answers deep questions that carry over download context and past history, and completes a booking while interest is high.',
-      href: '/features/ai-chat/',
+      href: '/en/chat/',
     },
     {
       badge: 'AI meeting booking',
       title: 'Meeton Calendar',
       body: 'The moment a lead converts, the AI assigns a rep and offers a booking while interest is high. It triggers from anywhere — form submission, thank-you page, or email.',
-      href: '/features/meetings/',
+      href: '/en/calendar/',
     },
     {
       badge: 'AI follow-up',
       title: 'Meeton Email',
       body: 'For leads who did not book immediately, the AI helps automate context-aware 1:1 follow-up. Rather than MA template blasts, it dynamically decides content, timing, and tone based on the lead\'s behavioral signals.',
-      href: '/features/ai-email/',
+      href: '/en/email/',
+    },
+    {
+      badge: 'AI ads',
+      title: 'Meeton Ads',
+      body: 'For visitors who never open the chat, the AI presents the best offer as an on-site ad — matched to page, traffic source, and industry. Prospects who never reach a conversation still convert with the right offer. The AI drafts the ad copy, and only approved ones go live.',
+      href: '/en/ads/',
     },
   ],
   cases: [
@@ -115,7 +121,7 @@ const config: SolutionLpConfig = {
     },
     {
       title: 'Respond in real time',
-      body: 'Meeton Live starts the conversation instantly (a 1:1 AI reply for email inflow). It does not depend on a rep\'s availability.',
+      body: 'Meeton Chat starts the conversation instantly (a 1:1 AI reply for email inflow). It does not depend on a rep\'s availability.',
     },
     {
       title: 'Book a meeting or follow up, by interest',
@@ -140,7 +146,7 @@ const config: SolutionLpConfig = {
     {
       question: 'Do I need scenario design or to build out FAQs?',
       answer:
-        'Complex scenario design is unnecessary. Meeton Live is generative-AI based; it uses your official information (site, materials, FAQs, past inquiries) as training data and responds in context even to undefined questions. When the AI cannot answer, it automatically switches to connecting to a rep or recommending related materials.',
+        'Complex scenario design is unnecessary. Meeton Chat is generative-AI based; it uses your official information (site, materials, FAQs, past inquiries) as training data and responds in context even to undefined questions. When the AI cannot answer, it automatically switches to connecting to a rep or recommending related materials.',
     },
     {
       question: 'Will fast response to inquiries alone produce results?',

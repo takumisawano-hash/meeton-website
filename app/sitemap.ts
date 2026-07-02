@@ -205,6 +205,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const enPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/en/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: `${baseUrl}/en/pricing/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/en/tools/roi/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     // EN-only self-serve funnel destination (no JA twin)
     { url: `${baseUrl}/en/trial/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     { url: `${baseUrl}/en/about/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },

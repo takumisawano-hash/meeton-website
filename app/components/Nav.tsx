@@ -134,7 +134,7 @@ const RESOURCE_ITEMS_EN: Item[] = [
   { href: "/en/blog/", label: "Blog", sub: "Playbooks for capture & conversion" },
   { href: "/en/glossary/ai-sdr/", label: "Glossary", sub: "What is an AI SDR, and more" },
   { href: "/en/cases/", label: "Customers", sub: "Accounts that saw results" },
-  { href: "/tools/roi/", label: "ROI calculator", sub: "Estimate your conversion upside" },
+  { href: "/en/tools/roi/", label: "ROI calculator", sub: "Estimate your conversion upside" },
 ];
 
 function useIsMobile(breakpoint = 980) {

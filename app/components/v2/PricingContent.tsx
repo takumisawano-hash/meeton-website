@@ -2,6 +2,7 @@ import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
+import MobileStickyCta from "@/app/components/v2/MobileStickyCta";
 import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/ui";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
@@ -542,6 +543,7 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
         </div>
       </Section>
 
+      <MobileStickyCta lang={lang} source="pricing" />
       <Footer lang={lang} />
     </>
   );

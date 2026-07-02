@@ -303,13 +303,21 @@ export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: So
             </div>
             <div className="sl-case-grid">
               {config.cases.map((c) => (
-                <Link key={c.slug} href={`/case-studies/${c.slug}/`} className="sl-case-card">
+                <Link key={c.slug} href={lang === 'en' ? `/en/cases/${c.slug}/` : `/cases/${c.slug}/`} className="sl-case-card">
                   <div className="sl-case-co">{c.company}</div>
                   <div className="sl-case-m">{c.metric}</div>
                   <div className="sl-case-l">{c.metricLabel}</div>
                   <div className="sl-case-cta">{SL_CHROME[lang].caseCta}</div>
                 </Link>
               ))}
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap', background: 'var(--sl-navy, #0f1128)', borderRadius: 18, padding: '24px 28px', marginTop: 28 }}>
+              <p style={{ margin: 0, fontSize: 'clamp(16px,2vw,20px)', fontWeight: 800, color: '#fff' }}>
+                {lang === 'en' ? 'Map this playbook to your own funnel — in 30 minutes.' : 'この打ち手を自社のファネルに当てはめると？ 30分でご案内します。'}
+              </p>
+              <DemoBookingButton className="sl-btn sl-btn-primary" utmCampaign={`${config.utmCampaignBase}__mid_consult`}>
+                {c.heroConsult}
+              </DemoBookingButton>
             </div>
           </div>
         </section>
@@ -379,15 +387,17 @@ export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: So
           </div>
           {/* 補助動線として小さくウェビナー誘導。Final CTA メインは
               checklist DL + 30分相談 の 2 つに集中。 */}
-          <div style={{ marginTop: 24, fontSize: 13, color: 'var(--sub)' }}>
-            {c.webinarLead}{' '}
-            <Link
-              href="/webinar/"
-              style={{ color: 'var(--sl-cta)', textDecoration: 'underline', fontWeight: 700 }}
-            >
-              {c.webinar}
-            </Link>
-          </div>
+          {lang !== 'en' && (
+  <div style={{ marginTop: 24, fontSize: 13, color: 'var(--sub)' }}>
+              {c.webinarLead}{' '}
+              <Link
+                href="/webinar/"
+                style={{ color: 'var(--sl-cta)', textDecoration: 'underline', fontWeight: 700 }}
+              >
+                {c.webinar}
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

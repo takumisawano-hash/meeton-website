@@ -64,32 +64,39 @@ export default function ProfessionalServicesUseCasePageEn() {
       ]}
       modules={[
         {
-          badge: 'AI Chat',
-          name: 'Meeton Live',
-          href: '/features/ai-chat/',
+          badge: 'Chat',
+          name: 'Meeton Chat',
+          href: '/en/chat/',
           description: 'The AI responds in real time in your website chat. It carefully discovers the inquiry\'s background, challenge, budget range, and timeline, and judges deal temperature automatically.',
           industryAngle: 'The AI handles the first response for consulting and licensed-professional inquiries. Cold "just consulting" requests get a materials guide; promising "want to start within 3 months" deals book directly into the partner\'s calendar. It concentrates the partner\'s time only on high-closing-value deals.',
         },
         {
-          badge: 'AI Email',
+          badge: 'Email',
           name: 'Meeton Email',
-          href: '/features/ai-email/',
+          href: '/en/email/',
           description: 'AI replies to inquiry emails. It confirms deal background, budget, and timeline within the email and judges meeting-conversion likelihood.',
           industryAngle: 'The AI also handles first replies to email inquiries arriving via referrals. It naturally discovers — "May I ask a few things before our meeting?" — so by the time the partner enters the meeting, the key points are already organized.',
         },
         {
-          badge: 'AI Calendar',
+          badge: 'Calendar',
           name: 'Meeton Calendar',
-          href: '/features/meetings/',
+          href: '/en/calendar/',
           description: 'Automatic scheduling integrated with Google Calendar / MS Teams / Zoom. It automates coordination across multiple partners and multiple client stakeholders.',
           industryAngle: 'It handles cases where the client brings several decision-makers. The partner side also needs to assign managers and associates, and the AI fully automates the scheduling of 4–6 people.',
         },
         {
-          badge: 'AI Offer',
+          badge: 'Library',
           name: 'Meeton Library',
-          href: '/features/ai-library/',
+          href: '/en/library/',
           description: 'Based on the visitor\'s industry and challenge theme, it auto-recommends the best track-record materials, whitepapers, and case studies.',
           industryAngle: 'It presents a track-record library by specialty and industry, optimized to the visitor. Clients can discover "is there a case similar to mine?" on their own, improving conversion to a booked meeting.',
+        },
+        {
+          badge: 'Ads',
+          name: 'Meeton Ads',
+          href: '/en/ads/',
+          description: 'On-site ads where the AI tailors the best offer to each visitor by page, traffic source, and industry. It keeps learning from clicks and captured leads.',
+          industryAngle: 'For visitors browsing your track-record and specialty pages, the AI presents the best offer (free consultation, case-study download) matched to their challenge theme, industry, and traffic source. Prospects who never open the chat still convert through on-site ads. The AI drafts the ad copy, and only approved ones go live.',
         },
       ]}
       integrations={[
@@ -121,11 +128,11 @@ export default function ProfessionalServicesUseCasePageEn() {
       faqs={[
         {
           question: 'This is an industry where partners value relationships. Won\'t AI handling first response hurt the customer experience?',
-          answer: 'The purpose of leaving first discovery to AI is to let partners focus on "high-value conversations." Meeton Live confirms deal background with polite language and immediately hands promising deals to a partner. Cold inquiries get materials and a resource guide, maintaining the right distance. In many cases, satisfaction actually rises versus "slow first response" or "a secretary responding mechanically."',
+          answer: 'The purpose of leaving first discovery to AI is to let partners focus on "high-value conversations." Meeton Chat confirms deal background with polite language and immediately hands promising deals to a partner. Cold inquiries get materials and a resource guide, maintaining the right distance. In many cases, satisfaction actually rises versus "slow first response" or "a secretary responding mechanically."',
         },
         {
           question: 'How do you sort cold "just want to consult" inquiries from promising deals?',
-          answer: 'During the inquiry, Meeton Live confirms "budget range," "timing," "current challenges," and "decision-maker" through natural conversation and computes a deal score automatically. Only inquiries above the threshold book directly into the partner\'s calendar; the rest go onto a materials and nurture path.',
+          answer: 'During the inquiry, Meeton Chat confirms "budget range," "timing," "current challenges," and "decision-maker" through natural conversation and computes a deal score automatically. Only inquiries above the threshold book directly into the partner\'s calendar; the rest go onto a materials and nurture path.',
         },
         {
           question: 'Consulting involves highly confidential discussions. Is security adequate?',

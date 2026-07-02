@@ -97,7 +97,17 @@ export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry;
             {t.h1}
           </h1>
           <p style={{ fontSize: 17, lineHeight: 1.85, color: "var(--on-navy-sub)", margin: "20px 0 28px", maxWidth: 680 }}>{t.sub}</p>
-          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" lang={lang} />
+          <CTAButtons
+            source={`${src}-hero`}
+            tone="onNavy"
+            size="lg"
+            lang={lang}
+            assurances={
+              en
+                ? ["1-month free trial — no credit card", "One JS tag, install in 5 minutes", "No scenario design"]
+                : ["JSタグ1行・約5分で設置", "シナリオ設計不要", "30分のデモで自社への効き方を確認"]
+            }
+          />
         </div>
       </Section>
 
@@ -133,7 +143,7 @@ export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry;
                 <h3 style={{ fontSize: 17, fontWeight: 800, color: "var(--heading)", margin: "0 0 8px" }}>{pl.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text)", margin: "0 0 12px" }}>{pl.desc}</p>
                 {cl && (
-                  <Link href={cl.pillar} style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none" }}>
+                  <Link href={en ? `/en${cl.pillar}` : cl.pillar} style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "none" }}>
                     {cl.pillarName} →
                   </Link>
                 )}

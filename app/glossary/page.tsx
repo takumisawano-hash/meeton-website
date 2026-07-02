@@ -4,6 +4,7 @@ import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import { Section, SectionHead, Eyebrow, Card } from "@/app/components/v2/ui";
+import CTAButtons from "@/app/components/v2/CTAButtons";
 import { CLUSTERS, CLUSTER_ORDER, type ClusterId } from "@/app/lib/content-clusters";
 import { allTerms } from "@/app/lib/glossary-data";
 
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   const terms = allTerms();
-  const byCluster: Record<ClusterId, typeof terms> = { library: [], calendar: [], email: [], chat: [], "ai-sdr": [] };
+  const byCluster: Record<ClusterId, typeof terms> = { library: [], calendar: [], email: [], chat: [], ads: [], "ai-sdr": [] };
   for (const t of terms) byCluster[t.cluster].push(t);
 
   const schema = {
@@ -68,6 +69,18 @@ export default function Page() {
             )
           )
         )}
+      </Section>
+
+      {/* Conversion strip — the glossary is a high-traffic AEO surface and
+          previously had zero CTA (2026-07-02 CRO audit). */}
+      <Section tone="navy" py={56}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
+          <div>
+            <p style={{ margin: 0, fontSize: "clamp(20px,2.6vw,26px)", fontWeight: 800, color: "var(--on-navy)", letterSpacing: "-0.02em" }}>用語の先にある「商談化」を、実際に見る。</p>
+            <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--on-navy-sub)" }}>30分のデモで、AI SDR が自社サイトでどう動くかを確認できます。</p>
+          </div>
+          <CTAButtons source="glossary-hub" tone="onNavy" size="md" />
+        </div>
       </Section>
       <Footer />
     </>

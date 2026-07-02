@@ -65,32 +65,39 @@ export default function SaaSUseCasePage() {
       ]}
       modules={[
         {
-          badge: 'AI Chat',
-          name: 'Meeton Live',
-          href: '/features/ai-chat/',
+          badge: 'Chat',
+          name: 'Meeton Chat',
+          href: '/chat/',
           description: 'Webサイトを訪れたリードに対して、AIがリアルタイムで会話。資料DLや動画閲覧の文脈を踏まえて、深いプロダクト質問にも具体的に回答します。',
           industryAngle: 'SaaS バイヤーの「機能・料金・セキュリティ」質問に、貴社の公式情報のみを根拠に正確に回答。シナリオ型チャットでは脱落していたバイヤーを、最初の30秒で商談導線に乗せます。',
         },
         {
-          badge: 'AI Email',
+          badge: 'Email',
           name: 'Meeton Email',
-          href: '/features/ai-email/',
+          href: '/email/',
           description: '問い合わせメールに対し、AIがインサイドセールスに代わって返信し、商談を予約します。Slack・HubSpot 通知と連動。',
           industryAngle: '評価期間中、関係者から個別に届くメール質問（請求書フォーマット・契約条項・技術仕様）に、AIが営業時間外でも即返信。バイイングコミッティ全員の温度を保ち続けます。',
         },
         {
-          badge: 'AI Calendar',
+          badge: 'Calendar',
           name: 'Meeton Calendar',
-          href: '/features/meetings/',
+          href: '/calendar/',
           description: 'Google Calendar / MS Teams / Zoom と連携した自動スケジューリング。バイヤーが空き枠を選ぶだけで商談が確定。',
           industryAngle: '複数のステークホルダーが参加する商談を、全員のカレンダーから自動で最適枠を提案。1on1だけでなく「3社合同・関係者5名」のような複雑な調整もAIが代行します。',
         },
         {
-          badge: 'AI Offer',
+          badge: 'Library',
           name: 'Meeton Library',
-          href: '/features/ai-library/',
+          href: '/library/',
           description: '訪問者の業界・役職・閲覧履歴に基づき、最適な資料・事例・動画をパーソナライズして提示。再訪リードを温め続けます。',
           industryAngle: 'SaaS の長期評価サイクルに対し、リードの関心テーマ（セキュリティ / 料金 / 事例）が変化しても、AIが今読むべき1本を提示。3ヶ月後の再訪でも文脈を覚えています。',
+        },
+        {
+          badge: 'Ads',
+          name: 'Meeton Ads',
+          href: '/ads/',
+          description: 'サイト訪問者一人ひとりに、閲覧ページ・流入元・業種に応じて最適なオファーを AI が出し分けるオンサイト広告。クリック・リード獲得から継続的に学習します。',
+          industryAngle: 'SaaS の比較検討中バイヤーに対し、閲覧ページ（機能 / 料金 / セキュリティ）や流入元に合わせた最適オファーを AI が提示。チャットを開かない訪問者もオンサイト広告でリード化します。広告文は AI が下書きし、承認したものだけを配信します。',
         },
       ]}
       integrations={[
@@ -126,11 +133,11 @@ export default function SaaSUseCasePage() {
         },
         {
           question: 'バイイングコミッティ（複数ステークホルダー）全員との商談を組めますか？',
-          answer: 'Meeton Calendar は1on1だけでなく、3-5名規模のマルチパーティ商談の調整に対応しています。さらに Meeton Live で「他にご検討に加わる方はいらっしゃいますか」と AI が自然に拾い上げ、関係者全員の参加意思確認まで自動化できます。',
+          answer: 'Meeton Calendar は1on1だけでなく、3-5名規模のマルチパーティ商談の調整に対応しています。さらに Meeton Chat で「他にご検討に加わる方はいらっしゃいますか」と AI が自然に拾い上げ、関係者全員の参加意思確認まで自動化できます。',
         },
         {
           question: 'SaaS バイヤーが投げてくる「機能比較」「セキュリティ」「料金根拠」のような深い質問にも答えられますか？',
-          answer: 'Meeton Live は貴社の製品ドキュメント・FAQ・セキュリティホワイトペーパー・料金ページを学習データとし、根拠付きで回答します。回答できない場合は「担当者に確認します」と判断し、即時に商談誘導へ切り替えます。シナリオ型ボットのような「ご質問にお答えできません」で脱落することはありません。',
+          answer: 'Meeton Chat は貴社の製品ドキュメント・FAQ・セキュリティホワイトペーパー・料金ページを学習データとし、根拠付きで回答します。回答できない場合は「担当者に確認します」と判断し、即時に商談誘導へ切り替えます。シナリオ型ボットのような「ご質問にお答えできません」で脱落することはありません。',
         },
         {
           question: '既存のセールススタック（HubSpot / Salesforce / Slack）はそのまま使えますか？',
@@ -138,7 +145,7 @@ export default function SaaSUseCasePage() {
         },
         {
           question: '他のチャットボット（Drift / Intercom / ChatPlus）との違いは？',
-          answer: 'シナリオ型チャットボットは決まった分岐しか答えられず、深い質問で即座に脱落します。Meeton Live は生成AIベースのため、未定義の質問にも文脈を理解して応答可能です。さらに「会話→商談予約→CRM 同期→Slack 通知」までを1つのプロダクトで完結する点が、純粋なチャットツールとの最大の違いです。',
+          answer: 'シナリオ型チャットボットは決まった分岐しか答えられず、深い質問で即座に脱落します。Meeton Chat は生成AIベースのため、未定義の質問にも文脈を理解して応答可能です。さらに「会話→商談予約→CRM 同期→Slack 通知」までを1つのプロダクトで完結する点が、純粋なチャットツールとの最大の違いです。',
         },
         {
           question: 'SaaS スタートアップでも導入できますか？',

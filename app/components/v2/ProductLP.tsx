@@ -2,6 +2,7 @@ import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
+import MobileStickyCta from "@/app/components/v2/MobileStickyCta";
 import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check, MAXW } from "@/app/components/v2/ui";
 import type { ProductLPData } from "@/app/lib/product-lp-data";
 import { COMPARE } from "@/app/lib/compare-data";
@@ -309,6 +310,7 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
       </Section>
       </main>
 
+      <MobileStickyCta lang={lang} source={src} />
       <Footer lang={lang} />
     </>
   );

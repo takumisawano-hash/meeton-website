@@ -30,7 +30,7 @@ const CASE_BY_CATEGORY: Record<string, CaseRef> = {
   'Inside Sales': {
     slug: 'edulinx-ai-chat-40-percent',
     company: 'EdulinX 株式会社',
-    metric: 'AI Chat 経由のリード商談化率 40%+',
+    metric: 'Meeton ai 経由の商談化率 60%+（業界平均約20%）',
     context: 'インサイドセールス強化に Meeton ai を採用',
   },
   Marketing: {
@@ -43,19 +43,19 @@ const CASE_BY_CATEGORY: Record<string, CaseRef> = {
 
 const COPY_BY_CATEGORY: Record<string, { eyebrow: string; headline: React.ReactNode; description: string; primary: string }> = {
   Sales: {
-    eyebrow: 'Meeton AI for Sales',
-    headline: <>営業の<span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談化率を2倍</span>にするAI</>,
+    eyebrow: 'Meeton ai for Sales',
+    headline: <>営業の<span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談化率を変える</span>AI</>,
     description: 'AIが見込み客を自動でナーチャリングし、商談予約までを完結。営業組織の生産性を抜本的に変える実装ガイドを資料でお届けします。',
     primary: '実装ガイドを受け取る',
   },
   'Inside Sales': {
-    eyebrow: 'Meeton AI for Inside Sales',
+    eyebrow: 'Meeton ai for Inside Sales',
     headline: <><span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI SDR</span>で 月間商談数を倍増</>,
-    description: 'インサイドセールスの架電・メール・LinkedIn DMをAIエージェントが自動化。商談化率40%超を実現する選定ガイドと事例集をお送りします。',
+    description: 'サイト上の会話・資料・追客メールをAIエージェントが自律実行。商談化率60%+を実現した選定ガイドと事例集をお送りします。',
     primary: 'AI SDR選定ガイドを受け取る',
   },
   Marketing: {
-    eyebrow: 'Meeton AI for Marketing',
+    eyebrow: 'Meeton ai for Marketing',
     headline: <>Web訪問者を<span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談に変える</span>AI</>,
     description: 'チャットボット × 行動ログ × AIナーチャリングで、サイト訪問者を見込み客→商談へ自動転換。マーケ施策のCV率改善ガイドを資料でお届けします。',
     primary: 'CV改善ガイドを受け取る',
@@ -63,7 +63,7 @@ const COPY_BY_CATEGORY: Record<string, { eyebrow: string; headline: React.ReactN
 }
 
 const DEFAULT_COPY = {
-  eyebrow: 'Meeton AI',
+  eyebrow: 'Meeton ai',
   headline: <>Webサイト訪問者を<br /><span style={{ background: 'linear-gradient(135deg, #12a37d, #3b6ff5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>商談に変える</span> AI</>,
   description: 'AIがすべてのWebサイト訪問者に対応し、リードを自動で獲得・育成。商談予約まで自動化します。',
   primary: '資料請求',
@@ -188,7 +188,7 @@ export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
 
       {caseRef && (
         <Link
-          href={`/case-studies/${caseRef.slug}/`}
+          href={`/cases/${caseRef.slug}/`}
           style={{
             display: 'block',
             marginTop: 16,

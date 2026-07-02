@@ -54,7 +54,7 @@ export const EN_OG_IMAGE = [
 // allowlist + the geo middleware). Used to point the language switch at the
 // correct EN twin instead of always dumping the visitor on the EN homepage.
 export const EN_TWIN_PREFIXES = [
-  "chat", "calendar", "library", "email", "ads", "capture",
+  "chat", "calendar", "library", "email", "ads", "capture", "tools/roi",
   "pricing", "about", "contact", "enterprise", "security", "glossary",
   "cases", "compare", "alternatives", "use-cases",
   "solutions/crm-to-meeting", "solutions/lead-to-meeting",

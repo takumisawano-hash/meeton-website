@@ -3,6 +3,7 @@ import Image from "next/image";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import CTAButtons from "@/app/components/v2/CTAButtons";
+import MobileStickyCta from "@/app/components/v2/MobileStickyCta";
 import { Section, SectionHead, Eyebrow, Card, ProductIcon, Check } from "@/app/components/v2/ui";
 import LogoWall from "@/app/components/v2/LogoWall";
 import { FEATURED_CASES } from "@/app/lib/featured-cases";
@@ -373,6 +374,7 @@ export default function CaptureContent({ lang = "ja" }: { lang?: Lang }) {
       </Section>
       </main>
 
+      <MobileStickyCta lang={lang} source="capture" />
       <Footer lang={lang} />
     </>
   );

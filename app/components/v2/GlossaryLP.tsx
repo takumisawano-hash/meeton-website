@@ -47,6 +47,7 @@ const CLUSTER_EN: Record<ClusterId, { blurb: string; pillar: string }> = {
   calendar: { blurb: "Follow up the moment a lead arises. Carry scheduling all the way to meeting conversion.", pillar: "/en/calendar/" },
   email: { blurb: "AI follows up 1:1 with leads who didn't book, triggered by behavior signals.", pillar: "/en/email/" },
   chat: { blurb: "Stand on the consideration foundation before an inquiry and convert visitors through conversation.", pillar: "/en/chat/" },
+  ads: { blurb: "AI-optimized on-site ads that show each visitor the single best offer and maximize lead capture.", pillar: "/en/ads/" },
   "ai-sdr": { blurb: "What an AI SDR is and how to raise the meeting-conversion rate—the category's definition and practical know-how.", pillar: "/en/" },
 };
 

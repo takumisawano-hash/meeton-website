@@ -52,7 +52,7 @@ const config: SolutionLpConfig = {
   heroProof: [
     { value: '5', unit: '秒', label: 'リード発生時の初動' },
     { value: '24', unit: '/7', label: 'AI 稼働' },
-    { value: '3', unit: 'モジュール', label: 'Live / Calendar / Email' },
+    { value: '3', unit: 'モジュール', label: 'Chat / Calendar / Email' },
   ],
   painsHeading: 'リードが商談に変わらない、3 つの構造',
   proofHeading: 'Meeton ai で生まれた商談創出の成果',
@@ -79,21 +79,27 @@ const config: SolutionLpConfig = {
   solutions: [
     {
       badge: 'AI チャット',
-      title: 'Meeton Live',
+      title: 'Meeton Chat',
       body: 'フォーム送信・サンクスページ・サイト再訪の瞬間に AI SDR がリアルタイムで会話。資料 DL 文脈や過去履歴を引き継いだ深い質問にも即応し、温度が高いうちに商談予約まで完結します。',
-      href: '/features/ai-chat/',
+      href: '/chat/',
     },
     {
       badge: 'AI 商談予約',
       title: 'Meeton Calendar',
       body: 'リードがコンバートした瞬間に AI が担当者を割り振り、温度が高い瞬間に商談予約を提示。フォーム送信・サンクスページ・メール経由のどこからでも発動します。',
-      href: '/features/meetings/',
+      href: '/calendar/',
     },
     {
       badge: 'AI フォロー',
       title: 'Meeton Email',
       body: '即時予約しなかったリードに対し、AI が 1:1 で文脈に沿った追客を支援 / 自動化。MA テンプレ配信ではなく、リードの行動シグナルに合わせて内容・タイミング・トーンを動的に判断します。',
-      href: '/features/ai-email/',
+      href: '/email/',
+    },
+    {
+      badge: 'AI 広告',
+      title: 'Meeton Ads',
+      body: 'チャットを開かない訪問者に、ページ・流入元・業種に応じた最適なオファーを AI がオンサイト広告として提示。会話に進まなかった見込み客も、正しいオファーでリード化します。広告文は AI が下書きし、承認したものだけを配信します。',
+      href: '/ads/',
     },
   ],
   cases: [
@@ -123,7 +129,7 @@ const config: SolutionLpConfig = {
     },
     {
       title: 'リアルタイムに初動応答',
-      body: 'Meeton Live が即時に会話を開始 (Email 流入の場合は 1:1 AI 返信)。担当者の都合に依存しません。',
+      body: 'Meeton Chat が即時に会話を開始 (Email 流入の場合は 1:1 AI 返信)。担当者の都合に依存しません。',
     },
     {
       title: '温度に合わせて商談予約 or 追客',
@@ -148,7 +154,7 @@ const config: SolutionLpConfig = {
     {
       question: 'シナリオ設計や FAQ 作り込みは必要ですか？',
       answer:
-        '複雑なシナリオ設計は不要です。Meeton Live は生成 AI ベースで、貴社の公式情報 (サイト・資料・FAQ・過去問い合わせ) を学習データとし、未定義の質問にも文脈で応答します。AI が回答できない場合は、担当者への接続や関連資料の提案に自動で切り替えます。',
+        '複雑なシナリオ設計は不要です。Meeton Chat は生成 AI ベースで、貴社の公式情報 (サイト・資料・FAQ・過去問い合わせ) を学習データとし、未定義の質問にも文脈で応答します。AI が回答できない場合は、担当者への接続や関連資料の提案に自動で切り替えます。',
     },
     {
       question: '問い合わせ後のスピード対応だけで成果が出るのですか？',

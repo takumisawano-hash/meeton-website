@@ -64,32 +64,39 @@ export default function FintechUseCasePageEn() {
       ]}
       modules={[
         {
-          badge: 'AI Chat',
-          name: 'Meeton Live',
-          href: '/features/ai-chat/',
+          badge: 'Chat',
+          name: 'Meeton Chat',
+          href: '/en/chat/',
           description: 'The AI converses in real time. Train it on compliance-audited expression prompts and your regulation-related FAQs to keep the tone consistent.',
           industryAngle: 'It builds an NG-expression list based on the Financial Instruments and Exchange Act and the Premiums Act into the AI\'s system prompt to prevent inappropriate wording. It also answers financial-institution technical questions (API, SLA, encryption) in depth, grounded in your technical specifications.',
         },
         {
-          badge: 'AI Email',
+          badge: 'Email',
           name: 'Meeton Email',
-          href: '/features/ai-email/',
+          href: '/en/email/',
           description: 'AI replies to inquiry emails. Based on compliance-audited templates, it confirms technical specs and regulatory eligibility.',
           industryAngle: 'The AI confirms the customer\'s business status (bank, securities, insurance, FinTech, operating company) and runs eligibility screening as a first pass. It prevents wasting sales time on ineligible deals before the meeting.',
         },
         {
-          badge: 'AI Calendar',
+          badge: 'Calendar',
           name: 'Meeton Calendar',
-          href: '/features/meetings/',
+          href: '/en/calendar/',
           description: 'Integrated with Google Calendar / MS Teams / Zoom. It automates even three-way coordination among technical IS, compliance, and the customer\'s engineer.',
           industryAngle: 'FinTech B2B meetings standardly involve a three-way setup of "sales + technical + compliance." Meeton Calendar coordinates multiple internal stakeholders plus the customer end to end.',
         },
         {
-          badge: 'AI Offer',
+          badge: 'Library',
           name: 'Meeton Library',
-          href: '/features/ai-library/',
+          href: '/en/library/',
           description: 'Auto-recommends case studies, whitepapers, and regulation-compliance documents matched to the visitor\'s sector (bank, securities, insurance).',
           industryAngle: 'It serves bank case studies, insurance use cases, and regulatory-compliance whitepapers selectively by the visitor\'s sector. It creates a path for technical buyers to find deep information themselves during the evaluation.',
+        },
+        {
+          badge: 'Ads',
+          name: 'Meeton Ads',
+          href: '/en/ads/',
+          description: 'On-site ads where the AI tailors the best offer to each visitor by page, traffic source, and industry. It keeps learning from clicks and captured leads.',
+          industryAngle: 'For technical buyers across different sectors (bank, securities, insurance), the AI presents the best offer (document download, technical consult) matched to the page they\'re viewing and their traffic source. Visitors who never open the chat still convert through on-site ads. The AI drafts the ad copy, and only compliance-approved ones go live.',
         },
       ]}
       integrations={[
@@ -121,15 +128,15 @@ export default function FintechUseCasePageEn() {
       faqs={[
         {
           question: 'I worry the AI might use expressions that violate the Financial Instruments and Exchange Act or the Premiums Act.',
-          answer: 'Meeton Live embeds a "prohibited-expression list" in the system prompt and runs a compliance check before output. Further, you can configure it to use only expression templates approved by your compliance team. At onboarding we interview your compliance requirements and co-design the initial prompts.',
+          answer: 'Meeton Chat embeds a "prohibited-expression list" in the system prompt and runs a compliance check before output. Further, you can configure it to use only expression templates approved by your compliance team. At onboarding we interview your compliance requirements and co-design the initial prompts.',
         },
         {
           question: 'Can the AI determine offer eligibility based on the customer\'s regulatory status (bank, securities, insurance, etc.)?',
-          answer: 'During the inquiry, Meeton Live confirms "sector, license category, region" and matches it against your serviceable-segment matrix. Ineligible segments receive only a polite guide, and only eligible leads proceed to meeting conversion. It eliminates the waste of discovering ineligibility for the first time on the sales floor.',
+          answer: 'During the inquiry, Meeton Chat confirms "sector, license category, region" and matches it against your serviceable-segment matrix. Ineligible segments receive only a polite guide, and only eligible leads proceed to meeting conversion. It eliminates the waste of discovering ineligibility for the first time on the sales floor.',
         },
         {
           question: 'Can the AI handle deep questions from technical leads — API specs, SLA, redundancy, encryption methods?',
-          answer: 'Yes. Meeton Live can include your technical documents (API reference, security whitepaper, SOC 2 / ISMS report summaries) in its training data. It can answer in depth, grounded in your official information, the API-spec, SLA, redundancy, and encryption-algorithm questions technical leads throw.',
+          answer: 'Yes. Meeton Chat can include your technical documents (API reference, security whitepaper, SOC 2 / ISMS report summaries) in its training data. It can answer in depth, grounded in your official information, the API-spec, SLA, redundancy, and encryption-algorithm questions technical leads throw.',
         },
         {
           question: 'What about financial institutions\' security requirements (on-prem, closed networks, no data export)?',

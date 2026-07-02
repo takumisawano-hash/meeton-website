@@ -5,9 +5,7 @@
 
 import type { ClusterId } from "@/app/lib/content-clusters";
 
-// "ads" (Meeton Ads, 2026-07-02) is a product without a blog cluster yet, so
-// it extends the cluster-derived union rather than ClusterId itself.
-export type StageProduct = Exclude<ClusterId, "ai-sdr"> | "ads"; // calendar | chat | library | email | ads
+export type StageProduct = Exclude<ClusterId, "ai-sdr">; // calendar | chat | library | email | ads
 
 export type Stage = {
   num: "①" | "②" | "③" | "④";

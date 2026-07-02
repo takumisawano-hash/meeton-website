@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import CTAButtons from '@/app/components/v2/CTAButtons'
 import Link from 'next/link'
 import Image from 'next/image'
 import Nav from '@/app/components/Nav'
@@ -789,7 +790,7 @@ export default async function BlogPageEn() {
               </div>
               <p style={{ marginTop: 18 }}>
                 <Link
-                  href="/blog/"
+                  href="/en/blog/"
                   style={{ fontSize: 14, fontWeight: 800, color: '#12a37d', textDecoration: 'none' }}
                 >
                   Browse the Japanese blog →
@@ -913,6 +914,17 @@ export default async function BlogPageEn() {
               )}
             </>
           )}
+        </section>
+
+        {/* Conversion strip — hub previously had zero CTA (2026-07-02 CRO audit). */}
+        <section style={{ background: 'var(--navy, #0F1128)', padding: '48px 24px' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+            <div>
+              <p style={{ margin: 0, fontSize: 'clamp(20px,2.6vw,26px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>Put these playbooks to work on your own site.</p>
+              <p style={{ margin: '8px 0 0', fontSize: 14, color: 'rgba(255,255,255,.72)' }}>Meeton ai runs capture → nurture → convert → win back autonomously. Start free, or see it in a 30-minute demo.</p>
+            </div>
+            <CTAButtons source="blog-hub" tone="onNavy" size="md" lang="en" />
+          </div>
         </section>
       </main>
       <Footer lang="en" />

@@ -81,19 +81,19 @@ const config: SolutionLpConfig = {
       badge: 'AI フォロー',
       title: 'Meeton Email',
       body: 'CRM 内の過去 MQL・失注 contact の検討再開シグナル (Web 再訪、料金ページ閲覧、メール開封) を検知し、AI が 1:1 文脈に沿った再アプローチを支援 / 自動化。送信前承認フロー運用も選べます。',
-      href: '/features/ai-email/',
+      href: '/email/',
     },
     {
       badge: 'AI チャット',
-      title: 'Meeton Live',
+      title: 'Meeton Chat',
       body: '再訪した識別済みリードに、過去の閲覧・DL・メール反応を引き継いだ AI SDR が即時対応。「以前ご検討されていた件、進捗はいかがですか」のような自然な再開を会話で実現します。',
-      href: '/features/ai-chat/',
+      href: '/chat/',
     },
     {
       badge: 'AI 商談予約',
       title: 'Meeton Calendar',
       body: '温度が高まった瞬間に AI が商談予約まで完結。CRM の owner / 業種 / 規模に応じて担当者を自動アサインし、Salesforce / HubSpot へ自動同期します。',
-      href: '/features/meetings/',
+      href: '/calendar/',
     },
   ],
   cases: [
@@ -127,7 +127,7 @@ const config: SolutionLpConfig = {
     },
     {
       title: '文脈に沿った再アプローチ',
-      body: 'Meeton Email が 1:1 で再アプローチ、Meeton Live が再訪時に対話。「いつ・誰に・何を」を AI が判断します。',
+      body: 'Meeton Email が 1:1 で再アプローチ、Meeton Chat が再訪時に対話。「いつ・誰に・何を」を AI が判断します。',
     },
     {
       title: '商談予約で完結',

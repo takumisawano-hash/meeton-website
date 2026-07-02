@@ -64,32 +64,39 @@ export default function ManufacturingUseCasePageEn() {
       ]}
       modules={[
         {
-          badge: 'AI Chat',
-          name: 'Meeton Live',
-          href: '/features/ai-chat/',
+          badge: 'Chat',
+          name: 'Meeton Chat',
+          href: '/en/chat/',
           description: 'The AI converses in real time in your website chat. It learns product specs, catalog information, and standard specifications, and handles the first triage of technical inquiries.',
           industryAngle: 'Using product catalogs, technical datasheets, and standards-compliance tables as training data, the AI instantly answers basic technical questions like "Can this material handle it?" or "What\'s the temperature range?" It hands only requirement-defined leads to technical IS, cutting their workload by 30%.',
         },
         {
-          badge: 'AI Email',
+          badge: 'Email',
           name: 'Meeton Email',
-          href: '/features/ai-email/',
+          href: '/en/email/',
           description: 'The AI replies to inquiry emails (quote requests, sample requests, technical questions). It judges meeting-conversion likelihood and alerts only on promising deals.',
           industryAngle: 'It gives a 24/7 first answer even to overseas / regional time-zone inquiries and late-night sample requests. The AI asks within the email "when, what quantity, for what use," assembles the requirements needed for a quote, and hands off to sales.',
         },
         {
-          badge: 'AI Calendar',
+          badge: 'Calendar',
           name: 'Meeton Calendar',
-          href: '/features/meetings/',
+          href: '/en/calendar/',
           description: 'Automatic scheduling integrated with Google Calendar / MS Teams / Zoom. It automates even three-way coordination among technical IS, sales, and the customer.',
           industryAngle: 'Technical consultations often require three-way meetings of "sales + technical IS + the customer\'s engineer." Meeton Calendar proposes the optimal slot across multiple calendars and can even manage factory-visit and sample-shipment schedules at the customer.',
         },
         {
-          badge: 'AI Offer',
+          badge: 'Library',
           name: 'Meeton Library',
-          href: '/features/ai-library/',
+          href: '/en/library/',
           description: 'Personalized delivery of technical materials, case studies, and catalogs matched to the visitor\'s interest segment (industry, application, material).',
           industryAngle: 'Through the long six-month-to-two-year cycle, the AI continuously presents case studies and technical materials matched to the customer\'s industry and application. As "a mechanism that won\'t be forgotten," it keeps delivering the one piece a returning lead should read now.',
+        },
+        {
+          badge: 'Ads',
+          name: 'Meeton Ads',
+          href: '/en/ads/',
+          description: 'On-site ads where the AI tailors the best offer to each visitor by page, traffic source, and industry. It keeps learning from clicks and captured leads.',
+          industryAngle: 'For visitors browsing technical materials and catalogs, the AI presents the best offer (sample request, technical consult, quote) matched to their application, industry, and traffic source. Even leads who never open the chat convert through on-site ads. The AI drafts the ad copy, and only approved ones go live.',
         },
       ]}
       integrations={[
@@ -129,7 +136,7 @@ export default function ManufacturingUseCasePageEn() {
         },
         {
           question: 'Can it handle English inquiries from overseas?',
-          answer: 'Meeton Live / Meeton Email are multilingual, and the AI automatically detects the language and replies to inquiries in English, Chinese, and more. It solves the problem of missing time-zone inquiries from overseas and the regions.',
+          answer: 'Meeton Chat / Meeton Email are multilingual, and the AI automatically detects the language and replies to inquiries in English, Chinese, and more. It solves the problem of missing time-zone inquiries from overseas and the regions.',
         },
         {
           question: 'How does form integration work for quote and sample requests?',

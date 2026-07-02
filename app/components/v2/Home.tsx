@@ -12,6 +12,7 @@ import CountUp from "@/app/components/v2/CountUp";
 import DemoFrame from "@/app/components/v2/DemoFrame";
 import { productMedia } from "@/app/lib/product-media";
 import { demoUrl } from "@/app/lib/cta-urls";
+import MobileStickyCta from "@/app/components/v2/MobileStickyCta";
 import type { CaseCardData } from "@/app/components/v2/CaseCardGrid";
 import FeaturedCase from "@/app/components/v2/FeaturedCase";
 import type { Lang } from "@/app/lib/i18n";
@@ -314,6 +315,7 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
       </Section>
       </main>
 
+      <MobileStickyCta lang={lang} source="home" />
       <Footer lang={lang} />
     </>
   );

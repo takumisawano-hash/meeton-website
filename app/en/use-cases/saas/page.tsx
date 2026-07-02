@@ -65,32 +65,39 @@ export default function SaaSUseCasePageEn() {
       ]}
       modules={[
         {
-          badge: 'AI Chat',
-          name: 'Meeton Live',
-          href: '/features/ai-chat/',
+          badge: 'Chat',
+          name: 'Meeton Chat',
+          href: '/en/chat/',
           description: 'The AI converses in real time with leads who visit your site. Carrying the context of their downloads and video views, it answers deep product questions concretely.',
           industryAngle: 'It answers SaaS buyers\' "feature / pricing / security" questions accurately, grounded only in your official information. Buyers who would have dropped off a scenario-based chatbot get onto the booking path within the first 30 seconds.',
         },
         {
-          badge: 'AI Email',
+          badge: 'Email',
           name: 'Meeton Email',
-          href: '/features/ai-email/',
+          href: '/en/email/',
           description: 'For inquiry emails, the AI replies in place of inside sales and books the meeting. Connected to Slack and HubSpot notifications.',
           industryAngle: 'During the evaluation, the AI replies instantly even after hours to the email questions stakeholders send individually (invoice formats, contract clauses, technical specs). It keeps the entire buying committee warm.',
         },
         {
-          badge: 'AI Calendar',
+          badge: 'Calendar',
           name: 'Meeton Calendar',
-          href: '/features/meetings/',
+          href: '/en/calendar/',
           description: 'Automatic scheduling integrated with Google Calendar / MS Teams / Zoom. The meeting is confirmed the moment the buyer picks an open slot.',
           industryAngle: 'For meetings with multiple stakeholders, it proposes the optimal slot automatically from everyone\'s calendars. Beyond 1:1, the AI handles complex coordination like "three-company, five-stakeholder" sessions.',
         },
         {
-          badge: 'AI Offer',
+          badge: 'Library',
           name: 'Meeton Library',
-          href: '/features/ai-library/',
+          href: '/en/library/',
           description: 'Based on a visitor\'s industry, role, and browsing history, it personalizes the best materials, case studies, and videos. It keeps returning leads warm.',
           industryAngle: 'Through SaaS\'s long evaluation cycle, even as a lead\'s topic of interest shifts (security / pricing / case studies), the AI presents the one piece to read now. It remembers the context even on a return visit three months later.',
+        },
+        {
+          badge: 'Ads',
+          name: 'Meeton Ads',
+          href: '/en/ads/',
+          description: 'On-site ads where the AI tailors the best offer to each visitor by page, traffic source, and industry. It keeps learning from clicks and captured leads.',
+          industryAngle: 'For SaaS buyers still evaluating, the AI presents the best offer based on the page they\'re viewing (features / pricing / security) and their traffic source. Visitors who never open the chat still convert into leads through on-site ads. The AI drafts the ad copy, and only approved ones go live.',
         },
       ]}
       integrations={[
@@ -126,11 +133,11 @@ export default function SaaSUseCasePageEn() {
         },
         {
           question: 'Can it assemble a meeting with the whole buying committee (multiple stakeholders)?',
-          answer: 'Meeton Calendar handles not just 1:1 but multi-party coordination for groups of 3–5. Further, Meeton Live naturally picks up "Is there anyone else joining the evaluation?" and can automate confirming everyone\'s intent to attend.',
+          answer: 'Meeton Calendar handles not just 1:1 but multi-party coordination for groups of 3–5. Further, Meeton Chat naturally picks up "Is there anyone else joining the evaluation?" and can automate confirming everyone\'s intent to attend.',
         },
         {
           question: 'Can it answer the deep questions SaaS buyers throw — "feature comparison," "security," "pricing rationale"?',
-          answer: 'Meeton Live uses your product docs, FAQs, security whitepapers, and pricing pages as training data and answers with grounding. When it can\'t answer, it decides to say "I\'ll check with our team" and switches immediately to a booking path. It won\'t drop off with a scenario-bot\'s "I can\'t answer that."',
+          answer: 'Meeton Chat uses your product docs, FAQs, security whitepapers, and pricing pages as training data and answers with grounding. When it can\'t answer, it decides to say "I\'ll check with our team" and switches immediately to a booking path. It won\'t drop off with a scenario-bot\'s "I can\'t answer that."',
         },
         {
           question: 'Can I keep my existing sales stack (HubSpot / Salesforce / Slack)?',
@@ -138,7 +145,7 @@ export default function SaaSUseCasePageEn() {
         },
         {
           question: 'How is it different from other chatbots (Drift / Intercom / ChatPlus)?',
-          answer: 'Scenario-based chatbots can only answer fixed branches and drop off instantly on deep questions. Meeton Live is generative-AI based, so it can respond with context even to undefined questions. The biggest difference from pure chat tools is that it completes "conversation → booking → CRM sync → Slack notification" in one product.',
+          answer: 'Scenario-based chatbots can only answer fixed branches and drop off instantly on deep questions. Meeton Chat is generative-AI based, so it can respond with context even to undefined questions. The biggest difference from pure chat tools is that it completes "conversation → booking → CRM sync → Slack notification" in one product.',
         },
         {
           question: 'Can a SaaS startup adopt it?',

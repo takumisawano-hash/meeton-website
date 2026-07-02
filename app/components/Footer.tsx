@@ -150,7 +150,7 @@ const DISCOVER_EN = [
       { href: "/en/blog/", label: "Blog" },
       { href: "/en/glossary/ai-sdr/", label: "Glossary" },
       { href: "/en/cases/", label: "Customers" },
-      { href: "/tools/roi/", label: "ROI calculator" },
+      { href: "/en/tools/roi/", label: "ROI calculator" },
     ],
   },
 ];

@@ -7,6 +7,7 @@ import {
   getTagsWithCounts,
 } from '@/app/lib/notion'
 import BlogListJsonLd from '@/app/components/BlogListJsonLd'
+import CTAButtons from '@/app/components/v2/CTAButtons'
 
 export const revalidate = 3600 // 1時間ごとに再検証
 
@@ -854,6 +855,18 @@ export default async function BlogPage() {
             )}
           </>
         )}
+      </section>
+
+      {/* Conversion strip — the hub is the biggest SEO surface and previously
+          had zero CTA (2026-07-02 CRO audit). */}
+      <section style={{ background: 'var(--navy, #0F1128)', padding: '48px 24px' }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+          <div>
+            <p style={{ margin: 0, fontSize: 'clamp(20px,2.6vw,26px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>読んだ打ち手を、自社サイトで動かす。</p>
+            <p style={{ margin: '8px 0 0', fontSize: 14, color: 'rgba(255,255,255,.72)' }}>Meeton ai が掴む→育てる→商談化→追客を自律実行。30分のデモで自社への効き方を確認できます。</p>
+          </div>
+          <CTAButtons source="blog-hub" tone="onNavy" size="md" />
+        </div>
       </section>
     </>
   )
