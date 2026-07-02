@@ -222,7 +222,7 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
       { title: "人の承認で、安心して任せる", desc: "AI生成の広告は承認したものだけ配信。常時表示（固定枠）、表示回数の上限、離脱直前トリガーなどの手動制御も。" },
     ],
     integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Webhook"],
-    crossSell: "広告で掴んだリードは Calendar で予約へ、資料が欲しい人には Library を、逃したら Email が追う——掴む→商談化→追客がつながると一気通貫のAI SDRに。",
+    crossSell: "広告で掴んだリードは Calendar で予約へ、資料が欲しい人には Library を、逃したら Email が追う——掴む→育てる→商談化→追客がつながると一気通貫のAI SDRに。",
     faq: [
       { q: "ポップアップツールやWeb接客ツールと何が違いますか？", a: "従来のツールは「どのページに・誰に・何を出すか」をすべて人がルール設定し、全員に同じものを表示します。Meeton Ads はAIが訪問者ごとの文脈（ページ・デバイス・流入元・業種）でオファーをスコアリングして最良の1本だけを表示し、クリック・リード獲得を報酬に配信を自動で最適化し続けます。" },
       { q: "広告は自分で作る必要がありますか？", a: "AIが自社の資料やコンテンツから広告案を自動生成し、承認キューに並べます。あなたはレビューして承認するだけで配信が始まります。もちろん自分で作成することも、特定の広告を常時表示（固定枠）にすることも可能です。" },
@@ -419,7 +419,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
       { title: "You approve, it runs", desc: "Only ads you approve go live. Manual controls too: pinned always-on ads, per-session and lifetime frequency caps, exit-intent triggers." },
     ],
     integrations: ["Salesforce", "HubSpot", "Slack", "Microsoft Teams", "Webhook"],
-    crossSell: "Leads captured by an ad go to Calendar for a booking, content-seekers go to Library, and Email pursues the ones who slip away — connect capture → convert → win back and you get an end-to-end AI SDR.",
+    crossSell: "Leads captured by an ad go to Calendar for a booking, content-seekers go to Library, and Email pursues the ones who slip away — connect capture → nurture → convert → win back and you get an end-to-end AI SDR.",
     faq: [
       { q: "How is this different from popup or web-engagement tools?", a: "Traditional tools make humans configure every rule — which page, which audience, which creative — and then show everyone the same thing. Meeton Ads scores offers per visitor context (page, device, traffic source, industry), shows only the single best one, and keeps optimizing delivery automatically with clicks and captured leads as the reward signal." },
       { q: "Do I have to create the ads myself?", a: "AI drafts ad candidates from your own content and materials and queues them for review — you approve, and they go live. You can also author ads yourself, and pin specific ads to run always-on." },

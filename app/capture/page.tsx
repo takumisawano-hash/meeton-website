@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { altLanguages } from '@/app/lib/i18n'
 import CaptureContent, { CAPTURE_STR, captureBreadcrumb, captureFaqSchema } from "@/app/components/v2/CaptureContent";
 
-// Stage page for ①掴む・育てる — merges Chat (会話で掴む) + Library (資料で育てる)
+// Stage page for ①掴む — Chat (会話で掴む) + Ads (広告で逃さない)
 // into ONE job-led page. Product names appear small as the means; the JOB is
 // the headline. /chat and /library stay as SEO landing pages, linked from here.
 

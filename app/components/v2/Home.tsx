@@ -36,7 +36,7 @@ const STR = {
       { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
       { n: 30, suf: "時間以上/月", l: "削減できた営業工数", sub: "初動・追客の自動化で" },
     ],
-    stagesEyebrow: "AI SDR の3つの仕事",
+    stagesEyebrow: "AI SDR の4つの仕事",
     stagesTitle: "掴んで育て、商談化し、逃さず追う。",
     stagesLede: "潜在層の獲得から追客まで、4つのプロダクトがひとつの AI SDR として連携します。",
     stagesPriceA: "料金は3プラン・月額12万円〜。30分のデモで、自社に合うプランをご案内します。 ",
@@ -71,7 +71,7 @@ const STR = {
       { n: 2, suf: "x", l: "Qualified leads", sub: "+100% vs. before deployment" },
       { n: 30, suf: "+ hrs/mo", l: "Sales hours saved", sub: "By automating speed-to-lead and follow-up" },
     ],
-    stagesEyebrow: "The 3 jobs of the AI SDR",
+    stagesEyebrow: "The 4 jobs of the AI SDR",
     stagesTitle: "Capture and nurture, convert, and chase down every lead.",
     stagesLede: "From acquiring prospects to winning them back, four products work together as a single AI SDR.",
     stagesPriceA: "Three plans, from ¥120,000/mo. A 30-minute demo helps you find the right one. ",
@@ -175,7 +175,7 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
       {/* 2.5 Customer logo wall — social proof near first view */}
       <LogoWall tone="white" {...(lang === "en" ? { lang: "en" as const, heading: "Chosen on the front lines of meeting generation, across every industry" } : {})} />
 
-      {/* 4. The 3 stages (deck p7) — 掴む → 商談化 → 追客 */}
+      {/* 4. The 4 stages — 掴む → 育てる → 商談化 → 追客 */}
       <Section tone="surface" id="stages">
         <SectionHead
           eyebrow={s.stagesEyebrow}

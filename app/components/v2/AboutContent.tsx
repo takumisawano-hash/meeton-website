@@ -103,7 +103,7 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
     ),
     missionLede:
       '問い合わせを待つだけのWebサイトでは、訪問者の多くが名前を残さず去り、せっかくのリードも初動の遅れや追客切れで商談になりません。Meeton ai は、Webサイトに配属する AI SDR としてこの取りこぼしをなくし、あらゆる瞬間を商談に変えます。',
-    threeJobsLabel: 'AI SDR の3つの仕事',
+    threeJobsLabel: 'AI SDR の4つの仕事',
     foundersEyebrow: '共同創業者',
     foundersTitle: 'プロダクトとビジネス、両輪で。',
     foundersLede: 'プロダクト（CTO）とビジネス（CRO）、それぞれの責任者が Meeton ai を開発・運用しています。',
@@ -171,7 +171,7 @@ export const ABOUT_STR: Record<Lang, AboutStrings> = {
     ),
     missionLede:
       'On a website that just waits for inquiries, most visitors leave without giving their name, and even the leads you do get never become meetings — lost to slow first response and dropped follow-up. As an AI SDR deployed on your website, Meeton ai eliminates these missed opportunities and turns every moment into a meeting.',
-    threeJobsLabel: 'The three jobs of an AI SDR',
+    threeJobsLabel: 'The four jobs of an AI SDR',
     foundersEyebrow: 'Co-founders',
     foundersTitle: 'Product and business, working in tandem.',
     foundersLede: 'The leaders of product (CTO) and business (CRO) build and operate Meeton ai together.',
@@ -277,7 +277,7 @@ export default function AboutContent({ lang = 'ja' }: { lang?: Lang }) {
           </div>
         </Section>
 
-        {/* Mission (white) — v2 narrative + the 3 stages from stages.ts */}
+        {/* Mission (white) — v2 narrative + the 4 stages from stages.ts */}
         <Section tone="white">
           <SectionHead eyebrow={s.missionEyebrow} title={s.missionTitle} lede={s.missionLede} />
           <h3

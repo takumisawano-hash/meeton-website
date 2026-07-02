@@ -12,12 +12,12 @@ import ProductAnim from "@/app/components/v2/ProductAnim";
 import DemoFrame from "@/app/components/v2/DemoFrame";
 import type { Lang } from "@/app/lib/i18n";
 
-// Lang-aware ①掴む・育てる stage page. JA is the default → the existing
+// Lang-aware ①掴む stage page (nurture moved to /library/ in the 4-stage
+// split, 2026-07-02). JA is the default → the existing
 // /capture/ page renders byte-identically. The embedded product demo HTML
 // stays Japanese (known follow-up); only page copy is translated.
 
 const chat = PRODUCTS.chat;
-const library = PRODUCTS.library;
 const ads = PRODUCTS.ads;
 
 type Sub = {
@@ -61,23 +61,23 @@ type CaptureStrings = {
 
 export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
   ja: {
-    metaTitleAbsolute: "掴む・育てる｜潜在層を会話と資料でリードに変える｜Meeton ai",
+    metaTitleAbsolute: "掴む｜潜在層を会話とサイト内広告でリードに変える｜Meeton ai",
     metaDescription:
-      "問い合わせ前の潜在層を、会話で掴み、資料で育ててリードにする。AIチャットが訪問者と対話し、AIが解説する資料で検討を前に進める——AI SDR の最初の仕事「掴む・育てる」を Meeton ai で。",
-    ogTitle: "掴む・育てる｜潜在層をリードに変える｜Meeton ai",
-    ogDescription: "会話で掴み、資料で育てる。問い合わせ前の潜在層をリードに変える AI SDR の最初の仕事。",
+      "問い合わせ前の潜在層を、会話とサイト内広告で掴んでリードにする。AIチャットが訪問者と対話し、AIが最適化するサイト内広告が残りを逃さない——AI SDR の最初の仕事「掴む」を Meeton ai で。",
+    ogTitle: "掴む｜潜在層をリードに変える｜Meeton ai",
+    ogDescription: "会話で掴み、広告で逃さない。問い合わせ前の潜在層をリードに変える AI SDR の最初の仕事。",
     skip: "本文へスキップ",
-    eyebrow: "AI SDR の3つの仕事",
-    heroBadge: "① 掴む・育てる（潜在層 → リード）",
+    eyebrow: "AI SDR の4つの仕事",
+    heroBadge: "① 掴む（潜在層 → リード）",
     heroH1: (
       <>
-        訪問者を<span style={{ color: "var(--cta)" }}>掴み</span>、リードに<span style={{ color: "var(--cta)" }}>育てる</span>。
+        訪問者を<span style={{ color: "var(--cta)" }}>掴んで</span>、リードに<span style={{ color: "var(--cta)" }}>変える</span>。
       </>
     ),
     heroSub:
-      "買い手は購買の約70%を、営業に接触する前に独力で進めます（Gartner/6sense）。その時間に会話で掴み、資料で育てて——問い合わせ前の潜在層を、商談につながるリードに変えます。",
-    jobsEyebrow: "この仕事は、3つの動きでできている",
-    jobsTitle: "会話で掴み、資料で育て、広告で逃さない。",
+      "買い手は購買の約70%を、営業に接触する前に独力で進めます（Gartner/6sense）。その時間に会話で話しかけ、サイト内広告で逃さず——問い合わせ前の潜在層を、商談につながるリードに変えます。",
+    jobsEyebrow: "この仕事は、2つの動きでできている",
+    jobsTitle: "会話で掴み、広告で逃さない。",
     proofName: "BizteX 株式会社",
     proofIndustry: "SaaS",
     proofQuote: "従来は月1〜2件。Meeton ai にしてから月20件以上——20倍以上のリードがチャットから生まれている。",
@@ -85,14 +85,14 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     nextEyebrow: "次の仕事",
     nextLine: (
       <>
-        掴んで育てたリードは、次に<Link href="/calendar/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>商談化</Link>し、逃したら<Link href="/email/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>追客</Link>へ。
+        掴んだリードは、次に<Link href="/library/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>育てて</Link>から<Link href="/calendar/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>商談化</Link>し、逃したら<Link href="/email/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>追客</Link>へ。
       </>
     ),
-    nextLink: "AI SDR の3つの仕事を見る →",
+    nextLink: "AI SDR の4つの仕事を見る →",
     faqEyebrow: "よくある質問",
-    faqTitle: "「掴む・育てる」のFAQ",
-    finalTitle: "まず「掴む・育てる」を、デモで。",
-    finalSub: "30分のデモで、自社サイトでの掴み方・育て方を具体的に確認できます。",
+    faqTitle: "「掴む」のFAQ",
+    finalTitle: "まず「掴む」を、デモで。",
+    finalSub: "30分のデモで、自社サイトでの掴み方を具体的に確認できます。",
     subs: [
       {
         key: "chat",
@@ -102,17 +102,6 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
         href: "/chat/",
         desc: "問い合わせを待たず、AIチャットが訪問者に話しかける。接触前の検討の土台に立ち、Webでは出せない答えをその場で渡してリードに変える。",
         points: ["シナリオ設計不要・設置5分", "過去の閲覧/会話の文脈を引き継ぐ", "温まったら予約へ繋ぐ"],
-        detailA: "この動きを担う ",
-        detailB: " の詳細 →",
-      },
-      {
-        key: "library",
-        job: "資料で、育てる",
-        transform: "まだ早い見込み客 → 温まったリード",
-        product: library,
-        href: "/library/",
-        desc: "まだ商談には早い見込み客を、資料で自動ナーチャリング。関心に合わせた資料を届け、AIが内容を解説し、反応を見て次の一手を出す。検討が温まるまで、放置せず育て続ける。",
-        points: ["関心に合った資料を自動で届ける", "AIが資料の疑問に答え理解を進める", "反応を見て育成し、温まったら次の仕事へ"],
         detailA: "この動きを担う ",
         detailB: " の詳細 →",
       },
@@ -130,33 +119,33 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     ],
     faq: [
       {
-        name: "「掴む・育てる」とは何をする仕事ですか？",
-        text: "AI SDR の最初の仕事で、問い合わせ前の潜在層をリードに変えるフェーズです。Meeton ai では、AIチャットが訪問者に話しかけて会話で掴み（リード化）、AIが解説する資料で検討を育てて前に進めます。買い手は購買の約70%を営業接触前に独力で進めるため、この段階で掴めるかどうかが商談数を左右します。",
+        name: "「掴む」とは何をする仕事ですか？",
+        text: "AI SDR の最初の仕事で、問い合わせ前の潜在層をリードに変えるフェーズです。Meeton ai では、AIチャットが訪問者に話しかけて会話で掴み（リード化）、会話に乗らない訪問者はAIが最適化するサイト内広告（Meeton Ads）で逃さず掴みます。買い手は購買の約70%を営業接触前に独力で進めるため、この段階で掴めるかどうかが商談数を左右します。",
       },
       {
-        name: "会話と資料、どちらから始めるべきですか？",
-        text: "匿名訪問者が多く離脱が課題ならチャット（会話で掴む）から、送った資料の反応が見えず追えないなら資料共有（資料で育てる）から始めるのが目安です。両方つなぐと、会話で掴んだ相手に最適な資料を渡し、開封を見て次の一手を打てます。まず30分のデモで自社に合う入り方を確認できます。",
+        name: "会話と広告、どちらから始めるべきですか？",
+        text: "どちらも同じJSタグ1行で動くため、通常は両方同時に始めます。チャットは質問がある訪問者を深く掴み、サイト内広告は会話に乗らない大多数の訪問者に最適なオファーを出して逃しません。掴んだリードは次の仕事「育てる（Meeton Library）」に引き継がれます。まず30分のデモで自社に合う入り方を確認できます。",
       },
     ],
   },
   en: {
-    metaTitleAbsolute: "Capture & nurture｜Turn latent prospects into leads with conversation and content｜Meeton ai",
+    metaTitleAbsolute: "Capture｜Turn latent prospects into leads with conversation and on-site ads｜Meeton ai",
     metaDescription:
-      "Capture pre-inquiry latent prospects in conversation, nurture them with content, and turn them into leads. An AI chat talks with visitors, and AI-explained materials move consideration forward — the first job of an AI SDR, capture & nurture, with Meeton ai.",
-    ogTitle: "Capture & nurture｜Turn latent prospects into leads｜Meeton ai",
-    ogDescription: "Capture in conversation, nurture with content. The first job of an AI SDR — turning pre-inquiry prospects into leads.",
+      "Capture pre-inquiry latent prospects with conversation and on-site ads. An AI chat talks with visitors, and AI-optimized on-site ads catch the ones who never open the chat — the first job of an AI SDR, capture, with Meeton ai.",
+    ogTitle: "Capture｜Turn latent prospects into leads｜Meeton ai",
+    ogDescription: "Capture in conversation, catch the rest with ads. The first job of an AI SDR — turning pre-inquiry prospects into leads.",
     skip: "Skip to content",
-    eyebrow: "The three jobs of an AI SDR",
-    heroBadge: "① Capture & nurture (latent prospects → leads)",
+    eyebrow: "The four jobs of an AI SDR",
+    heroBadge: "① Capture (latent prospects → leads)",
     heroH1: (
       <>
-        <span style={{ color: "var(--cta)" }}>Capture</span> visitors and <span style={{ color: "var(--cta)" }}>nurture</span> them into leads.
+        <span style={{ color: "var(--cta)" }}>Capture</span> visitors and turn them into <span style={{ color: "var(--cta)" }}>leads</span>.
       </>
     ),
     heroSub:
-      "B2B buyers complete about 70% of the purchase process on their own before contacting sales (Gartner/6sense). During that window, capture them in conversation and nurture them with content — turning pre-inquiry prospects into leads that lead to meetings.",
-    jobsEyebrow: "This job is made of three moves",
-    jobsTitle: "Capture in conversation, nurture with content, catch the rest with ads.",
+      "B2B buyers complete about 70% of the purchase process on their own before contacting sales (Gartner/6sense). During that window, speak to them in conversation and catch the rest with on-site ads — turning pre-inquiry prospects into leads that lead to meetings.",
+    jobsEyebrow: "This job is made of two moves",
+    jobsTitle: "Capture in conversation, catch the rest with ads.",
     proofName: "BizteX, Inc.",
     proofIndustry: "SaaS",
     proofQuote: "Previously 1–2 a month. Since switching to Meeton ai, 20+ a month — more than 20x the leads are born from chat.",
@@ -164,14 +153,14 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     nextEyebrow: "The next job",
     nextLine: (
       <>
-        Leads you capture and nurture next move to <Link href="/en/calendar/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>convert</Link>, and if missed, to <Link href="/en/email/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>win back</Link>.
+        Captured leads are next <Link href="/en/library/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>nurtured</Link>, then move to <Link href="/en/calendar/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>convert</Link>, and if missed, to <Link href="/en/email/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>win back</Link>.
       </>
     ),
-    nextLink: "See the three jobs of an AI SDR →",
+    nextLink: "See the four jobs of an AI SDR →",
     faqEyebrow: "FAQ",
-    faqTitle: "Capture & nurture FAQ",
-    finalTitle: "See capture & nurture in a demo first.",
-    finalSub: "In a 30-minute demo, see concretely how to capture and nurture on your own site.",
+    faqTitle: "Capture FAQ",
+    finalTitle: "See capture in a demo first.",
+    finalSub: "In a 30-minute demo, see concretely how to capture leads on your own site.",
     subs: [
       {
         key: "chat",
@@ -181,17 +170,6 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
         href: "/chat/",
         desc: "Without waiting for an inquiry, an AI chat speaks to visitors. It stands at the foundation of pre-contact consideration, hands over answers the website can't, and turns them into leads.",
         points: ["No scenario design, 5-minute setup", "Carries over past browsing / conversation context", "Connects to a booking once warm"],
-        detailA: "Details on ",
-        detailB: ", which handles this move →",
-      },
-      {
-        key: "library",
-        job: "Nurture, with content",
-        transform: "Not-yet-ready prospects → warmed leads",
-        product: library,
-        href: "/library/",
-        desc: "Automatically nurture prospects who aren't ready for a meeting yet with content. Deliver materials matched to their interests, have AI explain the content, and make the next move based on their response. Keep nurturing — not neglecting — until consideration warms up.",
-        points: ["Auto-delivers content matched to interest", "AI answers questions about the materials to deepen understanding", "Nurtures by response, then moves to the next job once warm"],
         detailA: "Details on ",
         detailB: ", which handles this move →",
       },
@@ -209,12 +187,12 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     ],
     faq: [
       {
-        name: "What does the capture & nurture job do?",
-        text: "It is the first job of an AI SDR — the phase that turns pre-inquiry latent prospects into leads. With Meeton ai, an AI chat speaks to visitors and captures them in conversation (lead creation), and AI-explained materials nurture and advance their consideration. Since buyers complete about 70% of the purchase on their own before contacting sales, whether you can capture them at this stage drives your number of meetings.",
+        name: "What does the capture job do?",
+        text: "It is the first job of an AI SDR — the phase that turns pre-inquiry latent prospects into leads. With Meeton ai, an AI chat speaks to visitors and captures them in conversation (lead creation), while AI-optimized on-site ads (Meeton Ads) catch the visitors who never open the chat. Since buyers complete about 70% of the purchase on their own before contacting sales, whether you can capture them at this stage drives your number of meetings.",
       },
       {
-        name: "Should I start with conversation or content?",
-        text: "If many anonymous visitors and drop-off are your issue, start with chat (capture in conversation). If you can't see the response to materials you sent and can't follow up, start with content sharing (nurture with content). Connecting both lets you hand the right material to someone you captured in conversation and make the next move based on opens. You can confirm the right entry point for your company in a 30-minute demo first.",
+        name: "Should I start with conversation or ads?",
+        text: "Both run off the same one-line JS tag, so most teams start with both at once. Chat engages the visitors who have questions in depth, while on-site ads show the single best offer to the majority who never open the chat. Captured leads then hand off to the next job — nurture (Meeton Library). You can confirm the right entry point for your company in a 30-minute demo first.",
       },
     ],
   },
@@ -225,7 +203,7 @@ export const captureBreadcrumb = (lang: Lang) => ({
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: lang === "en" ? "Home" : "ホーム", item: lang === "en" ? "https://dynameet.ai/en/" : "https://dynameet.ai/" },
-    { "@type": "ListItem", position: 2, name: lang === "en" ? "Capture & nurture" : "掴む・育てる", item: lang === "en" ? "https://dynameet.ai/en/capture/" : "https://dynameet.ai/capture/" },
+    { "@type": "ListItem", position: 2, name: lang === "en" ? "Capture" : "掴む", item: lang === "en" ? "https://dynameet.ai/en/capture/" : "https://dynameet.ai/capture/" },
   ],
 });
 

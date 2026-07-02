@@ -1,7 +1,7 @@
-// 3-stage AI SDR flow — single source of truth (deck p7「AI SDR の3つの仕事」).
-// Supersedes the flat "4 jobs" + product×moment coverage matrix framing
-// (2026-06-04, Takumi). Products are grouped into 3 sequential stages so the
-// site tells one story: 掴む・育てる → 商談化する → 追客する.
+// 4-stage AI SDR flow — single source of truth (2026-07-02, Takumi: split
+// stage ① after Meeton Ads joined capture; supersedes the 3-stage deck-p7
+// framing). The site tells one story: 掴む → 育てる → 商談化する → 追客する —
+// matching the long-standing full-pipeline phrase.
 
 import type { ClusterId } from "@/app/lib/content-clusters";
 
@@ -10,9 +10,9 @@ import type { ClusterId } from "@/app/lib/content-clusters";
 export type StageProduct = Exclude<ClusterId, "ai-sdr"> | "ads"; // calendar | chat | library | email | ads
 
 export type Stage = {
-  num: "①" | "②" | "③";
-  id: "capture" | "convert" | "follow";
-  title: string; // 掴む・育てる
+  num: "①" | "②" | "③" | "④";
+  id: "capture" | "nurture" | "convert" | "follow";
+  title: string; // 掴む
   titleEn: string; // English stage title (consumed only when lang="en")
   transform: string; // 潜在層 → リード
   transformEn: string; // English transform line
@@ -27,17 +27,29 @@ export const STAGES: Stage[] = [
   {
     num: "①",
     id: "capture",
-    title: "掴む・育てる",
-    titleEn: "Capture & nurture",
+    title: "掴む",
+    titleEn: "Capture",
     transform: "潜在層 → リード",
     transformEn: "Prospects → Leads",
-    lede: "問い合わせ前の潜在層を、会話と資料で掴んでリードに変え、検討を前に進める。",
-    ledeEn: "Engage pre-inquiry prospects with conversation and content, turn them into leads, and move the deal forward.",
-    products: ["chat", "library", "ads"],
+    lede: "問い合わせ前の潜在層を、会話とサイト内広告で掴んでリードに変える。",
+    ledeEn: "Engage pre-inquiry prospects with conversation and on-site ads, and turn them into leads.",
+    products: ["chat", "ads"],
     href: "/capture/",
   },
   {
     num: "②",
+    id: "nurture",
+    title: "育てる",
+    titleEn: "Nurture",
+    transform: "まだ早い見込み客 → 温まったリード",
+    transformEn: "Not-yet-ready prospects → warm leads",
+    lede: "まだ早い見込み客を、AIが解説する資料で自動ナーチャリングし、検討を前に進める。",
+    ledeEn: "Auto-nurture not-yet-ready prospects with AI-explained content, and move their consideration forward.",
+    products: ["library"],
+    href: "/library/",
+  },
+  {
+    num: "③",
     id: "convert",
     title: "商談化する",
     titleEn: "Convert to meetings",
@@ -49,7 +61,7 @@ export const STAGES: Stage[] = [
     href: "/calendar/",
   },
   {
-    num: "③",
+    num: "④",
     id: "follow",
     title: "追客する",
     titleEn: "Win back",

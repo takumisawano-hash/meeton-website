@@ -58,7 +58,7 @@ const DISCOVER = [
     heading: "製品",
     items: [
       // stage order (stages.ts): ① capture landing first, then product LPs
-      { href: "/capture/", label: "① 掴む・育てる" },
+      { href: "/capture/", label: "① 掴む" },
       { href: "/chat/", label: "Meeton Chat" },
       { href: "/library/", label: "Meeton Library" },
       { href: "/ads/", label: "Meeton Ads" },
@@ -116,7 +116,7 @@ const DISCOVER_EN = [
   {
     heading: C_EN.footerProduct,
     items: [
-      { href: "/en/capture/", label: "① Capture & Nurture" },
+      { href: "/en/capture/", label: "① Capture" },
       { href: "/en/chat/", label: "Meeton Chat" },
       { href: "/en/library/", label: "Meeton Library" },
       { href: "/en/ads/", label: "Meeton Ads" },

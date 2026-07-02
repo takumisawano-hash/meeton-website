@@ -46,7 +46,7 @@ type NavProps = {
 
 type Item = { href: string; label: string; sub?: string };
 
-// Product dropdown grouped by the 3 stages (deck p7 / stages.ts). The header
+// Product dropdown grouped by the 4 stages (stages.ts). The header
 // is job-led: each stage is ONE primary link to its stage/landing page
 // (capture→/capture, convert→/calendar, follow→/email). Product names are
 // listed small underneath as the means (2026-06-04: 仕事主役・製品名は脇役).
@@ -64,8 +64,8 @@ const STAGE_NAV: { stage: string; transform: string; href: string; products: Ite
 const PRODUCT_ITEMS: Item[] = STAGE_NAV.flatMap((g) => g.products);
 const PLATFORM_ITEM: Item = {
   href: "/",
-  label: "Meeton ai（3ステージの統合）",
-  sub: "掴む→商談化→追客で一気通貫の AI SDR",
+  label: "Meeton ai（4ステージの統合）",
+  sub: "掴む→育てる→商談化→追客で一気通貫の AI SDR",
 };
 const SOLUTION_ROLES: Item[] = [
   { href: "/solutions/cmo/", label: "CMO / マーケ責任者" },
@@ -75,9 +75,9 @@ const SOLUTION_ROLES: Item[] = [
 ];
 const USE_MOMENTS: Item[] = [
   { href: "/use-cases/pre-inquiry/", label: "問い合わせ前", sub: "① 掴む" },
-  { href: "/use-cases/post-download/", label: "資料 DL 後", sub: "①→② 商談化" },
-  { href: "/use-cases/revisit/", label: "再訪問", sub: "② 商談化 / ③ 追客" },
-  { href: "/use-cases/nurture/", label: "追客", sub: "③ 追客" },
+  { href: "/use-cases/post-download/", label: "資料 DL 後", sub: "②→③ 商談化" },
+  { href: "/use-cases/revisit/", label: "再訪問", sub: "③ 商談化 / ④ 追客" },
+  { href: "/use-cases/nurture/", label: "追客", sub: "④ 追客" },
 ];
 const RESOURCE_ITEMS: Item[] = [
   { href: "/blog/", label: "ブログ", sub: "獲得・商談化の実践知" },
@@ -98,9 +98,10 @@ const EN_PRODUCT_NAME: Record<string, { name: string; line: string }> = {
   ads: { name: "Meeton Ads", line: "AI-optimized on-site ads that capture more leads." },
 };
 const EN_STAGE: Record<string, { stage: string; transform: string }> = {
-  capture: { stage: "① Capture & Nurture", transform: "Prospects → Leads" },
-  convert: { stage: "② Convert", transform: "Leads → Meetings" },
-  follow: { stage: "③ Win back", transform: "Recover lost leads" },
+  capture: { stage: "① Capture", transform: "Prospects → Leads" },
+  nurture: { stage: "② Nurture", transform: "Not-yet-ready → warm leads" },
+  convert: { stage: "③ Convert", transform: "Leads → Meetings" },
+  follow: { stage: "④ Win back", transform: "Recover lost leads" },
 };
 const STAGE_NAV_EN: { stage: string; transform: string; href: string; products: Item[] }[] = STAGES.map((s) => ({
   stage: EN_STAGE[s.id].stage,
@@ -114,8 +115,8 @@ const STAGE_NAV_EN: { stage: string; transform: string; href: string; products: 
 }));
 const PLATFORM_ITEM_EN: Item = {
   href: "/en/",
-  label: "Meeton ai (3 stages, unified)",
-  sub: "Capture → Convert → Win back, one end-to-end AI SDR",
+  label: "Meeton ai (4 stages, unified)",
+  sub: "Capture → Nurture → Convert → Win back, one end-to-end AI SDR",
 };
 const SOLUTION_ROLES_EN: Item[] = [
   { href: "/en/solutions/cmo/", label: "CMO / Head of Marketing" },
@@ -125,9 +126,9 @@ const SOLUTION_ROLES_EN: Item[] = [
 ];
 const USE_MOMENTS_EN: Item[] = [
   { href: "/en/use-cases/pre-inquiry/", label: "Before the inquiry", sub: "① Capture" },
-  { href: "/en/use-cases/post-download/", label: "After a download", sub: "①→② Convert" },
-  { href: "/en/use-cases/revisit/", label: "Return visit", sub: "② Convert / ③ Win back" },
-  { href: "/en/use-cases/nurture/", label: "Follow-up", sub: "③ Win back" },
+  { href: "/en/use-cases/post-download/", label: "After a download", sub: "②→③ Convert" },
+  { href: "/en/use-cases/revisit/", label: "Return visit", sub: "③ Convert / ④ Win back" },
+  { href: "/en/use-cases/nurture/", label: "Follow-up", sub: "④ Win back" },
 ];
 const RESOURCE_ITEMS_EN: Item[] = [
   { href: "/en/blog/", label: "Blog", sub: "Playbooks for capture & conversion" },
@@ -205,7 +206,7 @@ export default function Nav({
   };
   useEffect(() => cancelClose, []);
 
-  const PANEL_W: Record<string, number> = { product: 760, usage: 520, resources: 300 };
+  const PANEL_W: Record<string, number> = { product: 940, usage: 520, resources: 300 };
   const openMenuAt = (id: string, el: HTMLElement) => {
     const r = el.getBoundingClientRect();
     const w = PANEL_W[id] ?? 400;
@@ -503,8 +504,8 @@ export default function Nav({
 
             {/* Dropdown panels (white reading surface) */}
             {openMenu === "product" && (
-              <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={760}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+              <DropdownPanel onClose={() => setOpenMenu(null)} left={panelLeft} width={940}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8 }}>
                   {stageNav.map((g) => (
                     <div key={g.stage}>
                       {/* stage header = the single job-led link */}
@@ -650,7 +651,7 @@ export default function Nav({
             <div style={{ flex: 1, overflowY: "auto", padding: "8px 24px 20px" }}>
             {stageNav.map((g) => (
               <MobileGroup key={g.stage} title={en ? `${g.stage} (${g.transform})` : `${g.stage}（${g.transform}）`}>
-                <MobileLink item={{ href: g.href, label: g.stage.replace(/^[①②③]\s*/, "") }} active={isActive(g.href)} />
+                <MobileLink item={{ href: g.href, label: g.stage.replace(/^[①②③④]\s*/, "") }} active={isActive(g.href)} />
                 {g.products.map((it) => (
                   <MobileLink key={it.href} item={it} active={isActive(it.href)} />
                 ))}

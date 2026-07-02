@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜The AI SDR Platform that turns your Website into meetings',
   },
   description:
-    'Meeton ai is an AI SDR Platform deployed on your website. It captures pre-inquiry prospects (Chat & Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Convert → Win back — three stages that turn every moment into a meeting.',
+    'Meeton ai is an AI SDR Platform deployed on your website. It captures pre-inquiry prospects (Chat & Ads), nurtures them with content (Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Nurture → Convert → Win back — four stages that turn every moment into a meeting.',
   alternates: altLanguages('/', 'en'),
   openGraph: {
     images: EN_OG_IMAGE,
     title: 'Meeton ai｜The AI SDR Platform that turns your Website into meetings',
     description:
-      'Visitors leave, and leads never become meetings. Turn a Website that "waits" into an AI sales channel that generates meetings. An AI SDR that autonomously handles all three stages: capture → convert → win back.',
+      'Visitors leave, and leads never become meetings. Turn a Website that "waits" into an AI sales channel that generates meetings. An AI SDR that autonomously handles all four stages: capture → nurture → convert → win back.',
     url: 'https://dynameet.ai/en/',
     type: 'website',
     locale: ogLocale('en'),
@@ -41,10 +41,10 @@ const homepageFaqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'What do the three stages of Meeton ai do?',
+      name: 'What do the four stages of Meeton ai do?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Meeton ai consists of three stages. (1) Capture & nurture (Meeton Chat captures visitors in conversation, and Meeton Library nurtures consideration with content to create leads). (2) Convert (Meeton Calendar carries leads all the way to a booked meeting the moment intent peaks). (3) Win back (Meeton Email follows up 1:1 on leads who did not book, triggered by behavioral signals, and brings them back to a meeting).',
+        text: 'Meeton ai consists of four stages. (1) Capture (Meeton Chat captures visitors in conversation, and Meeton Ads catches the rest with AI-optimized on-site ads). (2) Nurture (Meeton Library nurtures consideration with AI-explained content to create meeting-ready leads). (3) Convert (Meeton Calendar carries leads all the way to a booked meeting the moment intent peaks). (4) Win back (Meeton Email follows up 1:1 on leads who did not book, triggered by behavioral signals, and brings them back to a meeting).',
       },
     },
     {
@@ -93,7 +93,7 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    'AI SDR Platform for Japanese B2B companies. Deployed on your website, it autonomously runs three stages: capture (Chat & Library) → convert (Calendar) → win back (Email). From ¥120,000/mo, with three plans: Lead Generation / Meeting Generation / All-in-One.',
+    'AI SDR Platform for Japanese B2B companies. Deployed on your website, it autonomously runs four stages: capture (Chat & Ads) → nurture (Library) → convert (Calendar) → win back (Email). From ¥120,000/mo, with three plans: Lead Acquisition / Meeting Acquisition / All-in-One.',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/en/',

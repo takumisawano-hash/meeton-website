@@ -11,12 +11,12 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
   },
   description:
-    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層を掴み（Chat・Library）、商談化し（Calendar）、逃したリードを追客（Email）。掴む→商談化→追客の3ステージで、あらゆる瞬間を商談に変えます。',
+    'Meeton ai は、Webサイトに配属する AI SDR Platform。問い合わせ前の潜在層を掴み（Chat・Ads）、資料で育て（Library）、商談化し（Calendar）、逃したリードを追客（Email）。掴む→育てる→商談化→追客の4ステージで、あらゆる瞬間を商談に変えます。',
   alternates: altLanguages('/', 'ja'),
   openGraph: {
     title: 'Meeton ai｜Webサイトを商談に変える AI SDR Platform',
     description:
-      '訪問者は去り、リードは商談にならない。「待つ」Webサイトを、商談を生み出すAI営業チャネルへ。掴む→商談化→追客の3ステージを自律でこなす AI SDR。',
+      '訪問者は去り、リードは商談にならない。「待つ」Webサイトを、商談を生み出すAI営業チャネルへ。掴む→育てる→商談化→追客の4ステージを自律でこなす AI SDR。',
     url: 'https://dynameet.ai',
     type: 'website',
   },
@@ -35,15 +35,15 @@ const homepageFaqSchema = {
       name: 'AI SDR とは何ですか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'AI SDR（AI Sales Development Representative）とは、従来人間のSDRが担っていた初期接触・ヒアリング・資料提案・商談予約・追客をAIが自律的に行うシステムです。Meeton ai は、Webサイトに配属する AI SDR Platform で、会話・資料提案・予約・追客の4つの仕事をこなし、問い合わせ前から追客まであらゆる瞬間を商談に変えます。',
+        text: 'AI SDR（AI Sales Development Representative）とは、従来人間のSDRが担っていた初期接触・ヒアリング・資料提案・商談予約・追客をAIが自律的に行うシステムです。Meeton ai は、Webサイトに配属する AI SDR Platform で、掴む・育てる・商談化・追客の4つの仕事をこなし、問い合わせ前から追客まであらゆる瞬間を商談に変えます。',
       },
     },
     {
       '@type': 'Question',
-      name: 'Meeton ai の3つのステージはそれぞれ何をしますか？',
+      name: 'Meeton ai の4つのステージはそれぞれ何をしますか？',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Meeton ai は3つのステージで構成されます。①掴む・育てる（Meeton Chat が会話で訪問者を掴み、Meeton Library が資料で検討を育ててリードにする）、②商談化する（Meeton Calendar が温度の高まった瞬間に商談予約まで運ぶ）、③追客する（Meeton Email が予約しなかったリードを行動シグナル起点で1:1追客し再商談化へ戻す）。',
+        text: 'Meeton ai は4つのステージで構成されます。①掴む（Meeton Chat が会話で訪問者を掴み、Meeton Ads がサイト内広告で残りを逃さない）、②育てる（Meeton Library が資料で検討を育ててリードにする）、③商談化する（Meeton Calendar が温度の高まった瞬間に商談予約まで運ぶ）、④追客する（Meeton Email が予約しなかったリードを行動シグナル起点で1:1追客し再商談化へ戻す）。',
       },
     },
     {
@@ -92,7 +92,7 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Library）→商談化（Calendar）→追客（Email）の3ステージを自律化。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。',
+    '日本のB2B企業向け AI SDR Platform。Webサイトに配属し、掴む（Chat・Ads）→育てる（Library）→商談化（Calendar）→追客（Email）の4ステージを自律化。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/',

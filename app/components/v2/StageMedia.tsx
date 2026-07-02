@@ -37,15 +37,6 @@ const ROWS: Row[] = [
     icon: "chat",
   },
   {
-    key: "library",
-    stage: "① 育てる",
-    title: "資料で、見込み客を育てる。",
-    desc: "まだ早い見込み客を、資料で自動ナーチャリング。関心に合った資料を届け、AIが解説し、反応を見て検討を温める。",
-    points: ["関心に合った資料を自動で届ける", "反応を見て育成、温まったら次へ"],
-    href: "/library/",
-    icon: "library",
-  },
-  {
     key: "ads",
     stage: "① 掴む（サイト内広告）",
     title: "サイトの余白で、リードを掴む。",
@@ -55,8 +46,17 @@ const ROWS: Row[] = [
     icon: "ads",
   },
   {
+    key: "library",
+    stage: "② 育てる",
+    title: "資料で、見込み客を育てる。",
+    desc: "まだ早い見込み客を、資料で自動ナーチャリング。関心に合った資料を届け、AIが解説し、反応を見て検討を温める。",
+    points: ["関心に合った資料を自動で届ける", "反応を見て育成、温まったら次へ"],
+    href: "/library/",
+    icon: "library",
+  },
+  {
     key: "calendar",
-    stage: "② 商談化する",
+    stage: "③ 商談化する",
     title: "その場で、商談を予約する。",
     desc: "温度が高まった瞬間に、AIコンシェルジュが商談予約まで運ぶ。自動アサイン・CRM登録まで、離脱前に完結。",
     points: ["コンバート直後に即予約導線", "自動アサイン・CRM自動登録"],
@@ -65,7 +65,7 @@ const ROWS: Row[] = [
   },
   {
     key: "email",
-    stage: "③ 追客する",
+    stage: "④ 追客する",
     title: "逃さず、追って戻す。",
     desc: "予約しなかったリードを諦めず、AIが行動シグナルを見て1:1で追客。再びホットになれば商談化へ戻す。",
     points: ["再訪・開封などのシグナルで追客", "AIが1通ずつ生成、目的達成まで自律"],
@@ -87,15 +87,6 @@ const ROWS_EN: Row[] = [
     icon: "chat",
   },
   {
-    key: "library",
-    stage: "① Nurture",
-    title: "Nurture prospects with content.",
-    desc: "Auto-nurture not-yet-ready prospects with content. It delivers materials matched to their interest, the AI explains them, and reads reactions to warm up the consideration.",
-    points: ["Auto-delivers content matched to each interest", "Nurtures by reaction, hands off once warm"],
-    href: "/en/library/",
-    icon: "library",
-  },
-  {
     key: "ads",
     stage: "① Capture (on-site ads)",
     title: "Capture leads with your site's unused space.",
@@ -105,8 +96,17 @@ const ROWS_EN: Row[] = [
     icon: "ads",
   },
   {
+    key: "library",
+    stage: "② Nurture",
+    title: "Nurture prospects with content.",
+    desc: "Auto-nurture not-yet-ready prospects with content. It delivers materials matched to their interest, the AI explains them, and reads reactions to warm up the consideration.",
+    points: ["Auto-delivers content matched to each interest", "Nurtures by reaction, hands off once warm"],
+    href: "/en/library/",
+    icon: "library",
+  },
+  {
     key: "calendar",
-    stage: "② Convert",
+    stage: "③ Convert",
     title: "Book the meeting on the spot.",
     desc: "The moment intent peaks, the AI concierge carries them all the way to a booked meeting. Auto-assignment and CRM logging, all done before they leave.",
     points: ["Instant booking path right after conversion", "Auto-assignment and automatic CRM logging"],
@@ -115,7 +115,7 @@ const ROWS_EN: Row[] = [
   },
   {
     key: "email",
-    stage: "③ Win back",
+    stage: "④ Win back",
     title: "Chase them down and bring them back.",
     desc: "Never give up on leads who didn't book — the AI watches behavioral signals and follows up 1:1. When they turn hot again, it brings them back to a meeting.",
     points: ["Follows up on signals like return visits and opens", "AI writes each message, autonomous until the goal is met"],
@@ -128,7 +128,7 @@ const STR = {
   ja: {
     eyebrow: "動きで見る AI SDR",
     title: "それぞれの仕事が、どう動くか。",
-    lede: "掴む・育てる・商談化する・追客する——AI SDR が現場で何をするのかを、動きのイメージで。",
+    lede: "掴む・育てる・商談化する・追客する——AI SDR の4つの仕事が現場で何をするのかを、動きのイメージで。",
     more: "詳しく見る →",
   },
   en: {

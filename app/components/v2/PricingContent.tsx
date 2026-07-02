@@ -78,28 +78,28 @@ type PricingStrings = {
 
 export const PRICING_STR: Record<Lang, PricingStrings> = {
   ja: {
-    metaTitleAbsolute: "料金｜Meeton ai — 3つのプランで、掴む→商談化→追客",
+    metaTitleAbsolute: "料金｜Meeton ai — 3つのプランで、掴む→育てる→商談化→追客",
     metaDescription:
       "Meeton ai の料金。リード獲得プラン¥12万〜（掴む・育てる）。商談獲得プラン（+商談化）・オールインワンプラン（+追客）はお問い合わせ。規模は月間トラフィックで決まり、機能で3段階。すべて税抜/月・適格請求書対応。",
-    ogTitle: "料金｜Meeton ai — 掴む→商談化→追客の3プラン",
+    ogTitle: "料金｜Meeton ai — 掴む→育てる→商談化→追客の3プラン",
     ogDescription:
       "リード獲得¥12万〜 / 商談獲得・オールインワンはお問い合わせ。規模は月間トラフィック、機能で3段階。",
     heroEyebrow: "料金プラン",
     heroH1a: (
       <>
-        掴む → <span style={{ color: "var(--cta)" }}>商談化</span> → 追客。<br />必要な段階から。
+        掴む → 育てる → <span style={{ color: "var(--cta)" }}>商談化</span> → 追客。<br />必要な段階から。
       </>
     ),
     heroSub: "規模は月間トラフィックで決まり、機能で3段階に分かれます。すべて税抜/月。",
     heroSecondaryLabel: "導入事例を見る",
     plansEyebrow: "3つのプラン",
-    plansTitle: "AI SDR の3つの仕事に、そのまま対応。",
+    plansTitle: "AI SDR の4つの仕事に、そのまま対応。",
     plansLede:
       "上位プランは下位の機能をすべて含みます。商談化（Calendar）・追客（Email）を、事業の成長に合わせて足していけます。",
     priceUnit: " 〜 / 月（税抜）",
     planCta: "このプランで相談する",
     stagesLinkPre: "ステージの考え方は",
-    stagesLinkText: "AI SDR の3つの仕事",
+    stagesLinkText: "AI SDR の4つの仕事",
     trafficEyebrow: "トラフィック追加（全プラン共通）",
     trafficTitle: "規模は、月間トラフィックで。",
     trafficColTier: "月間トラフィック",
@@ -121,7 +121,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     plans: [
       {
         name: "リード獲得プラン",
-        stage: "① 掴む・育てる",
+        stage: "①+② 掴む・育てる",
         includes: "Chat + Library + Ads",
         price: "¥12万",
         source: "pricing-lead",
@@ -131,7 +131,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       },
       {
         name: "商談獲得プラン",
-        stage: "① + ② 商談化まで",
+        stage: "①〜③ 商談化まで",
         includes: "+ Calendar",
         price: "お問い合わせ",
         source: "pricing-convert",
@@ -142,12 +142,12 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       },
       {
         name: "オールインワンプラン",
-        stage: "① + ② + ③ 一気通貫",
+        stage: "①〜④ 一気通貫",
         includes: "+ Email",
         price: "お問い合わせ",
         source: "pricing-allinone",
         highlight: false,
-        blurb: "逃したリードも追客で回収。掴む→商談化→追客まで一気通貫で最大化。",
+        blurb: "逃したリードも追客で回収。掴む→育てる→商談化→追客まで一気通貫で最大化。",
         items: ["商談獲得プランの全機能", "Meeton Email 機能（無制限）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
       },
     ],
@@ -160,7 +160,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     faq: [
       {
         q: "プランはどう選べばいいですか？",
-        a: "AI SDR の3つの仕事に対応します。潜在層を掴んでリードにするだけなら『リード獲得プラン（¥12万〜）』、掴んだリードを商談まで運ぶなら『商談獲得プラン（お問い合わせ・最も選ばれる構成）』、逃したリードの追客まで一気通貫なら『オールインワンプラン（お問い合わせ）』です。上位プランは下位の機能をすべて含みます。",
+        a: "AI SDR の4つの仕事に対応します。潜在層を掴んでリードにするだけなら『リード獲得プラン（¥12万〜）』、掴んだリードを商談まで運ぶなら『商談獲得プラン（お問い合わせ・最も選ばれる構成）』、逃したリードの追客まで一気通貫なら『オールインワンプラン（お問い合わせ）』です。上位プランは下位の機能をすべて含みます。",
       },
       {
         q: "料金は何で決まりますか？",
@@ -202,7 +202,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     priceUnit: " / mo (excl. tax)",
     planCta: "Start 1-month free trial",
     stagesLinkPre: "For how the stages work, see",
-    stagesLinkText: "the three jobs of an AI SDR",
+    stagesLinkText: "the four jobs of an AI SDR",
     trafficEyebrow: "Included traffic (all plans)",
     trafficTitle: "Every plan includes up to 30,000 sessions / month.",
     trafficColTier: "Monthly website sessions",
@@ -235,7 +235,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     plans: [
       {
         name: "Lead Acquisition",
-        stage: "① Capture & nurture",
+        stage: "①+② Capture & nurture",
         includes: "Chat + Library + Ads",
         price: "¥120,000",
         pricePrefix: "From ",
@@ -248,7 +248,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       },
       {
         name: "Meeting Acquisition",
-        stage: "① + ② through to convert",
+        stage: "①–③ through to convert",
         includes: "+ Calendar",
         price: "¥180,000",
         pricePrefix: "From ",
@@ -262,7 +262,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       },
       {
         name: "All-in-One",
-        stage: "① + ② + ③ end to end",
+        stage: "①–④ end to end",
         includes: "+ Email",
         price: "¥240,000",
         pricePrefix: "From ",
@@ -289,7 +289,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       },
       {
         q: "How should I choose a plan?",
-        a: "The plans map to the three jobs of an AI SDR. To identify and nurture website visitors, choose Lead Acquisition (from ¥120,000/mo). To convert qualified visitors into booked meetings, choose Meeting Acquisition (from ¥180,000/mo — recommended for most teams). To also recover missed leads with automated follow-up, choose All-in-One (from ¥240,000/mo). Higher plans include everything in the lower ones, and you can start any of them with a free trial.",
+        a: "The plans map to the four jobs of an AI SDR. To identify and nurture website visitors, choose Lead Acquisition (from ¥120,000/mo). To convert qualified visitors into booked meetings, choose Meeting Acquisition (from ¥180,000/mo — recommended for most teams). To also recover missed leads with automated follow-up, choose All-in-One (from ¥240,000/mo). Higher plans include everything in the lower ones, and you can start any of them with a free trial.",
       },
       {
         q: "What determines the final price?",

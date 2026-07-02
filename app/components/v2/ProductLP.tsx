@@ -36,7 +36,7 @@ const STR = {
     pricingLede: "料金は月間トラフィックと機能で変動します。リード獲得 / 商談獲得 / オールインワン の3プラン。",
     pricingLink: "料金の詳細を見る →",
     expansionEyebrow: "これは Meeton ai の一部",
-    expansionStages: "AI SDR の3つの仕事を見る →",
+    expansionStages: "AI SDR の4つの仕事を見る →",
     expansionPricing: "料金を見る →",
     faqEyebrow: "よくある質問",
     faqTitle: (p: string) => `${p} のFAQ`,
@@ -59,7 +59,7 @@ const STR = {
     pricingLede: "Pricing varies by monthly traffic and features. Three plans: Lead Acquisition / Meeting Acquisition / All-in-One — every plan starts with a 1-month free trial.",
     pricingLink: "See pricing details →",
     expansionEyebrow: "This is part of Meeton ai",
-    expansionStages: "See the 3 jobs of the AI SDR →",
+    expansionStages: "See the 4 jobs of the AI SDR →",
     expansionPricing: "See pricing →",
     faqEyebrow: "FAQ",
     faqTitle: (p: string) => `${p} FAQ`,
@@ -69,8 +69,9 @@ const STR = {
 } as const;
 
 // English label for each AI SDR stage (stages.ts stores JA only).
-const STAGE_LABEL_EN: Record<"capture" | "convert" | "follow", string> = {
-  capture: "Capture & Nurture stage (Prospects → Leads)",
+const STAGE_LABEL_EN: Record<"capture" | "nurture" | "convert" | "follow", string> = {
+  capture: "Capture stage (Prospects → Leads)",
+  nurture: "Nurture stage (Not-yet-ready → warm leads)",
   convert: "Convert stage (Leads → Meetings)",
   follow: "Win-back stage (Recover lost leads)",
 };
