@@ -452,7 +452,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["shodanka-ritsu", "mql-sql", "inbound-sales"],
-    metaTitle: "What is an AI SDR? Definition, how it works, and the difference from a traditional SDR｜Meeton ai Glossary",
+    metaTitle: "What is an AI SDR?｜Meeton ai",
     metaDescription:
       "An AI SDR (AI Sales Development Representative) is an AI agent that autonomously performs lead handling, content recommendation, meeting booking, and follow-up. We clearly explain its definition, how it works, and the benefits of adoption in B2B sales.",
   },
@@ -483,7 +483,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["inside-sales", "ai-sdr", "shodanka-ritsu"],
-    metaTitle: "What is Speed to Lead? The importance of response speed that determines meeting-conversion rate｜Meeton ai Glossary",
+    metaTitle: "What is Speed to Lead?｜Meeton ai",
     metaDescription:
       "Speed to Lead is the time from a lead's creation to the first sales contact. Studies show responding within 5 minutes makes the qualification rate 21x higher, making it a critical metric that determines B2B sales success.",
   },
@@ -514,7 +514,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "mql-sql", "inbound-sales"],
-    metaTitle: "What is the meeting-conversion rate? Definition, formula, averages, and how to improve｜Meeton ai Glossary",
+    metaTitle: "What is the meeting-conversion rate?｜Meeton ai",
     metaDescription:
       "The meeting-conversion rate is a sales KPI showing the proportion of acquired leads that actually advanced to a meeting. We clearly explain the formula, industry averages, the inbound vs. outbound difference, and its relationship with Speed to Lead—essentials for B2B sales and marketing.",
   },
@@ -545,7 +545,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["speed-to-lead", "ai-sdr", "shodanka-ritsu"],
-    metaTitle: "What is inside sales? Definition, role, and the difference from field sales｜Meeton ai Glossary",
+    metaTitle: "What is inside sales?｜Meeton ai",
     metaDescription:
       "Inside sales is a sales method that uses non-face-to-face channels such as phone, email, and web meetings to handle everything from nurturing prospects to creating meetings. We clearly explain the SDR/BDR difference, Speed to Lead, and changes in the buying process—essentials for B2B sales professionals.",
   },
@@ -576,7 +576,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["sales-engagement", "ai-sdr", "shodanka-ritsu"],
-    metaTitle: "What is lead nurturing? Meaning, methods, and tips for success, clearly explained｜Meeton ai Glossary",
+    metaTitle: "What is lead nurturing?｜Meeton ai",
     metaDescription:
       "Lead nurturing is a cultivation activity that provides continuous information to acquired prospects to raise their buying intent. 57–70% of B2B buyers decide through self-research, and abandoning them lets them flow to competitors. We explain methods, FAQ, and tool-selection points.",
   },
@@ -607,7 +607,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "shodanka-ritsu", "inbound-sales"],
-    metaTitle: "What are MQL / SQL? Definitions, differences, and how to set them, clearly explained｜Meeton ai Glossary",
+    metaTitle: "What are MQL / SQL?｜Meeton ai",
     metaDescription:
       "An MQL (Marketing Qualified Lead) is a lead marketing judged \"worth handing to sales,\" and an SQL (Sales Qualified Lead) is a lead sales judged \"can be converted into a meeting.\" We explain the differences, judgment criteria, and conversion-rate benchmarks from a B2B practitioner's perspective.",
   },
@@ -638,7 +638,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
-    metaTitle: "What is inbound sales? The difference from outbound and its methods｜Meeton ai Glossary",
+    metaTitle: "What is inbound sales?｜Meeton ai",
     metaDescription:
       "Inbound sales is a sales method that designs a flow in which prospects inquire and request materials on their own, then connects this to meetings. We clearly explain the difference from outbound, representative measures, and Speed-to-Lead statistics for B2B professionals.",
   },
@@ -669,7 +669,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["lead-nurturing", "ai-sdr", "shodanka-ritsu"],
-    metaTitle: "What is sales engagement? Definition, the difference from CRM/SFA, and how to use it｜Meeton ai Glossary",
+    metaTitle: "What is sales engagement?｜Meeton ai",
     metaDescription:
       "Sales engagement is an umbrella term for a sales strategy that systematically manages and optimizes customer communication across multiple channels—email, phone, social, etc. We clearly explain the differences from CRM, SFA, and sales enablement, and how to use it in B2B sales.",
   },
@@ -700,7 +700,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "shodanka-ritsu", "speed-to-lead"],
-    metaTitle: "What is web engagement? Types, B2B effects, and the frontier of AI use｜Meeton ai Glossary",
+    metaTitle: "What is web engagement?｜Meeton ai",
     metaDescription:
       "Web engagement is an umbrella term for measures—chatbots, popups, etc.—that act on website visitors in real time to raise CVR and the meeting-conversion rate. We clearly explain the background of B2B use, types and selection of tools, and the latest trend toward autonomous AI.",
   },
@@ -731,7 +731,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "shodanka-ritsu", "speed-to-lead"],
-    metaTitle: "What is document open rate? Definition, how to use it, and the difference from email open rate｜Meeton ai Glossary",
+    metaTitle: "What is document open rate?｜Meeton ai",
     metaDescription:
       "Document open rate is a B2B sales metric showing the proportion of sent proposals and sales materials that were actually viewed. It is used to judge hot leads and optimize follow-up timing, and is treated separately from email open rate. We explain the definition, formula, and how to use it.",
   },
@@ -762,7 +762,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
-    metaTitle: "What is BANT? Meaning, how to use it, and its limits and use in modern sales｜Meeton ai Glossary",
+    metaTitle: "What is BANT?｜Meeton ai",
     metaDescription:
       "BANT is a standard B2B sales framework that evaluates leads with four elements: Budget, Authority, Need, and Timeline. We clearly explain the meaning, how to use it, and the limits and use points in modern B2B of the method IBM systematized.",
   },
@@ -793,7 +793,7 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       },
     ],
     related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
-    metaTitle: "What is PLG (Product-Led Growth)? The difference from SLG and the meaning of PQL, explained｜Meeton ai Glossary",
+    metaTitle: "What is PLG (Product-Led Growth)?｜Meeton ai",
     metaDescription:
       "PLG (Product-Led Growth) is a go-to-market strategy that makes the product experience itself the main engine of customer acquisition and conversion. Users experience value first via a free plan or free trial and voluntarily move to paid. We clearly explain the difference from SLG, PQL, and how to practice it in Japanese B2B.",
   },

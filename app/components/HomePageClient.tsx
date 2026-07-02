@@ -2141,7 +2141,7 @@ export default function HomePageClient({
           </div>
           <div style={{ textAlign: "center", marginTop: 24 }}>
             <a
-              href={isJa ? "/ja/integrations/" : "/integrations/"}
+              href={isJa ? "/integrations/" : "/en/integrations/"}
               style={{
                 color: "#12a37d",
                 fontSize: 15,

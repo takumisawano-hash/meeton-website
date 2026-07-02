@@ -10,7 +10,7 @@ export type CompareRow = { dim: string; meeton: string; competitor: string; meet
 export type CompareData = {
   slug: string;
   competitorName: string;
-  product: "calendar" | "chat" | "library" | "email";
+  product: "calendar" | "chat" | "library" | "email" | "ads";
   productName: string;
   category: string;
   metaTitle: string;
@@ -30,6 +30,7 @@ export const PRODUCT_NAMES: Record<CompareData["product"], string> = {
   chat: "Meeton Chat",
   library: "Meeton Library",
   email: "Meeton Email",
+  ads: "Meeton Ads",
 };
 
 const C = (dim: string, meeton: string, competitor: string, meetonWins = false): CompareRow => ({ dim, meeton, competitor, meetonWins });

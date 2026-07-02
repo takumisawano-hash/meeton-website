@@ -130,7 +130,7 @@ export const CAPTURE_STR: Record<Lang, CaptureStrings> = {
     ],
   },
   en: {
-    metaTitleAbsolute: "Capture｜Turn latent prospects into leads with conversation and on-site ads｜Meeton ai",
+    metaTitleAbsolute: "Capture leads with AI chat & on-site ads｜Meeton ai",
     metaDescription:
       "Capture pre-inquiry latent prospects with conversation and on-site ads. An AI chat talks with visitors, and AI-optimized on-site ads catch the ones who never open the chat — the first job of an AI SDR, capture, with Meeton ai.",
     ogTitle: "Capture｜Turn latent prospects into leads｜Meeton ai",

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import UseCasePageClient from '../UseCasePageClient'
 
 export const revalidate = 3600
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'フィンテック向け AI SDR — コンプライアンス対応の商談化 | Meeton ai',
   description:
     'フィンテック・金融 B2B 向け AI SDR。規制・コンプライアンス対応のトーンを保ちながら、技術的バイヤーのリードを商談化。レギュレーション適合性の確認まで AI が代行します。',
-  alternates: { canonical: '/use-cases/fintech/' },
+  alternates: altLanguages('/use-cases/fintech/', 'ja'),
   openGraph: {
     title: 'フィンテック向け AI SDR — コンプライアンス対応の商談化 | Meeton ai',
     description: 'コンプライアンス対応のトーンを保ちつつ、技術バイヤーのリードを商談化するフィンテック特化型 AI SDR。',

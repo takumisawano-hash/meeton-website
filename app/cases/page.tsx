@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
@@ -14,7 +15,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: { absolute: "導入事例｜Meeton ai — 商談化の成果を、数字で。" },
   description: "Meeton ai を導入した企業の成果を、業種別・数字で。商談化率60%+、チャット経由リード20倍以上、受注獲得まで——AI SDR が現場で生んだ変化を紹介します。",
-  alternates: { canonical: "/cases/" },
+  alternates: altLanguages("/cases/", "ja"),
   openGraph: { title: "導入事例｜Meeton ai", description: "Meeton ai 導入企業の成果を数字で。", url: "https://dynameet.ai/cases/", type: "website" },
 };
 

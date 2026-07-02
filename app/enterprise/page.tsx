@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
@@ -10,7 +11,7 @@ import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/Integrat
 export const metadata: Metadata = {
   title: { absolute: "エンタープライズ｜Meeton ai — SSO・CRM連携・セキュリティ" },
   description: "Meeton ai のエンタープライズ要件。SSO・API、CRMへの会話ログ自動登録、権限・監査ログ管理、契約終了後のデータ取扱、複数サイト・高度CRM連携まで。営業アシスト帯の導入を支援します。",
-  alternates: { canonical: "/enterprise/" },
+  alternates: altLanguages("/enterprise/", "ja"),
   openGraph: { title: "エンタープライズ｜Meeton ai", description: "SSO・CRM連携・権限/監査ログ・セキュリティ要件に対応。", url: "https://dynameet.ai/enterprise/", type: "website" },
 };
 

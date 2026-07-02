@@ -21,19 +21,19 @@ export default function BlogJsonLd({ post, wordCount, readingTime, headings }: B
     datePublished: post.publishedDate,
     dateModified: post.modifiedDate || post.publishedDate,
     author: {
-      '@type': 'Organization',
-      '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
-      url: 'https://dynameet.ai',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://dynameet.ai/logo-dark.svg',
-      },
+      '@type': 'Person',
+      '@id': 'https://dynameet.ai/#author-takumi-sawano',
+      name: '澤野 拓実',
+      alternateName: ['Takumi Sawano', 'Sawano Takumi'],
+      jobTitle: 'DynaMeet 共同創業者 / CRO',
+      url: 'https://dynameet.ai/about/',
+      sameAs: 'https://x.com/Founder_Meeton',
+      worksFor: { '@id': 'https://dynameet.ai/#organization' },
     },
     publisher: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet株式会社',
       url: 'https://dynameet.ai',
       logo: {
         '@type': 'ImageObject',

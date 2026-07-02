@@ -323,10 +323,17 @@ const nextConfig = {
       // solutions allowlist is the 2 existing EN solution LPs only — other
       // /en/solutions/* (cmo/cro/sdr/ceo) fall through to the JA twin.
       {
-        source: '/en/:slug((?!chat/|calendar/|library/|email/|ads/|tools/roi|privacy-policy|terms|integrations/$|integrations$|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|trial/|enterprise|security|cases|blog/|use-cases/|solutions/crm-to-meeting|solutions/lead-to-meeting|solutions/cmo|solutions/cro|solutions/sdr|solutions/ceo|chat$|calendar$|library$|email$|ads$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|trial$|enterprise$|security$|cases$|blog$).+)',
+        source: '/en/:slug((?!chat/|calendar/|library/|email/|ads/|tools/roi|privacy-policy|terms|integrations/|integrations$|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|trial/|enterprise|security|cases|blog/|use-cases/|solutions/crm-to-meeting|solutions/lead-to-meeting|solutions/cmo|solutions/cro|solutions/sdr|solutions/ceo|chat$|calendar$|library$|email$|ads$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|trial$|enterprise$|security$|cases$|blog$).+)',
         destination: '/:slug',
         permanent: true,
       },
+      // 2026-07-02 integrations IA swap: /ja/* (legacy inverted section) → root JA
+      { source: '/ja/integrations', destination: '/integrations/', permanent: true },
+      { source: '/ja/integrations/', destination: '/integrations/', permanent: true },
+      { source: '/ja/integrations/:slug', destination: '/integrations/:slug/', permanent: true },
+      { source: '/ja/integrations/:slug/', destination: '/integrations/:slug/', permanent: true },
+      { source: '/ja/contact', destination: '/contact/', permanent: true },
+      { source: '/ja/contact/', destination: '/contact/', permanent: true },
       // 2026-07-02 slug rescue: legacy auto-slug ranked pos4 for リード数減少
       { source: '/blog/jp-mlutg7bj-fj0o', destination: '/blog/lead-decline-causes-solutions/', permanent: true },
       { source: '/blog/jp-mlutg7bj-fj0o/', destination: '/blog/lead-decline-causes-solutions/', permanent: true },

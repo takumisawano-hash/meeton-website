@@ -12,9 +12,9 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${baseUrl}/#organization`,
-    name: 'DynaMeet Inc.',
+    name: 'DynaMeet株式会社',
     legalName: 'DynaMeet株式会社',
-    alternateName: ['Meeton ai', 'Meeton AI', 'Meeton', 'ミートン', 'DynaMeet', 'DynaMeet株式会社', 'ダイナミート'],
+    alternateName: ['Meeton ai', 'Meeton AI', 'Meeton', 'ミートン', 'DynaMeet', 'DynaMeet Inc.', 'ダイナミート'],
     url: baseUrl,
     logo: {
       '@type': 'ImageObject',

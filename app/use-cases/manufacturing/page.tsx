@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import UseCasePageClient from '../UseCasePageClient'
 
 export const revalidate = 3600
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: '製造業向け AI SDR — 技術問い合わせを商談化 | Meeton ai',
   description:
     '製造業の AI SDR。技術スペック・見積依頼・サンプル相談など、専門性の高いBtoB問い合わせを AI が一次対応し、有望リードのみを技術IS / 営業に引き継ぎます。',
-  alternates: { canonical: '/use-cases/manufacturing/' },
+  alternates: altLanguages('/use-cases/manufacturing/', 'ja'),
   openGraph: {
     title: '製造業向け AI SDR — 技術問い合わせを商談化 | Meeton ai',
     description: '製造業の長期・高単価営業に AI SDR を。技術問い合わせの一次対応から商談予約までを自動化。',

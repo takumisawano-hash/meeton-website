@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import { notFound } from "next/navigation";
 import PlaybookLP, { playbookSchema } from "@/app/components/v2/PlaybookLP";
 import { getMoment, MOMENT_SLUGS } from "@/app/lib/playbook-data";
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: { absolute: data.metaTitle },
     description: data.metaDescription,
-    alternates: { canonical: `/use-cases/${slug}/` },
+    alternates: altLanguages(`/use-cases/${slug}/`, "ja"),
     openGraph: { title: data.metaTitle, description: data.metaDescription, url: `https://dynameet.ai/use-cases/${slug}/`, type: "website" },
   };
 }

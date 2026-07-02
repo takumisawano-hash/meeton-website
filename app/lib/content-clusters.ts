@@ -84,7 +84,7 @@ export const CLUSTERS: Record<ClusterId, Cluster> = {
   },
 };
 
-export const CLUSTER_ORDER: ClusterId[] = ["library", "calendar", "email", "chat", "ai-sdr"];
+export const CLUSTER_ORDER: ClusterId[] = ["ads", "library", "calendar", "email", "chat", "ai-sdr"];
 
 /** Classify a post into a cluster from its category / tags / targetKeyword. */
 export function classifyCluster(input: { category?: string; tags?: string[]; targetKeyword?: string; title?: string }): ClusterId {

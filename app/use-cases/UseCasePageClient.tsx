@@ -365,19 +365,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           </div>
           <div className="uc-int-grid">
             {props.integrations.map((it) => (
-              // /integrations/* has no EN twin — chips stay unlinked on EN
-              lang === 'en' ? (
-                <div key={it.slug} className="uc-int-card" style={{ cursor: 'default' }}>
-                  <div className="uc-int-logo">
-                    <Image src={it.logo} alt={it.name} width={48} height={48} style={{ objectFit: 'contain' }} />
-                  </div>
-                  <div className="uc-int-body">
-                    <h3 className="uc-int-name">{it.name}</h3>
-                    <p className="uc-int-reason">{it.reason}</p>
-                  </div>
-                </div>
-              ) : (
-              <Link key={it.slug} href={`/integrations/${it.slug}/`} className="uc-int-card">
+              <Link key={it.slug} href={lang === 'en' ? `/en/integrations/${it.slug}/` : `/integrations/${it.slug}/`} className="uc-int-card">
                 <div className="uc-int-logo">
                   <Image
                     src={it.logo}
@@ -395,7 +383,6 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
                   <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </Link>
-              )
             ))}
           </div>
         </div>

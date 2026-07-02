@@ -1,7 +1,10 @@
 import IntegrationDetailLayout from "@/app/components/IntegrationDetailLayout";
+import { EN_OG_IMAGE } from "@/app/lib/i18n";
 import { integrations } from "@/lib/integrations-data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+// /en/integrations/[slug]/ — English detail twin (JA original at root).
 
 export function generateStaticParams() {
   return integrations.map((i) => ({ slug: i.slug }));
@@ -17,30 +20,29 @@ export async function generateMetadata({
   if (!integration) return {};
 
   return {
-    title: `${integration.name}連携`,
-    description: integration.ja.description,
+    title: `${integration.name} Integration`,
+    description: integration.en.description,
     alternates: {
-      canonical: `/ja/integrations/${slug}/`,
-      // Full hreflang cluster (self + alternate + x-default). x-default → JA
-      // since the site is Japanese-primary.
+      canonical: `/en/integrations/${slug}/`,
       languages: {
-        en: `/integrations/${slug}/`,
-        ja: `/ja/integrations/${slug}/`,
-        "x-default": `/ja/integrations/${slug}/`,
+        ja: `/integrations/${slug}/`,
+        en: `/en/integrations/${slug}/`,
+        "x-default": `/integrations/${slug}/`,
       },
     },
     openGraph: {
-      title: `${integration.name}連携`,
-      description: integration.ja.description,
-      url: `https://dynameet.ai/ja/integrations/${slug}/`,
+      images: EN_OG_IMAGE,
+      title: `${integration.name} Integration`,
+      description: integration.en.description,
+      url: `https://dynameet.ai/en/integrations/${slug}/`,
       siteName: "Meeton ai",
-      locale: "ja_JP",
+      locale: "en_US",
       type: "website",
     },
   };
 }
 
-export default async function JaIntegrationDetailPage({
+export default async function EnIntegrationDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -49,5 +51,5 @@ export default async function JaIntegrationDetailPage({
   const integration = integrations.find((i) => i.slug === slug);
   if (!integration) notFound();
 
-  return <IntegrationDetailLayout integration={integration} lang="ja" />;
+  return <IntegrationDetailLayout integration={integration} lang="en" />;
 }

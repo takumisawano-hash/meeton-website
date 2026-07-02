@@ -237,7 +237,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "calendar",
     productName: "Meeton Calendar",
     icon: "calendar",
-    metaTitle: "Meeting Scheduling for Sales | Calendly Alternative | Meeton Calendar",
+    metaTitle: "Meeting Scheduling for Sales｜Calendly Alternative｜Meeton Calendar",
     metaDescription:
       "AI scheduling that turns a fresh lead into a booked meeting the moment intent peaks. The instant a form is submitted or a doc is downloaded, AI offers a slot, auto-assigns the rep, and logs it to your CRM. See how it compares to immedio / TimeRex / Calendly. Try it in a 30-minute demo.",
     keyword: "meeting scheduling / sales booking automation / Calendly alternative / inbound conversion",
@@ -277,7 +277,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "chat",
     productName: "Meeton Chat",
     icon: "chat",
-    metaTitle: "Web Chat & AI Chatbot for B2B | Convert Visitors | Meeton Chat",
+    metaTitle: "Web Chat & AI Chatbot for B2B｜Convert Visitors｜Meeton Chat",
     metaDescription:
       "Buyers complete roughly 70% of the purchase journey before ever talking to sales. Meeton Chat meets them on that pre-sales ground, delivering answers your website can't and turning visitors into meetings—a web-engagement AI chat (chatbot). See how it compares to Intercom / scripted chatbots. Try it in a 30-minute demo.",
     keyword: "web engagement tool / chatbot for conversion / website exit prevention",
@@ -317,7 +317,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "library",
     productName: "Meeton Library",
     icon: "library",
-    metaTitle: "Sales Document Sharing & Nurturing | DocSend Alternative | Meeton Library",
+    metaTitle: "Sales Document Sharing & Nurturing｜DocSend Alternative｜Meeton Library",
     metaDescription:
       "Nurture prospects who aren't ready for a meeting yet—automatically, with content. Deliver materials matched to their interest, let AI explain the content, and grow the deal by reading their reactions. Opens and activity are fully visible. Automate content-driven lead nurturing. A DocSend alternative.",
     keyword: "lead nurturing with content / automated content nurturing / sales document sharing tool / DocSend alternative",
@@ -357,7 +357,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "email",
     productName: "Meeton Email",
     icon: "email",
-    metaTitle: "Follow-Up Automation & Lead Nurturing Email | AI 1:1 | Meeton Email",
+    metaTitle: "Follow-Up Automation & Lead Nurturing Email｜AI 1:1｜Meeton Email",
     metaDescription:
       "Leads who didn't book on the spot get autonomous 1:1 follow-up from AI, driven by behavioral signals. Not template swaps but AI-generated copy, with chat integration, working autonomously until the goal is met. Compare it to Lemlist / Smartlead / sales-engagement tools. Requires a CRM connection.",
     keyword: "lead nurturing email / follow-up automation / sales engagement",
@@ -397,7 +397,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     slug: "ads",
     productName: "Meeton Ads",
     icon: "ads",
-    metaTitle: "On-Site Ads with AI Auto-Optimization | Meeton Ads",
+    metaTitle: "On-Site Ads with AI Auto-Optimization｜Meeton Ads",
     metaDescription:
       "Turn your website's unused space into an ad channel run by AI. It scores every visitor's context—page, traffic source, industry—shows the single best offer, and keeps learning from every click and captured lead. AI drafts the ads from your own content; only what you approve goes live. Lift conversion with zero ad budget and no cookies.",
     keyword: "on-site ads / website popup alternative / on-site marketing / conversion rate optimization",

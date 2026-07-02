@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   title: { absolute: "商談化の余地 診断｜Meeton ai ROI診断ツール" },
   description:
     "月間訪問数・CV率・商談化率を入れるだけで、Webサイトに眠る『商談化の余地』を60秒で試算。去る訪問者の獲得余地と、リードの商談化余地を二段で可視化。無料・登録不要。",
-  alternates: { canonical: "/tools/roi/" },
+  alternates: altLanguages("/tools/roi/", "ja"),
   openGraph: {
     title: "商談化の余地 診断｜Meeton ai ROI診断ツール",
     description: "Webサイトに眠る商談化の余地を60秒で試算。獲得余地＋商談化余地を二段で可視化。無料・登録不要。",

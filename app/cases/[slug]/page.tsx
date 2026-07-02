@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { altLanguages } from '@/app/lib/i18n'
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: { absolute: title.slice(0, 70) },
     description: (c.description || c.quote || "").slice(0, 158),
-    alternates: { canonical: `/cases/${slug}/` },
+    alternates: altLanguages(`/cases/${slug}/`, "ja"),
     robots: c.noIndex ? { index: false, follow: true } : undefined,
     openGraph: { title, description: (c.description || c.quote || "").slice(0, 158), url: `https://dynameet.ai/cases/${slug}/`, type: "article", images: c.heroImage ? [c.heroImage] : undefined },
   };

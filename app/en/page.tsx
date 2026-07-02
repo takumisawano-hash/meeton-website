@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: altLanguages('/', 'en'),
   openGraph: {
     images: EN_OG_IMAGE,
-    title: 'Meeton ai｜The AI SDR Platform that turns your Website into meetings',
+    title: 'Meeton ai｜The AI SDR that turns your website into meetings',
     description:
       'Visitors leave, and leads never become meetings. Turn a Website that "waits" into an AI sales channel that generates meetings. An AI SDR that autonomously handles all four stages: capture → nurture → convert → win back.',
     url: 'https://dynameet.ai/en/',

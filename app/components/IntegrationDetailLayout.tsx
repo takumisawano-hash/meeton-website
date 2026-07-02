@@ -13,7 +13,7 @@ type Props = {
 const strings = {
   en: {
     breadcrumbRoot: "Integrations",
-    breadcrumbRootHref: "/integrations",
+    breadcrumbRootHref: "/en/integrations",
     howToInstall: "How to install",
     troubleshootingLinkText: "Contact support",
     usageAndPrereqs: "Usage & Prerequisites",
@@ -30,7 +30,7 @@ const strings = {
     privacyPolicy: "Privacy policy",
     privacyPolicyLabel: "View policy",
     langChip: "日本語",
-    langHrefBase: "/ja/integrations",
+    langHrefBase: "/integrations",
     overview: "Overview",
     aboutIntegration: "About this integration",
     readyToConnect: (name: string) => `Ready to connect ${name}?`,
@@ -44,7 +44,7 @@ const strings = {
   },
   ja: {
     breadcrumbRoot: "連携一覧",
-    breadcrumbRootHref: "/ja/integrations",
+    breadcrumbRootHref: "/integrations",
     howToInstall: "導入手順",
     troubleshootingLinkText: "サポートに問い合わせる",
     usageAndPrereqs: "使い方と前提条件",
@@ -61,7 +61,7 @@ const strings = {
     privacyPolicy: "プライバシーポリシー",
     privacyPolicyLabel: "ポリシーを確認する",
     langChip: "EN",
-    langHrefBase: "/integrations",
+    langHrefBase: "/en/integrations",
     overview: "概要",
     aboutIntegration: "この連携について",
     readyToConnect: (name: string) => `${name}との連携を始めませんか？`,
@@ -598,7 +598,7 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
       `}</style>
 
       <div className="int-page">
-        <Nav variant="light" langSwitchHref={langSwitchHref} langSwitchLabel={s.langChip} />
+        <Nav lang={lang} variant="light" langSwitchHref={langSwitchHref} langSwitchLabel={s.langChip} />
 
         {/* ---------- HERO ---------- */}
         <section className="int-hero">
@@ -955,7 +955,7 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
           </section>
         </main>
 
-        <Footer />
+        <Footer lang={lang} />
       </div>
     </>
   );

@@ -32,8 +32,8 @@ const jaFilters: { key: FilterKey; label: string }[] = [
 export default function IntegrationDirectoryClient({ lang }: Props) {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
   const filters = lang === "en" ? enFilters : jaFilters;
-  const basePath = lang === "en" ? "/integrations" : "/ja/integrations";
-  const contactHref = lang === "en" ? "/contact/" : "/ja/contact/";
+  const basePath = lang === "en" ? "/en/integrations" : "/integrations";
+  const contactHref = lang === "en" ? "/en/contact/" : "/contact/";
 
   const visible = integrations.filter(
     (i) => activeFilter === "all" || i.category === activeFilter,
@@ -51,7 +51,7 @@ export default function IntegrationDirectoryClient({ lang }: Props) {
       count: (n: number) => `${n} integration${n === 1 ? "" : "s"}`,
       viewLink: "View",
       langChip: "日本語",
-      langHref: "/ja/integrations",
+      langHref: "/integrations",
       ctaEyebrow: "Need something custom?",
       ctaTitle: "Don't see your tool?",
       ctaBody:
@@ -69,7 +69,7 @@ export default function IntegrationDirectoryClient({ lang }: Props) {
       count: (n: number) => `${n}件の連携`,
       viewLink: "詳細",
       langChip: "EN",
-      langHref: "/integrations",
+      langHref: "/en/integrations",
       ctaEyebrow: "カスタム連携も対応",
       ctaTitle: "ご利用中のツールが見つからない場合",
       ctaBody:
@@ -392,7 +392,7 @@ export default function IntegrationDirectoryClient({ lang }: Props) {
         }
       `}</style>
 
-      <Nav langSwitchHref={copy.langHref} langSwitchLabel={copy.langChip} />
+      <Nav lang={lang} langSwitchHref={copy.langHref} langSwitchLabel={copy.langChip} />
 
       {/* Hero */}
       <section className="int-dir-hero">
@@ -499,7 +499,7 @@ export default function IntegrationDirectoryClient({ lang }: Props) {
         </div>
       </section>
 
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 }

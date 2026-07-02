@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import UseCasePageClient from '../UseCasePageClient'
 
 export const revalidate = 3600
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'コンサル・士業向け AI SDR — インバウンドを商談化 | Meeton ai',
   description:
     'コンサル・プロフェッショナルサービス向け AI SDR。パートナーや専門家が本業に集中できるよう、インバウンド問い合わせの一次対応と商談予約を AI が代行します。',
-  alternates: { canonical: '/use-cases/professional-services/' },
+  alternates: altLanguages('/use-cases/professional-services/', 'ja'),
   openGraph: {
     title: 'コンサル・士業向け AI SDR — インバウンドを商談化 | Meeton ai',
     description: 'パートナーが本業（クロージング）に集中できる。一次対応はAIに任せるプロフェッショナルサービス向け AI SDR。',

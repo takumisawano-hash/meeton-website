@@ -389,6 +389,9 @@ export default async function BlogPostPageEn({ params }: Props) {
               <img
                 src={post.featuredImage}
                 alt={post.title}
+                width={1200}
+                height={630}
+                fetchPriority="high"
                 style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
               />
             </div>

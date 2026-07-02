@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/app/lib/notion'
+import { getAllPosts, getCategoriesWithCounts } from '@/app/lib/notion'
 import { getAllCaseStudies } from '@/app/lib/case-studies'
 import { integrations } from '@/lib/integrations-data'
 import { getUpcomingWebinars } from '@/app/lib/webinars-schedule'
@@ -109,7 +109,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/ja/integrations/${i.slug}/`,
+      url: `${baseUrl}/en/integrations/${i.slug}/`,
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
@@ -132,6 +132,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           : new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
+    }))
+  } catch {
+    // Notion API接続前やエラー時は空配列
+  }
+
+  // Blog category listing pages (substantial only: ≥3 posts). Indexable,
+  // self-canonical silo pages — listing them here speeds their discovery.
+  let categoryPages: MetadataRoute.Sitemap = []
+  try {
+    const cats = await getCategoriesWithCounts(3, 'ja')
+    categoryPages = cats.map((c) => ({
+      url: `${baseUrl}/blog/category/${c.slug}/`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
     }))
   } catch {
     // Notion API接続前やエラー時は空配列
@@ -240,6 +255,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...webinarPages,
     ...integrationPages,
     ...blogPosts,
+    ...categoryPages,
     ...enBlogPosts,
     ...caseStudies,
   ]

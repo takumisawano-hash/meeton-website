@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { altLanguages } from '@/app/lib/i18n'
 import UseCasePageClient from '../UseCasePageClient'
 
 export const revalidate = 3600
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'SaaS 向け AI SDR — リード商談化を自動化 | Meeton ai',
   description:
     'SaaS 企業向け AI SDR。長期評価サイクル・複数ステークホルダーのSaaSバイヤーに対し、Meeton ai が継続ナーチャーから関係者全員との商談予約までを自動化します。',
-  alternates: { canonical: '/use-cases/saas/' },
+  alternates: altLanguages('/use-cases/saas/', 'ja'),
   openGraph: {
     title: 'SaaS 向け AI SDR — リード商談化を自動化 | Meeton ai',
     description: 'SaaS 企業のリード商談化を AI SDR が自動化。長期評価サイクル・複数ステークホルダーに対応。',
