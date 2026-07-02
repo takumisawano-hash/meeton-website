@@ -6,7 +6,7 @@ import CTAButtons from "@/app/components/v2/CTAButtons";
 import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/ui";
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
-import { altLanguages, ogLocale } from "@/app/lib/i18n";
+import { altLanguages, ogLocale, EN_OG_IMAGE } from "@/app/lib/i18n";
 
 // /en/enterprise/ — English twin of /enterprise/. Faithful translation of the
 // JA enterprise page; registry/billing facts kept verbatim where present.
@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   title: { absolute: "Enterprise｜Meeton ai — SSO, CRM integration, security" },
   description: "Meeton ai's enterprise requirements. SSO / API, auto-logging of conversation history to your CRM, permission & audit-log management, post-contract data handling, multi-site and advanced CRM integration. We support deployment in the sales-assist tier.",
   alternates: altLanguages("/enterprise/", "en"),
-  openGraph: { title: "Enterprise｜Meeton ai", description: "Supports SSO, CRM integration, permission / audit logs, and security requirements.", url: "https://dynameet.ai/en/enterprise/", type: "website", locale: ogLocale("en") },
+  openGraph: {
+    images: EN_OG_IMAGE, title: "Enterprise｜Meeton ai", description: "Supports SSO, CRM integration, permission / audit logs, and security requirements.", url: "https://dynameet.ai/en/enterprise/", type: "website", locale: ogLocale("en") },
 };
 
 const REQS = [

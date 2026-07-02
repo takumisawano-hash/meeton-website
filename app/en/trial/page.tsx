@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EN_OG_IMAGE } from "@/app/lib/i18n";
 import TrialPageClient from "@/app/components/TrialPageClient";
 
 // EN-only page (no JA twin): the self-serve funnel destination for every
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     canonical: "/en/trial/",
   },
   openGraph: {
+    images: EN_OG_IMAGE,
     title: "Start your 1-month free trial｜Meeton ai",
     description:
       "An AI SDR that captures website visitors, qualifies them, and books meetings — free for 1 month. No credit card required.",

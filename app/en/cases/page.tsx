@@ -7,7 +7,7 @@ import { getAllCaseStudies } from "@/app/lib/case-studies";
 import { FEATURED_CASES, localizeFeaturedCase } from "@/app/lib/featured-cases";
 import LogoWall from "@/app/components/v2/LogoWall";
 import CaseCardGrid from "@/app/components/v2/CaseCardGrid";
-import { altLanguages, ogLocale } from "@/app/lib/i18n";
+import { altLanguages, ogLocale, EN_OG_IMAGE } from "@/app/lib/i18n";
 
 // /en/cases/ — English twin of /cases/. The page SHELL is English (hero, CTAs,
 // JSON-LD); the case CONTENT (company names, numbers, Notion-sourced quotes)
@@ -19,7 +19,8 @@ export const metadata: Metadata = {
   title: { absolute: "Customer stories｜Meeton ai — Results, in numbers." },
   description: "The results of companies that adopted Meeton ai, by industry and in numbers. 60%+ meeting-conversion rate, 20x+ chat-sourced leads, deals won — the changes an AI SDR produced in the field.",
   alternates: altLanguages("/cases/", "en"),
-  openGraph: { title: "Customer stories｜Meeton ai", description: "The results of Meeton ai customers, in numbers.", url: "https://dynameet.ai/en/cases/", type: "website", locale: ogLocale("en") },
+  openGraph: {
+    images: EN_OG_IMAGE, title: "Customer stories｜Meeton ai", description: "The results of Meeton ai customers, in numbers.", url: "https://dynameet.ai/en/cases/", type: "website", locale: ogLocale("en") },
 };
 
 export default async function CasesPageEn() {

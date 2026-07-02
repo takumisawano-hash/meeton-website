@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import ContactPageClient from '@/app/components/ContactPageClient'
-import { altLanguages, ogLocale } from '@/app/lib/i18n'
+import { altLanguages, ogLocale, EN_OG_IMAGE } from '@/app/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     'Get in touch with Meeton ai. For product questions, demo requests, or rollout consultations, feel free to reach out.',
   alternates: altLanguages('/contact/', 'en'),
   openGraph: {
+    images: EN_OG_IMAGE,
     title: 'Contact',
     description: 'For product questions, demo requests, or rollout consultations, feel free to reach out.',
     url: 'https://dynameet.ai/en/contact/',

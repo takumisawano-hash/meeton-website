@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ProductLP, { productFaqSchema, productAppSchema } from "@/app/components/v2/ProductLP";
 import { PRODUCTS_EN } from "@/app/lib/product-lp-data";
-import { altLanguages, ogLocale } from "@/app/lib/i18n";
+import { altLanguages, ogLocale, EN_OG_IMAGE } from "@/app/lib/i18n";
 
 const data = PRODUCTS_EN.library;
 export const revalidate = 3600;
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: data.metaDescription,
   alternates: altLanguages("/library/", "en"),
   openGraph: {
+    images: EN_OG_IMAGE,
     title: data.metaTitle,
     description: data.metaDescription,
     url: "https://dynameet.ai/en/library/",

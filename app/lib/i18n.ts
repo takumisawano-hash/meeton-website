@@ -38,6 +38,18 @@ export function altLanguages(jaRootPath: string, lang: Lang): NonNullable<Metada
 
 export const ogLocale = (lang: Lang) => (lang === "en" ? "en_US" : "ja_JP");
 
+// Default social-share card for EN pages (JA relies on the root
+// opengraph-image; per-page openGraph blocks don't inherit file-based images,
+// so EN money pages attach this explicitly).
+export const EN_OG_IMAGE = [
+  {
+    url: "/og/en-default.png",
+    width: 1200,
+    height: 630,
+    alt: "Meeton ai — the AI SDR that turns your website into booked meetings",
+  },
+];
+
 // JA paths with a guaranteed 1:1 English page (mirrors the next.config.js /en
 // allowlist + the geo middleware). Used to point the language switch at the
 // correct EN twin instead of always dumping the visitor on the EN homepage.

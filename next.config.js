@@ -327,6 +327,12 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
+      // /en section indexes that have no page (mirror: JA /use-cases/ and
+      // /solutions/ 404 too) — send to the EN home instead of a JA 404.
+      { source: '/en/use-cases', destination: '/en/', permanent: false },
+      { source: '/en/use-cases/', destination: '/en/', permanent: false },
+      { source: '/en/solutions', destination: '/en/', permanent: false },
+      { source: '/en/solutions/', destination: '/en/', permanent: false },
       // Individual legacy paths
       // /pricing now serves a real page (v2) — redirect removed 2026-05-29.
       {

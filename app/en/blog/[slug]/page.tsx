@@ -55,7 +55,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description,
     authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
-    alternates: altLanguages(`/blog/${jaSlug}/`, 'en'),
+    // NOT altLanguages(): the EN slug carries an "-en" suffix, so the EN URL
+    // is /en/blog/<ja-slug>-en/ — altLanguages would canonicalize to the
+    // non-existent /en/blog/<ja-slug>/ (was live as a systemic canonical→404).
+    alternates: {
+      canonical: `/en/blog/${post.slug}/`,
+      languages: {
+        ja: `/blog/${jaSlug}/`,
+        en: `/en/blog/${post.slug}/`,
+        'x-default': `/blog/${jaSlug}/`,
+      },
+    },
     openGraph: {
       title: post.title,
       description,

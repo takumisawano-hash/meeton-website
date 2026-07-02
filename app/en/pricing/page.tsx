@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PricingContent, { PRICING_STR, pricingFaqSchema, pricingProductSchema } from "@/app/components/v2/PricingContent";
-import { altLanguages, ogLocale } from "@/app/lib/i18n";
+import { altLanguages, ogLocale, EN_OG_IMAGE } from "@/app/lib/i18n";
 
 const s = PRICING_STR.en;
 const URL = "https://dynameet.ai/en/pricing/";
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: s.metaDescription,
   alternates: altLanguages("/pricing/", "en"),
   openGraph: {
+    images: EN_OG_IMAGE,
     title: s.ogTitle,
     description: s.ogDescription,
     url: URL,

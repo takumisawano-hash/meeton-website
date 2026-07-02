@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Home from '../components/v2/Home'
 import { getAllCaseStudies } from '../lib/case-studies'
 import { FEATURED_CASES, localizeFeaturedCase } from '../lib/featured-cases'
-import { altLanguages, ogLocale } from '../lib/i18n'
+import { altLanguages, ogLocale, EN_OG_IMAGE } from '../lib/i18n'
 
 export const revalidate = 3600
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     'Meeton ai is an AI SDR Platform deployed on your website. It captures pre-inquiry prospects (Chat & Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Convert → Win back — three stages that turn every moment into a meeting.',
   alternates: altLanguages('/', 'en'),
   openGraph: {
+    images: EN_OG_IMAGE,
     title: 'Meeton ai｜The AI SDR Platform that turns your Website into meetings',
     description:
       'Visitors leave, and leads never become meetings. Turn a Website that "waits" into an AI sales channel that generates meetings. An AI SDR that autonomously handles all three stages: capture → convert → win back.',

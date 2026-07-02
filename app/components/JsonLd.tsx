@@ -64,7 +64,8 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       availableLanguage: ['Japanese', 'English'],
       url: 'https://dynameet.ai/?calendarId=takumi-sawano&showChat=true',
     },
-    description: 'DynaMeetが提供するAI SDR Platform「Meeton ai」。掴む→商談化→追客の3ステージで、Webサイトのリードを商談に変える。Meeton Chat / Library（掴む・育てる）、Calendar（商談化）、Email（追客）。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。',
+    // Bilingual (this block is global — it renders on /en/* too)
+    description: 'DynaMeetが提供するAI SDR Platform「Meeton ai」。掴む→商談化→追客の3ステージで、Webサイトのリードを商談に変える。Meeton Chat / Library（掴む・育てる）、Calendar（商談化）、Email（追客）。月額12万円〜、リード獲得 / 商談獲得 / オールインワン の3プラン。 / Meeton ai is the AI SDR Platform by DynaMeet: it captures website visitors, converts them into booked meetings, and wins back missed leads — Chat & Library (capture), Calendar (convert), Email (win back). Plans from ¥120,000/mo.',
     // AEO/GEO: 組織の専門分野
     knowsAbout: [
       'AI SDR',
@@ -98,8 +99,9 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
     name: 'Meeton AI',
     alternateName: 'DynaMeet',
     url: baseUrl,
-    description: 'Meeton ai は、Webサイトのリードを商談に変える AI SDR Platform。掴む（Chat・Library）→商談化（Calendar）→追客（Email）の3ステージを自律でこなします。',
-    inLanguage: 'ja-JP',
+    description: 'Meeton ai は、Webサイトのリードを商談に変える AI SDR Platform。掴む（Chat・Library）→商談化（Calendar）→追客（Email）の3ステージを自律でこなします。 / Meeton ai is the AI SDR Platform that turns website leads into booked meetings.',
+    // The site is bilingual: JA at root, EN under /en/*
+    inLanguage: ['ja-JP', 'en-US'],
     publisher: {
       '@id': `${baseUrl}/#organization`,
     },
@@ -117,9 +119,9 @@ export default function JsonLd({ type, breadcrumbs }: JsonLdProps) {
       '@type': 'Blog',
       '@id': `${baseUrl}/blog/#blog`,
       name: 'Meeton AI ブログ',
-      description: 'AI営業、インサイドセールス、B2Bマーケティングに関する最新情報とノウハウ',
+      description: 'AI営業、インサイドセールス、B2Bマーケティングに関する最新情報とノウハウ / The Meeton AI blog: AI sales, inside sales, and B2B marketing know-how (EN edition at /en/blog/)',
       url: `${baseUrl}/blog/`,
-      inLanguage: 'ja-JP',
+      inLanguage: ['ja-JP', 'en-US'],
     },
   }
 
