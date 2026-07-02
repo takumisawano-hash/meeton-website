@@ -16,27 +16,20 @@ import type { Lang } from "@/app/lib/i18n";
 // 追客/Email +¥5万). Popular setups: base+convert ¥20万〜 (recommended),
 // full ¥25万〜. EN mirrors with From-pricing and trial-first CTAs.
 
-type Plan = {
-  name: string;
-  stage: string;
-  includes: string;
-  price: string;
-  source: string;
-  highlight: boolean;
-  badge?: string;
-  blurb: string;
-  items: string[];
-  /** rendered small before the ¥ amount (EN "From ") */
-  pricePrefix?: string;
-  /** one-line audience statement above the blurb (EN self-serve) */
-  whoFor?: string;
-  /** CTA override; default = demo booking */
-  ctaLabel?: string;
-  ctaHref?: string;
-  /** optional second (ghost) CTA under the primary */
-  cta2Label?: string;
-  cta2Href?: string;
+// Deck-p20 pricing model: ONE base plan + add-ons + a "popular setups" panel.
+type BasePlan = {
+  label: string; // 基本プラン
+  name: string; // リード獲得
+  stageLine: string; // 掴む・育てる（Chat + Ads + Library）
+  price: string; // ¥15万 / ¥150,000
+  pricePrefix?: string; // EN "From "
+  desc: string;
+  pill: string; // マーケチームだけで導入可能
+  ctaLabel: string;
+  ctaHref?: string; // default: demo
 };
+type Addon = { title: string; price: string; product: string; desc: string };
+type PopularSetup = { title: string; price: string; pricePrefix?: string; badge?: string; ctaLabel: string; ctaHref?: string };
 
 type PricingStrings = {
   metaTitleAbsolute: string;
@@ -67,7 +60,11 @@ type PricingStrings = {
   finalTitle: string;
   finalSub: string;
   casesLabel: string;
-  plans: Plan[];
+  basePlan: BasePlan;
+  addonsHeading: string;
+  addons: Addon[];
+  popularHeading: string;
+  popular: PopularSetup[];
   traffic: { tier: string; add: string }[];
   faq: { q: string; a: string }[];
   /** EN-only: reassurance line under the plan grid (trial terms) */
@@ -120,44 +117,27 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     finalTitle: "どのプランが合うか、まず相談。",
     finalSub: "30分のデモで、自社の規模と段階に合う構成を具体的に提案します。",
     casesLabel: "導入事例を見る",
-    plans: [
-      {
-        name: "リード獲得（基本プラン）",
-        stage: "①+② 掴む・育てる",
-        includes: "Chat + Ads + Library",
-        price: "¥15万",
-        source: "pricing-lead",
-        highlight: false,
-        whoFor: "まず訪問者をリードに変えたい企業に。",
-        blurb: "会話と広告で潜在層を掴み、資料で育ててリードにする。マーケチームだけで導入できます。",
-        items: ["Meeton Chat（会話で訪問者を掴む）", "Meeton Ads（サイト内広告・AI自動最適化）", "Meeton Library（資料で検討を育てる）", "CRM 連携込み", "開封・行動トラッキング"],
-      },
-      {
-        name: "基本＋商談化アドオン",
-        stage: "①〜③ 商談化まで",
-        includes: "基本 + Calendar",
-        price: "¥20万",
-        source: "pricing-convert",
-        highlight: true,
-        badge: "人気の構成・おすすめ",
-        whoFor: "リードを確実に商談まで運びたい企業に。",
-        blurb: "掴んだリードを、その場で商談予約まで運ぶ。最も選ばれる構成。",
-        items: ["基本プランの全機能", "商談化アドオン：Meeton Calendar（+5万円/月）", "AIコンシェルジュ・自動アサイン", "カレンダー連携人数 無制限"],
-      },
-      {
-        name: "フル構成（＋追客）",
-        stage: "①〜④ 一気通貫",
-        includes: "基本 + Calendar + Email",
-        price: "¥25万",
-        source: "pricing-allinone",
-        highlight: false,
-        whoFor: "取りこぼしゼロまで自動化したい企業に。",
-        blurb: "逃したリードも追客で回収。掴む→育てる→商談化→追客まで一気通貫で最大化。",
-        items: ["基本＋商談化の全機能", "追客アドオン：Meeton Email（+5万円/月）", "行動シグナル起点の1:1自律追客", "再商談化フロー"],
-      },
+    basePlan: {
+      label: "基本プラン",
+      name: "リード獲得",
+      stageLine: "掴む・育てる（ Chat + Ads + Library ）",
+      price: "¥15万",
+      desc: "会話と広告で潜在層を掴み、資料で育て、リードにする。CRM 連携込み。",
+      pill: "マーケチームだけで導入可能",
+      ctaLabel: "この構成で相談する",
+    },
+    addonsHeading: "＋ 必要な分だけアドオン",
+    addons: [
+      { title: "商談化アドオン", price: "+5万円", product: "Meeton Calendar", desc: "掴んだリードを予約まで運ぶ。連携人数 無制限。" },
+      { title: "追客アドオン", price: "+5万円", product: "Meeton Email", desc: "逃したリードを 1:1 で回収し、再商談化へ戻す。" },
+    ],
+    popularHeading: "人気の構成",
+    popular: [
+      { title: "基本＋商談化", price: "¥20万〜", badge: "おすすめ", ctaLabel: "この構成で相談する" },
+      { title: "フル構成（＋追客）", price: "¥25万〜", ctaLabel: "この構成で相談する" },
     ],
     plansFine:
-      "アドオンは基本プランに自由に追加できます（商談化・追客 各+5万円/月）。構成はいつでも変更可能。",
+      "アドオンは基本プランに自由に追加できます。商談化アドオンの Calendar 連携人数は無制限。構成はいつでも変更可能。",
     traffic: [
       { tier: "〜3万セッション/月", add: "基本料金に込み" },
       { tier: "〜10万セッション/月", add: "+¥6万" },
@@ -239,49 +219,26 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       ctaLabel: "Book a demo",
       ctaHref: "/en/contact/",
     },
-    plans: [
-      {
-        name: "Lead Acquisition (base plan)",
-        stage: "①+② Capture & nurture",
-        includes: "Chat + Ads + Library",
-        price: "¥150,000",
-        pricePrefix: "From ",
-        source: "pricing-lead",
-        highlight: false,
-        whoFor: "For teams that want to identify and nurture website visitors.",
-        blurb: "Capture latent prospects with conversation and on-site ads, nurture them with content — your marketing team can run it alone.",
-        items: ["Meeton Chat (capture visitors in conversation)", "Meeton Ads (on-site ads, AI auto-optimized)", "Meeton Library (nurture consideration with content)", "CRM integration included", "Open & behavior tracking"],
-        ctaHref: "/en/trial/?src=pricing&plan=lead",
-      },
-      {
-        name: "Base + Meeting Booking",
-        stage: "①–③ through to convert",
-        includes: "Base + Calendar",
-        price: "¥200,000",
-        pricePrefix: "From ",
-        source: "pricing-convert",
-        highlight: true,
-        badge: "Most popular setup",
-        whoFor: "For teams that want qualified visitors converted into booked meetings.",
-        blurb: "Everything in the base plan, plus automated meeting booking the moment intent peaks.",
-        items: ["Everything in the base plan", "Meeting Booking add-on: Meeton Calendar (+¥50,000/mo)", "AI concierge & auto-assignment", "Unlimited calendar seats"],
-        ctaHref: "/en/trial/?src=pricing&plan=meeting",
-      },
-      {
-        name: "Full stack (+ win-back)",
-        stage: "①–④ end to end",
-        includes: "Base + Calendar + Email",
-        price: "¥250,000",
-        pricePrefix: "From ",
-        source: "pricing-allinone",
-        highlight: false,
-        whoFor: "For teams that want automated follow-up after missed conversions.",
-        blurb: "Everything in Base + Meeting Booking, plus 1:1 autonomous follow-up that recovers the leads you'd otherwise lose.",
-        items: ["Everything in Base + Meeting Booking", "Win-back add-on: Meeton Email (+¥50,000/mo)", "Behavior-signal-triggered 1:1 autonomous follow-up", "Re-conversion flow"],
-        ctaHref: "/en/trial/?src=pricing&plan=all-in-one",
-        cta2Label: "Book a demo",
-        cta2Href: "/en/contact/",
-      },
+    basePlan: {
+      label: "Base plan",
+      name: "Lead Acquisition",
+      stageLine: "Capture & nurture ( Chat + Ads + Library )",
+      price: "¥150,000",
+      pricePrefix: "From ",
+      desc: "Capture latent prospects with conversation and on-site ads, nurture them with content. CRM integration included.",
+      pill: "Your marketing team can run it alone",
+      ctaLabel: "Start 1-month free trial",
+      ctaHref: "/en/trial/?src=pricing&plan=lead",
+    },
+    addonsHeading: "＋ Add only what you need",
+    addons: [
+      { title: "Meeting Booking add-on", price: "+¥50,000", product: "Meeton Calendar", desc: "Carries captured leads to a booked meeting. Unlimited calendar seats." },
+      { title: "Win-back add-on", price: "+¥50,000", product: "Meeton Email", desc: "Recovers missed leads 1:1 and brings them back to a meeting." },
+    ],
+    popularHeading: "Popular setups",
+    popular: [
+      { title: "Base + Meeting Booking", price: "¥200,000", pricePrefix: "From ", badge: "Recommended", ctaLabel: "Start free trial", ctaHref: "/en/trial/?src=pricing&plan=meeting" },
+      { title: "Full stack (+ win-back)", price: "¥250,000", pricePrefix: "From ", ctaLabel: "Start free trial", ctaHref: "/en/trial/?src=pricing&plan=all-in-one" },
     ],
     traffic: [
       { tier: "Up to 30,000 sessions / mo", add: "Included in every plan" },
@@ -326,7 +283,7 @@ export const pricingFaqSchema = (lang: Lang, url: string) => ({
 });
 
 export const pricingProductSchema = (lang: Lang, url: string) => {
-  const plans = PRICING_STR[lang].plans;
+  const st = PRICING_STR[lang];
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -337,9 +294,9 @@ export const pricingProductSchema = (lang: Lang, url: string) => {
     url,
     publisher: { "@id": "https://dynameet.ai/#organization" },
     offers: [
-      { "@type": "Offer", name: plans[0].name, price: "150000", priceCurrency: "JPY" },
-      { "@type": "Offer", name: plans[1].name, price: "200000", priceCurrency: "JPY" },
-      { "@type": "Offer", name: plans[2].name, price: "250000", priceCurrency: "JPY" },
+      { "@type": "Offer", name: `${st.basePlan.label} ${st.basePlan.name}`, price: "150000", priceCurrency: "JPY" },
+      { "@type": "Offer", name: st.popular[0].title, price: "200000", priceCurrency: "JPY" },
+      { "@type": "Offer", name: st.popular[1].title, price: "250000", priceCurrency: "JPY" },
     ],
   };
 };
@@ -389,74 +346,77 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
       {/* 3 plans (deck p19) */}
       <Section tone="white">
         <SectionHead eyebrow={s.plansEyebrow} title={balanced(s.plansTitle)} lede={s.plansLede} align="center" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, alignItems: "stretch" }}>
-          {s.plans.map((p) => (
-            <Card
-              key={p.name}
-              style={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                border: p.highlight ? "2px solid var(--cta)" : "1px solid var(--border)",
-                background: p.highlight ? "var(--navy)" : "#fff",
-              }}
-            >
-              {p.badge && (
-                <div style={{ position: "absolute", top: -12, left: 24, background: "var(--cta)", color: "var(--on-cta)", fontSize: 12, fontWeight: 800, padding: "4px 12px", borderRadius: 999 }}>{p.badge}</div>
-              )}
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: 0 }}>{p.name}</h3>
-              <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: p.highlight ? "var(--cta)" : "var(--cta-ink)", margin: "6px 0 2px" }}>{p.stage}</div>
-              <div style={{ fontSize: 13, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{p.includes}</div>
-              <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: p.highlight ? "var(--on-navy)" : "var(--heading)", margin: "12px 0 2px", minHeight: 70, fontVariantNumeric: "tabular-nums" }}>
-                {p.price.startsWith("¥") ? (
-                  <>
-                    {p.pricePrefix && <span style={{ fontSize: 20, fontWeight: 700, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{p.pricePrefix}</span>}
-                    <span style={{ fontSize: 42 }}>{p.price}</span>
-                    <span style={{ fontSize: 14, fontWeight: 600, color: p.highlight ? "var(--on-navy-sub)" : "var(--sub)" }}>{s.priceUnit}</span>
-                  </>
-                ) : (
-                  <span style={{ fontSize: 34 }}>{p.price}</span>
-                )}
+        <div className="pv3">
+          {/* base plan (deck-left) */}
+          <div className="pv3-base">
+            <div className="pv3-bar" />
+            <div style={{ fontSize: 13, fontWeight: 700, color: "var(--sub)" }}>{s.basePlan.label}</div>
+            <h3 style={{ fontFamily: "var(--fd)", fontSize: 30, fontWeight: 800, color: "var(--heading)", margin: "8px 0 6px", letterSpacing: "-0.02em" }}>{s.basePlan.name}</h3>
+            <div style={{ fontSize: 13.5, fontWeight: 800, color: "var(--cta-ink)" }}>{s.basePlan.stageLine}</div>
+            <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: "var(--cta-ink)", margin: "16px 0 4px", fontVariantNumeric: "tabular-nums" }}>
+              {s.basePlan.pricePrefix && <span style={{ fontSize: 20, fontWeight: 700, color: "var(--sub)" }}>{s.basePlan.pricePrefix}</span>}
+              <span style={{ fontSize: 46 }}>{s.basePlan.price}</span>
+              <span style={{ fontSize: 15, fontWeight: 700, color: "var(--sub)" }}>{s.priceUnit}</span>
+            </div>
+            <p style={{ fontSize: 14, lineHeight: 1.85, color: "var(--text)", margin: "10px 0 14px" }}>{s.basePlan.desc}</p>
+            <div style={{ background: "var(--cta-wash)", border: "1px solid var(--cta-border)", borderRadius: 10, padding: "10px 14px", textAlign: "center", fontSize: 13, fontWeight: 800, color: "var(--cta-ink)" }}>{s.basePlan.pill}</div>
+            <a href={s.basePlan.ctaHref ?? demoUrl("pricing-lead")} className="v2-cta-primary" style={{ marginTop: 16, textAlign: "center", padding: "13px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", background: "var(--cta)", color: "var(--on-cta)", display: "block", boxShadow: "0 6px 22px var(--cta-glow)" }}>
+              {s.basePlan.ctaLabel}
+            </a>
+          </div>
+
+          {/* plus */}
+          <div className="pv3-plus" aria-hidden>＋</div>
+
+          {/* add-ons (deck-middle) */}
+          <div className="pv3-addons">
+            <div style={{ fontSize: 12, fontWeight: 800, color: "var(--sub)", letterSpacing: ".06em", textTransform: "uppercase" }}>{s.addonsHeading}</div>
+            {s.addons.map((a) => (
+              <div key={a.title} className="pv3-addon">
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
+                  <h3 style={{ fontSize: 17, fontWeight: 800, color: "var(--heading)", margin: 0 }}>{a.title}</h3>
+                  <div style={{ whiteSpace: "nowrap" }}>
+                    <span style={{ fontFamily: "var(--fd)", fontSize: 24, fontWeight: 800, color: "var(--cta-ink)", fontVariantNumeric: "tabular-nums" }}>{a.price}</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: "var(--sub)" }}>{lang === "en" ? " / mo" : " / 月"}</span>
+                  </div>
+                </div>
+                <div style={{ fontSize: 13.5, fontWeight: 800, color: "var(--cta-ink)", margin: "6px 0 8px" }}>{a.product}</div>
+                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: "var(--text)", margin: 0 }}>{a.desc}</p>
               </div>
-              {p.whoFor && (
-                <p style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.6, color: p.highlight ? "var(--cta)" : "var(--cta-ink)", margin: "8px 0 0" }}>{p.whoFor}</p>
-              )}
-              <p style={{ fontSize: 13.5, lineHeight: 1.7, color: p.highlight ? "var(--on-navy-sub)" : "var(--text)", margin: "10px 0 16px" }}>{p.blurb}</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px", display: "grid", gap: 9 }}>
-                {p.items.map((it) => (
-                  <li key={it} style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 13.5, color: p.highlight ? "var(--on-navy)" : "var(--text)" }}><Check size={16} /> {it}</li>
-                ))}
-              </ul>
-              <a
-                href={p.ctaHref ?? demoUrl(p.source)}
-                className={p.highlight ? "v2-cta-primary" : "v2-cta-ghost"}
-                style={{
-                  marginTop: "auto", textAlign: "center", padding: "12px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none",
-                  background: p.highlight ? "var(--cta)" : "transparent",
-                  color: p.highlight ? "var(--on-cta)" : p.highlight ? "var(--on-navy)" : "var(--heading)",
-                  border: p.highlight ? "none" : "1.5px solid var(--border2)",
-                  boxShadow: p.highlight ? "0 6px 22px var(--cta-glow)" : "none",
-                }}
-              >
-                {p.ctaLabel ?? s.planCta}
-              </a>
-              {p.cta2Label && p.cta2Href && (
-                <a
-                  href={p.cta2Href}
-                  className="v2-cta-ghost"
-                  style={{
-                    marginTop: 10, textAlign: "center", padding: "10px 20px", borderRadius: 12, fontSize: 14, fontWeight: 700, textDecoration: "none",
-                    background: "transparent",
-                    color: p.highlight ? "var(--on-navy)" : "var(--heading)",
-                    border: "1.5px solid var(--border2)",
-                  }}
-                >
-                  {p.cta2Label}
+            ))}
+          </div>
+
+          {/* popular setups (deck-right, navy) */}
+          <div className="pv3-popular">
+            <div style={{ fontSize: 14, fontWeight: 800, color: "var(--cta)" }}>{s.popularHeading}</div>
+            {s.popular.map((c, i) => (
+              <div key={c.title} className="pv3-combo" style={{ borderLeft: i === 0 ? "3px solid var(--cta)" : "3px solid transparent" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                  <span style={{ fontSize: 15, fontWeight: 800, color: "var(--on-navy)" }}>{c.title}</span>
+                  {c.badge && <span style={{ background: "var(--cta)", color: "var(--on-cta)", fontSize: 11, fontWeight: 800, padding: "3px 10px", borderRadius: 999 }}>{c.badge}</span>}
+                </div>
+                <div style={{ fontFamily: "var(--fd)", fontWeight: 800, color: "var(--cta)", margin: "8px 0 10px", fontVariantNumeric: "tabular-nums" }}>
+                  {c.pricePrefix && <span style={{ fontSize: 15, color: "var(--on-navy-sub)" }}>{c.pricePrefix}</span>}
+                  <span style={{ fontSize: 32 }}>{c.price}</span>
+                </div>
+                <a href={c.ctaHref ?? demoUrl(i === 0 ? "pricing-convert" : "pricing-allinone")} className="v2-cta-ghost" style={{ display: "inline-block", fontSize: 13, fontWeight: 800, color: "var(--on-navy)", textDecoration: "none", border: "1.5px solid var(--on-navy-border)", borderRadius: 10, padding: "9px 16px" }}>
+                  {c.ctaLabel}
                 </a>
-              )}
-            </Card>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
+        <style>{`
+          .pv3{display:grid;grid-template-columns:1.15fr auto 1fr 1.05fr;gap:clamp(14px,2vw,24px);align-items:stretch}
+          .pv3-base{position:relative;background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px 26px 24px;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(15,17,40,.06)}
+          .pv3-bar{position:absolute;top:0;left:0;right:0;height:5px;border-radius:18px 18px 0 0;background:var(--cta)}
+          .pv3-plus{align-self:center;font-size:34px;font-weight:800;color:var(--sub)}
+          .pv3-addons{display:flex;flex-direction:column;gap:14px;justify-content:center}
+          .pv3-addon{background:#fff;border:1.6px solid var(--cta-border);border-radius:16px;padding:18px 20px}
+          .pv3-popular{background:var(--navy);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+          .pv3-combo{background:var(--navy-2);border-radius:12px;padding:16px 18px}
+          @media(max-width:1023px){.pv3{grid-template-columns:1fr}.pv3-plus{padding:0;text-align:center}}
+        `}</style>
         {s.plansFine && (
           <p style={{ textAlign: "center", marginTop: 20, fontSize: 13.5, fontWeight: 600, color: "var(--cta-ink)", lineHeight: 1.8 }}>
             {s.plansFine}
