@@ -23,7 +23,7 @@ const strings = {
     implications: "Implications of removal",
     dataHandlingTitle: "How your data is handled",
     developer: "Developer",
-    developerName: "DynaMeet K.K.",
+    developerName: "DynaMeet, Inc.",
     website: "Website",
     support: "Support",
     supportLabel: "Contact support",

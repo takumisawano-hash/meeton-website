@@ -97,7 +97,7 @@ function BlogListJsonLdEn({ posts }: { posts: Awaited<ReturnType<typeof getAllPo
     isPartOf: { '@type': 'WebSite', name: 'Meeton ai', url: 'https://dynameet.ai' },
     publisher: {
       '@type': 'Organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet, Inc.',
       url: 'https://dynameet.ai',
       logo: { '@type': 'ImageObject', url: 'https://dynameet.ai/logo-dark.svg' },
     },

@@ -55,7 +55,7 @@ export const EN_OG_IMAGE = [
 // correct EN twin instead of always dumping the visitor on the EN homepage.
 export const EN_TWIN_PREFIXES = [
   "chat", "calendar", "library", "email", "ads", "capture", "tools/roi",
-  "privacy-policy", "terms", "integrations",
+  "privacy-policy", "terms", "integrations", "legal/tokushoho",
   "pricing", "about", "contact", "enterprise", "security", "glossary",
   "cases", "compare", "alternatives", "use-cases",
   "solutions/crm-to-meeting", "solutions/lead-to-meeting",

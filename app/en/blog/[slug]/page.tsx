@@ -14,8 +14,8 @@ import {
   tagToSlug,
 } from '@/app/lib/notion'
 import BlogContent from '@/app/components/BlogContent'
-import { altLanguages, ogLocale } from '@/app/lib/i18n'
-import { classifyCluster, CLUSTERS } from '@/app/lib/content-clusters'
+import { ogLocale } from '@/app/lib/i18n'
+import { classifyCluster } from '@/app/lib/content-clusters'
 
 // /en/blog/[slug]/ — English twin of /blog/[slug]/. EN post slug = `<ja-slug>-en`
 // and is globally unique, so getPostBySlug(slug) resolves it directly. The page
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description,
-    authors: [{ name: 'DynaMeet Inc.', url: 'https://dynameet.ai' }],
+    authors: [{ name: 'DynaMeet, Inc.', url: 'https://dynameet.ai' }],
     // NOT altLanguages(): the EN slug carries an "-en" suffix, so the EN URL
     // is /en/blog/<ja-slug>-en/ — altLanguages would canonicalize to the
     // non-existent /en/blog/<ja-slug>/ (was live as a systemic canonical→404).
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: post.publishedDate,
       modifiedTime: post.modifiedDate || post.publishedDate,
-      authors: ['DynaMeet Inc.'],
+      authors: ['DynaMeet, Inc.'],
       section: post.category || 'Sales',
       tags: post.tags,
       url: `https://dynameet.ai/en/blog/${post.slug}/`,
@@ -201,13 +201,13 @@ export default async function BlogPostPageEn({ params }: Props) {
     author: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet, Inc.',
       url: 'https://dynameet.ai',
     },
     publisher: {
       '@type': 'Organization',
       '@id': 'https://dynameet.ai/#organization',
-      name: 'DynaMeet Inc.',
+      name: 'DynaMeet, Inc.',
       url: 'https://dynameet.ai',
       logo: { '@type': 'ImageObject', url: 'https://dynameet.ai/logo-dark.svg' },
     },

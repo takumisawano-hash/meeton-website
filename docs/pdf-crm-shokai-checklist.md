@@ -163,7 +163,7 @@ QR コードを併設 (Canva で生成、calendar URL を埋め込み)。
 ## Footer (全ページ)
 
 ```
-© DynaMeet, Inc.  |  Meeton ai  |  https://dynameet.ai
+© DynaMeet株式会社  |  Meeton ai  |  https://dynameet.ai
 ```
 
 ISMS 認証は審査合格済・認証発行待ち / セキュリティチェックシート対応可

@@ -104,6 +104,7 @@ const LEGAL = [
   { href: "/contact/", label: "お問い合わせ" },
   { href: "/privacy-policy/", label: "プライバシーポリシー" },
   { href: "/terms/", label: "利用規約" },
+  { href: "/legal/tokushoho/", label: "特定商取引法に基づく表記" },
 ];
 
 // ── English footer (lang="en") ──────────────────────────────────────
@@ -162,6 +163,7 @@ const LEGAL_EN = [
   { href: "/en/contact/", label: "Contact" },
   { href: "/en/privacy-policy/", label: C_EN.footerLegalPrivacy },
   { href: "/en/terms/", label: C_EN.footerLegalTerms },
+  { href: "/en/legal/tokushoho/", label: "Commercial Disclosure" },
 ];
 
 export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: FooterProps) {
@@ -331,7 +333,7 @@ export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: Footer
           opacity: 0.7,
         }}
       >
-        © 2026 DynaMeet K.K. All rights reserved.
+        © {new Date().getFullYear()} {en ? "DynaMeet, Inc." : "DynaMeet株式会社"} All rights reserved.
       </div>
 
       <style>{`
