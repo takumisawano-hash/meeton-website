@@ -163,7 +163,7 @@ const LEGAL_EN = [
   { href: "/en/contact/", label: "Contact" },
   { href: "/en/privacy-policy/", label: C_EN.footerLegalPrivacy },
   { href: "/en/terms/", label: C_EN.footerLegalTerms },
-  { href: "/en/legal/mail-order-sales/", label: "Commercial Disclosure" },
+  { href: "/en/legal/tokushoho/", label: "Commercial Disclosure" },
 ];
 
 export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: FooterProps) {

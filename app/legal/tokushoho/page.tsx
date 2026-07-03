@@ -2,23 +2,13 @@ import Footer from "@/app/components/Footer";
 import Nav from "@/app/components/Nav";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { altLanguages } from "@/app/lib/i18n";
 
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記",
   description:
     "DynaMeet株式会社の特定商取引法に基づく表記。販売事業者、所在地、お支払い方法等について記載しています。",
-  // TODO(legal): ドラフトの間は noindex。正式文言を入れるコミットで index に戻し、
-  // app/sitemap.ts へのエントリも同時に復帰させること。
-  robots: { index: false, follow: true },
-  alternates: {
-    canonical: "/legal/tokushoho/",
-    // Slugs differ per locale, so altLanguages() can't be used — hand-written pair.
-    languages: {
-      ja: "/legal/tokushoho/",
-      en: "/en/legal/mail-order-sales/",
-      "x-default": "/legal/tokushoho/",
-    },
-  },
+  alternates: altLanguages("/legal/tokushoho/", "ja"),
   openGraph: {
     title: "特定商取引法に基づく表記｜Meeton ai",
     description:
@@ -27,55 +17,67 @@ export const metadata: Metadata = {
   },
 };
 
-// TODO(legal): 全項目の正式な文言は法務確認のうえ差し替えること。
-// 現状はスキャフォールドのみで、本番公開前に必ず内容を確定させる。
 const ITEMS: { label: string; value: React.ReactNode }[] = [
   {
     label: "販売事業者",
-    value: <Todo hint="法人名（例: DynaMeet株式会社）" />,
+    value: "DynaMeet株式会社",
   },
   {
     label: "所在地",
-    value: <Todo hint="登記住所（〒150-0033 東京都渋谷区猿楽町17-10 代官山アートヴィレッジ2C を確認のうえ記載）" />,
+    value: "〒150-0033 東京都渋谷区猿楽町17-10 代官山アートヴィレッジ2C",
   },
   {
     label: "運営責任者",
-    value: <Todo hint="代表者または業務責任者の氏名" />,
+    value: "取締役 Ray Ayan",
   },
   {
     label: "お問い合わせ",
-    value: <Todo hint="メールアドレス（例: info@dynameet.ai）および電話番号の取扱い方針" />,
+    value:
+      "info@dynameet.ai（お問い合わせフォームからも承ります）。電話番号は、ご請求があった場合に遅滞なく開示いたします。",
   },
   {
     label: "販売価格・サービス料金",
-    value: <Todo hint="料金プランへの参照、または個別見積の旨" />,
+    value: (
+      <>
+        料金プランは
+        <a href="/pricing/" style={{ color: "#12a37d" }}>
+          料金ページ
+        </a>
+        をご参照ください。個別の要件に応じたお見積りも承ります。
+      </>
+    ),
   },
   {
     label: "代金の支払時期・支払方法",
-    value: <Todo hint="請求サイクル、支払方法（クレジットカード/銀行振込等）、支払期日" />,
+    value:
+      "セルフサーブプランは、Stripe を通じたクレジットカード決済により、契約開始日を基準に毎月自動的に課金されます。エンタープライズ契約は、請求書発行後30日以内の銀行振込によるお支払いとなります。",
   },
   {
     label: "サービス提供時期",
-    value: <Todo hint="契約成立後のアカウント発行タイミング等" />,
+    value:
+      "無料トライアルは、お申込みから1営業日以内にご利用いただけます。有料プランは、Stripe でのお支払い手続き完了後、直ちにご利用いただけます。エンタープライズ契約は、契約締結時にご案内する日程で提供を開始します。",
   },
   {
     label: "キャンセル・解約",
-    value: <Todo hint="解約手続き、最低利用期間、中途解約の扱い" />,
+    value:
+      "月額プランは、いつでも解約手続きが可能です。解約は次回請求サイクルの開始時点で有効となり、日割りでの返金は行いません。エンタープライズ契約の解約条件は、個別の契約書の定めによります。",
   },
   {
     label: "返金ポリシー",
-    value: <Todo hint="返金の可否・条件" />,
+    value:
+      "既に経過した請求期間分の返金は、原則として行っておりません。無料トライアル期間中は、いつでも料金の発生なくキャンセルいただけます。",
   },
   {
     label: "動作環境",
-    value: <Todo hint="対応ブラウザ・必要なシステム要件" />,
+    value:
+      "最新版の Google Chrome、Safari、Firefox、Microsoft Edge での動作を確認しています。JavaScript を有効にしてご利用ください。",
   },
 ];
 
 export default function TokushohoPage() {
   return (
     <>
-      <Nav langSwitchHref="/en/legal/mail-order-sales/" />
+      <Nav />
       <main
         style={{
           minHeight: "100vh",
@@ -127,21 +129,6 @@ export default function TokushohoPage() {
             </h1>
           </header>
 
-          {/* TODO(legal): 正式文言確定後にこのドラフト注意書きを削除 */}
-          <p
-            style={{
-              background: "#fff7ed",
-              border: "1px solid #fdba74",
-              borderRadius: 12,
-              padding: 16,
-              fontSize: 14,
-              color: "#9a3412",
-              marginBottom: 32,
-            }}
-          >
-            【ドラフト】本ページは雛形です。各項目の内容は確定前のため、公開前に正式な文言へ差し替えてください。
-          </p>
-
           {/* Content */}
           <div
             style={{
@@ -171,20 +158,12 @@ export default function TokushohoPage() {
             </dl>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              制定日：<Todo hint="正式公開日" />
+              制定日：2026年7月2日
             </p>
           </div>
         </div>
       </main>
       <Footer />
     </>
-  );
-}
-
-function Todo({ hint }: { hint: string }) {
-  return (
-    <span style={{ color: "#b45309", fontWeight: 600 }}>
-      TODO: {hint}
-    </span>
   );
 }

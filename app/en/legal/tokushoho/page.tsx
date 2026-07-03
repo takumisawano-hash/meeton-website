@@ -2,83 +2,80 @@ import Footer from "@/app/components/Footer";
 import Nav from "@/app/components/Nav";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { altLanguages, ogLocale } from "@/app/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Commercial Disclosure",
   description:
     "Disclosure under the Specified Commercial Transactions Act of Japan for services operated by DynaMeet, Inc.",
-  // TODO(legal): noindex while draft. Flip to indexable in the same commit that
-  // lands the final copy, and restore the app/sitemap.ts entry alongside it.
-  robots: { index: false, follow: true },
-  alternates: {
-    canonical: "/en/legal/mail-order-sales/",
-    // Slugs differ per locale, so altLanguages() can't be used — hand-written pair.
-    languages: {
-      ja: "/legal/tokushoho/",
-      en: "/en/legal/mail-order-sales/",
-      "x-default": "/legal/tokushoho/",
-    },
-  },
+  alternates: altLanguages("/legal/tokushoho/", "en"),
   openGraph: {
     title: "Commercial Disclosure｜Meeton ai",
     description:
       "Disclosure under the Specified Commercial Transactions Act of Japan for services operated by DynaMeet, Inc.",
-    url: "https://dynameet.ai/en/legal/mail-order-sales/",
+    url: "https://dynameet.ai/en/legal/tokushoho/",
+    locale: ogLocale("en"),
   },
 };
 
-// TODO(legal): all values below must be finalized with legal review before
-// publishing. This is a scaffold only — content must mirror the Japanese
-// disclosure at /legal/tokushoho/.
+// Mirrors the Japanese disclosure at /legal/tokushoho/.
 const ITEMS: { label: string; value: React.ReactNode }[] = [
   {
     label: "Business name",
-    value: <Todo hint="legal entity name (e.g. DynaMeet, Inc.)" />,
+    value: "DynaMeet, Inc. (legal name: DynaMeet株式会社)",
   },
   {
     label: "Business address",
-    value: (
-      <Todo hint="registered address (confirm: Daikanyama Art Village 2C, 17-10 Sarugakucho, Shibuya-ku, Tokyo 150-0033, Japan)" />
-    ),
+    value: "Daikanyama Art Village 2C, 17-10 Sarugakucho, Shibuya-ku, Tokyo 150-0033, Japan",
   },
   {
     label: "Responsible person",
-    value: <Todo hint="name of representative or operations manager" />,
+    value: "Ray Ayan, Director",
   },
   {
     label: "Contact",
-    value: <Todo hint="email address (e.g. info@dynameet.ai) and phone-number disclosure policy" />,
+    value:
+      "info@dynameet.ai (or our contact form). A phone number is available promptly upon request.",
   },
   {
     label: "Service fees",
-    value: <Todo hint="reference to pricing plans, or note that quotes are individual" />,
+    value: (
+      <>
+        See our <a href="/en/pricing/" style={{ color: "#12a37d" }}>pricing page</a>. Custom quotes are available for enterprise needs.
+      </>
+    ),
   },
   {
     label: "Payment timing and methods",
-    value: <Todo hint="billing cycle, accepted payment methods (credit card / bank transfer), due dates" />,
+    value:
+      "Self-serve plans are billed automatically via credit card through Stripe, on a recurring monthly basis from the contract start date. Enterprise contracts are invoiced and payable within 30 days by bank transfer.",
   },
   {
     label: "Service delivery timing",
-    value: <Todo hint="when accounts are provisioned after contract" />,
+    value:
+      "Free trials are provisioned within 1 business day of your request. Paid self-serve plans activate immediately after completing payment via Stripe. Enterprise plans begin on the schedule set out at contract signing.",
   },
   {
     label: "Cancellation policy",
-    value: <Todo hint="cancellation procedure, minimum term, mid-term termination" />,
+    value:
+      "Monthly self-serve plans can be canceled at any time. Cancellation takes effect at the start of the next billing cycle, with no partial-period refund. Enterprise contract cancellation terms are governed by the individual service agreement.",
   },
   {
     label: "Refund policy",
-    value: <Todo hint="whether and under what conditions refunds are given" />,
+    value:
+      "We do not provide refunds for the elapsed portion of a billing period. The free trial can be canceled at any time at no charge.",
   },
   {
     label: "System requirements",
-    value: <Todo hint="supported browsers / system requirements" />,
+    value:
+      "Verified on the latest versions of Google Chrome, Safari, Firefox, and Microsoft Edge. JavaScript must be enabled.",
   },
 ];
 
-export default function MailOrderSalesPage() {
+export default function TokushohoPageEn() {
   return (
     <>
-      <Nav lang="en" langSwitchHref="/legal/tokushoho/" />
+      <Nav lang="en" />
       <main
         style={{
           minHeight: "100vh",
@@ -141,22 +138,6 @@ export default function MailOrderSalesPage() {
             </p>
           </header>
 
-          {/* TODO(legal): remove this draft notice once final copy lands */}
-          <p
-            style={{
-              background: "#fff7ed",
-              border: "1px solid #fdba74",
-              borderRadius: 12,
-              padding: 16,
-              fontSize: 14,
-              color: "#9a3412",
-              marginBottom: 32,
-            }}
-          >
-            [DRAFT] This page is a scaffold. All items are pending final legal
-            copy and must be replaced before publication.
-          </p>
-
           {/* Content */}
           <div
             style={{
@@ -186,20 +167,12 @@ export default function MailOrderSalesPage() {
             </dl>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Established: <Todo hint="official publication date" />
+              Established: July 2, 2026
             </p>
           </div>
         </div>
       </main>
       <Footer lang="en" />
     </>
-  );
-}
-
-function Todo({ hint }: { hint: string }) {
-  return (
-    <span style={{ color: "#b45309", fontWeight: 600 }}>
-      TODO: {hint}
-    </span>
   );
 }

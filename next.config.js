@@ -345,17 +345,6 @@ const nextConfig = {
       { source: '/en/use-cases/', destination: '/en/', permanent: false },
       { source: '/en/solutions', destination: '/en/', permanent: false },
       { source: '/en/solutions/', destination: '/en/', permanent: false },
-      // EN tokushoho twin uses a different slug; the naive /en-strip lands here.
-      {
-        source: '/legal/mail-order-sales',
-        destination: '/legal/tokushoho/',
-        permanent: true,
-      },
-      {
-        source: '/legal/mail-order-sales/',
-        destination: '/legal/tokushoho/',
-        permanent: true,
-      },
       // Individual legacy paths
       // /pricing now serves a real page (v2) — redirect removed 2026-05-29.
       {
