@@ -72,10 +72,16 @@ export const EN_TWIN_PREFIXES = [
  *                              back to the EN blog hub, never a hard 404)
  * - anything else            → "/en/" (EN homepage)
  */
-// EN-only pages with NO JA twin (self-serve funnel). The geo middleware must
-// not strip these to a (non-existent) JA path, and the language switch sends
-// visitors to the JA homepage instead of a 404.
-export const EN_ONLY_PREFIXES = ["trial"];
+// EN-only pages with NO JA twin (self-serve funnel + self-serve legal set).
+// The geo middleware must not strip these to a (non-existent) JA path, and the
+// language switch sends visitors to the JA homepage instead of a 404.
+export const EN_ONLY_PREFIXES = [
+  "trial",
+  "trust",
+  "legal/terms-self-serve",
+  "legal/dpa",
+  "legal/sub-processors",
+];
 
 export function isEnOnlyPath(enPathStr: string): boolean {
   const seg = enPathStr.replace(/^\/en\/?/, "").replace(/\/+$/, "");

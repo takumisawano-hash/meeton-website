@@ -4,21 +4,27 @@ import { altLanguages, ogLocale, EN_OG_IMAGE } from "@/app/lib/i18n";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-// /en/privacy-policy/ — English twin of /privacy-policy/. Faithful, full
-// translation of every article; the Japanese version remains authoritative
-// (prevailing-language note at top). Legal name kept as "DynaMeet, Inc.
-// (DynaMeet株式会社)" on first mention; dates and article numbering preserved.
+// /en/privacy-policy/ — English master of the rebuilt Privacy Policy
+// (controller role). Structural rebuild for the SG/AU/NZ self-serve launch:
+// controller/processor split (processor role → the DPA), infrastructure/AI
+// sub-processor disclosure, named hosting region, breach-notify commitments,
+// per-jurisdiction annexes (JP/AU/SG/NZ) and a language-precedence clause.
+// The JA page (/privacy-policy/) is the Japanese translation of this master.
+//
+// DRAFT — pending professional legal review. Do not remove the DraftNotice
+// or publish before counsel sign-off. Gap list this draft answers:
+// docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7b (saas repo).
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "The Privacy Policy of DynaMeet, Inc. Sets out how we handle personal information.",
+    "The Privacy Policy of DynaMeet, Inc. How we handle personal information as a controller, and where our processor role is governed by the DPA.",
   alternates: altLanguages("/privacy-policy/", "en"),
   openGraph: {
     images: EN_OG_IMAGE,
     title: "Privacy Policy｜Meeton ai",
     description:
-      "The Privacy Policy of DynaMeet, Inc. Sets out how we handle personal information.",
+      "The Privacy Policy of DynaMeet, Inc. How we handle personal information as a controller, and where our processor role is governed by the DPA.",
     url: "https://dynameet.ai/en/privacy-policy/",
     type: "website",
     siteName: "Meeton ai",
@@ -81,6 +87,8 @@ export default function PrivacyPolicyPageEn() {
             </h1>
           </header>
 
+          <DraftNotice />
+
           {/* Content */}
           <div
             style={{
@@ -89,239 +97,176 @@ export default function PrivacyPolicyPageEn() {
               color: "#374151",
             }}
           >
-            <p
-              style={{
-                marginBottom: 32,
-                fontStyle: "italic",
-                color: "#6e7494",
-              }}
-            >
-              This English translation is provided for convenience. In the event
-              of any discrepancy, the Japanese version (
-              <a
-                href="https://dynameet.ai/privacy-policy/"
-                style={{ color: "#12a37d" }}
-              >
-                https://dynameet.ai/privacy-policy/
-              </a>
-              ) prevails.
-            </p>
-
             <p style={{ marginBottom: 32 }}>
-              DynaMeet, Inc. (DynaMeet株式会社; hereinafter the &ldquo;Company&rdquo;)
-              regards the protection of our customers&rsquo; personal information as an
-              important responsibility in the &ldquo;DynaMeet Platform&rdquo; that the
-              Company provides (including Meeton ai and others; hereinafter the
-              &ldquo;Service&rdquo;), and handles personal information appropriately in
-              accordance with the following Privacy Policy.
+              DynaMeet, Inc. (DynaMeet株式会社; the &ldquo;Company,&rdquo;
+              &ldquo;we&rdquo;) provides the &ldquo;DynaMeet Platform&rdquo;
+              (including Meeton ai; the &ldquo;Service&rdquo;). This Privacy Policy
+              explains how we handle personal information for which we determine the
+              purposes and means of processing — that is, where we act as a{" "}
+              <strong>controller</strong>.
             </p>
 
-            <Section title="Article 1 (Definition of Personal Information)">
+            <Section title="Article 1 (Our two roles: controller and processor)">
               <p>
-                In this Privacy Policy, &ldquo;personal information&rdquo; means
-                information relating to a living individual that can identify a
-                specific individual by the name, date of birth, or other
-                descriptions contained in such information (including information
-                that can be readily collated with other information and thereby
-                identify a specific individual).
+                1. <strong>As a controller</strong>, we handle: information about
+                our customers and their staff (account, billing and support data);
+                information about people who contact us, subscribe to our
+                newsletter, or visit our own website dynameet.ai; and information we
+                use for our own marketing. This Policy governs that processing.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. <strong>As a processor</strong>, we handle personal information
+                collected from visitors to our customers&rsquo; websites through the
+                Service (chat entries, form submissions, behavioural data, and the
+                like) on behalf of and under the instructions of the customer. That
+                processing is governed by our{" "}
+                <a href="/en/legal/dpa/" style={{ color: "#12a37d" }}>
+                  Data Processing Addendum
+                </a>{" "}
+                (&ldquo;DPA&rdquo;) with the customer, not by this Policy. If you are
+                a visitor to a website that uses the Service, the website
+                operator&rsquo;s privacy policy applies to that data; please direct
+                requests to the website operator, and we will assist them in
+                responding.
               </p>
             </Section>
 
-            <Section title="Article 2 (Methods of Collecting Personal Information)">
-              <p>The Company may collect personal information by the following methods.</p>
-              <ul style={{ paddingLeft: 24, marginTop: 12 }}>
-                <li>(1) When information is submitted through the inquiry form on the Company&rsquo;s website;</li>
-                <li>(2) When registering to use the Service;</li>
-                <li>(3) When subscribing to our newsletter;</li>
-                <li>
-                  (4) When a visitor to the customer&rsquo;s website enters information
-                  (such as name, email address, phone number, company name, job
-                  title, or department name) through any of the Service&rsquo;s features
-                  (AI chat, calendar booking forms, pop-ups/banners, and other input
-                  forms);
-                </li>
-                <li>
-                  (5) When behavioral data of visitors (such as email opens and link
-                  clicks) is obtained through the Service&rsquo;s email delivery and
-                  outreach features;
-                </li>
-                <li>
-                  (6) When, through the Service&rsquo;s features, behavioral data of
-                  visitors on the customer&rsquo;s website (such as URLs of viewed pages,
-                  time on page, scroll depth, session information, engagement with
-                  each feature, and the pages viewed and viewing time of materials in
-                  the Download Center), IP addresses, device information, browser
-                  information, and cookie/session information are collected
-                  automatically;
-                </li>
-                <li>
-                  (7) When corporate attribute information (company name, industry,
-                  location, employee size, etc.) is estimated based on information
-                  such as IP addresses;
-                </li>
-                <li>
-                  (8) When data is sent to and received from an external CRM
-                  designated by the customer (such as HubSpot or Salesforce) through
-                  integration;
-                </li>
-                <li>(9) Otherwise, in connection with the use of the Company&rsquo;s Service.</li>
-              </ul>
-            </Section>
-
-            <Section title="Article 3 (Purposes of Use of Personal Information)">
-              <p>The Company uses the personal information it collects for the following purposes.</p>
-              <ul style={{ paddingLeft: 24, marginTop: 12 }}>
-                <li>
-                  (1) To provide and operate the Company&rsquo;s Service (including
-                  generating automated responses via the AI chatbot, creating sales
-                  opportunities, scheduling via calendar integration, and nurturing
-                  through email delivery);
-                </li>
-                <li>(2) To respond to inquiries;</li>
-                <li>(3) To provide guidance and notices regarding the Service;</li>
-                <li>
-                  (4) To improve the Service and develop new services (including
-                  improving AI models based on anonymized data);
-                </li>
-                <li>(5) To provide usage reports to customers;</li>
-                <li>
-                  (6) To integrate and transfer data to an external CRM or the like
-                  designated by the customer;
-                </li>
-                <li>(7) To maintain the security of the Service and prevent unauthorized use;</li>
-                <li>(8) To respond to conduct that violates the Terms of Service;</li>
-                <li>(9) For other purposes incidental to the above purposes of use.</li>
-              </ul>
-            </Section>
-
-            <Section title="Article 4 (Provision of Personal Information to Third Parties)">
+            <Section title="Article 2 (Language versions and precedence)">
               <p>
-                Except as permitted by laws and regulations, the Company will not
-                provide personal information to third parties without obtaining the
-                customer&rsquo;s prior consent. However, this does not apply in the
-                following cases.
+                This Policy is published in English and Japanese. The Japanese
+                version is authoritative for customers who contract with us on our
+                Japanese (order-form) channel; the English version is authoritative
+                for customers who subscribe through our self-serve channel and for
+                customers outside Japan.
               </p>
+            </Section>
+
+            <Section title="Article 3 (Information we collect as a controller)">
               <ul style={{ paddingLeft: 24, marginTop: 12 }}>
-                <li>Where required by laws and regulations;</li>
                 <li>
-                  Where it is necessary to protect the life, body, or property of a
-                  person and it is difficult to obtain the consent of the individual;
+                  (1) <strong>Account and registration data</strong> — name, work
+                  email address, company name, country, language and similar details
+                  provided when registering for or administering the Service;
                 </li>
                 <li>
-                  Where it is especially necessary to improve public health or to
-                  promote the sound development of children and it is difficult to
-                  obtain the consent of the individual;
+                  (2) <strong>Billing data</strong> — plan, payment status, business
+                  tax identifiers, and billing contact details (card details are
+                  processed by our payment provider and are not stored by us);
                 </li>
                 <li>
-                  Where it is necessary to cooperate with a national government
-                  agency, a local government, or a party entrusted by either of them
-                  in carrying out affairs prescribed by laws and regulations.
+                  (3) <strong>Inquiries and support</strong> — information submitted
+                  through our contact forms, email, or support channels;
+                </li>
+                <li>
+                  (4) <strong>Newsletter and marketing data</strong> — email address
+                  and subscription preferences;
+                </li>
+                <li>
+                  (5) <strong>Our own website&rsquo;s visitor data</strong> —
+                  dynameet.ai itself uses the Meeton widget and analytics tools, so
+                  we collect the same categories of data on our own site that the
+                  Service collects for customers: pages viewed, time on page, chat
+                  and form entries you choose to submit, IP address, device and
+                  browser information, cookie/session information, and
+                  company-level attributes (company name, industry, location,
+                  employee size) estimated from information such as IP addresses.
+                  See Article 12 for details.
                 </li>
               </ul>
             </Section>
 
-            <Section title="Article 5 (Security Control of Personal Information)">
+            <Section title="Article 4 (Purposes of use)">
+              <p>We use the information in Article 3 for the following purposes:</p>
+              <ul style={{ paddingLeft: 24, marginTop: 12 }}>
+                <li>(1) Providing, operating and billing the Service;</li>
+                <li>(2) Responding to inquiries and providing support;</li>
+                <li>(3) Sending service notices (renewal reminders, security and maintenance notices, changes to terms);</li>
+                <li>
+                  (4) Sending marketing communications where permitted by law, with
+                  the ability to opt out at any time (Article 11);
+                </li>
+                <li>(5) Improving the Service and developing new features (including improving AI models using de-identified data only);</li>
+                <li>(6) Maintaining security and preventing unauthorised use;</li>
+                <li>(7) Responding to conduct that violates our terms;</li>
+                <li>(8) Complying with legal obligations;</li>
+                <li>(9) Purposes incidental to the above.</li>
+              </ul>
+            </Section>
+
+            <Section title="Article 5 (Provision to third parties)">
               <p>
-                The Company takes appropriate information security measures to
-                prevent the loss, destruction, alteration, leakage, and the like of
-                personal information. The Company also provides appropriate
-                supervision of employees who handle personal information.
+                We do not provide personal information to third parties without
+                consent, except: where required or permitted by law; where necessary
+                to protect a person&rsquo;s life, body or property and consent is
+                difficult to obtain; where especially necessary for public health or
+                the sound development of children and consent is difficult to
+                obtain; where necessary to cooperate with a government agency or its
+                contractor performing statutory duties; or in connection with a
+                merger or other business succession, within the scope of the
+                original purposes of use. Disclosure to our sub-processors and
+                service providers under Article 6 is entrustment, not third-party
+                provision.
               </p>
             </Section>
 
-            <Section title="Article 5-2 (Data Storage Location and Communication Structure in the Event of an Incident)">
-              <SubHeading>1. Data Storage Location</SubHeading>
+            <Section title="Article 6 (Sub-processors and service providers)">
               <p>
-                The Company securely stores personal information and customer data
-                obtained through the Service in data centers located within Japan.
+                1. We use the following categories of providers to operate the
+                Service, under contracts that require appropriate safeguards:
               </p>
-
-              <SubHeading>
-                2. Reporting to the Personal Information Protection Commission and Others
-              </SubHeading>
-              <p>
-                In accordance with the Act on the Protection of Personal Information,
-                if an incident such as a leakage of personal data occurs or is likely
-                to occur, a director will take the lead in reporting to the Personal
-                Information Protection Commission (PPC). In such reporting, the Company
-                will, as a general rule, provide a preliminary report within 3 to 5
-                days of becoming aware of the situation and, in principle, a final
-                report within 30 days after the completion of the investigation.
-              </p>
-
-              <SubHeading>3. Coordination with Relevant Authorities</SubHeading>
-              <p>
-                In the event of a large-scale cyberattack, the Company will share
-                information with and request technical assistance from JPCERT/CC. In
-                addition, reports and consultations regarding suspected criminal acts
-                such as theft, extortion, or unauthorized access will be made promptly
-                to the Cybercrime Countermeasures Division of the police station having
-                jurisdiction.
-              </p>
-            </Section>
-
-            <Section title="Article 6 (Disclosure, Correction, and Deletion of Personal Information)">
-              <p>
-                1. Customers may request the Company to disclose, correct, add to,
-                delete, or suspend the use of their own personal information. Upon
-                receiving such a request, the Company will respond within a reasonable
-                period after verifying the identity of the person.
+              <ul style={{ paddingLeft: 24, marginTop: 12 }}>
+                <li>
+                  (1) <strong>Infrastructure</strong> — Amazon Web Services (hosting;
+                  Tokyo region) and Supabase (application infrastructure);
+                </li>
+                <li>
+                  (2) <strong>AI model providers</strong> — Google (Gemini API) and
+                  Microsoft (Azure OpenAI Service), used to generate AI responses.
+                  Chat and content passed to these providers is used to provide the
+                  Service, not for the providers&rsquo; own advertising;
+                </li>
+                <li>
+                  (3) <strong>Payment processing</strong> — our payment provider
+                  processes card details for self-serve billing;
+                </li>
+                <li>
+                  (4) <strong>IP-based company enrichment</strong> — for Japanese
+                  traffic, a Japanese geolocation provider estimates company-level
+                  attributes from IP addresses.
+                </li>
+              </ul>
+              <p style={{ marginTop: 12 }}>
+                The current list of sub-processors that touch customer personal
+                data, including their locations, is published at{" "}
+                <a href="/en/legal/sub-processors/" style={{ color: "#12a37d" }}>
+                  dynameet.ai/en/legal/sub-processors/
+                </a>{" "}
+                and is updated with advance notice as described there.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. When the agreement to use the Service is terminated, the Company
-                will, within the period defined by the Company (in principle, within
-                90 days of termination), delete or anonymize the identifiable personal
-                data registered by the customer (such as name and email address).
-              </p>
-              <p style={{ marginTop: 12 }}>
-                3. Notwithstanding the preceding paragraph, the Company will retain and
-                use behavioral history, statistical information, and metadata that have
-                been processed so that individuals cannot be identified, for the
-                purposes of service improvement and analysis, even after the
-                termination of the agreement.
-              </p>
-              <p style={{ marginTop: 12 }}>
-                4. If a customer wishes to export data or have data individually deleted
-                upon termination of the agreement, the customer must notify the Company
-                at least 30 days prior to the date of termination. The Company will
-                respond to such requests to a reasonable extent.
+                2. <strong>Customer-directed integrations</strong> (Google,
+                Microsoft, Slack, Zoom, Salesforce, HubSpot and similar) exchange
+                data with the Service only when a customer connects them and only at
+                the customer&rsquo;s direction; they are governed by Article 7 and by
+                each provider&rsquo;s own terms.
               </p>
             </Section>
 
-            <Section title="Article 7 (Use of Cookies and the Like)">
+            <Section title="Article 7 (Data handling in OAuth integrations)">
+              <SubHeading>1. General</SubHeading>
               <p>
-                On the Company&rsquo;s website, we use cookies and similar technologies to
-                improve the convenience of the Service and to analyze access. Customers
-                can disable cookies through their browser settings, but some services may
-                not function properly as a result.
-              </p>
-            </Section>
-
-            <Section title="Article 8 (Regarding Access Analysis Tools)">
-              <p>
-                On the Company&rsquo;s website, we use &ldquo;Google Analytics,&rdquo; an
-                access analysis tool provided by Google Inc. Google Analytics uses
-                cookies to collect traffic data. This traffic data is collected
-                anonymously and does not identify individuals.
-              </p>
-            </Section>
-
-            <Section title="Article 9 (Data Handling in External Services and OAuth Integrations)">
-              <SubHeading>1. General Provisions</SubHeading>
-              <p>
-                To improve customer convenience and provide features, the Company&rsquo;s
-                Service may integrate (via OAuth authentication and the like) with
-                external services (such as Google, Microsoft, Slack, Zoom, Salesforce,
-                and HubSpot). When integrating, the Company collects only the minimum
-                information necessary to provide the relevant feature and handles it
-                appropriately in accordance with the terms of each external service and
-                the provisions of this Article.
+                To provide features, the Service may integrate (via OAuth and the
+                like) with external services (such as Google, Microsoft, Slack,
+                Zoom, Salesforce, and HubSpot). When integrating, we collect only
+                the minimum information necessary to provide the relevant feature
+                and handle it in accordance with each external service&rsquo;s terms
+                and this Article.
               </p>
 
-              <SubHeading>2. Limited Use of Google API User Data</SubHeading>
+              <SubHeading>2. Limited Use of Google API user data</SubHeading>
               <p>
-                The use of information the Company&rsquo;s Service receives from Google APIs,
-                and any transfer of such information to other apps, will comply with the{" "}
+                The use of information the Service receives from Google APIs, and
+                any transfer of such information to other apps, will comply with the{" "}
                 <a
                   href="https://developers.google.com/terms/api-services-user-data-policy"
                   target="_blank"
@@ -330,74 +275,227 @@ export default function PrivacyPolicyPageEn() {
                 >
                   Google API Services User Data Policy
                 </a>
-                , including the Limited Use requirements. Data obtained from Google APIs
-                (such as calendar information) is used solely for the purpose of providing
-                and improving the Service&rsquo;s features, and is never used for ad delivery,
-                marketing, or provision to any third party unrelated to the Service&rsquo;s
-                features.
+                , including the Limited Use requirements. Data obtained from Google
+                APIs (such as calendar information) is used solely to provide and
+                improve the Service&rsquo;s features, and is never used for ad
+                delivery, marketing, or provision to any third party unrelated to
+                the Service&rsquo;s features.
               </p>
 
-              <SubHeading>3. Integration with Microsoft (Teams/Outlook)</SubHeading>
+              <SubHeading>3. Microsoft (Teams/Outlook)</SubHeading>
               <p>
-                Data obtained through the Microsoft Graph API is used solely for the
-                purposes of scheduling sales meetings, setting up meetings, and the
-                notifications incidental thereto. The obtained data is never used for
-                advertising or profiling purposes.
+                Data obtained through the Microsoft Graph API is used solely for
+                scheduling sales meetings, setting up meetings, and the
+                notifications incidental thereto, and never for advertising or
+                profiling purposes.
               </p>
 
-              <SubHeading>4. Integration with Slack</SubHeading>
+              <SubHeading>4. Slack</SubHeading>
               <p>
-                Workspace information, channel information, message data, and the like
-                obtained through the integration are used solely for the purposes of
-                notifications and log creation within the Service. The obtained data is
-                appropriately managed in accordance with Slack&rsquo;s terms.
+                Workspace information, channel information, message data, and the
+                like obtained through the integration are used solely for
+                notifications and log creation within the Service, and are managed
+                in accordance with Slack&rsquo;s terms.
               </p>
 
-              <SubHeading>5. Integration with Zoom</SubHeading>
+              <SubHeading>5. Zoom</SubHeading>
               <p>
-                Data obtained through the Zoom API (such as meeting information, user
-                names, and email addresses) is used solely for the purposes of scheduling
-                sales meetings, issuing meeting URLs, and the notifications incidental
-                thereto. The Company never accesses, obtains, or stores users&rsquo; audio,
-                video, chat content, or other communication content obtained through the
-                Zoom API. Nor does the Company use such data to train or improve its own
-                AI models or those of third parties. The obtained data is handled in
-                accordance with the Zoom Privacy Statement and is never used for ad
-                delivery or user profiling purposes. If a customer removes (uninstalls)
-                the Service&rsquo;s integration from the Zoom Marketplace, the Company will,
-                notwithstanding the provisions of Article 6, promptly delete or anonymize
-                the OAuth access tokens already obtained and any Zoom-related data within
-                24 hours.
+                Data obtained through the Zoom API (such as meeting information,
+                user names, and email addresses) is used solely for scheduling sales
+                meetings, issuing meeting URLs, and the notifications incidental
+                thereto. We never access, obtain, or store users&rsquo; audio, video,
+                chat content, or other communication content obtained through the
+                Zoom API, nor use such data to train or improve our own AI models or
+                those of third parties. The obtained data is handled in accordance
+                with the Zoom Privacy Statement and is never used for ad delivery or
+                user profiling. If a customer removes (uninstalls) the
+                Service&rsquo;s integration from the Zoom Marketplace, we will,
+                notwithstanding Article 10, promptly delete or anonymize the OAuth
+                access tokens already obtained and any Zoom-related data within 24
+                hours.
               </p>
 
-              <SubHeading>6. Integration with CRMs (Salesforce/HubSpot)</SubHeading>
+              <SubHeading>6. CRMs (Salesforce/HubSpot)</SubHeading>
               <p>
-                The sending and receiving of data with external CRMs is carried out for
-                the purposes of synchronizing data designated by the customer and making
-                sales opportunity management more efficient.
+                Data is sent to and received from external CRMs to synchronize data
+                designated by the customer and make sales-opportunity management
+                more efficient.
               </p>
 
-              <SubHeading>7. Restrictions on Human Access</SubHeading>
+              <SubHeading>7. Restrictions on human access</SubHeading>
               <p>
-                The Company restricts employees from viewing user data obtained through
-                external integrations, except for reasons of security (such as
-                investigating unauthorized use), legal obligations, or support responses
-                for which the customer&rsquo;s consent has been obtained.
-              </p>
-            </Section>
-
-            <Section title="Article 10 (Changes to the Privacy Policy)">
-              <p>
-                The Company may change this Privacy Policy as necessary. The revised
-                Privacy Policy shall take effect from the time it is posted on the
-                Company&rsquo;s website.
+                We restrict employees from viewing user data obtained through
+                external integrations, except for security reasons (such as
+                investigating unauthorised use), legal obligations, or support
+                responses with the customer&rsquo;s consent.
               </p>
             </Section>
 
-            <Section title="Article 11 (Contact)">
+            <Section title="Article 8 (Where data is stored; international transfers)">
               <p>
-                For inquiries regarding this Privacy Policy, please contact us at the
-                following.
+                1. Personal information and customer data obtained through the
+                Service are stored in the Amazon Web Services Tokyo region
+                (ap-northeast-1) in Japan. Details of our hosting and security
+                posture are published on our{" "}
+                <a href="/en/trust/" style={{ color: "#12a37d" }}>
+                  Trust page
+                </a>
+                .
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. If you access the Service from outside Japan, your personal
+                information is transferred to and stored in Japan. Japan&rsquo;s
+                data-protection framework has been recognised as providing adequate
+                protection by the European Commission, and Japan participates in the
+                Global CBPR system. Where an overseas sub-processor is used (see the
+                sub-processor page for locations), we put in place contractual
+                safeguards consistent with the laws applicable to you — including
+                the PDPA (Singapore) transfer requirements, APP 8 (Australia), and
+                IPP 12 (New Zealand).
+              </p>
+            </Section>
+
+            <Section title="Article 9 (Security and breach response)">
+              <p>
+                1. We maintain an information security management system certified
+                to ISO/IEC 27001 and ISO/IEC 27017 and take appropriate technical
+                and organisational measures against loss, destruction, alteration
+                and leakage of personal information. See{" "}
+                <a href="/en/security/" style={{ color: "#12a37d" }}>
+                  Security
+                </a>{" "}
+                for details.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. If a data breach occurs or is likely to have occurred, we will:
+                notify affected customers without undue delay in accordance with the
+                notification commitment in the DPA; report to the Personal
+                Information Protection Commission of Japan (preliminary report
+                within 3–5 days of becoming aware, final report in principle within
+                30 days) where required by the APPI; and make any further regulator
+                and individual notifications required by the laws applicable to the
+                affected data (such as the Notifiable Data Breaches scheme in
+                Australia, the PDPA in Singapore, or the Privacy Act 2020 in New
+                Zealand). For large-scale cyberattacks we coordinate with JPCERT/CC
+                and, where criminal conduct is suspected, with the police.
+              </p>
+            </Section>
+
+            <Section title="Article 10 (Retention and deletion)">
+              <p>
+                1. We retain personal information for as long as needed for the
+                purposes in Article 4 and to meet legal obligations.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. When a customer&rsquo;s agreement ends, we delete or de-identify
+                the identifiable personal data registered by the customer (such as
+                names and email addresses) in principle within 90 days, subject to
+                the data-export window described in the applicable terms.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                3. Behavioural history, statistical information and metadata that
+                have been processed so that no individual can be identified or
+                re-identified may be retained after termination for service
+                improvement and analytics.
+              </p>
+            </Section>
+
+            <Section title="Article 11 (Your rights and marketing opt-out)">
+              <p>
+                1. You may request access to, correction, addition, deletion,
+                restriction of use, or (where applicable law provides) portability
+                of your personal information held by us. After verifying your
+                identity, we will respond within 30 days; if we need longer, we will
+                tell you why and when to expect a response. If we refuse a request,
+                we will give reasons and explain how to complain (see the annexes in
+                Article 14).
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. <strong>Marketing opt-out.</strong> Every marketing email we send
+                contains an unsubscribe link. You may also opt out of marketing at
+                any time by contacting us (Article 15). Opting out does not affect
+                service notices necessary for operating your account.
+              </p>
+            </Section>
+
+            <Section title="Article 12 (Cookies, analytics and our own use of the Meeton widget)">
+              <p>
+                1. Our website uses cookies and similar technologies for
+                functionality and access analysis. You can disable cookies in your
+                browser, though some features may stop working.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. We use Google Analytics to analyse site traffic. Google Analytics
+                uses cookies to collect traffic data.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                3. dynameet.ai itself runs the Meeton widget — the same product we
+                sell. Through it, information about your visit (pages viewed, time
+                on page, chat and form entries you submit, IP address, device and
+                browser information) is transmitted to and processed on our
+                infrastructure, and company-level attributes (company name,
+                industry, location, employee size) may be estimated from your IP
+                address. We use this to respond to you, to operate our own sales and
+                marketing, and to improve the Service.
+              </p>
+            </Section>
+
+            <Section title="Article 13 (AI model improvement)">
+              <p>
+                We may use data to improve AI models only after it has been
+                de-identified and aggregated so that it cannot identify, and cannot
+                reasonably be re-linked to, any individual or customer. Customers
+                can opt out of the use of their data for AI model improvement via
+                the settings screen within the Service.
+              </p>
+            </Section>
+
+            <Section title="Article 14 (Jurisdiction-specific provisions)">
+              <SubHeading>1. Japan (APPI)</SubHeading>
+              <p>
+                We handle personal information in accordance with the Act on the
+                Protection of Personal Information (APPI). Requests concerning
+                retained personal data (保有個人データ) — disclosure, correction,
+                cessation of use and the like — follow Article 11 and may be sent to
+                the contact in Article 15. Complaints may also be directed to the
+                Personal Information Protection Commission (PPC).
+              </p>
+              <SubHeading>2. Australia (Privacy Act 1988, APPs)</SubHeading>
+              <p>
+                Where the Australian Privacy Act applies to our handling of your
+                personal information, we handle it consistently with the Australian
+                Privacy Principles. Your personal information is held in Japan, and
+                may be accessed by sub-processors in the countries listed on our
+                sub-processor page. If you believe we have breached the APPs,
+                contact us first (Article 15); we will acknowledge your complaint
+                and respond within 30 days. If you are not satisfied with our
+                response, you may complain to the Office of the Australian
+                Information Commissioner (OAIC, www.oaic.gov.au).
+              </p>
+              <SubHeading>3. Singapore (PDPA)</SubHeading>
+              <p>
+                Where the Singapore Personal Data Protection Act 2012 applies, our
+                contact in Article 15 acts as the contact point for data-protection
+                matters. Access and correction requests follow Article 11. If
+                unresolved, you may approach the Personal Data Protection Commission
+                (PDPC).
+              </p>
+              <SubHeading>4. New Zealand (Privacy Act 2020)</SubHeading>
+              <p>
+                Where the New Zealand Privacy Act 2020 applies, requests and
+                complaints follow Articles 11 and 15. If you are not satisfied with
+                our response, you may complain to the Office of the Privacy
+                Commissioner (OPC, www.privacy.org.nz). Where we collect personal
+                information about you indirectly (for example company-level
+                attributes estimated from IP addresses), this Policy serves as
+                notice of that collection.
+              </p>
+            </Section>
+
+            <Section title="Article 15 (Contact)">
+              <p>
+                For privacy inquiries, requests under Article 11, or complaints,
+                contact:
               </p>
               <div
                 style={{
@@ -408,7 +506,7 @@ export default function PrivacyPolicyPageEn() {
                 }}
               >
                 <p style={{ margin: 0 }}>
-                  <strong>DynaMeet, Inc.</strong>
+                  <strong>DynaMeet, Inc.</strong> — Privacy Office
                   <br />
                   Daikanyama Art Village 2C, 17-10 Sarugakucho, Shibuya-ku, Tokyo
                   150-0033, Japan
@@ -418,16 +516,49 @@ export default function PrivacyPolicyPageEn() {
               </div>
             </Section>
 
+            <Section title="Article 16 (Changes to this Policy)">
+              <p>
+                We may update this Policy from time to time. For material changes,
+                we will give customers advance notice by email or within the
+                Service before the change takes effect. The updated Policy applies
+                from the stated effective date (or, for non-material changes, from
+                posting on our website).
+              </p>
+            </Section>
+
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
               Established: October 3, 2024
               <br />
-              Last updated: April 23, 2026
+              Last updated: [Draft — pending legal review; the version published
+              April 23, 2026 remains in effect]
             </p>
           </div>
         </div>
       </main>
       <Footer lang="en" />
     </>
+  );
+}
+
+function DraftNotice() {
+  return (
+    <div
+      style={{
+        background: "#fff8e6",
+        border: "1px solid #f0c948",
+        borderRadius: 12,
+        padding: "16px 20px",
+        marginBottom: 32,
+        fontSize: 14,
+        lineHeight: 1.7,
+        color: "#7a5b00",
+      }}
+    >
+      <strong>DRAFT — pending legal review.</strong> This restructured Privacy
+      Policy is a working draft prepared for review by qualified counsel. It is
+      not yet in effect; the Privacy Policy published on April 23, 2026 remains
+      the effective version until this draft is approved and published.
+    </div>
   );
 }
 

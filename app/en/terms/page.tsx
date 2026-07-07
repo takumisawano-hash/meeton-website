@@ -104,6 +104,30 @@ export default function TermsPageEn() {
               ) prevails.
             </p>
 
+            <div
+              style={{
+                background: "#f8fafc",
+                border: "1px solid #e2e8f0",
+                borderRadius: 12,
+                padding: "16px 20px",
+                marginBottom: 32,
+                fontSize: 14,
+                lineHeight: 1.7,
+              }}
+            >
+              <strong>Scope.</strong> These Terms apply to customers who contract
+              with the Company through a written order form arranged with our sales
+              team (managed plans). Subscriptions purchased online through our
+              self-serve signup are governed by the{" "}
+              <a
+                href="/en/legal/terms-self-serve/"
+                style={{ color: "#12a37d" }}
+              >
+                Self-Serve Terms of Service
+              </a>{" "}
+              instead.
+            </div>
+
             <p style={{ marginBottom: 32 }}>
               These Terms of Service (hereinafter the &ldquo;Terms&rdquo;) set out
               the conditions for using the &ldquo;DynaMeet Platform&rdquo; (including

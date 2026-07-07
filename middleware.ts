@@ -36,10 +36,17 @@ const EN_TWIN_PREFIXES = [
   'solutions/cmo', 'solutions/cro', 'solutions/sdr', 'solutions/ceo',
 ]
 
-// EN-only pages with NO JA twin (self-serve funnel, e.g. /en/trial/). The
-// JA-desired branch must never strip these — /trial/ does not exist.
+// EN-only pages with NO JA twin (self-serve funnel + self-serve legal set,
+// e.g. /en/trial/, /en/trust/, /en/legal/dpa/). The JA-desired branch must
+// never strip these — the JA paths do not exist.
 // Mirrors EN_ONLY_PREFIXES in app/lib/i18n.ts.
-const EN_ONLY_PREFIXES = ['trial']
+const EN_ONLY_PREFIXES = [
+  'trial',
+  'trust',
+  'legal/terms-self-serve',
+  'legal/dpa',
+  'legal/sub-processors',
+]
 
 function isEnOnly(pathname: string): boolean {
   const seg = pathname.replace(/^\/en\/?/, '').replace(/\/+$/, '')

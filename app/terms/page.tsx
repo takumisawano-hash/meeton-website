@@ -78,6 +78,28 @@ export default function TermsPage() {
               color: '#374151',
             }}
           >
+            <div
+              style={{
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                borderRadius: 12,
+                padding: '16px 20px',
+                marginBottom: 32,
+                fontSize: 14,
+                lineHeight: 1.7,
+              }}
+            >
+              <strong>適用範囲</strong>
+              ：本規約は、当社の営業担当を通じて申込書によりご契約いただくお客様（マネージドプラン）に適用されます。オンラインのセルフサーブ申込によるご契約には、
+              <a
+                href="/en/legal/terms-self-serve/"
+                style={{ color: '#12a37d' }}
+              >
+                Self-Serve Terms of Service（英語）
+              </a>
+              が適用されます。
+            </div>
+
             <p style={{ marginBottom: 32 }}>
                 本利用規約（以下「本規約」といいます）は、DynaMeet株式会社（以下「当社」といいます）が提供する「DynaMeet Platform」（Meeton ai等を含み、以下「本サービス」といいます）の利用条件を定めるものです。ご利用の前に必ずお読みください。
             </p>
