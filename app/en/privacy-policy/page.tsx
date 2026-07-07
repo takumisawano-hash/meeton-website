@@ -7,13 +7,20 @@ import Link from "next/link";
 // /en/privacy-policy/ — English master of the rebuilt Privacy Policy
 // (controller role). Structural rebuild for the SG/AU/NZ self-serve launch:
 // controller/processor split (processor role → the DPA), infrastructure/AI
-// sub-processor disclosure, named hosting region, breach-notify commitments,
-// per-jurisdiction annexes (JP/AU/SG/NZ) and a language-precedence clause.
-// The JA page (/privacy-policy/) is the Japanese translation of this master.
+// sub-processor disclosure, named hosting region, breach commitments, and a
+// language-precedence clause. The JA page (/privacy-policy/) is the Japanese
+// translation of this master.
 //
-// DRAFT — pending professional legal review. Do not remove the DraftNotice
-// or publish before counsel sign-off. Gap list this draft answers:
-// docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7b (saas repo).
+// Commitment-lean (2026-07-07 refinement): per-jurisdiction annexes (OAIC
+// escalation, 30-day response commitments, APP-posture statements) are
+// TRIGGER-DEFERRED — launch version carries one generic local-rights line
+// (Section 14). Concrete timeframes live in the DPA only (chosen contractual
+// commitments); this unilateral policy says "without undue delay". No
+// "complies with APP/PDPA" claims anywhere. Headings are plain English
+// numbered sections, not translated-APPI "Article N (…)" style.
+//
+// DRAFT — pending owner review (counsel is defer-with-triggers; see PR #11).
+// Gap list: docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7b.
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -106,16 +113,16 @@ export default function PrivacyPolicyPageEn() {
               <strong>controller</strong>.
             </p>
 
-            <Section title="Article 1 (Our two roles: controller and processor)">
+            <Section title="1. Our two roles: controller and processor">
               <p>
-                1. <strong>As a controller</strong>, we handle: information about
+                1.1 <strong>As a controller</strong>, we handle: information about
                 our customers and their staff (account, billing and support data);
                 information about people who contact us, subscribe to our
                 newsletter, or visit our own website dynameet.ai; and information we
                 use for our own marketing. This Policy governs that processing.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. <strong>As a processor</strong>, we handle personal information
+                1.2 <strong>As a processor</strong>, we handle personal information
                 collected from visitors to our customers&rsquo; websites through the
                 Service (chat entries, form submissions, behavioural data, and the
                 like) on behalf of and under the instructions of the customer. That
@@ -131,7 +138,7 @@ export default function PrivacyPolicyPageEn() {
               </p>
             </Section>
 
-            <Section title="Article 2 (Language versions and precedence)">
+            <Section title="2. Language versions and precedence">
               <p>
                 This Policy is published in English and Japanese. The Japanese
                 version is authoritative for customers who contract with us on our
@@ -141,7 +148,7 @@ export default function PrivacyPolicyPageEn() {
               </p>
             </Section>
 
-            <Section title="Article 3 (Information we collect as a controller)">
+            <Section title="3. Information we collect as a controller">
               <ul style={{ paddingLeft: 24, marginTop: 12 }}>
                 <li>
                   (1) <strong>Account and registration data</strong> — name, work
@@ -170,20 +177,20 @@ export default function PrivacyPolicyPageEn() {
                   browser information, cookie/session information, and
                   company-level attributes (company name, industry, location,
                   employee size) estimated from information such as IP addresses.
-                  See Article 12 for details.
+                  See Section 12 for details.
                 </li>
               </ul>
             </Section>
 
-            <Section title="Article 4 (Purposes of use)">
-              <p>We use the information in Article 3 for the following purposes:</p>
+            <Section title="4. Purposes of use">
+              <p>We use the information in Section 3 for the following purposes:</p>
               <ul style={{ paddingLeft: 24, marginTop: 12 }}>
                 <li>(1) Providing, operating and billing the Service;</li>
                 <li>(2) Responding to inquiries and providing support;</li>
                 <li>(3) Sending service notices (renewal reminders, security and maintenance notices, changes to terms);</li>
                 <li>
                   (4) Sending marketing communications where permitted by law, with
-                  the ability to opt out at any time (Article 11);
+                  the ability to opt out at any time (Section 11);
                 </li>
                 <li>(5) Improving the Service and developing new features (including improving AI models using de-identified data only);</li>
                 <li>(6) Maintaining security and preventing unauthorised use;</li>
@@ -193,7 +200,7 @@ export default function PrivacyPolicyPageEn() {
               </ul>
             </Section>
 
-            <Section title="Article 5 (Provision to third parties)">
+            <Section title="5. Provision to third parties">
               <p>
                 We do not provide personal information to third parties without
                 consent, except: where required or permitted by law; where necessary
@@ -204,14 +211,14 @@ export default function PrivacyPolicyPageEn() {
                 contractor performing statutory duties; or in connection with a
                 merger or other business succession, within the scope of the
                 original purposes of use. Disclosure to our sub-processors and
-                service providers under Article 6 is entrustment, not third-party
+                service providers under Section 6 is entrustment, not third-party
                 provision.
               </p>
             </Section>
 
-            <Section title="Article 6 (Sub-processors and service providers)">
+            <Section title="6. Sub-processors and service providers">
               <p>
-                1. We use the following categories of providers to operate the
+                6.1 We use the following categories of providers to operate the
                 Service, under contracts that require appropriate safeguards:
               </p>
               <ul style={{ paddingLeft: 24, marginTop: 12 }}>
@@ -244,26 +251,26 @@ export default function PrivacyPolicyPageEn() {
                 and is updated with advance notice as described there.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. <strong>Customer-directed integrations</strong> (Google,
+                6.2 <strong>Customer-directed integrations</strong> (Google,
                 Microsoft, Slack, Zoom, Salesforce, HubSpot and similar) exchange
                 data with the Service only when a customer connects them and only at
-                the customer&rsquo;s direction; they are governed by Article 7 and by
+                the customer&rsquo;s direction; they are governed by Section 7 and by
                 each provider&rsquo;s own terms.
               </p>
             </Section>
 
-            <Section title="Article 7 (Data handling in OAuth integrations)">
-              <SubHeading>1. General</SubHeading>
+            <Section title="7. Data handling in OAuth integrations">
+              <SubHeading>7.1 General</SubHeading>
               <p>
                 To provide features, the Service may integrate (via OAuth and the
                 like) with external services (such as Google, Microsoft, Slack,
                 Zoom, Salesforce, and HubSpot). When integrating, we collect only
                 the minimum information necessary to provide the relevant feature
                 and handle it in accordance with each external service&rsquo;s terms
-                and this Article.
+                and this Section.
               </p>
 
-              <SubHeading>2. Limited Use of Google API user data</SubHeading>
+              <SubHeading>7.2 Limited Use of Google API user data</SubHeading>
               <p>
                 The use of information the Service receives from Google APIs, and
                 any transfer of such information to other apps, will comply with the{" "}
@@ -282,7 +289,7 @@ export default function PrivacyPolicyPageEn() {
                 the Service&rsquo;s features.
               </p>
 
-              <SubHeading>3. Microsoft (Teams/Outlook)</SubHeading>
+              <SubHeading>7.3 Microsoft (Teams/Outlook)</SubHeading>
               <p>
                 Data obtained through the Microsoft Graph API is used solely for
                 scheduling sales meetings, setting up meetings, and the
@@ -290,7 +297,7 @@ export default function PrivacyPolicyPageEn() {
                 profiling purposes.
               </p>
 
-              <SubHeading>4. Slack</SubHeading>
+              <SubHeading>7.4 Slack</SubHeading>
               <p>
                 Workspace information, channel information, message data, and the
                 like obtained through the integration are used solely for
@@ -298,7 +305,7 @@ export default function PrivacyPolicyPageEn() {
                 in accordance with Slack&rsquo;s terms.
               </p>
 
-              <SubHeading>5. Zoom</SubHeading>
+              <SubHeading>7.5 Zoom</SubHeading>
               <p>
                 Data obtained through the Zoom API (such as meeting information,
                 user names, and email addresses) is used solely for scheduling sales
@@ -310,19 +317,19 @@ export default function PrivacyPolicyPageEn() {
                 with the Zoom Privacy Statement and is never used for ad delivery or
                 user profiling. If a customer removes (uninstalls) the
                 Service&rsquo;s integration from the Zoom Marketplace, we will,
-                notwithstanding Article 10, promptly delete or anonymize the OAuth
+                notwithstanding Section 10, promptly delete or anonymize the OAuth
                 access tokens already obtained and any Zoom-related data within 24
                 hours.
               </p>
 
-              <SubHeading>6. CRMs (Salesforce/HubSpot)</SubHeading>
+              <SubHeading>7.6 CRMs (Salesforce/HubSpot)</SubHeading>
               <p>
                 Data is sent to and received from external CRMs to synchronize data
                 designated by the customer and make sales-opportunity management
                 more efficient.
               </p>
 
-              <SubHeading>7. Restrictions on human access</SubHeading>
+              <SubHeading>7.7 Restrictions on human access</SubHeading>
               <p>
                 We restrict employees from viewing user data obtained through
                 external integrations, except for security reasons (such as
@@ -331,9 +338,9 @@ export default function PrivacyPolicyPageEn() {
               </p>
             </Section>
 
-            <Section title="Article 8 (Where data is stored; international transfers)">
+            <Section title="8. Where data is stored; international transfers">
               <p>
-                1. Personal information and customer data obtained through the
+                8.1 Personal information and customer data obtained through the
                 Service are stored in the Amazon Web Services Tokyo region
                 (ap-northeast-1) in Japan. Details of our hosting and security
                 posture are published on our{" "}
@@ -343,21 +350,23 @@ export default function PrivacyPolicyPageEn() {
                 .
               </p>
               <p style={{ marginTop: 12 }}>
-                2. If you access the Service from outside Japan, your personal
+                8.2 If you access the Service from outside Japan, your personal
                 information is transferred to and stored in Japan. Japan&rsquo;s
                 data-protection framework has been recognised as providing adequate
                 protection by the European Commission, and Japan participates in the
-                Global CBPR system. Where an overseas sub-processor is used (see the
-                sub-processor page for locations), we put in place contractual
-                safeguards consistent with the laws applicable to you — including
-                the PDPA (Singapore) transfer requirements, APP 8 (Australia), and
-                IPP 12 (New Zealand).
+                Global CBPR system. For customers, the contractual commitments that
+                govern the overseas processing of their visitor data — including
+                sub-processor locations and transfer safeguards — are set out in the{" "}
+                <a href="/en/legal/dpa/" style={{ color: "#12a37d" }}>
+                  DPA
+                </a>{" "}
+                and on the sub-processor page.
               </p>
             </Section>
 
-            <Section title="Article 9 (Security and breach response)">
+            <Section title="9. Security and breach response">
               <p>
-                1. We maintain an information security management system certified
+                9.1 We maintain an information security management system certified
                 to ISO/IEC 27001 and ISO/IEC 27017 and take appropriate technical
                 and organisational measures against loss, destruction, alteration
                 and leakage of personal information. See{" "}
@@ -367,69 +376,65 @@ export default function PrivacyPolicyPageEn() {
                 for details.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. If a data breach occurs or is likely to have occurred, we will:
+                9.2 If a data breach occurs or is likely to have occurred, we will:
                 notify affected customers without undue delay in accordance with the
                 notification commitment in the DPA; report to the Personal
                 Information Protection Commission of Japan (preliminary report
                 within 3–5 days of becoming aware, final report in principle within
-                30 days) where required by the APPI; and make any further regulator
-                and individual notifications required by the laws applicable to the
-                affected data (such as the Notifiable Data Breaches scheme in
-                Australia, the PDPA in Singapore, or the Privacy Act 2020 in New
-                Zealand). For large-scale cyberattacks we coordinate with JPCERT/CC
+                30 days) where required by the APPI; and make any further
+                notifications to regulators or individuals that applicable law
+                requires. For large-scale cyberattacks we coordinate with JPCERT/CC
                 and, where criminal conduct is suspected, with the police.
               </p>
             </Section>
 
-            <Section title="Article 10 (Retention and deletion)">
+            <Section title="10. Retention and deletion">
               <p>
-                1. We retain personal information for as long as needed for the
-                purposes in Article 4 and to meet legal obligations.
+                10.1 We retain personal information for as long as needed for the
+                purposes in Section 4 and to meet legal obligations.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. When a customer&rsquo;s agreement ends, we delete or de-identify
+                10.2 When a customer&rsquo;s agreement ends, we delete or de-identify
                 the identifiable personal data registered by the customer (such as
                 names and email addresses) in principle within 90 days, subject to
                 the data-export window described in the applicable terms.
               </p>
               <p style={{ marginTop: 12 }}>
-                3. Behavioural history, statistical information and metadata that
+                10.3 Behavioural history, statistical information and metadata that
                 have been processed so that no individual can be identified or
                 re-identified may be retained after termination for service
                 improvement and analytics.
               </p>
             </Section>
 
-            <Section title="Article 11 (Your rights and marketing opt-out)">
+            <Section title="11. Your rights and marketing opt-out">
               <p>
-                1. You may request access to, correction, addition, deletion,
+                11.1 You may request access to, correction, addition, deletion,
                 restriction of use, or (where applicable law provides) portability
                 of your personal information held by us. After verifying your
-                identity, we will respond within 30 days; if we need longer, we will
-                tell you why and when to expect a response. If we refuse a request,
-                we will give reasons and explain how to complain (see the annexes in
-                Article 14).
+                identity, we will respond without undue delay. If we refuse a
+                request, we will give reasons.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. <strong>Marketing opt-out.</strong> Every marketing email we send
+                11.2 <strong>Marketing opt-out.</strong> Every marketing email we send
                 contains an unsubscribe link. You may also opt out of marketing at
-                any time by contacting us (Article 15). Opting out does not affect
+                any time by contacting us (Section 15). Opting out does not affect
                 service notices necessary for operating your account.
               </p>
             </Section>
 
-            <Section title="Article 12 (Cookies, analytics and our own use of the Meeton widget)">
+            <Section title="12. Cookies, analytics and our own use of the Meeton widget">
               <p>
-                1. Our website uses cookies and similar technologies for
+                12.1 Our website uses cookies and similar technologies for
                 functionality and access analysis. You can disable cookies in your
                 browser, though some features may stop working.
               </p>
               <p style={{ marginTop: 12 }}>
-                2. We use Google Analytics to analyse site traffic. Google Analytics
-                uses cookies to collect traffic data.
+                12.2 We use Google Analytics to analyse site traffic. Google
+                Analytics uses cookies to collect traffic data.
               </p>
               <p style={{ marginTop: 12 }}>
-                3. dynameet.ai itself runs the Meeton widget — the same product we
+                12.3 dynameet.ai itself runs the Meeton widget — the same product we
                 sell. Through it, information about your visit (pages viewed, time
                 on page, chat and form entries you submit, IP address, device and
                 browser information) is transmitted to and processed on our
@@ -440,7 +445,7 @@ export default function PrivacyPolicyPageEn() {
               </p>
             </Section>
 
-            <Section title="Article 13 (AI model improvement)">
+            <Section title="13. AI model improvement">
               <p>
                 We may use data to improve AI models only after it has been
                 de-identified and aggregated so that it cannot identify, and cannot
@@ -450,51 +455,19 @@ export default function PrivacyPolicyPageEn() {
               </p>
             </Section>
 
-            <Section title="Article 14 (Jurisdiction-specific provisions)">
-              <SubHeading>1. Japan (APPI)</SubHeading>
+            <Section title="14. Additional rights under your local law">
               <p>
-                We handle personal information in accordance with the Act on the
-                Protection of Personal Information (APPI). Requests concerning
-                retained personal data (保有個人データ) — disclosure, correction,
-                cessation of use and the like — follow Article 11 and may be sent to
-                the contact in Article 15. Complaints may also be directed to the
-                Personal Information Protection Commission (PPC).
-              </p>
-              <SubHeading>2. Australia (Privacy Act 1988, APPs)</SubHeading>
-              <p>
-                Where the Australian Privacy Act applies to our handling of your
-                personal information, we handle it consistently with the Australian
-                Privacy Principles. Your personal information is held in Japan, and
-                may be accessed by sub-processors in the countries listed on our
-                sub-processor page. If you believe we have breached the APPs,
-                contact us first (Article 15); we will acknowledge your complaint
-                and respond within 30 days. If you are not satisfied with our
-                response, you may complain to the Office of the Australian
-                Information Commissioner (OAIC, www.oaic.gov.au).
-              </p>
-              <SubHeading>3. Singapore (PDPA)</SubHeading>
-              <p>
-                Where the Singapore Personal Data Protection Act 2012 applies, our
-                contact in Article 15 acts as the contact point for data-protection
-                matters. Access and correction requests follow Article 11. If
-                unresolved, you may approach the Personal Data Protection Commission
-                (PDPC).
-              </p>
-              <SubHeading>4. New Zealand (Privacy Act 2020)</SubHeading>
-              <p>
-                Where the New Zealand Privacy Act 2020 applies, requests and
-                complaints follow Articles 11 and 15. If you are not satisfied with
-                our response, you may complain to the Office of the Privacy
-                Commissioner (OPC, www.privacy.org.nz). Where we collect personal
-                information about you indirectly (for example company-level
-                attributes estimated from IP addresses), this Policy serves as
-                notice of that collection.
+                Depending on where you are located, the law that applies to you may
+                grant you additional rights in relation to your personal information
+                or additional routes of complaint. Nothing in this Policy limits any
+                right you have under a law that applies to you. To exercise such a
+                right, contact us using the details in Section 15.
               </p>
             </Section>
 
-            <Section title="Article 15 (Contact)">
+            <Section title="15. Contact">
               <p>
-                For privacy inquiries, requests under Article 11, or complaints,
+                For privacy inquiries, requests under Section 11, or complaints,
                 contact:
               </p>
               <div
@@ -516,7 +489,7 @@ export default function PrivacyPolicyPageEn() {
               </div>
             </Section>
 
-            <Section title="Article 16 (Changes to this Policy)">
+            <Section title="16. Changes to this Policy">
               <p>
                 We may update this Policy from time to time. For material changes,
                 we will give customers advance notice by email or within the
@@ -529,7 +502,7 @@ export default function PrivacyPolicyPageEn() {
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
               Established: October 3, 2024
               <br />
-              Last updated: [Draft — pending legal review; the version published
+              Last updated: [Draft — pending final review; the version published
               April 23, 2026 remains in effect]
             </p>
           </div>
@@ -554,10 +527,10 @@ function DraftNotice() {
         color: "#7a5b00",
       }}
     >
-      <strong>DRAFT — pending legal review.</strong> This restructured Privacy
-      Policy is a working draft prepared for review by qualified counsel. It is
-      not yet in effect; the Privacy Policy published on April 23, 2026 remains
-      the effective version until this draft is approved and published.
+      <strong>DRAFT — not yet in effect.</strong> This restructured Privacy
+      Policy is a working draft pending final review. The Privacy Policy
+      published on April 23, 2026 remains the effective version until this
+      draft is approved and published.
     </div>
   );
 }

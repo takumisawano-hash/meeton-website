@@ -11,9 +11,13 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // country-supplements section (AU ACL / NZ CGA / JP Consumer Contract Act).
 // Order-form (sales-managed) customers stay on /terms/ — the managed rail.
 //
-// DRAFT — pending professional legal review. Do not remove the DraftNotice
-// or publish before counsel sign-off. Gap list this draft answers:
-// docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7/§7b (saas repo).
+// DRAFT — pending owner review (counsel is defer-with-triggers, not gating;
+// see PR #11 for the parked-for-counsel list). Do not remove the DraftNotice
+// or publish before owner sign-off + product hooks ship. Gap list this draft
+// answers: docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7/§7b
+// (saas repo). The ACL s 64A / NZ CGA s 43(2) clauses track the statutory
+// formulas — verify wording against the statute (side-by-side in the PR body)
+// before changing them.
 
 export const metadata: Metadata = {
   title: "Self-Serve Terms of Service",
@@ -168,6 +172,20 @@ export default function SelfServeTermsPage() {
                 3.2 We will notify you by email before you incur any first charge
                 following a trial. If you do not wish to continue, you can cancel
                 within the Service before the charge date at no cost.
+              </p>
+              <p
+                style={{
+                  marginTop: 12,
+                  color: "#b45309",
+                  fontStyle: "italic",
+                  fontSize: 13.5,
+                }}
+              >
+                [TODO — open product decision: whether payment details are
+                required at trial start (card-required vs no-card). This Section
+                is written to stay neutral on that choice; resolve per the
+                implications doc §10 before launch and keep the clause
+                parameter-only.]
               </p>
             </Section>
 
@@ -454,9 +472,20 @@ export default function SelfServeTermsPage() {
                 the other party.
               </p>
               <p style={{ marginTop: 12 }}>
-                16.3 If a provision of these Terms is found unenforceable, the
-                remainder continues in effect. A failure to enforce a provision is
-                not a waiver.
+                16.3 <strong>Severability.</strong> If a provision of these Terms is
+                found void or unenforceable in a jurisdiction, it is severed or read
+                down there to the minimum extent necessary, and the remainder of
+                these Terms continues in full effect. A failure to enforce a
+                provision is not a waiver.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                16.4 <strong>Local mandatory rights unaffected.</strong> Nothing in
+                these Terms (including any limitation, exclusion, variation,
+                termination, or governing-law provision) excludes, restricts or
+                modifies any right, guarantee or protection granted to you by a
+                mandatory law of your jurisdiction that cannot lawfully be excluded,
+                restricted or modified; every provision of these Terms is to be read
+                subject to such laws.
               </p>
             </Section>
 
@@ -471,23 +500,23 @@ export default function SelfServeTermsPage() {
                 Nothing in these Terms excludes, restricts or modifies any consumer
                 guarantee, right or remedy under the Australian Consumer Law
                 (Schedule 2 to the Competition and Consumer Act 2010 (Cth)) that
-                cannot lawfully be excluded, restricted or modified. To the extent
-                permitted by law (including section 64A of the Australian Consumer
-                Law), our liability for failure to comply with a consumer guarantee
-                in respect of services is limited, at our option, to supplying the
-                services again or paying the cost of having the services supplied
-                again. Prices shown for Australian customers are exclusive of GST
-                unless stated otherwise; GST is applied or reverse-charged as
-                described in Section 5.2.
+                cannot lawfully be excluded, restricted or modified. Where our
+                liability for failure to comply with a consumer guarantee can be
+                limited under section 64A of the Australian Consumer Law, our
+                liability is limited, at our option, to: (a) the supplying of the
+                services again; or (b) the payment of the cost of having the
+                services supplied again. Prices shown for Australian customers are
+                exclusive of GST unless stated otherwise; GST is applied or
+                reverse-charged as described in Section 5.2.
               </p>
               <SubHeading>17.2 New Zealand</SubHeading>
               <p>
-                You confirm that you are acquiring the Service in trade for business
-                purposes. The parties agree that the Consumer Guarantees Act 1993
-                (NZ) does not apply to the supply of the Service, and that it is
-                fair and reasonable to exclude its application. Nothing in these
-                Terms limits rights under the Fair Trading Act 1986 (NZ) except to
-                the extent the parties may lawfully contract out of them in trade.
+                This Section records the parties&rsquo; agreement in writing, for
+                the purposes of section 43(2) of the Consumer Guarantees Act 1993
+                (NZ), that: the Service is supplied and acquired in trade; all
+                parties are in trade; the parties agree to contract out of the
+                provisions of the Consumer Guarantees Act 1993; and it is fair and
+                reasonable that the parties are bound by this provision.
               </p>
               <SubHeading>17.3 Singapore</SubHeading>
               <p>
@@ -527,8 +556,7 @@ export default function SelfServeTermsPage() {
             </Section>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Version: Draft v0.1 — pending professional legal review; not yet in
-              effect.
+              Version: Draft v0.2 — pending final review; not yet in effect.
               <br />
               Established: [TBD — on self-serve launch]
             </p>
@@ -554,9 +582,9 @@ function DraftNotice() {
         color: "#7a5b00",
       }}
     >
-      <strong>DRAFT — pending legal review.</strong> This document is a working
-      draft prepared for review by qualified counsel. It is not yet in effect and
-      creates no rights or obligations. The currently effective terms are our{" "}
+      <strong>DRAFT — not yet in effect.</strong> This document is a working
+      draft pending final review and creates no rights or obligations. The
+      currently effective terms are our{" "}
       <a href="/en/terms/" style={{ color: "#7a5b00" }}>
         Terms of Service
       </a>

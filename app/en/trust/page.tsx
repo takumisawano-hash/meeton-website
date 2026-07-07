@@ -15,7 +15,12 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // (no recolor/stretch/crop), on solid white cards — see the mark-usage rules
 // in SecurityPageClient.tsx / project memory before touching.
 //
-// DRAFT — pending legal review; [TBC] items need ops confirmation.
+// Commitment-lean rule (2026-07-07): verifiable facts only — hosting region,
+// ISO certs, sub-processors, and pointers to the chosen contractual
+// commitments in the DPA/ToS. No "complies with APP/PDPA" claims, no support
+// SLA until one is published for real.
+//
+// DRAFT — pending owner review; [TBC] items need ops confirmation.
 
 export const metadata: Metadata = {
   title: "Trust & Security",
@@ -160,15 +165,16 @@ export default function TrustPage() {
                 The Service and customer data are hosted in the{" "}
                 <strong>Amazon Web Services Tokyo region (ap-northeast-1)</strong>,
                 Japan. We state this plainly rather than promising regional hosting
-                we don&rsquo;t have: Japan&rsquo;s data-protection framework holds an
-                EU adequacy decision, Japan participates in the Global CBPR system,
-                and our{" "}
+                we don&rsquo;t have. Japan&rsquo;s data-protection framework holds an
+                EU adequacy decision and Japan participates in the Global CBPR
+                system. The contractual commitments governing overseas processing of
+                customer data — sub-processor locations, transfer safeguards, breach
+                notification — are set out in our{" "}
                 <a href="/en/legal/dpa/" style={{ color: "#12a37d" }}>
                   DPA
                 </a>{" "}
-                provides the contractual safeguards that Singapore&rsquo;s PDPA,
-                Australia&rsquo;s APP 8 and New Zealand&rsquo;s IPP 12 expect for
-                overseas processing.
+                (Section 6) for customers to use in their own compliance
+                assessments.
               </p>
             </Section>
 
@@ -274,31 +280,6 @@ export default function TrustPage() {
               </ul>
             </Section>
 
-            <Section title="Privacy compliance">
-              <p>
-                We handle personal information under Japan&rsquo;s APPI as our home
-                regime, and our Privacy Policy carries jurisdiction annexes for
-                Australia (Privacy Act 1988/APPs, with an OAIC complaint route),
-                Singapore (PDPA) and New Zealand (Privacy Act 2020) — see the{" "}
-                <a href="/en/privacy-policy/" style={{ color: "#12a37d" }}>
-                  Privacy Policy
-                </a>
-                . The Service ships disclosure templates that help you meet your own
-                notice obligations to your website visitors.
-              </p>
-            </Section>
-
-            <Section title="Support">
-              <p>
-                Support is provided in English and Japanese during Japan business
-                hours (JST) — which cover the full Singapore business day and most
-                of the Australian east-coast day. Requests outside these hours
-                (including New Zealand mornings) are handled asynchronously and
-                answered within [TBC — confirm published response SLA] business
-                day(s).
-              </p>
-            </Section>
-
             <Section title="Legal documents">
               <ul style={{ paddingLeft: 24, marginTop: 12 }}>
                 {LEGAL_DOCS.map((d) => (
@@ -343,9 +324,9 @@ function DraftNotice() {
         color: "#7a5b00",
       }}
     >
-      <strong>DRAFT.</strong> This page describes commitments that take effect
-      with the self-serve launch and is pending legal review. Items marked [TBC]
-      require confirmation before publication.
+      <strong>DRAFT — not yet in effect.</strong> This page describes
+      commitments that take effect with the self-serve launch and is pending
+      final review. Items marked [TBC] require confirmation before publication.
     </div>
   );
 }

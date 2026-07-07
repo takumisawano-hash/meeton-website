@@ -9,8 +9,13 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // customers' websites through the Service. PDPA/APP/IPP-aligned transfer
 // clauses, 72h breach-notify SLA, sub-processor change notice.
 //
-// DRAFT — pending professional legal review. Do not remove the DraftNotice
-// or publish before counsel sign-off. Gap list this draft answers:
+// DRAFT — pending owner review (counsel is defer-with-triggers, not gating;
+// see PR #11). Do not remove the DraftNotice or publish before owner sign-off.
+// The DPA is a KEPT artifact under the commitment-lean refinement — SG/AU
+// customers need its transfer clauses for their own compliance; its concrete
+// numbers (72h breach notify, 30-day sub-processor notice, 10-business-day
+// assist) are chosen contractual commitments, deliberately housed here rather
+// than in the unilateral privacy policy. Gap list this draft answers:
 // docs/planning/sgaunz-selfserve-implications-2026-07-07.md §1/§7b (saas repo).
 
 export const metadata: Metadata = {
@@ -304,6 +309,15 @@ export default function DpaPage() {
                 processing of Customer Personal Data, this DPA prevails. This DPA
                 remains in force while DynaMeet processes Customer Personal Data.
               </p>
+              <p style={{ marginTop: 12 }}>
+                11.3 <strong>Severability; local mandatory rights unaffected.</strong>{" "}
+                If a provision of this DPA is held void or unenforceable, it is
+                severed or read down to the minimum extent necessary and the
+                remainder continues in full effect. Nothing in this DPA excludes,
+                restricts or modifies any right or protection granted to the
+                Customer or to any individual by a mandatory applicable law that
+                cannot lawfully be excluded, restricted or modified.
+              </p>
             </Section>
 
             <Section title="Annex — Details of processing">
@@ -341,8 +355,7 @@ export default function DpaPage() {
             </Section>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Version: Draft v0.1 — pending professional legal review; not yet in
-              effect.
+              Version: Draft v0.2 — pending final review; not yet in effect.
               <br />
               Established: [TBD — on self-serve launch]
             </p>
@@ -368,9 +381,9 @@ function DraftNotice() {
         color: "#7a5b00",
       }}
     >
-      <strong>DRAFT — pending legal review.</strong> This Data Processing
-      Addendum is a working draft prepared for review by qualified counsel. It is
-      not yet in effect and creates no rights or obligations.
+      <strong>DRAFT — not yet in effect.</strong> This Data Processing Addendum
+      is a working draft pending final review and creates no rights or
+      obligations.
     </div>
   );
 }

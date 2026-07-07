@@ -10,7 +10,7 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // processor role; customer-directed OAuth integrations are explicitly not
 // sub-processors. Entries marked [TBC] must be confirmed by ops before publish.
 //
-// DRAFT — pending legal review + fact confirmation (regions, entity names).
+// DRAFT — pending owner review + fact confirmation (regions, entity names).
 
 export const metadata: Metadata = {
   title: "Sub-processors",
@@ -219,8 +219,8 @@ export default function SubProcessorsPage() {
             </Section>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Version: Draft v0.1 — pending legal review and fact confirmation; not
-              yet in effect.
+              Version: Draft v0.2 — pending final review and fact confirmation;
+              not yet in effect.
               <br />
               Last updated: [TBD]
             </p>
@@ -246,9 +246,9 @@ function DraftNotice() {
         color: "#7a5b00",
       }}
     >
-      <strong>DRAFT — pending legal review.</strong> This sub-processor list is a
-      working draft. Entries marked [TBC] require confirmation of entity names
-      and processing regions before publication.
+      <strong>DRAFT — not yet in effect.</strong> This sub-processor list is a
+      working draft pending final review. Entries marked [TBC] require
+      confirmation of entity names and processing regions before publication.
     </div>
   );
 }
