@@ -3,6 +3,13 @@ const blogRedirects = require('./scripts/blog-redirects.js')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
+  // Next's own trailingSlash redirect fires before middleware ever sees the
+  // request, so it can't be special-cased there. skipTrailingSlashRedirect
+  // hands full control to middleware.ts, which reimplements the same
+  // behavior — except OG/twitter image routes, which are rewritten (not
+  // redirected) since some link-unfurl bots (LinkedIn) won't follow a 308
+  // on an image subresource and silently substitute a random page image.
+  skipTrailingSlashRedirect: true,
   experimental: {
     // Limit parallel static page generation to avoid Notion API rate limits
     staticGenerationMaxConcurrency: 1,

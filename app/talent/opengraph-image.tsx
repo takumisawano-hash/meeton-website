@@ -59,12 +59,15 @@ export default async function Image() {
           >
             M
           </div>
-          <div style={{ fontSize: 64, fontWeight: 900, color: '#111827' }}>
-            Meeton <span style={{ color: '#2563eb' }}>Talent</span>
+          <div style={{ display: 'flex', gap: 14, fontSize: 64, fontWeight: 900, color: '#111827' }}>
+            <span>Meeton</span>
+            <span style={{ color: '#2563eb' }}>Talent</span>
           </div>
         </div>
         <div
           style={{
+            display: 'flex',
+            flexDirection: 'column',
             fontSize: 36,
             fontWeight: 700,
             color: '#64748b',
