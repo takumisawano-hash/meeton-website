@@ -124,6 +124,16 @@ function geoRedirect(req: NextRequest): NextResponse | null {
   return null
 }
 
+// Next's file-convention OG/Twitter image routes (opengraph-image.tsx,
+// twitter-image.tsx) are emitted in <meta> tags WITHOUT a trailing slash,
+// but site-wide trailingSlash:true then 308-redirects the actual fetch to
+// the slashed URL. Slack's unfurl bot follows that redirect fine; LinkedIn's
+// doesn't, and silently falls back to a random <img> on the page instead of
+// leaving the preview blank (e.g. homepage shows a customer's logo). Rewrite
+// (not redirect) these specific paths internally so the very first request
+// already 200s — closes the gap for crawlers that won't follow the 308.
+const OG_IMAGE_RE = /\/(opengraph-image|twitter-image)$/
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const decoded = (() => {
@@ -133,6 +143,24 @@ export function middleware(req: NextRequest) {
       return pathname
     }
   })()
+
+  if (OG_IMAGE_RE.test(pathname)) {
+    const url = req.nextUrl.clone()
+    url.pathname = `${pathname}/`
+    return NextResponse.rewrite(url)
+  }
+
+  // next.config.js sets skipTrailingSlashRedirect so we own trailing-slash
+  // enforcement here (the case above needs a rewrite, not a redirect). This
+  // reproduces Next's default trailingSlash:true behavior for every other path.
+  if (!pathname.endsWith('/')) {
+    // Built as a plain string, not via url.pathname= on a cloned NextURL —
+    // NextURL re-normalizes trailing slashes on assignment per the
+    // trailingSlash/skipTrailingSlashRedirect config and was silently
+    // stripping the slash we just added.
+    const target = `${req.nextUrl.origin}${pathname}/${req.nextUrl.search}`
+    return NextResponse.redirect(target, 308)
+  }
 
   // ── Legacy URL recovery (runs for everyone, incl. bots) ──────────────────
 
