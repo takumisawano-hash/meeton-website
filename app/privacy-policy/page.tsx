@@ -191,8 +191,7 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   （2）<strong>AIモデル提供者</strong>——Google（Gemini
-                  API）、Microsoft（Azure OpenAI
-                  Service）。AI応答の生成に利用します。これらの提供者に渡されるチャット・コンテンツは本サービスの提供のために利用され、提供者自身の広告には利用されません
+                  API）。AI応答の生成に利用します。提供者に渡されるチャット・コンテンツは本サービスの提供のために利用され、提供者自身の広告には利用されません
                 </li>
                 <li>
                   （3）<strong>決済処理</strong>

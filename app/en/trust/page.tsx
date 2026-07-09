@@ -1,31 +1,27 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import { EN_OG_IMAGE } from "@/app/lib/i18n";
 
-// /en/trust/ — English trust page (not a legal document). EN-only page.
-// The single anchor foreign buyers (SG/AU/NZ) get for: hosting region,
-// ISO 27001/27017 certification, sub-processor transparency, DPA, and the
-// breach-notify commitment. Referenced by the Privacy Policy (Art. 8) and
-// DPA (Sec. 4) as the APP 8 / PDPA transfer-disclosure anchor.
+// /en/trust/ — thin trust HUB (not a legal document). EN-only page.
+// Single-source-of-truth rule (owner steering 2026-07-09, anti-duplication):
+// each fact lives in exactly one place and everything else links to it —
+//   hosting region + all-processing-in-Japan → THIS page (unique facts here)
+//   cert marks + security measures        → /en/security/
+//   data-protection commitments (numbers) → the DPA
+//   provider list                          → /en/legal/sub-processors/
+// Do NOT re-add cert-mark images or commitment bullet lists here; that
+// duplication is what this page was slimmed to avoid. Factual tone only —
+// no posture editorializing, no "complies with APP/PDPA" claims.
 //
-// Cert marks: official SGS+ISMS-AC lockups only, served unoptimized
-// (no recolor/stretch/crop), on solid white cards — see the mark-usage rules
-// in SecurityPageClient.tsx / project memory before touching.
-//
-// Commitment-lean rule (2026-07-07): verifiable facts only — hosting region,
-// ISO certs, sub-processors, and pointers to the chosen contractual
-// commitments in the DPA/ToS. No "complies with APP/PDPA" claims, no support
-// SLA until one is published for real.
-//
-// DRAFT — pending owner review; [TBC] items need ops confirmation.
+// Referenced by Privacy Policy §8.1 and the DPA as the hosting-region anchor.
+// DRAFT — pending owner review.
 
 export const metadata: Metadata = {
   title: "Trust & Security",
   description:
-    "Where Meeton ai data is hosted, our ISO/IEC 27001 and 27017 certifications, sub-processors, DPA, and breach-notification commitments.",
+    "Where Meeton ai data is hosted, our certifications, sub-processors, and the legal documents that govern customer data.",
   alternates: {
     canonical: "/en/trust/",
   },
@@ -33,7 +29,7 @@ export const metadata: Metadata = {
     images: EN_OG_IMAGE,
     title: "Trust & Security｜Meeton ai",
     description:
-      "Where Meeton ai data is hosted, our ISO/IEC 27001 and 27017 certifications, sub-processors, DPA, and breach-notification commitments.",
+      "Where Meeton ai data is hosted, our certifications, sub-processors, and the legal documents that govern customer data.",
     url: "https://dynameet.ai/en/trust/",
     type: "website",
     siteName: "Meeton ai",
@@ -41,29 +37,27 @@ export const metadata: Metadata = {
   },
 };
 
-// Official SGS+ISMS-AC combined lockups (same assets as /security/).
-const CERT_MARKS = [
+const DOCS = [
   {
-    src: "/certifications/sgs-iso-27001-isms-ac.jpg",
-    alt: "SGS ISO/IEC 27001 certification mark (ISMS-AC accredited, ISR021)",
-    width: 1261,
-    height: 736,
-    standard: "ISO/IEC 27001:2022",
-    kind: "Information Security Management",
-    regNo: "JP26/00000205",
+    href: "/en/security/",
+    label: "Security",
+    note: "ISO/IEC 27001 and 27017 certification marks, product and organisational security measures",
   },
   {
-    src: "/certifications/sgs-iso-27017-isms-ac.jpg",
-    alt: "SGS ISO/IEC 27017 certification mark (ISMS-AC accredited, ISR021)",
-    width: 605,
-    height: 369,
-    standard: "ISO/IEC 27017:2015",
-    kind: "Cloud Security",
-    regNo: "JP26/00000206",
+    href: "/en/legal/dpa/",
+    label: "Data Processing Addendum",
+    note: "Our processor commitments for your visitor data — instructions, sub-processing, transfers, breach notification, deletion",
   },
-];
-
-const LEGAL_DOCS = [
+  {
+    href: "/en/legal/sub-processors/",
+    label: "Sub-processor list",
+    note: "Every provider that touches customer data, with locations and 30-day change notice",
+  },
+  {
+    href: "/en/privacy-policy/",
+    label: "Privacy Policy",
+    note: "How we handle personal information as a controller",
+  },
   {
     href: "/en/legal/terms-self-serve/",
     label: "Self-Serve Terms of Service",
@@ -73,21 +67,6 @@ const LEGAL_DOCS = [
     href: "/en/terms/",
     label: "Terms of Service (managed plans)",
     note: "For order-form customers via our sales team",
-  },
-  {
-    href: "/en/privacy-policy/",
-    label: "Privacy Policy",
-    note: "How we handle personal information as a controller",
-  },
-  {
-    href: "/en/legal/dpa/",
-    label: "Data Processing Addendum",
-    note: "Our processor commitments for your visitor data",
-  },
-  {
-    href: "/en/legal/sub-processors/",
-    label: "Sub-processor list",
-    note: "Who processes customer data, where — with 30-day change notice",
   },
 ];
 
@@ -146,8 +125,8 @@ export default function TrustPage() {
                 color: "#374151",
               }}
             >
-              Where your data lives, who touches it, and what we commit to when
-              something goes wrong — on one page.
+              Where customer data lives, who processes it, and the documents that
+              govern it.
             </p>
           </header>
 
@@ -164,76 +143,28 @@ export default function TrustPage() {
               <p>
                 The Service and customer data are hosted in the{" "}
                 <strong>Amazon Web Services Tokyo region (ap-northeast-1)</strong>,
-                Japan. We state this plainly rather than promising regional hosting
-                we don&rsquo;t have. Japan&rsquo;s data-protection framework holds an
-                EU adequacy decision and Japan participates in the Global CBPR
-                system. The contractual commitments governing overseas processing of
-                customer data — sub-processor locations, transfer safeguards, breach
-                notification — are set out in our{" "}
+                Japan. All current{" "}
+                <a href="/en/legal/sub-processors/" style={{ color: "#12a37d" }}>
+                  sub-processors
+                </a>{" "}
+                also process customer data in Japan. Japan&rsquo;s data-protection
+                framework holds an EU adequacy decision, and Japan participates in
+                the Global CBPR system. For customers assessing cross-border
+                requirements, the contractual transfer commitments are in the{" "}
                 <a href="/en/legal/dpa/" style={{ color: "#12a37d" }}>
                   DPA
                 </a>{" "}
-                (Section 6) for customers to use in their own compliance
-                assessments.
+                (Section 6).
               </p>
             </Section>
 
             <Section title="Certifications">
-              <p style={{ marginBottom: 20 }}>
+              <p>
                 DynaMeet operates an information security management system
-                certified by SGS Japan under ISMS-AC accreditation (ISR021):
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                  gap: 16,
-                }}
-              >
-                {CERT_MARKS.map((m) => (
-                  <div
-                    key={m.src}
-                    style={{
-                      background: "#ffffff",
-                      border: "1px solid #e2efea",
-                      borderRadius: 16,
-                      padding: 20,
-                    }}
-                  >
-                    <div
-                      style={{
-                        background: "#ffffff",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                      }}
-                    >
-                      <Image
-                        src={m.src}
-                        alt={m.alt}
-                        width={m.width}
-                        height={m.height}
-                        unoptimized
-                        style={{ height: 84, width: "auto", display: "block" }}
-                      />
-                    </div>
-                    <p
-                      style={{
-                        margin: "14px 0 0",
-                        fontWeight: 700,
-                        color: "#0f1128",
-                      }}
-                    >
-                      {m.standard}
-                    </p>
-                    <p style={{ margin: "4px 0 0", fontSize: 13.5 }}>
-                      {m.kind} — Registration {m.regNo}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <p style={{ marginTop: 16 }}>
-                Details of our product and organisational security measures are on
-                the{" "}
+                certified to <strong>ISO/IEC 27001:2022</strong> and{" "}
+                <strong>ISO/IEC 27017:2015</strong> (SGS Japan, ISMS-AC
+                accreditation ISR021). Certification marks, registration numbers,
+                and our product and organisational security measures are on the{" "}
                 <a href="/en/security/" style={{ color: "#12a37d" }}>
                   Security page
                 </a>
@@ -241,48 +172,9 @@ export default function TrustPage() {
               </p>
             </Section>
 
-            <Section title="Data protection commitments">
+            <Section title="Documents">
               <ul style={{ paddingLeft: 24, marginTop: 12 }}>
-                <li>
-                  <strong>Processor role under a click-through DPA.</strong> Visitor
-                  data collected from your website is yours; we process it only on
-                  your instructions under the{" "}
-                  <a href="/en/legal/dpa/" style={{ color: "#12a37d" }}>
-                    Data Processing Addendum
-                  </a>
-                  .
-                </li>
-                <li style={{ marginTop: 10 }}>
-                  <strong>Breach notification.</strong> If a breach affects your
-                  data, we notify your account administrator without undue delay —
-                  at the latest within 72 hours of becoming aware, targeting 48
-                  hours — with timely updates as investigation proceeds.
-                </li>
-                <li style={{ marginTop: 10 }}>
-                  <strong>Sub-processor transparency.</strong> Every provider that
-                  touches customer data is listed on the{" "}
-                  <a href="/en/legal/sub-processors/" style={{ color: "#12a37d" }}>
-                    sub-processor page
-                  </a>
-                  , with at least 30 days&rsquo; notice before any addition or
-                  replacement.
-                </li>
-                <li style={{ marginTop: 10 }}>
-                  <strong>Data export and deletion.</strong> Export your data any
-                  time during the term and for 30 days after termination; deletion
-                  or de-identification in principle within 90 days of termination.
-                </li>
-                <li style={{ marginTop: 10 }}>
-                  <strong>AI training opt-out.</strong> AI model improvement uses
-                  only de-identified, aggregated data — and you can opt out entirely
-                  in the Service&rsquo;s settings.
-                </li>
-              </ul>
-            </Section>
-
-            <Section title="Legal documents">
-              <ul style={{ paddingLeft: 24, marginTop: 12 }}>
-                {LEGAL_DOCS.map((d) => (
+                {DOCS.map((d) => (
                   <li key={d.href} style={{ marginBottom: 10 }}>
                     <a href={d.href} style={{ color: "#12a37d", fontWeight: 600 }}>
                       {d.label}
@@ -324,9 +216,8 @@ function DraftNotice() {
         color: "#7a5b00",
       }}
     >
-      <strong>DRAFT — not yet in effect.</strong> This page describes
-      commitments that take effect with the self-serve launch and is pending
-      final review. Items marked [TBC] require confirmation before publication.
+      <strong>DRAFT — not yet in effect.</strong> This page describes the setup
+      that takes effect with the self-serve launch and is pending final review.
     </div>
   );
 }

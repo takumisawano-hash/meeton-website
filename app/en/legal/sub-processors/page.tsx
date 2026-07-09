@@ -8,9 +8,10 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // (Section 5) and the Privacy Policy (Article 6). EN-only page.
 // Lists only providers that process Customer Personal Data in DynaMeet's
 // processor role; customer-directed OAuth integrations are explicitly not
-// sub-processors. Entries marked [TBC] must be confirmed by ops before publish.
+// sub-processors. Facts confirmed by owner 2026-07-09: no Azure OpenAI in the
+// stack; all processing in Japan.
 //
-// DRAFT — pending owner review + fact confirmation (regions, entity names).
+// DRAFT — pending owner review.
 
 export const metadata: Metadata = {
   title: "Sub-processors",
@@ -31,6 +32,8 @@ export const metadata: Metadata = {
   },
 };
 
+// Regions + entities confirmed by owner 2026-07-09 (no Azure OpenAI in the
+// stack; Supabase and Gemini both process in Tokyo).
 const SUB_PROCESSORS: {
   name: string;
   purpose: string;
@@ -44,20 +47,15 @@ const SUB_PROCESSORS: {
   {
     name: "Supabase, Inc.",
     purpose: "Application infrastructure",
-    location: "[TBC — confirm region before publish]",
+    location: "Japan (Tokyo region)",
   },
   {
     name: "Google LLC (Gemini API)",
     purpose: "AI response generation (chat, content and email drafting)",
-    location: "[TBC — confirm processing region before publish]",
+    location: "Japan (Tokyo region)",
   },
   {
-    name: "Microsoft Corporation (Azure OpenAI Service)",
-    purpose: "AI response generation (chat, content and email drafting)",
-    location: "[TBC — confirm processing region before publish]",
-  },
-  {
-    name: "Geolocation Technology, Inc. (docodoco) [TBC — confirm entity]",
+    name: "Geolocation Technology, Inc. (docodoco)",
     purpose:
       "IP-based company-attribute enrichment for visitors from Japanese IP addresses",
     location: "Japan",
@@ -130,7 +128,11 @@ export default function SubProcessorsPage() {
                 Data Processing Addendum
               </a>
               ) in providing the Service. Each sub-processor is bound by
-              data-protection obligations no less protective than the DPA.
+              data-protection obligations no less protective than the DPA.{" "}
+              <strong>
+                All current sub-processors process Customer Personal Data in
+                Japan.
+              </strong>
             </p>
 
             <div style={{ overflowX: "auto", marginBottom: 32 }}>
@@ -247,8 +249,8 @@ function DraftNotice() {
       }}
     >
       <strong>DRAFT — not yet in effect.</strong> This sub-processor list is a
-      working draft pending final review. Entries marked [TBC] require
-      confirmation of entity names and processing regions before publication.
+      working draft pending final review. Entity names and processing regions
+      were confirmed on 2026-07-09.
     </div>
   );
 }

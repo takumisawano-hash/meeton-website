@@ -227,10 +227,10 @@ export default function PrivacyPolicyPageEn() {
                   Tokyo region) and Supabase (application infrastructure);
                 </li>
                 <li>
-                  (2) <strong>AI model providers</strong> — Google (Gemini API) and
-                  Microsoft (Azure OpenAI Service), used to generate AI responses.
-                  Chat and content passed to these providers is used to provide the
-                  Service, not for the providers&rsquo; own advertising;
+                  (2) <strong>AI model provider</strong> — Google (Gemini API), used
+                  to generate AI responses. Chat and content passed to the provider
+                  is used to provide the Service, not for the provider&rsquo;s own
+                  advertising;
                 </li>
                 <li>
                   (3) <strong>Payment processing</strong> — our payment provider

@@ -12,10 +12,11 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // DRAFT — pending owner review (counsel is defer-with-triggers, not gating;
 // see PR #11). Do not remove the DraftNotice or publish before owner sign-off.
 // The DPA is a KEPT artifact under the commitment-lean refinement — SG/AU
-// customers need its transfer clauses for their own compliance; its concrete
-// numbers (72h breach notify, 30-day sub-processor notice, 10-business-day
-// assist) are chosen contractual commitments, deliberately housed here rather
-// than in the unilateral privacy policy. Gap list this draft answers:
+// customers need its transfer clauses for their own compliance. Owner decision
+// 2026-07-09: the 72h breach-notify figure is a soft TARGET (like the public
+// RTO/RPO SLOs), not a warranted deadline — the binding standard is "without
+// undue delay". 30-day sub-processor notice + 10-business-day assist remain
+// hard commitments. Gap list this draft answers:
 // docs/planning/sgaunz-selfserve-implications-2026-07-07.md §1/§7b (saas repo).
 
 export const metadata: Metadata = {
@@ -254,9 +255,11 @@ export default function DpaPage() {
                 8.1 If DynaMeet becomes aware of a breach of security leading to the
                 accidental or unlawful destruction, loss, alteration, unauthorised
                 disclosure of, or access to Customer Personal Data, DynaMeet will
-                notify the Customer without undue delay, and in any event within 72
-                hours of becoming aware (targeting 48 hours), to the account
-                administrator&rsquo;s registered email.
+                notify the Customer without undue delay after becoming aware,
+                targeting notification within 72 hours, to the account
+                administrator&rsquo;s registered email. The 72-hour figure is a
+                target the parties acknowledge as an objective, not a warranted
+                deadline.
               </p>
               <p style={{ marginTop: 12 }}>
                 8.2 The notification will describe, to the extent then known, the

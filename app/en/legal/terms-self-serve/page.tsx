@@ -173,23 +173,6 @@ export default function SelfServeTermsPage() {
                 following a trial. If you do not wish to continue, you can cancel
                 within the Service before the charge date at no cost.
               </p>
-              <p
-                style={{
-                  marginTop: 12,
-                  color: "#b45309",
-                  fontStyle: "italic",
-                  fontSize: 13.5,
-                }}
-              >
-                [TODO — open product decision: whether payment details are
-                required at trial start (card-required vs no-card). Current lean
-                (2026-07-09): <strong>no card required</strong>, matching the
-                live /en/trial/ funnel (&ldquo;no credit card required, no
-                auto-billing&rdquo;) — note this reverses the 2026-06-30 internal
-                read (card-required + usage-gated). This Section stays neutral on
-                the choice until the decision is final; resolve per the
-                implications doc §10 before launch.]
-              </p>
             </Section>
 
             <Section title="4. Subscription term, renewal and cancellation">
