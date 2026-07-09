@@ -182,10 +182,13 @@ export default function SelfServeTermsPage() {
                 }}
               >
                 [TODO — open product decision: whether payment details are
-                required at trial start (card-required vs no-card). This Section
-                is written to stay neutral on that choice; resolve per the
-                implications doc §10 before launch and keep the clause
-                parameter-only.]
+                required at trial start (card-required vs no-card). Current lean
+                (2026-07-09): <strong>no card required</strong>, matching the
+                live /en/trial/ funnel (&ldquo;no credit card required, no
+                auto-billing&rdquo;) — note this reverses the 2026-06-30 internal
+                read (card-required + usage-gated). This Section stays neutral on
+                the choice until the decision is final; resolve per the
+                implications doc §10 before launch.]
               </p>
             </Section>
 
