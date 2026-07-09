@@ -271,8 +271,8 @@ export default function PrivacyPolicyPage() {
                 1. 本サービスにおいて取得した個人情報および顧客データは、日本国内の
                 Amazon Web Services
                 東京リージョン（ap-northeast-1）に保管します。ホスティングおよびセキュリティ体制の詳細は
-                <a href="/en/trust/" style={{ color: "#12a37d" }}>
-                  Trustページ（英語）
+                <a href="/security/" style={{ color: "#12a37d" }}>
+                  情報セキュリティページ
                 </a>
                 に公表しています。
               </p>

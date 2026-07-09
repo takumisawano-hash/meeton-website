@@ -37,12 +37,11 @@ const EN_TWIN_PREFIXES = [
 ]
 
 // EN-only pages with NO JA twin (self-serve funnel + self-serve legal set,
-// e.g. /en/trial/, /en/trust/, /en/legal/dpa/). The JA-desired branch must
-// never strip these — the JA paths do not exist.
+// e.g. /en/trial/, /en/legal/dpa/). The JA-desired branch must never strip
+// these — the JA paths do not exist.
 // Mirrors EN_ONLY_PREFIXES in app/lib/i18n.ts.
 const EN_ONLY_PREFIXES = [
   'trial',
-  'trust',
   'legal/terms-self-serve',
   'legal/dpa',
   'legal/sub-processors',

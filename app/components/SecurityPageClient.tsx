@@ -6,6 +6,13 @@ import Footer from './Footer'
 import Nav from './Nav'
 import type { Lang } from '../lib/i18n'
 
+// 2026-07-09: /en/trust/ was merged into this page (owner call — one trust
+// surface, not two). The "Data residency & documents" section below is the
+// single home for: hosting region, all-sub-processors-in-Japan, and the
+// legal-doc index. Single-source-of-truth: commitments live in the DPA,
+// the provider list on /en/legal/sub-processors/ — link, don't restate.
+// Referenced by Privacy Policy §8.1 / 第8条 and DPA §4 as the hosting anchor.
+
 // ── 第三者認証（ISO/IEC 27001・27017）─────────────────────────────
 // SGS 公式マークを unoptimized で原本配信（改変・比率変更・トリミング不可）。
 // 白地に配置。cert standards/IDs are verbatim facts; `kind` label is localised.
@@ -67,6 +74,31 @@ const ORG_MEASURES = {
   ],
 }
 
+// Data residency + legal-document index (ex-/en/trust/ content).
+// EN-only legal docs are labelled （英語） on the JA page.
+const LEGAL_DOCS = [
+  {
+    href: { ja: '/privacy-policy/', en: '/en/privacy-policy/' },
+    label: { ja: 'プライバシーポリシー', en: 'Privacy Policy' },
+  },
+  {
+    href: { ja: '/terms/', en: '/en/terms/' },
+    label: { ja: '利用規約（マネージドプラン）', en: 'Terms of Service (managed plans)' },
+  },
+  {
+    href: { ja: '/en/legal/terms-self-serve/', en: '/en/legal/terms-self-serve/' },
+    label: { ja: 'Self-Serve Terms of Service（英語）', en: 'Self-Serve Terms of Service' },
+  },
+  {
+    href: { ja: '/en/legal/dpa/', en: '/en/legal/dpa/' },
+    label: { ja: 'データ処理補遺（DPA・英語）', en: 'Data Processing Addendum (DPA)' },
+  },
+  {
+    href: { ja: '/en/legal/sub-processors/', en: '/en/legal/sub-processors/' },
+    label: { ja: 'サブプロセッサー一覧（英語）', en: 'Sub-processor list' },
+  },
+] as const
+
 // Localised page chrome. JA is the default → existing call sites omit `lang`
 // and render byte-identically.
 const SEC_STR = {
@@ -88,6 +120,11 @@ const SEC_STR = {
     orgEyebrow: 'Organizational & Human',
     orgTitle: '組織的・人的セキュリティ対策',
     orgSub: '体制と人による継続的な対策。',
+    residencyEyebrow: 'Data Residency & Documents',
+    residencyTitle: 'データの所在地と関連文書',
+    residencyBody:
+      '本サービスおよび顧客データは、Amazon Web Services 東京リージョン（ap-northeast-1・日本国内）でホスティングされています。現在のすべてのサブプロセッサーは、顧客データを日本国内で処理しています。日本の個人情報保護法制は EU の十分性認定を受けており、日本は Global CBPR システムに参加しています。越境処理に関する契約上のコミットメントはデータ処理補遺（DPA）に定めています。',
+    docsTitle: '関連文書',
     ctaH2: 'さらに詳しい情報セキュリティ仕様を公開しています',
     ctaSub: 'インフラ構成・データ保護方針・バックアップ体制などをまとめたホワイトペーパーをご用意しています。導入前のセキュリティ確認にもご活用ください。',
     ctaPrimary: 'ホワイトペーパーを見る',
@@ -111,6 +148,11 @@ const SEC_STR = {
     orgEyebrow: 'Organizational & Human',
     orgTitle: 'Organizational & human security measures',
     orgSub: 'Continuous measures by structure and people.',
+    residencyEyebrow: 'Data Residency & Documents',
+    residencyTitle: 'Data residency & documents',
+    residencyBody:
+      'The Service and customer data are hosted in the Amazon Web Services Tokyo region (ap-northeast-1), Japan. All current sub-processors process customer data in Japan. Japan’s data-protection framework holds an EU adequacy decision, and Japan participates in the Global CBPR system. Contractual commitments for cross-border processing are set out in the Data Processing Addendum (DPA).',
+    docsTitle: 'Documents',
     ctaH2: 'We publish more detailed information-security specifications',
     ctaSub: 'We have a whitepaper covering infrastructure configuration, data-protection policy, backup setup, and more. Use it for your pre-deployment security review.',
     ctaPrimary: 'View the whitepaper',
@@ -262,6 +304,37 @@ export default function SecurityPageClient({ lang = 'ja' }: { lang?: Lang }) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
               <MeasureCard accent="#12a37d" eyebrow={s.prodEyebrow} title={s.prodTitle} sub={s.prodSub} items={PRODUCT_MEASURES[lang]} />
               <MeasureCard accent="#0891b2" eyebrow={s.orgEyebrow} title={s.orgTitle} sub={s.orgSub} items={ORG_MEASURES[lang]} />
+            </div>
+          </div>
+        </section>
+
+        {/* ── Data residency & legal documents (ex-/en/trust/) ─────── */}
+        <section style={{ padding: '0 clamp(16px, 4vw, 28px) clamp(40px, 6vw, 72px)' }}>
+          <div style={SHELL}>
+            <SectionHead eyebrow={s.residencyEyebrow} title={s.residencyTitle} lead={s.residencyBody} />
+            <div
+              style={{
+                background: '#ffffff',
+                border: '1px solid #e2efea',
+                borderRadius: 24,
+                padding: 'clamp(24px, 3vw, 32px)',
+                boxShadow: '0 14px 40px rgba(16,35,30,0.05)',
+                marginTop: 24,
+              }}
+            >
+              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#12a37d', marginBottom: 14 }}>
+                {s.docsTitle}
+              </div>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+                {LEGAL_DOCS.map((d) => (
+                  <li key={d.href[lang]} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                    <Check />
+                    <a href={d.href[lang]} style={{ fontSize: 15, fontWeight: 700, color: '#16332b', lineHeight: 1.5, textDecoration: 'underline', textDecorationColor: '#bfe3d7', textUnderlineOffset: 3 }}>
+                      {d.label[lang]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>

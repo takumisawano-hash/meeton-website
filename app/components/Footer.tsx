@@ -158,7 +158,6 @@ const DISCOVER_EN = [
 const LEGAL_EN = [
   { href: "/en/about/", label: "About" },
   { href: "/en/security/", label: C_EN.footerLegalSecurity },
-  { href: "/en/trust/", label: "Trust" },
   { href: "/en/integrations/", label: "Integrations" },
   { href: "/careers/", label: "Careers" },
   { href: "/en/contact/", label: "Contact" },

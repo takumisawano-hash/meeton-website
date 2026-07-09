@@ -242,8 +242,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/en/terms/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: `${baseUrl}/en/integrations/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: `${baseUrl}/en/legal/tokushoho/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
-    // Self-serve legal set + trust page (EN-only, no JA twins)
-    { url: `${baseUrl}/en/trust/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
+    // Self-serve legal set (EN-only, no JA twins)
     { url: `${baseUrl}/en/legal/terms-self-serve/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: `${baseUrl}/en/legal/dpa/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: `${baseUrl}/en/legal/sub-processors/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.3 },

@@ -344,8 +344,8 @@ export default function PrivacyPolicyPageEn() {
                 Service are stored in the Amazon Web Services Tokyo region
                 (ap-northeast-1) in Japan. Details of our hosting and security
                 posture are published on our{" "}
-                <a href="/en/trust/" style={{ color: "#12a37d" }}>
-                  Trust page
+                <a href="/en/security/" style={{ color: "#12a37d" }}>
+                  Security page
                 </a>
                 .
               </p>

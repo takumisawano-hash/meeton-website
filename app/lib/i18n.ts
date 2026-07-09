@@ -77,7 +77,6 @@ export const EN_TWIN_PREFIXES = [
 // language switch sends visitors to the JA homepage instead of a 404.
 export const EN_ONLY_PREFIXES = [
   "trial",
-  "trust",
   "legal/terms-self-serve",
   "legal/dpa",
   "legal/sub-processors",

@@ -178,10 +178,6 @@ export default function DpaPage() {
                 loss, alteration, unauthorised disclosure or access — including
                 encryption in transit, access controls, logging, and network
                 separation. Current details are published on the{" "}
-                <a href="/en/trust/" style={{ color: "#12a37d" }}>
-                  Trust page
-                </a>{" "}
-                and{" "}
                 <a href="/en/security/" style={{ color: "#12a37d" }}>
                   Security page
                 </a>
