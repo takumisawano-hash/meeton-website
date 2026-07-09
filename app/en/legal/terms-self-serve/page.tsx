@@ -109,10 +109,10 @@ export default function SelfServeTermsPage() {
             <p style={{ marginBottom: 32 }}>
               Customers who contract with us through a written order form arranged
               with our sales team are governed by our{" "}
-              <a href="/en/terms/" style={{ color: "#12a37d" }}>
-                Terms of Service (managed plans)
+              <a href="/terms/" style={{ color: "#12a37d" }}>
+                Terms of Service for managed plans
               </a>{" "}
-              instead of these Terms.
+              (maintained in Japanese) instead of these Terms.
             </p>
 
             <Section title="1. Eligibility and business use only">
