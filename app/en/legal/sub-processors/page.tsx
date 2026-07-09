@@ -11,7 +11,8 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // sub-processors. Facts confirmed by owner 2026-07-09: no Azure OpenAI in the
 // stack; all processing in Japan.
 //
-// DRAFT — pending owner review.
+// Publish model: merging this PR publishes (owner review gates the merge).
+// Set the last-updated date in the page footer at publish.
 
 export const metadata: Metadata = {
   title: "Sub-processors",
@@ -110,8 +111,6 @@ export default function SubProcessorsPage() {
               Sub-processors
             </h1>
           </header>
-
-          <DraftNotice />
 
           {/* Content */}
           <div
@@ -221,37 +220,13 @@ export default function SubProcessorsPage() {
             </Section>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Version: Draft v0.2 — pending final review and fact confirmation;
-              not yet in effect.
-              <br />
-              Last updated: [TBD]
+              Last updated: [set at publish]
             </p>
           </div>
         </div>
       </main>
       <Footer lang="en" />
     </>
-  );
-}
-
-function DraftNotice() {
-  return (
-    <div
-      style={{
-        background: "#fff8e6",
-        border: "1px solid #f0c948",
-        borderRadius: 12,
-        padding: "16px 20px",
-        marginBottom: 32,
-        fontSize: 14,
-        lineHeight: 1.7,
-        color: "#7a5b00",
-      }}
-    >
-      <strong>DRAFT — not yet in effect.</strong> This sub-processor list is a
-      working draft pending final review. Entity names and processing regions
-      were confirmed on 2026-07-09.
-    </div>
   );
 }
 

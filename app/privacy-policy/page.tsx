@@ -9,10 +9,11 @@ import Link from "next/link";
 // DPA が規律）、インフラ/AI サブプロセッサーの開示、保管リージョンの明記、
 // 漏えい時の通知コミットメント、法域別annex、言語優先条項。
 //
-// ドラフト — オーナーレビュー未了（counsel は defer-with-triggers。PR #11 の
-// parked リスト参照）。commitment-lean 方針: 法域別 annex（OAIC 経路・30日
-// 回答約束等）はトリガーまで先送り — 第14条は汎用の「現地法上の権利」1行のみ。
-// 具体的な日数コミットは DPA 側にのみ置く。対応ギャップ一覧:
+// 公開モデル: この PR のマージ＝公開（マージ前にオーナーレビュー。counsel は
+// defer-with-triggers。PR #11 の parked リスト参照）。最終更新日はマージ時に
+// 設定する。commitment-lean 方針: 法域別 annex（OAIC 経路・30日回答約束等）は
+// トリガーまで先送り — 第14条は汎用の「現地法上の権利」1条文のみ。具体的な
+// 日数コミットは DPA 側にのみ置く。対応ギャップ一覧:
 // docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7b（saas リポジトリ）。
 
 export const metadata: Metadata = {
@@ -84,8 +85,6 @@ export default function PrivacyPolicyPage() {
               プライバシーポリシー
             </h1>
           </header>
-
-          <DraftNotice />
 
           {/* Content */}
           <div
@@ -387,33 +386,13 @@ export default function PrivacyPolicyPage() {
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
               制定日：2024年10月3日
               <br />
-              最終更新日：［ドラフト——最終レビュー未了。2026年4月23日公表版が引き続き有効です］
+              最終更新日：［公開時に設定］
             </p>
           </div>
         </div>
       </main>
       <Footer />
     </>
-  );
-}
-
-function DraftNotice() {
-  return (
-    <div
-      style={{
-        background: "#fff8e6",
-        border: "1px solid #f0c948",
-        borderRadius: 12,
-        padding: "16px 20px",
-        marginBottom: 32,
-        fontSize: 14,
-        lineHeight: 1.7,
-        color: "#7a5b00",
-      }}
-    >
-      <strong>ドラフト——未発効。</strong>
-      本ページは最終レビュー前の改訂草案であり、まだ効力を有しません。承認・公表までは、2026年4月23日公表のプライバシーポリシーが引き続き有効です。
-    </div>
   );
 }
 

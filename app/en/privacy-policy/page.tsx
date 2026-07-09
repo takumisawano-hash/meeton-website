@@ -19,7 +19,9 @@ import Link from "next/link";
 // "complies with APP/PDPA" claims anywhere. Headings are plain English
 // numbered sections, not translated-APPI "Article N (…)" style.
 //
-// DRAFT — pending owner review (counsel is defer-with-triggers; see PR #11).
+// Publish model: merging this PR publishes (owner review gates the merge;
+// counsel is defer-with-triggers — see PR #11). Set the last-updated date in
+// the page footer at publish.
 // Gap list: docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7b.
 
 export const metadata: Metadata = {
@@ -93,8 +95,6 @@ export default function PrivacyPolicyPageEn() {
               Privacy Policy
             </h1>
           </header>
-
-          <DraftNotice />
 
           {/* Content */}
           <div
@@ -502,36 +502,13 @@ export default function PrivacyPolicyPageEn() {
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
               Established: October 3, 2024
               <br />
-              Last updated: [Draft — pending final review; the version published
-              April 23, 2026 remains in effect]
+              Last updated: [set at publish]
             </p>
           </div>
         </div>
       </main>
       <Footer lang="en" />
     </>
-  );
-}
-
-function DraftNotice() {
-  return (
-    <div
-      style={{
-        background: "#fff8e6",
-        border: "1px solid #f0c948",
-        borderRadius: 12,
-        padding: "16px 20px",
-        marginBottom: 32,
-        fontSize: 14,
-        lineHeight: 1.7,
-        color: "#7a5b00",
-      }}
-    >
-      <strong>DRAFT — not yet in effect.</strong> This restructured Privacy
-      Policy is a working draft pending final review. The Privacy Policy
-      published on April 23, 2026 remains the effective version until this
-      draft is approved and published.
-    </div>
   );
 }
 

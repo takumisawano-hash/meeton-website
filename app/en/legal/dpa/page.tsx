@@ -9,8 +9,8 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // customers' websites through the Service. PDPA/APP/IPP-aligned transfer
 // clauses, 72h breach-notify SLA, sub-processor change notice.
 //
-// DRAFT — pending owner review (counsel is defer-with-triggers, not gating;
-// see PR #11). Do not remove the DraftNotice or publish before owner sign-off.
+// Publish model: merging this PR publishes (owner review gates the merge;
+// see PR #11). Set the effective date in the page footer at publish.
 // The DPA is a KEPT artifact under the commitment-lean refinement — SG/AU
 // customers need its transfer clauses for their own compliance. Owner decision
 // 2026-07-09: the 72h breach-notify figure is a soft TARGET (like the public
@@ -86,8 +86,6 @@ export default function DpaPage() {
               Data Processing Addendum
             </h1>
           </header>
-
-          <DraftNotice />
 
           {/* Content */}
           <div
@@ -354,36 +352,13 @@ export default function DpaPage() {
             </Section>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Version: Draft v0.2 — pending final review; not yet in effect.
-              <br />
-              Established: [TBD — on self-serve launch]
+              Established: [effective date — set at publish]
             </p>
           </div>
         </div>
       </main>
       <Footer lang="en" />
     </>
-  );
-}
-
-function DraftNotice() {
-  return (
-    <div
-      style={{
-        background: "#fff8e6",
-        border: "1px solid #f0c948",
-        borderRadius: 12,
-        padding: "16px 20px",
-        marginBottom: 32,
-        fontSize: 14,
-        lineHeight: 1.7,
-        color: "#7a5b00",
-      }}
-    >
-      <strong>DRAFT — not yet in effect.</strong> This Data Processing Addendum
-      is a working draft pending final review and creates no rights or
-      obligations.
-    </div>
   );
 }
 

@@ -11,13 +11,13 @@ import { EN_OG_IMAGE } from "@/app/lib/i18n";
 // country-supplements section (AU ACL / NZ CGA / JP Consumer Contract Act).
 // Order-form (sales-managed) customers stay on /terms/ — the managed rail.
 //
-// DRAFT — pending owner review (counsel is defer-with-triggers, not gating;
-// see PR #11 for the parked-for-counsel list). Do not remove the DraftNotice
-// or publish before owner sign-off + product hooks ship. Gap list this draft
-// answers: docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7/§7b
-// (saas repo). The ACL s 64A / NZ CGA s 43(2) clauses track the statutory
-// formulas — verify wording against the statute (side-by-side in the PR body)
-// before changing them.
+// Publish model: merging this PR publishes (owner review + product hooks
+// gate the merge — see PR #11, incl. the parked-for-counsel list). Set the
+// effective date in the page footer at publish. Gap list this draft answers:
+// docs/planning/sgaunz-selfserve-implications-2026-07-07.md §7/§7b (saas
+// repo). The ACL s 64A / NZ CGA s 43(2) clauses track the statutory formulas
+// — verify wording against the statute (side-by-side in the PR body) before
+// changing them.
 
 export const metadata: Metadata = {
   title: "Self-Serve Terms of Service",
@@ -86,8 +86,6 @@ export default function SelfServeTermsPage() {
               Self-Serve Terms of Service
             </h1>
           </header>
-
-          <DraftNotice />
 
           {/* Content */}
           <div
@@ -542,40 +540,13 @@ export default function SelfServeTermsPage() {
             </Section>
 
             <p style={{ marginTop: 48, color: "#6e7494", fontSize: 14 }}>
-              Version: Draft v0.2 — pending final review; not yet in effect.
-              <br />
-              Established: [TBD — on self-serve launch]
+              Established: [effective date — set at publish]
             </p>
           </div>
         </div>
       </main>
       <Footer lang="en" />
     </>
-  );
-}
-
-function DraftNotice() {
-  return (
-    <div
-      style={{
-        background: "#fff8e6",
-        border: "1px solid #f0c948",
-        borderRadius: 12,
-        padding: "16px 20px",
-        marginBottom: 32,
-        fontSize: 14,
-        lineHeight: 1.7,
-        color: "#7a5b00",
-      }}
-    >
-      <strong>DRAFT — not yet in effect.</strong> This document is a working
-      draft pending final review and creates no rights or obligations. The
-      currently effective terms are our{" "}
-      <a href="/en/terms/" style={{ color: "#7a5b00" }}>
-        Terms of Service
-      </a>
-      .
-    </div>
   );
 }
 
