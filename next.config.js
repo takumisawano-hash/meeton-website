@@ -330,7 +330,11 @@ const nextConfig = {
       // solutions allowlist is the 2 existing EN solution LPs only — other
       // /en/solutions/* (cmo/cro/sdr/ceo) fall through to the JA twin.
       {
-        source: '/en/:slug((?!chat/|calendar/|library/|email/|ads/|tools/roi|privacy-policy|terms|integrations/$|integrations$|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|trial/|enterprise|security|cases|blog/|use-cases/|legal/|solutions/crm-to-meeting|solutions/lead-to-meeting|solutions/cmo|solutions/cro|solutions/sdr|solutions/ceo|chat$|calendar$|library$|email$|ads$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|trial$|enterprise$|security$|cases$|blog$).+)',
+        // NOTE: `integrations/` (not `integrations/$`) — the EN integration
+        // DETAIL pages (/en/integrations/<slug>/) are live since 2026-07-02;
+        // the `$`-anchored variant redirected them all to the JA twins
+        // (regressed once via an unrelated redirect fix — keep subpaths open).
+        source: '/en/:slug((?!chat/|calendar/|library/|email/|ads/|tools/roi|privacy-policy|terms|integrations/|integrations$|compare/|alternatives/|glossary/|pricing/|about/|contact/|capture/|trial/|enterprise|security|cases|blog/|use-cases/|legal/|solutions/crm-to-meeting|solutions/lead-to-meeting|solutions/cmo|solutions/cro|solutions/sdr|solutions/ceo|chat$|calendar$|library$|email$|ads$|compare$|alternatives$|glossary$|pricing$|about$|contact$|capture$|trial$|enterprise$|security$|cases$|blog$).+)',
         destination: '/:slug',
         permanent: true,
       },
