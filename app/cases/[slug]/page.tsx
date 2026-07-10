@@ -156,7 +156,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(24px,3.6vw,34px)", fontWeight: 800, color: "var(--on-navy)", margin: "0 0 14px", letterSpacing: "-0.02em" }}>同じ成果を、あなたの会社でも。</h2>
           <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>30分のデモで、自社での効き方を具体的に確認できます。</p>
-          <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`case-${slug}`} tone="onNavy" size="lg" align="center" /></div>
+          <div style={{ display: "flex", justifyContent: "center" }}><CTAButtons source={`case-${slug}`} tone="onNavy" size="lg" align="center" primaryLabel="同じ改善ができるか相談する" /></div>
         </div>
       </Section>
       <Footer />

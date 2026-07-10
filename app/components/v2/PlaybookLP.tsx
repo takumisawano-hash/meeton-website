@@ -108,6 +108,13 @@ export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry;
                 : ["JSタグ1行・約5分で設置", "シナリオ設計不要", "30分のデモで自社への効き方を確認"]
             }
           />
+          {/* tertiary: self-serve diagnostic — challenge/role readers often
+              want to size the problem before talking to anyone */}
+          <div style={{ marginTop: 14 }}>
+            <Link href={en ? "/en/tools/roi/" : "/tools/roi/"} className="v2-link" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--cta)", textDecoration: "underline" }}>
+              {en ? "Estimate your site's meeting upside in 60 seconds →" : "60秒で、自社サイトの商談化の余地を診断する →"}
+            </Link>
+          </div>
         </div>
       </Section>
 

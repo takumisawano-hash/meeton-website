@@ -352,6 +352,323 @@ export const COMPARE: Record<string, CompareData> = {
       { claim: "Smartleadは無制限メールボックス・自動ウォームアップ・エージェンシー向け統合管理に強み。Basic $39/月〜Unlimited $174/月", source: "smartlead.ai/pricing, g2.com" },
     ],
   },
+
+    sprocket: {
+    slug: "sprocket",
+    competitorName: "Sprocket",
+    product: "ads",
+    productName: "Meeton Ads",
+    category: "Web接客・CX改善",
+    metaTitle: "Sprocket の料金・違いとAI代替｜Web接客×サイト内広告で比較｜Meeton",
+    metaDescription:
+      "Sprocket はコンサル伴走型のCX改善・Web接客プラットフォーム。Meeton Ads はサイト内広告をAIが自動最適化し、チャット・商談化まで繋ぐAI SDRの一部。料金公開の有無や適する用途を比較表で解説。",
+    verdict:
+      "EC・金融などトラフィックの多いB2CサイトのCX改善を、専任コンサルタントの伴走で腰を据えて進めるなら、実績豊富な Sprocket が有力です。B2Bサイトでサイト内広告からリードを獲得し、AI会話・商談化まで一気通貫にしたいなら Meeton Ads が向きます。両者は解く課題が異なります。",
+    competitorStrength:
+      "Sprocket は2014年創業・導入企業400社以上のCX改善プラットフォームです。金融など規制業界を含むエンタープライズ実績、ITreview Grid Award Web接客ツール部門での Leader 連続受賞（2026 Spring 時点）、ISO/IEC 27001:2022 認証に加え、12万回超のA/Bテスト知見を持つ専任プロデューサーが伴走してPDCAを回す提供モデルは、CROを本格的に進めたい企業にとって明確な強みです。",
+    rows: [
+      C("主目的", "サイト内広告のAI最適化でB2Bリードを獲得・商談化", "Web接客・パーソナライズによるCX改善（CRO）", true),
+      C("AI会話・商談予約", "広告→AIチャット→予約まで接続（初動5秒・24時間365日）", "商談予約・訪問者向けAI会話の記載なし（ポップアップ・MA中心）", true),
+      C("最適化の仕組み", "AIがサイト内広告の出し分けを自動最適化", "生成AI（Insights / SproAgent）×12万回超のA/Bテスト知見×専任コンサルのシナリオ設計"),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "非公開（要問い合わせ）", true),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携", "CDP（DataStudio）経由の外部ツール連携", true),
+      C("導入・運用", "JSタグ1行・5分で導入、自走運用", "タグ1行で導入、専任プロデューサーが伴走運用"),
+    ],
+    chooseMeeton: [
+      "B2Bサイトでサイト内広告→AI会話→商談化まで一気通貫にしたい",
+      "公開された料金（基本プラン15万円〜＋アドオン）でスモールスタートしたい",
+      "HubSpot / Salesforce にリードを自動登録し、自走で運用したい",
+    ],
+    chooseCompetitor: [
+      "EC・金融などB2C・高トラフィックサイトのCVR改善（CRO）が主目的",
+      "専任コンサルタントに伴走してもらい、豊富なA/Bテスト知見でPDCAを回したい",
+      "CDP・BIまで含む統合CX基盤をエンタープライズで整備したい",
+    ],
+    faq: [
+      { q: "Sprocket と Meeton Ads の違いは？", a: "Sprocket はポップアップなどのWeb接客・パーソナライズ（Personalize）、CDP（DataStudio）、生成AI BI（Insights）、AIエージェント（SproAgent）を組み合わせたCX改善プラットフォームで、専任コンサルタントが伴走してCVR改善のPDCAを回す提供モデルです。Meeton Ads はB2Bサイト向けにサイト内広告をAIが自動最適化し、AIチャット（初動5秒・24時間365日）から商談予約までを同じAI SDRプラットフォームで繋ぎます。CX改善のコンサル伴走なら Sprocket、リード獲得から商談化までの自動化なら Meeton が向きます。" },
+      { q: "Sprocket の料金はいくらですか？", a: "Sprocket の料金は非公開で、要問い合わせです。公式FAQでは企業の課題・ニーズに合わせて最適なプランを個別提案するとしており、初期費用＋月額の構成です（2026年時点）。Meeton ai は基本プラン15万円〜＋アドオン（商談化・追客 各5万円/月）で料金を公開しています。" },
+      { q: "B2Bのリード獲得にはどちらが向いていますか？", a: "Sprocket の導入実績はEC・金融・旅行などB2C・高トラフィックサイトが中心で、ヤンマーホールディングスのオンライン展示会申込（ポップアップなし比143%）のようなB2B事例もあります。Meeton はB2Bのリード獲得〜商談化に特化して設計されており、導入企業では商談化率60%以上（EdulinX社）などの実績があります。B2Bのリード獲得・商談化が主目的なら Meeton、B2CサイトのCX改善が主目的なら Sprocket が適しています。" },
+    ],
+    sources: [
+      { claim: "Sprocket は Personalize（MA）/ DataStudio（CDP）/ Insights（生成AI BI）/ SproAgent の4モジュール構成のCX改善プラットフォーム。12万回超のA/Bテスト知見を持つ専任コンサルタントが伴走。導入企業400社以上", source: "sprocket.bz/service, sprocket.bz/company/outline.html" },
+      { claim: "料金は非公開（要問い合わせ）。課題・ニーズに合わせた個別提案で、初期費用＋月額の構成", source: "sprocket.bz/faq/3.html" },
+      { claim: "ITreview Grid Award Web接客ツール部門で Leader を連続受賞（2026 Spring 時点）。ISO/IEC 27001:2022・JIS Q 27001:2023 認証", source: "itreview.jp/award/2026_spring/web-customer-service.html, sprocket.bz/privacy" },
+      { claim: "ヤンマーホールディングスのB2B事例：オンライン展示会の申込完了率がポップアップなし比143%に改善", source: "sprocket.bz/release/20221004.html" },
+      { claim: "プラットフォームページに商談予約・チャット起点のリード獲得機能の記載なし（ポップアップ・MA・CDP・BIが中心）", source: "sprocket.bz/platform" },
+    ],
+  },
+
+  'flipdesk': {
+    slug: "flipdesk",
+    competitorName: "Flipdesk",
+    product: "ads",
+    productName: "Meeton Ads",
+    category: "Web接客・サイト内広告",
+    metaTitle: "Flipdesk の料金・違いとAI代替｜Web接客×サイト内広告で比較｜Meeton",
+    metaDescription:
+      "Flipdesk は1,600社超が導入する国産Web接客ツール（ポップアップ・バナー・クーポン）。Meeton Ads は訪問者ごとにAIがオファーを出し分け、リード獲得から商談化まで繋ぐサイト内広告。料金・AI機能・使い分けを比較表で解説。",
+    verdict:
+      "EC/D2Cや小売サイトでポップアップ・クーポン・ABテストなどのWeb接客を公開価格で手堅く始めたいなら、1,600社超の実績を持つ Flipdesk は堅実な選択です。B2Bのリード獲得を目的に、出し分け・最適化をAIに任せ、商談予約まで一気通貫にしたいなら Meeton Ads が向きます。",
+    competitorStrength:
+      "Flipdesk は2019年提供開始のWeb接客ツールで、1,600社・2,000サイト超の導入とアスクル・三越伊勢丹（meeco）などの著名実績を持ちます。ポップアップ・バナー・クーポン・ABテスト・ヒートマップまで揃うノーコードの道具箱、初期5万円＋月額5万円（税抜）という公開された入りやすい価格、ITreview 4.2/5（167件）で評価される使いやすさとサポートは明確な強みです。2024年3月にはシナリオAI作成・AIコードなどの生成AI機能も追加されています。",
+    rows: [
+      C("主目的", "サイト内広告でリード獲得を最大化（AI SDRの入口）", "ポップアップ・バナーによるWeb接客でCVR改善", true),
+      C("AIの役割", "配信最適化そのものをAIが担う（訪問者ごとに出し分け・クリックとリード獲得で自動学習）", "AIは制作補助（シナリオAI作成・AIコード・AI FAQボット、2024年3月〜）。配信はルール設定", true),
+      C("商談化への接続", "Meeton Calendar と繋がり初動5秒で商談予約へ（商談化率60%+ = EdulinX）", "商談予約・日程調整機能は確認できず（接客・FAQまで）", true),
+      C("カバー範囲", "掴む→育てる→商談化→追客の一気通貫（Ads/Chat/Library/Calendar/Email）", "サイト内接客＋Cross Talkチャットボット（ABテスト・ヒートマップ含む）"),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "Standard 初期5万円＋月額5万円（税抜・月80万PVまで公開、超過は要見積り）。Cross Talk は非公開（要問い合わせ）"),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携", "会員・CRMデータの取込によるパーソナライズ（SFA/CRMネイティブ連携の公式記載は確認できず）", true),
+    ],
+    chooseMeeton: [
+      "B2Bのリード獲得〜商談化まで、サイト内広告を起点に一気通貫で自動化したい",
+      "セグメントのルール設定やABテストの運用工数をかけず、出し分け・最適化をAIに任せたい",
+      "HubSpot / Salesforce と連携し、獲得したリードをそのまま商談化パイプラインに乗せたい",
+    ],
+    chooseCompetitor: [
+      "EC/D2C・小売・旅行など、購入CVRの改善が主目的（Flipdeskの実績が厚い領域）",
+      "クーポン・カウントダウン・ヒートマップなどWeb接客の道具箱を幅広く使いたい",
+      "初期5万円＋月額5万円（税抜）の公開価格でスモールスタートしたい",
+    ],
+    faq: [
+      { q: "Flipdesk と Meeton Ads の違いは？", a: "Flipdesk はポップアップ・バナー・クーポンなどを約30項目のセグメント条件でルール設定して出し分ける国産Web接客ツールで、1,600社超の導入実績があります。Meeton Ads は自社サイトを広告枠と捉え、AIが訪問者ごと（ページ・流入元・業種）に最適なオファーを選び、クリック・リード獲得を報酬に配信を自動学習するサイト内広告です。ECのCVR改善が目的なら Flipdesk、B2Bのリード獲得〜商談化なら Meeton Ads が向きます。" },
+      { q: "Flipdesk の料金はいくらですか？", a: "Flipdesk の Standard プランは初期費用5万円＋月額5万円（いずれも税抜）で月80万PVまで、超過する場合は要見積りです（2026年時点の公式公開価格）。チャットボットの Cross Talk は別料金で、公式サイトに価格の公開はなく要問い合わせです（二次情報の価格は情報源間で一致せず）。Meeton ai は基本プラン15万円〜＋アドオンで料金を公開しています。" },
+      { q: "Flipdesk にAI機能はありますか？", a: "あります。2024年3月に生成AI機能（自然文からシナリオを作る「シナリオAI作成」、バナーHTMLを自動生成する「AIコード」、フリーテキストに対応するAI FAQボット）が追加されました。ただし配信の出し分け自体はルール設定型で、商談予約やリードのクオリフィケーション機能は確認できません。Meeton Ads は配信最適化そのものをAIが担い、Meeton Calendar と繋いで商談予約まで自動化する点が異なります。" },
+    ],
+    sources: [
+      { claim: "Flipdesk はポップアップ・バナー・クーポン・ABテスト・ヒートマップ等のWeb接客。約30項目のセグメント条件で出し分け。1,600社・2,000サイト超、アスクル・三越伊勢丹（meeco）等の導入実績", source: "materialdigital.jp/service/flipdesk, materialdigital.jp/case/flipdesk" },
+      { claim: "Standardプランは初期費用5万円＋月額5万円（税抜）・月80万PVまで、超過は要見積り（公式公開価格）", source: "materialdigital.jp/service/flipdesk/price_opiton" },
+      { claim: "Cross Talk はシナリオ・QA・アンケート型チャットボット（有人チャット連携あり）。公式ページに商談予約・CRM連携の記載なし。料金は公式非公開で、二次情報間でも価格が一致しない（2026年7月確認）", source: "materialdigital.jp/service/crosstalk, it-trend.jp/chatbot/11285" },
+      { claim: "2024年3月に生成AI機能（シナリオAI作成・AIコード・AI FAQボット）を追加", source: "materialgroup.jp/news/20240301, support.materialdigital.jp/manual/ai_suggestion" },
+      { claim: "運営は株式会社マテリアルデジタル（2023年7月末に株式会社フリップデスクから社名変更、Material Group傘下）。ITreview 4.2/5（167件）", source: "materialgroup.jp/news/20230731, itreview.jp/products/flipdesk/profile" },
+    ],
+  },
+
+    "channel-talk": {
+    slug: "channel-talk",
+    competitorName: "チャネルトーク",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "接客チャット / CRM",
+    metaTitle: "チャネルトーク の料金・違いとAI代替｜Web接客×商談化で比較｜Meeton",
+    metaDescription:
+      "チャネルトークはLINE連携やEC向け機能が充実し無料から使える接客チャット/CRM。Meeton Chat は新規・潜在リードの商談化に特化したAIチャット（初動5秒・24時間365日）。接客・サポートか、商談獲得かで使い分けを比較表で解説。",
+    verdict:
+      "EC/D2CサイトでLINE・Instagramと繋いだ接客・購入支援や、サポート問い合わせの自動化を低コストで始めたいなら、日本での実績が厚いチャネルトークは有力です。B2Bサイトの新規・潜在訪問者を会話で掴み、予約・追客まで含めて「商談化」したいなら Meeton Chat が向きます。接客か、商談獲得かで選ぶのが適切です。",
+    competitorStrength:
+      "チャネルトークは日本法人設立から10年以上、全世界22万社以上（自社公表）が利用する接客チャット/CRMです。LINE・Instagram DMのネイティブ連携やShopify・Cafe24・カラーミーショップ向けアプリなどEC向けの作り込みが深く、AIエージェント「ALF」はAIが自律解決したチャットにのみ課金される買い手に優しい従量モデル。無料プランから始められる導入ハードルの低さも明確な強みです。",
+    rows: [
+      C("主目的", "新規・潜在リードの商談化（AI SDR）", "接客チャットを軸にした顧客コミュニケーション統合"),
+      C("AI会話の設計", "温度を上げ予約まで運ぶ（初動5秒・24時間365日）", "ALFが問い合わせを自律解決（サポート中心）", true),
+      C("カバー範囲", "会話＋資料＋予約＋追客の商談化一気通貫", "チャット＋社内チャット＋CRMマーケ（日程予約機能は非搭載）", true),
+      C("SFA/CRM連携", "HubSpot / Salesforce ネイティブ連携", "自社CRM（MU）内蔵・LINE / Instagram / EC系連携が充実", true),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "無料〜Growth ¥9,600/月＋MU数・AI解決数の従量（公開）"),
+      C("得意領域", "B2Bサイトの商談獲得・日本語ネイティブ", "EC/D2Cの接客・購入支援・サポート"),
+    ],
+    chooseMeeton: [
+      "B2Bサイトの訪問者を会話で掴み、予約・追客まで含めて商談化したい",
+      "HubSpot / Salesforce を軸にした営業プロセスに自動で乗せたい",
+      "JSタグ1行・5分で導入し、商談化率60%+（EdulinX）のような商談獲得の成果を狙いたい",
+    ],
+    chooseCompetitor: [
+      "EC/D2CサイトでLINE・Instagram・Shopify等と繋いだ接客・購入支援をしたい",
+      "サポート問い合わせの自律解決と社内チャット・CRMマーケまで1つにまとめたい",
+      "まず無料〜月数千円で接客チャットを小さく始めたい",
+    ],
+    faq: [
+      { q: "チャネルトークと Meeton Chat の違いは何ですか？", a: "チャネルトークは接客チャット・顧客CRM・社内チャット・CRMマーケティングを1つにまとめたオールインワンで、LINE・InstagramやShopify等のEC向け連携が充実し、EC/D2Cの接客・サポートに強みがあります。Meeton Chat はB2Bサイトの新規・潜在リードの『商談化』に特化したAIチャットで、初動5秒・24時間365日の会話で温度を上げ、予約・追客まで同じプラットフォームで運びます。接客・サポートならチャネルトーク、商談獲得なら Meeton が向きます。" },
+      { q: "チャネルトークの料金はいくらですか？", a: "無料プランのほか、Early Stage ¥3,600/月〜・Growth ¥9,600/月〜（税抜、年払い割引あり）の公開料金で、MU（保存連絡先数）に応じてプランが決まります。加えてAIエージェント『ALF』はAIが自律解決したチャット1件につき¥50などの従量課金が別途かかります（2026年時点）。Meeton ai は基本プラン15万円〜＋アドオン（税抜）の公開料金です。" },
+      { q: "B2Bの商談獲得にはどちらが向いていますか？", a: "チャネルトークにもチャットを使ったインサイドセールスの事例（ランサーズ）はありますが、製品の中心はEC/D2Cの接客・サポートで、日程予約機能は搭載されていません。Meeton Chat は商談獲得のためのAI SDRとして設計され、導入企業では商談化率60%以上（EdulinX）、チャット経由リード20倍（BizteX）、月間SQL2倍（G-gen）の実績があります。B2Bの商談獲得が主目的なら Meeton、接客との兼用ならチャネルトークも選択肢です。" },
+    ],
+    sources: [
+      { claim: "チャネルトークは無料 / Early Stage ¥3,600/月 / Growth ¥9,600/月（税抜、年払い割引あり）の公開料金。MU（保存連絡先）数に応じたプランで、Enterpriseは要問い合わせ", source: "channel.io/jp/pricing, itreview.jp/products/channeltalk/price" },
+      { claim: "AIエージェント「ALF」はAIが自律解決したチャットのみ¥50/件の従量課金。RAGで資料を学習し33言語・24時間対応", source: "channel.io/jp/pricing, docs.channel.io/help/en/articles/What-is-ALF--541f14b8" },
+      { claim: "全世界22万社以上が利用・継続率98%（自社公表）。日本法人は2015年1月設立、ISO系情報セキュリティ認証4種", source: "prtimes.jp/main/html/rd/p/000000144.000029184.html, korit.jp" },
+      { claim: "LINE・Instagram DM連携とShopify / Cafe24 / カラーミーショップ向けアプリを提供。ランサーズのチャットインサイドセールス事例も公表", source: "prtimes.jp/main/html/rd/p/000000041.000029184.html, channel.io/ja/blog/articles/case-lancers-0bf5304a" },
+    ],
+    alternative: true,
+  },
+
+    "hubspot-chatbot": {
+    slug: "hubspot-chatbot",
+    competitorName: "HubSpot Chatflows / Breeze",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "チャットボット / CRM一体チャット",
+    metaTitle: "HubSpotチャットボットの料金・違い｜商談化チャットで比較｜Meeton",
+    metaDescription:
+      "HubSpotのチャットボット（Chatflows / Breeze）は無料枠から使えるCRM一体のチャット基盤。Meeton Chat は商談化特化のAIチャットで、HubSpot CRMにネイティブ連携し置き換えなしで併用可能。役割の違いと使い分けを比較表で解説。",
+    verdict:
+      "既に HubSpot をお使いで、まず無料枠のライブチャットや既存顧客のサポート自動化（Breeze Customer Agent）から始めたいなら、HubSpot 純正のチャット機能が自然な選択です。サイト来訪者との会話を「商談化」まで運ぶAIを求めるなら、HubSpot CRM にネイティブ連携する Meeton Chat が向きます。両者は置き換えではなく、CRM＋サポートは HubSpot、商談化チャットは Meeton という役割分担での併用が可能です。",
+    competitorStrength:
+      "HubSpot は有料顧客299,458社（2026年3月末）・2025年通期売上約$3.13Bの世界的CRMプラットフォームです。チャット/Botの対話がコンタクトタイムライン・プロパティ・ワークフローにそのまま反映されるCRMネイティブ統合は純正ならではの強みで、無料枠からライブチャット＋簡易Botを始められる導入ハードルの低さ、成果報酬課金化（2026年4月）やWarmly買収発表（2026年6月）などAI領域への投資スピードも際立ちます。",
+    rows: [
+      C("主目的", "新規・潜在リードの商談化（AI SDR）", "CRM一体のチャット窓口（Chatflows）＋サポート自動解決（Breeze）"),
+      C("AI会話", "AIが自然な対話で温度を上げ予約まで運ぶ", "Chatflowsは決定木型、Breezeはサポート解決に特化", true),
+      C("チャット内予約", "会話の流れでヒアリング〜予約まで完結（初動5秒）", "予約リンクの提示が基本（カスタム項目は予約ページへ遷移）", true),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携（会話・商談を自動登録）", "HubSpot CRM そのもの（タイムライン自動記録）"),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "無料枠あり。高度機能はHub上位プラン＋Breezeは解決課金（$0.50/件）"),
+      C("提供", "国産・日本語ネイティブ設計", "グローバル製品・日本語ローカライズ（日本法人あり）"),
+    ],
+    chooseMeeton: [
+      "HubSpot CRM は維持したまま、サイト来訪者の商談化チャットを強化したい（ネイティブ連携で併用）",
+      "決定木でなくAIの自然な対話で温度を上げたい（EdulinX社で商談化率60%+）",
+      "会話の流れの中でヒアリングから予約まで完結させたい（24時間365日・初動5秒）",
+    ],
+    chooseCompetitor: [
+      "まず無料枠のライブチャット＋簡易Botで小さく始めたい",
+      "既存顧客のサポート問い合わせの自動解決が主目的（Breeze Customer Agent）",
+      "マーケ・営業・サポートを HubSpot 単一プラットフォームに揃えたい",
+    ],
+    faq: [
+      { q: "HubSpot のチャットボットと Meeton Chat は併用できますか？", a: "併用できます。Meeton Chat は HubSpot CRM とネイティブ連携しており、チャットの会話や獲得した商談はコンタクトのタイムラインに自動登録されます。HubSpot を CRM・サポート基盤として使い続けながら、サイト来訪者の商談化チャットだけを Meeton Chat で強化する役割分担が可能で、置き換えは不要です。導入はJSタグ1行・約5分です。" },
+      { q: "HubSpot Chatflows / Breeze と Meeton Chat の違いは？", a: "HubSpot の Chatflows は無料枠から使える決定木型Bot＋ライブチャット、Breeze Customer Agent はナレッジベース等を参照して問い合わせを自動解決するサポート特化のAIエージェントです。Meeton Chat は新規・潜在リードの商談化に特化し、AIが自然な対話で温度を上げ、初動5秒で会話を始めて予約まで運びます。サポート自動化なら HubSpot、商談化なら Meeton が向きます。" },
+      { q: "料金はどう違いますか？", a: "HubSpot の Chatflows は無料枠から始められ、高度な機能は Professional 以上（例: Service Hub Professional $90/seat/月）が必要です。Breeze Customer Agent は2026年4月14日から解決1件あたり50クレジット（$0.50）の成果報酬課金に移行しています。Meeton ai は基本プラン15万円〜＋アドオン（税抜）で料金を公開しています。" },
+    ],
+    sources: [
+      { claim: "ChatflowsはHubSpot無料CRMに含まれるライブチャット＋ルールベースBot。高度な分岐・ワークフロー連携はProfessional以上", source: "resonatehq.com/blog/hubspot-chatbot-guide, hubspot.com/pricing/marketing" },
+      { claim: "Bot内の予約はミーティングリンクの提示が基本で、カスタムフォーム項目がある場合はチャット内で完結せず予約ページへリダイレクトされる", source: "knowledge.hubspot.com/chatflows/a-guide-to-bot-actions" },
+      { claim: "Breeze Customer Agentはナレッジベース等を参照して問い合わせを自動解決するサポート特化AI。2026年4月14日より解決1件50クレジット（$0.50）の成果報酬課金へ移行", source: "hubspot.com/products/artificial-intelligence/breeze-ai-agents, hubspot.com/company-news/hubspots-customer-agent-and-prospecting-agent-now-you-pay-when-the-task-is-complete" },
+      { claim: "Service HubはStarter $7/seat・Professional $90/seat・Enterprise $150/seat。月次クレジットはStarter 500 / Professional 3,000 / Enterprise 5,000", source: "hubspot.com/pricing/service" },
+      { claim: "2026年6月30日、Warmly（匿名訪問者特定＋能動的エンゲージメントAI）の買収を発表。統合は長期的取り組みで発表時点では未統合", source: "warmly.ai/p/blog/warmly-is-joining-hubspot" },
+      { claim: "有料顧客299,458社（2026年3月末時点）、2025年通期売上約$3.13B", source: "ir.hubspot.com" },
+    ],
+  },
+
+  'drift': {
+    slug: "drift",
+    competitorName: "Drift（Salesloft）",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "会話型マーケティング",
+    metaTitle: "Drift の料金・違いとAI代替｜会話型マーケで比較｜Meeton",
+    metaDescription:
+      "Drift は会話型マーケティングを創出した米国SaaSだが、2026年3月に Salesloft が段階的サンセットを発表。Meeton Chat は日本語ネイティブ・初動5秒のAI会話から商談化・追客まで一気通貫のAI SDR。移行先候補として比較表で解説。",
+    verdict:
+      "既に Salesloft をアウトバウンド営業基盤として標準採用しており、後継の 1mind への移行パスも含めて同一エコシステムで買い手シグナルを扱いたいエンタープライズなら、Drift（Salesloft）系譜は今も検討対象です。ただし Drift 自体は2026年3月に段階的サンセットが公式発表されています。日本語でチャット→商談化→追客を新規に立ち上げる、あるいは Drift からの移行先を探すなら、提供継続中の Meeton Chat が現実的な選択です。",
+    competitorStrength:
+      "Drift は「カンバセーショナルマーケティング」というカテゴリーそのものを創出した先駆者で、Salesloft による買収時点で両社合わせグローバル約6,000社の顧客基盤を持ちました。10年近くかけて磨かれた ABM・アカウントルーティング、Salesloft のケイデンス基盤とのネイティブ統合、広範なサードパーティ連携エコシステムは、エンタープライズのアカウントベース営業で高く評価されてきた本物の資産です。",
+    rows: [
+      C("主目的", "会話→予約→資料→追客までの商談化（AI SDR）", "会話型マーケティング（チャット＋ABMルーティング）", true),
+      C("AI会話", "初動5秒・24時間365日のAI対話", "AIチャットボット＋ライブチャット/予約へのルーティング"),
+      C("カバー範囲", "チャット＋サイト内広告＋資料＋予約＋追客を一気通貫", "チャット＋ABM（追客メールは Salesloft 側の別製品）", true),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "非公開（要問い合わせ）", true),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携", "Salesloft ネイティブ＋広範な連携エコシステム"),
+      C("提供状況", "提供・開発継続中（国産・日本語ネイティブ）", "2026年3月に段階的サンセット発表（後継は 1mind）", true),
+    ],
+    chooseMeeton: [
+      "チャット・広告・資料・予約・追客を1つのAI SDRで完結させたい（JSタグ1行・5分で導入）",
+      "日本語ネイティブ＋初動5秒・24時間365日のAI会話で商談化したい（EdulinX 商談化率60%+、BizteX チャットリード20倍）",
+      "公開料金（基本プラン15万円〜）と提供継続性、ISO27001/27017 の国産基盤を重視したい",
+    ],
+    chooseCompetitor: [
+      "既に Salesloft をアウトバウンド営業のケイデンス基盤として標準採用しており、買い手会話シグナルを同一エコシステム内で扱いたい",
+      "既存の Drift ユーザーで、公式後継である 1mind への移行パスを前提に当面の継続利用を考えている",
+      "英語圏中心のエンタープライズ ABM で、成熟したアカウントルーティング資産を移行完了まで活かしたい",
+    ],
+    faq: [
+      { q: "Drift はサービス終了するのですか？", a: "はい。Drift は2024年2月に Salesloft に買収された後、2026年3月に Salesloft が AIエージェント企業 1mind との提携とあわせて Drift の「段階的サンセット」を公式発表し、既存顧客を後継製品として 1mind へ案内しています。2026年7月時点で drift.com は salesloft.com/platform/drift へリダイレクトされ、同ページには『We've transitioned from Drift to 1mind』と明記されています。新規導入は事実上推奨されない状況です。" },
+      { q: "Drift と Meeton Chat の違いは？", a: "Drift は会話型マーケティングの先駆で、チャットと ABM ルーティングに強みがありますが、追客メールは Salesloft 側の別製品で、日本語ローカライズや国内サポート体制の証跡はありません（ITreview のレビューも3件・満足度2.1/5にとどまります）。Meeton Chat は日本語ネイティブの AI SDR で、初動5秒・24時間365日のAI会話から資料提案・商談予約・追客まで一気通貫。HubSpot / Salesforce にネイティブ連携し、導入は JSタグ1行・5分です。" },
+      { q: "Drift の料金はいくらですか？", a: "非公開（要問い合わせ）です。Salesloft / Drift とも金額を明記した公式の価格ページはありません（2026年時点）。Meeton ai は基本プラン15万円〜＋アドオン（商談化・追客 各5万円/月）で料金を公開しています。" },
+    ],
+    sources: [
+      { claim: "2026年3月6日、Clari + Salesloft が 1mind との提携を発表し Drift の段階的サンセットを公式確認。drift.com は salesloft.com/platform/drift へリダイレクトされ「We've transitioned from Drift to 1mind」と明記", source: "salesloft.com/company/newsroom/1-mind-partnership, salesloft.com/platform/drift" },
+      { claim: "2024年2月13日、Salesloft が Drift を買収。統合後の顧客基盤はグローバル約6,000社", source: "salesloft.com/company/newsroom/salesloft-acquires-drift" },
+      { claim: "料金は非公開（要問い合わせ）。金額を明記した公式価格ページなし", source: "salesloft.com/platform/drift, help.salesloft.com" },
+      { claim: "日本語ローカライズ・日本拠点サポートの証跡なし。ITreview のレビューは3件・満足度2.1/5", source: "itreview.jp/products/drift/profile" },
+    ],
+    alternative: true,
+  },
+
+  'qualified': {
+    slug: "qualified",
+    competitorName: "Qualified (Piper)",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "AI SDR / 商談化チャット",
+    metaTitle: "Qualified の料金・違いとAI代替｜AI商談化チャットで比較｜Meeton",
+    metaDescription:
+      "Qualified（Piper AI SDR）はSalesforceネイティブのエンタープライズ向けAgentic Marketing基盤。2026年4月にSalesforceが買収。Meeton Chat は日本語ネイティブ・公開料金で会話→予約→追客まで一気通貫。CRMスタックと市場で使い分け。",
+    verdict:
+      "Salesforceを基幹CRMとするエンタープライズで、CRMデータと深く連動した来訪者エンゲージメント（チャット・音声・ビデオ）を求めるなら、Salesforce傘下となった Qualified（Piper）は最有力です。日本語ネイティブの製品・サポートと公開料金で、会話から資料・予約・追客まで国内で一気通貫に商談化したいなら Meeton Chat が向きます。",
+    competitorStrength:
+      "Qualified は元Salesforce幹部が創業し、Salesforce Platform上にネイティブ構築されたAI SDR「Piper」を提供。チャット・音声・ビデオの3モダリティでの会話体験と、Salesforceのリード・商談・カスタムオブジェクトまで読み書きする統合の深さは競合の中でも突出しています。公式サイトで500社超の導入を掲げ、2026年4月にSalesforceによる買収が完了（対価公正価値$1.2B）。Agentforceへの統合が進む、資金力と実績に裏付けられたエンタープライズの本命です。",
+    rows: [
+      C("主目的", "新規・潜在リードの商談化（チャット起点のAI SDR）", "Salesforce前提のAgentic Marketing（Piper AI SDR）"),
+      C("AI会話", "AIチャットが初動5秒・24時間365日で応答", "チャット・音声・ビデオの3モダリティで会話"),
+      C("カバー範囲", "会話＋広告＋資料＋予約＋追客を一気通貫", "来訪者エンゲージメント中心（2026年にoutbound用「Hunter」を追加）"),
+      C("料金", "基本プラン15万円〜＋アドオン（公開）", "非公開（要問い合わせ・デモ予約必須）", true),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携", "Salesforceネイティブ（カスタム項目まで深く読み書き）"),
+      C("日本での提供", "国産・日本語ネイティブ・国内サポート", "独自の日本法人・日本語料金は未確認（Salesforce Japan経由で体験公開）", true),
+    ],
+    chooseMeeton: [
+      "日本語ネイティブの製品・サポートで商談化チャットを立ち上げたい",
+      "公開料金（基本プラン15万円〜＋アドオン）で稟議・比較検討を進めたい",
+      "HubSpot中心などSalesforce以外のCRMスタックでも、JSタグ1行・5分で導入したい",
+    ],
+    chooseCompetitor: [
+      "Salesforceが基幹CRMで、CRMデータと深く連動したエンゲージメントを求めるエンタープライズ",
+      "チャットに加え音声・ビデオでのリアルタイム会話体験まで必要",
+      "Agentforceエコシステムへの統合を見据えたSalesforce中心の投資をしたい",
+    ],
+    faq: [
+      { q: "Qualified（Piper）とはどんな製品ですか？", a: "Qualified は米国発のAgentic Marketingプラットフォームで、AI SDR「Piper」がWebサイト来訪者とチャット・音声・ビデオで会話し、リード見極めから商談予約・AIメールまで自律的に実行します。Salesforce Platform上にネイティブ構築されており、2026年4月にSalesforceによる買収が完了、「Qualified from Salesforce」としてAgentforceへの統合が進んでいます。2026年6月にはoutbound向けのProspecting Agent「Hunter」（コンタクト特定＋メールシーケンス）も発表され、インバウンド専用ではなくなっています。" },
+      { q: "Qualified の料金はいくらですか？", a: "Qualified の料金は非公開です。公式にはPremier / Enterprise / Ultimateの3プランと機能差分のみが公開されており、金額はデモ予約後のカスタム見積もりとなります（2026年時点）。Meeton ai は基本プラン15万円〜＋アドオン（商談化・追客 各5万円/月）で料金を公開しています。" },
+      { q: "Qualified は日本語・日本市場に対応していますか？", a: "Piperの会話機能は多言語対応を謳っており、2026年6月のAgentforce World Tour Tokyoに合わせてSalesforce Japan公式サイト上で日本語で体験できる形が公開されました。ただし、Qualified独自の日本法人・日本語サポート体制・日本向け料金ページは確認されていません（2026年7月時点）。日本語ネイティブの製品・サポートを前提にするなら、国産の Meeton Chat が現実的な選択肢です。" },
+    ],
+    sources: [
+      { claim: "PiperはWebサイト来訪者とチャット・音声・ビデオで会話し、Salesforce CRMデータを読み書きして商談予約・AIメールまで実行。料金はPremier/Enterprise/Ultimateの3プラン構成で金額非公開（要問い合わせ）", source: "qualified.com/pricing, qualified.com/ai-sdr, qualified.com/salesforce" },
+      { claim: "2026年4月にSalesforceによる買収が完了（取得対価公正価値$1.2B、Salesforce FY2027 Q1 10-Q開示）。「Qualified from Salesforce」としてAgentforce Sales/Marketingへの統合が進行中。公式サイトは500社超の導入を表示", source: "sec.gov/Archives/edgar (crm-20260430), salesforceben.com, qualified.com" },
+      { claim: "2026年6月のSalesforce Connectionsでoutbound向けProspecting Agent「Hunter」を発表（コンタクト特定・アウトリーチ・メールナーチャー）。Piperを補完するアウトバウンド機能として提供", source: "salesforceben.com/how-many-ai-agents-is-too-many-salesforce-adds-four-more-at-connections" },
+      { claim: "2026年6月、Agentforce World Tour Tokyoに合わせSalesforce Japan公式サイトでPiperを日本語で体験公開。Qualified独自の日本法人・日本語料金体系は確認できず", source: "salesforce.com/jp/blog/jp-inside-sales-ai-agent-piper" },
+    ],
+    alternative: true,
+  },
+
+  'warmly': {
+    slug: "warmly",
+    competitorName: "Warmly",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "訪問者特定・シグナル営業",
+    metaTitle: "Warmly の料金・違いとAI代替｜訪問者特定×チャットで比較｜Meeton",
+    metaDescription:
+      "Warmly は匿名の訪問者を特定しウォームな営業接触につなげる米国製GTMプラットフォーム（2026年6月にHubSpotへの参画を発表）。Meeton Chat は日本語ネイティブで会話→予約→追客まで一気通貫のAI SDR。料金・機能・日本対応を公開情報で比較。",
+    verdict:
+      "英語圏のB2Bサイトで匿名トラフィックを特定し、ウォームなアウトバウンド接触に変えたいなら、専業として完成度の高い Warmly は有力な選択肢です。日本語のサイトで、AIの会話からそのまま予約・追客まで商談化を完結させたいなら Meeton Chat が向きます。両者は解いている課題が異なります。",
+    competitorStrength:
+      "Warmly はサイト訪問者の匿名解除を核とする米国製GTMプラットフォームです。約3秒の特定パイプライン、個人15-30%・企業30-60%という具体的なマッチ率を自ら公開する技術的な実直さがあり、特定後はチャット・Slack通知・メール・LinkedIn/Meta広告まで1つで接続します。500以上のGTMチームが利用し、G2 4.6/5（208件）・累計約$17M調達、2026年6月30日にはHubSpotへの参画（買収）を発表するなど、プロダクトの市場適合が裏付けられた選択肢です。",
+    rows: [
+      C("主目的", "会話→予約→資料→追客の商談化（AI SDR）", "訪問者の匿名解除→ウォームな外向き接触（チャット/メール/広告）"),
+      C("AI会話の提供", "基本プランから搭載。初動5秒・24時間365日", "Inbound Chat（$20,000/年）以上で提供。エントリープランは特定のみ", true),
+      C("訪問者の特定", "会話を通じて訪問者自身から情報を取得", "220M+件の照合で企業30-60%・個人15-30%を約3秒で特定"),
+      C("日本語・国内対応", "国産・日本語ネイティブ。ISO27001/27017", "英語のみ。日本語UI・国内サポートの公開情報なし", true),
+      C("料金", "基本プラン15万円〜＋アドオン（公開・月額）", "$10,000〜30,000/年＋アドオン（公開・年/四半期契約）"),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携", "CRM同期・Slack通知・リードルーティング（HubSpot参画を発表）"),
+    ],
+    chooseMeeton: [
+      "日本語サイトの訪問者と会話し、そのまま予約・追客まで商談化を完結させたい（EdulinX で商談化率60%+）",
+      "基本プランからAIチャットを使いたい（初動5秒・24時間365日、JSタグ1行・5分で導入）",
+      "月額の公開価格（基本プラン15万円〜）と ISO27001/27017 で国内の稟議を通したい",
+    ],
+    chooseCompetitor: [
+      "英語圏のB2B SaaSで、匿名Webトラフィックの特定→ウォームなアウトバウンドが主戦略",
+      "Slack通知・メールシーケンス・LinkedIn/Meta リターゲティングまで一体で回す米国型GTMチーム",
+      "HubSpot エコシステムへの深い統合を見据えたい（2026年6月に買収参画を発表済み）",
+    ],
+    faq: [
+      { q: "Warmly と Meeton Chat の違いは何ですか？", a: "Warmly は匿名のサイト訪問者を企業・個人レベルで特定し（公称：企業30-60%・個人15-30%、約3秒）、チャット・メール・広告リターゲティングでウォームに接触する米国製のGTMプラットフォームです。Meeton Chat は日本語ネイティブのAI SDRで、初動5秒のAI会話から予約・資料提案・追客まで一気通貫で商談化します。匿名層への外向きの接触が主目的なら Warmly、日本語サイトのインバウンド商談化なら Meeton が向きます。" },
+      { q: "Warmly の料金はいくらですか？", a: "公式料金ページで公開されており、AI Web-Deanonymization $10,000/年、Inbound Chat $20,000/年、AI Inbound Autopilot $30,000/年の3プラン＋アドオン（各$10,000/年）です（2026年7月時点、年または四半期契約）。AIチャットは $20,000/年のプラン以上で提供されます。Meeton ai は基本プラン15万円〜＋アドオン（税抜・月額）で料金を公開しています。" },
+      { q: "Warmly は HubSpot に買収されたのですか？", a: "Warmly は2026年6月30日、HubSpot への参画（買収）を自社ブログで発表し、独立系メディアも報じています（買収条件は非公開）。同社は既存の契約・価格・製品は当面変更なしと説明していますが、長期的には HubSpot プラットフォームへの統合を掲げており、独立製品としてのロードマップは今後変わる可能性があります。" },
+    ],
+    sources: [
+      { claim: "料金は公開: AI Web-Deanonymization $10,000/年、Inbound Chat $20,000/年、AI Inbound Autopilot $30,000/年＋アドオン各$10,000/年。無料プランは現行ページに記載なし。AIチャットは$20,000/年プラン以上", source: "warmly.ai/p/pricing" },
+      { claim: "訪問者特定は約3秒・220M+件照合、マッチ率は個人15-30%・企業30-60%を公称。特定後はチャット・Slack通知・メール・LinkedIn/Meta広告に接続", source: "warmly.ai/p/solutions/use-cases/website-visitor-identification" },
+      { claim: "2026年6月30日、HubSpotへの参画（買収）を発表（条件非公開）。既存契約・価格・製品は当面変更なしと自社説明、独立メディアも報道", source: "warmly.ai/p/blog/warmly-is-joining-hubspot, cmswire.com" },
+      { claim: "2020年サンフランシスコ創業（YC）、約60名、累計約$17M調達。500以上のGTMチームが利用、G2 4.6/5（208件）", source: "ycombinator.com/companies/warmly, g2.com/products/warmly-warmly/reviews" },
+      { claim: "公式サイト・製品・料金ページは英語のみで、日本語UI・国内サポート・国内事例の公開情報は確認できず。ISO/ISMS認証の記載なし（GDPR準拠を表明）", source: "warmly.ai" },
+    ],
+    alternative: true,
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────
@@ -679,6 +996,323 @@ export const COMPARE_EN: Record<string, CompareData> = {
     sources: [
       { claim: "Smartlead is strong at unlimited mailboxes, auto-warmup, and agency-oriented centralized management. Basic from $39/mo to Unlimited $174/mo", source: "smartlead.ai/pricing, g2.com" },
     ],
+  },
+
+    sprocket: {
+    slug: "sprocket",
+    competitorName: "Sprocket",
+    product: "ads",
+    productName: "Meeton Ads",
+    category: "Web engagement / CX improvement",
+    metaTitle: "Sprocket pricing, differences & AI alternative｜Web engagement vs on-site ads｜Meeton",
+    metaDescription:
+      "Sprocket is a consultant-led CX improvement / web engagement platform from Japan. Meeton Ads auto-optimizes on-site ads with AI and connects to chat and meeting booking as part of an AI SDR. A comparison of pricing disclosure and best-fit use cases.",
+    verdict:
+      "If you want to run serious CX improvement on a high-traffic B2C site—e-commerce, finance, and the like—with a dedicated consultant driving the program, the well-proven Sprocket is a strong option. If you want to capture leads from on-site ads on a B2B website and connect AI conversation through to booked meetings end to end, Meeton Ads fits better. The two solve different problems.",
+    competitorStrength:
+      "Sprocket is a CX improvement platform founded in 2014 with 400+ client companies, including enterprises in regulated industries such as finance. It holds consecutive 'Leader' awards in the ITreview Grid Award Web engagement (Web接客) tool category (as of 2026 Spring) and ISO/IEC 27001:2022 certification. Its delivery model—a dedicated producer/consultant running the PDCA cycle on a knowledge base of 120,000+ cumulative A/B tests—is a clear strength for companies that want a managed, hands-on CRO program.",
+    rows: [
+      C("Primary purpose", "Capture and convert B2B leads via AI-optimized on-site ads", "CX improvement (CRO) via web engagement & personalization", true),
+      C("AI conversation & meeting booking", "Ads connect to AI chat → booking (first response in 5 seconds, 24/7)", "No documented meeting-booking or visitor-facing AI conversation (popup/MA-centric)", true),
+      C("Optimization approach", "AI auto-optimizes which on-site ads are shown", "Generative AI (Insights / SproAgent) × 120,000+ A/B-test knowledge base × consultant-designed scenarios"),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Not disclosed (contact required)", true),
+      C("CRM integration", "Native HubSpot / Salesforce integration", "External tool integration via its CDP (DataStudio)", true),
+      C("Deployment & operation", "One line of JS, live in 5 minutes, self-serve operation", "One-line tag deployment, run by a dedicated producer/consultant"),
+    ],
+    chooseMeeton: [
+      "You want on-site ads → AI conversation → booked meetings end to end on a B2B website",
+      "You want to start small with published pricing (base plan from ¥150,000/mo + add-ons)",
+      "You want leads auto-registered to HubSpot / Salesforce and a self-serve operation",
+    ],
+    chooseCompetitor: [
+      "Your main goal is CVR improvement (CRO) on a high-traffic B2C site such as e-commerce or finance",
+      "You want a dedicated consultant running the PDCA cycle with a deep A/B-testing knowledge base",
+      "You want to build an integrated enterprise CX stack including CDP and BI",
+    ],
+    faq: [
+      { q: "What is the difference between Sprocket and Meeton Ads?", a: "Sprocket is a CX improvement platform combining web engagement/personalization popups (Personalize), a CDP (DataStudio), generative-AI BI (Insights), and an AI agent (SproAgent), delivered with a dedicated consultant who runs the CVR-improvement PDCA cycle. Meeton Ads auto-optimizes on-site ads with AI for B2B websites and connects AI chat (first response in 5 seconds, 24/7) through to meeting booking on the same AI SDR platform. For consultant-led CX improvement, Sprocket fits; for automating lead capture through to booked meetings, Meeton fits." },
+      { q: "How much does Sprocket cost?", a: "Sprocket does not publish pricing; you must contact them for a quote. Its official FAQ states plans are proposed individually based on each company's needs, structured as an initial fee plus a monthly fee (as of 2026). Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each)." },
+      { q: "Which fits B2B lead generation better?", a: "Sprocket's client base centers on B2C, high-traffic sites in e-commerce, finance, and travel, with some B2B cases such as Yanmar Holdings' online expo registration (completion rate improved to 143% vs. a no-popup baseline). Meeton is purpose-built for B2B lead capture through meeting conversion, with customer results such as a 60%+ meeting conversion rate (EdulinX). If B2B lead generation and meeting conversion is the goal, Meeton fits; if B2C site CX improvement is the goal, Sprocket fits." },
+    ],
+    sources: [
+      { claim: "Sprocket is a CX improvement platform with 4 modules — Personalize (MA) / DataStudio (CDP) / Insights (generative-AI BI) / SproAgent — delivered with dedicated consultants drawing on 120,000+ cumulative A/B tests; 400+ client companies", source: "sprocket.bz/service, sprocket.bz/company/outline.html" },
+      { claim: "Pricing is not disclosed (contact required); plans are proposed individually per company, structured as initial fee + monthly fee", source: "sprocket.bz/faq/3.html" },
+      { claim: "Consecutive 'Leader' awards in the ITreview Grid Award Web engagement tool category (as of 2026 Spring); ISO/IEC 27001:2022 and JIS Q 27001:2023 certified", source: "itreview.jp/award/2026_spring/web-customer-service.html, sprocket.bz/privacy" },
+      { claim: "Yanmar Holdings B2B case: online expo registration completion rate improved to 143% vs. a no-popup baseline", source: "sprocket.bz/release/20221004.html" },
+      { claim: "No meeting-booking or chat-driven lead-capture feature documented on the platform page (popup / MA / CDP / BI centric)", source: "sprocket.bz/platform" },
+    ],
+  },
+
+  'flipdesk': {
+    slug: "flipdesk",
+    competitorName: "Flipdesk",
+    product: "ads",
+    productName: "Meeton Ads",
+    category: "Web engagement & on-site ads",
+    metaTitle: "Flipdesk pricing, differences & AI alternative｜Web engagement vs on-site ads｜Meeton",
+    metaDescription:
+      "Flipdesk is a Japanese web-engagement tool (popups, banners, coupons) used by 1,600+ companies. Meeton Ads is AI-run on-site advertising that matches offers to each visitor and connects lead capture to booked meetings. Pricing, AI capabilities, and use-case fit compared.",
+    verdict:
+      "If you want to solidly start web engagement — popups, coupons, A/B testing — on an EC/D2C or retail site with published pricing, Flipdesk, with its 1,600+ company track record, is a sound choice. If your goal is B2B lead capture, you want AI to handle targeting and optimization, and you want an end-to-end path to booked meetings, Meeton Ads fits better.",
+    competitorStrength:
+      "Flipdesk is a web-engagement tool launched in 2019 with 1,600+ companies and 2,000+ sites deployed, including recognizable names such as Askul and Mitsukoshi Isetan (meeco). Its no-code toolkit spanning popups, banners, coupons, A/B testing, and heatmaps, its accessible published pricing of ¥50,000 setup + ¥50,000/mo (excl. tax), and the ease of use and support reflected in its ITreview 4.2/5 rating (167 reviews) are clear strengths. In March 2024 it also added generative-AI features such as AI scenario creation and AI code generation.",
+    rows: [
+      C("Primary purpose", "Maximize lead capture with on-site ads (the entry point of an AI SDR)", "Improve CVR through web engagement with popups and banners", true),
+      C("Role of AI", "AI runs delivery optimization itself (per-visitor targeting, auto-learning from clicks and captured leads)", "AI assists creation (AI scenario creation, AI code, AI FAQ bot, since March 2024); delivery is rule-based", true),
+      C("Path to booked meetings", "Connects to Meeton Calendar for booking within a 5-second first response (60%+ meeting-conversion rate = EdulinX)", "No meeting-booking or scheduling capability found (stops at engagement/FAQ)", true),
+      C("Coverage", "End to end across capture → nurture → meetings → follow-up (Ads/Chat/Library/Calendar/Email)", "On-site engagement + Cross Talk chatbot (incl. A/B testing and heatmaps)"),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Standard: ¥50,000 setup + ¥50,000/mo (excl. tax, published, up to 800,000 PV/mo; custom quote above). Cross Talk: not disclosed (contact required)"),
+      C("CRM integration", "Native HubSpot / Salesforce integration", "Ingests member/CRM data for personalization (no official mention of native SFA/CRM integration found)", true),
+    ],
+    chooseMeeton: [
+      "You want to automate everything from B2B lead capture to booked meetings, starting from on-site ads",
+      "You want AI to handle targeting and optimization instead of spending hours on segment rules and A/B tests",
+      "You want HubSpot / Salesforce integration so captured leads flow straight into your meeting pipeline",
+    ],
+    chooseCompetitor: [
+      "Your main goal is improving purchase CVR on EC/D2C, retail, or travel sites (where Flipdesk's track record is deepest)",
+      "You want a broad web-engagement toolkit — coupons, countdown timers, heatmaps",
+      "You want to start small at the published price of ¥50,000 setup + ¥50,000/mo (excl. tax)",
+    ],
+    faq: [
+      { q: "What's the difference between Flipdesk and Meeton Ads?", a: "Flipdesk is a Japanese web-engagement tool used by 1,600+ companies that displays popups, banners, and coupons via rule-based targeting with around 30 segmentation parameters. Meeton Ads treats your own site as ad inventory: AI picks the best offer for each visitor (page, traffic source, industry) and auto-learns delivery using clicks and captured leads as rewards. If your goal is EC conversion-rate improvement, Flipdesk fits; for B2B lead capture through to booked meetings, Meeton Ads fits." },
+      { q: "How much does Flipdesk cost?", a: "Flipdesk's Standard plan is ¥50,000 setup + ¥50,000/mo (both excl. tax) for up to 800,000 PV/month, with a custom quote above that (official published pricing as of 2026). The Cross Talk chatbot is priced separately and is not disclosed on the official site — contact required (secondary sources disagree on its price). Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons." },
+      { q: "Does Flipdesk have AI features?", a: "Yes. In March 2024 it added generative-AI features: AI scenario creation from natural-language prompts, AI code that auto-generates banner HTML, and an AI FAQ bot that handles free-text input. However, delivery targeting itself remains rule-based, and no meeting-booking or lead-qualification capability could be found. Meeton Ads differs in that AI runs delivery optimization itself and connects to Meeton Calendar to automate all the way to a booked meeting." },
+    ],
+    sources: [
+      { claim: "Flipdesk offers web engagement with popups, banners, coupons, A/B testing, and heatmaps, targeted via ~30 segmentation parameters. 1,600+ companies / 2,000+ sites; customers include Askul and Mitsukoshi Isetan (meeco)", source: "materialdigital.jp/service/flipdesk, materialdigital.jp/case/flipdesk" },
+      { claim: "Standard plan: ¥50,000 setup + ¥50,000/mo (excl. tax) up to 800,000 PV/month; custom quote above (official published pricing)", source: "materialdigital.jp/service/flipdesk/price_opiton" },
+      { claim: "Cross Talk is a scenario/QA/survey-format chatbot with human-chat handoff. No mention of meeting booking or CRM integration on the official page. Pricing is not officially disclosed and secondary sources disagree (checked July 2026)", source: "materialdigital.jp/service/crosstalk, it-trend.jp/chatbot/11285" },
+      { claim: "Generative-AI features (AI scenario creation, AI code, AI FAQ bot) added in March 2024", source: "materialgroup.jp/news/20240301, support.materialdigital.jp/manual/ai_suggestion" },
+      { claim: "Operated by Material Digital Inc. (renamed from Flipdesk Inc. at the end of July 2023; part of Material Group). ITreview rating 4.2/5 (167 reviews)", source: "materialgroup.jp/news/20230731, itreview.jp/products/flipdesk/profile" },
+    ],
+  },
+
+    "channel-talk": {
+    slug: "channel-talk",
+    competitorName: "Channel Talk",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "Web engagement chat / CRM",
+    metaTitle: "Channel Talk alternative: pricing & differences｜AI meeting-conversion chat｜Meeton",
+    metaDescription:
+      "Channel Talk is a web-engagement chat / CRM with rich LINE and e-commerce integrations, free to start. Meeton Chat is an AI chat specialized in converting new and latent leads into meetings (first response in 5 seconds, 24/7/365). Choose by engagement & support vs. meeting acquisition.",
+    verdict:
+      "If you want to run on-site customer engagement connected to LINE and Instagram on an EC/D2C site, or automate support inquiries at low cost, Channel Talk—with its deep track record in Japan—is a strong choice. If you want to capture new and latent visitors to a B2B website through conversation and \"convert\" them into meetings, including booking and follow-up, Meeton Chat fits. Choose by engagement vs. meeting acquisition.",
+    competitorStrength:
+      "Channel Talk is a web-engagement chat / CRM used by 220,000+ companies globally (self-reported), with a Japan subsidiary operating for over 10 years. Its e-commerce tooling runs deep—native LINE and Instagram DM integration plus dedicated apps for Shopify, Cafe24, and Color Me Shop—and its AI agent \"ALF\" uses a buyer-friendly usage model that charges only for chats the AI resolves autonomously. The low barrier to entry, starting from a free plan, is another clear strength.",
+    rows: [
+      C("Primary purpose", "Meeting conversion of new and latent leads (AI SDR)", "Unified customer communication centered on engagement chat"),
+      C("AI conversation design", "Warms up and carries to booking (first response in 5 seconds, 24/7/365)", "ALF autonomously resolves inquiries (support-centric)", true),
+      C("Coverage", "Conversation + content + booking + follow-up, end to end", "Chat + team chat + CRM marketing (no meeting-booking feature)", true),
+      C("SFA/CRM integration", "Native HubSpot / Salesforce integration", "Built-in CRM (MU) with rich LINE / Instagram / e-commerce integrations", true),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free to Growth ¥9,600/mo + usage fees by MU count and AI resolutions (published)"),
+      C("Best fit", "B2B website meeting acquisition, Japanese-native", "EC/D2C engagement, purchase support, and customer support"),
+    ],
+    chooseMeeton: [
+      "You want to capture B2B website visitors through conversation and convert them to meetings, including booking and follow-up",
+      "You want leads to flow automatically into a HubSpot / Salesforce-centered sales process",
+      "You want to deploy with one line of JS in 5 minutes and aim for meeting-acquisition results like a 60%+ meeting conversion rate (EdulinX)",
+    ],
+    chooseCompetitor: [
+      "You run an EC/D2C site and want engagement and purchase support connected to LINE, Instagram, Shopify, and more",
+      "You want autonomous resolution of support inquiries plus team chat and CRM marketing in one tool",
+      "You want to start small with a chat tool from free to a few thousand yen per month",
+    ],
+    faq: [
+      { q: "What is the difference between Channel Talk and Meeton Chat?", a: "Channel Talk is an all-in-one combining engagement chat, a customer CRM, team chat, and CRM marketing, with rich EC-oriented integrations such as LINE, Instagram, and Shopify—strong for EC/D2C engagement and support. Meeton Chat is an AI chat specialized in \"meeting conversion\" of new and latent leads on B2B websites: it warms prospects up with conversation (first response in 5 seconds, 24/7/365) and carries them to booking and follow-up on the same platform. For engagement and support, Channel Talk fits; for meeting acquisition, Meeton fits." },
+      { q: "How much does Channel Talk cost?", a: "Alongside a free plan, published pricing runs from Early Stage at ¥3,600/mo and Growth at ¥9,600/mo (excl. tax, with annual-prepay discounts), with plans determined by MU (stored contacts) count. On top of that, usage-based fees apply separately—for example, the ALF AI agent charges ¥50 per chat resolved autonomously by AI (as of 2026). Meeton ai has published pricing with a base plan from ¥150,000/mo plus add-ons (excl. tax)." },
+      { q: "Which is better for B2B meeting acquisition?", a: "Channel Talk has chat-based inside-sales case studies (e.g., Lancers), but the product centers on EC/D2C engagement and support, and it has no meeting-booking feature. Meeton Chat is designed as an AI SDR for meeting acquisition, with customer results including a 60%+ meeting conversion rate (EdulinX), 20x chat-sourced leads (BizteX), and 2x monthly SQLs (G-gen). If B2B meeting acquisition is the main goal, Meeton fits; if you also need engagement and support in one tool, Channel Talk is a valid option." },
+    ],
+    sources: [
+      { claim: "Channel Talk publishes pricing: Free / Early Stage ¥3,600/mo / Growth ¥9,600/mo (excl. tax, annual-prepay discounts). Plans are determined by MU (stored contacts) count; Enterprise is quote-based", source: "channel.io/jp/pricing, itreview.jp/products/channeltalk/price" },
+      { claim: "The ALF AI agent charges usage-based ¥50 per chat resolved autonomously by AI only. RAG-based document learning, 33 languages, 24/7 operation", source: "channel.io/jp/pricing, docs.channel.io/help/en/articles/What-is-ALF--541f14b8" },
+      { claim: "220,000+ companies globally and 98% retention (self-reported). Japan subsidiary established January 2015; holds 4 ISO information-security certifications", source: "prtimes.jp/main/html/rd/p/000000144.000029184.html, korit.jp" },
+      { claim: "Native LINE and Instagram DM integration and dedicated apps for Shopify / Cafe24 / Color Me Shop. Published Lancers chat inside-sales case study", source: "prtimes.jp/main/html/rd/p/000000041.000029184.html, channel.io/ja/blog/articles/case-lancers-0bf5304a" },
+    ],
+    alternative: true,
+  },
+
+    "hubspot-chatbot": {
+    slug: "hubspot-chatbot",
+    competitorName: "HubSpot Chatflows / Breeze",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "Chatbot / CRM-native chat",
+    metaTitle: "HubSpot chatbot (Chatflows/Breeze): pricing & differences｜Meeting-conversion chat｜Meeton",
+    metaDescription:
+      "HubSpot's chatbots (Chatflows / Breeze) are a CRM-native chat foundation you can start on a free tier. Meeton Chat is a meeting-conversion-focused AI chat that integrates natively with HubSpot CRM — run them side by side, no replacement needed. Differences and how to combine them, in one table.",
+    verdict:
+      "If you already use HubSpot and want to start with the free live-chat tier or automate support for existing customers (Breeze Customer Agent), HubSpot's own chat features are the natural choice. If you want an AI that carries website conversations all the way to booked meetings, Meeton Chat — natively integrated with HubSpot CRM — fits. This is not a replacement decision: a division of roles works, with HubSpot as CRM + support and Meeton as the meeting-conversion chat.",
+    competitorStrength:
+      "HubSpot is a global CRM platform with 299,458 paying customers (as of March 2026) and roughly $3.13B in 2025 full-year revenue. Its CRM-native integration — chat and bot conversations flowing straight into contact timelines, properties, and workflows — is a strength only the first party can offer, alongside a low barrier to entry (free live chat + basic bots) and fast AI investment, from outcome-based pricing (April 2026) to the announced Warmly acquisition (June 2026).",
+    rows: [
+      C("Primary purpose", "Meeting conversion of new and latent leads (AI SDR)", "CRM-native chat window (Chatflows) + automated support resolution (Breeze)"),
+      C("AI conversation", "AI warms leads through natural dialogue and carries them to booking", "Chatflows is decision-tree based; Breeze specializes in support resolution", true),
+      C("Booking inside chat", "Qualifies and books within the conversation flow (5-second first response)", "Presents a meeting link; custom form fields redirect to a booking page", true),
+      C("CRM integration", "Native HubSpot / Salesforce integration (conversations and meetings auto-logged)", "It is HubSpot CRM itself (auto-logged timelines)"),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free tier available; advanced features need upper Hub tiers + Breeze usage billing ($0.50/resolution)"),
+      C("Provided by", "Made in Japan, Japanese-native design", "Global product, Japanese localization (Japan subsidiary)"),
+    ],
+    chooseMeeton: [
+      "You want to keep HubSpot CRM and strengthen meeting-conversion chat for site visitors (runs alongside via native integration)",
+      "You want AI-driven natural dialogue, not decision trees, to warm leads (60%+ meeting-conversion rate at EdulinX)",
+      "You want qualification through booking completed inside the conversation (24/7, 5-second first response)",
+    ],
+    chooseCompetitor: [
+      "You want to start small with the free live chat + basic bot tier",
+      "Your main goal is auto-resolving support inquiries from existing customers (Breeze Customer Agent)",
+      "You want marketing, sales, and support consolidated on the single HubSpot platform",
+    ],
+    faq: [
+      { q: "Can HubSpot's chatbots and Meeton Chat be used together?", a: "Yes. Meeton Chat integrates natively with HubSpot CRM, so chat conversations and booked meetings are automatically logged to contact timelines. You can keep HubSpot as your CRM and support foundation while strengthening only the meeting-conversion chat with Meeton Chat — no replacement needed. Setup is one line of JS, about 5 minutes." },
+      { q: "How do HubSpot Chatflows / Breeze differ from Meeton Chat?", a: "HubSpot's Chatflows is a decision-tree bot + live chat available from the free tier; Breeze Customer Agent is a support-focused AI agent that resolves inquiries by referencing knowledge bases and site content. Meeton Chat specializes in converting new and latent leads into meetings: AI warms them through natural dialogue, starts talking within 5 seconds, and carries them to booking. For support automation, HubSpot fits; for meeting conversion, Meeton fits." },
+      { q: "How does pricing differ?", a: "HubSpot's Chatflows starts on a free tier, with advanced features requiring Professional or above (e.g., Service Hub Professional at $90/seat/mo). Breeze Customer Agent moved to outcome-based billing on April 14, 2026, at 50 credits ($0.50) per resolved conversation. Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons (excl. tax)." },
+    ],
+    sources: [
+      { claim: "Chatflows is included in HubSpot's free CRM as live chat + a rule-based bot builder; advanced branching and workflow integration require Professional or above", source: "resonatehq.com/blog/hubspot-chatbot-guide, hubspot.com/pricing/marketing" },
+      { claim: "In-bot booking primarily presents a meeting link; when custom form fields exist, the bot redirects to the booking page instead of completing in chat", source: "knowledge.hubspot.com/chatflows/a-guide-to-bot-actions" },
+      { claim: "Breeze Customer Agent is a support-focused AI that resolves inquiries by referencing knowledge bases; from April 14, 2026 it bills 50 credits ($0.50) per resolved conversation", source: "hubspot.com/products/artificial-intelligence/breeze-ai-agents, hubspot.com/company-news/hubspots-customer-agent-and-prospecting-agent-now-you-pay-when-the-task-is-complete" },
+      { claim: "Service Hub: Starter $7/seat, Professional $90/seat, Enterprise $150/seat; monthly credits: Starter 500 / Professional 3,000 / Enterprise 5,000", source: "hubspot.com/pricing/service" },
+      { claim: "On June 30, 2026, HubSpot announced the acquisition of Warmly (anonymous-visitor identification + proactive engagement AI); integration described as a long-term effort, not yet integrated at announcement", source: "warmly.ai/p/blog/warmly-is-joining-hubspot" },
+      { claim: "299,458 paying customers (as of end of March 2026) and roughly $3.13B in 2025 full-year revenue", source: "ir.hubspot.com" },
+    ],
+  },
+
+  'drift': {
+    slug: "drift",
+    competitorName: "Drift (Salesloft)",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "Conversational Marketing",
+    metaTitle: "Drift Alternative｜Pricing & Comparison｜Meeton Chat",
+    metaDescription:
+      "Drift pioneered conversational marketing, but Salesloft announced its gradual sunset in March 2026. Meeton Chat is an actively developed AI SDR — 5-second first response, 24/7 AI conversations, public pricing from ¥150,000/mo. Compare the two and plan your migration.",
+    verdict:
+      "If your sales org is already standardized on Salesloft for outbound cadences and you intend to follow its official successor path to 1mind, staying inside that ecosystem is a reasonable enterprise choice. Drift itself, however, entered a gradual sunset announced in March 2026. If you need an actively developed platform that takes website visitors from AI conversation to booked meetings and follow-up, Meeton Chat is the practical alternative.",
+    competitorStrength:
+      "Drift created the conversational-marketing category and built nearly a decade of thought leadership, with a combined global base of roughly 6,000 customers at the time of the Salesloft acquisition. Its mature ABM and account-routing logic, native integration with Salesloft's cadence platform, and broad third-party integration ecosystem made it a genuine enterprise standard for account-based selling.",
+    rows: [
+      C("Primary purpose", "Pipeline generation end to end: conversation → booking → content → follow-up (AI SDR)", "Conversational marketing (chat + ABM routing)", true),
+      C("AI conversation", "5-second first response, 24/7 AI dialogue", "AI chatbot with routing to live chat or meeting booking"),
+      C("Coverage", "Chat + on-site ads + content + booking + follow-up in one platform", "Chat + ABM (follow-up email lives in separate Salesloft products)", true),
+      C("Pricing", "From ¥150,000/mo + add-ons (public)", "Not published (contact sales)", true),
+      C("CRM integration", "Native HubSpot / Salesforce integration", "Native to Salesloft, plus a broad integration ecosystem"),
+      C("Availability", "Actively developed (built in Japan, native-level Japanese support)", "Gradual sunset announced March 2026 (successor: 1mind)", true),
+    ],
+    chooseMeeton: [
+      "You want one AI SDR covering chat, on-site ads, content, meeting booking, and follow-up (1-line JS tag, live in 5 minutes)",
+      "You want 24/7 AI conversations with a 5-second first response — customers report 60%+ meeting conversion (EdulinX) and 20x chat leads (BizteX)",
+      "You value public pricing (from ¥150,000/mo + add-ons), an actively developed product, and ISO 27001/27017 certification",
+    ],
+    chooseCompetitor: [
+      "Your sales org is standardized on Salesloft cadences and you want buyer-conversation signals inside that same ecosystem",
+      "You are an existing Drift customer planning to follow the official successor path to 1mind",
+      "You run enterprise ABM in English-speaking markets and want to preserve mature account-routing assets through the transition",
+    ],
+    faq: [
+      { q: "Is Drift being discontinued?", a: "Yes. Drift was acquired by Salesloft in February 2024, and in March 2026 Salesloft officially announced a \"gradual sunset\" of Drift alongside a partnership with AI-agent company 1mind, which is positioned as the successor product. As of July 2026, drift.com redirects to salesloft.com/platform/drift, which states \"We've transitioned from Drift to 1mind.\" New adoption of Drift is effectively no longer an option." },
+      { q: "What is the difference between Drift and Meeton Chat?", a: "Drift pioneered conversational marketing with strong chat and ABM routing, but follow-up email sequences live in separate Salesloft products, and there is no evidence of Japanese localization or a Japan-based support team. Meeton Chat is an AI SDR that runs the full journey on one platform — 24/7 AI conversations with a 5-second first response, content recommendations, meeting booking, and follow-up — with native HubSpot / Salesforce integration and a 1-line JS tag that deploys in 5 minutes." },
+      { q: "How much does Drift cost?", a: "Pricing is not published — both Salesloft and Drift require you to contact sales, and no official page lists prices (as of 2026). Meeton ai publishes its pricing: from ¥150,000/mo for the base plan, plus add-ons for meeting conversion and follow-up." },
+    ],
+    sources: [
+      { claim: "On March 6, 2026, Clari + Salesloft announced a partnership with 1mind and officially confirmed Drift's gradual sunset; drift.com redirects to salesloft.com/platform/drift, which states \"We've transitioned from Drift to 1mind\"", source: "salesloft.com/company/newsroom/1-mind-partnership, salesloft.com/platform/drift" },
+      { claim: "Salesloft acquired Drift on February 13, 2024; combined customer base of about 6,000 companies globally", source: "salesloft.com/company/newsroom/salesloft-acquires-drift" },
+      { claim: "Pricing is not published (contact sales); no official page lists prices", source: "salesloft.com/platform/drift, help.salesloft.com" },
+      { claim: "No evidence of Japanese localization or Japan-based support; Drift has 3 reviews and a 2.1/5 score on ITreview (Japan)", source: "itreview.jp/products/drift/profile" },
+    ],
+    alternative: true,
+  },
+
+  'qualified': {
+    slug: "qualified",
+    competitorName: "Qualified (Piper)",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "AI SDR / pipeline chat",
+    metaTitle: "Qualified (Piper) pricing, differences & AI alternative｜AI SDR chat｜Meeton",
+    metaDescription:
+      "Qualified (Piper AI SDR) is a Salesforce-native agentic marketing platform for enterprises, acquired by Salesforce in April 2026. Meeton Chat is Japanese-native with published pricing, covering conversation → booking → follow-up end to end. Choose by CRM stack and market.",
+    verdict:
+      "If you are an enterprise with Salesforce as your system of record and want visitor engagement (chat, voice, video) deeply wired into CRM data, Qualified (Piper) — now part of Salesforce — is a top contender. If you want to build pipeline in Japan with a Japanese-native product and support, published pricing, and one platform covering conversation through content, booking, and follow-up, Meeton Chat fits better.",
+    competitorStrength:
+      "Qualified was founded by former Salesforce executives and its AI SDR \"Piper\" is built natively on the Salesforce Platform. Its three-modality conversation experience (chat, voice, video) and integration depth — reading and writing Salesforce leads, opportunities, and custom objects — stand out among competitors. Its official site cites 500+ companies, and Salesforce completed its acquisition in April 2026 (consideration fair value of $1.2B). With Agentforce integration underway, it is the enterprise heavyweight, backed by deep resources and a strong track record.",
+    rows: [
+      C("Primary purpose", "Meeting conversion of new & latent leads (chat-first AI SDR)", "Salesforce-first agentic marketing (Piper AI SDR)"),
+      C("AI conversation", "AI chat responds within 5 seconds, 24/7/365", "Conversations across 3 modalities: chat, voice, video"),
+      C("Coverage", "Conversation + ads + content + booking + follow-up end to end", "Visitor engagement centric (added outbound agent \"Hunter\" in 2026)"),
+      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Not disclosed (inquiry & demo booking required)", true),
+      C("CRM integration", "Native Salesforce / HubSpot integration", "Salesforce-native (deep read/write down to custom fields)"),
+      C("Availability in Japan", "Made in Japan, Japanese-native product & support", "No dedicated Japan entity or Japanese pricing confirmed (demo published via Salesforce Japan)", true),
+    ],
+    chooseMeeton: [
+      "You want to launch pipeline-generating chat with a Japanese-native product and support",
+      "You want to evaluate with published pricing (base plan from ¥150,000/mo plus add-ons)",
+      "You run a non-Salesforce-centric stack such as HubSpot, and want a one-line JS tag, 5-minute install",
+    ],
+    chooseCompetitor: [
+      "You are an enterprise with Salesforce as the system of record and want engagement deeply wired into CRM data",
+      "You need real-time voice and video conversation experiences on top of chat",
+      "You are investing in a Salesforce-centric stack with Agentforce ecosystem integration in view",
+    ],
+    faq: [
+      { q: "What is Qualified (Piper)?", a: "Qualified is a US-born agentic marketing platform whose AI SDR \"Piper\" converses with website visitors via chat, voice, and video, autonomously handling lead qualification, meeting booking, and AI email. It is built natively on the Salesforce Platform; Salesforce completed its acquisition in April 2026, and integration into Agentforce is underway as \"Qualified from Salesforce.\" In June 2026 it also announced \"Hunter,\" an outbound prospecting agent (contact identification + email sequences), so it is no longer inbound-only." },
+      { q: "How much does Qualified cost?", a: "Qualified's pricing is not disclosed. Officially, only three plan tiers (Premier / Enterprise / Ultimate) and their feature differences are published; actual amounts require a demo booking and custom quote (as of 2026). Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each)." },
+      { q: "Does Qualified support Japanese and the Japan market?", a: "Piper's conversation features claim multi-language support, and in June 2026 — timed with Agentforce World Tour Tokyo — Piper was made available to try in Japanese on the Salesforce Japan official site. However, no dedicated Qualified Japan entity, Japanese-language support organization, or Japan pricing page has been confirmed (as of July 2026). If a Japanese-native product and support are prerequisites, the Japan-made Meeton Chat is the practical choice." },
+    ],
+    sources: [
+      { claim: "Piper converses with website visitors via chat, voice, and video, reads/writes Salesforce CRM data, and executes meeting booking and AI email. Pricing spans three plans (Premier/Enterprise/Ultimate) with no amounts disclosed (inquiry required)", source: "qualified.com/pricing, qualified.com/ai-sdr, qualified.com/salesforce" },
+      { claim: "Salesforce completed the acquisition in April 2026 (consideration fair value $1.2B, disclosed in Salesforce's FY2027 Q1 10-Q). Integration into Agentforce Sales/Marketing underway as \"Qualified from Salesforce.\" Official site shows 500+ companies", source: "sec.gov/Archives/edgar (crm-20260430), salesforceben.com, qualified.com" },
+      { claim: "At Salesforce Connections in June 2026, announced the outbound Prospecting Agent \"Hunter\" (contact identification, outreach, email nurture), offered as an outbound complement to Piper", source: "salesforceben.com/how-many-ai-agents-is-too-many-salesforce-adds-four-more-at-connections" },
+      { claim: "In June 2026, timed with Agentforce World Tour Tokyo, Piper became available to try in Japanese on the Salesforce Japan official site. No dedicated Qualified Japan entity or Japanese pricing confirmed", source: "salesforce.com/jp/blog/jp-inside-sales-ai-agent-piper" },
+    ],
+    alternative: true,
+  },
+
+  'warmly': {
+    slug: "warmly",
+    competitorName: "Warmly",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "Visitor ID & signal-based GTM",
+    metaTitle: "Warmly Pricing, Differences & AI Alternative｜Meeton Chat",
+    metaDescription:
+      "Warmly is a US-built GTM platform that de-anonymizes website visitors and turns them into warm outbound touches (it announced it is joining HubSpot in June 2026). Meeton Chat is a Japan-native AI SDR that runs conversation → booking → follow-up in one flow. Compare pricing, features, and Japan readiness.",
+    verdict:
+      "If you run an English-market B2B site and your core motion is identifying anonymous traffic and converting it into warm outbound touches, Warmly is a strong, well-built choice. If you want an AI conversation on a Japanese-language site to carry visitors all the way to booked meetings and follow-up, Meeton Chat is the better fit. The two solve different problems.",
+    competitorStrength:
+      "Warmly is a US-built GTM platform centered on real-time visitor de-anonymization. It publishes concrete numbers rather than vague marketing — an identification pipeline of about 3 seconds with claimed match rates of 15-30% at the person level and 30-60% at the company level — and connects identification to chat, Slack alerts, email sequences, and LinkedIn/Meta ad retargeting in one platform. With 500+ GTM teams as customers, a 4.6/5 G2 rating (208 reviews), roughly $17M raised, and an announced acquisition by HubSpot (June 30, 2026), its product-market fit is well validated.",
+    rows: [
+      C("Primary purpose", "Meeting conversion: conversation → booking → content → follow-up (AI SDR)", "Visitor de-anonymization → warm outbound touches (chat / email / ads)"),
+      C("AI chat availability", "Included from the base plan; 5-second first response, 24/7", "From the Inbound Chat tier ($20,000/yr); entry tier is identification-only", true),
+      C("Visitor identification", "Captured directly from visitors through conversation", "220M+ record matching; 30-60% company-level, 15-30% person-level in ~3 seconds"),
+      C("Japanese-market support", "Japan-native platform; ISO 27001/27017", "English only; no public evidence of Japanese UI or local support", true),
+      C("Pricing", "From ¥150,000/mo + add-ons (public, monthly)", "$10,000-30,000/yr + add-ons (public, annual/quarterly contracts)"),
+      C("CRM integration", "Native HubSpot / Salesforce integration", "CRM sync, Slack alerts, lead routing (announced it is joining HubSpot)"),
+    ],
+    chooseMeeton: [
+      "You sell to the Japanese market and want conversations on a Japanese-language site to convert into booked meetings and follow-up (60%+ meeting conversion at EdulinX)",
+      "You want AI chat from the base plan — 5-second first response, 24/7, deployed with a one-line JS tag in about 5 minutes",
+      "You need public monthly pricing (from ¥150,000/mo) and ISO 27001/27017 for procurement in Japan",
+    ],
+    chooseCompetitor: [
+      "You run an English-market B2B SaaS where de-anonymizing traffic and converting it into warm outbound is the core motion",
+      "You want Slack alerts, email sequences, and LinkedIn/Meta retargeting orchestrated in one US-style GTM stack",
+      "You are betting on deep HubSpot ecosystem integration (acquisition announced June 2026)",
+    ],
+    faq: [
+      { q: "What is the difference between Warmly and Meeton Chat?", a: "Warmly is a US-built GTM platform that identifies anonymous website visitors at the company and person level (claimed 30-60% company-level and 15-30% person-level match rates, in about 3 seconds) and engages them with chat, email, and ad retargeting. Meeton Chat is a Japan-native AI SDR: an AI conversation with a 5-second first response carries visitors through booking, content sharing, and follow-up in one flow. Choose Warmly for warm-outbound motions on English-market traffic; choose Meeton for inbound meeting conversion on Japanese-language sites." },
+      { q: "How much does Warmly cost?", a: "Warmly publishes its pricing: AI Web-Deanonymization at $10,000/year, Inbound Chat at $20,000/year, and AI Inbound Autopilot at $30,000/year, plus add-ons at $10,000/year each (as of July 2026, annual or quarterly contracts). AI chat is only available from the $20,000/year tier. Meeton ai publishes monthly pricing from ¥150,000/month plus add-ons." },
+      { q: "Was Warmly acquired by HubSpot?", a: "On June 30, 2026, Warmly announced on its own blog that it is joining HubSpot, and independent press confirmed the acquisition (terms undisclosed). Warmly states that existing contracts, pricing, and the product remain unchanged for now, but its stated long-term ambition is integration across HubSpot's platform, so its roadmap as an independent product may change." },
+    ],
+    sources: [
+      { claim: "Public pricing: AI Web-Deanonymization $10,000/yr, Inbound Chat $20,000/yr, AI Inbound Autopilot $30,000/yr, add-ons $10,000/yr each; no free plan on the current page; AI chat from the $20,000/yr tier", source: "warmly.ai/p/pricing" },
+      { claim: "Visitor ID in ~3 seconds against 220M+ records; claimed match rates 15-30% person-level, 30-60% company-level; post-ID chat, Slack alerts, email, and LinkedIn/Meta ads", source: "warmly.ai/p/solutions/use-cases/website-visitor-identification" },
+      { claim: "Announced it is joining HubSpot on June 30, 2026 (terms undisclosed); existing contracts, pricing, and product stated unchanged for now; confirmed by independent press", source: "warmly.ai/p/blog/warmly-is-joining-hubspot, cmswire.com" },
+      { claim: "Founded 2020 in San Francisco (YC), ~60 employees, ~$17M total raised; 500+ GTM teams as customers; G2 4.6/5 (208 reviews)", source: "ycombinator.com/companies/warmly, g2.com/products/warmly-warmly/reviews" },
+      { claim: "Official site, product, and pricing are English-only; no public evidence of Japanese UI, local support, or Japan case studies; no ISO/ISMS certification found (GDPR compliance claimed)", source: "warmly.ai" },
+    ],
+    alternative: true,
   },
 };
 

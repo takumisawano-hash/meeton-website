@@ -30,10 +30,11 @@ const STR = {
     heroH1b: "商談を生み出す",
     heroH1c: "AI SDRへ。",
     heroSub:
-      "Meeton ai は、Webサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、あらゆる瞬間を商談に変えます。",
+      "Meeton ai は、BtoB企業のWebサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、資料DL後・問い合わせ後の取りこぼしまで、あらゆる瞬間を商談に変えます。",
     demoTitle: "Meeton Chat のデモ",
     heroAssurances: ["30分のデモで自社への効き方を確認", "シナリオ設計不要", "ノーコード・設置5分"],
     heroOperator: "Meeton ai は、DynaMeet株式会社が運営するサービスです。",
+    heroRoiLink: "60秒で、自社サイトの商談化の余地を診断する →",
     proof: [
       { n: 60, suf: "%超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
       { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
@@ -79,10 +80,11 @@ const STR = {
     heroH1b: "to an AI SDR that",
     heroH1c: "generates meetings.",
     heroSub:
-      "Meeton ai is an AI SDR deployed on your website. It doesn't wait for inquiries — it engages prospects in conversation and turns every moment into a meeting.",
+      "Meeton ai is an AI SDR deployed on your B2B website. It doesn't wait for inquiries — it engages prospects in conversation, catches the leads that slip away after downloads and inquiries, and turns every moment into a meeting.",
     demoTitle: "Meeton Chat demo",
     heroAssurances: ["See how it works for you in a 30-min demo", "No scenario design", "No-code, install in 5 minutes"],
     heroOperator: "Meeton ai is a service operated by DynaMeet, Inc.",
+    heroRoiLink: "Estimate your site's meeting upside in 60 seconds →",
     proof: [
       { n: 60, suf: "%+", l: "Meeting conversion via Meeton ai", sub: "Industry average ~20%" },
       { n: 2, suf: "x", l: "Qualified leads", sub: "+100% vs. before deployment" },
@@ -164,6 +166,12 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
               {s.heroAssurances.map((a) => (
                 <span key={a}>✓ {a}</span>
               ))}
+            </div>
+            {/* tertiary CTA — self-serve diagnostic for visitors not ready to book */}
+            <div style={{ marginTop: 14 }}>
+              <Link href={lang === "en" ? "/en/tools/roi/" : "/tools/roi/"} className="v2-link" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--cta)", textDecoration: "underline" }}>
+                {s.heroRoiLink}
+              </Link>
             </div>
             <p style={{ margin: "14px 0 0", fontSize: 13, color: "var(--on-navy-sub)", opacity: 0.85 }}>
               {s.heroOperator}

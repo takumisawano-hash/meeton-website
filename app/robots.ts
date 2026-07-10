@@ -53,6 +53,7 @@ const NAMED_CRAWLERS = [
   'Perplexity-User', // Perplexity browse
   'ClaudeBot',         // Claude / Anthropic crawler
   'Claude-User',       // Claude browsing on a user's behalf
+  'Claude-SearchBot',  // Claude search indexing
   'anthropic-ai',      // legacy Anthropic crawler UA
   'Google-Extended',   // Google Gemini / AI Overviews opt-in
   'Applebot-Extended', // Apple Intelligence opt-in

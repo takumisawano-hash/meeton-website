@@ -19,6 +19,9 @@ export type ProductLPData = {
   problemLine: string;
   h1: string;
   heroSub: string;
+  /** AEO: dictionary-style 50-100字 definition ("〜とは、…です。") rendered as
+   *  an extractable callout — AI Overviews / ChatGPT search citation target. */
+  definition?: string;
   // how it works
   steps: Step[];
   // differentiation
@@ -49,6 +52,8 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "リードが動いた瞬間に、商談を予約する。",
     heroSub:
       "初動レスポンス（Speed to Lead）の業界標準は数時間〜数日。Meeton Calendar は、フォーム送信・資料DLの直後にAIが商談予約を提示し、自動アサイン・CRM登録まで一気に走らせます。最も関心が高い瞬間を、商談に変える。",
+    definition:
+      "Meeton Calendar とは、フォーム送信や資料DLなどリードの行動直後にAIが商談予約を提示し、担当者アサインとCRM登録まで自動化する、商談化に特化した日程調整ツールです。",
     steps: [
       { title: "コンバートを検知", desc: "フォーム送信・資料DL・チャット完了など、関心が最高潮の瞬間をトリガーに。" },
       { title: "その場で予約を提示", desc: "AIコンシェルジュが空き枠を提示。担当者を自動アサインし、最短の枠へ誘導。" },
@@ -89,6 +94,8 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "接触前の検討の“土台”に立つ、商談化AIチャット。",
     heroSub:
       "買い手は購買プロセスの約70%を営業に接触する前に独力で進めます（Gartner/6sense）。Meeton Chat は、その時間に訪問者と対話し、Webサイトでは得られない答えをその場で渡して、問い合わせ確率そのものを引き上げます。",
+    definition:
+      "Meeton Chat とは、Webサイト訪問者とAIが自由に対話し、質問対応からリード化・商談予約までを自動で行うBtoB向けの商談化AIチャットです。シナリオ設計は不要です。",
     steps: [
       { title: "スニペットを設置", desc: "1行のタグを貼るだけ。シナリオ設計は不要、設置後すぐにAIが訪問者に話しかけます。" },
       { title: "文脈を理解して対話", desc: "過去の閲覧・DL・会話履歴を引き継ぎ、生成AIが疑問に的確に回答。商談化に最適化。" },
@@ -129,6 +136,8 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "資料で、見込み客を育てる。",
     heroSub:
       "まだ商談には早い見込み客を、資料で自動ナーチャリング。関心に合わせた資料を届け、AIが中身を解説し、反応を見て次の一手を出す。検討が温まるまで放置せず育て続け、商談につながるリードにします。",
+    definition:
+      "Meeton Library とは、営業資料やホワイトペーパーをAIが訪問者ごとに提案・解説し、閲覧シグナルから検討度を可視化するコンテンツナーチャリングツールです。",
     steps: [
       { title: "資料を用意して渡す", desc: "PDF/スライドをアップし、共有URLで届ける。CRMの設定は不要です。" },
       { title: "AIが解説して育てる", desc: "受け手の質問に資料の文脈でAIが回答し、理解と検討を前に進める。" },
@@ -169,6 +178,8 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "予約しなかったリードを、諦めず追う。",
     heroSub:
       "その場で予約しなかったリードこそ、商談の伸びしろ。Meeton Email は、行動シグナル（再訪・開封・資料閲覧）を検知し、AIが1:1の文面を生成して追客します。テンプレの差し替えではなく、目的達成まで自律的に。",
+    definition:
+      "Meeton Email とは、商談予約に至らなかったリードへ、再訪や資料閲覧などの行動シグナルを起点にAIが1:1のフォローメールを送り、再商談化まで運ぶ追客自動化ツールです。",
     steps: [
       { title: "CRMを接続", desc: "Salesforce/HubSpotをOAuth接続。既存リードと行動データを取り込みます。" },
       { title: "シグナルを検知", desc: "再訪・開封・資料閲覧などの行動を検知し、追うべきタイミングをAIが判断。" },
@@ -209,6 +220,8 @@ export const PRODUCTS: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "自社サイトを、最強の広告枠に変える。",
     heroSub:
       "広告費をかけて集めた訪問者の大半は、何も残さず帰っていく。Meeton Ads は、訪問者ごとにAIが最適なオファー（資料・ウェビナー・商談予約）を選んで表示するサイト内広告。ページ・流入元・業種まで見て出し分け、クリックのたびに賢くなります。",
+    definition:
+      "Meeton Ads とは、自社サイトの訪問者ごとに、閲覧ページ・流入元・業種に応じた最適なオファーをAIが出し分けるサイト内広告（オンサイト広告）ツールです。配信結果から継続的に学習します。",
     steps: [
       { title: "AIが広告を下書き", desc: "自社の資料・コンテンツからAIが広告案を自動生成。あなたは承認キューでレビューして通すだけ。" },
       { title: "訪問者ごとに出し分け", desc: "ページ・デバイス・流入元・業種で毎回スコアリングし、1ページ1枠で最良の1本だけを表示。" },
@@ -246,6 +259,8 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "Book the meeting the moment the lead acts.",
     heroSub:
       "The industry-standard speed to lead is hours to days. Meeton Calendar offers a meeting slot the instant a form is submitted or a doc is downloaded, then runs auto-assignment and CRM logging end to end. Turn the moment of peak interest into a booked meeting.",
+    definition:
+      "Meeton Calendar is a meeting-focused scheduling tool: the moment a lead acts — submits a form or downloads a document — AI offers a meeting slot and automates rep assignment and CRM logging.",
     steps: [
       { title: "Detect the conversion", desc: "A form submission, a doc download, a finished chat—trigger on the moment interest is at its peak." },
       { title: "Offer a slot on the spot", desc: "An AI concierge presents open slots, auto-assigns the right rep, and steers the lead to the earliest available time." },
@@ -286,6 +301,8 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "The conversion AI chat that meets buyers in their pre-sales research.",
     heroSub:
       "Buyers complete roughly 70% of the purchase journey before they ever contact sales (Gartner/6sense). Meeton Chat talks with visitors during that window, delivers answers a website can't, and lifts the very probability that they reach out.",
+    definition:
+      "Meeton Chat is a B2B meeting-generation AI chat that converses freely with website visitors and automatically handles everything from answering questions to lead capture and meeting booking. No scenario design required.",
     steps: [
       { title: "Drop in the snippet", desc: "Just paste a single line of code. No scenario design—AI starts talking to visitors the moment it's installed." },
       { title: "Converse with full context", desc: "Carrying over past browsing, downloads, and conversation history, generative AI answers questions precisely—optimized for converting to meetings." },
@@ -326,6 +343,8 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "Nurture prospects with your content.",
     heroSub:
       "Nurture prospects who aren't ready for a meeting yet—automatically, with content. Deliver materials matched to their interest, let AI explain what's inside, and make the next move based on their reactions. Instead of leaving them to cool, keep nurturing until they become meeting-ready leads.",
+    definition:
+      "Meeton Library is a content-nurturing tool where AI recommends and explains sales materials to each visitor and turns viewing signals into a visible measure of buying intent.",
     steps: [
       { title: "Prepare and share materials", desc: "Upload a PDF/deck and deliver it via a share URL. No CRM setup required." },
       { title: "AI explains and nurtures", desc: "AI answers the recipient's questions in the context of the material, moving their understanding and consideration forward." },
@@ -366,6 +385,8 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "Don't give up on the leads who didn't book—pursue them.",
     heroSub:
       "The leads who didn't book on the spot are exactly where your pipeline upside lives. Meeton Email detects behavioral signals—return visits, opens, document views—and has AI generate 1:1 copy to follow up. Not template swaps, but autonomous follow-up until the goal is met.",
+    definition:
+      "Meeton Email is a win-back automation tool: triggered by behavioral signals such as return visits and document views, AI sends 1:1 follow-up emails that carry lost leads back to a booked meeting.",
     steps: [
       { title: "Connect your CRM", desc: "Connect Salesforce/HubSpot via OAuth. We pull in your existing leads and their behavioral data." },
       { title: "Detect the signals", desc: "AI detects behaviors like return visits, opens, and document views, and decides the right moment to follow up." },
@@ -406,6 +427,8 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     h1: "Turn your website into your best ad channel.",
     heroSub:
       "Most of the visitors you paid to acquire leave without a trace. Meeton Ads shows each visitor the single best offer—a guide, a webinar, a meeting—selected by AI from their context: page, traffic source, even industry. And it gets smarter with every click.",
+    definition:
+      "Meeton Ads is an on-site advertising tool that uses AI to show each website visitor the best offer for their context — page, traffic source, and industry — and keeps learning from every result.",
     steps: [
       { title: "AI drafts your ads", desc: "AI generates ad candidates from your own content and materials. You just review and approve them in the queue." },
       { title: "One best offer per visitor", desc: "Every impression is scored on page, device, traffic source, and industry — one slot per page, only the single best offer shows." },

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜The AI SDR Platform that turns your Website into meetings',
   },
   description:
-    'Meeton ai is an AI SDR Platform deployed on your website. It captures pre-inquiry prospects (Chat & Ads), nurtures them with content (Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Nurture → Convert → Win back — four stages that turn every moment into a meeting.',
+    'Meeton ai is an AI SDR Platform deployed on your B2B website. It captures pre-inquiry prospects (Chat & Ads), nurtures them with content (Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Nurture → Convert → Win back — four stages that turn every moment into a meeting.',
   alternates: altLanguages('/', 'en'),
   openGraph: {
     images: EN_OG_IMAGE,

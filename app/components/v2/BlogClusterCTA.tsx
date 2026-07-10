@@ -54,6 +54,13 @@ export default function BlogClusterCTA({
           </Link>
         ))}
       </div>
+      {/* self-serve diagnostic — readers researching a problem rarely book a
+          demo straight from an article; the ROI estimate is the natural step */}
+      <div style={{ marginTop: 14 }}>
+        <Link href="/tools/roi/" style={{ fontSize: 13, fontWeight: 700, color: "var(--cta-ink)", textDecoration: "underline" }}>
+          60秒で、自社サイトの商談化の余地を診断する →
+        </Link>
+      </div>
     </aside>
   );
 }
