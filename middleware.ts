@@ -27,9 +27,15 @@ import type { NextRequest } from 'next/server'
 // JA paths that have a guaranteed English twin. Mirrors the next.config.js /en
 // allowlist. Matched as exact or as a prefix followed by "/" so "/chat" and
 // "/chat/..." both redirect but "/chatfoo" does not.
+// NOTE: 'terms' is deliberately absent. /en/terms/ is a pointer stub whose
+// "managed plans" link targets the authoritative Japanese /terms/ — with
+// 'terms' in this list, an EN-preference visitor clicking that link gets
+// 302'd straight back to the stub (boomerang). The JA contract must stay
+// reachable regardless of language preference; the /terms/ language switcher
+// still offers /en/terms/ (it sets pref_lang on click).
 const EN_TWIN_PREFIXES = [
   'chat', 'calendar', 'library', 'email', 'ads', 'capture', 'tools/roi',
-  'privacy-policy', 'terms', 'integrations',
+  'privacy-policy', 'integrations',
   'pricing', 'about', 'contact', 'enterprise', 'security', 'glossary',
   'cases', 'compare', 'alternatives', 'use-cases',
   'solutions/crm-to-meeting', 'solutions/lead-to-meeting',
