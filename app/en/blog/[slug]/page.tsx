@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import Nav from '@/app/components/Nav'
@@ -9,6 +10,8 @@ import {
   getPostBlocks,
   getAllPosts,
   getRelatedPosts,
+  getTagsWithCounts,
+  getCategoriesWithCounts,
   calculateReadingTime,
   categoryToSlug,
   tagToSlug,
@@ -37,6 +40,28 @@ type Props = {
 export async function generateStaticParams() {
   const posts = await getAllPosts('en')
   return posts.map((post) => ({ slug: post.slug }))
+}
+
+// Shared chip styles — reused whether a tag/category renders as a link (archive
+// resolves) or a plain span (archive would 404), so the two branches stay visually identical.
+const CAT_BADGE_STYLE: CSSProperties = {
+  display: 'inline-block',
+  fontSize: 'clamp(11px, 1.8vw, 13px)',
+  fontWeight: 600,
+  color: '#12a37d',
+  background: 'rgba(18,163,125,0.1)',
+  padding: 'clamp(4px, 1vw, 6px) clamp(10px, 2vw, 14px)',
+  borderRadius: 8,
+  marginBottom: 'clamp(14px, 3vw, 20px)',
+  textDecoration: 'none',
+}
+const TAG_CHIP_STYLE: CSSProperties = {
+  fontSize: 'clamp(10px, 1.5vw, 12px)',
+  color: '#6e7494',
+  background: '#f0f2f5',
+  padding: '4px 10px',
+  borderRadius: 6,
+  textDecoration: 'none',
 }
 
 // EN pillar targets for the cluster cross-link (JA cluster data + /en twins).
@@ -167,10 +192,23 @@ export default async function BlogPostPageEn({ params }: Props) {
     notFound()
   }
 
-  const [blocks, relatedPosts] = await Promise.all([
+  const [blocks, relatedPosts, enTags, enCats] = await Promise.all([
     getPostBlocks(post.id),
     getRelatedPosts(post.category, post.slug, 4, 'en'),
+    getTagsWithCounts(1, 'en'),
+    getCategoriesWithCounts(1, 'en'),
   ])
+
+  // Only LINK tag/category archives that actually resolve — i.e. that exist in
+  // the EN corpus the archive pages compute from (getTagsWithCounts/
+  // getCategoriesWithCounts, lang='en'). A post can momentarily carry a tag that
+  // was just retagged, or the "Uncategorized" bucket that getCategoriesWithCounts
+  // always drops; linking those 404s the archive. Non-linkable tags/category
+  // still render as plain chips, just without an href. (These calls reuse the
+  // React.cache'd getAllPosts('en') — no extra Notion round-trip.)
+  const linkableTags = new Set(enTags.map((t) => t.name.toLowerCase().trim()))
+  const linkableCats = new Set(enCats.map((c) => c.name.toLowerCase().trim()))
+  const categoryLinkable = !!post.category && linkableCats.has(post.category.toLowerCase().trim())
 
   const contentText = extractTextFromBlocks(blocks)
   const wordCount = contentText.length
@@ -296,22 +334,16 @@ export default async function BlogPostPageEn({ params }: Props) {
           {/* Header */}
           <header style={{ marginBottom: 'clamp(24px, 5vw, 40px)' }}>
             {post.category && (
-              <Link
-                href={`/en/blog/category/${categoryToSlug(post.category)}/`}
-                style={{
-                  display: 'inline-block',
-                  fontSize: 'clamp(11px, 1.8vw, 13px)',
-                  fontWeight: 600,
-                  color: '#12a37d',
-                  background: 'rgba(18,163,125,0.1)',
-                  padding: 'clamp(4px, 1vw, 6px) clamp(10px, 2vw, 14px)',
-                  borderRadius: 8,
-                  marginBottom: 'clamp(14px, 3vw, 20px)',
-                  textDecoration: 'none',
-                }}
-              >
-                {post.category}
-              </Link>
+              categoryLinkable ? (
+                <Link
+                  href={`/en/blog/category/${categoryToSlug(post.category)}/`}
+                  style={CAT_BADGE_STYLE}
+                >
+                  {post.category}
+                </Link>
+              ) : (
+                <span style={CAT_BADGE_STYLE}>{post.category}</span>
+              )
             )}
             <h1
               style={{
@@ -353,22 +385,21 @@ export default async function BlogPostPageEn({ params }: Props) {
               </span>
               {post.tags.length > 0 && (
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {post.tags.map((tag) => (
-                    <Link
-                      key={tag}
-                      href={`/en/blog/tag/${tagToSlug(tag)}/`}
-                      style={{
-                        fontSize: 'clamp(10px, 1.5vw, 12px)',
-                        color: '#6e7494',
-                        background: '#f0f2f5',
-                        padding: '4px 10px',
-                        borderRadius: 6,
-                        textDecoration: 'none',
-                      }}
-                    >
-                      #{tag}
-                    </Link>
-                  ))}
+                  {post.tags.map((tag) =>
+                    linkableTags.has(tag.toLowerCase().trim()) ? (
+                      <Link
+                        key={tag}
+                        href={`/en/blog/tag/${tagToSlug(tag)}/`}
+                        style={TAG_CHIP_STYLE}
+                      >
+                        #{tag}
+                      </Link>
+                    ) : (
+                      <span key={tag} style={TAG_CHIP_STYLE}>
+                        #{tag}
+                      </span>
+                    )
+                  )}
                 </div>
               )}
             </div>

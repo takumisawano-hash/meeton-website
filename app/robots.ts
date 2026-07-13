@@ -24,6 +24,8 @@ const DISALLOW_PATHS = [
   '/*/feed/',          // tag/category feed URLs from WordPress era
   '/tag/',             // legacy WordPress tag pages — most return 404 or redirect
   '/category/',        // legacy WordPress category pages
+  '/en/blog/tag/',       // EN blog keyword archives — thin filter pages, churn with retags
+  '/en/blog/category/',  // EN blog category archives — thin filter pages, churn with retags
   '/*?lang=',          // ?lang=ja / ?lang=en_US legacy i18n params
   '/*?trk=',           // LinkedIn trk parameter
   '/*?hsCtaAttrib=',   // HubSpot CTA tracking parameter
