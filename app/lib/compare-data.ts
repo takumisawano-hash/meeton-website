@@ -669,6 +669,52 @@ export const COMPARE: Record<string, CompareData> = {
     ],
     alternative: true,
   },
+
+  'fin': {
+    slug: "fin",
+    competitorName: "Fin",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "AIエージェント・カスタマーサービスAI",
+    metaTitle: "Fin（旧Intercom）代替の料金・違い｜サポートAIと商談化AI SDRで比較｜Meeton Chat",
+    metaDescription:
+      "Fin（旧Intercom）は問い合わせを自動解決するカスタマーサービスAIエージェントの代表格。Meeton Chat はWebサイト訪問者のリード獲得〜商談予約に特化したAI SDR。サポート自動化か商談獲得かの使い分けを比較表で解説。",
+    verdict:
+      "既存顧客のサポート問い合わせを多チャネルでAIに自動解決させたいなら、サポート会話特化の独自モデルと大規模実績を持つ Fin が第一候補です。Webサイトの新規訪問者を会話で掴み、商談予約まで運びたいなら Meeton Chat が向きます。Fin for Sales（2026年4月提供開始）はインバウンド限定の拡張機能で、アウトバウンド開拓やメール追客までは覆いません。両者は解く課題（サポート解決 vs リード獲得・商談化）が異なります。",
+    competitorStrength:
+      "Fin は「AIエージェント時代のヘルプデスク」を掲げる旧 Intercom（2026年5月に社名を Fin へ変更）のカスタマーサービスAIで、サポート会話に特化して追加学習した独自モデルにより公称76%の平均解決率を掲げます（自社発表）。Web・メール・音声・WhatsApp 等10以上のチャネルを横断し、Salesforce / HubSpot / Freshworks 等の既存ヘルプデスクの上に単体導入できる柔軟性も強みです。2026年6月には Salesforce が約36億ドルでの買収に合意しており、エンタープライズでの信頼性の裏付けがある一方、統合移行期のロードマップには不確実性が残ります。",
+    rows: [
+      C("主目的", "Web訪問者のリード獲得→商談予約（AI SDR）", "サポート問い合わせのAI自動解決（カスタマーサービス）"),
+      C("対象部門", "マーケティング・インサイドセールス", "カスタマーサポート/CS部門（営業機能は拡張中の位置付け）"),
+      C("リード獲得・商談予約", "初動5秒・24時間365日で会話→予約まで自動（商談化率60%+の実績）", "Fin for Sales はインバウンドのみ。予約は Calendly / Chili Piper 連携、アウトバウンド・メール追客は非対応", true),
+      C("料金モデル", "基本プラン月15万円〜（税抜・公開・固定）", "従量課金 $0.99/成果 + $9.99/商談化、Intercom席料 $39〜139/席/月が別途（USDのみ）", true),
+      C("日本語対応", "日本語ネイティブ設計・日本のチームが提供", "管理画面は日本語対応（2025年4月〜）。AI応答は日本語学習コンテンツ追加が前提、日本法人なし・円建てなし", true),
+      C("CRM連携", "HubSpot / Salesforce ネイティブ連携（リード自動登録）", "Salesforce / HubSpot / Freshworks 等ネイティブ連携（成熟。買収完了後は Agentforce へ統合予定）"),
+    ],
+    chooseMeeton: [
+      "Webサイト訪問者をリード化し、商談予約まで自動で運びたい（商談化率60%+・チャットリード20倍の事例）",
+      "従量課金でなく、公開された月額固定（基本プラン15万円〜）で予算を確定させたい",
+      "JSタグ1行・5分で導入し、HubSpot / Salesforce にリードを自動登録したい",
+    ],
+    chooseCompetitor: [
+      "既存顧客のサポート問い合わせを音声・WhatsApp 含む10以上のチャネルで大量に自動解決したい",
+      "既存ヘルプデスク（Salesforce / HubSpot / Freshworks 等）を替えずにサポートAIだけ載せたい",
+    ],
+    faq: [
+      { q: "Fin（旧Intercom）と Meeton Chat の違いは何ですか？", a: "Fin は問い合わせをAIが自動解決するカスタマーサービスAIエージェントで、公称76%の平均解決率を掲げます（自社発表）。2026年4月に Fin for Sales を追加しましたが、対象はサイト上で意図を示したインバウンド訪問者に限定され、アウトバウンド開拓や単体のメールナーチャリングは非対応と自社FAQに明記されています。Meeton Chat はWebサイト訪問者のリード獲得〜商談予約に特化したAI SDRで、初動5秒・24時間365日で会話し、商談化率60%+（EdulinX事例）の実績があります。サポート自動化なら Fin、リード獲得・商談化なら Meeton が向きます。なお Fin は2026年6月に Salesforce による約36億ドルでの買収合意が発表され、Agentforce への統合が予定されています。" },
+      { q: "Fin の料金はいくらですか？Meeton ai とどう違いますか？", a: "Fin は成果課金で、解決・引き継ぎ・失格判定が $0.99/件、Fin for Sales の商談化（Qualification）が $9.99/件です。Intercom 上で使う場合は席料（月払 $39〜139/席、年払 $29〜132）が別途かかり、既存ヘルプデスク上での単体利用は月50成果〜（約$49/月〜）。請求はUSDのみで日本円建てはありません。Meeton ai は基本プラン月15万円〜（税抜）の公開・固定型で、会話量に左右されず月々の予算が読みやすい体系です。" },
+      { q: "Fin は日本語・日本市場に対応していますか？", a: "Fin の管理画面は2025年4月に日本語対応し、AI自体は日本語を含む45以上の言語に対応しますが、日本語の回答品質はワークスペースに日本語の学習コンテンツを追加する運用が前提です。Fin 直営の日本法人・日本語サポート組織は確認されておらず、国内の導入支援は正規代理店（INNOOV株式会社）経由、請求はUSDのみです。Meeton ai は日本語ネイティブ設計で、日本のチームが提供・サポートします。" },
+    ],
+    sources: [
+      { claim: "Fin for Sales は2026年4月22日提供開始。サイト上の意図シグナル起点でインバウンド訪問者に会話・資格判定し、Calendly / Chili Piper 連携で予約、CRMへ連携。アウトバウンド開拓や単体のメールナーチャリングは非対応と自社FAQに明記", source: "intercom.com/blog/announcing-fin-for-sales, intercom.com/help/en/articles/13927115" },
+      { claim: "料金は成果課金 $0.99/件（解決・引き継ぎ・失格判定）+ $9.99/商談化。Intercom 席料 Essential $39 / Advanced $99 / Expert $139（月払、年払 $29/$85/$132）が別途。単体利用は月50成果〜、USDのみ・円建てなし、14日間無料トライアルあり", source: "fin.ai/pricing, intercom.com/pricing" },
+      { claim: "公称平均解決率76%・約12,000社・週100万件超の会話処理（自社発表・未監査。2026年6月の買収報道では3万社超・週約200万件とより大きい数字も引用されている）", source: "fin.ai/learn/what-is-fin-ai-agent, techcrunch.com" },
+      { claim: "2026年5月12日に社名を Intercom, Inc. から Fin へ変更（Intercom はヘルプデスク製品名として存続）。2026年6月15日、Salesforce が約36億ドルでの買収に合意（Salesforce 2027年度Q4完了見込み・Agentforce へ統合予定）", source: "intercom.com/blog/today-intercom-becomes-fin, salesforce.com/news" },
+      { claim: "管理画面の日本語対応は2025年4月開始。国内初の正規代理店は INNOOV株式会社。Fin は45+言語（日本語含む）対応だが、日本語応答はワークスペースへの学習コンテンツ追加が前提", source: "prtimes.jp/main/html/rd/p/000000018.000044187.html, innoov.io/intercom_fin, intercom.com/help/en/articles/8322387" },
+      { claim: "Salesforce / HubSpot / Freshworks / Zoho 等の既存ヘルプデスク上に単体導入可能（非Intercom環境はセールス経由での提供）", source: "fin.ai/integrations, intercom.com/help/en/articles/10118495" },
+    ],
+    alternative: true,
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────
@@ -1311,6 +1357,52 @@ export const COMPARE_EN: Record<string, CompareData> = {
       { claim: "Announced it is joining HubSpot on June 30, 2026 (terms undisclosed); existing contracts, pricing, and product stated unchanged for now; confirmed by independent press", source: "warmly.ai/p/blog/warmly-is-joining-hubspot, cmswire.com" },
       { claim: "Founded 2020 in San Francisco (YC), ~60 employees, ~$17M total raised; 500+ GTM teams as customers; G2 4.6/5 (208 reviews)", source: "ycombinator.com/companies/warmly, g2.com/products/warmly-warmly/reviews" },
       { claim: "Official site, product, and pricing are English-only; no public evidence of Japanese UI, local support, or Japan case studies; no ISO/ISMS certification found (GDPR compliance claimed)", source: "warmly.ai" },
+    ],
+    alternative: true,
+  },
+
+  'fin': {
+    slug: "fin",
+    competitorName: "Fin",
+    product: "chat",
+    productName: "Meeton Chat",
+    category: "AI agents / customer service AI",
+    metaTitle: "Fin (by Intercom) alternative: pricing & differences｜Support AI vs sales AI SDR｜Meeton Chat",
+    metaDescription:
+      "Fin (formerly Intercom) is the flagship customer-service AI agent, autonomously resolving support conversations. Meeton Chat is a sales-side AI SDR that turns website visitors into booked meetings. Compare pricing models, Fin for Sales' inbound-only scope, and when each one fits.",
+    verdict:
+      "If your goal is automating customer-support resolution — deflecting conversations across chat, email, voice, and social at scale — Fin is the category leader, with a model purpose-trained for support and large published results. If your goal is turning website visitors into qualified leads and booked sales meetings, Meeton Chat is built for exactly that job. Fin for Sales (April 2026) adds inbound qualification, but it remains a bolt-on to a support platform: no outbound, no standalone email nurture, no on-site ads. Different jobs — choose by the problem you are hiring the AI to solve.",
+    competitorStrength:
+      "Fin — the company formerly known as Intercom, renamed in May 2026 — is the flagship AI agent for customer service, with a model post-trained specifically on support conversations and a company-claimed 76% average resolution rate. It spans 10+ channels (web, email, voice, SMS, WhatsApp, Slack, and more), can run standalone on top of Salesforce, HubSpot, or Freshworks helpdesks without migration, and gained significant enterprise backing when Salesforce agreed to acquire it for ~$3.6B in June 2026 — though the Agentforce transition adds near-term roadmap uncertainty.",
+    rows: [
+      C("Primary purpose", "Turning website visitors into leads and booked meetings (AI SDR)", "Autonomous resolution of customer-support conversations"),
+      C("Target team", "Marketing and inside sales (new-lead acquisition)", "Customer support / CS teams (sales framed as an emerging expansion)"),
+      C("Lead capture & meeting booking", "AI engages within 5 seconds, books meetings 24/7 (60%+ meeting conversion at EdulinX)", "Fin for Sales is inbound-only; books via Calendly / Chili Piper; no outbound prospecting or email nurture", true),
+      C("Pricing model", "Published flat base plan from ¥150,000/mo + 1-month free trial", "Metered: $0.99/outcome + $9.99/qualification, plus Intercom seats $39–139/seat/mo; USD only", true),
+      C("Japanese support", "Japanese-native product and team", "45+ languages incl. Japanese, but JP answers require customer-added training content; no JP entity, USD billing", true),
+      C("CRM integration", "Native HubSpot / Salesforce auto-registration", "Mature native Salesforce / HubSpot / Freshworks ecosystem (folding into Agentforce post-acquisition)"),
+    ],
+    chooseMeeton: [
+      "You want website visitors captured and carried to a booked meeting automatically — customers report 60%+ meeting conversion (EdulinX) and 20x chat-sourced leads (BizteX)",
+      "You want a published flat price (from ¥150,000/mo with a 1-month free trial) instead of metered per-outcome fees stacked on seat plans",
+      "You want a 1-line JS tag, 5-minute setup, and leads auto-registered in HubSpot / Salesforce",
+    ],
+    chooseCompetitor: [
+      "You want to auto-resolve a high volume of customer-support conversations across 10+ channels, including voice and WhatsApp",
+      "You want to add a support AI on top of your existing helpdesk (Salesforce / HubSpot / Freshworks) without migrating",
+    ],
+    faq: [
+      { q: "What is the difference between Fin (by Intercom) and Meeton Chat?", a: "Fin is a customer-service AI agent: it autonomously resolves support conversations across 10+ channels, with a company-claimed 76% average resolution rate. In April 2026 it added Fin for Sales, an inbound-only sales agent, and in June 2026 Salesforce agreed to acquire Fin for ~$3.6B, folding it into Agentforce. Meeton Chat is a sales-side AI SDR: it engages website visitors within 5 seconds, 24/7, qualifies them in conversation, and books the meeting — customers report 60%+ meeting conversion (EdulinX) and 2x monthly SQLs (G-gen). Choose Fin for support automation; choose Meeton Chat for website lead generation and meeting booking." },
+      { q: "Can Fin for Sales replace an AI SDR?", a: "Only for the inbound slice. Fin for Sales qualifies visitors already showing intent on your site ($9.99 per qualification) and books meetings via Calendly or Chili Piper, but Fin's own FAQ states it does not do outbound prospecting or standalone automated email nurture, and it requires an Intercom seat plan. A purpose-built AI SDR platform like Meeton ai covers the funnel in one product — chat capture, on-site ads, content library, meeting booking, and follow-up email — at a flat published price." },
+      { q: "How does Fin's pricing compare with Meeton Chat?", a: "Fin is metered: $0.99 per outcome (resolutions, handoffs, disqualifications) and $9.99 per sales qualification, plus Intercom seat plans ($39–139/seat/mo monthly, $29–132 annual) when run on Intercom; standalone deployment on an existing helpdesk starts at a 50-outcome monthly minimum (~$49/mo). Billing is USD-only, with a 14-day free trial. Meeton ai publishes a flat base plan from ¥150,000/mo with a 1-month free trial — costs stay predictable regardless of conversation volume." },
+    ],
+    sources: [
+      { claim: "Fin for Sales launched April 22, 2026: intent-triggered inbound engagement, AI qualification playbook, meeting booking via Calendly / Chili Piper, CRM routing. Fin's own FAQ confirms it is inbound-only with no outbound prospecting or standalone automated email nurture", source: "intercom.com/blog/announcing-fin-for-sales, intercom.com/help/en/articles/13927115" },
+      { claim: "Pricing: $0.99/outcome (resolutions, handoffs, disqualifications) + $9.99/qualification; Intercom seat plans Essential $39 / Advanced $99 / Expert $139 monthly ($29/$85/$132 annual) required for Fin-on-Intercom; standalone from a 50-outcome/mo minimum; USD only, no JPY; 14-day free trial", source: "fin.ai/pricing, intercom.com/pricing" },
+      { claim: "Company-claimed 76% average resolution rate, ~12,000 businesses, 1M+ conversations/week (unaudited marketing figures; June 2026 acquisition-era press cited larger current figures of 30,000+ customers and ~2M weekly resolutions)", source: "fin.ai/learn/what-is-fin-ai-agent, techcrunch.com" },
+      { claim: "Intercom, Inc. renamed to Fin on May 12, 2026 (Intercom remains only as the helpdesk product name); on June 15, 2026 Salesforce signed a definitive agreement to acquire Fin for ~$3.6B, expected to close Salesforce FY2027 Q4, folding into Agentforce", source: "intercom.com/blog/today-intercom-becomes-fin, salesforce.com/news" },
+      { claim: "Japanese admin interface launched April 2025; INNOOV is described as Japan's first official authorized reseller; Fin supports 45+ languages incl. Japanese but Japanese answers depend on customer-added training content per workspace", source: "prtimes.jp/main/html/rd/p/000000018.000044187.html, innoov.io/intercom_fin, intercom.com/help/en/articles/8322387" },
+      { claim: "Fin runs standalone on existing helpdesks (Salesforce, HubSpot, Freshworks, Zoho, etc.); non-Intercom deployment is sold via sales, not self-serve", source: "fin.ai/integrations, intercom.com/help/en/articles/10118495" },
     ],
     alternative: true,
   },

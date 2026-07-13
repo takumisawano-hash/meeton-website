@@ -108,6 +108,6 @@ export const CLUSTER_COMPARES: Record<ClusterId, string[]> = {
   ads: ["sprocket", "flipdesk"],
   calendar: ["immedio", "timerex", "spir", "calendly"],
   email: ["lemlist", "smartlead"],
-  chat: ["channel-talk", "intercom", "hubspot-chatbot"],
+  chat: ["channel-talk", "fin", "intercom", "hubspot-chatbot"],
   "ai-sdr": ["qualified", "drift", "warmly"],
 };
