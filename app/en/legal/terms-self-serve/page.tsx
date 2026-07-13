@@ -171,6 +171,13 @@ export default function SelfServeTermsPage() {
                 following a trial. If you do not wish to continue, you can cancel
                 within the Service before the charge date at no cost.
               </p>
+              <p style={{ marginTop: 12 }}>
+                3.3 Unless we state otherwise at signup, one free trial is
+                available per organisation (including its related entities). We
+                may modify, limit or end a free trial where reasonably necessary
+                to protect the Service — for example, on suspected abuse or
+                circumvention of trial limits — and will notify you when we do.
+              </p>
             </Section>
 
             <Section title="4. Subscription term, renewal and cancellation">
@@ -253,6 +260,18 @@ export default function SelfServeTermsPage() {
                 to events beyond our reasonable control. We will give advance notice
                 of planned maintenance where practicable.
               </p>
+              <p style={{ marginTop: 12 }}>
+                6.4 <strong>Usage limits.</strong> Each plan and each trial
+                includes usage limits — such as traffic, contact, email-sending,
+                AI-generation and API quotas — as published on the pricing page or
+                stated within the Service. We may apply reasonable technical
+                controls, including rate limits, to enforce these limits and to
+                protect the stability and security of the Service for all
+                customers. We will tell you within the Service when you reach a
+                plan limit, and you can upgrade or purchase more. If you exceed a
+                limit we may restrict the affected feature until usage returns
+                within the limit; sustained overuse may require a plan upgrade.
+              </p>
             </Section>
 
             <Section title="7. Acceptable use">
@@ -263,6 +282,24 @@ export default function SelfServeTermsPage() {
                 <li>impersonate others or misrepresent your affiliation;</li>
                 <li>infringe the intellectual property, privacy or other rights of any person;</li>
                 <li>upload or distribute malware or other harmful code;</li>
+                <li>
+                  flood or overload the Service, or conduct load testing,
+                  stress testing or penetration testing against it without our
+                  prior written consent;
+                </li>
+                <li>
+                  scrape, crawl or bulk-extract the Service or its content, or
+                  access the Service by automated means other than its documented
+                  interfaces;
+                </li>
+                <li>
+                  circumvent or attempt to circumvent usage limits (Section 6.4),
+                  trial limits, metering or billing — including by creating
+                  multiple accounts or organisations, misrepresenting your
+                  organisation or its domain, manipulating usage counters, or
+                  registering more than one free trial for the same organisation
+                  (Section 3.3);
+                </li>
                 <li>resell, sublicense or provide the Service to third parties except as expressly permitted;</li>
                 <li>use the Service to send unlawful, deceptive or unsolicited communications in breach of Section 7.2.</li>
               </ul>
@@ -330,6 +367,17 @@ export default function SelfServeTermsPage() {
                 improvement at any time via the settings screen within the Service,
                 with effect for data processed after the opt-out.
               </p>
+              <p style={{ marginTop: 12 }}>
+                9.4 <strong>AI feature misuse.</strong> You must not: use
+                automated, scripted or bulk prompting of the Service&rsquo;s AI
+                features beyond the ordinary business use of your plan; use the
+                AI features to build or train a competing product; resell or make
+                the Service&rsquo;s AI capacity available to third parties as a
+                stand-alone service; or attempt to extract the Service&rsquo;s
+                underlying prompts, models or configuration, or another
+                customer&rsquo;s data, including through prompt injection.
+                Section 12 applies to breaches of this Section.
+              </p>
             </Section>
 
             <Section title="10. Intellectual property">
@@ -363,21 +411,33 @@ export default function SelfServeTermsPage() {
 
             <Section title="12. Suspension and termination by us">
               <p>
-                12.1 If you breach these Terms in a way that can be remedied, we will
-                notify you and give you at least 14 days to remedy the breach before
-                suspending or terminating your account.
+                12.1 If we reasonably believe you have breached these Terms in a
+                way that can be remedied, we will notify you and give you at least
+                14 days to remedy the breach before suspending or terminating your
+                account.
               </p>
               <p style={{ marginTop: 12 }}>
-                12.2 We may suspend or terminate immediately, with notice to you,
-                only where: the breach is serious and cannot be remedied; your use
-                poses a security risk to the Service or others; your use is unlawful
-                or causes us to breach applicable law; or fees remain unpaid 14 days
-                after a payment-failure notice under Section 5.3.
+                12.2 We may suspend or terminate immediately only where we
+                reasonably believe that: the breach is serious and cannot be
+                remedied; your use poses a security risk to the Service, other
+                customers, or recipients of communications sent through the
+                Service; your use is unlawful or causes us to breach applicable
+                law; or fees remain unpaid 14 days after a payment-failure notice
+                under Section 5.3. If we act immediately, we will notify you
+                promptly — at the latest within 2 business days — with the reason
+                and what is needed to restore access.
               </p>
               <p style={{ marginTop: 12 }}>
                 12.3 Any suspension will be proportionate — limited to the affected
                 feature where reasonably possible — and lifted once the ground for it
                 is resolved.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                12.4 <strong>Mistaken suspension.</strong> If a suspension under
+                this Section turns out to have been mistaken, we will promptly
+                restore the Service and, on your request, credit the fees for the
+                affected period on a pro-rata basis. This Section does not limit
+                Section 14.
               </p>
             </Section>
 

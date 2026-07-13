@@ -193,7 +193,11 @@ export default function PrivacyPolicyPageEn() {
                   the ability to opt out at any time (Section 11);
                 </li>
                 <li>(5) Improving the Service and developing new features (including improving AI models using de-identified data only);</li>
-                <li>(6) Maintaining security and preventing unauthorised use;</li>
+                <li>
+                  (6) Maintaining security and preventing unauthorised use
+                  (including operating usage counters and abuse-detection
+                  telemetry);
+                </li>
                 <li>(7) Responding to conduct that violates our terms;</li>
                 <li>(8) Complying with legal obligations;</li>
                 <li>(9) Purposes incidental to the above.</li>
