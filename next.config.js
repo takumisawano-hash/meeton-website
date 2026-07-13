@@ -338,6 +338,23 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
+      // 2026-07-13 (週次PDCA 承認#5b): 言語スイッチャーが生成する EN twin 無し
+      // の静的比較ページURL。allowlist の compare/ を通過して 404 になるため、
+      // 他の非twinページと同じ挙動 (JA版へ) に揃える。
+      { source: '/en/compare/ma-vs-ai-sdr', destination: '/compare/ma-vs-ai-sdr/', permanent: true },
+      { source: '/en/compare/ma-vs-ai-sdr/', destination: '/compare/ma-vs-ai-sdr/', permanent: true },
+      { source: '/en/compare/chatbot-vs-ai-sdr', destination: '/compare/chatbot-vs-ai-sdr/', permanent: true },
+      { source: '/en/compare/chatbot-vs-ai-sdr/', destination: '/compare/chatbot-vs-ai-sdr/', permanent: true },
+      { source: '/en/compare/scheduling-vs-ai-sdr', destination: '/compare/scheduling-vs-ai-sdr/', permanent: true },
+      { source: '/en/compare/scheduling-vs-ai-sdr/', destination: '/compare/scheduling-vs-ai-sdr/', permanent: true },
+      { source: '/en/compare/web-sekkyaku-tools', destination: '/compare/web-sekkyaku-tools/', permanent: true },
+      { source: '/en/compare/web-sekkyaku-tools/', destination: '/compare/web-sekkyaku-tools/', permanent: true },
+      { source: '/en/compare/ai-chatbot-tools', destination: '/compare/ai-chatbot-tools/', permanent: true },
+      { source: '/en/compare/ai-chatbot-tools/', destination: '/compare/ai-chatbot-tools/', permanent: true },
+      { source: '/en/compare/inside-sales-automation', destination: '/compare/inside-sales-automation/', permanent: true },
+      { source: '/en/compare/inside-sales-automation/', destination: '/compare/inside-sales-automation/', permanent: true },
+      { source: '/en/compare/meeton-vs-:slug', destination: '/compare/meeton-vs-:slug/', permanent: true },
+      { source: '/en/compare/meeton-vs-:slug/', destination: '/compare/meeton-vs-:slug/', permanent: true },
       // 2026-07-02 integrations IA swap: /ja/* (legacy inverted section) → root JA
       { source: '/ja/integrations', destination: '/integrations/', permanent: true },
       { source: '/ja/integrations/', destination: '/integrations/', permanent: true },
