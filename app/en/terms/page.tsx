@@ -271,6 +271,39 @@ export default function TermsPageEn() {
               </p>
             </Section>
 
+            <Section title="Article 8-2 (Subscription Term and Renewal)">
+              <p>
+                1. The subscription runs for the billing period selected by the Customer
+                at sign-up (for example, monthly or annual), as shown at the time of
+                purchase or in the applicable order or Application Form (the
+                &quot;Subscription Term&quot;).
+              </p>
+              <p style={{ marginTop: 12 }}>
+                2. Automatic renewal. At the end of each Subscription Term, the
+                subscription automatically renews for a further period of the same length
+                at the then-current fees, unless the Customer cancels before the end of
+                the current Subscription Term or either party gives notice of non-renewal.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                3. Cancellation. The Customer may cancel the subscription at any time
+                through the account settings or by the procedure prescribed by the
+                Company. Cancellation takes effect at the end of the then-current
+                Subscription Term; the Customer retains access to the Service until that
+                time, and the subscription will not renew thereafter.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                4. No refunds. Except where required by applicable law, fees already paid
+                are non-refundable, and the Company does not provide refunds or credits
+                for partial Subscription Terms, unused periods, or downgrades.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                5. Fee changes. The Company may change the fees applicable to renewal
+                terms by giving notice before the start of the relevant renewal term. The
+                revised fees take effect from the next renewal unless the Customer cancels
+                before that renewal.
+              </p>
+            </Section>
+
             <Section title="Article 9 (Disclaimer of Warranties and Limitation of Liability)">
               <p>
                 1. The Company does not warrant, whether expressly or impliedly, that the
