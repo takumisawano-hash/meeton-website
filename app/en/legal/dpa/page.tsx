@@ -159,11 +159,22 @@ export default function DpaPage() {
 
             <Section title="3. Confidentiality and personnel">
               <p>
-                DynaMeet ensures that personnel authorised to process Customer
+                3.1 DynaMeet ensures that personnel authorised to process Customer
                 Personal Data are bound by confidentiality obligations and access
                 Customer Personal Data only as needed to provide the Service, in
                 line with the human-access restrictions described in our Privacy
                 Policy.
+              </p>
+              <p style={{ marginTop: 12 }}>
+                3.2 <strong>First-party support access.</strong> DynaMeet&rsquo;s
+                authorised personnel may access a Customer workspace to provide
+                onboarding, support or troubleshooting. Where they do: access is
+                role-scoped and limited to what the task requires; it is temporary
+                and expires automatically; each access is recorded in the
+                Customer&rsquo;s own activity log, where actions by DynaMeet staff
+                are visibly flagged to the Customer&rsquo;s team; and the Customer
+                may disable such access at any time in the Service&rsquo;s
+                settings, which immediately removes any existing staff access.
               </p>
             </Section>
 

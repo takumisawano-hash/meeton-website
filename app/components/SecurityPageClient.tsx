@@ -47,6 +47,7 @@ const PRODUCT_MEASURES = {
     '国内リージョンでの保管・高可用性',
     'クラウドセキュリティ（ISO/IEC 27017）',
     'セキュアな AI 運用',
+    'サポートアクセス制御（時間制限・操作ログ記録・設定で無効化可能）',
   ],
   en: [
     'Encryption of data in transit and at rest',
@@ -54,6 +55,7 @@ const PRODUCT_MEASURES = {
     'Domestic-region storage and high availability',
     'Cloud security (ISO/IEC 27017)',
     'Secure AI operation',
+    'Customer-controlled support access (time-limited, activity-logged, can be switched off)',
   ],
 }
 

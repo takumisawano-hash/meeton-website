@@ -157,6 +157,16 @@ export default function SelfServeTermsPage() {
                 users can manage roles and access for additional users within the
                 Service.
               </p>
+              <p style={{ marginTop: 12 }}>
+                2.4 <strong>Support access.</strong> Our authorised personnel may
+                temporarily access your workspace to provide onboarding, support
+                or troubleshooting. Such access is limited to what the task
+                requires and expires automatically, every access is recorded in
+                your workspace activity log with our staff&rsquo;s actions visibly
+                flagged, and you can switch support access off at any time in the
+                Service&rsquo;s settings — doing so immediately removes any
+                existing access. See also Section 3.2 of the DPA.
+              </p>
             </Section>
 
             <Section title="3. Free trial">
