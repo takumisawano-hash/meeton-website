@@ -298,6 +298,44 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
         `}</style>
       </Section>
 
+      {/* 8.3 Partner recruiting band (JA only, 2026-07-17) — the second
+          audience (partner candidates) gets a quiet entry point after the
+          cases/router stretch and before the FAQ. No 報酬率 here — rates are
+          gated behind the /partners/ form. Must not compete with demo CTAs. */}
+      {lang === "ja" && (
+        <Section tone="navy" py={64}>
+          <div className="v2-partner-band">
+            <div>
+              <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(22px,3vw,30px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--on-navy)", margin: 0, lineHeight: 1.4, textWrap: "balance", wordBreak: "auto-phrase" }}>
+                顧客のWebサイトを、新しい営業チャネルに。
+                <br />
+                Meeton ai パートナーを募集しています。
+              </h2>
+              <p style={{ fontSize: 15, lineHeight: 1.9, color: "var(--on-navy-sub)", margin: "16px 0 0", maxWidth: 640 }}>
+                営業支援、マーケティング支援、Web制作、CRM導入、BPOなど、既存のお客様に新しい価値を提供したい企業様とのパートナーシップを募集しています。ご紹介のみの連携から、共同提案・販売・導入支援まで、貴社の体制に合わせてご参加いただけます。
+              </p>
+              <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 16, fontSize: 13, color: "var(--on-navy-sub)" }}>
+                {["継続報酬あり", "商談・提案を Meeton ai が支援", "紹介のみでも参加可能"].map((a) => (
+                  <span key={a}>✓ {a}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, flexShrink: 0 }}>
+              <Link href="/partners/" className="v2-cta-primary" style={{ background: "var(--cta)", color: "var(--on-cta)", fontSize: 15, fontWeight: 800, padding: "13px 26px", borderRadius: 10, textDecoration: "none", textAlign: "center" }}>
+                パートナープログラムを見る
+              </Link>
+              <Link href="/partners/#partner-form" className="v2-cta-ghost" style={{ background: "transparent", color: "#fff", fontSize: 14, fontWeight: 700, padding: "12px 24px", borderRadius: 10, textDecoration: "none", border: "1.5px solid var(--on-navy-border)", textAlign: "center" }}>
+                パートナー制度資料を受け取る
+              </Link>
+            </div>
+          </div>
+          <style>{`
+            .v2-partner-band{display:flex;align-items:center;justify-content:space-between;gap:40px}
+            @media(max-width:860px){.v2-partner-band{flex-direction:column;align-items:flex-start;gap:24px}}
+          `}</style>
+        </Section>
+      )}
+
       {/* 8.5 FAQ — visible twin of the homepage FAQPage JSON-LD (page.tsx).
           Handles the classic pre-inquiry objections right before the final CTA. */}
       <Section tone="white" py={72}>

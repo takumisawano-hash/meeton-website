@@ -101,6 +101,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // /webinar/thanks/ is intentionally excluded (noindex).
     { url: `${baseUrl}/webinar/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/careers/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    // 2026-07-17: partner recruiting page (JA only)
+    { url: `${baseUrl}/partners/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/about/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/contact/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/security/`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },

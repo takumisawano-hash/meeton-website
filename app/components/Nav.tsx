@@ -447,6 +447,14 @@ export default function Nav({
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
               <DesktopDropdownTrigger id="product" label={chrome.navProduct} />
               <DesktopDropdownTrigger id="usage" label={chrome.navUsage} />
+              {/* パートナー — 第2オーディエンス（パートナー候補）の独立入口
+                  (2026-07-17)。JAのみ（/partners/ に EN twin なし）。CTAボタン化は
+                  しない — 顧客獲得CTA（デモを予約）と競合させないこと。 */}
+              {!en && (
+                <Link href="/partners/" style={topLink(isActive("/partners"), linkColor)}>
+                  パートナー
+                </Link>
+              )}
               <Link href={en ? "/en/cases/" : "/cases/"} style={topLink(isActive(en ? "/en/cases" : "/cases"), linkColor)}>
                 {chrome.navCases}
               </Link>
@@ -674,6 +682,8 @@ export default function Nav({
               {[
                 { href: en ? "/en/cases/" : "/cases/", label: en ? "Customers" : "導入事例" },
                 { href: en ? "/en/pricing/" : "/pricing/", label: en ? "Pricing" : "料金" },
+                // パートナー募集（JAのみ — desktop 中央ナビと同じ入口）
+                ...(en ? [] : [{ href: "/partners/", label: "パートナー" }]),
                 ...resourceItems,
               ].map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
