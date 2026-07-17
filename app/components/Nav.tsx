@@ -447,6 +447,13 @@ export default function Nav({
             <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
               <DesktopDropdownTrigger id="product" label={chrome.navProduct} />
               <DesktopDropdownTrigger id="usage" label={chrome.navUsage} />
+              <Link href={en ? "/en/cases/" : "/cases/"} style={topLink(isActive(en ? "/en/cases" : "/cases"), linkColor)}>
+                {chrome.navCases}
+              </Link>
+              <Link href={en ? "/en/pricing/" : "/pricing/"} style={topLink(isActive(en ? "/en/pricing" : "/pricing"), linkColor)}>
+                {chrome.navPricing}
+              </Link>
+              <DesktopDropdownTrigger id="resources" label={chrome.navResources} />
               {/* パートナー — 第2オーディエンス（パートナー候補）の独立入口
                   (2026-07-17)。JAのみ（/partners/ に EN twin なし）。CTAボタン化は
                   しない — 顧客獲得CTA（デモを予約）と競合させないこと。 */}
@@ -455,13 +462,6 @@ export default function Nav({
                   パートナー
                 </Link>
               )}
-              <Link href={en ? "/en/cases/" : "/cases/"} style={topLink(isActive(en ? "/en/cases" : "/cases"), linkColor)}>
-                {chrome.navCases}
-              </Link>
-              <Link href={en ? "/en/pricing/" : "/pricing/"} style={topLink(isActive(en ? "/en/pricing" : "/pricing"), linkColor)}>
-                {chrome.navPricing}
-              </Link>
-              <DesktopDropdownTrigger id="resources" label={chrome.navResources} />
               {resolvedLangHref && resolvedLangLabel && (
                 // Plain <a> (NOT next/link): a soft-nav <Link> prefetches the
                 // target WITHOUT the pref_lang cookie, so the geo middleware
@@ -682,9 +682,9 @@ export default function Nav({
               {[
                 { href: en ? "/en/cases/" : "/cases/", label: en ? "Customers" : "導入事例" },
                 { href: en ? "/en/pricing/" : "/pricing/", label: en ? "Pricing" : "料金" },
-                // パートナー募集（JAのみ — desktop 中央ナビと同じ入口）
-                ...(en ? [] : [{ href: "/partners/", label: "パートナー" }]),
                 ...resourceItems,
+                // パートナー募集（JAのみ — desktop 同様リソースの後ろ）
+                ...(en ? [] : [{ href: "/partners/", label: "パートナー" }]),
               ].map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}
