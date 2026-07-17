@@ -283,7 +283,7 @@ export const PRODUCTS_EN: Record<ProductLPData["slug"], ProductLPData> = {
     crossSell: "Raise intent with chat before the booking, and follow up by email with everyone who didn't book—when the four jobs connect, you get an end-to-end AI SDR.",
     faq: [
       { q: "How is this different from Calendly or TimeRex?", a: "Unlike tools that simply hand over a booking URL, Meeton Calendar has AI answer questions in conversation the instant a lead converts, raising intent before guiding them to a slot. It then automates rep assignment, CRM logging, and notifications—solving both speed to lead and lead leakage at the same time." },
-      { q: "How much does it cost?", a: "One base plan from ¥150,000/mo (Chat + Ads + Library), plus meeting-booking and win-back add-ons at ¥50,000/mo each — priced by monthly traffic. See the pricing page for details, and start with a 1-month free trial or a 30-minute demo." },
+      { q: "How much does it cost?", a: "One base plan from $999/mo (Chat + Ads + Library), plus a meeting-booking add-on at $350/mo — priced by monthly traffic. See the pricing page for details, and start with a 1-month free trial or a 30-minute demo." },
       { q: "How long does it take to get started?", a: "It's no-code. Connect your calendar via OAuth, issue a booking URL, and you're live in minutes. Every setting is configured by users themselves inside the app—no development required." },
     ],
   },

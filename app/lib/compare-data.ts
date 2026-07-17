@@ -742,13 +742,13 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion across conversation → booking → content → follow-up (AI SDR)", "Instant meeting conversion on the thank-you page", true),
       C("AI conversation before booking", "AI talks to warm up the lead before booking", "Shows a booking popup after the form", true),
       C("Coverage", "4 functions: booking + chat + content sharing + follow-up", "Meeting conversion (3 flows: thank-you page / content / business card)"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Not disclosed (contact required)", true),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Not disclosed (contact required)", true),
       C("CRM integration", "Auto-registers to Salesforce / HubSpot", "Salesforce / HubSpot integration & auto-routing"),
       C("Provided by", "Made in Japan, Japanese-native", "Made in Japan, Japanese-native"),
     ],
     chooseMeeton: [
       "You want to complete not just booking but conversation, content recommendation, and follow-up in one AI SDR",
-      "You want to move forward with a published pricing structure (base plan from ¥150,000/mo)",
+      "You want to move forward with a published pricing structure (base plan from $999/mo)",
       "You want to engage even pre-inquiry prospects via chat",
     ],
     chooseCompetitor: [
@@ -760,7 +760,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       { q: "How much funding has immedio raised?", a: "immedio announced a ¥350 million Series A in May 2024 (per announcements on corp.immedio.io). It remains a privately held company as of 2026." },
       { q: "Does immedio have a blog?", a: "As of July 2026, immedio's site centers on product, function, and case-study pages — there is no blog published at immedio.io/blog. If you're researching how immedio compares to an end-to-end AI SDR, the comparison on this page covers features, pricing disclosure, and use-case fit." },
       { q: "Which is stronger at meeting conversion, immedio or Meeton Calendar?", a: "Both are Japanese SaaS strong at inbound meeting conversion. immedio has a rich track record as a specialist in thank-you-page meeting conversion. Meeton Calendar differs in that, before booking, the AI warms up the lead through conversation, and chat, content sharing, and follow-up all connect on the same platform. If your use case is booking-focused, immedio fits; if you want everything from conversation to follow-up end to end, Meeton fits." },
-      { q: "How does pricing work?", a: "Meeton ai has a base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each) and discloses its pricing. immedio has no public pricing and requires an inquiry (as of 2026)." },
+      { q: "How does pricing work?", a: "Meeton ai has a base plan from $999/mo plus add-ons (meeting booking, +$350/mo) and discloses its pricing. immedio has no public pricing and requires an inquiry (as of 2026)." },
     ],
     sources: [
       { claim: "immedio converts meetings with a one-line tag on the thank-you page; the product comprises immedio / Box / Forms. It publicly reports outcomes such as a 60% reduction in meeting-processing hours at Sansan", source: "immedio.io/function, immedio.io/case" },
@@ -786,7 +786,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion of leads (conversation → booking → follow-up)", "Automatic coordination of open slots (scheduling)", true),
       C("AI conversation before booking", "AI talks to warm up the lead", "None (specialized in slot coordination)", true),
       C("Auto-trigger right after conversion", "Booking flow right after a form / content download", "Shares a booking URL for the other party to choose"),
-      C("Pricing feel", "Base plan from ¥150,000/mo + add-ons (excl. tax, published)", "Free to Premium, around ¥1,500/mo (excl. tax, per user)"),
+      C("Pricing feel", "Base plan from $999/mo + add-ons (USD, published)", "Free to Premium, around ¥1,500/mo (excl. tax, per user)"),
       C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (meeting-room booking, reminders, etc.)"),
     ],
     chooseMeeton: [
@@ -800,7 +800,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What's the difference between TimeRex and Meeton Calendar?", a: "TimeRex is a Japanese tool specialized in automatic slot coordination (scheduling), with the strength of being free to start and highly cost-effective. Meeton Calendar is optimized for \"meeting conversion\"—on top of scheduling, the AI warms up the lead through conversation before booking and connects to CRM auto-registration and follow-up. If your purpose is scheduling, TimeRex fits; if it is meeting conversion, Meeton fits." },
-      { q: "Which is cheaper?", a: "For pure scheduling, the unit price of TimeRex (free to about ¥1,500/mo per user) is lower. Meeton ai has a base plan from ¥150,000/mo plus add-ons (excl. tax), including meeting-conversion features such as conversation, auto-assignment, and CRM registration. It is appropriate to compare based on \"what problem you want to solve.\"" },
+      { q: "Which is cheaper?", a: "For pure scheduling, the unit price of TimeRex (free to about ¥1,500/mo per user) is lower. Meeton ai has a base plan from $999/mo plus add-ons (USD), including meeting-conversion features such as conversation, auto-assignment, and CRM registration. It is appropriate to compare based on \"what problem you want to solve.\"" },
     ],
     sources: [
       { claim: "TimeRex has 450,000 registered users, 4 tiers from Free to Enterprise, ISO 27001 certification, and claims up to 95% reduction in hours", source: "timerex.net/plan, timerex.net/feature" },
@@ -824,7 +824,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion of leads (conversation → booking → follow-up)", "Scheduling with multi-calendar integration", true),
       C("AI conversation before booking", "AI talks to warm up the lead", "None", true),
       C("Global / time zones", "Supported", "Strength in multi-time-zone support"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free (up to 3 people) to Team plans"),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Free (up to 3 people) to Team plans"),
       C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (calendar integration)"),
       C("Provided by", "Made in Japan, Japanese", "Made in Japan, Japanese"),
     ],
@@ -863,7 +863,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("AI conversation before booking", "AI talks to warm up the lead", "None", true),
       C("Japanese UI & support", "Japanese-native", "No official Japanese UI (translation only)", true),
       C("Integration ecosystem", "Supports major CRMs / calendars / notifications", "Widest with 100+ integrations"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free (1 event type) to paid plans"),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Free (1 event type) to paid plans"),
       C("Coverage", "4 functions: booking + chat + content + follow-up", "Scheduling (routing for teams)"),
     ],
     chooseMeeton: [
@@ -918,7 +918,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What's the difference between DocSend and Meeton Library?", a: "DocSend is a Dropbox-owned standard strong at page-level precise content tracking and VDR. Meeton Library adds AI-chat content explanation on top, can start with no CRM in Japanese, and differs by connecting open signals to Email / Calendar to automate follow-up." },
-      { q: "How does pricing work?", a: "Meeton ai has a base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each) and discloses its pricing. DocSend has no permanent free plan and offers a 14-day trial (as of 2026)." },
+      { q: "How does pricing work?", a: "Meeton ai has a base plan from $999/mo plus add-ons (meeting booking, +$350/mo) and discloses its pricing. DocSend has no permanent free plan and offers a 14-day trial (as of 2026)." },
     ],
     sources: [
       { claim: "DocSend was acquired by Dropbox for about $165M in 2021. Page-level tracking and VDR. No free plan / 14-day trial; Salesforce integration is a paid add-on", source: "dropbox.gcs-web.com, docsend.com" },
@@ -945,7 +945,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Optimization for meeting conversion", "Designed to warm up and carry to booking", "Centered on inquiry resolution", true),
       C("Pre-contact latent prospects", "Stands on the consideration foundation before inquiry", "Mainly existing / inquiring customers", true),
       C("Carrying over past context", "Carries over browsing, download, and conversation history", "Strong at managing support context"),
-      C("Pricing feel", "Base plan from ¥150,000/mo + add-ons (excl. tax, published)", "Seat fee + Fin $0.99/resolution usage-based"),
+      C("Pricing feel", "Base plan from $999/mo + add-ons (USD, published)", "Seat fee + Fin $0.99/resolution usage-based"),
       C("Provided by", "Japanese-native, meeting-conversion-focused", "English-centric, support-focused"),
     ],
     chooseMeeton: [
@@ -959,7 +959,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "Which is better, Intercom or Meeton Chat?", a: "They solve different problems. Intercom (Fin) is strong at automating customer support for existing customers, with a high inquiry resolution rate as its hallmark. Meeton Chat specializes in \"meeting conversion\" of new and latent leads—standing on the consideration foundation before contact to talk, and carrying to booking once intent rises. For support reduction, Intercom fits; for meeting acquisition, Meeton fits." },
-      { q: "How does pricing differ?", a: "Intercom charges a seat fee ($29–132/seat/mo) plus usage-based Fin AI at $0.99/resolution. Meeton ai has a base plan from ¥150,000/mo plus add-ons (excl. tax), a simple structure that varies by monthly traffic and features. Because the use cases and billing models differ, it is appropriate to choose based on your purpose." },
+      { q: "How does pricing differ?", a: "Intercom charges a seat fee ($29–132/seat/mo) plus usage-based Fin AI at $0.99/resolution. Meeton ai has a base plan from $999/mo plus add-ons (USD), a simple structure that varies by monthly traffic and features. Because the use cases and billing models differ, it is appropriate to choose based on your purpose." },
     ],
     sources: [
       { claim: "Intercom's customer-support AI \"Fin\" has a 67% resolution rate and 40M+ cumulative. Seat fee $29–132/mo + usage-based Fin at $0.99/resolution", source: "intercom.com/pricing, sacra.com/c/intercom" },
@@ -1061,13 +1061,13 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Capture and convert B2B leads via AI-optimized on-site ads", "CX improvement (CRO) via web engagement & personalization", true),
       C("AI conversation & meeting booking", "Ads connect to AI chat → booking (first response in 5 seconds, 24/7)", "No documented meeting-booking or visitor-facing AI conversation (popup/MA-centric)", true),
       C("Optimization approach", "AI auto-optimizes which on-site ads are shown", "Generative AI (Insights / SproAgent) × 120,000+ A/B-test knowledge base × consultant-designed scenarios"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Not disclosed (contact required)", true),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Not disclosed (contact required)", true),
       C("CRM integration", "Native HubSpot / Salesforce integration", "External tool integration via its CDP (DataStudio)", true),
       C("Deployment & operation", "One line of JS, live in 5 minutes, self-serve operation", "One-line tag deployment, run by a dedicated producer/consultant"),
     ],
     chooseMeeton: [
       "You want on-site ads → AI conversation → booked meetings end to end on a B2B website",
-      "You want to start small with published pricing (base plan from ¥150,000/mo + add-ons)",
+      "You want to start small with published pricing (base plan from $999/mo + add-ons)",
       "You want leads auto-registered to HubSpot / Salesforce and a self-serve operation",
     ],
     chooseCompetitor: [
@@ -1077,7 +1077,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What is the difference between Sprocket and Meeton Ads?", a: "Sprocket is a CX improvement platform combining web engagement/personalization popups (Personalize), a CDP (DataStudio), generative-AI BI (Insights), and an AI agent (SproAgent), delivered with a dedicated consultant who runs the CVR-improvement PDCA cycle. Meeton Ads auto-optimizes on-site ads with AI for B2B websites and connects AI chat (first response in 5 seconds, 24/7) through to meeting booking on the same AI SDR platform. For consultant-led CX improvement, Sprocket fits; for automating lead capture through to booked meetings, Meeton fits." },
-      { q: "How much does Sprocket cost?", a: "Sprocket does not publish pricing; you must contact them for a quote. Its official FAQ states plans are proposed individually based on each company's needs, structured as an initial fee plus a monthly fee (as of 2026). Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each)." },
+      { q: "How much does Sprocket cost?", a: "Sprocket does not publish pricing; you must contact them for a quote. Its official FAQ states plans are proposed individually based on each company's needs, structured as an initial fee plus a monthly fee (as of 2026). Meeton ai publishes its pricing: base plan from $999/mo plus add-ons (meeting booking, +$350/mo)." },
       { q: "Which fits B2B lead generation better?", a: "Sprocket's client base centers on B2C, high-traffic sites in e-commerce, finance, and travel, with some B2B cases such as Yanmar Holdings' online expo registration (completion rate improved to 143% vs. a no-popup baseline). Meeton is purpose-built for B2B lead capture through meeting conversion, with customer results such as a 60%+ meeting conversion rate (EdulinX). If B2B lead generation and meeting conversion is the goal, Meeton fits; if B2C site CX improvement is the goal, Sprocket fits." },
     ],
     sources: [
@@ -1107,7 +1107,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Role of AI", "AI runs delivery optimization itself (per-visitor targeting, auto-learning from clicks and captured leads)", "AI assists creation (AI scenario creation, AI code, AI FAQ bot, since March 2024); delivery is rule-based", true),
       C("Path to booked meetings", "Connects to Meeton Calendar for booking within a 5-second first response (60%+ meeting-conversion rate = EdulinX)", "No meeting-booking or scheduling capability found (stops at engagement/FAQ)", true),
       C("Coverage", "End to end across capture → nurture → meetings → follow-up (Ads/Chat/Library/Calendar/Email)", "On-site engagement + Cross Talk chatbot (incl. A/B testing and heatmaps)"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Standard: ¥50,000 setup + ¥50,000/mo (excl. tax, published, up to 800,000 PV/mo; custom quote above). Cross Talk: not disclosed (contact required)"),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Standard: ¥50,000 setup + ¥50,000/mo (excl. tax, published, up to 800,000 PV/mo; custom quote above). Cross Talk: not disclosed (contact required)"),
       C("CRM integration", "Native HubSpot / Salesforce integration", "Ingests member/CRM data for personalization (no official mention of native SFA/CRM integration found)", true),
     ],
     chooseMeeton: [
@@ -1122,7 +1122,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What's the difference between Flipdesk and Meeton Ads?", a: "Flipdesk is a Japanese web-engagement tool used by 1,600+ companies that displays popups, banners, and coupons via rule-based targeting with around 30 segmentation parameters. Meeton Ads treats your own site as ad inventory: AI picks the best offer for each visitor (page, traffic source, industry) and auto-learns delivery using clicks and captured leads as rewards. If your goal is EC conversion-rate improvement, Flipdesk fits; for B2B lead capture through to booked meetings, Meeton Ads fits." },
-      { q: "How much does Flipdesk cost?", a: "Flipdesk's Standard plan is ¥50,000 setup + ¥50,000/mo (both excl. tax) for up to 800,000 PV/month, with a custom quote above that (official published pricing as of 2026). The Cross Talk chatbot is priced separately and is not disclosed on the official site — contact required (secondary sources disagree on its price). Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons." },
+      { q: "How much does Flipdesk cost?", a: "Flipdesk's Standard plan is ¥50,000 setup + ¥50,000/mo (both excl. tax) for up to 800,000 PV/month, with a custom quote above that (official published pricing as of 2026). The Cross Talk chatbot is priced separately and is not disclosed on the official site — contact required (secondary sources disagree on its price). Meeton ai publishes its pricing: base plan from $999/mo plus add-ons." },
       { q: "Does Flipdesk have AI features?", a: "Yes. In March 2024 it added generative-AI features: AI scenario creation from natural-language prompts, AI code that auto-generates banner HTML, and an AI FAQ bot that handles free-text input. However, delivery targeting itself remains rule-based, and no meeting-booking or lead-qualification capability could be found. Meeton Ads differs in that AI runs delivery optimization itself and connects to Meeton Calendar to automate all the way to a booked meeting." },
     ],
     sources: [
@@ -1152,7 +1152,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("AI conversation design", "Warms up and carries to booking (first response in 5 seconds, 24/7/365)", "ALF autonomously resolves inquiries (support-centric)", true),
       C("Coverage", "Conversation + content + booking + follow-up, end to end", "Chat + team chat + CRM marketing (no meeting-booking feature)", true),
       C("SFA/CRM integration", "Native HubSpot / Salesforce integration", "Built-in CRM (MU) with rich LINE / Instagram / e-commerce integrations", true),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free to Growth ¥9,600/mo + usage fees by MU count and AI resolutions (published)"),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Free to Growth ¥9,600/mo + usage fees by MU count and AI resolutions (published)"),
       C("Best fit", "B2B website meeting acquisition, Japanese-native", "EC/D2C engagement, purchase support, and customer support"),
     ],
     chooseMeeton: [
@@ -1167,7 +1167,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What is the difference between Channel Talk and Meeton Chat?", a: "Channel Talk is an all-in-one combining engagement chat, a customer CRM, team chat, and CRM marketing, with rich EC-oriented integrations such as LINE, Instagram, and Shopify—strong for EC/D2C engagement and support. Meeton Chat is an AI chat specialized in \"meeting conversion\" of new and latent leads on B2B websites: it warms prospects up with conversation (first response in 5 seconds, 24/7/365) and carries them to booking and follow-up on the same platform. For engagement and support, Channel Talk fits; for meeting acquisition, Meeton fits." },
-      { q: "How much does Channel Talk cost?", a: "Alongside a free plan, published pricing runs from Early Stage at ¥3,600/mo and Growth at ¥9,600/mo (excl. tax, with annual-prepay discounts), with plans determined by MU (stored contacts) count. On top of that, usage-based fees apply separately—for example, the ALF AI agent charges ¥50 per chat resolved autonomously by AI (as of 2026). Meeton ai has published pricing with a base plan from ¥150,000/mo plus add-ons (excl. tax)." },
+      { q: "How much does Channel Talk cost?", a: "Alongside a free plan, published pricing runs from Early Stage at ¥3,600/mo and Growth at ¥9,600/mo (excl. tax, with annual-prepay discounts), with plans determined by MU (stored contacts) count. On top of that, usage-based fees apply separately—for example, the ALF AI agent charges ¥50 per chat resolved autonomously by AI (as of 2026). Meeton ai has published pricing with a base plan from $999/mo plus add-ons (USD)." },
       { q: "Which is better for B2B meeting acquisition?", a: "Channel Talk has chat-based inside-sales case studies (e.g., Lancers), but the product centers on EC/D2C engagement and support, and it has no meeting-booking feature. Meeton Chat is designed as an AI SDR for meeting acquisition, with customer results including a 60%+ meeting conversion rate (EdulinX), 20x chat-sourced leads (BizteX), and 2x monthly SQLs (G-gen). If B2B meeting acquisition is the main goal, Meeton fits; if you also need engagement and support in one tool, Channel Talk is a valid option." },
     ],
     sources: [
@@ -1197,7 +1197,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("AI conversation", "AI warms leads through natural dialogue and carries them to booking", "Chatflows is decision-tree based; Breeze specializes in support resolution", true),
       C("Booking inside chat", "Qualifies and books within the conversation flow (5-second first response)", "Presents a meeting link; custom form fields redirect to a booking page", true),
       C("CRM integration", "Native HubSpot / Salesforce integration (conversations and meetings auto-logged)", "It is HubSpot CRM itself (auto-logged timelines)"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Free tier available; advanced features need upper Hub tiers + Breeze usage billing ($0.50/resolution)"),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Free tier available; advanced features need upper Hub tiers + Breeze usage billing ($0.50/resolution)"),
       C("Provided by", "Made in Japan, Japanese-native design", "Global product, Japanese localization (Japan subsidiary)"),
     ],
     chooseMeeton: [
@@ -1213,7 +1213,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     faq: [
       { q: "Can HubSpot's chatbots and Meeton Chat be used together?", a: "Yes. Meeton Chat integrates natively with HubSpot CRM, so chat conversations and booked meetings are automatically logged to contact timelines. You can keep HubSpot as your CRM and support foundation while strengthening only the meeting-conversion chat with Meeton Chat — no replacement needed. Setup is one line of JS, about 5 minutes." },
       { q: "How do HubSpot Chatflows / Breeze differ from Meeton Chat?", a: "HubSpot's Chatflows is a decision-tree bot + live chat available from the free tier; Breeze Customer Agent is a support-focused AI agent that resolves inquiries by referencing knowledge bases and site content. Meeton Chat specializes in converting new and latent leads into meetings: AI warms them through natural dialogue, starts talking within 5 seconds, and carries them to booking. For support automation, HubSpot fits; for meeting conversion, Meeton fits." },
-      { q: "How does pricing differ?", a: "HubSpot's Chatflows starts on a free tier, with advanced features requiring Professional or above (e.g., Service Hub Professional at $90/seat/mo). Breeze Customer Agent moved to outcome-based billing on April 14, 2026, at 50 credits ($0.50) per resolved conversation. Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons (excl. tax)." },
+      { q: "How does pricing differ?", a: "HubSpot's Chatflows starts on a free tier, with advanced features requiring Professional or above (e.g., Service Hub Professional at $90/seat/mo). Breeze Customer Agent moved to outcome-based billing on April 14, 2026, at 50 credits ($0.50) per resolved conversation. Meeton ai publishes its pricing: base plan from $999/mo plus add-ons (USD)." },
     ],
     sources: [
       { claim: "Chatflows is included in HubSpot's free CRM as live chat + a rule-based bot builder; advanced branching and workflow integration require Professional or above", source: "resonatehq.com/blog/hubspot-chatbot-guide, hubspot.com/pricing/marketing" },
@@ -1233,7 +1233,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     category: "Conversational Marketing",
     metaTitle: "Drift Alternative｜Pricing & Comparison｜Meeton Chat",
     metaDescription:
-      "Drift pioneered conversational marketing, but Salesloft announced its gradual sunset in March 2026. Meeton Chat is an actively developed AI SDR — 5-second first response, 24/7 AI conversations, public pricing from ¥150,000/mo. Compare the two and plan your migration.",
+      "Drift pioneered conversational marketing, but Salesloft announced its gradual sunset in March 2026. Meeton Chat is an actively developed AI SDR — 5-second first response, 24/7 AI conversations, public pricing from $999/mo. Compare the two and plan your migration.",
     verdict:
       "If your sales org is already standardized on Salesloft for outbound cadences and you intend to follow its official successor path to 1mind, staying inside that ecosystem is a reasonable enterprise choice. Drift itself, however, entered a gradual sunset announced in March 2026. If you need an actively developed platform that takes website visitors from AI conversation to booked meetings and follow-up, Meeton Chat is the practical alternative.",
     competitorStrength:
@@ -1242,14 +1242,14 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Pipeline generation end to end: conversation → booking → content → follow-up (AI SDR)", "Conversational marketing (chat + ABM routing)", true),
       C("AI conversation", "5-second first response, 24/7 AI dialogue", "AI chatbot with routing to live chat or meeting booking"),
       C("Coverage", "Chat + on-site ads + content + booking + follow-up in one platform", "Chat + ABM (follow-up email lives in separate Salesloft products)", true),
-      C("Pricing", "From ¥150,000/mo + add-ons (public)", "Not published (contact sales)", true),
+      C("Pricing", "From $999/mo + add-ons (public)", "Not published (contact sales)", true),
       C("CRM integration", "Native HubSpot / Salesforce integration", "Native to Salesloft, plus a broad integration ecosystem"),
       C("Availability", "Actively developed (built in Japan, native-level Japanese support)", "Gradual sunset announced March 2026 (successor: 1mind)", true),
     ],
     chooseMeeton: [
       "You want one AI SDR covering chat, on-site ads, content, meeting booking, and follow-up (1-line JS tag, live in 5 minutes)",
       "You want 24/7 AI conversations with a 5-second first response — customers report 60%+ meeting conversion (EdulinX) and 20x chat leads (BizteX)",
-      "You value public pricing (from ¥150,000/mo + add-ons), an actively developed product, and ISO 27001/27017 certification",
+      "You value public pricing (from $999/mo + add-ons), an actively developed product, and ISO 27001/27017 certification",
     ],
     chooseCompetitor: [
       "Your sales org is standardized on Salesloft cadences and you want buyer-conversation signals inside that same ecosystem",
@@ -1259,7 +1259,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     faq: [
       { q: "Is Drift being discontinued?", a: "Yes. Drift was acquired by Salesloft in February 2024, and in March 2026 Salesloft officially announced a \"gradual sunset\" of Drift alongside a partnership with AI-agent company 1mind, which is positioned as the successor product. As of July 2026, drift.com redirects to salesloft.com/platform/drift, which states \"We've transitioned from Drift to 1mind.\" New adoption of Drift is effectively no longer an option." },
       { q: "What is the difference between Drift and Meeton Chat?", a: "Drift pioneered conversational marketing with strong chat and ABM routing, but follow-up email sequences live in separate Salesloft products, and there is no evidence of Japanese localization or a Japan-based support team. Meeton Chat is an AI SDR that runs the full journey on one platform — 24/7 AI conversations with a 5-second first response, content recommendations, meeting booking, and follow-up — with native HubSpot / Salesforce integration and a 1-line JS tag that deploys in 5 minutes." },
-      { q: "How much does Drift cost?", a: "Pricing is not published — both Salesloft and Drift require you to contact sales, and no official page lists prices (as of 2026). Meeton ai publishes its pricing: from ¥150,000/mo for the base plan, plus add-ons for meeting conversion and follow-up." },
+      { q: "How much does Drift cost?", a: "Pricing is not published — both Salesloft and Drift require you to contact sales, and no official page lists prices (as of 2026). Meeton ai publishes its pricing: from $999/mo for the base plan, plus add-ons for meeting conversion and follow-up." },
     ],
     sources: [
       { claim: "On March 6, 2026, Clari + Salesloft announced a partnership with 1mind and officially confirmed Drift's gradual sunset; drift.com redirects to salesloft.com/platform/drift, which states \"We've transitioned from Drift to 1mind\"", source: "salesloft.com/company/newsroom/1-mind-partnership, salesloft.com/platform/drift" },
@@ -1287,13 +1287,13 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Meeting conversion of new & latent leads (chat-first AI SDR)", "Salesforce-first agentic marketing (Piper AI SDR)"),
       C("AI conversation", "AI chat responds within 5 seconds, 24/7/365", "Conversations across 3 modalities: chat, voice, video"),
       C("Coverage", "Conversation + ads + content + booking + follow-up end to end", "Visitor engagement centric (added outbound agent \"Hunter\" in 2026)"),
-      C("Pricing", "Base plan from ¥150,000/mo + add-ons (published)", "Not disclosed (inquiry & demo booking required)", true),
+      C("Pricing", "Base plan from $999/mo + add-ons (published)", "Not disclosed (inquiry & demo booking required)", true),
       C("CRM integration", "Native Salesforce / HubSpot integration", "Salesforce-native (deep read/write down to custom fields)"),
       C("Availability in Japan", "Made in Japan, Japanese-native product & support", "No dedicated Japan entity or Japanese pricing confirmed (demo published via Salesforce Japan)", true),
     ],
     chooseMeeton: [
       "You want to launch pipeline-generating chat with a Japanese-native product and support",
-      "You want to evaluate with published pricing (base plan from ¥150,000/mo plus add-ons)",
+      "You want to evaluate with published pricing (base plan from $999/mo plus add-ons)",
       "You run a non-Salesforce-centric stack such as HubSpot, and want a one-line JS tag, 5-minute install",
     ],
     chooseCompetitor: [
@@ -1303,7 +1303,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What is Qualified (Piper)?", a: "Qualified is a US-born agentic marketing platform whose AI SDR \"Piper\" converses with website visitors via chat, voice, and video, autonomously handling lead qualification, meeting booking, and AI email. It is built natively on the Salesforce Platform; Salesforce completed its acquisition in April 2026, and integration into Agentforce is underway as \"Qualified from Salesforce.\" In June 2026 it also announced \"Hunter,\" an outbound prospecting agent (contact identification + email sequences), so it is no longer inbound-only." },
-      { q: "How much does Qualified cost?", a: "Qualified's pricing is not disclosed. Officially, only three plan tiers (Premier / Enterprise / Ultimate) and their feature differences are published; actual amounts require a demo booking and custom quote (as of 2026). Meeton ai publishes its pricing: base plan from ¥150,000/mo plus add-ons (meeting booking / win-back, ¥50,000/mo each)." },
+      { q: "How much does Qualified cost?", a: "Qualified's pricing is not disclosed. Officially, only three plan tiers (Premier / Enterprise / Ultimate) and their feature differences are published; actual amounts require a demo booking and custom quote (as of 2026). Meeton ai publishes its pricing: base plan from $999/mo plus add-ons (meeting booking, +$350/mo)." },
       { q: "Does Qualified support Japanese and the Japan market?", a: "Piper's conversation features claim multi-language support, and in June 2026 — timed with Agentforce World Tour Tokyo — Piper was made available to try in Japanese on the Salesforce Japan official site. However, no dedicated Qualified Japan entity, Japanese-language support organization, or Japan pricing page has been confirmed (as of July 2026). If a Japanese-native product and support are prerequisites, the Japan-made Meeton Chat is the practical choice." },
     ],
     sources: [
@@ -1333,13 +1333,13 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("AI chat availability", "Included from the base plan; 5-second first response, 24/7", "From the Inbound Chat tier ($20,000/yr); entry tier is identification-only", true),
       C("Visitor identification", "Captured directly from visitors through conversation", "220M+ record matching; 30-60% company-level, 15-30% person-level in ~3 seconds"),
       C("Japanese-market support", "Japan-native platform; ISO 27001/27017", "English only; no public evidence of Japanese UI or local support", true),
-      C("Pricing", "From ¥150,000/mo + add-ons (public, monthly)", "$10,000-30,000/yr + add-ons (public, annual/quarterly contracts)"),
+      C("Pricing", "From $999/mo + add-ons (public, monthly)", "$10,000-30,000/yr + add-ons (public, annual/quarterly contracts)"),
       C("CRM integration", "Native HubSpot / Salesforce integration", "CRM sync, Slack alerts, lead routing (announced it is joining HubSpot)"),
     ],
     chooseMeeton: [
       "You sell to the Japanese market and want conversations on a Japanese-language site to convert into booked meetings and follow-up (60%+ meeting conversion at EdulinX)",
       "You want AI chat from the base plan — 5-second first response, 24/7, deployed with a one-line JS tag in about 5 minutes",
-      "You need public monthly pricing (from ¥150,000/mo) and ISO 27001/27017 for procurement in Japan",
+      "You need public monthly pricing (from $999/mo) and ISO 27001/27017 for procurement in Japan",
     ],
     chooseCompetitor: [
       "You run an English-market B2B SaaS where de-anonymizing traffic and converting it into warm outbound is the core motion",
@@ -1348,7 +1348,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     ],
     faq: [
       { q: "What is the difference between Warmly and Meeton Chat?", a: "Warmly is a US-built GTM platform that identifies anonymous website visitors at the company and person level (claimed 30-60% company-level and 15-30% person-level match rates, in about 3 seconds) and engages them with chat, email, and ad retargeting. Meeton Chat is a Japan-native AI SDR: an AI conversation with a 5-second first response carries visitors through booking, content sharing, and follow-up in one flow. Choose Warmly for warm-outbound motions on English-market traffic; choose Meeton for inbound meeting conversion on Japanese-language sites." },
-      { q: "How much does Warmly cost?", a: "Warmly publishes its pricing: AI Web-Deanonymization at $10,000/year, Inbound Chat at $20,000/year, and AI Inbound Autopilot at $30,000/year, plus add-ons at $10,000/year each (as of July 2026, annual or quarterly contracts). AI chat is only available from the $20,000/year tier. Meeton ai publishes monthly pricing from ¥150,000/month plus add-ons." },
+      { q: "How much does Warmly cost?", a: "Warmly publishes its pricing: AI Web-Deanonymization at $10,000/year, Inbound Chat at $20,000/year, and AI Inbound Autopilot at $30,000/year, plus add-ons at $10,000/year each (as of July 2026, annual or quarterly contracts). AI chat is only available from the $20,000/year tier. Meeton ai publishes monthly pricing from $999/month plus add-ons." },
       { q: "Was Warmly acquired by HubSpot?", a: "On June 30, 2026, Warmly announced on its own blog that it is joining HubSpot, and independent press confirmed the acquisition (terms undisclosed). Warmly states that existing contracts, pricing, and the product remain unchanged for now, but its stated long-term ambition is integration across HubSpot's platform, so its roadmap as an independent product may change." },
     ],
     sources: [
@@ -1378,13 +1378,13 @@ export const COMPARE_EN: Record<string, CompareData> = {
       C("Primary purpose", "Turning website visitors into leads and booked meetings (AI SDR)", "Autonomous resolution of customer-support conversations"),
       C("Target team", "Marketing and inside sales (new-lead acquisition)", "Customer support / CS teams (sales framed as an emerging expansion)"),
       C("Lead capture & meeting booking", "AI engages within 5 seconds, books meetings 24/7 (60%+ meeting conversion at EdulinX)", "Fin for Sales is inbound-only; books via Calendly / Chili Piper; no outbound prospecting or email nurture", true),
-      C("Pricing model", "Published flat base plan from ¥150,000/mo + 1-month free trial", "Metered: $0.99/outcome + $9.99/qualification, plus Intercom seats $39–139/seat/mo; USD only", true),
+      C("Pricing model", "Published flat base plan from $999/mo + 1-month free trial", "Metered: $0.99/outcome + $9.99/qualification, plus Intercom seats $39–139/seat/mo; USD only", true),
       C("Japanese support", "Japanese-native product and team", "45+ languages incl. Japanese, but JP answers require customer-added training content; no JP entity, USD billing", true),
       C("CRM integration", "Native HubSpot / Salesforce auto-registration", "Mature native Salesforce / HubSpot / Freshworks ecosystem (folding into Agentforce post-acquisition)"),
     ],
     chooseMeeton: [
       "You want website visitors captured and carried to a booked meeting automatically — customers report 60%+ meeting conversion (EdulinX) and 20x chat-sourced leads (BizteX)",
-      "You want a published flat price (from ¥150,000/mo with a 1-month free trial) instead of metered per-outcome fees stacked on seat plans",
+      "You want a published flat price (from $999/mo with a 1-month free trial) instead of metered per-outcome fees stacked on seat plans",
       "You want a 1-line JS tag, 5-minute setup, and leads auto-registered in HubSpot / Salesforce",
     ],
     chooseCompetitor: [
@@ -1394,7 +1394,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     faq: [
       { q: "What is the difference between Fin (by Intercom) and Meeton Chat?", a: "Fin is a customer-service AI agent: it autonomously resolves support conversations across 10+ channels, with a company-claimed 76% average resolution rate. In April 2026 it added Fin for Sales, an inbound-only sales agent, and in June 2026 Salesforce agreed to acquire Fin for ~$3.6B, folding it into Agentforce. Meeton Chat is a sales-side AI SDR: it engages website visitors within 5 seconds, 24/7, qualifies them in conversation, and books the meeting — customers report 60%+ meeting conversion (EdulinX) and 2x monthly SQLs (G-gen). Choose Fin for support automation; choose Meeton Chat for website lead generation and meeting booking." },
       { q: "Can Fin for Sales replace an AI SDR?", a: "Only for the inbound slice. Fin for Sales qualifies visitors already showing intent on your site ($9.99 per qualification) and books meetings via Calendly or Chili Piper, but Fin's own FAQ states it does not do outbound prospecting or standalone automated email nurture, and it requires an Intercom seat plan. A purpose-built AI SDR platform like Meeton ai covers the funnel in one product — chat capture, on-site ads, content library, meeting booking, and follow-up email — at a flat published price." },
-      { q: "How does Fin's pricing compare with Meeton Chat?", a: "Fin is metered: $0.99 per outcome (resolutions, handoffs, disqualifications) and $9.99 per sales qualification, plus Intercom seat plans ($39–139/seat/mo monthly, $29–132 annual) when run on Intercom; standalone deployment on an existing helpdesk starts at a 50-outcome monthly minimum (~$49/mo). Billing is USD-only, with a 14-day free trial. Meeton ai publishes a flat base plan from ¥150,000/mo with a 1-month free trial — costs stay predictable regardless of conversation volume." },
+      { q: "How does Fin's pricing compare with Meeton Chat?", a: "Fin is metered: $0.99 per outcome (resolutions, handoffs, disqualifications) and $9.99 per sales qualification, plus Intercom seat plans ($39–139/seat/mo monthly, $29–132 annual) when run on Intercom; standalone deployment on an existing helpdesk starts at a 50-outcome monthly minimum (~$49/mo). Billing is USD-only, with a 14-day free trial. Meeton ai publishes a flat base plan from $999/mo with a 1-month free trial — costs stay predictable regardless of conversation volume." },
     ],
     sources: [
       { claim: "Fin for Sales launched April 22, 2026: intent-triggered inbound engagement, AI qualification playbook, meeting booking via Calendly / Chili Piper, CRM routing. Fin's own FAQ confirms it is inbound-only with no outbound prospecting or standalone automated email nurture", source: "intercom.com/blog/announcing-fin-for-sales, intercom.com/help/en/articles/13927115" },

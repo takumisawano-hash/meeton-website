@@ -448,7 +448,7 @@ export default async function UseCasePageClient(props: UseCasePageProps) {
           </div>
           <p style={{ marginTop: 20, fontSize: 14 }}>
             <Link href={lang === 'en' ? '/en/pricing/' : '/pricing/'} style={{ color: 'var(--uc-mute)', fontWeight: 700, textDecoration: 'underline' }}>
-              {lang === 'en' ? 'See pricing (base from ¥150,000/mo, 1-month free trial) →' : '料金を見る（基本プラン15万円〜）→'}
+              {lang === 'en' ? 'See pricing (from $999/mo, 1-month free trial) →' : '料金を見る（基本プラン15万円〜）→'}
             </Link>
           </p>
         </div>

@@ -129,22 +129,25 @@ const STR = {
     recoEyebrow: "Recommended setup for this result",
     recoCta: "See pricing for this setup",
     recoHref: () => "/en/pricing/",
+    // 2026-07-17 USD pivot: EN self-serve is USD-only and Meeton Email
+    // (win-back) is not part of the self-serve offer — the "full" reco keeps
+    // the capability story but routes to sales instead of showing a price.
     reco: {
       base: {
-        title: "Base plan: Lead Acquisition",
-        price: "From ¥150,000/mo",
+        title: "Capture Leads (base plan)",
+        price: "From $999/mo",
         products: "Chat + Ads + Library",
         why: "Your biggest upside is acquisition — capturing visitors who currently leave in silence, with conversation and on-site ads.",
       },
       convert: {
-        title: "Base + Meeting Booking add-on",
-        price: "From ¥200,000/mo",
+        title: "Book More Meetings",
+        price: "From $1,349/mo",
         products: "Chat + Ads + Library + Calendar",
         why: "You're capturing leads already. Your biggest upside is conversion — carrying leads to a booked meeting the moment intent peaks.",
       },
       full: {
-        title: "Full stack (+ win-back)",
-        price: "From ¥250,000/mo",
+        title: "Full funnel (+ win-back)",
+        price: "Contact sales",
         products: "Chat + Ads + Library + Calendar + Email",
         why: "You have upside on both acquisition and conversion. All four stages — capture, nurture, convert, win back — work together here.",
       },

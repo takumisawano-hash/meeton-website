@@ -80,7 +80,7 @@ const VENDORS: Vendor[] = [
     purpose: "End-to-end AI SDR platform: conversation → on-site ads → content → booking → follow-up",
     ai: { m: "yes", t: "LLM-native, first response in 5 seconds" },
     booking: { m: "yes", t: "books the meeting inside the chat" },
-    price: { m: "yes", t: "published, from ¥150,000/mo" },
+    price: { m: "yes", t: "published, from $999/mo" },
     status: "Independent, made in Japan; 1-month free trial",
     matrix: ["yes", "yes", "yes", "yes", "yes"],
     matrixNote: "5 products (Chat / Ads / Library / Calendar / Email)",
@@ -140,7 +140,7 @@ const VENDOR_NOTES: { name: string; href: string; body: string; fit: string; lin
   {
     name: "Meeton ai",
     href: "/en/pricing/",
-    body: "A Japan-built AI SDR platform covering four stages with five products: capture (Chat + on-site Ads), nurture (Library), convert (Calendar), and follow up (Email) — all on one platform. The AI opens the conversation within 5 seconds, works 24/7/365, and installs with a single line of JavaScript in about 5 minutes. Published customer results include a 60%+ meeting-conversion rate (EdulinX), 2x monthly SQLs (G-gen), and 20x chat-sourced leads (BizteX). Pricing is published: base plan from ¥150,000/mo plus add-ons, with a 1-month free trial and no credit card required.",
+    body: "A Japan-built AI SDR platform covering four stages with five products: capture (Chat + on-site Ads), nurture (Library), convert (Calendar), and follow up (Email) — all on one platform. The AI opens the conversation within 5 seconds, works 24/7/365, and installs with a single line of JavaScript in about 5 minutes. Published customer results include a 60%+ meeting-conversion rate (EdulinX), 2x monthly SQLs (G-gen), and 20x chat-sourced leads (BizteX). Pricing is published: base plan from $999/mo plus add-ons, with a 1-month free trial and no credit card required.",
     fit: "The first pick if you want conversation, ads, content, booking, and follow-up handled end to end by one AI — with pricing you can see before you talk to sales.",
     linkLabel: "See pricing →",
   },
@@ -183,7 +183,7 @@ const FAQ = [
   },
   {
     q: "Which AI SDR tools publish their pricing?",
-    a: "Meeton ai (base plan from ¥150,000/mo plus add-ons), Warmly ($10,000–30,000/yr), and HubSpot (free CRM tier plus $0.50 per AI-resolved conversation) publish pricing. Qualified and Drift do not disclose pricing (as of July 2026).",
+    a: "Meeton ai (base plan from $999/mo plus add-ons), Warmly ($10,000–30,000/yr), and HubSpot (free CRM tier plus $0.50 per AI-resolved conversation) publish pricing. Qualified and Drift do not disclose pricing (as of July 2026).",
   },
   {
     q: "Is Drift still a viable option in 2026?",
@@ -365,7 +365,7 @@ export default function AiSdrToolsComparePageEn() {
         <SectionHead eyebrow="How to choose" title="Work backwards from your situation" />
         <div style={{ maxWidth: 860, display: "grid", gap: 12 }}>
           {[
-            ["You want conversation, on-site ads, content, booking, and follow-up in one AI — with published pricing", "Meeton ai (from ¥150,000/mo, 1-month free trial)"],
+            ["You want conversation, on-site ads, content, booking, and follow-up in one AI — with published pricing", "Meeton ai (from $999/mo, 1-month free trial)"],
             ["Salesforce is your system of record and you buy enterprise", "Qualified (Piper)"],
             ["Your company already runs on HubSpot CRM and you want to start free", "HubSpot (Chatflows / Breeze)"],
             ["You are a US-market GTM team building warm outbound from visitor identification", "Warmly"],
@@ -429,7 +429,7 @@ export default function AiSdrToolsComparePageEn() {
             Try the end-to-end approach on your own site.
           </h2>
           <p style={{ fontSize: 15, color: "var(--on-navy-sub)", margin: "0 0 26px" }}>
-            Start a 1-month free trial — no credit card required — or book a 30-minute demo. Pricing is published, from ¥150,000/mo.
+            Start a 1-month free trial — no credit card required — or book a 30-minute demo. Pricing is published, from $999/mo.
           </p>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <CTAButtons source={`${src}-footer`} tone="onNavy" size="lg" align="center" lang="en" />

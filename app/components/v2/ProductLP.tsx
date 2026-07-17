@@ -62,8 +62,8 @@ const STR = {
     proofMore: "See more customer stories →",
     midCtaLine: (p: string) => `Try ${p} free for 1 month — or see it in a 30-minute demo.`,
     pricingEyebrow: "Pricing",
-    pricingTitle: "Base plan from ¥150,000/mo. Add only what you need.",
-    pricingLede: "One base plan (Chat + Ads + Library), plus meeting-booking and win-back add-ons at ¥50,000/mo each. Every setup starts with a 1-month free trial.",
+    pricingTitle: "Plans from $999/mo. Add only what you need.",
+    pricingLede: "One base plan (Chat + Ads + Library) from $999/mo, plus add-ons as you need them. Every setup starts with a 1-month free trial.",
     pricingLink: "See pricing details →",
     expansionEyebrow: "This is part of Meeton ai",
     expansionStages: "See the 4 jobs of the AI SDR →",
@@ -370,11 +370,11 @@ export function productAppSchema(data: ProductLPData, lang: Lang = "ja") {
     publisher: { "@id": "https://dynameet.ai/#organization" },
     offers: {
       "@type": "Offer",
-      price: "120000",
-      priceCurrency: "JPY",
+      price: lang === "en" ? "999" : "120000",
+      priceCurrency: lang === "en" ? "USD" : "JPY",
       description:
         lang === "en"
-          ? "Base plan from ¥150,000/mo plus add-ons. Varies by traffic and setup."
+          ? "Plans from $999/mo (USD) plus add-ons. Varies by traffic and setup."
           : "基本プラン15万円〜＋アドオン。規模・構成により変動。",
     },
   };

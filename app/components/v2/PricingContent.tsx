@@ -14,7 +14,8 @@ import type { Lang } from "@/app/lib/i18n";
 // 2026-07-02 pricing model v3 (founder deck p20): ONE base plan (リード獲得
 // ¥15万〜 = Chat + Ads + Library) + add-ons (商談化/Calendar +¥5万,
 // 追客/Email +¥5万). Popular setups: base+convert ¥20万〜 (recommended),
-// full ¥25万〜. EN mirrors with From-pricing and trial-first CTAs.
+// full ¥25万〜. EN is USD-only self-serve (2026-07-17): Capture Leads $999〜 +
+// Meeting Booking add-on $350 (Book More Meetings $1,349〜); Email not self-serve.
 
 // Deck-p20 pricing model: ONE base plan + add-ons + a "popular setups" panel.
 type BasePlan = {
@@ -214,26 +215,30 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     roiExampleCta: "60秒で、商談化の余地を診断する →",
     roiExampleHref: "/tools/roi/",
   },
+  // 2026-07-17 EN pricing pivot: USD-only (no multi-currency), outcome-named
+  // plans, and Meeton Email (win-back) removed from the self-serve pricing
+  // table — win-back is sales-assisted overseas. Monthly USD price is the
+  // anchor; annual saves 15%. Do NOT price below the JA yen equivalent.
   en: {
-    metaTitleAbsolute: "Pricing｜Meeton ai — start with a 1-month free trial",
+    metaTitleAbsolute: "Pricing｜Meeton ai — plans from $999/mo, 1-month free trial",
     metaDescription:
-      "Meeton ai pricing. Base plan (Lead Acquisition: Chat + Ads + Library) from ¥150,000/mo, then add only what you need — Meeting Booking add-on (Calendar) +¥50,000, Win-back add-on (Email) +¥50,000. Most-popular setup from ¥200,000/mo. Every setup starts with a 1-month free trial, no credit card required.",
-    ogTitle: "Pricing｜Meeton ai — start with a 1-month free trial",
+      "Meeton ai pricing in USD. Capture Leads (Chat + Ads + Library) from $999/mo, or add meeting booking (Meeton Calendar, +$350/mo) — Book More Meetings from $1,349/mo is the most popular plan. Every setup starts with a 1-month free trial, no credit card required.",
+    ogTitle: "Pricing｜Meeton ai — plans from $999/mo",
     ogDescription:
-      "Base plan from ¥150,000/mo · add-ons ¥50,000 each (meeting booking / win-back). Most-popular setup from ¥200,000/mo. 1-month free trial, no credit card required.",
+      "Capture Leads from $999/mo · Book More Meetings from $1,349/mo (most popular). Annual billing saves 15%. 1-month free trial, no credit card required.",
     heroEyebrow: "Pricing",
     heroH1a: (
       <>
         Start with a <span style={{ color: "var(--cta)" }}>1-month free trial</span>.
       </>
     ),
-    heroSub: "One base plan for capture & nurture, then add only what you need — meeting booking and win-back are simple add-ons. No credit card required to start. All prices are tax-exclusive / month.",
+    heroSub: "Choose how far you want to automate — capture leads, or carry them all the way to booked meetings. All prices in USD per month. No credit card required to start.",
     heroSecondaryLabel: "See customer stories",
-    plansEyebrow: "Base plan + add-ons",
-    plansTitle: "Start with the base. Add only what you need.",
+    plansEyebrow: "Plans",
+    plansTitle: "Pick how far you automate.",
     plansLede:
-      "Every setup starts with a 1-month free trial. Add meeting booking (Calendar) and win-back (Email) to the base plan whenever you're ready — ¥50,000/mo each.",
-    priceUnit: " / mo (excl. tax)",
+      "Every setup starts with a 1-month free trial. Start with Capture Leads, and add meeting booking (Calendar) whenever you're ready — +$350/mo.",
+    priceUnit: " / mo",
     planCta: "Start 1-month free trial",
     stagesLinkPre: "For how the stages work, see",
     stagesLinkText: "the four jobs of an AI SDR",
@@ -243,7 +248,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     trafficColAdd: "Add-on",
     trafficNote: (
       <>
-        Calendar integration is unlimited on every plan. Annual prepay is 2 months free (about 17% off). For multiple sites and advanced integrations, see{" "}
+        Calendar integration is unlimited on every plan. Annual billing saves 15%. For multiple sites and advanced integrations, see{" "}
         <Link href="/en/enterprise/" className="v2-link" style={{ color: "var(--cta-ink)", textDecoration: "underline" }}>Enterprise</Link>.
       </>
     ),
@@ -258,7 +263,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     finalSub: "Install with a single JS tag, connect your calendar and CRM, and see your first AI-qualified conversations this week. Prefer a walkthrough first? Book a 30-minute demo.",
     casesLabel: "See customer stories",
     plansFine:
-      "✓ Add-ons are ¥50,000/mo each and can be added to the base plan anytime · ✓ 1-month free trial on every setup · ✓ No credit card required · ✓ You approve before any paid plan begins",
+      "✓ The Meeting Booking add-on ($350/mo) can be added anytime · ✓ 1-month free trial on every setup · ✓ No credit card required · ✓ You approve before any paid plan begins",
     enterprise: {
       name: "Enterprise",
       desc: "Multiple sites, advanced CRM integrations, SSO, and security reviews — custom traffic and terms.",
@@ -268,9 +273,9 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     },
     basePlan: {
       label: "Base plan",
-      name: "Lead Acquisition",
+      name: "Capture Leads",
       stageLine: "Capture & nurture ( Chat + Ads + Library )",
-      price: "¥150,000",
+      price: "$999",
       pricePrefix: "From ",
       desc: "Capture latent prospects with conversation and on-site ads, nurture them with content. CRM integration included.",
       pill: "Your marketing team can run it alone",
@@ -278,21 +283,22 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       ctaHref: "/en/trial/?src=pricing&plan=lead",
       fit: "Best for: teams that first want more inquiries and content downloads, led by marketing.",
     },
-    addonsHeading: "＋ Add only what you need",
+    addonsHeading: "＋ Add when you're ready",
+    // Meeton Email (win-back) is intentionally NOT listed here — not part of
+    // the overseas self-serve offer (2026-07-17). Do not re-add without a
+    // pricing decision.
     addons: [
-      { title: "Meeting Booking add-on", price: "+¥50,000", product: "Meeton Calendar", desc: "Carries captured leads to a booked meeting. Unlimited calendar seats." },
-      { title: "Win-back add-on", price: "+¥50,000", product: "Meeton Email", desc: "Recovers missed leads 1:1 and brings them back to a meeting." },
+      { title: "Meeting Booking add-on", price: "+$350", product: "Meeton Calendar", desc: "Carries captured leads to a booked meeting. Unlimited calendar seats." },
     ],
-    popularHeading: "Popular setups",
+    popularHeading: "Most popular",
     popular: [
-      { title: "Base + Meeting Booking", price: "¥200,000", pricePrefix: "From ", badge: "Recommended", ctaLabel: "Start free trial", ctaHref: "/en/trial/?src=pricing&plan=meeting", fit: "Best for: teams that capture leads already but struggle with meeting conversion and speed to lead." },
-      { title: "Full stack (+ win-back)", price: "¥250,000", pricePrefix: "From ", ctaLabel: "Start free trial", ctaHref: "/en/trial/?src=pricing&plan=all-in-one", fit: "Best for: teams automating the whole pipeline from capture to win-back, or sitting on many dormant leads." },
+      { title: "Book More Meetings", price: "$1,349", pricePrefix: "From ", badge: "Most Popular", ctaLabel: "Start free trial", ctaHref: "/en/trial/?src=pricing&plan=meeting", fit: "Everything in Capture Leads, plus Meeton Calendar. Best for: teams that capture leads already but struggle with meeting conversion and speed to lead." },
     ],
     traffic: [
       { tier: "Up to 30,000 sessions / mo", add: "Included in every plan" },
-      { tier: "30,000 – 100,000 sessions / mo", add: "+¥60,000 / mo" },
-      { tier: "100,000 – 300,000 sessions / mo", add: "+¥120,000 / mo" },
-      { tier: "Over 300,000 sessions / mo", add: "Contact us" },
+      { tier: "30,000 – 100,000 sessions / mo", add: "+$399 / mo" },
+      { tier: "100,000 – 300,000 sessions / mo", add: "+$799 / mo" },
+      { tier: "Over 300,000 sessions / mo", add: "Contact sales" },
     ],
     faq: [
       {
@@ -300,28 +306,32 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
         a: "Request a trial, and we'll reach out within 1 business day to get you live — a single JS tag on your site, plus calendar and CRM connections. You then get full access to your plan's features for one month, free. No credit card is required to start, and you won't be billed automatically: paid service begins only after you confirm your plan at the end of the trial.",
       },
       {
-        q: "How should I choose a setup?",
-        a: "The base plan — Lead Acquisition (from ¥150,000/mo: Chat + Ads + Library) — is the foundation. Add the Meeting Booking add-on (Meeton Calendar, +¥50,000/mo) to convert leads into booked meetings, and the Win-back add-on (Meeton Email, +¥50,000/mo) to recover missed leads automatically. The most popular setup is Base + Meeting Booking (from ¥200,000/mo); the full stack is from ¥250,000/mo. Every setup starts with a free trial.",
+        q: "How should I choose a plan?",
+        a: "Choose how far you want to automate. Capture Leads (from $999/mo: Chat + Ads + Library) covers capture and nurture. Add the Meeting Booking add-on (Meeton Calendar, +$350/mo) to carry captured leads to booked meetings — that's Book More Meetings (from $1,349/mo), our most popular plan. Every setup starts with a free trial.",
       },
       {
         q: "What determines the final price?",
-        a: "Two axes: your setup (base plan + the add-ons you choose, ¥50,000/mo each) and your monthly website traffic. Every setup includes up to 30,000 sessions/mo; 30,000–100,000 is +¥60,000/mo, 100,000–300,000 is +¥120,000/mo, and over 300,000 is quote-based. If you're not sure about your traffic, start with the base plan — we'll notify you before any traffic-based change. Calendar seats are unlimited on the Meeting Booking add-on.",
+        a: "Two axes: your plan (Capture Leads, plus the Meeting Booking add-on if you choose it) and your monthly website traffic. Every plan includes up to 30,000 sessions/mo; 30,000–100,000 is +$399/mo, 100,000–300,000 is +$799/mo, and over 300,000 is handled by sales. If you're not sure about your traffic, start with the base plan — we'll notify you before any traffic-based change. Calendar seats are unlimited on the Meeting Booking add-on.",
       },
       {
-        q: "Can I add or remove add-ons later?",
-        a: "Yes. Start with the base plan and add meeting booking (Calendar) or win-back (Email) whenever you're ready — each is a simple ¥50,000/mo add-on, and you can change your setup as your business grows.",
+        q: "Can I add the Meeting Booking add-on later?",
+        a: "Yes. Start with Capture Leads and add meeting booking (Calendar) whenever you're ready — a simple +$350/mo add-on. You can change your plan as your business grows.",
+      },
+      {
+        q: "Do you offer annual billing?",
+        a: "Yes. Monthly billing in USD is the default; annual billing saves 15%. You can switch to annual at any renewal.",
       },
       {
         q: "What about multiple sites or advanced requirements?",
         a: "Multiple-site operation, advanced CRM integration, SSO, and security requirements are handled with Enterprise (custom pricing). See the Enterprise page or book a demo to discuss your setup.",
       },
       {
-        q: "What payment methods and invoices do you support?",
-        a: "We support credit card or invoice (bank transfer). In either case we issue Japan qualified invoices (with registration number) compliant with the invoice system.",
+        q: "What payment methods do you support?",
+        a: "We support credit card or invoice (bank transfer). All prices are in USD.",
       },
       {
         q: "It feels expensive. What should I compare it against?",
-        a: "Compare it against the cost of a meeting-generating capacity, not a tool's sticker price. Hiring one inside-sales rep costs roughly ¥375,000+/mo in salary terms (at ¥4.5M/yr) plus recruiting and ramp-up, and covers business hours only. The Meeton ai full stack is from ¥250,000/mo, works 24/7, and responds to leads within 5 seconds. Try the free ROI estimate (no signup) with your own numbers first.",
+        a: "Compare it against the cost of a meeting-generating capacity, not a tool's sticker price. Hiring one SDR typically costs $5,000–8,000+/mo fully loaded, plus recruiting and ramp-up, and covers business hours only. Meeton ai's most popular plan, Book More Meetings, is from $1,349/mo, works 24/7, and responds to leads within 5 seconds. Try the free ROI estimate (no signup) with your own numbers first.",
       },
       {
         q: "Isn't our existing MA tool enough?",
@@ -339,9 +349,9 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     costEyebrow: "How to think about the cost",
     costTitle: "Compared with hiring, or stacking tools.",
     costLede: "The two options most often weighed against Meeton ai in internal approvals. All figures are general estimates (as of 2026).",
-    costCols: { meeton: "Meeton ai (full stack)", human: "Hiring one inside-sales rep", stack: "Stacking individual tools" },
+    costCols: { meeton: "Meeton ai (Book More Meetings)", human: "Hiring one inside-sales rep", stack: "Stacking individual tools" },
     costRows: [
-      { dim: "Monthly cost (approx.)", meeton: "From ¥250,000", humanSdr: "≈¥375,000+ (at ¥4.5M/yr) + recruiting, ramp-up, management", toolStack: "Chatbot + MA + scheduling + content sharing + email: ¥100,000 to several hundred thousand combined" },
+      { dim: "Monthly cost (approx.)", meeton: "From $1,349", humanSdr: "≈$5,000–8,000+ fully loaded, plus recruiting, ramp-up, management", toolStack: "Chatbot + MA + scheduling + content sharing + email: several hundred to a few thousand dollars combined" },
       { dim: "Coverage hours", meeton: "24/7, first response in 5 seconds", humanSdr: "Business hours (one person's throughput)", toolStack: "Fragmented across tools" },
       { dim: "Scope", meeton: "Capture → nurture → convert → win back, in one platform", humanSdr: "Calls and email; hard to catch website visitors in the moment", toolStack: "Features exist but journeys are fragmented; integration work required" },
       { dim: "Time to launch", meeton: "One JS tag, ~5 minutes to install", humanSdr: "1–3 months to hire, plus ramp-up", toolStack: "Selection, contracting, and setup per tool" },
@@ -349,7 +359,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     ],
     costNote: "Labor and tool costs are general estimates. Meeton ai is not a replacement for human SDRs — it automates the first response and website-side conversion so your people can focus on the meetings themselves.",
     roiExampleTitle: "An ROI example for your internal approval",
-    roiExampleBody: "If your average deal is ¥1,000,000 and you run Base + Meeting Booking (¥200,000/mo), one additional won deal per month returns 5x the investment. Estimate your own meeting upside from your traffic, CVR, and meeting rate — free, no signup.",
+    roiExampleBody: "If your average deal is $10,000 and you run Book More Meetings ($1,349/mo), one additional won deal per month returns more than 7x the investment. Estimate your own meeting upside from your traffic, CVR, and meeting rate — free, no signup.",
     roiExampleCta: "Estimate your meeting upside in 60 seconds →",
     roiExampleHref: "/en/tools/roi/",
   },
@@ -373,11 +383,19 @@ export const pricingProductSchema = (lang: Lang, url: string) => {
     operatingSystem: "Web",
     url,
     publisher: { "@id": "https://dynameet.ai/#organization" },
-    offers: [
-      { "@type": "Offer", name: `${st.basePlan.label} ${st.basePlan.name}`, price: "150000", priceCurrency: "JPY" },
-      { "@type": "Offer", name: st.popular[0].title, price: "200000", priceCurrency: "JPY" },
-      { "@type": "Offer", name: st.popular[1].title, price: "250000", priceCurrency: "JPY" },
-    ],
+    // EN is USD-only with 2 self-serve offers (Email removed 2026-07-17);
+    // JA keeps the 3-tier JPY structure.
+    offers:
+      lang === "en"
+        ? [
+            { "@type": "Offer", name: `${st.basePlan.label} ${st.basePlan.name}`, price: "999", priceCurrency: "USD" },
+            { "@type": "Offer", name: st.popular[0].title, price: "1349", priceCurrency: "USD" },
+          ]
+        : [
+            { "@type": "Offer", name: `${st.basePlan.label} ${st.basePlan.name}`, price: "150000", priceCurrency: "JPY" },
+            { "@type": "Offer", name: st.popular[0].title, price: "200000", priceCurrency: "JPY" },
+            { "@type": "Offer", name: st.popular[1].title, price: "250000", priceCurrency: "JPY" },
+          ],
   };
 };
 
@@ -475,7 +493,9 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
             deck's side column at web widths) */}
         <div className="pv3-popular">
           <div style={{ fontSize: 14, fontWeight: 800, color: "var(--cta)" }}>{s.popularHeading}</div>
-          <div className="pv3-combos">
+          {/* EN has a single popular setup (Email removed 2026-07-17) — a lone
+              half-width cell in the 2-col grid looks broken, so collapse it. */}
+          <div className="pv3-combos" style={s.popular.length === 1 ? { gridTemplateColumns: "1fr" } : undefined}>
             {s.popular.map((c, i) => (
               <div key={c.title} className="pv3-combo" style={{ borderLeft: i === 0 ? "3px solid var(--cta)" : "3px solid transparent" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
