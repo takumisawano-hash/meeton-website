@@ -323,10 +323,12 @@ export default function SelfServeTermsPage() {
                 Control Act 2007 in Singapore, and the Act on Regulation of
                 Transmission of Specified Electronic Mail in Japan — that messages
                 accurately identify you as sender, and that unsubscribe requests are
-                honoured promptly. The Service provides compliance features
-                (including unsubscribe links and suppression of opted-out contacts);
-                you must not circumvent them. We may restrict sending features where
-                we reasonably believe they are being used unlawfully.
+                honoured promptly. The Service provides features that assist your
+                compliance (including consent-capture form fields, unsubscribe links
+                and suppression of opted-out contacts); using them appropriately for
+                the laws that apply to you remains your responsibility, and you must
+                not circumvent them. We may restrict sending features where we
+                reasonably believe they are being used unlawfully.
               </p>
             </Section>
 
