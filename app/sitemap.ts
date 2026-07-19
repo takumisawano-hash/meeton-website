@@ -265,6 +265,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/en/terms/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: `${baseUrl}/en/integrations/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: `${baseUrl}/en/legal/tokushoho/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
+    // Self-serve legal set (EN-only, no JA twins)
+    { url: `${baseUrl}/en/legal/terms-self-serve/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
+    { url: `${baseUrl}/en/legal/dpa/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },
+    { url: `${baseUrl}/en/legal/sub-processors/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${baseUrl}/en/cases/`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.6 },
     ...caseStudies.map((c) => ({ url: c.url.replace(`${baseUrl}/cases/`, `${baseUrl}/en/cases/`), lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 })),
     // EN blog hub. Per-post EN URLs are appended via enBlogPosts in the return.
