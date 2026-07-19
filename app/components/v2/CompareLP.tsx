@@ -31,6 +31,11 @@ const STR = {
     fitTitle: "どちらが、あなたに向くか。",
     fitMeeton: (p: string) => `${p} が向くケース`,
     fitCompetitor: (c: string) => `${c} が向くケース`,
+    heroPrimary: "自社に合う構成を相談する",
+    roiLink: "60秒で、自社サイトの商談化の余地を診断する →",
+    roiHref: "/tools/roi/",
+    twinToAlt: (c: string) => `「${c} の代替」として検討中の方はこちら →`,
+    twinToCompare: (c: string) => `${c} との機能・料金の詳細比較はこちら →`,
     midDemo: (p: string) => `${p} を、デモで体験する。`,
     midDetail: (p: string) => `${p} の詳細 →`,
     faqEyebrow: "よくある質問",
@@ -54,6 +59,11 @@ const STR = {
     fitTitle: "Which one is right for you.",
     fitMeeton: (p: string) => `When ${p} fits`,
     fitCompetitor: (c: string) => `When ${c} fits`,
+    heroPrimary: "Talk through the right setup",
+    roiLink: "Estimate your site's meeting upside in 60 seconds →",
+    roiHref: "/en/tools/roi/",
+    twinToAlt: (c: string) => `Evaluating ${c} alternatives? See the alternative guide →`,
+    twinToCompare: (c: string) => `See the full ${c} feature & pricing comparison →`,
     midDemo: (p: string) => `Experience ${p} in a demo.`,
     midDetail: (p: string) => `Learn more about ${p} →`,
     faqEyebrow: "FAQ",
@@ -91,7 +101,15 @@ export default function CompareLP({ data, mode = "compare", lang = "ja" }: { dat
             <div style={{ fontFamily: "var(--fm)", fontSize: 12, fontWeight: 700, color: "var(--cta)", marginBottom: 8 }}>{s.verdictLabel}</div>
             <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--on-navy)", margin: 0 }}>{data.verdict}</p>
           </div>
-          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" lang={lang} />
+          {/* JA: intent-matched primary (構成相談). EN keeps the trial-first
+              default — passing primaryLabel would silently revert to demo. */}
+          <CTAButtons source={`${src}-hero`} tone="onNavy" size="lg" lang={lang} {...(en ? {} : { primaryLabel: s.heroPrimary })} />
+          {/* tertiary: self-serve diagnostic for comparison shoppers not ready to talk */}
+          <div style={{ marginTop: 14 }}>
+            <Link href={s.roiHref} className="v2-link" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--cta)", textDecoration: "underline" }}>
+              {s.roiLink}
+            </Link>
+          </div>
         </div>
       </Section>
 
@@ -123,6 +141,25 @@ export default function CompareLP({ data, mode = "compare", lang = "ja" }: { dat
         <p style={{ fontSize: 12, color: "var(--sub)", marginTop: 12 }}>
           {s.sourceNote(data.competitorName)}
         </p>
+        {/* compare↔alternatives twin cross-link — kills the orphan state of
+            /alternatives/* (2026-07-13 週次PDCA 承認#7) */}
+        {data.alternative && (
+          <p style={{ fontSize: 13.5, marginTop: 14 }}>
+            <Link
+              href={
+                mode === "alternative"
+                  ? `${en ? "/en" : ""}/compare/${data.slug}/`
+                  : `${en ? "/en" : ""}/alternatives/${data.slug}/`
+              }
+              className="v2-link"
+              style={{ color: "var(--cta-ink)", fontWeight: 700, textDecoration: "underline" }}
+            >
+              {mode === "alternative"
+                ? s.twinToCompare(data.competitorName)
+                : s.twinToAlt(data.competitorName)}
+            </Link>
+          </p>
+        )}
       </Section>
 
       {/* 使い分け (fair) */}

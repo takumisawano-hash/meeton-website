@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // teaches Google the signal is noise and it stops trusting lastmod (incl.
   // the accurate per-post blog/cases dates below). Bump this when static
   // pages get a material content change. Blog/cases keep their real dates.
-  const now = new Date('2026-07-02T00:00:00Z')
+  const now = new Date('2026-07-10T00:00:00Z')
 
   // Static pages. /features/offers/ removed — it 301-redirects to /.
   // /talent/ removed — intentionally hidden from Nav.
@@ -31,6 +31,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/use-cases/post-download/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/use-cases/revisit/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/use-cases/nurture/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // 2026-07-10: new moment (challenge) LPs — post-inquiry / exhibition / webinar follow-up
+    { url: `${baseUrl}/use-cases/post-inquiry/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/exhibition/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/webinar-follow-up/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/enterprise/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     // 2026-05-23 ads relaunch: Phase 1 paid-traffic LPs
     { url: `${baseUrl}/solutions/crm-to-meeting/`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
@@ -51,7 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/pricing/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/tools/roi/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/integrations/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/ja/integrations/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    // /ja/integrations/ removed 2026-07-10 — /ja/* 308-redirects to root since
+    // the 2026-07-02 IA swap; a sitemap must contain only canonical 200 URLs.
     // NOTE: old /for/* persona URLs were REMOVED from the sitemap — they
     // 308-redirect to /solutions/* (already listed above), and a sitemap must
     // contain only canonical 200 URLs. The redirects stay live in next.config.
@@ -60,6 +65,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/use-cases/manufacturing/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/use-cases/professional-services/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/use-cases/fintech/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // 2026-07-10: 4 new vertical LPs (IT / 人材 / BPO / 教育・研修)
+    { url: `${baseUrl}/use-cases/it/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/hr-staffing/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/bpo/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/use-cases/education/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // Competitor comparison LPs — highest commercial-intent traffic
     // (buyers in final evaluation phase).
     { url: `${baseUrl}/compare/meeton-vs-sinclo/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
@@ -70,16 +80,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/compare/chatbot-vs-ai-sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${baseUrl}/compare/ma-vs-ai-sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${baseUrl}/compare/scheduling-vs-ai-sdr/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    // 2026-07-10: multi-vendor category comparison hubs
+    { url: `${baseUrl}/compare/web-sekkyaku-tools/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/compare/ai-sdr-tools/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/compare/ai-chatbot-tools/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/compare/inside-sales-automation/`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/en/compare/ai-sdr-tools/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // Pillar pages — SEO hub-and-spoke. Consolidate authority for
     // head-term queries ("B2B リードジェネレーション", "クッキーレス マーケティング")
     // and internal-link to 20+ cluster blog posts each.
     { url: `${baseUrl}/pillar/lead-generation/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/pillar/cookieless-marketing/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${baseUrl}/pillar/website-shodanka/`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    // 定義LP/課題LP — previously missing from the sitemap (2026-07-10 audit):
+    // /ai-sdr/ is the primary AEO definition page, /lead-revival/ the 休眠リード LP.
+    { url: `${baseUrl}/ai-sdr/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/lead-revival/`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // 2026-05-19: /roi-simulator/ 撤去 → 301 to /webinar/。商談化文脈に合わず学習動線をウェビナーに統合。
     // Webinar series — index + per-webinar registration LPs.
     // /webinar/thanks/ is intentionally excluded (noindex).
     { url: `${baseUrl}/webinar/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/careers/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    // 2026-07-17: partner recruiting page (JA only)
+    { url: `${baseUrl}/partners/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/about/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/contact/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/security/`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
@@ -235,7 +258,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...allTermSlugs().map((s) => ({ url: `${baseUrl}/en/glossary/${s}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.55 })),
     // role solutions + use-cases + enterprise/security/cases (2026-06-23)
     ...['cmo', 'cro', 'sdr', 'ceo'].map((r) => ({ url: `${baseUrl}/en/solutions/${r}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 })),
-    ...['pre-inquiry', 'post-download', 'revisit', 'nurture', 'saas', 'manufacturing', 'professional-services', 'fintech'].map((u) => ({ url: `${baseUrl}/en/use-cases/${u}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 })),
+    ...['pre-inquiry', 'post-download', 'revisit', 'nurture', 'post-inquiry', 'exhibition', 'webinar-follow-up', 'saas', 'manufacturing', 'professional-services', 'fintech', 'it', 'hr-staffing', 'bpo', 'education'].map((u) => ({ url: `${baseUrl}/en/use-cases/${u}/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 })),
     { url: `${baseUrl}/en/enterprise/`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: `${baseUrl}/en/security/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.4 },
     { url: `${baseUrl}/en/privacy-policy/`, lastModified: now, changeFrequency: 'yearly' as const, priority: 0.3 },

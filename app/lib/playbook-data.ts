@@ -365,6 +365,135 @@ export const MOMENTS: Record<string, PlaybookEntry> = {
       metaDescription: "Leads who didn't book are where the upside is. Triggered by behavioral signals, the AI follows up 1:1 and brings dormant leads back to meetings without giving up — a Meeton ai use case.",
     },
   },
+  "post-inquiry": {
+    slug: "post-inquiry", kind: "moment", badge: "瞬間 — 問い合わせ後",
+    problemLine: "問い合わせは来ている。でも、商談になっていない。",
+    h1: "問い合わせ直後の熱量を、商談に変える。",
+    sub: "問い合わせは関心が最高潮の瞬間。初動が遅れるほど商談化率は下がります（Speed to Lead）。即予約導線と未予約リードのAI追客で、問い合わせ後の取りこぼしをなくします。",
+    pains: [
+      { title: "初動が遅く温度が下がる", desc: "人が返信する頃には熱が冷め、競合に流れている。" },
+      { title: "日程調整の往復で離脱する", desc: "予約までのメール往復が多く、途中で切れる。" },
+      { title: "未予約リードを追い切れない", desc: "その場で予約しなかった相手が放置され、休眠化する。" },
+    ],
+    plays: [
+      { title: "問い合わせ直後に即予約", desc: "最も熱い瞬間に予約導線を提示、往復ゼロで商談化。", product: "calendar" },
+      { title: "自動アサインとCRM登録", desc: "担当差配・記録を自律化し、初動を秒単位に。", product: "calendar" },
+      { title: "未予約はAIが追客", desc: "予約しなかった相手を行動起点で1:1フォロー。", product: "email" },
+    ],
+    proofRef: "edulinx",
+    faq: [
+      { q: "既存の問い合わせフォームは変えずに使えますか？", a: "はい。JSタグ1行・約5分の設置で、フォーム送信直後に予約導線を提示できます。既存のフォームやCRM（HubSpot・Salesforce）はそのまま、初動だけを秒単位に変えます。" },
+      { q: "営業時間外の問い合わせはどうなりますか？", a: "AIが24時間365日対応します。夜間・休日の問い合わせにも即座に予約導線を提示し、予約しなかった相手は行動シグナルを見てAIが追客します。" },
+    ],
+    metaTitle: "問い合わせ後の商談化｜初動の遅れをなくす Speed to Lead｜Meeton ai",
+    metaDescription: "問い合わせは来るのに商談にならない——最も熱い瞬間の即予約と未予約リードのAI追客で、問い合わせ後の取りこぼしをなくす Meeton ai の活用シーン。",
+    en: {
+      badge: "Moment — after the inquiry",
+      problemLine: "Inquiries are coming in. But they aren't becoming meetings.",
+      h1: "Turn the heat right after an inquiry into a meeting.",
+      sub: "An inquiry is the moment interest peaks — and the slower the first response, the lower the conversion (Speed to Lead). With an instant booking path and AI follow-up of unbooked leads, eliminate the leaks after an inquiry.",
+      pains: [
+        { title: "Slow first response cools them off", desc: "By the time a person replies, the interest has cooled and they've moved to a competitor." },
+        { title: "Scheduling ping-pong loses them", desc: "Too many emails back and forth to book, and they drop off along the way." },
+        { title: "Unbooked leads go un-pursued", desc: "Those who didn't book on the spot are left untouched and go dormant." },
+      ],
+      plays: [
+        { title: "Offer a booking right after the inquiry", desc: "Present the booking path at the hottest moment and convert with zero back-and-forth." },
+        { title: "Auto-assignment and CRM logging", desc: "Automate rep assignment and logging, bringing first response to seconds." },
+        { title: "AI follows up the unbooked", desc: "Pursue those who didn't book, 1:1, triggered by behavior." },
+      ],
+      faq: [
+        { q: "Can I keep my existing inquiry form?", a: "Yes. With one JS tag and about 5 minutes of setup, you can present a booking path right after a form submission. Your existing form and CRM (HubSpot / Salesforce) stay as they are — only the first response changes, down to seconds." },
+        { q: "What happens to after-hours inquiries?", a: "The AI responds 24/7, 365 days a year. It presents a booking path instantly even on nights and weekends, and follows up with those who didn't book, watching behavioral signals." },
+      ],
+      metaTitle: "Meeting conversion after the inquiry｜End the slow first response (Speed to Lead)｜Meeton ai",
+      metaDescription: "Inquiries come in but never become meetings — with an instant booking at the hottest moment and AI follow-up of unbooked leads, Meeton ai eliminates the leaks after an inquiry.",
+    },
+  },
+  exhibition: {
+    slug: "exhibition", kind: "moment", badge: "瞬間 — 展示会後",
+    problemLine: "展示会で集めた名刺が、商談にならないまま眠っている。",
+    h1: "展示会リードを、冷める前に商談へ。",
+    sub: "展示会の名刺リードは日を追うごとに冷めていきます。AI追客・資料ナーチャー・即予約導線でフォローを自動で回し、名刺の山を商談に変えます。",
+    pains: [
+      { title: "フォローが間に合わない", desc: "大量の名刺を人手で追い切れず、大半が放置される。" },
+      { title: "温度感が分からない", desc: "誰が本当に検討中なのか見えず、全件に同じ扱いをする。" },
+      { title: "お礼メール一斉送信で終わる", desc: "テンプレ1通で接点が途絶え、その後が続かない。" },
+    ],
+    plays: [
+      { title: "AIが1:1で追客", desc: "相手の文脈に合わせ1通ずつ生成、返信・予約まで自律。", product: "email" },
+      { title: "資料で温度を可視化", desc: "資料を渡して誰がどこまで見たかを把握、追うべき相手が分かる。", product: "library" },
+      { title: "熱い相手には即予約", desc: "反応した瞬間に商談予約を提示、日程往復ゼロ。", product: "calendar" },
+    ],
+    proofRef: "univis",
+    faq: [
+      { q: "名刺データはどう取り込みますか？", a: "CSVやCRM（HubSpot・Salesforce）連携でリードを取り込めます。取り込み後はAIが行動シグナルを見て1:1で追客し、資料の開封状況から温度の高い相手を見極めます。" },
+    ],
+    metaTitle: "展示会後のリードフォロー自動化｜名刺を商談に変える｜Meeton ai",
+    metaDescription: "展示会の名刺リードは放置されるほど冷める。AI追客・資料ナーチャー・即予約でフォローを自動で回し、名刺の山を商談に変える Meeton ai の活用シーン。",
+    en: {
+      badge: "Moment — after a trade show",
+      problemLine: "The business cards you collected at the show sit unconverted.",
+      h1: "Turn trade-show leads into meetings before they cool.",
+      sub: "Trade-show leads cool with every passing day. With AI follow-up, content nurturing, and an instant booking path, run post-show follow-up automatically and turn the pile of business cards into meetings.",
+      pains: [
+        { title: "Follow-up can't keep up", desc: "A stack of cards is more than manual work can cover, and most are left untouched." },
+        { title: "You can't tell who's warm", desc: "You can't see who is actually considering, so everyone gets the same treatment." },
+        { title: "It ends with one thank-you blast", desc: "One templated email, then the touchpoints stop." },
+      ],
+      plays: [
+        { title: "AI follows up 1:1", desc: "Generated one message at a time to fit the recipient's context, autonomous through reply and booking." },
+        { title: "Make warmth visible with content", desc: "Hand over materials, see who read how far, and know who to pursue." },
+        { title: "Instant booking for the warm ones", desc: "Present a meeting booking the moment they respond, with zero scheduling back-and-forth." },
+      ],
+      faq: [
+        { q: "How do I import business-card leads?", a: "You can import leads via CSV or a CRM integration (HubSpot / Salesforce). After import, the AI follows up 1:1 on behavioral signals and identifies the warm contacts from content opens." },
+      ],
+      metaTitle: "Automating post-trade-show lead follow-up｜Turn business cards into meetings｜Meeton ai",
+      metaDescription: "Trade-show leads cool the longer they sit. With AI follow-up, content nurturing, and instant booking, Meeton ai runs post-show follow-up automatically and turns business cards into meetings.",
+    },
+  },
+  "webinar-follow-up": {
+    slug: "webinar-follow-up", kind: "moment", badge: "瞬間 — ウェビナー後",
+    problemLine: "ウェビナーの参加者が、視聴だけで終わっている。",
+    h1: "ウェビナー後の熱を、商談に変える。",
+    sub: "参加直後は関心が最も高い瞬間。録画・資料のナーチャーと行動起点のAI追客、即予約導線で、参加者を視聴で終わらせず商談に運びます。",
+    pains: [
+      { title: "お礼メール1通で終わる", desc: "一斉送信のあと接点が途絶え、熱が冷めていく。" },
+      { title: "誰が本気か分からない", desc: "参加者の中の検討層が見えず、全員に同じ扱いをする。" },
+    ],
+    plays: [
+      { title: "録画・資料でナーチャー", desc: "参加後に資料を渡しAIが解説、開封で温度を可視化。", product: "library" },
+      { title: "行動起点でAIが追客", desc: "資料閲覧・再訪を検知し、1:1フォローで商談へ。", product: "email" },
+      { title: "検討層には即予約", desc: "温度が上がった瞬間に商談予約を提示。", product: "calendar" },
+    ],
+    proofRef: "edulinx",
+    faq: [
+      { q: "ウェビナー施策とどう組み合わせますか？", a: "参加直後に録画・資料を渡して開封を可視化し、反応した相手をAIが1:1で追客、温度が上がった瞬間に予約導線を提示します。Meeton ai のウェビナー開催情報は /webinar/ にまとめています。" },
+    ],
+    metaTitle: "ウェビナー後の商談化｜参加者を視聴で終わらせない｜Meeton ai",
+    metaDescription: "ウェビナー参加直後は関心が最高潮。録画・資料ナーチャーと行動起点のAI追客・即予約で、参加者を商談に運ぶ Meeton ai の活用シーン。",
+    en: {
+      badge: "Moment — after a webinar",
+      problemLine: "Webinar attendees end at watching, never a meeting.",
+      h1: "Turn post-webinar heat into meetings.",
+      sub: "Right after attending is when interest peaks. With recording-and-content nurturing, behavior-triggered AI follow-up, and an instant booking path, carry attendees past watching and into meetings.",
+      pains: [
+        { title: "It ends with one thank-you email", desc: "After the blast, touchpoints stop and the heat fades." },
+        { title: "You can't tell who's serious", desc: "The considerers among attendees are invisible, so everyone gets the same treatment." },
+      ],
+      plays: [
+        { title: "Nurture with recordings and content", desc: "Hand over materials after the session, let the AI explain, and make warmth visible through opens." },
+        { title: "AI follows up on behavior", desc: "Detect content views and revisits, and follow up 1:1 toward a meeting." },
+        { title: "Instant booking for the considerers", desc: "Present a meeting booking the moment interest rises." },
+      ],
+      faq: [
+        { q: "How does it combine with a webinar program?", a: "Hand over the recording and materials right after attendance, make opens visible, have the AI follow up responders 1:1, and present a booking path the moment interest rises. Meeton ai's own webinar schedule is at /webinar/." },
+      ],
+      metaTitle: "Meeting conversion after a webinar｜Don't let attendees end at watching｜Meeton ai",
+      metaDescription: "Right after a webinar is when interest peaks. With recording-and-content nurturing, behavior-triggered AI follow-up, and instant booking, Meeton ai carries attendees into meetings.",
+    },
+  },
 };
 
 export function getSolution(slug: string) { return SOLUTIONS[slug]; }

@@ -224,18 +224,29 @@ export const GLOSSARY: Record<string, GlossaryTerm> = {
     "shortDef": "インバウンド営業とは、見込み客が自らコンテンツや広告を通じて企業に接触・問い合わせてくる流れを設計し、その関心を商談・受注につなげる営業手法のことを指す。テレアポや飛び込みなど企業側から一方的にアプローチするアウトバウンド営業と対をなす概念であり、デジタル化による顧客の自己学習行動の高まりを背景に日本のBtoB市場でも普及が進んでいる。",
     "body": [
       "インバウンド営業とアウトバウンド営業の最大の違いは「誰が最初に動くか」にある。アウトバウンド営業は担当者がターゲットリストに電話・メールを送る能動的アプローチだが、インバウンド営業は見込み客の側が検索・資料ダウンロード・ウェビナー参加などを通じて企業に接触する。BtoB購買において、購買担当者が営業担当者に最初に連絡を取るまでに購買プロセスの約57〜70%を自己完結させているという調査（CEB/Gartner の研究が57%、Forrester の調査が70%と報告）が示すように、顧客はすでに相当量の情報収集を終えた段階で営業と話す。インバウンド営業はこの「接触前の自己学習フェーズ」に良質なコンテンツで存在感を示しておくことで、初回接触時点での温度感を高めることを目的とする。",
-      "インバウンド営業の主な施策は、大きく「流入獲得」と「リード育成・転換」の二段階に分けられる。流入獲得では、SEOを意識したオウンドメディア記事・ホワイトペーパー・ウェビナー・SNS発信・プレスリリースが代表的だ。リード育成・転換の段階では、メールシーケンスやMAツールを用いたリードスコアリング、そして問い合わせ後の迅速なフォローアップが鍵を握る。Harvard Business Review（2011年）の研究では、Webからの問い合わせに1時間以内に応答した企業は、1時間後に応答した企業に比べてリードを商談化できる確率が約7倍高いと報告されている（いわゆる「Speed to Lead」）。流入施策の充実と同時に、問い合わせ後の応答速度と応答品質を整えることが成果に直結する。",
+      "インバウンド営業とアウトバウンド営業の違いを軸ごとに整理すると理解しやすい。【起点】アウトバウンドは営業側、インバウンドは見込み客側が最初に動く。【主なチャネル】アウトバウンドはテレアポ・飛び込み・コールドメール、インバウンドはSEO記事・ホワイトペーパー・ウェビナー・Web問い合わせ・チャット。【リードの温度】アウトバウンドは相手の関心が不明な状態から始まるため低め、インバウンドは自発的に接触してくるぶん高くなりやすい。【商談化率の傾向】一般に自発的なインバウンドリードのほうが商談化率は高くなりやすい（BtoBのWeb問い合わせ経由の商談化率は業界平均で約20%が一つの目安とされる）。【成果が出るまでの時間】アウトバウンドは即日でも当たれるが、インバウンドはコンテンツ資産が育つまで数か月単位の助走期間を要する。【コスト構造】アウトバウンドは人件費・架電コストが件数に比例、インバウンドは初期のコンテンツ投資が資産化し中長期の効率が高い。【向く場面】特定企業をピンポイントで狙うならアウトバウンド、幅広い潜在層から継続的にリードを集めるならインバウンドが向く。実務では両者を組み合わせるハイブリッドが主流だ。",
       "アウトバウンド営業との比較で見るインバウンド営業のメリットとデメリットも整理しておきたい。メリットとしては、(1) 自発的に関心を示したリードは成約率が高くなりやすい、(2) コンテンツ資産は長期的に流入を生み続けるため中長期のコスト効率が高い、(3) 顧客に「売り込まれた」という印象を与えにくい点が挙げられる。一方で、デメリットとして、(1) 検索流入やホワイトペーパーDLが安定するまで数か月単位の投資期間が必要、(2) 訴求したい特定企業・特定ターゲットに絞り込みにくい、(3) 受け身の設計が過ぎると刈り取り機会を逃すリスクがある点も念頭に置く必要がある。実務上は、インバウンドで育てたリードに対してアウトバウンド的なフォローを組み合わせるハイブリッド戦略をとる企業が多い。",
+      "インバウンド営業の主な施策は、大きく「流入獲得」と「リード育成・転換」の二段階に分けられる。流入獲得では、SEOを意識したオウンドメディア記事・ホワイトペーパー・ウェビナー・SNS発信・プレスリリースが代表的だ。リード育成・転換の段階では、メールシーケンスやMAツールを用いたリードスコアリング、そして問い合わせ後の迅速なフォローアップが鍵を握る。Harvard Business Review（2011年）の研究では、Webからの問い合わせに1時間以内に応答した企業は、1時間後に応答した企業に比べてリードを商談化できる確率が約7倍高いと報告されている（いわゆる「Speed to Lead」）。流入施策の充実と同時に、問い合わせ後の応答速度と応答品質を整えることが成果に直結する。",
+      "インバウンド営業で見落とされがちなのが「初動対応（Speed to Lead）の速さが商談化率を決める」という点だ。自ら問い合わせてきたインバウンドリードは、接触したその瞬間が最も購買意欲の高い『ゴールデンウィンドウ』にある。しかし多くのBtoB企業では担当者の手動対応に依存し、返信までに数時間〜数十時間かかることも珍しくなく、その間にリードの温度感は冷め、競合に先を越されてしまう。BtoBのWeb問い合わせ経由の商談化率は業界平均で約20%が一つの目安とされるが、初動対応を秒単位まで速めるだけでこの数字は大きく変わる。実際、Webサイト上のAIが初動5秒で応答し、24時間365日リードを取りこぼさない仕組みを導入したEdulinXでは、商談化率60%以上を達成している。初動対応の詳細は関連用語『Speed to Lead（初動レスポンス）』で扱っており、会話から商談予約までを自動化する Meeton Calendar と組み合わせることで、インバウンドリードの熱量が高いうちに商談化まで到達できる。",
+      "インバウンドリードを商談化する実務ステップは、大きく5段階で設計するとよい。第一に『即時応答』——問い合わせ・チャット・資料請求が発生した瞬間に自動で一次応答する（JSタグ1行・約5分で設置できるチャットを使えば、営業時間外の流入も取りこぼさない）。第二に『ヒアリングと選別』——課題・予算・検討度合いをBANTなどの観点で会話しながら確認し、確度の高いリードを見極める。第三に『関連資料の提案』——相手の関心に合った事例やサービス資料を提示し、比較検討を後押しする。第四に『商談枠の即時提示』——熱量が高いうちに、その場でカレンダーから空き枠を提示して予約まで完了させる。第五に『未予約リードへの追客』——その場で予約に至らなかったリードにも、行動シグナルに応じて1対1のフォローを継続する。この5ステップを人手の稼働に依存せず24時間365日回し続けられるかどうかが、インバウンド営業の成果を分ける。",
       "Webサイト上でのインバウンド動線を強化する文脈では、チャットボットや会話型AIの活用が近年注目されている。問い合わせフォームだけでなく、訪問者の関心に応じてリアルタイムで質問に答え、資料を提案し、商談予約まで完結させる仕組みを設けることで、「夜間・休日の流入を取りこぼさない」「営業担当がいない時間帯でも初期ヒアリングを完了させる」といった効果が期待できる。Meeton ai（DynaMeet）は、このインバウンド動線の自動化を目的として設計されたAI SDRプラットフォームであり、会話・資料提案・日程調整・追客の4モジュール（Meeton Calendar / Chat / Library / Email）をWebサイトに組み込んで活用できる。用語の解説という観点に戻ると、インバウンド営業は単なる「待ちの営業」ではなく、コンテンツ投資・導線設計・レスポンス速度・育成ロジックの総合力が問われる体系的な営業モデルだと理解することが重要だ。"
     ],
     "faq": [
       {
-        "q": "インバウンド営業とインバウンドマーケティングの違いは何ですか？",
-        "a": "インバウンドマーケティングは、SEOやコンテンツ・SNSなどを通じて見込み客を自社に引き寄せる「流入獲得」の活動全般を指す。インバウンド営業（インバウンドセールス）は、その流入によって生まれたリードを商談・受注に転換する「営業プロセス」を指す。マーケティング部門がリードを創出し、営業部門がクロージングを担うという役割分担が一般的だが、中小企業では一体で運用するケースも多い。"
+        "q": "インバウンド営業とは何ですか？",
+        "a": "インバウンド営業とは、見込み客が検索・資料ダウンロード・ウェビナー参加などを通じて自ら企業に接触してくる流れを設計し、その関心を商談・受注へ転換する営業手法です。企業側から電話や訪問でアプローチするアウトバウンド営業と対をなす概念で、良質なコンテンツで『接触前の自己学習フェーズ』に存在感を示し、問い合わせ後は迅速な初動対応で商談化につなげるのが基本です。"
       },
       {
-        "q": "インバウンド営業だけで新規開拓は完結しますか？",
-        "a": "業種・フェーズによって異なるが、インバウンドのみで全ての新規開拓を完結させるのは難しい場面が多い。コンテンツ資産が育つまでの立ち上げ期間は流入が少なく、また訴求したい特定企業に絞ったアプローチが必要なケースではアウトバウンドが有効だ。実務では、インバウンドで温度感の高いリードを獲得しつつ、アウトバウンドで特定ターゲットへの能動的アプローチを並走させるハイブリッド運用が主流となっている。"
+        "q": "インバウンド営業とアウトバウンド営業の違いは何ですか？",
+        "a": "最大の違いは『誰が最初に動くか』です。アウトバウンド営業は営業担当者がターゲットリストへ電話・メールを送る能動的アプローチで、特定企業をピンポイントで狙え即日でも着手できる一方、リードの温度感は不明な状態から始まります。インバウンド営業は見込み客が自発的に接触してくるためリードの温度感が高く商談化率が高くなりやすい反面、コンテンツ資産が育つまで数か月の助走期間を要します。実務では両者を組み合わせるハイブリッド運用が主流です。"
+      },
+      {
+        "q": "インバウンド営業の商談化率を上げるにはどうすればよいですか？",
+        "a": "鍵は『初動対応（Speed to Lead）の速さ』です。自ら問い合わせてきたインバウンドリードは接触した瞬間が最も購買意欲が高く、初動が遅れるほど温度感が冷めます。BtoBのWeb問い合わせ経由の商談化率は業界平均で約20%が目安とされますが、問い合わせ直後に即応答し、会話・資料提案・商談予約までその場で完結させることで大きく引き上げられます。実際、初動5秒で応答し24時間365日リードを取りこぼさないAIを導入したEdulinXは商談化率60%以上を達成しています。"
+      },
+      {
+        "q": "インバウンド営業とインバウンドマーケティングの違いは何ですか？",
+        "a": "インバウンドマーケティングは、SEOやコンテンツ・SNSなどを通じて見込み客を自社に引き寄せる「流入獲得」の活動全般を指す。インバウンド営業（インバウンドセールス）は、その流入によって生まれたリードを商談・受注に転換する「営業プロセス」を指す。マーケティング部門がリードを創出し、営業部門がクロージングを担うという役割分担が一般的だが、中小企業では一体で運用するケースも多い。"
       },
       {
         "q": "インバウンド営業を始めるには何から手をつければよいですか？",
@@ -245,10 +256,11 @@ export const GLOSSARY: Record<string, GlossaryTerm> = {
     "related": [
       "ai-sdr",
       "shodanka-ritsu",
+      "speed-to-lead",
       "mql-sql"
     ],
-    "metaTitle": "インバウンド営業とは？アウトバウンドとの違いと手法を解説｜Meeton ai 用語集",
-    "metaDescription": "インバウンド営業とは、見込み客が自ら問い合わせ・資料請求してくる流れを設計し商談につなげる営業手法。アウトバウンドとの違い・代表的な施策・Speed to Lead統計まで、BtoB担当者向けにわかりやすく解説します。"
+    "metaTitle": "インバウンド営業とは？意味・アウトバウンドとの違い・商談化のコツ｜Meeton ai 用語集",
+    "metaDescription": "インバウンド営業とは、見込み客が自ら検索・資料請求・問い合わせしてくる流れを設計し、商談・受注につなげる営業手法です。アウトバウンドとの違いや比較、Speed to Lead（初動対応）で商談化率を高める実務ステップまで、BtoB担当者向けにわかりやすく解説します。"
   },
   "sales-engagement": {
     "slug": "sales-engagement",
@@ -619,28 +631,39 @@ export const GLOSSARY_EN: Record<string, GlossaryTerm> = {
       "Inbound sales is a sales method that designs a flow in which prospects contact and inquire with a company on their own through content or ads, and then connects that interest to meetings and deals. It is a concept paired with outbound sales—where the company unilaterally approaches via telemarketing or cold visits—and, against the backdrop of growing self-learning behavior by customers due to digitalization, its adoption is advancing in Japan's B2B market as well.",
     body: [
       "The biggest difference between inbound sales and outbound sales is \"who moves first.\" Outbound sales is a proactive approach where reps call and email a target list, whereas inbound sales is where the prospect contacts the company through searches, content downloads, webinar attendance, and so on. In B2B purchasing, as shown by studies indicating buyers self-complete about 57–70% of the buying process before they first contact a sales rep (CEB/Gartner research reports 57%, Forrester research reports 70%), customers talk to sales after already finishing a considerable amount of information gathering. Inbound sales aims to raise the warmth at the first contact by maintaining a presence with quality content during this \"self-learning phase before contact.\"",
-      "The main measures of inbound sales are broadly divided into two stages: \"inflow acquisition\" and \"lead nurturing / conversion.\" For inflow acquisition, representative measures are SEO-conscious owned-media articles, white papers, webinars, social posting, and press releases. In the lead nurturing / conversion stage, the keys are email sequences and lead scoring using MA tools, and rapid follow-up after an inquiry. A Harvard Business Review study (2011) reports that companies responding to a web inquiry within 1 hour were about 7x more likely to convert the lead into a meeting than companies responding after 1 hour (so-called \"Speed to Lead\"). Alongside enriching inflow measures, organizing the response speed and response quality after an inquiry is directly tied to results.",
+      "It helps to organize the difference from outbound sales axis by axis. [Who moves first] Outbound: the sales side; inbound: the prospect. [Main channels] Outbound uses cold calls, cold visits, and cold email; inbound uses SEO articles, white papers, webinars, web inquiries, and chat. [Lead warmth] Outbound starts from a state where the prospect's interest is unknown, so it tends to be lower; inbound tends to be warmer because the prospect reaches out voluntarily. [Meeting-conversion tendency] Voluntary inbound leads generally convert to meetings at a higher rate (around 20% is one benchmark for the industry-average meeting-conversion rate via B2B web inquiries). [Time to results] Outbound can start hitting the same day, whereas inbound requires a run-up of several months until content assets mature. [Cost structure] Outbound's labor and calling costs scale with volume, while inbound's up-front content investment becomes an asset and is more efficient over the mid-to-long term. [Best fit] Outbound suits pinpoint targeting of specific companies; inbound suits continuously collecting leads from a broad latent audience. In practice, a hybrid that combines the two is mainstream.",
       "It is also worth organizing the merits and demerits of inbound sales compared with outbound sales. Merits include: (1) leads that voluntarily show interest tend to have higher win rates, (2) content assets keep generating inflow over the long term, so mid-to-long-term cost efficiency is high, and (3) it is less likely to give customers the impression of being \"sold to.\" On the other hand, you must keep in mind demerits: (1) it takes an investment period on the order of several months until search inflow and white-paper downloads stabilize, (2) it is hard to narrow down to specific companies / targets you want to appeal to, and (3) an overly passive design risks missing harvesting opportunities. In practice, many companies adopt a hybrid strategy that combines outbound-style follow-up for leads nurtured via inbound.",
+      "The main measures of inbound sales are broadly divided into two stages: \"inflow acquisition\" and \"lead nurturing / conversion.\" For inflow acquisition, representative measures are SEO-conscious owned-media articles, white papers, webinars, social posting, and press releases. In the lead nurturing / conversion stage, the keys are email sequences and lead scoring using MA tools, and rapid follow-up after an inquiry. A Harvard Business Review study (2011) reports that companies responding to a web inquiry within 1 hour were about 7x more likely to convert the lead into a meeting than companies responding after 1 hour (so-called \"Speed to Lead\"). Alongside enriching inflow measures, organizing the response speed and response quality after an inquiry is directly tied to results.",
+      "Something easily overlooked in inbound sales is that \"the speed of the initial response (Speed to Lead) determines the meeting-conversion rate.\" An inbound lead who inquired on their own is in the \"golden window\" of highest buying intent at the very moment of contact. Yet many B2B companies rely on manual handling by reps, and it is not unusual for a reply to take hours to tens of hours—during which the lead's warmth cools and competitors get ahead. The meeting-conversion rate via B2B web inquiries is often benchmarked at around 20% on industry average, but simply speeding the initial response down to seconds can change that number dramatically. In fact, EdulinX—which introduced a mechanism where AI on the website responds in 5 seconds and never misses leads 24/7/365—achieved a meeting-conversion rate of over 60%. The details of the initial response are covered in the related term \"Speed to Lead,\" and by combining it with Meeton Calendar, which automates everything from conversation to meeting booking, you can reach meeting conversion while an inbound lead is still hot.",
+      "It is good to design the practical steps for converting inbound leads into meetings in roughly five stages. First, \"instant response\"—automatically give a first reply the moment an inquiry, chat, or content request arises (with a chat you can install in about 5 minutes via one line of JavaScript, you won't miss inflow outside business hours). Second, \"discovery and qualification\"—confirm the issue, budget, and level of consideration through conversation using a framework such as BANT, and identify high-certainty leads. Third, \"recommending relevant content\"—present case studies and service materials matched to the prospect's interest to support their comparison. Fourth, \"instantly offering a meeting slot\"—while interest is high, present open slots straight from the calendar and complete the booking on the spot. Fifth, \"following up unbooked leads\"—continue 1:1 follow-up according to behavioral signals even for leads who didn't book right away. Whether you can keep this five-step cycle running 24/7/365 without depending on manual capacity is what separates inbound-sales outcomes.",
       "In the context of strengthening the inbound flow on a website, the use of chatbots and conversational AI has been attracting attention in recent years. By setting up a mechanism that not only has an inquiry form but also answers questions in real time according to the visitor's interest, recommends content, and completes meeting booking, you can expect effects such as \"not missing nighttime / holiday inflow\" and \"completing initial discovery even during hours when no sales rep is present.\" Meeton ai (DynaMeet) is an AI SDR platform designed to automate this inbound flow, and its four modules—conversation, content recommendation, scheduling, and follow-up (Meeton Calendar / Chat / Library / Email)—can be embedded into a website. Returning to the perspective of a term explanation, it is important to understand that inbound sales is not merely \"waiting sales\" but a systematic sales model that demands the combined strength of content investment, flow design, response speed, and nurturing logic.",
     ],
     faq: [
       {
-        q: "What's the difference between inbound sales and inbound marketing?",
-        a: "Inbound marketing refers to the overall \"inflow acquisition\" activities that attract prospects to your company through SEO, content, social, and so on. Inbound sales refers to the \"sales process\" that converts the leads generated by that inflow into meetings and deals. A common division has marketing create leads and sales handle closing, but at SMBs they are often operated together.",
+        q: "What is inbound sales?",
+        a: "Inbound sales is a sales method that designs a flow in which prospects contact a company on their own—through searches, content downloads, webinar attendance, and so on—and converts that interest into meetings and deals. It is a concept paired with outbound sales, where the company approaches via calls or visits. The basics are to maintain a presence with quality content during the \"self-learning phase before contact,\" then convert to meetings through a rapid initial response after an inquiry.",
       },
       {
-        q: "Can inbound sales alone complete new prospecting?",
-        a: "It depends on industry and phase, but in many situations it is difficult to complete all new prospecting with inbound alone. During the startup period until content assets mature, inflow is low, and in cases requiring an approach narrowed to specific companies you want to appeal to, outbound is effective. In practice, a hybrid operation—acquiring high-warmth leads via inbound while running proactive outbound approaches to specific targets in parallel—has become mainstream.",
+        q: "What is the difference between inbound sales and outbound sales?",
+        a: "The biggest difference is \"who moves first.\" Outbound sales is a proactive approach where reps call and email a target list; it can pinpoint specific companies and start the same day, but begins from a state where the lead's warmth is unknown. Inbound sales, where prospects reach out voluntarily, tends to have warmer leads and higher meeting-conversion rates, but requires a run-up of several months until content assets mature. In practice, a hybrid that combines the two is mainstream.",
+      },
+      {
+        q: "How can I raise the meeting-conversion rate in inbound sales?",
+        a: "The key is the speed of the initial response (Speed to Lead). An inbound lead who inquired on their own has the highest buying intent at the moment of contact, and the more the initial response is delayed, the more their warmth cools. The meeting-conversion rate via B2B web inquiries is often benchmarked at around 20% on industry average, but by responding instantly right after an inquiry and completing conversation, content recommendation, and meeting booking on the spot, it can be raised significantly. EdulinX, which introduced AI that responds in 5 seconds and never misses leads 24/7/365, achieved a meeting-conversion rate of over 60%.",
+      },
+      {
+        q: "What's the difference between inbound sales and inbound marketing?",
+        a: "Inbound marketing refers to the overall \"inflow acquisition\" activities that attract prospects to your company through SEO, content, social, and so on. Inbound sales refers to the \"sales process\" that converts the leads generated by that inflow into meetings and deals. A common division has marketing create leads and sales handle closing, but at SMBs they are often operated together.",
       },
       {
         q: "Where should I start to begin inbound sales?",
         a: "The standard approach is to first organize the persona and issues—\"whose what problem do you solve\"—and from there decide the priority of content such as SEO articles and white papers. At the same time, it is important to prepare the post-inflow CTA (content download / inquiry form / chat) and the post-inquiry response flow (auto-reply / rep assignment / follow-up email); even if you only increase inflow, the meeting-conversion rate will not rise if response speed or quality is low.",
       },
     ],
-    related: ["ai-sdr", "shodanka-ritsu", "mql-sql"],
-    metaTitle: "What is inbound sales?｜Meeton ai",
+    related: ["ai-sdr", "shodanka-ritsu", "speed-to-lead", "mql-sql"],
+    metaTitle: "What is Inbound Sales? Meaning, vs. Outbound & Conversion Tips｜Meeton ai",
     metaDescription:
-      "Inbound sales is a sales method that designs a flow in which prospects inquire and request materials on their own, then connects this to meetings. We clearly explain the difference from outbound, representative measures, and Speed-to-Lead statistics for B2B professionals.",
+      "Inbound sales is a sales method that designs a flow in which prospects search and inquire on their own, then connects this to meetings and deals. We clearly explain the difference from outbound, an axis-by-axis comparison, and practical steps to raise conversion with Speed to Lead—for B2B professionals.",
   },
   "sales-engagement": {
     slug: "sales-engagement",

@@ -24,6 +24,8 @@ const DISALLOW_PATHS = [
   '/*/feed/',          // tag/category feed URLs from WordPress era
   '/tag/',             // legacy WordPress tag pages — most return 404 or redirect
   '/category/',        // legacy WordPress category pages
+  '/en/blog/tag/',       // EN blog keyword archives — thin filter pages, churn with retags
+  '/en/blog/category/',  // EN blog category archives — thin filter pages, churn with retags
   '/*?lang=',          // ?lang=ja / ?lang=en_US legacy i18n params
   '/*?trk=',           // LinkedIn trk parameter
   '/*?hsCtaAttrib=',   // HubSpot CTA tracking parameter
@@ -53,6 +55,7 @@ const NAMED_CRAWLERS = [
   'Perplexity-User', // Perplexity browse
   'ClaudeBot',         // Claude / Anthropic crawler
   'Claude-User',       // Claude browsing on a user's behalf
+  'Claude-SearchBot',  // Claude search indexing
   'anthropic-ai',      // legacy Anthropic crawler UA
   'Google-Extended',   // Google Gemini / AI Overviews opt-in
   'Applebot-Extended', // Apple Intelligence opt-in

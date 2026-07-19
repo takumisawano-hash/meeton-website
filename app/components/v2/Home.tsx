@@ -30,10 +30,11 @@ const STR = {
     heroH1b: "商談を生み出す",
     heroH1c: "AI SDRへ。",
     heroSub:
-      "Meeton ai は、Webサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、あらゆる瞬間を商談に変えます。",
+      "Meeton ai は、BtoB企業のWebサイトに配属する AI SDR。問い合わせを待たず潜在層に会話で踏み込み、資料DL後・問い合わせ後の取りこぼしまで、あらゆる瞬間を商談に変えます。",
     demoTitle: "Meeton Chat のデモ",
     heroAssurances: ["30分のデモで自社への効き方を確認", "シナリオ設計不要", "ノーコード・設置5分"],
     heroOperator: "Meeton ai は、DynaMeet株式会社が運営するサービスです。",
+    heroRoiLink: "60秒で、自社サイトの商談化の余地を診断する →",
     proof: [
       { n: 60, suf: "%超", l: "Meeton ai 経由の商談化率", sub: "業界平均 約20%" },
       { n: 2, suf: "倍", l: "有効リード数", sub: "導入前比 +100%" },
@@ -79,10 +80,11 @@ const STR = {
     heroH1b: "to an AI SDR that",
     heroH1c: "generates meetings.",
     heroSub:
-      "Meeton ai is an AI SDR deployed on your website. It doesn't wait for inquiries — it engages prospects in conversation and turns every moment into a meeting.",
+      "Meeton ai is an AI SDR deployed on your B2B website. It doesn't wait for inquiries — it engages prospects in conversation, catches the leads that slip away after downloads and inquiries, and turns every moment into a meeting.",
     demoTitle: "Meeton Chat demo",
     heroAssurances: ["See how it works for you in a 30-min demo", "No scenario design", "No-code, install in 5 minutes"],
     heroOperator: "Meeton ai is a service operated by DynaMeet, Inc.",
+    heroRoiLink: "Estimate your site's meeting upside in 60 seconds →",
     proof: [
       { n: 60, suf: "%+", l: "Meeting conversion via Meeton ai", sub: "Industry average ~20%" },
       { n: 2, suf: "x", l: "Qualified leads", sub: "+100% vs. before deployment" },
@@ -91,7 +93,7 @@ const STR = {
     stagesEyebrow: "The 4 jobs of the AI SDR",
     stagesTitle: "Capture and nurture, convert, and chase down every lead.",
     stagesLede: "From acquiring prospects to winning them back, four products work together as a single AI SDR.",
-    stagesPriceA: "Base plan from ¥150,000/mo plus add-ons. A 30-minute demo helps you find the right setup. ",
+    stagesPriceA: "Plans from $999/mo (USD). A 30-minute demo helps you find the right setup. ",
     stagesPriceLink: "See pricing",
     casesEyebrow: "Customer stories",
     casesTitle: "The results show up in the data.",
@@ -114,7 +116,7 @@ const STR = {
       { q: "What is an AI SDR?", a: "An AI SDR (AI Sales Development Representative) is a system in which AI autonomously handles the work human SDRs used to do: first contact, discovery, content suggestions, meeting booking, and follow-up. Meeton ai is an AI SDR Platform deployed on your website — it runs the four jobs of capture, nurture, convert, and win back, turning every moment from pre-inquiry to follow-up into meetings." },
       { q: "What do the four stages of Meeton ai do?", a: "(1) Capture — Meeton Chat engages visitors in conversation, and Meeton Ads catches the rest with AI-optimized on-site ads. (2) Nurture — Meeton Library grows consideration with AI-explained content. (3) Convert — Meeton Calendar books the meeting the moment intent peaks. (4) Win back — Meeton Email follows up 1:1 on leads who didn't book, triggered by behavioral signals." },
       { q: "How hard is it to set up?", a: "One line of JS — about 5 minutes to install. No scenario design or engineering resources needed; everything is configured no-code, and calendars/CRMs connect via OAuth. On the free trial, we help you go live within 1 business day." },
-      { q: "How does pricing work?", a: "A base plan plus add-ons: Lead Acquisition (base, from ¥150,000/mo: Chat + Ads + Library), then add Meeting Booking (Calendar, +¥50,000/mo) and Win-back (Email, +¥50,000/mo) as needed. The most popular setup is from ¥200,000/mo. Pricing scales with monthly traffic, and every setup starts with a 1-month free trial — no credit card required." },
+      { q: "How does pricing work?", a: "Pick how far you automate: Capture Leads (from $999/mo: Chat + Ads + Library), or add the Meeting Booking add-on (Meeton Calendar, +$350/mo) — Book More Meetings, from $1,349/mo, is the most popular plan. Pricing scales with monthly traffic, and every setup starts with a 1-month free trial — no credit card required." },
       { q: "Does it integrate with our CRM and MA tools?", a: "Native HubSpot and Salesforce integrations log conversations and bookings automatically. Calendar integrations cover Google Calendar, Outlook, and Zoom; notifications go to Slack, Microsoft Teams, and Google Chat; webhooks connect everything else." },
       { q: "Who is it for?", a: "B2B companies in SaaS, IT, manufacturing, professional services, and fintech. It's especially effective when a CMO, CRO, or inside-sales/SDR leader wants to improve marketing-sourced meeting conversion (speed to lead)." },
     ],
@@ -164,6 +166,12 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
               {s.heroAssurances.map((a) => (
                 <span key={a}>✓ {a}</span>
               ))}
+            </div>
+            {/* tertiary CTA — self-serve diagnostic for visitors not ready to book */}
+            <div style={{ marginTop: 14 }}>
+              <Link href={lang === "en" ? "/en/tools/roi/" : "/tools/roi/"} className="v2-link" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--cta)", textDecoration: "underline" }}>
+                {s.heroRoiLink}
+              </Link>
             </div>
             <p style={{ margin: "14px 0 0", fontSize: 13, color: "var(--on-navy-sub)", opacity: 0.85 }}>
               {s.heroOperator}
@@ -289,6 +297,44 @@ export default function Home({ caseStudies = [], lang = "ja" }: { caseStudies?: 
           @media(max-width:560px){.v2-router-grid{grid-template-columns:1fr;gap:14px}}
         `}</style>
       </Section>
+
+      {/* 8.3 Partner recruiting band (JA only, 2026-07-17) — the second
+          audience (partner candidates) gets a quiet entry point after the
+          cases/router stretch and before the FAQ. No 報酬率 here — rates are
+          gated behind the /partners/ form. Must not compete with demo CTAs. */}
+      {lang === "ja" && (
+        <Section tone="navy" py={64}>
+          <div className="v2-partner-band">
+            <div>
+              <h2 style={{ fontFamily: "var(--fd)", fontSize: "clamp(22px,3vw,30px)", fontWeight: 800, letterSpacing: "-.02em", color: "var(--on-navy)", margin: 0, lineHeight: 1.4, textWrap: "balance", wordBreak: "auto-phrase" }}>
+                顧客のWebサイトを、新しい営業チャネルに。
+                <br />
+                Meeton ai パートナーを募集しています。
+              </h2>
+              <p style={{ fontSize: 15, lineHeight: 1.9, color: "var(--on-navy-sub)", margin: "16px 0 0", maxWidth: 640 }}>
+                営業支援、マーケティング支援、Web制作、CRM導入、BPOなど、既存のお客様に新しい価値を提供したい企業様とのパートナーシップを募集しています。ご紹介のみの連携から、共同提案・販売・導入支援まで、貴社の体制に合わせてご参加いただけます。
+              </p>
+              <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 16, fontSize: 13, color: "var(--on-navy-sub)" }}>
+                {["継続報酬あり", "商談・提案を Meeton ai が支援", "紹介のみでも参加可能"].map((a) => (
+                  <span key={a}>✓ {a}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, flexShrink: 0 }}>
+              <Link href="/partners/" className="v2-cta-primary" style={{ background: "var(--cta)", color: "var(--on-cta)", fontSize: 15, fontWeight: 800, padding: "13px 26px", borderRadius: 10, textDecoration: "none", textAlign: "center" }}>
+                パートナープログラムを見る
+              </Link>
+              <Link href="/partners/#partner-form" className="v2-cta-ghost" style={{ background: "transparent", color: "#fff", fontSize: 14, fontWeight: 700, padding: "12px 24px", borderRadius: 10, textDecoration: "none", border: "1.5px solid var(--on-navy-border)", textAlign: "center" }}>
+                パートナー制度資料を受け取る
+              </Link>
+            </div>
+          </div>
+          <style>{`
+            .v2-partner-band{display:flex;align-items:center;justify-content:space-between;gap:40px}
+            @media(max-width:860px){.v2-partner-band{flex-direction:column;align-items:flex-start;gap:24px}}
+          `}</style>
+        </Section>
+      )}
 
       {/* 8.5 FAQ — visible twin of the homepage FAQPage JSON-LD (page.tsx).
           Handles the classic pre-inquiry objections right before the final CTA. */}

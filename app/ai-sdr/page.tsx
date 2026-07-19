@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/app/components/Nav'
 import Footer from '@/app/components/Footer'
+import { getAllPosts } from '@/app/lib/notion'
+import { buildClusterGroups } from '@/app/pillar/components/cluster'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: {
@@ -56,7 +60,87 @@ const faqSchema = {
   ],
 }
 
-export default function AiSdrPage() {
+const HUB_LINKS = [
+  {
+    href: '/pillar/website-shodanka/',
+    label: '完全ガイド',
+    title: 'BtoBサイト商談化 完全ガイド',
+    desc: 'Web サイトを商談チャネルに変える設計と運用を体系化。AI SDR 導入の全体像はこちら。',
+  },
+  {
+    href: '/pillar/lead-generation/',
+    label: '完全ガイド',
+    title: 'B2B リードジェネレーション完全ガイド',
+    desc: '認知から商談化まで、リードジェン 5 段階と AI の入れどころを解説。',
+  },
+  {
+    href: '/compare/ai-sdr-tools/',
+    label: '比較',
+    title: 'AI SDR ツール比較',
+    desc: '主要な AI SDR ツールを機能・対応領域・価格の観点で比較。',
+  },
+  {
+    href: '/compare/chatbot-vs-ai-sdr/',
+    label: '比較',
+    title: 'チャットボット vs AI SDR',
+    desc: 'FAQ 応答と商談機会創出。能力ベースでの違いを整理。',
+  },
+  {
+    href: '/compare/ma-vs-ai-sdr/',
+    label: '比較',
+    title: 'MA ツール vs AI SDR',
+    desc: 'マーケファネルと商談化ラストワンマイル、それぞれの守備範囲。',
+  },
+  {
+    href: '/glossary/speed-to-lead/',
+    label: '用語集',
+    title: 'Speed to Lead（初動レスポンス）',
+    desc: '初動対応速度が商談化率を左右する理由と改善アプローチ。',
+  },
+  {
+    href: '/glossary/shodanka-ritsu/',
+    label: '用語集',
+    title: '商談化率',
+    desc: '定義・計算式・パイプライン効率の見方をコンパクトに解説。',
+  },
+  {
+    href: '/tools/roi/',
+    label: '診断ツール',
+    title: '商談化の余地 診断（ROI 診断）',
+    desc: '自社サイトにどれだけ商談化の余地があるか、その場で試算。',
+  },
+  {
+    href: '/cases/',
+    label: '導入事例',
+    title: '導入事例一覧',
+    desc: '商談化率 60%+ など、AI SDR を導入した企業の成果を紹介。',
+  },
+]
+
+const CLUSTER_SPEC = [
+  {
+    label: 'AI SDR・商談化',
+    keywords: ['ai sdr', 'aisdr', 'ai-sdr', '商談化', 'speed to lead', '初動'],
+  },
+  {
+    label: 'AI チャット・Web 接客',
+    keywords: ['ai チャット', 'aiチャット', 'チャットボット', 'web接客', 'web 接客'],
+  },
+  {
+    label: 'インサイドセールス・SDR',
+    keywords: ['インサイドセールス', 'sdr', 'bdr', '営業 dx', '営業dx'],
+  },
+]
+
+function formatPostDate(d: string): string {
+  if (!d) return ''
+  return d.slice(0, 10).replace(/-/g, '.')
+}
+
+export default async function AiSdrPage() {
+  const posts = await getAllPosts()
+  const { groups: clusterGroups } = buildClusterGroups(posts, CLUSTER_SPEC)
+
   const breadcrumbs = [
     { name: 'Home', url: 'https://dynameet.ai/' },
     { name: 'AI SDR とは', url: 'https://dynameet.ai/ai-sdr/' },
@@ -368,6 +452,56 @@ export default function AiSdrPage() {
           </div>
         </section>
 
+        {/* HUB — Guide continues */}
+        <section className="section section-light alt">
+          <div className="section-inner">
+            <div className="section-label">07 — Keep reading</div>
+            <h2>ガイドの続き</h2>
+            <p className="body">
+              AI SDR の定義を押さえたら、次は「自社サイトをどう商談化するか」「どのツールをどう選ぶか」の具体化です。目的別に、以下のガイド・比較・診断へ進んでください。
+            </p>
+            <div className="hub-grid">
+              {HUB_LINKS.map((item) => (
+                <Link key={item.href} href={item.href} className="hub-card">
+                  <div className="hub-card-label">{item.label}</div>
+                  <div className="hub-card-title">{item.title} →</div>
+                  <p className="hub-card-desc">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CLUSTER ARTICLES */}
+        {clusterGroups.length > 0 && (
+          <section className="section section-light">
+            <div className="section-inner">
+              <div className="section-label">08 — Related articles</div>
+              <h2>AI SDR 関連記事</h2>
+              <p className="body">
+                ブログで公開済みの記事のうち、AI SDR・AI チャット・インサイドセールスに関連するものを集約しています。
+              </p>
+              {clusterGroups.map((group) => (
+                <div key={group.label} className="cluster-group">
+                  <div className="cluster-group-head">
+                    <h3 className="cluster-group-h">{group.label}</h3>
+                    <span className="cluster-group-count">{group.posts.length} 記事</span>
+                  </div>
+                  <div className="cluster-grid">
+                    {group.posts.map((post) => (
+                      <Link key={post.id} href={`/blog/${post.slug}/`} className="cluster-card">
+                        {post.category && <div className="cluster-card-cat">{post.category}</div>}
+                        <h4 className="cluster-card-title">{post.title}</h4>
+                        <div className="cluster-card-date">{formatPostDate(post.publishedDate)}</div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* FAQ */}
         <section className="section section-light">
           <div className="section-inner narrow">
@@ -474,6 +608,28 @@ export default function AiSdrPage() {
 
 .cta-block{margin-top:40px;text-align:left}
 .cta-block.center{text-align:center}
+
+.hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+@media (max-width:880px){.hub-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.hub-grid{grid-template-columns:1fr}}
+.hub-card{display:block;padding:22px;background:#fff;border:1px solid #E5EEE8;border-radius:12px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s}
+.hub-card:hover{transform:translateY(-2px);border-color:rgba(4,203,120,.35)}
+.hub-card-label{font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:.16em;color:#04cb78;text-transform:uppercase;margin-bottom:8px}
+.hub-card-title{font-size:15px;font-weight:800;color:#0B1712;margin-bottom:8px;line-height:1.5}
+.hub-card-desc{font-size:12.5px;color:#4B5A52;line-height:1.7;margin:0}
+
+.cluster-group{margin-top:36px}
+.cluster-group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.cluster-group-h{font-size:18px;font-weight:800;color:#0B1712;margin:0;letter-spacing:-.01em}
+.cluster-group-count{font-family:var(--fm);font-size:11px;font-weight:700;color:#6C7B73}
+.cluster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:880px){.cluster-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.cluster-grid{grid-template-columns:1fr}}
+.cluster-card{display:block;padding:20px;background:#fff;border:1px solid #E5EEE8;border-radius:12px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s}
+.cluster-card:hover{transform:translateY(-2px);border-color:rgba(4,203,120,.35)}
+.cluster-card-cat{font-family:var(--fm);font-size:10px;font-weight:800;letter-spacing:.14em;color:#6C7B73;text-transform:uppercase;margin-bottom:8px}
+.cluster-card-title{font-size:14.5px;font-weight:800;color:#0B1712;line-height:1.6;margin:0 0 10px}
+.cluster-card-date{font-family:var(--fm);font-size:11px;color:#9CA3AF}
 
 .faq-list{display:flex;flex-direction:column;gap:18px;margin-top:32px}
 .faq-item{padding:24px 28px;background:#fff;border:1px solid #E5EEE8;border-radius:12px}

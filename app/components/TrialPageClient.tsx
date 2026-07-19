@@ -32,10 +32,12 @@ const LABEL_MAP: Record<string, string> = {
   送信する: 'Request my free trial',
 }
 
+// 2026-07-17 USD pivot: overseas self-serve is USD-only, and Meeton Email
+// (win-back / "all-in-one") is removed from the self-serve offer. Old
+// ?plan=all-in-one links fall through the PLANS.some() guard → default plan.
 const PLANS = [
-  { id: 'lead', label: 'Lead Acquisition (base)', price: 'From ¥150,000/mo' },
-  { id: 'meeting', label: 'Base + Meeting Booking', price: 'From ¥200,000/mo', recommended: true },
-  { id: 'all-in-one', label: 'Full stack (+ win-back)', price: 'From ¥250,000/mo' },
+  { id: 'lead', label: 'Capture Leads (base)', price: 'From $999/mo' },
+  { id: 'meeting', label: 'Book More Meetings', price: 'From $1,349/mo', recommended: true },
   { id: 'unsure', label: 'Not sure yet', price: "We'll recommend one" },
 ]
 

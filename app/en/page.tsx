@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     absolute: 'Meeton ai｜The AI SDR Platform that turns your Website into meetings',
   },
   description:
-    'Meeton ai is an AI SDR Platform deployed on your website. It captures pre-inquiry prospects (Chat & Ads), nurtures them with content (Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Nurture → Convert → Win back — four stages that turn every moment into a meeting.',
+    'Meeton ai is an AI SDR Platform deployed on your B2B website. It captures pre-inquiry prospects (Chat & Ads), nurtures them with content (Library), converts them into meetings (Calendar), and wins back lost leads (Email). Capture → Nurture → Convert → Win back — four stages that turn every moment into a meeting.',
   alternates: altLanguages('/', 'en'),
   openGraph: {
     images: EN_OG_IMAGE,
@@ -60,7 +60,7 @@ const homepageFaqSchema = {
       name: 'How is it priced?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A base plan plus add-ons: Lead Acquisition (base, from ¥150,000/mo: Chat + Ads + Library), then add Meeting Booking (Calendar, +¥50,000/mo) and Win-back (Email, +¥50,000/mo) as needed. The most popular setup is from ¥200,000/mo. Pricing scales with monthly traffic, and every setup starts with a 1-month free trial — no credit card required.',
+        text: 'Pick how far you automate: Capture Leads (from $999/mo: Chat + Ads + Library), or add the Meeting Booking add-on (Meeton Calendar, +$350/mo) — Book More Meetings, from $1,349/mo, is the most popular plan. Pricing scales with monthly traffic, and every setup starts with a 1-month free trial — no credit card required.',
       },
     },
     {
@@ -93,16 +93,16 @@ const homepageProductSchema = {
   applicationSubCategory: 'AI SDR / Sales Automation Software',
   operatingSystem: 'Web',
   description:
-    'AI SDR Platform for Japanese B2B companies. Deployed on your website, it autonomously runs four stages: capture (Chat & Ads) → nurture (Library) → convert (Calendar) → win back (Email). Base plan from ¥150,000/mo, plus meeting-booking and win-back add-ons (¥50,000/mo each).',
+    'AI SDR Platform for Japanese B2B companies. Deployed on your website, it autonomously runs four stages: capture (Chat & Ads) → nurture (Library) → convert (Calendar) → win back (Email). Plans from $999/mo (USD), plus a meeting-booking add-on (+$350/mo).',
   brand: { '@type': 'Brand', name: 'Meeton ai' },
   publisher: { '@id': 'https://dynameet.ai/#organization' },
   url: 'https://dynameet.ai/en/',
   image: 'https://dynameet.ai/logo-dark.svg',
   offers: {
     '@type': 'Offer',
-    price: '150000',
-    priceCurrency: 'JPY',
-    description: 'Base plan from ¥150,000/mo plus add-ons (¥50,000/mo each). Varies by traffic and setup.',
+    price: '999',
+    priceCurrency: 'USD',
+    description: 'Plans from $999/mo plus a meeting-booking add-on (+$350/mo). Varies by traffic and setup.',
   },
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'CRM integration', value: 'Native HubSpot & Salesforce integration' },

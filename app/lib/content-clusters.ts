@@ -105,9 +105,9 @@ export function classifyCluster(input: { category?: string; tags?: string[]; tar
 /** Compare-page slugs relevant to each cluster (for related BOFU links §4.8). */
 export const CLUSTER_COMPARES: Record<ClusterId, string[]> = {
   library: ["docsend"],
-  ads: [],
+  ads: ["sprocket", "flipdesk"],
   calendar: ["immedio", "timerex", "spir", "calendly"],
   email: ["lemlist", "smartlead"],
-  chat: ["intercom"],
-  "ai-sdr": [],
+  chat: ["channel-talk", "fin", "intercom", "hubspot-chatbot"],
+  "ai-sdr": ["qualified", "drift", "warmly"],
 };

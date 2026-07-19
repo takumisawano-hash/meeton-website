@@ -454,6 +454,14 @@ export default function Nav({
                 {chrome.navPricing}
               </Link>
               <DesktopDropdownTrigger id="resources" label={chrome.navResources} />
+              {/* パートナー — 第2オーディエンス（パートナー候補）の独立入口
+                  (2026-07-17)。JAのみ（/partners/ に EN twin なし）。CTAボタン化は
+                  しない — 顧客獲得CTA（デモを予約）と競合させないこと。 */}
+              {!en && (
+                <Link href="/partners/" style={topLink(isActive("/partners"), linkColor)}>
+                  パートナー
+                </Link>
+              )}
               {resolvedLangHref && resolvedLangLabel && (
                 // Plain <a> (NOT next/link): a soft-nav <Link> prefetches the
                 // target WITHOUT the pref_lang cookie, so the geo middleware
@@ -675,6 +683,8 @@ export default function Nav({
                 { href: en ? "/en/cases/" : "/cases/", label: en ? "Customers" : "導入事例" },
                 { href: en ? "/en/pricing/" : "/pricing/", label: en ? "Pricing" : "料金" },
                 ...resourceItems,
+                // パートナー募集（JAのみ — desktop 同様リソースの後ろ）
+                ...(en ? [] : [{ href: "/partners/", label: "パートナー" }]),
               ].map((it) => (
                 <MobileLink key={it.href} item={it} active={isActive(it.href)} />
               ))}

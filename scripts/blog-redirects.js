@@ -289,7 +289,7 @@ const blogRedirects = [
   },
   {
     "source": "/abm-tools-complete-guide-2025-how-to-choose-and-implement",
-    "destination": "/blog/abm-tools-complete-guide-2025-how-to-choose-and-implement/",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
     "permanent": true
   },
   {
@@ -1087,32 +1087,57 @@ const blogRedirects = [
   },
   {
     "source": "/blog/abm-comparison-tool-selection-guide-2026",
-    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
     "permanent": true
   },
   {
     "source": "/blog/abm-tool-enterprise-selection-guide",
-    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
-    "permanent": true
-  },
-  {
-    "source": "/blog/analysis-of-5-major-abm-tools",
-    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
     "permanent": true
   },
   {
     "source": "/blog/abm-tools-complete-guide-2025-how-to-choose-and-implement",
-    "destination": "/blog/abm-tool-ai-comparison-guide-2026/",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
     "permanent": true
   },
   {
     "source": "/blog/abm-tool-free-vs-paid-comparison-2026",
-    "destination": "/blog/abm-tool-free-selection-guide-2026-upgrade-timing/",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
     "permanent": true
   },
   {
-    "source": "/blog/smbs-abm-focus-growth",
-    "destination": "/blog/abm-tool-sme-selection-guide-2026/",
+    "source": "/blog/abm-tool-ai-comparison-guide-2026",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-free-selection-guide-2026-upgrade-timing",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-cost-guide-2026-price-roi",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-enterprise-comparison-2026",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-sme-selection-guide-2026",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
+    "permanent": true
+  },
+  {
+    "source": "/blog/abm-tool-sme-selection-guide-meeting-conversion",
+    "destination": "/blog/analysis-of-5-major-abm-tools/",
+    "permanent": true
+  },
+  {
+    "source": "/en/blog/abm-tool-enterprise-selection-guide-en",
+    "destination": "/en/blog/",
     "permanent": true
   },
   {

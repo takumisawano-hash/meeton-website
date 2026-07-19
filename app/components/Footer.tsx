@@ -80,9 +80,25 @@ const DISCOVER = [
     heading: "活用シーン",
     items: [
       { href: "/use-cases/pre-inquiry/", label: "問い合わせ前" },
+      { href: "/use-cases/post-inquiry/", label: "問い合わせ後" },
       { href: "/use-cases/post-download/", label: "資料 DL 後" },
+      { href: "/use-cases/exhibition/", label: "展示会後" },
+      { href: "/use-cases/webinar-follow-up/", label: "ウェビナー後" },
       { href: "/use-cases/revisit/", label: "再訪問" },
       { href: "/use-cases/nurture/", label: "追客" },
+    ],
+  },
+  {
+    heading: "業界別",
+    items: [
+      { href: "/use-cases/saas/", label: "SaaS" },
+      { href: "/use-cases/it/", label: "IT・SIer" },
+      { href: "/use-cases/manufacturing/", label: "製造業" },
+      { href: "/use-cases/hr-staffing/", label: "人材" },
+      { href: "/use-cases/fintech/", label: "金融・フィンテック" },
+      { href: "/use-cases/bpo/", label: "BPO・コールセンター" },
+      { href: "/use-cases/education/", label: "教育・研修" },
+      { href: "/use-cases/professional-services/", label: "士業・コンサル" },
     ],
   },
   {
@@ -92,12 +108,18 @@ const DISCOVER = [
       { href: "/glossary/ai-sdr/", label: "用語集" },
       { href: "/cases/", label: "導入事例" },
       { href: "/tools/roi/", label: "ROI 診断" },
+      { href: "/compare/ai-sdr-tools/", label: "AI SDRツール比較" },
+      { href: "/compare/web-sekkyaku-tools/", label: "Web接客ツール比較" },
+      { href: "/compare/ai-chatbot-tools/", label: "AIチャットボット比較" },
+      { href: "/compare/inside-sales-automation/", label: "IS自動化ツール比較" },
+      { href: "/pillar/website-shodanka/", label: "サイト商談化ガイド" },
     ],
   },
 ];
 
 const LEGAL = [
   { href: "/about/", label: "会社概要" },
+  { href: "/partners/", label: "パートナー募集" },
   { href: "/security/", label: "情報セキュリティ" },
   { href: "/integrations/", label: "連携一覧" },
   { href: "/careers/", label: "採用情報" },
@@ -140,9 +162,25 @@ const DISCOVER_EN = [
     heading: C_EN.footerUseCases,
     items: [
       { href: "/en/use-cases/pre-inquiry/", label: "Before the inquiry" },
+      { href: "/en/use-cases/post-inquiry/", label: "After the inquiry" },
       { href: "/en/use-cases/post-download/", label: "After a download" },
+      { href: "/en/use-cases/exhibition/", label: "After a trade show" },
+      { href: "/en/use-cases/webinar-follow-up/", label: "After a webinar" },
       { href: "/en/use-cases/revisit/", label: "Return visit" },
       { href: "/en/use-cases/nurture/", label: "Follow-up" },
+    ],
+  },
+  {
+    heading: "Industries",
+    items: [
+      { href: "/en/use-cases/saas/", label: "SaaS" },
+      { href: "/en/use-cases/it/", label: "IT services" },
+      { href: "/en/use-cases/manufacturing/", label: "Manufacturing" },
+      { href: "/en/use-cases/hr-staffing/", label: "HR & staffing" },
+      { href: "/en/use-cases/fintech/", label: "Fintech" },
+      { href: "/en/use-cases/bpo/", label: "BPO & contact centers" },
+      { href: "/en/use-cases/education/", label: "Education & training" },
+      { href: "/en/use-cases/professional-services/", label: "Professional services" },
     ],
   },
   {
@@ -152,6 +190,7 @@ const DISCOVER_EN = [
       { href: "/en/glossary/ai-sdr/", label: "Glossary" },
       { href: "/en/cases/", label: "Customers" },
       { href: "/en/tools/roi/", label: "ROI calculator" },
+      { href: "/en/compare/ai-sdr-tools/", label: "AI SDR tools compared" },
     ],
   },
 ];

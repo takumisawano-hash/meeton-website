@@ -45,6 +45,8 @@ const STR = {
     faqTitle: (p: string) => `${p} のFAQ`,
     finalTitle: (p: string) => `${p} を、デモで体験する。`,
     finalSub: "30分のデモで、自社サイトでの効き方を具体的に確認できます。",
+    roiLink: "60秒で、自社サイトの商談化の余地を診断する →",
+    roiHref: "/tools/roi/",
   },
   en: {
     skip: "Skip to content",
@@ -60,8 +62,8 @@ const STR = {
     proofMore: "See more customer stories →",
     midCtaLine: (p: string) => `Try ${p} free for 1 month — or see it in a 30-minute demo.`,
     pricingEyebrow: "Pricing",
-    pricingTitle: "Base plan from ¥150,000/mo. Add only what you need.",
-    pricingLede: "One base plan (Chat + Ads + Library), plus meeting-booking and win-back add-ons at ¥50,000/mo each. Every setup starts with a 1-month free trial.",
+    pricingTitle: "Plans from $999/mo. Add only what you need.",
+    pricingLede: "One base plan (Chat + Ads + Library) from $999/mo, plus add-ons as you need them. Every setup starts with a 1-month free trial.",
     pricingLink: "See pricing details →",
     expansionEyebrow: "This is part of Meeton ai",
     expansionStages: "See the 4 jobs of the AI SDR →",
@@ -70,6 +72,8 @@ const STR = {
     faqTitle: (p: string) => `${p} FAQ`,
     finalTitle: (p: string) => `Try ${p} free for 1 month.`,
     finalSub: "Live within 1 business day — one JS tag, no credit card. Prefer a walkthrough? A 30-minute demo shows exactly how it works on your own site.",
+    roiLink: "Estimate your site's meeting upside in 60 seconds →",
+    roiHref: "/en/tools/roi/",
   },
 } as const;
 
@@ -150,6 +154,12 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
               <span key={line}>✓ {line}</span>
             ))}
           </div>
+          {/* tertiary: self-serve diagnostic for visitors not ready to book */}
+          <div style={{ marginTop: 12 }}>
+            <Link href={s.roiHref} className="v2-link" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--cta)", textDecoration: "underline" }}>
+              {s.roiLink}
+            </Link>
+          </div>
         </div>
       </Section>
 
@@ -160,6 +170,16 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
 
       {/* 2. How it works */}
       <Section tone="white">
+        {/* AEO definition callout — dictionary-style sentence AI engines can
+            extract verbatim. Renders only when the data provides one. */}
+        {data.definition && (
+          <div style={{ maxWidth: 800, margin: "0 auto 48px", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 14, padding: "18px 22px" }}>
+            <div style={{ fontFamily: "var(--fm)", fontSize: 11.5, fontWeight: 700, letterSpacing: ".08em", color: "var(--cta-ink)", marginBottom: 6 }}>
+              {lang === "en" ? `WHAT IS ${data.productName.toUpperCase()}?` : `${data.productName} とは`}
+            </div>
+            <p style={{ fontSize: 15, lineHeight: 1.9, color: "var(--text)", margin: 0 }}>{data.definition}</p>
+          </div>
+        )}
         <SectionHead eyebrow={s.howEyebrow} title={s.howTitle(data.productName)} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
           {data.steps.map((step, i) => (
@@ -350,11 +370,11 @@ export function productAppSchema(data: ProductLPData, lang: Lang = "ja") {
     publisher: { "@id": "https://dynameet.ai/#organization" },
     offers: {
       "@type": "Offer",
-      price: "120000",
-      priceCurrency: "JPY",
+      price: lang === "en" ? "999" : "120000",
+      priceCurrency: lang === "en" ? "USD" : "JPY",
       description:
         lang === "en"
-          ? "Base plan from ¥150,000/mo plus add-ons. Varies by traffic and setup."
+          ? "Plans from $999/mo (USD) plus add-ons. Varies by traffic and setup."
           : "基本プラン15万円〜＋アドオン。規模・構成により変動。",
     },
   };

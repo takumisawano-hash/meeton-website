@@ -44,12 +44,16 @@ export default function MobileStickyCta({ lang = "ja", source }: { lang?: Lang; 
       style={{
         position: "fixed",
         left: 12,
-        right: 96, // keep clear of the Meeton widget bubble (bottom-right)
+        // Compact, content-width pill anchored bottom-LEFT. The old full-width bar
+        // (right:96) still ran under the Meeton chat widget on some phones whose
+        // launcher/teaser is wider than 96px. Leaving the whole right side free
+        // clears the widget on any screen width. maxWidth is a hard safety cap.
+        maxWidth: "calc(100vw - 96px)",
         bottom: 12,
         zIndex: 90,
         display: "flex",
         alignItems: "center",
-        gap: 12,
+        gap: 10,
         background: "rgba(15,17,40,.94)",
         backdropFilter: "blur(10px)",
         border: "1px solid var(--on-navy-border)",
