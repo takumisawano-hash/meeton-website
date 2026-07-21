@@ -37,10 +37,30 @@ const EN_TWIN_PREFIXES = [
   'chat', 'calendar', 'library', 'email', 'ads', 'capture', 'tools/roi',
   'privacy-policy', 'integrations',
   'pricing', 'about', 'contact', 'enterprise', 'security', 'glossary',
-  'cases', 'compare', 'alternatives', 'use-cases',
+  'cases', 'alternatives', 'use-cases',
   'solutions/crm-to-meeting', 'solutions/lead-to-meeting',
   'solutions/cmo', 'solutions/cro', 'solutions/sdr', 'solutions/ceo',
 ]
+
+// /compare/ is a partial twin: only these slugs have a real /en/compare/<slug>
+// page (app/en/compare/ai-sdr-tools + the app/en/compare/[slug] dynamic set,
+// mirrors COMPARE_EN keys in app/lib/compare-data.ts). The other static
+// /compare/* pages (meeton-vs-anybot, ma-vs-ai-sdr, etc.) have NO EN route —
+// next.config.js redirects their /en/compare/<slug> back to /compare/<slug>,
+// so twinning them here would bounce forever: /compare/X → /en/compare/X →
+// (next.config.js) /compare/X → ... (infinite redirect loop).
+const COMPARE_EN_SLUGS = [
+  'ai-sdr-tools',
+  'immedio', 'timerex', 'spir', 'calendly', 'docsend', 'intercom',
+  'lemlist', 'smartlead', 'sprocket', 'flipdesk', 'channel-talk',
+  'hubspot-chatbot', 'drift', 'qualified', 'warmly', 'fin',
+]
+
+function compareHasEnTwin(seg: string): boolean {
+  if (seg === 'compare') return true
+  const slug = seg.startsWith('compare/') ? seg.slice('compare/'.length) : null
+  return slug !== null && COMPARE_EN_SLUGS.includes(slug)
+}
 
 // EN-only pages with NO JA twin (self-serve funnel + self-serve legal set,
 // e.g. /en/trial/, /en/legal/dpa/). The JA-desired branch must never strip
@@ -65,6 +85,7 @@ function jaHasEnTwin(pathname: string): boolean {
   if (p === '/') return true
   const seg = p.slice(1) // drop leading "/"
   if (seg === 'blog' || seg.startsWith('blog/category/') || seg.startsWith('blog/tag/')) return true
+  if (seg === 'compare' || seg.startsWith('compare/')) return compareHasEnTwin(seg)
   return EN_TWIN_PREFIXES.some((pre) => seg === pre || seg.startsWith(pre + '/'))
 }
 
