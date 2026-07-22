@@ -150,8 +150,10 @@ export const SOLUTIONS: Record<string, PlaybookEntry> = {
       { q: "PQL（有望アカウント）の通知はありますか？", a: "アクティベーション以降、顧客のファネル（訪問・予約・開封・反応）を計測し、上げどきのアカウントをシグナル化してSlack等に通知する設計です。" },
       { q: "導入の手間は？", a: "ノーコードです（スニペット設置・OAuth接続）。ISチーム側の運用負荷を増やさず、初動と追客を自動化します。" },
     ],
-    metaTitle: "IS・SDR責任者向け｜初動と追客をスケールする AI SDR｜Meeton ai",
-    metaDescription: "大量リードの初動5分・追客漏れ——IS/SDR責任者向けに、即時対応・自動アサイン・行動起点の追客をAIに任せ、有望アカウントに集中できる Meeton ai のソリューション。",
+    // 2026-07-22 承認済み週次#10 (AEO表): 新興カテゴリ名「AIインサイドセールス」を
+    // title/desc に追加。/for/inside-sales/ は /solutions/sdr/ へ308なので実効ページはこちら。
+    metaTitle: "IS・SDR責任者向け｜AIインサイドセールスで初動・追客をスケール｜Meeton ai",
+    metaDescription: "大量リードの初動5分・追客漏れ——AIインサイドセールス（AI SDR）が即時対応・自動アサイン・行動起点の追客を代行し、ISチームは有望アカウントに集中。IS/SDR責任者向けソリューション。",
     en: {
       badge: "For Heads of IS / SDR",
       problemLine: "You can't process a flood of leads within 5 minutes.",
