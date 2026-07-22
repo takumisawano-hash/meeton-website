@@ -2,7 +2,19 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound, redirect } from 'next/navigation'
-import { getPostBySlug, getPostBlocks, getAllPostSlugs, getAllPosts, getRelatedPosts, calculateReadingTime, categoryToSlug, tagToSlug } from '@/app/lib/notion'
+import { getPostBySlug, getPostBlocks, getAllPostSlugs, getAllPosts, getRelatedPosts, getCategoriesWithCounts, calculateReadingTime, categoryToSlug, tagToSlug } from '@/app/lib/notion'
+
+const JA_CAT_BADGE_STYLE = {
+  display: 'inline-block',
+  fontSize: 'clamp(11px, 1.8vw, 13px)',
+  fontWeight: 600,
+  color: '#12a37d',
+  background: 'rgba(18,163,125,0.1)',
+  padding: 'clamp(4px, 1vw, 6px) clamp(10px, 2vw, 14px)',
+  borderRadius: 8,
+  marginBottom: 'clamp(14px, 3vw, 20px)',
+  textDecoration: 'none',
+} as const
 import BlogContent from '@/app/components/BlogContent'
 import BlogJsonLd from '@/app/components/BlogJsonLd'
 import BreadcrumbJsonLd from '@/app/components/BreadcrumbJsonLd'
@@ -146,10 +158,18 @@ export default async function BlogPostPage({ params }: Props) {
     redirect('/blog/')
   }
 
-  const [blocks, relatedPosts] = await Promise.all([
+  const [blocks, relatedPosts, jaCats] = await Promise.all([
     getPostBlocks(post.id),
     getRelatedPosts(post.category, post.slug, 4),
+    getCategoriesWithCounts(1, 'ja'),
   ])
+
+  // Only LINK category archives that actually resolve (mirrors the EN gate):
+  // getCategoriesWithCounts drops the "Uncategorized" bucket, so a post left
+  // uncategorized would otherwise link a 404 archive (SF crawl 2026-07-19
+  // found exactly that at /blog/category/uncategorized/).
+  const linkableCats = new Set(jaCats.map((c) => c.name.toLowerCase().trim()))
+  const categoryLinkable = !!post.category && linkableCats.has(post.category.toLowerCase().trim())
 
   // 読了時間とワードカウントを計算
   const contentText = extractTextFromBlocks(blocks)
@@ -238,22 +258,16 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Header */}
         <header style={{ marginBottom: 'clamp(24px, 5vw, 40px)' }}>
           {post.category && (
-            <Link
-              href={`/blog/category/${categoryToSlug(post.category)}/`}
-              style={{
-                display: 'inline-block',
-                fontSize: 'clamp(11px, 1.8vw, 13px)',
-                fontWeight: 600,
-                color: '#12a37d',
-                background: 'rgba(18,163,125,0.1)',
-                padding: 'clamp(4px, 1vw, 6px) clamp(10px, 2vw, 14px)',
-                borderRadius: 8,
-                marginBottom: 'clamp(14px, 3vw, 20px)',
-                textDecoration: 'none',
-              }}
-            >
-              {post.category}
-            </Link>
+            categoryLinkable ? (
+              <Link
+                href={`/blog/category/${categoryToSlug(post.category)}/`}
+                style={JA_CAT_BADGE_STYLE}
+              >
+                {post.category}
+              </Link>
+            ) : (
+              <span style={JA_CAT_BADGE_STYLE}>{post.category}</span>
+            )
           )}
           <h1
             style={{

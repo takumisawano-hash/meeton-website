@@ -105,7 +105,7 @@ const DISCOVER = [
     heading: "リソース",
     items: [
       { href: "/blog/", label: "ブログ" },
-      { href: "/glossary/ai-sdr/", label: "用語集" },
+      { href: "/glossary/", label: "用語集" },
       { href: "/cases/", label: "導入事例" },
       { href: "/tools/roi/", label: "ROI 診断" },
       { href: "/compare/ai-sdr-tools/", label: "AI SDRツール比較" },
@@ -187,7 +187,7 @@ const DISCOVER_EN = [
     heading: C_EN.footerResources,
     items: [
       { href: "/en/blog/", label: "Blog" },
-      { href: "/en/glossary/ai-sdr/", label: "Glossary" },
+      { href: "/en/glossary/", label: "Glossary" },
       { href: "/en/cases/", label: "Customers" },
       { href: "/en/tools/roi/", label: "ROI calculator" },
       { href: "/en/compare/ai-sdr-tools/", label: "AI SDR tools compared" },

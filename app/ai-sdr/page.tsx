@@ -8,13 +8,15 @@ import { buildClusterGroups } from '@/app/pillar/components/cluster'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
+  // 2026-07-22 承認済み週次プラン#5: /glossary/ai-sdr/ (定義・情報インテント) との
+  // 役割分担のため、こちらは製品・商用インテント寄りの title に差別化。
   title: {
-    absolute: 'AI SDRとは？仕組み・従来SDRとの違い・導入効果を解説｜Meeton ai',
+    absolute: 'AI SDRとは？Webサイトを商談化するAIレベニュー基盤｜Meeton ai',
   },
-  description: 'AI SDR とは、Web 行動と CRM データをもとに、見込み客への初動対応・資料提案・日程調整・追客を自動化する AI 営業エージェント。人間 SDR・チャットボット・日程調整ツールとの違い、Meeton ai の特徴と活用事例を解説。',
+  description: 'AI SDR は、Web サイト訪問者への初動対応・資料提案・日程調整・追客を自律実行し、サイトを商談チャネルに変える AI 営業基盤。Meeton ai の仕組み・導入効果・活用事例と、ツール選定の考え方を解説。',
   alternates: { canonical: '/ai-sdr/' },
   openGraph: {
-    title: 'AI SDRとは？仕組み・従来SDRとの違い・導入効果を解説',
+    title: 'AI SDRとは？Webサイトを商談化するAIレベニュー基盤',
     description: 'AI SDR は、Web 訪問者・資料 DL リード・再訪問者・CRM に蓄積された既存リードまで、会話・資料提案・日程調整・追客を自動化し、商談機会を創出する AI 営業エージェント。',
     url: 'https://dynameet.ai/ai-sdr/',
   },
@@ -61,6 +63,12 @@ const faqSchema = {
 }
 
 const HUB_LINKS = [
+  {
+    href: '/glossary/ai-sdr/',
+    label: '用語集',
+    title: 'AI SDR とは（定義・用語解説）',
+    desc: 'AI SDR の定義・仕組み・従来 SDR との違いを、用語集としてコンパクトに解説。',
+  },
   {
     href: '/pillar/website-shodanka/',
     label: '完全ガイド',

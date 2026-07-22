@@ -16,9 +16,12 @@ import PersonaPage, { type PersonaConfig } from '../components/PersonaPage'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'インサイドセールス向け AI SDR | 初動対応を自動化 | Meeton ai',
+  // 2026-07-22 承認済み週次#10 (AEO表): 「AIインサイドセールス」表記を追加 —
+  // 現在このページが「ai インサイドセールス」で pos 40台。カテゴリ名を title に
+  // 含めて新興KWの受け皿にする。
+  title: 'AIインサイドセールスで初動対応を自動化 | IS向け AI SDR | Meeton ai',
   description:
-    'インサイドセールスマネージャーが直面する「低品質リードの洪水」「手動クオリフィケーション」「フォロー漏れ」を、AI SDR Meeton ai で解消。IS は本来の高付加価値業務に集中できます。',
+    'AIインサイドセールス（AI SDR）が「低品質リードの洪水」「手動クオリフィケーション」「フォロー漏れ」を解消。一次対応・選別・日程調整を AI が引き受け、IS は本来の高付加価値業務に集中できます。',
   alternates: {
     canonical: '/for/inside-sales/',
     languages: {
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'インサイドセールス向け AI SDR | 初動対応を自動化',
+    title: 'AIインサイドセールスで初動対応を自動化 | IS向け AI SDR',
     description:
       '低品質リード対応と日程調整を AI に。IS は商談・複雑案件・既存深耕に集中できる構造へ。',
     url: 'https://dynameet.ai/for/inside-sales/',
@@ -50,7 +53,7 @@ const config: PersonaConfig = {
   personaJa: 'インサイドセールスマネージャー',
   heroH1: ['低品質リードと日程調整から、', 'IS チームを解放する'],
   heroSub:
-    '届いたリードのほとんどは情報収集段階。だが「全件対応」が建前として残り、IS のリソースは初動・選別・調整に吸い込まれていく。Meeton ai が AI SDR として一次対応を引き受け、IS は本当に動くべき案件にだけ向き合えます。',
+    '届いたリードのほとんどは情報収集段階。だが「全件対応」が建前として残り、IS のリソースは初動・選別・調整に吸い込まれていく。Meeton ai が AIインサイドセールス（AI SDR）として一次対応を引き受け、IS は本当に動くべき案件にだけ向き合えます。',
   pains: [
     {
       title: '低品質リードの洪水で、IS が本来の業務に向かえない',
@@ -129,6 +132,11 @@ const config: PersonaConfig = {
   ],
   accent: '#0891b2',
   utmCampaign: 'persona-inside-sales',
+  related: [
+    { href: '/compare/inside-sales-automation/', label: 'インサイドセールス自動化・AIインサイドセールスツール比較' },
+    { href: '/glossary/inside-sales/', label: 'インサイドセールスとは（用語解説）' },
+    { href: '/cases/g-gen-inside-sales-sql-2x/', label: '導入事例: G-gen 月間SQL 2倍' },
+  ],
 }
 
 export default function InsideSalesPersonaPage() {

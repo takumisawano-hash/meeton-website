@@ -75,7 +75,10 @@ export const CLUSTERS: Record<ClusterId, Cluster> = {
   "ai-sdr": {
     id: "ai-sdr",
     label: "AI SDR / カテゴリ",
-    pillar: "/",
+    // 2026-07-22: was "/" — since 7/10 the /ai-sdr/ pillar page exists; pointing
+    // cluster links there consolidates the "ai sdr" query (cannibalised by
+    // /glossary/ai-sdr/) into one recovery target.
+    pillar: "/ai-sdr/",
     pillarName: "Meeton ai",
     blurb: "AI SDR とは何か、商談化率をどう上げるか——カテゴリの定義と実践知。",
     weight: "low",

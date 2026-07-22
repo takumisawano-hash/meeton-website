@@ -22,12 +22,14 @@ const PATH = "/compare/inside-sales-automation/";
 const URL_ = `https://dynameet.ai${PATH}`;
 
 export const metadata: Metadata = {
-  title: "インサイドセールス自動化ツール比較｜工程別の分類と選び方",
+  // 2026-07-22 承認済み週次#10: 新興カテゴリ名「AIインサイドセールス」を title に
+  // 追加 (immedio がカテゴリ創造中、GSC で実インプレッション発生済みの立ち上がりKW)
+  title: "インサイドセールス自動化・AIインサイドセールスツール比較｜工程別の分類と選び方",
   description:
     "IS業務を初動対応・ヒアリング・日程調整・追客・記録の5工程に分解し、Meeton ai・immedio・TimeRex・Spir・lemlist・Smartlead・MAツールを横断比較。一気通貫型と単機能特化型の使い分けを公正に整理。",
   alternates: { canonical: PATH },
   openGraph: {
-    title: "インサイドセールス自動化ツール比較｜工程別の分類と選び方｜Meeton ai",
+    title: "インサイドセールス自動化・AIインサイドセールスツール比較｜工程別の分類と選び方｜Meeton ai",
     description:
       "インサイドセールスの5工程（初動対応・ヒアリング・日程調整・追客・記録）ごとに自動化ツールカテゴリを整理。一気通貫型（AI SDR）と単機能特化型、それぞれが正解になるケースを解説。",
     url: URL_,

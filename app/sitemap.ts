@@ -100,6 +100,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Webinar series — index + per-webinar registration LPs.
     // /webinar/thanks/ is intentionally excluded (noindex).
     { url: `${baseUrl}/webinar/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    // 2026-07-22 (approved weekly #2): past-webinar archive LP that stays live
+    // as a recording/lead page — the upcoming-only filter below silently
+    // dropped it from the sitemap while it kept earning GSC impressions.
+    { url: `${baseUrl}/webinar/lead-to-meeting-loss/`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/careers/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     // 2026-07-17: partner recruiting page (JA only)
     { url: `${baseUrl}/partners/`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },

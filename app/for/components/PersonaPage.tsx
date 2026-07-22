@@ -64,6 +64,8 @@ export type PersonaConfig = {
   accent: '#12a37d' | '#04cb78' | '#7c5cfc' | '#0891b2' | '#3b6ff5'
   /** UTM campaign tag for demo bookings from this page. */
   utmCampaign: string
+  /** Optional related-resource links (rendered as a compact row after FAQ). */
+  related?: { href: string; label: string }[]
 }
 
 const MODULE_META: Record<ModuleKey, { name: string; href: string; color: string; description: string }> = {
@@ -354,6 +356,19 @@ export default async function PersonaPage({ config }: { config: PersonaConfig })
               </div>
             ))}
           </dl>
+          {config.related && config.related.length > 0 && (
+            <p style={{ marginTop: 28, fontSize: 14, lineHeight: 1.9 }}>
+              関連リソース:{' '}
+              {config.related.map((r, i) => (
+                <span key={r.href}>
+                  {i > 0 && ' ／ '}
+                  <Link href={r.href} style={{ color: '#12a37d', fontWeight: 600, textDecoration: 'underline' }}>
+                    {r.label}
+                  </Link>
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </section>
 

@@ -24,7 +24,10 @@ export const DEDUPED_BLOG_SLUGS = new Set<string>([
   "jp-mlutgtmq-7hss",
   "jp-mlutgq9p-3f9v",
   "jp-mlutg1dm-rgkb",
-  "lead-decline-causes-solutions",
+  // "lead-decline-causes-solutions" removed 2026-07-22 (approved weekly #2):
+  // page is live 200 with no redirect, EN twin earns traffic — hiding only the
+  // JA original from sitemap/listing was a leftover inconsistency from the
+  // 06-22 dedup sweep, not an intentional exclusion.
   "websitebounce",
   "websitebounce-meeting-ai",
   "website-meeting-391-aistrategy",
