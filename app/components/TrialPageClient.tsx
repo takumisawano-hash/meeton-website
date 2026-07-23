@@ -274,8 +274,41 @@ export default function TrialPageClient() {
             </h1>
             <p className="tr-sub">
               Turn your website into an AI SDR that captures visitors, qualifies them, and books
-              meetings — live within 1 business day. No credit card required. No auto-billing:
-              paid service starts only after you approve.
+              meetings — create your account and start in minutes. No credit card required. No
+              auto-billing: paid service starts only after you approve.
+            </p>
+            {/* 2026-07-23: self-serve signup shipped — instant signup is the primary
+                path; the HubSpot form below remains as the guided-setup fallback. */}
+            <a
+              href="https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=trial-page-hero"
+              className="v2-cta-primary"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                marginTop: 28,
+                padding: '16px 36px',
+                background: 'var(--cta)',
+                color: 'var(--on-cta)',
+                borderRadius: 'var(--r-btn)',
+                fontWeight: 800,
+                fontSize: 16,
+                textDecoration: 'none',
+                boxShadow: '0 6px 22px var(--cta-glow)',
+              }}
+              onClick={() => {
+                const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
+                gtag?.('event', 'trial_click', { source: 'trial-page-hero', destination: 'app_signup' })
+              }}
+            >
+              Create your account — start now
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <p style={{ marginTop: 12, fontSize: 13, color: 'var(--sub)' }}>
+              Instant access · no credit card · or use the guided-setup form below
             </p>
           </div>
         </section>
@@ -322,8 +355,8 @@ export default function TrialPageClient() {
               ) : (
                 <div className="tr-card">
                   <div className="tr-card-h">
-                    <div className="tr-card-h-title">Request your free trial</div>
-                    <div className="tr-card-h-sub">Takes about 2 minutes — we handle the setup with you</div>
+                    <div className="tr-card-h-title">Prefer a guided setup? Request your trial here</div>
+                    <div className="tr-card-h-sub">Takes about 2 minutes — we handle the setup with you. For instant access, use “Create your account” above.</div>
                   </div>
                   <div className="tr-card-body">
                     {/* Plan choice (ours, injected into the lead on submit) */}

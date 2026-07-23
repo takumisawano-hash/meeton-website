@@ -146,7 +146,7 @@ const DISCOVER_EN = [
       { href: "/en/calendar/", label: "Meeton Calendar" },
       { href: "/en/email/", label: "Meeton Email" },
       { href: "/en/pricing/", label: "Pricing" },
-      { href: "/en/trial/", label: "Start free trial" },
+      { href: "https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=footer", label: "Start free trial" },
     ],
   },
   {

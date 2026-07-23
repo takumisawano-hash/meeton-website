@@ -23,13 +23,21 @@ export function pricingUrl(): string {
 }
 
 /**
- * EN self-serve trial request page — primary CTA on the English site
- * (2026-07-02 self-serve pivot). `plan` preselects a plan on the form.
+ * EN self-serve signup — primary CTA on the English site.
+ * 2026-07-23: the product's self-signup flow shipped (app.dynameet.ai/signup),
+ * replacing the /en/trial/ HubSpot request form as the CTA destination.
+ * UTM params land in the app's GA4 property so signups stay attributable to
+ * the website page/section that sent them. `plan` preselects a plan.
  */
 export function trialUrl(source = "website", plan?: string): string {
-  const p = new URLSearchParams({ src: source });
+  const p = new URLSearchParams({
+    utm_source: "dynameet.ai",
+    utm_medium: "website_cta",
+    utm_campaign: "en_selfserve",
+    utm_content: source,
+  });
   if (plan) p.set("plan", plan);
-  return `/en/trial/?${p.toString()}`;
+  return `https://app.dynameet.ai/signup?${p.toString()}`;
 }
 
 /**

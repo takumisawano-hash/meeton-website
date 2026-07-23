@@ -280,7 +280,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       desc: "Capture latent prospects with conversation and on-site ads, nurture them with content. CRM integration included.",
       pill: "Your marketing team can run it alone",
       ctaLabel: "Start 1-month free trial",
-      ctaHref: "/en/trial/?src=pricing&plan=lead",
+      ctaHref: "https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=pricing-lead&plan=lead",
       fit: "Best for: teams that first want more inquiries and content downloads, led by marketing.",
     },
     addonsHeading: "＋ Add when you're ready",
@@ -292,7 +292,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
     ],
     popularHeading: "Most popular",
     popular: [
-      { title: "Book More Meetings", price: "$1,349", pricePrefix: "From ", badge: "Most Popular", ctaLabel: "Start free trial", ctaHref: "/en/trial/?src=pricing&plan=meeting", fit: "Everything in Capture Leads, plus Meeton Calendar. Best for: teams that capture leads already but struggle with meeting conversion and speed to lead." },
+      { title: "Book More Meetings", price: "$1,349", pricePrefix: "From ", badge: "Most Popular", ctaLabel: "Start free trial", ctaHref: "https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=pricing-meeting&plan=meeting", fit: "Everything in Capture Leads, plus Meeton Calendar. Best for: teams that capture leads already but struggle with meeting conversion and speed to lead." },
     ],
     traffic: [
       { tier: "Up to 30,000 sessions / mo", add: "Included in every plan" },
