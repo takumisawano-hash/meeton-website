@@ -98,6 +98,20 @@ const VENDORS: Vendor[] = [
     matrixNote: "Content/follow-up = Offers & AI email inside Piper",
   },
   {
+    // Fin added 2026-07-23: the flagship EN competitor was missing from this
+    // hub, leaving /en/compare/fin/ + /en/alternatives/fin/ orphaned
+    // ("Discovered - currently not indexed" in GSC since the 07-13 launch).
+    name: "Fin (by Intercom)",
+    href: "/en/compare/fin/",
+    purpose: "Customer-service AI agent; Fin for Sales (April 2026) adds inbound qualification",
+    ai: { m: "yes", t: "support-trained model, claimed 76% resolution rate" },
+    booking: { m: "part", t: "via Calendly / Chili Piper, inbound only" },
+    price: { m: "part", t: "metered: $0.99/outcome + $9.99/qualification + seat plans" },
+    status: "Salesforce agreed to acquire Fin for ~$3.6B (June 2026); folding into Agentforce",
+    matrix: ["yes", "no", "no", "part", "no"],
+    matrixNote: "Sales scope is inbound-only — no outbound, no standalone email nurture",
+  },
+  {
     name: "Drift",
     href: "/en/compare/drift/",
     purpose: "Conversational marketing pioneer (chat + ABM routing)",
@@ -149,6 +163,13 @@ const VENDOR_NOTES: { name: string; href: string; body: string; fit: string; lin
     href: "/en/compare/qualified/",
     body: "A US 'Agentic Marketing Platform' built natively on Salesforce. Its AI SDR agent Piper engages website visitors over chat, voice, and video, auto-books meetings, and sends AI email.¹ Adopted by 500+ enterprises. Salesforce completed its acquisition of Qualified in April 2026 (consideration fair value of $1.2B per Salesforce's SEC 10-Q), and the product is being integrated into Agentforce as 'Qualified from Salesforce'.² Pricing is undisclosed — only plan names (Premier/Enterprise/Ultimate) are public.",
     fit: "The strongest option for global enterprises running Salesforce as their system of record.",
+    linkLabel: "See the 1:1 comparison →",
+  },
+  {
+    name: "Fin (by Intercom)",
+    href: "/en/compare/fin/",
+    body: "The flagship customer-service AI agent — the company formerly known as Intercom renamed itself Fin in May 2026, and Salesforce agreed to acquire it for ~$3.6B in June 2026. Fin autonomously resolves support conversations across 10+ channels with a company-claimed 76% average resolution rate, and can run standalone on Salesforce, HubSpot, or Freshworks helpdesks. Fin for Sales (April 2026) adds inbound visitor qualification, but per Fin's own FAQ it does no outbound prospecting and no standalone email nurture, and books meetings through Calendly or Chili Piper. Pricing is metered: $0.99 per outcome plus $9.99 per sales qualification on top of seat plans.",
+    fit: "The category leader if your primary job is support automation; for turning visitors into booked sales meetings it remains a bolt-on — compare carefully.",
     linkLabel: "See the 1:1 comparison →",
   },
   {
