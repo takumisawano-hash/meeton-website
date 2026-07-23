@@ -308,13 +308,13 @@ export default function RoiTool({ lang = "ja" }: { lang?: Lang }) {
 
   const roiParams = { visits, cvr, meetingRate, extra: r.extraMeetings };
 
-  // EN self-serve: primary = trial request, secondary = demo booking.
+  // EN self-serve (2026-07-23 拓実指示): trial + pricing only — demo removed.
   // JA (unchanged): primary = demo booking, secondary = pricing.
   const primaryBtn = en
     ? { label: s.ctaTrial, href: trialUrl("tools-roi"), kind: "trial" as const, isDemo: false }
     : { label: s.ctaDemo, href: withRoiParams(demoUrl("tools-roi"), roiParams), kind: "demo" as const, isDemo: true };
   const secondaryBtn = en
-    ? { label: s.ctaDemo, href: withRoiParams(demoUrl("tools-roi"), roiParams), kind: "demo" as const, isDemo: true }
+    ? { label: s.ctaPricing, href: "/en/pricing/", kind: "pricing" as const, isDemo: false }
     : { label: s.ctaPricing, href: pricingUrl(), kind: "pricing" as const, isDemo: false };
 
   const primaryStyle: React.CSSProperties = { flex: "1 1 auto", textAlign: "center", background: "var(--cta)", color: "var(--on-cta)", padding: "13px 22px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", boxShadow: "0 6px 22px var(--cta-glow)" };

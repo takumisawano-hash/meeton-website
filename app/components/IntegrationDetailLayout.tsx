@@ -35,7 +35,7 @@ const strings = {
     aboutIntegration: "About this integration",
     readyToConnect: (name: string) => `Ready to connect ${name}?`,
     readyToConnectSub:
-      "Talk to our team and we'll show you how Meeton ai fits your stack in under 20 minutes.",
+      "Create your account and connect it to your stack — 1-month free trial, no credit card required.",
     bookDemo: "Book a demo",
     backToList: "Back to integrations",
     category: "Category",
@@ -927,6 +927,29 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
               <h2 className="int-bottom-title">{s.readyToConnect(integration.name)}</h2>
               <p className="int-bottom-sub">{s.readyToConnectSub}</p>
               <div className="int-bottom-actions">
+                {/* EN 2026-07-23: self-serve only — trial signup replaces demo */}
+                {lang === "en" ? (
+                  <a
+                    className="int-bottom-btn"
+                    href={`https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=integration-${integration.slug}`}
+                  >
+                    Start 1-month free trial
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden
+                    >
+                      <path d="M5 12h14" />
+                      <path d="M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ) : (
                 <DemoBookingButton
                   className="int-bottom-btn"
                   utmCampaign={`integration-${integration.slug}`}
@@ -947,6 +970,7 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
                     <path d="M13 5l7 7-7 7" />
                   </svg>
                 </DemoBookingButton>
+                )}
                 <Link href={s.breadcrumbRootHref} className="int-bottom-back">
                   ← {s.backToList}
                 </Link>

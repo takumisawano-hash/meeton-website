@@ -47,8 +47,10 @@ const SL_CHROME = {
     solCta: 'Learn more →',
     caseCta: 'Read the story →',
     primaryDefault: 'Get the checklist',
-    heroConsult: 'Book a 30-min consult →',
-    finalConsult: 'Book a 30-min consult →',
+    // EN 2026-07-23 (拓実指示): self-serve only — demo/consult CTAs replaced
+    // by the signup trial CTA (rendered via TrialLink below).
+    heroConsult: 'Start 1-month free trial →',
+    finalConsult: 'Start 1-month free trial →',
     webinarLead: 'Prefer to learn first?',
     webinar: 'Free webinar',
   },
@@ -154,6 +156,17 @@ function useAttribution() {
   return attr
 }
 
+function TrialLink({ className, campaign, children }: { className: string; campaign: string; children: React.ReactNode }) {
+  return (
+    <a
+      className={className}
+      href={`https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=${campaign}`}
+    >
+      {children}
+    </a>
+  )
+}
+
 export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: SolutionLpConfig; lang?: Lang }) {
   const c = SL_CHROME[lang]
   // Side-effect: tag body with data-lp-slug so GA4 page_view custom
@@ -213,12 +226,18 @@ export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: So
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
               </svg>
             </DocRequestButton>
-            <DemoBookingButton
-              className="sl-btn sl-btn-ghost"
-              utmCampaign={`${config.utmCampaignBase}__hero_consult`}
-            >
-              {c.heroConsult}
-            </DemoBookingButton>
+            {lang === 'en' ? (
+              <TrialLink className="sl-btn sl-btn-ghost" campaign={`${config.utmCampaignBase}__hero`}>
+                {c.heroConsult}
+              </TrialLink>
+            ) : (
+              <DemoBookingButton
+                className="sl-btn sl-btn-ghost"
+                utmCampaign={`${config.utmCampaignBase}__hero_consult`}
+              >
+                {c.heroConsult}
+              </DemoBookingButton>
+            )}
           </div>
 
           {config.heroProof.length > 0 && (
@@ -313,11 +332,17 @@ export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: So
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap', background: 'var(--sl-navy, #0f1128)', borderRadius: 18, padding: '24px 28px', marginTop: 28 }}>
               <p style={{ margin: 0, fontSize: 'clamp(16px,2vw,20px)', fontWeight: 800, color: '#fff' }}>
-                {lang === 'en' ? 'Map this playbook to your own funnel — in 30 minutes.' : 'この打ち手を自社のファネルに当てはめると？ 30分でご案内します。'}
+                {lang === 'en' ? 'See this playbook running on your own site — free for 1 month.' : 'この打ち手を自社のファネルに当てはめると？ 30分でご案内します。'}
               </p>
-              <DemoBookingButton className="sl-btn sl-btn-primary" utmCampaign={`${config.utmCampaignBase}__mid_consult`}>
-                {c.heroConsult}
-              </DemoBookingButton>
+              {lang === 'en' ? (
+                <TrialLink className="sl-btn sl-btn-primary" campaign={`${config.utmCampaignBase}__mid`}>
+                  {c.heroConsult}
+                </TrialLink>
+              ) : (
+                <DemoBookingButton className="sl-btn sl-btn-primary" utmCampaign={`${config.utmCampaignBase}__mid_consult`}>
+                  {c.heroConsult}
+                </DemoBookingButton>
+              )}
             </div>
           </div>
         </section>
@@ -378,12 +403,18 @@ export default function SolutionLpTemplate({ config, lang = 'ja' }: { config: So
             <DocRequestButton className="sl-btn sl-btn-primary">
               {config.primaryCtaLabel ?? c.primaryDefault}
             </DocRequestButton>
-            <DemoBookingButton
-              className="sl-btn sl-btn-ghost"
-              utmCampaign={`${config.utmCampaignBase}__final_consult`}
-            >
-              {c.finalConsult}
-            </DemoBookingButton>
+            {lang === 'en' ? (
+              <TrialLink className="sl-btn sl-btn-ghost" campaign={`${config.utmCampaignBase}__final`}>
+                {c.finalConsult}
+              </TrialLink>
+            ) : (
+              <DemoBookingButton
+                className="sl-btn sl-btn-ghost"
+                utmCampaign={`${config.utmCampaignBase}__final_consult`}
+              >
+                {c.finalConsult}
+              </DemoBookingButton>
+            )}
           </div>
           {/* 補助動線として小さくウェビナー誘導。Final CTA メインは
               checklist DL + 30分相談 の 2 つに集中。 */}

@@ -300,8 +300,14 @@ export default function Nav({
           <a href={lang === "en" ? "/en/pricing/" : PRICING_URL} className="v2-cta-ghost" style={ghostBtn(isMobile)}>
             {chrome.ctaSeePricing}
           </a>
-          <a href={DEMO_URL} className="v2-cta-primary" style={primaryBtn(isMobile)} onClick={onDemoClick}>
-            {chrome.ctaBookDemo}
+          {/* EN 2026-07-23: self-serve only — trial replaces demo (拓実指示) */}
+          <a
+            href={lang === "en" ? navTrialUrl : DEMO_URL}
+            className="v2-cta-primary"
+            style={primaryBtn(isMobile)}
+            onClick={lang === "en" ? undefined : onDemoClick}
+          >
+            {lang === "en" ? chrome.ctaStartTrial : chrome.ctaBookDemo}
           </a>
         </div>
       </nav>
@@ -491,8 +497,9 @@ export default function Nav({
             <div style={{ display: "flex", gap: 10, flexShrink: 0 }}>
               {en ? (
                 <>
-                  <a href={DEMO_URL} className="v2-cta-ghost" style={ghostBtn(false)} onClick={onDemoClick}>
-                    {chrome.ctaBookDemo}
+                  {/* EN 2026-07-23: demo CTA removed — self-serve only (拓実指示) */}
+                  <a href="/en/pricing/" className="v2-cta-ghost" style={ghostBtn(false)}>
+                    {chrome.ctaSeePricing}
                   </a>
                   <a href={navTrialUrl} className="v2-cta-primary" style={primaryBtn(false)}>
                     {chrome.ctaStartTrial}
@@ -695,8 +702,9 @@ export default function Nav({
             <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 10, padding: "14px 24px calc(14px + env(safe-area-inset-bottom))", borderTop: "1px solid var(--on-navy-border)", background: "var(--navy)" }}>
               {en ? (
                 <>
-                  <a href={DEMO_URL} className="v2-cta-ghost" onClick={onDemoClick} style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
-                    {chrome.ctaBookDemo}
+                  {/* EN 2026-07-23: demo CTA removed — self-serve only (拓実指示) */}
+                  <a href="/en/pricing/" className="v2-cta-ghost" onClick={() => setMobileOpen(false)} style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                    {chrome.ctaSeePricing}
                   </a>
                   <a href={navTrialUrl} className="v2-cta-primary" onClick={() => setMobileOpen(false)} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
                     {chrome.ctaStartTrial}

@@ -55,13 +55,14 @@ export default function CTAButtons({
   const chrome = t(lang);
   const en = lang === "en";
   // Explicit overrides win; otherwise default to the locale CTAs.
-  // EN self-serve: primary = trial request page, secondary = demo booking.
+  // EN self-serve (2026-07-23 拓実指示): primary = signup, secondary = pricing.
+  // The demo CTA is removed from the EN defaults entirely — self-serve only.
   const primaryText = primaryLabel ?? (en ? "Start 1-month free trial" : chrome.ctaBookDemo);
   const primaryHref = en && !primaryLabel ? trialUrl(source) : demoUrl(source);
   const primaryIsDemo = !(en && !primaryLabel);
-  const secondaryText = secondaryLabel ?? (en ? chrome.ctaBookDemo : chrome.ctaSeePricing);
-  const secondaryHref2 = secondaryHref ?? (en ? demoUrl(source) : pricingUrl());
-  const secondaryIsDemo = en && !secondaryHref;
+  const secondaryText = secondaryLabel ?? chrome.ctaSeePricing;
+  const secondaryHref2 = secondaryHref ?? (en ? "/en/pricing/" : pricingUrl());
+  const secondaryIsDemo = false;
   const pad = size === "lg" ? "15px 30px" : "12px 24px";
   const fontSize = size === "lg" ? 16 : 15;
 

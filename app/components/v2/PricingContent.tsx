@@ -268,7 +268,7 @@ export const PRICING_STR: Record<Lang, PricingStrings> = {
       name: "Enterprise",
       desc: "Multiple sites, advanced CRM integrations, SSO, and security reviews — custom traffic and terms.",
       price: "Custom",
-      ctaLabel: "Book a demo",
+      ctaLabel: "Contact us",
       ctaHref: "/en/contact/",
     },
     basePlan: {

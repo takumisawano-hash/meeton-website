@@ -163,9 +163,9 @@ export default function PlaybookLP({ data, lang = "ja" }: { data: PlaybookEntry;
       {/* proof — stacks to 1 column on mobile */}
       {proof && (
         <Section tone="navy">
-          <div className="pb-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+          <div className="pb-proof" style={{ display: "grid", gridTemplateColumns: "minmax(0, 320px) 1fr", gap: 40, alignItems: "center" }}>
             <div>
-              <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proofEn?.heroMetric ?? proof.heroMetric}</div>
+              <div style={{ fontFamily: "var(--fd)", fontSize: (proofEn?.heroMetric ?? proof.heroMetric ?? "").length > 10 ? "clamp(26px,3.6vw,40px)" : "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1.15 }}>{proofEn?.heroMetric ?? proof.heroMetric}</div>
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 240 }}>{proofEn?.metricLabel ?? proof.heroMetricLabel}</div>
             </div>
             <div>

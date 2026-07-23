@@ -232,12 +232,16 @@ export default function ProductLP({ data, lang = "ja" }: { data: ProductLPData; 
           Optional: products without approved customer numbers omit it. */}
       {data.proof && (
         <Section tone="navy">
-          <div className="plp-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+          {/* Left column is capped: a long phrase metric (e.g. EN Email's
+              "Re-converted to meetings") at 84px used to blow the auto column
+              wide and shove the quote + stories link hard right. Short numeric
+              metrics keep the big display size; phrases get a smaller one. */}
+          <div className="plp-proof" style={{ display: "grid", gridTemplateColumns: "minmax(0, 320px) 1fr", gap: 40, alignItems: "center" }}>
             <div>
-              <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(48px,8vw,84px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>
+              <div style={{ fontFamily: "var(--fd)", fontSize: data.proof.metric.length > 10 ? "clamp(28px,4vw,44px)" : "clamp(48px,8vw,84px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1.15 }}>
                 {data.proof.metric}
               </div>
-              <div style={{ fontSize: 14, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{data.proof.label}</div>
+              <div style={{ fontSize: 14, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 260 }}>{data.proof.label}</div>
             </div>
             <div>
               <p style={{ fontSize: "clamp(18px,2.4vw,24px)", lineHeight: 1.7, color: "var(--on-navy)", fontWeight: 600, margin: 0 }}>

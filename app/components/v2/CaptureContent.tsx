@@ -320,9 +320,9 @@ export default function CaptureContent({ lang = "ja" }: { lang?: Lang }) {
       {/* Proof — stacks to 1 column on mobile (.cap-proof rule above) */}
       {hasProof && (
         <Section tone="navy">
-          <div className="cap-proof" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 40, alignItems: "center" }}>
+          <div className="cap-proof" style={{ display: "grid", gridTemplateColumns: "minmax(0, 320px) 1fr", gap: 40, alignItems: "center" }}>
             <div>
-              <div style={{ fontFamily: "var(--fd)", fontSize: "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1 }}>{proofMetric}</div>
+              <div style={{ fontFamily: "var(--fd)", fontSize: (proofMetric ?? "").length > 10 ? "clamp(26px,3.6vw,40px)" : "clamp(40px,7vw,72px)", fontWeight: 800, color: "var(--cta)", lineHeight: 1.15 }}>{proofMetric}</div>
               <div style={{ fontSize: 13, color: "var(--on-navy-sub)", marginTop: 8, maxWidth: 220 }}>{s.proofMetricLabel}</div>
             </div>
             <div>
