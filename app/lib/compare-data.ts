@@ -1276,7 +1276,7 @@ export const COMPARE_EN: Record<string, CompareData> = {
     product: "chat",
     productName: "Meeton Chat",
     category: "AI SDR / pipeline chat",
-    metaTitle: "Qualified (Piper) pricing, differences & AI alternative｜AI SDR chat｜Meeton",
+    metaTitle: "Qualified vs Meeton ai: Piper AI SDR Pricing & Feature Comparison (2026)",
     metaDescription:
       "Qualified (Piper AI SDR) is a Salesforce-native agentic marketing platform for enterprises, acquired by Salesforce in April 2026. Meeton Chat is Japanese-native with published pricing, covering conversation → booking → follow-up end to end. Choose by CRM stack and market.",
     verdict:

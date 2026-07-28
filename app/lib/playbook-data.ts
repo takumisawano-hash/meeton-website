@@ -197,8 +197,8 @@ export const SOLUTIONS: Record<string, PlaybookEntry> = {
       { q: "投資対効果はどう考えればいいですか？", a: "無料起点で獲得量を増やし、商談化効率と拡張（単体→バンドル）で回収する設計です。/tools/roi で商談化の余地を試算できます。" },
       { q: "セキュリティ・コンプラ要件は？", a: "SSO・権限/監査ログ・CRMへの会話ログ自動登録に対応します。詳細は /security・/enterprise をご覧ください。" },
     ],
-    metaTitle: "経営者向け｜人を増やさず商談を増やす AI SDR｜Meeton ai",
-    metaDescription: "CAC・NRR・営業人件費——経営者向けに、無料起点のPLGと一気通貫の商談化、単体→バンドル拡張で効率的に成長する Meeton ai のソリューション。",
+    metaTitle: "経営者向けAI SDR｜広告費を増やさずWeb商談化率を上げる方法",
+    metaDescription: "CEO・経営層向け。Webサイトからの商談創出をAIで自動化し、CACを悪化させずパイプラインを増やす方法を解説。3分でROI診断。",
     en: {
       badge: "For Founders & CEOs",
       problemLine: "Grow meetings without growing the sales team.",
