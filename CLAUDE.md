@@ -38,10 +38,15 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
 
 ## 計測（Mixpanel ファネル連結）
 - マーケサイトと app.dynameet.ai は**同一 Mixpanel プロジェクト**に送る。別プロジェクトのトークンは**無言で失敗**する（Mixpanel は有効なトークンなら成功を返すのでイベントは受理され、見ているプロジェクトに永遠に現れない）。`NEXT_PUBLIC_MIXPANEL_TOKEN` 未設定なら init も送信もしない。
-- イベントは2つだけ: `Landing Viewed`（/en/* のみ・フルロード毎に1回）と `Start Trial Clicked`（`source` のみ）。**個人情報は絶対に載せない**（autocapture / session replay は明示的に無効）。
-- init は JA 含む全ページ（JA→EN 切替で distinct_id を維持するため）。イベントだけ /en/* 限定。`startsWith("/en")` は **`/enterprise/` に誤マッチする** → `/en/` か完全一致で判定。
-- Start Trial CTA は `StartTrialLink` / `useTrialHref` 経由（app/lib/mixpanel.ts）。href は**クリック時ではなく effect で**書き換える — preventDefault だと cmd+クリックで distinct_id が落ち、gtag の `_gl` クロスドメインリンカーも壊れる。
+- イベントは3つ。**全部に `language: "en"|"ja"` を付ける**（JPは代理店主導＝セルフサーブ不可・アプリが403。ファネルが別物なので統合禁止）:
+  - `Landing Viewed`（両言語・1タブ1回）／`Start Trial Clicked`（EN のみ・`source`）／`Demo Requested`（両言語・`source`）
+- **個人情報は絶対に載せない**（autocapture / session replay は明示的に無効）。
+- `Landing Viewed` の二重計上ガード2つ（app/lib/analytics-context.ts）: ①URL に `calendarId` があればスキップ（デモCTAは同一オリジン遷移なので素直に数えると**クリックした人＝転換した人**を二重計上する）②sessionStorage で1タブ1回。①ではクレームを消費しない。
+- `startsWith("/en")` は **`/enterprise/`（JAページ）に誤マッチする** → `/en/` か完全一致で判定。
+- signup CTA は `distinct_id` を**追記するだけ**。既存の `utm_*` は書き換えない（`utm_content` が nav/home-hero/home-mid/home-footer/home-sticky を区別しており、アプリ側 GA4 がこの値でレポートしている）。ページ側の `utm_*` は混ぜない。
+- href は**クリック時ではなく effect で**書き換える — preventDefault だと cmd+クリックで distinct_id が落ち、gtag の `_gl` クロスドメインリンカーも壊れる。
 - 生 `<a href="…/signup">` を足さない。データ配列に入れる場合は `isSignupHref()` 分岐のある renderer（Footer / PricingContent）を通すこと。
+- デモCTAは `a[href*="calendarId="]` の委譲リスナーで捕捉。ただし `openMeetonCalendar()` の呼び出し元は全部 `<button>` で href が無いため、関数側で直接発火している。**同関数は引数ゼロを維持**（`onClick={openMeetonCalendar}` で渡されるので引数を足すと MouseEvent が入る）。
 
 ## その他の罠
 - Next16 `revalidateTag(tag, 'max')` 第2引数必須。blog更新は `&tag=notion` 付き revalidate。

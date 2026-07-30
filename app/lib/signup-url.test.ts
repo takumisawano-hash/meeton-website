@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { buildSignupUrl, isSignupHref } from "./signup-url";
 
 const BASE =
-  "https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=footer";
+  "https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=home-hero";
 
 /** Reads a param back off a built URL. */
 function param(url: string, key: string): string | null {
@@ -23,98 +23,66 @@ describe("buildSignupUrl — distinct_id contract", () => {
     expect(param(buildSignupUrl(BASE, id), "distinct_id")).toBe(id);
   });
 
+  it("does not lowercase a mixed-case id", () => {
+    const id = "$device:018F4C1E-9B2A-7C3D-8E5F-1A2B3C4D5E6F";
+    expect(param(buildSignupUrl(BASE, id), "distinct_id")).toBe(id);
+  });
+
   it("percent-encodes the $device: form on the wire so it survives transit", () => {
-    const built = buildSignupUrl(BASE, "$device:abc");
-    expect(built).toContain("distinct_id=%24device%3Aabc");
+    expect(buildSignupUrl(BASE, "$device:abc")).toContain("distinct_id=%24device%3Aabc");
   });
 
   it("uses exactly the param name `distinct_id`", () => {
+    const keys = [...new URL(buildSignupUrl(BASE, "$device:abc")).searchParams.keys()];
+    expect(keys).toContain("distinct_id");
+  });
+
+  it("appends exactly one param and nothing else", () => {
+    const before = [...new URL(BASE).searchParams.keys()];
+    const after = [...new URL(buildSignupUrl(BASE, "$device:abc")).searchParams.keys()];
+    expect(after).toEqual([...before, "distinct_id"]);
+  });
+});
+
+describe("buildSignupUrl — preserves the existing UTMs exactly", () => {
+  it("leaves every existing utm_* byte-identical", () => {
     const built = buildSignupUrl(BASE, "$device:abc");
-    expect([...new URL(built).searchParams.keys()]).toContain("distinct_id");
+    expect(param(built, "utm_source")).toBe("dynameet.ai");
+    expect(param(built, "utm_medium")).toBe("website_cta");
+    expect(param(built, "utm_campaign")).toBe("en_selfserve");
+    expect(param(built, "utm_content")).toBe("home-hero");
+  });
+
+  // utm_content is what distinguishes the ~5 English CTAs from each other.
+  it.each(["nav", "home-hero", "home-mid", "home-footer", "home-sticky"])(
+    "preserves utm_content=%s",
+    (slot) => {
+      const href = BASE.replace("utm_content=home-hero", `utm_content=${slot}`);
+      expect(param(buildSignupUrl(href, "$device:abc"), "utm_content")).toBe(slot);
+    },
+  );
+
+  it("preserves a plan param already on the href", () => {
+    const built = buildSignupUrl(`${BASE}&plan=lead`, "$device:abc");
+    expect(param(built, "plan")).toBe("lead");
+  });
+
+  it("does not add any utm the href did not already have", () => {
+    const built = buildSignupUrl(BASE, "$device:abc");
+    expect(new URL(built).searchParams.has("utm_term")).toBe(false);
   });
 });
 
 describe("buildSignupUrl — graceful degradation", () => {
-  it("omits distinct_id entirely when the SDK gave us nothing", () => {
+  it("returns the href untouched when the SDK gave us nothing", () => {
     for (const missing of [null, undefined, ""]) {
-      const built = buildSignupUrl(BASE, missing);
-      expect(new URL(built).searchParams.has("distinct_id")).toBe(false);
+      expect(buildSignupUrl(BASE, missing)).toBe(BASE);
     }
-  });
-
-  it("leaves the rest of the URL intact when distinct_id is missing", () => {
-    const built = buildSignupUrl(BASE, null);
-    expect(param(built, "utm_campaign")).toBe("en_selfserve");
-    expect(new URL(built).pathname).toBe("/signup");
   });
 
   it("returns a malformed base URL untouched rather than throwing", () => {
     expect(buildSignupUrl("/not-absolute", "$device:abc")).toBe("/not-absolute");
     expect(buildSignupUrl("", "$device:abc")).toBe("");
-  });
-
-  it("keeps the CTA's own utm_* when the search string is unusable", () => {
-    const built = buildSignupUrl(BASE, "$device:abc", "%%%");
-    expect(param(built, "utm_source")).toBe("dynameet.ai");
-    expect(param(built, "distinct_id")).toBe("$device:abc");
-  });
-});
-
-describe("buildSignupUrl — utm_* carry-over", () => {
-  it("carries a utm_* the CTA does not set (utm_term)", () => {
-    const built = buildSignupUrl(BASE, "$device:abc", "?utm_term=ai%20sdr");
-    expect(param(built, "utm_term")).toBe("ai sdr");
-  });
-
-  it("accepts a search string with or without the leading ?", () => {
-    expect(param(buildSignupUrl(BASE, null, "utm_term=x"), "utm_term")).toBe("x");
-    expect(param(buildSignupUrl(BASE, null, "?utm_term=x"), "utm_term")).toBe("x");
-  });
-
-  // Documented precedence decision (spec §5). Load-bearing for GA: letting a
-  // page's utm_source=google through would rewrite what the APP's GA4 sees for
-  // every paid signup and reclassify those sessions as Paid Search.
-  it("lets the CTA defaults win over page utm_*", () => {
-    const built = buildSignupUrl(BASE, null, "?utm_source=google&utm_medium=cpc");
-    expect(param(built, "utm_source")).toBe("dynameet.ai");
-    expect(param(built, "utm_medium")).toBe("website_cta");
-  });
-
-  it("does not duplicate a utm key the CTA already set", () => {
-    const built = buildSignupUrl(BASE, null, "?utm_source=google");
-    expect(new URL(built).searchParams.getAll("utm_source")).toEqual(["dynameet.ai"]);
-  });
-
-  it("keeps CTA defaults for utm keys the page does not set", () => {
-    const built = buildSignupUrl(BASE, null, "?utm_source=google");
-    expect(param(built, "utm_content")).toBe("footer");
-    expect(param(built, "utm_campaign")).toBe("en_selfserve");
-  });
-
-  it("does not let an empty page value blank out a CTA default", () => {
-    const built = buildSignupUrl(BASE, null, "?utm_source=");
-    expect(param(built, "utm_source")).toBe("dynameet.ai");
-  });
-
-  it("does not forward click ids — AttributionBootstrap owns those", () => {
-    const built = buildSignupUrl(BASE, null, "?gclid=Cj0KCQ&fbclid=abc&msclkid=xyz");
-    const keys = [...new URL(built).searchParams.keys()];
-    expect(keys).not.toContain("gclid");
-    expect(keys).not.toContain("fbclid");
-    expect(keys).not.toContain("msclkid");
-  });
-
-  it("does not forward unrelated params such as a preselected plan", () => {
-    const built = buildSignupUrl(BASE, null, "?plan=enterprise&ref=spam");
-    expect(new URL(built).searchParams.has("ref")).toBe(false);
-    // `plan` on the signup URL comes from trialUrl(), never from the page.
-    expect(new URL(built).searchParams.has("plan")).toBe(false);
-  });
-
-  it("preserves a plan already set by trialUrl()", () => {
-    const withPlan = `${BASE}&plan=lead`;
-    const built = buildSignupUrl(withPlan, "$device:abc", "?utm_source=google");
-    expect(param(built, "plan")).toBe("lead");
   });
 });
 
@@ -127,6 +95,8 @@ describe("isSignupHref", () => {
   it("does not match other destinations", () => {
     expect(isSignupHref("/en/pricing/")).toBe(false);
     expect(isSignupHref("https://app.dynameet.ai/login")).toBe(false);
+    // The demo CTA is same-origin and must never be treated as a signup CTA.
+    expect(isSignupHref("https://dynameet.ai/?calendarId=takumi-sawano")).toBe(false);
     expect(isSignupHref(undefined)).toBe(false);
     expect(isSignupHref(null)).toBe(false);
   });

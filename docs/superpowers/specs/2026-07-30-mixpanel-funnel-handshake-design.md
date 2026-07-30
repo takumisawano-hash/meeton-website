@@ -6,15 +6,15 @@
 
 ## Goal
 
-Join this marketing site's funnel to the app's 10-stage self-signup funnel as one
-continuous Mixpanel stream. The app at `app.dynameet.ai` already reads an inbound
-`?distinct_id=` from the URL and calls `mixpanel.identify()` with it before emitting
-`Signup Landed`. This side sends that parameter.
+Join this marketing site's funnel to the app's self-signup funnel as one
+continuous Mixpanel stream. The app at `app.dynameet.ai` reads an inbound
+`?distinct_id=` from the URL and calls `mixpanel.identify()` with it before
+emitting `Signup Landed`. This side sends that parameter.
 
-**Both sites report to the same Mixpanel project.** One project is what makes the
-funnel continuous. A token for a different project fails *silently* — Mixpanel
-returns success for any valid token, so events are accepted and simply never appear
-in the project being watched.
+**Both sites report to the same Mixpanel project.** One project is what makes
+the funnel continuous. A token for a different project fails *silently* —
+Mixpanel returns success for any valid token, so events are accepted and simply
+never appear in the project being watched. There is no error anywhere.
 
 ## Success criterion
 
@@ -28,39 +28,83 @@ specifically to prove the handshake worked.
 
 | File | Role |
 |---|---|
-| `app/lib/signup-url.ts` | **Pure.** `buildSignupUrl(base, distinctId, currentSearch)`. No SDK, no `window`. The contract the app validates lives here, and this is what the tests cover. |
-| `app/lib/mixpanel.ts` | Client SDK wrapper: lazy idempotent init, `trackEvent`, `getDistinctId`, `useTrialHref` |
-| `app/components/MixpanelTracker.tsx` | Layout-mounted, returns `null` — inits + emits `Landing Viewed` |
-| `app/components/StartTrialLink.tsx` | CTA island for plain-anchor call sites |
-| `app/lib/signup-url.test.ts` | Vitest over the pure builder |
+| `app/lib/signup-url.ts` | **Pure.** `buildSignupUrl(baseUrl, distinctId)` + `isSignupHref`. No SDK, no `window`. |
+| `app/lib/analytics-context.ts` | **Pure.** `detectLanguage`, `isBookingWidgetUrl`, `claimLandingView`, `shouldTrackLandingView`, `demoSourceFromHref`. |
+| `app/lib/mixpanel.ts` | Client SDK wrapper: lazy idempotent init, the three event emitters, `getDistinctId`, `useTrialHref`. |
+| `app/components/MixpanelTracker.tsx` | Layout-mounted, returns `null` — emits `Landing Viewed` + delegated `Demo Requested`. |
+| `app/components/StartTrialLink.tsx` | CTA island for plain-anchor signup call sites. |
+| `app/lib/*.test.ts` | Vitest over both pure modules (43 tests). |
 
-Init is **lazy and idempotent**: `getDistinctId()` self-inits rather than depending
-on `MixpanelTracker`'s effect having already run. Sibling-effect ordering in the
-root layout would otherwise be a silent, fragile dependency.
+The gating rules and the URL contract live in **pure** modules with no SDK,
+`window` or React, so the parts the app validates are unit-testable in
+isolation.
+
+Init is **lazy and idempotent**: `getDistinctId()` self-inits rather than
+depending on `MixpanelTracker`'s effect having already run. Sibling-effect
+ordering in the root layout would otherwise be a silent, fragile dependency.
+
+**No token → no init, no events.** Local dev and CI stay silent.
 
 ## 2. Event semantics
 
-- **`Landing Viewed`** — `/en/*` only, once per full page load (not on client-side
-  `<Link>` navigations, matching "on first load"). No custom properties; Mixpanel
-  auto-captures `$current_url`, `utm_*`, referrer, geo.
-- **`Start Trial Clicked`** — one `source` property (`"nav"`, `"footer"`,
-  `"pricing-lead"`, …), reusing the existing GA `source` convention.
+Three events, Title Case to match the app's convention (`Page View`, `Login`,
+`Signup Landed`, …). **All three carry `language: "en" | "ja"`.**
 
-No personal data on either event: no email, no name, no form contents.
+| Event | Fires on | Properties |
+|---|---|---|
+| `Landing Viewed` | both languages, once per tab session | `language` |
+| `Start Trial Clicked` | English self-serve CTA | `language: "en"`, `source` |
+| `Demo Requested` | demo booking CTA, both languages | `language`, `source` |
 
-**Init runs on every page (JA included); only the event is `/en/*`-gated.** A
-visitor who lands on a JA blog post and switches to EN keeps the same
-`distinct_id`, so the handshake survives the language switch. Scope is `/en/*`
-because the self-serve funnel is EN-only — JA CTAs point at demo booking
-(`demoUrl`), never `/signup`.
+`language` is on all three because the funnels are genuinely different: Japan is
+partner-led, self-serve signup is closed there, and the app hard-rejects JP
+signups with a 403. Merging them into one "CTA clicked" event would make either
+funnel unreadable.
 
-Synthetic clients (Lighthouse / PageSpeed / headless / webdriver) are skipped,
-mirroring `GoogleAnalytics.tsx`. Bot-inflated `Landing Viewed` would corrupt the
-exact conversion rate this work exists to measure.
+No personal data on any event — no email, name or form contents. Mixpanel
+auto-captures `utm_*`, referrer and geo, which is enough. `autocapture: false`
+and `record_sessions_percent: 0` are pinned so an SDK upgrade cannot start
+collecting form fields.
 
-## 3. CTA upgrade
+Language detection is `pathname === "/en" || pathname.startsWith("/en/")`.
+NOT `startsWith("/en")` — that also matches `/enterprise/`, a Japanese page,
+which would be silently misfiled into the English funnel.
 
-One mechanism, two ergonomics:
+## 3. `Landing Viewed` must not double-count
+
+The demo CTA is a SAME-ORIGIN navigation to `/?calendarId=…&showChat=true`
+which opens our own booking widget. That is a full page load, so a naive
+fire-on-every-load emits a SECOND landing the instant someone clicks the demo
+CTA — inflating the top of the funnel with precisely the visitors who
+converted. Two guards, both in `app/lib/analytics-context.ts`:
+
+1. **Skip when the URL carries `calendarId`.** That load is a booking view, not
+   a landing. The claim is deliberately *not* burned, so the visitor's genuine
+   landing later in the same tab still counts.
+2. **Claim once per tab via `sessionStorage`.** A reload mid-journey does not
+   re-count. Mirrors how the app claims `Signup Landed`. Fails *open* when
+   storage is unavailable (private mode / quota): a rare duplicate beats losing
+   the funnel's first step entirely.
+
+## 4. CTA handling
+
+`distinct_id` is **appended only**. The existing `utm_source` / `utm_medium` /
+`utm_campaign` / `utm_content` on each signup href are preserved exactly —
+never rewritten, replaced or regenerated. `utm_content` distinguishes the CTA
+slots (nav / home-hero / home-mid / home-footer / home-sticky / footer) and the
+app's GA4 reporting is keyed on those values.
+
+Page-level `utm_*` are deliberately NOT merged in. Doing so would change what
+the app's GA4 sees for paid signups: reports keyed on `utm_source=dynameet.ai`
+stop matching, and `utm_medium=cpc` reclassifies the session from Referral to
+Paid Search. Campaign attribution is already preserved — Mixpanel auto-captures
+the page's `utm_*` onto `Landing Viewed`, which shares a profile with
+`Signup Landed`.
+
+The demo CTA does NOT get `distinct_id`: it is a same-origin navigation, so
+Mixpanel identity already persists via its own storage.
+
+### The signup CTA
 
 ```
 useTrialHref(source, plan?)  →  href upgraded post-hydration via useEffect
@@ -68,136 +112,105 @@ useTrialHref(source, plan?)  →  href upgraded post-hydration via useEffect
         └── StartTrialLink       convenience wrapper for plain-anchor sites
 ```
 
-The href is upgraded in `useEffect`, **not** at click time with `preventDefault`.
-This matters for three independent reasons:
+The href is upgraded in an effect, **not** at click time with `preventDefault`:
 
 1. The anchor's real `href` is correct, so cmd-click, middle-click and
-   "copy link address" all carry `distinct_id`. A click-time `preventDefault`
-   would silently drop it for exactly those users.
-2. No hydration mismatch — server and first client render agree on the plain URL.
-3. **GA safety.** gtag decorates outbound links with its `_gl` cross-domain linker
-   param *at click time*. Navigating via `location.href` would clobber that
-   decoration and break GA4 session stitching between `dynameet.ai` and
-   `app.dynameet.ai`.
+   "copy link address" all carry `distinct_id`.
+2. No hydration mismatch — server and first client render agree.
+3. **GA safety.** gtag decorates outbound links with its `_gl` cross-domain
+   linker param *at click time*. Navigating via `location.href` would clobber
+   that and break GA4 session stitching.
 
-### Call sites (12 renderings, 9 files)
+Applied at 12 renderings across 9 files. Eight hardcoded
+`<a href="…/signup?…">` became `StartTrialLink`; for the two data-driven
+renderers (`Footer`, `PricingContent`) this is a one-line
+`isSignupHref(href) ? <StartTrialLink> : <a>` conditional in the generic mapper,
+which also catches any *future* hardcoded signup URL dropped into those arrays.
+The four `trialUrl()` callers (`Nav` — covering 4 render points —
+`MobileStickyCta`, `CTAButtons`, `RoiTool`) keep their own anchors, styling and
+GA events, swapping `trialUrl(x)` → `useTrialHref(x)`.
 
-**8 hardcoded `<a href="…/signup?…">` → `StartTrialLink`:**
-`Footer.tsx:149`, `TrialPageClient.tsx:283`, `IntegrationDetailLayout.tsx:934`,
-`SolutionLpTemplate.tsx:163`, `PricingContent.tsx:283,295` (+ enterprise).
+### The demo CTA
 
-For the two data-driven renderers (`Footer.tsx:318`, `PricingContent.tsx:464/512/544`)
-this is a one-line `isSignupHref(href) ? <StartTrialLink> : <a>` conditional in the
-generic mapper — which also catches any *future* hardcoded signup URL dropped into
-those data arrays.
+**One delegated listener** on `a[href*="calendarId="]` rather than an edit at
+each of the ~12 demo anchors. Delegation is safe here in a way it would not be
+for the signup CTA: it only OBSERVES the click, never calls `preventDefault`
+and never rewrites an href, so navigation, cmd-click and gtag's link decoration
+are untouched. It also catches the in-place widget path, where the handler
+preventDefaults but the event still bubbles.
 
-**4 `trialUrl()` callers keep their own anchors, styling and GA events untouched** —
-they swap `trialUrl(x)` → `useTrialHref(x)` and add one line to the existing
-`onClick`:
-`Nav.tsx:183` (covers 4 render points), `MobileStickyCta.tsx:32`,
-`CTAButtons.tsx:69`, `RoiTool.tsx:314`.
+**`openMeetonCalendar()` is instrumented directly** (`app/lib/meeton-cta.ts`)
+because its ~15 call sites are all `<button>` elements with no href — the
+delegated anchor listener cannot see them. Its signature must stay zero-arg:
+call sites pass it as `onClick={openMeetonCalendar}`, so any parameter would
+receive a MouseEvent.
 
-`CTAButtons` branches between demo and trial hrefs; wrapping it in `StartTrialLink`
-would mean restructuring it. The hook avoids that.
-
-## 4. Google Analytics safety
+## 5. Google Analytics safety
 
 The marketing team depends on GA. Rules observed:
 
-- **Every existing GA/dataLayer call is preserved verbatim.** The hook only changes
-  an href value; it never touches `onClick` semantics.
-- **`StartTrialLink` fires Mixpanel only — it does not add GA events.** Call sites
-  that already fire GA pass their handler through via the optional `onClick` prop.
-  GA event counts therefore stay exactly as they are; no new or duplicated
-  conversions appear in the marketing team's reports.
-- **`GoogleAnalytics.tsx` is not touched at all.** The originally-proposed
-  `isSyntheticClient()` extraction was dropped: it is unrelated refactoring in the
-  most incident-scarred file in the repo (see its own comment history — a prior
-  change killed Ads conversion tracking for ~a month). The new lib carries its own
-  copy with a cross-reference comment. Duplicating one bot regex is the cheaper risk.
+- **Every existing GA/dataLayer call is preserved verbatim.** The hook only
+  changes an href value; it never touches `onClick` semantics.
+- **`StartTrialLink` fires Mixpanel only — no GA events.** Call sites that
+  already fire GA pass their handler through the optional `onClick` prop, so GA
+  event counts are unchanged and no duplicate conversions appear.
+- **`GoogleAnalytics.tsx` is not touched at all.** An earlier draft extracted
+  its `isSyntheticClient()` helper for reuse; that was dropped as unrelated
+  refactoring in the most incident-scarred file in the repo (its own comments
+  record a change that silently killed Ads conversion tracking for ~a month).
+  The new lib carries its own copy with a cross-reference comment.
 
-Existing GA events on signup CTAs, all preserved:
+Existing GA events on signup CTAs, all preserved: `TrialPageClient`
+(`trial_click` + `destination: app_signup`), `MobileStickyCta`, `CTAButtons`,
+`RoiTool`.
 
-| Call site | Event |
-|---|---|
-| `TrialPageClient.tsx:299` | `trial_click {source:'trial-page-hero', destination:'app_signup'}` |
-| `MobileStickyCta.tsx:38` | `trial_click` / `demo_click` |
-| `CTAButtons.tsx:38` | `track()` → gtag, dataLayer fallback |
-| `RoiTool.tsx:197` | `track()` → gtag, dataLayer fallback |
+## 6. Contract
 
-## 5. utm_* precedence — RESOLVED (2026-07-30, 拓実確認)
+The app accepts a bare uuid **or** the SDK's `$device:<uuid>` form and rejects
+anything else. `mixpanel.get_distinct_id()` returns one of those two, so its
+value is passed through **verbatim** via `URLSearchParams.set` — no trim, no
+reformat, no lowercase, no wrapping. Param name is exactly `distinct_id`.
 
-`trialUrl()` already sets `utm_source=dynameet.ai&utm_medium=website_cta&
-utm_campaign=en_selfserve&utm_content=<source>` on the signup URL. The requirement
-also says to carry over "every `utm_*` from `window.location.search`". When a
-visitor arrives on `/en/?utm_source=google&utm_medium=cpc`, these collide.
-
-**Decision: the CTA's own `utm_*` win.** Page params only fill in keys the CTA
-does not already set — in practice `utm_term`. Existing behaviour is unchanged.
-
-Rejected alternative (page params win, per the requirement's `set` pseudocode)
-because of its blast radius on the **app's** GA4:
-
-- Saved reports, audiences and conversion segments keyed on
-  `utm_source=dynameet.ai` / `utm_medium=website_cta` / `utm_campaign=en_selfserve`
-  would silently stop matching on deploy day.
-- `utm_medium=cpc` would reclassify those sessions from Referral to **Paid
-  Search** in the app property's channel grouping — a step change that breaks
-  before/after comparisons.
-- If the app property is linked to Google Ads, that yields Paid Search sessions
-  with no matching `gclid`, and one ad click counted as paid on both properties.
-
-**Nothing is lost for the funnel.** Mixpanel auto-captures the page's `utm_*`
-onto `Landing Viewed` (verified on the wire: `utm_source: "google"`,
-`utm_medium: "cpc"`), and that event shares a profile with the app's
-`Signup Landed`. Campaign attribution is already in the funnel; this param only
-ever affected the app's GA4. Section attribution additionally rides on
-`Start Trial Clicked.source`.
-
-## 6. Failure modes
+## 7. Failure modes
 
 Every path degrades to a working CTA with no parameter:
 
 | Failure | Behavior |
 |---|---|
-| `NEXT_PUBLIC_MIXPANEL_TOKEN` unset | Nothing inits, nothing emits — local dev and CI stay silent |
-| SDK blocked / throws | `getDistinctId()` returns `null`, href stays plain `trialUrl()` |
+| `NEXT_PUBLIC_MIXPANEL_TOKEN` unset | Nothing inits, nothing emits |
+| SDK blocked / throws | `getDistinctId()` returns `null`, href stays plain |
 | JS disabled | SSR href is the plain signup URL |
-| Malformed base URL | `buildSignupUrl` returns it untouched |
+| `sessionStorage` unavailable | Claim fails open — landing still counted |
+| Malformed base URL | Returned untouched |
 
-## 7. Contract
+## 8. Verification (performed 2026-07-30, dev token)
 
-The app accepts a bare uuid **or** the SDK's `$device:<uuid>` form and rejects
-anything else. `mixpanel.get_distinct_id()` returns one of those two, so its value
-is passed through **verbatim** via `URLSearchParams.set` — no trim, no reformat, no
-wrapping. Param name is exactly `distinct_id`.
+| Check | Result |
+|---|---|
+| `Landing Viewed` on `/en/` | claim set; POST → 200 |
+| `Landing Viewed` on `/` (JA) | claim set; `Demo Requested` confirmed `language: "ja"` |
+| `/?calendarId=…` | suppressed, **and claim not burned** |
+| Reload of a claimed tab | zero Mixpanel requests |
+| `/enterprise/` (JA) | init only, zero events |
+| 6 EN signup CTAs | all utm intact; `$device:<uuid>`; `distinct_id` appended **last** |
+| `utm_content` slots | nav, home-hero, home-mid, home-footer, home-sticky, footer |
+| `Start Trial Clicked` | `language: "en"`, `source: "nav"`, no personal fields |
+| `Demo Requested` | `language: "ja"`, `source: "nav"`, no personal fields |
+| GA | gtag.js loaded, GA4 + Ads configs both present |
+| Landed URL | `app.dynameet.ai/signup?…&distinct_id=$device:…` |
 
-## 8. Tests
+**Not verifiable from this repo:** that the production token matches the app's
+(no access to either Mixpanel project), and `adopted_distinct_id: true` (needs a
+real signup plus visibility into the project).
 
-Vitest over `buildSignupUrl` only:
-
-- bare uuid preserved exactly
-- `$device:<uuid>` preserved exactly, including `$` and `:`
-- `utm_*` carried from the current page
-- non-`utm_` params (e.g. `gclid`, `fbclid`) **not** carried
-- `null` distinct_id → no `distinct_id` key, URL otherwise unchanged
-- malformed base URL → returned untouched
-
-## 9. Verification
-
-1. `.env.local` → DEV token (gitignored; never committed)
-2. Load an `/en/` page → `Landing Viewed` in the dev project
-3. Click a CTA → landed URL carries `?distinct_id=$device:…`
-4. Complete a signup → `Landing Viewed` and `Signup Landed` on the **same profile**,
-   `Signup Landed.adopted_distinct_id === true`
-
-If `adopted_distinct_id` is `false`: either the param never arrived (check the URL
-after the click) or it was rejected (check the format in §7).
-
-## 10. Deploy
+## 9. Deploy
 
 Production build needs `NEXT_PUBLIC_MIXPANEL_TOKEN` set to **the same token the
-app's production build uses**. This cannot be verified from inside this repo — it
-is an explicit pre-merge confirmation step in the PR description, not something
-this branch can prove. The wrong-project failure is silent and cost hours on the
-app side.
+app's production build uses**. Confirm the value matches before shipping — the
+wrong-project failure is silent and cost hours on the app side.
+
+Note that testing the full handshake requires **both halves on the same token**.
+Clicking a CTA from a local dev build lands on production `app.dynameet.ai`,
+which reports to the production project — so a dev-token marketing site and a
+prod-token app will never share a profile, and it looks exactly like a broken
+handshake even when the code is correct.

@@ -10,7 +10,8 @@
  * mixpanel.identify() with it before emitting `Signup Landed`. It accepts a
  * bare uuid or the SDK's `$device:<uuid>` form and REJECTS anything else —
  * so whatever get_distinct_id() returned is passed through verbatim here:
- * no trim, no reformat, no wrapping. URLSearchParams handles the encoding.
+ * no trim, no reformat, no lowercase, no wrapping. URLSearchParams handles
+ * the encoding.
  */
 
 /** The one param name the app looks for. Do not rename. */
@@ -28,43 +29,33 @@ export function isSignupHref(href: string | undefined | null): boolean {
 }
 
 /**
- * Append the visitor's Mixpanel id, plus any utm_* on the current page, to a
- * signup URL.
+ * Append the visitor's Mixpanel id to an English signup CTA.
  *
- * utm_* precedence: the CTA's OWN utm_* (from trialUrl) WIN. Page params only
- * fill in keys the CTA does not already set — in practice utm_term.
+ * APPEND ONLY. The existing `utm_source` / `utm_medium` / `utm_campaign` /
+ * `utm_content` on the href are preserved exactly — never rewritten, replaced
+ * or regenerated. `utm_content` in particular distinguishes nav / home-hero /
+ * home-mid / home-footer / home-sticky, and the app's GA4 reporting is keyed
+ * on these values.
  *
- * This is deliberate and load-bearing for GA (2026-07-30 拓実確認). Letting a
- * page's utm_source=google&utm_medium=cpc through would rewrite what the APP's
- * GA4 sees for every paid signup: saved reports and segments keyed on
- * utm_source=dynameet.ai / utm_medium=website_cta / utm_campaign=en_selfserve
- * would silently stop matching, and utm_medium=cpc would reclassify those
- * sessions from Referral to Paid Search in the app property's channel
- * grouping — a step change on deploy day, plus Paid Search sessions with no
- * matching gclid if the property is linked to Google Ads.
- *
- * Nothing is lost for the funnel: Mixpanel auto-captures the page's utm_* onto
- * `Landing Viewed`, and that event shares a profile with the app's
- * `Signup Landed`, so campaign attribution is already there. This param only
- * ever affected the app's GA4.
- *
- * Only `utm_*` is carried. Click ids (gclid/fbclid/msclkid) are deliberately
- * NOT forwarded — they are already persisted cross-subdomain by
- * AttributionBootstrap's `_meeton_attr` cookie, and duplicating them here
- * would let a stale marketing-page gclid overwrite the app's own.
+ * Page-level `utm_*` are deliberately NOT merged in: that would change what
+ * the app's GA4 sees for paid signups (reports keyed on
+ * utm_source=dynameet.ai stop matching; utm_medium=cpc reclassifies the
+ * session as Paid Search). Campaign attribution is already preserved in
+ * Mixpanel, which auto-captures the page's utm_* onto `Landing Viewed` — an
+ * event that shares a profile with the app's `Signup Landed`.
  *
  * Never throws: a malformed base URL is returned untouched so the CTA keeps
  * working.
  *
- * @param baseUrl       the signup URL from trialUrl()
- * @param distinctId    mixpanel.get_distinct_id(), or null when unavailable
- * @param currentSearch window.location.search (leading "?" optional)
+ * @param baseUrl    the existing signup href, with its utm_* already on it
+ * @param distinctId mixpanel.get_distinct_id(), or null when unavailable
  */
 export function buildSignupUrl(
   baseUrl: string,
   distinctId: string | null | undefined,
-  currentSearch = "",
 ): string {
+  if (!distinctId) return baseUrl;
+
   let url: URL;
   try {
     url = new URL(baseUrl);
@@ -73,20 +64,7 @@ export function buildSignupUrl(
     return baseUrl;
   }
 
-  try {
-    const incoming = new URLSearchParams(currentSearch);
-    incoming.forEach((value, key) => {
-      if (!key.startsWith("utm_") || !value) return;
-      // The CTA's own utm_* win — see the precedence note above.
-      if (url.searchParams.has(key)) return;
-      url.searchParams.set(key, value);
-    });
-  } catch {
-    /* unparseable search string — keep the CTA's own utm_* */
-  }
-
   // Verbatim. The app rejects anything that is not a bare uuid or $device:<uuid>.
-  if (distinctId) url.searchParams.set(DISTINCT_ID_PARAM, distinctId);
-
+  url.searchParams.set(DISTINCT_ID_PARAM, distinctId);
   return url.toString();
 }

@@ -3,6 +3,7 @@
 import mixpanel from "mixpanel-browser";
 import { useEffect, useState } from "react";
 
+import { detectLanguage, type Language } from "./analytics-context";
 import { trialUrl } from "./cta-urls";
 import { buildSignupUrl } from "./signup-url";
 
@@ -100,9 +101,36 @@ export function trackEvent(event: string, props?: Record<string, unknown>): void
   }
 }
 
-/** `Start Trial Clicked` — fired from every Start Trial CTA. */
+/**
+ * The language funnel the current page belongs to.
+ *
+ * Every event carries this. Japan is partner-led — self-serve signup is closed
+ * there and the app hard-rejects JP signups with a 403 — so the two languages
+ * have genuinely different conversion goals and each funnel must be readable
+ * on its own.
+ */
+export function currentLanguage(): Language {
+  if (typeof window === "undefined") return "ja";
+  return detectLanguage(window.location.pathname);
+}
+
+/** `Landing Viewed` — the top of both funnels. Callers own the guards. */
+export function trackLandingViewed(language: Language): void {
+  trackEvent("Landing Viewed", { language });
+}
+
+/**
+ * `Start Trial Clicked` — the English self-serve CTA.
+ * Always `language: "en"`: this CTA only exists on the English pages, since
+ * JP self-serve signup is closed.
+ */
 export function trackStartTrialClick(source: string): void {
-  trackEvent("Start Trial Clicked", { source });
+  trackEvent("Start Trial Clicked", { source, language: "en" });
+}
+
+/** `Demo Requested` — the demo booking CTA, on both languages. */
+export function trackDemoRequested(source: string, language: Language): void {
+  trackEvent("Demo Requested", { source, language });
 }
 
 /**
@@ -122,7 +150,7 @@ export function getDistinctId(): string | null {
 }
 
 /**
- * Upgrade a signup URL with the visitor's Mixpanel id + the page's utm_*.
+ * Append the visitor's Mixpanel id to a signup URL, preserving its utm_*.
  *
  * The upgrade happens in an effect, AFTER hydration, rather than at click time
  * with preventDefault(). Three reasons this matters:
@@ -141,7 +169,7 @@ export function useSignupHref(baseUrl: string): string {
   const [href, setHref] = useState(baseUrl);
 
   useEffect(() => {
-    setHref(buildSignupUrl(baseUrl, getDistinctId(), window.location.search));
+    setHref(buildSignupUrl(baseUrl, getDistinctId()));
   }, [baseUrl]);
 
   return href;
