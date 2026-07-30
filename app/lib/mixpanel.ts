@@ -29,6 +29,13 @@ import { buildSignupUrl } from "./signup-url";
 const TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
 
 /**
+ * LOCAL TESTING ONLY — retargets signup CTAs at a dev build of the app.
+ * Leave unset in production; the CTA then uses its real app.dynameet.ai href.
+ * See buildSignupUrl for why testing the handshake requires this.
+ */
+const APP_ORIGIN_OVERRIDE = process.env.NEXT_PUBLIC_APP_ORIGIN;
+
+/**
  * Deliberate near-duplicate of GoogleAnalytics.tsx's private copy.
  * That file has a scarred history (a 2026-05 change silently killed Ads
  * conversion tracking for ~a month); extracting a shared helper out of it is
@@ -169,7 +176,8 @@ export function useSignupHref(baseUrl: string): string {
   const [href, setHref] = useState(baseUrl);
 
   useEffect(() => {
-    setHref(buildSignupUrl(baseUrl, getDistinctId()));
+    // APP_ORIGIN is a local-testing override only; unset in production.
+    setHref(buildSignupUrl(baseUrl, getDistinctId(), APP_ORIGIN_OVERRIDE));
   }, [baseUrl]);
 
   return href;

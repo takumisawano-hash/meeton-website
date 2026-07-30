@@ -49,12 +49,20 @@ export function isSignupHref(href: string | undefined | null): boolean {
  *
  * @param baseUrl    the existing signup href, with its utm_* already on it
  * @param distinctId mixpanel.get_distinct_id(), or null when unavailable
+ * @param appOrigin  LOCAL TESTING ONLY. Retargets the CTA at a dev build of
+ *   the app (e.g. "http://localhost:3001"). Unset in production, where the
+ *   href's own origin is used. This exists because the handshake can only be
+ *   tested with BOTH halves on the same Mixpanel project: production
+ *   app.dynameet.ai reports to the production project, so a dev-token
+ *   marketing build clicking through to it lands the two events in different
+ *   projects — indistinguishable from a genuinely broken handshake.
  */
 export function buildSignupUrl(
   baseUrl: string,
   distinctId: string | null | undefined,
+  appOrigin?: string,
 ): string {
-  if (!distinctId) return baseUrl;
+  if (!distinctId && !appOrigin) return baseUrl;
 
   let url: URL;
   try {
@@ -63,6 +71,16 @@ export function buildSignupUrl(
     // Relative or malformed href — nothing safe to append to.
     return baseUrl;
   }
+
+  if (appOrigin) {
+    try {
+      url = new URL(url.pathname + url.search, appOrigin);
+    } catch {
+      /* unusable override — keep the real destination */
+    }
+  }
+
+  if (!distinctId) return url.toString();
 
   // Verbatim. The app rejects anything that is not a bare uuid or $device:<uuid>.
   url.searchParams.set(DISTINCT_ID_PARAM, distinctId);

@@ -86,6 +86,32 @@ describe("buildSignupUrl — graceful degradation", () => {
   });
 });
 
+describe("buildSignupUrl — local app-origin override", () => {
+  const LOCAL = "http://localhost:3001";
+
+  it("retargets the CTA at a dev app while keeping path, utm and distinct_id", () => {
+    const built = buildSignupUrl(BASE, "$device:abc", LOCAL);
+    const url = new URL(built);
+    expect(url.origin).toBe(LOCAL);
+    expect(url.pathname).toBe("/signup");
+    expect(url.searchParams.get("utm_content")).toBe("home-hero");
+    expect(url.searchParams.get("distinct_id")).toBe("$device:abc");
+  });
+
+  it("applies even when the SDK gave us no id", () => {
+    expect(new URL(buildSignupUrl(BASE, null, LOCAL)).origin).toBe(LOCAL);
+  });
+
+  it("is a no-op when unset — production keeps the real destination", () => {
+    expect(new URL(buildSignupUrl(BASE, "$device:abc")).origin).toBe("https://app.dynameet.ai");
+    expect(new URL(buildSignupUrl(BASE, "$device:abc", "")).origin).toBe("https://app.dynameet.ai");
+  });
+
+  it("keeps the real destination when the override is unusable", () => {
+    expect(new URL(buildSignupUrl(BASE, "$device:abc", "not a url")).origin).toBe("https://app.dynameet.ai");
+  });
+});
+
 describe("isSignupHref", () => {
   it("matches the app signup URL in the data-driven link arrays", () => {
     expect(isSignupHref(BASE)).toBe(true);
