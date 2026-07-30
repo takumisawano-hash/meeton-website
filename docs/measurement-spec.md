@@ -361,6 +361,43 @@ These broke prior cycles:
 
 ---
 
+## 9.5 Mixpanel — self-signup funnel handshake (added 2026-07-30)
+
+This spec above covers GA4 / HubSpot / gclid attribution for the **ads**
+funnel. It is **not** the whole tracking picture: since 2026-07-30 the site
+also reports to **Mixpanel**, to join this site's funnel to the app's
+self-signup funnel at `app.dynameet.ai`.
+
+The two systems are complementary and independent — GA4/HubSpot answers "which
+ad produced this lead", Mixpanel answers "did this visitor become a signup".
+Neither replaces the other.
+
+**Three events**, all carrying `language: "en" | "ja"`:
+
+| Event | Fires | Properties |
+|---|---|---|
+| `Landing Viewed` | both languages, once per tab session | `language` |
+| `Start Trial Clicked` | English self-serve CTA | `language`, `source` |
+| `Demo Requested` | demo booking CTA, both languages | `language`, `source` |
+
+Key rules (full detail in the docs below):
+
+- Marketing site and app **must** use the same Mixpanel project token. A token
+  for a different project fails **silently** — Mixpanel accepts events under
+  any valid token and they never appear in the project you are watching.
+- English signup CTAs carry `?distinct_id=<mixpanel id>`, **appended only** —
+  the existing `utm_*` on those hrefs are never rewritten, so the GA4
+  attribution described in §1–§3 is unaffected.
+- No personal data on any Mixpanel event; autocapture and session replay are
+  explicitly disabled.
+- No token ⇒ no init and no events (local dev and CI stay silent).
+
+Docs:
+
+- Design & rationale: `docs/superpowers/specs/2026-07-30-mixpanel-funnel-handshake-design.md`
+- Local test runbook: `docs/mixpanel-funnel-testing.md`
+- Day-to-day rules: `CLAUDE.md` → 計測（Mixpanel ファネル連結）
+
 ## 10. Owner
 
 - Spec maintenance: this file (PRs welcome)
