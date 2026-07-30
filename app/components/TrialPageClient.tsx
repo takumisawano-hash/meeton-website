@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Nav from './Nav'
 import Footer from './Footer'
+import StartTrialLink from './StartTrialLink'
 
 // ── /en/trial/ — EN-only self-serve trial request (2026-07-02) ────────
 // The English site's primary CTA. No self-serve billing exists yet, so the
@@ -279,8 +280,8 @@ export default function TrialPageClient() {
             </p>
             {/* 2026-07-23: self-serve signup shipped — instant signup is the primary
                 path; the HubSpot form below remains as the guided-setup fallback. */}
-            <a
-              href="https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=trial-page-hero"
+            <StartTrialLink
+              source="trial-page-hero"
               className="v2-cta-primary"
               style={{
                 display: 'inline-flex',
@@ -306,7 +307,7 @@ export default function TrialPageClient() {
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
-            </a>
+            </StartTrialLink>
             <p style={{ marginTop: 12, fontSize: 13, color: 'var(--sub)' }}>
               Instant access · no credit card · or use the guided-setup form below
             </p>

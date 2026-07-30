@@ -1,7 +1,8 @@
 "use client";
 
-import { demoUrl, pricingUrl, trialUrl, openDemoCalendarInPlace } from "@/app/lib/cta-urls";
+import { demoUrl, pricingUrl, openDemoCalendarInPlace } from "@/app/lib/cta-urls";
 import { t, type Lang } from "@/app/lib/i18n";
+import { trackStartTrialClick, useTrialHref } from "@/app/lib/mixpanel";
 
 // Permanent dual CTA (§1.2). 2026-06-04 sales-led pivot (deck p19, free tier
 // removed): primary = デモを予約 (green), secondary = 料金を見る (ghost → /pricing).
@@ -58,7 +59,9 @@ export default function CTAButtons({
   // EN self-serve (2026-07-23 拓実指示): primary = signup, secondary = pricing.
   // The demo CTA is removed from the EN defaults entirely — self-serve only.
   const primaryText = primaryLabel ?? (en ? "Start 1-month free trial" : chrome.ctaBookDemo);
-  const primaryHref = en && !primaryLabel ? trialUrl(source) : demoUrl(source);
+  // Hook must run unconditionally; only the trial branch actually uses it.
+  const trialHref = useTrialHref(source);
+  const primaryHref = en && !primaryLabel ? trialHref : demoUrl(source);
   const primaryIsDemo = !(en && !primaryLabel);
   const secondaryText = secondaryLabel ?? chrome.ctaSeePricing;
   const secondaryHref2 = secondaryHref ?? (en ? "/en/pricing/" : pricingUrl());
@@ -106,6 +109,7 @@ export default function CTAButtons({
         style={primary}
         onClick={(e) => {
           track(primaryIsDemo ? "demo_click" : "trial_click", source);
+          if (!primaryIsDemo) trackStartTrialClick(source);
           // In-place calendar: open the Meeton widget without leaving the
           // page when it's loaded; otherwise the default href navigation
           // proceeds (SEO / no-JS fallback).

@@ -4,6 +4,7 @@ import GoogleAnalytics from './components/GoogleAnalytics'
 import JsonLd from './components/JsonLd'
 import DocoDocoTracker from './components/DocoDocoTracker'
 import HubSpotTracker from './components/HubSpotTracker'
+import MixpanelTracker from './components/MixpanelTracker'
 import MeetonScript from './components/MeetonScript'
 import GeoLangSuggest from './components/GeoLangSuggest'
 import AttributionBootstrap from './components/AttributionBootstrap'
@@ -218,6 +219,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <GoogleAnalytics />
         <DocoDocoTracker />
         <HubSpotTracker />
+        <MixpanelTracker />
         <JsonLd type="organization" />
         <JsonLd type="website" />
         {children}

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { demoUrl, pricingUrl, trialUrl, openDemoCalendarInPlace } from "@/app/lib/cta-urls";
+import { demoUrl, pricingUrl, openDemoCalendarInPlace } from "@/app/lib/cta-urls";
+import { trackStartTrialClick, useTrialHref } from "@/app/lib/mixpanel";
 
 // Client-side ROI / 商談化の余地 calculator (§2.6). Two-stage model:
 //   ① 獲得の余地  = いま黙って去る訪問者を会話で掴む分
@@ -310,8 +311,10 @@ export default function RoiTool({ lang = "ja" }: { lang?: Lang }) {
 
   // EN self-serve (2026-07-23 拓実指示): trial + pricing only — demo removed.
   // JA (unchanged): primary = demo booking, secondary = pricing.
+  // Hook must run unconditionally; only the EN trial branch uses it.
+  const roiTrialHref = useTrialHref("tools-roi");
   const primaryBtn = en
-    ? { label: s.ctaTrial, href: trialUrl("tools-roi"), kind: "trial" as const, isDemo: false }
+    ? { label: s.ctaTrial, href: roiTrialHref, kind: "trial" as const, isDemo: false }
     : { label: s.ctaDemo, href: withRoiParams(demoUrl("tools-roi"), roiParams), kind: "demo" as const, isDemo: true };
   const secondaryBtn = en
     ? { label: s.ctaPricing, href: "/en/pricing/", kind: "pricing" as const, isDemo: false }
@@ -402,6 +405,7 @@ export default function RoiTool({ lang = "ja" }: { lang?: Lang }) {
                 href={primaryBtn.href}
                 onClick={(e) => {
                   onCta(primaryBtn.kind);
+                  if (primaryBtn.kind === "trial") trackStartTrialClick("tools-roi");
                   if (primaryBtn.isDemo && openDemoCalendarInPlace()) e.preventDefault();
                 }}
                 className="v2-cta-primary"

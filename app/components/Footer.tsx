@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { t, type Lang } from "@/app/lib/i18n";
+import { isSignupHref } from "@/app/lib/signup-url";
+import StartTrialLink from "@/app/components/StartTrialLink";
 
 // ── Meeton ai v2 footer (2026-05-29 rebuild) ────────────────────────
 // §3.8: footer is a navy frame surface. Discover grid feeds sitewide
@@ -315,23 +317,36 @@ export default function Footer({ hideDiscoverGrid = false, lang = "ja" }: Footer
               >
                 {col.heading}
               </div>
-              {col.items.map((it) => (
-                <Link
-                  key={it.href}
-                  href={it.href}
-                  className="v2-ft-link"
-                  style={{
-                    display: "block",
-                    fontSize: isMobile ? 13 : 14,
-                    color: "var(--on-navy-sub)",
-                    textDecoration: "none",
-                    fontWeight: 500,
-                    lineHeight: 2.1,
-                  }}
-                >
-                  {it.label}
-                </Link>
-              ))}
+              {col.items.map((it) => {
+                const linkStyle = {
+                  display: "block",
+                  fontSize: isMobile ? 13 : 14,
+                  color: "var(--on-navy-sub)",
+                  textDecoration: "none",
+                  fontWeight: 500,
+                  lineHeight: 2.1,
+                } as const;
+                // The signup URL is hardcoded in the link arrays above; route it
+                // through StartTrialLink so it carries the visitor's Mixpanel id
+                // into the app's funnel. Matching on the href (rather than
+                // special-casing one item) also catches any future signup URL
+                // dropped into those arrays.
+                return isSignupHref(it.href) ? (
+                  <StartTrialLink
+                    key={it.href}
+                    href={it.href}
+                    source="footer"
+                    className="v2-ft-link"
+                    style={linkStyle}
+                  >
+                    {it.label}
+                  </StartTrialLink>
+                ) : (
+                  <Link key={it.href} href={it.href} className="v2-ft-link" style={linkStyle}>
+                    {it.label}
+                  </Link>
+                );
+              })}
             </div>
           ))}
         </div>

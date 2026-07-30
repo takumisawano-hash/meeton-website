@@ -1,3 +1,7 @@
+'use client'
+
+import { currentLanguage, trackDemoRequested } from './mixpanel'
+
 /**
  * Site-wide CTA handlers that route to the Meeton widget instead of
  * HubSpot iframes.
@@ -71,6 +75,19 @@ export function openMeetonDownloadCenter(): void {
  */
 export function openMeetonCalendar(): void {
   if (typeof window === 'undefined') return
+
+  // `Demo Requested` is emitted here rather than at the ~15 call sites,
+  // because every one of them is a <button> with no href — MixpanelTracker's
+  // delegated listener only sees anchors carrying calendarId, so these would
+  // otherwise be invisible in the funnel. No `source` slot is available
+  // without editing all 15; Mixpanel auto-captures $current_url, which
+  // identifies the page.
+  //
+  // NOTE: the signature must stay zero-arg. Call sites pass this directly as
+  // `onClick={openMeetonCalendar}`, so any parameter would receive a
+  // MouseEvent.
+  trackDemoRequested('widget-button', currentLanguage())
+
   const api = window.Meeton
   if (api?.openCalendar) {
     api.openCalendar({ calendarId: 'takumi-sawano' })

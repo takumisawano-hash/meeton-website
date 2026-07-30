@@ -1,6 +1,7 @@
 import Footer from "@/app/components/Footer";
 import Nav from "@/app/components/Nav";
 import DemoBookingButton from "@/app/components/DemoBookingButton";
+import StartTrialLink from "@/app/components/StartTrialLink";
 import { Integration } from "@/lib/integrations-data";
 import Image from "next/image";
 import Link from "next/link";
@@ -929,9 +930,9 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
               <div className="int-bottom-actions">
                 {/* EN 2026-07-23: self-serve only — trial signup replaces demo */}
                 {lang === "en" ? (
-                  <a
+                  <StartTrialLink
                     className="int-bottom-btn"
-                    href={`https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=integration-${integration.slug}`}
+                    source={`integration-${integration.slug}`}
                   >
                     Start 1-month free trial
                     <svg
@@ -948,7 +949,7 @@ export default function IntegrationDetailLayout({ integration, lang }: Props) {
                       <path d="M5 12h14" />
                       <path d="M13 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </StartTrialLink>
                 ) : (
                 <DemoBookingButton
                   className="int-bottom-btn"
