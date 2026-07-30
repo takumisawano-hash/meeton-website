@@ -29,6 +29,21 @@ npm run dev
 
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認できます。
 
+## 計測（Mixpanel ファネル連結）
+
+マーケサイトとアプリ（app.dynameet.ai）の signup ファネルを1本につなぐ実装。
+ローカルでの検証手順は **[docs/mixpanel-funnel-testing.md](docs/mixpanel-funnel-testing.md)** を参照。
+
+```bash
+# ローカル検証（アプリを :3005 で起動しておく）
+echo 'NEXT_PUBLIC_APP_ORIGIN=http://localhost:3005' >> .env.local
+npm run dev            # マーケサイト :3000 → ブラウザは 127.0.0.1:3000 で開く
+```
+
+- `NEXT_PUBLIC_MIXPANEL_TOKEN` はアプリ本番と**同一プロジェクト**のトークン。別プロジェクトのトークンは無言で失敗する。
+- `NEXT_PUBLIC_APP_ORIGIN` は**ローカル検証専用**。Vercel には絶対に設定しない（本番の signup が飛ぶ）。
+- 設計の経緯は `docs/superpowers/specs/2026-07-30-mixpanel-funnel-handshake-design.md`。
+
 ## Vercelへのデプロイ
 
 ### 方法1: Vercel CLIを使用

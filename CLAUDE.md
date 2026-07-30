@@ -46,6 +46,7 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
 - signup CTA は `distinct_id` を**追記するだけ**。既存の `utm_*` は書き換えない（`utm_content` が nav/home-hero/home-mid/home-footer/home-sticky を区別しており、アプリ側 GA4 がこの値でレポートしている）。ページ側の `utm_*` は混ぜない。
 - href は**クリック時ではなく effect で**書き換える — preventDefault だと cmd+クリックで distinct_id が落ち、gtag の `_gl` クロスドメインリンカーも壊れる。
 - 生 `<a href="…/signup">` を足さない。データ配列に入れる場合は `isSignupHref()` 分岐のある renderer（Footer / PricingContent）を通すこと。
+- **ローカル検証手順は `docs/mixpanel-funnel-testing.md`**（ポート・cookie jar の罠・4つの落とし穴・トークン一致の確認方法）。`NEXT_PUBLIC_APP_ORIGIN` は検証専用で Vercel には設定しない。
 - デモCTAは `a[href*="calendarId="]` の委譲リスナーで捕捉。ただし `openMeetonCalendar()` の呼び出し元は全部 `<button>` で href が無いため、関数側で直接発火している。**同関数は引数ゼロを維持**（`onClick={openMeetonCalendar}` で渡されるので引数を足すと MouseEvent が入る）。
 
 ## その他の罠
