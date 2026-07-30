@@ -125,25 +125,34 @@ Existing GA events on signup CTAs, all preserved:
 | `CTAButtons.tsx:38` | `track()` → gtag, dataLayer fallback |
 | `RoiTool.tsx:197` | `track()` → gtag, dataLayer fallback |
 
-## 5. ⚠️ Open decision: utm_* precedence
+## 5. utm_* precedence — RESOLVED (2026-07-30, 拓実確認)
 
 `trialUrl()` already sets `utm_source=dynameet.ai&utm_medium=website_cta&
 utm_campaign=en_selfserve&utm_content=<source>` on the signup URL. The requirement
 also says to carry over "every `utm_*` from `window.location.search`". When a
 visitor arrives on `/en/?utm_source=google&utm_medium=cpc`, these collide.
 
-**Decision: page `utm_*` win** (`URLSearchParams.set` semantics, matching the
-requirement's own pseudocode). Rationale: the inbound campaign is the true
-acquisition source, which is what the funnel needs to attribute revenue.
+**Decision: the CTA's own `utm_*` win.** Page params only fill in keys the CTA
+does not already set — in practice `utm_term`. Existing behaviour is unchanged.
 
-Section attribution is **not lost** — it moves to Mixpanel's
-`Start Trial Clicked.source` property, which is more reliable than `utm_content`
-anyway.
+Rejected alternative (page params win, per the requirement's `set` pseudocode)
+because of its blast radius on the **app's** GA4:
 
-**Consequence to confirm:** for paid traffic, the *app's* GA4 will now see
-`utm_source=google` instead of `utm_source=dynameet.ai`. The marketing site's own
-GA4 is unaffected either way. Flipping to "CTA defaults win" is a one-line change
-in `buildSignupUrl`.
+- Saved reports, audiences and conversion segments keyed on
+  `utm_source=dynameet.ai` / `utm_medium=website_cta` / `utm_campaign=en_selfserve`
+  would silently stop matching on deploy day.
+- `utm_medium=cpc` would reclassify those sessions from Referral to **Paid
+  Search** in the app property's channel grouping — a step change that breaks
+  before/after comparisons.
+- If the app property is linked to Google Ads, that yields Paid Search sessions
+  with no matching `gclid`, and one ad click counted as paid on both properties.
+
+**Nothing is lost for the funnel.** Mixpanel auto-captures the page's `utm_*`
+onto `Landing Viewed` (verified on the wire: `utm_source: "google"`,
+`utm_medium: "cpc"`), and that event shares a profile with the app's
+`Signup Landed`. Campaign attribution is already in the funnel; this param only
+ever affected the app's GA4. Section attribution additionally rides on
+`Start Trial Clicked.source`.
 
 ## 6. Failure modes
 

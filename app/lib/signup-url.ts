@@ -31,13 +31,22 @@ export function isSignupHref(href: string | undefined | null): boolean {
  * Append the visitor's Mixpanel id, plus any utm_* on the current page, to a
  * signup URL.
  *
- * utm_* precedence: params on the CURRENT PAGE WIN over the defaults baked
- * into trialUrl(). The inbound campaign (e.g. utm_source=google) is the true
- * acquisition source, which is what the funnel needs to attribute revenue.
- * Section attribution ("nav" / "footer" / "pricing-lead") is not lost — it
- * rides on Mixpanel's `Start Trial Clicked.source` property instead, which is
- * more reliable than utm_content. To flip this, swap the `set` below for a
- * `has()` guard.
+ * utm_* precedence: the CTA's OWN utm_* (from trialUrl) WIN. Page params only
+ * fill in keys the CTA does not already set — in practice utm_term.
+ *
+ * This is deliberate and load-bearing for GA (2026-07-30 拓実確認). Letting a
+ * page's utm_source=google&utm_medium=cpc through would rewrite what the APP's
+ * GA4 sees for every paid signup: saved reports and segments keyed on
+ * utm_source=dynameet.ai / utm_medium=website_cta / utm_campaign=en_selfserve
+ * would silently stop matching, and utm_medium=cpc would reclassify those
+ * sessions from Referral to Paid Search in the app property's channel
+ * grouping — a step change on deploy day, plus Paid Search sessions with no
+ * matching gclid if the property is linked to Google Ads.
+ *
+ * Nothing is lost for the funnel: Mixpanel auto-captures the page's utm_* onto
+ * `Landing Viewed`, and that event shares a profile with the app's
+ * `Signup Landed`, so campaign attribution is already there. This param only
+ * ever affected the app's GA4.
  *
  * Only `utm_*` is carried. Click ids (gclid/fbclid/msclkid) are deliberately
  * NOT forwarded — they are already persisted cross-subdomain by
@@ -67,7 +76,10 @@ export function buildSignupUrl(
   try {
     const incoming = new URLSearchParams(currentSearch);
     incoming.forEach((value, key) => {
-      if (key.startsWith("utm_") && value) url.searchParams.set(key, value);
+      if (!key.startsWith("utm_") || !value) return;
+      // The CTA's own utm_* win — see the precedence note above.
+      if (url.searchParams.has(key)) return;
+      url.searchParams.set(key, value);
     });
   } catch {
     /* unparseable search string — keep the CTA's own utm_* */

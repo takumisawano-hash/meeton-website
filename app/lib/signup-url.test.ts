@@ -61,7 +61,7 @@ describe("buildSignupUrl — graceful degradation", () => {
 });
 
 describe("buildSignupUrl — utm_* carry-over", () => {
-  it("carries utm_* from the current page", () => {
+  it("carries a utm_* the CTA does not set (utm_term)", () => {
     const built = buildSignupUrl(BASE, "$device:abc", "?utm_term=ai%20sdr");
     expect(param(built, "utm_term")).toBe("ai sdr");
   });
@@ -71,12 +71,18 @@ describe("buildSignupUrl — utm_* carry-over", () => {
     expect(param(buildSignupUrl(BASE, null, "?utm_term=x"), "utm_term")).toBe("x");
   });
 
-  // Documented precedence decision (spec §5): the inbound campaign is the true
-  // acquisition source and overrides trialUrl()'s baked-in defaults.
-  it("lets page utm_* win over the CTA defaults", () => {
+  // Documented precedence decision (spec §5). Load-bearing for GA: letting a
+  // page's utm_source=google through would rewrite what the APP's GA4 sees for
+  // every paid signup and reclassify those sessions as Paid Search.
+  it("lets the CTA defaults win over page utm_*", () => {
     const built = buildSignupUrl(BASE, null, "?utm_source=google&utm_medium=cpc");
-    expect(param(built, "utm_source")).toBe("google");
-    expect(param(built, "utm_medium")).toBe("cpc");
+    expect(param(built, "utm_source")).toBe("dynameet.ai");
+    expect(param(built, "utm_medium")).toBe("website_cta");
+  });
+
+  it("does not duplicate a utm key the CTA already set", () => {
+    const built = buildSignupUrl(BASE, null, "?utm_source=google");
+    expect(new URL(built).searchParams.getAll("utm_source")).toEqual(["dynameet.ai"]);
   });
 
   it("keeps CTA defaults for utm keys the page does not set", () => {
