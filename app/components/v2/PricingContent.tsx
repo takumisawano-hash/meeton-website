@@ -7,6 +7,8 @@ import { Section, SectionHead, Eyebrow, Card, Check } from "@/app/components/v2/
 import LogoWall from "@/app/components/v2/LogoWall";
 import IntegrationLogos, { pickIntegrations } from "@/app/components/v2/IntegrationLogos";
 import { demoUrl } from "@/app/lib/cta-urls";
+import { isSignupHref } from "@/app/lib/signup-url";
+import StartTrialLink from "@/app/components/StartTrialLink";
 import type { Lang } from "@/app/lib/i18n";
 
 // Lang-aware pricing body. JA is the default → the existing /pricing/ page
@@ -405,6 +407,40 @@ const balanced = (text: string) => <span style={{ display: "block", textWrap: "b
 const th: React.CSSProperties = { textAlign: "left", padding: "14px 16px", fontWeight: 800, color: "var(--heading)", borderBottom: "2px solid var(--border)" };
 const td: React.CSSProperties = { padding: "14px 16px", color: "var(--text)", borderBottom: "1px solid var(--border)", fontSize: 14, lineHeight: 1.7, fontVariantNumeric: "tabular-nums" };
 
+/**
+ * Plan CTA. Signup URLs are hardcoded in the EN strings above, so they are
+ * routed through StartTrialLink to carry the visitor's Mixpanel id into the
+ * app's funnel; every other destination stays a plain server-rendered <a>.
+ * Matching on the href (rather than special-casing a plan) also catches any
+ * future signup URL added to the strings.
+ */
+function PlanCta({
+  href,
+  source,
+  className,
+  style,
+  children,
+}: {
+  href: string;
+  source: string;
+  className?: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+}) {
+  if (isSignupHref(href)) {
+    return (
+      <StartTrialLink href={href} source={source} className={className} style={style}>
+        {children}
+      </StartTrialLink>
+    );
+  }
+  return (
+    <a href={href} className={className} style={style}>
+      {children}
+    </a>
+  );
+}
+
 export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
   const s = PRICING_STR[lang];
   const casesHref = lang === "en" ? "/en/cases/" : "/cases/";
@@ -461,9 +497,9 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
               <p style={{ fontSize: 12.5, lineHeight: 1.7, color: "var(--sub)", margin: "0 0 14px" }}>{s.basePlan.fit}</p>
             )}
             <div style={{ background: "var(--cta-wash)", border: "1px solid var(--cta-border)", borderRadius: 10, padding: "10px 14px", textAlign: "center", fontSize: 13, fontWeight: 800, color: "var(--cta-ink)" }}>{s.basePlan.pill}</div>
-            <a href={s.basePlan.ctaHref ?? demoUrl("pricing-lead")} className="v2-cta-primary" style={{ marginTop: 16, textAlign: "center", padding: "13px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", background: "var(--cta)", color: "var(--on-cta)", display: "block", boxShadow: "0 6px 22px var(--cta-glow)" }}>
+            <PlanCta href={s.basePlan.ctaHref ?? demoUrl("pricing-lead")} source="pricing-lead" className="v2-cta-primary" style={{ marginTop: 16, textAlign: "center", padding: "13px 20px", borderRadius: 12, fontSize: 15, fontWeight: 800, textDecoration: "none", background: "var(--cta)", color: "var(--on-cta)", display: "block", boxShadow: "0 6px 22px var(--cta-glow)" }}>
               {s.basePlan.ctaLabel}
-            </a>
+            </PlanCta>
           </div>
 
           {/* plus */}
@@ -509,9 +545,9 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
                 {c.fit && (
                   <p style={{ fontSize: 12.5, lineHeight: 1.7, color: "var(--on-navy-sub)", margin: "0 0 12px" }}>{c.fit}</p>
                 )}
-                <a href={c.ctaHref ?? demoUrl(i === 0 ? "pricing-convert" : "pricing-allinone")} className={i === 0 ? "v2-cta-primary" : "v2-cta-ghost"} style={i === 0 ? { display: "inline-block", fontSize: 14, fontWeight: 800, color: "var(--on-cta)", textDecoration: "none", background: "var(--cta)", borderRadius: 10, padding: "10px 20px", boxShadow: "0 6px 22px var(--cta-glow)" } : { display: "inline-block", fontSize: 14, fontWeight: 800, color: "var(--on-navy)", textDecoration: "none", border: "1.5px solid var(--on-navy-border)", borderRadius: 10, padding: "10px 20px" }}>
+                <PlanCta href={c.ctaHref ?? demoUrl(i === 0 ? "pricing-convert" : "pricing-allinone")} source={i === 0 ? "pricing-convert" : "pricing-allinone"} className={i === 0 ? "v2-cta-primary" : "v2-cta-ghost"} style={i === 0 ? { display: "inline-block", fontSize: 14, fontWeight: 800, color: "var(--on-cta)", textDecoration: "none", background: "var(--cta)", borderRadius: 10, padding: "10px 20px", boxShadow: "0 6px 22px var(--cta-glow)" } : { display: "inline-block", fontSize: 14, fontWeight: 800, color: "var(--on-navy)", textDecoration: "none", border: "1.5px solid var(--on-navy-border)", borderRadius: 10, padding: "10px 20px" }}>
                   {c.ctaLabel}
-                </a>
+                </PlanCta>
               </div>
             ))}
           </div>
@@ -541,9 +577,9 @@ export default function PricingContent({ lang = "ja" }: { lang?: Lang }) {
               <span style={{ fontFamily: "var(--fd)", fontSize: 15, fontWeight: 800, color: "var(--heading)" }}>{s.enterprise.price}</span>
               <p style={{ fontSize: 13.5, lineHeight: 1.7, color: "var(--text)", margin: "6px 0 0" }}>{s.enterprise.desc}</p>
             </div>
-            <a href={s.enterprise.ctaHref} className="v2-cta-ghost" style={{ padding: "11px 22px", borderRadius: 12, fontSize: 14, fontWeight: 800, textDecoration: "none", color: "var(--heading)", border: "1.5px solid var(--border2)", whiteSpace: "nowrap" }}>
+            <PlanCta href={s.enterprise.ctaHref} source="pricing-enterprise" className="v2-cta-ghost" style={{ padding: "11px 22px", borderRadius: 12, fontSize: 14, fontWeight: 800, textDecoration: "none", color: "var(--heading)", border: "1.5px solid var(--border2)", whiteSpace: "nowrap" }}>
               {s.enterprise.ctaLabel}
-            </a>
+            </PlanCta>
           </div>
         )}
         <p style={{ textAlign: "center", marginTop: 18, fontSize: 13, color: "var(--sub)" }}>

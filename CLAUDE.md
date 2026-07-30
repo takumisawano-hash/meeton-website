@@ -36,6 +36,13 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
 - **policies = product commitments**: 実装済みの挙動しか書かない。marketing consent field は assistive（送信ゲートなし — 「同意なしをブロック」と書かない）、support access はオプトアウトが現状（"only with your permission"/"off by default" と書かない）。
 - trust ページは**存在しない**（/security/ の「Data residency & documents」節に統合済み。再作成しない）。単一ソース: 所在地・全処理国内の事実=security ページ／コミット数値=DPA／ベンダー一覧=sub-processors ページ。
 
+## 計測（Mixpanel ファネル連結）
+- マーケサイトと app.dynameet.ai は**同一 Mixpanel プロジェクト**に送る。別プロジェクトのトークンは**無言で失敗**する（Mixpanel は有効なトークンなら成功を返すのでイベントは受理され、見ているプロジェクトに永遠に現れない）。`NEXT_PUBLIC_MIXPANEL_TOKEN` 未設定なら init も送信もしない。
+- イベントは2つだけ: `Landing Viewed`（/en/* のみ・フルロード毎に1回）と `Start Trial Clicked`（`source` のみ）。**個人情報は絶対に載せない**（autocapture / session replay は明示的に無効）。
+- init は JA 含む全ページ（JA→EN 切替で distinct_id を維持するため）。イベントだけ /en/* 限定。`startsWith("/en")` は **`/enterprise/` に誤マッチする** → `/en/` か完全一致で判定。
+- Start Trial CTA は `StartTrialLink` / `useTrialHref` 経由（app/lib/mixpanel.ts）。href は**クリック時ではなく effect で**書き換える — preventDefault だと cmd+クリックで distinct_id が落ち、gtag の `_gl` クロスドメインリンカーも壊れる。
+- 生 `<a href="…/signup">` を足さない。データ配列に入れる場合は `isSignupHref()` 分岐のある renderer（Footer / PricingContent）を通すこと。
+
 ## その他の罠
 - Next16 `revalidateTag(tag, 'max')` 第2引数必須。blog更新は `&tag=notion` 付き revalidate。
 - 事例詳細リンクは `/cases/<slug>/`（`/case-studies/` は hub へ308され詳細に届かない）。

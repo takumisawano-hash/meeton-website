@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { STAGES, PRODUCT_IN_STAGE } from "@/app/lib/stages";
-import { openDemoCalendarInPlace, trialUrl } from "@/app/lib/cta-urls";
+import { openDemoCalendarInPlace } from "@/app/lib/cta-urls";
+import { trackStartTrialClick, useTrialHref } from "@/app/lib/mixpanel";
 import { t, enTwinFor, jaTwinFor, type Lang } from "@/app/lib/i18n";
 
 // Persist a manual language choice so the geo middleware (middleware.ts) stops
@@ -180,7 +181,8 @@ export default function Nav({
   // EN self-serve pivot (2026-07-02): on EN pages the primary nav CTA is the
   // 1-month free-trial request; demo booking becomes the ghost CTA. JA keeps
   // the original See-pricing / Book-demo pair.
-  const navTrialUrl = trialUrl("nav");
+  // Carries the visitor's Mixpanel id so the signup funnel stays continuous.
+  const navTrialUrl = useTrialHref("nav");
 
   // which dropdown is open (desktop): 'product' | 'usage' | 'resources' | null
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -305,7 +307,7 @@ export default function Nav({
             href={lang === "en" ? navTrialUrl : DEMO_URL}
             className="v2-cta-primary"
             style={primaryBtn(isMobile)}
-            onClick={lang === "en" ? undefined : onDemoClick}
+            onClick={lang === "en" ? () => trackStartTrialClick("nav") : onDemoClick}
           >
             {lang === "en" ? chrome.ctaStartTrial : chrome.ctaBookDemo}
           </a>
@@ -501,7 +503,7 @@ export default function Nav({
                   <a href="/en/pricing/" className="v2-cta-ghost" style={ghostBtn(false)}>
                     {chrome.ctaSeePricing}
                   </a>
-                  <a href={navTrialUrl} className="v2-cta-primary" style={primaryBtn(false)}>
+                  <a href={navTrialUrl} className="v2-cta-primary" style={primaryBtn(false)} onClick={() => trackStartTrialClick("nav")}>
                     {chrome.ctaStartTrial}
                   </a>
                 </>
@@ -584,7 +586,7 @@ export default function Nav({
             <a
               href={en ? navTrialUrl : DEMO_URL}
               className="v2-cta-primary"
-              onClick={en ? undefined : onDemoClick}
+              onClick={en ? () => trackStartTrialClick("nav") : onDemoClick}
               style={{ ...primaryBtn(true), padding: "9px 14px", fontSize: 13 }}
             >
               {en ? chrome.ctaStartTrial : chrome.ctaBookDemo}
@@ -706,7 +708,7 @@ export default function Nav({
                   <a href="/en/pricing/" className="v2-cta-ghost" onClick={() => setMobileOpen(false)} style={{ ...ghostBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
                     {chrome.ctaSeePricing}
                   </a>
-                  <a href={navTrialUrl} className="v2-cta-primary" onClick={() => setMobileOpen(false)} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
+                  <a href={navTrialUrl} className="v2-cta-primary" onClick={() => { trackStartTrialClick("nav"); setMobileOpen(false); }} style={{ ...primaryBtn(false), width: "100%", textAlign: "center", boxSizing: "border-box" }}>
                     {chrome.ctaStartTrial}
                   </a>
                 </>

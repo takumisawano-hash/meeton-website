@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import FAQJsonLd from '../components/FAQJsonLd'
 import DemoBookingButton from '../components/DemoBookingButton'
 import DocRequestButton from '../components/DocRequestButton'
+import StartTrialLink from '../components/StartTrialLink'
 import type { Lang } from '../lib/i18n'
 
 // Section chrome strings (eyebrows + fixed headings + CTA defaults). JA is the
@@ -158,12 +159,9 @@ function useAttribution() {
 
 function TrialLink({ className, campaign, children }: { className: string; campaign: string; children: React.ReactNode }) {
   return (
-    <a
-      className={className}
-      href={`https://app.dynameet.ai/signup?utm_source=dynameet.ai&utm_medium=website_cta&utm_campaign=en_selfserve&utm_content=${campaign}`}
-    >
+    <StartTrialLink className={className} source={campaign}>
       {children}
-    </a>
+    </StartTrialLink>
   )
 }
 
