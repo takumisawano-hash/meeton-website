@@ -271,7 +271,7 @@ export default function AiChatPageClient() {
             <p className="anim-y d3 hero-sub">Meeton Live は、匿名訪問者の初回質問から、CRM で識別済みの再訪リードまで、文脈に応じて AI SDR が対話する機能です。閲覧ページ・資料 DL・メール反応・CRM 履歴をもとに、質問への回答、資料提案、ヒアリング、商談予約まで自然につなぎます。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
-              <button className="btn-ghost" onClick={openMeetonCalendar}>
+              <button className="btn-ghost" onClick={() => openMeetonCalendar("chat-hero")}>
                 デモを予約
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -610,7 +610,7 @@ export default function AiChatPageClient() {
         heading="識別済みリードへの AI SDR 対話と CRM 文脈の引き継ぎ精度を、御社の業界に合わせたデモで 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={openMeetonCalendar}
+        onClick={() => openMeetonCalendar("chat-mid")}
       />
 
       {/* WHY */}
@@ -682,7 +682,7 @@ export default function AiChatPageClient() {
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>CRM 連携で識別済みリードに集中。AI SDR が全文脈を引き継いで対話し、商談予約まで完結します。</p>
           <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
-            <button className="btn-ghost" onClick={openMeetonCalendar}>
+            <button className="btn-ghost" onClick={() => openMeetonCalendar("chat-final")}>
               デモを予約
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

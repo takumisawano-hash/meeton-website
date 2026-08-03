@@ -1163,7 +1163,11 @@ export default function HomePageClient({
       });
       window.lintrk?.("track", { conversion_id: 25161212 });
     }
-    openMeetonCalendar();
+    // `location` is nav / hero / final_cta / diagnose / sticky. Prefixed so
+    // `hero` on the homepage is distinguishable from `hero` on /chat/, and
+    // normalised to kebab-case. The gtag literals above keep their original
+    // values — LP reporting already depends on them.
+    openMeetonCalendar(`home-${location.replace(/_/g, "-")}`);
   };
 
   const openDocModal = (location: string) => {
@@ -2327,7 +2331,7 @@ export default function HomePageClient({
           onSecondary={() => openDocModal("sticky")}
         />
       )}
-      {!isLp && <MobileStickyCta onClick={openMeetonCalendar} />}
+      {!isLp && <MobileStickyCta onClick={() => openMeetonCalendar("home-sticky")} />}
 
       <HubSpotModal
         isOpen={isDocModalOpen}

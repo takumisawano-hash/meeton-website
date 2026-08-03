@@ -1,5 +1,6 @@
 'use client'
 
+import { demoSourceFromArg } from './analytics-context'
 import { currentLanguage, trackDemoRequested } from './mixpanel'
 
 /**
@@ -73,20 +74,25 @@ export function openMeetonDownloadCenter(): void {
  * the widget on load. We try the in-place API first so users already
  * on the homepage skip the page reload.
  */
-export function openMeetonCalendar(): void {
+export function openMeetonCalendar(source?: unknown): void {
   if (typeof window === 'undefined') return
 
-  // `Demo Requested` is emitted here rather than at the ~15 call sites,
+  // `Demo Requested` is emitted here rather than at the ~19 call sites,
   // because every one of them is a <button> with no href — MixpanelTracker's
   // delegated listener only sees anchors carrying calendarId, so these would
-  // otherwise be invisible in the funnel. No `source` slot is available
-  // without editing all 15; Mixpanel auto-captures $current_url, which
-  // identifies the page.
+  // otherwise be invisible in the funnel.
   //
-  // NOTE: the signature must stay zero-arg. Call sites pass this directly as
-  // `onClick={openMeetonCalendar}`, so any parameter would receive a
-  // MouseEvent.
-  trackDemoRequested('widget-button', currentLanguage())
+  // `source` is OPTIONAL and typed `unknown` on purpose. Call sites may still
+  // pass this function directly as `onClick={openMeetonCalendar}`, in which
+  // case React hands it a MouseEvent — demoSourceFromArg discards anything
+  // that is not a non-empty string and falls back to 'widget-button'. That
+  // guard is load-bearing: without it the funnel fills with
+  // `source: "[object Object]"`. Do not "tidy" it into `source?: string`,
+  // which would compile while still receiving events at runtime.
+  //
+  // The same source is stashed for `Demo Booked` (inside trackDemoRequested),
+  // so naming a CTA here makes it sliceable at BOTH ends of the funnel.
+  trackDemoRequested(demoSourceFromArg(source), currentLanguage())
 
   const api = window.Meeton
   if (api?.openCalendar) {

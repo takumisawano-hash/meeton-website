@@ -87,6 +87,25 @@ export function demoSourceFromHref(href: string): string {
   }
 }
 
+/** Where a demo CTA that did not name itself is filed. */
+export const DEFAULT_DEMO_SOURCE = "widget-button";
+
+/**
+ * The `source` a `<button>` demo CTA is reporting.
+ *
+ * `openMeetonCalendar` takes its source as an optional argument, and many call
+ * sites still pass the function itself: `onClick={openMeetonCalendar}`. React
+ * then hands it a **MouseEvent**, which without this guard would be stringified
+ * into the funnel as `source: "[object Object]"`.
+ *
+ * That hazard is why the function was pinned zero-arg. The guard removes the
+ * cause rather than the symptom, so named CTAs can opt in one at a time while
+ * every un-migrated site keeps reporting the old default.
+ */
+export function demoSourceFromArg(arg: unknown): string {
+  return typeof arg === "string" && arg.length > 0 ? arg : DEFAULT_DEMO_SOURCE;
+}
+
 /* ── `Demo Booked` — the booking widget's completion signal ──────────────
  * Spec: docs/superpowers/specs/2026-08-03-demo-booked-event-design.md
  */
