@@ -2,13 +2,28 @@
 
 import { useEffect } from "react";
 
-import { demoSourceFromHref, detectLanguage, shouldTrackLandingView } from "@/app/lib/analytics-context";
-import { ensureMixpanel, trackDemoRequested, trackLandingViewed } from "@/app/lib/mixpanel";
+import {
+  demoSourceFromHref,
+  detectLanguage,
+  isMeetingBookedMessage,
+  readLandingPath,
+  recallDemoContext,
+  resolveBookedContext,
+  shouldTrackLandingView,
+} from "@/app/lib/analytics-context";
+import {
+  ensureMixpanel,
+  safeSessionStorage,
+  trackDemoBooked,
+  trackDemoRequested,
+  trackLandingViewed,
+} from "@/app/lib/mixpanel";
 
 /**
- * MixpanelTracker — emits `Landing Viewed` and `Demo Requested`.
+ * MixpanelTracker — emits `Landing Viewed`, `Demo Requested` and `Demo Booked`.
  * Mounted in app/layout.tsx so it runs on every route, both languages.
- * Spec: docs/superpowers/specs/2026-07-30-mixpanel-funnel-handshake-design.md
+ * Specs: docs/superpowers/specs/2026-07-30-mixpanel-funnel-handshake-design.md
+ *        docs/superpowers/specs/2026-08-03-demo-booked-event-design.md
  *
  * `Landing Viewed` fires for BOTH languages, each tagged with `language`, so
  * the English self-serve funnel and the Japanese partner-led funnel can each
@@ -48,20 +63,44 @@ export default function MixpanelTracker() {
     };
     document.addEventListener("click", onDocumentClick, true);
 
+    // `Demo Booked` — the widget iframe posts { type: "meetingBooked", data: {} }
+    // to its parent on a completed booking. One listener covers every entry
+    // point (calendar popup, Download Center, marketing-offer popups) because
+    // they all share this channel.
+    //
+    // No capture phase: unlike the click listener there is nothing to observe
+    // ahead of. meeton.js runs its own listener on the same message to fire
+    // Google Ads / Meta / LinkedIn conversions, but never re-posts it, so this
+    // sees each booking exactly once.
+    const onMessage = (event: MessageEvent) => {
+      if (!isMeetingBookedMessage(event.origin, event.data)) return;
+      const { language: bookedLanguage, source } = resolveBookedContext(
+        recallDemoContext(safeSessionStorage()),
+        window.location.pathname,
+        window.location.search,
+      );
+      trackDemoBooked(bookedLanguage, source, readLandingPath(window.__meetonAttribution));
+    };
+    window.addEventListener("message", onMessage);
+
     // Claim the landing only once the SDK is actually available. Claiming
     // before the await would burn the once-per-tab claim on a load that failed,
     // losing the visitor's landing entirely.
     let cancelled = false;
     void ensureMixpanel().then((mp) => {
       if (cancelled || !mp) return;
-      if (shouldTrackLandingView(window.location.search, window.sessionStorage)) {
+      if (shouldTrackLandingView(window.location.search, safeSessionStorage())) {
         trackLandingViewed(language);
       }
     });
 
+    // Removing the same function references the effect added is what makes
+    // StrictMode's dev double-invoke safe: mount → unmount → mount leaves
+    // exactly one of each listener, not two.
     return () => {
       cancelled = true;
       document.removeEventListener("click", onDocumentClick, true);
+      window.removeEventListener("message", onMessage);
     };
   }, []);
 

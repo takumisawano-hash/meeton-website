@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { detectLanguage, type Language } from "./analytics-context";
+import {
+  detectLanguage,
+  rememberDemoContext,
+  type Language,
+} from "./analytics-context";
 import { trialUrl } from "./cta-urls";
 import { buildSignupUrl } from "./signup-url";
 
@@ -55,6 +59,29 @@ const APP_ORIGIN_OVERRIDE = process.env.NEXT_PUBLIC_APP_ORIGIN;
  * consider the other.
  */
 const SYNTHETIC_UA_RE = /\b(Lighthouse|Chrome-Lighthouse|HeadlessChrome|PageSpeed|GTmetrix)\b/i;
+
+/**
+ * `window.sessionStorage`, or undefined when it is unreachable.
+ *
+ * The GETTER ITSELF throws — not just the read/write — when a browser is set
+ * to block all storage for the site (Chrome "Block all cookies", Firefox
+ * `dom.storage.enabled=false`, a sandboxed frame). A try/catch inside the
+ * consuming helper is too late: the throw happens at the property access in
+ * the caller.
+ *
+ * That matters here because trackDemoRequested runs SYNCHRONOUSLY inside
+ * openMeetonCalendar() before the widget is opened, so an uncaught throw would
+ * take out every <button> demo CTA on the JA site. Analytics must never break
+ * a CTA.
+ */
+export function safeSessionStorage(): Storage | undefined {
+  if (typeof window === "undefined") return undefined;
+  try {
+    return window.sessionStorage;
+  } catch {
+    return undefined;
+  }
+}
 
 function isSyntheticClient(): boolean {
   if (typeof navigator === "undefined") return false;
@@ -163,9 +190,39 @@ export function trackStartTrialClick(source: string): void {
   trackEvent("Start Trial Clicked", { source, language: "en" });
 }
 
-/** `Demo Requested` — the demo booking CTA, on both languages. */
+/**
+ * `Demo Requested` — the demo booking CTA, on both languages.
+ *
+ * Also stashes `source`/`language` for `Demo Booked`, which the widget's
+ * postMessage cannot supply. The write lives HERE rather than at the call
+ * sites because this function is already the funnel-wide chokepoint — both
+ * MixpanelTracker's delegated anchor listener and openMeetonCalendar() route
+ * through it — so the stash cannot drift out of sync with the event it
+ * describes, and any future demo CTA inherits it for free.
+ */
 export function trackDemoRequested(source: string, language: Language): void {
   trackEvent("Demo Requested", { source, language });
+  rememberDemoContext(safeSessionStorage(), { source, language });
+}
+
+/**
+ * `Demo Booked` — a booking completed inside the widget. The bottom of the
+ * acquisition funnel: Landing Viewed → Demo Requested → Demo Booked.
+ *
+ * `source` and `landing_path` are omitted when unknown — a booking opened
+ * straight from the chat widget has no preceding CTA click, and `/lp*` routes
+ * never populate DynaMeetConfig. `language` is always present so the JA and
+ * EN funnels stay readable on their own.
+ */
+export function trackDemoBooked(
+  language: Language,
+  source?: string,
+  landingPath?: string,
+): void {
+  const props: Record<string, unknown> = { language };
+  if (source) props.source = source;
+  if (landingPath) props.landing_path = landingPath;
+  trackEvent("Demo Booked", props);
 }
 
 /**
