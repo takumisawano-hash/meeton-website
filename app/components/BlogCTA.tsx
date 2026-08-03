@@ -167,7 +167,7 @@ export default function BlogCTA({ category, slug }: BlogCTAProps = {}) {
               {copy.primary}
             </button>
             <button
-              onClick={openMeetonCalendar}
+              onClick={() => openMeetonCalendar("blog-cta")}
               style={{
                 background: 'transparent',
                 color: '#0f1128',

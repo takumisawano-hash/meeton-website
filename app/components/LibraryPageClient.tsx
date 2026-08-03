@@ -268,7 +268,7 @@ export default function LibraryPageClient() {
             <h1 className="anim-y d2">資料を、<br /><em>AI が商談につながる会話に変える</em></h1>
             <p className="anim-y d3 hero-sub">Meeton Library は、PDF やスライドをアップロードするだけで、AI チャット付きの資料ライブラリーを自動生成。訪問者の関心や CRM 履歴に応じて最適な資料を提案し、AI が読むべき箇所を案内します。初回訪問者のリード化から、既存リードの検討再開、稟議準備の支援まで対応。</p>
             <div className="anim d4 hero-ctas">
-              <button className="btn btn-cta btn-cta-lg" onClick={openMeetonCalendar}>デモを予約</button>
+              <button className="btn btn-cta btn-cta-lg" onClick={() => openMeetonCalendar("library-hero")}>デモを予約</button>
               <button className="btn-ghost" onClick={openMeetonDownloadCenter}>
                 資料請求
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -637,7 +637,7 @@ export default function LibraryPageClient() {
         heading="既存リードへの AI 資料推薦と検討再開検知の精度を、御社の業界に合わせたデモで 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={openMeetonCalendar}
+        onClick={() => openMeetonCalendar("library-mid")}
       />
 
       {/* WHY */}
@@ -704,7 +704,7 @@ export default function LibraryPageClient() {
           <div className="stitle" style={{ textAlign: 'center' }}>Meeton Library で、<br /><em>既存リードの商談機会を再発火</em></div>
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>AI が行動履歴から最適資料を推薦・解説。検討再開を捉えて Meeton Calendar に引き渡し、商談機会を再点火させます。</p>
           <div className="final-cta-ctas">
-            <button className="btn btn-cta btn-cta-lg" onClick={openMeetonCalendar}>デモを予約</button>
+            <button className="btn btn-cta btn-cta-lg" onClick={() => openMeetonCalendar("library-final")}>デモを予約</button>
             <button className="btn-ghost" onClick={openMeetonDownloadCenter}>
               資料請求
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>

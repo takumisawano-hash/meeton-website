@@ -77,12 +77,18 @@ Mixpanel dev project → **Events**. To filter to yourself: right-click any
 | Click "Start free trial" | `Start Trial Clicked`, `language: "en"`, `source` |
 | New tab → `/` | `Landing Viewed`, `language: "ja"` |
 | Click "デモを予約" in the nav | `Demo Requested`, `language: "ja"` |
-| New tab → `/library/`, click "デモを予約" | `Demo Requested`, `source: "widget-button"` |
+| New tab → `/library/`, click "デモを予約" (hero) | `Demo Requested`, `source: "library-hero"` |
 
 The last row exercises a different code path: those CTAs are `<button>`s with
 no href, so they are invisible to the delegated anchor listener and are
 instrumented inside `openMeetonCalendar()` (`app/lib/meeton-cta.ts`). Test it
 separately from the anchor CTAs.
+
+Each button names its own slot — `home-hero`, `chat-mid`, `library-final`, … —
+and anything that fails to (or that React hands a MouseEvent) falls back to
+`widget-button`. **Seeing `widget-button` in a fresh event means a call site
+was missed; seeing `[object Object]` means the `demoSourceFromArg` guard was
+removed.** Both are regressions, not noise.
 
 ## Test 2 — the double-count guards
 
@@ -212,7 +218,7 @@ location.reload();
 |---|---|
 | Reset → `/`, no CTA clicked | `Demo Booked`, `language: "ja"`, `landing_path: "/"`, **no** `source` |
 | Reset → `/`, click "デモを予約" in the nav first | `Demo Booked` with `source: "nav"` |
-| Reset → `/library/`, click "デモを予約" first | `source: "widget-button"` — the `<button>` path through `openMeetonCalendar()` |
+| Reset → `/library/`, click "デモを予約" first | `source: "library-hero"` — the `<button>` path through `openMeetonCalendar()` |
 | Reset → `/en/` (set `pref_lang` first, see §3) | `language: "en"`, `landing_path: "/en/"`, **no** `source` — the chat-initiated booking path |
 | Seed the stash (below), fire from `/en/` | `source: "nav"` but `language: "en"` — the **pathname** wins off the widget URL |
 | Seed the stash, fire from `/?calendarId=takumi-sawano` | `language: "ja"` — the stash wins **only** here |

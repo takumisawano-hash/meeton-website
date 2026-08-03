@@ -52,7 +52,9 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
 - href は**クリック時ではなく effect で**書き換える — preventDefault だと cmd+クリックで distinct_id が落ち、gtag の `_gl` クロスドメインリンカーも壊れる。
 - 生 `<a href="…/signup">` を足さない。データ配列に入れる場合は `isSignupHref()` 分岐のある renderer（Footer / PricingContent）を通すこと。
 - **ローカル検証手順は `docs/mixpanel-funnel-testing.md`**（ポート・cookie jar の罠・4つの落とし穴・トークン一致の確認方法）。`NEXT_PUBLIC_APP_ORIGIN` は検証専用で Vercel には設定しない。
-- デモCTAは `a[href*="calendarId="]` の委譲リスナーで捕捉。ただし `openMeetonCalendar()` の呼び出し元は全部 `<button>` で href が無いため、関数側で直接発火している。**同関数は引数ゼロを維持**（`onClick={openMeetonCalendar}` で渡されるので引数を足すと MouseEvent が入る）。
+- デモCTAは `a[href*="calendarId="]` の委譲リスナーで捕捉。ただし `openMeetonCalendar()` の呼び出し元は全部 `<button>` で href が無いため、関数側で直接発火している。
+- `openMeetonCalendar(source?: unknown)` の **`unknown` と `demoSourceFromArg()` ガードは必須**。`onClick={openMeetonCalendar}` と書かれると React が MouseEvent を渡すので、非空文字列以外は `widget-button` に落とす。`source?: string` に「整理」しない — 型は通るが実行時に event が入り、`source: "[object Object]"` がファネルに溜まる。
+- ボタン側 source は `home-*` / `chat-*` / `email-*` / `calendar-*` / `library-*` / `blog-cta`（各ページ hero/mid/final）。同じ値が `Demo Requested` と `Demo Booked` の両方に載る（stash 経由）。新しいデモボタンを足すときは必ず名前を渡すこと。
 
 ## その他の罠
 - Next16 `revalidateTag(tag, 'max')` 第2引数必須。blog更新は `&tag=notion` 付き revalidate。

@@ -288,7 +288,7 @@ export default function MeetingsPageClient() {
             <p className="anim-y d3 hero-sub">Meeton Calendar は、AI SDR が「温度が高まった瞬間」を判断して商談予約 UI を提示する出口機能。フォーム送信・資料 DL・会話文脈・再訪などのシグナルに応じて、適切な担当者の空き枠を即時提示し、商談予約まで自動化します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
-              <button className="btn-ghost" onClick={openMeetonCalendar}>
+              <button className="btn-ghost" onClick={() => openMeetonCalendar("calendar-hero")}>
                 デモを予約
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -630,7 +630,7 @@ export default function MeetingsPageClient() {
         heading="リードコンバート瞬間の即時発動・割り振りルール・Meeton Email 連携を、実機で 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={openMeetonCalendar}
+        onClick={() => openMeetonCalendar("calendar-mid")}
       />
 
       {/* WHY */}
@@ -698,7 +698,7 @@ export default function MeetingsPageClient() {
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>業界42時間の Speed to Lead を 即時に。リードコンバート瞬間に発動し、コンバージョン直前の最後の100mを担います。</p>
           <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
-            <button className="btn-ghost" onClick={openMeetonCalendar}>
+            <button className="btn-ghost" onClick={() => openMeetonCalendar("calendar-final")}>
               デモを予約
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

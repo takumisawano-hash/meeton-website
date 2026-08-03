@@ -288,7 +288,7 @@ export default function AiEmailPageClient() {
             <p className="anim-y d3 hero-sub">Meeton Email は、Meeton Calendar で予約に至らなかったリードを 1:1 で追跡するだけではありません。CRM に眠る過去 MQL・失注リード・休眠 contact の再検討シグナル（サイト再訪、料金閲覧、メール再開封等）を Meeton Email が検知し、AI が文脈に沿って再アプローチ。商談予約をゴールに、Web 接点と CRM データの両方から商談機会を生み出します。</p>
             <div className="anim d4 hero-ctas">
               <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
-              <button className="btn-ghost" onClick={openMeetonCalendar}>
+              <button className="btn-ghost" onClick={() => openMeetonCalendar("email-hero")}>
                 デモを予約
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </button>
@@ -660,7 +660,7 @@ export default function AiEmailPageClient() {
         heading="MA メールとの違い・AI が文脈で動的判断する流れ・承認モードの操作感を、実機で 30 分で体験"
         ctaLabel="デモを予約する"
         variant="demo"
-        onClick={openMeetonCalendar}
+        onClick={() => openMeetonCalendar("email-mid")}
       />
 
       {/* WHY */}
@@ -726,7 +726,7 @@ export default function AiEmailPageClient() {
           <p className="ssub" style={{ textAlign: 'center', margin: '16px auto 36px' }}>Meeton Calendar で即時予約しなかったリードを、AI が文脈で動的判断しながら 1:1 で追跡。商談予約獲得を一本のゴールに据えた AI SDR エージェントです。</p>
           <div className="final-cta-ctas">
             <button className="btn btn-cta btn-cta-lg" onClick={openMeetonDownloadCenter}>資料請求</button>
-            <button className="btn-ghost" onClick={openMeetonCalendar}>
+            <button className="btn-ghost" onClick={() => openMeetonCalendar("email-final")}>
               デモを予約
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </button>

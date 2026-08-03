@@ -4,6 +4,8 @@ import {
   claimLandingView,
   DEMO_CONTEXT_KEY,
   DEMO_CONTEXT_TTL_MS,
+  DEFAULT_DEMO_SOURCE,
+  demoSourceFromArg,
   demoSourceFromHref,
   detectLanguage,
   isBookingWidgetUrl,
@@ -302,5 +304,29 @@ describe("resolveBookedContext", () => {
 
   it("does not misfile /enterprise/ as English", () => {
     expect(resolveBookedContext(null, "/enterprise/", "").language).toBe("ja");
+  });
+});
+
+describe("demoSourceFromArg", () => {
+  it("keeps a named source", () => {
+    expect(demoSourceFromArg("home-hero")).toBe("home-hero");
+    expect(demoSourceFromArg("chat-final")).toBe("chat-final");
+  });
+
+  // The whole reason this guard exists: `onClick={openMeetonCalendar}` hands
+  // the function a MouseEvent, which would otherwise reach Mixpanel as
+  // "[object Object]" and poison the source breakdown.
+  it("falls back when React passes an event instead of a source", () => {
+    const mouseEventish = { type: "click", bubbles: true, target: {} };
+    expect(demoSourceFromArg(mouseEventish)).toBe(DEFAULT_DEMO_SOURCE);
+  });
+
+  it.each([undefined, null, "", 0, 42, true, [], () => {}])(
+    "falls back for %s",
+    (arg) => expect(demoSourceFromArg(arg)).toBe(DEFAULT_DEMO_SOURCE),
+  );
+
+  it("keeps the historical default value", () => {
+    expect(DEFAULT_DEMO_SOURCE).toBe("widget-button");
   });
 });
