@@ -1,6 +1,5 @@
 "use client";
 
-import mixpanel from "mixpanel-browser";
 import { useEffect, useState } from "react";
 
 import { detectLanguage, type Language } from "./analytics-context";
@@ -24,6 +23,18 @@ import { buildSignupUrl } from "./signup-url";
  * name, no form contents. Mixpanel auto-captures utm_*, referrer and geo,
  * which is enough. Autocapture and session recording are explicitly disabled
  * below so a future SDK default cannot start hoovering up form fields.
+ *
+ * The SDK is loaded via DYNAMIC import (2026-08-03). Statically imported it was
+ * ~103KB of the 312KB of JavaScript on /en/ — a third of the page's JS for
+ * three events, on a site whose Core Web Vitals feed its SEO. Dynamic import
+ * keeps it out of the initial bundle so the browser paints without parsing it.
+ *
+ * It is still fetched immediately on mount, NOT on idle. That matters: every
+ * emitter here is fire-and-forget, so an event raised before the module lands
+ * is queued against the load promise rather than sent. Deferring the fetch
+ * would widen the window in which a fast click navigates away before the SDK
+ * exists and the event is lost outright. Loading eagerly-but-off-critical-path
+ * keeps that window to the network round trip.
  */
 
 const TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
@@ -51,61 +62,78 @@ function isSyntheticClient(): boolean {
   return SYNTHETIC_UA_RE.test(navigator.userAgent);
 }
 
-type InitState = "pending" | "ready" | "disabled";
-let initState: InitState = "pending";
+type Mixpanel = typeof import("mixpanel-browser").default;
+
+/** Resolved SDK once loaded and initialised; null when unavailable. */
+let sdk: Mixpanel | null = null;
+/** Single in-flight load, so concurrent callers share one import. */
+let loadOnce: Promise<Mixpanel | null> | null = null;
 
 /**
  * Idempotent, lazy init. Callers invoke this rather than relying on
  * <MixpanelTracker /> having mounted first — sibling-effect ordering in the
  * root layout would otherwise be a silent, fragile dependency.
  *
- * Returns false (and stays silent) when there is no token, so local dev and CI
- * emit nothing at all.
+ * Resolves null (and stays silent) when there is no token, so local dev and CI
+ * emit nothing at all — and in that case the SDK is never even downloaded.
  */
-export function ensureMixpanel(): boolean {
-  if (initState !== "pending") return initState === "ready";
-  // Never latch state during SSR — the browser still needs its chance to init.
-  if (typeof window === "undefined") return false;
+export function ensureMixpanel(): Promise<Mixpanel | null> {
+  if (loadOnce) return loadOnce;
+
+  // Never latch during SSR — the browser still needs its chance to load.
+  if (typeof window === "undefined") return Promise.resolve(null);
 
   if (!TOKEN || isSyntheticClient()) {
-    initState = "disabled";
-    return false;
+    loadOnce = Promise.resolve(null);
+    return loadOnce;
   }
 
-  try {
-    mixpanel.init(TOKEN, {
-      // We emit our own `Landing Viewed`; the SDK's built-in pageview would be
-      // a second, differently-named event in the same funnel.
-      track_pageview: false,
-      // Cookie on .dynameet.ai so the marketing site and app.dynameet.ai share
-      // one distinct_id natively. The ?distinct_id= URL param remains the
-      // contract — it is what survives ITP and blocked third-party storage —
-      // but this makes the two agree by default.
-      cross_subdomain_cookie: true,
-      // Privacy: never auto-collect DOM interactions or replay sessions. Both
-      // default to off today; pinned so an SDK upgrade cannot flip them and
-      // start capturing form contents.
-      autocapture: false,
-      record_sessions_percent: 0,
-      debug: process.env.NODE_ENV !== "production",
+  loadOnce = import("mixpanel-browser")
+    .then((mod) => {
+      const instance = mod.default;
+      instance.init(TOKEN, {
+        // We emit our own `Landing Viewed`; the SDK's built-in pageview would be
+        // a second, differently-named event in the same funnel.
+        track_pageview: false,
+        // Cookie on .dynameet.ai so the marketing site and app.dynameet.ai share
+        // one distinct_id natively. The ?distinct_id= URL param remains the
+        // contract — it is what survives ITP and blocked third-party storage —
+        // but this makes the two agree by default.
+        cross_subdomain_cookie: true,
+        // Privacy: never auto-collect DOM interactions or replay sessions. Both
+        // default to off today; pinned so an SDK upgrade cannot flip them and
+        // start capturing form contents.
+        autocapture: false,
+        record_sessions_percent: 0,
+        debug: process.env.NODE_ENV !== "production",
+      });
+      sdk = instance;
+      return instance;
+    })
+    .catch(() => {
+      // Chunk blocked by an ad blocker, offline, storage denied, etc.
+      // Stay silent forever rather than retrying on every call.
+      sdk = null;
+      return null;
     });
-    initState = "ready";
-  } catch {
-    // Blocked by an ad blocker, storage denied, etc. Stay silent forever.
-    initState = "disabled";
-  }
 
-  return initState === "ready";
+  return loadOnce;
 }
 
-/** Emit an event. No-op when Mixpanel is unavailable. */
+/**
+ * Emit an event. Fire-and-forget: never awaited by callers, so it cannot delay
+ * a click or a navigation. Events raised before the SDK lands queue against the
+ * same load promise and fire in call order once it resolves.
+ */
 export function trackEvent(event: string, props?: Record<string, unknown>): void {
-  if (!ensureMixpanel()) return;
-  try {
-    mixpanel.track(event, props);
-  } catch {
-    /* never let analytics break the page */
-  }
+  void ensureMixpanel().then((mp) => {
+    if (!mp) return;
+    try {
+      mp.track(event, props);
+    } catch {
+      /* never let analytics break the page */
+    }
+  });
 }
 
 /**
@@ -146,10 +174,24 @@ export function trackDemoRequested(source: string, language: Language): void {
  * Returned verbatim: the app accepts a bare uuid or `$device:<uuid>` and
  * rejects anything else, so this value must not be trimmed or reformatted.
  */
-export function getDistinctId(): string | null {
-  if (!ensureMixpanel()) return null;
+export async function getDistinctId(): Promise<string | null> {
+  const mp = await ensureMixpanel();
+  return readDistinctId(mp);
+}
+
+/**
+ * Synchronous read, for when the SDK already happens to be loaded — lets a
+ * client-side route change compute the correct href on first render instead of
+ * flashing the plain one. Returns null before the SDK lands.
+ */
+export function getDistinctIdSync(): string | null {
+  return readDistinctId(sdk);
+}
+
+function readDistinctId(mp: Mixpanel | null): string | null {
+  if (!mp) return null;
   try {
-    const id = mixpanel.get_distinct_id();
+    const id = mp.get_distinct_id();
     return typeof id === "string" && id.length > 0 ? id : null;
   } catch {
     return null;
@@ -173,11 +215,24 @@ export function getDistinctId(): string | null {
  *     app.dynameet.ai.
  */
 export function useSignupHref(baseUrl: string): string {
-  const [href, setHref] = useState(baseUrl);
+  // APP_ORIGIN is a local-testing override only; unset in production.
+  const upgrade = (id: string | null) => buildSignupUrl(baseUrl, id, APP_ORIGIN_OVERRIDE);
+  // Seed from the sync read so a client-side route change with the SDK already
+  // loaded renders the correct href immediately, with no flash of the plain URL.
+  const [href, setHref] = useState(() => upgrade(getDistinctIdSync()));
 
   useEffect(() => {
-    // APP_ORIGIN is a local-testing override only; unset in production.
-    setHref(buildSignupUrl(baseUrl, getDistinctId(), APP_ORIGIN_OVERRIDE));
+    let cancelled = false;
+    // Re-read synchronously first: `baseUrl` may have changed while the SDK was
+    // already loaded, in which case there is nothing to wait for.
+    setHref(upgrade(getDistinctIdSync()));
+    void getDistinctId().then((id) => {
+      if (!cancelled) setHref(upgrade(id));
+    });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseUrl]);
 
   return href;
