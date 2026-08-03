@@ -10,6 +10,7 @@ import {
   detectLanguage,
   isBookingWidgetUrl,
   isMeetingBookedMessage,
+  landingViewedClaimKey,
   LANDING_VIEWED_CLAIM_KEY,
   MEETON_APP_ORIGIN,
   readLandingPath,
@@ -85,50 +86,89 @@ describe("claimLandingView", () => {
   });
 
   it("grants the claim exactly once per tab session", () => {
-    expect(claimLandingView(storage)).toBe(true);
-    expect(claimLandingView(storage)).toBe(false);
-    expect(claimLandingView(storage)).toBe(false);
+    expect(claimLandingView(storage, "ja")).toBe(true);
+    expect(claimLandingView(storage, "ja")).toBe(false);
+    expect(claimLandingView(storage, "ja")).toBe(false);
   });
 
+  // The key is a persistence contract: docs/mixpanel-funnel-testing.md resets
+  // it by hand, so both halves are asserted literally.
   it("records the claim under the documented key", () => {
-    claimLandingView(storage);
-    expect(storage.getItem(LANDING_VIEWED_CLAIM_KEY)).toBe("1");
+    claimLandingView(storage, "ja");
+    expect(storage.getItem("mp_landing_viewed_ja")).toBe("1");
+  });
+
+  it("namespaces the documented key per language", () => {
+    expect(landingViewedClaimKey("ja")).toBe(`${LANDING_VIEWED_CLAIM_KEY}_ja`);
+    expect(landingViewedClaimKey("en")).toBe(`${LANDING_VIEWED_CLAIM_KEY}_en`);
   });
 
   it("a fresh tab session gets its own claim", () => {
-    claimLandingView(storage);
-    expect(claimLandingView(fakeStorage())).toBe(true);
+    claimLandingView(storage, "ja");
+    expect(claimLandingView(fakeStorage(), "ja")).toBe(true);
+  });
+
+  it("claims each language funnel independently", () => {
+    expect(claimLandingView(storage, "ja")).toBe(true);
+    expect(claimLandingView(storage, "en")).toBe(true);
+    expect(claimLandingView(storage, "ja")).toBe(false);
+    expect(claimLandingView(storage, "en")).toBe(false);
   });
 
   // Losing the funnel's first step entirely is worse than a rare duplicate.
   it("fails open when storage is unavailable or throws", () => {
-    expect(claimLandingView(undefined)).toBe(true);
-    expect(claimLandingView(hostileStorage())).toBe(true);
+    expect(claimLandingView(undefined, "ja")).toBe(true);
+    expect(claimLandingView(hostileStorage(), "ja")).toBe(true);
   });
 });
 
 describe("shouldTrackLandingView", () => {
   it("tracks an ordinary first landing", () => {
-    expect(shouldTrackLandingView("", fakeStorage())).toBe(true);
+    expect(shouldTrackLandingView("", fakeStorage(), "ja")).toBe(true);
   });
 
   it("does not re-count a reload mid-journey", () => {
     const storage = fakeStorage();
-    expect(shouldTrackLandingView("?utm_source=google", storage)).toBe(true);
-    expect(shouldTrackLandingView("?utm_source=google", storage)).toBe(false);
+    expect(shouldTrackLandingView("?utm_source=google", storage, "ja")).toBe(true);
+    expect(shouldTrackLandingView("?utm_source=google", storage, "ja")).toBe(false);
   });
 
   // The exact double-count this guard exists for: clicking the demo CTA is a
   // same-origin navigation to /?calendarId=… and must not inflate the funnel.
   it("skips the booking-widget view the demo CTA navigates to", () => {
-    expect(shouldTrackLandingView("?calendarId=takumi-sawano&showChat=true", fakeStorage())).toBe(false);
+    expect(shouldTrackLandingView("?calendarId=takumi-sawano&showChat=true", fakeStorage(), "ja")).toBe(false);
+  });
+
+  // The language switcher is a plain full-page <a> (Nav.tsx:480), so the tab —
+  // and its sessionStorage — survives the switch. A single shared claim let the
+  // JA landing swallow the EN one, leaving the EN funnel with a Demo Requested
+  // and no Landing Viewed above it. The two funnels are read separately, so
+  // each owns its own first step.
+  it("gives each language funnel its own top step", () => {
+    const storage = fakeStorage();
+    expect(shouldTrackLandingView("", storage, "ja")).toBe(true);
+    expect(shouldTrackLandingView("", storage, "en")).toBe(true);
+  });
+
+  it("still counts a language funnel only once per tab", () => {
+    const storage = fakeStorage();
+    expect(shouldTrackLandingView("", storage, "en")).toBe(true);
+    expect(shouldTrackLandingView("", storage, "en")).toBe(false);
   });
 
   it("does not burn the claim on a skipped booking view", () => {
     const storage = fakeStorage();
-    expect(shouldTrackLandingView("?calendarId=takumi-sawano", storage)).toBe(false);
+    expect(shouldTrackLandingView("?calendarId=takumi-sawano", storage, "ja")).toBe(false);
     // The visitor's genuine landing later in the same tab still counts.
-    expect(shouldTrackLandingView("", storage)).toBe(true);
+    expect(shouldTrackLandingView("", storage, "ja")).toBe(true);
+  });
+
+  // Demo CTAs send EN visitors to the JA root (dynameet.ai/?calendarId=…), so
+  // the skipped view is classified "ja". It must leave the EN claim untouched.
+  it("leaves the EN claim intact when an EN visitor opens the JA booking root", () => {
+    const storage = fakeStorage();
+    expect(shouldTrackLandingView("?calendarId=takumi-sawano", storage, "ja")).toBe(false);
+    expect(shouldTrackLandingView("", storage, "en")).toBe(true);
   });
 });
 
