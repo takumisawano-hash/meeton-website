@@ -38,8 +38,13 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
 
 ## 計測（Mixpanel ファネル連結）
 - マーケサイトと app.dynameet.ai は**同一 Mixpanel プロジェクト**に送る。別プロジェクトのトークンは**無言で失敗**する（Mixpanel は有効なトークンなら成功を返すのでイベントは受理され、見ているプロジェクトに永遠に現れない）。`NEXT_PUBLIC_MIXPANEL_TOKEN` 未設定なら init も送信もしない。
-- イベントは3つ。**全部に `language: "en"|"ja"` を付ける**（JPは代理店主導＝セルフサーブ不可・アプリが403。ファネルが別物なので統合禁止）:
-  - `Landing Viewed`（両言語・1タブ1回）／`Start Trial Clicked`（EN のみ・`source`）／`Demo Requested`（両言語・`source`）
+- イベントは4つ。**全部に `language: "en"|"ja"` を付ける**（JPは代理店主導＝セルフサーブ不可・アプリが403。ファネルが別物なので統合禁止）:
+  - `Landing Viewed`（両言語・1タブ1回）／`Start Trial Clicked`（EN のみ・`source`）／`Demo Requested`（両言語・`source`）／`Demo Booked`（両言語・`source?`・`landing_path?`）
+- `Demo Booked` = 予約完了。widget iframe の `postMessage({type:"meetingBooked"})` を拾う（MixpanelTracker）。罠が3つ:
+  - **origin を `https://app.dynameet.ai` で必ずガード**。同じチャネルに `setIframeDimensions`/`chatOpen` 等が大量に流れ、`event.data` はオブジェクトとは限らない。
+  - `source`/`language` は widget から来ない → `trackDemoRequested()` の中で sessionStorage(`mp_demo_context`, TTL 30分)に退避し、予約時に読む。**退避の書き込みを呼び出し側（約15箇所）に移さない**。
+  - 退避した `language` を使うのは URL に `calendarId` がある時だけ（`resolveBookedContext`）。それ以外はページの pathname が正。JA CTA を押して離脱→言語切替→EN ページでチャット予約、が JA ファネルに混入する。
+- `window.sessionStorage` は**ゲッター自体が throw する**（全 Cookie ブロック時）。`safeSessionStorage()` を通すこと — `openMeetonCalendar()` は同期で `trackDemoRequested()` を呼ぶので、素で触ると JA の `<button>` CTA が全部死ぬ。
 - **個人情報は絶対に載せない**（autocapture / session replay は明示的に無効）。
 - `Landing Viewed` の二重計上ガード2つ（app/lib/analytics-context.ts）: ①URL に `calendarId` があればスキップ（デモCTAは同一オリジン遷移なので素直に数えると**クリックした人＝転換した人**を二重計上する）②sessionStorage で1タブ1回。①ではクレームを消費しない。
 - `startsWith("/en")` は **`/enterprise/`（JAページ）に誤マッチする** → `/en/` か完全一致で判定。

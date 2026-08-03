@@ -66,7 +66,7 @@ Only Test 3 needs this. Tests 1 and 2 never touch the app, so plain
 
 ---
 
-## Test 1 — the three events
+## Test 1 — the three CTA events
 
 Mixpanel dev project → **Events**. To filter to yourself: right-click any
 "Start free trial" → Copy Link Address; the `distinct_id` is in that URL.
@@ -141,6 +141,135 @@ inbound identity.
 
 You do **not** need to complete a signup. Both events fire on reaching
 `/signup`, so the JP 403 on submit does not block verification.
+
+## Test 3.5 — `Demo Booked` (no real booking required)
+
+Design doc: `docs/superpowers/specs/2026-08-03-demo-booked-event-design.md`
+
+`Demo Booked` fires on a `message` from the booking iframe:
+`{ type: "meetingBooked", data: {} }`. The listener requires
+`event.origin === "https://app.dynameet.ai"`, so a `postMessage` typed into the
+console **on the page itself** carries `http://localhost:3000` and is correctly
+rejected.
+
+That does not mean you need a real booking. DevTools evaluates in **any
+frame's context**, and `app.dynameet.ai/iframe.html` serves
+`frame-ancestors 'self' *`, so you can embed it and post from inside it. The
+message then carries a genuine `app.dynameet.ai` origin.
+
+This works even when the chat widget itself fails to load locally (see the
+known red herring below) — the injected iframe is independent of it, and
+`landing_path` comes from `window.__meetonAttribution`, which
+`AttributionBootstrap` sets on every route regardless of the widget.
+
+### Setup
+
+1. `npm run dev`, then open **a new tab** at `http://localhost:3000/`
+2. In the DevTools console (top frame), inject the sender:
+
+```js
+const f = document.createElement('iframe');
+f.src = 'https://app.dynameet.ai/iframe.html?cb=' + Date.now();
+f.style.cssText = 'position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0';
+document.body.appendChild(f);
+```
+
+3. Change the console's **JavaScript context dropdown** (top-left of the
+   Console panel, reads `top`) to the `app.dynameet.ai/iframe.html` frame
+4. Fire the booking:
+
+```js
+parent.postMessage({ type: 'meetingBooked', data: {} }, '*')
+```
+
+5. Switch the dropdown back to `top` to read the result
+
+In dev, `mixpanel.init` runs with `debug: true`, so every event prints to the
+console. Network tab → filter `track` also shows the payload.
+
+The real widget ignores the injected iframe: its own listener checks
+`event.source !== this.iframe.contentWindow` and drops it, so nothing else
+fires.
+
+### Reset between cases
+
+`landing_path` comes from `localStorage["mlp_attribution"]`, which
+`AttributionBootstrap` pins for **180 days** — a new tab does not clear it. The
+first page you ever open stays the `landing_path` for every later case, which
+is correct behaviour but will not match the table below. Reset first, then
+reload (the reload destroys the injected iframe — re-inject it):
+
+```js
+localStorage.removeItem('mlp_attribution');    // landing_path
+sessionStorage.removeItem('mp_demo_context');  // source + language stash
+sessionStorage.removeItem('mp_landing_viewed');
+location.reload();
+```
+
+### What to expect
+
+| Setup, then fire the message above | Expected |
+|---|---|
+| Reset → `/`, no CTA clicked | `Demo Booked`, `language: "ja"`, `landing_path: "/"`, **no** `source` |
+| Reset → `/`, click "デモを予約" in the nav first | `Demo Booked` with `source: "nav"` |
+| Reset → `/library/`, click "デモを予約" first | `source: "widget-button"` — the `<button>` path through `openMeetonCalendar()` |
+| Reset → `/en/` (set `pref_lang` first, see §3) | `language: "en"`, `landing_path: "/en/"`, **no** `source` — the chat-initiated booking path |
+| Seed the stash (below), fire from `/en/` | `source: "nav"` but `language: "en"` — the **pathname** wins off the widget URL |
+| Seed the stash, fire from `/?calendarId=takumi-sawano` | `language: "ja"` — the stash wins **only** here |
+| Seed the stash with `at: Date.now() - 31*60*1000` | **no** `source` — the record has expired |
+
+Seeding a demo request by hand (top frame). The `at` timestamp is required —
+a record without one is treated as expired and ignored:
+
+```js
+sessionStorage.setItem('mp_demo_context', JSON.stringify({
+  source: 'nav', language: 'ja', at: Date.now(),
+}));
+```
+
+Those middle two rows are the funnel-merge guard. A visitor can click a JA demo
+CTA, abandon it, switch language (a full-page `<a>`, so `sessionStorage`
+survives) and book from the chat widget on an English page. If that reports
+`language: "ja"`, an English booking has been filed into the Japanese funnel —
+`CLAUDE.md`: 「ファネルが別物なので統合禁止」. The stash is only trusted on the
+`?calendarId=` URL, which is the one place the page's own path lies.
+
+**Before clicking any demo CTA, check `!!window.Meeton?.openCalendar` in the top
+frame.** When it is `false` — common locally, see the red herring below — the
+CTA's fallback runs `window.location.href = 'https://dynameet.ai/…'` and takes
+you to **production**. Seed the stash by hand instead of clicking.
+
+### Firing the cases quickly
+
+After switching the console context to the `app.dynameet.ai` frame, define a
+helper there once; every case below runs without switching back:
+
+```js
+const post = (m) => parent.postMessage(m, '*');
+
+post({ type: 'meetingBooked', data: {} });   // → one Demo Booked
+post({ type: 'setIframeDimensions' });        // → nothing
+post('meetingBooked');                        // → nothing (data isn't an object)
+post({ data: {} });                           // → nothing (no type)
+```
+
+### Negative cases — do not skip
+
+| Action | Expected |
+|---|---|
+| Post the same message from the **top** frame context | **nothing** — origin is `localhost` |
+| From the iframe, post `{ type: 'setIframeDimensions' }` | **nothing** — unrelated widget chatter shares this channel |
+| From the iframe, post the string `'meetingBooked'` | **nothing** — `event.data` is not always an object |
+| Fire the booking message **once** | **exactly one** `Demo Booked`, never two |
+
+That last row is the StrictMode check and it only works in dev. React
+double-invokes effects there, so a listener registered without a matching
+cleanup produces **two** events per message. Two events here means the cleanup
+in `MixpanelTracker` is broken.
+
+`source` is stashed in `sessionStorage` under `mp_demo_context` and is
+deliberately **not** cleared on read. To retest the no-`source` case, use a new
+tab or run `sessionStorage.removeItem('mp_demo_context')`.
 
 ## Test 4 — the negative case (do not skip)
 

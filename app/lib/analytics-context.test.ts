@@ -2,10 +2,18 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import {
   claimLandingView,
+  DEMO_CONTEXT_KEY,
+  DEMO_CONTEXT_TTL_MS,
   demoSourceFromHref,
   detectLanguage,
   isBookingWidgetUrl,
+  isMeetingBookedMessage,
   LANDING_VIEWED_CLAIM_KEY,
+  MEETON_APP_ORIGIN,
+  readLandingPath,
+  recallDemoContext,
+  rememberDemoContext,
+  resolveBookedContext,
   shouldTrackLandingView,
 } from "./analytics-context";
 
@@ -132,5 +140,167 @@ describe("demoSourceFromHref", () => {
   it("falls back to 'unknown' rather than throwing", () => {
     expect(demoSourceFromHref("https://dynameet.ai/?calendarId=x")).toBe("unknown");
     expect(demoSourceFromHref("not a url")).toBe("unknown");
+  });
+});
+
+describe("isMeetingBookedMessage", () => {
+  it("accepts the widget's booking-completed message", () => {
+    expect(isMeetingBookedMessage(MEETON_APP_ORIGIN, { type: "meetingBooked", data: {} })).toBe(true);
+  });
+
+  // The guard that makes a devtools window.postMessage fail: it would carry
+  // this site's origin, not the widget's.
+  it.each([
+    "https://dynameet.ai",
+    "https://app.dynameet.ai.evil.com",
+    "http://app.dynameet.ai",
+    "https://api.dynameet.ai",
+    "null",
+    "",
+  ])("rejects origin %s", (origin) => {
+    expect(isMeetingBookedMessage(origin, { type: "meetingBooked" })).toBe(false);
+  });
+
+  // The widget's channel is busy; only one message type is a booking.
+  it.each(["setIframeDimensions", "chatOpen", "exitFullScreen", "init", "meetingbooked"])(
+    "ignores unrelated widget message %s",
+    (type) => expect(isMeetingBookedMessage(MEETON_APP_ORIGIN, { type })).toBe(false),
+  );
+
+  // event.data is not always an object on this channel.
+  it.each([undefined, null, "meetingBooked", 42, true, []])(
+    "survives non-object data %s",
+    (data) => expect(isMeetingBookedMessage(MEETON_APP_ORIGIN, data)).toBe(false),
+  );
+
+  it("ignores a missing type", () => {
+    expect(isMeetingBookedMessage(MEETON_APP_ORIGIN, { data: {} })).toBe(false);
+  });
+});
+
+describe("readLandingPath", () => {
+  it("reads landingPath out of the attribution payload", () => {
+    expect(readLandingPath({ landingPath: "/chat/", firstSeenAt: "2026-08-03" })).toBe("/chat/");
+  });
+
+  // A mutable global any script can overwrite: degrade, never throw.
+  it.each([
+    undefined,
+    null,
+    {},
+    "nope",
+    42,
+    { landingPath: "" },
+    { landingPath: 42 },
+    { landingPath: null },
+  ])("returns undefined for %s", (attribution) => {
+    expect(readLandingPath(attribution)).toBeUndefined();
+  });
+});
+
+describe("demo context stash", () => {
+  const NOW = 1_700_000_000_000;
+
+  it("round-trips source and language across a navigation", () => {
+    const storage = fakeStorage();
+    rememberDemoContext(storage, { source: "nav", language: "ja" }, NOW);
+    expect(recallDemoContext(storage, NOW)).toEqual({ source: "nav", language: "ja" });
+  });
+
+  it("returns null when no demo was requested (chat-initiated booking)", () => {
+    expect(recallDemoContext(fakeStorage(), NOW)).toBeNull();
+  });
+
+  // Deliberate: a second booking inside the TTL inherits the first's source
+  // rather than losing it.
+  it("does not consume the record on read", () => {
+    const storage = fakeStorage();
+    rememberDemoContext(storage, { source: "cta", language: "en" }, NOW);
+    recallDemoContext(storage, NOW);
+    expect(recallDemoContext(storage, NOW)).toEqual({ source: "cta", language: "en" });
+  });
+
+  it("overwrites an earlier request with the most recent one", () => {
+    const storage = fakeStorage();
+    rememberDemoContext(storage, { source: "nav", language: "ja" }, NOW);
+    rememberDemoContext(storage, { source: "pricing-lead", language: "ja" }, NOW);
+    expect(recallDemoContext(storage, NOW)).toEqual({ source: "pricing-lead", language: "ja" });
+  });
+
+  // A click at 09:00 must not claim credit for a chat booking at 17:00.
+  it("expires once the TTL has passed", () => {
+    const storage = fakeStorage();
+    rememberDemoContext(storage, { source: "nav", language: "ja" }, NOW);
+    expect(recallDemoContext(storage, NOW + DEMO_CONTEXT_TTL_MS)).not.toBeNull();
+    expect(recallDemoContext(storage, NOW + DEMO_CONTEXT_TTL_MS + 1)).toBeNull();
+  });
+
+  it("rejects a record with no usable timestamp", () => {
+    const storage = fakeStorage();
+    storage.setItem(DEMO_CONTEXT_KEY, JSON.stringify({ source: "nav", language: "ja" }));
+    expect(recallDemoContext(storage, NOW)).toBeNull();
+    storage.setItem(DEMO_CONTEXT_KEY, JSON.stringify({ source: "nav", language: "ja", at: "soon" }));
+    expect(recallDemoContext(storage, NOW)).toBeNull();
+  });
+
+  // "" would pass validation, trigger the language rule, then be dropped by
+  // trackDemoBooked — the worst of both branches.
+  it("rejects an empty source rather than half-honouring it", () => {
+    const storage = fakeStorage();
+    storage.setItem(DEMO_CONTEXT_KEY, JSON.stringify({ source: "", language: "ja", at: NOW }));
+    expect(recallDemoContext(storage, NOW)).toBeNull();
+  });
+
+  it.each(['{"source":"nav"}', '{"language":"ja"}', '{"source":"nav","language":"de"}', '{"source":1,"language":"ja"}', "null", "[]", "not json"])(
+    "rejects the unusable record %s",
+    (raw) => {
+      const storage = fakeStorage();
+      storage.setItem(DEMO_CONTEXT_KEY, raw);
+      expect(recallDemoContext(storage, NOW)).toBeNull();
+    },
+  );
+
+  it("stays silent when storage is unavailable", () => {
+    expect(() => rememberDemoContext(hostileStorage(), { source: "nav", language: "ja" })).not.toThrow();
+    expect(recallDemoContext(hostileStorage())).toBeNull();
+    expect(() => rememberDemoContext(undefined, { source: "nav", language: "ja" })).not.toThrow();
+    expect(recallDemoContext(undefined)).toBeNull();
+  });
+});
+
+describe("resolveBookedContext", () => {
+  const JA_STASH = { source: "nav", language: "ja" as const };
+
+  it("falls back to the page language when nothing was stashed", () => {
+    expect(resolveBookedContext(null, "/en/pricing/", "")).toEqual({ language: "en" });
+    expect(resolveBookedContext(null, "/", "")).toEqual({ language: "ja" });
+  });
+
+  // The case the stash exists for: the CTA fallback navigates to the JA root,
+  // so the page's own path cannot be trusted.
+  it("trusts the stashed language on the booking-widget URL", () => {
+    expect(resolveBookedContext({ source: "nav", language: "en" }, "/", "?calendarId=takumi-sawano")).toEqual({
+      language: "en",
+      source: "nav",
+    });
+  });
+
+  // The regression this rule was extracted to prevent: clicking a JA CTA,
+  // abandoning it, switching language, then booking from the chat widget must
+  // NOT file an English booking into the Japanese funnel.
+  it("does not let a stale stash override a genuine EN booking", () => {
+    expect(resolveBookedContext(JA_STASH, "/en/pricing/", "")).toEqual({
+      language: "en",
+      source: "nav",
+    });
+  });
+
+  it("keeps source regardless of which language wins", () => {
+    expect(resolveBookedContext(JA_STASH, "/en/", "").source).toBe("nav");
+    expect(resolveBookedContext(JA_STASH, "/", "?calendarId=x").source).toBe("nav");
+  });
+
+  it("does not misfile /enterprise/ as English", () => {
+    expect(resolveBookedContext(null, "/enterprise/", "").language).toBe("ja");
   });
 });
