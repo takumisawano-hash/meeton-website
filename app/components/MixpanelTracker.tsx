@@ -33,14 +33,11 @@ import { ensureMixpanel, trackDemoRequested, trackLandingViewed } from "@/app/li
  */
 export default function MixpanelTracker() {
   useEffect(() => {
-    if (!ensureMixpanel()) return;
-
     const language = detectLanguage(window.location.pathname);
 
-    if (shouldTrackLandingView(window.location.search, window.sessionStorage)) {
-      trackLandingViewed(language);
-    }
-
+    // Attached synchronously, before the SDK has loaded, so a click during the
+    // load window is still captured — trackEvent queues it against the import.
+    // trackDemoRequested is a no-op when there is no token.
     const onDocumentClick = (event: MouseEvent) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
@@ -49,9 +46,23 @@ export default function MixpanelTracker() {
       if (!link) return;
       trackDemoRequested(demoSourceFromHref(link.href), language);
     };
-
     document.addEventListener("click", onDocumentClick, true);
-    return () => document.removeEventListener("click", onDocumentClick, true);
+
+    // Claim the landing only once the SDK is actually available. Claiming
+    // before the await would burn the once-per-tab claim on a load that failed,
+    // losing the visitor's landing entirely.
+    let cancelled = false;
+    void ensureMixpanel().then((mp) => {
+      if (cancelled || !mp) return;
+      if (shouldTrackLandingView(window.location.search, window.sessionStorage)) {
+        trackLandingViewed(language);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      document.removeEventListener("click", onDocumentClick, true);
+    };
   }, []);
 
   return null;
