@@ -38,24 +38,46 @@ export function isBookingWidgetUrl(search: string): boolean {
   }
 }
 
-/** sessionStorage key claiming `Landing Viewed` once per tab. */
+/** sessionStorage key prefix claiming `Landing Viewed` once per tab. */
 export const LANDING_VIEWED_CLAIM_KEY = "mp_landing_viewed";
 
 /**
- * Claim `Landing Viewed` for this tab, returning true only for the first
- * caller. Mirrors how the app claims `Signup Landed`, so a reload mid-journey
- * does not re-count the visitor.
+ * The claim key for one language funnel — `mp_landing_viewed_ja` / `…_en`.
+ *
+ * Namespaced by language because the switcher is a plain full-page `<a>`
+ * (Nav.tsx:480, deliberately not a soft-nav Link so the pref_lang cookie is
+ * written before the geo middleware sees the request). The tab — and its
+ * sessionStorage — therefore survives the switch, so a single shared key let
+ * the JA landing swallow the EN one: the EN funnel got a `Demo Requested` with
+ * no `Landing Viewed` above it, reading better than reality.
+ */
+export function landingViewedClaimKey(language: Language): string {
+  return `${LANDING_VIEWED_CLAIM_KEY}_${language}`;
+}
+
+/**
+ * Claim `Landing Viewed` for this tab and language, returning true only for
+ * the first caller. Mirrors how the app claims `Signup Landed`, so a reload
+ * mid-journey does not re-count the visitor.
  *
  * sessionStorage (not localStorage) is deliberate: the claim must last exactly
  * one tab session. Returns true when storage is unavailable (private mode,
  * quota) — better to risk a duplicate than to lose the funnel's first step
  * entirely.
+ *
+ * Scope is once per tab session, PER LANGUAGE — not once per page load, and
+ * not once per visitor. A visitor toggling JA↔EN repeatedly still produces
+ * exactly two events, one per funnel, because each namespace holds its claim.
  */
-export function claimLandingView(storage: Storage | undefined): boolean {
+export function claimLandingView(
+  storage: Storage | undefined,
+  language: Language,
+): boolean {
   if (!storage) return true;
+  const key = landingViewedClaimKey(language);
   try {
-    if (storage.getItem(LANDING_VIEWED_CLAIM_KEY)) return false;
-    storage.setItem(LANDING_VIEWED_CLAIM_KEY, "1");
+    if (storage.getItem(key)) return false;
+    storage.setItem(key, "1");
     return true;
   } catch {
     return true;
@@ -65,13 +87,19 @@ export function claimLandingView(storage: Storage | undefined): boolean {
 /**
  * Whether `Landing Viewed` should fire for this page view. Both guards from
  * the spec, in one place so the rule is testable as a unit.
+ *
+ * Order matters: the booking-widget skip returns before any claim is taken, so
+ * a demo CTA never burns a claim. That is load-bearing for EN visitors — the
+ * CTA sends them to the JA root (`dynameet.ai/?calendarId=…`), which must
+ * neither count as a JA landing nor consume the JA claim.
  */
 export function shouldTrackLandingView(
   search: string,
   storage: Storage | undefined,
+  language: Language,
 ): boolean {
   if (isBookingWidgetUrl(search)) return false;
-  return claimLandingView(storage);
+  return claimLandingView(storage, language);
 }
 
 /**

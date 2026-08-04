@@ -46,7 +46,7 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
   - 退避した `language` を使うのは URL に `calendarId` がある時だけ（`resolveBookedContext`）。それ以外はページの pathname が正。JA CTA を押して離脱→言語切替→EN ページでチャット予約、が JA ファネルに混入する。
 - `window.sessionStorage` は**ゲッター自体が throw する**（全 Cookie ブロック時）。`safeSessionStorage()` を通すこと — `openMeetonCalendar()` は同期で `trackDemoRequested()` を呼ぶので、素で触ると JA の `<button>` CTA が全部死ぬ。
 - **個人情報は絶対に載せない**（autocapture / session replay は明示的に無効）。
-- `Landing Viewed` の二重計上ガード2つ（app/lib/analytics-context.ts）: ①URL に `calendarId` があればスキップ（デモCTAは同一オリジン遷移なので素直に数えると**クリックした人＝転換した人**を二重計上する）②sessionStorage で1タブ1回。①ではクレームを消費しない。
+- `Landing Viewed` の二重計上ガード2つ（app/lib/analytics-context.ts）: ①URL に `calendarId` があればスキップ（デモCTAは同一オリジン遷移なので素直に数えると**クリックした人＝転換した人**を二重計上する）②sessionStorage で1タブ1回、**言語ごと**（`mp_landing_viewed_ja` / `_en`）。①ではクレームを消費しない。言語スイッチャーは全ページ遷移の `<a>` なのでタブ＝sessionStorage が生き残る → キーを共有すると JA のランディングが EN を飲み込み、EN ファネルが「`Demo Requested` はあるが `Landing Viewed` が無い」＝実際より良く見える状態になる。
 - `startsWith("/en")` は **`/enterprise/`（JAページ）に誤マッチする** → `/en/` か完全一致で判定。
 - signup CTA は `distinct_id` を**追記するだけ**。既存の `utm_*` は書き換えない（`utm_content` が nav/home-hero/home-mid/home-footer/home-sticky を区別しており、アプリ側 GA4 がこの値でレポートしている）。ページ側の `utm_*` は混ぜない。
 - href は**クリック時ではなく effect で**書き換える — preventDefault だと cmd+クリックで distinct_id が落ち、gtag の `_gl` クロスドメインリンカーも壊れる。

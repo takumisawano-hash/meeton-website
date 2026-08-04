@@ -89,7 +89,7 @@ export default function MixpanelTracker() {
     let cancelled = false;
     void ensureMixpanel().then((mp) => {
       if (cancelled || !mp) return;
-      if (shouldTrackLandingView(window.location.search, safeSessionStorage())) {
+      if (shouldTrackLandingView(window.location.search, safeSessionStorage(), language)) {
         trackLandingViewed(language);
       }
     });

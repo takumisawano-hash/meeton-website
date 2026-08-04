@@ -208,7 +208,8 @@ reload (the reload destroys the injected iframe — re-inject it):
 ```js
 localStorage.removeItem('mlp_attribution');    // landing_path
 sessionStorage.removeItem('mp_demo_context');  // source + language stash
-sessionStorage.removeItem('mp_landing_viewed');
+sessionStorage.removeItem('mp_landing_viewed_ja');   // claim is per language:
+sessionStorage.removeItem('mp_landing_viewed_en');   // clearing one leaves the other
 location.reload();
 ```
 
