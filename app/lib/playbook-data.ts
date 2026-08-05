@@ -312,8 +312,8 @@ export const MOMENTS: Record<string, PlaybookEntry> = {
     ],
     proofRef: "biztex",
     faq: [{ q: "誰が再訪したか分かりますか？", a: "識別済みリードの再訪を検知し、過去の文脈を引き継いだ会話・追客のトリガーにできます。検討再開の瞬間を逃しません。" }],
-    metaTitle: "再訪問からの商談化｜検討再開の瞬間を掴む｜Meeton ai",
-    metaDescription: "再訪問は検討再開のサイン。文脈を引き継いだ会話と再訪起点の追客で、戻ってきた見込み客を商談に繋げる Meeton ai の活用シーン。",
+    metaTitle: "再訪問リードを逃さないAI追客｜Meeton Email",
+    metaDescription: "サイト再訪問したリードをAIが自動検知し最適タイミングで追客。休眠掘り起こしにも活用可能なMeeton Emailの仕組みを解説",
     en: {
       badge: "Moment — return visit",
       problemLine: "You don't notice the prospects who came back.",
