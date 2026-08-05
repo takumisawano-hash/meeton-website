@@ -25,37 +25,25 @@ export default function DocoDocoTracker() {
       events.forEach((e) => window.removeEventListener(e, run))
       clearTimeout(timer)
 
-      fetch('https://api.ipify.org?format=json')
-        .then((r) => r.json())
-        .then((ipData: { ip: string }) =>
-          fetch(
-            'https://api.docodoco.jp/v6/search?format=json' +
-              '&ipadr=' + encodeURIComponent(ipData.ip) +
-              '&key1=Oq3jXfIIMPjyTgR6rpI00j41YnOdH3G9XBcVp4UqTmxskjBLoXCOvugFVrR5CiYv' +
-              '&key2=538c14fdb5fdfde8b64547df6aa902961ac2442c'
-          )
-        )
+      fetch('/api/docodoco-lookup')
         .then((r) => r.json())
         .then((d: {
-          OrgName?: string
-          DomainName?: string
-          OrgUrl?: string
-          OrgEmployeesCode?: string
-          OrgIndustrialCategoryL?: string
-          LineCode?: string
+          status: string
+          company_name?: string
+          domain?: string
+          org_url?: string
+          employees?: string
+          industry?: string
         }) => {
           sessionStorage.setItem('_ddc', '1')
-          const org = d.OrgName || ''
-          if (!org || !d.DomainName) return
-          const lineCode = d.LineCode || ''
-          if (lineCode === '1' || lineCode === '2') return
+          if (d.status !== 'ok' || !d.company_name || !d.domain) return
 
           const payload = {
-            company_name: org,
-            domain: d.DomainName,
-            org_url: d.OrgUrl || '',
-            employees: d.OrgEmployeesCode || '',
-            industry: d.OrgIndustrialCategoryL || '',
+            company_name: d.company_name,
+            domain: d.domain,
+            org_url: d.org_url || '',
+            employees: d.employees || '',
+            industry: d.industry || '',
             page_url: location.href,
             referrer: document.referrer || '',
           }
