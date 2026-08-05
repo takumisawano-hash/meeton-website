@@ -105,6 +105,17 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      // 2026-08-05: JA トライアル廃止 — trial LP 削除、過去の広告クリック救済
+      {
+        source: '/lp/trial',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/lp/trial/',
+        destination: '/',
+        permanent: true,
+      },
       // Old short paths → canonical legal pages (fix 404 from LP footer history)
       {
         source: '/privacy',

@@ -13,7 +13,7 @@ export default function SoftwareAppJsonLd({ name, description, featureList, url 
   // Google policy: AggregateRating must be backed by visible reviews
   // on the same page. Fake ratings → manual action penalty risk.
   //
-  // offers.price='0' は 14日間無料トライアルの正当な表現として保持。
+  // 2026-08-05: offers (price '0' / 無料トライアル) 削除 — JA のトライアル提供終了。
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -23,13 +23,6 @@ export default function SoftwareAppJsonLd({ name, description, featureList, url 
     description,
     featureList,
     url,
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'JPY',
-      description: '14日間無料トライアル',
-      availability: 'https://schema.org/InStock',
-    },
     publisher: {
       '@id': 'https://dynameet.ai/#organization',
     },

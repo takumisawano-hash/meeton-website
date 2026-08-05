@@ -7,16 +7,19 @@
 ```
 app/lp/
 ├── README.md (this file)
-├── [slug]/
-│   └── page.tsx    ← 各LPのページ
-└── components/
-    └── LPTemplate.tsx  ← 共通LPテンプレート
+├── layout.tsx      ← noindex + LinkedIn Insight Tag
+└── [slug]/
+    └── page.tsx    ← 各LP (HomePageClient mode="lp" のラッパー)
 ```
 
 ## URL構造
-- `/lp/trial/` - トライアル訴求LP
-- `/lp/intent/` - Intent機能紹介LP
-- `/lp/webinar-2026-03/` - ウェビナー告知LP
+- `/lp/lead-gen/` - リード獲得訴求LP
+- `/lp/web-chat/` - Webチャット訴求LP
+- `/lp/meeting/` - 商談化訴求LP
+- `/lp/inside-sales/` - インサイドセールス訴求LP
+
+※ `/lp/trial/` は 2026-08-05 廃止（JA トライアル提供終了、`/` へ 308）。
+JA サイトではトライアル訴求を書かないこと。
 
 ## LP作成フロー
 
@@ -27,22 +30,25 @@ app/lp/
 5. **デプロイ:** Vercelに自動デプロイ
 6. **計測:** GA4でコンバージョン計測
 
-## テンプレート使用法
+## 実装パターン
 
 ```tsx
-import LPTemplate from '../components/LPTemplate'
+import HomePageClient from '@/app/components/HomePageClient'
 
-export default function TrialLP() {
+export default async function LeadGenLP() {
   return (
-    <LPTemplate
-      title="14日間無料トライアル"
-      subtitle="AI SDRの効果を実感してください"
-      ctaText="今すぐ始める"
-      ctaLink="https://app.dynameet.ai/signup"
+    <HomePageClient
+      mode="lp"
+      lpVariant="lead-gen"
+      lpHeadline="..."
+      lpSubheadline="..."
     />
   )
 }
 ```
+
+新しい variant は `app/components/HomePageClient.tsx` の `LPVariant` union に追加する
+（GA4 の `lp_variant` イベントパラメータに使われる）。
 
 ## デザインガイドライン
 - CTA: `#12a37d` グリーン

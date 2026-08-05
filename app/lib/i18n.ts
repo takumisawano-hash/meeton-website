@@ -128,6 +128,8 @@ export const CHROME = {
     navResources: "リソース",
     ctaSeePricing: "料金を見る",
     ctaBookDemo: "デモを予約",
+    // JA では未使用（EN 分岐のみで描画）。JA トライアルは 2026-08-05 全廃 —
+    // この文言を JA ページに出さないこと。
     ctaStartTrial: "無料トライアル",
     langSwitch: "EN",
     footerProduct: "製品",

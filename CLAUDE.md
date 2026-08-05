@@ -16,7 +16,7 @@ JA がルート、EN は `/en/*` サブパス。デプロイ: `git push origin m
 ステージ①ランディング=/capture/。**旧称禁止**: AI Chat/AI Email/AI Calendar/AI Offer、Meeton Live、旧 `/features/*` URL（全部 /chat/ 等へ308済み）。
 
 ## 料金 v3（2026-07-02 deck p20）
-基本プラン「リード獲得」¥15万〜（Chat+Ads+Library）+ 商談化アドオン(Calendar +5万) + 追客アドオン(Email +5万)。人気=基本+商談化 ¥20万〜(おすすめ)、フル ¥25万〜。EN: From ¥150,000/200,000/250,000 + 1ヶ月無料トライアル（/en/trial/、カード不要）。
+基本プラン「リード獲得」¥15万〜（Chat+Ads+Library）+ 商談化アドオン(Calendar +5万) + 追客アドオン(Email +5万)。人気=基本+商談化 ¥20万〜(おすすめ)、フル ¥25万〜。EN (USD, 2026-07-17〜): Capture Leads $999〜 / Book More Meetings $1,349〜(人気)、Calendar addon +$350、Email は EN セルフサーブ対象外、年契約15%off、1ヶ月無料トライアル（/en/trial/、カード不要）。**JA はトライアル提供なし（2026-08-05 全廃）— JA ページにトライアル文言を書かない。トライアルは EN のみ。**
 
 ## 承認済みファクト（これ以外の数値を創作しない）
 商談化率60%+=EdulinX / チャットリード20倍=BizteX / 月間SQL2倍(20→41-48件)=G-gen / 受注2件=Univis / 初動5秒 / JSタグ1行・5分 / 24時間365日。

@@ -668,8 +668,8 @@ const integrations = [
 ];
 
 // 2026-05-21: Home FAQ を 6 問に圧縮。比較系細かい質問 (Marketo / Drift /
-// Intercom / 多言語 / 14日トライアル) は各 compare ページ・/lp/trial/ に
-// 移動。トップは核心的な 6 問で構成。
+// Intercom / 多言語) は各 compare ページに移動。トップは核心的な 6 問で構成。
+// 2026-08-05: JA サイトはトライアル訴求を全廃 — トライアル文言を復活させない。
 const faqData = [
   {
     q: "日程調整ツールとは何が違いますか？",
@@ -692,8 +692,8 @@ const faqData = [
     a: "JavaScript タグを 1 行設置するだけで稼働します。AI の事前学習を含めても、最短で当日中に運用開始できます。Meeton ai 側の設定もデモから 5 分です。",
   },
   {
-    q: "トライアルでは何を評価すべきですか？",
-    a: "「リード数」ではなく「商談数 / 商談化率」を評価してください。Meeton ai は CV 数を増やすツールではなく、Web 訪問者と CRM 既存リードを商談に変えるツールです。14 日間の無料トライアルで自社サイトでの商談化余地を可視化できます。",
+    q: "導入効果はどう評価すべきですか？",
+    a: "「リード数」ではなく「商談数 / 商談化率」を評価してください。Meeton ai は CV 数を増やすツールではなく、Web 訪問者と CRM 既存リードを商談に変えるツールです。デモで自社サイトでの商談化余地を可視化できます。",
   },
 ];
 
@@ -1005,7 +1005,6 @@ export type LPVariant =
   | "lead-gen"
   | "linkedin"
   | "meeting"
-  | "trial"
   | "web-chat"
   | "google";
 
@@ -1202,9 +1201,7 @@ export default function HomePageClient({
               which alone added ~1s to LCP. Visual slide-in is preserved. */}
           <div className="anim-y d1 hero-badge">
             <div className="hero-badge-dot" />
-            {isLp && lpVariant === "trial"
-              ? "14日間無料トライアル"
-              : "AI SDR Platform"}
+            AI SDR Platform
           </div>
           <h1 className="anim-y d2 hero-h1">
             {lpHeadline ?? (
